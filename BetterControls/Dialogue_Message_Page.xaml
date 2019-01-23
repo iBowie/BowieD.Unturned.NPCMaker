@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="BowieD.Unturned.NPCMaker.BetterControls.Dialogue_Message_Page"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.BetterControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" MinHeight="64">
+    <Grid>
+        <TextBox TextChanged="TextField_TextChanged" TextWrapping="Wrap" Name="textField" Margin="5,5">
+            
+        </TextBox>
+        <Button MouseEnter="DeleteButton_MouseEnter" MouseLeave="DeleteButton_MouseLeave" Name="deleteButton" Width="16" Height="16" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,10">
+            <Button.Content>
+                <Image Source="/Resources/ICON_CANCEL.png"/>
+            </Button.Content>
+        </Button>
+    </Grid>
+</UserControl>

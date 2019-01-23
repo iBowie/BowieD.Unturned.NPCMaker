@@ -12,6 +12,21 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -24,17 +39,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Option_1_256x.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -53,6 +73,176 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BetterControls\Dialogue_Response.xaml.cs">
+      <DependentUpon>Dialogue_Response.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BetterControls\NumberBox.xaml.cs">
+      <DependentUpon>NumberBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BetterControls\Universal_ItemList.xaml.cs">
+      <DependentUpon>Universal_ItemList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BetterControls\Dialogue_ItemList.xaml.cs">
+      <DependentUpon>Dialogue_ItemList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BetterControls\Dialogue_Message.xaml.cs">
+      <DependentUpon>Dialogue_Message.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BetterControls\Dialogue_Message_Page.xaml.cs">
+      <DependentUpon>Dialogue_Message_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BetterForms\Message_TreeView.xaml.cs">
+      <DependentUpon>Message_TreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BetterForms\Universal_ConditionEditor.xaml.cs">
+      <DependentUpon>Universal_ConditionEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BetterForms\Universal_ListView.xaml.cs">
+      <DependentUpon>Universal_ListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BetterForms\Universal_RewardEditor.xaml.cs">
+      <DependentUpon>Universal_RewardEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BetterForms\Universal_Select.xaml.cs">
+      <DependentUpon>Universal_Select.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BetterForms\Universal_VendorItemEditor.xaml.cs">
+      <DependentUpon>Universal_VendorItemEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BetterForms\Whats_New.xaml.cs">
+      <DependentUpon>Whats_New.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NumericUpDown.xaml.cs">
+      <DependentUpon>NumericUpDown.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Export_ExportWindow.xaml.cs">
+      <DependentUpon>Export_ExportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_About.xaml.cs">
+      <DependentUpon>Form_About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mistake.cs" />
+    <Compile Include="Mistakes\Dialogue\EmptyMessage.cs" />
+    <Compile Include="Mistakes\Dialogue\QuestSettingMistake.cs" />
+    <Compile Include="Mistakes\General\AssignmentOfficial.cs" />
+    <Compile Include="Mistakes\General\NonEnglishCharsEditorName.cs" />
+    <Compile Include="Mistakes\General\TooShortDisplayName.cs" />
+    <Compile Include="Mistakes\Generic.cs" />
+    <Compile Include="Notification\NotificationBase.xaml.cs">
+      <DependentUpon>NotificationBase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NPC\Condition.cs" />
+    <Compile Include="NPC\Conditions\Experience_Cond.cs" />
+    <Compile Include="NPC\Conditions\Flag_Bool_Cond.cs" />
+    <Compile Include="NPC\Conditions\Flag_Short_Cond.cs" />
+    <Compile Include="NPC\Conditions\Item_Cond.cs" />
+    <Compile Include="NPC\Conditions\Kills_Animal_Cond.cs" />
+    <Compile Include="NPC\Conditions\Kills_Horde_Cond.cs" />
+    <Compile Include="NPC\Conditions\Player_Life_Food_Cond.cs" />
+    <Compile Include="NPC\Conditions\Player_Life_Health_Cond.cs" />
+    <Compile Include="NPC\Conditions\Player_Life_Virus_Cond.cs" />
+    <Compile Include="NPC\Conditions\Player_Life_Water_Cond.cs" />
+    <Compile Include="NPC\Conditions\Quest_Cond.cs" />
+    <Compile Include="NPC\Conditions\Kills_Zombie_Cond.cs" />
+    <Compile Include="NPC\Conditions\Reputation_Cond.cs" />
+    <Compile Include="NPC\Conditions\Skillset_Cond.cs" />
+    <Compile Include="NPC\Conditions\Time_Of_Day_Cond.cs" />
+    <Compile Include="NPC\Enums.cs" />
+    <Compile Include="NPC\NPCColor.cs" />
+    <Compile Include="NPC\NPCDialogue.cs" />
+    <Compile Include="NPC\NPCMessage.cs" />
+    <Compile Include="NPC\NPCQuest.cs" />
+    <Compile Include="NPC\NPCResponse.cs" />
+    <Compile Include="NPC\NPCVendor.cs" />
+    <Compile Include="NPC\Reward.cs" />
+    <Compile Include="NPC\Rewards\Experience.cs" />
+    <Compile Include="NPC\Rewards\Flag_Bool.cs" />
+    <Compile Include="NPC\Rewards\Flag_Math.cs" />
+    <Compile Include="NPC\Rewards\Flag_Short.cs" />
+    <Compile Include="NPC\Rewards\Flag_Short_Random.cs" />
+    <Compile Include="NPC\Rewards\Item.cs" />
+    <Compile Include="NPC\Rewards\Item_Random.cs" />
+    <Compile Include="NPC\Rewards\Quest.cs" />
+    <Compile Include="NPC\Rewards\Reputation.cs" />
+    <Compile Include="NPC\Rewards\Teleport.cs" />
+    <Compile Include="NPC\Rewards\Vehicle.cs" />
+    <Compile Include="Util.cs" />
+    <Page Include="BetterControls\Dialogue_Response.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BetterControls\NumberBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BetterControls\Universal_ItemList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BetterControls\Dialogue_ItemList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BetterControls\Dialogue_Message.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BetterControls\Dialogue_Message_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BetterForms\Message_TreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BetterForms\Universal_ConditionEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BetterForms\Universal_ListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BetterForms\Universal_RewardEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BetterForms\Universal_Select.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BetterForms\Universal_VendorItemEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BetterForms\Whats_New.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NumericUpDown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Export_ExportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Form_About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Localization\lang.ru-RU.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Localization\lang.uk-UA.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Localization\lang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -65,8 +255,13 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Notification\NotificationBase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NPC\NPCSave.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -92,5 +287,178 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_APPAREL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_SAVE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_OPEN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_RECENT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_INFO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_CHAT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_EXCLAMATION.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_WARNING.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_MONEY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_CANCEL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_OK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Unturned\Beards\0.png" />
+    <Resource Include="Resources\Unturned\Beards\1.png" />
+    <Resource Include="Resources\Unturned\Beards\10.png" />
+    <Resource Include="Resources\Unturned\Beards\11.png" />
+    <Resource Include="Resources\Unturned\Beards\12.png" />
+    <Resource Include="Resources\Unturned\Beards\13.png" />
+    <Resource Include="Resources\Unturned\Beards\14.png" />
+    <Resource Include="Resources\Unturned\Beards\15.png" />
+    <Resource Include="Resources\Unturned\Beards\2.png" />
+    <Resource Include="Resources\Unturned\Beards\3.png" />
+    <Resource Include="Resources\Unturned\Beards\4.png" />
+    <Resource Include="Resources\Unturned\Beards\5.png" />
+    <Resource Include="Resources\Unturned\Beards\6.png" />
+    <Resource Include="Resources\Unturned\Beards\7.png" />
+    <Resource Include="Resources\Unturned\Beards\8.png" />
+    <Resource Include="Resources\Unturned\Beards\9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Unturned\Faces\0.png" />
+    <Resource Include="Resources\Unturned\Faces\1.png" />
+    <Resource Include="Resources\Unturned\Faces\10.png" />
+    <Resource Include="Resources\Unturned\Faces\11.png" />
+    <Resource Include="Resources\Unturned\Faces\12.png" />
+    <Resource Include="Resources\Unturned\Faces\13.png" />
+    <Resource Include="Resources\Unturned\Faces\14.png" />
+    <Resource Include="Resources\Unturned\Faces\15.png" />
+    <Resource Include="Resources\Unturned\Faces\16.png" />
+    <Resource Include="Resources\Unturned\Faces\17.png" />
+    <Resource Include="Resources\Unturned\Faces\18.png" />
+    <Resource Include="Resources\Unturned\Faces\19.png" />
+    <Resource Include="Resources\Unturned\Faces\2.png" />
+    <Resource Include="Resources\Unturned\Faces\20.png" />
+    <Resource Include="Resources\Unturned\Faces\21.png" />
+    <Resource Include="Resources\Unturned\Faces\22.png" />
+    <Resource Include="Resources\Unturned\Faces\23.png" />
+    <Resource Include="Resources\Unturned\Faces\24.png" />
+    <Resource Include="Resources\Unturned\Faces\25.png" />
+    <Resource Include="Resources\Unturned\Faces\26.png" />
+    <Resource Include="Resources\Unturned\Faces\27.png" />
+    <Resource Include="Resources\Unturned\Faces\28.png" />
+    <Resource Include="Resources\Unturned\Faces\29.png" />
+    <Resource Include="Resources\Unturned\Faces\3.png" />
+    <Resource Include="Resources\Unturned\Faces\30.png" />
+    <Resource Include="Resources\Unturned\Faces\31.png" />
+    <Resource Include="Resources\Unturned\Faces\4.png" />
+    <Resource Include="Resources\Unturned\Faces\5.png" />
+    <Resource Include="Resources\Unturned\Faces\6.png" />
+    <Resource Include="Resources\Unturned\Faces\7.png" />
+    <Resource Include="Resources\Unturned\Faces\8.png" />
+    <Resource Include="Resources\Unturned\Faces\9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Unturned\Hairs\0.png" />
+    <Resource Include="Resources\Unturned\Hairs\1.png" />
+    <Resource Include="Resources\Unturned\Hairs\10.png" />
+    <Resource Include="Resources\Unturned\Hairs\11.png" />
+    <Resource Include="Resources\Unturned\Hairs\12.png" />
+    <Resource Include="Resources\Unturned\Hairs\13.png" />
+    <Resource Include="Resources\Unturned\Hairs\14.png" />
+    <Resource Include="Resources\Unturned\Hairs\15.png" />
+    <Resource Include="Resources\Unturned\Hairs\16.png" />
+    <Resource Include="Resources\Unturned\Hairs\17.png" />
+    <Resource Include="Resources\Unturned\Hairs\18.png" />
+    <Resource Include="Resources\Unturned\Hairs\19.png" />
+    <Resource Include="Resources\Unturned\Hairs\2.png" />
+    <Resource Include="Resources\Unturned\Hairs\20.png" />
+    <Resource Include="Resources\Unturned\Hairs\21.png" />
+    <Resource Include="Resources\Unturned\Hairs\22.png" />
+    <Resource Include="Resources\Unturned\Hairs\3.png" />
+    <Resource Include="Resources\Unturned\Hairs\4.png" />
+    <Resource Include="Resources\Unturned\Hairs\5.png" />
+    <Resource Include="Resources\Unturned\Hairs\6.png" />
+    <Resource Include="Resources\Unturned\Hairs\7.png" />
+    <Resource Include="Resources\Unturned\Hairs\8.png" />
+    <Resource Include="Resources\Unturned\Hairs\9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_PLUS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Unturned\VEHICLE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Unturned\ITEM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_BUY.png" />
+    <Resource Include="Resources\ICON_SELL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_CRAFTING.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BowieD_1000x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_PENCIL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Services\Discord.png" />
+    <Resource Include="Resources\Services\Steam.png" />
+    <Resource Include="Resources\Services\VK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Option_1_256x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_ACHIEVEMENT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_COPY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Option_1_256x.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_ARROW_DOWN.png" />
+    <Resource Include="Resources\ICON_ARROW_UP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_OPTIONS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_SCALE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICON_QUESTION.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BAD_ICON_UPDATE.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

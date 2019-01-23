@@ -1,0 +1,40 @@
+﻿
+GUID b1847848bc594cc287805c12759c8302
+Type Dialogue
+ID 22803
+Messages 1
+Message_0_Pages 2
+Responses 4
+Response_0_Dialogue 22811
+Response_0_Quest 22810
+Response_0_Conditions 1
+Response_0_Condition_0_Type Quest
+Response_0_Condition_0_ID 22810
+Response_0_Condition_0_Status None
+Response_0_Condition_0_Logic Equal
+Response_1_Dialogue 22811
+Response_1_Quest 22810
+Response_1_Conditions 1
+Response_1_Condition_0_Type Quest
+Response_1_Condition_0_ID 22810
+Response_1_Condition_0_Status Ready
+Response_1_Condition_0_Logic Equal
+Response_1_Condition_0_Reset
+Response_1_Rewards 1
+Response_1_Reward_0_Type Quest
+Response_1_Reward_0_ID 22810
+Response_2_Dialogue 22811
+Response_2_Quest 22822
+Response_2_Conditions 1
+Response_2_Condition_0_Type Quest
+Response_2_Condition_0_ID 22822
+Response_2_Condition_0_Status None
+Response_2_Condition_0_Logic Equal
+Response_3_Dialogue 22811
+Response_3_Quest 22822
+Response_3_Conditions 1
+Response_3_Condition_0_Type Quest
+Response_3_Condition_0_ID 22822
+Response_3_Condition_0_Status Ready
+Response_3_Condition_0_Logic Equal
+Response_3_Condition_0_Reset

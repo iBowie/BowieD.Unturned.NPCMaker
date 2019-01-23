@@ -1,0 +1,19 @@
+﻿<Window x:Class="BowieD.Unturned.NPCMaker.BetterForms.Universal_Select"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.BetterForms"
+        mc:Ignorable="d"
+        Title="xD" Height="450" MinWidth="300" MaxWidth="300" Width="300" Icon="{DynamicResource app_Icon}">
+    <Grid>
+        <Grid.LayoutTransform>
+            <ScaleTransform x:Name="gridScale"/>
+        </Grid.LayoutTransform>
+        <ScrollViewer Margin="10">
+            <StackPanel Name="stackPanel">
+                
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="BowieD.Unturned.NPCMaker.BetterControls.Dialogue_ItemList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.BetterControls"
+             mc:Ignorable="d" 
+             Height="20" MinHeight="20" MinWidth="196" Width="196">
+    <Grid>
+        <TextBlock Text="" Name="mainTextBlock" Margin="0,0,40,0"/>
+        <Button Name="deleteButton" Width="20" HorizontalAlignment="Right">
+            <Button.Content>
+                <Image Source="/Resources/ICON_CANCEL.png"/>
+            </Button.Content>
+        </Button>
+        <Button Name="editButton" Width="20" HorizontalAlignment="Right" Margin="0,0,20,0">
+            <Button.Content>
+                <Image Source="/Resources/ICON_PENCIL.png"/>
+            </Button.Content>
+        </Button>
+    </Grid>
+</UserControl>

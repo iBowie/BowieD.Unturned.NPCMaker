@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="BowieD.Unturned.NPCMaker.BetterControls.Dialogue_Response"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.BetterControls"
+             mc:Ignorable="d" 
+             Height="185" Width="321.25" MinWidth="301" MinHeight="185">
+    <Grid>
+        <Label HorizontalContentAlignment="Center" Content="{DynamicResource dialogue_Reply_Title}" Margin="38,5,168,0" Height="29" VerticalAlignment="Top"/>
+        <TextBox TextChanged="MainText_TextChanged" Name="mainText" Height="23" Margin="10,39,168,0" TextWrapping="NoWrap" VerticalAlignment="Top"/>
+        <Button Click="EditConditionsButton_Click" Name="editConditionsButton" Content="{DynamicResource dialogue_Reply_EditCondition}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,10,50,0" Height="23" Width="113"/>
+        <Button Click="EditRewardsButton_Click" Name="editRewardsButton" Content="{DynamicResource dialogue_Reply_EditRewards}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,38,50,0" Height="23" Width="113"/>
+        <Button ToolTip="{DynamicResource dialogue_DialogueList_Delete_Tooltip}" Name="deleteButton" Height="23" Width="23" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Button.Content>
+                <Image Source="/Resources/ICON_CANCEL.png"/>
+            </Button.Content>
+        </Button>
+        <!--<Label Content="{DynamicResource dialogue_Reply_Redirects_Dialogue}" Height="28" Margin="81,62,10,0" VerticalAlignment="Top"/>
+        <Label Content="{DynamicResource dialogue_Reply_Redirects_Vendor}" Height="28" Margin="81,90,10,0" VerticalAlignment="Top"/>
+        <Label Content="{DynamicResource dialogue_Reply_Redirects_Quest}" Height="27" Margin="81,118,10,0" VerticalAlignment="Top"/>-->
+        <Border Height="23" Margin="81,67,50,0" VerticalAlignment="Top">
+            <TextBlock Text="{DynamicResource dialogue_Reply_Redirects_Dialogue}" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="11" TextAlignment="Left"/>
+        </Border>
+        <Border Height="23" Margin="81,95,50,0" VerticalAlignment="Top">
+            <TextBlock Text="{DynamicResource dialogue_Reply_Redirects_Vendor}" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="11" TextAlignment="Left"/>
+        </Border>
+        <Border Height="22" Margin="81,123,50,0" VerticalAlignment="Top">
+            <TextBlock Text="{DynamicResource dialogue_Reply_Redirects_Quest}" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="11" TextAlignment="Left"/>
+        </Border>
+        <Button Click="DialogueSelect_Click" Width="23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="54,67,0,0" Height="23">
+            <Button.Content>
+                <Image Source="/Resources/ICON_CHAT.png"/>
+            </Button.Content>
+        </Button>
+        <Button Click="VendorSelect_Click" Width="23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="54,95,0,0" Height="23">
+            <Button.Content>
+                <Image Source="/Resources/ICON_MONEY.png"/>
+            </Button.Content>
+        </Button>
+        <Button Click="QuestSelect_Click" Width="23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="54,123,0,0" Height="23">
+            <Button.Content>
+                <Image Source="/Resources/ICON_EXCLAMATION.png"/>
+            </Button.Content>
+        </Button>
+        <TextBox TextChanged="TxtBoxDialogueID_TextChanged" HorizontalAlignment="Left" Width="39" Height="23" Margin="10,67,232,0" TextWrapping="Wrap"  Name="txtBoxDialogueID" VerticalAlignment="Top"/>
+        <TextBox TextChanged="TxtBoxVendorID_TextChanged" HorizontalAlignment="Left" Width="39" Height="23" Margin="10,95,232,0" TextWrapping="Wrap"  Name="txtBoxVendorID" VerticalAlignment="Top"/>
+        <TextBox TextChanged="TxtBoxQuestID_TextChanged" HorizontalAlignment="Left" Width="39" Height="23" Margin="10,123,232,0" TextWrapping="Wrap" Name="txtBoxQuestID" VerticalAlignment="Top"/>
+        <Button Click="ChangeVisibilityButton_Click" Content="{DynamicResource dialogue_Reply_EditVisibility}" HorizontalAlignment="Left" Margin="10,151,0,0" VerticalAlignment="Top" Width="261" Height="24"/>
+        <Button Click="OrderButtonUp_Click" Name="orderButtonUp" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="24" Width="24">
+            <Button.Content>
+                <Image Source="/Resources/ICON_ARROW_UP.png"/>
+            </Button.Content>
+        </Button>
+        <Button Click="OrderButtonDown_Click" Name="orderButtonDown" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="24" Width="24">
+            <Button.Content>
+                <Image Source="/Resources/ICON_ARROW_DOWN.png"/>
+            </Button.Content>
+        </Button>
+    </Grid>
+</UserControl>

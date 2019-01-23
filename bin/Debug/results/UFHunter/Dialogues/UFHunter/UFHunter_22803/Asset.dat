@@ -1,0 +1,22 @@
+﻿
+GUID 8ef50400ec0c42d2928e1b15e5c4fdae
+Type Dialogue
+ID 22803
+Messages 1
+Message_0_Pages 2
+Responses 2
+Response_0_Dialogue 22803
+Response_0_Quest 22810
+Response_0_Conditions 1
+Response_0_Condition_0_Type Quest
+Response_0_Condition_0_ID 18810
+Response_0_Condition_0_Status None
+Response_0_Condition_0_Logic Not_Equal
+Response_1_Dialogue 22803
+Response_1_Quest 22810
+Response_1_Conditions 1
+Response_1_Condition_0_Type Quest
+Response_1_Condition_0_ID 18810
+Response_1_Condition_0_Status Ready
+Response_1_Condition_0_Logic Equal
+Response_1_Condition_0_Reset

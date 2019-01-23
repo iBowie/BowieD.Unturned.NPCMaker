@@ -1,0 +1,14 @@
+﻿
+GUID 45c608ebd3e943c9aac50b9ec2df7413
+Type Dialogue
+ID 9999
+Messages 1
+Message_0_Pages 1
+Message_0_Responses 3
+Message_0_Response_0 0
+Message_0_Response_1 1
+Message_0_Response_2 2
+Responses 3
+Response_0_Dialogue 9997
+Response_0_Vendor 7999
+Response_1_Dialogue 9996
