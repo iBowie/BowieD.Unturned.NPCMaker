@@ -77,10 +77,25 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             else if (Type == ReturnType.VendorItem)
             {
                 NPC.VendorItem Item = Value as NPC.VendorItem;
+                bool old = Item.isBuy;
                 BetterForms.Universal_VendorItemEditor uvie = new BetterForms.Universal_VendorItemEditor(Item);
                 if (uvie.ShowDialog() == true)
                 {
-                    Value = uvie.Result;
+                    NPC.VendorItem NewItem = uvie.Result as NPC.VendorItem;
+                    if (old != NewItem.isBuy)
+                    {
+                        if (NewItem.isBuy)
+                        {
+                            MainWindow.Instance.Vendor_Delete_Sell(Util.FindParent<Universal_ItemList>(sender as Button));
+                            MainWindow.Instance.Vendor_Add_Buy(NewItem);
+                        }
+                        else
+                        {
+                            MainWindow.Instance.Vendor_Delete_Buy(Util.FindParent<Universal_ItemList>(sender as Button));
+                            MainWindow.Instance.Vendor_Add_Sell(NewItem);
+                        }
+                    }
+                    Value = NewItem;
                     mainTextBlock.Text = Value.ToString();
                     mainTextBlock.ToolTip = Value.ToString();
                 }

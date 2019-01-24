@@ -1381,17 +1381,13 @@ namespace BowieD.Unturned.NPCMaker
             if (uvie.ShowDialog() == true)
             {
                 VendorItem resultedVendorItem = uvie.Result;
-                Universal_ItemList uil = new Universal_ItemList(resultedVendorItem, Universal_ItemList.ReturnType.VendorItem, false);
-                uil.Width = 240;
                 if (resultedVendorItem.isBuy)
                 {
-                    uil.deleteButton.Click += DeleteVendorBuy_Click;
-                    vendorListBuyItems.Children.Add(uil);
+                    Vendor_Add_Buy(resultedVendorItem);
                 }
                 else
                 {
-                    uil.deleteButton.Click += DeleteVendorSell_Click;
-                    vendorListSellItems.Children.Add(uil);
+                    Vendor_Add_Sell(resultedVendorItem);
                 }
                 if (Autosave_Vendor_Enabled && CurrentVendor.id > 0)
                     SaveVendor_Click(sender, e);
@@ -1438,6 +1434,36 @@ namespace BowieD.Unturned.NPCMaker
             vendorListSellItems.Children.Remove(uil);
             if (Autosave_Vendor_Enabled && CurrentVendor.id > 0)
                 SaveVendor_Click(sender, e);
+        }
+        public void Vendor_Add_Buy(VendorItem item)
+        {
+            Universal_ItemList uil = new Universal_ItemList(item, Universal_ItemList.ReturnType.VendorItem, false);
+            uil.Width = 240;
+            uil.deleteButton.Click += DeleteVendorBuy_Click;
+            vendorListBuyItems.Children.Add(uil);
+        }
+        public void Vendor_Add_Sell(VendorItem item)
+        {
+            Universal_ItemList uil = new Universal_ItemList(item, Universal_ItemList.ReturnType.VendorItem, false);
+            uil.Width = 240;
+            uil.deleteButton.Click += DeleteVendorSell_Click;
+            vendorListSellItems.Children.Add(uil);
+        }
+        public void Vendor_Delete_Buy(UIElement item)
+        {
+            vendorListBuyItems.Children.Remove(item);
+        }
+        public void Vendor_Delete_Buy(int id)
+        {
+            vendorListBuyItems.Children.RemoveAt(id);
+        }
+        public void Vendor_Delete_Sell(int id)
+        {
+            vendorListSellItems.Children.RemoveAt(id);
+        }
+        public void Vendor_Delete_Sell(UIElement item)
+        {
+            vendorListSellItems.Children.Remove(item);
         }
         #endregion
         #region QUEST_EDITOR

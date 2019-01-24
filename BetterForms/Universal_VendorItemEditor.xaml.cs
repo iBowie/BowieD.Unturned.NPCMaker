@@ -46,16 +46,6 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                     break;
                 }
             }
-            if (Result == startItem)
-            {
-                sellBox.IsEnabled = false;
-                disableSellTypeChange = true;
-                if (Result.type == ItemType.ITEM && Result.isBuy == true)
-                {
-                    typeBox.IsEnabled = false;
-                    disableTypeChange = true;
-                }
-            }
         }
 
         private bool disableTypeChange { get; set; }
@@ -76,10 +66,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 BeginAnimation(HeightProperty, heightAnimation);
                 txtBoxSpawnpoint.BeginAnimation(OpacityProperty, opacityAnimation);
                 labelSpawnpoint.BeginAnimation(OpacityProperty, opacityAnimation);
-                if (disableSellTypeChange)
-                    sellBox.IsEnabled = false;
-                else
-                    sellBox.IsEnabled = true;
+                sellBox.IsEnabled = true;
                 txtBoxSpawnpoint.Text = "";
             }
             else
