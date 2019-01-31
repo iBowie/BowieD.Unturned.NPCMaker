@@ -32,39 +32,39 @@
                 <MenuItem Header="{DynamicResource menu_File}">
                     <MenuItem Header="{DynamicResource file_Open}" Click="LoadClick">
                         <MenuItem.Icon>
-                            <Image Source="Resources/ICON_OPEN.png"/>
+                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_OPEN.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="{DynamicResource file_Save}" Click="SaveClick">
                         <MenuItem.Icon>
-                            <Image Source="Resources/ICON_SAVE.png"/>
+                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_SAVE.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="{DynamicResource file_SaveAs}" Click="SaveAsClick">
                         <MenuItem.Icon>
-                            <Image Source="Resources/ICON_SAVE.png"/>
+                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_SAVE.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Name="RecentList" Header="{DynamicResource file_Recent}" Click="RecentList_Click">
                         <MenuItem.Icon>
-                            <Image Source="Resources/ICON_RECENT.png"/>
+                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_RECENT.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="{DynamicResource file_Export}" Click="ExportClick">
                         <MenuItem.Icon>
-                            <Image Source="Resources/ICON_OK.png"/>
+                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_OK.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="{DynamicResource file_Exit}" Click="ExitButtonClick">
                         <MenuItem.Icon>
-                            <Image Source="Resources/ICON_CANCEL.png"/>
+                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_CANCEL.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="{DynamicResource menu_Options}">
                     <MenuItem Header="{DynamicResource menu_AutoSave}">
                         <MenuItem.Icon>
-                            <Image Source="Resources/ICON_SAVE.png"/>
+                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_SAVE.png"/>
                         </MenuItem.Icon>
                         <MenuItem Click="AutosaveNPCCheckbox_Click" Name="autosaveNPCCheckbox" Header="{DynamicResource menu_AutoSave_NPC}"/>
                         <MenuItem Click="AutosaveDialoguesCheckbox_Click" Name="autosaveDialoguesCheckbox" Header="{DynamicResource menu_AutoSave_Dialogue}"/>
@@ -73,7 +73,7 @@
                     </MenuItem>
                     <MenuItem Header="{DynamicResource menu_Scale}" Name="scaleMenuItem">
                         <MenuItem.Icon>
-                            <Image Source="Resources/ICON_SCALE.png"/>
+                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_SCALE.png"/>
                         </MenuItem.Icon>
                         <MenuItem Click="ScaleUpdate" Tag="0.75" Header="75%"/>
                         <MenuItem Click="ScaleUpdate" Tag="1" Header="100%"/>
@@ -83,27 +83,27 @@
                     </MenuItem>
                     <MenuItem Header="{DynamicResource menu_Language}" Name="languageMenuItem">
                         <MenuItem.Icon>
-                            <Image Source="Resources/ICON_CHAT.png"/>
+                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_CHAT.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="{DynamicResource menu_WhatsNew}" Click="WhatsNew_Menu_Click">
                         <MenuItem.Icon>
-                            <Image Source="Resources/ICON_QUESTION.png"/>
+                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_QUESTION.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Name="checkForUpdatesButton" Header="{DynamicResource menu_CheckForUpdates}" Click="CheckForUpdates_Click">
                         <MenuItem.Icon>
-                            <Image Source="Resources/ICON_QUESTION.png"/>
+                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_QUESTION.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem IsEnabled="False" Name="forceUpdateButton" Header="{DynamicResource menu_Update}" Click="ForceUpdate_Click">
                         <MenuItem.Icon>
-                            <Image Source="Resources/BAD_ICON_UPDATE.png"/>
+                            <Image Width="16" Height="{Binding Width}" Source="Resources/BAD_ICON_UPDATE.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Click="AboutMenu_Click" Header="{DynamicResource menu_About}">
                         <MenuItem.Icon>
-                            <Image Source="Resources/ICON_INFO.png"/>
+                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_INFO.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
@@ -111,17 +111,17 @@
                 <MenuItem Header="{DynamicResource menu_Communication}">
                     <MenuItem Click="FeedbackItemClick" Tag="https://steamcommunity.com/profiles/76561198085825110" Header="{DynamicResource feedback_Steam}">
                         <MenuItem.Icon>
-                            <Image Source="Resources/Services/Steam.png"/>
+                            <Image Width="16" Height="{Binding Width}" Source="Resources/Services/Steam.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Click="FeedbackItemClick" Tag="https://discord.gg/scBw7G3" Header="{DynamicResource feedback_Discord}">
                         <MenuItem.Icon>
-                            <Image Source="Resources/Services/Discord.png"/>
+                            <Image Width="16" Height="{Binding Width}" Source="Resources/Services/Discord.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Click="FeedbackItemClick" Tag="https://vk.com/id250813640" Header="{DynamicResource feedback_VK}">
                         <MenuItem.Icon>
-                            <Image Source="Resources/Services/VK.png"/>
+                            <Image Width="16" Height="{Binding Width}" Source="Resources/Services/VK.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
@@ -130,7 +130,7 @@
                 <TabItem Name="generalInfoTab">
                     <TabItem.Header>
                         <Grid>
-                            <Image Width="17" Source="Resources/ICON_INFO.png" HorizontalAlignment="Left"/>
+                            <Image Width="17" Height="{Binding Width}" Source="Resources/ICON_INFO.png" HorizontalAlignment="Left"/>
                             <TextBlock Text="{DynamicResource tab_General}" Margin="17,0,0,0"/>
                         </Grid>
                     </TabItem.Header>
@@ -150,7 +150,7 @@
                 <TabItem Name="apparelTab">
                     <TabItem.Header>
                         <Grid>
-                            <Image Source="Resources/ICON_APPAREL.png" Width="17" HorizontalAlignment="Left"/>
+                            <Image Height="{Binding Width}" Source="Resources/ICON_APPAREL.png" Width="17" HorizontalAlignment="Left"/>
                             <TextBlock  Text="{DynamicResource tab_Apparel}" Margin="17,0,0,0"/>
                         </Grid>
                     </TabItem.Header>
@@ -298,7 +298,7 @@
                 <TabItem Name="dialogueTab">
                     <TabItem.Header>
                         <Grid>
-                            <Image Width="17" HorizontalAlignment="Left" Source="Resources/ICON_CHAT.png"/>
+                            <Image Height="{Binding Width}" Width="17" HorizontalAlignment="Left" Source="Resources/ICON_CHAT.png"/>
                             <TextBlock  Text="{DynamicResource tab_Dialogues}" Margin="17,0,0,0"/>
                         </Grid>
                     </TabItem.Header>
@@ -332,17 +332,17 @@
                         </GroupBox>
                         <Button Grid.Column="2" Click="Dialogue_SaveButtonClick" ToolTip="{DynamicResource dialogue_Save}" HorizontalAlignment="Right" Margin="0,10,68,0" VerticalAlignment="Top" Width="24" Height="24">
                             <Button.Content>
-                                <Image Source="Resources/ICON_SAVE.png"/>
+                                <Image Width="21" Height="{Binding Width}" Source="Resources/ICON_SAVE.png"/>
                             </Button.Content>
                         </Button>
                         <Button Grid.Column="2" Click="Dialogue_ClearCurrentButtonClick" ToolTip="{DynamicResource dialogue_Clear}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="24" Height="24">
                             <Button.Content>
-                                <Image Source="Resources/ICON_CANCEL.png"/>
+                                <Image Width="21" Height="{Binding Width}" Source="Resources/ICON_CANCEL.png"/>
                             </Button.Content>
                         </Button>
                         <Button Grid.Column="2" Click="Dialogue_OpenButtonClick" ToolTip="{DynamicResource dialogue_Open}" HorizontalAlignment="Right" Margin="0,10,39,0" VerticalAlignment="Top" Width="24" Height="24">
                             <Button.Content>
-                                <Image Source="Resources/ICON_OPEN.png"/>
+                                <Image Width="21" Height="{Binding Width}" Source="Resources/ICON_OPEN.png"/>
                             </Button.Content>
                         </Button>
                         <TextBlock  Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="10" Text="{DynamicResource dialogue_Tips}" TextWrapping="Wrap"/>
@@ -351,7 +351,7 @@
                 <TabItem Name="vendorTab">
                     <TabItem.Header>
                         <Grid>
-                            <Image HorizontalAlignment="Left" Width="17" Source="Resources/ICON_MONEY.png"/>
+                            <Image Height="{Binding Width}" HorizontalAlignment="Left" Width="17" Source="Resources/ICON_MONEY.png"/>
                             <TextBlock  Text="{DynamicResource tab_Vendor}" Margin="17,0,0,0"/>
                         </Grid>
                     </TabItem.Header>
@@ -374,17 +374,17 @@
                         <TextBlock  Grid.Column="1" Width="128" HorizontalAlignment="Right" Margin="0,0,10,14" TextWrapping="Wrap" Text="{DynamicResource vendor_Desc}" VerticalAlignment="Bottom"/>
                         <Button Grid.Column="2" Click="SaveVendor_Click" Height="23" ToolTip="{DynamicResource vendor_Save}" HorizontalAlignment="Right" Margin="0,10,66,0" VerticalAlignment="Top" Width="23">
                             <Button.Content>
-                                <Image Source="Resources/ICON_SAVE.png"/>
+                                <Image Width="21" Height="{Binding Width}" Source="Resources/ICON_SAVE.png"/>
                             </Button.Content>
                         </Button>
                         <Button Grid.Column="2" Click="OpenVendor_Click" Height="23" ToolTip="{DynamicResource vendor_Open}" HorizontalAlignment="Right" Margin="0,10,38,0" VerticalAlignment="Top" Width="23">
                             <Button.Content>
-                                <Image Source="Resources/ICON_OPEN.png"/>
+                                <Image Width="21" Height="{Binding Width}" Source="Resources/ICON_OPEN.png"/>
                             </Button.Content>
                         </Button>
                         <Button Grid.Column="2" Click="ClearVendor_Click" Height="23" ToolTip="{DynamicResource vendor_Clear}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="23">
                             <Button.Content>
-                                <Image Source="Resources/ICON_CANCEL.png"/>
+                                <Image Width="21" Height="{Binding Width}" Source="Resources/ICON_CANCEL.png"/>
                             </Button.Content>
                         </Button>
                         <TextBlock  Grid.Row="1" TextAlignment="Center" Text="{DynamicResource vendor_BuyList}" Height="23" Margin="10,10,10,0" VerticalAlignment="Top"/>
@@ -409,7 +409,7 @@
                 <TabItem Name="questTab">
                     <TabItem.Header>
                         <Grid>
-                            <Image Width="17" HorizontalAlignment="Left" Source="Resources/ICON_EXCLAMATION.png"/>
+                            <Image Height="{Binding Width}" Width="17" HorizontalAlignment="Left" Source="Resources/ICON_EXCLAMATION.png"/>
                             <TextBlock  Margin="17,0,0,0" Text="{DynamicResource tab_Quest}"/>
                         </Grid>
                     </TabItem.Header>
@@ -432,17 +432,17 @@
                         <TextBlock Grid.Row="1" TextAlignment="Center" Text="{DynamicResource quest_Desc}" Height="23" VerticalAlignment="Top" Margin="10,66,10,0"/>
                         <Button Grid.Column="2" Click="SaveQuest_Click" Height="23" ToolTip="{DynamicResource quest_Save}" HorizontalAlignment="Right" Margin="0,10,66,0" VerticalAlignment="Top" Width="23">
                             <Button.Content>
-                                <Image Source="Resources/ICON_SAVE.png"/>
+                                <Image Width="21" Height="{Binding Width}" Source="Resources/ICON_SAVE.png"/>
                             </Button.Content>
                         </Button>
                         <Button Grid.Column="2" Click="LoadQuest_Click" Height="23" ToolTip="{DynamicResource quest_Open}" HorizontalAlignment="Right" Margin="0,10,38,0" VerticalAlignment="Top" Width="23">
                             <Button.Content>
-                                <Image Source="Resources/ICON_OPEN.png"/>
+                                <Image Width="21" Height="{Binding Width}" Source="Resources/ICON_OPEN.png"/>
                             </Button.Content>
                         </Button>
                         <Button Grid.Column="2" Click="ClearQuest_Click" Height="23" ToolTip="{DynamicResource quest_Clear}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="23">
                             <Button.Content>
-                                <Image Source="Resources/ICON_CANCEL.png"/>
+                                <Image Width="21" Height="{Binding Width}" Source="Resources/ICON_CANCEL.png"/>
                             </Button.Content>
                         </Button>
                         <Border Grid.Column="1" Grid.Row="1" BorderBrush="LightGray" BorderThickness="2" Margin="10,40,10,40">
@@ -460,7 +460,7 @@
                 <TabItem Name="mistakeListTab">
                     <TabItem.Header>
                         <Grid>
-                            <Image Width="17" HorizontalAlignment="Left" Source="Resources/ICON_WARNING.png"/>
+                            <Image Height="{Binding Width}" Width="17" HorizontalAlignment="Left" Source="Resources/ICON_WARNING.png"/>
                             <TextBlock  Text="{DynamicResource tab_Mistakes}" Margin="17,0,0,0"/>
                         </Grid>
                     </TabItem.Header>
@@ -471,7 +471,7 @@
                                     <GridViewColumn Width="32">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}"/>
+                                                <Image Width="17" Height="{Binding Width}" Source="{Binding Image}"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -505,7 +505,7 @@
             <TextBlock  Name="betaOverlayText" Margin="5" Text="BETA" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="36" Opacity="0.15"/>
             
             <Grid Name="debugOverlayText" HorizontalAlignment="Left" Opacity="0.15" VerticalAlignment="Bottom" Margin="5">
-                <Image Source="Resources/ICON_WARNING.png" Height="36" HorizontalAlignment="Left"/>
+                <Image Width="36" Source="Resources/ICON_WARNING.png" Height="{Binding Width}" HorizontalAlignment="Left"/>
                 <TextBlock Margin="36,0,0,0" Text="DEBUG" HorizontalAlignment="Right" FontSize="36"/>
             </Grid>
         </Grid>
