@@ -49,6 +49,11 @@
                             <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_SAVE.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Header="Save as Example" Name="saveAsExampleButton" Click="SaveAsExampleButton_Click">
+                        <MenuItem.Icon>
+                            <Image Width="16" Source="Resources/ICON_SAVE.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem Name="RecentList" Header="{DynamicResource file_Recent}" Click="RecentList_Click">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_RECENT.png"/>
@@ -112,6 +117,13 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Click="Donate_Click" Header="{DynamicResource menu_Donate}"/>
+                <MenuItem Header="{DynamicResource menu_Help}">
+                    <MenuItem Header="{DynamicResource menu_Help_Examples}" Name="examplesMenu">
+                        <MenuItem.Icon>
+                            <Image Source="{DynamicResource app_Icon}" Width="16" Height="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
                 <MenuItem Header="{DynamicResource menu_Communication}">
                     <MenuItem Click="FeedbackItemClick" Tag="https://steamcommunity.com/profiles/76561198085825110" Header="{DynamicResource feedback_Steam}">
                         <MenuItem.Icon>

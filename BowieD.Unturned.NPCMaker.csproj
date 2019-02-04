@@ -115,6 +115,7 @@
     <Compile Include="Controls\NumericUpDown.xaml.cs">
       <DependentUpon>NumericUpDown.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Examples\NPCExample.cs" />
     <Compile Include="Forms\Export_ExportWindow.xaml.cs">
       <DependentUpon>Export_ExportWindow.xaml</DependentUpon>
     </Compile>

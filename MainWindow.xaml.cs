@@ -23,6 +23,7 @@ using BowieD.Unturned.NPCMaker.BetterForms;
 using BowieD.Unturned.NPCMaker.BetterControls;
 
 using System.Net; // ONLY FOR UPDATE CHECK (FOR THOSE WHO DECOMPILE MY APP (STOP DOING THIS THO))
+using BowieD.Unturned.NPCMaker.Examples;
 // STILL ONLY FOR UPDATES
 
 namespace BowieD.Unturned.NPCMaker
@@ -224,6 +225,11 @@ namespace BowieD.Unturned.NPCMaker
             debugOverlayText.Visibility = Visibility.Collapsed;
 #endif
             #endregion
+            #region EXAMPLE DEBUG
+#if !DEBUG
+            saveAsExampleButton.Visibility = Visibility.Collapsed;
+#endif
+            #endregion
             #region read cache
             try
             {
@@ -244,10 +250,11 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23,
-        version = 14;
+        version = 15;
         #endregion
         #region STATIC
         public static MainWindow Instance;
+        public static NPCSave CurrentNPC { get; set; }
         #endregion
         #region LOCALIZATION EVENTS
         private void ChangeLanguageClick(object sender, RoutedEventArgs e)
@@ -277,8 +284,13 @@ namespace BowieD.Unturned.NPCMaker
         public static NPCSave StateAsNPC => Instance.ConvertCurrentStateToNPC();
         #endregion
         #region SAVE_LOAD
-        public void Save()
+        public void Save(bool asExample = false)
         {
+            if ((CurrentNPC?.IsReadOnly) ?? false)
+            {
+                DoNotification("READ ONLY!");
+                return;
+            }
             if (saveFile == null || saveFile == "")
             {
                 SaveFileDialog sfd = new SaveFileDialog
@@ -304,68 +316,82 @@ namespace BowieD.Unturned.NPCMaker
             }
             try
             {
-                using (FileStream fs = new FileStream(saveFile, FileMode.Create))
+                if (asExample)
                 {
-                    using (XmlWriter writer = XmlWriter.Create(fs))
+                    NPCExample example = new NPCExample(ConvertCurrentStateToNPC());
+                    if (saveFile != null && saveFile != "")
                     {
-                        XmlSerializer ser = new XmlSerializer(typeof(NPCSave));
-                        ser.Serialize(writer, ConvertCurrentStateToNPC());
+                        using (FileStream fs = new FileStream(saveFile, FileMode.Create))
+                        using (XmlWriter writer = XmlWriter.Create(fs))
+                        {
+                            XmlSerializer ser = new XmlSerializer(typeof(NPCExample));
+                            ser.Serialize(writer, example);
+                        }
+                        DoNotification("EXAMPLE SAVED!");
+                        isSaved = true;
                     }
                 }
-                DoNotification((string)TryFindResource("notify_Saved"));
-                isSaved = true;
+                else
+                {
+                    if (CurrentNPC.IsReadOnly)
+                    {
+                        DoNotification("READ ONLY!");
+                        return;
+                    }
+                    NPCSave save = ConvertCurrentStateToNPC();
+                    if (saveFile != null && saveFile != "")
+                    {
+                        using (FileStream fs = new FileStream(saveFile, FileMode.Create))
+                        using (XmlWriter writer = XmlWriter.Create(fs))
+                        {
+                            XmlSerializer ser = new XmlSerializer(typeof(NPCSave));
+                            ser.Serialize(writer, save);
+                        }
+                        DoNotification((string)TryFindResource("notify_Saved"));
+                        isSaved = true;
+                    }
+                }
             }
             catch (Exception ex) { DoNotification($"Saving failed! Exception: {ex.Message}"); }
         }
-        public void Load(string path, bool fileDialogInstead = false)
+        public bool Load(string path, bool asExample = false)
         {
             if (!isSaved)
-            {
                 if (!SavePrompt())
-                {
-                    return;
-                }
-            }
-            if (fileDialogInstead)
-            {
-                OpenFileDialog ofd = new OpenFileDialog
-                {
-                    Filter = $"{(string)TryFindResource("save_Filter")} (*.npc)|*.npc",
-                    Multiselect = false
-                };
-                var res = ofd.ShowDialog();
-                if (res == true)
-                    path = ofd.FileName;
-                else
-                    return;
-            }
+                    return false;
+            
             try
             {
-                if (!FileCompatible(path))
-                    throw new Exception();
                 using (FileStream fs = new FileStream(path, FileMode.Open))
+                using (XmlReader reader = XmlReader.Create(fs))
                 {
-                    using (XmlReader reader = XmlReader.Create(fs))
+                    if (asExample)
+                    {
+                        XmlSerializer deser = new XmlSerializer(typeof(NPCExample));
+                        NPCExample save = deser.Deserialize(reader) as NPCExample;
+                        CurrentNPC = save;
+                    }
+                    else
                     {
                         XmlSerializer deser = new XmlSerializer(typeof(NPCSave));
-                        NPCSave npc = deser.Deserialize(reader) as NPCSave;
-                        npc.saveFile = path;
-                        if (npc.version < version)
-                        {
-                            DoNotification((string)TryFindResource("load_Old"));
-                        }
-                        if (npc.version > version)
-                        {
-                            DoNotification((string)TryFindResource("load_New"));
-                        }
-                        if (Autosave_NPC_Enabled && saveFile?.Length > 0)
-                            Save();
-                        ConvertNPCToState(npc);
+                        NPCSave save = deser.Deserialize(reader) as NPCSave;
+                        CurrentNPC = save;
+                        saveFile = path;
                     }
+                    if (CurrentNPC.version < version)
+                    {
+                        DoNotification((string)TryFindResource("load_Old"));
+                    }
+                    if (CurrentNPC.version > version)
+                    {
+                        DoNotification((string)TryFindResource("load_New"));
+                    }
+                    ConvertNPCToState(CurrentNPC);
                 }
                 DoNotification((string)TryFindResource("notify_Loaded"));
+                return true;
             }
-            catch { DoNotification((string)TryFindResource("load_Incompatible")); }
+            catch { DoNotification((string)TryFindResource("load_Incompatible")); return false; }
         }
         public bool SavePrompt()
         {
@@ -422,6 +448,10 @@ namespace BowieD.Unturned.NPCMaker
         }
         #endregion
         #region EVENTS
+        private void SaveAsExampleButton_Click(object sender, RoutedEventArgs e)
+        {
+            Save(true);
+        }
         private void Char_EditConditions_Button_Click(object sender, RoutedEventArgs e)
         {
             Universal_ListView ulv = new Universal_ListView(visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
@@ -622,7 +652,26 @@ namespace BowieD.Unturned.NPCMaker
         }
         private void LoadClick(object sender, RoutedEventArgs e)
         {
-            Load("", true);
+            string path = "";
+            OpenFileDialog ofd = new OpenFileDialog()
+            {
+                Filter = $"{(string)TryFindResource("save_Filter")} (*.npc)|*.npc",
+                Multiselect = false
+            };
+            var res = ofd.ShowDialog();
+            if (res == true)
+                path = ofd.FileName;
+            else
+                return;
+
+            if (!Load(path, false))
+            {
+                if (Load(path, true))
+                {
+                    notificationsStackPanel.Children.Clear();
+                    DoNotification((string)TryFindResource("notify_Loaded"));
+                }
+            }
         }
         private void FaceImageIndex_Changed(int value)
         {
@@ -711,7 +760,7 @@ namespace BowieD.Unturned.NPCMaker
                 face = (byte)faceImageIndex.Value,
                 beard = (byte)beardImageIndex.Value,
                 haircut = (byte)hairImageIndex.Value,
-                saveFile = saveFile,
+                //saveFile = saveFile,
                 id = Inputted_ID,
                 editorName = Inputted_EditorName,
                 displayName = Inputted_DisplayName,
@@ -762,7 +811,7 @@ namespace BowieD.Unturned.NPCMaker
             dialogues = save.dialogues;
             vendors = save.vendors;
             quests = save.quests;
-            saveFile = save.saveFile;
+            //saveFile = save.saveFile;
             Inputted_StartDialogueID = save.startDialogueId;
             apparelLeftHandedCheckbox.IsChecked = save.leftHanded;
             visibilityConditions = save.visibilityConditions;
@@ -782,7 +831,7 @@ namespace BowieD.Unturned.NPCMaker
                     break;
                 }
             }
-
+            CurrentNPC = save;
         }
         #endregion
         #region PROPERTIES
@@ -1840,7 +1889,7 @@ namespace BowieD.Unturned.NPCMaker
         }
         public static bool CacheUpdated = false;
         public static List<UnturnedFile> CachedUnturnedFiles { get; set; }
-        
+
         public class UnturnedFile
         {
             public string FileName { get; set; }

@@ -37,6 +37,8 @@
     <v:String x:Key="menu_AutoSave_Vendor">Торговля</v:String>
     <v:String x:Key="menu_AutoSave_Quest">Задания</v:String>
     <v:String x:Key="menu_PlannedFeatures">Запланированные функции</v:String>
+    <v:String x:Key="menu_Help">Помощь</v:String>
+    <v:String x:Key="menu_Help_Examples">Примеры NPC</v:String>
     <v:String x:Key="feedback_Steam">Мой Steam (Нажать)</v:String>
     <v:String x:Key="feedback_Discord">Мой сервер в Discord (Нажать)</v:String>
     <v:String x:Key="feedback_VK">Мой ВК (Нажать)</v:String>

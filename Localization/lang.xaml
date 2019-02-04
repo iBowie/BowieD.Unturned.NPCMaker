@@ -37,6 +37,8 @@
     <v:String x:Key="menu_AutoSave_Vendor">Vendors</v:String>
     <v:String x:Key="menu_AutoSave_Quest">Quests</v:String>
     <v:String x:Key="menu_PlannedFeatures">Planned Features</v:String>
+    <v:String x:Key="menu_Help">Help</v:String>
+    <v:String x:Key="menu_Help_Examples">Examples</v:String>
     <v:String x:Key="feedback_Steam">My Steam (Click)</v:String>
     <v:String x:Key="feedback_Discord">My Discord Server (Click)</v:String>
     <v:String x:Key="feedback_VK">My VK (Click)</v:String>

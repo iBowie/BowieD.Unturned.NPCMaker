@@ -1,9 +1,11 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Examples;
+using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
+    [XmlInclude(typeof(NPCExample))]
     public class NPCSave
     {
         public NPCSave()
@@ -29,7 +31,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public ushort vest;
         public ushort glasses;
         public ushort startDialogueId;
-        public string saveFile;
         public NPC_Pose pose;
         public bool leftHanded;
         public ushort equipPrimary;
@@ -44,5 +45,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
         [XmlAttribute]
         public string guid;
+        [XmlAttribute]
+        public bool IsReadOnly { get; set; }
     }
 }
