@@ -117,13 +117,6 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Click="Donate_Click" Header="{DynamicResource menu_Donate}"/>
-                <MenuItem Header="{DynamicResource menu_Help}">
-                    <MenuItem Header="{DynamicResource menu_Help_Examples}" Name="examplesMenu">
-                        <MenuItem.Icon>
-                            <Image Source="{DynamicResource app_Icon}" Width="16" Height="16"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                </MenuItem>
                 <MenuItem Header="{DynamicResource menu_Communication}">
                     <MenuItem Click="FeedbackItemClick" Tag="https://steamcommunity.com/profiles/76561198085825110" Header="{DynamicResource feedback_Steam}">
                         <MenuItem.Icon>
