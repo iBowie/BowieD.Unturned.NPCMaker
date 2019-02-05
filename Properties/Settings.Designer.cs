@@ -25,6 +25,7 @@ namespace BowieD.Unturned.NPCMaker.Properties {
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("false")]
         public global::System.Boolean experimentalFeatures
         {
             get => ((global::System.Boolean)(this["experimentalFeatures"]));

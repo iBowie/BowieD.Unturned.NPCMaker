@@ -34,6 +34,14 @@ namespace BowieD.Unturned.NPCMaker
         {
             InitializeComponent();
             Instance = this;
+            #region PROPERTIES TO NEW
+            if (!Config.Configuration.ConfigExist)
+            {
+                Config.Configuration.Force(Config.Configuration.ConvertFromOldToNew);
+                Config.Configuration.Save();
+            }
+            #endregion
+            Config.Configuration.Load();
             #region LOCALIZATION
             App.LanguageChanged += App_LanguageChanged;
             languageMenuItem.Items.Clear();
@@ -48,7 +56,7 @@ namespace BowieD.Unturned.NPCMaker
                 menuLang.Click += ChangeLanguageClick;
                 languageMenuItem.Items.Add(menuLang);
             }
-            App.Language = Properties.Settings.Default.language;
+            App.Language = Config.Configuration.Properties.language;
             #endregion
             #region OPEN_WITH
             string[] args = Environment.GetCommandLineArgs();
@@ -69,16 +77,16 @@ namespace BowieD.Unturned.NPCMaker
             }
             #endregion
             #region PROPERTY SETUP
-            if (Properties.Settings.Default.recent == null)
-                Properties.Settings.Default.recent = new string[0];
-            Properties.Settings.Default.recent = Properties.Settings.Default.recent.Where(d => File.Exists(d)).ToArray();
-            RecentList.ItemsSource = Properties.Settings.Default.recent;
+            if (Config.Configuration.Properties.recent == null)
+                Config.Configuration.Properties.recent = new string[0];
+            Config.Configuration.Properties.recent = Config.Configuration.Properties.recent.Where(d => File.Exists(d)).ToArray();
+            RecentList.ItemsSource = Config.Configuration.Properties.recent;
 #endregion
             #region SCALE SETUP
             foreach (UIElement ui in scaleMenuItem.Items)
             {
                 var w = (ui as MenuItem);
-                if (double.Parse(w.Tag.ToString().Replace('.', ',')) == Properties.Settings.Default.scale)
+                if (double.Parse(w.Tag.ToString().Replace('.', ',')) == Config.Configuration.Properties.scale)
                 {
                     ScaleUpdate(w, null);
                     break;
@@ -242,7 +250,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             catch { }
             #endregion
-            Properties.Settings.Default.firstLaunch = false;
+            Config.Configuration.Properties.firstLaunch = false;
             isSaved = true;
         }
         #region CONSTANTS
@@ -305,14 +313,14 @@ namespace BowieD.Unturned.NPCMaker
                 else
                     return;
             }
-            if (Properties.Settings.Default.recent == null)
-                Properties.Settings.Default.recent = new string[0];
-            if (!Properties.Settings.Default.recent.Contains(saveFile))
+            if (Config.Configuration.Properties.recent == null)
+                Config.Configuration.Properties.recent = new string[0];
+            if (!Config.Configuration.Properties.recent.Contains(saveFile))
             {
-                List<string> r = Properties.Settings.Default.recent.ToList();
+                List<string> r = Config.Configuration.Properties.recent.ToList();
                 r.Insert(0, saveFile);
-                Properties.Settings.Default.recent = r.ToArray();
-                Properties.Settings.Default.Save();
+                Config.Configuration.Properties.recent = r.ToArray();
+                Config.Configuration.Save();
             }
             try
             {
@@ -492,10 +500,10 @@ namespace BowieD.Unturned.NPCMaker
         private void UserColorListChanged()
         {
             userColorSampleList.Children.Clear();
-            if (Properties.Settings.Default.userColors == null)
+            if (Config.Configuration.Properties.userColors == null)
                 return;
             BrushConverter brushConverter = new BrushConverter();
-            foreach (string uColor in Properties.Settings.Default.userColors)
+            foreach (string uColor in Config.Configuration.Properties.userColors)
             {
                 try
                 {
@@ -564,22 +572,22 @@ namespace BowieD.Unturned.NPCMaker
             Grid g = Util.FindParent<Grid>(sender as Button);
             Label l = Util.FindChildren<Label>(g);
             string color = l.Content.ToString();
-            Properties.Settings.Default.userColors = Properties.Settings.Default.userColors.Where(d => d != color.Trim('#')).ToArray();
-            Properties.Settings.Default.Save();
+            Config.Configuration.Properties.userColors = Config.Configuration.Properties.userColors.Where(d => d != color.Trim('#')).ToArray();
+            Config.Configuration.Save();
             UserColorListChanged();
         }
         private void UserColorList_AddColor(object sender, RoutedEventArgs e)
         {
-            if (Properties.Settings.Default.userColors == null)
-                Properties.Settings.Default.userColors = new string[0];
-            if (Properties.Settings.Default.userColors.Length > 0 && Properties.Settings.Default.userColors.Contains(colorHexOut.Text.Trim('#')))
+            if (Config.Configuration.Properties.userColors == null)
+                Config.Configuration.Properties.userColors = new string[0];
+            if (Config.Configuration.Properties.userColors.Length > 0 && Config.Configuration.Properties.userColors.Contains(colorHexOut.Text.Trim('#')))
                 return;
-            List<string> uColors = Properties.Settings.Default.userColors.ToList();
+            List<string> uColors = Config.Configuration.Properties.userColors.ToList();
             if (uColors == null)
                 uColors = new List<string>();
             uColors.Add(colorHexOut.Text.Trim('#'));
-            Properties.Settings.Default.userColors = uColors.ToArray();
-            Properties.Settings.Default.Save();
+            Config.Configuration.Properties.userColors = uColors.ToArray();
+            Config.Configuration.Save();
             UserColorListChanged();
         }
         private void ExitButtonClick(object sender, RoutedEventArgs e)
@@ -591,7 +599,7 @@ namespace BowieD.Unturned.NPCMaker
                     return;
                 }
             }
-            Properties.Settings.Default.Save();
+            Config.Configuration.Save();
             if (CacheUpdated && CachedUnturnedFiles?.Count() > 0)
             {
                 var res = MessageBox.Show((string)TryFindResource("app_Cache_Save"), "", MessageBoxButton.YesNo);
@@ -716,11 +724,11 @@ namespace BowieD.Unturned.NPCMaker
                 (ui as MenuItem).IsChecked = false;
             }
             (sender as MenuItem).IsChecked = true;
-            Properties.Settings.Default.scale = d;
+            Config.Configuration.Properties.scale = d;
         }
         protected override void OnClosing(CancelEventArgs e)
         {
-            Properties.Settings.Default.Save();
+            Config.Configuration.Save();
             e.Cancel = true;
             ExitButtonClick(this, null);
             base.OnClosing(e);
@@ -994,15 +1002,15 @@ namespace BowieD.Unturned.NPCMaker
         {
             get
             {
-                if (Properties.Settings.Default.autosaveParams?.Length != 4)
-                    Properties.Settings.Default.autosaveParams = new bool[4];
-                return Properties.Settings.Default.autosaveParams[0];
+                if (Config.Configuration.Properties.autosaveParams?.Length != 4)
+                    Config.Configuration.Properties.autosaveParams = new bool[4];
+                return Config.Configuration.Properties.autosaveParams[0];
             }
             set
             {
-                if (Properties.Settings.Default.autosaveParams?.Length != 4)
-                    Properties.Settings.Default.autosaveParams = new bool[4];
-                Properties.Settings.Default.autosaveParams[0] = value;
+                if (Config.Configuration.Properties.autosaveParams?.Length != 4)
+                    Config.Configuration.Properties.autosaveParams = new bool[4];
+                Config.Configuration.Properties.autosaveParams[0] = value;
                 autosaveNPCCheckbox.IsChecked = value;
             }
         }
@@ -1010,15 +1018,15 @@ namespace BowieD.Unturned.NPCMaker
         {
             get
             {
-                if (Properties.Settings.Default.autosaveParams?.Length != 4)
-                    Properties.Settings.Default.autosaveParams = new bool[4];
-                return Properties.Settings.Default.autosaveParams[1];
+                if (Config.Configuration.Properties.autosaveParams?.Length != 4)
+                    Config.Configuration.Properties.autosaveParams = new bool[4];
+                return Config.Configuration.Properties.autosaveParams[1];
             }
             set
             {
-                if (Properties.Settings.Default.autosaveParams?.Length != 4)
-                    Properties.Settings.Default.autosaveParams = new bool[4];
-                Properties.Settings.Default.autosaveParams[1] = value;
+                if (Config.Configuration.Properties.autosaveParams?.Length != 4)
+                    Config.Configuration.Properties.autosaveParams = new bool[4];
+                Config.Configuration.Properties.autosaveParams[1] = value;
                 autosaveDialoguesCheckbox.IsChecked = value;
             }
         }
@@ -1026,15 +1034,15 @@ namespace BowieD.Unturned.NPCMaker
         {
             get
             {
-                if (Properties.Settings.Default.autosaveParams?.Length != 4)
-                    Properties.Settings.Default.autosaveParams = new bool[4];
-                return Properties.Settings.Default.autosaveParams[2];
+                if (Config.Configuration.Properties.autosaveParams?.Length != 4)
+                    Config.Configuration.Properties.autosaveParams = new bool[4];
+                return Config.Configuration.Properties.autosaveParams[2];
             }
             set
             {
-                if (Properties.Settings.Default.autosaveParams?.Length != 4)
-                    Properties.Settings.Default.autosaveParams = new bool[4];
-                Properties.Settings.Default.autosaveParams[2] = value;
+                if (Config.Configuration.Properties.autosaveParams?.Length != 4)
+                    Config.Configuration.Properties.autosaveParams = new bool[4];
+                Config.Configuration.Properties.autosaveParams[2] = value;
                 autosaveVendorsCheckbox.IsChecked = value;
             }
         }
@@ -1042,15 +1050,15 @@ namespace BowieD.Unturned.NPCMaker
         {
             get
             {
-                if (Properties.Settings.Default.autosaveParams?.Length != 4)
-                    Properties.Settings.Default.autosaveParams = new bool[4];
-                return Properties.Settings.Default.autosaveParams[3];
+                if (Config.Configuration.Properties.autosaveParams?.Length != 4)
+                    Config.Configuration.Properties.autosaveParams = new bool[4];
+                return Config.Configuration.Properties.autosaveParams[3];
             }
             set
             {
-                if (Properties.Settings.Default.autosaveParams?.Length != 4)
-                    Properties.Settings.Default.autosaveParams = new bool[4];
-                Properties.Settings.Default.autosaveParams[3] = value;
+                if (Config.Configuration.Properties.autosaveParams?.Length != 4)
+                    Config.Configuration.Properties.autosaveParams = new bool[4];
+                Config.Configuration.Properties.autosaveParams[3] = value;
                 autosaveQuestsCheckbox.IsChecked = value;
             }
         }
@@ -1099,8 +1107,10 @@ namespace BowieD.Unturned.NPCMaker
             if (!skipCache)
             {
                 blockActionsOverlay.Visibility = Visibility.Visible;
-                System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
-                fbd.ShowNewFolderButton = false;
+                System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog
+                {
+                    ShowNewFolderButton = false
+                };
                 var res = fbd.ShowDialog();
                 if (res == System.Windows.Forms.DialogResult.Cancel)
                 {
@@ -1486,15 +1496,19 @@ namespace BowieD.Unturned.NPCMaker
         }
         public void Vendor_Add_Buy(VendorItem item)
         {
-            Universal_ItemList uil = new Universal_ItemList(item, Universal_ItemList.ReturnType.VendorItem, false);
-            uil.Width = 240;
+            Universal_ItemList uil = new Universal_ItemList(item, Universal_ItemList.ReturnType.VendorItem, false)
+            {
+                Width = 240
+            };
             uil.deleteButton.Click += DeleteVendorBuy_Click;
             vendorListBuyItems.Children.Add(uil);
         }
         public void Vendor_Add_Sell(VendorItem item)
         {
-            Universal_ItemList uil = new Universal_ItemList(item, Universal_ItemList.ReturnType.VendorItem, false);
-            uil.Width = 240;
+            Universal_ItemList uil = new Universal_ItemList(item, Universal_ItemList.ReturnType.VendorItem, false)
+            {
+                Width = 240
+            };
             uil.deleteButton.Click += DeleteVendorSell_Click;
             vendorListSellItems.Children.Add(uil);
         }
@@ -1733,11 +1747,13 @@ namespace BowieD.Unturned.NPCMaker
         #region NOTIFICATIONS
         public void DoNotification(string text, double fontSize = 16, TextAlignment textAlignment = TextAlignment.Center)
         {
-            TextBlock textBlock = new TextBlock();
-            textBlock.Text = text;
-            textBlock.TextAlignment = textAlignment;
-            textBlock.FontSize = fontSize;
-            textBlock.TextWrapping = TextWrapping.Wrap;
+            TextBlock textBlock = new TextBlock
+            {
+                Text = text,
+                TextAlignment = textAlignment,
+                FontSize = fontSize,
+                TextWrapping = TextWrapping.Wrap
+            };
             DoNotification(textBlock);
         }
         public void DoNotification(TextBlock textBlock)
