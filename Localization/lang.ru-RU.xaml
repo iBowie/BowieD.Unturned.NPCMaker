@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Localization"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
-    <v:String x:Key="app_News_Text">+ Исправлено отображение на Windows 7```Хотите, чтобы программа поздравляла вас с днём рождения? Пожертвуйте больше 30 рублей и я сделаю это ^.^</v:String>
+    <v:String x:Key="app_News_Text">+ Возможность открывать примеры (Скоро будут)```Хотите, чтобы программа поздравляла вас с днём рождения? Пожертвуйте больше 30 рублей и я сделаю это ^.^</v:String>
     <v:String x:Key="app_Title">NPC Maker для Unturned. Автор: BowieD</v:String>
     <v:String x:Key="app_Beta">Это Бета-версия программы. Возможны как ошибки, так и изменения в будущем. Если вы столкнулись с ошибкой или хотите сделать предложение - смотрите раздел "Обратная связь"</v:String>
     <v:String x:Key="app_Exit_UnsavedChanges_Title">Несохранённая работа</v:String>
@@ -366,6 +366,5 @@
     <v:String x:Key="notify_Quest_Saved">Задание сохранено!</v:String>
     <v:String x:Key="notify_Saved">Успешное сохранение!</v:String>
     <v:String x:Key="notify_Loaded">Успешная загрузка!</v:String>
-
-    <BitmapImage x:Key="app_Icon" UriSource="pack://application:,,,/Resources/Icons/Option_1_256x.png"/>
+    <v:String x:Key="notify_ReadOnly">Файл только для чтения!</v:String>
 </ResourceDictionary>

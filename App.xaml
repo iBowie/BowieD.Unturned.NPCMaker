@@ -5,9 +5,11 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <BitmapImage x:Key="app_Icon" UriSource="pack://application:,,,/Resources/Icons/Option_1_256x.png"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Localization/lang.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
+
 </Application>
