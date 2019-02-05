@@ -34,13 +34,6 @@ namespace BowieD.Unturned.NPCMaker
         {
             InitializeComponent();
             Instance = this;
-            #region PROPERTIES TO NEW
-            if (!Config.Configuration.ConfigExist)
-            {
-                Config.Configuration.Force(Config.Configuration.ConvertFromOldToNew);
-                Config.Configuration.Save();
-            }
-            #endregion
             Config.Configuration.Load();
             #region LOCALIZATION
             App.LanguageChanged += App_LanguageChanged;
@@ -296,7 +289,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             if ((CurrentNPC?.IsReadOnly) ?? false)
             {
-                DoNotification("READ ONLY!");
+                DoNotification((string)TryFindResource("notify_ReadOnly"));
                 return;
             }
             if (saveFile == null || saveFile == "")
@@ -343,7 +336,7 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     if (CurrentNPC.IsReadOnly)
                     {
-                        DoNotification("READ ONLY!");
+                        DoNotification((string)TryFindResource("notify_ReadOnly"));
                         return;
                     }
                     NPCSave save = ConvertCurrentStateToNPC();
@@ -362,12 +355,13 @@ namespace BowieD.Unturned.NPCMaker
             }
             catch (Exception ex) { DoNotification($"Saving failed! Exception: {ex.Message}"); }
         }
-        public bool Load(string path, bool asExample = false)
+        public bool Load(string path, bool asExample = false, bool skipPrompt = false)
         {
-            if (!isSaved)
-                if (!SavePrompt())
-                    return false;
-            
+            if (!skipPrompt)
+                if (!(CurrentNPC?.IsReadOnly).GetValueOrDefault())
+                    if (!isSaved)
+                        if (!SavePrompt())
+                            return false;
             try
             {
                 using (FileStream fs = new FileStream(path, FileMode.Open))
@@ -403,6 +397,10 @@ namespace BowieD.Unturned.NPCMaker
         }
         public bool SavePrompt()
         {
+            if ((CurrentNPC?.IsReadOnly).GetValueOrDefault())
+            {
+                return true;
+            }
             if (Autosave_NPC_Enabled)
             {
                 Save();
@@ -674,7 +672,7 @@ namespace BowieD.Unturned.NPCMaker
 
             if (!Load(path, false))
             {
-                if (Load(path, true))
+                if (Load(path, true, true))
                 {
                     notificationsStackPanel.Children.Clear();
                     DoNotification((string)TryFindResource("notify_Loaded"));

@@ -32,7 +32,15 @@ namespace BowieD.Unturned.NPCMaker
             languages.Add(new CultureInfo("en-US"));
             languages.Add(new CultureInfo("ru-RU"));
             //languages.Add(new CultureInfo("es-ES"));
-            if (NPCMaker.Properties.Settings.Default.firstLaunch)
+            #region PROPERTIES TO NEW
+            if (!Config.Configuration.ConfigExist)
+            {
+                Config.Configuration.Force(Config.Configuration.ConvertFromOldToNew);
+                Config.Configuration.Save();
+            }
+            #endregion
+            Config.Configuration.Load();
+            if (Config.Configuration.Properties.firstLaunch)
             {
                 if (languages.Contains(CultureInfo.InstalledUICulture))
                 {
@@ -42,15 +50,15 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     Language = new CultureInfo("en-US");
                 }
-                NPCMaker.Properties.Settings.Default.language = Language;
-                NPCMaker.Properties.Settings.Default.Save();
+                Config.Configuration.Properties.Language = Language.Name;
+                Config.Configuration.Save();
             }
         }
 
         private void App_LanguageChanged(object sender, EventArgs e)
         {
-            NPCMaker.Properties.Settings.Default.language = Language;
-            NPCMaker.Properties.Settings.Default.Save();
+            Config.Configuration.Properties.Language = Language.Name;
+            Config.Configuration.Save();
         }
 
         public static event EventHandler LanguageChanged;
