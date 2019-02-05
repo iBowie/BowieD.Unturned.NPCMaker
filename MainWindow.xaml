@@ -123,7 +123,7 @@
                             <Image Width="16" Height="{Binding Width}" Source="Resources/Services/Steam.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Click="FeedbackItemClick" Tag="https://discord.gg/scBw7G3" Header="{DynamicResource feedback_Discord}">
+                    <MenuItem Click="FeedbackItemClick" Tag="https://discord.gg/Geqtkx2" Header="{DynamicResource feedback_Discord}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/Services/Discord.png"/>
                         </MenuItem.Icon>
