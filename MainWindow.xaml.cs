@@ -61,7 +61,14 @@ namespace BowieD.Unturned.NPCMaker
                     {
                         if (FileCompatible(args[k]))
                         {
-                            Load(args[k]);
+                            if (!Load(args[k], false))
+                            {
+                                if (Load(args[k], true, true))
+                                {
+                                    notificationsStackPanel.Children.Clear();
+                                    DoNotification((string)TryFindResource("notify_Loaded"));
+                                }
+                            }
                             break;
                         }
                     }
@@ -251,7 +258,7 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23,
-        version = 15;
+        version = 16;
         #endregion
         #region STATIC
         public static MainWindow Instance;
@@ -334,7 +341,7 @@ namespace BowieD.Unturned.NPCMaker
                 }
                 else
                 {
-                    if (CurrentNPC.IsReadOnly)
+                    if ((CurrentNPC?.IsReadOnly) ?? false)
                     {
                         DoNotification((string)TryFindResource("notify_ReadOnly"));
                         return;
@@ -429,7 +436,8 @@ namespace BowieD.Unturned.NPCMaker
                     using (XmlReader reader = XmlReader.Create(fs))
                     {
                         XmlSerializer s = new XmlSerializer(typeof(NPC.NPCSave));
-                        return s.CanDeserialize(reader);
+                        XmlSerializer s2 = new XmlSerializer(typeof(NPCExample));
+                        return s.CanDeserialize(reader) || s2.CanDeserialize(reader);
                     }
                 }
             }
@@ -1654,7 +1662,15 @@ namespace BowieD.Unturned.NPCMaker
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 e.Effects = DragDropEffects.Copy;
-                Load((e.Data.GetData(DataFormats.FileDrop) as string[])[0]);
+                string path = (e.Data.GetData(DataFormats.FileDrop) as string[])[0];
+                if (!Load(path, false))
+                {
+                    if (Load(path, true, true))
+                    {
+                        notificationsStackPanel.Children.Clear();
+                        DoNotification((string)TryFindResource("notify_Loaded"));
+                    }
+                }
             }
             dropOverlay.Visibility = Visibility.Hidden;
         }
