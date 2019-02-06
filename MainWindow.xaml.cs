@@ -294,11 +294,13 @@ namespace BowieD.Unturned.NPCMaker
         #region SAVE_LOAD
         public void Save(bool asExample = false)
         {
+            #if !DEBUG
             if ((CurrentNPC?.IsReadOnly) ?? false)
             {
                 DoNotification((string)TryFindResource("notify_ReadOnly"));
                 return;
             }
+            #endif
             if (saveFile == null || saveFile == "")
             {
                 SaveFileDialog sfd = new SaveFileDialog
@@ -341,11 +343,13 @@ namespace BowieD.Unturned.NPCMaker
                 }
                 else
                 {
+                    #if !DEBUG
                     if ((CurrentNPC?.IsReadOnly) ?? false)
                     {
                         DoNotification((string)TryFindResource("notify_ReadOnly"));
                         return;
                     }
+                    #endif
                     NPCSave save = ConvertCurrentStateToNPC();
                     if (saveFile != null && saveFile != "")
                     {
@@ -460,8 +464,8 @@ namespace BowieD.Unturned.NPCMaker
         {
             Autosave_Quest_Enabled = !Autosave_Quest_Enabled;
         }
-        #endregion
-        #region EVENTS
+#endregion
+#region EVENTS
         private void SaveAsExampleButton_Click(object sender, RoutedEventArgs e)
         {
             Save(true);
@@ -765,8 +769,8 @@ namespace BowieD.Unturned.NPCMaker
                         );
             box.ShowDialog();
         }
-        #endregion
-        #region STATE CONVERTERS
+#endregion
+#region STATE CONVERTERS
         public NPCSave ConvertCurrentStateToNPC()
         {
             NPCSave npc = new NPCSave
@@ -847,8 +851,8 @@ namespace BowieD.Unturned.NPCMaker
             }
             CurrentNPC = save;
         }
-        #endregion
-        #region PROPERTIES
+#endregion
+#region PROPERTIES
         public ushort Inputted_ID
         {
             get
@@ -1068,8 +1072,8 @@ namespace BowieD.Unturned.NPCMaker
                 autosaveQuestsCheckbox.IsChecked = value;
             }
         }
-        #endregion
-        #region MISTAKES
+#endregion
+#region MISTAKES
         public void FindMistakes()
         {
             lstMistakes.Items.Clear();
@@ -1197,8 +1201,8 @@ namespace BowieD.Unturned.NPCMaker
             }
             blockActionsOverlay.Visibility = Visibility.Collapsed;
         }
-        #endregion
-        #region DIALOGUE_EDITOR
+#endregion
+#region DIALOGUE_EDITOR
         private void Dialogue_SaveButtonClick(object sender, RoutedEventArgs e)
         {
             var dil = CurrentDialogue;
@@ -1395,8 +1399,8 @@ namespace BowieD.Unturned.NPCMaker
                 dialogue_commentbox.Text = d.comment;
             }
         }
-        #endregion
-        #region VENDOR_EDITOR
+#endregion
+#region VENDOR_EDITOR
         public NPCVendor CurrentVendor
         {
             get
@@ -1534,8 +1538,8 @@ namespace BowieD.Unturned.NPCMaker
         {
             vendorListSellItems.Children.Remove(item);
         }
-        #endregion
-        #region QUEST_EDITOR
+#endregion
+#region QUEST_EDITOR
         public NPCQuest CurrentQuest
         {
             get
@@ -1643,8 +1647,8 @@ namespace BowieD.Unturned.NPCMaker
             listQuestConditions.Children.Clear();
             listQuestRewards.Children.Clear();
         }
-        #endregion
-        #region DRAG AND DROP
+#endregion
+#region DRAG AND DROP
         private void Window_DragEnter(object sender, DragEventArgs e)
         {
             dropOverlay.Visibility = Visibility.Visible;
@@ -1674,8 +1678,8 @@ namespace BowieD.Unturned.NPCMaker
             }
             dropOverlay.Visibility = Visibility.Hidden;
         }
-        #endregion
-        #region UPDATE CHECK
+#endregion
+#region UPDATE CHECK
         public async Task<bool> IsUpdateAvailable()
         {
             if (updCache)
@@ -1703,7 +1707,7 @@ namespace BowieD.Unturned.NPCMaker
                 }
                 catch { }
                 finally { checkForUpdatesButton.IsEnabled = true; }
-                #region LEGACY
+#region LEGACY
                 //try
                 //{
                 //    using (WebClient wc = new WebClient())
@@ -1722,15 +1726,15 @@ namespace BowieD.Unturned.NPCMaker
                 //    }
                 //}
                 //catch { }
-                #endregion
+#endregion
             }
             return false;
         }
 
         private bool updCache = false;
         private bool updValue = false;
-        #endregion
-        #region UPDATE
+#endregion
+#region UPDATE
         public void DownloadUpdater()
         {
             using (WebClient wc = new WebClient())
@@ -1757,8 +1761,8 @@ namespace BowieD.Unturned.NPCMaker
             System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "updater.exe",  fileName);
             Environment.Exit(0);
         }
-        #endregion
-        #region NOTIFICATIONS
+#endregion
+#region NOTIFICATIONS
         public void DoNotification(string text, double fontSize = 16, TextAlignment textAlignment = TextAlignment.Center)
         {
             TextBlock textBlock = new TextBlock
@@ -1775,9 +1779,9 @@ namespace BowieD.Unturned.NPCMaker
             Notification.NotificationBase notificationBase = new Notification.NotificationBase(notificationsStackPanel, textBlock);
             notificationsStackPanel.Children.Add(notificationBase);
         }
-        #endregion
+#endregion
         
-        #region DEEP GAME ANALYSIS METHODS
+#region DEEP GAME ANALYSIS METHODS
         // check for conflict id's, check every item in NPC for validness ^.^
         // WIP
 
@@ -1946,6 +1950,6 @@ namespace BowieD.Unturned.NPCMaker
             return res.First();
         }
 
-        #endregion
+#endregion
     }
 }
