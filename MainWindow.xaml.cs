@@ -465,7 +465,7 @@ namespace BowieD.Unturned.NPCMaker
             Autosave_Quest_Enabled = !Autosave_Quest_Enabled;
         }
 #endregion
-#region EVENTS
+        #region EVENTS
         private void SaveAsExampleButton_Click(object sender, RoutedEventArgs e)
         {
             Save(true);
@@ -770,7 +770,7 @@ namespace BowieD.Unturned.NPCMaker
             box.ShowDialog();
         }
 #endregion
-#region STATE CONVERTERS
+        #region STATE CONVERTERS
         public NPCSave ConvertCurrentStateToNPC()
         {
             NPCSave npc = new NPCSave
@@ -852,7 +852,7 @@ namespace BowieD.Unturned.NPCMaker
             CurrentNPC = save;
         }
 #endregion
-#region PROPERTIES
+        #region PROPERTIES
         public ushort Inputted_ID
         {
             get
@@ -1073,7 +1073,7 @@ namespace BowieD.Unturned.NPCMaker
             }
         }
 #endregion
-#region MISTAKES
+        #region MISTAKES
         public void FindMistakes()
         {
             lstMistakes.Items.Clear();
@@ -1202,7 +1202,7 @@ namespace BowieD.Unturned.NPCMaker
             blockActionsOverlay.Visibility = Visibility.Collapsed;
         }
 #endregion
-#region DIALOGUE_EDITOR
+        #region DIALOGUE_EDITOR
         private void Dialogue_SaveButtonClick(object sender, RoutedEventArgs e)
         {
             var dil = CurrentDialogue;
@@ -1400,7 +1400,7 @@ namespace BowieD.Unturned.NPCMaker
             }
         }
 #endregion
-#region VENDOR_EDITOR
+        #region VENDOR_EDITOR
         public NPCVendor CurrentVendor
         {
             get
@@ -1539,7 +1539,7 @@ namespace BowieD.Unturned.NPCMaker
             vendorListSellItems.Children.Remove(item);
         }
 #endregion
-#region QUEST_EDITOR
+        #region QUEST_EDITOR
         public NPCQuest CurrentQuest
         {
             get
@@ -1648,7 +1648,7 @@ namespace BowieD.Unturned.NPCMaker
             listQuestRewards.Children.Clear();
         }
 #endregion
-#region DRAG AND DROP
+        #region DRAG AND DROP
         private void Window_DragEnter(object sender, DragEventArgs e)
         {
             dropOverlay.Visibility = Visibility.Visible;
@@ -1679,7 +1679,7 @@ namespace BowieD.Unturned.NPCMaker
             dropOverlay.Visibility = Visibility.Hidden;
         }
 #endregion
-#region UPDATE CHECK
+        #region UPDATE CHECK
         public async Task<bool> IsUpdateAvailable()
         {
             if (updCache)
@@ -1734,7 +1734,7 @@ namespace BowieD.Unturned.NPCMaker
         private bool updCache = false;
         private bool updValue = false;
 #endregion
-#region UPDATE
+        #region UPDATE
         public void DownloadUpdater()
         {
             using (WebClient wc = new WebClient())
@@ -1762,7 +1762,7 @@ namespace BowieD.Unturned.NPCMaker
             Environment.Exit(0);
         }
 #endregion
-#region NOTIFICATIONS
+        #region NOTIFICATIONS
         public void DoNotification(string text, double fontSize = 16, TextAlignment textAlignment = TextAlignment.Center)
         {
             TextBlock textBlock = new TextBlock
@@ -1780,8 +1780,8 @@ namespace BowieD.Unturned.NPCMaker
             notificationsStackPanel.Children.Add(notificationBase);
         }
 #endregion
-        
-#region DEEP GAME ANALYSIS METHODS
+                
+        #region DEEP GAME ANALYSIS METHODS
         // check for conflict id's, check every item in NPC for validness ^.^
         // WIP
 
