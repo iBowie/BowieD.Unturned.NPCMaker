@@ -24,6 +24,7 @@ using BowieD.Unturned.NPCMaker.BetterControls;
 
 using System.Net; // ONLY FOR UPDATE CHECK (FOR THOSE WHO DECOMPILE MY APP (STOP DOING THIS THO))
 using BowieD.Unturned.NPCMaker.Examples;
+using DiscordRPC;
 // STILL ONLY FOR UPDATES
 
 namespace BowieD.Unturned.NPCMaker
@@ -252,17 +253,29 @@ namespace BowieD.Unturned.NPCMaker
             #endregion
             Config.Configuration.Properties.firstLaunch = false;
             isSaved = true;
+            discordRichPresenceMenu.IsChecked = Config.Configuration.Properties.enableDiscord;
+            if (Config.Configuration.Properties.enableDiscord)
+            {
+                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "DiscordRPC.dll") && File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Newtonsoft.Json.dll"))
+                {
+                    DiscordWorker = new DiscordRPC.DiscordWorker(1000);
+                    (DiscordWorker as DiscordRPC.DiscordWorker).Initialize();
+                    TabControl_SelectionChanged(mainTabControl, null);
+                }
+            }
         }
+
         #region CONSTANTS
         public const int 
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23,
-        version = 16;
+        version = 17;
         #endregion
         #region STATIC
         public static MainWindow Instance;
         public static NPCSave CurrentNPC { get; set; }
+        public static object DiscordWorker { get; set; }
         #endregion
         #region LOCALIZATION EVENTS
         private void ChangeLanguageClick(object sender, RoutedEventArgs e)
@@ -627,6 +640,7 @@ namespace BowieD.Unturned.NPCMaker
                     catch { }
                 }
             }
+            (DiscordWorker as DiscordRPC.DiscordWorker)?.Deinitialize();
             Environment.Exit(0);
         }
         private void RecentList_Click(object sender, RoutedEventArgs e)
@@ -662,6 +676,13 @@ namespace BowieD.Unturned.NPCMaker
         private void SaveClick(object sender, RoutedEventArgs e)
         {
             Save();
+        }
+        private void DiscordRichPresenceMenu_Click(object sender, RoutedEventArgs e)
+        {
+            (sender as MenuItem).IsChecked = !(sender as MenuItem).IsChecked;
+            Config.Configuration.Properties.enableDiscord = (sender as MenuItem).IsChecked;
+            Config.Configuration.Save();
+            DoNotification((string)TryFindResource("menu_Discord_Click"));
         }
         private void SaveAsClick(object sender, RoutedEventArgs e)
         {
@@ -706,12 +727,12 @@ namespace BowieD.Unturned.NPCMaker
             hairImageControl.Source = ("Resources/Unturned/Hairs/" + value + ".png").GetImageSource();
             isSaved = false;
         }
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems.Count == 0)
+            if (e?.AddedItems.Count == 0)
                 return;
-            TabItem tab = e.AddedItems[0] as TabItem;
             int selectedIndex = (sender as TabControl).SelectedIndex;
+            TabItem tab = e?.AddedItems[0] as TabItem;
             if (tab?.Content is Grid g)
             {
                 DoubleAnimation anim = new DoubleAnimation(0, 1, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
@@ -721,6 +742,36 @@ namespace BowieD.Unturned.NPCMaker
             {
                 FindMistakes();
             }
+            RichPresence presence = new RichPresence
+            {
+                Details = $"Editing NPC {Inputted_EditorName}",
+                State = $"Current job:"
+            };
+            switch (selectedIndex)
+            {
+                case 0:
+                    presence.State += " General Information";
+                    break;
+                case 1:
+                    presence.State += " Apparel";
+                    break;
+                case 2:
+                    presence.State += " Dialogues";
+                    break;
+                case 3:
+                    presence.State += " Vendors";
+                    break;
+                case 4:
+                    presence.State += " Quests";
+                    break;
+                case 5:
+                    presence.State += " Looking for mistakes";
+                    break;
+                default:
+                    presence.State += " Unknown";
+                    break;
+            }
+            (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
         }
         private void ScaleUpdate(object sender, RoutedEventArgs e)
         {
@@ -769,7 +820,7 @@ namespace BowieD.Unturned.NPCMaker
                         );
             box.ShowDialog();
         }
-#endregion
+        #endregion
         #region STATE CONVERTERS
         public NPCSave ConvertCurrentStateToNPC()
         {
@@ -1447,6 +1498,12 @@ namespace BowieD.Unturned.NPCMaker
         private void AddVendorItem_Click(object sender, RoutedEventArgs e)
         {
             BetterForms.Universal_VendorItemEditor uvie = new BetterForms.Universal_VendorItemEditor();
+            RichPresence presence = new RichPresence
+            {
+                Details = $"Editing NPC {Inputted_EditorName}",
+                State = $"Adding vendor item"
+            };
+            (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
             if (uvie.ShowDialog() == true)
             {
                 VendorItem resultedVendorItem = uvie.Result;
@@ -1461,6 +1518,7 @@ namespace BowieD.Unturned.NPCMaker
                 if (Autosave_Vendor_Enabled && CurrentVendor.id > 0)
                     SaveVendor_Click(sender, e);
             }
+            TabControl_SelectionChanged(mainTabControl, null);
         }
         private void SaveVendor_Click(object sender, RoutedEventArgs e)
         {
@@ -1584,7 +1642,13 @@ namespace BowieD.Unturned.NPCMaker
         }
         private void AddQuestCondition_Click(object sender, RoutedEventArgs e)
         {
-            BetterForms.Universal_ConditionEditor uce = new BetterForms.Universal_ConditionEditor(null, true);
+            Universal_ConditionEditor uce = new Universal_ConditionEditor(null, true);
+            RichPresence presence = new RichPresence
+            {
+                Details = $"Editing NPC {Inputted_EditorName}",
+                State = "Creating condition for a quest"
+            };
+            (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
             if (uce.ShowDialog() == true)
             {
                 NPC.Condition cond = uce.Result;
@@ -1594,6 +1658,7 @@ namespace BowieD.Unturned.NPCMaker
                 if (Autosave_Quest_Enabled && CurrentQuest.id > 0)
                     SaveQuest_Click(sender, e);
             }
+            TabControl_SelectionChanged(mainTabControl, null);
         }
         private void RemoveQuestCondition_Click(object sender, RoutedEventArgs e)
         {
@@ -1604,7 +1669,13 @@ namespace BowieD.Unturned.NPCMaker
         }
         private void AddQuestReward_Click(object sender, RoutedEventArgs e)
         {
-            BetterForms.Universal_RewardEditor ure = new BetterForms.Universal_RewardEditor(null, true);
+            Universal_RewardEditor ure = new Universal_RewardEditor(null, true);
+            RichPresence presence = new RichPresence
+            {
+                Details = $"Editing NPC {Inputted_EditorName}",
+                State = "Creating reward for a quest"
+            };
+            (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
             if (ure.ShowDialog() == true)
             {
                 Reward rew = ure.Result;
@@ -1614,6 +1685,7 @@ namespace BowieD.Unturned.NPCMaker
                 if (Autosave_Quest_Enabled && CurrentQuest.id > 0)
                     SaveQuest_Click(sender, e);
             }
+            TabControl_SelectionChanged(mainTabControl, null);
         }
         private void RemoveQuestReward_Click(object sender, RoutedEventArgs e)
         {
@@ -1759,6 +1831,7 @@ namespace BowieD.Unturned.NPCMaker
             if (!fileName.EndsWith(".exe"))
                 fileName += ".exe";
             System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "updater.exe",  fileName);
+            (DiscordWorker as DiscordRPC.DiscordWorker)?.Deinitialize();
             Environment.Exit(0);
         }
 #endregion

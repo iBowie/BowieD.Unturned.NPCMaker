@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Globalization;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace BowieD.Unturned.NPCMaker
@@ -27,6 +26,8 @@ namespace BowieD.Unturned.NPCMaker
         public App()
         {
             InitializeComponent();
+            CopyResource(NPCMaker.Properties.Resources.DiscordRPC, AppDomain.CurrentDomain.BaseDirectory + "DiscordRPC.dll");
+            CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, AppDomain.CurrentDomain.BaseDirectory + "Newtonsoft.Json.dll");
             App.LanguageChanged += App_LanguageChanged;
             languages.Clear();
             languages.Add(new CultureInfo("en-US"));
@@ -52,6 +53,14 @@ namespace BowieD.Unturned.NPCMaker
                 }
                 Config.Configuration.Properties.Language = Language.Name;
                 Config.Configuration.Save();
+            }
+        }
+
+        private void CopyResource(byte[] res, string file)
+        {
+            using (Stream output = File.OpenWrite(file))
+            {
+                output.Write(res, 0, res.Length);
             }
         }
 

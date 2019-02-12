@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -21,6 +17,7 @@ namespace BowieD.Unturned.NPCMaker.Config
             public double scale;
             public bool firstLaunch;
             public string Language;
+            public bool enableDiscord;
 
             [XmlIgnore]
             public CultureInfo language => new CultureInfo(Language);
@@ -32,6 +29,7 @@ namespace BowieD.Unturned.NPCMaker.Config
                 autosaveParams = new bool[4];
                 userColors = new string[0];
                 recent = new string[0];
+                enableDiscord = true;
             }
         }
 

@@ -80,6 +80,7 @@
                         <MenuItem Click="AutosaveVendorsCheckbox_Click" Name="autosaveVendorsCheckbox" Header="{DynamicResource menu_AutoSave_Vendor}"/>
                         <MenuItem Click="AutosaveQuestsCheckbox_Click" Name="autosaveQuestsCheckbox" Header="{DynamicResource menu_AutoSave_Quest}"/>
                     </MenuItem>
+                    <MenuItem Header="{DynamicResource menu_Discord}" Name="discordRichPresenceMenu" Click="DiscordRichPresenceMenu_Click"/>
                     <MenuItem Header="{DynamicResource menu_Scale}" Name="scaleMenuItem">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_SCALE.png"/>

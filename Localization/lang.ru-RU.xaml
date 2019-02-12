@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Localization"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
-    <v:String x:Key="app_News_Text">+ Исправлено открытие файлов с помощью DragAndDrop и Открыть с помощью...```Хотите, чтобы программа поздравляла вас с днём рождения? Пожертвуйте больше 30 рублей и я сделаю это ^.^</v:String>
+    <v:String x:Key="app_News_Text">+ Добавлена интеграция с Discord Rich Presence. Теперь другие люди в Discord смогут увидеть, что вы делаете в программе (Можно отключить)```Хотите, чтобы программа поздравляла вас с днём рождения? Пожертвуйте больше 30 рублей и я сделаю это ^.^</v:String>
     <v:String x:Key="app_Title">NPC Maker для Unturned. Автор: BowieD</v:String>
     <v:String x:Key="app_Beta">Это Бета-версия программы. Возможны как ошибки, так и изменения в будущем. Если вы столкнулись с ошибкой или хотите сделать предложение - смотрите раздел "Обратная связь"</v:String>
     <v:String x:Key="app_Exit_UnsavedChanges_Title">Несохранённая работа</v:String>
@@ -39,6 +39,9 @@
     <v:String x:Key="menu_PlannedFeatures">Запланированные функции</v:String>
     <v:String x:Key="menu_Help">Помощь</v:String>
     <v:String x:Key="menu_Help_Examples">Примеры NPC</v:String>
+    <v:String x:Key="menu_Discord">Discord Rich Presence</v:String>
+    <v:String x:Key="menu_Discord_Click">Для применения изменений перезапустите программу.</v:String>
+    <v:String x:Key="menu_Discord_Start">Интеграция с Discord Rich Presence активирована!</v:String>
     <v:String x:Key="feedback_Steam">Мой Steam (Нажать)</v:String>
     <v:String x:Key="feedback_Discord">Мой сервер в Discord (Нажать)</v:String>
     <v:String x:Key="feedback_VK">Мой ВК (Нажать)</v:String>

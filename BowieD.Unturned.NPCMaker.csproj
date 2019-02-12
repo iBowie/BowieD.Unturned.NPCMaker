@@ -52,6 +52,9 @@
     <ApplicationIcon>Option_1_256x.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DiscordRPC">
+      <HintPath>..\..\..\User\Desktop\discord-rpc-csharp-master\Discord RPC\bin\Debug\DiscordRPC.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
@@ -116,6 +119,7 @@
     <Compile Include="Controls\NumericUpDown.xaml.cs">
       <DependentUpon>NumericUpDown.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DiscordRPC\DiscordWorker.cs" />
     <Compile Include="Examples\NPCExample.cs" />
     <Compile Include="Forms\Export_ExportWindow.xaml.cs">
       <DependentUpon>Export_ExportWindow.xaml</DependentUpon>
@@ -280,6 +284,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -461,6 +466,9 @@
   <ItemGroup>
     <Resource Include="Resources\BAD_ICON_UPDATE.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="DiscordRPC.dll" />
+    <Content Include="Newtonsoft.Json.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
