@@ -20,7 +20,7 @@ namespace BowieD.Unturned.NPCMaker.Config
             public bool enableDiscord;
 
             [XmlIgnore]
-            public CultureInfo language => new CultureInfo(Language);
+            public CultureInfo language => new CultureInfo(Language ?? "en-US");
 
             public CFG()
             {
@@ -54,6 +54,9 @@ namespace BowieD.Unturned.NPCMaker.Config
         }
         public static void Save()
         {
+            var dir = System.IO.Path.GetDirectoryName(Path);
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
             using (FileStream fs = new FileStream(Path, FileMode.Create))
             using (XmlWriter writer = XmlWriter.Create(fs, new XmlWriterSettings() { Indent = true, IndentChars = "\t" }))
             {

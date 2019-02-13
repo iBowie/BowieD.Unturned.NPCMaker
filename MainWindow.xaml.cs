@@ -25,6 +25,7 @@ using BowieD.Unturned.NPCMaker.BetterControls;
 using System.Net; // ONLY FOR UPDATE CHECK (FOR THOSE WHO DECOMPILE MY APP (STOP DOING THIS THO))
 using BowieD.Unturned.NPCMaker.Examples;
 using DiscordRPC;
+using System.Text;
 // STILL ONLY FOR UPDATES
 
 namespace BowieD.Unturned.NPCMaker
@@ -36,6 +37,7 @@ namespace BowieD.Unturned.NPCMaker
             InitializeComponent();
             Instance = this;
             Config.Configuration.Load();
+            Config.Configuration.Save();
             #region LOCALIZATION
             App.LanguageChanged += App_LanguageChanged;
             languageMenuItem.Items.Clear();
@@ -50,7 +52,7 @@ namespace BowieD.Unturned.NPCMaker
                 menuLang.Click += ChangeLanguageClick;
                 languageMenuItem.Items.Add(menuLang);
             }
-            App.Language = Config.Configuration.Properties.language;
+            App.Language = Config.Configuration.Properties.language ?? new CultureInfo("en-US");
             #endregion
             #region OPEN_WITH
             string[] args = Environment.GetCommandLineArgs();
@@ -82,7 +84,7 @@ namespace BowieD.Unturned.NPCMaker
                 Config.Configuration.Properties.recent = new string[0];
             Config.Configuration.Properties.recent = Config.Configuration.Properties.recent.Where(d => File.Exists(d)).ToArray();
             RecentList.ItemsSource = Config.Configuration.Properties.recent;
-#endregion
+            #endregion
             #region SCALE SETUP
             foreach (UIElement ui in scaleMenuItem.Items)
             {
@@ -93,7 +95,7 @@ namespace BowieD.Unturned.NPCMaker
                     break;
                 }
             }
-#endregion
+            #endregion
             #region APPAREL SETUP
             faceImageIndex.MaxValue = faceAmount - 1;
             FaceImageIndex_Changed(faceImageIndex.Value);
@@ -259,7 +261,7 @@ namespace BowieD.Unturned.NPCMaker
                 if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "DiscordRPC.dll") && File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Newtonsoft.Json.dll"))
                 {
                     DiscordWorker = new DiscordRPC.DiscordWorker(1000);
-                    (DiscordWorker as DiscordRPC.DiscordWorker).Initialize();
+                    (DiscordWorker as DiscordRPC.DiscordWorker)?.Initialize();
                     TabControl_SelectionChanged(mainTabControl, null);
                 }
             }
@@ -270,7 +272,7 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23,
-        version = 17;
+        version = 18;
         #endregion
         #region STATIC
         public static MainWindow Instance;
@@ -729,7 +731,7 @@ namespace BowieD.Unturned.NPCMaker
         }
         internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e?.AddedItems.Count == 0)
+            if (e?.AddedItems.Count == 0 || sender == null)
                 return;
             int selectedIndex = (sender as TabControl).SelectedIndex;
             TabItem tab = e?.AddedItems[0] as TabItem;
@@ -744,7 +746,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             RichPresence presence = new RichPresence
             {
-                Details = $"Editing NPC {Inputted_EditorName}",
+                Details = $"Editing NPC {Inputted_EditorName ?? ""}",
                 State = $"Current job:"
             };
             switch (selectedIndex)
@@ -1450,7 +1452,7 @@ namespace BowieD.Unturned.NPCMaker
                 dialogue_commentbox.Text = d.comment;
             }
         }
-#endregion
+        #endregion
         #region VENDOR_EDITOR
         public NPCVendor CurrentVendor
         {

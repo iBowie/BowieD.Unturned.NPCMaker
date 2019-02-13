@@ -36,7 +36,14 @@ namespace BowieD.Unturned.NPCMaker
             #region PROPERTIES TO NEW
             if (!Config.Configuration.ConfigExist)
             {
-                Config.Configuration.Force(Config.Configuration.ConvertFromOldToNew);
+                try
+                {
+                    Config.Configuration.Force(Config.Configuration.ConvertFromOldToNew);
+                }
+                catch
+                {
+                    Config.Configuration.LoadDefaults();
+                }
                 Config.Configuration.Save();
             }
             #endregion
