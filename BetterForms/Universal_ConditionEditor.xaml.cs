@@ -18,7 +18,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         public Universal_ConditionEditor(Condition condition = null, bool viewLocalization = false)
         {
             InitializeComponent();
-            double scale = Properties.Settings.Default.scale;
+            double scale = Config.Configuration.Properties.scale;
             ClearParameters();
             this.Height *= scale;
             this.Width *= scale;

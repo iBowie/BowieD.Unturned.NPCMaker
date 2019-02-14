@@ -12,7 +12,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         public Universal_Select(ReturnType returnType)
         {
             InitializeComponent();
-            double scale = Properties.Settings.Default.scale;
+            double scale = Config.Configuration.Properties.scale;
             this.Width *= scale;
             this.Height *= scale;
             this.MinWidth *= scale;

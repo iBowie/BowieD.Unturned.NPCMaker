@@ -31,7 +31,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             {
                 Add(uil);
             }
-            double scale = Properties.Settings.Default.scale;
+            double scale = Config.Configuration.Properties.scale;
             gridScale.ScaleX = scale;
             gridScale.ScaleY = scale;
             Height *= scale;

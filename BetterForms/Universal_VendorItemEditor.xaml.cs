@@ -16,7 +16,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         {
             InitializeComponent();
 
-            double scale = Properties.Settings.Default.scale;
+            double scale = Config.Configuration.Properties.scale;
             stateA *= scale;
             stateB *= scale;
             gridScale.ScaleX = scale;

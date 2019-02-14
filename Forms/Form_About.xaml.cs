@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
@@ -26,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             r = r.Replace("%version%", MainWindow.version.ToString());
             r = r.Replace(@"\n", Environment.NewLine);
             mainText.Text = r;
-            double scale = Properties.Settings.Default.scale;
+            double scale = Config.Configuration.Properties.scale;
             this.Height *= scale;
             this.Width *= scale;
             gridScale.ScaleX = scale;
