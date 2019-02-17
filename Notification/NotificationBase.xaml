@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Notification"
              mc:Ignorable="d" 
-             d:DesignHeight="120" d:DesignWidth="300" MouseDown="UserControl_MouseDown" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" Margin="3">
-    <Border Background="White" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5">
+             d:DesignHeight="120" d:DesignWidth="300" MouseDown="UserControl_MouseDown" Margin="3">
+    <Border Background="White" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Name="mainBorder">
         <Border.Effect>
             <DropShadowEffect Opacity="0.5" ShadowDepth="2"/>
         </Border.Effect>

@@ -10,15 +10,15 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="{DynamicResource app_Title}"
-        MinHeight="511" Height="511"
-        MinWidth="900" Width="900"
+        MinHeight="593" Height="593"
+        MinWidth="1000" Width="1000"
         DragEnter="Window_DragEnter"
         DragLeave="Window_DragLeave"
         DragDrop.Drop="Window_Drop"
         AllowDrop="True"
         Icon="{DynamicResource app_Icon}"
         Name="mainWindow"
-        >
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform x:Name="mainGridScale"
@@ -32,7 +32,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Menu VerticalAlignment="Top" Height="19">
+            <Menu VerticalAlignment="Top">
                 <MenuItem Header="{DynamicResource menu_File}">
                     <MenuItem Header="{DynamicResource file_Open}" Click="LoadClick">
                         <MenuItem.Icon>
@@ -71,6 +71,13 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="{DynamicResource menu_Options}">
+                    <MenuItem Header="{DynamicResource menu_Themes}">
+                        <MenuItem Header="{DynamicResource menu_Theme_Legacy}" Click="Theme_SetupLegacy"/>
+                        <MenuItem Header="{DynamicResource menu_Theme_LightGreen}" Click="Theme_SetupLightGreen"/>
+                        <MenuItem Header="{DynamicResource menu_Theme_DarkGreen}" Click="Theme_SetupDarkGreen"/>
+                        <MenuItem Header="{DynamicResource menu_Theme_LightPink}" Click="Theme_SetupLightPink"/>
+                        <MenuItem Header="{DynamicResource menu_Theme_DarkPink}" Click="Theme_SetupDarkPink"/>
+                    </MenuItem>
                     <MenuItem Header="{DynamicResource menu_AutoSave}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_SAVE.png"/>
@@ -137,13 +144,7 @@
                 </MenuItem>
             </Menu>
             <TabControl Grid.Row="1" Background="Transparent" Padding="-1" Name="mainTabControl" SelectedIndex="0" Margin="0,5,0,0" SelectionChanged="TabControl_SelectionChanged">
-                <TabItem Name="generalInfoTab">
-                    <TabItem.Header>
-                        <Grid>
-                            <Image Width="17" Height="{Binding Width}" Source="Resources/ICON_INFO.png" HorizontalAlignment="Left"/>
-                            <TextBlock Text="{DynamicResource tab_General}" Margin="17,0,0,0"/>
-                        </Grid>
-                    </TabItem.Header>
+                <TabItem Name="generalInfoTab" Header="{DynamicResource tab_General}">
                     <Grid>
                         <TextBlock FontSize="24" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="{DynamicResource general_Title}" VerticalAlignment="Top"/>
                         <TextBox  Name="txtEditorName" ToolTip="{DynamicResource general_EditorName_Tooltip}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,47,0,0"/>
@@ -157,27 +158,21 @@
                         <Button Click="Char_EditConditions_Button_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource general_Conditions}" Margin="10,162,0,0" Width="212" Height="28"/>
                     </Grid>
                 </TabItem>
-                <TabItem Name="apparelTab">
-                    <TabItem.Header>
-                        <Grid>
-                            <Image Height="{Binding Width}" Source="Resources/ICON_APPAREL.png" Width="17" HorizontalAlignment="Left"/>
-                            <TextBlock  Text="{DynamicResource tab_Apparel}" Margin="17,0,0,0"/>
-                        </Grid>
-                    </TabItem.Header>
+                <TabItem Name="apparelTab" Header="{DynamicResource tab_Apparel}">
                     <Grid>
-                        <GroupBox Header="{DynamicResource tool_Color}" HorizontalAlignment="Left" Height="312" Margin="468,111,0,0" VerticalAlignment="Top" Width="240">
+                        <GroupBox Header="{DynamicResource tool_Color}" HorizontalAlignment="Right" Height="312" Margin="0,0,10,10" VerticalAlignment="Top" Width="300">
                             <Grid>
                                 <Rectangle Name="colorRectangle" Fill="#000000" HorizontalAlignment="Left" Height="16" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="16"/>
                                 <TextBlock Text="{DynamicResource tool_Color_Preview_Label}" VerticalAlignment="Top" Height="17" Margin="31,10,10,196"/>
-                                <Slider ValueChanged="ColorSliderChange" Maximum="255" SmallChange="1" LargeChange="5" Name="colorSliderR" Orientation="Vertical" Margin="10,32,150,40"/>
-                                <Slider ValueChanged="ColorSliderChange" Maximum="255" SmallChange="1" LargeChange="5" Name="colorSliderG" Orientation="Vertical" Margin="35,32,125,40"/>
-                                <Slider ValueChanged="ColorSliderChange" Maximum="255" SmallChange="1" LargeChange="5" Name="colorSliderB" Orientation="Vertical" Margin="60,32,100,40"/>
-                                <Label Content="{DynamicResource tool_Color_Red}" HorizontalAlignment="Left" Margin="10,188,0,5" VerticalAlignment="Bottom" Width="20"/>
-                                <Label Content="{DynamicResource tool_Color_Green}" HorizontalAlignment="Left" Margin="35,188,0,5" VerticalAlignment="Bottom" Width="20"/>
-                                <Label Content="{DynamicResource tool_Color_Blue}" HorizontalAlignment="Left" Margin="60,188,0,5" VerticalAlignment="Bottom" Width="20"/>
-                                <TextBox Name="colorHexOut" IsReadOnly="True" Margin="0,0,10,63" TextWrapping="Wrap" Text="#000000" HorizontalAlignment="Right" Width="133" Height="23" VerticalAlignment="Bottom"/>
+                                <Slider ValueChanged="ColorSliderChange" HorizontalAlignment="Left" Maximum="255" SmallChange="1" LargeChange="5" Name="colorSliderR" Orientation="Vertical" Margin="10,32,150,40"/>
+                                <Slider ValueChanged="ColorSliderChange" HorizontalAlignment="Left" Maximum="255" SmallChange="1" LargeChange="5" Name="colorSliderG" Orientation="Vertical" Margin="35,32,125,40"/>
+                                <Slider ValueChanged="ColorSliderChange" HorizontalAlignment="Left" Maximum="255" SmallChange="1" LargeChange="5" Name="colorSliderB" Orientation="Vertical" Margin="60,32,100,40"/>
+                                <Label Content="{DynamicResource tool_Color_Red}" HorizontalAlignment="Left" Margin="10,0,0,5" VerticalAlignment="Bottom" Width="20"/>
+                                <Label Content="{DynamicResource tool_Color_Green}" HorizontalAlignment="Left" Margin="35,0,0,5" VerticalAlignment="Bottom" Width="20"/>
+                                <Label Content="{DynamicResource tool_Color_Blue}" HorizontalAlignment="Left" Margin="60,0,0,5" VerticalAlignment="Bottom" Width="20"/>
+                                <TextBox Name="colorHexOut" IsReadOnly="True" Margin="0,0,10,70" TextWrapping="Wrap" Text="#000000" HorizontalAlignment="Right" Width="133" Height="23" VerticalAlignment="Bottom"/>
                                 <Button  Click="UserColorList_AddColor" Content="{DynamicResource apparel_User_Color_Save}" Margin="0,0,10,10" HorizontalAlignment="Right" Width="133" Height="20" VerticalAlignment="Bottom"/>
-                                <Button  Click="RandomColor_Click" Content="{DynamicResource tool_Color_Random}" Height="23" HorizontalAlignment="Left" Margin="85,232,0,0" VerticalAlignment="Top" Width="133"/>
+                                <Button  Click="RandomColor_Click" Content="{DynamicResource tool_Color_Random}" Height="23" HorizontalAlignment="Right" Margin="0,0,10,40" VerticalAlignment="Bottom" Width="133"/>
                             </Grid>
                         </GroupBox>
                         <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="96" Margin="10,10,0,0" VerticalAlignment="Top" Width="96">
@@ -245,7 +240,7 @@
                         <TextBlock HorizontalAlignment="Left" Margin="438,87,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Pose}" VerticalAlignment="Top"/>
                         <TextBlock HorizontalAlignment="Left" Margin="438,13,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Skin}" VerticalAlignment="Top"/>
                         <TextBlock HorizontalAlignment="Left" Margin="438,41,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Hair}" VerticalAlignment="Top"/>
-                        <GroupBox Header="{DynamicResource apparel_Group_Equipment}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,132,0,0" Width="298" Height="292">
+                        <GroupBox Header="{DynamicResource apparel_Group_Equipment}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,0,0,10" Width="300" Height="300">
                             <Grid>
                                 <bettercontrols:NumberBox x:Name="hatIdBox" MaxValue="65535" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
                                 <bettercontrols:NumberBox x:Name="maskIdBox" MaxValue="65535" Margin="10,33,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
@@ -293,25 +288,19 @@
 
                             </Grid>
                         </GroupBox>
-                        <GroupBox Header="{DynamicResource apparel_Color_Samples}" HorizontalAlignment="Left" Height="150" Margin="313,111,0,0" VerticalAlignment="Top" Width="150">
+                        <GroupBox Header="{DynamicResource apparel_Color_Samples}" HorizontalAlignment="Right" Height="157" Margin="0,0,220,10" VerticalAlignment="Bottom" Width="200">
                             <ScrollViewer>
                                 <StackPanel Name="unturnedColorSampleList"/>
                             </ScrollViewer>
                         </GroupBox>
-                        <GroupBox Header="{DynamicResource apparel_User_Color_Samples}" HorizontalAlignment="Left" Height="157" Margin="313,266,0,0" VerticalAlignment="Top" Width="150">
+                        <GroupBox Header="{DynamicResource apparel_User_Color_Samples}" HorizontalAlignment="Right" Height="157" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="200">
                             <ScrollViewer>
                                 <StackPanel Name="userColorSampleList"/>
                             </ScrollViewer>
                         </GroupBox>
                     </Grid>
                 </TabItem>
-                <TabItem Name="dialogueTab">
-                    <TabItem.Header>
-                        <Grid>
-                            <Image Height="{Binding Width}" Width="17" HorizontalAlignment="Left" Source="Resources/ICON_CHAT.png"/>
-                            <TextBlock  Text="{DynamicResource tab_Dialogues}" Margin="17,0,0,0"/>
-                        </Grid>
-                    </TabItem.Header>
+                <TabItem Name="dialogueTab" Header="{DynamicResource tab_Dialogues}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="33*"/>
@@ -358,13 +347,7 @@
                         <TextBlock  Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="10" Text="{DynamicResource dialogue_Tips}" TextWrapping="Wrap"/>
                     </Grid>
                 </TabItem>
-                <TabItem Name="vendorTab">
-                    <TabItem.Header>
-                        <Grid>
-                            <Image Height="{Binding Width}" HorizontalAlignment="Left" Width="17" Source="Resources/ICON_MONEY.png"/>
-                            <TextBlock  Text="{DynamicResource tab_Vendor}" Margin="17,0,0,0"/>
-                        </Grid>
-                    </TabItem.Header>
+                <TabItem Name="vendorTab" Header="{DynamicResource tab_Vendor}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="72"/>
@@ -416,13 +399,7 @@
                         <Button Click="AddVendorItem_Click" Content="{DynamicResource vendor_Add}" Margin="10,10,10,10" VerticalAlignment="Bottom"/>
                     </Grid>
                 </TabItem>
-                <TabItem Name="questTab">
-                    <TabItem.Header>
-                        <Grid>
-                            <Image Height="{Binding Width}" Width="17" HorizontalAlignment="Left" Source="Resources/ICON_EXCLAMATION.png"/>
-                            <TextBlock  Margin="17,0,0,0" Text="{DynamicResource tab_Quest}"/>
-                        </Grid>
-                    </TabItem.Header>
+                <TabItem Name="questTab" Header="{DynamicResource tab_Quest}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="72"/>
@@ -467,13 +444,7 @@
                         <Button Grid.Column="2" Grid.Row="1" Click="AddQuestReward_Click" Height="23" Content="{DynamicResource quest_Add_Reward}" Margin="10,0,10,10" VerticalAlignment="Bottom"/>
                     </Grid>
                 </TabItem>
-                <TabItem Name="mistakeListTab">
-                    <TabItem.Header>
-                        <Grid>
-                            <Image Height="{Binding Width}" Width="17" HorizontalAlignment="Left" Source="Resources/ICON_WARNING.png"/>
-                            <TextBlock  Text="{DynamicResource tab_Mistakes}" Margin="17,0,0,0"/>
-                        </Grid>
-                    </TabItem.Header>
+                <TabItem Name="mistakeListTab" Header="{DynamicResource tab_Mistakes}">
                     <Grid>
                         <ListView Name="lstMistakes" Margin="10,10,10,60">
                             <ListView.View>
@@ -499,6 +470,7 @@
                     </DataTemplate>
                 </TabControl.ItemTemplate>
             </TabControl>
+            <TextBlock Name="genericTextBlock" Visibility="Collapsed"/>
         </Grid>
         <Grid Name="dropOverlay" Background="#99000000" Visibility="Hidden">
             <Image Source="Resources/ICON_OPEN.png" Width="256" Height="256"/>
@@ -513,7 +485,7 @@
         </Grid>
         <Grid Name="notClickableOverlay" IsHitTestVisible="False">
             <TextBlock  Name="betaOverlayText" Margin="5" Text="BETA" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="36" Opacity="0.15"/>
-            
+
             <Grid Name="debugOverlayText" HorizontalAlignment="Left" Opacity="0.15" VerticalAlignment="Bottom" Margin="5">
                 <Image Width="36" Source="Resources/ICON_WARNING.png" Height="{Binding Width}" HorizontalAlignment="Left"/>
                 <TextBlock Margin="36,0,0,0" Text="DEBUG" HorizontalAlignment="Right" FontSize="36"/>

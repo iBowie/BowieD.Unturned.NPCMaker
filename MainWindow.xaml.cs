@@ -38,6 +38,26 @@ namespace BowieD.Unturned.NPCMaker
             Instance = this;
             Config.Configuration.Load();
             Config.Configuration.Save();
+            #region THEME SETUP
+            switch (Config.Configuration.Properties.theme)
+            {
+                case "DarkGreen":
+                    Theme_SetupDarkGreen(null,null);
+                    break;
+                case "LightGreen":
+                    Theme_SetupLightGreen(null, null);
+                    break;
+                case "DarkPink":
+                    Theme_SetupDarkPink(null, null);
+                    break;
+                case "LightPink":
+                    Theme_SetupLightPink(null, null);
+                    break;
+                default:
+                    Theme_SetupLegacy(null, null);
+                    break;
+            }
+            #endregion
             #region LOCALIZATION
             App.LanguageChanged += App_LanguageChanged;
             languageMenuItem.Items.Clear();
@@ -266,18 +286,94 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
         }
-
+        #region THEME EVENTS
+        private void Theme_SetupLegacy(object sender, RoutedEventArgs e)
+        {
+            Theme_Clear();
+            Config.Configuration.Properties.theme = "Legacy";
+        }
+        private void Theme_SetupLightGreen(object sender, RoutedEventArgs e)
+        {
+            Theme_Clear();
+            Theme_SetupMetro();
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Green.xaml") });
+            Config.Configuration.Properties.theme = "LightGreen";
+        }
+        private void Theme_SetupLightPink(object sender, RoutedEventArgs e)
+        {
+            Theme_Clear();
+            Theme_SetupMetro();
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Pink.xaml") });
+            Config.Configuration.Properties.theme = "LightPink";
+        }
+        private void Theme_SetupDarkGreen(object sender, RoutedEventArgs e)
+        {
+            Theme_Clear();
+            Theme_SetupMetro();
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Green.xaml") });
+            Config.Configuration.Properties.theme = "DarkGreen";
+        }
+        private void Theme_SetupDarkPink(object sender, RoutedEventArgs e)
+        {
+            Theme_Clear();
+            Theme_SetupMetro();
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Pink.xaml") });
+            Config.Configuration.Properties.theme = "DarkPink";
+        }
+        private void Theme_SetupMetro()
+        {
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml") });
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml") });
+            IsMetro = true;
+        }
+        private void Theme_Clear()
+        {
+            ResourceDictionary metroControls = (from d in Application.Current.Resources.MergedDictionaries
+                                                where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"
+                                                select d).FirstOrDefault();
+            ResourceDictionary metroFonts = (from d in Application.Current.Resources.MergedDictionaries
+                                             where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"
+                                             select d).FirstOrDefault();
+            ResourceDictionary metroDG = (from d in Application.Current.Resources.MergedDictionaries
+                                          where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Green.xaml"
+                                          select d).FirstOrDefault();
+            ResourceDictionary metroLG = (from d in Application.Current.Resources.MergedDictionaries
+                                          where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Green.xaml"
+                                          select d).FirstOrDefault();
+            ResourceDictionary metroLP = (from d in Application.Current.Resources.MergedDictionaries
+                                          where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Pink.xaml"
+                                          select d).FirstOrDefault();
+            ResourceDictionary metroDP = (from d in Application.Current.Resources.MergedDictionaries
+                                          where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Pink.xaml"
+                                          select d).FirstOrDefault();
+            if (metroControls != null)
+                Application.Current.Resources.MergedDictionaries.Remove(metroControls);
+            if (metroFonts != null)
+                Application.Current.Resources.MergedDictionaries.Remove(metroFonts);
+            if (metroDG != null)
+                Application.Current.Resources.MergedDictionaries.Remove(metroDG);
+            if (metroLG != null)
+                Application.Current.Resources.MergedDictionaries.Remove(metroLG);
+            if (metroDP != null)
+                Application.Current.Resources.MergedDictionaries.Remove(metroDP);
+            if (metroLP != null)
+                Application.Current.Resources.MergedDictionaries.Remove(metroLP);
+            IsMetro = false;
+        }
+        #endregion
         #region CONSTANTS
         public const int 
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23,
-        version = 18;
+        version = 19;
         #endregion
         #region STATIC
         public static MainWindow Instance;
         public static NPCSave CurrentNPC { get; set; }
         public static object DiscordWorker { get; set; }
+
+        public static bool IsMetro { get; set; }
         #endregion
         #region LOCALIZATION EVENTS
         private void ChangeLanguageClick(object sender, RoutedEventArgs e)
@@ -557,6 +653,7 @@ namespace BowieD.Unturned.NPCMaker
                         },
                         Width = 16,
                         HorizontalAlignment = HorizontalAlignment.Right,
+                        Margin = new Thickness(0, 0, 5, 0),
                         ToolTip = (string)TryFindResource("apparel_User_Color_Remove")
                     };
                     Button copyButton = new Button
@@ -568,7 +665,7 @@ namespace BowieD.Unturned.NPCMaker
                             Height = 16
                         },
                         HorizontalAlignment = HorizontalAlignment.Right,
-                        Margin = new Thickness(0, 0, 18, 0),
+                        Margin = new Thickness(0, 0, 23, 0),
                         Tag = $"#{uColor}"
                     };
                     copyButton.Click += CopyButton_Click;
@@ -1845,13 +1942,14 @@ namespace BowieD.Unturned.NPCMaker
                 Text = text,
                 TextAlignment = textAlignment,
                 FontSize = fontSize,
-                TextWrapping = TextWrapping.Wrap
+                TextWrapping = TextWrapping.Wrap,
+                Foreground = genericTextBlock.Foreground
             };
             DoNotification(textBlock);
         }
         public void DoNotification(TextBlock textBlock)
         {
-            Notification.NotificationBase notificationBase = new Notification.NotificationBase(notificationsStackPanel, textBlock);
+            Notification.NotificationBase notificationBase = new Notification.NotificationBase(notificationsStackPanel, this.Background, textBlock);
             notificationsStackPanel.Children.Add(notificationBase);
         }
 #endregion

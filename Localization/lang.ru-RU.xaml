@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Localization"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
-    <v:String x:Key="app_News_Text">+ Добавлена интеграция с Discord Rich Presence. Теперь другие люди в Discord смогут увидеть, что вы делаете в программе (Можно отключить)```Хотите, чтобы программа поздравляла вас с днём рождения? Пожертвуйте больше 30 рублей и я сделаю это ^.^</v:String>
+    <v:String x:Key="app_News_Text">+ Добавлены темы```Хотите, чтобы программа поздравляла вас с днём рождения? Пожертвуйте больше 30 рублей и я сделаю это ^.^</v:String>
     <v:String x:Key="app_Title">NPC Maker для Unturned. Автор: BowieD</v:String>
     <v:String x:Key="app_Beta">Это Бета-версия программы. Возможны как ошибки, так и изменения в будущем. Если вы столкнулись с ошибкой или хотите сделать предложение - смотрите раздел "Обратная связь"</v:String>
     <v:String x:Key="app_Exit_UnsavedChanges_Title">Несохранённая работа</v:String>
@@ -16,6 +16,7 @@
     <v:String x:Key="app_Analysis">Анализ...</v:String>
     <v:String x:Key="app_Cache_Save">Сохранить кеш Unturned?</v:String>
     <v:String x:Key="app_Comment">Поле для комментария. Всё что вы здесь введёте не повлияет на NPC и будет видно только в этой программе.</v:String>
+    <v:String x:Key="app_Desktop">Внимание! Вы хотите запустить программу на рабочем столе, что не рекомендуется из-за создания необходимых для работы программы файлов. Вы уверены что хотите продолжить?</v:String>
     <v:String x:Key="load_Old">Этот НИП был сделан в более старой версии программы. Возможны ошибки.</v:String>
     <v:String x:Key="load_New">Этот НИП был сделан в более новой версии программы. Возможны ошибки.</v:String>
     <v:String x:Key="load_Incompatible">Не удалось распознать файл.</v:String>
@@ -42,6 +43,12 @@
     <v:String x:Key="menu_Discord">Discord Rich Presence</v:String>
     <v:String x:Key="menu_Discord_Click">Для применения изменений перезапустите программу.</v:String>
     <v:String x:Key="menu_Discord_Start">Интеграция с Discord Rich Presence активирована!</v:String>
+    <v:String x:Key="menu_Themes">Темы</v:String>
+    <v:String x:Key="menu_Theme_Legacy">Устаревшая</v:String>
+    <v:String x:Key="menu_Theme_LightGreen">Светлая зелёная</v:String>
+    <v:String x:Key="menu_Theme_DarkGreen">Тёмная зелёная</v:String>
+    <v:String x:Key="menu_Theme_LightPink">Светлая розовая</v:String>
+    <v:String x:Key="menu_Theme_DarkPink">Тёмная розовая</v:String>
     <v:String x:Key="feedback_Steam">Мой Steam (Нажать)</v:String>
     <v:String x:Key="feedback_Discord">Мой сервер в Discord (Нажать)</v:String>
     <v:String x:Key="feedback_VK">Мой ВК (Нажать)</v:String>
@@ -51,15 +58,15 @@
     <v:String x:Key="file_Recent">Недавние</v:String>
     <v:String x:Key="file_Export">Экспорт НИПа</v:String>
     <v:String x:Key="file_Exit">Выйти</v:String>
-    <v:String x:Key="about_Text">Copyright BowieD 2018\n\nАвтор программы: BowieD. Перевод на русский: BowieD\nВерсия программы: %version%\nЗагляните в раздел "Обратная связь" для связи со мной.</v:String>
+    <v:String x:Key="about_Text">Copyright BowieD 2019\n\nАвтор программы: BowieD. Перевод на русский: BowieD\nВерсия программы: %version%\nЗагляните в раздел "Обратная связь" для связи со мной.</v:String>
     <v:String x:Key="about_Title">О программе</v:String>
-    <v:String x:Key="tab_General">Основная информация</v:String>
+    <v:String x:Key="tab_General">Информация</v:String>
     <v:String x:Key="tab_Apparel">Внешность</v:String>
     <v:String x:Key="tab_Dialogues">Диалоги</v:String>
     <v:String x:Key="tab_Vendor">Торговля</v:String>
     <v:String x:Key="tab_Quest">Задания</v:String>
     <v:String x:Key="tab_Tools">Инструменты</v:String>
-    <v:String x:Key="tab_Mistakes">Список ошибок</v:String>
+    <v:String x:Key="tab_Mistakes">Ошибки</v:String>
     <v:String x:Key="general_EditorName">Имя в редакторе</v:String>
     <v:String x:Key="general_EditorName_Tooltip">Имя, видимое в редакторе карт</v:String>
     <v:String x:Key="general_DisplayName">Отображаемое имя</v:String>

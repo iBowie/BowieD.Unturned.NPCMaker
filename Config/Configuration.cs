@@ -18,6 +18,7 @@ namespace BowieD.Unturned.NPCMaker.Config
             public bool firstLaunch;
             public string Language;
             public bool enableDiscord;
+            public string theme;
 
             [XmlIgnore]
             public CultureInfo language => new CultureInfo(Language ?? "en-US");
@@ -30,6 +31,7 @@ namespace BowieD.Unturned.NPCMaker.Config
                 userColors = new string[0];
                 recent = new string[0];
                 enableDiscord = true;
+                theme = "DarkGreen";
             }
         }
 

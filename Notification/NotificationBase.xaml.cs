@@ -21,9 +21,10 @@ namespace BowieD.Unturned.NPCMaker.Notification
     /// </summary>
     public partial class NotificationBase : UserControl
     {
-        public NotificationBase(StackPanel parent, params UIElement[] children)
+        public NotificationBase(StackPanel parent, Brush background, params UIElement[] children)
         {
             InitializeComponent();
+            mainBorder.Background = background;
             foreach (UIElement uie in children)
             {
                 notificationContentGrid.Children.Add(uie);
@@ -51,16 +52,6 @@ namespace BowieD.Unturned.NPCMaker.Notification
 
         private Storyboard animationStoryboard;
         private StackPanel parent;
-
-        private void UserControl_MouseEnter(object sender, MouseEventArgs e)
-        {
-            animationStoryboard.Pause();
-        }
-
-        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
-        {
-            animationStoryboard.Resume();
-        }
 
         public virtual void UserControl_MouseDown(object sender, MouseButtonEventArgs e)
         {

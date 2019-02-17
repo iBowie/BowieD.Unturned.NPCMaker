@@ -63,9 +63,39 @@ namespace BowieD.Unturned.NPCMaker.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
+        internal static byte[] ControlzEx {
+            get {
+                object obj = ResourceManager.GetObject("ControlzEx", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
         internal static byte[] DiscordRPC {
             get {
                 object obj = ResourceManager.GetObject("DiscordRPC", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] MahApps_Metro {
+            get {
+                object obj = ResourceManager.GetObject("MahApps_Metro", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] Microsoft_Xaml_Behaviors {
+            get {
+                object obj = ResourceManager.GetObject("Microsoft_Xaml_Behaviors", resourceCulture);
                 return ((byte[])(obj));
             }
         }

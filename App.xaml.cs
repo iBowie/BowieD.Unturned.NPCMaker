@@ -4,6 +4,7 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 
 namespace BowieD.Unturned.NPCMaker
@@ -22,12 +23,10 @@ namespace BowieD.Unturned.NPCMaker
                 return languages;
             }
         }
-
+        
         public App()
         {
             InitializeComponent();
-            CopyResource(NPCMaker.Properties.Resources.DiscordRPC, AppDomain.CurrentDomain.BaseDirectory + "DiscordRPC.dll");
-            CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, AppDomain.CurrentDomain.BaseDirectory + "Newtonsoft.Json.dll");
             App.LanguageChanged += App_LanguageChanged;
             languages.Clear();
             languages.Add(new CultureInfo("en-US"));
@@ -61,14 +60,34 @@ namespace BowieD.Unturned.NPCMaker
                 Config.Configuration.Properties.Language = Language.Name;
                 Config.Configuration.Save();
             }
+            var desktopDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            var secDesktopDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            if (desktopDir == AppDomain.CurrentDomain.BaseDirectory || secDesktopDir == AppDomain.CurrentDomain.BaseDirectory)
+            {
+                var res = System.Windows.Forms.MessageBox.Show((string)TryFindResource("app_Desktop"), "", System.Windows.Forms.MessageBoxButtons.YesNo);
+                if (res != System.Windows.Forms.DialogResult.Yes)
+                {
+                    Application.Current.Shutdown();
+                    return;
+                }
+            }
+            CopyResource(NPCMaker.Properties.Resources.DiscordRPC, AppDomain.CurrentDomain.BaseDirectory + "DiscordRPC.dll");
+            CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, AppDomain.CurrentDomain.BaseDirectory + "Newtonsoft.Json.dll");
+            CopyResource(NPCMaker.Properties.Resources.ControlzEx, AppDomain.CurrentDomain.BaseDirectory + "ControlzEx.dll");
+            CopyResource(NPCMaker.Properties.Resources.MahApps_Metro, AppDomain.CurrentDomain.BaseDirectory + "MahApps.Metro.dll");
+            CopyResource(NPCMaker.Properties.Resources.Microsoft_Xaml_Behaviors, AppDomain.CurrentDomain.BaseDirectory + "Microsoft.Xaml.Behaviors.dll");
         }
 
         private void CopyResource(byte[] res, string file)
         {
-            using (Stream output = File.OpenWrite(file))
+            try
             {
-                output.Write(res, 0, res.Length);
+                using (Stream output = File.OpenWrite(file))
+                {
+                    output.Write(res, 0, res.Length);
+                }
             }
+            catch { }
         }
 
         private void App_LanguageChanged(object sender, EventArgs e)
