@@ -60,17 +60,6 @@ namespace BowieD.Unturned.NPCMaker
                 Config.Configuration.Properties.Language = Language.Name;
                 Config.Configuration.Save();
             }
-            var desktopDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            var secDesktopDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            if (desktopDir == AppDomain.CurrentDomain.BaseDirectory || secDesktopDir == AppDomain.CurrentDomain.BaseDirectory)
-            {
-                var res = System.Windows.Forms.MessageBox.Show((string)TryFindResource("app_Desktop"), "", System.Windows.Forms.MessageBoxButtons.YesNo);
-                if (res != System.Windows.Forms.DialogResult.Yes)
-                {
-                    Application.Current.Shutdown();
-                    return;
-                }
-            }
             CopyResource(NPCMaker.Properties.Resources.DiscordRPC, AppDomain.CurrentDomain.BaseDirectory + "DiscordRPC.dll");
             CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, AppDomain.CurrentDomain.BaseDirectory + "Newtonsoft.Json.dll");
             CopyResource(NPCMaker.Properties.Resources.ControlzEx, AppDomain.CurrentDomain.BaseDirectory + "ControlzEx.dll");
