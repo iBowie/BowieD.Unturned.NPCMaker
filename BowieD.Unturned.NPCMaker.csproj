@@ -467,8 +467,8 @@
     <Resource Include="Resources\BAD_ICON_UPDATE.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DiscordRPC.dll" />
-    <Content Include="Newtonsoft.Json.dll" />
+    <EmbeddedResource Include="Libs\DiscordRPC.dll" />
+    <Content Include="Libs\Newtonsoft.Json.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
