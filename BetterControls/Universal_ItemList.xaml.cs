@@ -12,26 +12,13 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
         {
             InitializeComponent();
             this.Value = input;
-            mainTextBlock.Text = Value.ToString();
-            mainTextBlock.ToolTip = Value.ToString();
+            //mainTextBlock.Text = Value.ToString();
+            //mainTextBlock.ToolTip = Value.ToString();
+            mainLabel.Content = Value;
+            mainLabel.ToolTip = Value;
             this.Localizable = localizable;
             this.Type = type;
         }
-
-        //public static Universal_ItemList AutoDetect(object input, bool localizable)
-        //{
-        //    if (input is NPC.Condition cond)
-        //        return new Universal_ItemList(cond, ReturnType.Condition, localizable);
-        //    else if (input is NPC.Reward reward)
-        //        return new Universal_ItemList(reward, ReturnType.Reward, localizable);
-        //    else if (input is NPC.NPCDialogue dialogue)
-        //        return new Universal_ItemList(dialogue, ReturnType.Dialogue, localizable);
-        //    else if (input is NPC.NPCVendor vendor)
-        //        return new Universal_ItemList(vendor, ReturnType.Vendor, localizable);
-        //    else if (input is NPC.VendorItem item)
-        //        return new Universal_ItemList(item, ReturnType.VendorItem, localizable);
-        //    return null;
-        //}
 
         public object Value { get; private set; }
         public bool Localizable { get; private set; }
@@ -46,8 +33,8 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                 if (uce.ShowDialog() == true)
                 {
                     Value = uce.Result;
-                    mainTextBlock.Text = Value.ToString();
-                    mainTextBlock.ToolTip = Value.ToString();
+                    mainLabel.Content = Value;
+                    mainLabel.ToolTip = Value;
                 }
             }
             else if (Type == ReturnType.Dialogue)
@@ -66,8 +53,8 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                 if (ure.DialogResult == true)
                 {
                     Value = ure.Result;
-                    mainTextBlock.Text = Value.ToString();
-                    mainTextBlock.ToolTip = Value.ToString();
+                    mainLabel.Content = Value;
+                    mainLabel.ToolTip = Value;
                 }
             }
             else if (Type == ReturnType.Vendor)
@@ -96,8 +83,8 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                         }
                     }
                     Value = NewItem;
-                    mainTextBlock.Text = Value.ToString();
-                    mainTextBlock.ToolTip = Value.ToString();
+                    mainLabel.Content = Value;
+                    mainLabel.ToolTip = Value;
                 }
             }
         }

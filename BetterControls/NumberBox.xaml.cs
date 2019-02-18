@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Media;
+using System;
 
 namespace BowieD.Unturned.NPCMaker.BetterControls
 {
@@ -13,8 +14,20 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
         public NumberBox()
         {
             InitializeComponent();
+            PropertyChanged += NumberBox_PropertyChanged;
         }
-        
+
+        ~NumberBox()
+        {
+            PropertyChanged -= NumberBox_PropertyChanged;
+        }
+
+        private void NumberBox_PropertyChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.Property == ValueProperty)
+                ValueChanged?.Invoke(this, (long)e.NewValue);
+        }
+
         public long MinValue
         {
             get
@@ -54,7 +67,17 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
         public static readonly DependencyProperty MinValueProperty = DependencyProperty.Register("MinValue", typeof(long), typeof(NumberBox), new PropertyMetadata((long)0));
         public static readonly DependencyProperty MaxValueProperty = DependencyProperty.Register("MaxValue", typeof(long), typeof(NumberBox), new PropertyMetadata(long.MaxValue));
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(long), typeof(NumberBox), new PropertyMetadata((long)0));
-        
+
+        internal event DependencyPropertyChangedEventHandler PropertyChanged;
+
+        internal event EventHandler<long> ValueChanged;
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            PropertyChanged?.Invoke(this, e);
+            base.OnPropertyChanged(e);
+        }
+
         private bool IsTextAllowed(string text)
         {
             if (long.TryParse(text, out long result))
@@ -96,7 +119,6 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                     e.CancelCommand();
                     return;
                 }
-                //Value = long.Parse(text);
             }
             else
             {

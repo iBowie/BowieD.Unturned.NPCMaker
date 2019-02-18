@@ -16,9 +16,9 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             InitializeComponent();
             Response = startResponse ?? new NPC.NPCResponse();
             mainText.Text = Response.mainText;
-            txtBoxDialogueID.Text = Response.openDialogueId.ToString();
-            txtBoxQuestID.Text = Response.openQuestId.ToString();
-            txtBoxVendorID.Text = Response.openVendorId.ToString();
+            txtBoxDialogueID.Value = Response.openDialogueId;
+            txtBoxQuestID.Value = Response.openQuestId;
+            txtBoxVendorID.Value = Response.openVendorId;
         }
         
         public NPC.NPCResponse Response { get; private set; }
@@ -54,21 +54,6 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
         {
             Response.mainText = mainText.Text;
         }
-        private void TxtBoxDialogueID_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (txtBoxDialogueID.Text.Count(d => !char.IsNumber(d)) == 0 && ushort.TryParse(txtBoxDialogueID.Text, out ushort resultedId))
-                Response.openDialogueId = resultedId;
-        }
-        private void TxtBoxVendorID_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (txtBoxVendorID.Text.Count(d => !char.IsNumber(d)) == 0 && ushort.TryParse(txtBoxVendorID.Text, out ushort resultedId))
-                Response.openVendorId = resultedId;
-        }
-        private void TxtBoxQuestID_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (txtBoxQuestID.Text.Count(d => !char.IsNumber(d)) == 0 && ushort.TryParse(txtBoxQuestID.Text, out ushort resultedId))
-                Response.openQuestId= resultedId;
-        }
         #endregion
 
         private void QuestSelect_Click(object sender, RoutedEventArgs e)
@@ -79,7 +64,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             select.ShowDialog();
             if (select.DialogResult == true)
             {
-                txtBoxQuestID.Text = (select.SelectedValue as NPC.NPCQuest).id.ToString();
+                txtBoxQuestID.Value = (select.SelectedValue as NPC.NPCQuest).id;
             }
         }
 
@@ -91,7 +76,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             select.ShowDialog();
             if (select.DialogResult == true)
             {
-                txtBoxVendorID.Text = (select.SelectedValue as NPC.NPCVendor).id.ToString();
+                txtBoxVendorID.Value = (select.SelectedValue as NPC.NPCVendor).id;
             }
         }
 
@@ -103,7 +88,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             select.ShowDialog();
             if (select.DialogResult == true)
             {
-                txtBoxDialogueID.Text = (select.SelectedValue as NPC.NPCDialogue).id.ToString();
+                txtBoxDialogueID.Value = (select.SelectedValue as NPC.NPCDialogue).id;
             }
         }
 
@@ -179,6 +164,21 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                     dr.UpdateOrderButtons();
                 }
             }
+        }
+
+        private void TxtBoxVendorID_ValueChanged(object sender, long e)
+        {
+            Response.openVendorId = (ushort)e;
+        }
+
+        private void TxtBoxQuestID_ValueChanged(object sender, long e)
+        {
+            Response.openQuestId = (ushort)e;
+        }
+
+        private void TxtBoxDialogueID_ValueChanged(object sender, long e)
+        {
+            Response.openDialogueId = (ushort)e;
         }
     }
 }

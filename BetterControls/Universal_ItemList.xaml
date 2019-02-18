@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              Height="20" MinHeight="20" Width="196" MinWidth="196" VerticalAlignment="Top" Margin="5,5">
     <Grid>
-        <TextBlock Name="mainTextBlock" Margin="0,0,40,0"/>
+        <!--<TextBlock Name="mainTextBlock" Margin="0,0,40,0"/>-->
+        <Label Name="mainLabel" Margin="0,-4,40,0" VerticalAlignment="Bottom"/>
         <Button Click="EditButton_Click" Name="editButton" Width="20" HorizontalAlignment="Right" Margin="0,0,20,0">
             <Button.Content>
                 <Image Source="/Resources/ICON_PENCIL.png"/>

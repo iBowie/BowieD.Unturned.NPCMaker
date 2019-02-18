@@ -487,11 +487,11 @@
             <ProgressBar Name="progrBar" VerticalAlignment="Bottom" Margin="10" Height="32" Opacity="0.8"/>
         </Grid>
         <Grid Name="notClickableOverlay" IsHitTestVisible="False">
-            <TextBlock  Name="betaOverlayText" Margin="5" Text="BETA" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="36" Opacity="0.15"/>
-
+            <!--<TextBlock  Name="betaOverlayText" Margin="5" Text="BETA" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="36" Opacity="0.15"/>-->
+            <Label Name="betaOverlayText" Margin="5" Content="BETA" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="36" Opacity="0.15"/>
             <Grid Name="debugOverlayText" HorizontalAlignment="Left" Opacity="0.15" VerticalAlignment="Bottom" Margin="5">
                 <Image Width="36" Source="Resources/ICON_WARNING.png" Height="{Binding Width}" HorizontalAlignment="Left"/>
-                <TextBlock Margin="36,0,0,0" Text="DEBUG" HorizontalAlignment="Right" FontSize="36"/>
+                <Label Margin="36,0,0,0" Content="DEBUG" HorizontalAlignment="Right" FontSize="36"/>
             </Grid>
         </Grid>
     </Grid>
