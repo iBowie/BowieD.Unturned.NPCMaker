@@ -122,10 +122,10 @@
     <v:String x:Key="dialogue_Page_Remove">Удалить страницу</v:String>
     <v:String x:Key="dialogue_Reply_Add">Добавить ответ</v:String>
     <v:String x:Key="dialogue_Reply_Remove">Удалить ответ</v:String>
-    <v:String x:Key="dialogue_Reply_EditCondition">Изменить условия</v:String>
-    <v:String x:Key="dialogue_Reply_EditRewards">Изменить награды</v:String>
+    <v:String x:Key="dialogue_Reply_EditCondition">Условия</v:String>
+    <v:String x:Key="dialogue_Reply_EditRewards">Награды</v:String>
     <v:String x:Key="dialogue_Reply_Redirects">При выборе</v:String>
-    <v:String x:Key="dialogue_Reply_Redirects_Dialogue">ID открываемого диалога (0 если нет)</v:String>
+    <v:String x:Key="dialogue_Reply_Redirects_Dialogue">ID диалога (0 если нет)</v:String>
     <v:String x:Key="dialogue_Reply_Redirects_Vendor">ID магазина (0 если нет)</v:String>
     <v:String x:Key="dialogue_Reply_Redirects_Quest">ID задания (0 если нет)</v:String>
     <v:String x:Key="dialogue_Reply_EditVisibility">Отображение в сообщениях</v:String>
