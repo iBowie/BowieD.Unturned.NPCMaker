@@ -1,13 +1,14 @@
 ﻿#define BETA
 //#define RELEASE
 
+#region SYSTEM USINGS
 using System;
 using System.IO;
 using System.Xml;
 using System.Linq;
 using System.Media;
 using System.Windows;
-using Microsoft.Win32;
+using System.Net;
 using System.Windows.Media;
 using System.Globalization;
 using System.ComponentModel;
@@ -16,17 +17,17 @@ using System.Windows.Controls;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Animation;
+#endregion
+#region LOCAL USINGS
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Forms;
-using System.Windows.Media.Animation;
 using BowieD.Unturned.NPCMaker.BetterForms;
 using BowieD.Unturned.NPCMaker.BetterControls;
-
-using System.Net; // ONLY FOR UPDATE CHECK (FOR THOSE WHO DECOMPILE MY APP (STOP DOING THIS THO))
 using BowieD.Unturned.NPCMaker.Examples;
+#endregion
+using Microsoft.Win32;
 using DiscordRPC;
-using System.Text;
-// STILL ONLY FOR UPDATES
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -273,8 +274,10 @@ namespace BowieD.Unturned.NPCMaker
             }
             catch { }
             #endregion
+            CheckForUpdates_Click(Instance, null);
             Config.Configuration.Properties.firstLaunch = false;
             isSaved = true;
+            #region DISCORD
             discordRichPresenceMenu.IsChecked = Config.Configuration.Properties.enableDiscord;
             if (Config.Configuration.Properties.enableDiscord)
             {
@@ -285,6 +288,7 @@ namespace BowieD.Unturned.NPCMaker
                     TabControl_SelectionChanged(mainTabControl, null);
                 }
             }
+            #endregion
         }
         #region THEME EVENTS
         private void Theme_SetupLegacy(object sender, RoutedEventArgs e)
@@ -607,7 +611,7 @@ namespace BowieD.Unturned.NPCMaker
                 //MessageBox.Show((string)TryFindResource("app_Update_Available"));
                 DoNotification((string)TryFindResource("app_Update_Available"));
             }
-            else if (updCache && !isUpdateAvailable)
+            else if (updCache && !isUpdateAvailable && !(sender is MainWindow))
             {
                 //MessageBox.Show((string)TryFindResource("app_Update_Latest"));
                 DoNotification((string)TryFindResource("app_Update_Latest"));
