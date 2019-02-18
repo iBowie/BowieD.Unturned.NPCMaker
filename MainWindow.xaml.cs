@@ -54,6 +54,12 @@ namespace BowieD.Unturned.NPCMaker
                 case "LightPink":
                     Theme_SetupLightPink(null, null);
                     break;
+                case "LightRed":
+                    Theme_SetupLightRed(null, null);
+                    break;
+                case "DarkRed":
+                    Theme_SetupDarkRed(null, null);
+                    break;
                 default:
                     Theme_SetupLegacy(null, null);
                     break;
@@ -118,12 +124,12 @@ namespace BowieD.Unturned.NPCMaker
             }
             #endregion
             #region APPAREL SETUP
-            faceImageIndex.MaxValue = faceAmount - 1;
-            FaceImageIndex_Changed(faceImageIndex.Value);
-            beardImageIndex.MaxValue = beardAmount - 1;
-            BeardImageIndex_Changed(beardImageIndex.Value);
-            hairImageIndex.MaxValue = haircutAmount - 1;
-            HairImageIndex_Changed(hairImageIndex.Value);
+            faceImageIndex.Maximum = faceAmount - 1;
+            FaceImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, faceImageIndex.Value));
+            beardImageIndex.Maximum = beardAmount - 1;
+            BeardImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, beardImageIndex.Value));
+            hairImageIndex.Maximum = haircutAmount - 1;
+            HairImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, hairImageIndex.Value));
             #region COLOR SAMPLES
             #region UNTURNED
             List<string> unturnedColors = new List<string>()
@@ -229,7 +235,7 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     Whats_New box = new Whats_New(
                         (string)TryFindResource("app_News_Title"),
-                        string.Format((string)TryFindResource("app_News_BodyTitle"), version),
+                        string.Format((string)TryFindResource("app_News_BodyTitle"), Version),
                         (string)TryFindResource("app_News_Text"),
                         (string)TryFindResource("app_News_OK")
                         );
@@ -324,6 +330,20 @@ namespace BowieD.Unturned.NPCMaker
             Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Pink.xaml") });
             Config.Configuration.Properties.theme = "DarkPink";
         }
+        private void Theme_SetupLightRed(object sender, RoutedEventArgs e)
+        {
+            Theme_Clear();
+            Theme_SetupMetro();
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Red.xaml") });
+            Config.Configuration.Properties.theme = "LightRed";
+        }
+        private void Theme_SetupDarkRed(object sender, RoutedEventArgs e)
+        {
+            Theme_Clear();
+            Theme_SetupMetro();
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Red.xaml") });
+            Config.Configuration.Properties.theme = "DarkRed";
+        }
         private void Theme_SetupMetro()
         {
             Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml") });
@@ -366,11 +386,11 @@ namespace BowieD.Unturned.NPCMaker
         }
         #endregion
         #region CONSTANTS
-        public const int 
+        public const int
         faceAmount = 32,
         beardAmount = 16,
-        haircutAmount = 23,
-        version = 19;
+        haircutAmount = 23;
+        public static Version Version => new Version(0, 9, 0, 0);
         #endregion
         #region STATIC
         public static MainWindow Instance;
@@ -506,11 +526,11 @@ namespace BowieD.Unturned.NPCMaker
                         CurrentNPC = save;
                         saveFile = path;
                     }
-                    if (CurrentNPC.version < version)
+                    if (CurrentNPC.newVersion < Version)
                     {
                         DoNotification((string)TryFindResource("load_Old"));
                     }
-                    if (CurrentNPC.version > version)
+                    if (CurrentNPC.newVersion < Version)
                     {
                         DoNotification((string)TryFindResource("load_New"));
                     }
@@ -605,20 +625,17 @@ namespace BowieD.Unturned.NPCMaker
         }
         private async void CheckForUpdates_Click(object sender, RoutedEventArgs e)
         {
-            bool isUpdateAvailable = await IsUpdateAvailable();
-            if (updCache && isUpdateAvailable)
+            bool? isUpdateAvailable = await IsUpdateAvailable();
+            if (isUpdateAvailable.HasValue && isUpdateAvailable == true)
             {
-                //MessageBox.Show((string)TryFindResource("app_Update_Available"));
                 DoNotification((string)TryFindResource("app_Update_Available"));
             }
-            else if (updCache && !isUpdateAvailable && !(sender is MainWindow))
+            else if (isUpdateAvailable.HasValue && isUpdateAvailable == false && !(sender is MainWindow))
             {
-                //MessageBox.Show((string)TryFindResource("app_Update_Latest"));
                 DoNotification((string)TryFindResource("app_Update_Latest"));
             }
-            else if (!updCache)
+            else if (!isUpdateAvailable.HasValue)
             {
-                //MessageBox.Show((string)TryFindResource("app_Update_Fail"));
                 DoNotification((string)TryFindResource("app_Update_Fail"));
             }
         }
@@ -815,19 +832,19 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
         }
-        private void FaceImageIndex_Changed(int value)
+        private void FaceImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            faceImageControl.Source = ("Resources/Unturned/Faces/" + value + ".png").GetImageSource();
+            faceImageControl.Source = ("Resources/Unturned/Faces/" + e.NewValue + ".png").GetImageSource();
             isSaved = false;
         }
-        private void BeardImageIndex_Changed(int value)
+        private void BeardImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            beardImageControl.Source = ("Resources/Unturned/Beards/" + value + ".png").GetImageSource();
+            beardImageControl.Source = ("Resources/Unturned/Beards/" + e.NewValue + ".png").GetImageSource();
             isSaved = false;
         }
-        private void HairImageIndex_Changed(int value)
+        private void HairImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            hairImageControl.Source = ("Resources/Unturned/Hairs/" + value + ".png").GetImageSource();
+            hairImageControl.Source = ("Resources/Unturned/Hairs/" + e.NewValue + ".png").GetImageSource();
             isSaved = false;
         }
         internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -917,11 +934,33 @@ namespace BowieD.Unturned.NPCMaker
         {
             Whats_New box = new Whats_New(
                         (string)TryFindResource("app_News_Title"),
-                        string.Format((string)TryFindResource("app_News_BodyTitle"), version),
+                        string.Format((string)TryFindResource("app_News_BodyTitle"), Version),
                         (string)TryFindResource("app_News_Text"),
                         (string)TryFindResource("app_News_OK")
                         );
             box.ShowDialog();
+        }
+        private void ApparelSkinColorBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string text = apparelSkinColorBox.Text;
+            BrushConverter bc = new BrushConverter();
+            if (bc.IsValid(text))
+            {
+                Brush color = bc.ConvertFromString(text) as Brush;
+                faceImageBorder.Background = color;
+                hairImageBorder.Background = color;
+                beardImageBorder.Background = color;
+            }
+            else
+            {
+                faceImageBorder.Background = Brushes.Transparent;
+                hairImageBorder.Background = Brushes.Transparent;
+                beardImageBorder.Background = Brushes.Transparent;
+            }
+        }
+        private void ApparelHairColorBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
         #endregion
         #region STATE CONVERTERS
@@ -932,14 +971,13 @@ namespace BowieD.Unturned.NPCMaker
                 face = (byte)faceImageIndex.Value,
                 beard = (byte)beardImageIndex.Value,
                 haircut = (byte)hairImageIndex.Value,
-                //saveFile = saveFile,
                 id = Inputted_ID,
                 editorName = Inputted_EditorName,
                 displayName = Inputted_DisplayName,
                 dialogues = dialogues,
                 vendors = vendors,
                 quests = quests,
-                version = version,
+                newVersion = Version,
                 startDialogueId = Inputted_StartDialogueID,
                 hat = Inputted_Equip_Hat,
                 top = Inputted_Equip_Top,
@@ -983,7 +1021,6 @@ namespace BowieD.Unturned.NPCMaker
             dialogues = save.dialogues;
             vendors = save.vendors;
             quests = save.quests;
-            //saveFile = save.saveFile;
             Inputted_StartDialogueID = save.startDialogueId;
             apparelLeftHandedCheckbox.IsChecked = save.leftHanded;
             visibilityConditions = save.visibilityConditions;
@@ -1855,59 +1892,22 @@ namespace BowieD.Unturned.NPCMaker
         }
 #endregion
         #region UPDATE CHECK
-        public async Task<bool> IsUpdateAvailable()
+        public async Task<bool?> IsUpdateAvailable()
         {
-            if (updCache)
-                return updValue;
-            else
+            checkForUpdatesButton.IsEnabled = false;
+            try
             {
-                checkForUpdatesButton.IsEnabled = false;
-                try
+                using (WebClient wc = new WebClient())
                 {
-                    using (WebClient wc = new WebClient())
-                    {
-                        string vers = await wc.DownloadStringTaskAsync("https://bowiestuff.at.ua/npcmakerversion.txt");
-                        updCache = true;
-                        if (vers == version.ToString())
-                        {
-                            updValue = false;
-                        }
-                        else
-                        {
-                            forceUpdateButton.IsEnabled = true;
-                            updValue = true;
-                        }
-                        return updValue;
-                    }
+                    string vers = await wc.DownloadStringTaskAsync("https://bowiestuff.at.ua/NPCMversion.txt");
+                    forceUpdateButton.IsEnabled = vers != Version.ToString();
+                    return vers != Version.ToString();
                 }
-                catch { }
-                finally { checkForUpdatesButton.IsEnabled = true; }
-#region LEGACY
-                //try
-                //{
-                //    using (WebClient wc = new WebClient())
-                //    {
-                //        string vers = wc.DownloadString("https://bowiestuff.at.ua/npcmakerversion.txt");
-                //        if (vers == version.ToString())
-                //        {
-                //            updCache = true;
-                //            updValue = false;
-                //            return false;
-                //        }
-                //        forceUpdateButton.IsEnabled = true;
-                //        updCache = true;
-                //        updValue = true;
-                //        return true;
-                //    }
-                //}
-                //catch { }
-#endregion
             }
-            return false;
+            catch { }
+            finally { checkForUpdatesButton.IsEnabled = true; }
+            return null;
         }
-
-        private bool updCache = false;
-        private bool updValue = false;
 #endregion
         #region UPDATE
         public void DownloadUpdater()
@@ -1953,7 +1953,7 @@ namespace BowieD.Unturned.NPCMaker
         }
         public void DoNotification(TextBlock textBlock)
         {
-            Notification.NotificationBase notificationBase = new Notification.NotificationBase(notificationsStackPanel, this.Background, textBlock);
+            Notification.NotificationBase notificationBase = new Notification.NotificationBase(notificationsStackPanel, textBlock);
             notificationsStackPanel.Children.Add(notificationBase);
         }
 #endregion

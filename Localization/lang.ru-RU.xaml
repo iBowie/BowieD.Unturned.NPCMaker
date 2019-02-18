@@ -15,7 +15,7 @@
     <v:String x:Key="app_News_OK">Продолжить</v:String>
     <v:String x:Key="app_Analysis">Анализ...</v:String>
     <v:String x:Key="app_Cache_Save">Сохранить кеш Unturned?</v:String>
-    <v:String x:Key="app_Comment">Поле для комментария. Всё что вы здесь введёте не повлияет на NPC и будет видно только в этой программе.</v:String>
+    <v:String x:Key="app_Comment">Комментарий...</v:String>
     <v:String x:Key="app_Desktop">Внимание! Вы хотите запустить программу на рабочем столе, что не рекомендуется из-за создания необходимых для работы программы файлов. Вы уверены что хотите продолжить?</v:String>
     <v:String x:Key="load_Old">Этот НИП был сделан в более старой версии программы. Возможны ошибки.</v:String>
     <v:String x:Key="load_New">Этот НИП был сделан в более новой версии программы. Возможны ошибки.</v:String>
@@ -49,6 +49,8 @@
     <v:String x:Key="menu_Theme_DarkGreen">Тёмная зелёная</v:String>
     <v:String x:Key="menu_Theme_LightPink">Светлая розовая</v:String>
     <v:String x:Key="menu_Theme_DarkPink">Тёмная розовая</v:String>
+    <v:String x:Key="menu_Theme_LightRed">Светлая красная</v:String>
+    <v:String x:Key="menu_Theme_DarkRed">Тёмная красная</v:String>
     <v:String x:Key="feedback_Steam">Мой Steam (Нажать)</v:String>
     <v:String x:Key="feedback_Discord">Мой сервер в Discord (Нажать)</v:String>
     <v:String x:Key="feedback_VK">Мой ВК (Нажать)</v:String>

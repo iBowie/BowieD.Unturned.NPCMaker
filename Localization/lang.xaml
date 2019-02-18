@@ -15,7 +15,7 @@
     <v:String x:Key="app_News_OK">Continue</v:String>
     <v:String x:Key="app_Analysis">Analysing...</v:String>
     <v:String x:Key="app_Cache_Save">Save Unturned's file cache?</v:String>
-    <v:String x:Key="app_Comment">Comment box. All what you will enter here will not affect NPC.</v:String>
+    <v:String x:Key="app_Comment">Note...</v:String>
     <v:String x:Key="app_Desktop">Warning! You want to launch app on desktop, which is not recommended due to file deploying. You sure you want to continue?</v:String>
     <v:String x:Key="load_Old">This NPC was made in older version of app. Continue at your own risk.</v:String>
     <v:String x:Key="load_New">This NPC was made in newer version of app. Continue at your own risk.</v:String>
@@ -49,6 +49,8 @@
     <v:String x:Key="menu_Theme_DarkGreen">Dark Green</v:String>
     <v:String x:Key="menu_Theme_LightPink">Light Pink</v:String>
     <v:String x:Key="menu_Theme_DarkPink">Dark Pink</v:String>
+    <v:String x:Key="menu_Theme_LightRed">Light Red</v:String>
+    <v:String x:Key="menu_Theme_DarkRed">Dark Red</v:String>
     <v:String x:Key="feedback_Steam">My Steam (Click)</v:String>
     <v:String x:Key="feedback_Discord">My Discord Server (Click)</v:String>
     <v:String x:Key="feedback_VK">My VK (Click)</v:String>

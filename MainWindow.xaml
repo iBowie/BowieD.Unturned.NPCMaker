@@ -8,6 +8,7 @@
         xmlns:npc="clr-namespace:BowieD.Unturned.NPCMaker.NPC"
         xmlns:bettercontrols="clr-namespace:BowieD.Unturned.NPCMaker.BetterControls"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         Title="{DynamicResource app_Title}"
         MinHeight="593" Height="593"
@@ -77,6 +78,8 @@
                         <MenuItem Header="{DynamicResource menu_Theme_DarkGreen}" Click="Theme_SetupDarkGreen"/>
                         <MenuItem Header="{DynamicResource menu_Theme_LightPink}" Click="Theme_SetupLightPink"/>
                         <MenuItem Header="{DynamicResource menu_Theme_DarkPink}" Click="Theme_SetupDarkPink"/>
+                        <MenuItem Header="{DynamicResource menu_Theme_LightRed}" Click="Theme_SetupLightRed"/>
+                        <MenuItem Header="{DynamicResource menu_Theme_DarkRed}" Click="Theme_SetupDarkRed"/>
                     </MenuItem>
                     <MenuItem Header="{DynamicResource menu_AutoSave}">
                         <MenuItem.Icon>
@@ -176,19 +179,19 @@
                             </Grid>
                         </GroupBox>
                         <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="96" Margin="10,10,0,0" VerticalAlignment="Top" Width="96">
-                            <Image Name="faceImageControl"/>
+                            <Image Name="faceImageControl" />
                         </Border>
-                        <controls:NumericUpDown OnValueChanged="FaceImageIndex_Changed" x:Name="faceImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,111,0,0" Width="{Binding Width, ElementName=faceImageBorder}"/>
+                        <mah:NumericUpDown Minimum="0" x:Name="faceImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,111,0,0" Width="{Binding Width, ElementName=faceImageBorder}" ValueChanged="FaceImageIndex_Changed" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
                         <Border x:Name="beardImageBorder" BorderBrush="{Binding BorderBrush, ElementName=faceImageBorder}" BorderThickness="{Binding BorderThickness, ElementName=faceImageBorder}" HorizontalAlignment="Left" Height="{Binding Height, ElementName=faceImageBorder}" Width="{Binding Width, ElementName=faceImageBorder}" VerticalAlignment="Top" Margin="212,10,0,0">
-                            <Image Name="beardImageControl"/>
+                            <Image Name="beardImageControl" />
                         </Border>
-                        <controls:NumericUpDown OnValueChanged="BeardImageIndex_Changed" x:Name="beardImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="212,111,0,0" Width="{Binding Width, ElementName=beardImageBorder}"/>
+                        <mah:NumericUpDown Minimum="0" x:Name="beardImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="212,111,0,0" Width="{Binding Width, ElementName=beardImageBorder}" ValueChanged="BeardImageIndex_Changed" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
                         <Border x:Name="hairImageBorder" BorderBrush="{Binding BorderBrush, ElementName=beardImageBorder}" BorderThickness="{Binding BorderThickness, ElementName=beardImageBorder}" HorizontalAlignment="Left" Height="{Binding Height, ElementName=beardImageBorder}" Width="{Binding Width, ElementName=beardImageBorder}" VerticalAlignment="Top" Margin="111,10,0,0">
-                            <Image Name="hairImageControl"/>
+                            <Image Name="hairImageControl" />
                         </Border>
-                        <controls:NumericUpDown OnValueChanged="HairImageIndex_Changed" x:Name="hairImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="111,111,0,0" Width="{Binding Width, ElementName=hairImageBorder}"/>
-                        <TextBox Name="apparelSkinColorBox" HorizontalAlignment="Left" Height="23" Margin="313,10,0,0" TextWrapping="Wrap" MaxLength="7" VerticalAlignment="Top" Width="120"/>
-                        <TextBox Name="apparelHairColorBox" HorizontalAlignment="Left" Height="23" Margin="313,38,0,0" TextWrapping="Wrap" MaxLength="7" VerticalAlignment="Top" Width="120"/>
+                        <mah:NumericUpDown Minimum="0" x:Name="hairImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="111,111,0,0" Width="{Binding Width, ElementName=hairImageBorder}" ValueChanged="HairImageIndex_Changed" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
+                        <TextBox TextChanged="ApparelSkinColorBox_TextChanged" Name="apparelSkinColorBox" HorizontalAlignment="Left" Height="23" Margin="313,10,0,0" TextWrapping="Wrap" MaxLength="7" VerticalAlignment="Top" Width="120" mah:TextBoxHelper.Watermark="#000000" mah:TextBoxHelper.HasText="True"/>
+                        <TextBox TextChanged="ApparelHairColorBox_TextChanged" Name="apparelHairColorBox" HorizontalAlignment="Left" Height="23" Margin="313,38,0,0" TextWrapping="Wrap" MaxLength="7" VerticalAlignment="Top" Width="120" mah:TextBoxHelper.HasText="True" mah:TextBoxHelper.Watermark="#000000"/>
                         <CheckBox Name="apparelLeftHandedCheckbox" Content="{DynamicResource apparel_LeftHanded}" HorizontalAlignment="Left" Margin="313,66,0,0" VerticalAlignment="Top"/>
                         <ComboBox Name="apparelPoseBox" HorizontalAlignment="Left" SelectedIndex="0" Margin="313,84,0,0" VerticalAlignment="Top" Width="120">
                             <ComboBoxItem Content="{DynamicResource apparel_Pose_Stand}">
@@ -311,7 +314,7 @@
                             <RowDefinition Height="72"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBox ToolTip="{DynamicResource app_Comment}" Name="dialogue_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10"/>
+                        <TextBox mah:TextBoxHelper.Watermark="{DynamicResource app_Comment}" Name="dialogue_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10"/>
                         <Button Name="setAsStartButton" Grid.Column="1" Margin="10" Height="32" VerticalAlignment="Top" VerticalContentAlignment="Center" Content="{DynamicResource dialogue_StartDialogue}" Click="SetAsStart_Button_Click"/>
                         <bettercontrols:NumberBox MaxValue="65535" x:Name="dialogueInputIdControl" Width="100" Height="24" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="115,14,0,0" TextWrapping="Wrap" Text="{DynamicResource dialogue_ID}" VerticalAlignment="Top" Height="16" Width="66"/>
@@ -358,7 +361,7 @@
                             <ColumnDefinition MinWidth="296" Width="33*"/>
                             <ColumnDefinition Width="33*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox ToolTip="{DynamicResource app_Comment}" Name="vendor_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10"/>
+                        <TextBox mah:TextBoxHelper.Watermark="{DynamicResource app_Comment}" Name="vendor_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10"/>
                         <bettercontrols:NumberBox x:Name="vendorIdTxtBox" MaxValue="65535" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" VerticalAlignment="Top" Width="40" />
                         <TextBlock  HorizontalAlignment="Left" Margin="55,13,0,0" TextWrapping="Wrap" Text="{DynamicResource vendor_ID}" VerticalAlignment="Top" Width="83"/>
                         <TextBox  Grid.Column="1" Name="vendorTitleTxtBox" Height="23" VerticalAlignment="Top" Margin="10,10,146,0"/>
@@ -410,7 +413,7 @@
                             <ColumnDefinition Width="33*"/>
                             <ColumnDefinition Width="33*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox ToolTip="{DynamicResource app_Comment}" Name="quest_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10"/>
+                        <TextBox mah:TextBoxHelper.Watermark="{DynamicResource app_Comment}" Name="quest_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10"/>
                         <bettercontrols:NumberBox MaxValue="65535" x:Name="questIdBox" Height="23" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" Width="40"/>
                         <TextBlock Text="{DynamicResource quest_ID}" Height="23" VerticalAlignment="Top" HorizontalAlignment="Left" Width="288" Margin="55,10,0,0"/>
                         <TextBox Grid.Row="1" Name="questTitleBox" Height="23" VerticalAlignment="Top" Margin="10,38,10,0"/>
