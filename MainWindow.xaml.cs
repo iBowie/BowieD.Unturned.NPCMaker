@@ -39,7 +39,7 @@ namespace BowieD.Unturned.NPCMaker
             Config.Configuration.Load();
             Config.Configuration.Save();
             #region THEME SETUP
-            switch (Config.Configuration.Properties.theme)
+            switch (Config.Configuration.Properties.theme ?? "Legacy")
             {
                 case "DarkGreen":
                     Theme_SetupDarkGreen(null,null);
