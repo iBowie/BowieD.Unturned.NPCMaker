@@ -11,8 +11,8 @@
             <ScaleTransform x:Name="gridScale"/>
         </Grid.LayoutTransform>
         <Image VerticalAlignment="Center" Source="/Resources/BowieD_1000x.png" Height="128" StretchDirection="DownOnly" Margin="10,-46,10,89"/>
-        <TextBlock Name="mainText" TextWrapping="Wrap" TextAlignment="Center" Margin="0,34,0,0">
-
-        </TextBlock>
+        <Label Margin="0,34,0,0" HorizontalAlignment="Center">
+            <TextBlock Name="mainText" TextWrapping="Wrap" TextAlignment="Center" />
+        </Label>
     </Grid>
 </Window>

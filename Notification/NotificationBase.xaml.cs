@@ -21,12 +21,18 @@ namespace BowieD.Unturned.NPCMaker.Notification
     /// </summary>
     public partial class NotificationBase : UserControl
     {
-        public NotificationBase(StackPanel parent, params UIElement[] children)
+        public NotificationBase(StackPanel parent, Brush background, params UIElement[] children)
         {
             InitializeComponent();
+            mainBorder.Background = background;
             foreach (UIElement uie in children)
             {
-                notificationContentGrid.Children.Add(uie);
+                Label l = new Label
+                {
+                    Content = uie,
+                    HorizontalAlignment = HorizontalAlignment.Center
+                };
+                notificationContentGrid.Children.Add(l);
             }
             animationStoryboard = new Storyboard();
             var anim2 = new DoubleAnimation

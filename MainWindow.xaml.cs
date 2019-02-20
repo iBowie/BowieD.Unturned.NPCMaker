@@ -358,30 +358,20 @@ namespace BowieD.Unturned.NPCMaker
             ResourceDictionary metroFonts = (from d in Application.Current.Resources.MergedDictionaries
                                              where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"
                                              select d).FirstOrDefault();
-            ResourceDictionary metroDG = (from d in Application.Current.Resources.MergedDictionaries
-                                          where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Green.xaml"
-                                          select d).FirstOrDefault();
-            ResourceDictionary metroLG = (from d in Application.Current.Resources.MergedDictionaries
-                                          where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Green.xaml"
-                                          select d).FirstOrDefault();
-            ResourceDictionary metroLP = (from d in Application.Current.Resources.MergedDictionaries
-                                          where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Pink.xaml"
-                                          select d).FirstOrDefault();
-            ResourceDictionary metroDP = (from d in Application.Current.Resources.MergedDictionaries
-                                          where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Pink.xaml"
-                                          select d).FirstOrDefault();
+            List<ResourceDictionary> metroThemes = (from d in Application.Current.Resources.MergedDictionaries
+                                                           where d.Source != null && d.Source.OriginalString.StartsWith("pack://application:,,,/MahApps.Metro;component/Styles/Themes/")
+                                                           select d).ToList();
             if (metroControls != null)
                 Application.Current.Resources.MergedDictionaries.Remove(metroControls);
             if (metroFonts != null)
                 Application.Current.Resources.MergedDictionaries.Remove(metroFonts);
-            if (metroDG != null)
-                Application.Current.Resources.MergedDictionaries.Remove(metroDG);
-            if (metroLG != null)
-                Application.Current.Resources.MergedDictionaries.Remove(metroLG);
-            if (metroDP != null)
-                Application.Current.Resources.MergedDictionaries.Remove(metroDP);
-            if (metroLP != null)
-                Application.Current.Resources.MergedDictionaries.Remove(metroLP);
+            if (metroThemes?.Count() > 0)
+            {
+                foreach (var dic in metroThemes)
+                {
+                    Application.Current.Resources.MergedDictionaries.Remove(dic);
+                }
+            }
             IsMetro = false;
         }
         #endregion
@@ -390,7 +380,7 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(0, 9, 0, 0);
+        public static Version Version => new Version(0, 9, 0, 3);
         #endregion
         #region STATIC
         public static MainWindow Instance;
@@ -1946,14 +1936,13 @@ namespace BowieD.Unturned.NPCMaker
                 Text = text,
                 TextAlignment = textAlignment,
                 FontSize = fontSize,
-                TextWrapping = TextWrapping.Wrap,
-                Foreground = genericTextBlock.Foreground
+                TextWrapping = TextWrapping.Wrap
             };
             DoNotification(textBlock);
         }
         public void DoNotification(TextBlock textBlock)
         {
-            Notification.NotificationBase notificationBase = new Notification.NotificationBase(notificationsStackPanel, textBlock);
+            Notification.NotificationBase notificationBase = new Notification.NotificationBase(notificationsStackPanel, this.Background, textBlock);
             notificationsStackPanel.Children.Add(notificationBase);
         }
 #endregion

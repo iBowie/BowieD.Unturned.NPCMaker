@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Localization"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
-    <v:String x:Key="app_News_Text">+ Added themes```Also if you want, app can say "Happy Birthday, 'your nickname'!" at your birthday! Donate more than 0.5$ and i will do it ^.^</v:String>
+    <v:String x:Key="app_News_Text">+ Improved theme styles```Also if you want, app can say "Happy Birthday, 'your nickname'!" at your birthday! Donate more than 0.5$ and i will do it ^.^</v:String>
     <v:String x:Key="app_Title">NPC Maker for Unturned by BowieD</v:String>
     <v:String x:Key="app_Beta">This app is in Beta. All errors can happen. Also changes can happen. If you encountered an error or want to do a suggestion - take a look into "Feedback". App developer's native language is not English. If you see a mistake in the localization contact me.</v:String>
     <v:String x:Key="app_Exit_UnsavedChanges_Title">Unsaved work</v:String>
