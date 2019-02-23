@@ -5,16 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.BetterControls"
              mc:Ignorable="d" 
-             Height="20" MinHeight="20" Width="196" MinWidth="196" VerticalAlignment="Top" Margin="5,5">
+             Height="20" MinHeight="20" Width="250" MinWidth="196" VerticalAlignment="Top" Margin="5,5">
     <Grid>
-        <!--<TextBlock Name="mainTextBlock" Margin="0,0,40,0"/>-->
-        <Label Name="mainLabel" Margin="0,-4,40,0" VerticalAlignment="Bottom"/>
+        <Label Name="mainLabel" Margin="0,-5,40,-5" VerticalAlignment="Bottom" Height="29"/>
         <Button Click="EditButton_Click" Name="editButton" Width="20" HorizontalAlignment="Right" Margin="0,0,20,0">
             <Button.Content>
                 <Image Source="/Resources/ICON_PENCIL.png"/>
             </Button.Content>
         </Button>
-        
+
         <Button Name="deleteButton" Width="20" HorizontalAlignment="Right" Margin="0,0,0,0">
             <Button.Content>
                 <Image Source="/Resources/ICON_CANCEL.png"/>

@@ -153,6 +153,7 @@
     <Compile Include="NPC\Conditions\Item_Cond.cs" />
     <Compile Include="NPC\Conditions\Kills_Animal_Cond.cs" />
     <Compile Include="NPC\Conditions\Kills_Horde_Cond.cs" />
+    <Compile Include="NPC\Conditions\Kills_Players_Cond.cs" />
     <Compile Include="NPC\Conditions\Player_Life_Food_Cond.cs" />
     <Compile Include="NPC\Conditions\Player_Life_Health_Cond.cs" />
     <Compile Include="NPC\Conditions\Player_Life_Virus_Cond.cs" />

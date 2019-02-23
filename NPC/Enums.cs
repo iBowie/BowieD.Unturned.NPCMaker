@@ -10,6 +10,7 @@
         Kills_Zombie,
         Kills_Horde,
         Kills_Animal,
+        Kills_Player,
         Time_Of_Day,
         Player_Life_Health,
         Player_Life_Food,

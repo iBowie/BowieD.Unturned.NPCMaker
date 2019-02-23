@@ -28,6 +28,7 @@ using BowieD.Unturned.NPCMaker.Examples;
 #endregion
 using Microsoft.Win32;
 using DiscordRPC;
+using System.Text;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -233,13 +234,7 @@ namespace BowieD.Unturned.NPCMaker
             {
                 if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "updater.exe"))
                 {
-                    Whats_New box = new Whats_New(
-                        (string)TryFindResource("app_News_Title"),
-                        string.Format((string)TryFindResource("app_News_BodyTitle"), Version),
-                        (string)TryFindResource("app_News_Text"),
-                        (string)TryFindResource("app_News_OK")
-                        );
-                    box.ShowDialog();
+                    WhatsNew_Menu_Click(null, null);
                     File.Delete(AppDomain.CurrentDomain.BaseDirectory + "updater.exe");
                 }
             }
@@ -380,7 +375,7 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(0, 9, 0, 3);
+        public static Version Version => new Version(0, 9, 1, 0);
         #endregion
         #region STATIC
         public static MainWindow Instance;
@@ -503,26 +498,17 @@ namespace BowieD.Unturned.NPCMaker
                 using (FileStream fs = new FileStream(path, FileMode.Open))
                 using (XmlReader reader = XmlReader.Create(fs))
                 {
+                    XmlSerializer deser = new XmlSerializer(asExample ? typeof(NPCExample) : typeof(NPCSave));
                     if (asExample)
                     {
-                        XmlSerializer deser = new XmlSerializer(typeof(NPCExample));
                         NPCExample save = deser.Deserialize(reader) as NPCExample;
                         CurrentNPC = save;
                     }
                     else
                     {
-                        XmlSerializer deser = new XmlSerializer(typeof(NPCSave));
                         NPCSave save = deser.Deserialize(reader) as NPCSave;
                         CurrentNPC = save;
                         saveFile = path;
-                    }
-                    if (CurrentNPC.newVersion < Version)
-                    {
-                        DoNotification((string)TryFindResource("load_Old"));
-                    }
-                    if (CurrentNPC.newVersion < Version)
-                    {
-                        DoNotification((string)TryFindResource("load_New"));
                     }
                     ConvertNPCToState(CurrentNPC);
                 }
@@ -922,13 +908,19 @@ namespace BowieD.Unturned.NPCMaker
         }
         private void WhatsNew_Menu_Click(object sender, RoutedEventArgs e)
         {
-            Whats_New box = new Whats_New(
-                        (string)TryFindResource("app_News_Title"),
-                        string.Format((string)TryFindResource("app_News_BodyTitle"), Version),
-                        (string)TryFindResource("app_News_Text"),
-                        (string)TryFindResource("app_News_OK")
-                        );
-            box.ShowDialog();
+            try
+            {
+                using (WebClient wc = new WebClient() { Encoding = Encoding.UTF8 })
+                {
+                    new Whats_New(
+                                                    (string)TryFindResource("app_News_Title"),
+                                                    string.Format((string)TryFindResource("app_News_BodyTitle"), Version),
+                                                    wc.DownloadString($"https://raw.githubusercontent.com/iBowie/publicfiles/master/npcmakerpatch.{Config.Configuration.Properties.Language.Replace('-', '_')}.txt"),
+                                                    (string)TryFindResource("app_News_OK")
+                                                    ).ShowDialog();
+                }
+            }
+            catch { }
         }
         private void ApparelSkinColorBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -967,7 +959,6 @@ namespace BowieD.Unturned.NPCMaker
                 dialogues = dialogues,
                 vendors = vendors,
                 quests = quests,
-                newVersion = Version,
                 startDialogueId = Inputted_StartDialogueID,
                 hat = Inputted_Equip_Hat,
                 top = Inputted_Equip_Top,
@@ -1889,9 +1880,9 @@ namespace BowieD.Unturned.NPCMaker
             {
                 using (WebClient wc = new WebClient())
                 {
-                    string vers = await wc.DownloadStringTaskAsync("https://bowiestuff.at.ua/NPCMversion.txt");
-                    forceUpdateButton.IsEnabled = vers != Version.ToString();
-                    return vers != Version.ToString();
+                    string vers = await wc.DownloadStringTaskAsync("https://raw.githubusercontent.com/iBowie/publicfiles/master/npcmakerversion.txt");
+                    forceUpdateButton.IsEnabled = new Version(vers) > Version;
+                    return new Version(vers) > Version;
                 }
             }
             catch { }

@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Localization"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
-    <v:String x:Key="app_News_Text">+ Улучшение стиля тем```Хотите, чтобы программа поздравляла вас с днём рождения? Пожертвуйте больше 30 рублей и я сделаю это ^.^</v:String>
     <v:String x:Key="app_Title">NPC Maker для Unturned. Автор: BowieD</v:String>
     <v:String x:Key="app_Beta">Это Бета-версия программы. Возможны как ошибки, так и изменения в будущем. Если вы столкнулись с ошибкой или хотите сделать предложение - смотрите раздел "Обратная связь"</v:String>
     <v:String x:Key="app_Exit_UnsavedChanges_Title">Несохранённая работа</v:String>
@@ -10,7 +9,7 @@
     <v:String x:Key="app_Update_Available">Доступно обновление программы. Скачайте его с помощью руководства в Steam или нажав "Обновить программу"</v:String>
     <v:String x:Key="app_Update_Fail">Не удалось проверить на наличие обновлений.</v:String>
     <v:String x:Key="app_Update_Latest">У Вас уже установлена последняя версия программы.</v:String>
-    <v:String x:Key="app_News_BodyTitle">Новое в версии {0}!</v:String>
+    <v:String x:Key="app_News_BodyTitle">Приложение обновлено до версии {0}!</v:String>
     <v:String x:Key="app_News_Title">Что нового</v:String>
     <v:String x:Key="app_News_OK">Продолжить</v:String>
     <v:String x:Key="app_Analysis">Анализ...</v:String>
@@ -166,6 +165,7 @@
     <v:String x:Key="Condition_Kills_Zombie">Убить зомби</v:String>
     <v:String x:Key="Condition_Kills_Horde">Зачистить волны</v:String>
     <v:String x:Key="Condition_Kills_Animal">Убить животных</v:String>
+    <v:String x:Key="Condition_Kills_Player">Убить игроков</v:String>
     <v:String x:Key="Condition_Time_Of_Day">Время дня</v:String>
     <v:String x:Key="Condition_Player_Life_Health">Здоровье игрока</v:String>
     <v:String x:Key="Condition_Player_Life_Food">Сытость игрока</v:String>
@@ -317,8 +317,8 @@
     <v:String x:Key="vendor_BuyList">Покупает</v:String>
     <v:String x:Key="vendor_SellList">Продаёт</v:String>
     <v:String x:Key="vendor_Add">Добавить предмет</v:String>
-    <v:String x:Key="vendor_Item_Format_Buy">Тип: %itemType%, ID: %id%, Цена: %cost%</v:String>
-    <v:String x:Key="vendor_Item_Format_Sell">Тип: Предмет, ID: %id%, Цена: %cost%</v:String>
+    <v:String x:Key="vendor_Item_Format_Buy">%itemType%, %id% за %cost%</v:String>
+    <v:String x:Key="vendor_Item_Format_Sell">Предмет, %id% за %cost%</v:String>
     <v:String x:Key="vendorEditor_Edit_Conditions">Изменить условия</v:String>
     <v:String x:Key="vendorEditor_Save">Сохранить товар</v:String>
     

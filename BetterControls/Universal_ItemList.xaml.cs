@@ -12,8 +12,6 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
         {
             InitializeComponent();
             this.Value = input;
-            //mainTextBlock.Text = Value.ToString();
-            //mainTextBlock.ToolTip = Value.ToString();
             mainLabel.Content = Value;
             mainLabel.ToolTip = Value;
             this.Localizable = localizable;
@@ -83,9 +81,9 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                         }
                     }
                     Value = NewItem;
-                    mainLabel.Content = Value;
-                    mainLabel.ToolTip = Value;
                 }
+                mainLabel.Content = Value.ToString();
+                mainLabel.ToolTip = Value;
             }
         }
 

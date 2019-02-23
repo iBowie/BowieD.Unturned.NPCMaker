@@ -12,18 +12,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             guid = Guid.NewGuid().ToString("N");
         }
-
-        [XmlIgnore]
-        [Obsolete]
-        public int version;
-
-        private Version versionInfo = MainWindow.Version;
-        public Version newVersion
-        {
-            get => versionInfo;
-            set => versionInfo = value;
-        }
-
         public string editorName;
         public string displayName;
         public ushort id;

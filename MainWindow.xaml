@@ -383,22 +383,20 @@
                                 <Image Width="21" Height="{Binding Width}" Source="Resources/ICON_CANCEL.png"/>
                             </Button.Content>
                         </Button>
-                        <TextBlock  Grid.Row="1" TextAlignment="Center" Text="{DynamicResource vendor_BuyList}" Height="23" Margin="10,10,10,0" VerticalAlignment="Top"/>
-                        <Border Grid.Row="1" Margin="10,48,10,48" BorderThickness="2" BorderBrush="LightGray">
+                        <GroupBox Grid.Row="1" Margin="5" Header="{DynamicResource vendor_BuyList}">
                             <ScrollViewer>
                                 <StackPanel Name="vendorListBuyItems">
 
                                 </StackPanel>
                             </ScrollViewer>
-                        </Border>
-                        <TextBlock  Grid.Row="1" Grid.Column="1" TextAlignment="Center" Text="{DynamicResource vendor_SellList}" Height="23" Margin="10,10,10,0" VerticalAlignment="Top"/>
-                        <Border Grid.Row="1" Grid.Column="1" Margin="10,48,10,48" BorderThickness="2" BorderBrush="LightGray">
+                        </GroupBox>
+                        <GroupBox Grid.Row="1" Grid.Column="1" Margin="5" Header="{DynamicResource vendor_SellList}">
                             <ScrollViewer>
                                 <StackPanel Name="vendorListSellItems">
-
+                                    
                                 </StackPanel>
                             </ScrollViewer>
-                        </Border>
+                        </GroupBox>
                         <Button Click="AddVendorItem_Click" Content="{DynamicResource vendor_Add}" Margin="10,10,10,10" VerticalAlignment="Bottom"/>
                     </Grid>
                 </TabItem>
@@ -435,16 +433,26 @@
                                 <Image Width="21" Height="{Binding Width}" Source="Resources/ICON_CANCEL.png"/>
                             </Button.Content>
                         </Button>
-                        <Border Grid.Column="1" Grid.Row="1" BorderBrush="LightGray" BorderThickness="2" Margin="10,40,10,40">
-                            <StackPanel Name="listQuestConditions" />
-                        </Border>
-                        <Border Grid.Column="2" Grid.Row="1" BorderBrush="LightGray" BorderThickness="2" Margin="10,40,10,40">
-                            <StackPanel Name="listQuestRewards" />
-                        </Border>
-                        <TextBlock Grid.Column="1" Grid.Row="1" Height="30" TextAlignment="Center" Margin="10,10,10,0" TextWrapping="Wrap" Text="{DynamicResource quest_Conditions}" VerticalAlignment="Top"/>
-                        <TextBlock Grid.Column="2" Grid.Row="1" Height="30" TextAlignment="Center" Margin="10,10,10,0" TextWrapping="Wrap" Text="{DynamicResource quest_Rewards}" VerticalAlignment="Top"/>
-                        <Button Grid.Column="1" Grid.Row="1" Click="AddQuestCondition_Click" Height="23" Content="{DynamicResource quest_Add_Condition}" Margin="10,0,10,10" VerticalAlignment="Bottom"/>
-                        <Button Grid.Column="2" Grid.Row="1" Click="AddQuestReward_Click" Height="23" Content="{DynamicResource quest_Add_Reward}" Margin="10,0,10,10" VerticalAlignment="Bottom"/>
+                        <Grid Grid.Column="1" Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <GroupBox Header="{DynamicResource quest_Conditions}" Margin="10">
+                                <StackPanel Name="listQuestConditions" />
+                            </GroupBox>
+                            <Button Grid.Column="1" Grid.Row="1" Click="AddQuestCondition_Click" Height="23" Content="{DynamicResource quest_Add_Condition}" Margin="10" VerticalAlignment="Bottom"/>
+                        </Grid>
+                        <Grid Grid.Column="2" Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <GroupBox Header="{DynamicResource quest_Rewards}" Margin="10">
+                                <StackPanel Name="listQuestRewards" />
+                            </GroupBox>
+                            <Button Grid.Row="1" Click="AddQuestReward_Click" Height="23" Content="{DynamicResource quest_Add_Reward}" Margin="10" VerticalAlignment="Bottom"/>
+                        </Grid>
                     </Grid>
                 </TabItem>
                 <TabItem Name="mistakeListTab" Header="{DynamicResource tab_Mistakes}">

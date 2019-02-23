@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Localization"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
-    <v:String x:Key="app_News_Text">+ Improved theme styles```Also if you want, app can say "Happy Birthday, 'your nickname'!" at your birthday! Donate more than 0.5$ and i will do it ^.^</v:String>
     <v:String x:Key="app_Title">NPC Maker for Unturned by BowieD</v:String>
     <v:String x:Key="app_Beta">This app is in Beta. All errors can happen. Also changes can happen. If you encountered an error or want to do a suggestion - take a look into "Feedback". App developer's native language is not English. If you see a mistake in the localization contact me.</v:String>
     <v:String x:Key="app_Exit_UnsavedChanges_Title">Unsaved work</v:String>
@@ -10,7 +9,7 @@
     <v:String x:Key="app_Update_Available">Update available to download! You can get it either using Steam Guide or by clicking on "Force Update" button.</v:String>
     <v:String x:Key="app_Update_Fail">Can't check for updates.</v:String>
     <v:String x:Key="app_Update_Latest">You already have latest version of the app.</v:String>
-    <v:String x:Key="app_News_BodyTitle">New features in {0} version!</v:String>
+    <v:String x:Key="app_News_BodyTitle">App updated to version {0}</v:String>
     <v:String x:Key="app_News_Title">What's New</v:String>
     <v:String x:Key="app_News_OK">Continue</v:String>
     <v:String x:Key="app_Analysis">Analysing...</v:String>
@@ -165,6 +164,7 @@
     <v:String x:Key="Condition_Kills_Zombie">Kills Zombie</v:String>
     <v:String x:Key="Condition_Kills_Horde">Kills Horde</v:String>
     <v:String x:Key="Condition_Kills_Animal">Kills Animals</v:String>
+    <v:String x:Key="Condition_Kills_Player">Kills Player</v:String>
     <v:String x:Key="Condition_Time_Of_Day">Time of Day</v:String>
     <v:String x:Key="Condition_Player_Life_Health">Player Health</v:String>
     <v:String x:Key="Condition_Player_Life_Food">Player Food</v:String>

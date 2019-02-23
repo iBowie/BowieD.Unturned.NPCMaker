@@ -24,7 +24,6 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             this.Width *= scale;
             baseHeight = Height;
             heightDelta *= scale;
-            //elementHeight *= scale;
             gridScale.ScaleX = scale;
             gridScale.ScaleY = scale;
             Condition startCondition = condition ?? new Condition();
@@ -35,6 +34,11 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             SelectConditionType(startCondition.Type);
             switch (startCondition.Type)
             {
+                case Condition_Type.Kills_Player:
+                    SetMainValue(1, (startCondition as Kills_Players_Cond).ID);
+                    SetMainValue(3, (startCondition as Kills_Players_Cond).Value);
+                    SetMainValue(5, startCondition.Reset);
+                    break;
                 case Condition_Type.Experience:
                     SetMainValue(1, (startCondition as Experience_Cond).Logic);
                     SetMainValue(3, (startCondition as Experience_Cond).Value);
@@ -157,6 +161,17 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             int mult = 0;
             switch (newSelection)
             {
+                case Condition_Type.Kills_Player:
+                    mult = 3;
+
+                    AddLabel((string)TryFindResource("conditionEditor_ID"));
+                    AddTextBox(5);
+
+                    AddLabel((string)TryFindResource("conditionEditor_Value"));
+                    AddTextBox(5);
+
+                    AddResetLabelAndCheckbox("Kills_Player");
+                    break;
                 case Condition_Type.Experience:
                     mult = 3;
 
@@ -538,6 +553,15 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                             Second = ulong.Parse(input[1].ToString())
                         };
                         Result = c15;
+                        break;
+                    case Condition_Type.Kills_Player:
+                        Kills_Players_Cond c16 = new Kills_Players_Cond()
+                        {
+                            ID = ushort.Parse(input[0].ToString()),
+                            Value = short.Parse(input[1].ToString()),
+                            Reset = (bool)input[2]
+                        };
+                        Result = c16;
                         break;
                 }
                 if (viewLocalizationField)

@@ -39,7 +39,6 @@ namespace BowieD.Unturned.NPCMaker.Examples
             this.startDialogueId = save.startDialogueId;
             this.top = save.top;
             this.vendors = save.vendors;
-            this.newVersion = save.newVersion;
             this.vest = save.vest;
             this.visibilityConditions = save.visibilityConditions;
         }
