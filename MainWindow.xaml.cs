@@ -8,6 +8,7 @@ using System.Xml;
 using System.Linq;
 using System.Media;
 using System.Windows;
+using System.Text;
 using System.Net;
 using System.Windows.Media;
 using System.Globalization;
@@ -18,6 +19,7 @@ using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
+using Microsoft.Win32;
 #endregion
 #region LOCAL USINGS
 using BowieD.Unturned.NPCMaker.NPC;
@@ -26,9 +28,7 @@ using BowieD.Unturned.NPCMaker.BetterForms;
 using BowieD.Unturned.NPCMaker.BetterControls;
 using BowieD.Unturned.NPCMaker.Examples;
 #endregion
-using Microsoft.Win32;
 using DiscordRPC;
-using System.Text;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -375,7 +375,7 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(0, 9, 1, 0);
+        public static Version Version => new Version(0, 9, 1, 1);
         #endregion
         #region STATIC
         public static MainWindow Instance;
@@ -1882,7 +1882,7 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     string vers = await wc.DownloadStringTaskAsync("https://raw.githubusercontent.com/iBowie/publicfiles/master/npcmakerversion.txt");
                     forceUpdateButton.IsEnabled = new Version(vers) > Version;
-                    return new Version(vers) > Version;
+                    return new Version(vers) > Version; // memory leak
                 }
             }
             catch { }

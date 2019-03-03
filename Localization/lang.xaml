@@ -345,6 +345,12 @@
     <v:String x:Key="select_Vendor">Vendor</v:String>
     <v:String x:Key="select_Quest">Quest</v:String>
 
+    <v:String x:Key="deep_dialogue">Dialogue conflicting in [{0}]</v:String>
+    <v:String x:Key="deep_vendor">Vendors conflicting in [{0}]</v:String>
+    <v:String x:Key="deep_char">Character error. ID [{0}] already used.</v:String>
+    <v:String x:Key="deep_item">Item [{0}] not found.</v:String>
+    <v:String x:Key="deep_vehicle">Vehicle [{0}] not found.</v:String>
+
     <v:String x:Key="mistakes_DeepAnalysis">Deep Analysis [BETA]</v:String>
     <v:String x:Key="mistakes_DeepAnalysis_Tooltip">Check all game ID's and id's, that you have.</v:String>
     <v:String x:Key="mistakes_DA_SelectGameFolder">Select Game Folder</v:String>
