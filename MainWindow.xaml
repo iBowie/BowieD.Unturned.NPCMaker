@@ -71,63 +71,10 @@
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Header="{DynamicResource menu_Options}">
-                    <MenuItem Header="{DynamicResource menu_Themes}">
-                        <MenuItem Header="{DynamicResource menu_Theme_Legacy}" Click="Theme_SetupLegacy"/>
-                        <MenuItem Header="{DynamicResource menu_Theme_LightGreen}" Click="Theme_SetupLightGreen"/>
-                        <MenuItem Header="{DynamicResource menu_Theme_DarkGreen}" Click="Theme_SetupDarkGreen"/>
-                        <MenuItem Header="{DynamicResource menu_Theme_LightPink}" Click="Theme_SetupLightPink"/>
-                        <MenuItem Header="{DynamicResource menu_Theme_DarkPink}" Click="Theme_SetupDarkPink"/>
-                        <MenuItem Header="{DynamicResource menu_Theme_LightRed}" Click="Theme_SetupLightRed"/>
-                        <MenuItem Header="{DynamicResource menu_Theme_DarkRed}" Click="Theme_SetupDarkRed"/>
-                    </MenuItem>
-                    <MenuItem Header="{DynamicResource menu_AutoSave}">
-                        <MenuItem.Icon>
-                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_SAVE.png"/>
-                        </MenuItem.Icon>
-                        <MenuItem Click="AutosaveNPCCheckbox_Click" Name="autosaveNPCCheckbox" Header="{DynamicResource menu_AutoSave_NPC}"/>
-                        <MenuItem Click="AutosaveDialoguesCheckbox_Click" Name="autosaveDialoguesCheckbox" Header="{DynamicResource menu_AutoSave_Dialogue}"/>
-                        <MenuItem Click="AutosaveVendorsCheckbox_Click" Name="autosaveVendorsCheckbox" Header="{DynamicResource menu_AutoSave_Vendor}"/>
-                        <MenuItem Click="AutosaveQuestsCheckbox_Click" Name="autosaveQuestsCheckbox" Header="{DynamicResource menu_AutoSave_Quest}"/>
-                    </MenuItem>
-                    <MenuItem Header="{DynamicResource menu_Discord}" Name="discordRichPresenceMenu" Click="DiscordRichPresenceMenu_Click"/>
-                    <MenuItem Header="{DynamicResource menu_Scale}" Name="scaleMenuItem">
-                        <MenuItem.Icon>
-                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_SCALE.png"/>
-                        </MenuItem.Icon>
-                        <MenuItem Click="ScaleUpdate" Tag="0.75" Header="75%"/>
-                        <MenuItem Click="ScaleUpdate" Tag="1" Header="100%"/>
-                        <MenuItem Click="ScaleUpdate" Tag="1.25" Header="125%"/>
-                        <MenuItem Click="ScaleUpdate" Tag="1.5" Header="150%"/>
-                        <MenuItem Click="ScaleUpdate" Tag="2" Header="200%"/>
-                    </MenuItem>
-                    <MenuItem Header="{DynamicResource menu_Language}" Name="languageMenuItem">
-                        <MenuItem.Icon>
-                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_CHAT.png"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="{DynamicResource menu_WhatsNew}" Click="WhatsNew_Menu_Click">
-                        <MenuItem.Icon>
-                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_QUESTION.png"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Name="checkForUpdatesButton" Header="{DynamicResource menu_CheckForUpdates}" Click="CheckForUpdates_Click">
-                        <MenuItem.Icon>
-                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_QUESTION.png"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem IsEnabled="False" Name="forceUpdateButton" Header="{DynamicResource menu_Update}" Click="ForceUpdate_Click">
-                        <MenuItem.Icon>
-                            <Image Width="16" Height="{Binding Width}" Source="Resources/BAD_ICON_UPDATE.png"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Click="AboutMenu_Click" Header="{DynamicResource menu_About}">
-                        <MenuItem.Icon>
-                            <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_INFO.png"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Click="Donate_Click" Header="{DynamicResource menu_Donate}"/>
+                <MenuItem Header="{DynamicResource menu_Options}" Click="Options_Click"/>
+                <MenuItem Header="{DynamicResource menu_WhatsNew}" Click="WhatsNew_Menu_Click"/>
+                <MenuItem Name="checkForUpdatesButton" Header="{DynamicResource menu_CheckForUpdates}" Click="CheckForUpdates_Click"/>
+                <MenuItem IsEnabled="False" Name="forceUpdateButton" Header="{DynamicResource menu_Update}" Click="ForceUpdate_Click"/>
                 <MenuItem Header="{DynamicResource menu_Communication}">
                     <MenuItem Click="FeedbackItemClick" Tag="https://steamcommunity.com/profiles/76561198085825110" Header="{DynamicResource feedback_Steam}">
                         <MenuItem.Icon>
@@ -145,6 +92,7 @@
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
+                <MenuItem Click="AboutMenu_Click" Header="{DynamicResource menu_About}"/>
             </Menu>
             <TabControl Grid.Row="1" Background="Transparent" Padding="-1" Name="mainTabControl" SelectedIndex="0" Margin="0,5,0,0" SelectionChanged="TabControl_SelectionChanged">
                 <TabItem Name="generalInfoTab" Header="{DynamicResource tab_General}">
@@ -159,6 +107,7 @@
                         <bettercontrols:NumberBox x:Name="txtStartDialogueID" MaxValue="65535" ToolTip="{DynamicResource general_StartDialogue_Tooltip}" HorizontalAlignment="Left" Height="23" Margin="10,134,0,0" VerticalAlignment="Top" Width="128"/>
                         <TextBlock  HorizontalAlignment="Left" Margin="143,138,0,0" TextWrapping="Wrap" Text="{DynamicResource general_StartDialogue}" VerticalAlignment="Top"/>
                         <Button Click="Char_EditConditions_Button_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource general_Conditions}" Margin="10,162,0,0" Width="212" Height="28"/>
+                        <Button Click="RegenerateGuids_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource general_Regenerate}" Margin="10,195,0,0" MinWidth="212" Height="28"/>
                     </Grid>
                 </TabItem>
                 <TabItem Name="apparelTab" Header="{DynamicResource tab_Apparel}">

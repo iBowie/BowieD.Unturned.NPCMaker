@@ -73,7 +73,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                     asset.WriteLine();
                     local.WriteLine();
-                    asset.WriteLine($"GUID {save.guid}");
+                    if (Config.Configuration.Properties.generateGuids)
+                        asset.WriteLine($"GUID {save.guid}");
                     asset.WriteLine($"ID {save.id}");
                     asset.WriteLine($"Type NPC");
                     if (save.top > 0)
@@ -143,7 +144,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                         asset.WriteLine();
                         local.WriteLine();
-                        asset.WriteLine($"GUID {dialogue.guid}");
+                        if (Config.Configuration.Properties.generateGuids)
+                            asset.WriteLine($"GUID {dialogue.guid}");
                         asset.WriteLine($"Type Dialogue");
                         asset.WriteLine($"ID {dialogue.id}");
 
@@ -248,7 +250,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                         asset.WriteLine();
                         local.WriteLine();
-                        asset.WriteLine($"GUID {vendor.guid}");
+                        if (Config.Configuration.Properties.generateGuids)
+                            asset.WriteLine($"GUID {vendor.guid}");
                         asset.WriteLine($"Type Vendor");
                         asset.WriteLine($"ID {vendor.id}");
 
@@ -317,7 +320,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                         asset.WriteLine();
                         local.WriteLine();
-                        asset.WriteLine($"GUID {quest.guid}");
+                        if (Config.Configuration.Properties.generateGuids)
+                            asset.WriteLine($"GUID {quest.guid}");
                         asset.WriteLine($"Type Quest");
                         asset.WriteLine($"ID {quest.id}");
 

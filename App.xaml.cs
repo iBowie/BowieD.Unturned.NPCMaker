@@ -4,7 +4,6 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 
 namespace BowieD.Unturned.NPCMaker
@@ -32,20 +31,6 @@ namespace BowieD.Unturned.NPCMaker
             languages.Add(new CultureInfo("en-US"));
             languages.Add(new CultureInfo("ru-RU"));
             //languages.Add(new CultureInfo("es-ES"));
-            #region PROPERTIES TO NEW
-            if (!Config.Configuration.ConfigExist)
-            {
-                try
-                {
-                    Config.Configuration.Force(Config.Configuration.ConvertFromOldToNew);
-                }
-                catch
-                {
-                    Config.Configuration.LoadDefaults();
-                }
-                Config.Configuration.Save();
-            }
-            #endregion
             Config.Configuration.Load();
             if (Config.Configuration.Properties.firstLaunch)
             {

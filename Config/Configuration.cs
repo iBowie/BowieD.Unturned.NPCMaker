@@ -11,7 +11,6 @@ namespace BowieD.Unturned.NPCMaker.Config
         public class CFG
         {
             public bool experimentalFeatures;
-            public bool[] autosaveParams;
             public string[] userColors;
             public string[] recent;
             public double scale;
@@ -19,6 +18,8 @@ namespace BowieD.Unturned.NPCMaker.Config
             public string Language;
             public bool enableDiscord;
             public string theme;
+            public bool generateGuids;
+            public byte autosaveOption;
 
             [XmlIgnore]
             public CultureInfo language => new CultureInfo(Language ?? "en-US");
@@ -27,11 +28,12 @@ namespace BowieD.Unturned.NPCMaker.Config
             {
                 firstLaunch = true;
                 scale = 1;
-                autosaveParams = new bool[4];
                 userColors = new string[0];
                 recent = new string[0];
                 enableDiscord = true;
                 theme = "DarkGreen";
+                generateGuids = true;
+                autosaveOption = 1;
             }
         }
 
@@ -74,16 +76,5 @@ namespace BowieD.Unturned.NPCMaker.Config
         {
             Properties = newConfig;
         }
-
-        public static CFG ConvertFromOldToNew => new CFG()
-        {
-            autosaveParams = NPCMaker.Properties.Settings.Default.autosaveParams,
-            experimentalFeatures = NPCMaker.Properties.Settings.Default.experimentalFeatures,
-            firstLaunch = NPCMaker.Properties.Settings.Default.firstLaunch,
-            Language = NPCMaker.Properties.Settings.Default.language.Name,
-            recent = NPCMaker.Properties.Settings.Default.recent,
-            scale = NPCMaker.Properties.Settings.Default.scale,
-            userColors = NPCMaker.Properties.Settings.Default.userColors
-        };
     }
 }

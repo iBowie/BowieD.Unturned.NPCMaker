@@ -1,7 +1,6 @@
 ﻿#define BETA
 //#define RELEASE
 
-#region SYSTEM USINGS
 using System;
 using System.IO;
 using System.Xml;
@@ -20,15 +19,13 @@ using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
 using Microsoft.Win32;
-#endregion
-#region LOCAL USINGS
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.BetterForms;
 using BowieD.Unturned.NPCMaker.BetterControls;
 using BowieD.Unturned.NPCMaker.Examples;
-#endregion
 using DiscordRPC;
+using System.Windows.Threading;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -38,8 +35,13 @@ namespace BowieD.Unturned.NPCMaker
         {
             InitializeComponent();
             Instance = this;
-            Config.Configuration.Load();
             Config.Configuration.Save();
+            #region SCALE
+            mainGridScale.ScaleX = Config.Configuration.Properties.scale;
+            mainGridScale.ScaleY = Config.Configuration.Properties.scale;
+            Width = MinWidth * Config.Configuration.Properties.scale;
+            Height = MinHeight * Config.Configuration.Properties.scale;
+            #endregion
             #region THEME SETUP
             switch (Config.Configuration.Properties.theme ?? "Legacy")
             {
@@ -67,19 +69,6 @@ namespace BowieD.Unturned.NPCMaker
             }
             #endregion
             #region LOCALIZATION
-            App.LanguageChanged += App_LanguageChanged;
-            languageMenuItem.Items.Clear();
-            foreach (var lang in App.Languages)
-            {
-                MenuItem menuLang = new MenuItem
-                {
-                    Header = lang.NativeName,
-                    Tag = lang,
-                    IsChecked = lang.Equals(App.Language)
-                };
-                menuLang.Click += ChangeLanguageClick;
-                languageMenuItem.Items.Add(menuLang);
-            }
             App.Language = Config.Configuration.Properties.language ?? new CultureInfo("en-US");
             #endregion
             #region OPEN_WITH
@@ -112,17 +101,6 @@ namespace BowieD.Unturned.NPCMaker
                 Config.Configuration.Properties.recent = new string[0];
             Config.Configuration.Properties.recent = Config.Configuration.Properties.recent.Where(d => File.Exists(d)).ToArray();
             RecentList.ItemsSource = Config.Configuration.Properties.recent;
-            #endregion
-            #region SCALE SETUP
-            foreach (UIElement ui in scaleMenuItem.Items)
-            {
-                var w = (ui as MenuItem);
-                if (double.Parse(w.Tag.ToString().Replace('.', ',')) == Config.Configuration.Properties.scale)
-                {
-                    ScaleUpdate(w, null);
-                    break;
-                }
-            }
             #endregion
             #region APPAREL SETUP
             faceImageIndex.Maximum = faceAmount - 1;
@@ -241,27 +219,46 @@ namespace BowieD.Unturned.NPCMaker
             catch { }
             #endregion
             #region AUTOSAVE INIT
-            autosaveNPCCheckbox.IsChecked = Autosave_NPC_Enabled;
-            autosaveDialoguesCheckbox.IsChecked = Autosave_Dialogues_Enabled;
-            autosaveVendorsCheckbox.IsChecked = Autosave_Vendor_Enabled;
-            autosaveQuestsCheckbox.IsChecked = Autosave_Quest_Enabled;
+            if (Config.Configuration.Properties.autosaveOption > 0)
+            {
+                AutosaveTimer = new DispatcherTimer();
+                switch (Config.Configuration.Properties.autosaveOption)
+                {
+                    case 1:
+                        AutosaveTimer.Interval = new TimeSpan(0, 5, 0);
+                        break;
+                    case 2:
+                        AutosaveTimer.Interval = new TimeSpan(0, 10, 0);
+                        break;
+                    case 3:
+                        AutosaveTimer.Interval = new TimeSpan(0, 15, 0);
+                        break;
+                    case 4:
+                        AutosaveTimer.Interval = new TimeSpan(0, 30, 0);
+                        break;
+                    case 5:
+                        AutosaveTimer.Interval = new TimeSpan(1, 0, 0);
+                        break;
+                }
+                AutosaveTimer.Tick += AutosaveTimer_Tick;
+                AutosaveTimer.Start();
+            }
             #endregion
             #region VERSION SPECIFIC CODE
-#if BETA
-            //MessageBox.Show((string)TryFindResource("app_Beta"));
+            #if BETA
             DoNotification((string)TryFindResource("app_Beta"));
-#endif
-#if !BETA
+            #endif
+            #if !BETA
             betaOverlayText.Visibility = Visibility.Collapsed;
-#endif
-#if !DEBUG
+            #endif
+            #if !DEBUG
             debugOverlayText.Visibility = Visibility.Collapsed;
-#endif
+            #endif
             #endregion
             #region EXAMPLE DEBUG
-#if !DEBUG
+            #if !DEBUG
             saveAsExampleButton.Visibility = Visibility.Collapsed;
-#endif
+            #endif
             #endregion
             #region read cache
             try
@@ -279,7 +276,6 @@ namespace BowieD.Unturned.NPCMaker
             Config.Configuration.Properties.firstLaunch = false;
             isSaved = true;
             #region DISCORD
-            discordRichPresenceMenu.IsChecked = Config.Configuration.Properties.enableDiscord;
             if (Config.Configuration.Properties.enableDiscord)
             {
                 if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "DiscordRPC.dll") && File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Newtonsoft.Json.dll"))
@@ -290,6 +286,7 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             #endregion
+            DoNotification((string)TryFindResource("app_Free"));
         }
         #region THEME EVENTS
         private void Theme_SetupLegacy(object sender, RoutedEventArgs e)
@@ -375,32 +372,15 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(0, 9, 1, 1);
+        public static Version Version => new Version(0, 9, 2, 0);
         #endregion
         #region STATIC
         public static MainWindow Instance;
         public static NPCSave CurrentNPC { get; set; }
         public static object DiscordWorker { get; set; }
+        public static DispatcherTimer AutosaveTimer { get; set; }
 
         public static bool IsMetro { get; set; }
-        #endregion
-        #region LOCALIZATION EVENTS
-        private void ChangeLanguageClick(object sender, RoutedEventArgs e)
-        {
-            if (sender is MenuItem mi && mi.Tag is CultureInfo lang)
-            {
-                App.Language = lang;
-            }
-        }
-        private void App_LanguageChanged(object sender, EventArgs e)
-        {
-            CultureInfo currLang = App.Language;
-            foreach (MenuItem i in languageMenuItem.Items)
-            {
-                CultureInfo ci = i.Tag as CultureInfo;
-                i.IsChecked = ci != null && ci.Equals(currLang);
-            }
-        }
         #endregion
         #region CURRENT NPC
         public static string saveFile = "";
@@ -414,13 +394,16 @@ namespace BowieD.Unturned.NPCMaker
         #region SAVE_LOAD
         public void Save(bool asExample = false)
         {
-            #if !DEBUG
+#if !DEBUG
             if ((CurrentNPC?.IsReadOnly) ?? false)
             {
                 DoNotification((string)TryFindResource("notify_ReadOnly"));
                 return;
             }
-            #endif
+#endif
+            Dialogue_SaveButtonClick(null, null);
+            SaveVendor_Click(null, null);
+            SaveQuest_Click(null, null);
             if (saveFile == null || saveFile == "")
             {
                 SaveFileDialog sfd = new SaveFileDialog
@@ -523,11 +506,6 @@ namespace BowieD.Unturned.NPCMaker
             {
                 return true;
             }
-            if (Autosave_NPC_Enabled)
-            {
-                Save();
-                return true;
-            }
             var result = MessageBox.Show((string)TryFindResource("app_Exit_UnsavedChanges_Text"), (string)TryFindResource("app_Exit_UnsavedChanges_Title"), MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
             if (result == MessageBoxResult.Yes)
             {
@@ -558,25 +536,36 @@ namespace BowieD.Unturned.NPCMaker
             }
             catch { return false; }
         }
-
-        private void AutosaveNPCCheckbox_Click(object sender, RoutedEventArgs e)
-        {
-            Autosave_NPC_Enabled = !Autosave_NPC_Enabled;
-        }
-        private void AutosaveDialoguesCheckbox_Click(object sender, RoutedEventArgs e)
-        {
-            Autosave_Dialogues_Enabled = !Autosave_Dialogues_Enabled;
-        }
-        private void AutosaveVendorsCheckbox_Click(object sender, RoutedEventArgs e)
-        {
-            Autosave_Vendor_Enabled = !Autosave_Vendor_Enabled;
-        }
-        private void AutosaveQuestsCheckbox_Click(object sender, RoutedEventArgs e)
-        {
-            Autosave_Quest_Enabled = !Autosave_Quest_Enabled;
-        }
-#endregion
+        #endregion
         #region EVENTS
+        private void RegenerateGuids_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (NPCDialogue d in CurrentNPC?.dialogues)
+            {
+                d.guid = Guid.NewGuid().ToString("N");
+            }
+            foreach (NPCVendor v in CurrentNPC?.vendors)
+            {
+                v.guid = Guid.NewGuid().ToString("N");
+            }
+            foreach (NPCQuest q in CurrentNPC?.quests)
+            {
+                q.guid = Guid.NewGuid().ToString("N");
+            }
+            DoNotification((string)TryFindResource("general_Regenerated"));
+        }
+        private void AutosaveTimer_Tick(object sender, EventArgs e)
+        {
+            AutosaveTimer.Stop();
+            if (saveFile?.Length > 0)
+                Save();
+            AutosaveTimer.Start();
+        }
+        private void Options_Click(object sender, RoutedEventArgs e)
+        {
+            Config.ConfigWindow cw = new Config.ConfigWindow();
+            cw.ShowDialog();
+        }
         private void SaveAsExampleButton_Click(object sender, RoutedEventArgs e)
         {
             Save(true);
@@ -586,10 +575,6 @@ namespace BowieD.Unturned.NPCMaker
             Universal_ListView ulv = new Universal_ListView(visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
             ulv.ShowDialog();
             visibilityConditions = ulv.Values.Cast<NPC.Condition>().ToList();
-        }
-        private void Donate_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show((string)TryFindResource("menu_Donate_Out"));
         }
         private void RandomColor_Click(object sender, RoutedEventArgs e)
         {
@@ -758,27 +743,13 @@ namespace BowieD.Unturned.NPCMaker
                 if (!(res == MessageBoxResult.OK || res == MessageBoxResult.Yes))
                     return;
             }
-            if (Autosave_Dialogues_Enabled && CurrentDialogue.id > 0)
-                Dialogue_SaveButtonClick(null, null);
-            if (Autosave_Quest_Enabled && CurrentQuest.id > 0)
-                SaveQuest_Click(null, null);
-            if (Autosave_Vendor_Enabled && CurrentVendor.id > 0)
-                SaveVendor_Click(null, null);
-            if (Autosave_NPC_Enabled && saveFile?.Length > 0)
-                Save();
+            Save();
             Export_ExportWindow eew = new Export_ExportWindow(AppDomain.CurrentDomain.BaseDirectory + $@"results\{Inputted_EditorName}\");
             eew.DoActions(ConvertCurrentStateToNPC());
         }
         private void SaveClick(object sender, RoutedEventArgs e)
         {
             Save();
-        }
-        private void DiscordRichPresenceMenu_Click(object sender, RoutedEventArgs e)
-        {
-            (sender as MenuItem).IsChecked = !(sender as MenuItem).IsChecked;
-            Config.Configuration.Properties.enableDiscord = (sender as MenuItem).IsChecked;
-            Config.Configuration.Save();
-            DoNotification((string)TryFindResource("menu_Discord_Click"));
         }
         private void SaveAsClick(object sender, RoutedEventArgs e)
         {
@@ -868,20 +839,6 @@ namespace BowieD.Unturned.NPCMaker
                     break;
             }
             (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
-        }
-        private void ScaleUpdate(object sender, RoutedEventArgs e)
-        {
-            double d = double.Parse((sender as MenuItem).Tag.ToString().Replace('.', ','));
-            mainGridScale.ScaleX = d;
-            mainGridScale.ScaleY = d;
-            Width = MinWidth * d;
-            Height = MinHeight * d;
-            foreach (UIElement ui in scaleMenuItem.Items)
-            {
-                (ui as MenuItem).IsChecked = false;
-            }
-            (sender as MenuItem).IsChecked = true;
-            Config.Configuration.Properties.scale = d;
         }
         protected override void OnClosing(CancelEventArgs e)
         {
@@ -1174,76 +1131,6 @@ namespace BowieD.Unturned.NPCMaker
                 tertiaryIdBox.Value = value;
             }
         }
-
-        // 0 - NPC
-        // 1 - Dialogues
-        // 2 - Vendor
-        // 3 - Quest
-
-        public bool Autosave_NPC_Enabled
-        {
-            get
-            {
-                if (Config.Configuration.Properties.autosaveParams?.Length != 4)
-                    Config.Configuration.Properties.autosaveParams = new bool[4];
-                return Config.Configuration.Properties.autosaveParams[0];
-            }
-            set
-            {
-                if (Config.Configuration.Properties.autosaveParams?.Length != 4)
-                    Config.Configuration.Properties.autosaveParams = new bool[4];
-                Config.Configuration.Properties.autosaveParams[0] = value;
-                autosaveNPCCheckbox.IsChecked = value;
-            }
-        }
-        public bool Autosave_Dialogues_Enabled
-        {
-            get
-            {
-                if (Config.Configuration.Properties.autosaveParams?.Length != 4)
-                    Config.Configuration.Properties.autosaveParams = new bool[4];
-                return Config.Configuration.Properties.autosaveParams[1];
-            }
-            set
-            {
-                if (Config.Configuration.Properties.autosaveParams?.Length != 4)
-                    Config.Configuration.Properties.autosaveParams = new bool[4];
-                Config.Configuration.Properties.autosaveParams[1] = value;
-                autosaveDialoguesCheckbox.IsChecked = value;
-            }
-        }
-        public bool Autosave_Vendor_Enabled
-        {
-            get
-            {
-                if (Config.Configuration.Properties.autosaveParams?.Length != 4)
-                    Config.Configuration.Properties.autosaveParams = new bool[4];
-                return Config.Configuration.Properties.autosaveParams[2];
-            }
-            set
-            {
-                if (Config.Configuration.Properties.autosaveParams?.Length != 4)
-                    Config.Configuration.Properties.autosaveParams = new bool[4];
-                Config.Configuration.Properties.autosaveParams[2] = value;
-                autosaveVendorsCheckbox.IsChecked = value;
-            }
-        }
-        public bool Autosave_Quest_Enabled
-        {
-            get
-            {
-                if (Config.Configuration.Properties.autosaveParams?.Length != 4)
-                    Config.Configuration.Properties.autosaveParams = new bool[4];
-                return Config.Configuration.Properties.autosaveParams[3];
-            }
-            set
-            {
-                if (Config.Configuration.Properties.autosaveParams?.Length != 4)
-                    Config.Configuration.Properties.autosaveParams = new bool[4];
-                Config.Configuration.Properties.autosaveParams[3] = value;
-                autosaveQuestsCheckbox.IsChecked = value;
-            }
-        }
 #endregion
         #region MISTAKES
         public void FindMistakes()
@@ -1380,16 +1267,16 @@ namespace BowieD.Unturned.NPCMaker
             var dil = CurrentDialogue;
             if (dil.id == 0)
             {
-                DoNotification((string)TryFindResource("dialogue_ID_Zero"));
+                if (sender != null)
+                    DoNotification((string)TryFindResource("dialogue_ID_Zero"));
                 return;
             }
             var o = dialogues.Where(d => d.id == dil.id);
             if (o.Count() > 0)
                 dialogues.Remove(o.ElementAt(0));
             dialogues.Add(CurrentDialogue);
-            DoNotification((string)TryFindResource("notify_Dialogue_Saved"));
-            if (Autosave_NPC_Enabled && saveFile?.Length > 0)
-                Save();
+            if (sender != null)
+                DoNotification((string)TryFindResource("notify_Dialogue_Saved"));
         }
         private void Dialogue_ClearCurrentButtonClick(object sender, RoutedEventArgs e)
         {
@@ -1423,8 +1310,7 @@ namespace BowieD.Unturned.NPCMaker
             var ulv = new Universal_ListView(dialogues.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Dialogue, false)).ToList(), Universal_ItemList.ReturnType.Dialogue);
             if (ulv.ShowDialog() == true)
             {
-                if (Autosave_Dialogues_Enabled && CurrentDialogue.id > 0)
-                    Dialogue_SaveButtonClick(sender, e);
+                Dialogue_SaveButtonClick(sender, null);
                 CurrentDialogue = ulv.SelectedValue as NPCDialogue;
             }
             dialogues = ulv.Values.Cast<NPCDialogue>().ToList();
@@ -1440,8 +1326,6 @@ namespace BowieD.Unturned.NPCMaker
                     ind = k + 1;
             }
             messagePagesGrid.Children.Insert(ind, o);
-            if (Autosave_Dialogues_Enabled && CurrentDialogue.id > 0)
-                Dialogue_SaveButtonClick(sender, e);
         }
         private void Dialogue_AddReplyClick(object sender, RoutedEventArgs e)
         {
@@ -1463,8 +1347,6 @@ namespace BowieD.Unturned.NPCMaker
                     dr.UpdateOrderButtons();
                 }
             }
-            if (Autosave_Dialogues_Enabled && CurrentDialogue.id > 0)
-                Dialogue_SaveButtonClick(sender, e);
         }
         private void Dialogue_RemoveReplyClick(object sender, RoutedEventArgs e)
         {
@@ -1477,15 +1359,11 @@ namespace BowieD.Unturned.NPCMaker
                     dr.UpdateOrderButtons();
                 }
             }
-            if (Autosave_Dialogues_Enabled && CurrentDialogue.id > 0)
-                Dialogue_SaveButtonClick(sender, e);
         }
         private void Dialogue_RemoveMessageClick(object sender, RoutedEventArgs e)
         {
             Dialogue_Message pag = Util.FindParent<Dialogue_Message>(sender as Button);
             messagePagesGrid.Children.Remove(pag);
-            if (Autosave_Dialogues_Enabled && CurrentDialogue.id > 0)
-                Dialogue_SaveButtonClick(sender, e);
         }
         private void SetAsStart_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -1636,22 +1514,21 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     Vendor_Add_Sell(resultedVendorItem);
                 }
-                if (Autosave_Vendor_Enabled && CurrentVendor.id > 0)
-                    SaveVendor_Click(sender, e);
             }
             TabControl_SelectionChanged(mainTabControl, null);
         }
         private void SaveVendor_Click(object sender, RoutedEventArgs e)
         {
             NPCVendor cur = CurrentVendor;
+            if (cur.id == 0)
+                return;
             if (vendors.Where(d => d.id == cur.id).Count() > 0)
             {
                 vendors.Remove(vendors.Where(d => d.id == cur.id).ElementAt(0));
             }
             vendors.Add(cur);
-            DoNotification((string)TryFindResource("notify_Vendor_Saved"));
-            if (Autosave_NPC_Enabled && saveFile?.Length > 0)
-                Save();
+            if (sender != null)
+                DoNotification((string)TryFindResource("notify_Vendor_Saved"));
         }
         private void ClearVendor_Click(object sender, RoutedEventArgs e)
         {
@@ -1663,8 +1540,7 @@ namespace BowieD.Unturned.NPCMaker
             BetterForms.Universal_ListView ulv = new BetterForms.Universal_ListView(vendors.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Vendor, false)).ToList(), Universal_ItemList.ReturnType.Vendor);
             if (ulv.ShowDialog() == true)
             {
-                if (Autosave_Vendor_Enabled && CurrentVendor.id > 0)
-                    SaveVendor_Click(sender, e);
+                SaveVendor_Click(sender, null);
                 CurrentVendor = ulv.SelectedValue as NPCVendor;
             }
             vendors = ulv.Values.Cast<NPCVendor>().ToList();
@@ -1673,15 +1549,11 @@ namespace BowieD.Unturned.NPCMaker
         {
             Universal_ItemList uil = Util.FindParent<Universal_ItemList>(sender as Button);
             vendorListBuyItems.Children.Remove(uil);
-            if (Autosave_Vendor_Enabled && CurrentVendor.id > 0)
-                SaveVendor_Click(sender, e);
         }
         private void DeleteVendorSell_Click(object sender, RoutedEventArgs e)
         {
             Universal_ItemList uil = Util.FindParent<Universal_ItemList>(sender as Button);
             vendorListSellItems.Children.Remove(uil);
-            if (Autosave_Vendor_Enabled && CurrentVendor.id > 0)
-                SaveVendor_Click(sender, e);
         }
         public void Vendor_Add_Buy(VendorItem item)
         {
@@ -1776,8 +1648,6 @@ namespace BowieD.Unturned.NPCMaker
                 Universal_ItemList uil = new Universal_ItemList(cond, Universal_ItemList.ReturnType.Condition, true);
                 uil.deleteButton.Click += RemoveQuestCondition_Click;
                 listQuestConditions.Children.Add(uil);
-                if (Autosave_Quest_Enabled && CurrentQuest.id > 0)
-                    SaveQuest_Click(sender, e);
             }
             TabControl_SelectionChanged(mainTabControl, null);
         }
@@ -1785,8 +1655,6 @@ namespace BowieD.Unturned.NPCMaker
         {
             Universal_ItemList uil = Util.FindParent<Universal_ItemList>(sender as Button);
             listQuestConditions.Children.Remove(uil);
-            if (Autosave_Quest_Enabled && CurrentQuest.id > 0)
-                SaveQuest_Click(sender, e);
         }
         private void AddQuestReward_Click(object sender, RoutedEventArgs e)
         {
@@ -1803,8 +1671,6 @@ namespace BowieD.Unturned.NPCMaker
                 Universal_ItemList uil = new Universal_ItemList(rew, Universal_ItemList.ReturnType.Reward, true);
                 uil.deleteButton.Click += RemoveQuestReward_Click;
                 listQuestRewards.Children.Add(uil);
-                if (Autosave_Quest_Enabled && CurrentQuest.id > 0)
-                    SaveQuest_Click(sender, e);
             }
             TabControl_SelectionChanged(mainTabControl, null);
         }
@@ -1812,25 +1678,24 @@ namespace BowieD.Unturned.NPCMaker
         {
             Universal_ItemList uil = Util.FindParent<Universal_ItemList>(sender as Button);
             listQuestRewards.Children.Remove(uil);
-            if (Autosave_Quest_Enabled && CurrentQuest.id > 0)
-                SaveQuest_Click(sender, e);
         }
         private void SaveQuest_Click(object sender, RoutedEventArgs e)
         {
+            NPCQuest cur = CurrentQuest;
+            if (cur.id == 0)
+                return;
             if (quests.Where(d => d.id == questIdBox.Value).Count() > 0)
                 quests.Remove(quests.Where(d => d.id == questIdBox.Value).ElementAt(0));
             quests.Add(CurrentQuest);
-            DoNotification((string)TryFindResource("notify_Quest_Saved"));
-            if (Autosave_NPC_Enabled && saveFile?.Length > 0)
-                Save();
+            if (sender != null)
+                DoNotification((string)TryFindResource("notify_Quest_Saved"));
         }
         private void LoadQuest_Click(object sender, RoutedEventArgs e)
         {
             BetterForms.Universal_ListView ulv = new BetterForms.Universal_ListView(quests.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Quest, false)).ToList(), Universal_ItemList.ReturnType.Quest);
             if (ulv.ShowDialog() == true)
             {
-                if (Autosave_Quest_Enabled && CurrentQuest.id > 0)
-                    SaveQuest_Click(sender, e);
+                SaveQuest_Click(sender, null);
                 CurrentQuest = ulv.SelectedValue as NPCQuest;
             }
             quests = ulv.Values.Cast<NPCQuest>().ToList();

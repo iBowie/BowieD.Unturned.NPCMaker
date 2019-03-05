@@ -8,6 +8,9 @@
             <BitmapImage x:Key="app_Icon" UriSource="pack://application:,,,/Resources/Icons/Option_1_256x.png"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Localization/lang.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Green.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
