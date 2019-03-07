@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Logging;
+using System;
 using System.Globalization;
 using System.IO;
 using System.Xml;
@@ -20,6 +21,7 @@ namespace BowieD.Unturned.NPCMaker.Config
             public string theme;
             public bool generateGuids;
             public byte autosaveOption;
+            public Logging.Log_Level LogLevel;
 
             [XmlIgnore]
             public CultureInfo language => new CultureInfo(Language ?? "en-US");
@@ -34,6 +36,8 @@ namespace BowieD.Unturned.NPCMaker.Config
                 theme = "DarkGreen";
                 generateGuids = true;
                 autosaveOption = 1;
+                experimentalFeatures = false;
+                LogLevel = Logging.Log_Level.Normal;
             }
         }
 
@@ -54,10 +58,11 @@ namespace BowieD.Unturned.NPCMaker.Config
                     Properties = content;
                 }
             }
-            catch { LoadDefaults(); }
+            catch { Logger.Log("Can't load configuration. Loading defaults...", Log_Level.Errors); LoadDefaults(); }
         }
         public static void Save()
         {
+            Logger.Log("Saving configuration...");
             var dir = System.IO.Path.GetDirectoryName(Path);
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
@@ -67,6 +72,7 @@ namespace BowieD.Unturned.NPCMaker.Config
                 XmlSerializer ser = new XmlSerializer(typeof(CFG));
                 ser.Serialize(writer, Properties);
             }
+            Logger.Log("Configuration saved!");
         }
         public static void LoadDefaults()
         {

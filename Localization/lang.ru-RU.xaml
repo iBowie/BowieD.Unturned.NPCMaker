@@ -17,6 +17,12 @@
     <v:String x:Key="config_Tab_General_Option_5">1 час</v:String>
     <v:String x:Key="config_Tab_General_Language">Язык</v:String>
     <v:String x:Key="config_Tab_General_GUIDs">Генерировать GUID</v:String>
+    <v:String x:Key="config_Tab_General_LogLevel">Уровень логирования</v:String>
+    <v:String x:Key="config_Tab_General_LogLevel_None">Нет</v:String>
+    <v:String x:Key="config_Tab_General_LogLevel_Normal">Обычный</v:String>
+    <v:String x:Key="config_Tab_General_LogLevel_Warnings">Предупреждения</v:String>
+    <v:String x:Key="config_Tab_General_LogLevel_Errors">Ошибки</v:String>
+    <v:String x:Key="config_Tab_General_LogLevel_Critical">Критические ошибки</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme">Тема</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_Legacy">Стандартная (Устарело)</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_LightGreen">[METRO] Светлая зелёная</v:String>
@@ -27,6 +33,7 @@
     <v:String x:Key="config_Tab_Appearance_Theme_DarkRed">[METRO] Тёмная красная</v:String>
     <v:String x:Key="config_Tab_Appearance_Scale">Масштаб</v:String>
     <v:String x:Key="config_Tab_Misc_Discord">Включить Discord Rich Presence</v:String>
+    <v:String x:Key="config_Tab_Misc_Experimental">Экспериментальный режим</v:String>
     <v:String x:Key="config_OnExit">Для применения настроек перезапустите программу.</v:String>
 
     <v:String x:Key="app_Free">Эта программа абсолютно бесплатна. Если вы скачали её не из руководства Steam либо купили - Вас скорее всего обманули.</v:String>

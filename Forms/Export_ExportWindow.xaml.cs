@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.Logging;
+using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -53,7 +54,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 Directory.Delete(AppDomain.CurrentDomain.BaseDirectory + $@"results\{save.editorName}", true);
             }
-            catch { }
+            catch (Exception ex) { Logger.Log("Can't delete directory with NPC.", Log_Level.Normal); Logger.Log(ex.Message, Log_Level.Errors); }
             Directory.CreateDirectory(dir + $@"Characters\{save.editorName}");
             if (save.dialogues?.Count() > 0)
                 Directory.CreateDirectory(dir + $@"Dialogues\{save.editorName}");

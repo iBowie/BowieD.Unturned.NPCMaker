@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace BowieD.Unturned.NPCMaker.Config
 {
@@ -49,8 +39,18 @@ namespace BowieD.Unturned.NPCMaker.Config
                     break;
                 }
             }
+            foreach (ComboBoxItem cbi in Log_Level_Box.Items)
+            {
+                if (cbi?.Tag.ToString() == Configuration.Properties.LogLevel.ToString())
+                {
+                    Log_Level_Box.SelectedItem = cbi;
+                    break;
+                }
+            }
+            Experimental_Box.IsChecked = Configuration.Properties.experimentalFeatures;
             Discord_Enabled_Box.IsChecked = Configuration.Properties.enableDiscord;
             Generate_GUIDS_Box.IsChecked = Configuration.Properties.generateGuids;
+            
         }
 
         public Configuration.CFG GetConfig
@@ -70,6 +70,8 @@ namespace BowieD.Unturned.NPCMaker.Config
                 nc.scale = double.Parse((Scale_Box.SelectedItem as ComboBoxItem).Tag.ToString(), CultureInfo.InvariantCulture);
                 nc.enableDiscord = Discord_Enabled_Box.IsChecked.Value;
                 nc.generateGuids = Generate_GUIDS_Box.IsChecked.Value;
+                nc.experimentalFeatures = Experimental_Box.IsChecked.Value;
+                nc.LogLevel = (Logging.Log_Level)Enum.Parse(typeof(Logging.Log_Level), (Log_Level_Box.SelectedItem as ComboBoxItem).Tag.ToString());
                 return nc;
             }
         }

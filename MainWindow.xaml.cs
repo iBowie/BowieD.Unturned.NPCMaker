@@ -26,6 +26,7 @@ using BowieD.Unturned.NPCMaker.BetterControls;
 using BowieD.Unturned.NPCMaker.Examples;
 using DiscordRPC;
 using System.Windows.Threading;
+using BowieD.Unturned.NPCMaker.Logging;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -34,14 +35,15 @@ namespace BowieD.Unturned.NPCMaker
         public MainWindow()
         {
             InitializeComponent();
+            Logger.Log($"Launch stage. Version: {Version}.");
             Instance = this;
-            Config.Configuration.Save();
             #region SCALE
             mainGridScale.ScaleX = Config.Configuration.Properties.scale;
             mainGridScale.ScaleY = Config.Configuration.Properties.scale;
             Width = MinWidth * Config.Configuration.Properties.scale;
             Height = MinHeight * Config.Configuration.Properties.scale;
             #endregion
+            Logger.Log($"Scale set up to {Config.Configuration.Properties.scale}");
             #region THEME SETUP
             switch (Config.Configuration.Properties.theme ?? "Legacy")
             {
@@ -68,9 +70,11 @@ namespace BowieD.Unturned.NPCMaker
                     break;
             }
             #endregion
+            Logger.Log($"Theme set to {Config.Configuration.Properties.theme}");
             #region LOCALIZATION
             App.Language = Config.Configuration.Properties.language ?? new CultureInfo("en-US");
             #endregion
+            Logger.Log($"Language set to {Config.Configuration.Properties.language.Name}");
             #region OPEN_WITH
             string[] args = Environment.GetCommandLineArgs();
             if (args != null && args.Length >= 0)
@@ -372,7 +376,7 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(0, 9, 2, 0);
+        public static Version Version => new Version(0, 9, 2, 1);
         #endregion
         #region STATIC
         public static MainWindow Instance;
@@ -1801,8 +1805,8 @@ namespace BowieD.Unturned.NPCMaker
             Notification.NotificationBase notificationBase = new Notification.NotificationBase(notificationsStackPanel, this.Background, textBlock);
             notificationsStackPanel.Children.Add(notificationBase);
         }
-#endregion
-                
+        #endregion
+
         #region DEEP GAME ANALYSIS METHODS
         // check for conflict id's, check every item in NPC for validness ^.^
         // WIP

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Logging;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
@@ -26,14 +27,19 @@ namespace BowieD.Unturned.NPCMaker
         public App()
         {
             InitializeComponent();
+            Logger.Clear();
+            Logger.Log("App started! Pre-launch stage.");
             App.LanguageChanged += App_LanguageChanged;
             languages.Clear();
             languages.Add(new CultureInfo("en-US"));
             languages.Add(new CultureInfo("ru-RU"));
             //languages.Add(new CultureInfo("es-ES"));
+            Logger.Log("Loading configuration...");
             Config.Configuration.Load();
+            Logger.Log("Configuration loaded!");
             if (Config.Configuration.Properties.firstLaunch)
             {
+                Logger.Log("First launch! Detecting language...");
                 if (languages.Contains(CultureInfo.InstalledUICulture))
                 {
                     Language = CultureInfo.InstalledUICulture;

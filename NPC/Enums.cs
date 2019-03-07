@@ -116,4 +116,26 @@
         Multiplication,
         Division
     }
+    //public enum Object_Type
+    //{
+    //    SMALL,
+    //    MEDIUM,
+    //    LARGE
+    //}
+    //public enum Object_Interactability
+    //{
+    //    None,
+    //    Binary_State,
+    //    Dropper,
+    //    Note,
+    //    Water,
+    //    Fuel,
+    //    Rubble,
+    //    Quest
+    //}
+    //public enum Object_Rubble
+    //{
+    //    None,
+    //    Destroy
+    //}
 }

@@ -17,6 +17,12 @@
     <v:String x:Key="config_Tab_General_Option_5">1 hour</v:String>
     <v:String x:Key="config_Tab_General_Language">Language</v:String>
     <v:String x:Key="config_Tab_General_GUIDs">Generate GUIDs</v:String>
+    <v:String x:Key="config_Tab_General_LogLevel">Logging Level</v:String>
+    <v:String x:Key="config_Tab_General_LogLevel_None">None</v:String>
+    <v:String x:Key="config_Tab_General_LogLevel_Normal">Normal</v:String>
+    <v:String x:Key="config_Tab_General_LogLevel_Warnings">Warnings</v:String>
+    <v:String x:Key="config_Tab_General_LogLevel_Errors">Errors</v:String>
+    <v:String x:Key="config_Tab_General_LogLevel_Critical">Critical</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme">Theme</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_Legacy">Default (Legacy)</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_LightGreen">[METRO] Light Green</v:String>
@@ -27,6 +33,7 @@
     <v:String x:Key="config_Tab_Appearance_Theme_DarkRed">[METRO] Dark Red</v:String>
     <v:String x:Key="config_Tab_Appearance_Scale">Scale</v:String>
     <v:String x:Key="config_Tab_Misc_Discord">Enable Discord Rich Presence</v:String>
+    <v:String x:Key="config_Tab_Misc_Experimental">Enable Experimental Features</v:String>
     <v:String x:Key="config_OnExit">To apply new settings restart the app.</v:String>
 
     <v:String x:Key="app_Free">This app is absolutely free. If you downloaded app not from steam guide or bought it - you were scammed.</v:String>

@@ -32,6 +32,16 @@
                     <Grid Margin="2.5">
                         <CheckBox Name="Generate_GUIDS_Box" Content="{DynamicResource config_Tab_General_GUIDs}"/>
                     </Grid>
+                    <Grid Margin="2.5">
+                        <Label Content="{DynamicResource config_Tab_General_LogLevel}"/>
+                        <ComboBox HorizontalAlignment="Right" Name="Log_Level_Box">
+                            <ComboBoxItem Tag="None" Content="{DynamicResource config_Tab_General_LogLevel_None}"/>
+                            <ComboBoxItem Tag="Normal" Content="{DynamicResource config_Tab_General_LogLevel_Normal}"/>
+                            <ComboBoxItem Tag="Warnings" Content="{DynamicResource config_Tab_General_LogLevel_Warnings}"/>
+                            <ComboBoxItem Tag="Critical" Content="{DynamicResource config_Tab_General_LogLevel_Critical}"/>
+                            <ComboBoxItem Tag="Errors" Content="{DynamicResource config_Tab_General_LogLevel_Errors}"/>
+                        </ComboBox>
+                    </Grid>
                 </StackPanel>
             </TabItem>
             <TabItem Header="{DynamicResource config_Tab_Appearance}">
@@ -61,9 +71,10 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="{DynamicResource config_Tab_Misc}">
-                <Grid Margin="5">
+                <StackPanel Margin="5">
                     <CheckBox Name="Discord_Enabled_Box" VerticalAlignment="Top" Margin="2.5" Content="{DynamicResource config_Tab_Misc_Discord}"/>
-                </Grid>
+                    <CheckBox Name="Experimental_Box" VerticalAlignment="Top" Margin="2.5" Content="{DynamicResource config_Tab_Misc_Experimental}"/>
+                </StackPanel>
             </TabItem>
         </TabControl>
         <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">

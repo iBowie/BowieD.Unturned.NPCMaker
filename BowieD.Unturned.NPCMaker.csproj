@@ -139,6 +139,7 @@
     <Compile Include="Forms\Form_About.xaml.cs">
       <DependentUpon>Form_About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Logging\Logger.cs" />
     <Compile Include="Mistake.cs" />
     <Compile Include="Mistakes\Dialogue\EmptyMessage.cs" />
     <Compile Include="Mistakes\Dialogue\QuestSettingMistake.cs" />
@@ -167,9 +168,11 @@
     <Compile Include="NPC\Conditions\Skillset_Cond.cs" />
     <Compile Include="NPC\Conditions\Time_Of_Day_Cond.cs" />
     <Compile Include="NPC\Enums.cs" />
+    <Compile Include="NPC\NPCCharacter.cs" />
     <Compile Include="NPC\NPCColor.cs" />
     <Compile Include="NPC\NPCDialogue.cs" />
     <Compile Include="NPC\NPCMessage.cs" />
+    <Compile Include="NPC\NPCObject.cs" />
     <Compile Include="NPC\NPCQuest.cs" />
     <Compile Include="NPC\NPCResponse.cs" />
     <Compile Include="NPC\NPCVendor.cs" />
@@ -185,6 +188,9 @@
     <Compile Include="NPC\Rewards\Reputation.cs" />
     <Compile Include="NPC\Rewards\Teleport.cs" />
     <Compile Include="NPC\Rewards\Vehicle.cs" />
+    <Compile Include="Parser\NPCParser.cs" />
+    <Compile Include="Parser\SubParsers\CharacterParser.cs" />
+    <Compile Include="Parser\IParser.cs" />
     <Compile Include="Util.cs" />
     <Page Include="BetterControls\Dialogue_Response.xaml">
       <SubType>Designer</SubType>

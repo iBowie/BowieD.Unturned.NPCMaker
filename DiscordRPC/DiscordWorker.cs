@@ -62,6 +62,7 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
 
         private void Client_OnReady(object sender, global::DiscordRPC.Message.ReadyMessage args)
         {
+            Logging.Logger.Log("Discord Rich Presence started!", Logging.Log_Level.Normal);
             MainWindow.Instance.DoNotification((string)MainWindow.Instance.TryFindResource("menu_Discord_Start"));
         }
     }
