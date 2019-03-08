@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="{DynamicResource config_Title}" Icon="{DynamicResource app_Icon}" Height="240" Width="480">
     <Grid>
+        <Grid.LayoutTransform>
+            <ScaleTransform x:Name="gridScale"/>
+        </Grid.LayoutTransform>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
@@ -78,9 +81,9 @@
             </TabItem>
         </TabControl>
         <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
-        <Button Click="CancelButton_Click" HorizontalAlignment="Right" Margin="0,0,10,0" Content="{DynamicResource config_Cancel}"/>
-        <Button Click="SaveButton_Click" HorizontalAlignment="Right" Margin="0,0,0,0" Content="{DynamicResource config_Save}"/>
-            
+            <Button Click="ResetButton_Click" HorizontalAlignment="Right" Margin="0,0,10,0" Content="{DynamicResource config_Default}"/>
+            <Button Click="CancelButton_Click" HorizontalAlignment="Right" Margin="0,0,10,0" Content="{DynamicResource config_Cancel}"/>
+            <Button Click="SaveButton_Click" HorizontalAlignment="Right" Margin="0,0,0,0" Content="{DynamicResource config_Save}"/>
         </StackPanel>
     </Grid>
 </Window>

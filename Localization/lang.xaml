@@ -8,6 +8,8 @@
     <v:String x:Key="config_Tab_Misc">Miscellaneous</v:String>
     <v:String x:Key="config_Save">Save</v:String>
     <v:String x:Key="config_Cancel">Cancel</v:String>
+    <v:String x:Key="config_Default">Reset Settings</v:String>
+    <v:String x:Key="config_Default_Confirm">Are you sure you want to reset settings?</v:String>
     <v:String x:Key="config_Tab_General_Autosave">Autosave every:</v:String>
     <v:String x:Key="config_Tab_General_Option_0">Never</v:String>
     <v:String x:Key="config_Tab_General_Option_1">5 minutes</v:String>

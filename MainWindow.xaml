@@ -20,6 +20,9 @@
         Icon="{DynamicResource app_Icon}"
         Name="mainWindow"
         WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform x:Name="mainGridScale"
@@ -127,16 +130,140 @@
                                 <Button  Click="RandomColor_Click" Content="{DynamicResource tool_Color_Random}" Height="23" HorizontalAlignment="Right" Margin="0,0,10,40" VerticalAlignment="Bottom" Width="133"/>
                             </Grid>
                         </GroupBox>
-                        <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="96" Margin="10,10,0,0" VerticalAlignment="Top" Width="96">
+                        <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="98" Margin="10,10,0,0" VerticalAlignment="Top" Width="98">
                             <Image Name="faceImageControl" />
                         </Border>
                         <mah:NumericUpDown Minimum="0" x:Name="faceImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,111,0,0" Width="{Binding Width, ElementName=faceImageBorder}" ValueChanged="FaceImageIndex_Changed" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
-                        <Border x:Name="beardImageBorder" BorderBrush="{Binding BorderBrush, ElementName=faceImageBorder}" BorderThickness="{Binding BorderThickness, ElementName=faceImageBorder}" HorizontalAlignment="Left" Height="{Binding Height, ElementName=faceImageBorder}" Width="{Binding Width, ElementName=faceImageBorder}" VerticalAlignment="Top" Margin="212,10,0,0">
-                            <Image Name="beardImageControl" />
+                        <Border x:Name="beardImageBorder" BorderBrush="{Binding BorderBrush, ElementName=faceImageBorder}" BorderThickness="1" HorizontalAlignment="Left" Height="{Binding Height, ElementName=faceImageBorder}" Width="{Binding Width, ElementName=faceImageBorder}" VerticalAlignment="Top" Margin="212,10,0,0">
+                            <Grid Name="beardRenderGrid" DataContext="{Binding SolidColorBrush}">
+                                <Canvas>
+                                    <Line X1="27" Y1="27" X2="70" Y2="70" Stroke="Red" StrokeThickness="2" />
+                                    <Line X1="70" Y1="27" X2="27" Y2="70" Stroke="Red" StrokeThickness="2" />
+                                </Canvas>
+                                <Canvas Visibility="Collapsed">
+                                    <Polygon Points="7,74 7,22 16,22 16,32 79,32 79,22 88,22 88,74 7,74 25,56 70,56 70,40 25,40 25,56" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                </Canvas>
+                                <Canvas Visibility="Collapsed">
+                                    <Polygon Points="8,63 8,45 20,45 20,39 33,39 33,33 62,33 62,39 75,39 75,45 87,45 87,63 82,63 82,57 69,57 69,51 25,51 25,57 13,57 13,63" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                </Canvas>
+                                <Canvas Visibility="Collapsed">
+                                    <Polygon Points="5,77 90,77 90,19 5,19 5,77 17,52 17,31 78,31 78,52 17,52" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                </Canvas>
+                                <Canvas Visibility="Collapsed">
+                                    <Polygon Points="2,62 2,49 16,49 16,42 30,42 30,35 65,35 65,42 79,42 79,49 93,49 93,62 87,62 87,55 73,55 73,48 59,48 59,35 36,35 36,48 22,48 22,55 8,55 8,62" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                </Canvas>
+                                <Canvas Visibility="Collapsed">
+                                    <Polygon Points="9,42 9,31 14,31 14,42 9,42 4,42 4,54 9,54 9,60 21,60 21,66 26,66 26,60 69,60 69,66 74,66 74,60 86,60 86,49 91,49 91,37 86,37 86,31 81,31 81,42 86,42 86,49 81,49 81,55 62,55 62,49 33,49 33,55 14,55 14,49 9,49" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                </Canvas>
+                                <Canvas Visibility="Collapsed">
+                                    <Polygon Points="5,21 14,21 14,56 81,56 81,21 90,21 90,75 5,75" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                </Canvas>
+                                <Canvas Visibility="Collapsed">
+                                    <Polygon Points="4,37 4,31 17,31 17,25 31,25 31,18 64,18 64,25 77,25 77,31 91,31 91,37 72,37 72,30 57,30 57,71 50,71 50,78 45,78 45,71 38,71 38,59 57,59 57,30 23,30 23,37" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                </Canvas>
+                                <Canvas Visibility="Collapsed">
+                                    <Polygon Points="3,12 13,12 13,17 82,17 82,12 92,12 92,74 81,74 81,80 71,80 71,85 24,85 24,80 14,80 14,74 3,74 3,12 28,32 66,32 66,49 28,49 28,32" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                </Canvas>
+                                <Canvas Visibility="Collapsed">
+                                    <Polygon Points="2,2 12,2 12,13 83,13 83,2 93,2 93,60 82,60 82,87 72,87 72,60 60,60 60,65 55,65 55,93 39,93 39,65 34,65 34,60 22,60 22,87 13,87 13,60 2,60 2,2 22,28 72,28 72,39 22,39 22,28" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                </Canvas>
+                                <Canvas Visibility="Collapsed">
+                                    <Polygon Points="35,2 59,2 59,7 70,7 70,12 80,12 80,52 75,52 75,61 70,61 70,72 64,72 64,82 59,82 59,93 35,93 35,82 30,82 30,72 24,72 24,61 19,61 19,52 14,52 14,12 24,12 24,7 35,7 35,2 29,21 65,21 65,37 29,37 29,21" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                </Canvas>
+                                <Canvas Visibility="Collapsed">
+                                    <Polygon Points="2,7 93,7 93,60 87,60 87,65 82,65 82,76 72,76 72,65 66,65 66,60 55,60 55,71 49,71 49,87 45,87 45,76 39,76 39,65 28,65 28,76 22,76 22,82 16,82 16,87 13,87 13,71 7,71 7,55 2,55 28,39 66,39 66,22 28,22 28,39 2,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                </Canvas>
+                                <Canvas Visibility="Collapsed">
+                                    <Polygon Points="3,55 13,55 13,59 3,59" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    <Polygon Points="13,55 13,50 17,50 17,45 23,45 23,39 34,39 34,34 38,34 38,44 28,44 28,49 22,49 22,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    <Polygon Points="92,59 92,55 82,55 82,59" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    <Polygon Points="82,55 82,50 78,50 78,45 72,45 72,39 61,39 61,34 57,34 57,44 67,44 67,49 73,49 73,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                </Canvas>
+                                <Canvas Visibility="Collapsed">
+                                    <Polygon Points="8,75 2,75 2,26 9,26 9,19 85,19 85,26 93,26 93,75 86,75 86,33 8,33" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                </Canvas>
+                                <Canvas Visibility="Collapsed">
+                                    <Polygon Points="2,7 12,7 12,13 22,13 22,17 28,17 28,34 66,34 66,17 72,17 72,13 83,13 83,7 93,7 93,49 87,49 87,55 76,55 76,60 65,60 65,65 55,65 55,76 49,76 49,87 45,87 45,76 39,76 39,65 29,65 29,60 17,60 17,55 7,55 7,49 2,49" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                </Canvas>
+                                <Canvas Visibility="Collapsed">
+                                    <Polygon Points="56,2 56,9 65,9 65,16 73,16 73,25 79,25 79,31 73,31 73,38 65,38 65,54 56,54 56,70 50,70 50,93 43,93 43,70 37,70 37,54 28,54 28,38 20,38 20,31 14,31 14,25 20,25 20,16 28,16 28,9 37,9 37,2" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                </Canvas>
+                            </Grid>
                         </Border>
                         <mah:NumericUpDown Minimum="0" x:Name="beardImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="212,111,0,0" Width="{Binding Width, ElementName=beardImageBorder}" ValueChanged="BeardImageIndex_Changed" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
                         <Border x:Name="hairImageBorder" BorderBrush="{Binding BorderBrush, ElementName=beardImageBorder}" BorderThickness="{Binding BorderThickness, ElementName=beardImageBorder}" HorizontalAlignment="Left" Height="{Binding Height, ElementName=beardImageBorder}" Width="{Binding Width, ElementName=beardImageBorder}" VerticalAlignment="Top" Margin="111,10,0,0">
-                            <Image Name="hairImageControl" />
+                            <Grid Name="hairRenderGrid" DataContext="{Binding SolidColorBrush}">
+                                <Canvas>
+                                    <Line X1="27" Y1="27" X2="70" Y2="70" Stroke="Red" StrokeThickness="2" />
+                                    <Line X1="70" Y1="27" X2="27" Y2="70" Stroke="Red" StrokeThickness="2" />
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                                <Canvas>
+                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                </Canvas>
+                            </Grid>
                         </Border>
                         <mah:NumericUpDown Minimum="0" x:Name="hairImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="111,111,0,0" Width="{Binding Width, ElementName=hairImageBorder}" ValueChanged="HairImageIndex_Changed" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
                         <TextBox TextChanged="ApparelSkinColorBox_TextChanged" Name="apparelSkinColorBox" HorizontalAlignment="Left" Height="23" Margin="313,10,0,0" TextWrapping="Wrap" MaxLength="7" VerticalAlignment="Top" Width="120" mah:TextBoxHelper.Watermark="#000000" mah:TextBoxHelper.HasText="True"/>

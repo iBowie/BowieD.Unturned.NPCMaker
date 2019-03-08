@@ -5,7 +5,9 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -27,6 +29,7 @@ namespace BowieD.Unturned.NPCMaker
         public App()
         {
             InitializeComponent();
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Logger.Clear();
             Logger.Log("App started! Pre-launch stage.");
             App.LanguageChanged += App_LanguageChanged;
@@ -56,6 +59,12 @@ namespace BowieD.Unturned.NPCMaker
             CopyResource(NPCMaker.Properties.Resources.ControlzEx, AppDomain.CurrentDomain.BaseDirectory + "ControlzEx.dll");
             CopyResource(NPCMaker.Properties.Resources.MahApps_Metro, AppDomain.CurrentDomain.BaseDirectory + "MahApps.Metro.dll");
             CopyResource(NPCMaker.Properties.Resources.Microsoft_Xaml_Behaviors, AppDomain.CurrentDomain.BaseDirectory + "Microsoft.Xaml.Behaviors.dll");
+        }
+        
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Exception ex = e.ExceptionObject as Exception;
+            Logger.Log($"Exception caused the app to stop. Message: {ex.Message}", Log_Level.Critical);
         }
 
         private void CopyResource(byte[] res, string file)

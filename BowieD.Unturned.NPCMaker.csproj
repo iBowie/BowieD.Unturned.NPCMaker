@@ -168,7 +168,6 @@
     <Compile Include="NPC\Conditions\Skillset_Cond.cs" />
     <Compile Include="NPC\Conditions\Time_Of_Day_Cond.cs" />
     <Compile Include="NPC\Enums.cs" />
-    <Compile Include="NPC\NPCCharacter.cs" />
     <Compile Include="NPC\NPCColor.cs" />
     <Compile Include="NPC\NPCDialogue.cs" />
     <Compile Include="NPC\NPCMessage.cs" />
@@ -188,9 +187,6 @@
     <Compile Include="NPC\Rewards\Reputation.cs" />
     <Compile Include="NPC\Rewards\Teleport.cs" />
     <Compile Include="NPC\Rewards\Vehicle.cs" />
-    <Compile Include="Parser\NPCParser.cs" />
-    <Compile Include="Parser\SubParsers\CharacterParser.cs" />
-    <Compile Include="Parser\IParser.cs" />
     <Compile Include="Util.cs" />
     <Page Include="BetterControls\Dialogue_Response.xaml">
       <SubType>Designer</SubType>
@@ -352,24 +348,6 @@
     <Resource Include="Resources\ICON_OK.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Unturned\Beards\0.png" />
-    <Resource Include="Resources\Unturned\Beards\1.png" />
-    <Resource Include="Resources\Unturned\Beards\10.png" />
-    <Resource Include="Resources\Unturned\Beards\11.png" />
-    <Resource Include="Resources\Unturned\Beards\12.png" />
-    <Resource Include="Resources\Unturned\Beards\13.png" />
-    <Resource Include="Resources\Unturned\Beards\14.png" />
-    <Resource Include="Resources\Unturned\Beards\15.png" />
-    <Resource Include="Resources\Unturned\Beards\2.png" />
-    <Resource Include="Resources\Unturned\Beards\3.png" />
-    <Resource Include="Resources\Unturned\Beards\4.png" />
-    <Resource Include="Resources\Unturned\Beards\5.png" />
-    <Resource Include="Resources\Unturned\Beards\6.png" />
-    <Resource Include="Resources\Unturned\Beards\7.png" />
-    <Resource Include="Resources\Unturned\Beards\8.png" />
-    <Resource Include="Resources\Unturned\Beards\9.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Unturned\Faces\0.png" />
     <Resource Include="Resources\Unturned\Faces\1.png" />
     <Resource Include="Resources\Unturned\Faces\10.png" />
@@ -497,8 +475,6 @@
     <None Include="Libs\Microsoft.Xaml.Behaviors.dll" />
     <Content Include="Libs\Newtonsoft.Json.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Debug\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

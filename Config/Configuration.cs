@@ -76,8 +76,9 @@ namespace BowieD.Unturned.NPCMaker.Config
         }
         public static void LoadDefaults()
         {
-            Properties = new CFG();
+            Properties = GetDefaults();
         }
+        public static CFG GetDefaults() => new CFG();
         public static void Force(CFG newConfig)
         {
             Properties = newConfig;

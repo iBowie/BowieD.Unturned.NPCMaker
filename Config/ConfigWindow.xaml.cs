@@ -13,47 +13,14 @@ namespace BowieD.Unturned.NPCMaker.Config
         public ConfigWindow()
         {
             InitializeComponent();
-            foreach (ComboBoxItem cbi in Selected_Theme_Box.Items)
-            {
-                if (cbi?.Tag.ToString() == Configuration.Properties.theme)
-                {
-                    Selected_Theme_Box.SelectedItem = cbi;
-                    break;
-                }
-            }
-            Autosave_Box.SelectedIndex = Configuration.Properties.autosaveOption;
-            foreach (var lang in App.Languages)
-            {
-                ComboBoxItem cbi = new ComboBoxItem();
-                cbi.Content = lang.NativeName;
-                cbi.Tag = lang;
-                Languages_Box.Items.Add(cbi);
-                if (lang.Name == Configuration.Properties.language.Name)
-                    Languages_Box.SelectedItem = cbi;
-            }
-            foreach (ComboBoxItem cbi in Scale_Box.Items)
-            {
-                if (cbi?.Tag.ToString() == Configuration.Properties.scale.ToString().Replace(',', '.'))
-                {
-                    Scale_Box.SelectedItem = cbi;
-                    break;
-                }
-            }
-            foreach (ComboBoxItem cbi in Log_Level_Box.Items)
-            {
-                if (cbi?.Tag.ToString() == Configuration.Properties.LogLevel.ToString())
-                {
-                    Log_Level_Box.SelectedItem = cbi;
-                    break;
-                }
-            }
-            Experimental_Box.IsChecked = Configuration.Properties.experimentalFeatures;
-            Discord_Enabled_Box.IsChecked = Configuration.Properties.enableDiscord;
-            Generate_GUIDS_Box.IsChecked = Configuration.Properties.generateGuids;
-            
+            gridScale.ScaleX = Configuration.Properties.scale;
+            gridScale.ScaleY = Configuration.Properties.scale;
+            Width *= Configuration.Properties.scale;
+            Height *= Configuration.Properties.scale;
+            CurrentConfig = Configuration.Properties;
         }
 
-        public Configuration.CFG GetConfig
+        public Configuration.CFG CurrentConfig
         {
             get
             {
@@ -74,6 +41,46 @@ namespace BowieD.Unturned.NPCMaker.Config
                 nc.LogLevel = (Logging.Log_Level)Enum.Parse(typeof(Logging.Log_Level), (Log_Level_Box.SelectedItem as ComboBoxItem).Tag.ToString());
                 return nc;
             }
+            set
+            {
+                foreach (ComboBoxItem cbi in Selected_Theme_Box.Items)
+                {
+                    if (cbi?.Tag.ToString() == value.theme)
+                    {
+                        Selected_Theme_Box.SelectedItem = cbi;
+                        break;
+                    }
+                }
+                Autosave_Box.SelectedIndex = value.autosaveOption;
+                foreach (var lang in App.Languages)
+                {
+                    ComboBoxItem cbi = new ComboBoxItem();
+                    cbi.Content = lang.NativeName;
+                    cbi.Tag = lang;
+                    Languages_Box.Items.Add(cbi);
+                    if (lang.Name == value.language.Name)
+                        Languages_Box.SelectedItem = cbi;
+                }
+                foreach (ComboBoxItem cbi in Scale_Box.Items)
+                {
+                    if (cbi?.Tag.ToString() == value.scale.ToString().Replace(',', '.'))
+                    {
+                        Scale_Box.SelectedItem = cbi;
+                        break;
+                    }
+                }
+                foreach (ComboBoxItem cbi in Log_Level_Box.Items)
+                {
+                    if (cbi?.Tag.ToString() == value.LogLevel.ToString())
+                    {
+                        Log_Level_Box.SelectedItem = cbi;
+                        break;
+                    }
+                }
+                Experimental_Box.IsChecked = value.experimentalFeatures;
+                Discord_Enabled_Box.IsChecked = value.enableDiscord;
+                Generate_GUIDS_Box.IsChecked = value.generateGuids;
+            }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -83,10 +90,19 @@ namespace BowieD.Unturned.NPCMaker.Config
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            Configuration.Force(GetConfig);
+            Configuration.Force(CurrentConfig);
             Configuration.Save();
             MainWindow.Instance.DoNotification((string)TryFindResource("config_OnExit"));
             Close();
+        }
+
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show((string)TryFindResource("config_Default_Confirm"), "", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                CurrentConfig = Configuration.GetDefaults();
+            }
         }
     }
 }

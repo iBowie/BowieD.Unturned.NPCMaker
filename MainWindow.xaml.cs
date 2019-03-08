@@ -110,9 +110,9 @@ namespace BowieD.Unturned.NPCMaker
             faceImageIndex.Maximum = faceAmount - 1;
             FaceImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, faceImageIndex.Value));
             beardImageIndex.Maximum = beardAmount - 1;
-            BeardImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, beardImageIndex.Value));
             hairImageIndex.Maximum = haircutAmount - 1;
-            HairImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, hairImageIndex.Value));
+            beardRenderGrid.DataContext = Brushes.Black;
+            hairRenderGrid.DataContext = Brushes.Black;
             #region COLOR SAMPLES
             #region UNTURNED
             List<string> unturnedColors = new List<string>()
@@ -790,12 +790,26 @@ namespace BowieD.Unturned.NPCMaker
         }
         private void BeardImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            beardImageControl.Source = ("Resources/Unturned/Beards/" + e.NewValue + ".png").GetImageSource();
+            foreach (UIElement ui in beardRenderGrid.Children)
+            {
+                if (ui is Canvas c)
+                {
+                    c.Visibility = Visibility.Collapsed;
+                }
+            }
+            beardRenderGrid.Children[(int)e.NewValue].Visibility = Visibility.Visible;
             isSaved = false;
         }
         private void HairImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            hairImageControl.Source = ("Resources/Unturned/Hairs/" + e.NewValue + ".png").GetImageSource();
+            foreach (UIElement ui in hairRenderGrid.Children)
+            {
+                if (ui is Canvas c)
+                {
+                    c.Visibility = Visibility.Collapsed;
+                }
+            }
+            hairRenderGrid.Children[(int)e.NewValue].Visibility = Visibility.Visible;
             isSaved = false;
         }
         internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -903,7 +917,19 @@ namespace BowieD.Unturned.NPCMaker
         }
         private void ApparelHairColorBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            string text = apparelHairColorBox.Text;
+            BrushConverter bc = new BrushConverter();
+            if (bc.IsValid(text))
+            {
+                Brush color = bc.ConvertFromString(text) as Brush;
+                beardRenderGrid.DataContext = color;
+                hairRenderGrid.DataContext = color;
+            }
+            else
+            {
+                beardRenderGrid.DataContext = Brushes.Black;
+                hairRenderGrid.DataContext = Brushes.Black;
+            }
         }
         #endregion
         #region STATE CONVERTERS
@@ -1806,6 +1832,8 @@ namespace BowieD.Unturned.NPCMaker
             notificationsStackPanel.Children.Add(notificationBase);
         }
         #endregion
+
+
 
         #region DEEP GAME ANALYSIS METHODS
         // check for conflict id's, check every item in NPC for validness ^.^

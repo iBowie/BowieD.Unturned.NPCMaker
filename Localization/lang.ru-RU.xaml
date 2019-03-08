@@ -8,6 +8,8 @@
     <v:String x:Key="config_Tab_Misc">Разное</v:String>
     <v:String x:Key="config_Save">Сохранить</v:String>
     <v:String x:Key="config_Cancel">Отмена</v:String>
+    <v:String x:Key="config_Default">Вернуть исходные</v:String>
+    <v:String x:Key="config_Default_Confirm">Вы уверены что хотите сбросить настройки?</v:String>
     <v:String x:Key="config_Tab_General_Autosave">Автосохранение раз в:</v:String>
     <v:String x:Key="config_Tab_General_Option_0">Никогда</v:String>
     <v:String x:Key="config_Tab_General_Option_1">5 минут</v:String>
