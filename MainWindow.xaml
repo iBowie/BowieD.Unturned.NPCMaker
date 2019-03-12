@@ -101,13 +101,13 @@
                 <TabItem Name="generalInfoTab" Header="{DynamicResource tab_General}">
                     <Grid>
                         <TextBlock FontSize="24" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="{DynamicResource general_Title}" VerticalAlignment="Top"/>
-                        <TextBox  Name="txtEditorName" ToolTip="{DynamicResource general_EditorName_Tooltip}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,47,0,0"/>
-                        <TextBlock  HorizontalAlignment="Left" Margin="143,51,0,0" TextWrapping="Wrap" Text="{DynamicResource general_EditorName}" VerticalAlignment="Top"/>
-                        <TextBox  Name="txtDisplayName" ToolTip="{DynamicResource general_DisplayName_Tooltip}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,76,0,0"/>
+                        <TextBox TextChanged="EditorName_Change" Name="txtEditorName" ToolTip="{DynamicResource general_EditorName_Tooltip}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,47,0,0"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="143,51,0,0" TextWrapping="Wrap" Text="{DynamicResource general_EditorName}" VerticalAlignment="Top"/>
+                        <TextBox TextChanged="DisplayName_Change" Name="txtDisplayName" ToolTip="{DynamicResource general_DisplayName_Tooltip}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,76,0,0"/>
                         <TextBlock  HorizontalAlignment="Left" Margin="143,80,0,0" TextWrapping="Wrap" Text="{DynamicResource general_DisplayName}" VerticalAlignment="Top"/>
-                        <bettercontrols:NumberBox MaxValue="65535" ToolTip="{DynamicResource general_ID_Tooltip}" x:Name="txtID" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,105,0,0"/>
+                        <bettercontrols:NumberBox TextBoxBase.TextChanged="NPC_ID_Change" MaxValue="65535" ToolTip="{DynamicResource general_ID_Tooltip}" x:Name="txtID" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,105,0,0"/>
                         <TextBlock  HorizontalAlignment="Left" Margin="143,109,0,0" TextWrapping="Wrap" Text="{DynamicResource general_ID}" VerticalAlignment="Top"/>
-                        <bettercontrols:NumberBox x:Name="txtStartDialogueID" MaxValue="65535" ToolTip="{DynamicResource general_StartDialogue_Tooltip}" HorizontalAlignment="Left" Height="23" Margin="10,134,0,0" VerticalAlignment="Top" Width="128"/>
+                        <bettercontrols:NumberBox TextBoxBase.TextChanged="StartDialogue_ID_Change" x:Name="txtStartDialogueID" MaxValue="65535" ToolTip="{DynamicResource general_StartDialogue_Tooltip}" HorizontalAlignment="Left" Height="23" Margin="10,134,0,0" VerticalAlignment="Top" Width="128"/>
                         <TextBlock  HorizontalAlignment="Left" Margin="143,138,0,0" TextWrapping="Wrap" Text="{DynamicResource general_StartDialogue}" VerticalAlignment="Top"/>
                         <Button Click="Char_EditConditions_Button_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource general_Conditions}" Margin="10,162,0,0" Width="212" Height="28"/>
                         <Button Click="RegenerateGuids_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource general_Regenerate}" Margin="10,195,0,0" MinWidth="212" Height="28"/>
@@ -125,22 +125,22 @@
                                 <Label Content="{DynamicResource tool_Color_Red}" HorizontalAlignment="Left" Margin="10,0,0,5" VerticalAlignment="Bottom" Width="20"/>
                                 <Label Content="{DynamicResource tool_Color_Green}" HorizontalAlignment="Left" Margin="35,0,0,5" VerticalAlignment="Bottom" Width="20"/>
                                 <Label Content="{DynamicResource tool_Color_Blue}" HorizontalAlignment="Left" Margin="60,0,0,5" VerticalAlignment="Bottom" Width="20"/>
-                                <TextBox Name="colorHexOut" IsReadOnly="True" Margin="0,0,10,70" TextWrapping="Wrap" Text="#000000" HorizontalAlignment="Right" Width="133" Height="23" VerticalAlignment="Bottom"/>
+                                <TextBox Name="colorHexOut" IsReadOnly="True" Margin="0,0,10,68" TextWrapping="Wrap" Text="#000000" HorizontalAlignment="Right" Width="133" Height="24" VerticalAlignment="Bottom"/>
                                 <Button  Click="UserColorList_AddColor" Content="{DynamicResource apparel_User_Color_Save}" Margin="0,0,10,10" HorizontalAlignment="Right" Width="133" Height="20" VerticalAlignment="Bottom"/>
                                 <Button  Click="RandomColor_Click" Content="{DynamicResource tool_Color_Random}" Height="23" HorizontalAlignment="Right" Margin="0,0,10,40" VerticalAlignment="Bottom" Width="133"/>
                             </Grid>
                         </GroupBox>
-                        <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="98" Margin="10,10,0,0" VerticalAlignment="Top" Width="98">
+                        <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="98" Margin="8,38,0,0" VerticalAlignment="Top" Width="98">
                             <Image Name="faceImageControl" />
                         </Border>
-                        <mah:NumericUpDown Minimum="0" x:Name="faceImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,111,0,0" Width="{Binding Width, ElementName=faceImageBorder}" ValueChanged="FaceImageIndex_Changed" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
-                        <Border x:Name="beardImageBorder" BorderBrush="{Binding BorderBrush, ElementName=faceImageBorder}" BorderThickness="1" HorizontalAlignment="Left" Height="{Binding Height, ElementName=faceImageBorder}" Width="{Binding Width, ElementName=faceImageBorder}" VerticalAlignment="Top" Margin="212,10,0,0">
-                            <Grid Name="beardRenderGrid" DataContext="{Binding SolidColorBrush}">
+                        <mah:NumericUpDown Minimum="0" x:Name="faceImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,140,0,0" Width="{Binding Width, ElementName=faceImageBorder}" ValueChanged="FaceImageIndex_Changed" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
+                        <Border x:Name="beardImageBorder" BorderBrush="{Binding BorderBrush, ElementName=faceImageBorder}" BorderThickness="1" HorizontalAlignment="Left" Height="{Binding Height, ElementName=faceImageBorder}" Width="{Binding Width, ElementName=faceImageBorder}" VerticalAlignment="Top" Margin="210,38,0,0">
+                            <Grid Name="beardRenderGrid" DataContext="{Binding SolidColorBrush}" Background="#EEAAAAAA">
                                 <Canvas>
                                     <Line X1="27" Y1="27" X2="70" Y2="70" Stroke="Red" StrokeThickness="2" />
                                     <Line X1="70" Y1="27" X2="27" Y2="70" Stroke="Red" StrokeThickness="2" />
                                 </Canvas>
-                                <Canvas Visibility="Collapsed">
+                                <Canvas>
                                     <Polygon Points="7,74 7,22 16,22 16,32 79,32 79,22 88,22 88,74 7,74 25,56 70,56 70,40 25,40 25,56" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
                                 </Canvas>
                                 <Canvas Visibility="Collapsed">
@@ -190,86 +190,90 @@
                                 </Canvas>
                             </Grid>
                         </Border>
-                        <mah:NumericUpDown Minimum="0" x:Name="beardImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="212,111,0,0" Width="{Binding Width, ElementName=beardImageBorder}" ValueChanged="BeardImageIndex_Changed" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
-                        <Border x:Name="hairImageBorder" BorderBrush="{Binding BorderBrush, ElementName=beardImageBorder}" BorderThickness="{Binding BorderThickness, ElementName=beardImageBorder}" HorizontalAlignment="Left" Height="{Binding Height, ElementName=beardImageBorder}" Width="{Binding Width, ElementName=beardImageBorder}" VerticalAlignment="Top" Margin="111,10,0,0">
-                            <Grid Name="hairRenderGrid" DataContext="{Binding SolidColorBrush}">
+                        <mah:NumericUpDown Minimum="0" x:Name="beardImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,140,0,0" Width="{Binding Width, ElementName=beardImageBorder}" ValueChanged="BeardImageIndex_Changed" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
+                        <Border x:Name="hairImageBorder" BorderBrush="{Binding BorderBrush, ElementName=beardImageBorder}" BorderThickness="{Binding BorderThickness, ElementName=beardImageBorder}" HorizontalAlignment="Left" Height="{Binding Height, ElementName=beardImageBorder}" Width="{Binding Width, ElementName=beardImageBorder}" VerticalAlignment="Top" Margin="109,38,0,0">
+                            <Grid Name="hairRenderGrid" DataContext="{Binding SolidColorBrush}" Background="#EEAAAAAA">
                                 <Canvas>
                                     <Line X1="27" Y1="27" X2="70" Y2="70" Stroke="Red" StrokeThickness="2" />
                                     <Line X1="70" Y1="27" X2="27" Y2="70" Stroke="Red" StrokeThickness="2" />
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="25,85 16,85 16,76 11,76 11,61 6,61 6,41 2,41 2,33 6,33 6,28 16,28 16,23 36,23 36,18 45,18 45,14 74,14 74,9 93,9 93,17 87,17 87,22 82,22 82,56 69,56 69,46 55,46 55,41 49,41 49,46 39,46 39,51 35,51 35,56 30,56 30,61 25,61" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="2,45 8,45 8,39 14,39 14,34 20,34 20,29 39,29 39,23 93,23 93,49 49,49 49,55 38,55 38,59 33,59 33,65 22,65 22,71 2,71" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="2,42 2,52 7,52 7,58 28,58 28,52 34,52 34,58 65,58 65,52 72,52 72,58 93,58 93,48 82,48 82,42 61,42 61,53 55,53 55,42 61,42 61,37 45,37 45,48 38,48 38,37 29,37 29,42 17,42 17,48 12,48 12,42" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="16,90 16,74 22,74 22,62 28,62 28,52 33,52 33,47 38,47 38,41 44,41 44,30 87,30 87,25 93,25 93,10 87,10 87,4 56,4 56,10 34,10 34,15 13,15 13,20 7,20 7,31 2,31 2,62 7,62 7,90" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="2,93 8,93 8,27 14,27 14,93 20,93 20,40 27,40 27,93 33,93 33,54 40,54 40,93 46,93 46,60 53,60 53,93 60,93 60,80 67,80 67,93 79,93 79,47 86,47 86,93 92,93 92,47 86,47 86,40 92,40 92,35 86,35 86,15 79,15 79,9 73,9 73,3 67,3 67,9 60,9 60,15 67,15 67,27 60,27 60,60 53,60 53,27 60,27 60,15 54,15 54,9 34,9 34,15 40,15 40,21 34,21 34,34 40,34 40,40 34,40 34,34 20,34 20,27 27,27 27,21 34,21 34,15 9,15 9,22 2,22" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="33,88 33,78 23,78 23,73 12,73 12,67 2,67 2,72 7,72 7,77 18,77 18,83 29,83 29,88" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="33,66 33,57 28,57 28,51 24,51 24,47 18,47 18,36 13,36 13,31 7,31 7,26 3,26 3,31 7,31 7,36 7,40 13,40 13,47 18,47 18,51 24,51 24,61 29,61 29,66" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="34,8 39,8 39,30 44,30 44,50 34,50" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="51,50 61,50 61,29 66,29 66,8 62,8 62,19 56,19 56,40 51,40" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="67,50 77,50 77,39 82,39 82,29 88,29 88,18 93,18 93,8 89,8 89,13 83,13 83,24 78,24 78,35 72,35 72,46 67,46" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="20,84 20,54 15,54 15,44 10,44 10,39 5,39 5,29 10,29 10,19 15,19 15,14 20,14 20,9 25,9 25,19 35,19 35,24 65,24 65,19 85,19 85,24 90,24 90,39 85,39 85,44 45,44 45,54 40,54 40,59 35,59 35,64 30,64 30,74 25,74 25,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="10,84 10,69 5,69 5,39 10,39 10,29 15,29 15,24 35,24 35,19 55,19 55,14 75,14 75,19 80,19 80,34 85,34 85,59 80,59 80,54 70,54 70,49 50,49 50,54 40,54 40,59 35,59 35,64 25,64 25,74 20,74 20,79 15,79 15,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="15,84 15,69 10,69 10,49 5,49 5,34 15,34 15,29 10,29 10,24 30,24 30,14 25,14 25,19 40,19 40,14 55,14 55,19 65,19 65,14 85,14 85,9 90,9 90,24 85,24 85,29 80,29 80,54 75,54 75,49 70,49 70,44 55,44 55,49 45,49 45,54 35,54 35,59 30,59 30,64 25,64 25,69 20,69 20,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="10,86 10,76 5,76 5,46 10,46 10,31 15,31 15,21 20,21 20,16 25,16 25,11 85,11 85,16 90,16 90,46 85,46 85,56 75,56 75,61 60,61 60,66 50,66 50,71 30,71 30,76 25,76 25,81 20,81 20,86" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="15,84 15,69 10,69 10,59 5,59 5,54 10,54 10,49 5,49 5,39 10,39 10,24 5,24 5,29 25,29 25,19 20,19 20,24 30,24 30,29 40,29 40,24 45,24 45,19 40,19 40,14 50,14 50,19 65,19 65,14 70,14 70,19 80,19 80,14 85,14 85,9 90,9 90,24 85,24 85,29 80,29 80,34 90,34 90,39 85,39 85,44 80,44 80,64 75,64 75,54 60,54 60,49 45,49 45,54 35,54 35,59 30,59 30,64 25,64 25,69 20,69 20,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="4,67 4,47 9,47 9,42 14,42 14,37 19,37 19,42 29,42 29,22 69,22 69,27 79,27 79,37 84,37 84,52 89,52 89,72 84,72 84,67 79,67 79,62 74,62 74,57 54,57 54,52 24,52 24,57 19,57 19,62 9,62 9,67" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="36,87 26,87 26,82 16,82 16,77 6,77 6,52 1,52 1,27 11,27 11,22 21,22 21,17 31,17 31,12 81,12 81,7 91,7 91,22 86,22 86,32 81,32 81,42 76,42 76,52 36,52" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="85,90 75,90 75,85 65,85 65,80 55,80 55,75 45,75 45,70 40,70 40,65 35,65 35,55 25,55 25,60 20,60 20,65 15,65 15,70 10,70 10,55 5,55 5,25 10,25 10,15 15,15 15,10 35,10 35,5 55,5 55,0 75,0 75,5 80,5 80,20 85,20 85,45 80,45 80,40 65,40 65,60 70,60 70,70 75,70 75,75 80,75 80,85 85,85" Canvas.Left="2" Canvas.Top="3" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="10,85 5,85 5,80 0,80 0,60 5,60 5,45 10,45 10,35 20,35 20,15 25,15 25,10 35,10 35,5 50,5 50,0 85,0 85,35 70,35 70,40 65,40 65,45 55,45 55,50 45,50 45,55 35,55 35,60 20,60 20,55 10,55" Canvas.Top="4" Canvas.Left="4" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="15,90 10,90 10,65 5,65 5,40 10,40 10,25 15,25 15,15 20,15 20,10 25,10 25,5 60,5 60,10 70,10 70,15 75,15 75,20 80,20 80,50 75,50 75,35 25,35 25,40 20,40 20,50 15,50" Canvas.Top="2" Canvas.Left="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="5,75 0,75 0,25 5,25 5,20 20,20 20,15 35,15 35,10 50,10 50,15 60,15 60,20 75,20 75,25 85,25 85,45 80,45 80,40 65,40 65,35 45,35 45,40 35,40 35,45 30,45 30,50 20,50 20,55 15,55 15,60 10,60 10,65 5,65" Canvas.Top="4" Canvas.Left="3" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="0,60 0,35 5,35 5,30 15,30 15,25 35,25 35,20 65,20 65,25 75,25 75,30 80,30 80,35 85,35 85,65 80,65 80,70 75,70 75,55 65,55 65,60 55,60 55,50 20,50 20,55 10,55 10,60" Canvas.Top="2" Canvas.Left="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="15,70 15,55 10,55 10,45 5,45 5,35 0,35 0,40 15,40 15,45 25,45 25,30 15,30 15,25 20,25 20,35 35,35 35,40 40,40 40,45 60,45 60,50 75,50 75,60 80,60 80,65 65,65 65,60 35,60 35,65 20,65 20,70" Canvas.Top="3" Canvas.Left="4" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="0,70 0,45 5,45 5,40 25,40 25,30 30,30 30,20 35,20 35,30 40,30 40,35 55,35 55,40 70,40 70,45 80,45 80,55 85,55 85,70 80,70 80,65 75,65 75,60 70,60 70,55 50,55 50,50 30,50 30,55 15,55 15,60 10,60 10,65 5,65 5,70" Canvas.Left="2" Canvas.Top="4" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="25,85 15,85 15,80 10,80 10,75 5,75 5,70 0,70 0,50 5,50 5,35 10,35 10,30 15,30 15,25 20,25 20,20 25,20 25,15 40,15 40,10 55,10 55,15 65,15 65,20 70,20 70,25 75,25 75,30 80,30 80,45 85,45 85,65 80,65 80,75 75,75 75,80 70,80 70,85 60,85 60,55 25,55" Canvas.Left="3" Canvas.Top="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                                 <Canvas>
-                                    <Polygon Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    <Polygon Points="0,80 0,30 5,30 5,25 20,25 20,20 35,20 35,15 50,15 50,20 60,20 60,25 75,25 75,30 85,30 85,80 80,80 80,50 70,50 70,45 15,45 15,50 5,50 5,80" Canvas.Left="2" Canvas.Top="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
                                 </Canvas>
                             </Grid>
                         </Border>
-                        <mah:NumericUpDown Minimum="0" x:Name="hairImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="111,111,0,0" Width="{Binding Width, ElementName=hairImageBorder}" ValueChanged="HairImageIndex_Changed" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
+                        <mah:NumericUpDown Minimum="0" x:Name="hairImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="109,140,0,0" Width="{Binding Width, ElementName=hairImageBorder}" ValueChanged="HairImageIndex_Changed" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
                         <TextBox TextChanged="ApparelSkinColorBox_TextChanged" Name="apparelSkinColorBox" HorizontalAlignment="Left" Height="23" Margin="313,10,0,0" TextWrapping="Wrap" MaxLength="7" VerticalAlignment="Top" Width="120" mah:TextBoxHelper.Watermark="#000000" mah:TextBoxHelper.HasText="True"/>
                         <TextBox TextChanged="ApparelHairColorBox_TextChanged" Name="apparelHairColorBox" HorizontalAlignment="Left" Height="23" Margin="313,38,0,0" TextWrapping="Wrap" MaxLength="7" VerticalAlignment="Top" Width="120" mah:TextBoxHelper.HasText="True" mah:TextBoxHelper.Watermark="#000000"/>
-                        <CheckBox Name="apparelLeftHandedCheckbox" Content="{DynamicResource apparel_LeftHanded}" HorizontalAlignment="Left" Margin="313,66,0,0" VerticalAlignment="Top"/>
-                        <ComboBox Name="apparelPoseBox" HorizontalAlignment="Left" SelectedIndex="0" Margin="313,84,0,0" VerticalAlignment="Top" Width="120">
+                        <CheckBox Click="LeftHanded_Update" Name="apparelLeftHandedCheckbox" Content="{DynamicResource apparel_LeftHanded}" HorizontalAlignment="Left" Margin="313,66,0,0" VerticalAlignment="Top"/>
+                        <ComboBox SelectionChanged="EquippedChange" Name="apparelPoseBox" HorizontalAlignment="Left" SelectedIndex="0" Margin="313,84,0,0" VerticalAlignment="Top" Width="120">
                             <ComboBoxItem Content="{DynamicResource apparel_Pose_Stand}">
                                 <ComboBoxItem.Tag>
                                     <npc:NPC_Pose>Stand</npc:NPC_Pose>
@@ -319,18 +323,21 @@
                         <TextBlock HorizontalAlignment="Left" Margin="438,87,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Pose}" VerticalAlignment="Top"/>
                         <TextBlock HorizontalAlignment="Left" Margin="438,13,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Skin}" VerticalAlignment="Top"/>
                         <TextBlock HorizontalAlignment="Left" Margin="438,41,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Hair}" VerticalAlignment="Top"/>
+                        <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Face}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,10,0,0" Width="98" Height="28"/>
+                        <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Hair}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="109,10,0,0" Width="98" Height="28"/>
+                        <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Beard}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,10,0,0" Width="98" Height="28"/>
                         <GroupBox Header="{DynamicResource apparel_Group_Equipment}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,0,0,10" Width="300" Height="300">
                             <Grid>
-                                <bettercontrols:NumberBox x:Name="hatIdBox" MaxValue="65535" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox x:Name="maskIdBox" MaxValue="65535" Margin="10,33,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox x:Name="glassesIdBox" MaxValue="65535" Margin="10,56,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox x:Name="vestIdBox" MaxValue="65535" Margin="10,79,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox x:Name="topIdBox" MaxValue="65535" Margin="10,102,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox x:Name="backpackIdBox" MaxValue="65535" Margin="10,125,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox x:Name="bottomIdBox" MaxValue="65535" Margin="10,148,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox x:Name="primaryIdBox" MaxValue="65535" Margin="10,171,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox x:Name="secondaryIdBox" MaxValue="65535" Margin="10,194,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox x:Name="tertiaryIdBox" MaxValue="65535" Margin="10,217,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox Tag="HAT" ValueChanged="Equip_Change" x:Name="hatIdBox" MaxValue="65535" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox Tag="MASK" ValueChanged="Equip_Change" x:Name="maskIdBox" MaxValue="65535" Margin="10,33,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox Tag="GLASSES" ValueChanged="Equip_Change" x:Name="glassesIdBox" MaxValue="65535" Margin="10,56,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox Tag="VEST" ValueChanged="Equip_Change" x:Name="vestIdBox" MaxValue="65535" Margin="10,79,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox Tag="TOP" ValueChanged="Equip_Change" x:Name="topIdBox" MaxValue="65535" Margin="10,102,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox Tag="BACK" ValueChanged="Equip_Change" x:Name="backpackIdBox" MaxValue="65535" Margin="10,125,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox Tag="BOTTOM" ValueChanged="Equip_Change" x:Name="bottomIdBox" MaxValue="65535" Margin="10,148,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox Tag="PRIMARY" ValueChanged="Equip_Change" x:Name="primaryIdBox" MaxValue="65535" Margin="10,171,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox Tag="SECONDARY" ValueChanged="Equip_Change" x:Name="secondaryIdBox" MaxValue="65535" Margin="10,194,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox Tag="TERTIARY" ValueChanged="Equip_Change" x:Name="tertiaryIdBox" MaxValue="65535" Margin="10,217,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
                                 <Label Content="{DynamicResource apparel_Hat_ID}" Margin="111,4,10,0" VerticalAlignment="Top" Height="24"/>
                                 <Label Content="{DynamicResource apparel_Mask_ID}" Margin="111,27,10,0" VerticalAlignment="Top" Height="24"/>
                                 <Label Content="{DynamicResource apparel_Glasses_ID}" Margin="111,50,10,0" VerticalAlignment="Top" Height="24"/>
@@ -341,7 +348,7 @@
                                 <Label Content="{DynamicResource apparel_Primary_ID}" Margin="111,165,10,0" VerticalAlignment="Top" Height="24"/>
                                 <Label Content="{DynamicResource apparel_Secondary_ID}" Margin="111,188,10,0" VerticalAlignment="Top" Height="24"/>
                                 <Label Content="{DynamicResource apparel_Tertiary_ID}" Margin="111,211,10,0" VerticalAlignment="Top" Height="24"/>
-                                <ComboBox Name="equipSlotBox" HorizontalAlignment="Left" Margin="10,240,0,0" VerticalAlignment="Top" Width="120">
+                                <ComboBox SelectionChanged="EquippedChange" Name="equipSlotBox" HorizontalAlignment="Left" Margin="10,240,0,0" VerticalAlignment="Top" Width="120">
                                     <ComboBoxItem Content="{DynamicResource apparel_Equip_None}">
                                         <ComboBoxItem.Tag>
                                             <npc:Equip_Type>None</npc:Equip_Type>
@@ -469,7 +476,7 @@
                         <GroupBox Grid.Row="1" Grid.Column="1" Margin="5" Header="{DynamicResource vendor_SellList}">
                             <ScrollViewer>
                                 <StackPanel Name="vendorListSellItems">
-                                    
+
                                 </StackPanel>
                             </ScrollViewer>
                         </GroupBox>

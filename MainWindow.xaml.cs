@@ -376,11 +376,11 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(0, 9, 2, 1);
+        public static Version Version => new Version(0, 9, 3, 0);
         #endregion
         #region STATIC
         public static MainWindow Instance;
-        public static NPCSave CurrentNPC { get; set; }
+        public static NPCSave CurrentNPC { get; set; } = new NPCSave();
         public static object DiscordWorker { get; set; }
         public static DispatcherTimer AutosaveTimer { get; set; }
 
@@ -389,11 +389,51 @@ namespace BowieD.Unturned.NPCMaker
         #region CURRENT NPC
         public static string saveFile = "";
         public static bool isSaved = true;
-        public static List<NPCDialogue> dialogues = new List<NPCDialogue>();
-        public static List<NPCQuest> quests = new List<NPCQuest>();
-        public static List<NPCVendor> vendors = new List<NPCVendor>();
-        public static List<NPC.Condition> visibilityConditions = new List<NPC.Condition>();
-        public static NPCSave StateAsNPC => Instance.ConvertCurrentStateToNPC();
+        public static List<NPCDialogue> dialogues
+        {
+            get
+            {
+                return CurrentNPC.dialogues;
+            }
+            set
+            {
+                CurrentNPC.dialogues = value;
+            }
+        }
+        public static List<NPCQuest> quests
+        {
+            get
+            {
+                return CurrentNPC.quests;
+            }
+            set
+            {
+                CurrentNPC.quests = value;
+            }
+        }
+        public static List<NPCVendor> vendors
+        {
+            get
+            {
+                return CurrentNPC.vendors;
+            }
+            set
+            {
+                CurrentNPC.vendors = value;
+            }
+        }
+        public static List<NPC.Condition> visibilityConditions
+        {
+            get
+            {
+                return CurrentNPC.visibilityConditions;
+            }
+            set
+            {
+                CurrentNPC.visibilityConditions = value;
+            }
+        }
+        //public static NPCSave StateAsNPC => Instance.ConvertCurrentStateToNPC();
         #endregion
         #region SAVE_LOAD
         public void Save(bool asExample = false)
@@ -413,7 +453,7 @@ namespace BowieD.Unturned.NPCMaker
                 SaveFileDialog sfd = new SaveFileDialog
                 {
                     Filter = $"{(string)TryFindResource("save_Filter")} (*.npc)|*.npc",
-                    FileName = $"{ConvertCurrentStateToNPC().editorName}.npc",
+                    FileName = $"{CurrentNPC.editorName}.npc",
                     OverwritePrompt = true
                 };
                 var result = sfd.ShowDialog();
@@ -435,7 +475,7 @@ namespace BowieD.Unturned.NPCMaker
             {
                 if (asExample)
                 {
-                    NPCExample example = new NPCExample(ConvertCurrentStateToNPC());
+                    NPCExample example = new NPCExample(CurrentNPC);
                     if (saveFile != null && saveFile != "")
                     {
                         using (FileStream fs = new FileStream(saveFile, FileMode.Create))
@@ -457,14 +497,13 @@ namespace BowieD.Unturned.NPCMaker
                         return;
                     }
                     #endif
-                    NPCSave save = ConvertCurrentStateToNPC();
                     if (saveFile != null && saveFile != "")
                     {
                         using (FileStream fs = new FileStream(saveFile, FileMode.Create))
                         using (XmlWriter writer = XmlWriter.Create(fs))
                         {
                             XmlSerializer ser = new XmlSerializer(typeof(NPCSave));
-                            ser.Serialize(writer, save);
+                            ser.Serialize(writer, CurrentNPC);
                         }
                         DoNotification((string)TryFindResource("notify_Saved"));
                         isSaved = true;
@@ -542,21 +581,107 @@ namespace BowieD.Unturned.NPCMaker
         }
         #endregion
         #region EVENTS
+        private void EditorName_Change(object sender, TextChangedEventArgs e)
+        {
+            CurrentNPC.editorName = Inputted_EditorName;
+            isSaved = false;
+        }
+        private void DisplayName_Change(object sender, TextChangedEventArgs e)
+        {
+            CurrentNPC.displayName = Inputted_DisplayName;
+            isSaved = false;
+        }
+        private void NPC_ID_Change(object sender, TextChangedEventArgs e)
+        {
+            CurrentNPC.id = Inputted_ID;
+            isSaved = false;
+        }
+        private void StartDialogue_ID_Change(object sender, TextChangedEventArgs e)
+        {
+            CurrentNPC.startDialogueId = Inputted_StartDialogueID;
+            isSaved = false;
+        }
+        private void Equip_Change(object sender, long e)
+        {
+            switch ((sender as NumberBox).Tag.ToString())
+            {
+                case "HAT":
+                    CurrentNPC.hat = Inputted_Equip_Hat;
+                    break;
+                case "TOP":
+                    CurrentNPC.top = Inputted_Equip_Top;
+                    break;
+                case "BOTTOM":
+                    CurrentNPC.bottom = Inputted_Equip_Bottom;
+                    break;
+                case "MASK":
+                    CurrentNPC.mask = Inputted_Equip_Mask;
+                    break;
+                case "BACK":
+                    CurrentNPC.backpack = Inputted_Equip_Backpack;
+                    break;
+                case "VEST":
+                    CurrentNPC.vest = Inputted_Equip_Vest;
+                    break;
+                case "GLASSES":
+                    CurrentNPC.glasses = Inputted_Equip_Glasses;
+                    break;
+                case "PRIMARY":
+                    CurrentNPC.equipPrimary = Inputted_Equip_Primary;
+                    break;
+                case "SECONDARY":
+                    CurrentNPC.equipSecondary = Inputted_Equip_Secondary;
+                    break;
+                case "TERTIARY":
+                    CurrentNPC.equipTertiary = Inputted_Equip_Tertiary;
+                    break;
+            }
+            isSaved = false;
+        }
+        private void LeftHanded_Update(object sender, RoutedEventArgs e)
+        {
+            CurrentNPC.leftHanded = apparelLeftHandedCheckbox.IsChecked.Value;
+            isSaved = false;
+        }
+        private void EquippedChange(object sender, SelectionChangedEventArgs e)
+        {
+            if ((sender as ComboBox).Name == equipSlotBox?.Name)
+                CurrentNPC.equipped = equipSlotBox?.SelectedIndex > -1 ? (Equip_Type)(equipSlotBox.SelectedItem as ComboBoxItem).Tag : Equip_Type.None;
+            else
+                CurrentNPC.pose = (NPC_Pose)(apparelPoseBox.SelectedItem as ComboBoxItem)?.Tag;
+            isSaved = false;
+        }
         private void RegenerateGuids_Click(object sender, RoutedEventArgs e)
         {
-            foreach (NPCDialogue d in CurrentNPC?.dialogues)
+            if (CurrentNPC != null)
             {
-                d.guid = Guid.NewGuid().ToString("N");
+                if (CurrentNPC.dialogues != null)
+                {
+                    foreach (NPCDialogue d in CurrentNPC.dialogues)
+                    {
+                        if (d != null)
+                            d.guid = Guid.NewGuid().ToString("N");
+                    }
+                }
+                if (CurrentNPC.vendors != null)
+                {
+                    foreach (NPCVendor v in CurrentNPC.vendors)
+                    {
+                        if (v != null)
+                            v.guid = Guid.NewGuid().ToString("N");
+                    }
+                }
+                if (CurrentNPC.quests != null)
+                {
+                    foreach (NPCQuest q in CurrentNPC.quests)
+                    {
+                        if (q != null)
+                            q.guid = Guid.NewGuid().ToString("N");
+                    }
+                }
+                DoNotification((string)TryFindResource("general_Regenerated"));
+                isSaved = false;
             }
-            foreach (NPCVendor v in CurrentNPC?.vendors)
-            {
-                v.guid = Guid.NewGuid().ToString("N");
-            }
-            foreach (NPCQuest q in CurrentNPC?.quests)
-            {
-                q.guid = Guid.NewGuid().ToString("N");
-            }
-            DoNotification((string)TryFindResource("general_Regenerated"));
         }
         private void AutosaveTimer_Tick(object sender, EventArgs e)
         {
@@ -579,6 +704,7 @@ namespace BowieD.Unturned.NPCMaker
             Universal_ListView ulv = new Universal_ListView(visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
             ulv.ShowDialog();
             visibilityConditions = ulv.Values.Cast<NPC.Condition>().ToList();
+            isSaved = false;
         }
         private void RandomColor_Click(object sender, RoutedEventArgs e)
         {
@@ -749,7 +875,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             Save();
             Export_ExportWindow eew = new Export_ExportWindow(AppDomain.CurrentDomain.BaseDirectory + $@"results\{Inputted_EditorName}\");
-            eew.DoActions(ConvertCurrentStateToNPC());
+            eew.DoActions(CurrentNPC);
         }
         private void SaveClick(object sender, RoutedEventArgs e)
         {
@@ -786,6 +912,7 @@ namespace BowieD.Unturned.NPCMaker
         private void FaceImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
             faceImageControl.Source = ("Resources/Unturned/Faces/" + e.NewValue + ".png").GetImageSource();
+            CurrentNPC.face = (byte)e.NewValue;
             isSaved = false;
         }
         private void BeardImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
@@ -798,6 +925,7 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             beardRenderGrid.Children[(int)e.NewValue].Visibility = Visibility.Visible;
+            CurrentNPC.beard = (byte)e.NewValue;
             isSaved = false;
         }
         private void HairImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
@@ -810,6 +938,7 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             hairRenderGrid.Children[(int)e.NewValue].Visibility = Visibility.Visible;
+            CurrentNPC.haircut = (byte)e.NewValue;
             isSaved = false;
         }
         internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -905,14 +1034,11 @@ namespace BowieD.Unturned.NPCMaker
             {
                 Brush color = bc.ConvertFromString(text) as Brush;
                 faceImageBorder.Background = color;
-                hairImageBorder.Background = color;
-                beardImageBorder.Background = color;
+                CurrentNPC.skinColor = new NPCColor() { HEX = text };
             }
             else
             {
                 faceImageBorder.Background = Brushes.Transparent;
-                hairImageBorder.Background = Brushes.Transparent;
-                beardImageBorder.Background = Brushes.Transparent;
             }
         }
         private void ApparelHairColorBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -924,6 +1050,7 @@ namespace BowieD.Unturned.NPCMaker
                 Brush color = bc.ConvertFromString(text) as Brush;
                 beardRenderGrid.DataContext = color;
                 hairRenderGrid.DataContext = color;
+                CurrentNPC.hairColor = new NPCColor() { HEX = text };
             }
             else
             {
@@ -933,62 +1060,29 @@ namespace BowieD.Unturned.NPCMaker
         }
         #endregion
         #region STATE CONVERTERS
-        public NPCSave ConvertCurrentStateToNPC()
-        {
-            NPCSave npc = new NPCSave
-            {
-                face = (byte)faceImageIndex.Value,
-                beard = (byte)beardImageIndex.Value,
-                haircut = (byte)hairImageIndex.Value,
-                id = Inputted_ID,
-                editorName = Inputted_EditorName,
-                displayName = Inputted_DisplayName,
-                dialogues = dialogues,
-                vendors = vendors,
-                quests = quests,
-                startDialogueId = Inputted_StartDialogueID,
-                hat = Inputted_Equip_Hat,
-                top = Inputted_Equip_Top,
-                bottom = Inputted_Equip_Bottom,
-                glasses = Inputted_Equip_Glasses,
-                backpack = Inputted_Equip_Backpack,
-                mask = Inputted_Equip_Mask,
-                vest = Inputted_Equip_Vest,
-                leftHanded = apparelLeftHandedCheckbox.IsChecked.Value,
-                pose = (NPC_Pose)(apparelPoseBox.SelectedItem as ComboBoxItem).Tag,
-                equipped = equipSlotBox.SelectedIndex > -1 ? (Equip_Type)(equipSlotBox.SelectedItem as ComboBoxItem).Tag : Equip_Type.None,
-                hairColor = new NPCColor() { HEX = apparelHairColorBox.Text },
-                skinColor = new NPCColor() { HEX = apparelSkinColorBox.Text },
-                equipPrimary = Inputted_Equip_Primary,
-                equipSecondary = Inputted_Equip_Secondary,
-                equipTertiary = Inputted_Equip_Tertiary,
-                visibilityConditions = visibilityConditions
-            };
-            return npc;
-        }
         public void ConvertNPCToState(NPCSave save)
         {
             apparelSkinColorBox.Text = save.skinColor.HEX;
             apparelHairColorBox.Text = save.hairColor.HEX;
-            Inputted_Equip_Backpack = save.backpack;
-            Inputted_Equip_Mask = save.mask;
-            Inputted_Equip_Vest = save.vest;
-            Inputted_Equip_Top = save.top;
-            Inputted_Equip_Bottom = save.bottom;
-            Inputted_Equip_Glasses = save.glasses;
-            Inputted_Equip_Hat = save.hat;
-            Inputted_Equip_Primary = save.equipPrimary;
-            Inputted_Equip_Secondary = save.equipSecondary;
-            Inputted_Equip_Tertiary = save.equipTertiary;
+            backpackIdBox.Value = save.backpack;
+            maskIdBox.Value = save.mask;
+            vestIdBox.Value = save.vest;
+            topIdBox.Value = save.top;
+            bottomIdBox.Value = save.bottom;
+            glassesIdBox.Value = save.glasses;
+            hatIdBox.Value = save.hat;
+            primaryIdBox.Value = save.equipPrimary;
+            secondaryIdBox.Value = save.equipSecondary;
+            tertiaryIdBox.Value = save.equipTertiary;
             faceImageIndex.Value = save.face;
             beardImageIndex.Value = save.beard;
             hairImageIndex.Value = save.haircut;
             Inputted_ID = save.id;
             Inputted_EditorName = save.editorName;
             Inputted_DisplayName = save.displayName;
-            dialogues = save.dialogues;
-            vendors = save.vendors;
-            quests = save.quests;
+            //dialogues = save.dialogues;
+            //vendors = save.vendors;
+            //quests = save.quests;
             Inputted_StartDialogueID = save.startDialogueId;
             apparelLeftHandedCheckbox.IsChecked = save.leftHanded;
             visibilityConditions = save.visibilityConditions;
@@ -1008,7 +1102,7 @@ namespace BowieD.Unturned.NPCMaker
                     break;
                 }
             }
-            CurrentNPC = save;
+            //CurrentNPC = save;
         }
 #endregion
         #region PROPERTIES
@@ -1307,6 +1401,7 @@ namespace BowieD.Unturned.NPCMaker
             dialogues.Add(CurrentDialogue);
             if (sender != null)
                 DoNotification((string)TryFindResource("notify_Dialogue_Saved"));
+            isSaved = false;
         }
         private void Dialogue_ClearCurrentButtonClick(object sender, RoutedEventArgs e)
         {
@@ -1559,6 +1654,7 @@ namespace BowieD.Unturned.NPCMaker
             vendors.Add(cur);
             if (sender != null)
                 DoNotification((string)TryFindResource("notify_Vendor_Saved"));
+            isSaved = false;
         }
         private void ClearVendor_Click(object sender, RoutedEventArgs e)
         {
@@ -1719,6 +1815,7 @@ namespace BowieD.Unturned.NPCMaker
             quests.Add(CurrentQuest);
             if (sender != null)
                 DoNotification((string)TryFindResource("notify_Quest_Saved"));
+            isSaved = false;
         }
         private void LoadQuest_Click(object sender, RoutedEventArgs e)
         {
@@ -1832,9 +1929,7 @@ namespace BowieD.Unturned.NPCMaker
             notificationsStackPanel.Children.Add(notificationBase);
         }
         #endregion
-
-
-
+        
         #region DEEP GAME ANALYSIS METHODS
         // check for conflict id's, check every item in NPC for validness ^.^
         // WIP

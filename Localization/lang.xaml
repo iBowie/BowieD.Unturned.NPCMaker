@@ -93,7 +93,10 @@
     <v:String x:Key="general_Conditions">Visibility Conditions</v:String>
     <v:String x:Key="general_Regenerate">Regenerate GUIDs</v:String>
     <v:String x:Key="general_Regenerated">GUIDs were generated again</v:String>
-    
+
+    <v:String x:Key="apparel_Hair">Haircut</v:String>
+    <v:String x:Key="apparel_Beard">Beard</v:String>
+    <v:String x:Key="apparel_Face">Face</v:String>
     <v:String x:Key="apparel_LeftHanded">Lefthanded</v:String>
     <v:String x:Key="apparel_Pose">Pose</v:String>
     <v:String x:Key="apparel_Pose_Stand">Stand</v:String>
@@ -127,6 +130,7 @@
     <v:String x:Key="apparel_User_Color_Samples">User Color Samples</v:String>
     <v:String x:Key="apparel_User_Color_Save">Save color</v:String>
     <v:String x:Key="apparel_User_Color_Remove">Delete</v:String>
+    <v:String x:Key="apparel_Color_Select">Palette</v:String>
 
     <v:String x:Key="dialogue_Save">Save dialogue</v:String>
     <v:String x:Key="dialogue_Open">Open existing...</v:String>

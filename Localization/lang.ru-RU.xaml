@@ -92,7 +92,10 @@
     <v:String x:Key="general_Conditions">Условия видимости</v:String>
     <v:String x:Key="general_Regenerate">Повторная генерация GUIDов</v:String>
     <v:String x:Key="general_Regenerated">GUIDы были заново созданы</v:String>
-    
+
+    <v:String x:Key="apparel_Hair">Причёска</v:String>
+    <v:String x:Key="apparel_Beard">Борода</v:String>
+    <v:String x:Key="apparel_Face">Лицо</v:String>
     <v:String x:Key="apparel_LeftHanded">Левша</v:String>
     <v:String x:Key="apparel_Pose">Поза</v:String>
     <v:String x:Key="apparel_Pose_Stand">Стоит</v:String>
@@ -126,6 +129,7 @@
     <v:String x:Key="apparel_User_Color_Samples">Ваши цвета</v:String>
     <v:String x:Key="apparel_User_Color_Save">Сохранить</v:String>
     <v:String x:Key="apparel_User_Color_Remove">Удалить цвет</v:String>
+    <v:String x:Key="apparel_Color_Select">Открыть палитру</v:String>
     
     <v:String x:Key="dialogue_Save">Сохранить диалог</v:String>
     <v:String x:Key="dialogue_Open">Открыть существующий...</v:String>

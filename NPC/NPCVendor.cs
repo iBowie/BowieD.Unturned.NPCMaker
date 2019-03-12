@@ -11,6 +11,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             guid = Guid.NewGuid().ToString("N");
             comment = "";
+            items = new List<VendorItem>();
         }
 
         [XmlAttribute]
@@ -22,7 +23,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public string vendorTitle;
         public string vendorDescription;
         public List<VendorItem> items;
+        [XmlIgnore]
         public List<VendorItem> BuyItems => (items ?? new List<VendorItem>()).Where(d => d.isBuy).ToList();
+        [XmlIgnore]
         public List<VendorItem> SellItems => (items ?? new List<VendorItem>()).Where(d => !d.isBuy).ToList();
 
         public override string ToString()

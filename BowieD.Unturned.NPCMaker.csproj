@@ -382,38 +382,7 @@
     <Resource Include="Resources\Unturned\Faces\9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Unturned\Hairs\0.png" />
-    <Resource Include="Resources\Unturned\Hairs\1.png" />
-    <Resource Include="Resources\Unturned\Hairs\10.png" />
-    <Resource Include="Resources\Unturned\Hairs\11.png" />
-    <Resource Include="Resources\Unturned\Hairs\12.png" />
-    <Resource Include="Resources\Unturned\Hairs\13.png" />
-    <Resource Include="Resources\Unturned\Hairs\14.png" />
-    <Resource Include="Resources\Unturned\Hairs\15.png" />
-    <Resource Include="Resources\Unturned\Hairs\16.png" />
-    <Resource Include="Resources\Unturned\Hairs\17.png" />
-    <Resource Include="Resources\Unturned\Hairs\18.png" />
-    <Resource Include="Resources\Unturned\Hairs\19.png" />
-    <Resource Include="Resources\Unturned\Hairs\2.png" />
-    <Resource Include="Resources\Unturned\Hairs\20.png" />
-    <Resource Include="Resources\Unturned\Hairs\21.png" />
-    <Resource Include="Resources\Unturned\Hairs\22.png" />
-    <Resource Include="Resources\Unturned\Hairs\3.png" />
-    <Resource Include="Resources\Unturned\Hairs\4.png" />
-    <Resource Include="Resources\Unturned\Hairs\5.png" />
-    <Resource Include="Resources\Unturned\Hairs\6.png" />
-    <Resource Include="Resources\Unturned\Hairs\7.png" />
-    <Resource Include="Resources\Unturned\Hairs\8.png" />
-    <Resource Include="Resources\Unturned\Hairs\9.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\ICON_PLUS.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Unturned\VEHICLE.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Unturned\ITEM.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\ICON_BUY.png" />
