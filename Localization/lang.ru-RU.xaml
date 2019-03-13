@@ -222,6 +222,7 @@
     <v:String x:Key="export_Step_Vendors">Магазины</v:String>
     <v:String x:Key="export_Step_Quests">Задания</v:String>
     <v:String x:Key="export_Done">НИП успешно экспортирован! Результат находится в папке results.</v:String>
+    <v:String x:Key="export_Done_Goto">Перейти к результату</v:String>
     <v:String x:Key="export_Done_Title">Экспорт завершён!</v:String>
     <v:String x:Key="export_Warnings_Desc">У Вас есть предупреждения в списке ошибок. Вы уверены что хотите продолжить экспорт?</v:String>
     <v:String x:Key="export_Warnings_Title">Экспорт не безопасен</v:String>

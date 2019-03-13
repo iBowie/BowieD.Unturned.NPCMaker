@@ -2,10 +2,12 @@
 using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
@@ -24,8 +26,22 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             base.Show();
             Start(save);
-            MainWindow.Instance.DoNotification((string)TryFindResource("export_Done"));
-            //MessageBox.Show((string)TryFindResource("export_Done"), (string)TryFindResource("export_Done_Title"), MessageBoxButton.OK);
+            TextBlock text = new TextBlock
+            {
+                FontSize = 16,
+                TextAlignment = TextAlignment.Center,
+                Text = (string)TryFindResource("export_Done"),
+                TextWrapping = TextWrapping.Wrap
+            };
+            TextBlock buttonText = new TextBlock
+            {
+                FontSize = 16,
+                TextAlignment = TextAlignment.Center,
+                TextWrapping = TextWrapping.Wrap,
+                Text = (string)TryFindResource("export_Done_Goto")
+            };
+            Action<object, RoutedEventArgs> action = new Action<object, RoutedEventArgs>((sender, e) => { Process.Start(AppDomain.CurrentDomain.BaseDirectory + "results"); });
+            MainWindow.Instance.DoNotification(text, buttonText, action);
             this.Close();
         }
 

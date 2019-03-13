@@ -1928,6 +1928,14 @@ namespace BowieD.Unturned.NPCMaker
             Notification.NotificationBase notificationBase = new Notification.NotificationBase(notificationsStackPanel, this.Background, textBlock);
             notificationsStackPanel.Children.Add(notificationBase);
         }
+        public void DoNotification(TextBlock textBlock, TextBlock buttonText, Action<object, RoutedEventArgs> buttonAction)
+        {
+            Button b = new Button();
+            b.Click += new RoutedEventHandler(buttonAction);
+            b.Content = buttonText;
+            Notification.NotificationBase notificationBase = new Notification.NotificationBase(notificationsStackPanel, this.Background, textBlock, b);
+            notificationsStackPanel.Children.Add(notificationBase);
+        }
         #endregion
         
         #region DEEP GAME ANALYSIS METHODS

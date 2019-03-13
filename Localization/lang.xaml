@@ -223,6 +223,7 @@
     <v:String x:Key="export_Step_Vendors">Vendors</v:String>
     <v:String x:Key="export_Step_Quests">Quests</v:String>
     <v:String x:Key="export_Done">NPC succesfully exported! View results folder.</v:String>
+    <v:String x:Key="export_Done_Goto">Go to results</v:String>
     <v:String x:Key="export_Done_Title">Exported</v:String>
     <v:String x:Key="export_Warnings_Desc">You have at least one warning. Are you sure you want to export NPC?</v:String>
     <v:String x:Key="export_Warnings_Title">Unsafe export</v:String>

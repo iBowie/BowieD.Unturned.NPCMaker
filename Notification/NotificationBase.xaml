@@ -10,6 +10,6 @@
         <Border.Effect>
             <DropShadowEffect Opacity="0.5" ShadowDepth="2"/>
         </Border.Effect>
-        <Grid Name="notificationContentGrid"/>
+        <StackPanel Name="notificationContentGrid"/>
     </Border>
 </UserControl>
