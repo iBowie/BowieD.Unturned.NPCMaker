@@ -130,6 +130,7 @@
     <v:String x:Key="apparel_User_Color_Save">Сохранить</v:String>
     <v:String x:Key="apparel_User_Color_Remove">Удалить цвет</v:String>
     <v:String x:Key="apparel_Color_Select">Открыть палитру</v:String>
+    <v:String x:Key="apparel_Char_Random">Случайно</v:String>
     
     <v:String x:Key="dialogue_Save">Сохранить диалог</v:String>
     <v:String x:Key="dialogue_Open">Открыть существующий...</v:String>

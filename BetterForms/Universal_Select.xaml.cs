@@ -27,19 +27,19 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             switch (returnType)
             {
                 case ReturnType.Dialogue:
-                    foreach (var d in MainWindow.dialogues)
+                    foreach (var d in MainWindow.CurrentNPC.dialogues)
                     {
                         Add(d, d.ToString());
                     }
                     break;
                 case ReturnType.Quest:
-                    foreach (var q in MainWindow.quests)
+                    foreach (var q in MainWindow.CurrentNPC.quests)
                     {
                         Add(q, q.ToString());
                     }
                     break;
                 case ReturnType.Vendor:
-                    foreach (var v in MainWindow.vendors)
+                    foreach (var v in MainWindow.CurrentNPC.vendors)
                     {
                         Add(v, v.ToString());
                     }

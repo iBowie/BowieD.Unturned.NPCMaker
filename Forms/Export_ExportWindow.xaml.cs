@@ -176,11 +176,12 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                 {
                                     asset.WriteLine($"Message_{k}_Pages {message.PagesAmount}");
                                 }
-                                List<NPCResponse> visibleResponses = dialogue.responses.Where(d => d.visibleIn == null || d.visibleIn.Count() == 0 ||  d.visibleIn.Contains(k)).ToList();
+                                List<NPCResponse> visibleResponses = dialogue.responses.Where(d => d.VisibleInAll || d.visibleIn.Contains(k)).ToList();
                                 if (visibleResponses.Count() > 0)
                                 {
                                     asset.WriteLine($"Message_{k}_Responses {visibleResponses.Count()}");
-                                    for (int c = 0; c < visibleResponses.Count(); c++)
+                                    int visResCnt = visibleResponses.Count();
+                                    for (int c = 0; c < visResCnt; c++)
                                     {
                                         NPCResponse response = visibleResponses[c];
                                         int id = dialogue.responses.IndexOf(response);
@@ -190,7 +191,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                 if (message.conditions.Count() > 0)
                                 {
                                     asset.WriteLine($"Message_{k}_Conditions {message.conditions.Count()}");
-                                    for (int c = 0; c < message.conditions.Count(); c++)
+                                    int msgCnt = message.conditions.Count();
+                                    for (int c = 0; c < msgCnt; c++)
                                     {
                                         asset.WriteLine(message.conditions[c].GetFullFilePresentation("Message_", k, c));
                                     }
@@ -203,8 +205,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             for (int k = 0; k < dialogue.ResponsesAmount; k++)
                             {
                                 NPCResponse response = dialogue.responses[k];
-                                if (response.openDialogueId > 0)
-                                    asset.WriteLine($"Response_{k}_Dialogue {response.openDialogueId}");
                                 if (!response.VisibleInAll)
                                 {
                                     asset.WriteLine($"Response_{k}_Messages {response.visibleIn.Length}");
@@ -213,6 +213,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                         asset.WriteLine($"Response_{k}_Message_{c} {response.visibleIn[c]}");
                                     }
                                 }
+                                if (response.openDialogueId > 0)
+                                    asset.WriteLine($"Response_{k}_Dialogue {response.openDialogueId}");
                                 if (response.openQuestId > 0)
                                     asset.WriteLine($"Response_{k}_Quest {response.openQuestId}");
                                 if (response.openVendorId > 0)
@@ -220,7 +222,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                 if (response.conditions.Count() > 0)
                                 {
                                     asset.WriteLine($"Response_{k}_Conditions {response.conditions.Count()}");
-                                    for (int c = 0; c < response.conditions.Count(); c++)
+                                    int cndCnt = response.conditions.Count();
+                                    for (int c = 0; c < cndCnt; c++)
                                     {
                                         asset.WriteLine(response.conditions[c].GetFullFilePresentation("Response_", k, c));
                                     }
@@ -228,7 +231,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                 if (response.rewards.Count() > 0)
                                 {
                                     asset.WriteLine($"Response_{k}_Rewards {response.rewards.Count()}");
-                                    for (int c = 0; c < response.rewards.Count(); c++)
+                                    int rwrdCnt = response.rewards.Count();
+                                    for (int c = 0; c < rwrdCnt; c++)
                                     {
                                         asset.WriteLine(response.rewards[c].GetFilePresentation("Response_", k, c));
                                     }

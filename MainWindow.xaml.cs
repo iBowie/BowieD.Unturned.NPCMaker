@@ -85,7 +85,7 @@ namespace BowieD.Unturned.NPCMaker
                     {
                         if (FileCompatible(args[k]))
                         {
-                            if (!Load(args[k], false))
+                            if (!Load(args[k], false, true))
                             {
                                 if (Load(args[k], true, true))
                                 {
@@ -376,7 +376,7 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(0, 9, 3, 1);
+        public static Version Version => new Version(0, 9, 4, 0);
         #endregion
         #region STATIC
         public static MainWindow Instance;
@@ -389,51 +389,6 @@ namespace BowieD.Unturned.NPCMaker
         #region CURRENT NPC
         public static string saveFile = "";
         public static bool isSaved = true;
-        public static List<NPCDialogue> dialogues
-        {
-            get
-            {
-                return CurrentNPC.dialogues;
-            }
-            set
-            {
-                CurrentNPC.dialogues = value;
-            }
-        }
-        public static List<NPCQuest> quests
-        {
-            get
-            {
-                return CurrentNPC.quests;
-            }
-            set
-            {
-                CurrentNPC.quests = value;
-            }
-        }
-        public static List<NPCVendor> vendors
-        {
-            get
-            {
-                return CurrentNPC.vendors;
-            }
-            set
-            {
-                CurrentNPC.vendors = value;
-            }
-        }
-        public static List<NPC.Condition> visibilityConditions
-        {
-            get
-            {
-                return CurrentNPC.visibilityConditions;
-            }
-            set
-            {
-                CurrentNPC.visibilityConditions = value;
-            }
-        }
-        //public static NPCSave StateAsNPC => Instance.ConvertCurrentStateToNPC();
         #endregion
         #region SAVE_LOAD
         public void Save(bool asExample = false)
@@ -514,11 +469,8 @@ namespace BowieD.Unturned.NPCMaker
         }
         public bool Load(string path, bool asExample = false, bool skipPrompt = false)
         {
-            if (!skipPrompt)
-                if (!(CurrentNPC?.IsReadOnly).GetValueOrDefault())
-                    if (!isSaved)
-                        if (!SavePrompt())
-                            return false;
+            if (!skipPrompt && !SavePrompt())
+                return false;
             try
             {
                 using (FileStream fs = new FileStream(path, FileMode.Open))
@@ -537,6 +489,7 @@ namespace BowieD.Unturned.NPCMaker
                         saveFile = path;
                     }
                     ConvertNPCToState(CurrentNPC);
+                    isSaved = true;
                 }
                 DoNotification((string)TryFindResource("notify_Loaded"));
                 return true;
@@ -545,10 +498,8 @@ namespace BowieD.Unturned.NPCMaker
         }
         public bool SavePrompt()
         {
-            if ((CurrentNPC?.IsReadOnly).GetValueOrDefault())
-            {
+            if (isSaved == true || CurrentNPC.IsReadOnly || CurrentNPC == new NPCSave())
                 return true;
-            }
             var result = MessageBox.Show((string)TryFindResource("app_Exit_UnsavedChanges_Text"), (string)TryFindResource("app_Exit_UnsavedChanges_Title"), MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
             if (result == MessageBoxResult.Yes)
             {
@@ -701,9 +652,9 @@ namespace BowieD.Unturned.NPCMaker
         }
         private void Char_EditConditions_Button_Click(object sender, RoutedEventArgs e)
         {
-            Universal_ListView ulv = new Universal_ListView(visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
+            Universal_ListView ulv = new Universal_ListView(CurrentNPC.visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
             ulv.ShowDialog();
-            visibilityConditions = ulv.Values.Cast<NPC.Condition>().ToList();
+            CurrentNPC.visibilityConditions = ulv.Values.Cast<NPC.Condition>().ToList();
             isSaved = false;
         }
         private void RandomColor_Click(object sender, RoutedEventArgs e)
@@ -1058,6 +1009,18 @@ namespace BowieD.Unturned.NPCMaker
                 hairRenderGrid.DataContext = Brushes.Black;
             }
         }
+        private void ApparelHaircut_Random(object sender, RoutedEventArgs e)
+        {
+            hairImageIndex.Value = new Random().Next(0, haircutAmount);
+        }
+        private void ApparelBeard_Random(object sender, RoutedEventArgs e)
+        {
+            beardImageIndex.Value = new Random().Next(0, beardAmount);
+        }
+        private void ApparelFace_Random(object sender, RoutedEventArgs e)
+        {
+            faceImageIndex.Value = new Random().Next(0, faceAmount);
+        }
         #endregion
         #region STATE CONVERTERS
         public void ConvertNPCToState(NPCSave save)
@@ -1080,12 +1043,8 @@ namespace BowieD.Unturned.NPCMaker
             Inputted_ID = save.id;
             Inputted_EditorName = save.editorName;
             Inputted_DisplayName = save.displayName;
-            //dialogues = save.dialogues;
-            //vendors = save.vendors;
-            //quests = save.quests;
             Inputted_StartDialogueID = save.startDialogueId;
             apparelLeftHandedCheckbox.IsChecked = save.leftHanded;
-            visibilityConditions = save.visibilityConditions;
             foreach (var i in equipSlotBox.Items)
             {
                 if ((Equip_Type)(i as ComboBoxItem).Tag == save.equipped)
@@ -1102,7 +1061,6 @@ namespace BowieD.Unturned.NPCMaker
                     break;
                 }
             }
-            //CurrentNPC = save;
         }
 #endregion
         #region PROPERTIES
@@ -1305,12 +1263,7 @@ namespace BowieD.Unturned.NPCMaker
                     ShowNewFolderButton = false
                 };
                 var res = fbd.ShowDialog();
-                if (res == System.Windows.Forms.DialogResult.Cancel)
-                {
-                    blockActionsOverlay.Visibility = Visibility.Collapsed;
-                    return;
-                }
-                if (!File.Exists(fbd.SelectedPath + @"\Unturned.exe"))
+                if (res == System.Windows.Forms.DialogResult.Cancel || !File.Exists(fbd.SelectedPath + @"\Unturned.exe"))
                 {
                     blockActionsOverlay.Visibility = Visibility.Collapsed;
                     return;
@@ -1319,9 +1272,9 @@ namespace BowieD.Unturned.NPCMaker
                 blockActionsOverlay.Visibility = Visibility.Collapsed;
             }
             FindMistakes();
-            foreach (NPCDialogue dialogue in dialogues)
+            foreach (NPCDialogue dialogue in CurrentNPC.dialogues)
             {
-                if (CachedUnturnedFiles.Any(d => d.Type == EAssetType.Dialogue && d.Id == dialogue.id))
+                if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == EAssetType.Dialogue && d.Id == dialogue.id))
                 {
                     lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_dialogue"), dialogue.id), "", IMPORTANCE.HIGH, true)
                     {
@@ -1330,9 +1283,9 @@ namespace BowieD.Unturned.NPCMaker
                 }
                 await Task.Yield();
             }
-            foreach (NPCVendor vendor in vendors)
+            foreach (NPCVendor vendor in CurrentNPC.vendors)
             {
-                if (CachedUnturnedFiles.Any(d => d.Type == EAssetType.Vendor && d.Id == vendor.id))
+                if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == EAssetType.Vendor && d.Id == vendor.id))
                 {
                     lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_vendor"), vendor.id), "", IMPORTANCE.HIGH, true)
                     {
@@ -1360,9 +1313,9 @@ namespace BowieD.Unturned.NPCMaker
                 }
                 await Task.Yield();
             }
-            foreach (NPCQuest quest in quests)
+            foreach (NPCQuest quest in CurrentNPC.quests)
             {
-                if (CachedUnturnedFiles.Any(d => d.Type == EAssetType.Quest && d.Id == quest.id))
+                if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == EAssetType.Quest && d.Id == quest.id))
                 {
                     lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_quest"), quest.id), "", IMPORTANCE.HIGH, true)
                     {
@@ -1374,7 +1327,7 @@ namespace BowieD.Unturned.NPCMaker
             if (Inputted_ID > 0)
             {
                 ushort input = Inputted_ID;
-                if (CachedUnturnedFiles.Any(d => d.Type == EAssetType.NPC && d.Id == input))
+                if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == EAssetType.NPC && d.Id == input))
                 {
                     lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_char"), input), "", IMPORTANCE.HIGH, true)
                     {
@@ -1395,10 +1348,10 @@ namespace BowieD.Unturned.NPCMaker
                     DoNotification((string)TryFindResource("dialogue_ID_Zero"));
                 return;
             }
-            var o = dialogues.Where(d => d.id == dil.id);
+            var o = CurrentNPC.dialogues.Where(d => d.id == dil.id);
             if (o.Count() > 0)
-                dialogues.Remove(o.ElementAt(0));
-            dialogues.Add(CurrentDialogue);
+                CurrentNPC.dialogues.Remove(o.ElementAt(0));
+            CurrentNPC.dialogues.Add(CurrentDialogue);
             if (sender != null)
                 DoNotification((string)TryFindResource("notify_Dialogue_Saved"));
             isSaved = false;
@@ -1432,13 +1385,13 @@ namespace BowieD.Unturned.NPCMaker
         }
         private void Dialogue_OpenButtonClick(object sender, RoutedEventArgs e)
         {
-            var ulv = new Universal_ListView(dialogues.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Dialogue, false)).ToList(), Universal_ItemList.ReturnType.Dialogue);
+            var ulv = new Universal_ListView(CurrentNPC.dialogues.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Dialogue, false)).ToList(), Universal_ItemList.ReturnType.Dialogue);
             if (ulv.ShowDialog() == true)
             {
                 Dialogue_SaveButtonClick(sender, null);
                 CurrentDialogue = ulv.SelectedValue as NPCDialogue;
             }
-            dialogues = ulv.Values.Cast<NPCDialogue>().ToList();
+            CurrentNPC.dialogues = ulv.Values.Cast<NPCDialogue>().ToList();
         }
         private void Dialogue_AddMessageClick(object sender, RoutedEventArgs e)
         {
@@ -1497,6 +1450,7 @@ namespace BowieD.Unturned.NPCMaker
             if (dial.id > 0 && Inputted_StartDialogueID != dial.id)
             {
                 Inputted_StartDialogueID = dial.id;
+                CurrentNPC.startDialogueId = dial.id;
                 try
                 {
                     DoNotification(string.Format((string)TryFindResource("dialogue_Start_Notify"), dial.id));
@@ -1523,6 +1477,7 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     if (ui is Dialogue_Response dr)
                     {
+                        dr.RebuildResponse();
                         responses.Add(dr);
                     }
                 }
@@ -1574,7 +1529,7 @@ namespace BowieD.Unturned.NPCMaker
                 dialogue_commentbox.Text = d.comment;
             }
         }
-        #endregion
+        #endregion  
         #region VENDOR_EDITOR
         public NPCVendor CurrentVendor
         {
@@ -1647,11 +1602,11 @@ namespace BowieD.Unturned.NPCMaker
             NPCVendor cur = CurrentVendor;
             if (cur.id == 0)
                 return;
-            if (vendors.Where(d => d.id == cur.id).Count() > 0)
+            if (CurrentNPC.vendors.Where(d => d.id == cur.id).Count() > 0)
             {
-                vendors.Remove(vendors.Where(d => d.id == cur.id).ElementAt(0));
+                CurrentNPC.vendors.Remove(CurrentNPC.vendors.Where(d => d.id == cur.id).ElementAt(0));
             }
-            vendors.Add(cur);
+            CurrentNPC.vendors.Add(cur);
             if (sender != null)
                 DoNotification((string)TryFindResource("notify_Vendor_Saved"));
             isSaved = false;
@@ -1663,13 +1618,13 @@ namespace BowieD.Unturned.NPCMaker
         }
         private void OpenVendor_Click(object sender, RoutedEventArgs e)
         {
-            BetterForms.Universal_ListView ulv = new BetterForms.Universal_ListView(vendors.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Vendor, false)).ToList(), Universal_ItemList.ReturnType.Vendor);
+            BetterForms.Universal_ListView ulv = new BetterForms.Universal_ListView(CurrentNPC.vendors.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Vendor, false)).ToList(), Universal_ItemList.ReturnType.Vendor);
             if (ulv.ShowDialog() == true)
             {
                 SaveVendor_Click(sender, null);
                 CurrentVendor = ulv.SelectedValue as NPCVendor;
             }
-            vendors = ulv.Values.Cast<NPCVendor>().ToList();
+            CurrentNPC.vendors = ulv.Values.Cast<NPCVendor>().ToList();
         }
         private void DeleteVendorBuy_Click(object sender, RoutedEventArgs e)
         {
@@ -1810,22 +1765,22 @@ namespace BowieD.Unturned.NPCMaker
             NPCQuest cur = CurrentQuest;
             if (cur.id == 0)
                 return;
-            if (quests.Where(d => d.id == questIdBox.Value).Count() > 0)
-                quests.Remove(quests.Where(d => d.id == questIdBox.Value).ElementAt(0));
-            quests.Add(CurrentQuest);
+            if (CurrentNPC.quests.Where(d => d.id == questIdBox.Value).Count() > 0)
+                CurrentNPC.quests.Remove(CurrentNPC.quests.Where(d => d.id == questIdBox.Value).ElementAt(0));
+            CurrentNPC.quests.Add(CurrentQuest);
             if (sender != null)
                 DoNotification((string)TryFindResource("notify_Quest_Saved"));
             isSaved = false;
         }
         private void LoadQuest_Click(object sender, RoutedEventArgs e)
         {
-            BetterForms.Universal_ListView ulv = new BetterForms.Universal_ListView(quests.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Quest, false)).ToList(), Universal_ItemList.ReturnType.Quest);
+            BetterForms.Universal_ListView ulv = new BetterForms.Universal_ListView(CurrentNPC.quests.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Quest, false)).ToList(), Universal_ItemList.ReturnType.Quest);
             if (ulv.ShowDialog() == true)
             {
                 SaveQuest_Click(sender, null);
                 CurrentQuest = ulv.SelectedValue as NPCQuest;
             }
-            quests = ulv.Values.Cast<NPCQuest>().ToList();
+            CurrentNPC.quests = ulv.Values.Cast<NPCQuest>().ToList();
         }
         private void ClearQuest_Click(object sender, RoutedEventArgs e)
         {
@@ -2090,23 +2045,9 @@ namespace BowieD.Unturned.NPCMaker
             public EAssetType Type { get; set; }
         }
 
-        internal static bool AssetExist(EAssetType assetType, ushort id)
-        {
-            var res = (from d
-             in CachedUnturnedFiles
-             where d.Id == id && d.Type == assetType
-             select d);
-            return (res.Count() > 0);
-        }
-        internal static UnturnedFile GetAsset(EAssetType assetType, ushort id)
-        {
-            var res = (from d
-                       in CachedUnturnedFiles
-                       where d.Id == id && d.Type == assetType
-                       select d);
-            return res.First();
-        }
+        internal static bool AssetExist(EAssetType assetType, ushort id) => CachedUnturnedFiles.Any(d => d.Id == id && d.Type == assetType);
+        internal static UnturnedFile GetAsset(EAssetType assetType, ushort id) => CachedUnturnedFiles.FirstOrDefault(d => d.Id == id && d.Type == assetType);
 
-#endregion
+        #endregion
     }
 }

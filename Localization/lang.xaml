@@ -131,6 +131,7 @@
     <v:String x:Key="apparel_User_Color_Save">Save color</v:String>
     <v:String x:Key="apparel_User_Color_Remove">Delete</v:String>
     <v:String x:Key="apparel_Color_Select">Palette</v:String>
+    <v:String x:Key="apparel_Char_Random">Randomize</v:String>
 
     <v:String x:Key="dialogue_Save">Save dialogue</v:String>
     <v:String x:Key="dialogue_Open">Open existing...</v:String>

@@ -22,6 +22,12 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
         }
         
         public NPC.NPCResponse Response { get; private set; }
+        public void RebuildResponse()
+        {
+            Response.openDialogueId = (ushort)txtBoxDialogueID.Value;
+            Response.openQuestId = (ushort)txtBoxQuestID.Value;
+            Response.openVendorId = (ushort)txtBoxVendorID.Value;
+        }
 
         #region EVENTS
         private void EditRewardsButton_Click(object sender, RoutedEventArgs e)
@@ -58,7 +64,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void QuestSelect_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.quests.Count() == 0)
+            if (MainWindow.CurrentNPC.quests.Count() == 0)
                 return;
             Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Quest);
             select.ShowDialog();
@@ -70,7 +76,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void VendorSelect_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.vendors.Count() == 0)
+            if (MainWindow.CurrentNPC.vendors.Count() == 0)
                 return;
             Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Vendor);
             select.ShowDialog();
@@ -82,7 +88,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void DialogueSelect_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.dialogues.Count() == 0)
+            if (MainWindow.CurrentNPC.dialogues.Count() == 0)
                 return;
             Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Dialogue);
             select.ShowDialog();

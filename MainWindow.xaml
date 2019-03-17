@@ -11,7 +11,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         Title="{DynamicResource app_Title}"
-        MinHeight="593" Height="593"
+        MinHeight="623" Height="623"
         MinWidth="1000" Width="1000"
         DragEnter="Window_DragEnter"
         DragLeave="Window_DragLeave"
@@ -270,6 +270,9 @@
                             </Grid>
                         </Border>
                         <mah:NumericUpDown Minimum="0" x:Name="hairImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="109,140,0,0" Width="{Binding Width, ElementName=hairImageBorder}" ValueChanged="HairImageIndex_Changed" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
+                        <Button Click="ApparelFace_Random" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="8,171,0,0" Width="98"/>
+                        <Button Click="ApparelHaircut_Random" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="109,171,0,0" Width="98"/>
+                        <Button Click="ApparelBeard_Random" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="210,171,0,0" Width="98"/>
                         <TextBox TextChanged="ApparelSkinColorBox_TextChanged" Name="apparelSkinColorBox" HorizontalAlignment="Left" Height="23" Margin="313,10,0,0" TextWrapping="Wrap" MaxLength="7" VerticalAlignment="Top" Width="120" mah:TextBoxHelper.Watermark="#000000" mah:TextBoxHelper.HasText="True"/>
                         <TextBox TextChanged="ApparelHairColorBox_TextChanged" Name="apparelHairColorBox" HorizontalAlignment="Left" Height="23" Margin="313,38,0,0" TextWrapping="Wrap" MaxLength="7" VerticalAlignment="Top" Width="120" mah:TextBoxHelper.HasText="True" mah:TextBoxHelper.Watermark="#000000"/>
                         <CheckBox Click="LeftHanded_Update" Name="apparelLeftHandedCheckbox" Content="{DynamicResource apparel_LeftHanded}" HorizontalAlignment="Left" Margin="313,66,0,0" VerticalAlignment="Top"/>

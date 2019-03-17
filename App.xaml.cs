@@ -82,7 +82,6 @@ namespace BowieD.Unturned.NPCMaker
         private void App_LanguageChanged(object sender, EventArgs e)
         {
             Config.Configuration.Properties.Language = Language.Name;
-            Config.Configuration.Save();
         }
 
         public static event EventHandler LanguageChanged;
