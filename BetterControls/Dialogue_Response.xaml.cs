@@ -24,6 +24,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
         public NPC.NPCResponse Response { get; private set; }
         public void RebuildResponse()
         {
+            Response.mainText = mainText.Text;
             Response.openDialogueId = (ushort)txtBoxDialogueID.Value;
             Response.openQuestId = (ushort)txtBoxQuestID.Value;
             Response.openVendorId = (ushort)txtBoxVendorID.Value;

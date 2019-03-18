@@ -376,7 +376,7 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(0, 9, 4, 0);
+        public static Version Version => new Version(0, 9, 4, 1);
         #endregion
         #region STATIC
         public static MainWindow Instance;
@@ -400,6 +400,7 @@ namespace BowieD.Unturned.NPCMaker
                 return;
             }
 #endif
+            RebuildApparel();
             Dialogue_SaveButtonClick(null, null);
             SaveVendor_Click(null, null);
             SaveQuest_Click(null, null);
@@ -1892,7 +1893,22 @@ namespace BowieD.Unturned.NPCMaker
             notificationsStackPanel.Children.Add(notificationBase);
         }
         #endregion
-        
+        #region BUG FIXES
+        public void RebuildApparel()
+        {
+            CurrentNPC.top = (ushort)topIdBox.Value;
+            CurrentNPC.bottom = (ushort)bottomIdBox.Value;
+            CurrentNPC.backpack = (ushort)backpackIdBox.Value;
+            CurrentNPC.glasses = (ushort)glassesIdBox.Value;
+            CurrentNPC.hat = (ushort)hatIdBox.Value;
+            CurrentNPC.mask = (ushort)maskIdBox.Value;
+            CurrentNPC.vest = (ushort)vestIdBox.Value;
+            CurrentNPC.equipPrimary = (ushort)primaryIdBox.Value;
+            CurrentNPC.equipSecondary = (ushort)secondaryIdBox.Value;
+            CurrentNPC.equipTertiary = (ushort)tertiaryIdBox.Value;
+        }
+        #endregion
+
         #region DEEP GAME ANALYSIS METHODS
         // check for conflict id's, check every item in NPC for validness ^.^
         // WIP
