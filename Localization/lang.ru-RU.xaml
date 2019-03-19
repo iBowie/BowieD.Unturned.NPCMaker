@@ -185,6 +185,7 @@
     <v:String x:Key="Condition_Kills_Horde">Зачистить волны</v:String>
     <v:String x:Key="Condition_Kills_Animal">Убить животных</v:String>
     <v:String x:Key="Condition_Kills_Player">Убить игроков</v:String>
+    <v:String x:Key="Condition_Kills_Object">Уничтожить объекты</v:String>
     <v:String x:Key="Condition_Time_Of_Day">Время дня</v:String>
     <v:String x:Key="Condition_Player_Life_Health">Здоровье игрока</v:String>
     <v:String x:Key="Condition_Player_Life_Food">Сытость игрока</v:String>
@@ -237,7 +238,9 @@
     <v:String x:Key="conditionEditor_Amount">Количество</v:String>
     <v:String x:Key="conditionEditor_Animal">ID животного</v:String>
     <v:String x:Key="conditionEditor_Second">Внутриигровая секунда</v:String>
+    <v:String x:Key="conditionEditor_Object">GUID объекта</v:String>
     <v:String x:Key="conditionEditor_Navmesh">ID навигации</v:String>
+    <v:String x:Key="conditionEditor_Navmesh_Objects">Укажите значение 255 если вы не хотите указывать навигацию</v:String>
     <v:String x:Key="conditionEditor_Reset">Сброс по выполнении</v:String>
     <v:String x:Key="conditionEditor_Spawn">Возрождать зомби при подходе</v:String>
     <v:String x:Key="conditionEditor_Reset_Item_Title">Убрать предмет после выполнения</v:String>
