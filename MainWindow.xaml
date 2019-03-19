@@ -38,79 +38,79 @@
             </Grid.RowDefinitions>
             <Menu VerticalAlignment="Top">
                 <MenuItem Header="{DynamicResource menu_File}">
-                    <MenuItem Header="{DynamicResource file_Open}" Click="LoadClick">
+                    <MenuItem Header="{DynamicResource file_Open}" Name="loadButton">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_OPEN.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource file_Save}" Click="SaveClick">
+                    <MenuItem Header="{DynamicResource file_Save}" Name="saveButton">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_SAVE.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource file_SaveAs}" Click="SaveAsClick">
+                    <MenuItem Header="{DynamicResource file_SaveAs}" Name="saveAsButton">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_SAVE.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Save as Example" Name="saveAsExampleButton" Click="SaveAsExampleButton_Click">
+                    <MenuItem Header="Save as Example" Name="saveAsExampleButton">
                         <MenuItem.Icon>
                             <Image Width="16" Source="Resources/ICON_SAVE.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Name="RecentList" Header="{DynamicResource file_Recent}" Click="RecentList_Click">
+                    <MenuItem Name="RecentList" Header="{DynamicResource file_Recent}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_RECENT.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource file_Export}" Click="ExportClick">
+                    <MenuItem Header="{DynamicResource file_Export}" Name="exportButton">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_OK.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource file_Exit}" Click="ExitButtonClick">
+                    <MenuItem Header="{DynamicResource file_Exit}" Name="exitButton">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/ICON_CANCEL.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Header="{DynamicResource menu_Options}" Click="Options_Click"/>
-                <MenuItem Header="{DynamicResource menu_WhatsNew}" Click="WhatsNew_Menu_Click"/>
-                <MenuItem Name="checkForUpdatesButton" Header="{DynamicResource menu_CheckForUpdates}" Click="CheckForUpdates_Click"/>
-                <MenuItem IsEnabled="False" Name="forceUpdateButton" Header="{DynamicResource menu_Update}" Click="ForceUpdate_Click"/>
+                <MenuItem Name="optionsMenuItem" Header="{DynamicResource menu_Options}"/>
+                <MenuItem Name="patchNotesMenuItem" Header="{DynamicResource menu_WhatsNew}"/>
+                <MenuItem Name="checkForUpdatesButton" Header="{DynamicResource menu_CheckForUpdates}"/>
+                <MenuItem IsEnabled="False" Name="forceUpdateButton" Header="{DynamicResource menu_Update}"/>
                 <MenuItem Header="{DynamicResource menu_Communication}">
-                    <MenuItem Click="FeedbackItemClick" Tag="https://steamcommunity.com/profiles/76561198085825110" Header="{DynamicResource feedback_Steam}">
+                    <MenuItem Name="steamComm" Tag="https://steamcommunity.com/profiles/76561198085825110" Header="{DynamicResource feedback_Steam}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/Services/Steam.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Click="FeedbackItemClick" Tag="https://discord.gg/Geqtkx2" Header="{DynamicResource feedback_Discord}">
+                    <MenuItem Name="discordComm" Tag="https://discord.gg/Geqtkx2" Header="{DynamicResource feedback_Discord}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/Services/Discord.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Click="FeedbackItemClick" Tag="https://vk.com/id250813640" Header="{DynamicResource feedback_VK}">
+                    <MenuItem Name="vkComm" Tag="https://vk.com/id250813640" Header="{DynamicResource feedback_VK}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/Services/VK.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Click="AboutMenu_Click" Header="{DynamicResource menu_About}"/>
+                <MenuItem Name="aboutMenuItem" Header="{DynamicResource menu_About}"/>
             </Menu>
-            <TabControl Grid.Row="1" Background="Transparent" Padding="-1" Name="mainTabControl" SelectedIndex="0" Margin="0,5,0,0" SelectionChanged="TabControl_SelectionChanged">
+            <TabControl Grid.Row="1" Background="Transparent" Padding="-1" Name="mainTabControl" SelectedIndex="0" Margin="0,5,0,0">
                 <TabItem Name="generalInfoTab" Header="{DynamicResource tab_General}">
                     <Grid>
                         <TextBlock FontSize="24" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="{DynamicResource general_Title}" VerticalAlignment="Top"/>
-                        <TextBox TextChanged="EditorName_Change" Name="txtEditorName" ToolTip="{DynamicResource general_EditorName_Tooltip}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,47,0,0"/>
+                        <TextBox Name="txtEditorName" ToolTip="{DynamicResource general_EditorName_Tooltip}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,47,0,0"/>
                         <TextBlock HorizontalAlignment="Left" Margin="143,51,0,0" TextWrapping="Wrap" Text="{DynamicResource general_EditorName}" VerticalAlignment="Top"/>
-                        <TextBox TextChanged="DisplayName_Change" Name="txtDisplayName" ToolTip="{DynamicResource general_DisplayName_Tooltip}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,76,0,0"/>
+                        <TextBox Name="txtDisplayName" ToolTip="{DynamicResource general_DisplayName_Tooltip}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,76,0,0"/>
                         <TextBlock  HorizontalAlignment="Left" Margin="143,80,0,0" TextWrapping="Wrap" Text="{DynamicResource general_DisplayName}" VerticalAlignment="Top"/>
-                        <bettercontrols:NumberBox TextBoxBase.TextChanged="NPC_ID_Change" MaxValue="65535" ToolTip="{DynamicResource general_ID_Tooltip}" x:Name="txtID" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,105,0,0"/>
+                        <bettercontrols:NumberBox MaxValue="65535" ToolTip="{DynamicResource general_ID_Tooltip}" x:Name="txtID" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,105,0,0"/>
                         <TextBlock  HorizontalAlignment="Left" Margin="143,109,0,0" TextWrapping="Wrap" Text="{DynamicResource general_ID}" VerticalAlignment="Top"/>
-                        <bettercontrols:NumberBox TextBoxBase.TextChanged="StartDialogue_ID_Change" x:Name="txtStartDialogueID" MaxValue="65535" ToolTip="{DynamicResource general_StartDialogue_Tooltip}" HorizontalAlignment="Left" Height="23" Margin="10,134,0,0" VerticalAlignment="Top" Width="128"/>
+                        <bettercontrols:NumberBox x:Name="txtStartDialogueID" MaxValue="65535" ToolTip="{DynamicResource general_StartDialogue_Tooltip}" HorizontalAlignment="Left" Height="23" Margin="10,134,0,0" VerticalAlignment="Top" Width="128"/>
                         <TextBlock  HorizontalAlignment="Left" Margin="143,138,0,0" TextWrapping="Wrap" Text="{DynamicResource general_StartDialogue}" VerticalAlignment="Top"/>
-                        <Button Click="Char_EditConditions_Button_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource general_Conditions}" Margin="10,162,0,0" Width="212" Height="28"/>
-                        <Button Click="RegenerateGuids_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource general_Regenerate}" Margin="10,195,0,0" MinWidth="212" Height="28"/>
+                        <Button Name="visibilityCondsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource general_Conditions}" Margin="10,162,0,0" Width="212" Height="28"/>
+                        <Button Name="regenerateGuidsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource general_Regenerate}" Margin="10,195,0,0" MinWidth="212" Height="28"/>
                     </Grid>
                 </TabItem>
                 <TabItem Name="apparelTab" Header="{DynamicResource tab_Apparel}">
@@ -119,21 +119,21 @@
                             <Grid>
                                 <Rectangle Name="colorRectangle" Fill="#000000" HorizontalAlignment="Left" Height="16" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="16"/>
                                 <TextBlock Text="{DynamicResource tool_Color_Preview_Label}" VerticalAlignment="Top" Height="17" Margin="31,10,10,196"/>
-                                <Slider ValueChanged="ColorSliderChange" HorizontalAlignment="Left" Maximum="255" SmallChange="1" LargeChange="5" Name="colorSliderR" Orientation="Vertical" Margin="10,32,150,40"/>
-                                <Slider ValueChanged="ColorSliderChange" HorizontalAlignment="Left" Maximum="255" SmallChange="1" LargeChange="5" Name="colorSliderG" Orientation="Vertical" Margin="35,32,125,40"/>
-                                <Slider ValueChanged="ColorSliderChange" HorizontalAlignment="Left" Maximum="255" SmallChange="1" LargeChange="5" Name="colorSliderB" Orientation="Vertical" Margin="60,32,100,40"/>
+                                <Slider HorizontalAlignment="Left" Maximum="255" SmallChange="1" LargeChange="5" Name="colorSliderR" Orientation="Vertical" Margin="10,32,150,40"/>
+                                <Slider HorizontalAlignment="Left" Maximum="255" SmallChange="1" LargeChange="5" Name="colorSliderG" Orientation="Vertical" Margin="35,32,125,40"/>
+                                <Slider HorizontalAlignment="Left" Maximum="255" SmallChange="1" LargeChange="5" Name="colorSliderB" Orientation="Vertical" Margin="60,32,100,40"/>
                                 <Label Content="{DynamicResource tool_Color_Red}" HorizontalAlignment="Left" Margin="10,0,0,5" VerticalAlignment="Bottom" Width="20"/>
                                 <Label Content="{DynamicResource tool_Color_Green}" HorizontalAlignment="Left" Margin="35,0,0,5" VerticalAlignment="Bottom" Width="20"/>
                                 <Label Content="{DynamicResource tool_Color_Blue}" HorizontalAlignment="Left" Margin="60,0,0,5" VerticalAlignment="Bottom" Width="20"/>
                                 <TextBox Name="colorHexOut" IsReadOnly="True" Margin="0,0,10,68" TextWrapping="Wrap" Text="#000000" HorizontalAlignment="Right" Width="133" Height="24" VerticalAlignment="Bottom"/>
-                                <Button  Click="UserColorList_AddColor" Content="{DynamicResource apparel_User_Color_Save}" Margin="0,0,10,10" HorizontalAlignment="Right" Width="133" Height="20" VerticalAlignment="Bottom"/>
-                                <Button  Click="RandomColor_Click" Content="{DynamicResource tool_Color_Random}" Height="23" HorizontalAlignment="Right" Margin="0,0,10,40" VerticalAlignment="Bottom" Width="133"/>
+                                <Button Name="userColorSaveButton" Content="{DynamicResource apparel_User_Color_Save}" Margin="0,0,10,10" HorizontalAlignment="Right" Width="133" Height="20" VerticalAlignment="Bottom"/>
+                                <Button Name="randomColorButton" Content="{DynamicResource tool_Color_Random}" Height="23" HorizontalAlignment="Right" Margin="0,0,10,40" VerticalAlignment="Bottom" Width="133"/>
                             </Grid>
                         </GroupBox>
                         <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="98" Margin="8,38,0,0" VerticalAlignment="Top" Width="98">
                             <Image Name="faceImageControl" />
                         </Border>
-                        <mah:NumericUpDown Minimum="0" x:Name="faceImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,140,0,0" Width="{Binding Width, ElementName=faceImageBorder}" ValueChanged="FaceImageIndex_Changed" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
+                        <mah:NumericUpDown Minimum="0" x:Name="faceImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,140,0,0" Width="{Binding Width, ElementName=faceImageBorder}" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
                         <Border x:Name="beardImageBorder" BorderBrush="{Binding BorderBrush, ElementName=faceImageBorder}" BorderThickness="1" HorizontalAlignment="Left" Height="{Binding Height, ElementName=faceImageBorder}" Width="{Binding Width, ElementName=faceImageBorder}" VerticalAlignment="Top" Margin="210,38,0,0">
                             <Grid Name="beardRenderGrid" DataContext="{Binding SolidColorBrush}" Background="#EEAAAAAA">
                                 <Canvas>
@@ -190,7 +190,7 @@
                                 </Canvas>
                             </Grid>
                         </Border>
-                        <mah:NumericUpDown Minimum="0" x:Name="beardImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,140,0,0" Width="{Binding Width, ElementName=beardImageBorder}" ValueChanged="BeardImageIndex_Changed" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
+                        <mah:NumericUpDown Minimum="0" x:Name="beardImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,140,0,0" Width="{Binding Width, ElementName=beardImageBorder}" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
                         <Border x:Name="hairImageBorder" BorderBrush="{Binding BorderBrush, ElementName=beardImageBorder}" BorderThickness="{Binding BorderThickness, ElementName=beardImageBorder}" HorizontalAlignment="Left" Height="{Binding Height, ElementName=beardImageBorder}" Width="{Binding Width, ElementName=beardImageBorder}" VerticalAlignment="Top" Margin="109,38,0,0">
                             <Grid Name="hairRenderGrid" DataContext="{Binding SolidColorBrush}" Background="#EEAAAAAA">
                                 <Canvas>
@@ -269,14 +269,14 @@
                                 </Canvas>
                             </Grid>
                         </Border>
-                        <mah:NumericUpDown Minimum="0" x:Name="hairImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="109,140,0,0" Width="{Binding Width, ElementName=hairImageBorder}" ValueChanged="HairImageIndex_Changed" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
-                        <Button Click="ApparelFace_Random" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="8,171,0,0" Width="98"/>
-                        <Button Click="ApparelHaircut_Random" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="109,171,0,0" Width="98"/>
-                        <Button Click="ApparelBeard_Random" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="210,171,0,0" Width="98"/>
-                        <TextBox TextChanged="ApparelSkinColorBox_TextChanged" Name="apparelSkinColorBox" HorizontalAlignment="Left" Height="23" Margin="313,10,0,0" TextWrapping="Wrap" MaxLength="7" VerticalAlignment="Top" Width="120" mah:TextBoxHelper.Watermark="#000000" mah:TextBoxHelper.HasText="True"/>
-                        <TextBox TextChanged="ApparelHairColorBox_TextChanged" Name="apparelHairColorBox" HorizontalAlignment="Left" Height="23" Margin="313,38,0,0" TextWrapping="Wrap" MaxLength="7" VerticalAlignment="Top" Width="120" mah:TextBoxHelper.HasText="True" mah:TextBoxHelper.Watermark="#000000"/>
-                        <CheckBox Click="LeftHanded_Update" Name="apparelLeftHandedCheckbox" Content="{DynamicResource apparel_LeftHanded}" HorizontalAlignment="Left" Margin="313,66,0,0" VerticalAlignment="Top"/>
-                        <ComboBox SelectionChanged="EquippedChange" Name="apparelPoseBox" HorizontalAlignment="Left" SelectedIndex="0" Margin="313,84,0,0" VerticalAlignment="Top" Width="120">
+                        <mah:NumericUpDown Minimum="0" x:Name="hairImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="109,140,0,0" Width="{Binding Width, ElementName=hairImageBorder}" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
+                        <Button Name="apparelFaceRandomize" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="8,171,0,0" Width="98"/>
+                        <Button Name="apparelHairRandomize" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="109,171,0,0" Width="98"/>
+                        <Button Name="apparelBeardRandomize" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="210,171,0,0" Width="98"/>
+                        <TextBox Name="apparelSkinColorBox" HorizontalAlignment="Left" Height="23" Margin="313,10,0,0" TextWrapping="Wrap" MaxLength="7" VerticalAlignment="Top" Width="120" mah:TextBoxHelper.Watermark="#000000" mah:TextBoxHelper.HasText="True"/>
+                        <TextBox Name="apparelHairColorBox" HorizontalAlignment="Left" Height="23" Margin="313,38,0,0" TextWrapping="Wrap" MaxLength="7" VerticalAlignment="Top" Width="120" mah:TextBoxHelper.HasText="True" mah:TextBoxHelper.Watermark="#000000"/>
+                        <CheckBox Name="apparelLeftHandedCheckbox" Content="{DynamicResource apparel_LeftHanded}" HorizontalAlignment="Left" Margin="313,66,0,0" VerticalAlignment="Top"/>
+                        <ComboBox Name="apparelPoseBox" HorizontalAlignment="Left" SelectedIndex="0" Margin="313,84,0,0" VerticalAlignment="Top" Width="120">
                             <ComboBoxItem Content="{DynamicResource apparel_Pose_Stand}">
                                 <ComboBoxItem.Tag>
                                     <npc:NPC_Pose>Stand</npc:NPC_Pose>
@@ -331,16 +331,16 @@
                         <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Beard}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,10,0,0" Width="98" Height="28"/>
                         <GroupBox Header="{DynamicResource apparel_Group_Equipment}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,0,0,10" Width="300" Height="300">
                             <Grid>
-                                <bettercontrols:NumberBox Tag="HAT" ValueChanged="Equip_Change" x:Name="hatIdBox" MaxValue="65535" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox Tag="MASK" ValueChanged="Equip_Change" x:Name="maskIdBox" MaxValue="65535" Margin="10,33,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox Tag="GLASSES" ValueChanged="Equip_Change" x:Name="glassesIdBox" MaxValue="65535" Margin="10,56,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox Tag="VEST" ValueChanged="Equip_Change" x:Name="vestIdBox" MaxValue="65535" Margin="10,79,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox Tag="TOP" ValueChanged="Equip_Change" x:Name="topIdBox" MaxValue="65535" Margin="10,102,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox Tag="BACK" ValueChanged="Equip_Change" x:Name="backpackIdBox" MaxValue="65535" Margin="10,125,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox Tag="BOTTOM" ValueChanged="Equip_Change" x:Name="bottomIdBox" MaxValue="65535" Margin="10,148,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox Tag="PRIMARY" ValueChanged="Equip_Change" x:Name="primaryIdBox" MaxValue="65535" Margin="10,171,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox Tag="SECONDARY" ValueChanged="Equip_Change" x:Name="secondaryIdBox" MaxValue="65535" Margin="10,194,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
-                                <bettercontrols:NumberBox Tag="TERTIARY" ValueChanged="Equip_Change" x:Name="tertiaryIdBox" MaxValue="65535" Margin="10,217,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox x:Name="hatIdBox" MaxValue="65535" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox x:Name="maskIdBox" MaxValue="65535" Margin="10,33,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox x:Name="glassesIdBox" MaxValue="65535" Margin="10,56,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox x:Name="vestIdBox" MaxValue="65535" Margin="10,79,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox x:Name="topIdBox" MaxValue="65535" Margin="10,102,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox x:Name="backpackIdBox" MaxValue="65535" Margin="10,125,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox x:Name="bottomIdBox" MaxValue="65535" Margin="10,148,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox x:Name="primaryIdBox" MaxValue="65535" Margin="10,171,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox x:Name="secondaryIdBox" MaxValue="65535" Margin="10,194,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
+                                <bettercontrols:NumberBox x:Name="tertiaryIdBox" MaxValue="65535" Margin="10,217,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96"/>
                                 <Label Content="{DynamicResource apparel_Hat_ID}" Margin="111,4,10,0" VerticalAlignment="Top" Height="24"/>
                                 <Label Content="{DynamicResource apparel_Mask_ID}" Margin="111,27,10,0" VerticalAlignment="Top" Height="24"/>
                                 <Label Content="{DynamicResource apparel_Glasses_ID}" Margin="111,50,10,0" VerticalAlignment="Top" Height="24"/>
@@ -351,7 +351,7 @@
                                 <Label Content="{DynamicResource apparel_Primary_ID}" Margin="111,165,10,0" VerticalAlignment="Top" Height="24"/>
                                 <Label Content="{DynamicResource apparel_Secondary_ID}" Margin="111,188,10,0" VerticalAlignment="Top" Height="24"/>
                                 <Label Content="{DynamicResource apparel_Tertiary_ID}" Margin="111,211,10,0" VerticalAlignment="Top" Height="24"/>
-                                <ComboBox SelectionChanged="EquippedChange" Name="equipSlotBox" HorizontalAlignment="Left" Margin="10,240,0,0" VerticalAlignment="Top" Width="120">
+                                <ComboBox Name="equipSlotBox" HorizontalAlignment="Left" Margin="10,240,0,0" VerticalAlignment="Top" Width="120">
                                     <ComboBoxItem Content="{DynamicResource apparel_Equip_None}">
                                         <ComboBoxItem.Tag>
                                             <npc:Equip_Type>None</npc:Equip_Type>
@@ -549,16 +549,18 @@
                                     <GridViewColumn Width="32">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Width="17" Height="{Binding Width}" Source="{Binding Image}"/>
+                                                <Image Width="17" Height="17" Source="{Binding Image}"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn DisplayMemberBinding="{Binding MistakeName}" Header="{DynamicResource mistakes_ErrorName}" Width="350"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding MistakeDesc}" Header="{DynamicResource mistakes_ErrorDesc}" Width="450"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding MistakeName}" Header="{DynamicResource mistakes_ErrorName}" Width="80"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding MistakeDesc}" Header="{DynamicResource mistakes_ErrorDesc}" Width="600"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
                         <Button Name="deepAnalysis_Button" Click="DA_Button_Click" FontSize="16" VerticalAlignment="Bottom" Content="{DynamicResource mistakes_DeepAnalysis}" ToolTip="{DynamicResource mistakes_DeepAnalysis_Tooltip}" Margin="10,0,10,10" Height="45"/>
+                        <Label Name="noErrorsLabel" VerticalAlignment="Center" HorizontalAlignment="Center" Content="No errors! You're doing great!" FontSize="24" Visibility="Collapsed" Margin="0,0,0,100"/>
+                        
                     </Grid>
                 </TabItem>
                 <TabControl.ItemTemplate>

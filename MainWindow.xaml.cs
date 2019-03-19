@@ -27,6 +27,7 @@ using BowieD.Unturned.NPCMaker.Examples;
 using DiscordRPC;
 using System.Windows.Threading;
 using BowieD.Unturned.NPCMaker.Logging;
+using System.Reflection;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -37,6 +38,8 @@ namespace BowieD.Unturned.NPCMaker
             InitializeComponent();
             Logger.Log($"Launch stage. Version: {Version}.");
             Instance = this;
+            Proxy = new PropertyProxy(this);
+            Proxy.RegisterEvents();
             #region SCALE
             mainGridScale.ScaleX = Config.Configuration.Properties.scale;
             mainGridScale.ScaleY = Config.Configuration.Properties.scale;
@@ -108,11 +111,14 @@ namespace BowieD.Unturned.NPCMaker
             #endregion
             #region APPAREL SETUP
             faceImageIndex.Maximum = faceAmount - 1;
-            FaceImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, faceImageIndex.Value));
             beardImageIndex.Maximum = beardAmount - 1;
             hairImageIndex.Maximum = haircutAmount - 1;
-            beardRenderGrid.DataContext = Brushes.Black;
-            hairRenderGrid.DataContext = Brushes.Black;
+            Proxy.FaceImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, CurrentNPC.face));
+            Proxy.HairImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, CurrentNPC.haircut));
+            Proxy.BeardImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, CurrentNPC.beard));
+            beardRenderGrid.DataContext = CurrentNPC.hairColor.Brush;
+            hairRenderGrid.DataContext = CurrentNPC.hairColor.Brush;
+            faceImageBorder.Background = CurrentNPC.skinColor.Brush;
             #region COLOR SAMPLES
             #region UNTURNED
             List<string> unturnedColors = new List<string>()
@@ -167,14 +173,23 @@ namespace BowieD.Unturned.NPCMaker
                     Margin = new Thickness(0, 0, 0, 0),
                     Tag = $"#{uColor}"
                 };
-                copyButton.Click += CopyButton_Click;
+                copyButton.Click += new RoutedEventHandler((sender, e) =>
+                {
+                    try
+                    {
+                        Button b1 = (sender as Button);
+                        string toCopy = (string)b1.Tag;
+                        Clipboard.SetText(toCopy);
+                    }
+                    catch { }
+                });
                 g.Children.Add(b);
                 g.Children.Add(l);
                 g.Children.Add(copyButton);
                 unturnedColorSampleList.Children.Add(g);
             }
             #endregion
-            UserColorListChanged();
+            Proxy.UserColorListChanged();
             #endregion
             #endregion
             #region HOLIDAYS
@@ -216,7 +231,7 @@ namespace BowieD.Unturned.NPCMaker
             {
                 if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "updater.exe"))
                 {
-                    WhatsNew_Menu_Click(null, null);
+                    Proxy.WhatsNew_Menu_Click(null, null);
                     File.Delete(AppDomain.CurrentDomain.BaseDirectory + "updater.exe");
                 }
             }
@@ -276,7 +291,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             catch { }
             #endregion
-            CheckForUpdates_Click(Instance, null);
+            Proxy.CheckForUpdates_Click(Instance, null);
             Config.Configuration.Properties.firstLaunch = false;
             isSaved = true;
             #region DISCORD
@@ -286,12 +301,14 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     DiscordWorker = new DiscordRPC.DiscordWorker(1000);
                     (DiscordWorker as DiscordRPC.DiscordWorker)?.Initialize();
-                    TabControl_SelectionChanged(mainTabControl, null);
+                    Proxy.TabControl_SelectionChanged(mainTabControl, null);
                 }
             }
             #endregion
             DoNotification((string)TryFindResource("app_Free"));
+
         }
+        public static string Localize(string key) => (string)Instance.TryFindResource(key);
         #region THEME EVENTS
         private void Theme_SetupLegacy(object sender, RoutedEventArgs e)
         {
@@ -376,13 +393,14 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(0, 9, 4, 1);
+        public static Version Version => new Version(0, 9, 5, 0);
         #endregion
         #region STATIC
         public static MainWindow Instance;
         public static NPCSave CurrentNPC { get; set; } = new NPCSave();
         public static object DiscordWorker { get; set; }
         public static DispatcherTimer AutosaveTimer { get; set; }
+        public static PropertyProxy Proxy { get; private set; }
 
         public static bool IsMetro { get; set; }
         #endregion
@@ -390,6 +408,20 @@ namespace BowieD.Unturned.NPCMaker
         public static string saveFile = "";
         public static bool isSaved = true;
         #endregion
+        private void AutosaveTimer_Tick(object sender, EventArgs e)
+        {
+            AutosaveTimer.Stop();
+            if (saveFile?.Length > 0)
+                Save();
+            AutosaveTimer.Start();
+        }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            Config.Configuration.Save();
+            e.Cancel = true;
+            Proxy.ExitButtonClick(this, null);
+            base.OnClosing(e);
+        }
         #region SAVE_LOAD
         public void Save(bool asExample = false)
         {
@@ -532,497 +564,6 @@ namespace BowieD.Unturned.NPCMaker
             catch { return false; }
         }
         #endregion
-        #region EVENTS
-        private void EditorName_Change(object sender, TextChangedEventArgs e)
-        {
-            CurrentNPC.editorName = Inputted_EditorName;
-            isSaved = false;
-        }
-        private void DisplayName_Change(object sender, TextChangedEventArgs e)
-        {
-            CurrentNPC.displayName = Inputted_DisplayName;
-            isSaved = false;
-        }
-        private void NPC_ID_Change(object sender, TextChangedEventArgs e)
-        {
-            CurrentNPC.id = Inputted_ID;
-            isSaved = false;
-        }
-        private void StartDialogue_ID_Change(object sender, TextChangedEventArgs e)
-        {
-            CurrentNPC.startDialogueId = Inputted_StartDialogueID;
-            isSaved = false;
-        }
-        private void Equip_Change(object sender, long e)
-        {
-            switch ((sender as NumberBox).Tag.ToString())
-            {
-                case "HAT":
-                    CurrentNPC.hat = Inputted_Equip_Hat;
-                    break;
-                case "TOP":
-                    CurrentNPC.top = Inputted_Equip_Top;
-                    break;
-                case "BOTTOM":
-                    CurrentNPC.bottom = Inputted_Equip_Bottom;
-                    break;
-                case "MASK":
-                    CurrentNPC.mask = Inputted_Equip_Mask;
-                    break;
-                case "BACK":
-                    CurrentNPC.backpack = Inputted_Equip_Backpack;
-                    break;
-                case "VEST":
-                    CurrentNPC.vest = Inputted_Equip_Vest;
-                    break;
-                case "GLASSES":
-                    CurrentNPC.glasses = Inputted_Equip_Glasses;
-                    break;
-                case "PRIMARY":
-                    CurrentNPC.equipPrimary = Inputted_Equip_Primary;
-                    break;
-                case "SECONDARY":
-                    CurrentNPC.equipSecondary = Inputted_Equip_Secondary;
-                    break;
-                case "TERTIARY":
-                    CurrentNPC.equipTertiary = Inputted_Equip_Tertiary;
-                    break;
-            }
-            isSaved = false;
-        }
-        private void LeftHanded_Update(object sender, RoutedEventArgs e)
-        {
-            CurrentNPC.leftHanded = apparelLeftHandedCheckbox.IsChecked.Value;
-            isSaved = false;
-        }
-        private void EquippedChange(object sender, SelectionChangedEventArgs e)
-        {
-            if ((sender as ComboBox).Name == equipSlotBox?.Name)
-                CurrentNPC.equipped = equipSlotBox?.SelectedIndex > -1 ? (Equip_Type)(equipSlotBox.SelectedItem as ComboBoxItem).Tag : Equip_Type.None;
-            else
-                CurrentNPC.pose = (NPC_Pose)(apparelPoseBox.SelectedItem as ComboBoxItem)?.Tag;
-            isSaved = false;
-        }
-        private void RegenerateGuids_Click(object sender, RoutedEventArgs e)
-        {
-            if (CurrentNPC != null)
-            {
-                if (CurrentNPC.dialogues != null)
-                {
-                    foreach (NPCDialogue d in CurrentNPC.dialogues)
-                    {
-                        if (d != null)
-                            d.guid = Guid.NewGuid().ToString("N");
-                    }
-                }
-                if (CurrentNPC.vendors != null)
-                {
-                    foreach (NPCVendor v in CurrentNPC.vendors)
-                    {
-                        if (v != null)
-                            v.guid = Guid.NewGuid().ToString("N");
-                    }
-                }
-                if (CurrentNPC.quests != null)
-                {
-                    foreach (NPCQuest q in CurrentNPC.quests)
-                    {
-                        if (q != null)
-                            q.guid = Guid.NewGuid().ToString("N");
-                    }
-                }
-                DoNotification((string)TryFindResource("general_Regenerated"));
-                isSaved = false;
-            }
-        }
-        private void AutosaveTimer_Tick(object sender, EventArgs e)
-        {
-            AutosaveTimer.Stop();
-            if (saveFile?.Length > 0)
-                Save();
-            AutosaveTimer.Start();
-        }
-        private void Options_Click(object sender, RoutedEventArgs e)
-        {
-            Config.ConfigWindow cw = new Config.ConfigWindow();
-            cw.ShowDialog();
-        }
-        private void SaveAsExampleButton_Click(object sender, RoutedEventArgs e)
-        {
-            Save(true);
-        }
-        private void Char_EditConditions_Button_Click(object sender, RoutedEventArgs e)
-        {
-            Universal_ListView ulv = new Universal_ListView(CurrentNPC.visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
-            ulv.ShowDialog();
-            CurrentNPC.visibilityConditions = ulv.Values.Cast<NPC.Condition>().ToList();
-            isSaved = false;
-        }
-        private void RandomColor_Click(object sender, RoutedEventArgs e)
-        {
-            byte[] colors = new byte[3];
-            System.Security.Cryptography.RandomNumberGenerator.Create().GetBytes(colors);
-            colorSliderR.Value = colors[0];
-            colorSliderG.Value = colors[1];
-            colorSliderB.Value = colors[2];
-        }
-        private async void CheckForUpdates_Click(object sender, RoutedEventArgs e)
-        {
-            bool? isUpdateAvailable = await IsUpdateAvailable();
-            if (isUpdateAvailable.HasValue && isUpdateAvailable == true)
-            {
-                DoNotification((string)TryFindResource("app_Update_Available"));
-            }
-            else if (isUpdateAvailable.HasValue && isUpdateAvailable == false && !(sender is MainWindow))
-            {
-                DoNotification((string)TryFindResource("app_Update_Latest"));
-            }
-            else if (!isUpdateAvailable.HasValue)
-            {
-                DoNotification((string)TryFindResource("app_Update_Fail"));
-            }
-        }
-        private void UserColorListChanged()
-        {
-            userColorSampleList.Children.Clear();
-            if (Config.Configuration.Properties.userColors == null)
-                return;
-            BrushConverter brushConverter = new BrushConverter();
-            foreach (string uColor in Config.Configuration.Properties.userColors)
-            {
-                try
-                {
-                    Grid g = new Grid();
-                    Border b = new Border
-                    {
-                        HorizontalAlignment = HorizontalAlignment.Left,
-                        Width = 16,
-                        Height = 16,
-                        BorderThickness = new Thickness(1),
-                        BorderBrush = Brushes.Black,
-                        Background = brushConverter.ConvertFromString($"#{uColor}") as Brush
-                    };
-                    Label l = new Label
-                    {
-                        Content = $"#{uColor}",
-                        Margin = new Thickness(16, 0, 0, 0)
-                    };
-                    Button button = new Button()
-                    {
-                        Content = new Image
-                        {
-                            Source = new BitmapImage(new Uri("pack://application:,,,/Resources/ICON_CANCEL.png")),
-                            Width = 16,
-                            Height = 16
-                        },
-                        Width = 16,
-                        HorizontalAlignment = HorizontalAlignment.Right,
-                        Margin = new Thickness(0, 0, 5, 0),
-                        ToolTip = (string)TryFindResource("apparel_User_Color_Remove")
-                    };
-                    Button copyButton = new Button
-                    {
-                        Content = new Image
-                        {
-                            Source = new BitmapImage(new Uri("pack://application:,,,/Resources/ICON_COPY.png")),
-                            Width = 16,
-                            Height = 16
-                        },
-                        HorizontalAlignment = HorizontalAlignment.Right,
-                        Margin = new Thickness(0, 0, 23, 0),
-                        Tag = $"#{uColor}"
-                    };
-                    copyButton.Click += CopyButton_Click;
-                    button.Click += UserColorList_RemoveColor;
-                    g.Children.Add(b);
-                    g.Children.Add(l);
-                    g.Children.Add(button);
-                    g.Children.Add(copyButton);
-                    userColorSampleList.Children.Add(g);
-                }
-                catch { }
-            }
-        }
-        private void CopyButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Button b = (sender as Button);
-                string toCopy = (string)b.Tag;
-                Clipboard.SetText(toCopy);
-            }
-            catch { }
-        }
-        private void UserColorList_RemoveColor(object sender, RoutedEventArgs e)
-        {
-            Grid g = Util.FindParent<Grid>(sender as Button);
-            Label l = Util.FindChildren<Label>(g);
-            string color = l.Content.ToString();
-            Config.Configuration.Properties.userColors = Config.Configuration.Properties.userColors.Where(d => d != color.Trim('#')).ToArray();
-            Config.Configuration.Save();
-            UserColorListChanged();
-        }
-        private void UserColorList_AddColor(object sender, RoutedEventArgs e)
-        {
-            if (Config.Configuration.Properties.userColors == null)
-                Config.Configuration.Properties.userColors = new string[0];
-            if (Config.Configuration.Properties.userColors.Length > 0 && Config.Configuration.Properties.userColors.Contains(colorHexOut.Text.Trim('#')))
-                return;
-            List<string> uColors = Config.Configuration.Properties.userColors.ToList();
-            if (uColors == null)
-                uColors = new List<string>();
-            uColors.Add(colorHexOut.Text.Trim('#'));
-            Config.Configuration.Properties.userColors = uColors.ToArray();
-            Config.Configuration.Save();
-            UserColorListChanged();
-        }
-        private void ExitButtonClick(object sender, RoutedEventArgs e)
-        {
-            if (!isSaved)
-            {
-                if (!SavePrompt())
-                {
-                    return;
-                }
-            }
-            Config.Configuration.Save();
-            if (CacheUpdated && CachedUnturnedFiles?.Count() > 0)
-            {
-                var res = MessageBox.Show((string)TryFindResource("app_Cache_Save"), "", MessageBoxButton.YesNo);
-                if (res == MessageBoxResult.Yes)
-                {
-                    try // save cache
-                    {
-                        using (FileStream fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + "unturnedCache.xml", FileMode.Create))
-                        using (XmlWriter writer = XmlWriter.Create(fs))
-                        {
-                            XmlSerializer serializer = new XmlSerializer(typeof(List<UnturnedFile>));
-                            serializer.Serialize(writer, CachedUnturnedFiles);
-                        }
-                    }
-                    catch { }
-                }
-            }
-            (DiscordWorker as DiscordRPC.DiscordWorker)?.Deinitialize();
-            Environment.Exit(0);
-        }
-        private void RecentList_Click(object sender, RoutedEventArgs e)
-        {
-            MenuItem m = e.OriginalSource as MenuItem;
-            Load(m.Header.ToString());
-        }
-        private void ExportClick(object sender, RoutedEventArgs e)
-        {
-            if (No_Exports > 0)
-            {
-                SystemSounds.Hand.Play();
-                mainTabControl.SelectedIndex = mainTabControl.Items.Count - 1;
-                return;
-            }
-            if (Warnings > 0)
-            {
-                var res = MessageBox.Show((string)FindResource("export_Warnings_Desc"), (string)FindResource("export_Warnings_Title"), MessageBoxButton.YesNo);
-                if (!(res == MessageBoxResult.OK || res == MessageBoxResult.Yes))
-                    return;
-            }
-            Save();
-            Export_ExportWindow eew = new Export_ExportWindow(AppDomain.CurrentDomain.BaseDirectory + $@"results\{Inputted_EditorName}\");
-            eew.DoActions(CurrentNPC);
-        }
-        private void SaveClick(object sender, RoutedEventArgs e)
-        {
-            Save();
-        }
-        private void SaveAsClick(object sender, RoutedEventArgs e)
-        {
-            saveFile = "";
-            Save();
-        }
-        private void LoadClick(object sender, RoutedEventArgs e)
-        {
-            string path = "";
-            OpenFileDialog ofd = new OpenFileDialog()
-            {
-                Filter = $"{(string)TryFindResource("save_Filter")} (*.npc)|*.npc",
-                Multiselect = false
-            };
-            var res = ofd.ShowDialog();
-            if (res == true)
-                path = ofd.FileName;
-            else
-                return;
-
-            if (!Load(path, false))
-            {
-                if (Load(path, true, true))
-                {
-                    notificationsStackPanel.Children.Clear();
-                    DoNotification((string)TryFindResource("notify_Loaded"));
-                }
-            }
-        }
-        private void FaceImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            faceImageControl.Source = ("Resources/Unturned/Faces/" + e.NewValue + ".png").GetImageSource();
-            CurrentNPC.face = (byte)e.NewValue;
-            isSaved = false;
-        }
-        private void BeardImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            foreach (UIElement ui in beardRenderGrid.Children)
-            {
-                if (ui is Canvas c)
-                {
-                    c.Visibility = Visibility.Collapsed;
-                }
-            }
-            beardRenderGrid.Children[(int)e.NewValue].Visibility = Visibility.Visible;
-            CurrentNPC.beard = (byte)e.NewValue;
-            isSaved = false;
-        }
-        private void HairImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            foreach (UIElement ui in hairRenderGrid.Children)
-            {
-                if (ui is Canvas c)
-                {
-                    c.Visibility = Visibility.Collapsed;
-                }
-            }
-            hairRenderGrid.Children[(int)e.NewValue].Visibility = Visibility.Visible;
-            CurrentNPC.haircut = (byte)e.NewValue;
-            isSaved = false;
-        }
-        internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e?.AddedItems.Count == 0 || sender == null)
-                return;
-            int selectedIndex = (sender as TabControl).SelectedIndex;
-            TabItem tab = e?.AddedItems[0] as TabItem;
-            if (tab?.Content is Grid g)
-            {
-                DoubleAnimation anim = new DoubleAnimation(0, 1, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
-                g.BeginAnimation(OpacityProperty, anim);
-            }
-            if (selectedIndex == (sender as TabControl).Items.Count - 1)
-            {
-                FindMistakes();
-            }
-            RichPresence presence = new RichPresence
-            {
-                Details = $"Editing NPC {Inputted_EditorName ?? ""}",
-                State = $"Current job:"
-            };
-            switch (selectedIndex)
-            {
-                case 0:
-                    presence.State += " General Information";
-                    break;
-                case 1:
-                    presence.State += " Apparel";
-                    break;
-                case 2:
-                    presence.State += " Dialogues";
-                    break;
-                case 3:
-                    presence.State += " Vendors";
-                    break;
-                case 4:
-                    presence.State += " Quests";
-                    break;
-                case 5:
-                    presence.State += " Looking for mistakes";
-                    break;
-                default:
-                    presence.State += " Unknown";
-                    break;
-            }
-            (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
-        }
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            Config.Configuration.Save();
-            e.Cancel = true;
-            ExitButtonClick(this, null);
-            base.OnClosing(e);
-        }
-        private void ColorSliderChange(object sender, RoutedPropertyChangedEventArgs<double> value)
-        {
-            NPCColor c = new NPCColor((byte)colorSliderR.Value, (byte)colorSliderG.Value, (byte)colorSliderB.Value);
-            string res = c.HEX;
-            colorRectangle.Fill = new BrushConverter().ConvertFromString(res) as Brush;
-            colorHexOut.Text = res;
-        }
-        private void AboutMenu_Click(object sender, RoutedEventArgs e)
-        {
-            Forms.Form_About a = new Forms.Form_About();
-            a.ShowDialog();
-        }
-        private void FeedbackItemClick(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Process.Start((sender as MenuItem).Tag.ToString());
-        }
-        private void WhatsNew_Menu_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                using (WebClient wc = new WebClient() { Encoding = Encoding.UTF8 })
-                {
-                    new Whats_New(
-                                                    (string)TryFindResource("app_News_Title"),
-                                                    string.Format((string)TryFindResource("app_News_BodyTitle"), Version),
-                                                    wc.DownloadString($"https://raw.githubusercontent.com/iBowie/publicfiles/master/npcmakerpatch.{Config.Configuration.Properties.Language.Replace('-', '_')}.txt"),
-                                                    (string)TryFindResource("app_News_OK")
-                                                    ).ShowDialog();
-                }
-            }
-            catch { }
-        }
-        private void ApparelSkinColorBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string text = apparelSkinColorBox.Text;
-            BrushConverter bc = new BrushConverter();
-            if (bc.IsValid(text))
-            {
-                Brush color = bc.ConvertFromString(text) as Brush;
-                faceImageBorder.Background = color;
-                CurrentNPC.skinColor = new NPCColor() { HEX = text };
-            }
-            else
-            {
-                faceImageBorder.Background = Brushes.Transparent;
-            }
-        }
-        private void ApparelHairColorBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string text = apparelHairColorBox.Text;
-            BrushConverter bc = new BrushConverter();
-            if (bc.IsValid(text))
-            {
-                Brush color = bc.ConvertFromString(text) as Brush;
-                beardRenderGrid.DataContext = color;
-                hairRenderGrid.DataContext = color;
-                CurrentNPC.hairColor = new NPCColor() { HEX = text };
-            }
-            else
-            {
-                beardRenderGrid.DataContext = Brushes.Black;
-                hairRenderGrid.DataContext = Brushes.Black;
-            }
-        }
-        private void ApparelHaircut_Random(object sender, RoutedEventArgs e)
-        {
-            hairImageIndex.Value = new Random().Next(0, haircutAmount);
-        }
-        private void ApparelBeard_Random(object sender, RoutedEventArgs e)
-        {
-            beardImageIndex.Value = new Random().Next(0, beardAmount);
-        }
-        private void ApparelFace_Random(object sender, RoutedEventArgs e)
-        {
-            faceImageIndex.Value = new Random().Next(0, faceAmount);
-        }
-        #endregion
         #region STATE CONVERTERS
         public void ConvertNPCToState(NPCSave save)
         {
@@ -1041,10 +582,10 @@ namespace BowieD.Unturned.NPCMaker
             faceImageIndex.Value = save.face;
             beardImageIndex.Value = save.beard;
             hairImageIndex.Value = save.haircut;
-            Inputted_ID = save.id;
-            Inputted_EditorName = save.editorName;
-            Inputted_DisplayName = save.displayName;
-            Inputted_StartDialogueID = save.startDialogueId;
+            txtID.Value = save.id;
+            txtEditorName.Text = save.editorName;
+            txtDisplayName.Text = save.displayName;
+            txtStartDialogueID.Value = save.startDialogueId;
             apparelLeftHandedCheckbox.IsChecked = save.leftHanded;
             foreach (var i in equipSlotBox.Items)
             {
@@ -1063,182 +604,46 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
         }
-#endregion
-        #region PROPERTIES
-        public ushort Inputted_ID
-        {
-            get
-            {
-                return (ushort)txtID.Value;
-            }
-            set
-            {
-                txtID.Value = value;
-            }
-        }
-        public string Inputted_DisplayName
-        {
-            get => txtDisplayName.Text ?? "";
-            set
-            {
-                txtDisplayName.Text = value;
-            }
-        }
-        public string Inputted_EditorName
-        {
-            get => txtEditorName.Text ?? "";
-            set
-            {
-                txtEditorName.Text = value;
-            }
-        }
-        public ushort Inputted_StartDialogueID
-        {
-            get
-            {
-                return (ushort)txtStartDialogueID.Value;
-            }
-            set
-            {
-                txtStartDialogueID.Value = value;
-            }
-        }
-
-        public ushort Inputted_Equip_Hat
-        {
-            get
-            {
-                return (ushort)hatIdBox.Value;
-            }
-            set
-            {
-                hatIdBox.Value = value;
-            }
-        }
-        public ushort Inputted_Equip_Mask
-        {
-            get
-            {
-                return (ushort)maskIdBox.Value;
-            }
-            set
-            {
-                maskIdBox.Value = value;
-            }
-        }
-        public ushort Inputted_Equip_Glasses
-        {
-            get
-            {
-                return (ushort)glassesIdBox.Value;
-            }
-            set
-            {
-                glassesIdBox.Value = value;
-            }
-        }
-        public ushort Inputted_Equip_Backpack
-        {
-            get
-            {
-                return (ushort)backpackIdBox.Value;
-            }
-            set
-            {
-                backpackIdBox.Value = value;
-            }
-        }
-        public ushort Inputted_Equip_Vest
-        {
-            get
-            {
-                return (ushort)vestIdBox.Value;
-            }
-            set
-            {
-                vestIdBox.Value = value;
-            }
-        }
-        public ushort Inputted_Equip_Top
-        {
-            get
-            {
-                return (ushort)topIdBox.Value;
-            }
-            set
-            {
-                topIdBox.Value = value;
-            }
-        }
-        public ushort Inputted_Equip_Bottom
-        {
-            get
-            {
-                return (ushort)bottomIdBox.Value;
-            }
-            set
-            {
-                bottomIdBox.Value = value;
-            }
-        }
-        public ushort Inputted_Equip_Primary
-        {
-            get
-            {
-                return (ushort)primaryIdBox.Value;
-            }
-            set
-            {
-                primaryIdBox.Value = value;
-            }
-        }
-        public ushort Inputted_Equip_Secondary
-        {
-            get
-            {
-                return (ushort)secondaryIdBox.Value;
-            }
-            set
-            {
-                secondaryIdBox.Value = value;
-            }
-        }
-        public ushort Inputted_Equip_Tertiary
-        {
-            get
-            {
-                return (ushort)tertiaryIdBox.Value;
-            }
-            set
-            {
-                tertiaryIdBox.Value = value;
-            }
-        }
-#endregion
+        #endregion
         #region MISTAKES
         public void FindMistakes()
         {
+            if (CheckableMistakes == null)
+            {
+                CheckableMistakes = new HashSet<Mistake>();
+                string[] nspaces = {
+                    "BowieD.Unturned.NPCMaker.Mistakes.Dialogue",
+                    "BowieD.Unturned.NPCMaker.Mistakes.General",
+                    "BowieD.Unturned.NPCMaker.Mistakes.Vendor",
+                    "BowieD.Unturned.NPCMaker.Mistakes.Quests",
+                    "BowieD.Unturned.NPCMaker.Mistakes.Apparel"
+                };
+                var q = from t in Assembly.GetExecutingAssembly().GetTypes() where t.IsClass && nspaces.Contains(t.Namespace) select t;
+                foreach (Type t in q)
+                {
+                    var mistake = Activator.CreateInstance(t);
+                    if (mistake is Mistake mist)
+                        CheckableMistakes.Add(mist);
+                }
+            }
             lstMistakes.Items.Clear();
-            List<Mistake> foundMistakes = CheckableMistakes.Where(d => d.IsMistake).ToList();
+            var foundMistakes = CheckableMistakes.Where(d => d.IsMistake);
             foreach (Mistake m in foundMistakes)
             {
                 lstMistakes.Items.Add(m);
             }
-        }
-        public List<Mistake> CheckableMistakes
-        {
-            get
+            if (lstMistakes.Items.Count == 0)
             {
-                return new List<Mistake>()
-                {
-                    new Mistakes.General.TooShortDisplayName(),
-                    new Mistakes.General.NonEnglishCharsEditorName(),
-                    new Mistakes.General.AssignmentOfficial(),
-                    new Mistakes.Dialogue.EmptyMessage(),
-                    new Mistakes.Dialogue.QuestSetting()
-                };
+                lstMistakes.Visibility = Visibility.Collapsed;
+                noErrorsLabel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                lstMistakes.Visibility = Visibility.Visible;
+                noErrorsLabel.Visibility = Visibility.Collapsed;
             }
         }
+        public static HashSet<Mistake> CheckableMistakes;
         public int Advices => CheckableMistakes.Where(d => d.Importance == IMPORTANCE.ADVICE && d.IsMistake).Count();
         public int Warnings => CheckableMistakes.Where(d => d.Importance == IMPORTANCE.HIGH && d.IsMistake).Count();
         public int No_Exports => CheckableMistakes.Where(d => d.Importance == IMPORTANCE.NO_EXPORT && d.IsMistake).Count();
@@ -1277,10 +682,7 @@ namespace BowieD.Unturned.NPCMaker
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == EAssetType.Dialogue && d.Id == dialogue.id))
                 {
-                    lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_dialogue"), dialogue.id), "", IMPORTANCE.HIGH, true)
-                    {
-                        TranslateName = false
-                    });
+                    lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_dialogue"), dialogue.id), "", IMPORTANCE.HIGH, true, false));
                 }
                 await Task.Yield();
             }
@@ -1288,27 +690,18 @@ namespace BowieD.Unturned.NPCMaker
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == EAssetType.Vendor && d.Id == vendor.id))
                 {
-                    lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_vendor"), vendor.id), "", IMPORTANCE.HIGH, true)
-                    {
-                        TranslateName = false
-                    });
+                    lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_vendor"), vendor.id), "", IMPORTANCE.HIGH, true, false));
                 }
                 foreach (var it in vendor.items)
                 {
                     if (it.type == ItemType.VEHICLE && !CachedUnturnedFiles.Any(d => d.Type == EAssetType.Vehicle && d.Id == it.id))
                     {
-                        lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_vehicle"), it.id), "", IMPORTANCE.HIGH, true)
-                        {
-                            TranslateName = false
-                        });
+                        lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_vehicle"), it.id), "", IMPORTANCE.HIGH, true, false));
                         continue;
                     }
                     if (it.type == ItemType.ITEM && !CachedUnturnedFiles.Any(d => d.Type == EAssetType.Item && d.Id == it.id))
                     {
-                        lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_item"), it.id), "", IMPORTANCE.HIGH, true)
-                        {
-                            TranslateName = false
-                        });
+                        lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_item"), it.id), "", IMPORTANCE.HIGH, true, false));
                         continue;
                     }
                 }
@@ -1318,27 +711,31 @@ namespace BowieD.Unturned.NPCMaker
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == EAssetType.Quest && d.Id == quest.id))
                 {
-                    lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_quest"), quest.id), "", IMPORTANCE.HIGH, true)
-                    {
-                        TranslateName = false
-                    });
+                    lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_quest"), quest.id), "", IMPORTANCE.HIGH, true, false));
                 }
                 await Task.Yield();
             }
-            if (Inputted_ID > 0)
+            if (txtID.Value > 0)
             {
-                ushort input = Inputted_ID;
+                ushort input = (ushort)txtID.Value;
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == EAssetType.NPC && d.Id == input))
                 {
-                    lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_char"), input), "", IMPORTANCE.HIGH, true)
-                    {
-                        TranslateName = false
-                    });
+                    lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_char"), input), "", IMPORTANCE.HIGH, true, false));
                 }
             }
             blockActionsOverlay.Visibility = Visibility.Collapsed;
+            if (lstMistakes.Items.Count == 0)
+            {
+                lstMistakes.Visibility = Visibility.Collapsed;
+                noErrorsLabel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                lstMistakes.Visibility = Visibility.Visible;
+                noErrorsLabel.Visibility = Visibility.Collapsed;
+            }
         }
-#endregion
+        #endregion
         #region DIALOGUE_EDITOR
         private void Dialogue_SaveButtonClick(object sender, RoutedEventArgs e)
         {
@@ -1448,9 +845,9 @@ namespace BowieD.Unturned.NPCMaker
         {
             Dialogue_SaveButtonClick(null, null);
             var dial = CurrentDialogue;
-            if (dial.id > 0 && Inputted_StartDialogueID != dial.id)
+            if (dial.id > 0 && txtStartDialogueID.Value != dial.id)
             {
-                Inputted_StartDialogueID = dial.id;
+                txtStartDialogueID.Value = dial.id;
                 CurrentNPC.startDialogueId = dial.id;
                 try
                 {
@@ -1580,7 +977,7 @@ namespace BowieD.Unturned.NPCMaker
             BetterForms.Universal_VendorItemEditor uvie = new BetterForms.Universal_VendorItemEditor();
             RichPresence presence = new RichPresence
             {
-                Details = $"Editing NPC {Inputted_EditorName}",
+                Details = $"Editing NPC {txtEditorName.Text ?? "without name"}",
                 State = $"Adding vendor item"
             };
             (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
@@ -1596,7 +993,7 @@ namespace BowieD.Unturned.NPCMaker
                     Vendor_Add_Sell(resultedVendorItem);
                 }
             }
-            TabControl_SelectionChanged(mainTabControl, null);
+            Proxy.TabControl_SelectionChanged(mainTabControl, null);
         }
         private void SaveVendor_Click(object sender, RoutedEventArgs e)
         {
@@ -1671,7 +1068,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             vendorListSellItems.Children.Remove(item);
         }
-#endregion
+        #endregion
         #region QUEST_EDITOR
         public NPCQuest CurrentQuest
         {
@@ -1720,7 +1117,7 @@ namespace BowieD.Unturned.NPCMaker
             Universal_ConditionEditor uce = new Universal_ConditionEditor(null, true);
             RichPresence presence = new RichPresence
             {
-                Details = $"Editing NPC {Inputted_EditorName}",
+                Details = $"Editing NPC {txtEditorName.Text ?? "without name"}",
                 State = "Creating condition for a quest"
             };
             (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
@@ -1731,7 +1128,7 @@ namespace BowieD.Unturned.NPCMaker
                 uil.deleteButton.Click += RemoveQuestCondition_Click;
                 listQuestConditions.Children.Add(uil);
             }
-            TabControl_SelectionChanged(mainTabControl, null);
+            Proxy.TabControl_SelectionChanged(mainTabControl, null);
         }
         private void RemoveQuestCondition_Click(object sender, RoutedEventArgs e)
         {
@@ -1743,7 +1140,7 @@ namespace BowieD.Unturned.NPCMaker
             Universal_RewardEditor ure = new Universal_RewardEditor(null, true);
             RichPresence presence = new RichPresence
             {
-                Details = $"Editing NPC {Inputted_EditorName}",
+                Details = $"Editing NPC {txtEditorName.Text ?? "without name"}",
                 State = "Creating reward for a quest"
             };
             (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
@@ -1754,7 +1151,7 @@ namespace BowieD.Unturned.NPCMaker
                 uil.deleteButton.Click += RemoveQuestReward_Click;
                 listQuestRewards.Children.Add(uil);
             }
-            TabControl_SelectionChanged(mainTabControl, null);
+            Proxy.TabControl_SelectionChanged(mainTabControl, null);
         }
         private void RemoveQuestReward_Click(object sender, RoutedEventArgs e)
         {
@@ -1788,7 +1185,7 @@ namespace BowieD.Unturned.NPCMaker
             listQuestConditions.Children.Clear();
             listQuestRewards.Children.Clear();
         }
-#endregion
+        #endregion
         #region DRAG AND DROP
         private void Window_DragEnter(object sender, DragEventArgs e)
         {

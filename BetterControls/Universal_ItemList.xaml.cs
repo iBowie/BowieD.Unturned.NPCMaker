@@ -13,7 +13,10 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             InitializeComponent();
             this.Value = input;
             mainLabel.Content = Value;
-            mainLabel.ToolTip = Value;
+            if (type == ReturnType.Dialogue || type == ReturnType.Quest || type == ReturnType.Vendor)
+                mainLabel.ToolTip = Value is NPC.NPCDialogue ? (Value as NPC.NPCDialogue).comment : Value is NPC.NPCQuest ? (Value as NPC.NPCQuest).comment : Value is NPC.NPCVendor ? (Value as NPC.NPCVendor).comment : Value;
+            else
+                mainLabel.ToolTip = Value;
             this.Localizable = localizable;
             this.Type = type;
         }

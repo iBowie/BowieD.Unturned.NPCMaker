@@ -1,4 +1,6 @@
 ﻿using System.Globalization;
+using System.Windows.Media;
+using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
@@ -40,5 +42,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 catch { }
             }
         }
+        [XmlIgnore]
+        public Brush Brush => new BrushConverter().ConvertFromString(HEX) as Brush;
     }
 }

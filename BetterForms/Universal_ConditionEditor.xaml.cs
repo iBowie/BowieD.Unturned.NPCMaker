@@ -144,7 +144,6 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         #region DESIGN VARS
         private double baseHeight = 178;
         private double heightDelta = 35;
-        //private double elementHeight = 24;
         private double elementHeight = 32;
         private Thickness elementMargin = new Thickness(5, 5, 5, 5);
         private bool viewLocalizationField = false;

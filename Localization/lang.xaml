@@ -26,7 +26,7 @@
     <v:String x:Key="config_Tab_General_LogLevel_Errors">Errors</v:String>
     <v:String x:Key="config_Tab_General_LogLevel_Critical">Critical</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme">Theme</v:String>
-    <v:String x:Key="config_Tab_Appearance_Theme_Legacy">Default (Legacy)</v:String>
+    <v:String x:Key="config_Tab_Appearance_Theme_Legacy">System (Legacy)</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_LightGreen">[METRO] Light Green</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkGreen">[METRO] Dark Green</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_LightPink">[METRO] Light Pink</v:String>
@@ -377,22 +377,20 @@
     <v:String x:Key="mistakes_DeepAnalysis_Tooltip">Check all game ID's and id's, that you have.</v:String>
     <v:String x:Key="mistakes_DA_SelectGameFolder">Select Game Folder</v:String>
     <v:String x:Key="mistakes_DA_UpdateCache">Update Cache?</v:String>
-    <v:String x:Key="mistakes_ErrorName">Error Name</v:String>
+    <v:String x:Key="mistakes_ErrorName">Error Code</v:String>
     <v:String x:Key="mistakes_ErrorDesc">Error Description</v:String>
-    <v:String x:Key="mistakes_Mistake_General_NonEnglishCharsEditorName_Name">Naming error</v:String>
-    <v:String x:Key="mistakes_Mistake_General_NonEnglishCharsEditorName_Desc">Recommended to use english chars in editor name.</v:String>
-    <v:String x:Key="mistakes_Mistake_General_TooShortDisplayName_Name">Too short name</v:String>
-    <v:String x:Key="mistakes_Mistake_General_TooShortDisplayName_Desc">Recommended to use name that longer than 3 chars.</v:String>
-    <v:String x:Key="mistakes_Mistake_General_AssignmentOfficial_Name">Official content conflict</v:String>
-    <v:String x:Key="mistakes_Mistake_General_AssignmentOfficial_Desc">NPC id should be more than 2000, because all id's lower than 2000 are reserved for official content</v:String>
-    <v:String x:Key="mistakes_Mistake_General_EmptyEditorName_Name">Empty editor name</v:String>
-    <v:String x:Key="mistakes_Mistake_General_EmptyEditorName_Desc">Editor name can't be empty.</v:String>
-    <v:String x:Key="mistakes_Mistake_General_EmptyDisplayName_Name">Empty display name</v:String>
-    <v:String x:Key="mistakes_Mistake_General_EmptyDisplayName_Desc">Display name can't be empty.</v:String>
-    <v:String x:Key="mistakes_Mistake_Dialogue_EmptyMessage_Name">Empty NPC message.</v:String>
-    <v:String x:Key="mistakes_Mistake_Dialogue_EmptyMessage_Desc">NPC's message must contain at least one page.</v:String>
-    <v:String x:Key="mistakes_Mistake_Dialogue_QuestSetting_Name">Start Quest Mistake.</v:String>
-    <v:String x:Key="mistakes_Mistake_Dialogue_QuestSetting_Desc">You have quest, that do not leads to the actual quest. Add reward of type "Quest" to response with quest.</v:String>
+    <v:String x:Key="mistakes_NoMistakes">No mistakes! You're doing great!</v:String>
+    
+    <v:String x:Key="NE_0000_Desc">NPC id should be more than 2000, because all id's lower than 2000 are reserved for official content</v:String>
+    <v:String x:Key="NE_0001_Desc">Recommended to use english chars in editor name.</v:String>
+    <v:String x:Key="NE_0002_Desc">Recommended to use name that longer than 3 chars.</v:String>
+    <v:String x:Key="NE_0003_Desc">Change ID of the NPC to any value greater than 0</v:String>
+    <v:String x:Key="NE_1000_Desc">Invalid skin color.</v:String>
+    <v:String x:Key="NE_1001_Desc">Invalid hair color.</v:String>
+    <v:String x:Key="NE_2000_Desc">You have quest, that do not leads to the actual quest. Add reward of type "Quest" to response with quest.</v:String>
+    <v:String x:Key="NE_2001_Desc">NPC's message must contain at least one page.</v:String>
+    <v:String x:Key="NE_3000_Desc">Change ID of the vendor with zero id</v:String>
+    <v:String x:Key="NE_4000_Desc">Change ID of the quest with zero id</v:String>
 
     <v:String x:Key="notify_Dialogue_Saved">Dialogue saved!</v:String>
     <v:String x:Key="notify_Vendor_Saved">Vendor saved!</v:String>

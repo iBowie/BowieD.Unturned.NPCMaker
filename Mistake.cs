@@ -1,18 +1,21 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Windows.Media;
 
 namespace BowieD.Unturned.NPCMaker
 {
     public abstract class Mistake
     {
-        public bool TranslateName = true, TranslateDesc = true;
+        public virtual bool TranslateName => true;
+        public virtual bool TranslateDesc => true;
 
+        public virtual Action OnClick => null;
         public virtual string MistakeNameKey => "";
         public virtual string MistakeDescKey => "";
         public virtual IMPORTANCE Importance => IMPORTANCE.ADVICE;
         public ImageSource Image => (Importance == IMPORTANCE.ADVICE ? "Resources/ICON_INFO.png".GetImageSource() : Importance == IMPORTANCE.HIGH ? "Resources/ICON_WARNING.png".GetImageSource() : "Resources/ICON_CANCEL.png".GetImageSource());
 
-        public string MistakeName => TranslateName ? (string)MainWindow.Instance.TryFindResource(MistakeNameKey) : MistakeNameKey;
-        public string MistakeDesc => TranslateDesc ? (string)MainWindow.Instance.TryFindResource(MistakeDescKey) : MistakeDescKey;
+        public string MistakeName => TranslateName ? MainWindow.Localize(MistakeNameKey) : MistakeNameKey;
+        public string MistakeDesc => TranslateDesc ? MainWindow.Localize(MistakeDescKey) : MistakeDescKey;
         public virtual bool IsMistake
         {
             get { return false; }

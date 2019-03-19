@@ -376,23 +376,21 @@
     <v:String x:Key="mistakes_DeepAnalysis_Tooltip">Проверить все ID в игре и те ID, которые вы используете на наличие несовместимостей.</v:String>
     <v:String x:Key="mistakes_DA_SelectGameFolder">Укажите папку с игрой</v:String>
     <v:String x:Key="mistakes_DA_UpdateCache">Обновить кэш?</v:String>
-    <v:String x:Key="mistakes_ErrorName">Имя ошибки</v:String>
+    <v:String x:Key="mistakes_ErrorName">Код ошибки</v:String>
     <v:String x:Key="mistakes_ErrorDesc">Описание ошибки</v:String>
-    <v:String x:Key="mistakes_Mistake_General_NonEnglishCharsEditorName_Name">Ошибка имени</v:String>
-    <v:String x:Key="mistakes_Mistake_General_NonEnglishCharsEditorName_Desc">В имени в редакторе карт рекомендуется использовать символы латинского алфавита.</v:String>
-    <v:String x:Key="mistakes_Mistake_General_TooShortDisplayName_Name">Слишком короткое имя</v:String>
-    <v:String x:Key="mistakes_Mistake_General_TooShortDisplayName_Desc">Рекомендуется использовать имя длиной не менее трёх символов.</v:String>
-    <v:String x:Key="mistakes_Mistake_General_AssignmentOfficial_Name">Конфликт</v:String>
-    <v:String x:Key="mistakes_Mistake_General_AssignmentOfficial_Desc">ID должен быть больше 2000, так как все ID меньше 2000 зарезервированы под оффициальный контент</v:String>
-    <v:String x:Key="mistakes_Mistake_General_EmptyEditorName_Name">Пустое имя редактора</v:String>
-    <v:String x:Key="mistakes_Mistake_General_EmptyEditorName_Desc">Имя в редакторе не может пустым.</v:String>
-    <v:String x:Key="mistakes_Mistake_General_EmptyDisplayName_Name">Пустое видимое имя</v:String>
-    <v:String x:Key="mistakes_Mistake_General_EmptyDisplayName_Desc">Видимое имя не может быть пустым.</v:String>
-    <v:String x:Key="mistakes_Mistake_Dialogue_EmptyMessage_Name">Пустое сообщение.</v:String>
-    <v:String x:Key="mistakes_Mistake_Dialogue_EmptyMessage_Desc">Сообщения НИПа должны содержать минимум одну страницу.</v:String>
-    <v:String x:Key="mistakes_Mistake_Dialogue_QuestSetting_Name">Ошибка выдачи задания.</v:String>
-    <v:String x:Key="mistakes_Mistake_Dialogue_QuestSetting_Desc">У Вас есть диалог, в котором задание не ведёт к самому заданию. Добавьте награду типа "Задание" к ответу с заданием.</v:String>
+    <v:String x:Key="mistakes_NoMistakes">Ошибок нет! Вы отлично справляетесь!</v:String>
 
+    <v:String x:Key="NE_0000_Desc">ID NPC должен быть больше 2000, так как все ID меньше 2000 зарезервированы для игры</v:String>
+    <v:String x:Key="NE_0001_Desc">Рекомендуется использовать английские символы в имени для редактора.</v:String>
+    <v:String x:Key="NE_0002_Desc">Рекомендуется использовать имя длиннее трёх символов.</v:String>
+    <v:String x:Key="NE_0003_Desc">Измените ID NPC на любой выше 0</v:String>
+    <v:String x:Key="NE_1000_Desc">Неправильный цвет кожи.</v:String>
+    <v:String x:Key="NE_1001_Desc">Неправильный цвет волос.</v:String>
+    <v:String x:Key="NE_2000_Desc">У Вас есть задание, которое не ведёт к заданию. Добавьте награду типа "Задание" к ответу с заданием.</v:String>
+    <v:String x:Key="NE_2001_Desc">Сообщение NPC должно содержать как минимум одно сообщение.</v:String>
+    <v:String x:Key="NE_3000_Desc">Измените ID магазина на любой выше 0</v:String>
+    <v:String x:Key="NE_4000_Desc">Измените ID задания на любой выше 0</v:String>
+    
     <v:String x:Key="notify_Dialogue_Saved">Диалог сохранен!</v:String>
     <v:String x:Key="notify_Vendor_Saved">Магазин сохранен!</v:String>
     <v:String x:Key="notify_Quest_Saved">Задание сохранено!</v:String>

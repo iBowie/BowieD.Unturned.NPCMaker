@@ -18,15 +18,14 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         {
             InitializeComponent();
             double scale = Config.Configuration.Properties.scale;
-            baseHeight *= scale;
+            this.Height *= scale;
+            this.Width *= scale;
+            baseHeight = Height;
             heightDelta *= scale;
-            elementHeight *= scale;
             gridScale.ScaleX = scale;
             gridScale.ScaleY = scale;
             viewLocalizationField = viewLocalization;
             saveButton.IsEnabled = false;
-            Height = baseHeight;
-            Width *= scale;
             typeBox.ItemsSource = Enum.GetValues(typeof(RewardType)).Cast<RewardType>().Where(d => d != RewardType.None).Select(d => new ComboBoxItem() { Content = (string)TryFindResource($"reward_Type_{d.ToString()}"), Tag = d });
 
             if (reward != null)
@@ -91,7 +90,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         #region DESIGN VARS
         private double baseHeight = 178;
         private double heightDelta = 35;
-        private double elementHeight = 24;
+        private double elementHeight = 32;
         private Thickness elementMargin = new Thickness(5, 5, 5, 5);
         private bool viewLocalizationField = false;
         #endregion

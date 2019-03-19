@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.BetterForms"
         mc:Ignorable="d"
         Title="{DynamicResource rewardEditor_Title}" 
-        Height="450" 
+        Height="201.5" 
         Width="300"
         ResizeMode="NoResize"
         Icon="{DynamicResource app_Icon}">
