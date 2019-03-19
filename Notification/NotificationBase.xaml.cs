@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BowieD.Unturned.NPCMaker.Notification
 {
@@ -39,7 +30,7 @@ namespace BowieD.Unturned.NPCMaker.Notification
             {
                 BeginTime = TimeSpan.FromSeconds(6),
                 Duration = TimeSpan.FromSeconds(1),
-                From = 1,
+                From = 0.8,
                 To = 0
             };
             Storyboard.SetTarget(anim2, this);

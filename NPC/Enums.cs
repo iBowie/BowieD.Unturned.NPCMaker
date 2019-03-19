@@ -18,7 +18,8 @@
         Player_Life_Virus,
         Flag_Bool,
         Flag_Short,
-        Skillset
+        Skillset,
+        Kills_Object
     }
     public enum Logic_Type
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -13,6 +14,43 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public ushort Id { get; set; }
         public short Value { get; set; }
         public bool AllowUnset { get; set; }
+
+        public override int Elements => 5;
+        public override void Init(Universal_ConditionEditor uce)
+        {
+            uce.AddLabel(MainWindow.Localize("conditionEditor_ID"));
+            uce.AddTextBox(5);
+            uce.AddLabel(MainWindow.Localize("conditionEditor_LogicType"));
+            uce.AddLogicBox();
+            uce.AddLabel(MainWindow.Localize("conditionEditor_Value"));
+            uce.AddTextBox(5);
+            uce.AddLabel(MainWindow.Localize("conditionEditor_AllowUnset"));
+            uce.AddCheckBox(true);
+            uce.AddResetLabelAndCheckbox("Flag_Short");
+        }
+        public override void Init(Universal_ConditionEditor uce, Condition start)
+        {
+            Init(uce);   
+            if (start != null)
+            {
+                uce.SetMainValue(1, (start as Flag_Short_Cond).Id);
+                uce.SetMainValue(3, (start as Flag_Short_Cond).Logic);
+                uce.SetMainValue(5, (start as Flag_Short_Cond).Value);
+                uce.SetMainValue(7, (start as Flag_Short_Cond).AllowUnset);
+                uce.SetMainValue(9, start.Reset);
+            }
+        }
+        public override T Parse<T>(object[] input)
+        {
+            return new Flag_Short_Cond
+            {
+                Id = ushort.Parse(input[0].ToString()),
+                Logic = (Logic_Type)input[1],
+                Value = short.Parse(input[2].ToString()),
+                AllowUnset = (bool)input[3],
+                Reset = (bool)input[4]
+            } as T;
+        }
 
         public override string GetFilePresentation(string prefix, int prefixIndex, int conditionIndex)
         {

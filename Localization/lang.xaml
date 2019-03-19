@@ -186,6 +186,7 @@
     <v:String x:Key="Condition_Kills_Horde">Kills Horde</v:String>
     <v:String x:Key="Condition_Kills_Animal">Kills Animals</v:String>
     <v:String x:Key="Condition_Kills_Player">Kills Player</v:String>
+    <v:String x:Key="Condition_Kills_Object">Kills Object</v:String>
     <v:String x:Key="Condition_Time_Of_Day">Time of Day</v:String>
     <v:String x:Key="Condition_Player_Life_Health">Player Health</v:String>
     <v:String x:Key="Condition_Player_Life_Food">Player Food</v:String>
@@ -236,9 +237,11 @@
     <v:String x:Key="conditionEditor_Skillset">Skillset</v:String>
     <v:String x:Key="conditionEditor_Value">Value</v:String>
     <v:String x:Key="conditionEditor_Amount">Amount</v:String>
+    <v:String x:Key="conditionEditor_Object">Object GUID</v:String>
     <v:String x:Key="conditionEditor_Animal">Animal ID</v:String>
     <v:String x:Key="conditionEditor_Second">In-game Second</v:String>
     <v:String x:Key="conditionEditor_Navmesh">Navmesh ID</v:String>
+    <v:String x:Key="conditionEditor_Navmesh_Objects">Set to 255 if you don't want to set Navmesh</v:String>
     <v:String x:Key="conditionEditor_Reset">Reset on complete</v:String>
     <v:String x:Key="conditionEditor_Spawn">Spawn zombie on approach</v:String>
     <v:String x:Key="conditionEditor_Reset_Item_Title">Remove item on complete</v:String>

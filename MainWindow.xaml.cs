@@ -308,7 +308,13 @@ namespace BowieD.Unturned.NPCMaker
             DoNotification((string)TryFindResource("app_Free"));
 
         }
-        public static string Localize(string key) => (string)Instance.TryFindResource(key);
+        public static string Localize(string key)
+        {
+            var res = (string)Instance.TryFindResource(key);
+            if (res?.Length == 0)
+                return key;
+            return res;
+        }
         #region THEME EVENTS
         private void Theme_SetupLegacy(object sender, RoutedEventArgs e)
         {
@@ -1216,7 +1222,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             dropOverlay.Visibility = Visibility.Hidden;
         }
-#endregion
+        #endregion
         #region UPDATE CHECK
         public async Task<bool?> IsUpdateAvailable()
         {
@@ -1226,15 +1232,16 @@ namespace BowieD.Unturned.NPCMaker
                 using (WebClient wc = new WebClient())
                 {
                     string vers = await wc.DownloadStringTaskAsync("https://raw.githubusercontent.com/iBowie/publicfiles/master/npcmakerversion.txt");
-                    forceUpdateButton.IsEnabled = new Version(vers) > Version;
-                    return new Version(vers) > Version; // memory leak
+                    Version newVersion = new Version(vers);
+                    forceUpdateButton.IsEnabled = newVersion > Version;
+                    return newVersion > Version;
                 }
             }
             catch { }
             finally { checkForUpdatesButton.IsEnabled = true; }
             return null;
         }
-#endregion
+        #endregion
         #region UPDATE
         public void DownloadUpdater()
         {
@@ -1263,7 +1270,7 @@ namespace BowieD.Unturned.NPCMaker
             (DiscordWorker as DiscordRPC.DiscordWorker)?.Deinitialize();
             Environment.Exit(0);
         }
-#endregion
+        #endregion
         #region NOTIFICATIONS
         public void DoNotification(string text, double fontSize = 16, TextAlignment textAlignment = TextAlignment.Center)
         {
@@ -1279,6 +1286,7 @@ namespace BowieD.Unturned.NPCMaker
         public void DoNotification(TextBlock textBlock)
         {
             Notification.NotificationBase notificationBase = new Notification.NotificationBase(notificationsStackPanel, this.Background, textBlock);
+            notificationBase.Opacity = 0.8;
             notificationsStackPanel.Children.Add(notificationBase);
         }
         public void DoNotification(TextBlock textBlock, TextBlock buttonText, Action<object, RoutedEventArgs> buttonAction)
@@ -1287,6 +1295,7 @@ namespace BowieD.Unturned.NPCMaker
             b.Click += new RoutedEventHandler(buttonAction);
             b.Content = buttonText;
             Notification.NotificationBase notificationBase = new Notification.NotificationBase(notificationsStackPanel, this.Background, textBlock, b);
+            notificationBase.Opacity = 0.8;
             notificationsStackPanel.Children.Add(notificationBase);
         }
         #endregion
@@ -1307,9 +1316,6 @@ namespace BowieD.Unturned.NPCMaker
         #endregion
 
         #region DEEP GAME ANALYSIS METHODS
-        // check for conflict id's, check every item in NPC for validness ^.^
-        // WIP
-
         public enum EAssetType
         {
             None,

@@ -1,4 +1,5 @@
 ﻿using System;
+using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -12,6 +13,39 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public ushort Animal { get; set; }
         public short ID { get; set; }
         public uint Value { get; set; }
+
+        public override int Elements => 4;
+        public override void Init(Universal_ConditionEditor uce)
+        {
+            uce.AddLabel(MainWindow.Localize("conditionEditor_ID"));
+            uce.AddTextBox(5);
+            uce.AddLabel(MainWindow.Localize("conditionEditor_Animal"));
+            uce.AddTextBox(5);
+            uce.AddLabel(MainWindow.Localize("conditionEditor_Amount"));
+            uce.AddTextBox(6);
+            uce.AddResetLabelAndCheckbox("Kills_Animal");
+        }
+        public override void Init(Universal_ConditionEditor uce, Condition start)
+        {
+            Init(uce);
+            if (start != null)
+            {
+                uce.SetMainValue(1, (start as Kills_Animal_Cond).ID);
+                uce.SetMainValue(3, (start as Kills_Animal_Cond).Animal);
+                uce.SetMainValue(5, (start as Kills_Animal_Cond).Value);
+                uce.SetMainValue(7, start.Reset);
+            }
+        }
+        public override T Parse<T>(object[] input)
+        {
+            return new Kills_Animal_Cond
+            {
+                ID = short.Parse(input[0].ToString()),
+                Animal = ushort.Parse(input[1].ToString()),
+                Value = uint.Parse(input[2].ToString()),
+                Reset = (bool)input[3]
+            } as T;
+        }
 
         public override string GetFilePresentation(string prefix, int prefixIndex, int conditionIndex)
         {

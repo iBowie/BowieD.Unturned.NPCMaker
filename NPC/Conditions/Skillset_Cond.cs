@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -15,6 +16,32 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
         public Logic_Type Logic { get; set; }
         public NPC.ESkillset Value { get; set; }
+
+        public override int Elements => 2;
+        public override void Init(Universal_ConditionEditor uce)
+        {
+            uce.AddLabel(MainWindow.Localize("conditionEditor_LogicType"));
+            uce.AddLogicBox();
+            uce.AddLabel(MainWindow.Localize("conditionEditor_Skillset"));
+            uce.AddComboBox(Enum.GetValues(typeof(ESkillset)).Cast<ESkillset>(), "Skillset_{0}");
+        }
+        public override void Init(Universal_ConditionEditor uce, Condition start)
+        {
+            Init(uce);
+            if (start != null)
+            {
+                uce.SetMainValue(1, (start as Skillset_Cond).Logic);
+                uce.SetMainValue(3, (start as Skillset_Cond).Value);
+            }
+        }
+        public override T Parse<T>(object[] input)
+        {
+            return new Skillset_Cond
+            {
+                Logic = (Logic_Type)input[0],
+                Value = (ESkillset)input[1]
+            } as T;
+        }
 
         public override string GetFilePresentation(string prefix, int prefixIndex, int conditionIndex)
         {

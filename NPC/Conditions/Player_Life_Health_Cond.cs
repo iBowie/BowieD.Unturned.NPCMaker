@@ -1,4 +1,5 @@
 ﻿using System;
+using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -11,6 +12,32 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
         public Logic_Type Logic { get; set; }
         public ushort Value { get; set; }
+
+        public override int Elements => 2;
+        public override void Init(Universal_ConditionEditor uce)
+        {
+            uce.AddLabel(MainWindow.Localize("conditionEditor_LogicType"));
+            uce.AddLogicBox();
+            uce.AddLabel(MainWindow.Localize("conditionEditor_Value"));
+            uce.AddTextBox(6);
+        }
+        public override void Init(Universal_ConditionEditor uce, Condition start)
+        {
+            Init(uce);
+            if (start != null)
+            {
+                uce.SetMainValue(1, (start as Player_Life_Health_Cond).Logic);
+                uce.SetMainValue(3, (start as Player_Life_Health_Cond).Value);
+            }
+        }
+        public override T Parse<T>(object[] input)
+        {
+            return new Player_Life_Health_Cond
+            {
+                Logic = (Logic_Type)input[0],
+                Value = ushort.Parse(input[1].ToString())
+            } as T;
+        }
 
         public override string GetFilePresentation(string prefix, int prefixIndex, int conditionIndex)
         {
