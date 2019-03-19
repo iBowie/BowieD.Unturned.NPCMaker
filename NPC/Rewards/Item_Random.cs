@@ -1,4 +1,5 @@
 ﻿using System;
+using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
@@ -11,6 +12,32 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
         public ushort SpawnID { get; set; }
         public uint Amount { get; set; }
+
+        public override int Elements => 2;
+        public override void Init(Universal_RewardEditor ure)
+        {
+            ure.AddLabel(MainWindow.Localize("rewardEditor_SpawnID"));
+            ure.AddTextBox(5);
+            ure.AddLabel(MainWindow.Localize("rewardEditor_Amount"));
+            ure.AddTextBox(6);
+        }
+        public override void Init(Universal_RewardEditor ure, Reward start)
+        {
+            Init(ure);
+            if (start != null)
+            {
+                ure.SetMainValue(1, (start as Item_Random).SpawnID);
+                ure.SetMainValue(3, (start as Item_Random).Amount);
+            }
+        }
+        public override T Parse<T>(object[] input)
+        {
+            return new Item_Random()
+            {
+                SpawnID = ushort.Parse(input[0].ToString()),
+                Amount = uint.Parse(input[1].ToString())
+            } as T;
+        }
 
         public override string GetFilePresentation(string prefix, int prefixIndex, int conditionIndex)
         {

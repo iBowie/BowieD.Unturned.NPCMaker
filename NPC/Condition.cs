@@ -87,7 +87,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
             {
                 if (condTypes == null)
                 {
-                    HashSet<Type> result = new HashSet<Type>();
                     var classes = Assembly.GetExecutingAssembly().GetTypes().Where(d => d.IsClass && d.Namespace == "BowieD.Unturned.NPCMaker.NPC.Conditions").ToList();
                     condTypes = new HashSet<Type>();
                     classes.ForEach(d => condTypes.Add(d));

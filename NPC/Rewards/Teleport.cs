@@ -1,4 +1,5 @@
 ﻿using System;
+using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
@@ -10,6 +11,28 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         }
 
         public ushort SpawnpointID { get; set; }
+
+        public override int Elements => 1;
+        public override void Init(Universal_RewardEditor ure)
+        {
+            ure.AddLabel(MainWindow.Localize("rewardEditor_SpawnpointID"));
+            ure.AddTextBox(5);
+        }
+        public override void Init(Universal_RewardEditor ure, Reward start)
+        {
+            Init(ure);
+            if (start != null)
+            {
+                ure.SetMainValue(1, (start as Teleport).SpawnpointID);
+            }
+        }
+        public override T Parse<T>(object[] input)
+        {
+            return new Teleport()
+            {
+                SpawnpointID = ushort.Parse(input[0].ToString())
+            } as T;
+        }
 
         public override string GetFilePresentation(string prefix, int prefixIndex, int conditionIndex)
         {
