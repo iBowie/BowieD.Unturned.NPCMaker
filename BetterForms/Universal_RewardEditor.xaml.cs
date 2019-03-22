@@ -26,7 +26,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             gridScale.ScaleY = scale;
             viewLocalizationField = viewLocalization;
             saveButton.IsEnabled = false;
-            typeBox.ItemsSource = Enum.GetValues(typeof(RewardType)).Cast<RewardType>().Where(d => d != RewardType.None).Select(d => new ComboBoxItem() { Content = (string)TryFindResource($"reward_Type_{d.ToString()}"), Tag = d });
+            typeBox.ItemsSource = Enum.GetValues(typeof(RewardType)).Cast<RewardType>().Where(d => d != RewardType.None).Select(d => new ComboBoxItem() { Content = MainWindow.Localize($"reward_Type_{d.ToString()}"), Tag = d });
             Reward startReward = reward ?? new Reward();
             SelectRewardType(startReward.Type);
             if (reward != null)
@@ -75,7 +75,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         }
         internal void AddComboBox<T>(IEnumerable<T> Items, string translationKeyFormat)
         {
-            variablesGrid.Children.Add(new ComboBox() { ItemsSource = Items.Select(d => new ComboBoxItem() { Content = (string)TryFindResource(string.Format(translationKeyFormat, d.ToString())), Tag = d }), HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Top, Margin = elementMargin, Width = 100, Height = elementHeight });
+            variablesGrid.Children.Add(new ComboBox() { ItemsSource = Items.Select(d => new ComboBoxItem() { Content = MainWindow.Localize(string.Format(translationKeyFormat, d.ToString())), Tag = d }), HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Top, Margin = elementMargin, Width = 100, Height = elementHeight });
         }
         internal void AddCheckBox(bool checkState)
         {

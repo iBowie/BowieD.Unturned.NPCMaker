@@ -21,7 +21,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             gridScale.ScaleY = scale;
             try
             {
-                Title = string.Format((string)TryFindResource("select_Title"), (string)TryFindResource("select_" + returnType.ToString()));
+                Title = string.Format(MainWindow.Localize("select_Title"), MainWindow.Localize("select_" + returnType.ToString()));
             }
             catch { }
             switch (returnType)

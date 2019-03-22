@@ -66,6 +66,7 @@
     <v:String x:Key="feedback_Steam">My Steam (Click)</v:String>
     <v:String x:Key="feedback_Discord">My Discord Server (Click)</v:String>
     <v:String x:Key="feedback_VK">My VK (Click)</v:String>
+    <v:String x:Key="file_New">New</v:String>
     <v:String x:Key="file_Open">Open...</v:String>
     <v:String x:Key="file_Save">Save</v:String>
     <v:String x:Key="file_SaveAs">Save as...</v:String>
@@ -390,10 +391,15 @@
     <v:String x:Key="NE_0003_Desc">Change ID of the NPC to any value greater than 0</v:String>
     <v:String x:Key="NE_1000_Desc">Invalid skin color.</v:String>
     <v:String x:Key="NE_1001_Desc">Invalid hair color.</v:String>
-    <v:String x:Key="NE_2000_Desc">You have quest, that do not leads to the actual quest. Add reward of type "Quest" to response with quest.</v:String>
+    <v:String x:Key="NE_1002_Desc">Equipped slot empty.</v:String>
+    <v:String x:Key="NE_2000_Desc">You have response with quest, that doesn't leads to the actual quest. Add reward of type "Quest" to response with quest.</v:String>
     <v:String x:Key="NE_2001_Desc">NPC's message must contain at least one page.</v:String>
+    <v:String x:Key="NE_2002_Desc">Change ID of the dialogue with zero id</v:String>
+    <v:String x:Key="NE_2003_Desc">You have two or more dialogues with same ID</v:String>
     <v:String x:Key="NE_3000_Desc">Change ID of the vendor with zero id</v:String>
+    <v:String x:Key="NE_3001_Desc">You have two or more vendors with same ID</v:String>
     <v:String x:Key="NE_4000_Desc">Change ID of the quest with zero id</v:String>
+    <v:String x:Key="NE_4001_Desc">You have two or more quests with same ID</v:String>
 
     <v:String x:Key="notify_Dialogue_Saved">Dialogue saved!</v:String>
     <v:String x:Key="notify_Vendor_Saved">Vendor saved!</v:String>

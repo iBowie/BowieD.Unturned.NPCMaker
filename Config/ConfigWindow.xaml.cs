@@ -92,13 +92,13 @@ namespace BowieD.Unturned.NPCMaker.Config
         {
             Configuration.Force(CurrentConfig);
             Configuration.Save();
-            MainWindow.Instance.DoNotification((string)TryFindResource("config_OnExit"));
+            MainWindow.Instance.DoNotification(MainWindow.Localize("config_OnExit"));
             Close();
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show((string)TryFindResource("config_Default_Confirm"), "", MessageBoxButton.YesNo);
+            var result = MessageBox.Show(MainWindow.Localize("config_Default_Confirm"), "", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
                 CurrentConfig = Configuration.GetDefaults();

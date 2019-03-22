@@ -23,8 +23,8 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         public Universal_ListView(List<BetterControls.Universal_ItemList> listUil, BetterControls.Universal_ItemList.ReturnType returnType)
         {
             InitializeComponent();
-            addButton.Content = (string)TryFindResource($"listView_Add_{returnType.ToString()}");
-            Title = (string)TryFindResource($"listView_Title_{returnType.ToString()}");
+            addButton.Content = MainWindow.Localize($"listView_Add_{returnType.ToString()}");
+            Title = MainWindow.Localize($"listView_Title_{returnType.ToString()}");
             ReturnType = returnType;
             Values = new List<object>();
             foreach (BetterControls.Universal_ItemList uil in listUil)

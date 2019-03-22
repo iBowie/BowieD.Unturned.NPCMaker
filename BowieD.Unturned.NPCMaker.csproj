@@ -144,15 +144,20 @@
     <Compile Include="Mistake.cs" />
     <Compile Include="Mistakes\Apparel\NE_1000.cs" />
     <Compile Include="Mistakes\Apparel\NE_1001.cs" />
+    <Compile Include="Mistakes\Apparel\NE_1002.cs" />
     <Compile Include="Mistakes\Dialogue\NE_2000.cs" />
     <Compile Include="Mistakes\Dialogue\NE_2001.cs" />
+    <Compile Include="Mistakes\Dialogue\NE_2002.cs" />
+    <Compile Include="Mistakes\Dialogue\NE_2003.cs" />
     <Compile Include="Mistakes\General\NE_0000.cs" />
     <Compile Include="Mistakes\General\NE_0001.cs" />
     <Compile Include="Mistakes\General\NE_0002.cs" />
     <Compile Include="Mistakes\General\NE_0003.cs" />
     <Compile Include="Mistakes\Generic.cs" />
     <Compile Include="Mistakes\Quests\NE_4000.cs" />
+    <Compile Include="Mistakes\Quests\NE_4001.cs" />
     <Compile Include="Mistakes\Vendor\NE_3000.cs" />
+    <Compile Include="Mistakes\Vendor\NE_3001.cs" />
     <Compile Include="Notification\NotificationBase.xaml.cs">
       <DependentUpon>NotificationBase.xaml</DependentUpon>
     </Compile>

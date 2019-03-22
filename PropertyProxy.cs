@@ -29,6 +29,7 @@ namespace BowieD.Unturned.NPCMaker
         }
         public void RegisterEvents()
         {
+            inst.newButton.Click += NewButtonClick;
             inst.lstMistakes.SelectionChanged += MistakeList_Selected;
             inst.txtEditorName.TextChanged += EditorName_Change;
             inst.txtDisplayName.TextChanged += DisplayName_Change;
@@ -93,6 +94,15 @@ namespace BowieD.Unturned.NPCMaker
         {
             MainWindow.CurrentNPC.editorName = (sender as TextBox).Text;
             MainWindow.isSaved = false;
+            if (MainWindow.DiscordWorker != null)
+            {
+                RichPresence presence = new RichPresence
+                {
+                    Details = $"Editing NPC {MainWindow.CurrentNPC.editorName ?? "without name"}",
+                    State = $"Working on: General Information"
+                };
+                (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
+            }
         }
         internal void DisplayName_Change(object sender, TextChangedEventArgs e)
         {
@@ -385,6 +395,7 @@ namespace BowieD.Unturned.NPCMaker
         }
         internal void ExportClick(object sender, RoutedEventArgs e)
         {
+            inst.FindMistakes();
             if (inst.No_Exports > 0)
             {
                 SystemSounds.Hand.Play();
@@ -400,6 +411,13 @@ namespace BowieD.Unturned.NPCMaker
             inst.Save();
             Export_ExportWindow eew = new Export_ExportWindow(AppDomain.CurrentDomain.BaseDirectory + $@"results\{MainWindow.CurrentNPC.editorName}\");
             eew.DoActions(MainWindow.CurrentNPC);
+        }
+        internal void NewButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (!inst.SavePrompt())
+                return;
+            inst.ConvertNPCToState(new NPCSave());
+            MainWindow.isSaved = true;
         }
         internal void SaveClick(object sender, RoutedEventArgs e)
         {

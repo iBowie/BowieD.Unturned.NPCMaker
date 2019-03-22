@@ -38,7 +38,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 startCondition.Init(this, startCondition);
                 if (viewLocalization)
                 {
-                    AddLabel((string)TryFindResource("conditionEditor_Localization"));
+                    AddLabel(MainWindow.Localize("conditionEditor_Localization"));
                     AddTextBox(200);
                     SetMainValue(variablesGrid.Children.Count - 1, startCondition.Localization);
                 }
@@ -85,7 +85,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             if (viewLocalizationField)
             {
                 mult++;
-                AddLabel((string)TryFindResource("conditionEditor_Localization"));
+                AddLabel(MainWindow.Localize("conditionEditor_Localization"));
                 AddTextBox(200);
             }
             DoubleAnimation anim = new DoubleAnimation(Height, (baseHeight + (heightDelta * (mult + (mult > 1 ? 1 : 0)))), new Duration(new TimeSpan(0, 0, 0, 0, 500)));
@@ -99,12 +99,12 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         }
         internal void AddResetLabelAndCheckbox(string currentType = "", bool checkState = false)
         {
-            string text = (string)TryFindResource($"conditionEditor_Reset_{currentType}_Title");
-            string tooltip = (string)TryFindResource($"conditionEditor_Reset_{currentType}_Tooltip");
+            string text = MainWindow.Localize($"conditionEditor_Reset_{currentType}_Title");
+            string tooltip = MainWindow.Localize($"conditionEditor_Reset_{currentType}_Tooltip");
             if (text != null)
                 AddLabel(text, tooltip != null ? tooltip.Replace("`", Environment.NewLine) : text);
             else
-                AddLabel((string)TryFindResource("conditionEditor_Reset"));
+                AddLabel(MainWindow.Localize("conditionEditor_Reset"));
             AddCheckBox(checkState);
         }
         internal void AddLabel(string text, string tooltip = "")
@@ -121,7 +121,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         }
         internal void AddComboBox<T>(IEnumerable<T> Items, string translationKeyFormat)
         {
-            variablesGrid.Children.Add(new ComboBox() { ItemsSource = Items.Select(d => new ComboBoxItem() { Content = (string)TryFindResource(string.Format(translationKeyFormat, d.ToString())), Tag = d }), HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Top, Margin = elementMargin, Width = 100, Height = elementHeight });
+            variablesGrid.Children.Add(new ComboBox() { ItemsSource = Items.Select(d => new ComboBoxItem() { Content = MainWindow.Localize(string.Format(translationKeyFormat, d.ToString())), Tag = d }), HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Top, Margin = elementMargin, Width = 100, Height = elementHeight });
         }
         internal void AddCheckBox(bool checkState)
         {

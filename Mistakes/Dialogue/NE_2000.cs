@@ -10,13 +10,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         public override IMPORTANCE Importance => IMPORTANCE.HIGH;
         public override string MistakeNameKey => "NE_2000";
         public override string MistakeDescKey => "NE_2000_Desc";
-        public override bool IsMistake
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool IsMistake => false;
         public override bool TranslateName => false;
         public override Action OnClick => () =>
         {

@@ -5,9 +5,7 @@ using System;
 using System.IO;
 using System.Xml;
 using System.Linq;
-using System.Media;
 using System.Windows;
-using System.Text;
 using System.Net;
 using System.Windows.Media;
 using System.Globalization;
@@ -17,10 +15,8 @@ using System.Windows.Controls;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Windows.Media.Imaging;
-using System.Windows.Media.Animation;
 using Microsoft.Win32;
 using BowieD.Unturned.NPCMaker.NPC;
-using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.BetterForms;
 using BowieD.Unturned.NPCMaker.BetterControls;
 using BowieD.Unturned.NPCMaker.Examples;
@@ -48,7 +44,7 @@ namespace BowieD.Unturned.NPCMaker
             #endregion
             Logger.Log($"Scale set up to {Config.Configuration.Properties.scale}");
             #region THEME SETUP
-            switch (Config.Configuration.Properties.theme ?? "Legacy")
+            switch (Config.Configuration.Properties.theme ?? "DarkGreen")
             {
                 case "DarkGreen":
                     Theme_SetupDarkGreen(null,null);
@@ -68,8 +64,11 @@ namespace BowieD.Unturned.NPCMaker
                 case "DarkRed":
                     Theme_SetupDarkRed(null, null);
                     break;
-                default:
+                case "Legacy":
                     Theme_SetupLegacy(null, null);
+                    break;
+                default:
+                    Theme_SetupDarkGreen(null, null);
                     break;
             }
             #endregion
@@ -93,7 +92,7 @@ namespace BowieD.Unturned.NPCMaker
                                 if (Load(args[k], true, true))
                                 {
                                     notificationsStackPanel.Children.Clear();
-                                    DoNotification((string)TryFindResource("notify_Loaded"));
+                                    DoNotification(Localize("notify_Loaded"));
                                 }
                             }
                             break;
@@ -118,7 +117,7 @@ namespace BowieD.Unturned.NPCMaker
             Proxy.BeardImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, CurrentNPC.beard));
             beardRenderGrid.DataContext = CurrentNPC.hairColor.Brush;
             hairRenderGrid.DataContext = CurrentNPC.hairColor.Brush;
-            faceImageBorder.Background = CurrentNPC.skinColor.Brush;
+            faceImageBorder.Background = apparelSkinColorBox.Text.Length == 0 ? Brushes.Transparent : CurrentNPC.skinColor.Brush;
             #region COLOR SAMPLES
             #region UNTURNED
             List<string> unturnedColors = new List<string>()
@@ -265,7 +264,7 @@ namespace BowieD.Unturned.NPCMaker
             #endregion
             #region VERSION SPECIFIC CODE
             #if BETA
-            DoNotification((string)TryFindResource("app_Beta"));
+            DoNotification(Localize("app_Beta"));
             #endif
             #if !BETA
             betaOverlayText.Visibility = Visibility.Collapsed;
@@ -305,20 +304,28 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             #endregion
-            DoNotification((string)TryFindResource("app_Free"));
+            DoNotification(MainWindow.Localize("app_Free"));
 
         }
         public static string Localize(string key)
         {
-            var res = (string)Instance.TryFindResource(key);
-            if (res?.Length == 0)
+            var res = Instance.TryFindResource(key);
+            if (res == null || !(res is string resString) || resString.Length == 0)
                 return key;
-            return res;
+            return resString;
+        }
+        public static string Localize(string key, params object[] format)
+        {
+            string res = Localize(key);
+            if (res == key)
+                return key;
+            return string.Format(res, format);
         }
         #region THEME EVENTS
         private void Theme_SetupLegacy(object sender, RoutedEventArgs e)
         {
             Theme_Clear();
+            App.Current.Resources["AccentColor"] = new SolidColorBrush(Colors.Black);
             Config.Configuration.Properties.theme = "Legacy";
         }
         private void Theme_SetupLightGreen(object sender, RoutedEventArgs e)
@@ -326,6 +333,7 @@ namespace BowieD.Unturned.NPCMaker
             Theme_Clear();
             Theme_SetupMetro();
             Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Green.xaml") });
+            App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(84, 142, 25));
             Config.Configuration.Properties.theme = "LightGreen";
         }
         private void Theme_SetupLightPink(object sender, RoutedEventArgs e)
@@ -333,6 +341,7 @@ namespace BowieD.Unturned.NPCMaker
             Theme_Clear();
             Theme_SetupMetro();
             Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Pink.xaml") });
+            App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(246, 142, 217));
             Config.Configuration.Properties.theme = "LightPink";
         }
         private void Theme_SetupDarkGreen(object sender, RoutedEventArgs e)
@@ -340,6 +349,7 @@ namespace BowieD.Unturned.NPCMaker
             Theme_Clear();
             Theme_SetupMetro();
             Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Green.xaml") });
+            App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(84, 142, 25));
             Config.Configuration.Properties.theme = "DarkGreen";
         }
         private void Theme_SetupDarkPink(object sender, RoutedEventArgs e)
@@ -347,6 +357,7 @@ namespace BowieD.Unturned.NPCMaker
             Theme_Clear();
             Theme_SetupMetro();
             Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Pink.xaml") });
+            App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(246, 142, 217));
             Config.Configuration.Properties.theme = "DarkPink";
         }
         private void Theme_SetupLightRed(object sender, RoutedEventArgs e)
@@ -354,6 +365,7 @@ namespace BowieD.Unturned.NPCMaker
             Theme_Clear();
             Theme_SetupMetro();
             Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Red.xaml") });
+            App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(234, 67, 51));
             Config.Configuration.Properties.theme = "LightRed";
         }
         private void Theme_SetupDarkRed(object sender, RoutedEventArgs e)
@@ -361,6 +373,7 @@ namespace BowieD.Unturned.NPCMaker
             Theme_Clear();
             Theme_SetupMetro();
             Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Red.xaml") });
+            App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(234, 67, 51));
             Config.Configuration.Properties.theme = "DarkRed";
         }
         private void Theme_SetupMetro()
@@ -399,7 +412,7 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(0, 9, 5, 1);
+        public static Version Version => new Version(0, 9, 5, 2);
         #endregion
         #region STATIC
         public static MainWindow Instance;
@@ -434,7 +447,7 @@ namespace BowieD.Unturned.NPCMaker
 #if !DEBUG
             if ((CurrentNPC?.IsReadOnly) ?? false)
             {
-                DoNotification((string)TryFindResource("notify_ReadOnly"));
+                DoNotification(Localize("notify_ReadOnly"));
                 return;
             }
 #endif
@@ -446,7 +459,7 @@ namespace BowieD.Unturned.NPCMaker
             {
                 SaveFileDialog sfd = new SaveFileDialog
                 {
-                    Filter = $"{(string)TryFindResource("save_Filter")} (*.npc)|*.npc",
+                    Filter = $"{Localize("save_Filter")} (*.npc)|*.npc",
                     FileName = $"{CurrentNPC.editorName}.npc",
                     OverwritePrompt = true
                 };
@@ -487,7 +500,7 @@ namespace BowieD.Unturned.NPCMaker
                     #if !DEBUG
                     if ((CurrentNPC?.IsReadOnly) ?? false)
                     {
-                        DoNotification((string)TryFindResource("notify_ReadOnly"));
+                        DoNotification(Localize("notify_ReadOnly"));
                         return;
                     }
                     #endif
@@ -499,7 +512,7 @@ namespace BowieD.Unturned.NPCMaker
                             XmlSerializer ser = new XmlSerializer(typeof(NPCSave));
                             ser.Serialize(writer, CurrentNPC);
                         }
-                        DoNotification((string)TryFindResource("notify_Saved"));
+                        DoNotification(Localize("notify_Saved"));
                         isSaved = true;
                     }
                 }
@@ -530,16 +543,16 @@ namespace BowieD.Unturned.NPCMaker
                     ConvertNPCToState(CurrentNPC);
                     isSaved = true;
                 }
-                DoNotification((string)TryFindResource("notify_Loaded"));
+                DoNotification(Localize("notify_Loaded"));
                 return true;
             }
-            catch { DoNotification((string)TryFindResource("load_Incompatible")); return false; }
+            catch { DoNotification(Localize("load_Incompatible")); return false; }
         }
         public bool SavePrompt()
         {
             if (isSaved == true || CurrentNPC.IsReadOnly || CurrentNPC == new NPCSave())
                 return true;
-            var result = MessageBox.Show((string)TryFindResource("app_Exit_UnsavedChanges_Text"), (string)TryFindResource("app_Exit_UnsavedChanges_Title"), MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
+            var result = MessageBox.Show(Localize("app_Exit_UnsavedChanges_Text"), Localize("app_Exit_UnsavedChanges_Title"), MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
             if (result == MessageBoxResult.Yes)
             {
                 Save();
@@ -658,7 +671,7 @@ namespace BowieD.Unturned.NPCMaker
             bool skipCache = false;
             if (CachedUnturnedFiles?.Count() > 0)
             {
-                var res = MessageBox.Show((string)TryFindResource("mistakes_DA_UpdateCache"), "", MessageBoxButton.YesNoCancel);
+                var res = MessageBox.Show(Localize("mistakes_DA_UpdateCache"), "", MessageBoxButton.YesNoCancel);
                 if (res == MessageBoxResult.Cancel)
                 {
                     blockActionsOverlay.Visibility = Visibility.Collapsed;
@@ -688,7 +701,7 @@ namespace BowieD.Unturned.NPCMaker
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == EAssetType.Dialogue && d.Id == dialogue.id))
                 {
-                    lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_dialogue"), dialogue.id), "", IMPORTANCE.HIGH, true, false));
+                    lstMistakes.Items.Add(new Mistakes.Generic(Localize("deep_dialogue", dialogue.id), "", IMPORTANCE.HIGH, true, false));
                 }
                 await Task.Yield();
             }
@@ -696,18 +709,18 @@ namespace BowieD.Unturned.NPCMaker
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == EAssetType.Vendor && d.Id == vendor.id))
                 {
-                    lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_vendor"), vendor.id), "", IMPORTANCE.HIGH, true, false));
+                    lstMistakes.Items.Add(new Mistakes.Generic(Localize("deep_vendor", vendor.id), "", IMPORTANCE.HIGH, true, false));
                 }
                 foreach (var it in vendor.items)
                 {
                     if (it.type == ItemType.VEHICLE && !CachedUnturnedFiles.Any(d => d.Type == EAssetType.Vehicle && d.Id == it.id))
                     {
-                        lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_vehicle"), it.id), "", IMPORTANCE.HIGH, true, false));
+                        lstMistakes.Items.Add(new Mistakes.Generic(Localize("deep_vehicle", it.id), "", IMPORTANCE.HIGH, true, false));
                         continue;
                     }
                     if (it.type == ItemType.ITEM && !CachedUnturnedFiles.Any(d => d.Type == EAssetType.Item && d.Id == it.id))
                     {
-                        lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_item"), it.id), "", IMPORTANCE.HIGH, true, false));
+                        lstMistakes.Items.Add(new Mistakes.Generic(Localize("deep_item", it.id), "", IMPORTANCE.HIGH, true, false));
                         continue;
                     }
                 }
@@ -717,7 +730,7 @@ namespace BowieD.Unturned.NPCMaker
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == EAssetType.Quest && d.Id == quest.id))
                 {
-                    lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_quest"), quest.id), "", IMPORTANCE.HIGH, true, false));
+                    lstMistakes.Items.Add(new Mistakes.Generic(Localize("deep_quest", quest.id), "", IMPORTANCE.HIGH, true, false));
                 }
                 await Task.Yield();
             }
@@ -726,7 +739,7 @@ namespace BowieD.Unturned.NPCMaker
                 ushort input = (ushort)txtID.Value;
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == EAssetType.NPC && d.Id == input))
                 {
-                    lstMistakes.Items.Add(new Mistakes.Generic(string.Format((string)TryFindResource("deep_char"), input), "", IMPORTANCE.HIGH, true, false));
+                    lstMistakes.Items.Add(new Mistakes.Generic(Localize("deep_char", input), "", IMPORTANCE.HIGH, true, false));
                 }
             }
             blockActionsOverlay.Visibility = Visibility.Collapsed;
@@ -749,7 +762,7 @@ namespace BowieD.Unturned.NPCMaker
             if (dil.id == 0)
             {
                 if (sender != null)
-                    DoNotification((string)TryFindResource("dialogue_ID_Zero"));
+                    DoNotification(Localize("dialogue_ID_Zero"));
                 return;
             }
             var o = CurrentNPC.dialogues.Where(d => d.id == dil.id);
@@ -757,7 +770,7 @@ namespace BowieD.Unturned.NPCMaker
                 CurrentNPC.dialogues.Remove(o.ElementAt(0));
             CurrentNPC.dialogues.Add(CurrentDialogue);
             if (sender != null)
-                DoNotification((string)TryFindResource("notify_Dialogue_Saved"));
+                DoNotification(Localize("notify_Dialogue_Saved"));
             isSaved = false;
         }
         private void Dialogue_ClearCurrentButtonClick(object sender, RoutedEventArgs e)
@@ -857,7 +870,7 @@ namespace BowieD.Unturned.NPCMaker
                 CurrentNPC.startDialogueId = dial.id;
                 try
                 {
-                    DoNotification(string.Format((string)TryFindResource("dialogue_Start_Notify"), dial.id));
+                    DoNotification(Localize("dialogue_Start_Notify", dial.id));
                 }
                 catch { }
             }
@@ -1012,7 +1025,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             CurrentNPC.vendors.Add(cur);
             if (sender != null)
-                DoNotification((string)TryFindResource("notify_Vendor_Saved"));
+                DoNotification(Localize("notify_Vendor_Saved"));
             isSaved = false;
         }
         private void ClearVendor_Click(object sender, RoutedEventArgs e)
@@ -1173,7 +1186,7 @@ namespace BowieD.Unturned.NPCMaker
                 CurrentNPC.quests.Remove(CurrentNPC.quests.Where(d => d.id == questIdBox.Value).ElementAt(0));
             CurrentNPC.quests.Add(CurrentQuest);
             if (sender != null)
-                DoNotification((string)TryFindResource("notify_Quest_Saved"));
+                DoNotification(Localize("notify_Quest_Saved"));
             isSaved = false;
         }
         private void LoadQuest_Click(object sender, RoutedEventArgs e)
@@ -1216,7 +1229,7 @@ namespace BowieD.Unturned.NPCMaker
                     if (Load(path, true, true))
                     {
                         notificationsStackPanel.Children.Clear();
-                        DoNotification((string)TryFindResource("notify_Loaded"));
+                        DoNotification(Localize("notify_Loaded"));
                     }
                 }
             }
@@ -1233,8 +1246,9 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     string vers = await wc.DownloadStringTaskAsync("https://raw.githubusercontent.com/iBowie/publicfiles/master/npcmakerversion.txt");
                     Version newVersion = new Version(vers);
-                    forceUpdateButton.IsEnabled = newVersion > Version;
-                    return newVersion > Version;
+                    bool res = newVersion > Version;
+                    forceUpdateButton.IsEnabled = res;
+                    return res;
                 }
             }
             catch { }
@@ -1248,7 +1262,7 @@ namespace BowieD.Unturned.NPCMaker
             using (WebClient wc = new WebClient())
             using (FileStream fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + "updater.exe", FileMode.Create))
             {
-                byte[] dat = wc.DownloadData("https://bowiestuff.at.ua/npcmakerupdater.e");
+                byte[] dat = wc.DownloadData("https://raw.githubusercontent.com/iBowie/publicfiles/master/BowieD.Unturned.NPCMaker.Updater.exe");
                 for (int k = 0; k < dat.Length; k++)
                 {
                     fs.WriteByte(dat[k]);

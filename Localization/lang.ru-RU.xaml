@@ -66,6 +66,7 @@
     <v:String x:Key="feedback_Steam">Мой Steam (Нажать)</v:String>
     <v:String x:Key="feedback_Discord">Мой сервер в Discord (Нажать)</v:String>
     <v:String x:Key="feedback_VK">Мой ВК (Нажать)</v:String>
+    <v:String x:Key="file_New">Создать нового</v:String>
     <v:String x:Key="file_Open">Открыть...</v:String>
     <v:String x:Key="file_Save">Сохранить</v:String>
     <v:String x:Key="file_SaveAs">Сохранить как...</v:String>
@@ -389,10 +390,15 @@
     <v:String x:Key="NE_0003_Desc">Измените ID NPC на любой выше 0</v:String>
     <v:String x:Key="NE_1000_Desc">Неправильный цвет кожи.</v:String>
     <v:String x:Key="NE_1001_Desc">Неправильный цвет волос.</v:String>
+    <v:String x:Key="NE_1002_Desc">Экипированный слот пуст.</v:String>
     <v:String x:Key="NE_2000_Desc">У Вас есть задание, которое не ведёт к заданию. Добавьте награду типа "Задание" к ответу с заданием.</v:String>
     <v:String x:Key="NE_2001_Desc">Сообщение NPC должно содержать как минимум одно сообщение.</v:String>
+    <v:String x:Key="NE_2002_Desc">Измените ID диалога на любой выше 0</v:String>
+    <v:String x:Key="NE_2003_Desc">У Вас есть несколько диалогов с одинаковым ID</v:String>
     <v:String x:Key="NE_3000_Desc">Измените ID магазина на любой выше 0</v:String>
+    <v:String x:Key="NE_3001_Desc">У Вас есть несколько магазинов с одинаковым ID</v:String>
     <v:String x:Key="NE_4000_Desc">Измените ID задания на любой выше 0</v:String>
+    <v:String x:Key="NE_4001_Desc">У Вас есть несколько заданий с одинаковым ID</v:String>
     
     <v:String x:Key="notify_Dialogue_Saved">Диалог сохранен!</v:String>
     <v:String x:Key="notify_Vendor_Saved">Магазин сохранен!</v:String>

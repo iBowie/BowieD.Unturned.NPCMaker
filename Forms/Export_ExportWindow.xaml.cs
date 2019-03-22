@@ -30,7 +30,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 FontSize = 16,
                 TextAlignment = TextAlignment.Center,
-                Text = (string)TryFindResource("export_Done"),
+                Text = MainWindow.Localize("export_Done"),
                 TextWrapping = TextWrapping.Wrap
             };
             TextBlock buttonText = new TextBlock
@@ -38,7 +38,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 FontSize = 16,
                 TextAlignment = TextAlignment.Center,
                 TextWrapping = TextWrapping.Wrap,
-                Text = (string)TryFindResource("export_Done_Goto")
+                Text = MainWindow.Localize("export_Done_Goto")
             };
             Action<object, RoutedEventArgs> action = new Action<object, RoutedEventArgs>((sender, e) => { Process.Start(AppDomain.CurrentDomain.BaseDirectory + "results"); });
             MainWindow.Instance.DoNotification(text, buttonText, action);
@@ -50,13 +50,13 @@ namespace BowieD.Unturned.NPCMaker.Forms
             try
             {
                 Prepare(save, dir);
-                detailedExport.Text = ((string)TryFindResource("export_StepFormat")).Replace("%done%", "1").Replace("%total%", "4").Replace("%step%", (string)FindResource("export_Step_Character"));
+                detailedExport.Text = (MainWindow.Localize("export_StepFormat")).Replace("%done%", "1").Replace("%total%", "4").Replace("%step%", (string)FindResource("export_Step_Character"));
                 Export_Character(save);
-                detailedExport.Text = ((string)TryFindResource("export_StepFormat")).Replace("%done%", "2").Replace("%total%", "4").Replace("%step%", (string)FindResource("export_Step_Dialogues"));
+                detailedExport.Text = (MainWindow.Localize("export_StepFormat")).Replace("%done%", "2").Replace("%total%", "4").Replace("%step%", (string)FindResource("export_Step_Dialogues"));
                 Export_Dialogues(save);
-                detailedExport.Text = ((string)TryFindResource("export_StepFormat")).Replace("%done%", "3").Replace("%total%", "4").Replace("%step%", (string)FindResource("export_Step_Quests"));
+                detailedExport.Text = (MainWindow.Localize("export_StepFormat")).Replace("%done%", "3").Replace("%total%", "4").Replace("%step%", (string)FindResource("export_Step_Quests"));
                 Export_Quests(save);
-                detailedExport.Text = ((string)TryFindResource("export_StepFormat")).Replace("%done%", "4").Replace("%total%", "4").Replace("%step%", (string)FindResource("export_Step_Vendors"));
+                detailedExport.Text = (MainWindow.Localize("export_StepFormat")).Replace("%done%", "4").Replace("%total%", "4").Replace("%step%", (string)FindResource("export_Step_Vendors"));
                 Export_Vendors(save);
             }
             catch (Exception ex) { MainWindow.Instance.DoNotification($"Export failed. Exception: {ex.Message}"); }
