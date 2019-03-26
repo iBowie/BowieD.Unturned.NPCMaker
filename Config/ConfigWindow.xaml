@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Config"
+        xmlns:npcmaker="clr-namespace:BowieD.Unturned.NPCMaker"
         mc:Ignorable="d"
         Title="{DynamicResource config_Title}" Icon="{DynamicResource app_Icon}" Height="240" Width="480">
     <Grid>
@@ -51,14 +52,57 @@
                 <StackPanel Margin="5">
                     <Grid Margin="2.5">
                         <Label Content="{DynamicResource config_Tab_Appearance_Theme}"/>
-                        <ComboBox SelectedIndex="1" HorizontalAlignment="Right" Name="Selected_Theme_Box">
-                            <ComboBoxItem Tag="Legacy" Content="{DynamicResource config_Tab_Appearance_Theme_Legacy}"/>
-                            <ComboBoxItem Tag="LightGreen" Content="{DynamicResource config_Tab_Appearance_Theme_LightGreen}"/>
-                            <ComboBoxItem Tag="DarkGreen" Content="{DynamicResource config_Tab_Appearance_Theme_DarkGreen}"/>
-                            <ComboBoxItem Tag="LightPink" Content="{DynamicResource config_Tab_Appearance_Theme_LightPink}"/>
-                            <ComboBoxItem Tag="DarkPink" Content="{DynamicResource config_Tab_Appearance_Theme_DarkPink}"/>
-                            <ComboBoxItem Tag="LightRed" Content="{DynamicResource config_Tab_Appearance_Theme_LightRed}"/>
-                            <ComboBoxItem Tag="DarkRed" Content="{DynamicResource config_Tab_Appearance_Theme_DarkRed}"/>
+                        <ComboBox SelectedIndex="0" HorizontalAlignment="Right" Name="Selected_Theme_Box">
+                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_LightGreen}">
+                                <ComboBoxItem.Tag>
+                                    <npcmaker:ThemeInfo R="84" G="142" B="25" Name="LightGreen" DictionaryName="Light.Green"/>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_LightPink}">
+                                <ComboBoxItem.Tag>
+                                    <npcmaker:ThemeInfo R="246" G="142" B="217" Name="LightPink" DictionaryName="Light.Pink"/>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_LightRed}">
+                                <ComboBoxItem.Tag>
+                                    <npcmaker:ThemeInfo R="234" G="67" B="51" Name="LightRed" DictionaryName="Light.Red"/>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_LightBlue}">
+                                <ComboBoxItem.Tag>
+                                    <npcmaker:ThemeInfo R="51" G="115" B="242" Name="LightBlue" DictionaryName="Light.Blue"/>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_LightPurple}">
+                                <ComboBoxItem.Tag>
+                                    <npcmaker:ThemeInfo R="87" G="78" B="185" Name="LightPurple" DictionaryName="Light.Purple"/>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_DarkGreen}">
+                                <ComboBoxItem.Tag>
+                                    <npcmaker:ThemeInfo R="84" G="142" B="25" Name="DarkGreen" DictionaryName="Dark.Green"/>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_DarkPink}">
+                                <ComboBoxItem.Tag>
+                                    <npcmaker:ThemeInfo R="246" G="142" B="217" Name="DarkPink" DictionaryName="Dark.Pink"/>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_DarkRed}">
+                                <ComboBoxItem.Tag>
+                                    <npcmaker:ThemeInfo R="234" G="67" B="51" Name="DarkRed" DictionaryName="Dark.Red"/>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_DarkBlue}">
+                                <ComboBoxItem.Tag>
+                                    <npcmaker:ThemeInfo R="51" G="115" B="242" Name="DarkBlue" DictionaryName="Dark.Blue"/>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_DarkPurple}">
+                                <ComboBoxItem.Tag>
+                                    <npcmaker:ThemeInfo R="87" G="78" B="185" Name="DarkPurple" DictionaryName="Dark.Purple"/>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
                         </ComboBox>
                     </Grid>
                     <Grid Margin="2.5">

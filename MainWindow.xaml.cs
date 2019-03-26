@@ -1,5 +1,4 @@
-﻿#define BETA
-//#define RELEASE
+﻿#define RELEASE
 
 using System;
 using System.IO;
@@ -41,42 +40,16 @@ namespace BowieD.Unturned.NPCMaker
             mainGridScale.ScaleY = Config.Configuration.Properties.scale;
             Width = MinWidth * Config.Configuration.Properties.scale;
             Height = MinHeight * Config.Configuration.Properties.scale;
-            #endregion
             Logger.Log($"Scale set up to {Config.Configuration.Properties.scale}");
-            #region THEME SETUP
-            switch (Config.Configuration.Properties.theme ?? "DarkGreen")
-            {
-                case "DarkGreen":
-                    Theme_SetupDarkGreen(null,null);
-                    break;
-                case "LightGreen":
-                    Theme_SetupLightGreen(null, null);
-                    break;
-                case "DarkPink":
-                    Theme_SetupDarkPink(null, null);
-                    break;
-                case "LightPink":
-                    Theme_SetupLightPink(null, null);
-                    break;
-                case "LightRed":
-                    Theme_SetupLightRed(null, null);
-                    break;
-                case "DarkRed":
-                    Theme_SetupDarkRed(null, null);
-                    break;
-                case "Legacy":
-                    Theme_SetupLegacy(null, null);
-                    break;
-                default:
-                    Theme_SetupDarkGreen(null, null);
-                    break;
-            }
             #endregion
-            Logger.Log($"Theme set to {Config.Configuration.Properties.theme}");
+            #region THEME SETUP
+            (Config.Configuration.Properties.currentTheme ?? Config.Configuration.DefaultTheme).Setup();
+            Logger.Log($"Theme set to {(Config.Configuration.Properties.currentTheme ?? Config.Configuration.DefaultTheme).Name}");
+            #endregion
             #region LOCALIZATION
             App.Language = Config.Configuration.Properties.language ?? new CultureInfo("en-US");
-            #endregion
             Logger.Log($"Language set to {Config.Configuration.Properties.language.Name}");
+            #endregion
             #region OPEN_WITH
             string[] args = Environment.GetCommandLineArgs();
             if (args != null && args.Length >= 0)
@@ -263,12 +236,6 @@ namespace BowieD.Unturned.NPCMaker
             }
             #endregion
             #region VERSION SPECIFIC CODE
-            #if BETA
-            DoNotification(Localize("app_Beta"));
-            #endif
-            #if !BETA
-            betaOverlayText.Visibility = Visibility.Collapsed;
-            #endif
             #if !DEBUG
             debugOverlayText.Visibility = Visibility.Collapsed;
             #endif
@@ -304,8 +271,14 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             #endregion
-            DoNotification(MainWindow.Localize("app_Free"));
+            #region ENABLE EXPERIMENTAL
+            if (Config.Configuration.Properties.experimentalFeatures)
+            {
 
+            }
+            #endregion
+            Proxy.ColorSliderChange(null, null);
+            DoNotification(MainWindow.Localize("app_Free"));
         }
         public static string Localize(string key)
         {
@@ -321,68 +294,14 @@ namespace BowieD.Unturned.NPCMaker
                 return key;
             return string.Format(res, format);
         }
-        #region THEME EVENTS
-        private void Theme_SetupLegacy(object sender, RoutedEventArgs e)
-        {
-            Theme_Clear();
-            App.Current.Resources["AccentColor"] = new SolidColorBrush(Colors.Black);
-            Config.Configuration.Properties.theme = "Legacy";
-        }
-        private void Theme_SetupLightGreen(object sender, RoutedEventArgs e)
-        {
-            Theme_Clear();
-            Theme_SetupMetro();
-            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Green.xaml") });
-            App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(84, 142, 25));
-            Config.Configuration.Properties.theme = "LightGreen";
-        }
-        private void Theme_SetupLightPink(object sender, RoutedEventArgs e)
-        {
-            Theme_Clear();
-            Theme_SetupMetro();
-            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Pink.xaml") });
-            App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(246, 142, 217));
-            Config.Configuration.Properties.theme = "LightPink";
-        }
-        private void Theme_SetupDarkGreen(object sender, RoutedEventArgs e)
-        {
-            Theme_Clear();
-            Theme_SetupMetro();
-            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Green.xaml") });
-            App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(84, 142, 25));
-            Config.Configuration.Properties.theme = "DarkGreen";
-        }
-        private void Theme_SetupDarkPink(object sender, RoutedEventArgs e)
-        {
-            Theme_Clear();
-            Theme_SetupMetro();
-            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Pink.xaml") });
-            App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(246, 142, 217));
-            Config.Configuration.Properties.theme = "DarkPink";
-        }
-        private void Theme_SetupLightRed(object sender, RoutedEventArgs e)
-        {
-            Theme_Clear();
-            Theme_SetupMetro();
-            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Red.xaml") });
-            App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(234, 67, 51));
-            Config.Configuration.Properties.theme = "LightRed";
-        }
-        private void Theme_SetupDarkRed(object sender, RoutedEventArgs e)
-        {
-            Theme_Clear();
-            Theme_SetupMetro();
-            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Red.xaml") });
-            App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(234, 67, 51));
-            Config.Configuration.Properties.theme = "DarkRed";
-        }
-        private void Theme_SetupMetro()
+        #region THEMES
+        internal void Theme_SetupMetro()
         {
             Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml") });
             Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml") });
             IsMetro = true;
         }
-        private void Theme_Clear()
+        internal void Theme_Clear()
         {
             ResourceDictionary metroControls = (from d in Application.Current.Resources.MergedDictionaries
                                                 where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"
@@ -412,7 +331,7 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(0, 9, 5, 2);
+        public static Version Version => new Version(1, 0, 0, 0);
         #endregion
         #region STATIC
         public static MainWindow Instance;
@@ -420,11 +339,13 @@ namespace BowieD.Unturned.NPCMaker
         public static object DiscordWorker { get; set; }
         public static DispatcherTimer AutosaveTimer { get; set; }
         public static PropertyProxy Proxy { get; private set; }
+        public static bool IsRGB { get; set; } = true;
+        public static DateTime Started { get; set; } = DateTime.UtcNow;
 
         public static bool IsMetro { get; set; }
         #endregion
         #region CURRENT NPC
-        public static string saveFile = "";
+        public static string saveFile = "", oldFile = "";
         public static bool isSaved = true;
         #endregion
         private void AutosaveTimer_Tick(object sender, EventArgs e)
@@ -451,7 +372,7 @@ namespace BowieD.Unturned.NPCMaker
                 return;
             }
 #endif
-            RebuildApparel();
+            //RebuildApparel();
             Dialogue_SaveButtonClick(null, null);
             SaveVendor_Click(null, null);
             SaveQuest_Click(null, null);
@@ -467,7 +388,10 @@ namespace BowieD.Unturned.NPCMaker
                 if (result == true)
                     saveFile = sfd.FileName;
                 else
+                {
+                    saveFile = oldFile.Length > 0 ? oldFile : saveFile;
                     return;
+                }
             }
             if (Config.Configuration.Properties.recent == null)
                 Config.Configuration.Properties.recent = new string[0];
@@ -518,6 +442,8 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             catch (Exception ex) { DoNotification($"Saving failed! Exception: {ex.Message}"); }
+            if (oldFile != "")
+                MainWindow.saveFile = oldFile;
         }
         public bool Load(string path, bool asExample = false, bool skipPrompt = false)
         {
@@ -544,6 +470,7 @@ namespace BowieD.Unturned.NPCMaker
                     isSaved = true;
                 }
                 DoNotification(Localize("notify_Loaded"));
+                Started = DateTime.UtcNow;
                 return true;
             }
             catch { DoNotification(Localize("load_Incompatible")); return false; }
@@ -586,6 +513,7 @@ namespace BowieD.Unturned.NPCMaker
         #region STATE CONVERTERS
         public void ConvertNPCToState(NPCSave save)
         {
+            CurrentNPC = save;
             apparelSkinColorBox.Text = save.skinColor.HEX;
             apparelHairColorBox.Text = save.hairColor.HEX;
             backpackIdBox.Value = save.backpack;
@@ -622,6 +550,9 @@ namespace BowieD.Unturned.NPCMaker
                     break;
                 }
             }
+            CurrentDialogue = new NPCDialogue();
+            CurrentQuest = new NPCQuest();
+            CurrentVendor = new NPCVendor();
         }
         #endregion
         #region MISTAKES
@@ -879,7 +810,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             get
             {
-                ushort dialogueID = (ushort)dialogueInputIdControl.Value;
+                ushort dialogueID = (ushort)(dialogueInputIdControl.Value ?? 0);
                 NPCDialogue ret = new NPCDialogue();
                 List<Dialogue_Message> messages = new List<Dialogue_Message>();
                 foreach (UIElement ui in messagePagesGrid.Children)
@@ -964,7 +895,7 @@ namespace BowieD.Unturned.NPCMaker
                 return new NPCVendor()
                 {
                     items = items,
-                    id = (ushort)vendorIdTxtBox.Value,
+                    id = (ushort)(vendorIdTxtBox.Value ?? 0),
                     vendorDescription = vendorDescTxtBox.Text,
                     vendorTitle = vendorTitleTxtBox.Text,
                     comment = vendor_commentbox.Text
@@ -994,12 +925,6 @@ namespace BowieD.Unturned.NPCMaker
         private void AddVendorItem_Click(object sender, RoutedEventArgs e)
         {
             BetterForms.Universal_VendorItemEditor uvie = new BetterForms.Universal_VendorItemEditor();
-            RichPresence presence = new RichPresence
-            {
-                Details = $"Editing NPC {txtEditorName.Text ?? "without name"}",
-                State = $"Adding vendor item"
-            };
-            (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
             if (uvie.ShowDialog() == true)
             {
                 VendorItem resultedVendorItem = uvie.Result;
@@ -1105,7 +1030,7 @@ namespace BowieD.Unturned.NPCMaker
                 }
                 ret.title = questTitleBox.Text;
                 ret.description = questDescBox.Text;
-                ret.id = (ushort)questIdBox.Value;
+                ret.id = (ushort)(questIdBox.Value ?? 0);
                 ret.comment = quest_commentbox.Text;
 
                 return ret;
@@ -1134,12 +1059,6 @@ namespace BowieD.Unturned.NPCMaker
         private void AddQuestCondition_Click(object sender, RoutedEventArgs e)
         {
             Universal_ConditionEditor uce = new Universal_ConditionEditor(null, true);
-            RichPresence presence = new RichPresence
-            {
-                Details = $"Editing NPC {txtEditorName.Text ?? "without name"}",
-                State = "Creating condition for a quest"
-            };
-            (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
             if (uce.ShowDialog() == true)
             {
                 NPC.Condition cond = uce.Result;
@@ -1157,12 +1076,6 @@ namespace BowieD.Unturned.NPCMaker
         private void AddQuestReward_Click(object sender, RoutedEventArgs e)
         {
             Universal_RewardEditor ure = new Universal_RewardEditor(null, true);
-            RichPresence presence = new RichPresence
-            {
-                Details = $"Editing NPC {txtEditorName.Text ?? "without name"}",
-                State = "Creating reward for a quest"
-            };
-            (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
             if (ure.ShowDialog() == true)
             {
                 Reward rew = ure.Result;
@@ -1236,7 +1149,7 @@ namespace BowieD.Unturned.NPCMaker
             dropOverlay.Visibility = Visibility.Hidden;
         }
         #endregion
-        #region UPDATE CHECK
+        #region UPDATE
         public async Task<bool?> IsUpdateAvailable()
         {
             checkForUpdatesButton.IsEnabled = false;
@@ -1255,8 +1168,6 @@ namespace BowieD.Unturned.NPCMaker
             finally { checkForUpdatesButton.IsEnabled = true; }
             return null;
         }
-        #endregion
-        #region UPDATE
         public void DownloadUpdater()
         {
             using (WebClient wc = new WebClient())
@@ -1311,21 +1222,6 @@ namespace BowieD.Unturned.NPCMaker
             Notification.NotificationBase notificationBase = new Notification.NotificationBase(notificationsStackPanel, this.Background, textBlock, b);
             notificationBase.Opacity = 0.8;
             notificationsStackPanel.Children.Add(notificationBase);
-        }
-        #endregion
-        #region BUG FIXES
-        public void RebuildApparel()
-        {
-            CurrentNPC.top = (ushort)topIdBox.Value;
-            CurrentNPC.bottom = (ushort)bottomIdBox.Value;
-            CurrentNPC.backpack = (ushort)backpackIdBox.Value;
-            CurrentNPC.glasses = (ushort)glassesIdBox.Value;
-            CurrentNPC.hat = (ushort)hatIdBox.Value;
-            CurrentNPC.mask = (ushort)maskIdBox.Value;
-            CurrentNPC.vest = (ushort)vestIdBox.Value;
-            CurrentNPC.equipPrimary = (ushort)primaryIdBox.Value;
-            CurrentNPC.equipSecondary = (ushort)secondaryIdBox.Value;
-            CurrentNPC.equipTertiary = (ushort)tertiaryIdBox.Value;
         }
         #endregion
 

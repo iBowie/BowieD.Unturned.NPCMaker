@@ -87,7 +87,7 @@
     <v:String x:Key="general_DisplayName_Tooltip">Имя, видимое в игре</v:String>
     <v:String x:Key="general_ID">ID НИПа</v:String>
     <v:String x:Key="general_ID_Tooltip">ID, используемый в игре</v:String>
-    <v:String x:Key="general_StartDialogue">ID начального диалога (оставьте пустым если нет)</v:String>
+    <v:String x:Key="general_StartDialogue">ID начального диалога (0 если нет)</v:String>
     <v:String x:Key="general_StartDialogue_Tooltip">Этот диалог откроется при взаимодействии с НИПом</v:String>
     <v:String x:Key="general_Title">Основная информация</v:String>
     <v:String x:Key="general_Conditions">Условия видимости</v:String>
@@ -362,8 +362,19 @@
     <v:String x:Key="tool_Color_Red">R</v:String>
     <v:String x:Key="tool_Color_Green">G</v:String>
     <v:String x:Key="tool_Color_Blue">B</v:String>
+    <v:String x:Key="tool_Color_Red_Tip">Значение красного</v:String>
+    <v:String x:Key="tool_Color_Green_Tip">Значение зелёного</v:String>
+    <v:String x:Key="tool_Color_Blue_Tip">Значение синего</v:String>
+    <v:String x:Key="tool_Color_Hue">H</v:String>
+    <v:String x:Key="tool_Color_Saturation">S</v:String>
+    <v:String x:Key="tool_Color_Value">V</v:String>
+    <v:String x:Key="tool_Color_Hue_Tip">Оттенок</v:String>
+    <v:String x:Key="tool_Color_Saturation_Tip">Насыщенность</v:String>
+    <v:String x:Key="tool_Color_Value_Tip">Значение</v:String>
     <v:String x:Key="tool_Color_HEX">HEX: {0}</v:String>
     <v:String x:Key="tool_Color_Random">Случайный цвет</v:String>
+    <v:String x:Key="tool_Color_SwitchTo_HSV">Схема: RGB</v:String>
+    <v:String x:Key="tool_Color_SwitchTo_RGB">Схема: HSV</v:String>
 
     <v:String x:Key="select_Title">Выбрать {0}</v:String>
     <v:String x:Key="select_Dialogue">Диалог</v:String>

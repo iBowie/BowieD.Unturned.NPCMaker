@@ -17,33 +17,33 @@
                 <Image Source="/Resources/ICON_CANCEL.png"/>
             </Button.Content>
         </Button>
-        <Border Height="23" Margin="93,67,38,0" VerticalAlignment="Top">
+        <Border Height="23" Margin="105,67,26.25,0" VerticalAlignment="Top">
             <TextBlock Text="{DynamicResource dialogue_Reply_Redirects_Dialogue}" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="11" TextAlignment="Left" Margin="0,4,0,4"/>
         </Border>
-        <Border Height="23" Margin="93,95,38,0" VerticalAlignment="Top">
+        <Border Height="23" Margin="105,95,26.25,0" VerticalAlignment="Top">
             <TextBlock Text="{DynamicResource dialogue_Reply_Redirects_Vendor}" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="11" TextAlignment="Left" Margin="0,4,0,4"/>
         </Border>
-        <Border Height="22" Margin="93,123,38,0" VerticalAlignment="Top">
+        <Border Height="22" Margin="105,123,26.25,0" VerticalAlignment="Top">
             <TextBlock Text="{DynamicResource dialogue_Reply_Redirects_Quest}" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="11" TextAlignment="Left" Margin="0,4,0,4"/>
         </Border>
-        <Button Click="DialogueSelect_Click" Width="23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,67,0,0" Height="23">
+        <Button Click="DialogueSelect_Click" Width="23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="77,67,0,0" Height="23">
             <Button.Content>
                 <Image Source="/Resources/ICON_CHAT.png"/>
             </Button.Content>
         </Button>
-        <Button Click="VendorSelect_Click" Width="23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,95,0,0" Height="23">
+        <Button Click="VendorSelect_Click" Width="23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="77,95,0,0" Height="23">
             <Button.Content>
                 <Image Source="/Resources/ICON_MONEY.png"/>
             </Button.Content>
         </Button>
-        <Button Click="QuestSelect_Click" Width="23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,123,0,0" Height="23">
+        <Button Click="QuestSelect_Click" Width="23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="77,123,0,0" Height="23">
             <Button.Content>
                 <Image Source="/Resources/ICON_EXCLAMATION.png"/>
             </Button.Content>
         </Button>
-        <local:NumberBox ValueChanged="TxtBoxDialogueID_ValueChanged" MaxValue="65535" MinValue="0" Width="50" Height="23" Margin="10,67,0,0" x:Name="txtBoxDialogueID" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <local:NumberBox ValueChanged="TxtBoxQuestID_ValueChanged" MaxValue="65535" MinValue="0" Width="50" Height="23" Margin="10,123,0,0" x:Name="txtBoxQuestID" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <local:NumberBox ValueChanged="TxtBoxVendorID_ValueChanged" MaxValue="65535" MinValue="0" Width="50" Height="23" Margin="10,95,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="txtBoxVendorID"/>
+        <mah:NumericUpDown ValueChanged="TxtBoxDialogueID_ValueChanged"  ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Width="50" Height="23" Margin="10,67,0,0" x:Name="txtBoxDialogueID" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <mah:NumericUpDown ValueChanged="TxtBoxQuestID_ValueChanged"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Width="50" Height="23" Margin="10,123,0,0" x:Name="txtBoxQuestID" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <mah:NumericUpDown ValueChanged="TxtBoxVendorID_ValueChanged"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Width="50" Height="23" Margin="10,95,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="txtBoxVendorID"/>
         <Button Click="ChangeVisibilityButton_Click" Content="{DynamicResource dialogue_Reply_EditVisibility}" HorizontalAlignment="Left" Margin="10,151,0,0" VerticalAlignment="Top" Width="261" Height="24"/>
         <Button Click="OrderButtonUp_Click" Name="orderButtonUp" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="24" Width="24">
             <Button.Content>

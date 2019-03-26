@@ -28,11 +28,10 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
 
         public void SendPresence(RichPresence rich)
         {
-            rich.Assets = new Assets
-            {
-                LargeImageText = $"NPC Maker for Unturned by BowieD. Version: {MainWindow.Version}",
-                LargeImageKey = "mainimage_outline"
-            };
+            if (rich.Assets == null)
+                rich.Assets = new Assets();
+            rich.Assets.LargeImageText = $"NPC Maker for Unturned by BowieD. Version: {MainWindow.Version}";
+            rich.Assets.LargeImageKey = "mainimage_outline";
             if (client.IsInitialized)
                 client.SetPresence(rich);
         }

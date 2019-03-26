@@ -173,19 +173,27 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             }
         }
 
-        private void TxtBoxVendorID_ValueChanged(object sender, long e)
+        private void TxtBoxVendorID_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            Response.openVendorId = (ushort)e;
+            if (e.NewValue.HasValue)
+            {
+                Response.openVendorId = (ushort)e.NewValue.Value;
+            }
         }
 
-        private void TxtBoxQuestID_ValueChanged(object sender, long e)
+        private void TxtBoxQuestID_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            Response.openQuestId = (ushort)e;
+            if (e.NewValue.HasValue)
+            {
+                Response.openQuestId = (ushort)e.NewValue.Value;
+            }
         }
-
-        private void TxtBoxDialogueID_ValueChanged(object sender, long e)
+        private void TxtBoxDialogueID_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            Response.openDialogueId = (ushort)e;
+            if (e.NewValue.HasValue)
+            {
+                Response.openDialogueId = (ushort)e.NewValue.Value;
+            }
         }
     }
 }

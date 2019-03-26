@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.BetterForms"
         xmlns:npc="clr-namespace:BowieD.Unturned.NPCMaker.NPC"
         xmlns:bettercontrols="clr-namespace:BowieD.Unturned.NPCMaker.BetterControls"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         Title="{DynamicResource vendorEditor_Title}" ResizeMode="NoResize" Height="296" Width="300" Icon="{DynamicResource app_Icon}">
     <Grid>
@@ -30,8 +31,8 @@
             <ComboBoxItem Content="{DynamicResource vendor_SellType_Buy}" Tag="BUY" />
             <ComboBoxItem Content="{DynamicResource vendor_SellType_Sell}" Tag="SELL"/>
         </ComboBox>
-        <bettercontrols:NumberBox MaxValue="65535" x:Name="txtBoxID" HorizontalAlignment="Right" Height="23" Margin="0,175,10,0" VerticalAlignment="Top" Width="100"/>
-        <bettercontrols:NumberBox MaxValue="1000000" x:Name="txtBoxCost" HorizontalAlignment="Right" Height="23" Margin="0,203,10,0" VerticalAlignment="Top" Width="100"/>
+        <mah:NumericUpDown ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" x:Name="txtBoxID" HorizontalAlignment="Right" Height="23" Margin="0,172,10,0" VerticalAlignment="Top" Width="100"/>
+        <mah:NumericUpDown ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="4294967295" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" x:Name="txtBoxCost" HorizontalAlignment="Right" Height="23" Margin="0,200,10,0" VerticalAlignment="Top" Width="100"/>
         <TextBox MaxLength="5" Name="txtBoxSpawnpoint" HorizontalAlignment="Right" Height="23" Margin="0,231,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="100"/>
         <Label Name="labelSpawnpoint" Content="{DynamicResource vendor_Item_Spawnpoint}" HorizontalAlignment="Left" Margin="10,228,0,0" VerticalAlignment="Top" Width="169"/>
         <Button Click="SaveButton_Click" Content="{DynamicResource vendorEditor_Save}" Margin="10,0,10,10" Height="26" VerticalAlignment="Bottom"/>

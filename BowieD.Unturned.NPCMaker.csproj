@@ -89,9 +89,6 @@
     <Compile Include="BetterControls\Dialogue_Response.xaml.cs">
       <DependentUpon>Dialogue_Response.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BetterControls\NumberBox.xaml.cs">
-      <DependentUpon>NumberBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="BetterControls\Universal_ItemList.xaml.cs">
       <DependentUpon>Universal_ItemList.xaml</DependentUpon>
     </Compile>
@@ -128,9 +125,6 @@
     <Compile Include="Config\Configuration.cs" />
     <Compile Include="Config\ConfigWindow.xaml.cs">
       <DependentUpon>ConfigWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\NumericUpDown.xaml.cs">
-      <DependentUpon>NumericUpDown.xaml</DependentUpon>
     </Compile>
     <Compile Include="DiscordRPC\DiscordWorker.cs" />
     <Compile Include="Examples\NPCExample.cs" />
@@ -200,12 +194,9 @@
     <Compile Include="NPC\Rewards\Teleport.cs" />
     <Compile Include="NPC\Rewards\Vehicle.cs" />
     <Compile Include="PropertyProxy.cs" />
+    <Compile Include="ThemeInfo.cs" />
     <Compile Include="Util.cs" />
     <Page Include="BetterControls\Dialogue_Response.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="BetterControls\NumberBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -254,10 +245,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Config\ConfigWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\NumericUpDown.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

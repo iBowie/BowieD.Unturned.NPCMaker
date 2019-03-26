@@ -17,11 +17,6 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             PropertyChanged += NumberBox_PropertyChanged;
         }
 
-        ~NumberBox()
-        {
-            PropertyChanged -= NumberBox_PropertyChanged;
-        }
-
         private void NumberBox_PropertyChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (e.Property == ValueProperty)
@@ -54,7 +49,6 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
         {
             get
             {
-                Value = long.TryParse(mainBox.Text, out long result) ? result : 0;
                 return (long)GetValue(ValueProperty);
             }
             set
@@ -97,8 +91,10 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                     SystemSounds.Beep.Play();
                     return false;
                 }
+                Value = result;
                 return true;
             }
+            Value = 0;
             SystemSounds.Beep.Play();
             return false;
         }
@@ -106,7 +102,8 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
         private void MainBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             string text = (sender as TextBox).Text + e.Text;
-            e.Handled = !IsTextAllowed(text);
+            IsTextAllowed(text);
+            e.Handled = false;
         }
 
         private void MainBox_Pasting(object sender, DataObjectPastingEventArgs e)

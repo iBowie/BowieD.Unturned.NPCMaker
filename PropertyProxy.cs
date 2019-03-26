@@ -13,6 +13,7 @@ using System.Net;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
@@ -78,11 +79,76 @@ namespace BowieD.Unturned.NPCMaker
             inst.apparelBeardRandomize.Click += ApparelBeard_Random;
             inst.apparelFaceRandomize.Click += ApparelFace_Random;
             inst.userColorSaveButton.Click += UserColorList_AddColor;
+            inst.switchToAnotherScheme.Click += ColorScheme_Switch;
+            inst.colorHexOut.PreviewTextInput += ColorHex_Input;
+            DataObject.AddPastingHandler(inst.colorHexOut, ColorHex_Pasted);
         }
 
         private MainWindow inst;
 
         #region EVENTS
+        internal void ColorHex_Input(object sender, TextCompositionEventArgs e)
+        {
+            string text = inst.colorHexOut.Text;
+            int cursorPos = inst.colorHexOut.SelectionStart;
+            text = text.Insert(inst.colorHexOut.SelectionStart, e.Text);
+            if ((text.StartsWith("#") && text.Length < 7) || text.Length < 6)
+                return;
+            var parseAble = NPCColor.CanParseHex(text);
+            e.Handled = !parseAble;
+            inst.userColorSaveButton.IsEnabled = parseAble;
+            if (parseAble)
+            {
+                var color = new NPCColor() { HEX = text };
+                inst.colorHexOut.Text = color.HEX;
+                if (MainWindow.IsRGB)
+                {
+                    inst.colorSliderR.Value = color.R;
+                    inst.colorSliderG.Value = color.G;
+                    inst.colorSliderB.Value = color.B;
+                }
+                else
+                {
+                    var colorHSV = color.HSV;
+                    inst.colorSliderR.Value = colorHSV.Item1;
+                    inst.colorSliderG.Value = colorHSV.Item2;
+                    inst.colorSliderB.Value = colorHSV.Item3;
+                }
+                inst.colorHexOut.SelectionStart = cursorPos + 1;
+            }
+        }
+        internal void ColorHex_Pasted(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.SourceDataObject.GetDataPresent(DataFormats.UnicodeText, true))
+            {
+                var parseAble = NPCColor.CanParseHex(e.SourceDataObject.GetData(DataFormats.UnicodeText) as string);
+                e.Handled = !parseAble;
+                inst.userColorSaveButton.IsEnabled = parseAble;
+                if (parseAble)
+                {
+                    var color = new NPCColor() { HEX = (e.SourceDataObject.GetData(DataFormats.UnicodeText) as string) };
+                    inst.colorHexOut.Text = color.HEX;
+                    if (MainWindow.IsRGB)
+                    {
+                        inst.colorSliderR.Value = color.R;
+                        inst.colorSliderG.Value = color.G;
+                        inst.colorSliderB.Value = color.B;
+                    }
+                    else
+                    {
+                        var colorHSV = color.HSV;
+                        inst.colorSliderR.Value = colorHSV.Item1;
+                        inst.colorSliderG.Value = colorHSV.Item2;
+                        inst.colorSliderB.Value = colorHSV.Item3;
+                    }
+                }
+            }
+            else
+            {
+                e.Handled = true;
+                inst.userColorSaveButton.IsEnabled = false;
+            }
+        }
         internal void MistakeList_Selected(object sender, SelectionChangedEventArgs e)
         {
             if (inst.lstMistakes.SelectedItem != null && inst.lstMistakes.SelectedItem is Mistake mist)
@@ -98,8 +164,17 @@ namespace BowieD.Unturned.NPCMaker
             {
                 RichPresence presence = new RichPresence
                 {
-                    Details = $"Editing NPC {MainWindow.CurrentNPC.editorName ?? "without name"}",
-                    State = $"Working on: General Information"
+                    Details = $"Editing {(MainWindow.CurrentNPC.editorName == null || MainWindow.CurrentNPC.editorName.Length < 1 ? "NPC without name" : MainWindow.CurrentNPC.editorName)}",
+                    State = $"Display Name: {(MainWindow.CurrentNPC.displayName == null || MainWindow.CurrentNPC.displayName.Length < 1 ? "None" : MainWindow.CurrentNPC.displayName)}"
+                };
+                presence.Timestamps = new Timestamps
+                {
+                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                };
+                presence.Assets = new Assets
+                {
+                    SmallImageKey = "icon_info_outlined",
+                    SmallImageText = "Info"
                 };
                 (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
             }
@@ -107,67 +182,121 @@ namespace BowieD.Unturned.NPCMaker
         internal void DisplayName_Change(object sender, TextChangedEventArgs e)
         {
             MainWindow.CurrentNPC.displayName = (sender as TextBox).Text;
+            if (MainWindow.DiscordWorker != null)
+            {
+                RichPresence presence = new RichPresence
+                {
+                    Details = $"Editing {(MainWindow.CurrentNPC.editorName == null || MainWindow.CurrentNPC.editorName.Length < 1 ? "NPC without name" : MainWindow.CurrentNPC.editorName)}",
+                    State = $"Display Name: {(MainWindow.CurrentNPC.displayName == null || MainWindow.CurrentNPC.displayName.Length < 1 ? "None" : MainWindow.CurrentNPC.displayName)}"
+                };
+                presence.Timestamps = new Timestamps
+                {
+                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                };
+                presence.Assets = new Assets
+                {
+                    SmallImageKey = "icon_info_outlined",
+                    SmallImageText = "Info"
+                };
+                (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
+            }
             MainWindow.isSaved = false;
         }
-        internal void NPC_ID_Change(object sender, long e)
+        internal void NPC_ID_Change(object sender, /*long e*/ RoutedPropertyChangedEventArgs<double?> e)
         {
-            MainWindow.CurrentNPC.id = (ushort)(sender as NumberBox).Value;
-            MainWindow.isSaved = false;
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.id = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
         }
-        internal void StartDialogue_ID_Change(object sender, long e)
+        internal void StartDialogue_ID_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            MainWindow.CurrentNPC.startDialogueId = (ushort)(sender as NumberBox).Value;
-            MainWindow.isSaved = false;
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.startDialogueId = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
         }
-        internal void HatId_Change(object sender, long e)
+        internal void HatId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            MainWindow.CurrentNPC.hat = (ushort)(sender as NumberBox).Value;
-            MainWindow.isSaved = false;
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.hat = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
         }
-        internal void TopId_Change(object sender, long e)
+        internal void TopId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            MainWindow.CurrentNPC.top = (ushort)(sender as NumberBox).Value;
-            MainWindow.isSaved = false;
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.top = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
         }
-        internal void BottomId_Change(object sender, long e)
+        internal void BottomId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            MainWindow.CurrentNPC.bottom = (ushort)(sender as NumberBox).Value;
-            MainWindow.isSaved = false;
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.bottom = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
         }
-        internal void MaskId_Change(object sender, long e)
+        internal void MaskId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            MainWindow.CurrentNPC.mask = (ushort)(sender as NumberBox).Value;
-            MainWindow.isSaved = false;
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.mask = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
         }
-        internal void BackId_Change(object sender, long e)
+        internal void BackId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            MainWindow.CurrentNPC.backpack = (ushort)(sender as NumberBox).Value;
-            MainWindow.isSaved = false;
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.backpack = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
         }
-        internal void VestId_Change(object sender, long e)
+        internal void VestId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            MainWindow.CurrentNPC.vest = (ushort)(sender as NumberBox).Value;
-            MainWindow.isSaved = false;
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.vest = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
         }
-        internal void GlassesId_Change(object sender, long e)
+        internal void GlassesId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            MainWindow.CurrentNPC.glasses = (ushort)(sender as NumberBox).Value;
-            MainWindow.isSaved = false;
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.glasses = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
         }
-        internal void PrimaryId_Change(object sender, long e)
+        internal void PrimaryId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            MainWindow.CurrentNPC.equipPrimary = (ushort)(sender as NumberBox).Value;
-            MainWindow.isSaved = false;
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.equipPrimary = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
         }
-        internal void SecondaryId_Change(object sender, long e)
+        internal void SecondaryId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            MainWindow.CurrentNPC.equipSecondary = (ushort)(sender as NumberBox).Value;
-            MainWindow.isSaved = false;
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.equipSecondary = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
         }
-        internal void TertiaryId_Change(object sender, long e)
+        internal void TertiaryId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            MainWindow.CurrentNPC.equipTertiary = (ushort)(sender as NumberBox).Value;
-            MainWindow.isSaved = false;
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.equipTertiary = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
         }
         internal void LeftHanded_Change(object sender, RoutedEventArgs e)
         {
@@ -243,11 +372,20 @@ namespace BowieD.Unturned.NPCMaker
         }
         internal void RandomColor_Click(object sender, RoutedEventArgs e)
         {
-            byte[] colors = new byte[3];
-            System.Security.Cryptography.RandomNumberGenerator.Create().GetBytes(colors);
-            inst.colorSliderR.Value = colors[0];
-            inst.colorSliderG.Value = colors[1];
-            inst.colorSliderB.Value = colors[2];
+            if (MainWindow.IsRGB)
+            {
+                byte[] colors = new byte[3];
+                System.Security.Cryptography.RandomNumberGenerator.Create().GetBytes(colors);
+                inst.colorSliderR.Value = colors[0];
+                inst.colorSliderG.Value = colors[1];
+                inst.colorSliderB.Value = colors[2];
+            }
+            else
+            {
+                inst.colorSliderR.Value = new Random().Next(360);
+                inst.colorSliderG.Value = new Random().NextDouble();
+                inst.colorSliderB.Value = new Random().NextDouble();
+            }
         }   
         internal async void CheckForUpdates_Click(object sender, RoutedEventArgs e)
         {
@@ -273,8 +411,16 @@ namespace BowieD.Unturned.NPCMaker
             BrushConverter brushConverter = new BrushConverter();
             foreach (string uColor in Config.Configuration.Properties.userColors)
             {
-                if (!brushConverter.IsValid(uColor))
-                    continue;
+                if (uColor.StartsWith("#"))
+                {
+                    if (!brushConverter.IsValid(uColor))
+                        continue;
+                }
+                else
+                {
+                    if (!brushConverter.IsValid($"#{uColor}"))
+                        continue;
+                }
                 Grid g = new Grid();
                 Border b = new Border
                 {
@@ -298,9 +444,8 @@ namespace BowieD.Unturned.NPCMaker
                         Width = 16,
                         Height = 16
                     },
-                    Width = 16,
                     HorizontalAlignment = HorizontalAlignment.Right,
-                    Margin = new Thickness(0, 0, 5, 0),
+                    Margin = new Thickness(0, 0, 10, 0),
                     ToolTip = MainWindow.Localize("apparel_User_Color_Remove")
                 };
                 Button copyButton = new Button
@@ -312,7 +457,7 @@ namespace BowieD.Unturned.NPCMaker
                         Height = 16
                     },
                     HorizontalAlignment = HorizontalAlignment.Right,
-                    Margin = new Thickness(0, 0, 23, 0),
+                    Margin = new Thickness(0, 0, 42, 0),
                     Tag = $"#{uColor}"
                 };
                 copyButton.Click += new RoutedEventHandler((sender, e) =>
@@ -418,6 +563,7 @@ namespace BowieD.Unturned.NPCMaker
                 return;
             inst.ConvertNPCToState(new NPCSave());
             MainWindow.isSaved = true;
+            MainWindow.Started = DateTime.UtcNow;
         }
         internal void SaveClick(object sender, RoutedEventArgs e)
         {
@@ -425,8 +571,10 @@ namespace BowieD.Unturned.NPCMaker
         }
         internal void SaveAsClick(object sender, RoutedEventArgs e)
         {
+            MainWindow.oldFile = MainWindow.saveFile;
             MainWindow.saveFile = "";
             inst.Save();
+            MainWindow.oldFile = "";
         }
         internal void LoadClick(object sender, RoutedEventArgs e)
         {
@@ -500,41 +648,193 @@ namespace BowieD.Unturned.NPCMaker
             }
             RichPresence presence = new RichPresence
             {
-                Details = $"Editing NPC {MainWindow.CurrentNPC.editorName ?? "without name"}",
-                State = $"Working on:"
+                Details = $"Editing {(MainWindow.CurrentNPC.editorName == null || MainWindow.CurrentNPC.editorName.Length < 1 ? "NPC without name" : MainWindow.CurrentNPC.editorName)}",
+                State = $"Display Name: {(MainWindow.CurrentNPC.displayName == null || MainWindow.CurrentNPC.displayName.Length < 1 ? "None" : MainWindow.CurrentNPC.displayName)}"
             };
+            presence.Timestamps = new Timestamps();
+            presence.Timestamps.StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            presence.Assets = new Assets();
             switch (selectedIndex)
             {
                 case 0:
-                    presence.State += " General Information";
+                    presence.Assets.SmallImageKey = "icon_info_outlined";
+                    presence.Assets.SmallImageText = "Info";
                     break;
                 case 1:
-                    presence.State += " Apparel";
+                    presence.Assets.SmallImageKey = "icon_apparel_outlined";
+                    presence.Assets.SmallImageText = "Apparel";
                     break;
                 case 2:
-                    presence.State += " Dialogues";
+                    presence.Assets.SmallImageKey = "icon_chat_outlined";
+                    presence.Assets.SmallImageText = $"Dialogues: {MainWindow.CurrentNPC.dialogues.Count}";
                     break;
                 case 3:
-                    presence.State += " Vendors";
+                    presence.Assets.SmallImageKey = "icon_money_outlined";
+                    presence.Assets.SmallImageText = $"Vendors: {MainWindow.CurrentNPC.vendors.Count}";
                     break;
                 case 4:
-                    presence.State += " Quests";
+                    presence.Assets.SmallImageKey = "icon_exclamation_outlined";
+                    presence.Assets.SmallImageText = $"Quests: {MainWindow.CurrentNPC.quests.Count}";
                     break;
                 case 5:
-                    presence.State += " Looking for mistakes";
+                    presence.Assets.SmallImageKey = "icon_warning_outlined";
+                    presence.Assets.SmallImageText = $"Mistakes: {MainWindow.Instance.lstMistakes.Items.Count}";
                     break;
                 default:
-                    presence.State += " Something?..";
+                    presence.Assets.SmallImageKey = "icon_question_outlined";
+                    presence.Assets.SmallImageText = "Something?..";
                     break;
             }
             (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
         }
         internal void ColorSliderChange(object sender, RoutedPropertyChangedEventArgs<double> value)
         {
-            NPCColor c = new NPCColor((byte)inst.colorSliderR.Value, (byte)inst.colorSliderG.Value, (byte)inst.colorSliderB.Value);
+            NPCColor c;
+            if (MainWindow.IsRGB)
+                c = new NPCColor((byte)inst.colorSliderR.Value, (byte)inst.colorSliderG.Value, (byte)inst.colorSliderB.Value);
+            else
+                c = NPCColor.FromHSV((int)inst.colorSliderR.Value, inst.colorSliderG.Value, inst.colorSliderB.Value);
             string res = c.HEX;
             inst.colorRectangle.Fill = new BrushConverter().ConvertFromString(res) as Brush;
             inst.colorHexOut.Text = res;
+            if (Config.Configuration.Properties.experimentalFeatures)
+            {
+                if (!MainWindow.IsRGB)
+                {
+                    var HSV = c.HSV;
+                    // build first bar (Hue)
+                    Slider senderSlider = sender as Slider ?? new Slider();
+                    if (senderSlider.Name != inst.colorSliderR.Name)
+                    {
+                        List<GradientStop> stopsHue = new List<GradientStop>();
+                        for (int k = 0; k <= 360; k++)
+                        {
+                            stopsHue.Add(new GradientStop(NPCColor.FromHSV(k, HSV.Item2, HSV.Item3).Color, k / 360d));
+                        }
+                        inst.colorSliderR.Background = new LinearGradientBrush(new GradientStopCollection(stopsHue), 0);
+                    }
+                    // build second bar (Saturation)
+                    if (senderSlider.Name != inst.colorSliderG.Name)
+                    {
+                        List<GradientStop> stopsSatur = new List<GradientStop>();
+                        for (double k = 0; k <= 1; k += 0.01)
+                        {
+                            stopsSatur.Add(new GradientStop(NPCColor.FromHSV(HSV.Item1, k, HSV.Item3).Color, k));
+                        }
+                        inst.colorSliderG.Background = new LinearGradientBrush(new GradientStopCollection(stopsSatur), 0);
+                    }
+                    // build third bar (Value)
+                    if (senderSlider.Name != inst.colorSliderB.Name)
+                    {
+                        List<GradientStop> stopsValue = new List<GradientStop>();
+                        for (double k = 0; k <= 1; k += 0.01)
+                        {
+                            stopsValue.Add(new GradientStop(NPCColor.FromHSV(HSV.Item1, HSV.Item2, k).Color, k));
+                        }
+                        inst.colorSliderB.Background = new LinearGradientBrush(new GradientStopCollection(stopsValue), 0);
+                    }
+                }
+                else
+                {
+                    Slider senderSlider = sender as Slider ?? new Slider();
+                    if (senderSlider.Name != inst.colorSliderR.Name)
+                    {
+                        List<GradientStop> stopsRed = new List<GradientStop>();
+                        for (byte red = 0; red < 255; red++)
+                        {
+                            var clr = new NPCColor(red, c.G, c.B);
+                            stopsRed.Add(new GradientStop(clr.Color, red / 255d));
+                        }
+                        inst.colorSliderR.Background = new LinearGradientBrush(new GradientStopCollection(stopsRed), 0);
+                    }
+                    if (senderSlider.Name != inst.colorSliderG.Name)
+                    {
+                        List<GradientStop> stopsGreen = new List<GradientStop>();
+                        for (byte green = 0; green < 255; green++)
+                        {
+                            var clr = new NPCColor(c.R, green, c.B);
+                            stopsGreen.Add(new GradientStop(clr.Color, green / 255d));
+                        }
+                        inst.colorSliderG.Background = new LinearGradientBrush(new GradientStopCollection(stopsGreen), 0);
+                    }
+                    if (senderSlider.Name != inst.colorSliderB.Name)
+                    {
+                        List<GradientStop> stopsBlue = new List<GradientStop>();
+                        for (byte blue = 0; blue < 255; blue++)
+                        {
+                            var clr = new NPCColor(c.R, c.G, blue);
+                            stopsBlue.Add(new GradientStop(clr.Color, blue / 255d));
+                        }
+                        inst.colorSliderB.Background = new LinearGradientBrush(new GradientStopCollection(stopsBlue), 0);
+                    }
+                }
+            }
+        }
+        internal void ColorScheme_Switch(object sender, RoutedEventArgs e)
+        {
+            MainWindow.IsRGB = !MainWindow.IsRGB;
+            NPCColor c;
+            if (MainWindow.IsRGB)
+            {
+                c = NPCColor.FromHSV((int)inst.colorSliderR.Value, inst.colorSliderG.Value, inst.colorSliderB.Value);
+                inst.colorSliderR.Value = 0;
+                inst.colorSliderG.Value = 0;
+                inst.colorSliderB.Value = 0;
+                inst.colorSliderR.Minimum = 0;
+                inst.colorSliderG.Minimum = 0;
+                inst.colorSliderB.Minimum = 0;
+                inst.colorSliderR.Maximum = 255;
+                inst.colorSliderG.Maximum = 255;
+                inst.colorSliderB.Maximum = 255;
+                inst.colorSliderG.SmallChange = 1;
+                inst.colorSliderG.LargeChange = 5;
+                inst.colorSliderB.SmallChange = 1;
+                inst.colorSliderB.LargeChange = 5;
+                inst.colorSliderR.AutoToolTipPrecision = 0;
+                inst.colorSliderG.AutoToolTipPrecision = 0;
+                inst.colorSliderB.AutoToolTipPrecision = 0;
+                inst.colorRLabel.Content = MainWindow.Localize("tool_Color_Red");
+                inst.colorGLabel.Content = MainWindow.Localize("tool_Color_Green");
+                inst.colorBLabel.Content = MainWindow.Localize("tool_Color_Blue");
+                inst.colorRLabel.ToolTip = MainWindow.Localize("tool_Color_Red_Tip");
+                inst.colorGLabel.ToolTip = MainWindow.Localize("tool_Color_Green_Tip");
+                inst.colorBLabel.ToolTip = MainWindow.Localize("tool_Color_Blue_Tip");
+                inst.switchToAnotherScheme.Content = MainWindow.Localize("tool_Color_SwitchTo_HSV");
+                inst.colorSliderR.Value = c.R;
+                inst.colorSliderG.Value = c.G;
+                inst.colorSliderB.Value = c.B;
+            }
+            else
+            {
+                c = new NPCColor((byte)inst.colorSliderR.Value, (byte)inst.colorSliderG.Value, (byte)inst.colorSliderB.Value);
+                inst.colorSliderR.Value = 0;
+                inst.colorSliderG.Value = 0;
+                inst.colorSliderB.Value = 0;
+                inst.colorSliderR.Minimum = 0;
+                inst.colorSliderG.Minimum = 0;
+                inst.colorSliderB.Minimum = 0;
+                inst.colorSliderR.Maximum = 359.99;
+                inst.colorSliderG.Maximum = 1;
+                inst.colorSliderB.Maximum = 1;
+                inst.colorSliderG.AutoToolTipPrecision = 2;
+                inst.colorSliderB.AutoToolTipPrecision = 2;
+                inst.colorSliderG.SmallChange = 0.01;
+                inst.colorSliderG.LargeChange = 0.1;
+                inst.colorSliderB.SmallChange = 0.01;
+                inst.colorSliderB.LargeChange = 0.1;
+                inst.colorRLabel.Content = MainWindow.Localize("tool_Color_Hue");
+                inst.colorGLabel.Content = MainWindow.Localize("tool_Color_Saturation");
+                inst.colorBLabel.Content = MainWindow.Localize("tool_Color_Value");
+                inst.colorRLabel.ToolTip = MainWindow.Localize("tool_Color_Hue_Tip");
+                inst.colorGLabel.ToolTip = MainWindow.Localize("tool_Color_Saturation_Tip");
+                inst.colorBLabel.ToolTip = MainWindow.Localize("tool_Color_Value_Tip");
+                inst.switchToAnotherScheme.Content = MainWindow.Localize("tool_Color_SwitchTo_RGB");
+                var cHSV = c.HSV;
+                inst.colorSliderR.Value = cHSV.Item1;
+                inst.colorSliderG.Value = cHSV.Item2;
+                inst.colorSliderB.Value = cHSV.Item3;
+            }
+            ColorSliderChange(null, null);
         }
         internal void AboutMenu_Click(object sender, RoutedEventArgs e)
         {

@@ -18,7 +18,7 @@ namespace BowieD.Unturned.NPCMaker.Config
             public bool firstLaunch;
             public string Language;
             public bool enableDiscord;
-            public string theme;
+            public ThemeInfo currentTheme;
             public bool generateGuids;
             public byte autosaveOption;
             public Logging.Log_Level LogLevel;
@@ -33,7 +33,7 @@ namespace BowieD.Unturned.NPCMaker.Config
                 userColors = new string[0];
                 recent = new string[0];
                 enableDiscord = true;
-                theme = "DarkGreen";
+                currentTheme = DefaultTheme;
                 generateGuids = true;
                 autosaveOption = 1;
                 experimentalFeatures = false;
@@ -42,6 +42,7 @@ namespace BowieD.Unturned.NPCMaker.Config
         }
 
         public static CFG Properties { get; private set; }
+        public static ThemeInfo DefaultTheme => new ThemeInfo() { DictionaryName = "Light.Green", Name = "LightGreen", R = 84, G = 142, B = 25 };
 
         private static string Path => $@"C:\Users\{Environment.UserName}\AppData\Local\BowieD\UnturnedNPCMakerConfig.xml";
         public static bool ConfigExist => File.Exists(Path);
