@@ -27,12 +27,16 @@
     <v:String x:Key="config_Tab_General_LogLevel_Critical">Критические ошибки</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme">Тема</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_Legacy">Стандартная (Устарело)</v:String>
-    <v:String x:Key="config_Tab_Appearance_Theme_LightGreen">[METRO] Светлая зелёная</v:String>
-    <v:String x:Key="config_Tab_Appearance_Theme_DarkGreen">[METRO] Тёмная зелёная</v:String>
-    <v:String x:Key="config_Tab_Appearance_Theme_LightPink">[METRO] Светлая розовая</v:String>
-    <v:String x:Key="config_Tab_Appearance_Theme_DarkPink">[METRO] Тёмная розовая</v:String>
-    <v:String x:Key="config_Tab_Appearance_Theme_LightRed">[METRO] Светлая красная</v:String>
-    <v:String x:Key="config_Tab_Appearance_Theme_DarkRed">[METRO] Тёмная красная</v:String>
+    <v:String x:Key="config_Tab_Appearance_Theme_LightGreen">Светлая зелёная</v:String>
+    <v:String x:Key="config_Tab_Appearance_Theme_LightPink">Светлая розовая</v:String>
+    <v:String x:Key="config_Tab_Appearance_Theme_LightRed">Светлая красная</v:String>
+    <v:String x:Key="config_Tab_Appearance_Theme_LightBlue">Светлая синяя</v:String>
+    <v:String x:Key="config_Tab_Appearance_Theme_LightPurple">Светлая фиолетовая</v:String>
+    <v:String x:Key="config_Tab_Appearance_Theme_DarkGreen">Тёмная фиолетовая</v:String>
+    <v:String x:Key="config_Tab_Appearance_Theme_DarkPink">Тёмная розовая</v:String>
+    <v:String x:Key="config_Tab_Appearance_Theme_DarkRed">Тёмная красная</v:String>
+    <v:String x:Key="config_Tab_Appearance_Theme_DarkBlue">Тёмная синяя</v:String>
+    <v:String x:Key="config_Tab_Appearance_Theme_DarkPurple">Тёмная фиолетовая</v:String>
     <v:String x:Key="config_Tab_Appearance_Scale">Масштаб</v:String>
     <v:String x:Key="config_Tab_Misc_Discord">Включить Discord Rich Presence</v:String>
     <v:String x:Key="config_Tab_Misc_Experimental">Экспериментальный режим</v:String>
@@ -81,6 +85,7 @@
     <v:String x:Key="tab_Vendor">Торговля</v:String>
     <v:String x:Key="tab_Quest">Задания</v:String>
     <v:String x:Key="tab_Mistakes">Ошибки</v:String>
+    
     <v:String x:Key="general_EditorName">Имя в редакторе</v:String>
     <v:String x:Key="general_EditorName_Tooltip">Имя, видимое в редакторе карт</v:String>
     <v:String x:Key="general_DisplayName">Отображаемое имя</v:String>

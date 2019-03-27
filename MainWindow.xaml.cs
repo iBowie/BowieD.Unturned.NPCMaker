@@ -331,7 +331,7 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(1, 0, 0, 0);
+        public static Version Version => new Version(1, 0, 0, 1);
         #endregion
         #region STATIC
         public static MainWindow Instance;
