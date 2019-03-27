@@ -1180,7 +1180,7 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
         }
-        private void ForceUpdate_Click(object sender, RoutedEventArgs e)
+        internal void ForceUpdate_Click(object sender, RoutedEventArgs e)
         {
             DownloadUpdater();
             RunUpdate();

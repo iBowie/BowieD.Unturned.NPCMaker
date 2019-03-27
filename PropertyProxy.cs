@@ -81,6 +81,7 @@ namespace BowieD.Unturned.NPCMaker
             inst.userColorSaveButton.Click += UserColorList_AddColor;
             inst.switchToAnotherScheme.Click += ColorScheme_Switch;
             inst.colorHexOut.PreviewTextInput += ColorHex_Input;
+            inst.forceUpdateButton.Click += inst.ForceUpdate_Click;
             DataObject.AddPastingHandler(inst.colorHexOut, ColorHex_Pasted);
         }
 
