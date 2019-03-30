@@ -1,33 +1,41 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
 {
     /// <summary>
-    /// No pages in message
+    /// Some of messages will never appear
     /// </summary>
-    public class NE_2001 : Mistake
+    public class NE_2004 : Mistake
     {
-        public override IMPORTANCE Importance => IMPORTANCE.NO_EXPORT;
+        public override IMPORTANCE Importance => IMPORTANCE.ADVICE;
         public override bool IsMistake
         {
             get
             {
-                foreach (NPCDialogue dialogue in MainWindow.CurrentNPC.dialogues)
+                foreach (NPCDialogue dial in MainWindow.CurrentNPC.dialogues)
                 {
-                    if (dialogue.MessagesAmount > 0 && dialogue.messages.Any(d => d.PagesAmount == 0))
+                    if (dial.MessagesAmount >= 2)
                     {
-                        errorDialogue = dialogue;
-                        return true;
+                        for (int k = 0; k < dial.messages.Count - 1; k++)
+                        {
+                            if (dial.messages[k].conditions.Count() == 0)
+                            {
+                                errorDialogue = dial;
+                                return true;
+                            }
+                        }
                     }
                 }
                 return false;
             }
         }
-
-        public override string MistakeNameKey => "NE_2001";
-        public override string MistakeDescKey => MainWindow.Localize("NE_2001_Desc", errorDialogue.id);
+        public override string MistakeDescKey => MainWindow.Localize("NE_2004_Desc", errorDialogue.id);
+        public override string MistakeNameKey => "NE_2004";
         public override bool TranslateName => false;
         public override bool TranslateDesc => false;
         private NPCDialogue errorDialogue;
@@ -35,7 +43,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         {
             get
             {
-                return new Action(() =>
+                return new Action(() => 
                 {
                     if (MainWindow.Instance.CurrentDialogue.id == 0)
                         return;

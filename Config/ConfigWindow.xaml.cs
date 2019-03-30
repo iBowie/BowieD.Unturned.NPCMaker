@@ -13,8 +13,6 @@ namespace BowieD.Unturned.NPCMaker.Config
         public ConfigWindow()
         {
             InitializeComponent();
-            gridScale.ScaleX = Configuration.Properties.scale;
-            gridScale.ScaleY = Configuration.Properties.scale;
             Width *= Configuration.Properties.scale;
             Height *= Configuration.Properties.scale;
             CurrentConfig = Configuration.Properties;

@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.BetterControls;
 using BowieD.Unturned.NPCMaker.BetterForms;
 using BowieD.Unturned.NPCMaker.Forms;
+using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.NPC;
 using DiscordRPC;
 using Microsoft.Win32;
@@ -54,7 +55,7 @@ namespace BowieD.Unturned.NPCMaker
             inst.saveAsExampleButton.Click += SaveAsExampleButton_Click;
             inst.visibilityCondsButton.Click += Char_EditConditions_Button_Click;
             inst.randomColorButton.Click += RandomColor_Click;
-            inst.checkForUpdatesButton.Click += CheckForUpdates_Click;
+            //inst.checkForUpdatesButton.Click += CheckForUpdates_Click;
             inst.exitButton.Click += ExitButtonClick;
             inst.RecentList.Click += RecentList_Click;
             inst.exportButton.Click += ExportClick;
@@ -81,7 +82,7 @@ namespace BowieD.Unturned.NPCMaker
             inst.userColorSaveButton.Click += UserColorList_AddColor;
             inst.switchToAnotherScheme.Click += ColorScheme_Switch;
             inst.colorHexOut.PreviewTextInput += ColorHex_Input;
-            inst.forceUpdateButton.Click += inst.ForceUpdate_Click;
+            //inst.forceUpdateButton.Click += inst.ForceUpdate_Click;
             DataObject.AddPastingHandler(inst.colorHexOut, ColorHex_Pasted);
         }
 
@@ -388,22 +389,22 @@ namespace BowieD.Unturned.NPCMaker
                 inst.colorSliderB.Value = new Random().NextDouble();
             }
         }   
-        internal async void CheckForUpdates_Click(object sender, RoutedEventArgs e)
-        {
-            bool? isUpdateAvailable = await inst.IsUpdateAvailable();
-            if (isUpdateAvailable.HasValue && isUpdateAvailable == true)
-            {
-                inst.DoNotification(MainWindow.Localize("app_Update_Available"));
-            }
-            else if (isUpdateAvailable.HasValue && isUpdateAvailable == false && !(sender is MainWindow))
-            {
-                inst.DoNotification(MainWindow.Localize("app_Update_Latest"));
-            }
-            else if (!isUpdateAvailable.HasValue)
-            {
-                inst.DoNotification(MainWindow.Localize("app_Update_Fail"));
-            }
-        }
+        //internal async void CheckForUpdates_Click(object sender, RoutedEventArgs e)
+        //{
+        //    bool? isUpdateAvailable = await inst.IsUpdateAvailable();
+        //    if (isUpdateAvailable.HasValue && isUpdateAvailable == true)
+        //    {
+        //        inst.DoNotification(MainWindow.Localize("app_Update_Available"));
+        //    }
+        //    else if (isUpdateAvailable.HasValue && isUpdateAvailable == false && !(sender is MainWindow))
+        //    {
+        //        inst.DoNotification(MainWindow.Localize("app_Update_Latest"));
+        //    }
+        //    else if (!isUpdateAvailable.HasValue)
+        //    {
+        //        inst.DoNotification(MainWindow.Localize("app_Update_Fail"));
+        //    }
+        //}
         internal void UserColorListChanged()
         {
             inst.userColorSampleList.Children.Clear();
@@ -530,6 +531,12 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.Deinitialize();
+            if (UpdateManager.updatesAvailable.HasValue && UpdateManager.updatesAvailable.Value)
+            {
+                UpdateManager.RunUpdater();
+                Environment.Exit(0);
+                return;
+            }
             Environment.Exit(0);
         }
         internal void RecentList_Click(object sender, RoutedEventArgs e)
@@ -860,7 +867,7 @@ namespace BowieD.Unturned.NPCMaker
                                                     ).ShowDialog();
                 }
             }
-            catch { }
+            catch(Exception ex) { Logging.Logger.Log(ex); }
         }
         internal void ApparelSkinColorBox_TextChanged(object sender, TextChangedEventArgs e)
         {

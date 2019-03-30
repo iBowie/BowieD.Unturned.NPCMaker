@@ -1,4 +1,6 @@
-﻿using BowieD.Unturned.NPCMaker.Logging;
+﻿using BowieD.Unturned.NPCMaker.BetterForms;
+using BowieD.Unturned.NPCMaker.Logging;
+using BowieD.Unturned.NPCMaker.Managers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -29,7 +31,11 @@ namespace BowieD.Unturned.NPCMaker
         public App()
         {
             InitializeComponent();
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
+            #region check for updates
+            UpdateManager.Create();
+            UpdateManager.Instance.Start();
+            #endregion
             Logger.Clear();
             Logger.Log("App started! Pre-launch stage.");
             App.LanguageChanged += App_LanguageChanged;
@@ -54,17 +60,26 @@ namespace BowieD.Unturned.NPCMaker
                 Config.Configuration.Properties.Language = Language.Name;
                 Config.Configuration.Save();
             }
+            #region SCALE
+            Resources["Scale"] = Config.Configuration.Properties.scale;
+            //Resources.Remove("Scale");
+            //Resources.Add("Scale", Config.Configuration.Properties.scale);
+            Logger.Log($"Scale set to {Config.Configuration.Properties.scale}");
+            #endregion
             CopyResource(NPCMaker.Properties.Resources.DiscordRPC, AppDomain.CurrentDomain.BaseDirectory + "DiscordRPC.dll");
             CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, AppDomain.CurrentDomain.BaseDirectory + "Newtonsoft.Json.dll");
             CopyResource(NPCMaker.Properties.Resources.ControlzEx, AppDomain.CurrentDomain.BaseDirectory + "ControlzEx.dll");
             CopyResource(NPCMaker.Properties.Resources.MahApps_Metro, AppDomain.CurrentDomain.BaseDirectory + "MahApps.Metro.dll");
             CopyResource(NPCMaker.Properties.Resources.Microsoft_Xaml_Behaviors, AppDomain.CurrentDomain.BaseDirectory + "Microsoft.Xaml.Behaviors.dll");
         }
-        
-        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+
+        private void Current_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            Exception ex = e.ExceptionObject as Exception;
-            Logger.Log($"Exception caused the app to stop. Message: {ex.Message}", Log_Level.Critical);
+            AppCrashReport acr = new AppCrashReport(e.Exception);
+            acr.ShowDialog();
+            e.Handled = acr.Handle;
+            if (acr.Handle)
+                Logger.Log($"Ignoring exception {e.Exception.Message}.");
         }
 
         private void CopyResource(byte[] res, string file)

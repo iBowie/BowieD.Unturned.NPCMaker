@@ -12,8 +12,8 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         public Message_TreeView(int[] arr, int count)
         {
             InitializeComponent();
-            gridScale.ScaleX = Config.Configuration.Properties.scale;
-            gridScale.ScaleY = Config.Configuration.Properties.scale;
+            Height *= Config.Configuration.Properties.scale;
+            Width *= Config.Configuration.Properties.scale;
             for (int k = 0; k < count; k++)
             {
                 mainTreeView.Items.Add(new CheckBox() { Content = $"[{k+1}]", IsChecked = arr?.Count() == 0 ? true : arr?.Contains(k) });

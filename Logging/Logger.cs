@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -16,7 +17,13 @@ namespace BowieD.Unturned.NPCMaker.Logging
             {
                 sw.WriteLine(GetFormatted(logLevel, message));
             }
+            lines.Add(GetFormatted(logLevel, message));
         }
+        public static void Log(Exception ex, Log_Level logLevel = Log_Level.Critical)
+        {
+            Log("Exception: " + ex.Message, logLevel);
+        }
+        public static List<string> lines = new List<string>();
         public static void Clear()
         {
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "npcmaker.log"))

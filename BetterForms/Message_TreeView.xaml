@@ -9,7 +9,7 @@
         Icon="{DynamicResource app_Icon}">
     <Grid>
         <Grid.LayoutTransform>
-            <ScaleTransform x:Name="gridScale"/>
+            <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
         </Grid.LayoutTransform>
         <ScrollViewer Margin="10,10,10,50" VerticalScrollBarVisibility="Auto">
             <TreeView Name="mainTreeView">

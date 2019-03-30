@@ -101,6 +101,9 @@
     <Compile Include="BetterControls\Dialogue_Message_Page.xaml.cs">
       <DependentUpon>Dialogue_Message_Page.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BetterForms\AppCrashReport.xaml.cs">
+      <DependentUpon>AppCrashReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BetterForms\Message_TreeView.xaml.cs">
       <DependentUpon>Message_TreeView.xaml</DependentUpon>
     </Compile>
@@ -135,6 +138,8 @@
       <DependentUpon>Form_About.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Managers\IManager.cs" />
+    <Compile Include="Managers\UpdateManager.cs" />
     <Compile Include="Mistake.cs" />
     <Compile Include="Mistakes\Apparel\NE_1000.cs" />
     <Compile Include="Mistakes\Apparel\NE_1001.cs" />
@@ -143,6 +148,7 @@
     <Compile Include="Mistakes\Dialogue\NE_2001.cs" />
     <Compile Include="Mistakes\Dialogue\NE_2002.cs" />
     <Compile Include="Mistakes\Dialogue\NE_2003.cs" />
+    <Compile Include="Mistakes\Dialogue\NE_2004.cs" />
     <Compile Include="Mistakes\General\NE_0000.cs" />
     <Compile Include="Mistakes\General\NE_0001.cs" />
     <Compile Include="Mistakes\General\NE_0002.cs" />
@@ -150,8 +156,11 @@
     <Compile Include="Mistakes\Generic.cs" />
     <Compile Include="Mistakes\Quests\NE_4000.cs" />
     <Compile Include="Mistakes\Quests\NE_4001.cs" />
+    <Compile Include="Mistakes\Quests\NE_4002.cs" />
+    <Compile Include="Mistakes\Quests\NE_4003.cs" />
     <Compile Include="Mistakes\Vendor\NE_3000.cs" />
     <Compile Include="Mistakes\Vendor\NE_3001.cs" />
+    <Compile Include="Mistakes\Vendor\NE_3002.cs" />
     <Compile Include="Notification\NotificationBase.xaml.cs">
       <DependentUpon>NotificationBase.xaml</DependentUpon>
     </Compile>
@@ -213,6 +222,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BetterControls\Dialogue_Message_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BetterForms\AppCrashReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -438,6 +451,19 @@
     <Resource Include="Resources\BAD_ICON_UPDATE.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Help\img_help_dialogueMessage.png" />
+    <Resource Include="Resources\Help\img_help_dialogueReply.png" />
+    <Resource Include="Resources\Help\img_help_apparel_backpack.png" />
+    <Resource Include="Resources\Help\img_help_apparel_bottom.png" />
+    <Resource Include="Resources\Help\img_help_apparel_mask.png" />
+    <Resource Include="Resources\Help\img_help_apparel_shirt.png" />
+    <Resource Include="Resources\Help\img_help_apparel_vest.png" />
+    <Resource Include="Resources\Help\img_help_apparel_glasses.png" />
+    <Resource Include="Resources\Help\img_help_apparel_hat.png" />
+    <Resource Include="Resources\Help\img_help_displayName.png" />
+    <Resource Include="Resources\Help\img_help_editorName.png" />
+    <Resource Include="Resources\Help\img_help_startDialogue.png" />
+    <Resource Include="Resources\Help\img_help_visibilityConditions.png" />
     <EmbeddedResource Include="Libs\DiscordRPC.dll" />
     <None Include="Libs\MahApps.Metro.dll" />
     <None Include="Libs\ControlzEx.dll" />

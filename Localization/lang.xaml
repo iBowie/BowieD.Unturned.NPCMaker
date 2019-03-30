@@ -2,6 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Localization"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <v:String x:Key="acr_Title">NPC Maker Crashed!</v:String>
+    <v:String x:Key="acr_Header">Oops... Looks like NPC Maker got an exception!</v:String>
+    <v:String x:Key="acr_HandleException">Handle</v:String>
+    <v:String x:Key="acr_Copy">Copy Log</v:String>
+    <v:String x:Key="acr_Save">Save NPC</v:String>
+    
+    
     <v:String x:Key="config_Title">App Settings</v:String>
     <v:String x:Key="config_Tab_General">General</v:String>
     <v:String x:Key="config_Tab_Appearance">Appearance</v:String>
@@ -168,6 +175,9 @@
     <v:String x:Key="dialogue_StartDialogue">Set as start dialogue</v:String>
     <v:String x:Key="dialogue_Start_Notify">[{0}] set as start dialogue!</v:String>
     <v:String x:Key="dialogue_ID_Zero">Can't save dialogue. ID is zero.</v:String>
+    <v:String x:Key="dialogue_Reply_EditVisibility_MessageCount">No sense in editing visibility if you have less than two messages.</v:String>
+    <v:String x:Key="dialogue_Message_EditCondition">Edit Conditions</v:String>
+    <v:String x:Key="dialogue_Message_EditCondition_ToolTip">When dialogue opens up-most message with true conditions will appear</v:String>
 
     <v:String x:Key="listView_Add_Condition">Add Condition</v:String>
     <v:String x:Key="listView_Add_Reward">Add Reward</v:String>
@@ -265,6 +275,7 @@
     <v:String x:Key="conditionEditor_Status">Quest Status</v:String>
     <v:String x:Key="conditionEditor_Zombies">Zombie Type</v:String>
     <v:String x:Key="conditionEditor_Localization">In-game display</v:String>
+    <v:String x:Key="conditionEditor_Localization_Tooltip">Text that display in menus. {0} - current progress, {1} - required.</v:String>
     <v:String x:Key="conditionEditor_Variables">Parameters</v:String>
     <v:String x:Key="condition_DisplayText_Item">Player must have item %item% x%amount%</v:String>
     <v:String x:Key="condition_DisplayText_Quest">Player must have quest %questId%. Status: %questStatus%</v:String>
@@ -399,7 +410,12 @@
     <v:String x:Key="mistakes_ErrorName">Error Code</v:String>
     <v:String x:Key="mistakes_ErrorDesc">Error Description</v:String>
     <v:String x:Key="mistakes_NoMistakes">No mistakes! You're doing great!</v:String>
-    
+    <v:String x:Key="mistakes_ErrorImportance">Importance</v:String>
+
+    <v:String x:Key="IMPORTANCE_NO_EXPORT">No export</v:String>
+    <v:String x:Key="IMPORTANCE_ADVICE">Advice</v:String>
+    <v:String x:Key="IMPORTANCE_HIGH">Error</v:String>
+
     <v:String x:Key="NE_0000_Desc">NPC id should be more than 2000, because all id's lower than 2000 are reserved for official content</v:String>
     <v:String x:Key="NE_0001_Desc">Recommended to use english chars in editor name.</v:String>
     <v:String x:Key="NE_0002_Desc">Recommended to use name that longer than 3 chars.</v:String>
@@ -411,10 +427,13 @@
     <v:String x:Key="NE_2001_Desc">NPC's message must contain at least one page.</v:String>
     <v:String x:Key="NE_2002_Desc">Change ID of the dialogue with zero id</v:String>
     <v:String x:Key="NE_2003_Desc">You have two or more dialogues with same ID</v:String>
+    <v:String x:Key="NE_2004_Desc">Some of messages in dialogue {0} will never appear.</v:String>
     <v:String x:Key="NE_3000_Desc">Change ID of the vendor with zero id</v:String>
     <v:String x:Key="NE_3001_Desc">You have two or more vendors with same ID</v:String>
     <v:String x:Key="NE_4000_Desc">Change ID of the quest with zero id</v:String>
     <v:String x:Key="NE_4001_Desc">You have two or more quests with same ID</v:String>
+    <v:String x:Key="NE_4002_Desc">Quest {0} doesn't have any conditions.</v:String>
+    <v:String x:Key="NE_4003_Desc">Quest {0} doesn't have any rewards.</v:String>
 
     <v:String x:Key="notify_Dialogue_Saved">Dialogue saved!</v:String>
     <v:String x:Key="notify_Vendor_Saved">Vendor saved!</v:String>

@@ -52,6 +52,7 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
         public void Deinitialize()
         {
             client.Dispose();
+            Logging.Logger.Log("Discord Rich Presence client deinitialized!");
         }
 
         private void Client_OnPresenceUpdate(object sender, global::DiscordRPC.Message.PresenceMessage args)

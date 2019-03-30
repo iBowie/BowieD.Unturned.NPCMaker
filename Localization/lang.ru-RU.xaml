@@ -2,6 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Localization"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <v:String x:Key="acr_Title">NPC Maker Crashed!</v:String>
+    <v:String x:Key="acr_Header">Oops... Looks like NPC Maker got an exception!</v:String>
+    <v:String x:Key="acr_HandleException">Игнорировать ошибку</v:String>
+    <v:String x:Key="acr_Copy">Скопировать</v:String>
+    <v:String x:Key="acr_Save">Сохранить NPC</v:String>
+    
     <v:String x:Key="config_Title">Настройки программы</v:String>
     <v:String x:Key="config_Tab_General">Основное</v:String>
     <v:String x:Key="config_Tab_Appearance">Внешний вид</v:String>
@@ -168,6 +174,9 @@
     <v:String x:Key="dialogue_StartDialogue">Сделать стартовым диалогом</v:String>
     <v:String x:Key="dialogue_Start_Notify">[{0}] теперь стартовый диалог!</v:String>
     <v:String x:Key="dialogue_ID_Zero">Не удалось сохранить диалог. ID диалога не может быть равен нулю</v:String>
+    <v:String x:Key="dialogue_Reply_EditVisibility_MessageCount">Нет смысла изменять видимость, если у Вас меньше двух сообщений.</v:String>
+    <v:String x:Key="dialogue_Message_EditCondition">Условия</v:String>
+    <v:String x:Key="dialogue_Message_EditCondition_ToolTip">При открытии диалога происходит проверка условий сообщений. Первое сообщение с истинными условиями будет отображено.</v:String>
 
     <v:String x:Key="listView_Add_Condition">Добавить условие</v:String>
     <v:String x:Key="listView_Add_Reward">Добавить награду</v:String>
@@ -265,6 +274,7 @@
     <v:String x:Key="conditionEditor_Status">Статус задания</v:String>
     <v:String x:Key="conditionEditor_Zombies">Вид зомби</v:String>
     <v:String x:Key="conditionEditor_Localization">Локализация</v:String>
+    <v:String x:Key="conditionEditor_Localization_Tooltip">Текст, который виден в меню. {0} - текущий прогресс, {1} - требуется.</v:String>
     <v:String x:Key="conditionEditor_Variables">Параметры</v:String>
     <v:String x:Key="condition_DisplayText_Item">Игрок должен иметь %item% x%amount%</v:String>
     <v:String x:Key="condition_DisplayText_Quest">Игрок должен иметь задание %questId%. Статус: %questStatus%</v:String>
@@ -399,6 +409,11 @@
     <v:String x:Key="mistakes_ErrorName">Код ошибки</v:String>
     <v:String x:Key="mistakes_ErrorDesc">Описание ошибки</v:String>
     <v:String x:Key="mistakes_NoMistakes">Ошибок нет! Вы отлично справляетесь!</v:String>
+    <v:String x:Key="mistakes_ErrorImportance">Серьёзность</v:String>
+
+    <v:String x:Key="IMPORTANCE_NO_EXPORT">Критическая</v:String>
+    <v:String x:Key="IMPORTANCE_ADVICE">Совет</v:String>
+    <v:String x:Key="IMPORTANCE_HIGH">Ошибка</v:String>
 
     <v:String x:Key="NE_0000_Desc">ID NPC должен быть больше 2000, так как все ID меньше 2000 зарезервированы для игры</v:String>
     <v:String x:Key="NE_0001_Desc">Рекомендуется использовать английские символы в имени для редактора.</v:String>
@@ -408,13 +423,16 @@
     <v:String x:Key="NE_1001_Desc">Неправильный цвет волос.</v:String>
     <v:String x:Key="NE_1002_Desc">Экипированный слот пуст.</v:String>
     <v:String x:Key="NE_2000_Desc">У Вас есть задание, которое не ведёт к заданию. Добавьте награду типа "Задание" к ответу с заданием.</v:String>
-    <v:String x:Key="NE_2001_Desc">Сообщение NPC должно содержать как минимум одно сообщение.</v:String>
+    <v:String x:Key="NE_2001_Desc">Сообщение NPC в диалоге {0} должно содержать как минимум одну страницу текста.</v:String>
     <v:String x:Key="NE_2002_Desc">Измените ID диалога на любой выше 0</v:String>
     <v:String x:Key="NE_2003_Desc">У Вас есть несколько диалогов с одинаковым ID</v:String>
+    <v:String x:Key="NE_2004_Desc">Некоторые сообщения в диалоге {0} никогда не появятся.</v:String>
     <v:String x:Key="NE_3000_Desc">Измените ID магазина на любой выше 0</v:String>
     <v:String x:Key="NE_3001_Desc">У Вас есть несколько магазинов с одинаковым ID</v:String>
     <v:String x:Key="NE_4000_Desc">Измените ID задания на любой выше 0</v:String>
     <v:String x:Key="NE_4001_Desc">У Вас есть несколько заданий с одинаковым ID</v:String>
+    <v:String x:Key="NE_4002_Desc">В задании {0} нет условий.</v:String>
+    <v:String x:Key="NE_4003_Desc">В задании {0} нет условий.</v:String>
     
     <v:String x:Key="notify_Dialogue_Saved">Диалог сохранен!</v:String>
     <v:String x:Key="notify_Vendor_Saved">Магазин сохранен!</v:String>

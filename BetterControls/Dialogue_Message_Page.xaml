@@ -10,9 +10,9 @@
         <TextBox TextChanged="TextField_TextChanged" TextWrapping="Wrap" Name="textField" Margin="5,5">
             
         </TextBox>
-        <Button MouseEnter="DeleteButton_MouseEnter" MouseLeave="DeleteButton_MouseLeave" Name="deleteButton" Width="16" Height="16" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,10">
+        <Button MouseEnter="DeleteButton_MouseEnter" MouseLeave="DeleteButton_MouseLeave" Name="deleteButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,10">
             <Button.Content>
-                <Image Source="/Resources/ICON_CANCEL.png"/>
+                <Image Source="/Resources/ICON_CANCEL.png" Width="16" Height="16"/>
             </Button.Content>
         </Button>
     </Grid>

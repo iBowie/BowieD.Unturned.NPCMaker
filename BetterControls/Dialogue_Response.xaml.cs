@@ -101,12 +101,19 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void ChangeVisibilityButton_Click(object sender, RoutedEventArgs e)
         {
-            Message_TreeView mtv = new Message_TreeView(Response.visibleIn, MainWindow.Instance.CurrentDialogue.MessagesAmount);
-            mtv.ShowDialog();
-            if (mtv.SaveApply)
+            if (MainWindow.Instance.CurrentDialogue.MessagesAmount > 1)
             {
-                var arr = mtv.AsIntArray;
-                Response.visibleIn = arr.Count() == 0 ? null : arr;
+                Message_TreeView mtv = new Message_TreeView(Response.visibleIn, MainWindow.Instance.CurrentDialogue.MessagesAmount);
+                mtv.ShowDialog();
+                if (mtv.SaveApply)
+                {
+                    var arr = mtv.AsIntArray;
+                    Response.visibleIn = arr.Count() == 0 ? null : arr;
+                }
+            }
+            else
+            {
+                MainWindow.Instance.DoNotification(MainWindow.Localize("dialogue_Reply_EditVisibility_MessageCount"));
             }
         }
 

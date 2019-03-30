@@ -1,46 +1,44 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC;
 using System;
-using System.Linq;
 
-namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
+namespace BowieD.Unturned.NPCMaker.Mistakes.Vendor
 {
     /// <summary>
-    /// No pages in message
+    /// No items in vendor
     /// </summary>
-    public class NE_2001 : Mistake
+    public class NE_3002 : Mistake
     {
         public override IMPORTANCE Importance => IMPORTANCE.NO_EXPORT;
         public override bool IsMistake
         {
             get
             {
-                foreach (NPCDialogue dialogue in MainWindow.CurrentNPC.dialogues)
+                foreach (NPCVendor vendor in MainWindow.CurrentNPC.vendors)
                 {
-                    if (dialogue.MessagesAmount > 0 && dialogue.messages.Any(d => d.PagesAmount == 0))
+                    if (vendor.items.Count == 0)
                     {
-                        errorDialogue = dialogue;
+                        errorVendor = vendor;
                         return true;
                     }
                 }
                 return false;
             }
         }
-
-        public override string MistakeNameKey => "NE_2001";
-        public override string MistakeDescKey => MainWindow.Localize("NE_2001_Desc", errorDialogue.id);
+        public NPCVendor errorVendor;
+        public override string MistakeDescKey => MainWindow.Localize("NE_3002_Desc", errorVendor.id);
+        public override string MistakeNameKey => "NE_3002";
         public override bool TranslateName => false;
         public override bool TranslateDesc => false;
-        private NPCDialogue errorDialogue;
         public override Action OnClick
         {
             get
             {
                 return new Action(() =>
                 {
-                    if (MainWindow.Instance.CurrentDialogue.id == 0)
+                    if (MainWindow.Instance.CurrentVendor.id == 0)
                         return;
-                    MainWindow.Instance.Dialogue_SaveButtonClick(null, null);
-                    MainWindow.Instance.CurrentDialogue = errorDialogue;
+                    MainWindow.Instance.SaveVendor_Click(null, null);
+                    MainWindow.Instance.CurrentVendor = errorVendor;
                     MainWindow.Instance.mainTabControl.SelectedIndex = 2;
                 });
             }

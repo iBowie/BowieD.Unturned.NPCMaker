@@ -16,6 +16,12 @@
                 <Image Source="/Resources/ICON_CANCEL.png"/>
             </Button.Content>
         </Button>
-        <Button Click="Button_Click" Content="{DynamicResource dialogue_Reply_EditCondition}" Margin="10,0,9.92,50" VerticalAlignment="Bottom"/>
+        <Button Click="Button_Click" Content="{DynamicResource dialogue_Message_EditCondition}" Margin="10,0,9.92,50" VerticalAlignment="Bottom">
+            <Button.ToolTip>
+                <StackPanel>
+                    <Label Content="{DynamicResource dialogue_Message_EditCondition_ToolTip}"/>
+                </StackPanel>
+            </Button.ToolTip>
+        </Button>
     </Grid>
 </UserControl>

@@ -9,7 +9,7 @@
         Title="{DynamicResource config_Title}" Icon="{DynamicResource app_Icon}" Height="240" Width="480">
     <Grid>
         <Grid.LayoutTransform>
-            <ScaleTransform x:Name="gridScale"/>
+            <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
         </Grid.LayoutTransform>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <TabControl TabStripPlacement="Left" Margin="10,10,10,10">
             <TabItem Header="{DynamicResource config_Tab_General}">
-                <StackPanel Margin="5">
+                <StackPanel Margin="5" CanVerticallyScroll="True">
                     <Grid Margin="2.5">
                         <Label Content="{DynamicResource config_Tab_General_Autosave}"/>
                         <ComboBox SelectedIndex="1" Name="Autosave_Box" HorizontalAlignment="Right">
@@ -49,7 +49,7 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="{DynamicResource config_Tab_Appearance}">
-                <StackPanel Margin="5">
+                <StackPanel Margin="5" CanVerticallyScroll="True">
                     <Grid Margin="2.5">
                         <Label Content="{DynamicResource config_Tab_Appearance_Theme}"/>
                         <ComboBox SelectedIndex="0" HorizontalAlignment="Right" Name="Selected_Theme_Box">
@@ -118,7 +118,7 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="{DynamicResource config_Tab_Misc}">
-                <StackPanel Margin="5">
+                <StackPanel Margin="5" CanVerticallyScroll="True">
                     <CheckBox Name="Discord_Enabled_Box" VerticalAlignment="Top" Margin="2.5" Content="{DynamicResource config_Tab_Misc_Discord}"/>
                     <CheckBox Name="Experimental_Box" VerticalAlignment="Top" Margin="2.5" Content="{DynamicResource config_Tab_Misc_Experimental}"/>
                 </StackPanel>

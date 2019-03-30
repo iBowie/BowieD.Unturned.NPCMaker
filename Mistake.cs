@@ -16,6 +16,7 @@ namespace BowieD.Unturned.NPCMaker
 
         public string MistakeName => TranslateName ? MainWindow.Localize(MistakeNameKey) : MistakeNameKey;
         public string MistakeDesc => TranslateDesc ? MainWindow.Localize(MistakeDescKey) : MistakeDescKey;
+        public string MistakeImportance => Importance == IMPORTANCE.ADVICE ? MainWindow.Localize("IMPORTANCE_ADVICE") : Importance == IMPORTANCE.HIGH ? MainWindow.Localize("IMPORTANCE_HIGH") : MainWindow.Localize("IMPORTANCE_NO_EXPORT");
         public virtual bool IsMistake
         {
             get { return false; }

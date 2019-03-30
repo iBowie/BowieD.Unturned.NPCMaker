@@ -31,17 +31,12 @@ namespace BowieD.Unturned.NPCMaker
         public MainWindow()
         {
             InitializeComponent();
+            Width *= Config.Configuration.Properties.scale;
+            Height *= Config.Configuration.Properties.scale;
             Logger.Log($"Launch stage. Version: {Version}.");
             Instance = this;
             Proxy = new PropertyProxy(this);
             Proxy.RegisterEvents();
-            #region SCALE
-            mainGridScale.ScaleX = Config.Configuration.Properties.scale;
-            mainGridScale.ScaleY = Config.Configuration.Properties.scale;
-            Width = MinWidth * Config.Configuration.Properties.scale;
-            Height = MinHeight * Config.Configuration.Properties.scale;
-            Logger.Log($"Scale set up to {Config.Configuration.Properties.scale}");
-            #endregion
             #region THEME SETUP
             (Config.Configuration.Properties.currentTheme ?? Config.Configuration.DefaultTheme).Setup();
             Logger.Log($"Theme set to {(Config.Configuration.Properties.currentTheme ?? Config.Configuration.DefaultTheme).Name}");
@@ -257,7 +252,6 @@ namespace BowieD.Unturned.NPCMaker
             }
             catch { }
             #endregion
-            Proxy.CheckForUpdates_Click(Instance, null);
             Config.Configuration.Properties.firstLaunch = false;
             isSaved = true;
             #region DISCORD
@@ -331,7 +325,7 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(1, 0, 0, 1);
+        public static Version Version => new Version(1, 0, 1, 0);
         #endregion
         #region STATIC
         public static MainWindow Instance;
@@ -441,7 +435,12 @@ namespace BowieD.Unturned.NPCMaker
                     }
                 }
             }
-            catch (Exception ex) { DoNotification($"Saving failed! Exception: {ex.Message}"); }
+            catch (Exception ex)
+            {
+                DoNotification($"Saving failed! Exception: {ex.Message}");
+                AppCrashReport acr = new AppCrashReport(ex, false, true);
+                acr.ShowDialog();
+            }
             if (oldFile != "")
                 MainWindow.saveFile = oldFile;
         }
@@ -687,7 +686,7 @@ namespace BowieD.Unturned.NPCMaker
         }
         #endregion
         #region DIALOGUE_EDITOR
-        private void Dialogue_SaveButtonClick(object sender, RoutedEventArgs e)
+        internal void Dialogue_SaveButtonClick(object sender, RoutedEventArgs e)
         {
             var dil = CurrentDialogue;
             if (dil.id == 0)
@@ -703,6 +702,7 @@ namespace BowieD.Unturned.NPCMaker
             if (sender != null)
                 DoNotification(Localize("notify_Dialogue_Saved"));
             isSaved = false;
+            Logger.Log($"Dialogue {dil.id} saved!");
         }
         private void Dialogue_ClearCurrentButtonClick(object sender, RoutedEventArgs e)
         {
@@ -730,6 +730,7 @@ namespace BowieD.Unturned.NPCMaker
             {
                 dialoguePlayerRepliesGrid.Children.Remove(item);
             }
+            Logger.Log($"Cleared dialogue {dialogueInputIdControl.Value}");
         }
         private void Dialogue_OpenButtonClick(object sender, RoutedEventArgs e)
         {
@@ -738,6 +739,7 @@ namespace BowieD.Unturned.NPCMaker
             {
                 Dialogue_SaveButtonClick(sender, null);
                 CurrentDialogue = ulv.SelectedValue as NPCDialogue;
+                Logger.Log($"Opened dialogue {dialogueInputIdControl.Value}");
             }
             CurrentNPC.dialogues = ulv.Values.Cast<NPCDialogue>().ToList();
         }
@@ -799,11 +801,8 @@ namespace BowieD.Unturned.NPCMaker
             {
                 txtStartDialogueID.Value = dial.id;
                 CurrentNPC.startDialogueId = dial.id;
-                try
-                {
-                    DoNotification(Localize("dialogue_Start_Notify", dial.id));
-                }
-                catch { }
+                DoNotification(Localize("dialogue_Start_Notify", dial.id));
+                Logger.Log($"Dialogue {dial.id} set as start!");
             }
         }
         public NPCDialogue CurrentDialogue
@@ -834,6 +833,7 @@ namespace BowieD.Unturned.NPCMaker
                 ret.responses = responses.Select(d => d.Response).ToList();
                 ret.id = dialogueID;
                 ret.comment = dialogue_commentbox.Text;
+                Logger.Log($"Built dialogue {ret.id}");
                 return ret;
             }
             set
@@ -892,6 +892,7 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     items.Add((ui as Universal_ItemList).Value as VendorItem);
                 }
+                Logger.Log($"Built vendor {vendorIdTxtBox.Value}");
                 return new NPCVendor()
                 {
                     items = items,
@@ -920,6 +921,7 @@ namespace BowieD.Unturned.NPCMaker
                 vendorTitleTxtBox.Text = value.vendorTitle;
                 vendorDescTxtBox.Text = value.vendorDescription;
                 vendor_commentbox.Text = value.comment;
+                Logger.Log($"Set vendor {value.id}");
             }
         }
         private void AddVendorItem_Click(object sender, RoutedEventArgs e)
@@ -931,15 +933,17 @@ namespace BowieD.Unturned.NPCMaker
                 if (resultedVendorItem.isBuy)
                 {
                     Vendor_Add_Buy(resultedVendorItem);
+                    Logger.Log($"Added item {resultedVendorItem.id} in buy list");
                 }
                 else
                 {
                     Vendor_Add_Sell(resultedVendorItem);
+                    Logger.Log($"Added item {resultedVendorItem.id} in sell list");
                 }
             }
             Proxy.TabControl_SelectionChanged(mainTabControl, null);
         }
-        private void SaveVendor_Click(object sender, RoutedEventArgs e)
+        internal void SaveVendor_Click(object sender, RoutedEventArgs e)
         {
             NPCVendor cur = CurrentVendor;
             if (cur.id == 0)
@@ -952,11 +956,15 @@ namespace BowieD.Unturned.NPCMaker
             if (sender != null)
                 DoNotification(Localize("notify_Vendor_Saved"));
             isSaved = false;
+            Logger.Log($"Vendor {cur.id} saved!");
         }
         private void ClearVendor_Click(object sender, RoutedEventArgs e)
         {
             vendorListBuyItems.Children.Clear();
             vendorListSellItems.Children.Clear();
+            vendorDescTxtBox.Text = "";
+            vendorTitleTxtBox.Text = "";
+            Logger.Log($"Vendor {vendorIdTxtBox.Value} cleared!");
         }
         private void OpenVendor_Click(object sender, RoutedEventArgs e)
         {
@@ -965,18 +973,17 @@ namespace BowieD.Unturned.NPCMaker
             {
                 SaveVendor_Click(sender, null);
                 CurrentVendor = ulv.SelectedValue as NPCVendor;
+                Logger.Log($"Opened vendor {vendorIdTxtBox.Value}");
             }
             CurrentNPC.vendors = ulv.Values.Cast<NPCVendor>().ToList();
         }
         private void DeleteVendorBuy_Click(object sender, RoutedEventArgs e)
         {
-            Universal_ItemList uil = Util.FindParent<Universal_ItemList>(sender as Button);
-            vendorListBuyItems.Children.Remove(uil);
+            Vendor_Delete_Buy(Util.FindParent<Universal_ItemList>(sender as Button));
         }
         private void DeleteVendorSell_Click(object sender, RoutedEventArgs e)
         {
-            Universal_ItemList uil = Util.FindParent<Universal_ItemList>(sender as Button);
-            vendorListSellItems.Children.Remove(uil);
+            Vendor_Delete_Sell(Util.FindParent<Universal_ItemList>(sender as Button));
         }
         public void Vendor_Add_Buy(VendorItem item)
         {
@@ -1090,7 +1097,7 @@ namespace BowieD.Unturned.NPCMaker
             Universal_ItemList uil = Util.FindParent<Universal_ItemList>(sender as Button);
             listQuestRewards.Children.Remove(uil);
         }
-        private void SaveQuest_Click(object sender, RoutedEventArgs e)
+        internal void SaveQuest_Click(object sender, RoutedEventArgs e)
         {
             NPCQuest cur = CurrentQuest;
             if (cur.id == 0)
@@ -1147,53 +1154,6 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             dropOverlay.Visibility = Visibility.Hidden;
-        }
-        #endregion
-        #region UPDATE
-        public async Task<bool?> IsUpdateAvailable()
-        {
-            checkForUpdatesButton.IsEnabled = false;
-            try
-            {
-                using (WebClient wc = new WebClient())
-                {
-                    string vers = await wc.DownloadStringTaskAsync("https://raw.githubusercontent.com/iBowie/publicfiles/master/npcmakerversion.txt");
-                    Version newVersion = new Version(vers);
-                    bool res = newVersion > Version;
-                    forceUpdateButton.IsEnabled = res;
-                    return res;
-                }
-            }
-            catch { }
-            finally { checkForUpdatesButton.IsEnabled = true; }
-            return null;
-        }
-        public void DownloadUpdater()
-        {
-            using (WebClient wc = new WebClient())
-            using (FileStream fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + "updater.exe", FileMode.Create))
-            {
-                byte[] dat = wc.DownloadData("https://raw.githubusercontent.com/iBowie/publicfiles/master/BowieD.Unturned.NPCMaker.Updater.exe");
-                for (int k = 0; k < dat.Length; k++)
-                {
-                    fs.WriteByte(dat[k]);
-                }
-            }
-        }
-        internal void ForceUpdate_Click(object sender, RoutedEventArgs e)
-        {
-            DownloadUpdater();
-            RunUpdate();
-        }
-
-        public void RunUpdate()
-        {
-            string fileName = Path.GetFileName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
-            if (!fileName.EndsWith(".exe"))
-                fileName += ".exe";
-            System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "updater.exe",  fileName);
-            (DiscordWorker as DiscordRPC.DiscordWorker)?.Deinitialize();
-            Environment.Exit(0);
         }
         #endregion
         #region NOTIFICATIONS
@@ -1293,6 +1253,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             List<UnturnedFile> cache = new List<UnturnedFile>();
             List<FileInfo> validFiles = new DirectoryInfo(directory).GetFiles("*.dat", SearchOption.AllDirectories).ToList();
+            Logger.Log($"Found {validFiles.Count} assets!");
             if (light)
             {
                 long oldTotal = validFiles.Count();
@@ -1360,6 +1321,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             CachedUnturnedFiles = cache;
             CacheUpdated = true;
+            Logger.Log($"Cached {cache.Count} files!");
             return true;
         }
         public static bool CacheUpdated = false;
