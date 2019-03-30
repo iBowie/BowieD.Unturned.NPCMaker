@@ -38,13 +38,13 @@
     <v:String x:Key="config_Tab_Appearance_Theme_LightRed">Светлая красная</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_LightBlue">Светлая синяя</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_LightPurple">Светлая фиолетовая</v:String>
-    <v:String x:Key="config_Tab_Appearance_Theme_DarkGreen">Тёмная фиолетовая</v:String>
+    <v:String x:Key="config_Tab_Appearance_Theme_DarkGreen">Тёмная зелёная</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkPink">Тёмная розовая</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkRed">Тёмная красная</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkBlue">Тёмная синяя</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkPurple">Тёмная фиолетовая</v:String>
     <v:String x:Key="config_Tab_Appearance_Scale">Масштаб</v:String>
-    <v:String x:Key="config_Tab_Misc_Discord">Включить Discord Rich Presence</v:String>
+    <v:String x:Key="config_Tab_Misc_Discord">Подробный Discord Rich Presence</v:String>
     <v:String x:Key="config_Tab_Misc_Experimental">Экспериментальный режим</v:String>
     <v:String x:Key="config_OnExit">Для применения настроек перезапустите программу.</v:String>
 
@@ -297,6 +297,7 @@
     <v:String x:Key="rewardEditor_ID">ID</v:String>
     <v:String x:Key="rewardEditor_Amount">Количество</v:String>
     <v:String x:Key="rewardEditor_Localization">Локализация</v:String>
+    <v:String x:Key="rewardEditor_Localization_Tooltip">Текст, который виден в меню.</v:String>
     <v:String x:Key="rewardEditor_Variables">Параметры</v:String>
     <v:String x:Key="rewardEditor_Value">Значение</v:String>
     <v:String x:Key="rewardEditor_FlagID">ID флага</v:String>

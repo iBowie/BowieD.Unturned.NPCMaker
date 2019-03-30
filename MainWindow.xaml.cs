@@ -255,12 +255,10 @@ namespace BowieD.Unturned.NPCMaker
             Config.Configuration.Properties.firstLaunch = false;
             isSaved = true;
             #region DISCORD
-            if (Config.Configuration.Properties.enableDiscord)
-            {
-                DiscordWorker = new DiscordRPC.DiscordWorker(1000);
-                (DiscordWorker as DiscordRPC.DiscordWorker)?.Initialize();
-                Proxy.TabControl_SelectionChanged(mainTabControl, null);
-            }
+            DiscordWorker = new DiscordRPC.DiscordWorker(1000);
+            DiscordWorker.descriptive = Config.Configuration.Properties.enableDiscord;
+            DiscordWorker?.Initialize();
+            Proxy.TabControl_SelectionChanged(mainTabControl, null);
             #endregion
             #region ENABLE EXPERIMENTAL
             if (Config.Configuration.Properties.experimentalFeatures)
@@ -322,12 +320,12 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(1, 0, 1, 0);
+        public static Version Version => new Version(1, 0, 1, 1);
         #endregion
         #region STATIC
         public static MainWindow Instance;
         public static NPCSave CurrentNPC { get; set; } = new NPCSave();
-        public static object DiscordWorker { get; set; }
+        public static DiscordRPC.DiscordWorker DiscordWorker { get; set; }
         public static DispatcherTimer AutosaveTimer { get; set; }
         public static PropertyProxy Proxy { get; private set; }
         public static bool IsRGB { get; set; } = true;

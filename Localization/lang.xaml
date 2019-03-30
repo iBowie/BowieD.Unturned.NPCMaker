@@ -45,7 +45,7 @@
     <v:String x:Key="config_Tab_Appearance_Theme_DarkBlue">Dark Blue</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkPurple">Dark Purple</v:String>
     <v:String x:Key="config_Tab_Appearance_Scale">Scale</v:String>
-    <v:String x:Key="config_Tab_Misc_Discord">Enable Discord Rich Presence</v:String>
+    <v:String x:Key="config_Tab_Misc_Discord">Discord Rich Presence Advanced</v:String>
     <v:String x:Key="config_Tab_Misc_Experimental">Enable Experimental Features</v:String>
     <v:String x:Key="config_OnExit">To apply new settings restart the app.</v:String>
 
@@ -298,6 +298,7 @@
     <v:String x:Key="rewardEditor_ID">ID</v:String>
     <v:String x:Key="rewardEditor_Amount">Amount</v:String>
     <v:String x:Key="rewardEditor_Localization">In-game display</v:String>
+    <v:String x:Key="rewardEditor_Localization_Tooltip">Text that display in menus.</v:String>
     <v:String x:Key="rewardEditor_Variables">Parameters</v:String>
     <v:String x:Key="rewardEditor_Value">Value</v:String>
     <v:String x:Key="rewardEditor_FlagID">Flag ID</v:String>

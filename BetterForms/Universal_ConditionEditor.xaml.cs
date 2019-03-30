@@ -38,7 +38,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 startCondition.Init(this, startCondition);
                 if (viewLocalization)
                 {
-                    AddLabel(MainWindow.Localize("conditionEditor_Localization"));
+                    AddLabel(MainWindow.Localize("conditionEditor_Localization"), MainWindow.Localize("rewardEditor_Localization_Tooltip"));
                     AddTextBox(200);
                     SetMainValue(variablesGrid.Children.Count - 1, startCondition.Localization);
                 }
@@ -85,7 +85,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             if (viewLocalizationField)
             {
                 mult++;
-                AddLabel(MainWindow.Localize("conditionEditor_Localization"));
+                AddLabel(MainWindow.Localize("conditionEditor_Localization"), MainWindow.Localize("conditionEditor_Localization_Tooltip"));
                 AddTextBox(200);
             }
             DoubleAnimation anim = new DoubleAnimation(Height, (baseHeight + (heightDelta * (mult + (mult > 1 ? 1 : 0)))), new Duration(new TimeSpan(0, 0, 0, 0, 500)));

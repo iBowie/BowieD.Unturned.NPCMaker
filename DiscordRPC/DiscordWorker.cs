@@ -8,6 +8,7 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
     {
         public DiscordRpcClient client;
         public int ticksDelay;
+        public bool descriptive { get; set; }
 
         public DiscordWorker(int delay)
         {
@@ -28,6 +29,12 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
 
         public void SendPresence(RichPresence rich)
         {
+            if (!descriptive)
+            {
+                rich = new RichPresence();
+                rich.State = "User hides details";
+                rich.Details = "Editing NPC";
+            }
             if (rich.Assets == null)
                 rich.Assets = new Assets();
             rich.Assets.LargeImageText = $"NPC Maker for Unturned by BowieD. Version: {MainWindow.Version}";
@@ -63,7 +70,7 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
         private void Client_OnReady(object sender, global::DiscordRPC.Message.ReadyMessage args)
         {
             Logging.Logger.Log("Discord Rich Presence started!", Logging.Log_Level.Normal);
-            MainWindow.Instance.DoNotification(MainWindow.Localize("menu_Discord_Start"));
+            //MainWindow.Instance.DoNotification(MainWindow.Localize("menu_Discord_Start"));
         }
     }
 }

@@ -35,7 +35,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 startReward.Init(this, startReward);
                 if (viewLocalization)
                 {
-                    AddLabel(MainWindow.Localize("rewardEditor_Localization"));
+                    AddLabel(MainWindow.Localize("rewardEditor_Localization"), MainWindow.Localize("rewardEditor_Localization_Tooltip"));
                     AddTextBox(200);
                     SetMainValue(variablesGrid.Children.Count-1, reward.Localization);
                 }
@@ -57,17 +57,18 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             variablesGrid.Children.Clear();
             this.Height = baseHeight;
         }
-        internal void AddLabel(string text)
+        internal void AddLabel(string text, string tooltip = "")
         {
-            variablesGrid.Children.Add(new Label() { VerticalContentAlignment = VerticalAlignment.Top, HorizontalAlignment = HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Top, Content = text, Margin = elementMargin, Height = elementHeight });
-            foreach (UIElement ui in variablesGrid.Children)
-            {
-                if (ui is Label l && (l.ToolTip == null || l.ToolTip.ToString() == "" || l.ToolTip.ToString().Length == 0) && l.Content != null && l.Content.ToString().Length >= 17)
-                {
-                    l.ToolTip = l.Content;
-                    return;
-                }
-            }
+            //variablesGrid.Children.Add(new Label() { VerticalContentAlignment = VerticalAlignment.Top, HorizontalAlignment = HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Top, Content = text, Margin = elementMargin, Height = elementHeight });
+            //foreach (UIElement ui in variablesGrid.Children)
+            //{
+            //    if (ui is Label l && (l.ToolTip == null || l.ToolTip.ToString() == "" || l.ToolTip.ToString().Length == 0) && l.Content != null && l.Content.ToString().Length >= 17)
+            //    {
+            //        l.ToolTip = l.Content;
+            //        return;
+            //    }
+            //}
+            variablesGrid.Children.Add(new TextBlock() { ToolTip = tooltip ?? null, TextWrapping = TextWrapping.Wrap, TextAlignment = TextAlignment.Left, VerticalAlignment = VerticalAlignment.Top, HorizontalAlignment = HorizontalAlignment.Left, Text = text, Margin = elementMargin, Height = elementHeight });
         }
         internal void AddTextBox(int maxLength)
         {
@@ -112,7 +113,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             if (viewLocalizationField)
             {
                 mult++;
-                AddLabel(MainWindow.Localize("rewardEditor_Localization"));
+                AddLabel(MainWindow.Localize("rewardEditor_Localization"), MainWindow.Localize("rewardEditor_Localization_Tooltip"));
                 AddTextBox(200);
             }
             DoubleAnimation anim = new DoubleAnimation(Height, (baseHeight + (heightDelta * (mult + (mult > 1 ? 1 : 0)))), new Duration(new TimeSpan(0, 0, 0, 0, 500)));
