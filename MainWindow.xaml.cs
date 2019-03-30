@@ -257,12 +257,9 @@ namespace BowieD.Unturned.NPCMaker
             #region DISCORD
             if (Config.Configuration.Properties.enableDiscord)
             {
-                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "DiscordRPC.dll") && File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Newtonsoft.Json.dll"))
-                {
-                    DiscordWorker = new DiscordRPC.DiscordWorker(1000);
-                    (DiscordWorker as DiscordRPC.DiscordWorker)?.Initialize();
-                    Proxy.TabControl_SelectionChanged(mainTabControl, null);
-                }
+                DiscordWorker = new DiscordRPC.DiscordWorker(1000);
+                (DiscordWorker as DiscordRPC.DiscordWorker)?.Initialize();
+                Proxy.TabControl_SelectionChanged(mainTabControl, null);
             }
             #endregion
             #region ENABLE EXPERIMENTAL

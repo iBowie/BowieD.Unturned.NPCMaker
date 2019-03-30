@@ -653,13 +653,6 @@
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding MistakeImportance}" Header="{DynamicResource mistakes_ErrorImportance}" Width="100"/>
-                                    <!--<GridViewColumn Width="32">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Image Width="17" Height="17" Source="{Binding Image}"/>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>-->
                                     <GridViewColumn DisplayMemberBinding="{Binding MistakeName}" Header="{DynamicResource mistakes_ErrorName}" Width="80"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding MistakeDesc}" Header="{DynamicResource mistakes_ErrorDesc}" Width="600"/>
                                 </GridView>

@@ -44,7 +44,18 @@ namespace BowieD.Unturned.NPCMaker.Config
         public static CFG Properties { get; private set; }
         public static ThemeInfo DefaultTheme => new ThemeInfo() { DictionaryName = "Light.Green", Name = "LightGreen", R = 84, G = 142, B = 25 };
 
-        private static string Path => $@"C:\Users\{Environment.UserName}\AppData\Local\BowieD\UnturnedNPCMakerConfig.xml";
+        private static string Path => $@"C:{System.IO.Path.DirectorySeparatorChar}Users{System.IO.Path.DirectorySeparatorChar}{Environment.UserName}{System.IO.Path.DirectorySeparatorChar}AppData{System.IO.Path.DirectorySeparatorChar}Local{System.IO.Path.DirectorySeparatorChar}BowieD{System.IO.Path.DirectorySeparatorChar}UnturnedNPCMakerConfig.xml";
+        public static string ConfigDirectory
+        {
+            get
+            {
+                var res = System.IO.Path.GetDirectoryName(Path);
+                if (!res.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString()))
+                    res += System.IO.Path.DirectorySeparatorChar;
+                return res;
+            }
+        }
+
         public static bool ConfigExist => File.Exists(Path);
 
         public static void Load()
@@ -64,7 +75,7 @@ namespace BowieD.Unturned.NPCMaker.Config
         public static void Save()
         {
             Logger.Log("Saving configuration...");
-            var dir = System.IO.Path.GetDirectoryName(Path);
+            var dir = ConfigDirectory;
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
             using (FileStream fs = new FileStream(Path, FileMode.Create))

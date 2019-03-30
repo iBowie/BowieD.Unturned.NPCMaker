@@ -7,6 +7,7 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Threading;
@@ -32,6 +33,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             InitializeComponent();
             Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
             #region check for updates
             UpdateManager.Create();
             UpdateManager.Instance.Start();
@@ -58,19 +60,33 @@ namespace BowieD.Unturned.NPCMaker
                     Language = new CultureInfo("en-US");
                 }
                 Config.Configuration.Properties.Language = Language.Name;
-                Config.Configuration.Save();
             }
             #region SCALE
             Resources["Scale"] = Config.Configuration.Properties.scale;
-            //Resources.Remove("Scale");
-            //Resources.Add("Scale", Config.Configuration.Properties.scale);
             Logger.Log($"Scale set to {Config.Configuration.Properties.scale}");
             #endregion
-            CopyResource(NPCMaker.Properties.Resources.DiscordRPC, AppDomain.CurrentDomain.BaseDirectory + "DiscordRPC.dll");
-            CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, AppDomain.CurrentDomain.BaseDirectory + "Newtonsoft.Json.dll");
-            CopyResource(NPCMaker.Properties.Resources.ControlzEx, AppDomain.CurrentDomain.BaseDirectory + "ControlzEx.dll");
-            CopyResource(NPCMaker.Properties.Resources.MahApps_Metro, AppDomain.CurrentDomain.BaseDirectory + "MahApps.Metro.dll");
-            CopyResource(NPCMaker.Properties.Resources.Microsoft_Xaml_Behaviors, AppDomain.CurrentDomain.BaseDirectory + "Microsoft.Xaml.Behaviors.dll");
+            Config.Configuration.Save();
+            CopyResource(NPCMaker.Properties.Resources.DiscordRPC, Config.Configuration.ConfigDirectory + "DiscordRPC.dll");
+            CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, Config.Configuration.ConfigDirectory + "Newtonsoft.Json.dll");
+            CopyResource(NPCMaker.Properties.Resources.ControlzEx, Config.Configuration.ConfigDirectory + "ControlzEx.dll");
+            CopyResource(NPCMaker.Properties.Resources.MahApps_Metro, Config.Configuration.ConfigDirectory + "MahApps.Metro.dll");
+            CopyResource(NPCMaker.Properties.Resources.Microsoft_Xaml_Behaviors, Config.Configuration.ConfigDirectory + "Microsoft.Xaml.Behaviors.dll");
+        }
+
+        private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            if (args.Name.Contains(".resources"))
+                return null;
+            Assembly assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(d => d.FullName == args.Name);
+            if (assembly != null)
+                return assembly;
+            string fileName = args.Name.Split(',')[0] + ".dll";
+            string asmFile = Path.Combine(Config.Configuration.ConfigDirectory, fileName);
+            try
+            {
+                return Assembly.LoadFrom(asmFile);
+            }
+            catch { return null; }
         }
 
         private void Current_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
