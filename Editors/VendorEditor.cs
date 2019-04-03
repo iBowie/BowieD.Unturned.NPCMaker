@@ -88,7 +88,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
 
         public void Open()
         {
-            Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentNPC.vendors.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Vendor, false)).ToList(), Universal_ItemList.ReturnType.Vendor);
+            Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentNPC.vendors.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Vendor, false)).ToList(), Universal_ItemList.ReturnType.Vendor);
             if (ulv.ShowDialog() == true)
             {
                 Save();

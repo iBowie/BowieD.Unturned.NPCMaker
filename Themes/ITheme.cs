@@ -1,10 +1,14 @@
-﻿namespace BowieD.Unturned.NPCMaker
+﻿using System.Xml.Serialization;
+
+namespace BowieD.Unturned.NPCMaker
 {
-    public interface ITheme
+    [XmlInclude(typeof(MetroTheme))]
+    public abstract class ITheme
     {
-        void Apply();
-        byte R { get; set; }
-        byte G { get; set; }
-        byte B { get; set; }
+        public abstract void Apply();
+        public abstract byte R { get; set; }
+        public abstract byte G { get; set; }
+        public abstract byte B { get; set; }
+        public abstract string Name { get; set; }
     }
 }

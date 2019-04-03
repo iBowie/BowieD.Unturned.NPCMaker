@@ -6,13 +6,13 @@ namespace BowieD.Unturned.NPCMaker
 {
     public class MetroTheme : ITheme
     {
-        public string Name { get; set; }
+        public override string Name { get; set; }
         public string DictionaryName { get; set; }
-        public byte R { get; set; }
-        public byte G { get; set; }
-        public byte B { get; set; }
+        public override byte R { get; set; }
+        public override byte G { get; set; }
+        public override byte B { get; set; }
 
-        public void Apply()
+        public override void Apply()
         {
             MainWindow.Instance.Theme_Clear();
             Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml") });

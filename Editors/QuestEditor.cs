@@ -91,7 +91,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
         }
         public void Open()
         {
-            Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentNPC.quests.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Quest, false)).ToList(), Universal_ItemList.ReturnType.Quest);
+            Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentNPC.quests.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Quest, false)).ToList(), Universal_ItemList.ReturnType.Quest);
             if (ulv.ShowDialog() == true)
             {
                 Save();

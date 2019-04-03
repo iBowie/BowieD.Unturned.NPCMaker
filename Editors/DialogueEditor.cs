@@ -28,7 +28,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
 
         public void Open()
         {
-            var ulv = new Universal_ListView(MainWindow.CurrentNPC.dialogues.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Dialogue, false)).ToList(), Universal_ItemList.ReturnType.Dialogue);
+            var ulv = new Universal_ListView(MainWindow.CurrentNPC.dialogues.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Dialogue, false)).ToList(), Universal_ItemList.ReturnType.Dialogue);
             if (ulv.ShowDialog() == true)
             {
                 Save();

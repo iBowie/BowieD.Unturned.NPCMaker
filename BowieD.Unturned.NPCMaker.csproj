@@ -146,6 +146,8 @@
     <Compile Include="Mistakes\MistakesManager.cs" />
     <Compile Include="Notification\INotificationManager.cs" />
     <Compile Include="Notification\NotificationManager.cs" />
+    <Compile Include="Themes\ITheme.cs" />
+    <Compile Include="Themes\MetroTheme.cs" />
     <Compile Include="UpdateManagers\GitHubUpdateManager.cs" />
     <Compile Include="UpdateManagers\IUpdateManager.cs" />
     <Compile Include="UpdateManagers\UpdateAvailability.cs" />
@@ -212,7 +214,6 @@
     <Compile Include="NPC\Rewards\Teleport.cs" />
     <Compile Include="NPC\Rewards\Vehicle.cs" />
     <Compile Include="PropertyProxy.cs" />
-    <Compile Include="ThemeInfo.cs" />
     <Compile Include="Util.cs" />
     <Page Include="BetterControls\Dialogue_Response.xaml">
       <SubType>Designer</SubType>
