@@ -29,7 +29,7 @@ namespace BowieD.Unturned.NPCMaker.Config
                 nc.recent = cc.recent;
                 nc.firstLaunch = cc.firstLaunch;
                 #endregion
-                nc.currentTheme = (Selected_Theme_Box.SelectedItem as ComboBoxItem).Tag as ThemeInfo;
+                nc.currentTheme = (Selected_Theme_Box.SelectedItem as ComboBoxItem).Tag as MetroTheme;
                 nc.autosaveOption = (byte)Autosave_Box.SelectedIndex;
                 nc.Language = ((CultureInfo)(Languages_Box.SelectedItem as ComboBoxItem).Tag).Name;
                 nc.scale = double.Parse((Scale_Box.SelectedItem as ComboBoxItem).Tag.ToString(), CultureInfo.InvariantCulture);
@@ -43,7 +43,7 @@ namespace BowieD.Unturned.NPCMaker.Config
             {
                 foreach (ComboBoxItem cbi in Selected_Theme_Box.Items)
                 {
-                    if ((cbi?.Tag as ThemeInfo).Name == value.currentTheme.Name)
+                    if ((cbi?.Tag as MetroTheme).Name == value.currentTheme.Name)
                     {
                         Selected_Theme_Box.SelectedItem = cbi;
                         break;
@@ -90,7 +90,7 @@ namespace BowieD.Unturned.NPCMaker.Config
         {
             Configuration.Force(CurrentConfig);
             Configuration.Save();
-            MainWindow.Instance.DoNotification(MainWindow.Localize("config_OnExit"));
+            MainWindow.NotificationManager.Notify(MainWindow.Localize("config_OnExit"));
             Close();
         }
 

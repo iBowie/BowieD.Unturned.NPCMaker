@@ -8,7 +8,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Quests
     /// </summary>
     public class NE_4000 : Mistake
     {
-        public override IMPORTANCE Importance => IMPORTANCE.NO_EXPORT;
+        public override IMPORTANCE Importance => IMPORTANCE.CRITICAL;
         public override bool IsMistake => MainWindow.CurrentNPC.quests.Any(d => d.id == 0);
         public override string MistakeNameKey => "NE_4000";
         public override string MistakeDescKey => "NE_4000_Desc";

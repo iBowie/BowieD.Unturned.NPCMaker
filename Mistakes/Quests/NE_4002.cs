@@ -8,7 +8,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Quests
     /// </summary>
     public class NE_4002 : Mistake
     {
-        public override IMPORTANCE Importance => IMPORTANCE.HIGH;
+        public override IMPORTANCE Importance => IMPORTANCE.WARNING;
         public override bool IsMistake
         {
             get
@@ -31,10 +31,10 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Quests
         public override bool TranslateName => false;
         public override Action OnClick => () =>
         {
-            if (MainWindow.Instance.CurrentQuest.id == 0)
+            if (MainWindow.QuestEditor.Current.id == 0)
                 return;
-            MainWindow.Instance.SaveQuest_Click(null, null);
-            MainWindow.Instance.CurrentQuest = errorQuest;
+            MainWindow.QuestEditor.Save();
+            MainWindow.QuestEditor.Current = errorQuest;
             MainWindow.Instance.mainTabControl.SelectedIndex = 4;
         };
     }

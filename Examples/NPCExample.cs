@@ -6,7 +6,7 @@ namespace BowieD.Unturned.NPCMaker.Examples
     {
         public string Title { get; set; }
 
-        public NPCExample()
+        public NPCExample() : base() // todo
         {
             IsReadOnly = true;
         }

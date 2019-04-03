@@ -353,7 +353,7 @@ namespace BowieD.Unturned.NPCMaker
                         q.guid = Guid.NewGuid().ToString("N");
                 }
             }
-            inst.DoNotification(MainWindow.Localize("general_Regenerated"));
+            MainWindow.NotificationManager.Notify(MainWindow.Localize("general_Regenerated"));
             MainWindow.isSaved = false;
         }
         internal void Options_Click(object sender, RoutedEventArgs e)
@@ -513,27 +513,10 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             Config.Configuration.Save();
-            if (MainWindow.CacheUpdated && MainWindow.CachedUnturnedFiles?.Count() > 0)
-            {
-                var res = MessageBox.Show(MainWindow.Localize("app_Cache_Save"), "", MessageBoxButton.YesNo);
-                if (res == MessageBoxResult.Yes)
-                {
-                    try // save cache
-                    {
-                        using (FileStream fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + "unturnedCache.xml", FileMode.Create))
-                        using (XmlWriter writer = XmlWriter.Create(fs))
-                        {
-                            XmlSerializer serializer = new XmlSerializer(typeof(List<MainWindow.UnturnedFile>));
-                            serializer.Serialize(writer, MainWindow.CachedUnturnedFiles);
-                        }
-                    }
-                    catch { }
-                }
-            }
             (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.Deinitialize();
-            if (UpdateManager.updatesAvailable.HasValue && UpdateManager.updatesAvailable.Value)
+            if (MainWindow.UpdateManager.UpdateAvailability == UpdateAvailability.AVAILABLE) // fix
             {
-                UpdateManager.RunUpdater();
+                MainWindow.UpdateManager.StartUpdate();
                 Environment.Exit(0);
                 return;
             }
@@ -548,14 +531,14 @@ namespace BowieD.Unturned.NPCMaker
         }
         internal void ExportClick(object sender, RoutedEventArgs e)
         {
-            inst.FindMistakes();
-            if (inst.No_Exports > 0)
+            Mistakes.MistakesManager.FindMistakes();
+            if (Mistakes.MistakesManager.Criticals_Count > 0)
             {
                 SystemSounds.Hand.Play();
                 inst.mainTabControl.SelectedIndex = inst.mainTabControl.Items.Count - 1;
                 return;
             }
-            if (inst.Warnings > 0)
+            if (Mistakes.MistakesManager.Warnings_Count > 0)
             {
                 var res = MessageBox.Show(MainWindow.Localize("export_Warnings_Desc"), MainWindow.Localize("export_Warnings_Title"), MessageBoxButton.YesNo);
                 if (!(res == MessageBoxResult.OK || res == MessageBoxResult.Yes))
@@ -597,14 +580,10 @@ namespace BowieD.Unturned.NPCMaker
                 path = ofd.FileName;
             else
                 return;
-
-            if (!inst.Load(path, false))
+            if (inst.Load(path))
             {
-                if (inst.Load(path, true, true))
-                {
-                    inst.notificationsStackPanel.Children.Clear();
-                    inst.DoNotification(MainWindow.Localize("notify_Loaded"));
-                }
+                inst.notificationsStackPanel.Children.Clear();
+                MainWindow.NotificationManager.Notify(MainWindow.Localize("notify_Loaded"));
             }
         }
         internal void FaceImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
@@ -652,7 +631,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             if (selectedIndex == (sender as TabControl).Items.Count - 1)
             {
-                inst.FindMistakes();
+                Mistakes.MistakesManager.FindMistakes();
             }
             RichPresence presence = new RichPresence
             {

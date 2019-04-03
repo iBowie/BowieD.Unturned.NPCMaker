@@ -8,7 +8,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Vendor
     /// </summary>
     public class NE_3002 : Mistake
     {
-        public override IMPORTANCE Importance => IMPORTANCE.NO_EXPORT;
+        public override IMPORTANCE Importance => IMPORTANCE.CRITICAL;
         public override bool IsMistake
         {
             get
@@ -35,10 +35,10 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Vendor
             {
                 return new Action(() =>
                 {
-                    if (MainWindow.Instance.CurrentVendor.id == 0)
+                    if (MainWindow.VendorEditor.Current.id == 0)
                         return;
-                    MainWindow.Instance.SaveVendor_Click(null, null);
-                    MainWindow.Instance.CurrentVendor = errorVendor;
+                    MainWindow.VendorEditor.Save();
+                    MainWindow.VendorEditor.Current = errorVendor;
                     MainWindow.Instance.mainTabControl.SelectedIndex = 2;
                 });
             }

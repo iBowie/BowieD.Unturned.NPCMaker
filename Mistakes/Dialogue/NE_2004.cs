@@ -45,10 +45,10 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
             {
                 return new Action(() => 
                 {
-                    if (MainWindow.Instance.CurrentDialogue.id == 0)
+                    if (MainWindow.DialogueEditor.Current.id == 0)
                         return;
-                    MainWindow.Instance.Dialogue_SaveButtonClick(null, null);
-                    MainWindow.Instance.CurrentDialogue = errorDialogue;
+                    MainWindow.DialogueEditor.Save();
+                    MainWindow.DialogueEditor.Current = errorDialogue;
                     MainWindow.Instance.mainTabControl.SelectedIndex = 2;
                 });
             }

@@ -8,7 +8,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Apparel
     /// </summary>
     public class NE_1000 : Mistake
     {
-        public override IMPORTANCE Importance => IMPORTANCE.NO_EXPORT;
+        public override IMPORTANCE Importance => IMPORTANCE.CRITICAL;
         public override bool IsMistake => MainWindow.Instance.apparelSkinColorBox.Text.Length > 0 && MainWindow.Instance.apparelSkinColorBox.Text.Length < 6 && !new BrushConverter().IsValid(MainWindow.Instance.apparelSkinColorBox.Text);
         public override string MistakeNameKey => "NE_1000";
         public override bool TranslateName => false;

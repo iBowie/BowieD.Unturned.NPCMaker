@@ -8,7 +8,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
     /// </summary>
     public class NE_2002 : Mistake
     {
-        public override IMPORTANCE Importance => IMPORTANCE.NO_EXPORT;
+        public override IMPORTANCE Importance => IMPORTANCE.CRITICAL;
         public override bool IsMistake => MainWindow.CurrentNPC.dialogues.Any(d => d.id == 0);
         public override string MistakeDescKey => "NE_2002_Desc";
         public override string MistakeNameKey => "NE_2002";

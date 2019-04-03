@@ -7,7 +7,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Apparel
     /// </summary>
     public class NE_1002 : Mistake
     {
-        public override IMPORTANCE Importance => IMPORTANCE.NO_EXPORT;
+        public override IMPORTANCE Importance => IMPORTANCE.CRITICAL;
         public override bool IsMistake
         {
             get

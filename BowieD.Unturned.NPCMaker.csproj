@@ -130,6 +130,10 @@
       <DependentUpon>ConfigWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DiscordRPC\DiscordWorker.cs" />
+    <Compile Include="Editors\DialogueEditor.cs" />
+    <Compile Include="Editors\IEditor.cs" />
+    <Compile Include="Editors\QuestEditor.cs" />
+    <Compile Include="Editors\VendorEditor.cs" />
     <Compile Include="Examples\NPCExample.cs" />
     <Compile Include="Forms\Export_ExportWindow.xaml.cs">
       <DependentUpon>Export_ExportWindow.xaml</DependentUpon>
@@ -138,8 +142,13 @@
       <DependentUpon>Form_About.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logging\Logger.cs" />
-    <Compile Include="Managers\IManager.cs" />
-    <Compile Include="Managers\UpdateManager.cs" />
+    <Compile Include="Mistakes\DeepAnalysisManager.cs" />
+    <Compile Include="Mistakes\MistakesManager.cs" />
+    <Compile Include="Notification\INotificationManager.cs" />
+    <Compile Include="Notification\NotificationManager.cs" />
+    <Compile Include="UpdateManagers\GitHubUpdateManager.cs" />
+    <Compile Include="UpdateManagers\IUpdateManager.cs" />
+    <Compile Include="UpdateManagers\UpdateAvailability.cs" />
     <Compile Include="Mistake.cs" />
     <Compile Include="Mistakes\Apparel\NE_1000.cs" />
     <Compile Include="Mistakes\Apparel\NE_1001.cs" />

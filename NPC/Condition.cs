@@ -45,12 +45,10 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             throw new NotImplementedException();
         }
-
         public virtual T Parse<T>(object[] input) where T : Condition
         {
             throw new NotImplementedException();
         }
-
         public virtual string GetFilePresentation(string prefix, int prefixIndex, int conditionIndex)
         {
             throw new NotImplementedException();

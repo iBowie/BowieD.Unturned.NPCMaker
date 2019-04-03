@@ -32,12 +32,10 @@ namespace BowieD.Unturned.NPCMaker
         public App()
         {
             InitializeComponent();
+            #if !DEBUG
             Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
+            #endif
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
-            #region check for updates
-            UpdateManager.Create();
-            UpdateManager.Instance.Start();
-            #endregion
             Logger.Clear();
             Logger.Log("App started! Pre-launch stage.");
             App.LanguageChanged += App_LanguageChanged;
@@ -61,10 +59,10 @@ namespace BowieD.Unturned.NPCMaker
                 }
                 Config.Configuration.Properties.Language = Language.Name;
             }
-            #region SCALE
+#region SCALE
             Resources["Scale"] = Config.Configuration.Properties.scale;
             Logger.Log($"Scale set to {Config.Configuration.Properties.scale}");
-            #endregion
+#endregion
             Config.Configuration.Save();
             CopyResource(NPCMaker.Properties.Resources.DiscordRPC, Config.Configuration.ConfigDirectory + "DiscordRPC.dll");
             CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, Config.Configuration.ConfigDirectory + "Newtonsoft.Json.dll");

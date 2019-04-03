@@ -20,6 +20,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public NPC.Reward[] rewards;
         public int[] visibleIn;
         [XmlIgnore]
-        public bool VisibleInAll => visibleIn == null || visibleIn.Length == 0 || visibleIn.Length == MainWindow.Instance.CurrentDialogue.MessagesAmount;
+        public bool VisibleInAll => visibleIn == null || visibleIn.Length == 0 || visibleIn.Length == MainWindow.DialogueEditor.Current.MessagesAmount;
     }
 }

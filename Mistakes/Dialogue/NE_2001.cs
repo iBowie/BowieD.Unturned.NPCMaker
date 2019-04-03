@@ -9,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
     /// </summary>
     public class NE_2001 : Mistake
     {
-        public override IMPORTANCE Importance => IMPORTANCE.NO_EXPORT;
+        public override IMPORTANCE Importance => IMPORTANCE.CRITICAL;
         public override bool IsMistake
         {
             get
@@ -37,10 +37,10 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
             {
                 return new Action(() =>
                 {
-                    if (MainWindow.Instance.CurrentDialogue.id == 0)
+                    if (MainWindow.DialogueEditor.Current.id == 0)
                         return;
-                    MainWindow.Instance.Dialogue_SaveButtonClick(null, null);
-                    MainWindow.Instance.CurrentDialogue = errorDialogue;
+                    MainWindow.DialogueEditor.Save();
+                    MainWindow.DialogueEditor.Current = errorDialogue;
                     MainWindow.Instance.mainTabControl.SelectedIndex = 2;
                 });
             }

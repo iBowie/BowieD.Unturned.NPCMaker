@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using BowieD.Unturned.NPCMaker.Editors;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace BowieD.Unturned.NPCMaker.BetterControls
@@ -74,13 +75,13 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                     {
                         if (NewItem.isBuy)
                         {
-                            MainWindow.Instance.Vendor_Delete_Sell(Util.FindParent<Universal_ItemList>(sender as Button));
-                            MainWindow.Instance.Vendor_Add_Buy(NewItem);
+                            (MainWindow.VendorEditor as VendorEditor).RemoveItemSell(Util.FindParent<Universal_ItemList>(sender as Button));
+                            (MainWindow.VendorEditor as VendorEditor).AddItemBuy(NewItem);
                         }
                         else
                         {
-                            MainWindow.Instance.Vendor_Delete_Buy(Util.FindParent<Universal_ItemList>(sender as Button));
-                            MainWindow.Instance.Vendor_Add_Sell(NewItem);
+                            (MainWindow.VendorEditor as VendorEditor).RemoveItemBuy(Util.FindParent<Universal_ItemList>(sender as Button));
+                            (MainWindow.VendorEditor as VendorEditor).AddItemSell(NewItem);
                         }
                     }
                     Value = NewItem;

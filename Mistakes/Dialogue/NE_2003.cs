@@ -8,7 +8,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
     /// </summary>
     public class NE_2003 : Mistake
     {
-        public override IMPORTANCE Importance => IMPORTANCE.NO_EXPORT;
+        public override IMPORTANCE Importance => IMPORTANCE.CRITICAL;
         public override string MistakeNameKey => "NE_2003";
         public override bool TranslateName => false;
         public override string MistakeDescKey => "NE_2003_Desc";

@@ -8,7 +8,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Quests
     /// </summary>
     public class NE_4001 : Mistake
     {
-        public override IMPORTANCE Importance => IMPORTANCE.NO_EXPORT;
+        public override IMPORTANCE Importance => IMPORTANCE.CRITICAL;
         public override string MistakeNameKey => "NE_4001";
         public override bool TranslateName => false;
         public override string MistakeDescKey => "NE_4001_Desc";

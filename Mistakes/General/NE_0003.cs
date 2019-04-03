@@ -7,7 +7,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.General
     /// </summary>
     public class NE_0003 : Mistake
     {
-        public override IMPORTANCE Importance => IMPORTANCE.NO_EXPORT;
+        public override IMPORTANCE Importance => IMPORTANCE.CRITICAL;
         public override bool IsMistake => MainWindow.CurrentNPC.id == 0;
         public override string MistakeNameKey => "NE_0003";
         public override string MistakeDescKey => "NE_0003_Desc";

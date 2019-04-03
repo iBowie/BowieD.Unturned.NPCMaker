@@ -7,7 +7,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
     /// </summary>
     public class NE_2000 : Mistake
     {
-        public override IMPORTANCE Importance => IMPORTANCE.HIGH;
+        public override IMPORTANCE Importance => IMPORTANCE.WARNING;
         public override string MistakeNameKey => "NE_2000";
         public override string MistakeDescKey => "NE_2000_Desc";
         public override bool IsMistake => false;

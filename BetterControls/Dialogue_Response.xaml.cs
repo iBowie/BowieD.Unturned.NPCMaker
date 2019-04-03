@@ -101,9 +101,9 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void ChangeVisibilityButton_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.Instance.CurrentDialogue.MessagesAmount > 1)
+            if (MainWindow.DialogueEditor.Current.MessagesAmount > 1)
             {
-                Message_TreeView mtv = new Message_TreeView(Response.visibleIn, MainWindow.Instance.CurrentDialogue.MessagesAmount);
+                Message_TreeView mtv = new Message_TreeView(Response.visibleIn, MainWindow.DialogueEditor.Current.MessagesAmount);
                 mtv.ShowDialog();
                 if (mtv.SaveApply)
                 {
@@ -113,7 +113,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             }
             else
             {
-                MainWindow.Instance.DoNotification(MainWindow.Localize("dialogue_Reply_EditVisibility_MessageCount"));
+                MainWindow.NotificationManager.Notify(MainWindow.Localize("dialogue_Reply_EditVisibility_MessageCount"));
             }
         }
 

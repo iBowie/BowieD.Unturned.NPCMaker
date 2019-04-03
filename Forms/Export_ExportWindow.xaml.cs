@@ -26,22 +26,16 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             base.Show();
             Start(save);
-            TextBlock text = new TextBlock
+            Button button = new Button
             {
-                FontSize = 16,
-                TextAlignment = TextAlignment.Center,
-                Text = MainWindow.Localize("export_Done"),
-                TextWrapping = TextWrapping.Wrap
-            };
-            TextBlock buttonText = new TextBlock
-            {
-                FontSize = 16,
-                TextAlignment = TextAlignment.Center,
-                TextWrapping = TextWrapping.Wrap,
-                Text = MainWindow.Localize("export_Done_Goto")
+                Content = new TextBlock
+                {
+                    Text = MainWindow.Localize("export_Done_Goto")
+                }
             };
             Action<object, RoutedEventArgs> action = new Action<object, RoutedEventArgs>((sender, e) => { Process.Start(AppDomain.CurrentDomain.BaseDirectory + $@"results\{save.editorName}"); });
-            MainWindow.Instance.DoNotification(text, buttonText, action);
+            button.Click += new RoutedEventHandler(action);
+            MainWindow.NotificationManager.Notify(MainWindow.Localize("export_Done"), buttons: button);
             this.Close();
         }
 
@@ -59,7 +53,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 detailedExport.Text = (MainWindow.Localize("export_StepFormat")).Replace("%done%", "4").Replace("%total%", "4").Replace("%step%", (string)FindResource("export_Step_Vendors"));
                 Export_Vendors(save);
             }
-            catch (Exception ex) { MainWindow.Instance.DoNotification($"Export failed. Exception: {ex.Message}"); }
+            catch (Exception ex) { MainWindow.NotificationManager.Notify($"Export failed. Exception: {ex.Message}"); }
         }
 
         public string dir;
@@ -141,7 +135,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     local.WriteLine($"Character {save.displayName}");
                 }
             }
-            catch (Exception ex) { MainWindow.Instance.DoNotification($"Can't export character. Exception: {ex.Message}"); }
+            catch (Exception ex) { MainWindow.NotificationManager.Notify($"Can't export character. Exception: {ex.Message}"); }
         }
         public void Export_Dialogues(NPCSave save)
         {
@@ -248,7 +242,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                         }
                     }
                 }
-                catch (Exception ex) { MainWindow.Instance.DoNotification($"Can't export dialogue {dialogue.id}. Exception: {ex.Message}"); }
+                catch (Exception ex) { MainWindow.NotificationManager.Notify($"Can't export dialogue {dialogue.id}. Exception: {ex.Message}"); }
             }
         }
         public void Export_Vendors(NPCSave save)
@@ -316,7 +310,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                         local.WriteLine($"Description {vendor.vendorDescription}");
                     }
                 }
-                catch (Exception ex) { MainWindow.Instance.DoNotification($"Can't export vendor {vendor.id}. Exception: {ex.Message}"); }
+                catch (Exception ex) { MainWindow.NotificationManager.Notify($"Can't export vendor {vendor.id}. Exception: {ex.Message}"); }
             }
         }
         public void Export_Quests(NPCSave save)
@@ -364,7 +358,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                         }
                     }
                 }
-                catch (Exception ex) { MainWindow.Instance.DoNotification($"Can't export quest {quest.id}. Exception: {ex.Message}"); }
+                catch (Exception ex) { MainWindow.NotificationManager.Notify($"Can't export quest {quest.id}. Exception: {ex.Message}"); }
             }
         }
     }

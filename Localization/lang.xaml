@@ -413,26 +413,27 @@
     <v:String x:Key="mistakes_NoMistakes">No mistakes! You're doing great!</v:String>
     <v:String x:Key="mistakes_ErrorImportance">Importance</v:String>
 
-    <v:String x:Key="IMPORTANCE_NO_EXPORT">No export</v:String>
+    <v:String x:Key="IMPORTANCE_CRITICAL">Critical</v:String>
     <v:String x:Key="IMPORTANCE_ADVICE">Advice</v:String>
-    <v:String x:Key="IMPORTANCE_HIGH">Error</v:String>
+    <v:String x:Key="IMPORTANCE_WARNING">Warning</v:String>
 
-    <v:String x:Key="NE_0000_Desc">NPC id should be more than 2000, because all id's lower than 2000 are reserved for official content</v:String>
+    <v:String x:Key="NE_0000_Desc">NPC id should be more than 2000, because all id's lower than 2000 are reserved for official content.</v:String>
     <v:String x:Key="NE_0001_Desc">Recommended to use english chars in editor name.</v:String>
     <v:String x:Key="NE_0002_Desc">Recommended to use name that longer than 3 chars.</v:String>
-    <v:String x:Key="NE_0003_Desc">Change ID of the NPC to any value greater than 0</v:String>
+    <v:String x:Key="NE_0003_Desc">Change ID of the NPC to any value greater than 0.</v:String>
     <v:String x:Key="NE_1000_Desc">Invalid skin color.</v:String>
     <v:String x:Key="NE_1001_Desc">Invalid hair color.</v:String>
     <v:String x:Key="NE_1002_Desc">Equipped slot empty.</v:String>
     <v:String x:Key="NE_2000_Desc">You have response with quest, that doesn't leads to the actual quest. Add reward of type "Quest" to response with quest.</v:String>
     <v:String x:Key="NE_2001_Desc">NPC's message must contain at least one page.</v:String>
-    <v:String x:Key="NE_2002_Desc">Change ID of the dialogue with zero id</v:String>
-    <v:String x:Key="NE_2003_Desc">You have two or more dialogues with same ID</v:String>
+    <v:String x:Key="NE_2002_Desc">Change ID of the dialogue with zero id.</v:String>
+    <v:String x:Key="NE_2003_Desc">You have two or more dialogues with same ID.</v:String>
     <v:String x:Key="NE_2004_Desc">Some of messages in dialogue {0} will never appear.</v:String>
-    <v:String x:Key="NE_3000_Desc">Change ID of the vendor with zero id</v:String>
-    <v:String x:Key="NE_3001_Desc">You have two or more vendors with same ID</v:String>
-    <v:String x:Key="NE_4000_Desc">Change ID of the quest with zero id</v:String>
-    <v:String x:Key="NE_4001_Desc">You have two or more quests with same ID</v:String>
+    <v:String x:Key="NE_3000_Desc">Change ID of the vendor with zero id.</v:String>
+    <v:String x:Key="NE_3001_Desc">You have two or more vendors with same ID.</v:String>
+    <v:String x:Key="NE_3002_Desc">No items in vendor {0}.</v:String>
+    <v:String x:Key="NE_4000_Desc">Change ID of the quest with zero id.</v:String>
+    <v:String x:Key="NE_4001_Desc">You have two or more quests with same ID.</v:String>
     <v:String x:Key="NE_4002_Desc">Quest {0} doesn't have any conditions.</v:String>
     <v:String x:Key="NE_4003_Desc">Quest {0} doesn't have any rewards.</v:String>
 
