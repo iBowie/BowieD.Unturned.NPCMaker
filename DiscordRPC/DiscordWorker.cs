@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 
 namespace BowieD.Unturned.NPCMaker.DiscordRPC
 {
-    public class DiscordWorker
+    public class DiscordManager
     {
-        public DiscordRpcClient client;
+        private DiscordRpcClient client;
         public int ticksDelay;
         public bool descriptive { get; set; }
 
-        public DiscordWorker(int delay)
+        public DiscordManager(int delay)
         {
             ticksDelay = delay;
         }
@@ -70,7 +70,6 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
         private void Client_OnReady(object sender, global::DiscordRPC.Message.ReadyMessage args)
         {
             Logging.Logger.Log("Discord Rich Presence started!", Logging.Log_Level.Normal);
-            //MainWindow.Instance.DoNotification(MainWindow.Localize("menu_Discord_Start"));
         }
     }
 }

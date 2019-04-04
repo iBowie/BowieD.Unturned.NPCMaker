@@ -24,6 +24,9 @@ namespace BowieD.Unturned.NPCMaker.Editors
             {
                 Reset();
             });
+            MainWindow.Instance.dialogueAddReplyButton.Click += AddReplyClick;
+            MainWindow.Instance.dialogueAddMessageButton.Click += AddMessageClick;
+            MainWindow.Instance.setAsStartButton.Click += SetAsStartClick;
         }
 
         public void Open()

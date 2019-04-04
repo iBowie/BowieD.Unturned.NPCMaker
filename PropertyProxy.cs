@@ -7,7 +7,6 @@ using DiscordRPC;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Media;
 using System.Net;
@@ -18,8 +17,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -55,7 +52,6 @@ namespace BowieD.Unturned.NPCMaker
             inst.saveAsExampleButton.Click += SaveAsExampleButton_Click;
             inst.visibilityCondsButton.Click += Char_EditConditions_Button_Click;
             inst.randomColorButton.Click += RandomColor_Click;
-            //inst.checkForUpdatesButton.Click += CheckForUpdates_Click;
             inst.exitButton.Click += ExitButtonClick;
             inst.RecentList.Click += RecentList_Click;
             inst.exportButton.Click += ExportClick;
@@ -82,7 +78,6 @@ namespace BowieD.Unturned.NPCMaker
             inst.userColorSaveButton.Click += UserColorList_AddColor;
             inst.switchToAnotherScheme.Click += ColorScheme_Switch;
             inst.colorHexOut.PreviewTextInput += ColorHex_Input;
-            //inst.forceUpdateButton.Click += inst.ForceUpdate_Click;
             DataObject.AddPastingHandler(inst.colorHexOut, ColorHex_Pasted);
         }
 
@@ -162,7 +157,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             MainWindow.CurrentNPC.editorName = (sender as TextBox).Text;
             MainWindow.isSaved = false;
-            if (MainWindow.DiscordWorker != null)
+            if (MainWindow.DiscordManager != null)
             {
                 RichPresence presence = new RichPresence
                 {
@@ -178,13 +173,13 @@ namespace BowieD.Unturned.NPCMaker
                     SmallImageKey = "icon_info_outlined",
                     SmallImageText = "Info"
                 };
-                (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
+                (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
             }
         }
         internal void DisplayName_Change(object sender, TextChangedEventArgs e)
         {
             MainWindow.CurrentNPC.displayName = (sender as TextBox).Text;
-            if (MainWindow.DiscordWorker != null)
+            if (MainWindow.DiscordManager != null)
             {
                 RichPresence presence = new RichPresence
                 {
@@ -200,11 +195,11 @@ namespace BowieD.Unturned.NPCMaker
                     SmallImageKey = "icon_info_outlined",
                     SmallImageText = "Info"
                 };
-                (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
+                (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
             }
             MainWindow.isSaved = false;
         }
-        internal void NPC_ID_Change(object sender, /*long e*/ RoutedPropertyChangedEventArgs<double?> e)
+        internal void NPC_ID_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
             if (e.NewValue.HasValue)
             {
@@ -388,23 +383,7 @@ namespace BowieD.Unturned.NPCMaker
                 inst.colorSliderG.Value = new Random().NextDouble();
                 inst.colorSliderB.Value = new Random().NextDouble();
             }
-        }   
-        //internal async void CheckForUpdates_Click(object sender, RoutedEventArgs e)
-        //{
-        //    bool? isUpdateAvailable = await inst.IsUpdateAvailable();
-        //    if (isUpdateAvailable.HasValue && isUpdateAvailable == true)
-        //    {
-        //        inst.DoNotification(MainWindow.Localize("app_Update_Available"));
-        //    }
-        //    else if (isUpdateAvailable.HasValue && isUpdateAvailable == false && !(sender is MainWindow))
-        //    {
-        //        inst.DoNotification(MainWindow.Localize("app_Update_Latest"));
-        //    }
-        //    else if (!isUpdateAvailable.HasValue)
-        //    {
-        //        inst.DoNotification(MainWindow.Localize("app_Update_Fail"));
-        //    }
-        //}
+        }
         internal void UserColorListChanged()
         {
             inst.userColorSampleList.Children.Clear();
@@ -513,7 +492,7 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             Config.Configuration.Save();
-            (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.Deinitialize();
+            (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.Deinitialize();
             if (MainWindow.UpdateManager.UpdateAvailability == UpdateAvailability.AVAILABLE) // fix
             {
                 MainWindow.UpdateManager.StartUpdate();
@@ -672,7 +651,7 @@ namespace BowieD.Unturned.NPCMaker
                     presence.Assets.SmallImageText = "Something?..";
                     break;
             }
-            (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
+            (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
         }
         internal void ColorSliderChange(object sender, RoutedPropertyChangedEventArgs<double> value)
         {
@@ -846,7 +825,7 @@ namespace BowieD.Unturned.NPCMaker
                                                     ).ShowDialog();
                 }
             }
-            catch(Exception ex) { Logging.Logger.Log(ex); }
+            catch (Exception ex) { Logging.Logger.Log(ex); }
         }
         internal void ApparelSkinColorBox_TextChanged(object sender, TextChangedEventArgs e)
         {

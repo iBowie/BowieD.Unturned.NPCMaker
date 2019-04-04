@@ -1,29 +1,24 @@
-﻿#define RELEASE
-
-using System;
-using System.IO;
-using System.Xml;
-using System.Linq;
-using System.Windows;
-using System.Windows.Media;
-using System.Globalization;
-using System.ComponentModel;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Xml.Serialization;
-using System.Collections.Generic;
-using System.Windows.Media.Imaging;
-using Microsoft.Win32;
-using BowieD.Unturned.NPCMaker.NPC;
-using BowieD.Unturned.NPCMaker.BetterForms;
-using BowieD.Unturned.NPCMaker.BetterControls;
+﻿using BowieD.Unturned.NPCMaker.BetterForms;
+using BowieD.Unturned.NPCMaker.Editors;
 using BowieD.Unturned.NPCMaker.Examples;
-using System.Windows.Threading;
 using BowieD.Unturned.NPCMaker.Logging;
-using System.Reflection;
 using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.Notification;
-using BowieD.Unturned.NPCMaker.Editors;
+using BowieD.Unturned.NPCMaker.NPC;
+using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -32,6 +27,8 @@ namespace BowieD.Unturned.NPCMaker
         #region MANAGERS
         public static INotificationManager NotificationManager { get; private set; } = new NotificationManager();
         public static Mistakes.DeepAnalysisManager DeepAnalysisManager { get; private set; }
+        public static IUpdateManager UpdateManager { get; set; }
+        public static DiscordRPC.DiscordManager DiscordManager { get; set; }
         #endregion
         #region EDITORS
         public static IEditor<NPCDialogue> DialogueEditor { get; private set; }
@@ -211,9 +208,10 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     Proxy.WhatsNew_Menu_Click(null, null);
                     File.Delete(AppDomain.CurrentDomain.BaseDirectory + "updater.exe");
+                    Logger.Log("Updater deleted.");
                 }
             }
-            catch { }
+            catch { Logger.Log("Can't delete updater."); }
             #endregion
             #region AUTOSAVE INIT
             if (Config.Configuration.Properties.autosaveOption > 0)
@@ -244,19 +242,17 @@ namespace BowieD.Unturned.NPCMaker
             #region VERSION SPECIFIC CODE
             #if !DEBUG
             debugOverlayText.Visibility = Visibility.Collapsed;
-            #endif
-            #endregion
-            #region EXAMPLE DEBUG
-            #if !DEBUG
             saveAsExampleButton.Visibility = Visibility.Collapsed;
             #endif
             #endregion
             Config.Configuration.Properties.firstLaunch = false;
             isSaved = true;
             #region DISCORD
-            DiscordWorker = new DiscordRPC.DiscordWorker(1000);
-            DiscordWorker.descriptive = Config.Configuration.Properties.enableDiscord;
-            DiscordWorker?.Initialize();
+            DiscordManager = new DiscordRPC.DiscordManager(1000)
+            {
+                descriptive = Config.Configuration.Properties.enableDiscord
+            };
+            DiscordManager?.Initialize();
             Proxy.TabControl_SelectionChanged(mainTabControl, null);
             #endregion
             #region ENABLE EXPERIMENTAL
@@ -294,8 +290,8 @@ namespace BowieD.Unturned.NPCMaker
                                              where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"
                                              select d).FirstOrDefault();
             List<ResourceDictionary> metroThemes = (from d in Application.Current.Resources.MergedDictionaries
-                                                           where d.Source != null && d.Source.OriginalString.StartsWith("pack://application:,,,/MahApps.Metro;component/Styles/Themes/")
-                                                           select d).ToList();
+                                                    where d.Source != null && d.Source.OriginalString.StartsWith("pack://application:,,,/MahApps.Metro;component/Styles/Themes/")
+                                                    select d).ToList();
             if (metroControls != null)
                 Application.Current.Resources.MergedDictionaries.Remove(metroControls);
             if (metroFonts != null)
@@ -307,7 +303,6 @@ namespace BowieD.Unturned.NPCMaker
                     Application.Current.Resources.MergedDictionaries.Remove(dic);
                 }
             }
-            IsMetro = false;
         }
         #endregion
         #region CONSTANTS
@@ -315,19 +310,15 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(1, 0, 2, 1);
+        public static Version Version => new Version(1, 0, 2, 2);
         #endregion
         #region STATIC
         public static MainWindow Instance;
         public static NPCSave CurrentNPC { get; set; } = new NPCSave();
-        public static DiscordRPC.DiscordWorker DiscordWorker { get; set; }
         public static DispatcherTimer AutosaveTimer { get; set; }
         public static PropertyProxy Proxy { get; private set; }
         public static bool IsRGB { get; set; } = true;
         public static DateTime Started { get; set; } = DateTime.UtcNow;
-        public static IUpdateManager UpdateManager { get; set; }
-
-        public static bool IsMetro { get; set; }
         #endregion
         #region CURRENT NPC
         public static string saveFile = "", oldFile = "";
@@ -350,13 +341,13 @@ namespace BowieD.Unturned.NPCMaker
         #region SAVE_LOAD
         public void Save(bool asExample = false)
         {
-            #if !DEBUG
+#if !DEBUG
             if ((CurrentNPC?.IsReadOnly) ?? false)
             {
                 MainWindow.NotificationManager.Notify(Localize("notify_ReadOnly"));
                 return;
             }
-            #endif
+#endif
             DialogueEditor.Save();
             VendorEditor.Save();
             QuestEditor.Save();
@@ -405,13 +396,13 @@ namespace BowieD.Unturned.NPCMaker
                 }
                 else
                 {
-                    #if !DEBUG
+#if !DEBUG
                     if ((CurrentNPC?.IsReadOnly) ?? false)
                     {
                         MainWindow.NotificationManager.Notify(Localize("notify_ReadOnly"));
                         return;
                     }
-                    #endif
+#endif
                     if (saveFile != null && saveFile != "")
                     {
                         using (FileStream fs = new FileStream(saveFile, FileMode.Create))

@@ -39,7 +39,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                 Details = $"Editing NPC {MainWindow.Instance.txtEditorName.Text ?? "without name"}",
                 State = "Creating reward for a dialogue response"
             };
-            (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
+            (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
             ulv.ShowDialog();
             Response.rewards = ulv.Values.Cast<NPC.Reward>().ToArray();
             MainWindow.Proxy.TabControl_SelectionChanged(MainWindow.Instance.mainTabControl, null);
@@ -52,7 +52,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                 Details = $"Editing NPC {MainWindow.Instance.txtEditorName.Text ?? "without name"}",
                 State = "Creating condition for a dialogue response"
             };
-            (MainWindow.DiscordWorker as DiscordRPC.DiscordWorker)?.SendPresence(presence);
+            (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
             ulv.ShowDialog();
             Response.conditions = ulv.Values.Cast<NPC.Condition>().ToArray();
             MainWindow.Proxy.TabControl_SelectionChanged(MainWindow.Instance.mainTabControl, null);
