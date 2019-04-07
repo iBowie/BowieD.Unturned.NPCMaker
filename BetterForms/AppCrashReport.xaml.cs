@@ -40,7 +40,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             sb.AppendLine($"Settings:");
             sb.AppendLine();
             sb.AppendLine($"Experimental Features: {(cfg.experimentalFeatures ? "Enabled" : "Disabled")}");
-            sb.AppendLine($"Language: {cfg.Language}");
+            sb.AppendLine($"Language: {cfg.language.Name}");
             sb.AppendLine($"Log Level: {cfg.LogLevel.ToString()}");
             sb.AppendLine("User Colors:");
             foreach (string s in cfg.userColors ?? new string[] { "No user colors" })

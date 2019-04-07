@@ -31,7 +31,7 @@ namespace BowieD.Unturned.NPCMaker.Config
                 #endregion
                 nc.currentTheme = (Selected_Theme_Box.SelectedItem as ComboBoxItem).Tag as MetroTheme;
                 nc.autosaveOption = (byte)Autosave_Box.SelectedIndex;
-                nc.Language = ((CultureInfo)(Languages_Box.SelectedItem as ComboBoxItem).Tag).Name;
+                nc.language = (CultureInfo)(Languages_Box.SelectedItem as ComboBoxItem).Tag;
                 nc.scale = double.Parse((Scale_Box.SelectedItem as ComboBoxItem).Tag.ToString(), CultureInfo.InvariantCulture);
                 nc.enableDiscord = Discord_Enabled_Box.IsChecked.Value;
                 nc.generateGuids = Generate_GUIDS_Box.IsChecked.Value;

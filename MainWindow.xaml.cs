@@ -310,7 +310,7 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(1, 0, 2, 2);
+        public static Version Version => new Version(1, 0, 3, 0);
         #endregion
         #region STATIC
         public static MainWindow Instance;
@@ -495,13 +495,13 @@ namespace BowieD.Unturned.NPCMaker
             CurrentNPC = save;
             apparelSkinColorBox.Text = save.skinColor.HEX;
             apparelHairColorBox.Text = save.hairColor.HEX;
-            backpackIdBox.Value = save.backpack;
-            maskIdBox.Value = save.mask;
-            vestIdBox.Value = save.vest;
-            topIdBox.Value = save.top;
-            bottomIdBox.Value = save.bottom;
-            glassesIdBox.Value = save.glasses;
-            hatIdBox.Value = save.hat;
+            backpackIdBox.Value = save.clothing.backpack;
+            maskIdBox.Value = save.clothing.mask;
+            vestIdBox.Value = save.clothing.vest;
+            topIdBox.Value = save.clothing.top;
+            bottomIdBox.Value = save.clothing.bottom;
+            glassesIdBox.Value = save.clothing.glasses;
+            hatIdBox.Value = save.clothing.hat;
             primaryIdBox.Value = save.equipPrimary;
             secondaryIdBox.Value = save.equipSecondary;
             tertiaryIdBox.Value = save.equipTertiary;

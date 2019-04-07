@@ -87,20 +87,51 @@ namespace BowieD.Unturned.NPCMaker.Forms
                         asset.WriteLine($"GUID {save.guid}");
                     asset.WriteLine($"ID {save.id}");
                     asset.WriteLine($"Type NPC");
-                    if (save.top > 0)
-                        asset.WriteLine($"Shirt {save.top}");
-                    if (save.bottom > 0)
-                        asset.WriteLine($"Pants {save.bottom}");
-                    if (save.mask > 0)
-                        asset.WriteLine($"Mask {save.mask}");
-                    if (save.vest > 0)
-                        asset.WriteLine($"Vest {save.vest}");
-                    if (save.backpack > 0)
-                        asset.WriteLine($"Backpack {save.backpack}");
-                    if (save.hat > 0)
-                        asset.WriteLine($"Hat {save.hat}");
-                    if (save.glasses > 0)
-                        asset.WriteLine($"Glasses {save.glasses}");
+                    if (save.clothing.top > 0)
+                        asset.WriteLine($"Shirt {save.clothing.top}");
+                    if (save.clothing.bottom > 0)
+                        asset.WriteLine($"Pants {save.clothing.bottom}");
+                    if (save.clothing.mask > 0)
+                        asset.WriteLine($"Mask {save.clothing.mask}");
+                    if (save.clothing.vest > 0)
+                        asset.WriteLine($"Vest {save.clothing.vest}");
+                    if (save.clothing.backpack > 0)
+                        asset.WriteLine($"Backpack {save.clothing.backpack}");
+                    if (save.clothing.hat > 0)
+                        asset.WriteLine($"Hat {save.clothing.hat}");
+                    if (save.clothing.glasses > 0)
+                        asset.WriteLine($"Glasses {save.clothing.glasses}");
+
+                    if (save.christmasClothing.top > 0)
+                        asset.WriteLine($"Christmas_Shirt {save.christmasClothing.top}");
+                    if (save.christmasClothing.bottom > 0)
+                        asset.WriteLine($"Christmas_Pants {save.christmasClothing.bottom}");
+                    if (save.christmasClothing.mask > 0)
+                        asset.WriteLine($"Christmas_Mask {save.christmasClothing.mask}");
+                    if (save.christmasClothing.vest > 0)
+                        asset.WriteLine($"Christmas_Vest {save.christmasClothing.vest}");
+                    if (save.christmasClothing.backpack > 0)
+                        asset.WriteLine($"Christmas_Backpack {save.christmasClothing.backpack}");
+                    if (save.christmasClothing.hat > 0)
+                        asset.WriteLine($"Christmas_Hat {save.christmasClothing.hat}");
+                    if (save.christmasClothing.glasses > 0)
+                        asset.WriteLine($"Christmas_Glasses {save.christmasClothing.glasses}");
+
+                    if (save.halloweenClothing.top > 0)
+                        asset.WriteLine($"Halloween_Shirt {save.halloweenClothing.top}");
+                    if (save.halloweenClothing.bottom > 0)
+                        asset.WriteLine($"Halloween_Pants {save.halloweenClothing.bottom}");
+                    if (save.halloweenClothing.mask > 0)
+                        asset.WriteLine($"Halloween_Mask {save.halloweenClothing.mask}");
+                    if (save.halloweenClothing.vest > 0)
+                        asset.WriteLine($"Halloween_Vest {save.halloweenClothing.vest}");
+                    if (save.halloweenClothing.backpack > 0)
+                        asset.WriteLine($"Halloween_Backpack {save.halloweenClothing.backpack}");
+                    if (save.halloweenClothing.hat > 0)
+                        asset.WriteLine($"Halloween_Hat {save.halloweenClothing.hat}");
+                    if (save.halloweenClothing.glasses > 0)
+                        asset.WriteLine($"Halloween_Glasses {save.halloweenClothing.glasses}");
+
                     if (save.equipPrimary > 0)
                         asset.WriteLine($"Primary {save.equipPrimary}");
                     if (save.equipSecondary > 0)

@@ -121,6 +121,7 @@
     <v:String x:Key="apparel_Pose_Surrender">Сдаётся</v:String>
     <v:String x:Key="apparel_Color_Skin">Цвет кожи</v:String>
     <v:String x:Key="apparel_Color_Hair">Цвет волос</v:String>
+    <v:String x:Key="apparel_Group_Clothing">Одежда</v:String>
     <v:String x:Key="apparel_Group_Equipment">Снаряжение</v:String>
     <v:String x:Key="apparel_Hat_ID">ID головного убора</v:String>
     <v:String x:Key="apparel_Mask_ID">ID маски</v:String>
@@ -143,6 +144,9 @@
     <v:String x:Key="apparel_User_Color_Remove">Удалить цвет</v:String>
     <v:String x:Key="apparel_Color_Select">Открыть палитру</v:String>
     <v:String x:Key="apparel_Char_Random">Случайно</v:String>
+    <v:String x:Key="apparel_Clothing_Default">Обычно</v:String>
+    <v:String x:Key="apparel_Clothing_Christmas">Рождество</v:String>
+    <v:String x:Key="apparel_Clothing_Halloween">Хэллоуин</v:String>
     
     <v:String x:Key="dialogue_Save">Сохранить диалог</v:String>
     <v:String x:Key="dialogue_Open">Открыть существующий...</v:String>

@@ -34,6 +34,7 @@ namespace BowieD.Unturned.NPCMaker
             inst.txtDisplayName.TextChanged += DisplayName_Change;
             inst.txtID.ValueChanged += NPC_ID_Change;
             inst.txtStartDialogueID.ValueChanged += StartDialogue_ID_Change;
+            #region default clothing
             inst.hatIdBox.ValueChanged += HatId_Change;
             inst.topIdBox.ValueChanged += TopId_Change;
             inst.bottomIdBox.ValueChanged += BottomId_Change;
@@ -41,6 +42,25 @@ namespace BowieD.Unturned.NPCMaker
             inst.backpackIdBox.ValueChanged += BackId_Change;
             inst.vestIdBox.ValueChanged += VestId_Change;
             inst.glassesIdBox.ValueChanged += GlassesId_Change;
+            #endregion
+            #region christmas clothing
+            inst.christmashatIdBox.ValueChanged +=      ChristmasHatId_Change;
+            inst.christmastopIdBox.ValueChanged +=      ChristmasTopId_Change;
+            inst.christmasbottomIdBox.ValueChanged +=   ChristmasBottomId_Change;
+            inst.christmasmaskIdBox.ValueChanged +=     ChristmasMaskId_Change;
+            inst.christmasbackpackIdBox.ValueChanged += ChristmasBackId_Change;
+            inst.christmasvestIdBox.ValueChanged +=     ChristmasVestId_Change;
+            inst.christmasglassesIdBox.ValueChanged +=  ChristmasGlassesId_Change;
+            #endregion
+            #region halloween clothing
+            inst.halloweenhatIdBox.ValueChanged +=      HalloweenHatId_Change;
+            inst.halloweentopIdBox.ValueChanged +=      HalloweenTopId_Change;
+            inst.halloweenbottomIdBox.ValueChanged +=   HalloweenBottomId_Change;
+            inst.halloweenmaskIdBox.ValueChanged +=     HalloweenMaskId_Change;
+            inst.halloweenbackpackIdBox.ValueChanged += HalloweenBackId_Change;
+            inst.halloweenvestIdBox.ValueChanged +=     HalloweenVestId_Change;
+            inst.halloweenglassesIdBox.ValueChanged +=  HalloweenGlassesId_Change;
+            #endregion
             inst.primaryIdBox.ValueChanged += PrimaryId_Change;
             inst.secondaryIdBox.ValueChanged += SecondaryId_Change;
             inst.tertiaryIdBox.ValueChanged += TertiaryId_Change;
@@ -219,7 +239,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             if (e.NewValue.HasValue)
             {
-                MainWindow.CurrentNPC.hat = (ushort)e.NewValue.Value;
+                MainWindow.CurrentNPC.clothing.hat = (ushort)e.NewValue.Value;
                 MainWindow.isSaved = false;
             }
         }
@@ -227,7 +247,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             if (e.NewValue.HasValue)
             {
-                MainWindow.CurrentNPC.top = (ushort)e.NewValue.Value;
+                MainWindow.CurrentNPC.clothing.top = (ushort)e.NewValue.Value;
                 MainWindow.isSaved = false;
             }
         }
@@ -235,7 +255,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             if (e.NewValue.HasValue)
             {
-                MainWindow.CurrentNPC.bottom = (ushort)e.NewValue.Value;
+                MainWindow.CurrentNPC.clothing.bottom = (ushort)e.NewValue.Value;
                 MainWindow.isSaved = false;
             }
         }
@@ -243,7 +263,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             if (e.NewValue.HasValue)
             {
-                MainWindow.CurrentNPC.mask = (ushort)e.NewValue.Value;
+                MainWindow.CurrentNPC.clothing.mask = (ushort)e.NewValue.Value;
                 MainWindow.isSaved = false;
             }
         }
@@ -251,7 +271,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             if (e.NewValue.HasValue)
             {
-                MainWindow.CurrentNPC.backpack = (ushort)e.NewValue.Value;
+                MainWindow.CurrentNPC.clothing.backpack = (ushort)e.NewValue.Value;
                 MainWindow.isSaved = false;
             }
         }
@@ -259,7 +279,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             if (e.NewValue.HasValue)
             {
-                MainWindow.CurrentNPC.vest = (ushort)e.NewValue.Value;
+                MainWindow.CurrentNPC.clothing.vest = (ushort)e.NewValue.Value;
                 MainWindow.isSaved = false;
             }
         }
@@ -267,7 +287,119 @@ namespace BowieD.Unturned.NPCMaker
         {
             if (e.NewValue.HasValue)
             {
-                MainWindow.CurrentNPC.glasses = (ushort)e.NewValue.Value;
+                MainWindow.CurrentNPC.clothing.glasses = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
+        }
+        internal void HalloweenHatId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.halloweenClothing.hat = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
+        }
+        internal void HalloweenTopId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.halloweenClothing.top = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
+        }
+        internal void HalloweenBottomId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.halloweenClothing.bottom = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
+        }
+        internal void HalloweenMaskId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.halloweenClothing.mask = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
+        }
+        internal void HalloweenBackId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.halloweenClothing.backpack = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
+        }
+        internal void HalloweenVestId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.halloweenClothing.vest = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
+        }
+        internal void HalloweenGlassesId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.halloweenClothing.glasses = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
+        }
+        internal void ChristmasHatId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.christmasClothing.hat = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
+        }
+        internal void ChristmasTopId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.christmasClothing.top = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
+        }
+        internal void ChristmasBottomId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.christmasClothing.bottom = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
+        }
+        internal void ChristmasMaskId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.christmasClothing.mask = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
+        }
+        internal void ChristmasBackId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.christmasClothing.backpack = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
+        }
+        internal void ChristmasVestId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.christmasClothing.vest = (ushort)e.NewValue.Value;
+                MainWindow.isSaved = false;
+            }
+        }
+        internal void ChristmasGlassesId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (e.NewValue.HasValue)
+            {
+                MainWindow.CurrentNPC.christmasClothing.glasses = (ushort)e.NewValue.Value;
                 MainWindow.isSaved = false;
             }
         }
@@ -493,7 +625,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             Config.Configuration.Save();
             (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.Deinitialize();
-            if (MainWindow.UpdateManager.UpdateAvailability == UpdateAvailability.AVAILABLE) // fix
+            if (MainWindow.UpdateManager.UpdateAvailability == UpdateAvailability.AVAILABLE)
             {
                 MainWindow.UpdateManager.StartUpdate();
                 Environment.Exit(0);
@@ -820,7 +952,7 @@ namespace BowieD.Unturned.NPCMaker
                     new Whats_New(
                                                     MainWindow.Localize("app_News_Title"),
                                                     string.Format(MainWindow.Localize("app_News_BodyTitle"), MainWindow.Version),
-                                                    wc.DownloadString($"https://raw.githubusercontent.com/iBowie/publicfiles/master/npcmakerpatch.{Config.Configuration.Properties.Language.Replace('-', '_')}.txt"),
+                                                    wc.DownloadString($"https://raw.githubusercontent.com/iBowie/publicfiles/master/npcmakerpatch.{(Config.Configuration.Properties.Language == "ru-RU" ? Config.Configuration.Properties.Language.Replace('-', '_') : "en_US")}.txt"),
                                                     MainWindow.Localize("app_News_OK")
                                                     ).ShowDialog();
                 }

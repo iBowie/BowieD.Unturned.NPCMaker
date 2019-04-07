@@ -11,7 +11,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         }
 
         public ushort Animal { get; set; }
-        public short ID { get; set; }
+        public ushort ID { get; set; }
         public uint Value { get; set; }
 
         public override int Elements => 4;
@@ -40,7 +40,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             return new Kills_Animal_Cond
             {
-                ID = short.Parse(input[0].ToString()),
+                ID = ushort.Parse(input[0].ToString()),
                 Animal = ushort.Parse(input[1].ToString()),
                 Value = uint.Parse(input[2].ToString()),
                 Reset = (bool)input[3]

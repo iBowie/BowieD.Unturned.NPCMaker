@@ -24,7 +24,17 @@ namespace BowieD.Unturned.NPCMaker.Config
             public Logging.Log_Level LogLevel;
 
             [XmlIgnore]
-            public CultureInfo language => new CultureInfo(Language ?? "en-US");
+            public CultureInfo language
+            {
+                get
+                {
+                    return new CultureInfo(Language ?? "en-US") ?? new CultureInfo("en-US");
+                }
+                set
+                {
+                    Language = value.Name;
+                }
+            }
 
             public CFG()
             {

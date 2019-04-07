@@ -122,6 +122,7 @@
     <v:String x:Key="apparel_Pose_Surrender">Surrender</v:String>
     <v:String x:Key="apparel_Color_Skin">Skin Color</v:String>
     <v:String x:Key="apparel_Color_Hair">Hair Color</v:String>
+    <v:String x:Key="apparel_Group_Clothing">Clothing</v:String>
     <v:String x:Key="apparel_Group_Equipment">Equipment</v:String>
     <v:String x:Key="apparel_Hat_ID">Hat ID</v:String>
     <v:String x:Key="apparel_Mask_ID">Mask ID</v:String>
@@ -144,6 +145,9 @@
     <v:String x:Key="apparel_User_Color_Remove">Delete</v:String>
     <v:String x:Key="apparel_Color_Select">Palette</v:String>
     <v:String x:Key="apparel_Char_Random">Randomize</v:String>
+    <v:String x:Key="apparel_Clothing_Default">Default</v:String>
+    <v:String x:Key="apparel_Clothing_Christmas">Christmas</v:String>
+    <v:String x:Key="apparel_Clothing_Halloween">Halloween</v:String>
 
     <v:String x:Key="dialogue_Save">Save dialogue</v:String>
     <v:String x:Key="dialogue_Open">Open existing...</v:String>

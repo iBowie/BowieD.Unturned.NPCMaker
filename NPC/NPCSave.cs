@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Examples;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
@@ -19,13 +20,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
             haircut = 0;
             hairColor = new NPCColor(0, 0, 0);
             skinColor = new NPCColor(0, 0, 0);
-            hat = 0;
-            mask = 0;
-            top = 0;
-            bottom = 0;
-            backpack = 0;
-            vest = 0;
-            glasses = 0;
+            clothing = new NPCClothing();
+            halloweenClothing = new NPCClothing();
+            christmasClothing = new NPCClothing();
             startDialogueId = 0;
             pose = NPC_Pose.Stand;
             leftHanded = false;
@@ -46,13 +43,72 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public byte haircut;
         public NPCColor hairColor;
         public NPCColor skinColor;
-        public ushort hat;
-        public ushort mask;
-        public ushort top;
-        public ushort bottom;
-        public ushort backpack;
-        public ushort vest;
-        public ushort glasses;
+        public NPCClothing clothing;
+        public NPCClothing christmasClothing;
+        public NPCClothing halloweenClothing;
+        [Obsolete("Use clothing.hat instead")]
+        public ushort hat
+        {
+            get => 0;
+            set
+            {
+                clothing.hat = value;
+            }
+        }
+        [Obsolete("Use clothing.mask instead")]
+        public ushort mask
+        {
+            get => 0;
+            set
+            {
+                clothing.mask = value;
+            }
+        }
+        [Obsolete("Use clothing.top instead")]
+        public ushort top
+        {
+            get => 0;
+            set
+            {
+                clothing.top = value;
+            }
+        }
+        [Obsolete("Use clothing.bottom instead")]
+        public ushort bottom
+        {
+            get => 0;
+            set
+            {
+                clothing.bottom = value;
+            }
+        }
+        [Obsolete("Use clothing.backpack instead")]
+        public ushort backpack
+        {
+            get => 0;
+            set
+            {
+                clothing.backpack = value;
+            }
+        }
+        [Obsolete("Use clothing.vest instead")]
+        public ushort vest
+        {
+            get => 0;
+            set
+            {
+                clothing.vest = value;
+            }
+        }
+        [Obsolete("Use clothing.glasses instead")]
+        public ushort glasses
+        {
+            get => 0;
+            set
+            {
+                clothing.glasses = value;
+            }
+        }
         public ushort startDialogueId;
         public NPC_Pose pose;
         public bool leftHanded;
@@ -70,5 +126,20 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public string guid;
         [XmlAttribute]
         public bool IsReadOnly { get; set; }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool ShouldSerializehat() => false;
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool ShouldSerializemask() => false;
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool ShouldSerializetop() => false;
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool ShouldSerializevest() => false;
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool ShouldSerializebackpack() => false;
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool ShouldSerializeglasses() => false;
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool ShouldSerializebottom() => false;
     }
 }

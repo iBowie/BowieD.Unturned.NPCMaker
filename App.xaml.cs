@@ -42,7 +42,8 @@ namespace BowieD.Unturned.NPCMaker
             languages.Clear();
             languages.Add(new CultureInfo("en-US"));
             languages.Add(new CultureInfo("ru-RU"));
-            //languages.Add(new CultureInfo("es-ES"));
+            //languages.Add(new CultureInfo("de-DE")); // German
+            //languages.Add(new CultureInfo("es-ES")); // Spanish
             Logger.Log("Loading configuration...");
             Config.Configuration.Load();
             Logger.Log("Configuration loaded!");
@@ -57,12 +58,12 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     Language = new CultureInfo("en-US");
                 }
-                Config.Configuration.Properties.Language = Language.Name;
+                Config.Configuration.Properties.language = Language;
             }
-#region SCALE
+            #region SCALE
             Resources["Scale"] = Config.Configuration.Properties.scale;
             Logger.Log($"Scale set to {Config.Configuration.Properties.scale}");
-#endregion
+            #endregion
             Config.Configuration.Save();
             CopyResource(NPCMaker.Properties.Resources.DiscordRPC, Config.Configuration.ConfigDirectory + "DiscordRPC.dll");
             CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, Config.Configuration.ConfigDirectory + "Newtonsoft.Json.dll");
@@ -110,7 +111,7 @@ namespace BowieD.Unturned.NPCMaker
 
         private void App_LanguageChanged(object sender, EventArgs e)
         {
-            Config.Configuration.Properties.Language = Language.Name;
+            Config.Configuration.Properties.language = Language;
         }
 
         public static event EventHandler LanguageChanged;
