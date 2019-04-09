@@ -96,7 +96,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 DialogResult = true;
                 Close();
             }
-            catch { } // error messages
+            catch { MessageBox.Show(MainWindow.Localize("conditionEditor_Fail")); }
         }
 
         private void TypeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

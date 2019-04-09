@@ -58,7 +58,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             sb.AppendLine($"GUID Generation: {(cfg.generateGuids ? "Enabled" : "Disabled")}");
             sb.AppendLine($"Scale: {cfg.scale}");
             sb.AppendLine($"Theme: {cfg.currentTheme.Name}");
-            sb.AppendLine($"Discord Rich Presence: {(cfg.enableDiscord ? "Enabled" : "Disabled")}");
+            sb.AppendLine($"Discord Rich Presence: {(cfg.enableDiscord ? "Detailed" : "Private")}");
             sb.AppendLine();
             sb.AppendLine($"Application log:");
             sb.AppendLine();

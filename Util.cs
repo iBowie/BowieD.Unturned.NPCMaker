@@ -36,5 +36,22 @@ namespace BowieD.Unturned.NPCMaker
             }
             catch { return null; }
         }
+        public static T FindByName<T>(Window window, string name) where T : UIElement
+        {
+            var res=window.FindName(name);
+            if (res is T result)
+            {
+                return result;
+            }
+            return null;
+        }
+        public static object FindByName(Window window, string name)
+        {
+            return window.FindName(name);
+        }
+        public static object FindByName(string name)
+        {
+            return MainWindow.Instance.FindName(name);
+        }
     }
 }

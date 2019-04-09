@@ -76,12 +76,12 @@
     <v:String x:Key="feedback_Steam">Мой Steam (Нажать)</v:String>
     <v:String x:Key="feedback_Discord">Мой сервер в Discord (Нажать)</v:String>
     <v:String x:Key="feedback_VK">Мой ВК (Нажать)</v:String>
-    <v:String x:Key="file_New">Создать нового</v:String>
-    <v:String x:Key="file_Open">Открыть...</v:String>
-    <v:String x:Key="file_Save">Сохранить</v:String>
+    <v:String x:Key="file_New">Создать нового (Ctrl + N)</v:String>
+    <v:String x:Key="file_Open">Открыть... (Ctrl + O)</v:String>
+    <v:String x:Key="file_Save">Сохранить (Ctrl + S)</v:String>
     <v:String x:Key="file_SaveAs">Сохранить как...</v:String>
     <v:String x:Key="file_Recent">Недавние</v:String>
-    <v:String x:Key="file_Export">Экспорт НИПа</v:String>
+    <v:String x:Key="file_Export">Экспорт НИПа (Ctrl + E)</v:String>
     <v:String x:Key="file_Exit">Выйти</v:String>
     <v:String x:Key="about_Text">Copyright BowieD 2019\n\nАвтор программы: BowieD. Перевод на русский: BowieD\nВерсия программы: %version%\nЗагляните в раздел "Обратная связь" для связи со мной.</v:String>
     <v:String x:Key="about_Title">О программе</v:String>
@@ -138,8 +138,7 @@
     <v:String x:Key="apparel_Equip_Primary">Первый слот</v:String>
     <v:String x:Key="apparel_Equip_Secondary">Второй слот</v:String>
     <v:String x:Key="apparel_Equip_Tertiary">Слот без оружия</v:String>
-    <v:String x:Key="apparel_Color_Samples">Цвета Unturned</v:String>
-    <v:String x:Key="apparel_User_Color_Samples">Ваши цвета</v:String>
+    <v:String x:Key="apparel_Color_Samples">Цвета</v:String>
     <v:String x:Key="apparel_User_Color_Save">Сохранить</v:String>
     <v:String x:Key="apparel_User_Color_Remove">Удалить цвет</v:String>
     <v:String x:Key="apparel_Color_Select">Открыть палитру</v:String>
@@ -282,6 +281,7 @@
     <v:String x:Key="conditionEditor_Variables">Параметры</v:String>
     <v:String x:Key="condition_DisplayText_Item">Игрок должен иметь %item% x%amount%</v:String>
     <v:String x:Key="condition_DisplayText_Quest">Игрок должен иметь задание %questId%. Статус: %questStatus%</v:String>
+    <v:String x:Key="conditionEditor_Fail">Все поля должны иметь корректные данные.</v:String>
     
     <v:String x:Key="reward_Type_Item">Предмет</v:String>
     <v:String x:Key="reward_Type_Quest">Задание</v:String>

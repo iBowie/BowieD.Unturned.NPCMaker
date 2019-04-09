@@ -99,6 +99,34 @@ namespace BowieD.Unturned.NPCMaker
             inst.switchToAnotherScheme.Click += ColorScheme_Switch;
             inst.colorHexOut.PreviewTextInput += ColorHex_Input;
             DataObject.AddPastingHandler(inst.colorHexOut, ColorHex_Pasted);
+            RoutedCommand saveHotkey = new RoutedCommand();
+            saveHotkey.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
+            inst.CommandBindings.Add(new CommandBinding(saveHotkey,
+                new ExecutedRoutedEventHandler((object sender, ExecutedRoutedEventArgs e) =>
+                {
+                    inst.Save();
+                })));
+            RoutedCommand loadHotkey = new RoutedCommand();
+            loadHotkey.InputGestures.Add(new KeyGesture(Key.O, ModifierKeys.Control));
+            inst.CommandBindings.Add(new CommandBinding(loadHotkey,
+                new ExecutedRoutedEventHandler((object sender, ExecutedRoutedEventArgs e) =>
+                {
+                    LoadClick(sender, null);
+                })));
+            RoutedCommand exportHotkey = new RoutedCommand();
+            exportHotkey.InputGestures.Add(new KeyGesture(Key.E, ModifierKeys.Control));
+            inst.CommandBindings.Add(new CommandBinding(exportHotkey,
+                new ExecutedRoutedEventHandler((object sender, ExecutedRoutedEventArgs e) =>
+                {
+                    ExportClick(sender, null);
+                })));
+            RoutedCommand newFileHotkey = new RoutedCommand();
+            newFileHotkey.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
+            inst.CommandBindings.Add(new CommandBinding(newFileHotkey,
+                new ExecutedRoutedEventHandler((object sender, ExecutedRoutedEventArgs e) =>
+                {
+                    NewButtonClick(sender, null);
+                })));
         }
 
         private MainWindow inst;
@@ -519,9 +547,75 @@ namespace BowieD.Unturned.NPCMaker
         internal void UserColorListChanged()
         {
             inst.userColorSampleList.Children.Clear();
+            List<string> unturnedColors = new List<string>()
+            {
+                "F4E6D2",
+                "D9CAB4",
+                "BEA582",
+                "9D886B",
+                "94764B",
+                "706049",
+                "534736",
+                "4B3D31",
+                "332C25",
+                "231F1C",
+                "D7D7D7",
+                "C1C1C1",
+                "CDC08C",
+                "AC6A39",
+                "665037",
+                "57452F",
+                "352C22",
+                "373737",
+                "191919"
+            };
+            BrushConverter brushConverter = new BrushConverter();
+            foreach (string uColor in unturnedColors)
+            {
+                Grid g = new Grid();
+                Border b = new Border
+                {
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    Width = 16,
+                    Height = 16,
+                    BorderBrush = Brushes.Black,
+                    BorderThickness = new Thickness(1),
+                    Background = brushConverter.ConvertFromString($"#{uColor}") as Brush
+                };
+                Label l = new Label
+                {
+                    Content = $"#{uColor}",
+                    Margin = new Thickness(16, 0, 0, 0)
+                };
+                Button copyButton = new Button
+                {
+                    Content = new Image
+                    {
+                        Source = new BitmapImage(new Uri("pack://application:,,,/Resources/ICON_COPY.png")),
+                        Width = 16,
+                        Height = 16
+                    },
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    Margin = new Thickness(0, 0, 10, 0),
+                    Tag = $"#{uColor}"
+                };
+                copyButton.Click += new RoutedEventHandler((sender, e) =>
+                {
+                    try
+                    {
+                        Button b1 = (sender as Button);
+                        string toCopy = (string)b1.Tag;
+                        Clipboard.SetText(toCopy);
+                    }
+                    catch { }
+                });
+                g.Children.Add(b);
+                g.Children.Add(l);
+                g.Children.Add(copyButton);
+                inst.userColorSampleList.Children.Add(g);
+            }
             if (Config.Configuration.Properties.userColors == null)
                 return;
-            BrushConverter brushConverter = new BrushConverter();
             foreach (string uColor in Config.Configuration.Properties.userColors)
             {
                 if (uColor.StartsWith("#"))

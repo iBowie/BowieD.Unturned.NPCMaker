@@ -15,7 +15,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Xml;
 using System.Xml.Serialization;
@@ -43,6 +42,8 @@ namespace BowieD.Unturned.NPCMaker
             VendorEditor = new VendorEditor();
             QuestEditor = new QuestEditor();
             DeepAnalysisManager = new Mistakes.DeepAnalysisManager();
+            if (Config.Configuration.Properties == null)
+                Config.Configuration.Load();
             Width *= Config.Configuration.Properties.scale;
             Height *= Config.Configuration.Properties.scale;
             Logger.Log($"Launch stage. Version: {Version}.");
@@ -94,78 +95,7 @@ namespace BowieD.Unturned.NPCMaker
             beardRenderGrid.DataContext = CurrentNPC.hairColor.Brush;
             hairRenderGrid.DataContext = CurrentNPC.hairColor.Brush;
             faceImageBorder.Background = apparelSkinColorBox.Text.Length == 0 ? Brushes.Transparent : CurrentNPC.skinColor.Brush;
-            #region COLOR SAMPLES
-            #region UNTURNED
-            List<string> unturnedColors = new List<string>()
-            {
-                "F4E6D2",
-                "D9CAB4",
-                "BEA582",
-                "9D886B",
-                "94764B",
-                "706049",
-                "534736",
-                "4B3D31",
-                "332C25",
-                "231F1C",
-                "D7D7D7",
-                "C1C1C1",
-                "CDC08C",
-                "AC6A39",
-                "665037",
-                "57452F",
-                "352C22",
-                "373737",
-                "191919"
-            };
-            BrushConverter brushConverter = new BrushConverter();
-            foreach (string uColor in unturnedColors)
-            {
-                Grid g = new Grid();
-                Border b = new Border
-                {
-                    HorizontalAlignment = HorizontalAlignment.Left,
-                    Width = 16,
-                    Height = 16,
-                    BorderBrush = Brushes.Black,
-                    BorderThickness = new Thickness(1),
-                    Background = brushConverter.ConvertFromString($"#{uColor}") as Brush
-                };
-                Label l = new Label
-                {
-                    Content = $"#{uColor}",
-                    Margin = new Thickness(16, 0, 0, 0)
-                };
-                Button copyButton = new Button
-                {
-                    Content = new Image
-                    {
-                        Source = new BitmapImage(new Uri("pack://application:,,,/Resources/ICON_COPY.png")),
-                        Width = 16,
-                        Height = 16
-                    },
-                    HorizontalAlignment = HorizontalAlignment.Right,
-                    Margin = new Thickness(0, 0, 0, 0),
-                    Tag = $"#{uColor}"
-                };
-                copyButton.Click += new RoutedEventHandler((sender, e) =>
-                {
-                    try
-                    {
-                        Button b1 = (sender as Button);
-                        string toCopy = (string)b1.Tag;
-                        Clipboard.SetText(toCopy);
-                    }
-                    catch { }
-                });
-                g.Children.Add(b);
-                g.Children.Add(l);
-                g.Children.Add(copyButton);
-                unturnedColorSampleList.Children.Add(g);
-            }
-            #endregion
             Proxy.UserColorListChanged();
-            #endregion
             #endregion
             #region HOLIDAYS
             int day = DateTime.Now.Day;
@@ -283,26 +213,31 @@ namespace BowieD.Unturned.NPCMaker
         #region THEMES
         internal void Theme_Clear()
         {
-            ResourceDictionary metroControls = (from d in Application.Current.Resources.MergedDictionaries
-                                                where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"
-                                                select d).FirstOrDefault();
-            ResourceDictionary metroFonts = (from d in Application.Current.Resources.MergedDictionaries
-                                             where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"
-                                             select d).FirstOrDefault();
-            List<ResourceDictionary> metroThemes = (from d in Application.Current.Resources.MergedDictionaries
-                                                    where d.Source != null && d.Source.OriginalString.StartsWith("pack://application:,,,/MahApps.Metro;component/Styles/Themes/")
-                                                    select d).ToList();
-            if (metroControls != null)
-                Application.Current.Resources.MergedDictionaries.Remove(metroControls);
-            if (metroFonts != null)
-                Application.Current.Resources.MergedDictionaries.Remove(metroFonts);
-            if (metroThemes?.Count() > 0)
+            try
             {
-                foreach (var dic in metroThemes)
+                ResourceDictionary metroControls = (from d in Application.Current.Resources.MergedDictionaries
+                                                    where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"
+                                                    select d).FirstOrDefault();
+                ResourceDictionary metroFonts = (from d in Application.Current.Resources.MergedDictionaries
+                                                 where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"
+                                                 select d).FirstOrDefault();
+                List<ResourceDictionary> metroThemes = (from d in Application.Current.Resources.MergedDictionaries
+                                                        where d.Source != null && d.Source.OriginalString.StartsWith("pack://application:,,,/MahApps.Metro;component/Styles/Themes/")
+                                                        select d).ToList();
+                if (metroControls != null)
+                    Application.Current.Resources.MergedDictionaries.Remove(metroControls);
+                if (metroFonts != null)
+                    Application.Current.Resources.MergedDictionaries.Remove(metroFonts);
+                if (metroThemes?.Count() > 0)
                 {
-                    Application.Current.Resources.MergedDictionaries.Remove(dic);
+                    foreach (var dic in metroThemes)
+                    {
+                        Application.Current.Resources.MergedDictionaries.Remove(dic);
+                    }
                 }
+
             }
+            catch (Exception ex) { Logger.Log("Could not clear theme"); }
         }
         #endregion
         #region CONSTANTS
@@ -502,6 +437,20 @@ namespace BowieD.Unturned.NPCMaker
             bottomIdBox.Value = save.clothing.bottom;
             glassesIdBox.Value = save.clothing.glasses;
             hatIdBox.Value = save.clothing.hat;
+            halloweenbackpackIdBox.Value = save.halloweenClothing.backpack;
+            halloweenmaskIdBox.Value = save.halloweenClothing.mask;
+            halloweenvestIdBox.Value = save.halloweenClothing.vest;
+            halloweentopIdBox.Value = save.halloweenClothing.top;
+            halloweenbottomIdBox.Value = save.halloweenClothing.bottom;
+            halloweenglassesIdBox.Value = save.halloweenClothing.glasses;
+            halloweenhatIdBox.Value = save.halloweenClothing.hat;
+            christmasbackpackIdBox.Value = save.christmasClothing.backpack;
+            christmasmaskIdBox.Value = save.christmasClothing.mask;
+            christmasvestIdBox.Value = save.christmasClothing.vest;
+            christmastopIdBox.Value = save.christmasClothing.top;
+            christmasbottomIdBox.Value = save.christmasClothing.bottom;
+            christmasglassesIdBox.Value = save.christmasClothing.glasses;
+            christmashatIdBox.Value = save.christmasClothing.hat;
             primaryIdBox.Value = save.equipPrimary;
             secondaryIdBox.Value = save.equipSecondary;
             tertiaryIdBox.Value = save.equipTertiary;

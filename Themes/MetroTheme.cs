@@ -14,18 +14,23 @@ namespace BowieD.Unturned.NPCMaker
 
         public override void Apply()
         {
-            MainWindow.Instance.Theme_Clear();
-            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml") });
-            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml") });
-            var resourceDictionary = new ResourceDictionary() { Source = new Uri($"pack://application:,,,/MahApps.Metro;component/Styles/Themes/{DictionaryName}.xaml") };
-            if (resourceDictionary == null)
+            try
             {
-                Config.Configuration.DefaultTheme.Apply();
-                return;
+                MainWindow.Instance.Theme_Clear();
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml") });
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml") });
+                var resourceDictionary = new ResourceDictionary() { Source = new Uri($"pack://application:,,,/MahApps.Metro;component/Styles/Themes/{DictionaryName}.xaml") };
+                if (resourceDictionary == null)
+                {
+                    Config.Configuration.DefaultTheme.Apply();
+                    return;
+                }
+                Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+                App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(R, G, B));
+                Config.Configuration.Properties.currentTheme = this;
+
             }
-            Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
-            App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(R, G, B));
-            Config.Configuration.Properties.currentTheme = this;
+            catch { Logging.Logger.Log($"Can't apply {Name} theme"); }
         }
     }
 }

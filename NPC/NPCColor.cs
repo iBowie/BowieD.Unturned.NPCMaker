@@ -158,5 +158,14 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public Brush Brush => new BrushConverter().ConvertFromString(HEX) as Brush;
         [XmlIgnore]
         public Color Color => Color.FromRgb(R, G, B);
+
+        public static bool operator==(NPCColor a, NPCColor b)
+        {
+            return (a.R == b.R && a.G == b.G && a.B == b.B);
+        }
+        public static bool operator!=(NPCColor a, NPCColor b)
+        {
+            return !(a == b);
+        }
     }
 }

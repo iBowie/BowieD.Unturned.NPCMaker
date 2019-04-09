@@ -141,7 +141,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 DialogResult = true;
                 Close();
             }
-            catch {  } // write some error message or something like that
+            catch { MessageBox.Show(MainWindow.Localize("conditionEditor_Fail")); } // write some error message or something like that
         }
 
         private Condition_Type Selected_Condition => (typeBox.SelectedItem as ComboBoxItem).Tag is Condition_Type condition ? condition : Condition_Type.None;
