@@ -181,7 +181,8 @@
     <v:String x:Key="dialogue_Reply_EditVisibility_MessageCount">No sense in editing visibility if you have less than two messages.</v:String>
     <v:String x:Key="dialogue_Message_EditCondition">Edit Conditions</v:String>
     <v:String x:Key="dialogue_Message_EditCondition_ToolTip">When dialogue opens up-most message with true conditions will appear</v:String>
-
+    <v:String x:Key="dialogue_Message_EditVisibility_Save">Save</v:String>
+    
     <v:String x:Key="listView_Add_Condition">Add Condition</v:String>
     <v:String x:Key="listView_Add_Reward">Add Reward</v:String>
     <v:String x:Key="listView_Add_Dialogue">Add Dialogue</v:String>

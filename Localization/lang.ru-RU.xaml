@@ -180,7 +180,9 @@
     <v:String x:Key="dialogue_Reply_EditVisibility_MessageCount">Нет смысла изменять видимость, если у Вас меньше двух сообщений.</v:String>
     <v:String x:Key="dialogue_Message_EditCondition">Условия</v:String>
     <v:String x:Key="dialogue_Message_EditCondition_ToolTip">При открытии диалога происходит проверка условий сообщений. Первое сообщение с истинными условиями будет отображено.</v:String>
+    <v:String x:Key="dialogue_Message_EditVisibility_Save">Сохранить</v:String>
 
+    
     <v:String x:Key="listView_Add_Condition">Добавить условие</v:String>
     <v:String x:Key="listView_Add_Reward">Добавить награду</v:String>
     <v:String x:Key="listView_Add_Dialogue">Добавить диалог</v:String>

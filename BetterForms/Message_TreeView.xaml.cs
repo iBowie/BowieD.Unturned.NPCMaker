@@ -4,19 +4,21 @@ using System.Windows.Controls;
 
 namespace BowieD.Unturned.NPCMaker.BetterForms
 {
-    /// <summary>
-    /// Логика взаимодействия для Message_TreeView.xaml
-    /// </summary>
     public partial class Message_TreeView : Window
     {
+        private int _count;
         public Message_TreeView(int[] arr, int count)
         {
             InitializeComponent();
+            _count = count;
             Height *= Config.Configuration.Properties.scale;
             Width *= Config.Configuration.Properties.scale;
             for (int k = 0; k < count; k++)
             {
-                mainTreeView.Items.Add(new CheckBox() { Content = $"[{k+1}]", IsChecked = arr?.Count() == 0 ? true : arr?.Contains(k) });
+                var box = new CheckBox();
+                box.Content = $"[{k + 1}]";
+                box.IsChecked = arr?.Count() == 0 || arr?.Length <= k ? true : arr?[k] == 1;
+                mainTreeView.Items.Add(box);
             }
         }
 
@@ -24,24 +26,22 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         {
             get
             {
-                int[] arr = new int[mainTreeView.Items.Count];
-                arr = arr.Select(d => -1).ToArray();
+                int[] result = new int[_count];
                 for (int k = 0; k < mainTreeView.Items.Count; k++)
                 {
-                    CheckBox elem = mainTreeView.Items[k] as CheckBox;
-                    if (elem.IsChecked == true)
-                        arr[k] = k-1;
+                    var box = mainTreeView.Items[k] as CheckBox;
+                    if (box.IsChecked == true)
+                    {
+                        result[k] = 1;
+                    }
                 }
-                arr = arr.Where(d => d >= 0).ToArray();
-                return arr;
+                return result;
             }
         }
 
-        public bool SaveApply { get; set; } = false;
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SaveApply = true;
+            DialogResult = true;
             Close();
         }
     }

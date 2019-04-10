@@ -197,8 +197,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                 {
                                     asset.WriteLine($"Message_{k}_Pages {message.PagesAmount}");
                                 }
-                                List<NPCResponse> visibleResponses = dialogue.responses.Where(d => d.VisibleInAll || d.visibleIn.Contains(k)).ToList();
-                                if (visibleResponses.Count() > 0)
+                                List<NPCResponse> visibleResponses = dialogue.responses.Where(d => d.VisibleInAll || d.visibleIn[k] == 1).ToList();
+                                if (visibleResponses.Count() > 0 && visibleResponses.Count() < dialogue.responses.Count())
                                 {
                                     asset.WriteLine($"Message_{k}_Responses {visibleResponses.Count()}");
                                     int visResCnt = visibleResponses.Count();
@@ -228,10 +228,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                 NPCResponse response = dialogue.responses[k];
                                 if (!response.VisibleInAll)
                                 {
-                                    asset.WriteLine($"Response_{k}_Messages {response.visibleIn.Length}");
-                                    for (int c = 0; c < response.visibleIn.Length; c++)
+                                    asset.WriteLine($"Response_{k}_Messages {response.visibleIn.Count(d => d == 1)}");
+                                    for (int c = 0, ind = 0; c < dialogue.MessagesAmount; c++)
                                     {
-                                        asset.WriteLine($"Response_{k}_Message_{c} {response.visibleIn[c]}");
+                                        var currentMessage = dialogue.messages[c];
+                                        if (response.visibleIn[c] == 1)
+                                        {
+                                            asset.WriteLine($"Response_{k}_Message_{ind++} {dialogue.messages.IndexOf(currentMessage)}");
+                                        }
                                     }
                                 }
                                 if (response.openDialogueId > 0)

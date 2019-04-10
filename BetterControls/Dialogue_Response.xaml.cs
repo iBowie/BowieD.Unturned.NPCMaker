@@ -105,7 +105,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             {
                 Message_TreeView mtv = new Message_TreeView(Response.visibleIn, MainWindow.DialogueEditor.Current.MessagesAmount);
                 mtv.ShowDialog();
-                if (mtv.SaveApply)
+                if (mtv.DialogResult == true)
                 {
                     var arr = mtv.AsIntArray;
                     Response.visibleIn = arr.Count() == 0 ? null : arr;

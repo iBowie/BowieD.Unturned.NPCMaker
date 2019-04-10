@@ -16,6 +16,6 @@
 
             </TreeView>
         </ScrollViewer>
-        <Button Click="Button_Click" Content="{DynamicResource file_Save}" FontSize="18" Margin="10,0,10,10" Height="35" VerticalAlignment="Bottom"/>
+        <Button Click="Button_Click" Content="{DynamicResource dialogue_Message_EditVisibility_Save}" FontSize="18" Margin="10,0,10,10" Height="35" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

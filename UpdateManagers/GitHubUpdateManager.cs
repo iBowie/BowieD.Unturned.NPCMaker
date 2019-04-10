@@ -9,12 +9,12 @@ namespace BowieD.Unturned.NPCMaker.Managers
     public class GitHubUpdateManager : IUpdateManager
     {
         public UpdateAvailability UpdateAvailability { get; set; } = UpdateAvailability.NOT_CHECKED;
-        private static async void DownloadUpdater()
+        private static void DownloadUpdater()
         {
             using (WebClient wc = new WebClient())
             using (FileStream fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + "updater.exe", FileMode.Create))
             {
-                byte[] dat = await wc.DownloadDataTaskAsync("https://raw.githubusercontent.com/iBowie/publicfiles/master/BowieD.Unturned.NPCMaker.Updater.exe");
+                byte[] dat = wc.DownloadData("https://raw.githubusercontent.com/iBowie/publicfiles/master/BowieD.Unturned.NPCMaker.Updater.exe");
                 for (int k = 0; k < dat.Length; k++)
                 {
                     fs.WriteByte(dat[k]);
