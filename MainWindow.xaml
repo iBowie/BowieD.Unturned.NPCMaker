@@ -777,6 +777,15 @@
                         </Grid>
                     </Grid>
                 </TabItem>
+                <TabItem Name="objectEditorTab" Header="Objects">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="25*"/>
+                            <ColumnDefinition Width="75*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                    </Grid>
+                </TabItem>
                 <TabItem Name="mistakeListTab" Header="{DynamicResource tab_Mistakes}">
                     <Grid>
                         <ListView Name="lstMistakes" Margin="10,10,10,60">

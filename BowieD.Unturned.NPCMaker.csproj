@@ -132,6 +132,7 @@
     <Compile Include="DiscordRPC\DiscordWorker.cs" />
     <Compile Include="Editors\DialogueEditor.cs" />
     <Compile Include="Editors\IEditor.cs" />
+    <Compile Include="Editors\ObjectEditor.cs" />
     <Compile Include="Editors\QuestEditor.cs" />
     <Compile Include="Editors\VendorEditor.cs" />
     <Compile Include="Examples\NPCExample.cs" />

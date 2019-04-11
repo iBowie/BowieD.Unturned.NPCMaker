@@ -33,6 +33,7 @@ namespace BowieD.Unturned.NPCMaker
         public static IEditor<NPCDialogue> DialogueEditor { get; private set; }
         public static IEditor<NPCVendor> VendorEditor { get; private set; }
         public static IEditor<NPCQuest> QuestEditor { get; private set; }
+        public static IEditor<NPCObject> ObjectEditor { get; private set; }
         #endregion
         public MainWindow()
         {
@@ -41,6 +42,7 @@ namespace BowieD.Unturned.NPCMaker
             DialogueEditor = new DialogueEditor();
             VendorEditor = new VendorEditor();
             QuestEditor = new QuestEditor();
+            ObjectEditor = new ObjectEditor();
             DeepAnalysisManager = new Mistakes.DeepAnalysisManager();
             if (Config.Configuration.Properties == null)
                 Config.Configuration.Load();
@@ -245,7 +247,7 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(1, 0, 4, 1);
+        public static Version Version => new Version(1, 0, 5, 0);
         #endregion
         #region STATIC
         public static MainWindow Instance;
