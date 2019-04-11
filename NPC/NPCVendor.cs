@@ -46,7 +46,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public uint cost;
         public ushort id;
         public List<Condition> conditions;
-        public ushort spawnPointID;
+        public string spawnPointID;
 
         public override string ToString()
         {

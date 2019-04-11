@@ -28,7 +28,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             Result = startItem ?? new VendorItem();
             txtBoxCost.Value = Result.cost;
             txtBoxID.Value = Result.id;
-            txtBoxSpawnpoint.Text = Result.spawnPointID.ToString();
+            txtBoxSpawnpoint.Text = Result.spawnPointID;
             foreach (ComboBoxItem cbi in typeBox.Items)
             {
                 ItemType it = (ItemType)cbi.Tag;
@@ -98,7 +98,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 Result.id = (ushort)txtBoxID.Value;
                 Result.type = Selected_ItemType;
                 if (Result.type == ItemType.VEHICLE)
-                    Result.spawnPointID = ushort.Parse(txtBoxSpawnpoint.Text);
+                    Result.spawnPointID = txtBoxSpawnpoint.Text;
                 Result.isBuy = IsBuy;
                 Result.cost = (uint)txtBoxCost.Value;
                 if (Result.conditions == null)

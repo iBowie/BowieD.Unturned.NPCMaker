@@ -10,13 +10,13 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             Type = RewardType.Teleport;
         }
 
-        public ushort SpawnpointID { get; set; }
+        public string SpawnpointID { get; set; }
 
         public override int Elements => 1;
         public override void Init(Universal_RewardEditor ure)
         {
             ure.AddLabel(MainWindow.Localize("rewardEditor_SpawnpointID"));
-            ure.AddTextBox(5);
+            ure.AddTextBox(int.MaxValue);
         }
         public override void Init(Universal_RewardEditor ure, Reward start)
         {
@@ -30,7 +30,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         {
             return new Teleport()
             {
-                SpawnpointID = ushort.Parse(input[0].ToString())
+                SpawnpointID = input[0].ToString()
             } as T;
         }
 

@@ -11,7 +11,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         }
 
         public ushort Id { get; set; }
-        public ushort SpawnPointID { get; set; }
+        public string SpawnPointID { get; set; }
 
         public override int Elements => 2;
         public override void Init(Universal_RewardEditor ure)
@@ -19,7 +19,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             ure.AddLabel(MainWindow.Localize("rewardEditor_ID"));
             ure.AddTextBox(5);
             ure.AddLabel(MainWindow.Localize("rewardEditor_SpawnpointID"));
-            ure.AddTextBox(5);
+            ure.AddTextBox(int.MaxValue);
         }
         public override void Init(Universal_RewardEditor ure, Reward start)
         {
@@ -35,7 +35,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             return new Vehicle()
             {
                 Id = ushort.Parse(input[0].ToString()),
-                SpawnPointID = ushort.Parse(input[1].ToString())
+                SpawnPointID = input[1].ToString()
             } as T;
         }
 
