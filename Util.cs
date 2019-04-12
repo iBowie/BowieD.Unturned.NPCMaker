@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -52,6 +53,15 @@ namespace BowieD.Unturned.NPCMaker
         public static object FindByName(string name)
         {
             return MainWindow.Instance.FindName(name);
+        }
+        public static bool Contains(this ItemCollection collection, Func<object, bool> func)
+        {
+            foreach (var item in collection)
+            {
+                if (func.Invoke(item))
+                    return true;
+            }
+            return false;
         }
     }
 }

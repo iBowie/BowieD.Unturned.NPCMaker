@@ -7,7 +7,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
     {
         public string guid; // GUID
         public Object_Type type; // Type
-        public ushort ID; // ID
+        public ushort ID { get; set; } // ID
         public bool isFuelSource; // Fuel
         public bool isWaterSource; // Refill
         public bool noVehicleDamage; // Soft
