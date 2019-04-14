@@ -455,7 +455,7 @@ namespace BowieD.Unturned.NPCMaker
             string path = "";
             OpenFileDialog ofd = new OpenFileDialog()
             {
-                Filter = $"{MainWindow.Localize("save_Filter")} (*.npc)|*.npc",
+                Filter = $"{MainWindow.Localize("save_Filter")} (*.npc,*.npcproj)|*.npc;*.npcproj",
                 Multiselect = false
             };
             var res = ofd.ShowDialog();
@@ -533,23 +533,23 @@ namespace BowieD.Unturned.NPCMaker
             {
                 case 0:
                     presence.Assets.SmallImageKey = "icon_info_outlined";
-                    presence.Assets.SmallImageText = "Info";
+                    presence.Assets.SmallImageText = $"Characters: {MainWindow.CurrentSave.characters.Count}";
                     break;
                 case 1:
-                    presence.Assets.SmallImageKey = "icon_apparel_outlined";
-                    presence.Assets.SmallImageText = "Apparel";
-                    break;
-                case 2:
                     presence.Assets.SmallImageKey = "icon_chat_outlined";
                     presence.Assets.SmallImageText = $"Dialogues: {MainWindow.CurrentSave.dialogues.Count}";
                     break;
-                case 3:
+                case 2:
                     presence.Assets.SmallImageKey = "icon_money_outlined";
                     presence.Assets.SmallImageText = $"Vendors: {MainWindow.CurrentSave.vendors.Count}";
                     break;
-                case 4:
+                case 3:
                     presence.Assets.SmallImageKey = "icon_exclamation_outlined";
                     presence.Assets.SmallImageText = $"Quests: {MainWindow.CurrentSave.quests.Count}";
+                    break;
+                case 4:
+                    presence.Assets.SmallImageKey = "icon_object_outlined";
+                    presence.Assets.SmallImageText = $"Objects: {MainWindow.CurrentSave.objects.Count}";
                     break;
                 case 5:
                     presence.Assets.SmallImageKey = "icon_warning_outlined";
