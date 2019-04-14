@@ -14,7 +14,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         {
             get
             {
-                foreach (NPCDialogue dialogue in MainWindow.CurrentNPC.dialogues)
+                foreach (NPCDialogue dialogue in MainWindow.CurrentSave.dialogues)
                 {
                     if (dialogue.MessagesAmount > 0 && dialogue.messages.Any(d => d.PagesAmount == 0))
                     {

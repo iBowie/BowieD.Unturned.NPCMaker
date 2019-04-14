@@ -88,14 +88,14 @@ namespace BowieD.Unturned.NPCMaker.Editors
 
         public void Open()
         {
-            Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentNPC.vendors.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Vendor, false)).ToList(), Universal_ItemList.ReturnType.Vendor);
+            Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentSave.vendors.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Vendor, false)).ToList(), Universal_ItemList.ReturnType.Vendor);
             if (ulv.ShowDialog() == true)
             {
                 Save();
                 Current = ulv.SelectedValue as NPCVendor;
                 Logger.Log($"Opened vendor {MainWindow.Instance.vendorIdTxtBox.Value}");
             }
-            MainWindow.CurrentNPC.vendors = ulv.Values.Cast<NPCVendor>().ToList();
+            MainWindow.CurrentSave.vendors = ulv.Values.Cast<NPCVendor>().ToList();
         }
         public void Reset()
         {
@@ -110,11 +110,11 @@ namespace BowieD.Unturned.NPCMaker.Editors
             NPCVendor cur = Current;
             if (cur.id == 0)
                 return;
-            if (MainWindow.CurrentNPC.vendors.Where(d => d.id == cur.id).Count() > 0)
+            if (MainWindow.CurrentSave.vendors.Where(d => d.id == cur.id).Count() > 0)
             {
-                MainWindow.CurrentNPC.vendors.Remove(MainWindow.CurrentNPC.vendors.Where(d => d.id == cur.id).ElementAt(0));
+                MainWindow.CurrentSave.vendors.Remove(MainWindow.CurrentSave.vendors.Where(d => d.id == cur.id).ElementAt(0));
             }
-            MainWindow.CurrentNPC.vendors.Add(cur);
+            MainWindow.CurrentSave.vendors.Add(cur);
             MainWindow.NotificationManager.Notify(MainWindow.Localize("notify_Vendor_Saved"));
             MainWindow.isSaved = false;
             Logger.Log($"Vendor {cur.id} saved!");

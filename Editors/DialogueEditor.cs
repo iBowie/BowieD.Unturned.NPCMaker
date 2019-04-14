@@ -31,14 +31,14 @@ namespace BowieD.Unturned.NPCMaker.Editors
 
         public void Open()
         {
-            var ulv = new Universal_ListView(MainWindow.CurrentNPC.dialogues.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Dialogue, false)).ToList(), Universal_ItemList.ReturnType.Dialogue);
+            var ulv = new Universal_ListView(MainWindow.CurrentSave.dialogues.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Dialogue, false)).ToList(), Universal_ItemList.ReturnType.Dialogue);
             if (ulv.ShowDialog() == true)
             {
                 Save();
                 Current = ulv.SelectedValue as NPCDialogue;
                 Logger.Log($"Opened dialogue {MainWindow.Instance.dialogueInputIdControl.Value}");
             }
-            MainWindow.CurrentNPC.dialogues = ulv.Values.Cast<NPCDialogue>().ToList();
+            MainWindow.CurrentSave.dialogues = ulv.Values.Cast<NPCDialogue>().ToList();
         }
         public void Reset()
         {
@@ -76,10 +76,10 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 MainWindow.NotificationManager.Notify(MainWindow.Localize("dialogue_ID_Zero"));
                 return;
             }
-            var o = MainWindow.CurrentNPC.dialogues.Where(d => d.id == dil.id);
+            var o = MainWindow.CurrentSave.dialogues.Where(d => d.id == dil.id);
             if (o.Count() > 0)
-                MainWindow.CurrentNPC.dialogues.Remove(o.ElementAt(0));
-            MainWindow.CurrentNPC.dialogues.Add(dil);
+                MainWindow.CurrentSave.dialogues.Remove(o.ElementAt(0));
+            MainWindow.CurrentSave.dialogues.Add(dil);
             MainWindow.NotificationManager.Notify(MainWindow.Localize("notify_Dialogue_Saved"));
             MainWindow.isSaved = false;
             Logger.Log($"Dialogue {dil.id} saved!");
@@ -213,7 +213,6 @@ namespace BowieD.Unturned.NPCMaker.Editors
             if (dial.id > 0 && MainWindow.Instance.txtStartDialogueID.Value != dial.id)
             {
                 MainWindow.Instance.txtStartDialogueID.Value = dial.id;
-                MainWindow.CurrentNPC.startDialogueId = dial.id;
                 MainWindow.NotificationManager.Notify(MainWindow.Localize("dialogue_Start_Notify", dial.id));
                 Logger.Log($"Dialogue {dial.id} set as start!");
             }

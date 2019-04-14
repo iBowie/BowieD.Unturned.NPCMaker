@@ -51,5 +51,10 @@ namespace BowieD.Unturned.NPCMaker.NPC
             rubbleFinaleEffect = 0;
             rubbleReset = 0;
         }
+
+        public override string ToString()
+        {
+            return $"{ID}";
+        }
     }
 }

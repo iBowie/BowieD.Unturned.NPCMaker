@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Vendor
         {
             get
             {
-                foreach (NPCVendor vendor in MainWindow.CurrentNPC.vendors)
+                foreach (NPCVendor vendor in MainWindow.CurrentSave.vendors)
                 {
                     if (vendor.items.Count == 0)
                     {

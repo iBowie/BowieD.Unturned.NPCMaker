@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Quests
         {
             get
             {
-                foreach (NPCQuest quest in MainWindow.CurrentNPC.quests)
+                foreach (NPCQuest quest in MainWindow.CurrentSave.quests)
                 {
                     if (quest.conditions.Count == 0)
                     {

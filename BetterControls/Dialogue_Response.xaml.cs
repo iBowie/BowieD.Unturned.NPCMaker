@@ -65,7 +65,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void QuestSelect_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.CurrentNPC.quests.Count() == 0)
+            if (MainWindow.CurrentSave.quests.Count() == 0)
                 return;
             Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Quest);
             select.ShowDialog();
@@ -77,7 +77,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void VendorSelect_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.CurrentNPC.vendors.Count() == 0)
+            if (MainWindow.CurrentSave.vendors.Count() == 0)
                 return;
             Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Vendor);
             select.ShowDialog();
@@ -89,7 +89,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void DialogueSelect_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.CurrentNPC.dialogues.Count() == 0)
+            if (MainWindow.CurrentSave.dialogues.Count() == 0)
                 return;
             Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Dialogue);
             select.ShowDialog();

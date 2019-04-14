@@ -85,6 +85,7 @@
     <v:String x:Key="file_Exit">Выйти</v:String>
     <v:String x:Key="about_Text">Copyright BowieD 2019\n\nАвтор программы: BowieD. Перевод на русский: BowieD\nВерсия программы: %version%\nЗагляните в раздел "Обратная связь" для связи со мной.</v:String>
     <v:String x:Key="about_Title">О программе</v:String>
+    <v:String x:Key="tab_Character">Персонаж</v:String>
     <v:String x:Key="tab_General">Информация</v:String>
     <v:String x:Key="tab_Apparel">Внешность</v:String>
     <v:String x:Key="tab_Dialogues">Диалоги</v:String>
@@ -182,13 +183,16 @@
     <v:String x:Key="dialogue_Message_EditCondition_ToolTip">При открытии диалога происходит проверка условий сообщений. Первое сообщение с истинными условиями будет отображено.</v:String>
     <v:String x:Key="dialogue_Message_EditVisibility_Save">Сохранить</v:String>
 
-    
+    <v:String x:Key="listView_Add_Character">Добавить персонажа</v:String>
+    <v:String x:Key="listView_Add_Object">Добавить объект</v:String>
     <v:String x:Key="listView_Add_Condition">Добавить условие</v:String>
     <v:String x:Key="listView_Add_Reward">Добавить награду</v:String>
     <v:String x:Key="listView_Add_Dialogue">Добавить диалог</v:String>
     <v:String x:Key="listView_Add_Vendor">Добавить магазин</v:String>
     <v:String x:Key="listView_Add_VendorItem">Добавить предмет</v:String>
     <v:String x:Key="listView_Add_Quest">Добавить задание</v:String>
+    <v:String x:Key="listView_Title_Object">Выбрать объект</v:String>
+    <v:String x:Key="listView_Title_Character">Выбрать персонажа</v:String>
     <v:String x:Key="listView_Title_Dialogue">Выбрать диалог</v:String>
     <v:String x:Key="listView_Title_Vendor">Выбрать магазин</v:String>
     <v:String x:Key="listView_Title_VendorItem">Выбрать предмет</v:String>

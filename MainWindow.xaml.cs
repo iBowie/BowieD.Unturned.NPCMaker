@@ -30,6 +30,7 @@ namespace BowieD.Unturned.NPCMaker
         public static DiscordRPC.DiscordManager DiscordManager { get; set; }
         #endregion
         #region EDITORS
+        public static IEditor<NPCCharacter> CharacterEditor { get; private set; }
         public static IEditor<NPCDialogue> DialogueEditor { get; private set; }
         public static IEditor<NPCVendor> VendorEditor { get; private set; }
         public static IEditor<NPCQuest> QuestEditor { get; private set; }
@@ -39,6 +40,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             Instance = this;
             InitializeComponent();
+            CharacterEditor = new CharacterEditor();
             DialogueEditor = new DialogueEditor();
             VendorEditor = new VendorEditor();
             QuestEditor = new QuestEditor();
@@ -91,12 +93,9 @@ namespace BowieD.Unturned.NPCMaker
             faceImageIndex.Maximum = faceAmount - 1;
             beardImageIndex.Maximum = beardAmount - 1;
             hairImageIndex.Maximum = haircutAmount - 1;
-            Proxy.FaceImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, CurrentNPC.face));
-            Proxy.HairImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, CurrentNPC.haircut));
-            Proxy.BeardImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, CurrentNPC.beard));
-            beardRenderGrid.DataContext = CurrentNPC.hairColor.Brush;
-            hairRenderGrid.DataContext = CurrentNPC.hairColor.Brush;
-            faceImageBorder.Background = apparelSkinColorBox.Text.Length == 0 ? Brushes.Transparent : CurrentNPC.skinColor.Brush;
+            Proxy.FaceImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
+            Proxy.HairImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
+            Proxy.BeardImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
             Proxy.UserColorListChanged();
             #endregion
             #region HOLIDAYS
@@ -174,7 +173,6 @@ namespace BowieD.Unturned.NPCMaker
             #region VERSION SPECIFIC CODE
             #if !DEBUG
             debugOverlayText.Visibility = Visibility.Collapsed;
-            saveAsExampleButton.Visibility = Visibility.Collapsed;
             #endif
             #endregion
             Config.Configuration.Properties.firstLaunch = false;
@@ -251,7 +249,7 @@ namespace BowieD.Unturned.NPCMaker
         #endregion
         #region STATIC
         public static MainWindow Instance;
-        public static NPCSave CurrentNPC { get; set; } = new NPCSave();
+        public static NPCSave CurrentSave { get; set; } = new NPCSave();
         public static DispatcherTimer AutosaveTimer { get; set; }
         public static PropertyProxy Proxy { get; private set; }
         public static bool IsRGB { get; set; } = true;
@@ -276,24 +274,19 @@ namespace BowieD.Unturned.NPCMaker
             base.OnClosing(e);
         }
         #region SAVE_LOAD
-        public void Save(bool asExample = false)
+        public void Save()
         {
-#if !DEBUG
-            if ((CurrentNPC?.IsReadOnly) ?? false)
-            {
-                MainWindow.NotificationManager.Notify(Localize("notify_ReadOnly"));
-                return;
-            }
-#endif
+            CharacterEditor.Save();
             DialogueEditor.Save();
             VendorEditor.Save();
             QuestEditor.Save();
+            ObjectEditor.Save();
             if (saveFile == null || saveFile == "")
             {
                 SaveFileDialog sfd = new SaveFileDialog
                 {
-                    Filter = $"{Localize("save_Filter")} (*.npc)|*.npc",
-                    FileName = $"{CurrentNPC.editorName}.npc",
+                    Filter = $"{Localize("save_Filter")} (*.npcproj)|*.npcproj",
+                    FileName = $"{CharacterEditor.Current?.editorName ?? "Unnamed"}.npcproj",
                     OverwritePrompt = true
                 };
                 var result = sfd.ShowDialog();
@@ -316,41 +309,16 @@ namespace BowieD.Unturned.NPCMaker
             }
             try
             {
-                if (asExample)
+                if (saveFile != null && saveFile != "")
                 {
-                    NPCExample example = new NPCExample(CurrentNPC);
-                    if (saveFile != null && saveFile != "")
+                    using (FileStream fs = new FileStream(saveFile, FileMode.Create))
+                    using (XmlWriter writer = XmlWriter.Create(fs))
                     {
-                        using (FileStream fs = new FileStream(saveFile, FileMode.Create))
-                        using (XmlWriter writer = XmlWriter.Create(fs))
-                        {
-                            XmlSerializer ser = new XmlSerializer(typeof(NPCExample));
-                            ser.Serialize(writer, example);
-                        }
-                        MainWindow.NotificationManager.Notify("EXAMPLE SAVED!");
-                        isSaved = true;
+                        XmlSerializer ser = new XmlSerializer(typeof(NPCSave));
+                        ser.Serialize(writer, CurrentSave);
                     }
-                }
-                else
-                {
-#if !DEBUG
-                    if ((CurrentNPC?.IsReadOnly) ?? false)
-                    {
-                        MainWindow.NotificationManager.Notify(Localize("notify_ReadOnly"));
-                        return;
-                    }
-#endif
-                    if (saveFile != null && saveFile != "")
-                    {
-                        using (FileStream fs = new FileStream(saveFile, FileMode.Create))
-                        using (XmlWriter writer = XmlWriter.Create(fs))
-                        {
-                            XmlSerializer ser = new XmlSerializer(typeof(NPCSave));
-                            ser.Serialize(writer, CurrentNPC);
-                        }
-                        MainWindow.NotificationManager.Notify(Localize("notify_Saved"));
-                        isSaved = true;
-                    }
+                    MainWindow.NotificationManager.Notify(Localize("notify_Saved"));
+                    isSaved = true;
                 }
             }
             catch (Exception ex)
@@ -371,18 +339,18 @@ namespace BowieD.Unturned.NPCMaker
                 using (FileStream fs = new FileStream(path, FileMode.Open))
                 using (XmlReader reader = XmlReader.Create(fs))
                 {
-                    XmlSerializer normalDeser = new XmlSerializer(typeof(NPCSave));
-                    XmlSerializer exampleDeser = new XmlSerializer(typeof(NPCExample));
-                    if (normalDeser.CanDeserialize(reader))
+                    XmlSerializer oldDeser = new XmlSerializer(typeof(NPCSaveOld));
+                    XmlSerializer newDeser = new XmlSerializer(typeof(NPCSave));
+                    if (oldDeser.CanDeserialize(reader))
                     {
-                        CurrentNPC = normalDeser.Deserialize(reader) as NPCSave;
-                        saveFile = path;
+                        CurrentSave = ConvertToNew(oldDeser.Deserialize(reader) as NPCSaveOld);
                     }
-                    else if (exampleDeser.CanDeserialize(reader))
+                    else if (newDeser.CanDeserialize(reader))
                     {
-                        CurrentNPC = exampleDeser.Deserialize(reader) as NPCExample;
+                        CurrentSave = newDeser.Deserialize(reader) as NPCSave;
                     }
-                    ConvertNPCToState(CurrentNPC);
+                    saveFile = path;
+                    ConvertNPCToState(CurrentSave);
                     isSaved = true;
                 }
                 NotificationManager.Notify(Localize("notify_Loaded"));
@@ -393,7 +361,7 @@ namespace BowieD.Unturned.NPCMaker
         }
         public bool SavePrompt()
         {
-            if (isSaved == true || CurrentNPC.IsReadOnly || CurrentNPC == new NPCSave())
+            if (isSaved == true || CurrentSave == new NPCSave())
                 return true;
             var result = MessageBox.Show(Localize("app_Exit_UnsavedChanges_Text"), Localize("app_Exit_UnsavedChanges_Title"), MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
             if (result == MessageBoxResult.Yes)
@@ -417,72 +385,61 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     using (XmlReader reader = XmlReader.Create(fs))
                     {
-                        XmlSerializer s = new XmlSerializer(typeof(NPC.NPCSave));
-                        XmlSerializer s2 = new XmlSerializer(typeof(NPCExample));
-                        return s.CanDeserialize(reader) || s2.CanDeserialize(reader);
+                        XmlSerializer oldDeserializer = new XmlSerializer(typeof(NPC.NPCSaveOld));
+                        XmlSerializer newDeserializer = new XmlSerializer(typeof(NPCSave));
+                        return oldDeserializer.CanDeserialize(reader) || newDeserializer.CanDeserialize(reader);
                     }
                 }
             }
             catch { return false; }
         }
+
+        public static NPCSave ConvertToNew(NPCSaveOld old)
+        {
+            return new NPCSave
+            {
+                dialogues = old.dialogues,
+                vendors = old.vendors,
+                quests = old.quests,
+                characters = new List<NPCCharacter>()
+                {
+                    new NPCCharacter()
+                    {
+                        id = old.id,
+                        startDialogueId = old.startDialogueId,
+                        clothing = old.clothing,
+                        christmasClothing = old.christmasClothing,
+                        halloweenClothing = old.halloweenClothing,
+                        beard = old.beard,
+                        displayName = old.displayName,
+                        editorName = old.editorName,
+                        equipped = old.equipped,
+                        equipPrimary = old.equipPrimary,
+                        equipSecondary = old.equipSecondary,
+                        equipTertiary = old.equipTertiary,
+                        face = old.face,
+                        guid = old.guid,
+                        hairColor = old.hairColor,
+                        haircut = old.haircut,
+                        leftHanded = old.leftHanded,
+                        pose = old.pose,
+                        skinColor = old.skinColor,
+                        visibilityConditions = old.visibilityConditions
+                    }
+                },
+                objects = new List<NPCObject>()
+            };
+        }
         #endregion
         #region STATE CONVERTERS
         public void ConvertNPCToState(NPCSave save)
         {
-            CurrentNPC = save;
-            apparelSkinColorBox.Text = save.skinColor.HEX;
-            apparelHairColorBox.Text = save.hairColor.HEX;
-            backpackIdBox.Value = save.clothing.backpack;
-            maskIdBox.Value = save.clothing.mask;
-            vestIdBox.Value = save.clothing.vest;
-            topIdBox.Value = save.clothing.top;
-            bottomIdBox.Value = save.clothing.bottom;
-            glassesIdBox.Value = save.clothing.glasses;
-            hatIdBox.Value = save.clothing.hat;
-            halloweenbackpackIdBox.Value = save.halloweenClothing.backpack;
-            halloweenmaskIdBox.Value = save.halloweenClothing.mask;
-            halloweenvestIdBox.Value = save.halloweenClothing.vest;
-            halloweentopIdBox.Value = save.halloweenClothing.top;
-            halloweenbottomIdBox.Value = save.halloweenClothing.bottom;
-            halloweenglassesIdBox.Value = save.halloweenClothing.glasses;
-            halloweenhatIdBox.Value = save.halloweenClothing.hat;
-            christmasbackpackIdBox.Value = save.christmasClothing.backpack;
-            christmasmaskIdBox.Value = save.christmasClothing.mask;
-            christmasvestIdBox.Value = save.christmasClothing.vest;
-            christmastopIdBox.Value = save.christmasClothing.top;
-            christmasbottomIdBox.Value = save.christmasClothing.bottom;
-            christmasglassesIdBox.Value = save.christmasClothing.glasses;
-            christmashatIdBox.Value = save.christmasClothing.hat;
-            primaryIdBox.Value = save.equipPrimary;
-            secondaryIdBox.Value = save.equipSecondary;
-            tertiaryIdBox.Value = save.equipTertiary;
-            faceImageIndex.Value = save.face;
-            beardImageIndex.Value = save.beard;
-            hairImageIndex.Value = save.haircut;
-            txtID.Value = save.id;
-            txtEditorName.Text = save.editorName;
-            txtDisplayName.Text = save.displayName;
-            txtStartDialogueID.Value = save.startDialogueId;
-            apparelLeftHandedCheckbox.IsChecked = save.leftHanded;
-            foreach (var i in equipSlotBox.Items)
-            {
-                if ((Equip_Type)(i as ComboBoxItem).Tag == save.equipped)
-                {
-                    equipSlotBox.SelectedItem = i;
-                    break;
-                }
-            }
-            foreach (var i in apparelPoseBox.Items)
-            {
-                if ((NPC_Pose)(i as ComboBoxItem).Tag == save.pose)
-                {
-                    apparelPoseBox.SelectedItem = i;
-                    break;
-                }
-            }
+            CurrentSave = save;
+            CharacterEditor.Current = new NPCCharacter();
             DialogueEditor.Current = new NPCDialogue();
             QuestEditor.Current = new NPCQuest();
             VendorEditor.Current = new NPCVendor();
+            ObjectEditor.Current = new NPCObject();
         }
         #endregion
         #region DRAG AND DROP

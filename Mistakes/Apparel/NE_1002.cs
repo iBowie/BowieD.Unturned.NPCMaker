@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.NPC;
+using System;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes.Apparel
 {
@@ -12,15 +13,17 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Apparel
         {
             get
             {
-                switch (MainWindow.CurrentNPC.equipped)
+                foreach (NPCCharacter character in MainWindow.CurrentSave.characters)
                 {
-                    case NPC.Equip_Type.Primary when MainWindow.CurrentNPC.equipPrimary == 0:
-                    case NPC.Equip_Type.Secondary when MainWindow.CurrentNPC.equipSecondary == 0:
-                    case NPC.Equip_Type.Tertiary when MainWindow.CurrentNPC.equipTertiary == 0:
-                        return true;
-                    default:
-                        return false;
+                    switch (character.equipped)
+                    {
+                        case NPC.Equip_Type.Primary when character.equipPrimary == 0:
+                        case NPC.Equip_Type.Secondary when character.equipSecondary == 0:
+                        case NPC.Equip_Type.Tertiary when character.equipTertiary == 0:
+                            return true;
+                    }
                 }
+                return false;
             }
         }
         public override string MistakeNameKey => "NE_1002";

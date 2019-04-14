@@ -17,7 +17,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         {
             get
             {
-                foreach (NPCDialogue dial in MainWindow.CurrentNPC.dialogues)
+                foreach (NPCDialogue dial in MainWindow.CurrentSave.dialogues)
                 {
                     if (dial.MessagesAmount >= 2)
                     {

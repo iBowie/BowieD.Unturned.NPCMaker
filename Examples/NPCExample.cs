@@ -2,7 +2,7 @@
 
 namespace BowieD.Unturned.NPCMaker.Examples
 {
-    public class NPCExample : NPCSave
+    public class NPCExample : NPCSaveOld
     {
         public string Title { get; set; }
 
@@ -11,7 +11,7 @@ namespace BowieD.Unturned.NPCMaker.Examples
             IsReadOnly = true;
         }
 
-        public NPCExample(NPCSave save)
+        public NPCExample(NPCSaveOld save)
         {
             this.IsReadOnly = true;
             this.clothing = save.clothing;

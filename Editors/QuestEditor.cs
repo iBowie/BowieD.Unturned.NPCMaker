@@ -91,13 +91,13 @@ namespace BowieD.Unturned.NPCMaker.Editors
         }
         public void Open()
         {
-            Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentNPC.quests.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Quest, false)).ToList(), Universal_ItemList.ReturnType.Quest);
+            Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentSave.quests.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Quest, false)).ToList(), Universal_ItemList.ReturnType.Quest);
             if (ulv.ShowDialog() == true)
             {
                 Save();
                 Current = ulv.SelectedValue as NPCQuest;
             }
-            MainWindow.CurrentNPC.quests = ulv.Values.Cast<NPCQuest>().ToList();
+            MainWindow.CurrentSave.quests = ulv.Values.Cast<NPCQuest>().ToList();
         }
         public void Reset()
         {
@@ -112,9 +112,9 @@ namespace BowieD.Unturned.NPCMaker.Editors
             NPCQuest cur = Current;
             if (cur.id == 0)
                 return;
-            if (MainWindow.CurrentNPC.quests.Where(d => d.id == MainWindow.Instance.questIdBox.Value).Count() > 0)
-                MainWindow.CurrentNPC.quests.Remove(MainWindow.CurrentNPC.quests.Where(d => d.id == MainWindow.Instance.questIdBox.Value).ElementAt(0));
-            MainWindow.CurrentNPC.quests.Add(cur);
+            if (MainWindow.CurrentSave.quests.Where(d => d.id == MainWindow.Instance.questIdBox.Value).Count() > 0)
+                MainWindow.CurrentSave.quests.Remove(MainWindow.CurrentSave.quests.Where(d => d.id == MainWindow.Instance.questIdBox.Value).ElementAt(0));
+            MainWindow.CurrentSave.quests.Add(cur);
             MainWindow.isSaved = false;
             MainWindow.NotificationManager.Notify(MainWindow.Localize("notify_Quest_Saved"));
         }

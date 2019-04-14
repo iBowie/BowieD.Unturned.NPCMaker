@@ -86,12 +86,16 @@
     <v:String x:Key="file_Exit">Exit</v:String>
     <v:String x:Key="about_Text">Copyright BowieD 2019\n\nThis app was made by BowieD. English translator: BowieD\nApp Version: %version%\nView Feedback menu if you want contact me.</v:String>
     <v:String x:Key="about_Title">About</v:String>
+    <v:String x:Key="tab_Character">Character</v:String>
     <v:String x:Key="tab_General">Information</v:String>
     <v:String x:Key="tab_Apparel">Apparel</v:String>
     <v:String x:Key="tab_Dialogues">Dialogues</v:String>
     <v:String x:Key="tab_Vendor">Vendors</v:String>
     <v:String x:Key="tab_Quest">Quests</v:String>
     <v:String x:Key="tab_Mistakes">Error list</v:String>
+
+    <v:String x:Key="character_ID_Zero">Character ID is zero</v:String>
+    <v:String x:Key="notify_Character_Saved">Character saved!</v:String>
     
     <v:String x:Key="general_EditorName">Editor Name</v:String>
     <v:String x:Key="general_EditorName_Tooltip">Name visible in map editor</v:String>
@@ -183,12 +187,16 @@
     <v:String x:Key="dialogue_Message_EditCondition_ToolTip">When dialogue opens up-most message with true conditions will appear</v:String>
     <v:String x:Key="dialogue_Message_EditVisibility_Save">Save</v:String>
     
+    <v:String x:Key="listView_Add_Character">Add Character</v:String>
+    <v:String x:Key="listView_Add_Object">Add Object</v:String>
     <v:String x:Key="listView_Add_Condition">Add Condition</v:String>
     <v:String x:Key="listView_Add_Reward">Add Reward</v:String>
     <v:String x:Key="listView_Add_Dialogue">Add Dialogue</v:String>
     <v:String x:Key="listView_Add_Vendor">Add Vendor</v:String>
     <v:String x:Key="listView_Add_VendorItem">Add Item</v:String>
     <v:String x:Key="listView_Add_Quest">Add Quest</v:String>
+    <v:String x:Key="listView_Title_Object">Select Object</v:String>
+    <v:String x:Key="listView_Title_Character">Select Character</v:String>
     <v:String x:Key="listView_Title_Dialogue">Select Dialogue</v:String>
     <v:String x:Key="listView_Title_Vendor">Select Vendor</v:String>
     <v:String x:Key="listView_Title_VendorItem">Select Item</v:String>

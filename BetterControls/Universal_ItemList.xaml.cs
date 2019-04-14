@@ -89,11 +89,15 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                 mainLabel.Content = Value.ToString();
                 mainLabel.ToolTip = Value;
             }
+            else if (Type == ReturnType.Character)
+                return;
+            else if (Type == ReturnType.Object)
+                return;
         }
 
         public enum ReturnType
         {
-            Reward, Condition, Dialogue, Vendor, Quest, VendorItem
+            Reward, Condition, Dialogue, Vendor, Quest, VendorItem, Object, Character
         }
     }
 }

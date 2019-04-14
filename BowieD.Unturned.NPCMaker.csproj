@@ -130,6 +130,7 @@
       <DependentUpon>ConfigWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DiscordRPC\DiscordWorker.cs" />
+    <Compile Include="Editors\CharacterEditor.cs" />
     <Compile Include="Editors\DialogueEditor.cs" />
     <Compile Include="Editors\IEditor.cs" />
     <Compile Include="Editors\ObjectEditor.cs" />
@@ -147,7 +148,9 @@
     <Compile Include="Mistakes\MistakesManager.cs" />
     <Compile Include="Notification\INotificationManager.cs" />
     <Compile Include="Notification\NotificationManager.cs" />
+    <Compile Include="NPC\NPCCharacter.cs" />
     <Compile Include="NPC\NPCClothing.cs" />
+    <Compile Include="NPC\NPCSave.cs" />
     <Compile Include="Themes\ITheme.cs" />
     <Compile Include="Themes\MetroTheme.cs" />
     <Compile Include="UpdateManagers\GitHubUpdateManager.cs" />
@@ -311,7 +314,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NPC\NPCSave.cs" />
+    <Compile Include="NPC\NPCSaveOld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

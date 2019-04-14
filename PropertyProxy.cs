@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.BetterControls;
 using BowieD.Unturned.NPCMaker.BetterForms;
+using BowieD.Unturned.NPCMaker.Editors;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.NPC;
@@ -30,46 +31,8 @@ namespace BowieD.Unturned.NPCMaker
         {
             inst.newButton.Click += NewButtonClick;
             inst.lstMistakes.SelectionChanged += MistakeList_Selected;
-            inst.txtEditorName.TextChanged += EditorName_Change;
-            inst.txtDisplayName.TextChanged += DisplayName_Change;
-            inst.txtID.ValueChanged += NPC_ID_Change;
-            inst.txtStartDialogueID.ValueChanged += StartDialogue_ID_Change;
-            #region default clothing
-            inst.hatIdBox.ValueChanged += HatId_Change;
-            inst.topIdBox.ValueChanged += TopId_Change;
-            inst.bottomIdBox.ValueChanged += BottomId_Change;
-            inst.maskIdBox.ValueChanged += MaskId_Change;
-            inst.backpackIdBox.ValueChanged += BackId_Change;
-            inst.vestIdBox.ValueChanged += VestId_Change;
-            inst.glassesIdBox.ValueChanged += GlassesId_Change;
-            #endregion
-            #region christmas clothing
-            inst.christmashatIdBox.ValueChanged +=      ChristmasHatId_Change;
-            inst.christmastopIdBox.ValueChanged +=      ChristmasTopId_Change;
-            inst.christmasbottomIdBox.ValueChanged +=   ChristmasBottomId_Change;
-            inst.christmasmaskIdBox.ValueChanged +=     ChristmasMaskId_Change;
-            inst.christmasbackpackIdBox.ValueChanged += ChristmasBackId_Change;
-            inst.christmasvestIdBox.ValueChanged +=     ChristmasVestId_Change;
-            inst.christmasglassesIdBox.ValueChanged +=  ChristmasGlassesId_Change;
-            #endregion
-            #region halloween clothing
-            inst.halloweenhatIdBox.ValueChanged +=      HalloweenHatId_Change;
-            inst.halloweentopIdBox.ValueChanged +=      HalloweenTopId_Change;
-            inst.halloweenbottomIdBox.ValueChanged +=   HalloweenBottomId_Change;
-            inst.halloweenmaskIdBox.ValueChanged +=     HalloweenMaskId_Change;
-            inst.halloweenbackpackIdBox.ValueChanged += HalloweenBackId_Change;
-            inst.halloweenvestIdBox.ValueChanged +=     HalloweenVestId_Change;
-            inst.halloweenglassesIdBox.ValueChanged +=  HalloweenGlassesId_Change;
-            #endregion
-            inst.primaryIdBox.ValueChanged += PrimaryId_Change;
-            inst.secondaryIdBox.ValueChanged += SecondaryId_Change;
-            inst.tertiaryIdBox.ValueChanged += TertiaryId_Change;
-            inst.apparelLeftHandedCheckbox.Click += LeftHanded_Change;
-            inst.apparelPoseBox.SelectionChanged += Pose_Change;
-            inst.equipSlotBox.SelectionChanged += Equipped_Change;
             inst.regenerateGuidsButton.Click += RegenerateGuids_Click;
             inst.optionsMenuItem.Click += Options_Click;
-            inst.saveAsExampleButton.Click += SaveAsExampleButton_Click;
             inst.visibilityCondsButton.Click += Char_EditConditions_Button_Click;
             inst.randomColorButton.Click += RandomColor_Click;
             inst.exitButton.Click += ExitButtonClick;
@@ -201,308 +164,27 @@ namespace BowieD.Unturned.NPCMaker
                 mist.OnClick?.Invoke();
             }
         }
-        internal void EditorName_Change(object sender, TextChangedEventArgs e)
-        {
-            MainWindow.CurrentNPC.editorName = (sender as TextBox).Text;
-            MainWindow.isSaved = false;
-            if (MainWindow.DiscordManager != null)
-            {
-                RichPresence presence = new RichPresence
-                {
-                    Details = $"Editing {(MainWindow.CurrentNPC.editorName == null || MainWindow.CurrentNPC.editorName.Length < 1 ? "NPC without name" : MainWindow.CurrentNPC.editorName)}",
-                    State = $"Display Name: {(MainWindow.CurrentNPC.displayName == null || MainWindow.CurrentNPC.displayName.Length < 1 ? "None" : MainWindow.CurrentNPC.displayName)}"
-                };
-                presence.Timestamps = new Timestamps
-                {
-                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
-                };
-                presence.Assets = new Assets
-                {
-                    SmallImageKey = "icon_info_outlined",
-                    SmallImageText = "Info"
-                };
-                (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
-            }
-        }
-        internal void DisplayName_Change(object sender, TextChangedEventArgs e)
-        {
-            MainWindow.CurrentNPC.displayName = (sender as TextBox).Text;
-            if (MainWindow.DiscordManager != null)
-            {
-                RichPresence presence = new RichPresence
-                {
-                    Details = $"Editing {(MainWindow.CurrentNPC.editorName == null || MainWindow.CurrentNPC.editorName.Length < 1 ? "NPC without name" : MainWindow.CurrentNPC.editorName)}",
-                    State = $"Display Name: {(MainWindow.CurrentNPC.displayName == null || MainWindow.CurrentNPC.displayName.Length < 1 ? "None" : MainWindow.CurrentNPC.displayName)}"
-                };
-                presence.Timestamps = new Timestamps
-                {
-                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
-                };
-                presence.Assets = new Assets
-                {
-                    SmallImageKey = "icon_info_outlined",
-                    SmallImageText = "Info"
-                };
-                (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
-            }
-            MainWindow.isSaved = false;
-        }
-        internal void NPC_ID_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.id = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void StartDialogue_ID_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.startDialogueId = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void HatId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.clothing.hat = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void TopId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.clothing.top = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void BottomId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.clothing.bottom = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void MaskId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.clothing.mask = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void BackId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.clothing.backpack = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void VestId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.clothing.vest = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void GlassesId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.clothing.glasses = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void HalloweenHatId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.halloweenClothing.hat = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void HalloweenTopId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.halloweenClothing.top = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void HalloweenBottomId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.halloweenClothing.bottom = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void HalloweenMaskId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.halloweenClothing.mask = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void HalloweenBackId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.halloweenClothing.backpack = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void HalloweenVestId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.halloweenClothing.vest = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void HalloweenGlassesId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.halloweenClothing.glasses = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void ChristmasHatId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.christmasClothing.hat = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void ChristmasTopId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.christmasClothing.top = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void ChristmasBottomId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.christmasClothing.bottom = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void ChristmasMaskId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.christmasClothing.mask = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void ChristmasBackId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.christmasClothing.backpack = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void ChristmasVestId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.christmasClothing.vest = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void ChristmasGlassesId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.christmasClothing.glasses = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void PrimaryId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.equipPrimary = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void SecondaryId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.equipSecondary = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void TertiaryId_Change(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            if (e.NewValue.HasValue)
-            {
-                MainWindow.CurrentNPC.equipTertiary = (ushort)e.NewValue.Value;
-                MainWindow.isSaved = false;
-            }
-        }
-        internal void LeftHanded_Change(object sender, RoutedEventArgs e)
-        {
-            MainWindow.CurrentNPC.leftHanded = (sender as CheckBox).IsChecked.Value;
-            MainWindow.isSaved = false;
-        }
-        internal void Pose_Change(object sender, SelectionChangedEventArgs e)
-        {
-            if (sender == null)
-                return;
-            var item = (sender as ComboBox).SelectedItem as ComboBoxItem;
-            if (item == null)
-                return;
-            var val = (NPC_Pose)item.Tag;
-            MainWindow.CurrentNPC.pose = val;
-            MainWindow.isSaved = false;
-        }
-        internal void Equipped_Change(object sender, SelectionChangedEventArgs e)
-        {
-            if (sender == null)
-                return;
-            var item = (sender as ComboBox).SelectedItem as ComboBoxItem;
-            if (item == null)
-                return;
-            var val = (Equip_Type)item.Tag;
-            MainWindow.CurrentNPC.equipped = val;
-            MainWindow.isSaved = false;
-        }
         internal void RegenerateGuids_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.CurrentNPC.dialogues != null)
+            if (MainWindow.CurrentSave.dialogues != null)
             {
-                foreach (NPCDialogue d in MainWindow.CurrentNPC.dialogues)
+                foreach (NPCDialogue d in MainWindow.CurrentSave.dialogues)
                 {
                     if (d != null)
                         d.guid = Guid.NewGuid().ToString("N");
                 }
             }
-            if (MainWindow.CurrentNPC.vendors != null)
+            if (MainWindow.CurrentSave.vendors != null)
             {
-                foreach (NPCVendor v in MainWindow.CurrentNPC.vendors)
+                foreach (NPCVendor v in MainWindow.CurrentSave.vendors)
                 {
                     if (v != null)
                         v.guid = Guid.NewGuid().ToString("N");
                 }
             }
-            if (MainWindow.CurrentNPC.quests != null)
+            if (MainWindow.CurrentSave.quests != null)
             {
-                foreach (NPCQuest q in MainWindow.CurrentNPC.quests)
+                foreach (NPCQuest q in MainWindow.CurrentSave.quests)
                 {
                     if (q != null)
                         q.guid = Guid.NewGuid().ToString("N");
@@ -516,15 +198,11 @@ namespace BowieD.Unturned.NPCMaker
             Config.ConfigWindow cw = new Config.ConfigWindow();
             cw.ShowDialog();
         }
-        internal void SaveAsExampleButton_Click(object sender, RoutedEventArgs e)
-        {
-            inst.Save(true);
-        }
         internal void Char_EditConditions_Button_Click(object sender, RoutedEventArgs e)
         {
-            Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentNPC.visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
+            Universal_ListView ulv = new Universal_ListView((MainWindow.CharacterEditor as CharacterEditor).conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
             ulv.ShowDialog();
-            MainWindow.CurrentNPC.visibilityConditions = ulv.Values.Cast<NPC.Condition>().ToList();
+            (MainWindow.CharacterEditor as CharacterEditor).conditions = ulv.Values.Cast<NPC.Condition>().ToList();
             MainWindow.isSaved = false;
         }
         internal void RandomColor_Click(object sender, RoutedEventArgs e)
@@ -750,8 +428,8 @@ namespace BowieD.Unturned.NPCMaker
                     return;
             }
             inst.Save();
-            Export_ExportWindow eew = new Export_ExportWindow(AppDomain.CurrentDomain.BaseDirectory + $@"results\{MainWindow.CurrentNPC.editorName}\");
-            eew.DoActions(MainWindow.CurrentNPC);
+            Export_ExportWindow eew = new Export_ExportWindow(AppDomain.CurrentDomain.BaseDirectory + $@"results\{MainWindow.CurrentSave.guid}\");
+            eew.DoActions(MainWindow.CurrentSave);
         }
         internal void NewButtonClick(object sender, RoutedEventArgs e)
         {
@@ -794,7 +472,6 @@ namespace BowieD.Unturned.NPCMaker
         internal void FaceImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
             inst.faceImageControl.Source = ("Resources/Unturned/Faces/" + e.NewValue + ".png").GetImageSource();
-            MainWindow.CurrentNPC.face = (byte)e.NewValue;
             MainWindow.isSaved = false;
         }
         internal void BeardImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
@@ -807,7 +484,6 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             inst.beardRenderGrid.Children[(int)e.NewValue].Visibility = Visibility.Visible;
-            MainWindow.CurrentNPC.beard = (byte)e.NewValue;
             MainWindow.isSaved = false;
         }
         internal void HairImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
@@ -820,7 +496,6 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             inst.hairRenderGrid.Children[(int)e.NewValue].Visibility = Visibility.Visible;
-            MainWindow.CurrentNPC.haircut = (byte)e.NewValue;
             MainWindow.isSaved = false;
         }
         internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -840,8 +515,16 @@ namespace BowieD.Unturned.NPCMaker
             }
             RichPresence presence = new RichPresence
             {
-                Details = $"Editing {(MainWindow.CurrentNPC.editorName == null || MainWindow.CurrentNPC.editorName.Length < 1 ? "NPC without name" : MainWindow.CurrentNPC.editorName)}",
-                State = $"Display Name: {(MainWindow.CurrentNPC.displayName == null || MainWindow.CurrentNPC.displayName.Length < 1 ? "None" : MainWindow.CurrentNPC.displayName)}"
+                Details = new Func<string>(() =>
+                {
+                    string editorName = MainWindow.CharacterEditor.Current.editorName;
+                    return $"Editing {(editorName == null || editorName.Length < 1 ? "NPC without name" : editorName)}";
+                }).Invoke(),
+                State = new Func<string>(() =>
+                {
+                    string displayName = MainWindow.CharacterEditor.Current.displayName;
+                    return $"Display Name: {(displayName == null || displayName.Length < 1 ? "None" : displayName)}";
+                }).Invoke(),
             };
             presence.Timestamps = new Timestamps();
             presence.Timestamps.StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
@@ -858,15 +541,15 @@ namespace BowieD.Unturned.NPCMaker
                     break;
                 case 2:
                     presence.Assets.SmallImageKey = "icon_chat_outlined";
-                    presence.Assets.SmallImageText = $"Dialogues: {MainWindow.CurrentNPC.dialogues.Count}";
+                    presence.Assets.SmallImageText = $"Dialogues: {MainWindow.CurrentSave.dialogues.Count}";
                     break;
                 case 3:
                     presence.Assets.SmallImageKey = "icon_money_outlined";
-                    presence.Assets.SmallImageText = $"Vendors: {MainWindow.CurrentNPC.vendors.Count}";
+                    presence.Assets.SmallImageText = $"Vendors: {MainWindow.CurrentSave.vendors.Count}";
                     break;
                 case 4:
                     presence.Assets.SmallImageKey = "icon_exclamation_outlined";
-                    presence.Assets.SmallImageText = $"Quests: {MainWindow.CurrentNPC.quests.Count}";
+                    presence.Assets.SmallImageText = $"Quests: {MainWindow.CurrentSave.quests.Count}";
                     break;
                 case 5:
                     presence.Assets.SmallImageKey = "icon_warning_outlined";
@@ -1061,7 +744,6 @@ namespace BowieD.Unturned.NPCMaker
             {
                 Brush color = bc.ConvertFromString(text) as Brush;
                 inst.faceImageBorder.Background = color;
-                MainWindow.CurrentNPC.skinColor = new NPCColor() { HEX = text };
             }
             else
             {
@@ -1077,7 +759,6 @@ namespace BowieD.Unturned.NPCMaker
                 Brush color = bc.ConvertFromString(text) as Brush;
                 inst.beardRenderGrid.DataContext = color;
                 inst.hairRenderGrid.DataContext = color;
-                MainWindow.CurrentNPC.hairColor = new NPCColor() { HEX = text };
             }
             else
             {

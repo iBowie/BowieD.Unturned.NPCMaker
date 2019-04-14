@@ -47,7 +47,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 MainWindow.Instance.blockActionsOverlay.Visibility = Visibility.Collapsed;
             }
             MistakesManager.FindMistakes();
-            foreach (NPCDialogue dialogue in MainWindow.CurrentNPC.dialogues)
+            foreach (NPCDialogue dialogue in MainWindow.CurrentSave.dialogues)
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Dialogue && d.Id == dialogue.id))
                 {
@@ -55,7 +55,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 }
                 await Task.Yield();
             }
-            foreach (NPCVendor vendor in MainWindow.CurrentNPC.vendors)
+            foreach (NPCVendor vendor in MainWindow.CurrentSave.vendors)
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Vendor && d.Id == vendor.id))
                 {
@@ -76,7 +76,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 }
                 await Task.Yield();
             }
-            foreach (NPCQuest quest in MainWindow.CurrentNPC.quests)
+            foreach (NPCQuest quest in MainWindow.CurrentSave.quests)
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Quest && d.Id == quest.id))
                 {

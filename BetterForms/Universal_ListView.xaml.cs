@@ -93,6 +93,16 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                     DialogResult = true;
                     Close();
                     break;
+                case Universal_ItemList.ReturnType.Character:
+                    SelectedValue = new NPC.NPCCharacter();
+                    DialogResult = true;
+                    Close();
+                    break;
+                case Universal_ItemList.ReturnType.Object:
+                    SelectedValue = new NPC.NPCObject();
+                    DialogResult = true;
+                    Close();
+                    break;
             }
         }
 
@@ -112,7 +122,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         {
             Values.Add(uil.Value);
             uil.deleteButton.Click += DeleteButton_Click;
-            if (ReturnType == BetterControls.Universal_ItemList.ReturnType.Dialogue || ReturnType == BetterControls.Universal_ItemList.ReturnType.Vendor || ReturnType == BetterControls.Universal_ItemList.ReturnType.Quest)
+            if (ReturnType == Universal_ItemList.ReturnType.Object || ReturnType == Universal_ItemList.ReturnType.Character || ReturnType == BetterControls.Universal_ItemList.ReturnType.Dialogue || ReturnType == BetterControls.Universal_ItemList.ReturnType.Vendor || ReturnType == BetterControls.Universal_ItemList.ReturnType.Quest)
                 uil.editButton.Click += EditButton_Click;
             uil.Width = mainGrid.Width;
             mainGrid.Children.Add(uil);
