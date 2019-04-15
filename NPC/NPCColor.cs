@@ -167,5 +167,13 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             return !(a == b);
         }
+        public override int GetHashCode()
+        {
+            return HEX.GetHashCode();
+        }
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
     }
 }

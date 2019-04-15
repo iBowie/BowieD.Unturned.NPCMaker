@@ -137,9 +137,7 @@
     <Compile Include="Editors\QuestEditor.cs" />
     <Compile Include="Editors\VendorEditor.cs" />
     <Compile Include="Examples\NPCExample.cs" />
-    <Compile Include="Forms\Export_ExportWindow.xaml.cs">
-      <DependentUpon>Export_ExportWindow.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Export\Exporter.cs" />
     <Compile Include="Forms\Form_About.xaml.cs">
       <DependentUpon>Form_About.xaml</DependentUpon>
     </Compile>
@@ -273,10 +271,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Config\ConfigWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Forms\Export_ExportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

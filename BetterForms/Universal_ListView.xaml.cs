@@ -98,11 +98,11 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                     DialogResult = true;
                     Close();
                     break;
-                case Universal_ItemList.ReturnType.Object:
-                    SelectedValue = new NPC.NPCObject();
-                    DialogResult = true;
-                    Close();
-                    break;
+                //case Universal_ItemList.ReturnType.Object:
+                //    SelectedValue = new NPC.NPCObject();
+                //    DialogResult = true;
+                //    Close();
+                //    break;
             }
         }
 

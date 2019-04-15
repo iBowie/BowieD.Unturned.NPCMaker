@@ -794,7 +794,7 @@
                         </Grid>
                     </Grid>
                 </TabItem>
-                <TabItem Name="objectEditorTab" Header="Objects">
+                <TabItem Visibility="Collapsed" Name="objectEditorTab" Header="Objects">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="25*"/>

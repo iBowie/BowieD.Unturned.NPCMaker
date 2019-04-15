@@ -17,7 +17,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             dialogues = new List<NPCDialogue>();
             vendors = new List<NPCVendor>();
             quests = new List<NPCQuest>();
-            objects = new List<NPCObject>();
+            //objects = new List<NPCObject>();
         }
 
         [XmlAttribute]
@@ -26,6 +26,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public List<NPCDialogue> dialogues;
         public List<NPCVendor> vendors;
         public List<NPCQuest> quests;
-        public List<NPCObject> objects;
+        //public List<NPCObject> objects;
     }
 }

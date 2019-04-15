@@ -34,7 +34,7 @@ namespace BowieD.Unturned.NPCMaker
         public static IEditor<NPCDialogue> DialogueEditor { get; private set; }
         public static IEditor<NPCVendor> VendorEditor { get; private set; }
         public static IEditor<NPCQuest> QuestEditor { get; private set; }
-        public static IEditor<NPCObject> ObjectEditor { get; private set; }
+        //public static IEditor<NPCObject> ObjectEditor { get; private set; }
         #endregion
         public MainWindow()
         {
@@ -44,7 +44,7 @@ namespace BowieD.Unturned.NPCMaker
             DialogueEditor = new DialogueEditor();
             VendorEditor = new VendorEditor();
             QuestEditor = new QuestEditor();
-            ObjectEditor = new ObjectEditor();
+            //ObjectEditor = new ObjectEditor();
             DeepAnalysisManager = new Mistakes.DeepAnalysisManager();
             if (Config.Configuration.Properties == null)
                 Config.Configuration.Load();
@@ -237,7 +237,7 @@ namespace BowieD.Unturned.NPCMaker
                 }
 
             }
-            catch (Exception ex) { Logger.Log("Could not clear theme"); }
+            catch { Logger.Log("Could not clear theme"); }
         }
         #endregion
         #region CONSTANTS
@@ -280,7 +280,7 @@ namespace BowieD.Unturned.NPCMaker
             DialogueEditor.Save();
             VendorEditor.Save();
             QuestEditor.Save();
-            ObjectEditor.Save();
+            //ObjectEditor.Save();
             if (saveFile == null || saveFile == "")
             {
                 SaveFileDialog sfd = new SaveFileDialog
@@ -426,8 +426,8 @@ namespace BowieD.Unturned.NPCMaker
                         skinColor = old.skinColor,
                         visibilityConditions = old.visibilityConditions
                     }
-                },
-                objects = new List<NPCObject>()
+                }/*,*/
+                //objects = new List<NPCObject>()
             };
         }
         #endregion
@@ -439,7 +439,7 @@ namespace BowieD.Unturned.NPCMaker
             DialogueEditor.Current = new NPCDialogue();
             QuestEditor.Current = new NPCQuest();
             VendorEditor.Current = new NPCVendor();
-            ObjectEditor.Current = new NPCObject();
+            //ObjectEditor.Current = new NPCObject();
         }
         #endregion
         #region DRAG AND DROP

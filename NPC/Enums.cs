@@ -139,4 +139,13 @@
         None,
         Destroy
     }
+    public enum Object_Hint
+    {
+        None,
+        Door,
+        Switch,
+        Fire,
+        Generator,
+        Use
+    }
 }

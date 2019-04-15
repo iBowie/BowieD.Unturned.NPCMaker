@@ -428,8 +428,7 @@ namespace BowieD.Unturned.NPCMaker
                     return;
             }
             inst.Save();
-            Export_ExportWindow eew = new Export_ExportWindow(AppDomain.CurrentDomain.BaseDirectory + $@"results\{MainWindow.CurrentSave.guid}\");
-            eew.DoActions(MainWindow.CurrentSave);
+            Export.Exporter.ExportNPC(MainWindow.CurrentSave);
         }
         internal void NewButtonClick(object sender, RoutedEventArgs e)
         {
@@ -548,8 +547,8 @@ namespace BowieD.Unturned.NPCMaker
                     presence.Assets.SmallImageText = $"Quests: {MainWindow.CurrentSave.quests.Count}";
                     break;
                 case 4:
-                    presence.Assets.SmallImageKey = "icon_object_outlined";
-                    presence.Assets.SmallImageText = $"Objects: {MainWindow.CurrentSave.objects.Count}";
+                    //presence.Assets.SmallImageKey = "icon_object_outlined";
+                    //presence.Assets.SmallImageText = $"Objects: {MainWindow.CurrentSave.objects.Count}";
                     break;
                 case 5:
                     presence.Assets.SmallImageKey = "icon_warning_outlined";
