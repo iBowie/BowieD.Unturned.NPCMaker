@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Managers;
+using System;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -63,5 +64,6 @@ namespace BowieD.Unturned.NPCMaker
             }
             return false;
         }
+        public static IUpdateManager UpdateManager { get; set; }
     }
 }

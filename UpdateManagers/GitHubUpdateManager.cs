@@ -29,7 +29,7 @@ namespace BowieD.Unturned.NPCMaker.Managers
             if (!fileName.EndsWith(".exe"))
                 fileName += ".exe";
             System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "updater.exe", fileName);
-            Environment.Exit(0);
+            MainWindow.PerformExit();
         }
         public async Task<UpdateAvailability> CheckForUpdates()
         {

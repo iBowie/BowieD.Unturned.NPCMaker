@@ -75,7 +75,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
 
         private void SaveNPC_Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.Instance.Save();
+            MainWindow.Save();
         }
 
         private void CopyButton_Click(object sender, RoutedEventArgs e)

@@ -1,8 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.BetterControls;
 using BowieD.Unturned.NPCMaker.BetterForms;
 using BowieD.Unturned.NPCMaker.Editors;
-using BowieD.Unturned.NPCMaker.Forms;
-using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.NPC;
 using DiscordRPC;
 using Microsoft.Win32;
@@ -35,7 +33,10 @@ namespace BowieD.Unturned.NPCMaker
             inst.optionsMenuItem.Click += Options_Click;
             inst.visibilityCondsButton.Click += Char_EditConditions_Button_Click;
             inst.randomColorButton.Click += RandomColor_Click;
-            inst.exitButton.Click += ExitButtonClick;
+            inst.exitButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
+            {
+                MainWindow.PerformExit();
+            });
             inst.RecentList.Click += RecentList_Click;
             inst.exportButton.Click += ExportClick;
             inst.saveButton.Click += SaveClick;
@@ -67,7 +68,7 @@ namespace BowieD.Unturned.NPCMaker
             inst.CommandBindings.Add(new CommandBinding(saveHotkey,
                 new ExecutedRoutedEventHandler((object sender, ExecutedRoutedEventArgs e) =>
                 {
-                    inst.Save();
+                    MainWindow.Save();
                 })));
             RoutedCommand loadHotkey = new RoutedCommand();
             loadHotkey.InputGestures.Add(new KeyGesture(Key.O, ModifierKeys.Control));
@@ -386,25 +387,6 @@ namespace BowieD.Unturned.NPCMaker
             Config.Configuration.Save();
             UserColorListChanged();
         }
-        internal void ExitButtonClick(object sender, RoutedEventArgs e)
-        {
-            if (!MainWindow.isSaved)
-            {
-                if (!inst.SavePrompt())
-                {
-                    return;
-                }
-            }
-            Config.Configuration.Save();
-            (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.Deinitialize();
-            if (MainWindow.UpdateManager.UpdateAvailability == UpdateAvailability.AVAILABLE)
-            {
-                MainWindow.UpdateManager.StartUpdate();
-                Environment.Exit(0);
-                return;
-            }
-            Environment.Exit(0);
-        }
         internal void RecentList_Click(object sender, RoutedEventArgs e)
         {
             if (e.OriginalSource.Equals(inst.RecentList))
@@ -427,12 +409,12 @@ namespace BowieD.Unturned.NPCMaker
                 if (!(res == MessageBoxResult.OK || res == MessageBoxResult.Yes))
                     return;
             }
-            inst.Save();
+            MainWindow.Save();
             Export.Exporter.ExportNPC(MainWindow.CurrentSave);
         }
         internal void NewButtonClick(object sender, RoutedEventArgs e)
         {
-            if (!inst.SavePrompt())
+            if (!MainWindow.SavePrompt())
                 return;
             inst.ConvertNPCToState(new NPCSave());
             MainWindow.isSaved = true;
@@ -440,13 +422,13 @@ namespace BowieD.Unturned.NPCMaker
         }
         internal void SaveClick(object sender, RoutedEventArgs e)
         {
-            inst.Save();
+            MainWindow.Save();
         }
         internal void SaveAsClick(object sender, RoutedEventArgs e)
         {
             MainWindow.oldFile = MainWindow.saveFile;
             MainWindow.saveFile = "";
-            inst.Save();
+            MainWindow.Save();
             MainWindow.oldFile = "";
         }
         internal void LoadClick(object sender, RoutedEventArgs e)

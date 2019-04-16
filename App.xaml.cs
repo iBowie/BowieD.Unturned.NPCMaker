@@ -65,6 +65,15 @@ namespace BowieD.Unturned.NPCMaker
             Logger.Log($"Scale set to {Config.Configuration.Properties.scale}");
             #endregion
             Config.Configuration.Save();
+
+            Util.UpdateManager = new GitHubUpdateManager();
+            Util.UpdateManager.CheckForUpdates().GetAwaiter().GetResult();
+            if (Util.UpdateManager.UpdateAvailability == UpdateAvailability.AVAILABLE)
+            {
+                Util.UpdateManager.StartUpdate();
+                return;
+            }
+
             CopyResource(NPCMaker.Properties.Resources.DiscordRPC, Config.Configuration.ConfigDirectory + "DiscordRPC.dll");
             CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, Config.Configuration.ConfigDirectory + "Newtonsoft.Json.dll");
             CopyResource(NPCMaker.Properties.Resources.ControlzEx, Config.Configuration.ConfigDirectory + "ControlzEx.dll");

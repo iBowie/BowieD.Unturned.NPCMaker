@@ -26,7 +26,6 @@ namespace BowieD.Unturned.NPCMaker
         #region MANAGERS
         public static INotificationManager NotificationManager { get; private set; } = new NotificationManager();
         public static Mistakes.DeepAnalysisManager DeepAnalysisManager { get; private set; }
-        public static IUpdateManager UpdateManager { get; set; }
         public static DiscordRPC.DiscordManager DiscordManager { get; set; }
         #endregion
         #region EDITORS
@@ -193,8 +192,6 @@ namespace BowieD.Unturned.NPCMaker
             #endregion
             Proxy.ColorSliderChange(null, null);
             MainWindow.NotificationManager.Notify(MainWindow.Localize("app_Free"));
-            UpdateManager = new GitHubUpdateManager();
-            UpdateManager.CheckForUpdates();
         }
         public static string Localize(string key)
         {
@@ -255,7 +252,7 @@ namespace BowieD.Unturned.NPCMaker
         public static bool IsRGB { get; set; } = true;
         public static DateTime Started { get; set; } = DateTime.UtcNow;
         #endregion
-        #region CURRENT NPC
+        #region CURRENT SAVE
         public static string saveFile = "", oldFile = "";
         public static bool isSaved = true;
         #endregion
@@ -270,11 +267,11 @@ namespace BowieD.Unturned.NPCMaker
         {
             Config.Configuration.Save();
             e.Cancel = true;
-            Proxy.ExitButtonClick(this, null);
+            PerformExit();
             base.OnClosing(e);
         }
         #region SAVE_LOAD
-        public void Save()
+        public static void Save()
         {
             CharacterEditor.Save();
             DialogueEditor.Save();
@@ -359,7 +356,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             catch { NotificationManager.Notify(Localize("load_Incompatible")); return false; }
         }
-        public bool SavePrompt()
+        public static bool SavePrompt()
         {
             if (isSaved == true || CurrentSave == new NPCSave())
                 return true;
@@ -470,5 +467,19 @@ namespace BowieD.Unturned.NPCMaker
             dropOverlay.Visibility = Visibility.Hidden;
         }
         #endregion
+
+        public static void PerformExit()
+        {
+            if (!isSaved)
+            {
+                if (!SavePrompt())
+                {
+                    return;
+                }
+            }
+            Config.Configuration.Save();
+            DiscordManager?.Deinitialize();
+            Environment.Exit(0);
+        }
     }
 }
