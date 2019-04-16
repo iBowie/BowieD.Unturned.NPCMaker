@@ -1,8 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.BetterForms;
 using BowieD.Unturned.NPCMaker.Editors;
-using BowieD.Unturned.NPCMaker.Examples;
 using BowieD.Unturned.NPCMaker.Logging;
-using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.Notification;
 using BowieD.Unturned.NPCMaker.NPC;
 using Microsoft.Win32;
@@ -13,8 +11,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Threading;
 using System.Xml;
 using System.Xml.Serialization;

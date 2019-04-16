@@ -108,7 +108,7 @@ namespace BowieD.Unturned.NPCMaker
             inst.userColorSaveButton.IsEnabled = parseAble;
             if (parseAble)
             {
-                var color = new NPCColor() { HEX = text };
+                var color = NPCColor.FromHEX(text);
                 inst.colorHexOut.Text = color.HEX;
                 if (MainWindow.IsRGB)
                 {
@@ -135,7 +135,7 @@ namespace BowieD.Unturned.NPCMaker
                 inst.userColorSaveButton.IsEnabled = parseAble;
                 if (parseAble)
                 {
-                    var color = new NPCColor() { HEX = (e.SourceDataObject.GetData(DataFormats.UnicodeText) as string) };
+                    var color = NPCColor.FromHEX(e.SourceDataObject.GetData(DataFormats.UnicodeText) as string);
                     inst.colorHexOut.Text = color.HEX;
                     if (MainWindow.IsRGB)
                     {
