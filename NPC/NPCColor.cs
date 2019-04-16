@@ -20,51 +20,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
         }
         public static NPCColor FromHSV(double H, double S, double V)
         {
-            #region OPTION_1
-            //double C = V * S;
-            //double X = C * (1d - Math.Abs((H / 60d) % 2d - 1d));
-            //double m = V - C;
-            //double RR = 0, GG = 0, BB = 0;
-            //if (H < 60d)
-            //{
-            //    RR = C;
-            //    GG = X;
-            //    BB = 0;
-            //}
-            //else if (H < 120d)
-            //{
-            //    RR = X;
-            //    GG = C;
-            //    BB = 0;
-            //}
-            //else if (H < 180d)
-            //{
-            //    RR = 0;
-            //    GG = C;
-            //    BB = X;
-            //}
-            //else if (H < 240d)
-            //{
-            //    RR = 0;
-            //    GG = X;
-            //    BB = C;
-            //}
-            //else if (H < 300d)
-            //{
-            //    RR = X;
-            //    GG = 0;
-            //    BB = C;
-            //}
-            //else
-            //{
-            //    RR = C;
-            //    GG = 0;
-            //    BB = X;
-            //}
-            //return new NPCColor((byte)((RR + m) * 255), (byte)((GG + m) * 255), (byte)((BB + m) * 255));
-            #endregion
-            #region OPTION_2
-            // working properly
             int hi = Convert.ToInt32(Math.Floor(H / 60)) % 6;
             double f = H / 60 - Math.Floor(H / 60);
 
@@ -86,14 +41,27 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 return new NPCColor(t, p, v);
             else
                 return new NPCColor(v, p, q);
-            #endregion
+        }
+        public static NPCColor FromHEX(string HEX)
+        {
+            if (HEX.StartsWith("#") && HEX.Length > 1)
+                HEX = HEX.Substring(1);
+            if (HEX.Length < 6)
+                throw new ArgumentException("Not HEX");
+            if (byte.TryParse($"{HEX[0]}{HEX[1]}", NumberStyles.HexNumber, CultureInfo.InvariantCulture, out byte R) &&
+                byte.TryParse($"{HEX[2]}{HEX[3]}", NumberStyles.HexNumber, CultureInfo.InvariantCulture, out byte G) &&
+                byte.TryParse($"{HEX[4]}{HEX[5]}", NumberStyles.HexNumber, CultureInfo.InvariantCulture, out byte B))
+            {
+                return new NPCColor(R, G, B);
+            }
+            else
+                throw new ArgumentException("Not HEX");
         }
         [XmlIgnore]
-        public Tuple<double, double, double> HSV
+        public (double H, double S, double V) HSV
         {
             get
             {
-                #region OPTION_1
                 double RR = R / 255d;
                 double GG = G / 255d;
                 double BB = B / 255d;
@@ -113,49 +81,18 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 if (Cmax != 0)
                     S = delta / Cmax;
                 double V = Cmax;
-                return new Tuple<double, double, double>(H, S, V);
-                #endregion
+                return (H, S, V);
             }
         }
+        [XmlIgnore]
         public string HEX
         {
             get => $"#{R:X2}{G:X2}{B:X2}";
-            set
-            {
-                if (value.StartsWith("#") && value.Length > 1)
-                    value = value.Substring(1);
-                if (value.Length < 6)
-                    return;
-                try
-                {
-                    R = byte.Parse($"{value[0]}{value[1]}", NumberStyles.HexNumber);
-                }
-                catch { }
-                try
-                {
-                    G = byte.Parse($"{value[2]}{value[3]}", NumberStyles.HexNumber);
-                }
-                catch { }
-                try
-                {
-                    B = byte.Parse($"{value[4]}{value[5]}", NumberStyles.HexNumber);
-                }
-                catch { }
-            }
         }
-        public static bool CanParseHex(string text)
-        {
-            if ((text.StartsWith("#") && text.Length < 7) || (text.Length < 6))
-                return false;
-            int offset = 0;
-            if (text.StartsWith("#"))
-                offset = 1;
-            return (byte.TryParse($"{text[0+offset]}{text[1+offset]}", NumberStyles.HexNumber, CultureInfo.InvariantCulture, out byte result1))
-                && (byte.TryParse($"{text[2+offset]}{text[3+offset]}", NumberStyles.HexNumber, CultureInfo.InvariantCulture, out byte result2))
-                && (byte.TryParse($"{text[4+offset]}{text[5+offset]}", NumberStyles.HexNumber, CultureInfo.InvariantCulture, out byte result3));
-        }
+        public static bool CanParseHex(string text) => brushConverter.IsValid(text.Trim('#'));
+        private static BrushConverter brushConverter = new BrushConverter();
         [XmlIgnore]
-        public Brush Brush => new BrushConverter().ConvertFromString(HEX) as Brush;
+        public Brush Brush => brushConverter.ConvertFromString(HEX) as Brush;
         [XmlIgnore]
         public Color Color => Color.FromRgb(R, G, B);
 

@@ -27,5 +27,42 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public List<NPCVendor> vendors;
         public List<NPCQuest> quests;
         //public List<NPCObject> objects;
+
+        public static explicit operator NPCSave(NPCSaveOld old)
+        {
+            return new NPCSave
+            {
+                dialogues = old.dialogues,
+                vendors = old.vendors,
+                quests = old.quests,
+                characters = new List<NPCCharacter>()
+                {
+                    new NPCCharacter()
+                    {
+                        id = old.id,
+                        startDialogueId = old.startDialogueId,
+                        clothing = old.clothing,
+                        christmasClothing = old.christmasClothing,
+                        halloweenClothing = old.halloweenClothing,
+                        beard = old.beard,
+                        displayName = old.displayName,
+                        editorName = old.editorName,
+                        equipped = old.equipped,
+                        equipPrimary = old.equipPrimary,
+                        equipSecondary = old.equipSecondary,
+                        equipTertiary = old.equipTertiary,
+                        face = old.face,
+                        guid = old.guid,
+                        hairColor = old.hairColor,
+                        haircut = old.haircut,
+                        leftHanded = old.leftHanded,
+                        pose = old.pose,
+                        skinColor = old.skinColor,
+                        visibilityConditions = old.visibilityConditions
+                    }
+                }/*,*/
+                //objects = new List<NPCObject>()
+            };
+        }
     }
 }

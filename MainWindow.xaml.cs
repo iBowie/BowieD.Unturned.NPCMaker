@@ -340,7 +340,7 @@ namespace BowieD.Unturned.NPCMaker
                     XmlSerializer newDeser = new XmlSerializer(typeof(NPCSave));
                     if (oldDeser.CanDeserialize(reader))
                     {
-                        CurrentSave = ConvertToNew(oldDeser.Deserialize(reader) as NPCSaveOld);
+                        CurrentSave = (NPCSave)(oldDeser.Deserialize(reader) as NPCSaveOld);
                     }
                     else if (newDeser.CanDeserialize(reader))
                     {
@@ -391,42 +391,6 @@ namespace BowieD.Unturned.NPCMaker
             catch { return false; }
         }
 
-        public static NPCSave ConvertToNew(NPCSaveOld old)
-        {
-            return new NPCSave
-            {
-                dialogues = old.dialogues,
-                vendors = old.vendors,
-                quests = old.quests,
-                characters = new List<NPCCharacter>()
-                {
-                    new NPCCharacter()
-                    {
-                        id = old.id,
-                        startDialogueId = old.startDialogueId,
-                        clothing = old.clothing,
-                        christmasClothing = old.christmasClothing,
-                        halloweenClothing = old.halloweenClothing,
-                        beard = old.beard,
-                        displayName = old.displayName,
-                        editorName = old.editorName,
-                        equipped = old.equipped,
-                        equipPrimary = old.equipPrimary,
-                        equipSecondary = old.equipSecondary,
-                        equipTertiary = old.equipTertiary,
-                        face = old.face,
-                        guid = old.guid,
-                        hairColor = old.hairColor,
-                        haircut = old.haircut,
-                        leftHanded = old.leftHanded,
-                        pose = old.pose,
-                        skinColor = old.skinColor,
-                        visibilityConditions = old.visibilityConditions
-                    }
-                }/*,*/
-                //objects = new List<NPCObject>()
-            };
-        }
         #endregion
         #region STATE CONVERTERS
         public void ConvertNPCToState(NPCSave save)

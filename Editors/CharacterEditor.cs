@@ -95,7 +95,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                         string text = MainWindow.Instance.apparelHairColorBox.Text;
                         BrushConverter bc = new BrushConverter();
                         if (bc.IsValid(text))
-                            return new NPCColor() { HEX = text };
+                            return NPCColor.FromHEX(text);
                         return new NPCColor(0, 0, 0);
                     }).Invoke(),
                     skinColor = new Func<NPCColor>(() =>
@@ -103,7 +103,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                         string text = MainWindow.Instance.apparelSkinColorBox.Text;
                         BrushConverter bc = new BrushConverter();
                         if (bc.IsValid(text))
-                            return new NPCColor() { HEX = text };
+                            return NPCColor.FromHEX(text);
                         return new NPCColor(0, 0, 0);
                     }).Invoke(),
                     leftHanded = MainWindow.Instance.apparelLeftHandedCheckbox.IsChecked == true,
