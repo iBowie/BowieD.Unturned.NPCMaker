@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    public class NPCDialogue
+    public class NPCDialogue : IHasDisplayName
     {
         public NPCDialogue()
         {
@@ -35,10 +35,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 return null;
             return responses.Where(d => d.VisibleInAll || d.visibleIn[messageIndex] == 1).ToList();
         }
-
-        public override string ToString()
-        {
-            return $"[{id}]";
-        }
+        public string DisplayName => $"[{id}]";
     }
 }

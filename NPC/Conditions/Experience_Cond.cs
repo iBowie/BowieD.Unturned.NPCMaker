@@ -3,7 +3,7 @@ using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    public class Experience_Cond : Condition
+    public class Experience_Cond : Condition, Condition.IHasLogic, Condition.IHasValue<uint>
     {
         public Experience_Cond()
         {

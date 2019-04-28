@@ -4,7 +4,7 @@ using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    public class Quest_Cond : Condition
+    public class Quest_Cond : Condition, Condition.IHasLogic
     {
         public Quest_Cond()
         {

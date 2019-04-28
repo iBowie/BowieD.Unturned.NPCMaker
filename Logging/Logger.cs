@@ -18,6 +18,13 @@ namespace BowieD.Unturned.NPCMaker.Logging
                 sw.WriteLine(GetFormatted(logLevel, message));
             }
             lines.Add(GetFormatted(logLevel, message));
+            #if DEBUG
+            try
+            {
+                MainWindow.LogWindow.logBox.Text += $"{GetFormatted(logLevel, message)}{Environment.NewLine}";
+            }
+            catch { }
+            #endif
         }
         public static void Log(Exception ex, Log_Level logLevel = Log_Level.Critical)
         {

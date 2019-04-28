@@ -19,6 +19,9 @@ namespace BowieD.Unturned.NPCMaker
 {
     public partial class MainWindow : Window
     {
+        #if DEBUG
+        public static LogWindow LogWindow { get; private set; } = new LogWindow();
+#endif
         #region MANAGERS
         public static INotificationManager NotificationManager { get; private set; } = new NotificationManager();
         public static Mistakes.DeepAnalysisManager DeepAnalysisManager { get; private set; }
@@ -169,6 +172,9 @@ namespace BowieD.Unturned.NPCMaker
             #if !DEBUG
             debugOverlayText.Visibility = Visibility.Collapsed;
             #endif
+            #if DEBUG
+            LogWindow.Show();
+            #endif
             #endregion
             Config.Configuration.Properties.firstLaunch = false;
             isSaved = true;
@@ -203,36 +209,6 @@ namespace BowieD.Unturned.NPCMaker
                 return key;
             return string.Format(res, format);
         }
-        #region THEMES
-        internal void Theme_Clear()
-        {
-            try
-            {
-                ResourceDictionary metroControls = (from d in Application.Current.Resources.MergedDictionaries
-                                                    where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"
-                                                    select d).FirstOrDefault();
-                ResourceDictionary metroFonts = (from d in Application.Current.Resources.MergedDictionaries
-                                                 where d.Source != null && d.Source.OriginalString == "pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"
-                                                 select d).FirstOrDefault();
-                List<ResourceDictionary> metroThemes = (from d in Application.Current.Resources.MergedDictionaries
-                                                        where d.Source != null && d.Source.OriginalString.StartsWith("pack://application:,,,/MahApps.Metro;component/Styles/Themes/")
-                                                        select d).ToList();
-                if (metroControls != null)
-                    Application.Current.Resources.MergedDictionaries.Remove(metroControls);
-                if (metroFonts != null)
-                    Application.Current.Resources.MergedDictionaries.Remove(metroFonts);
-                if (metroThemes?.Count() > 0)
-                {
-                    foreach (var dic in metroThemes)
-                    {
-                        Application.Current.Resources.MergedDictionaries.Remove(dic);
-                    }
-                }
-
-            }
-            catch { Logger.Log("Could not clear theme"); }
-        }
-        #endregion
         #region CONSTANTS
         public const int
         faceAmount = 32,

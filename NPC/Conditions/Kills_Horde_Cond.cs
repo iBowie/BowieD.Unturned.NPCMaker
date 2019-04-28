@@ -3,7 +3,7 @@ using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    public class Kills_Horde_Cond : Condition
+    public class Kills_Horde_Cond : Condition, Condition.IHasValue<uint>
     {
         public Kills_Horde_Cond()
         {

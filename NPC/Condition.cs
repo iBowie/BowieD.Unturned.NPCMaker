@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
@@ -25,7 +26,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
     [XmlInclude(typeof(Conditions.Player_Life_Water_Cond))]
     [XmlInclude(typeof(Conditions.Player_Life_Health_Cond))]
     [XmlInclude(typeof(Conditions.Player_Life_Virus_Cond))]
-    public class Condition
+    public class Condition : IHasDisplayName
     {
         public string Localization { get; set; }
         public bool Reset { get; set; }
@@ -60,9 +61,70 @@ namespace BowieD.Unturned.NPCMaker.NPC
             else
                 return GetFilePresentation(prefix, prefixIndex, conditionIndex);
         }
-        public override string ToString()
+        public string DisplayName
         {
-            return Localization != null && Localization.Length > 0 ? Localization : Type.ToString();
+            get
+            {
+                if (Localization?.Length > 0)
+                    return $"{Localization}";
+                else
+                {
+                    StringBuilder str = new StringBuilder();
+                    str.Append(MainWindow.Localize("Condition_" + this.Type.ToString()));
+                    if (this is IHasLogic hasLogic)
+                    {
+                        switch (hasLogic.Logic)
+                        {
+                            case Logic_Type.Equal:
+                                str.Append(" = ");
+                                break;
+                            case Logic_Type.Greater_Than:
+                                str.Append(" > ");
+                                break;
+                            case Logic_Type.Greater_Than_Or_Equal_To:
+                                str.Append(" >= ");
+                                break;
+                            case Logic_Type.Less_Than:
+                                str.Append(" < ");
+                                break;
+                            case Logic_Type.Less_Than_Or_Equal_To:
+                                str.Append(" <= ");
+                                break;
+                            case Logic_Type.Not_Equal:
+                                str.Append(" != ");
+                                break;
+                        }
+                    }
+                    switch (this)
+                    {
+                        case IHasValue<uint> val:
+                            str.Append($" {val.Value} ");
+                            break;
+                        case IHasValue<int> val:
+                            str.Append($" {val.Value} ");
+                            break;
+                        case IHasValue<short> val:
+                            str.Append($" {val.Value} ");
+                            break;
+                        case IHasValue<ushort> val:
+                            str.Append($" {val.Value} ");
+                            break;
+                        case IHasValue<long> val:
+                            str.Append($" {val.Value} ");
+                            break;
+                        case IHasValue<ulong> val:
+                            str.Append($" {val.Value} ");
+                            break;
+                        case IHasValue<ESkillset> val:
+                            str.Append($" {MainWindow.Localize($"Skillset_{val.Value.ToString()}")} ");
+                            break;
+                        case IHasValue<bool> val:
+                            str.Append($" {(val.Value ? "TRUE" : "FALSE")} ");
+                            break;
+                    }
+                    return str.ToString();
+                }
+            }
         }
 
         public static Type GetByType(Condition_Type type) => ConditionObjects.First(d => d.Type == type).GetType();
@@ -94,5 +156,14 @@ namespace BowieD.Unturned.NPCMaker.NPC
         }
         private static HashSet<Type> condTypes;
         private static HashSet<Condition> condObjs;
+
+        public interface IHasLogic
+        {
+            Logic_Type Logic { get; set; }
+        }
+        public interface IHasValue<T>
+        {
+            T Value { get; set; }
+        }
     }
 }

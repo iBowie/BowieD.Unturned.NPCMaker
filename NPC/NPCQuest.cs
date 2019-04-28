@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    public class NPCQuest
+    public class NPCQuest : IHasDisplayName
     {
         public NPCQuest()
         {
@@ -27,9 +27,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public string title;
         public string description;
 
-        public override string ToString()
-        {
-            return $"[{id}] {title}";
-        }
+        public string DisplayName => $"[{id}] {title}";
     }
 }

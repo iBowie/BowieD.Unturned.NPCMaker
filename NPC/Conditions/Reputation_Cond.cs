@@ -3,7 +3,7 @@ using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    public class Reputation_Cond : Condition
+    public class Reputation_Cond : Condition, Condition.IHasLogic, Condition.IHasValue<int>
     {
         public Reputation_Cond()
         {

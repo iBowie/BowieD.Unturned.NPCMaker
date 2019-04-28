@@ -3,7 +3,7 @@ using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    public class Time_Of_Day_Cond : Condition
+    public class Time_Of_Day_Cond : Condition, Condition.IHasLogic
     {
         public Time_Of_Day_Cond()
         {

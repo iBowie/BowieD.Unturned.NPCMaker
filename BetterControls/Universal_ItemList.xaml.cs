@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Editors;
+using BowieD.Unturned.NPCMaker.NPC;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,7 +14,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
         {
             InitializeComponent();
             this.Value = input;
-            mainLabel.Content = Value;
+            mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
             if (type == ReturnType.Dialogue || type == ReturnType.Quest || type == ReturnType.Vendor)
                 mainLabel.ToolTip = Value is NPC.NPCDialogue ? (Value as NPC.NPCDialogue).comment : Value is NPC.NPCQuest ? (Value as NPC.NPCQuest).comment : Value is NPC.NPCVendor ? (Value as NPC.NPCVendor).comment : Value;
             else
@@ -35,7 +36,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                 if (uce.ShowDialog() == true)
                 {
                     Value = uce.Result;
-                    mainLabel.Content = Value;
+                    mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
                     mainLabel.ToolTip = Value;
                 }
             }
@@ -55,7 +56,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                 if (ure.DialogResult == true)
                 {
                     Value = ure.Result;
-                    mainLabel.Content = Value;
+                    mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
                     mainLabel.ToolTip = Value;
                 }
             }
@@ -86,7 +87,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                     }
                     Value = NewItem;
                 }
-                mainLabel.Content = Value.ToString();
+                mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
                 mainLabel.ToolTip = Value;
             }
             else if (Type == ReturnType.Character)

@@ -93,6 +93,26 @@ namespace BowieD.Unturned.NPCMaker.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
+        internal static byte[] MahApps_Metro_IconPacks_Core {
+            get {
+                object obj = ResourceManager.GetObject("MahApps_Metro_IconPacks_Core", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] MahApps_Metro_IconPacks_Material {
+            get {
+                object obj = ResourceManager.GetObject("MahApps_Metro_IconPacks_Material", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
         internal static byte[] Microsoft_Xaml_Behaviors {
             get {
                 object obj = ResourceManager.GetObject("Microsoft_Xaml_Behaviors", resourceCulture);

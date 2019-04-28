@@ -29,19 +29,19 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 case ReturnType.Dialogue:
                     foreach (var d in MainWindow.CurrentSave.dialogues)
                     {
-                        Add(d, d.ToString());
+                        Add(d, d.DisplayName);
                     }
                     break;
                 case ReturnType.Quest:
                     foreach (var q in MainWindow.CurrentSave.quests)
                     {
-                        Add(q, q.ToString());
+                        Add(q, q.DisplayName);
                     }
                     break;
                 case ReturnType.Vendor:
                     foreach (var v in MainWindow.CurrentSave.vendors)
                     {
-                        Add(v, v.ToString());
+                        Add(v, v.DisplayName);
                     }
                     break;
             }

@@ -7,7 +7,7 @@ using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    public class Skillset_Cond : Condition
+    public class Skillset_Cond : Condition, Condition.IHasLogic, Condition.IHasValue<ESkillset>
     {
         public Skillset_Cond()
         {

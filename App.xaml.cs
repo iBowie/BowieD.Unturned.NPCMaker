@@ -73,12 +73,15 @@ namespace BowieD.Unturned.NPCMaker
                 Util.UpdateManager.StartUpdate();
                 return;
             }
-
+            #region COPY LIBS
             CopyResource(NPCMaker.Properties.Resources.DiscordRPC, Config.Configuration.ConfigDirectory + "DiscordRPC.dll");
             CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, Config.Configuration.ConfigDirectory + "Newtonsoft.Json.dll");
             CopyResource(NPCMaker.Properties.Resources.ControlzEx, Config.Configuration.ConfigDirectory + "ControlzEx.dll");
             CopyResource(NPCMaker.Properties.Resources.MahApps_Metro, Config.Configuration.ConfigDirectory + "MahApps.Metro.dll");
             CopyResource(NPCMaker.Properties.Resources.Microsoft_Xaml_Behaviors, Config.Configuration.ConfigDirectory + "Microsoft.Xaml.Behaviors.dll");
+            CopyResource(NPCMaker.Properties.Resources.MahApps_Metro_IconPacks_Core, Config.Configuration.ConfigDirectory + "MahApps.Metro.IconPacks.Core.dll");
+            CopyResource(NPCMaker.Properties.Resources.MahApps_Metro_IconPacks_Material, Config.Configuration.ConfigDirectory + "MahApps.Metro.IconPacks.Material.dll");
+            #endregion
         }
 
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)

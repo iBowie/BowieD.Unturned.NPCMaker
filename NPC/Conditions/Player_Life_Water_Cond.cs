@@ -3,7 +3,7 @@ using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    public class Player_Life_Water_Cond : Condition
+    public class Player_Life_Water_Cond : Condition, Condition.IHasLogic, Condition.IHasValue<ushort>
     {
         public Player_Life_Water_Cond()
         {

@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    public class NPCCharacter
+    public class NPCCharacter : IHasDisplayName
     {
         public NPCCharacter()
         {
@@ -55,9 +55,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public string guid;
         public List<Condition> visibilityConditions;
 
-        public override string ToString()
-        {
-            return $"{editorName} - {displayName}";
-        }
+        public string DisplayName => $"[{id}] {editorName} - {displayName}";
     }
 }

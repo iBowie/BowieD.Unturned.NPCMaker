@@ -3,7 +3,7 @@ using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    public class Flag_Bool_Cond : Condition
+    public class Flag_Bool_Cond : Condition, Condition.IHasValue<bool>
     {
         public Flag_Bool_Cond()
         {

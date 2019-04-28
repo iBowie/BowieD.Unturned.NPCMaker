@@ -3,7 +3,7 @@ using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    public class Kills_Players_Cond : Condition
+    public class Kills_Players_Cond : Condition, Condition.IHasValue<short>
     {
         public Kills_Players_Cond()
         {

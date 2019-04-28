@@ -18,7 +18,7 @@ namespace BowieD.Unturned.NPCMaker.Config
             public bool firstLaunch;
             public string Language;
             public bool enableDiscord;
-            public ITheme currentTheme;
+            public Theme currentTheme;
             public bool generateGuids;
             public byte autosaveOption;
             public Logging.Log_Level LogLevel;
@@ -52,7 +52,7 @@ namespace BowieD.Unturned.NPCMaker.Config
         }
 
         public static CFG Properties { get; private set; }
-        public static ITheme DefaultTheme => new MetroTheme() { DictionaryName = "Light.Green", Name = "LightGreen", R = 84, G = 142, B = 25 };
+        public static Theme DefaultTheme => new MetroTheme() { DictionaryName = "Light.Green", Name = "LightGreen", R = 84, G = 142, B = 25 };
 
         private static string Path => $@"C:{System.IO.Path.DirectorySeparatorChar}Users{System.IO.Path.DirectorySeparatorChar}{Environment.UserName}{System.IO.Path.DirectorySeparatorChar}AppData{System.IO.Path.DirectorySeparatorChar}Local{System.IO.Path.DirectorySeparatorChar}BowieD{System.IO.Path.DirectorySeparatorChar}UnturnedNPCMakerConfig.xml";
         public static string ConfigDirectory

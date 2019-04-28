@@ -101,17 +101,17 @@
                             </mah:NumericUpDown.ToolTip>
                         </mah:NumericUpDown>
                         <TextBlock  HorizontalAlignment="Left" Margin="79,15,0,0" TextWrapping="Wrap" Text="{DynamicResource general_ID}" VerticalAlignment="Top"/>
-                        <Button Name="characterSaveButton" ToolTip="{DynamicResource dialogue_Save}" HorizontalAlignment="Right" Margin="0,10,68,0" VerticalAlignment="Top" Width="24" Height="25">
+                        <Button Name="characterSaveButton" ToolTip="{DynamicResource dialogue_Save}" HorizontalAlignment="Right" Margin="0,5,82,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="ContentSave"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
+                                <iconPacks:PackIconMaterial Kind="ContentSave" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Name="characterResetButton" ToolTip="{DynamicResource dialogue_Clear}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="24" Height="25">
+                        <Button Name="characterResetButton" ToolTip="{DynamicResource dialogue_Clear}" HorizontalAlignment="Right" Margin="0,5,10,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Name="characterOpenButton" ToolTip="{DynamicResource dialogue_Open}" HorizontalAlignment="Right" Margin="0,10,39,0" VerticalAlignment="Top" Width="24" Height="25">
+                        <Button Name="characterOpenButton" ToolTip="{DynamicResource dialogue_Open}" HorizontalAlignment="Right" Margin="0,5,46,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
@@ -672,17 +672,17 @@
                                 </StackPanel>
                             </ScrollViewer>
                         </GroupBox>
-                        <Button Grid.Column="2" Name="dialogueSaveButton" ToolTip="{DynamicResource dialogue_Save}" HorizontalAlignment="Right" Margin="0,10,68,0" VerticalAlignment="Top" Width="24" Height="25">
+                        <Button Grid.Column="2" Name="dialogueSaveButton" ToolTip="{DynamicResource dialogue_Save}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="dialogueResetButton" ToolTip="{DynamicResource dialogue_Clear}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="24" Height="25">
+                        <Button Grid.Column="2" Name="dialogueResetButton" ToolTip="{DynamicResource dialogue_Clear}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Delete" Width="16" Height="16"  Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="dialogueOpenButton" ToolTip="{DynamicResource dialogue_Open}" HorizontalAlignment="Right" Margin="0,10,39,0" VerticalAlignment="Top" Width="24" Height="25">
+                        <Button Grid.Column="2" Name="dialogueOpenButton" ToolTip="{DynamicResource dialogue_Open}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="FolderOutline" Width="16" Height="16"  Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
@@ -708,17 +708,17 @@
                         <TextBlock  Grid.Column="1" HorizontalAlignment="Right" Margin="0,14,10,0" TextWrapping="Wrap" Text="{DynamicResource vendor_Title}" VerticalAlignment="Top" Width="128" Height="16"/>
                         <TextBox  Grid.Column="1" Name="vendorDescTxtBox" Height="26" VerticalAlignment="Bottom" Margin="10,0,146,10"/>
                         <TextBlock  Grid.Column="1" Width="128" HorizontalAlignment="Right" Margin="0,0,10,14" TextWrapping="Wrap" Text="{DynamicResource vendor_Desc}" VerticalAlignment="Bottom" Height="16"/>
-                        <Button Grid.Column="2" Name="vendorSaveButton" Height="25" ToolTip="{DynamicResource vendor_Save}" HorizontalAlignment="Right" Margin="0,10,68,0" VerticalAlignment="Top" Width="24">
+                        <Button Grid.Column="2" Name="vendorSaveButton" Height="31" ToolTip="{DynamicResource vendor_Save}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="vendorOpenButton" Height="25" ToolTip="{DynamicResource vendor_Open}" HorizontalAlignment="Right" Margin="0,10,39,0" VerticalAlignment="Top" Width="24">
+                        <Button Grid.Column="2" Name="vendorOpenButton" Height="31" ToolTip="{DynamicResource vendor_Open}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="vendorResetButton" Height="25" ToolTip="{DynamicResource vendor_Clear}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="24">
+                        <Button Grid.Column="2" Name="vendorResetButton" Height="31" ToolTip="{DynamicResource vendor_Clear}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
@@ -758,17 +758,17 @@
                         <TextBlock Grid.Row="1" Text="{DynamicResource quest_Title}" TextAlignment="Center" Height="23" VerticalAlignment="Top" Margin="10,10,10,0"/>
                         <TextBox Grid.Row="1" TextWrapping="Wrap" Name="questDescBox" Margin="10,94,10,10"/>
                         <TextBlock Grid.Row="1" TextAlignment="Center" Text="{DynamicResource quest_Desc}" Height="23" VerticalAlignment="Top" Margin="10,66,10,0"/>
-                        <Button Grid.Column="2" Name="questSaveButton" Height="25" ToolTip="{DynamicResource quest_Save}" HorizontalAlignment="Right" Margin="0,10,68,0" VerticalAlignment="Top" Width="24">
+                        <Button Grid.Column="2" Name="questSaveButton" Height="31" ToolTip="{DynamicResource quest_Save}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="questOpenButton" Height="25" ToolTip="{DynamicResource quest_Open}" HorizontalAlignment="Right" Margin="0,10,39,0" VerticalAlignment="Top" Width="24">
+                        <Button Grid.Column="2" Name="questOpenButton" Height="31" ToolTip="{DynamicResource quest_Open}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="questResetButton" Height="25" ToolTip="{DynamicResource quest_Clear}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="24">
+                        <Button Grid.Column="2" Name="questResetButton" Height="31" ToolTip="{DynamicResource quest_Clear}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>

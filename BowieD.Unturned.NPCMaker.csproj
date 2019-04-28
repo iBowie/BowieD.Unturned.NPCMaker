@@ -111,6 +111,9 @@
     <Compile Include="BetterForms\AppCrashReport.xaml.cs">
       <DependentUpon>AppCrashReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BetterForms\LogWindow.xaml.cs">
+      <DependentUpon>LogWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BetterForms\Message_TreeView.xaml.cs">
       <DependentUpon>Message_TreeView.xaml</DependentUpon>
     </Compile>
@@ -153,11 +156,17 @@
     <Compile Include="Mistakes\MistakesManager.cs" />
     <Compile Include="Notification\INotificationManager.cs" />
     <Compile Include="Notification\NotificationManager.cs" />
+    <Compile Include="NPC\IHasDisplayName.cs" />
     <Compile Include="NPC\NPCCharacter.cs" />
     <Compile Include="NPC\NPCClothing.cs" />
     <Compile Include="NPC\NPCSave.cs" />
-    <Compile Include="Themes\ITheme.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Themes\MetroTheme.cs" />
+    <Compile Include="Themes\Theme.cs" />
     <Compile Include="UpdateManagers\GitHubUpdateManager.cs" />
     <Compile Include="UpdateManagers\IUpdateManager.cs" />
     <Compile Include="UpdateManagers\UpdateAvailability.cs" />
@@ -249,6 +258,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="BetterForms\LogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BetterForms\Message_TreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -319,11 +332,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -331,8 +339,8 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -480,11 +488,13 @@
     <Resource Include="Resources\Help\img_help_editorName.png" />
     <Resource Include="Resources\Help\img_help_startDialogue.png" />
     <Resource Include="Resources\Help\img_help_visibilityConditions.png" />
-    <EmbeddedResource Include="Libs\DiscordRPC.dll" />
-    <None Include="Libs\MahApps.Metro.dll" />
-    <None Include="Libs\ControlzEx.dll" />
-    <None Include="Libs\Microsoft.Xaml.Behaviors.dll" />
-    <Content Include="Libs\Newtonsoft.Json.dll" />
+    <Resource Include="Libs\DiscordRPC.dll" />
+    <Resource Include="Libs\MahApps.Metro.dll" />
+    <Resource Include="Libs\ControlzEx.dll" />
+    <Resource Include="Libs\Microsoft.Xaml.Behaviors.dll" />
+    <Resource Include="Libs\MahApps.Metro.IconPacks.Material.dll" />
+    <Resource Include="Libs\MahApps.Metro.IconPacks.Core.dll" />
+    <Resource Include="Libs\Newtonsoft.Json.dll" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

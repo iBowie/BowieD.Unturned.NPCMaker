@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace BowieD.Unturned.NPCMaker
 {
-    public class MetroTheme : ITheme
+    public class MetroTheme : Theme
     {
         public override string Name { get; set; }
         public string DictionaryName { get; set; }
@@ -16,7 +16,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             try
             {
-                MainWindow.Instance.Theme_Clear();
+                ClearThemes();
                 Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml") });
                 Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml") });
                 var resourceDictionary = new ResourceDictionary() { Source = new Uri($"pack://application:,,,/MahApps.Metro;component/Styles/Themes/{DictionaryName}.xaml") };
@@ -27,6 +27,7 @@ namespace BowieD.Unturned.NPCMaker
                 }
                 Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
                 App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(R, G, B));
+                Logging.Logger.Log($"Accent Color Set to ({R};{G};{B})");
                 Config.Configuration.Properties.currentTheme = this;
 
             }
