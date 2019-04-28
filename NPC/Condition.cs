@@ -122,6 +122,14 @@ namespace BowieD.Unturned.NPCMaker.NPC
                             str.Append($" {(val.Value ? "TRUE" : "FALSE")} ");
                             break;
                     }
+                    if (this is Quest_Cond questCond)
+                    {
+                        str.Append($" {MainWindow.Localize("QuestStatus_" + questCond.Status.ToString())} ");
+                    }
+                    if (this is Item_Cond itemCond)
+                    {
+                        str.Append($" {itemCond.Id} x{itemCond.Amount}");
+                    }
                     return str.ToString();
                 }
             }

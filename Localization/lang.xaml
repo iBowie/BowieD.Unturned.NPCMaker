@@ -278,6 +278,8 @@
     <v:String x:Key="conditionEditor_Reset_Kills_Zombie_Title">Set amount to zero on complete</v:String>
     <v:String x:Key="conditionEditor_Reset_Kills_Horde_Title">Set amount to zero on complete</v:String>
     <v:String x:Key="conditionEditor_Reset_Kills_Animal_Title">Set amount to zero on complete</v:String>
+    <v:String x:Key="conditionEditor_Reset_Kills_Objects_Title">Set amount to zero on complete</v:String>
+    <v:String x:Key="conditionEditor_Reset_Kills_Player_Title">Set amount to zero on complete</v:String>
     <v:String x:Key="conditionEditor_Reset_Quest_Title">Set status based on current on complete</v:String>
     <v:String x:Key="conditionEditor_Reset_Quest_Tooltip">If quest status is "Active", it will abandon quest`If quest status is "Ready", it will complete quest`If quest status is "Completed", it will remove quest</v:String>
     <v:String x:Key="conditionEditor_Reset_Experience">Spend experience on complete</v:String>

@@ -92,6 +92,9 @@
     <v:String x:Key="tab_Vendor">Торговля</v:String>
     <v:String x:Key="tab_Quest">Задания</v:String>
     <v:String x:Key="tab_Mistakes">Ошибки</v:String>
+
+    <v:String x:Key="character_ID_Zero">ID персонажа равен нулю</v:String>
+    <v:String x:Key="notify_Character_Saved">Персонаж сохранён!</v:String>
     
     <v:String x:Key="general_EditorName">Имя в редакторе</v:String>
     <v:String x:Key="general_EditorName_Tooltip">Имя, видимое в редакторе карт</v:String>
@@ -274,6 +277,8 @@
     <v:String x:Key="conditionEditor_Reset_Kills_Zombie_Title">Установить значение 0 после выполнения</v:String>
     <v:String x:Key="conditionEditor_Reset_Kills_Horde_Title">Установить значение 0 после выполнения</v:String>
     <v:String x:Key="conditionEditor_Reset_Kills_Animal_Title">Установить значение 0 после выполнения</v:String>
+    <v:String x:Key="conditionEditor_Reset_Kills_Objects_Title">Установить значение 0 после выполнения</v:String>
+    <v:String x:Key="conditionEditor_Reset_Kills_Player_Title">Установить значение 0 после выполнения</v:String>
     <v:String x:Key="conditionEditor_Reset_Quest_Title">Изменить статус при выполнении</v:String>
     <v:String x:Key="conditionEditor_Reset_Quest_Tooltip">Статус задания "В процессе": сброс задания`Статус задания "Готово": выполнение квеста`Статус задания "Выполнено": снятие задания с игрока</v:String>
     <v:String x:Key="conditionEditor_Reset_Experience">Потратить опыт после выполнения</v:String>
@@ -282,7 +287,7 @@
     <v:String x:Key="conditionEditor_FlagID">ID флага</v:String>
     <v:String x:Key="conditionEditor_Status">Статус задания</v:String>
     <v:String x:Key="conditionEditor_Zombies">Вид зомби</v:String>
-    <v:String x:Key="conditionEditor_Localization">Локализация</v:String>
+    <v:String x:Key="conditionEditor_Localization">Игровой текст</v:String>
     <v:String x:Key="conditionEditor_Localization_Tooltip">Текст, который виден в меню. {0} - текущий прогресс, {1} - требуется.</v:String>
     <v:String x:Key="conditionEditor_Variables">Параметры</v:String>
     <v:String x:Key="condition_DisplayText_Item">Игрок должен иметь %item% x%amount%</v:String>
