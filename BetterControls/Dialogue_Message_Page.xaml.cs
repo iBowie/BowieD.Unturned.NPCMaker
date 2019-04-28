@@ -29,14 +29,28 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void DeleteButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            DoubleAnimation anim = new DoubleAnimation(deleteButton.Opacity, Visible_Opacity, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
-            deleteButton.BeginAnimation(OpacityProperty, anim);
+            if (Config.Configuration.Properties.animateControls)
+            {
+                DoubleAnimation anim = new DoubleAnimation(deleteButton.Opacity, Visible_Opacity, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
+                deleteButton.BeginAnimation(OpacityProperty, anim);
+            }
+            else
+            {
+                deleteButton.Opacity = Visible_Opacity;
+            }
         }
 
         private void DeleteButton_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            DoubleAnimation anim = new DoubleAnimation(deleteButton.Opacity, Hidden_Opacity, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
-            deleteButton.BeginAnimation(OpacityProperty, anim);
+            if (Config.Configuration.Properties.animateControls)
+            {
+                DoubleAnimation anim = new DoubleAnimation(deleteButton.Opacity, Hidden_Opacity, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
+                deleteButton.BeginAnimation(OpacityProperty, anim);
+            }
+            else
+            {
+                deleteButton.Opacity = Hidden_Opacity;
+            }
         }
     }
 }

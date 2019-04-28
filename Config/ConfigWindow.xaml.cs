@@ -37,6 +37,7 @@ namespace BowieD.Unturned.NPCMaker.Config
                 nc.generateGuids = Generate_GUIDS_Box.IsChecked.Value;
                 nc.experimentalFeatures = Experimental_Box.IsChecked.Value;
                 nc.LogLevel = (Logging.Log_Level)Enum.Parse(typeof(Logging.Log_Level), (Log_Level_Box.SelectedItem as ComboBoxItem).Tag.ToString());
+                nc.animateControls = Animation_Enabled_Box.IsChecked.Value;
                 return nc;
             }
             set
@@ -78,6 +79,7 @@ namespace BowieD.Unturned.NPCMaker.Config
                 Experimental_Box.IsChecked = value.experimentalFeatures;
                 Discord_Enabled_Box.IsChecked = value.enableDiscord;
                 Generate_GUIDS_Box.IsChecked = value.generateGuids;
+                Animation_Enabled_Box.IsChecked = value.animateControls;
             }
         }
 

@@ -91,9 +91,9 @@ namespace BowieD.Unturned.NPCMaker
             faceImageIndex.Maximum = faceAmount - 1;
             beardImageIndex.Maximum = beardAmount - 1;
             hairImageIndex.Maximum = haircutAmount - 1;
-            Proxy.FaceImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
-            Proxy.HairImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
-            Proxy.BeardImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
+            (CharacterEditor as CharacterEditor).FaceImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
+            (CharacterEditor as CharacterEditor).HairImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
+            (CharacterEditor as CharacterEditor).BeardImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
             Proxy.UserColorListChanged();
             #endregion
             #region HOLIDAYS

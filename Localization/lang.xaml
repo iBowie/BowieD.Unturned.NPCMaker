@@ -45,6 +45,7 @@
     <v:String x:Key="config_Tab_Appearance_Theme_DarkBlue">Dark Blue</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkPurple">Dark Purple</v:String>
     <v:String x:Key="config_Tab_Appearance_Scale">Scale</v:String>
+    <v:String x:Key="config_Tab_Appearance_Animation">Animation</v:String>
     <v:String x:Key="config_Tab_Misc_Discord">Discord Rich Presence Advanced</v:String>
     <v:String x:Key="config_Tab_Misc_Experimental">Enable Experimental Features</v:String>
     <v:String x:Key="config_OnExit">To apply new settings restart the app.</v:String>

@@ -115,6 +115,7 @@
                             <ComboBoxItem Tag="2" Content="200%"/>
                         </ComboBox>
                     </Grid>
+                    <CheckBox Content="{DynamicResource config_Tab_Appearance_Animation}" Name="Animation_Enabled_Box" VerticalAlignment="Top" Margin="2.5"/>
                 </StackPanel>
             </TabItem>
             <TabItem Header="{DynamicResource config_Tab_Misc}">

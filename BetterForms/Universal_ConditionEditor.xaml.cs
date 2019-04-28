@@ -88,8 +88,16 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 AddLabel(MainWindow.Localize("conditionEditor_Localization"), MainWindow.Localize("conditionEditor_Localization_Tooltip"));
                 AddTextBox(200);
             }
-            DoubleAnimation anim = new DoubleAnimation(Height, (baseHeight + (heightDelta * (mult + (mult > 1 ? 1 : 0)))), new Duration(new TimeSpan(0, 0, 0, 0, 500)));
-            BeginAnimation(HeightProperty, anim);
+            double newHeight = (baseHeight + (heightDelta * (mult + (mult > 1 ? 1 : 0))));
+            if (Config.Configuration.Properties.animateControls)
+            {
+                DoubleAnimation anim = new DoubleAnimation(Height, newHeight, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
+                BeginAnimation(HeightProperty, anim);
+            }
+            else
+            {
+                Height = newHeight;
+            }
         }
         #region METHODS
         internal void ClearParameters()

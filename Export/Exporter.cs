@@ -2,11 +2,14 @@
 using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace BowieD.Unturned.NPCMaker.Export
 {
@@ -22,6 +25,16 @@ namespace BowieD.Unturned.NPCMaker.Export
             //Export_Objects(save.objects);
             Export_Quests(save.quests);
             Export_Vendors(save.vendors);
+            Button button = new Button
+            {
+                Content = new TextBlock
+                {
+                    Text = MainWindow.Localize("export_Done_Goto")
+                }
+            };
+            Action<object, RoutedEventArgs> action = new Action<object, RoutedEventArgs>((sender, e) => { Process.Start(AppDomain.CurrentDomain.BaseDirectory + $@"results\{save.guid}"); });
+            button.Click += new RoutedEventHandler(action);
+            MainWindow.NotificationManager.Notify(MainWindow.Localize("export_Done"), buttons: button);
         }
         private static string dir = "";
 
@@ -31,6 +44,7 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
+                    Directory.CreateDirectory(dir + $@"Characters\{character.editorName}_{character.id}");
                     using (StreamWriter asset = new StreamWriter(dir + $@"Characters\{character.editorName}_{character.id}\Asset.dat", false, Encoding.UTF8))
                     using (StreamWriter local = new StreamWriter(dir + $@"Characters\{character.editorName}_{character.id}\English.dat", false, Encoding.UTF8))
                     {

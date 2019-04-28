@@ -2,6 +2,8 @@
 using BowieD.Unturned.NPCMaker.BetterForms;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
+using DiscordRPC;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -15,14 +17,17 @@ namespace BowieD.Unturned.NPCMaker.Editors
         {
             MainWindow.Instance.dialogueSaveButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) => {
                 Save();
+                SendPresence();
             });
             MainWindow.Instance.dialogueOpenButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
             {
                 Open();
+                SendPresence();
             });
             MainWindow.Instance.dialogueResetButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
             {
                 Reset();
+                SendPresence();
             });
             MainWindow.Instance.dialogueAddReplyButton.Click += AddReplyClick;
             MainWindow.Instance.dialogueAddMessageButton.Click += AddMessageClick;
@@ -216,6 +221,19 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 MainWindow.NotificationManager.Notify(MainWindow.Localize("dialogue_Start_Notify", dial.id));
                 Logger.Log($"Dialogue {dial.id} set as start!");
             }
+        }
+
+        public void SendPresence()
+        {
+            RichPresence presence = new RichPresence();
+            presence.Timestamps = new Timestamps();
+            presence.Timestamps.StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            presence.Assets = new Assets();
+            presence.Assets.SmallImageKey = "icon_chat_outlined";
+            presence.Assets.SmallImageText = $"Dialogues: {MainWindow.CurrentSave.dialogues.Count}";
+            presence.Details = $"Messages: {MainWindow.DialogueEditor.Current.MessagesAmount}";
+            presence.State = $"Responses: {MainWindow.DialogueEditor.Current.ResponsesAmount}";
+            MainWindow.DiscordManager.SendPresence(presence);
         }
     }
 }

@@ -8,25 +8,71 @@ using BowieD.Unturned.NPCMaker.BetterControls;
 using BowieD.Unturned.NPCMaker.BetterForms;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
+using DiscordRPC;
 
 namespace BowieD.Unturned.NPCMaker.Editors
 {
     public class CharacterEditor : IEditor<NPCCharacter>
     {
+        private Func<Equip_Type> getEquipType = new Func<Equip_Type>(() =>
+        {
+            var item = MainWindow.Instance.equipSlotBox.SelectedItem as ComboBoxItem;
+            if (item == null)
+                return Equip_Type.None;
+            var val = (Equip_Type)item.Tag;
+            return val;
+        });
+        private Func<NPC_Pose> getPose = new Func<NPC_Pose>(() =>
+        {
+            var item = MainWindow.Instance.apparelPoseBox.SelectedItem as ComboBoxItem;
+            if (item == null)
+                return NPC_Pose.Stand;
+            var val = (NPC_Pose)item.Tag;
+            return val;
+        });
+        private Func<NPCColor> getHairColor = new Func<NPCColor>(() =>
+        {
+            string text = MainWindow.Instance.apparelHairColorBox.Text;
+            BrushConverter bc = new BrushConverter();
+            if (bc.IsValid(text))
+                return NPCColor.FromHEX(text);
+            return new NPCColor(0, 0, 0);
+        });
+        private Func<NPCColor> getSkinColor = new Func<NPCColor>(() =>
+        {
+            string text = MainWindow.Instance.apparelSkinColorBox.Text;
+            BrushConverter bc = new BrushConverter();
+            if (bc.IsValid(text))
+                return NPCColor.FromHEX(text);
+            return new NPCColor(0, 0, 0);
+        });
         public CharacterEditor()
         {
             MainWindow.Instance.characterResetButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
             {
                 Reset();
+                SendPresence();
             });
             MainWindow.Instance.characterOpenButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
             {
                 Open();
+                SendPresence();
             });
             MainWindow.Instance.characterSaveButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
             {
                 Save();
+                SendPresence();
             });
+            MainWindow.Instance.apparelFaceRandomize.Click += Apparel_Face_Random_Button_Click;
+            MainWindow.Instance.faceImageIndex.ValueChanged += FaceImageIndex_Changed;
+            MainWindow.Instance.beardImageIndex.ValueChanged += BeardImageIndex_Changed;
+            MainWindow.Instance.hairImageIndex.ValueChanged += HairImageIndex_Changed;
+            MainWindow.Instance.apparelSkinColorBox.TextChanged += ApparelSkinColorBox_TextChanged;
+            MainWindow.Instance.apparelHairColorBox.TextChanged += ApparelHairColorBox_TextChanged;
+            MainWindow.Instance.apparelHairRandomize.Click += Apparel_Hair_Random_Button_Click;
+            MainWindow.Instance.apparelBeardRandomize.Click += Apparel_Beard_Random_Button_Click;
+            MainWindow.Instance.apparelFaceRandomize.Click += Apparel_Face_Random_Button_Click;
+            MainWindow.Instance.visibilityCondsButton.Click += Char_EditConditions_Button_Click;
         }
         public NPCCharacter Current
         {
@@ -68,44 +114,16 @@ namespace BowieD.Unturned.NPCMaker.Editors
                     },
                     displayName = MainWindow.Instance.txtDisplayName.Text ?? "",
                     editorName = MainWindow.Instance.txtEditorName.Text ?? "",
-                    equipped = new Func<Equip_Type>(() =>
-                    {
-                        var item = MainWindow.Instance.equipSlotBox.SelectedItem as ComboBoxItem;
-                        if (item == null)
-                            return Equip_Type.None;
-                        var val = (Equip_Type)item.Tag;
-                        return val;
-                    }).Invoke(),
-                    pose = new Func<NPC_Pose>(() =>
-                    {
-                        var item = MainWindow.Instance.apparelPoseBox.SelectedItem as ComboBoxItem;
-                        if (item == null)
-                            return NPC_Pose.Stand;
-                        var val = (NPC_Pose)item.Tag;
-                        return val;
-                    }).Invoke(),
+                    equipped = getEquipType.Invoke(),
+                    pose = getPose.Invoke(),
                     equipPrimary = (ushort)(MainWindow.Instance.primaryIdBox.Value ?? 0),
                     equipSecondary = (ushort)(MainWindow.Instance.secondaryIdBox.Value ?? 0),
                     equipTertiary = (ushort)(MainWindow.Instance.tertiaryIdBox.Value ?? 0),
                     face = (byte)(MainWindow.Instance.faceImageIndex.Value ?? 0),
                     haircut = (byte)(MainWindow.Instance.hairImageIndex.Value ?? 0),
                     guid = loadedGUID,
-                    hairColor = new Func<NPCColor>(() =>
-                    {
-                        string text = MainWindow.Instance.apparelHairColorBox.Text;
-                        BrushConverter bc = new BrushConverter();
-                        if (bc.IsValid(text))
-                            return NPCColor.FromHEX(text);
-                        return new NPCColor(0, 0, 0);
-                    }).Invoke(),
-                    skinColor = new Func<NPCColor>(() =>
-                    {
-                        string text = MainWindow.Instance.apparelSkinColorBox.Text;
-                        BrushConverter bc = new BrushConverter();
-                        if (bc.IsValid(text))
-                            return NPCColor.FromHEX(text);
-                        return new NPCColor(0, 0, 0);
-                    }).Invoke(),
+                    hairColor = getHairColor.Invoke(),
+                    skinColor = getSkinColor.Invoke(),
                     leftHanded = MainWindow.Instance.apparelLeftHandedCheckbox.IsChecked == true,
                     startDialogueId = (ushort)(MainWindow.Instance.txtStartDialogueID.Value ?? 0),
                     visibilityConditions = conditions
@@ -222,5 +240,97 @@ namespace BowieD.Unturned.NPCMaker.Editors
 
         private string loadedGUID;
         public List<NPC.Condition> conditions;
+
+        public void SendPresence()
+        {
+            RichPresence presence = new RichPresence();
+            presence.Timestamps = new Timestamps();
+            presence.Timestamps.StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            presence.Assets = new Assets();
+            presence.Assets.SmallImageKey = "icon_info_outlined";
+            presence.Assets.SmallImageText = $"Characters: {MainWindow.CurrentSave.characters.Count}";
+            presence.Details = $"Current NPC: {MainWindow.CharacterEditor.Current.editorName}";
+            presence.State = $"Display Name: {MainWindow.CharacterEditor.Current.displayName}";
+            MainWindow.DiscordManager.SendPresence(presence);
+        }
+
+        internal void Apparel_Face_Random_Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Instance.faceImageIndex.Value = new Random().Next(0, MainWindow.faceAmount);
+        }
+        internal void Apparel_Beard_Random_Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Instance.beardImageIndex.Value = new Random().Next(0, MainWindow.beardAmount);
+        }
+        internal void Apparel_Hair_Random_Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Instance.hairImageIndex.Value = new Random().Next(0, MainWindow.haircutAmount);
+        }
+        internal void ApparelSkinColorBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string text = MainWindow.Instance.apparelSkinColorBox.Text;
+            BrushConverter bc = new BrushConverter();
+            if (bc.IsValid(text))
+            {
+                Brush color = bc.ConvertFromString(text) as Brush;
+                MainWindow.Instance.faceImageBorder.Background = color;
+            }
+            else
+            {
+                MainWindow.Instance.faceImageBorder.Background = Brushes.Transparent;
+            }
+        }
+        internal void ApparelHairColorBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string text = MainWindow.Instance.apparelHairColorBox.Text;
+            BrushConverter bc = new BrushConverter();
+            if (bc.IsValid(text))
+            {
+                Brush color = bc.ConvertFromString(text) as Brush;
+                MainWindow.Instance.beardRenderGrid.DataContext = color;
+                MainWindow.Instance.hairRenderGrid.DataContext = color;
+            }
+            else
+            {
+                MainWindow.Instance.beardRenderGrid.DataContext = Brushes.Black;
+                MainWindow.Instance.hairRenderGrid.DataContext = Brushes.Black;
+            }
+        }
+        internal void FaceImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            MainWindow.Instance.faceImageControl.Source = ("Resources/Unturned/Faces/" + e.NewValue + ".png").GetImageSource();
+            MainWindow.isSaved = false;
+        }
+        internal void HairImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            foreach (UIElement ui in MainWindow.Instance.hairRenderGrid.Children)
+            {
+                if (ui is Canvas c)
+                {
+                    c.Visibility = Visibility.Collapsed;
+                }
+            }
+            MainWindow.Instance.hairRenderGrid.Children[(int)e.NewValue].Visibility = Visibility.Visible;
+            MainWindow.isSaved = false;
+        }
+        internal void BeardImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            foreach (UIElement ui in MainWindow.Instance.beardRenderGrid.Children)
+            {
+                if (ui is Canvas c)
+                {
+                    c.Visibility = Visibility.Collapsed;
+                }
+            }
+            MainWindow.Instance.beardRenderGrid.Children[(int)e.NewValue].Visibility = Visibility.Visible;
+            MainWindow.isSaved = false;
+        }
+        internal void Char_EditConditions_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Universal_ListView ulv = new Universal_ListView(conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
+            ulv.ShowDialog();
+            conditions = ulv.Values.Cast<NPC.Condition>().ToList();
+            MainWindow.isSaved = false;
+        }
     }
 }

@@ -93,31 +93,23 @@
             <TabControl Grid.Row="1" Background="Transparent" Padding="-1" Name="mainTabControl" SelectedIndex="0" Margin="0,5,0,0">
                 <TabItem Name="characterTab" Header="{DynamicResource tab_Character}">
                     <Grid>
-                        <mah:NumericUpDown Name="txtID" mah:TextBoxHelper.Watermark="NPC ID" HorizontalAlignment="Left" VerticalAlignment="Top" Width="64" Height="24" Margin="10,10,0,0" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
-                            <mah:NumericUpDown.ToolTip>
-                                <StackPanel>
-                                    <Label Content="{DynamicResource general_ID_Tooltip}"/>
-                                </StackPanel>
-                            </mah:NumericUpDown.ToolTip>
-                        </mah:NumericUpDown>
-                        <TextBlock  HorizontalAlignment="Left" Margin="79,15,0,0" TextWrapping="Wrap" Text="{DynamicResource general_ID}" VerticalAlignment="Top"/>
-                        <Button Name="characterSaveButton" ToolTip="{DynamicResource dialogue_Save}" HorizontalAlignment="Right" Margin="0,5,82,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Name="characterSaveButton" ToolTip="{DynamicResource dialogue_Save}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Name="characterResetButton" ToolTip="{DynamicResource dialogue_Clear}" HorizontalAlignment="Right" Margin="0,5,10,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Name="characterResetButton" ToolTip="{DynamicResource dialogue_Clear}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Name="characterOpenButton" ToolTip="{DynamicResource dialogue_Open}" HorizontalAlignment="Right" Margin="0,5,46,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Name="characterOpenButton" ToolTip="{DynamicResource dialogue_Open}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
 
-                        <TabControl Margin="0,41,0,0">
+                        <TabControl Margin="0,0,0,0">
                             <TabItem Name="generalInfoTab" Header="{DynamicResource tab_General}">
                                 <Grid>
                                     <TextBlock FontSize="24" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="{DynamicResource general_Title}" VerticalAlignment="Top"/>
@@ -139,7 +131,15 @@
                                         </TextBox.ToolTip>
                                     </TextBox>
                                     <TextBlock  HorizontalAlignment="Left" Margin="143,80,0,0" TextWrapping="Wrap" Text="{DynamicResource general_DisplayName}" VerticalAlignment="Top"/>
-                                    <mah:NumericUpDown Name="txtStartDialogueID" HorizontalAlignment="Left" Height="23" Margin="10,107,0,0" VerticalAlignment="Top" Width="128" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
+                                    <mah:NumericUpDown Name="txtID" HorizontalAlignment="Left" VerticalAlignment="Top" Width="64" Height="24" Margin="10,107,0,0" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
+                                        <mah:NumericUpDown.ToolTip>
+                                            <StackPanel>
+                                                <Label Content="{DynamicResource general_ID_Tooltip}"/>
+                                            </StackPanel>
+                                        </mah:NumericUpDown.ToolTip>
+                                    </mah:NumericUpDown>
+                                    <TextBlock  HorizontalAlignment="Left" Margin="79,110,0,0" TextWrapping="Wrap" Text="{DynamicResource general_ID}" VerticalAlignment="Top"/>
+                                    <mah:NumericUpDown Name="txtStartDialogueID" HorizontalAlignment="Left" Height="23" Margin="10,138,0,0" VerticalAlignment="Top" Width="128" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
                                         <mah:NumericUpDown.ToolTip>
                                             <ToolTip>
                                                 <StackPanel>
@@ -149,15 +149,15 @@
                                             </ToolTip>
                                         </mah:NumericUpDown.ToolTip>
                                     </mah:NumericUpDown>
-                                    <TextBlock  HorizontalAlignment="Left" Margin="143,111,0,0" TextWrapping="Wrap" Text="{DynamicResource general_StartDialogue}" VerticalAlignment="Top"/>
-                                    <Button Name="visibilityCondsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource general_Conditions}" Margin="10,138,0,0" Width="212" Height="28">
+                                    <TextBlock  HorizontalAlignment="Left" Margin="143,142,0,0" TextWrapping="Wrap" Text="{DynamicResource general_StartDialogue}" VerticalAlignment="Top"/>
+                                    <Button Name="visibilityCondsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource general_Conditions}" Margin="10,170,0,0" Width="212" Height="28">
                                         <Button.ToolTip>
                                             <StackPanel>
                                                 <Image Source="Resources/Help/img_help_visibilityConditions.png"/>
                                             </StackPanel>
                                         </Button.ToolTip>
                                     </Button>
-                                    <Button Name="regenerateGuidsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource general_Regenerate}" Margin="10,171,0,0" MinWidth="212" Height="28"/>
+                                    <Button Name="regenerateGuidsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource general_Regenerate}" Margin="10,202,0,0" MinWidth="212" Height="28"/>
                                 </Grid>
                             </TabItem>
                             <TabItem Name="apparelTab" Header="{DynamicResource tab_Apparel}">
@@ -645,7 +645,9 @@
                             </Button.ToolTip>
                         </Button>
                         <mah:NumericUpDown x:Name="dialogueInputIdControl" Width="62" Height="26" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
-                        <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="77,17,0,0" TextWrapping="Wrap" Text="{DynamicResource dialogue_ID}" VerticalAlignment="Top" Height="16" Width="66"/>
+                        <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
+                            <TextBlock TextAlignment="Center" Text="{DynamicResource dialogue_ID}" VerticalAlignment="Center"/>
+                        </Border>
                         <GroupBox Grid.Row="1" Header="{DynamicResource dialogue_Group_Pages}" Margin="10">
                             <ScrollViewer>
                                 <StackPanel Name="messagePagesGrid" VerticalAlignment="Top">
@@ -703,7 +705,9 @@
                         </Grid.ColumnDefinitions>
                         <TextBox mah:TextBoxHelper.Watermark="{DynamicResource app_Comment}" Name="vendor_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
                         <mah:NumericUpDown x:Name="vendorIdTxtBox" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
-                        <TextBlock  HorizontalAlignment="Left" Margin="77,14,0,0" TextWrapping="Wrap" Text="{DynamicResource vendor_ID}" VerticalAlignment="Top" Width="83" Height="16"/>
+                        <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
+                            <TextBlock TextWrapping="Wrap" Text="{DynamicResource vendor_ID}" VerticalAlignment="Center"/>
+                        </Border>
                         <TextBox  Grid.Column="1" Name="vendorTitleTxtBox" Height="26" VerticalAlignment="Top" Margin="10,10,146,0"/>
                         <TextBlock  Grid.Column="1" HorizontalAlignment="Right" Margin="0,14,10,0" TextWrapping="Wrap" Text="{DynamicResource vendor_Title}" VerticalAlignment="Top" Width="128" Height="16"/>
                         <TextBox  Grid.Column="1" Name="vendorDescTxtBox" Height="26" VerticalAlignment="Bottom" Margin="10,0,146,10"/>
@@ -723,14 +727,14 @@
                                 <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <GroupBox Grid.Row="1" Margin="5" Header="{DynamicResource vendor_BuyList}">
+                        <GroupBox Grid.Row="1" Margin="10,5,5,10" Header="{DynamicResource vendor_BuyList}">
                             <ScrollViewer>
                                 <StackPanel Name="vendorListBuyItems">
 
                                 </StackPanel>
                             </ScrollViewer>
                         </GroupBox>
-                        <GroupBox Grid.Row="1" Grid.Column="1" Margin="5" Header="{DynamicResource vendor_SellList}">
+                        <GroupBox Grid.Row="1" Grid.Column="1" Margin="5,5,5,10" Header="{DynamicResource vendor_SellList}">
                             <ScrollViewer>
                                 <StackPanel Name="vendorListSellItems">
 
@@ -753,7 +757,9 @@
                         </Grid.ColumnDefinitions>
                         <TextBox mah:TextBoxHelper.Watermark="{DynamicResource app_Comment}" Name="quest_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
                         <mah:NumericUpDown x:Name="questIdBox" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
-                        <TextBlock Text="{DynamicResource quest_ID}" Height="23" VerticalAlignment="Top" HorizontalAlignment="Left" Width="288" Margin="77,16,0,0" Grid.ColumnSpan="2"/>
+                        <Border VerticalAlignment="Top" HorizontalAlignment="Left" Margin="77,10,0,0" Height="26" Grid.ColumnSpan="2">
+                            <TextBlock Text="{DynamicResource quest_ID}" VerticalAlignment="Center"/>
+                        </Border>
                         <TextBox Grid.Row="1" Name="questTitleBox" Height="26" VerticalAlignment="Top" Margin="10,38,10,0"/>
                         <TextBlock Grid.Row="1" Text="{DynamicResource quest_Title}" TextAlignment="Center" Height="23" VerticalAlignment="Top" Margin="10,10,10,0"/>
                         <TextBox Grid.Row="1" TextWrapping="Wrap" Name="questDescBox" Margin="10,94,10,10"/>

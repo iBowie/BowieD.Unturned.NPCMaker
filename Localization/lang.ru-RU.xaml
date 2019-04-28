@@ -44,6 +44,7 @@
     <v:String x:Key="config_Tab_Appearance_Theme_DarkBlue">Тёмная синяя</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkPurple">Тёмная фиолетовая</v:String>
     <v:String x:Key="config_Tab_Appearance_Scale">Масштаб</v:String>
+    <v:String x:Key="config_Tab_Appearance_Animation">Анимация</v:String>
     <v:String x:Key="config_Tab_Misc_Discord">Подробный Discord Rich Presence</v:String>
     <v:String x:Key="config_Tab_Misc_Experimental">Экспериментальный режим</v:String>
     <v:String x:Key="config_OnExit">Для применения настроек перезапустите программу.</v:String>

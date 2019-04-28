@@ -31,7 +31,6 @@ namespace BowieD.Unturned.NPCMaker
             inst.lstMistakes.SelectionChanged += MistakeList_Selected;
             inst.regenerateGuidsButton.Click += RegenerateGuids_Click;
             inst.optionsMenuItem.Click += Options_Click;
-            inst.visibilityCondsButton.Click += Char_EditConditions_Button_Click;
             inst.randomColorButton.Click += RandomColor_Click;
             inst.exitButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
             {
@@ -42,9 +41,6 @@ namespace BowieD.Unturned.NPCMaker
             inst.saveButton.Click += SaveClick;
             inst.saveAsButton.Click += SaveAsClick;
             inst.loadButton.Click += LoadClick;
-            inst.faceImageIndex.ValueChanged += FaceImageIndex_Changed;
-            inst.beardImageIndex.ValueChanged += BeardImageIndex_Changed;
-            inst.hairImageIndex.ValueChanged += HairImageIndex_Changed;
             inst.mainTabControl.SelectionChanged += TabControl_SelectionChanged;
             inst.colorSliderR.ValueChanged += ColorSliderChange;
             inst.colorSliderG.ValueChanged += ColorSliderChange;
@@ -54,11 +50,6 @@ namespace BowieD.Unturned.NPCMaker
             inst.discordComm.Click += FeedbackItemClick;
             inst.steamComm.Click += FeedbackItemClick;
             inst.patchNotesMenuItem.Click += WhatsNew_Menu_Click;
-            inst.apparelSkinColorBox.TextChanged += ApparelSkinColorBox_TextChanged;
-            inst.apparelHairColorBox.TextChanged += ApparelHairColorBox_TextChanged;
-            inst.apparelHairRandomize.Click += ApparelHaircut_Random;
-            inst.apparelBeardRandomize.Click += ApparelBeard_Random;
-            inst.apparelFaceRandomize.Click += ApparelFace_Random;
             inst.userColorSaveButton.Click += UserColorList_AddColor;
             inst.switchToAnotherScheme.Click += ColorScheme_Switch;
             inst.colorHexOut.PreviewTextInput += ColorHex_Input;
@@ -167,6 +158,14 @@ namespace BowieD.Unturned.NPCMaker
         }
         internal void RegenerateGuids_Click(object sender, RoutedEventArgs e)
         {
+            if (MainWindow.CurrentSave.characters != null)
+            {
+                foreach (NPCCharacter c in MainWindow.CurrentSave.characters)
+                {
+                    if (c != null)
+                        c.guid = Guid.NewGuid().ToString("N");
+                }
+            }
             if (MainWindow.CurrentSave.dialogues != null)
             {
                 foreach (NPCDialogue d in MainWindow.CurrentSave.dialogues)
@@ -198,13 +197,6 @@ namespace BowieD.Unturned.NPCMaker
         {
             Config.ConfigWindow cw = new Config.ConfigWindow();
             cw.ShowDialog();
-        }
-        internal void Char_EditConditions_Button_Click(object sender, RoutedEventArgs e)
-        {
-            Universal_ListView ulv = new Universal_ListView((MainWindow.CharacterEditor as CharacterEditor).conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
-            ulv.ShowDialog();
-            (MainWindow.CharacterEditor as CharacterEditor).conditions = ulv.Values.Cast<NPC.Condition>().ToList();
-            MainWindow.isSaved = false;
         }
         internal void RandomColor_Click(object sender, RoutedEventArgs e)
         {
@@ -450,42 +442,13 @@ namespace BowieD.Unturned.NPCMaker
                 MainWindow.NotificationManager.Notify(MainWindow.Localize("notify_Loaded"));
             }
         }
-        internal void FaceImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            inst.faceImageControl.Source = ("Resources/Unturned/Faces/" + e.NewValue + ".png").GetImageSource();
-            MainWindow.isSaved = false;
-        }
-        internal void BeardImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            foreach (UIElement ui in inst.beardRenderGrid.Children)
-            {
-                if (ui is Canvas c)
-                {
-                    c.Visibility = Visibility.Collapsed;
-                }
-            }
-            inst.beardRenderGrid.Children[(int)e.NewValue].Visibility = Visibility.Visible;
-            MainWindow.isSaved = false;
-        }
-        internal void HairImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
-        {
-            foreach (UIElement ui in inst.hairRenderGrid.Children)
-            {
-                if (ui is Canvas c)
-                {
-                    c.Visibility = Visibility.Collapsed;
-                }
-            }
-            inst.hairRenderGrid.Children[(int)e.NewValue].Visibility = Visibility.Visible;
-            MainWindow.isSaved = false;
-        }
         internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e?.AddedItems.Count == 0 || sender == null)
                 return;
             int selectedIndex = (sender as TabControl).SelectedIndex;
             TabItem tab = e?.AddedItems[0] as TabItem;
-            if (tab?.Content is Grid g)
+            if (Config.Configuration.Properties.animateControls && tab?.Content is Grid g)
             {
                 DoubleAnimation anim = new DoubleAnimation(0, 1, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
                 g.BeginAnimation(MainWindow.OpacityProperty, anim);
@@ -494,54 +457,65 @@ namespace BowieD.Unturned.NPCMaker
             {
                 Mistakes.MistakesManager.FindMistakes();
             }
-            RichPresence presence = new RichPresence
+            if (MainWindow.DiscordManager != null)
             {
-                Details = new Func<string>(() =>
+                switch (selectedIndex)
                 {
-                    string editorName = MainWindow.CharacterEditor.Current.editorName;
-                    return $"Editing {(editorName == null || editorName.Length < 1 ? "NPC without name" : editorName)}";
-                }).Invoke(),
-                State = new Func<string>(() =>
-                {
-                    string displayName = MainWindow.CharacterEditor.Current.displayName;
-                    return $"Display Name: {(displayName == null || displayName.Length < 1 ? "None" : displayName)}";
-                }).Invoke(),
-            };
-            presence.Timestamps = new Timestamps();
-            presence.Timestamps.StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-            presence.Assets = new Assets();
-            switch (selectedIndex)
-            {
-                case 0:
-                    presence.Assets.SmallImageKey = "icon_info_outlined";
-                    presence.Assets.SmallImageText = $"Characters: {MainWindow.CurrentSave.characters.Count}";
-                    break;
-                case 1:
-                    presence.Assets.SmallImageKey = "icon_chat_outlined";
-                    presence.Assets.SmallImageText = $"Dialogues: {MainWindow.CurrentSave.dialogues.Count}";
-                    break;
-                case 2:
-                    presence.Assets.SmallImageKey = "icon_money_outlined";
-                    presence.Assets.SmallImageText = $"Vendors: {MainWindow.CurrentSave.vendors.Count}";
-                    break;
-                case 3:
-                    presence.Assets.SmallImageKey = "icon_exclamation_outlined";
-                    presence.Assets.SmallImageText = $"Quests: {MainWindow.CurrentSave.quests.Count}";
-                    break;
-                case 4:
-                    //presence.Assets.SmallImageKey = "icon_object_outlined";
-                    //presence.Assets.SmallImageText = $"Objects: {MainWindow.CurrentSave.objects.Count}";
-                    break;
-                case 5:
-                    presence.Assets.SmallImageKey = "icon_warning_outlined";
-                    presence.Assets.SmallImageText = $"Mistakes: {MainWindow.Instance.lstMistakes.Items.Count}";
-                    break;
-                default:
-                    presence.Assets.SmallImageKey = "icon_question_outlined";
-                    presence.Assets.SmallImageText = "Something?..";
-                    break;
+                    case 0:
+                        MainWindow.CharacterEditor.SendPresence();
+                        break;
+                    case 1:
+                        MainWindow.DialogueEditor.SendPresence();
+                        break;
+                    case 2:
+                        MainWindow.VendorEditor.SendPresence();
+                        break;
+                    case 3:
+                        MainWindow.QuestEditor.SendPresence();
+                        break;
+                    case 4:
+                        //MainWindow.ObjectEditor.SendPresence();
+
+                        //presence.Assets.SmallImageKey = "icon_object_outlined";
+                        //presence.Assets.SmallImageText = $"Objects: {MainWindow.CurrentSave.objects.Count}";
+                        break;
+                    case 5:
+                        {
+                            RichPresence presence = new RichPresence
+                            {
+                                Timestamps = new Timestamps
+                                {
+                                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                                },
+                                Assets = new Assets()
+                            };
+                            presence.Assets.SmallImageKey = "icon_warning_outlined";
+                            presence.Assets.SmallImageText = $"Mistakes: {MainWindow.Instance.lstMistakes.Items.Count}";
+                            presence.Details = $"Critical errors: {Mistakes.MistakesManager.Criticals_Count}";
+                            presence.State = $"Warnings: {Mistakes.MistakesManager.Warnings_Count}";
+                            MainWindow.DiscordManager.SendPresence(presence);
+                            break;
+                        }
+                    default:
+                        {
+
+                            RichPresence presence = new RichPresence
+                            {
+                                Timestamps = new Timestamps
+                                {
+                                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                                },
+                                Assets = new Assets()
+                            };
+                            presence.Assets.SmallImageKey = "icon_question_outlined";
+                            presence.Assets.SmallImageText = "Something?..";
+                            presence.Details = $"If this is shown";
+                            presence.State = $"Then something gone wrong.";
+                            MainWindow.DiscordManager.SendPresence(presence);
+                            break;
+                        }
+                }
             }
-            (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
         }
         internal void ColorSliderChange(object sender, RoutedPropertyChangedEventArgs<double> value)
         {
@@ -716,48 +690,6 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             catch (Exception ex) { Logging.Logger.Log(ex); }
-        }
-        internal void ApparelSkinColorBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string text = inst.apparelSkinColorBox.Text;
-            BrushConverter bc = new BrushConverter();
-            if (bc.IsValid(text))
-            {
-                Brush color = bc.ConvertFromString(text) as Brush;
-                inst.faceImageBorder.Background = color;
-            }
-            else
-            {
-                inst.faceImageBorder.Background = Brushes.Transparent;
-            }
-        }
-        internal void ApparelHairColorBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string text = inst.apparelHairColorBox.Text;
-            BrushConverter bc = new BrushConverter();
-            if (bc.IsValid(text))
-            {
-                Brush color = bc.ConvertFromString(text) as Brush;
-                inst.beardRenderGrid.DataContext = color;
-                inst.hairRenderGrid.DataContext = color;
-            }
-            else
-            {
-                inst.beardRenderGrid.DataContext = Brushes.Black;
-                inst.hairRenderGrid.DataContext = Brushes.Black;
-            }
-        }
-        internal void ApparelHaircut_Random(object sender, RoutedEventArgs e)
-        {
-            inst.hairImageIndex.Value = new Random().Next(0, MainWindow.haircutAmount);
-        }
-        internal void ApparelBeard_Random(object sender, RoutedEventArgs e)
-        {
-            inst.beardImageIndex.Value = new Random().Next(0, MainWindow.beardAmount);
-        }
-        internal void ApparelFace_Random(object sender, RoutedEventArgs e)
-        {
-            inst.faceImageIndex.Value = new Random().Next(0, MainWindow.faceAmount);
         }
         #endregion
     }

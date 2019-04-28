@@ -1,6 +1,8 @@
 ﻿using BowieD.Unturned.NPCMaker.BetterControls;
 using BowieD.Unturned.NPCMaker.BetterForms;
 using BowieD.Unturned.NPCMaker.NPC;
+using DiscordRPC;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,14 +34,17 @@ namespace BowieD.Unturned.NPCMaker.Editors
             };
             MainWindow.Instance.questSaveButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) => {
                 Save();
+                SendPresence();
             });
             MainWindow.Instance.questOpenButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
             {
                 Open();
+                SendPresence();
             });
             MainWindow.Instance.questResetButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
             {
                 Reset();
+                SendPresence();
             });
         }
 
@@ -117,6 +122,19 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.CurrentSave.quests.Add(cur);
             MainWindow.isSaved = false;
             MainWindow.NotificationManager.Notify(MainWindow.Localize("notify_Quest_Saved"));
+        }
+
+        public void SendPresence()
+        {
+            RichPresence presence = new RichPresence();
+            presence.Timestamps = new Timestamps();
+            presence.Timestamps.StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            presence.Assets = new Assets();
+            presence.Assets.SmallImageKey = "icon_exclamation_outlined";
+            presence.Assets.SmallImageText = $"Quests: {MainWindow.CurrentSave.quests.Count}";
+            presence.Details = $"Quest Name: {MainWindow.QuestEditor.Current.title}";
+            presence.State = $"Rewards: {MainWindow.QuestEditor.Current.rewards.Count} | Conds: {MainWindow.QuestEditor.Current.conditions.Count}";
+            MainWindow.DiscordManager.SendPresence(presence);
         }
 
         public void AddReward(Reward reward)

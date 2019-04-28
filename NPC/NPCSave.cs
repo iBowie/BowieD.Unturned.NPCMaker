@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
@@ -12,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
     {
         public NPCSave()
         {
-            guid = new Guid().ToString("N");
+            guid = Guid.NewGuid().ToString("N");
             characters = new List<NPCCharacter>();
             dialogues = new List<NPCDialogue>();
             vendors = new List<NPCVendor>();

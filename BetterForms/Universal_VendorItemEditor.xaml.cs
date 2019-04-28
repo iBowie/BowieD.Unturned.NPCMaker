@@ -61,21 +61,39 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 return;
             if (Selected_ItemType == ItemType.ITEM)
             {
-                DoubleAnimation opacityAnimation = new DoubleAnimation(1, 0, new Duration(new System.TimeSpan(0, 0, 0, 0, 500)));
-                DoubleAnimation heightAnimation = new DoubleAnimation(stateA, stateB, new Duration(new System.TimeSpan(0, 0, 0, 0, 500)));
-                BeginAnimation(HeightProperty, heightAnimation);
-                txtBoxSpawnpoint.BeginAnimation(OpacityProperty, opacityAnimation);
-                labelSpawnpoint.BeginAnimation(OpacityProperty, opacityAnimation);
+                if (Config.Configuration.Properties.animateControls)
+                {
+                    DoubleAnimation opacityAnimation = new DoubleAnimation(1, 0, new Duration(new System.TimeSpan(0, 0, 0, 0, 500)));
+                    DoubleAnimation heightAnimation = new DoubleAnimation(stateA, stateB, new Duration(new System.TimeSpan(0, 0, 0, 0, 500)));
+                    BeginAnimation(HeightProperty, heightAnimation);
+                    txtBoxSpawnpoint.BeginAnimation(OpacityProperty, opacityAnimation);
+                    labelSpawnpoint.BeginAnimation(OpacityProperty, opacityAnimation);
+                }
+                else
+                {
+                    Height = stateB;
+                    labelSpawnpoint.Opacity = 0;
+                    txtBoxSpawnpoint.Opacity = 0;
+                }
                 sellBox.IsEnabled = true;
                 txtBoxSpawnpoint.Text = "";
             }
             else
             {
-                DoubleAnimation opacityAnimation = new DoubleAnimation(0, 1, new Duration(new System.TimeSpan(0, 0, 0, 0, 500)));
-                DoubleAnimation heightAnimation = new DoubleAnimation(stateB, stateA, new Duration(new System.TimeSpan(0, 0, 0, 0, 500)));
-                BeginAnimation(HeightProperty, heightAnimation);
-                txtBoxSpawnpoint.BeginAnimation(OpacityProperty, opacityAnimation);
-                labelSpawnpoint.BeginAnimation(OpacityProperty, opacityAnimation);
+                if (Config.Configuration.Properties.animateControls)
+                {
+                    DoubleAnimation opacityAnimation = new DoubleAnimation(0, 1, new Duration(new System.TimeSpan(0, 0, 0, 0, 500)));
+                    DoubleAnimation heightAnimation = new DoubleAnimation(stateB, stateA, new Duration(new System.TimeSpan(0, 0, 0, 0, 500)));
+                    BeginAnimation(HeightProperty, heightAnimation);
+                    txtBoxSpawnpoint.BeginAnimation(OpacityProperty, opacityAnimation);
+                    labelSpawnpoint.BeginAnimation(OpacityProperty, opacityAnimation);
+                }
+                else
+                {
+                    Height = stateA;
+                    labelSpawnpoint.Opacity = 1;
+                    txtBoxSpawnpoint.Opacity = 1;
+                }
                 sellBox.IsEnabled = false;
                 sellBox.SelectedIndex = 1;
             }

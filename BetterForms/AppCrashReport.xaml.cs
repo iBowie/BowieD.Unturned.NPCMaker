@@ -59,13 +59,11 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             sb.AppendLine($"Scale: {cfg.scale}");
             sb.AppendLine($"Theme: {cfg.currentTheme.Name}");
             sb.AppendLine($"Discord Rich Presence: {(cfg.enableDiscord ? "Detailed" : "Private")}");
+            sb.AppendLine($"Animation: {(cfg.animateControls ? "Animated" : "Inanimated")}");
             sb.AppendLine();
             sb.AppendLine($"Application log:");
             sb.AppendLine();
-            foreach (string s in Logger.lines)
-            {
-                sb.AppendLine(s);
-            }
+            Logger.lines.ForEach(s => sb.AppendLine(s));
             sb.AppendLine();
             sb.AppendLine($"Exception message: {exception.Message}");
             sb.AppendLine($"Stack trace: {exception.StackTrace}");

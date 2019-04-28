@@ -6,5 +6,6 @@
         void Open();
         void Reset();
         T Current { get; set; }
+        void SendPresence();
     }
 }
