@@ -352,39 +352,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\ICON_APPAREL.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_SAVE.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_OPEN.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_RECENT.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_INFO.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_CHAT.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_EXCLAMATION.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_WARNING.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_MONEY.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_CANCEL.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_OK.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Unturned\Faces\0.png" />
     <Resource Include="Resources\Unturned\Faces\1.png" />
     <Resource Include="Resources\Unturned\Faces\10.png" />
@@ -419,20 +386,7 @@
     <Resource Include="Resources\Unturned\Faces\9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\ICON_PLUS.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_BUY.png" />
-    <Resource Include="Resources\ICON_SELL.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_CRAFTING.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\BowieD_1000x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_PENCIL.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Services\Discord.png" />
@@ -450,29 +404,7 @@
     <Resource Include="Resources\Icons\Option_1_256x.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\ICON_ACHIEVEMENT.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_COPY.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Option_1_256x.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_ARROW_DOWN.png" />
-    <Resource Include="Resources\ICON_ARROW_UP.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_OPTIONS.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_SCALE.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ICON_QUESTION.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\BAD_ICON_UPDATE.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Help\img_help_dialogueMessage.png" />

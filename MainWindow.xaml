@@ -109,7 +109,7 @@
                             </Button.Content>
                         </Button>
 
-                        <TabControl Margin="0,0,0,0">
+                        <TabControl Margin="0,0,0,0" Background="Transparent">
                             <TabItem Name="generalInfoTab" Header="{DynamicResource tab_General}">
                                 <Grid>
                                     <TextBlock FontSize="24" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="{DynamicResource general_Title}" VerticalAlignment="Top"/>
@@ -839,7 +839,7 @@
                             </ListView.View>
                         </ListView>
                         <Button Name="deepAnalysis_Button" FontSize="16" VerticalAlignment="Bottom" Content="{DynamicResource mistakes_DeepAnalysis}" ToolTip="{DynamicResource mistakes_DeepAnalysis_Tooltip}" Margin="10,0,10,10" Height="45"/>
-                        <Label Name="noErrorsLabel" VerticalAlignment="Center" HorizontalAlignment="Center" Content="No errors! You're doing great!" FontSize="24" Visibility="Collapsed" Margin="0,0,0,100"/>
+                        <Label Name="noErrorsLabel" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{DynamicResource mistakes_NoMistakes}" FontSize="24" Visibility="Collapsed" Margin="0,0,0,100"/>
 
                     </Grid>
                 </TabItem>
