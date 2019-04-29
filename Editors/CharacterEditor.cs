@@ -272,8 +272,24 @@ namespace BowieD.Unturned.NPCMaker.Editors
             BrushConverter bc = new BrushConverter();
             if (bc.IsValid(text))
             {
-                Brush color = bc.ConvertFromString(text) as Brush;
+                SolidColorBrush color = bc.ConvertFromString(text) as SolidColorBrush;
                 MainWindow.Instance.faceImageBorder.Background = color;
+                NPCColor clr = NPCColor.FromBrush(color);
+                if (clr.HSV.V <= 0.1d)
+                {
+                    var effect = new System.Windows.Media.Effects.DropShadowEffect
+                    {
+                        BlurRadius = 2,
+                        Direction = 0,
+                        Color = Brushes.White.Color,
+                        ShadowDepth = 0
+                    };
+                    MainWindow.Instance.faceImageControl.Effect = effect;
+                }
+                else
+                {
+                    MainWindow.Instance.faceImageControl.Effect = null;
+                }
             }
             else
             {
@@ -286,7 +302,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             BrushConverter bc = new BrushConverter();
             if (bc.IsValid(text))
             {
-                Brush color = bc.ConvertFromString(text) as Brush;
+                SolidColorBrush color = bc.ConvertFromString(text) as SolidColorBrush;
                 MainWindow.Instance.beardRenderGrid.DataContext = color;
                 MainWindow.Instance.hairRenderGrid.DataContext = color;
             }

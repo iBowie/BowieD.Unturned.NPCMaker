@@ -178,8 +178,12 @@
                                             <Button Name="switchToAnotherScheme" Content="{DynamicResource tool_Color_SwitchTo_HSV}" Height="23" HorizontalAlignment="Right" Margin="0,0,147,10" VerticalAlignment="Bottom" Width="133"/>
                                         </Grid>
                                     </GroupBox>
-                                    <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="98" Margin="8,38,0,0" VerticalAlignment="Top" Width="98">
-                                        <Image Name="faceImageControl" />
+                                    <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" Background="Black" HorizontalAlignment="Left" Height="98" Margin="8,38,0,0" VerticalAlignment="Top" Width="98">
+                                        <Image Name="faceImageControl" Source="Resources/Unturned/Faces/1.png" >
+                                            <Image.Effect>
+                                                <DropShadowEffect Color="White" Direction="0" BlurRadius="2" ShadowDepth="0"/>
+                                            </Image.Effect>
+                                        </Image>
                                     </Border>
                                     <mah:NumericUpDown Minimum="0" x:Name="faceImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,140,0,0" Width="{Binding Width, ElementName=faceImageBorder}" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
                                     <Border x:Name="beardImageBorder" BorderBrush="{Binding BorderBrush, ElementName=faceImageBorder}" BorderThickness="1" HorizontalAlignment="Left" Height="{Binding Height, ElementName=faceImageBorder}" Width="{Binding Width, ElementName=faceImageBorder}" VerticalAlignment="Top" Margin="210,38,0,0">
@@ -648,7 +652,7 @@
                         <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
                             <TextBlock TextAlignment="Center" Text="{DynamicResource dialogue_ID}" VerticalAlignment="Center"/>
                         </Border>
-                        <GroupBox Grid.Row="1" Header="{DynamicResource dialogue_Group_Pages}" Margin="10">
+                        <GroupBox Grid.Row="1" Header="{DynamicResource dialogue_Group_Pages}" Margin="10,10,5,10">
                             <ScrollViewer>
                                 <StackPanel Name="messagePagesGrid" VerticalAlignment="Top">
                                     <Button Name="dialogueAddMessageButton" Margin="10" Height="32" Content="{DynamicResource dialogue_Message_Add}">
@@ -661,7 +665,7 @@
                                 </StackPanel>
                             </ScrollViewer>
                         </GroupBox>
-                        <GroupBox Grid.Column="1" Grid.Row="1" Header="{DynamicResource dialogue_Group_Replys}" Margin="10,10,0,10" MinWidth="361">
+                        <GroupBox Grid.Column="1" Grid.Row="1" Header="{DynamicResource dialogue_Group_Replys}" Margin="5,10,5,10" MinWidth="361">
                             <ScrollViewer>
                                 <StackPanel x:Name="dialoguePlayerRepliesGrid">
                                     <Button Name="dialogueAddReplyButton" Margin="10" VerticalAlignment="Top" Height="32" Content="{DynamicResource dialogue_Reply_Add}" Width="312">

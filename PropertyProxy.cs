@@ -92,7 +92,9 @@ namespace BowieD.Unturned.NPCMaker
             string text = inst.colorHexOut.Text;
             int cursorPos = inst.colorHexOut.SelectionStart;
             text = text.Insert(inst.colorHexOut.SelectionStart, e.Text);
-            if ((text.StartsWith("#") && text.Length < 7) || text.Length < 6)
+            if (text.StartsWith("#"))
+                text = text.Substring(1);
+            if (text.Length < 6)
                 return;
             var parseAble = NPCColor.CanParseHex(text);
             e.Handled = !parseAble;
@@ -527,6 +529,7 @@ namespace BowieD.Unturned.NPCMaker
             string res = c.HEX;
             inst.colorRectangle.Fill = new BrushConverter().ConvertFromString(res) as Brush;
             inst.colorHexOut.Text = res;
+            inst.userColorSaveButton.IsEnabled = true;
             if (Config.Configuration.Properties.experimentalFeatures)
             {
                 if (!MainWindow.IsRGB)

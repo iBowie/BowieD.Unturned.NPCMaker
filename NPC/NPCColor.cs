@@ -57,6 +57,11 @@ namespace BowieD.Unturned.NPCMaker.NPC
             else
                 throw new ArgumentException("Not HEX");
         }
+        public static NPCColor FromBrush(SolidColorBrush b)
+        {
+            var clr = b.Color;
+            return new NPCColor(clr.R, clr.G, clr.B);
+        }
         [XmlIgnore]
         public (double H, double S, double V) HSV
         {
@@ -89,7 +94,12 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             get => $"#{R:X2}{G:X2}{B:X2}";
         }
-        public static bool CanParseHex(string text) => brushConverter.IsValid(text.Trim('#'));
+        public static bool CanParseHex(string text)
+        {
+            return brushConverter.IsValid(text.StartsWith("#") ? text.Substring(1) : text)
+                || brushConverter.IsValid(text.StartsWith("#") ? text : "#" + text);
+        }
+
         private static BrushConverter brushConverter = new BrushConverter();
         [XmlIgnore]
         public Brush Brush => brushConverter.ConvertFromString(HEX) as Brush;
