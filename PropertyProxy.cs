@@ -12,6 +12,7 @@ using System.Net;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -262,16 +263,15 @@ namespace BowieD.Unturned.NPCMaker
                 };
                 Button copyButton = new Button
                 {
-                    Content = new Image
+                    Content = new MahApps.Metro.IconPacks.PackIconMaterial()
                     {
-                        Source = new BitmapImage(new Uri("pack://application:,,,/Resources/ICON_COPY.png")),
-                        Width = 16,
-                        Height = 16
+                        Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.ContentCopy
                     },
                     HorizontalAlignment = HorizontalAlignment.Right,
                     Margin = new Thickness(0, 0, 10, 0),
                     Tag = $"#{uColor}"
                 };
+                (copyButton.Content as MahApps.Metro.IconPacks.PackIconMaterial).SetResourceReference(MahApps.Metro.IconPacks.PackIconMaterial.ForegroundProperty, "AccentColor");
                 copyButton.Click += new RoutedEventHandler((sender, e) =>
                 {
                     try
@@ -318,28 +318,26 @@ namespace BowieD.Unturned.NPCMaker
                 };
                 Button button = new Button()
                 {
-                    Content = new Image
+                    Content = new MahApps.Metro.IconPacks.PackIconMaterial()
                     {
-                        Source = new BitmapImage(new Uri("pack://application:,,,/Resources/ICON_CANCEL.png")),
-                        Width = 16,
-                        Height = 16
+                        Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.TrashCan
                     },
                     HorizontalAlignment = HorizontalAlignment.Right,
                     Margin = new Thickness(0, 0, 10, 0),
                     ToolTip = MainWindow.Localize("apparel_User_Color_Remove")
                 };
+                (button.Content as MahApps.Metro.IconPacks.PackIconMaterial).SetResourceReference(MahApps.Metro.IconPacks.PackIconMaterial.ForegroundProperty, "AccentColor");
                 Button copyButton = new Button
                 {
-                    Content = new Image
+                    Content = new MahApps.Metro.IconPacks.PackIconMaterial()
                     {
-                        Source = new BitmapImage(new Uri("pack://application:,,,/Resources/ICON_COPY.png")),
-                        Width = 16,
-                        Height = 16
+                        Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.ContentCopy
                     },
                     HorizontalAlignment = HorizontalAlignment.Right,
                     Margin = new Thickness(0, 0, 42, 0),
                     Tag = $"#{uColor}"
                 };
+                (copyButton.Content as MahApps.Metro.IconPacks.PackIconMaterial).SetResourceReference(MahApps.Metro.IconPacks.PackIconMaterial.ForegroundProperty, "AccentColor");
                 copyButton.Click += new RoutedEventHandler((sender, e) =>
                 {
                     try

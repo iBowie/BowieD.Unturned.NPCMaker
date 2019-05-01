@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.NPC;
+using System;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes.General
 {
@@ -8,12 +9,33 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.General
     public class NE_0000 : Mistake
     {
         public override IMPORTANCE Importance => IMPORTANCE.WARNING;
-        public override bool IsMistake => MainWindow.Instance.txtID.Value > 0 && MainWindow.Instance.txtID.Value <= 2000;
+        //public override bool IsMistake => MainWindow.Instance.txtID.Value > 0 && MainWindow.Instance.txtID.Value <= 2000;
+        public override bool IsMistake
+        {
+            get
+            {
+                foreach (var _char in MainWindow.CurrentSave.characters)
+                {
+                    if (_char.id > 0 && _char.id <= 2000)
+                    {
+                        failChar = _char;
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+        private NPCCharacter failChar = null;
         public override string MistakeNameKey => "NE_0000";
-        public override string MistakeDescKey => "NE_0000_Desc";
+        public override string MistakeDescKey => MainWindow.Localize("NE_0000_Desc", failChar.displayName, failChar.id);
         public override bool TranslateName => false;
+        public override bool TranslateDesc => false;
         public override Action OnClick => () => 
         {
+            if (MainWindow.CharacterEditor.Current.id == 0)
+                return;
+            MainWindow.CharacterEditor.Save();
+            MainWindow.CharacterEditor.Current = failChar;
             MainWindow.Instance.mainTabControl.SelectedIndex = 0;
         };
     }

@@ -433,10 +433,10 @@
     <v:String x:Key="IMPORTANCE_ADVICE">Advice</v:String>
     <v:String x:Key="IMPORTANCE_WARNING">Warning</v:String>
 
-    <v:String x:Key="NE_0000_Desc">NPC id should be more than 2000, because all id's lower than 2000 are reserved for official content.</v:String>
+    <v:String x:Key="NE_0000_Desc">ID of {0} [{1}] is in reserved range (from 0 to 2000)</v:String>
     <v:String x:Key="NE_0001_Desc">Recommended to use english chars in editor name.</v:String>
-    <v:String x:Key="NE_0002_Desc">Recommended to use name that longer than 3 chars.</v:String>
-    <v:String x:Key="NE_0003_Desc">Change ID of the NPC to any value greater than 0.</v:String>
+    <v:String x:Key="NE_0002_Desc">Recommended to use name that longer than 3 chars. ({0} [{1}])</v:String>
+    <v:String x:Key="NE_0003_Desc">Change ID of the character {0} [{1}] to any value greater than 0.</v:String>
     <v:String x:Key="NE_1000_Desc">Invalid skin color.</v:String>
     <v:String x:Key="NE_1001_Desc">Invalid hair color.</v:String>
     <v:String x:Key="NE_1002_Desc">Equipped slot empty.</v:String>

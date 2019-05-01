@@ -117,7 +117,6 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 ret.responses = responses.Select(d => d.Response).ToList();
                 ret.id = dialogueID;
                 ret.comment = MainWindow.Instance.dialogue_commentbox.Text;
-                Logger.Log($"Built dialogue {ret.id}");
                 return ret;
             }
             set

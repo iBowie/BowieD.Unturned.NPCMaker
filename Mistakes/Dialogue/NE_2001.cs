@@ -31,19 +31,13 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         public override bool TranslateName => false;
         public override bool TranslateDesc => false;
         private NPCDialogue errorDialogue;
-        public override Action OnClick
+        public override Action OnClick => () =>
         {
-            get
-            {
-                return new Action(() =>
-                {
-                    if (MainWindow.DialogueEditor.Current.id == 0)
-                        return;
-                    MainWindow.DialogueEditor.Save();
-                    MainWindow.DialogueEditor.Current = errorDialogue;
-                    MainWindow.Instance.mainTabControl.SelectedIndex = 2;
-                });
-            }
-        }
+            if (MainWindow.DialogueEditor.Current.id == 0)
+                return;
+            MainWindow.DialogueEditor.Save();
+            MainWindow.DialogueEditor.Current = errorDialogue;
+            MainWindow.Instance.mainTabControl.SelectedIndex = 2;
+        };
     }
 }

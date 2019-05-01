@@ -432,10 +432,10 @@
     <v:String x:Key="IMPORTANCE_ADVICE">Совет</v:String>
     <v:String x:Key="IMPORTANCE_WARNING">Ошибка</v:String>
 
-    <v:String x:Key="NE_0000_Desc">ID NPC должен быть больше 2000, так как все ID меньше 2000 зарезервированы для игры.</v:String>
+    <v:String x:Key="NE_0000_Desc">ID персонажа с именем {0} [{1}] находится в резервированном пространстве ID (между 0 и 2000)</v:String>
     <v:String x:Key="NE_0001_Desc">Рекомендуется использовать английские символы в имени для редактора.</v:String>
-    <v:String x:Key="NE_0002_Desc">Рекомендуется использовать имя длиннее трёх символов.</v:String>
-    <v:String x:Key="NE_0003_Desc">Измените ID NPC на любой выше 0.</v:String>
+    <v:String x:Key="NE_0002_Desc">Рекомендуется использовать имя длиннее трёх символов. ({0} [{1}])</v:String>
+    <v:String x:Key="NE_0003_Desc">Измените ID у персонажа {0} [{1}] на любой выше 0.</v:String>
     <v:String x:Key="NE_1000_Desc">Неправильный цвет кожи.</v:String>
     <v:String x:Key="NE_1001_Desc">Неправильный цвет волос.</v:String>
     <v:String x:Key="NE_1002_Desc">Экипированный слот пуст.</v:String>

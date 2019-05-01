@@ -255,7 +255,7 @@ namespace BowieD.Unturned.NPCMaker
                 SaveFileDialog sfd = new SaveFileDialog
                 {
                     Filter = $"{Localize("save_Filter")} (*.npcproj)|*.npcproj",
-                    FileName = $"{CharacterEditor.Current?.editorName ?? "Unnamed"}.npcproj",
+                    FileName = $"{(CharacterEditor.Current?.editorName?.Length > 0 ? CharacterEditor.Current?.editorName : "Unnamed")}.npcproj",
                     OverwritePrompt = true
                 };
                 var result = sfd.ShowDialog();
