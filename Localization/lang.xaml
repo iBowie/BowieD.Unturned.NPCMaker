@@ -110,6 +110,9 @@
     <v:String x:Key="general_Conditions">Visibility Conditions</v:String>
     <v:String x:Key="general_Regenerate">Regenerate GUIDs</v:String>
     <v:String x:Key="general_Regenerated">GUIDs were generated again</v:String>
+    <v:String x:Key="character_Save">Save Character</v:String>
+    <v:String x:Key="character_Open">Open Character</v:String>
+    <v:String x:Key="character_Clear">Clear Current</v:String>
 
     <v:String x:Key="apparel_Hair">Haircut</v:String>
     <v:String x:Key="apparel_Beard">Beard</v:String>

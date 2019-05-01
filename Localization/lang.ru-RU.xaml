@@ -109,6 +109,9 @@
     <v:String x:Key="general_Conditions">Условия видимости</v:String>
     <v:String x:Key="general_Regenerate">Повторная генерация GUIDов</v:String>
     <v:String x:Key="general_Regenerated">GUIDы были заново созданы</v:String>
+    <v:String x:Key="character_Save">Сохранить персонажа</v:String>
+    <v:String x:Key="character_Open">Открыть персонажа</v:String>
+    <v:String x:Key="character_Clear">Очистить текущего</v:String>
 
     <v:String x:Key="apparel_Hair">Причёска</v:String>
     <v:String x:Key="apparel_Beard">Борода</v:String>
