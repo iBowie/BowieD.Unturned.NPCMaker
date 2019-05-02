@@ -130,6 +130,10 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     {
                         str.Append($" {itemCond.Id} x{itemCond.Amount}");
                     }
+                    if (this is Time_Of_Day_Cond time_Of_Day)
+                    {
+                        str.Append($" {time_Of_Day.Second}");
+                    }
                     return str.ToString();
                 }
             }

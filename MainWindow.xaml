@@ -789,7 +789,9 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <GroupBox Header="{DynamicResource quest_Conditions}" Margin="10">
-                                <StackPanel Name="listQuestConditions" />
+                                <ScrollViewer>
+                                    <StackPanel Name="listQuestConditions" />
+                                </ScrollViewer>
                             </GroupBox>
                             <Button Grid.Column="1" Grid.Row="1" Name="questAddConditionButton" Height="23" Content="{DynamicResource quest_Add_Condition}" Margin="10" VerticalAlignment="Bottom"/>
                         </Grid>
@@ -799,7 +801,9 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <GroupBox Header="{DynamicResource quest_Rewards}" Margin="10">
-                                <StackPanel Name="listQuestRewards" />
+                                <ScrollViewer>
+                                    <StackPanel Name="listQuestRewards" />
+                                </ScrollViewer>
                             </GroupBox>
                             <Button Grid.Row="1" Name="questAddRewardButton" Height="23" Content="{DynamicResource quest_Add_Reward}" Margin="10" VerticalAlignment="Bottom"/>
                         </Grid>
