@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.NPC;
 using System.Windows;
 using System.Windows.Controls;
+using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.BetterControls
 {
@@ -31,7 +32,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
         {
             if (Type == ReturnType.Condition)
             {
-                NPC.Condition Condition = Value as NPC.Condition;
+                Condition Condition = Value as Condition;
                 BetterForms.Universal_ConditionEditor uce = new BetterForms.Universal_ConditionEditor(Condition, Localizable);
                 if (uce.ShowDialog() == true)
                 {

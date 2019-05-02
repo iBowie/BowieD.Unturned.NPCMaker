@@ -156,6 +156,7 @@
     <Compile Include="Mistakes\MistakesManager.cs" />
     <Compile Include="Notification\INotificationManager.cs" />
     <Compile Include="Notification\NotificationManager.cs" />
+    <Compile Include="NPC\Conditions\Condition.cs" />
     <Compile Include="NPC\IHasDisplayName.cs" />
     <Compile Include="NPC\NPCCharacter.cs" />
     <Compile Include="NPC\NPCClothing.cs" />
@@ -194,24 +195,6 @@
     <Compile Include="Notification\NotificationBase.xaml.cs">
       <DependentUpon>NotificationBase.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NPC\Condition.cs" />
-    <Compile Include="NPC\Conditions\Experience_Cond.cs" />
-    <Compile Include="NPC\Conditions\Flag_Bool_Cond.cs" />
-    <Compile Include="NPC\Conditions\Flag_Short_Cond.cs" />
-    <Compile Include="NPC\Conditions\Item_Cond.cs" />
-    <Compile Include="NPC\Conditions\Kills_Animal_Cond.cs" />
-    <Compile Include="NPC\Conditions\Kills_Horde_Cond.cs" />
-    <Compile Include="NPC\Conditions\Kills_Object_Cond.cs" />
-    <Compile Include="NPC\Conditions\Kills_Players_Cond.cs" />
-    <Compile Include="NPC\Conditions\Player_Life_Food_Cond.cs" />
-    <Compile Include="NPC\Conditions\Player_Life_Health_Cond.cs" />
-    <Compile Include="NPC\Conditions\Player_Life_Virus_Cond.cs" />
-    <Compile Include="NPC\Conditions\Player_Life_Water_Cond.cs" />
-    <Compile Include="NPC\Conditions\Quest_Cond.cs" />
-    <Compile Include="NPC\Conditions\Kills_Zombie_Cond.cs" />
-    <Compile Include="NPC\Conditions\Reputation_Cond.cs" />
-    <Compile Include="NPC\Conditions\Skillset_Cond.cs" />
-    <Compile Include="NPC\Conditions\Time_Of_Day_Cond.cs" />
     <Compile Include="NPC\Enums.cs" />
     <Compile Include="NPC\NPCColor.cs" />
     <Compile Include="NPC\NPCDialogue.cs" />

@@ -3,6 +3,7 @@ using DiscordRPC;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.BetterControls
 {
@@ -54,7 +55,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             };
             (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
             ulv.ShowDialog();
-            Response.conditions = ulv.Values.Cast<NPC.Condition>().ToArray();
+            Response.conditions = ulv.Values.Cast<Condition>().ToArray();
             MainWindow.Proxy.TabControl_SelectionChanged(MainWindow.Instance.mainTabControl, null);
         }
         private void MainText_TextChanged(object sender, TextChangedEventArgs e)

@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using Condition = BowieD.Unturned.NPCMaker.NPC.Condition;
+using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.Editors
 {
@@ -59,7 +59,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 }
                 foreach (UIElement ui in MainWindow.Instance.listQuestConditions.Children)
                 {
-                    ret.conditions.Add((ui as Universal_ItemList).Value as NPC.Condition);
+                    ret.conditions.Add((ui as Universal_ItemList).Value as Condition);
                 }
                 ret.title = MainWindow.Instance.questTitleBox.Text;
                 ret.description = MainWindow.Instance.questDescBox.Text;
@@ -79,7 +79,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                     };
                     MainWindow.Instance.listQuestRewards.Children.Add(uil);
                 }
-                foreach (NPC.Condition cond in value.conditions)
+                foreach (Condition cond in value.conditions)
                 {
                     Universal_ItemList uil = new Universal_ItemList(cond, Universal_ItemList.ReturnType.Condition, true);
                     uil.deleteButton.Click += (object sender, RoutedEventArgs e) => 

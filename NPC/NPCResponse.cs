@@ -8,7 +8,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public NPCResponse()
         {
             mainText = "";
-            conditions = new Condition[0];
+            conditions = new NPC.Conditions.Condition[0];
             rewards = new Reward[0];
             visibleIn = new int[0];
         }
@@ -17,7 +17,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public ushort openDialogueId;
         public ushort openVendorId;
         public ushort openQuestId;
-        public NPC.Condition[] conditions;
+        public NPC.Conditions.Condition[] conditions;
         public NPC.Reward[] rewards;
         public int[] visibleIn;
         [XmlIgnore]

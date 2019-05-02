@@ -334,7 +334,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                             asset.WriteLine($"Conditions {quest.conditions.Count}");
                             for (int k = 0; k < quest.conditions.Count; k++)
                             {
-                                asset.WriteLine(quest.conditions[k].GetFullFilePresentation("", k, k));
+                                asset.WriteLine(quest.conditions[k].GetFullFilePresentation("", k, k, false));
                             }
                         }
 

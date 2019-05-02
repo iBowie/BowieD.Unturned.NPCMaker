@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
+using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
@@ -14,6 +15,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public List<string> pages;
         [XmlIgnore]
         public int PagesAmount => pages == null ? 0 : pages.Count;
-        public NPC.Condition[] conditions;
+        public Condition[] conditions;
     }
 }

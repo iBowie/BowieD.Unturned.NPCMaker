@@ -8,7 +8,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
     {
         public NPCQuest()
         {
-            conditions = new List<Condition>();
+            conditions = new List<NPC.Conditions.Condition>();
             rewards = new List<Reward>();
             title = "";
             description = "";
@@ -22,7 +22,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public string comment;
 
         public ushort id;
-        public List<NPC.Condition> conditions;
+        public List<NPC.Conditions.Condition> conditions;
         public List<NPC.Reward> rewards;
         public string title;
         public string description;

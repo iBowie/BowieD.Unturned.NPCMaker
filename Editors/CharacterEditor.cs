@@ -9,6 +9,7 @@ using BowieD.Unturned.NPCMaker.BetterForms;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
 using DiscordRPC;
+using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.Editors
 {
@@ -239,7 +240,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
         }
 
         private string loadedGUID;
-        public List<NPC.Condition> conditions;
+        public List<Condition> conditions;
 
         public void SendPresence()
         {
@@ -345,7 +346,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
         {
             Universal_ListView ulv = new Universal_ListView(conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
             ulv.ShowDialog();
-            conditions = ulv.Values.Cast<NPC.Condition>().ToList();
+            conditions = ulv.Values.Cast<Condition>().ToList();
             MainWindow.isSaved = false;
         }
     }
