@@ -64,7 +64,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 ret.title = MainWindow.Instance.questTitleBox.Text;
                 ret.description = MainWindow.Instance.questDescBox.Text;
                 ret.id = (ushort)(MainWindow.Instance.questIdBox.Value ?? 0);
-                ret.comment = MainWindow.Instance.quest_commentbox.Text;
+                ret.Comment = MainWindow.Instance.quest_commentbox.Text;
                 return ret;
             }
             set
@@ -91,7 +91,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 MainWindow.Instance.questIdBox.Value = value.id;
                 MainWindow.Instance.questTitleBox.Text = value.title;
                 MainWindow.Instance.questDescBox.Text = value.description;
-                MainWindow.Instance.quest_commentbox.Text = value.comment;
+                MainWindow.Instance.quest_commentbox.Text = value.Comment;
             }
         }
         public void Open()

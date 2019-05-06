@@ -5,19 +5,20 @@ using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    public class NPCVendor : IHasDisplayName
+    public class NPCVendor : IHasDisplayName, IHasComment
     {
         public NPCVendor()
         {
             guid = Guid.NewGuid().ToString("N");
-            comment = "";
+            Comment = "";
             items = new List<VendorItem>();
         }
 
         [XmlAttribute]
         public string guid;
         [XmlAttribute]
-        public string comment;
+        [XmlElement("comment")]
+        public string Comment { get; set; }
 
         public ushort id;
         public string vendorTitle;

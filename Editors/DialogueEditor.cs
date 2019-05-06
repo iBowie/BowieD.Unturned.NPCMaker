@@ -116,7 +116,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 ret.messages = messages.Select(d => d.Message).ToList();
                 ret.responses = responses.Select(d => d.Response).ToList();
                 ret.id = dialogueID;
-                ret.comment = MainWindow.Instance.dialogue_commentbox.Text;
+                ret.Comment = MainWindow.Instance.dialogue_commentbox.Text;
                 return ret;
             }
             set
@@ -157,7 +157,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                     }
                     MainWindow.Instance.messagePagesGrid.Children.Insert(ind, dialogue_Message);
                 }
-                MainWindow.Instance.dialogue_commentbox.Text = d.comment;
+                MainWindow.Instance.dialogue_commentbox.Text = d.Comment;
             }
         }
         private void AddReplyClick(object sender, RoutedEventArgs e)

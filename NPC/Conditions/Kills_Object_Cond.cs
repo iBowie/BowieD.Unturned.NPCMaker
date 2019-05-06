@@ -3,14 +3,14 @@ using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    public class Kills_Object_Cond : Condition, Condition.IHasValue<short>
+    public class Kills_Object_Cond : Condition, Condition.IHasValue<short>, Condition.IHasConditionID
     {
         public Kills_Object_Cond()
         {
             Type = Condition_Type.Kills_Object;
         }
 
-        public ushort ID { get; set; }
+        public ushort FlagID { get; set; }
         public short Value { get; set; }
         public Guid Object { get; set; }
         public byte Nav { get; set; }
@@ -34,7 +34,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             Init(uce);
             if (start != null)
             {
-                uce.SetMainValue(1, (start as Kills_Object_Cond).ID);
+                uce.SetMainValue(1, (start as Kills_Object_Cond).FlagID);
                 uce.SetMainValue(3, (start as Kills_Object_Cond).Value);
                 uce.SetMainValue(5, (start as Kills_Object_Cond).Object);
                 uce.SetMainValue(7, (start as Kills_Object_Cond).Nav);
@@ -45,7 +45,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             return new Kills_Object_Cond()
             {
-                ID = ushort.Parse(input[0].ToString()),
+                FlagID = ushort.Parse(input[0].ToString()),
                 Value = short.Parse(input[1].ToString()),
                 Object = Guid.Parse(input[2].ToString()),
                 Nav = byte.Parse(input[3].ToString())
@@ -58,7 +58,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                     prefix += "_";
             string output = "";
             output += ($"{prefix}{(prefix.Length > 0 ? $"{prefixIndex.ToString()}_" : "")}Condition_{conditionIndex}_Type Kills_Object");
-            output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Condition_{conditionIndex}_ID {this.ID}");
+            output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Condition_{conditionIndex}_ID {this.FlagID}");
             output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Condition_{conditionIndex}_Value {this.Value}");
             output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Condition_{conditionIndex}_Object {this.Object.ToString("N")}");
             if (this.Nav != byte.MaxValue)

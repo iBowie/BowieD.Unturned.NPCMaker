@@ -440,6 +440,8 @@
     <v:String x:Key="NE_0001_Desc">Recommended to use english chars in editor name.</v:String>
     <v:String x:Key="NE_0002_Desc">Recommended to use name that longer than 3 chars. ({0} [{1}])</v:String>
     <v:String x:Key="NE_0003_Desc">Change ID of the character {0} [{1}] to any value greater than 0.</v:String>
+    <v:String x:Key="NE_0004_Desc">Two or more of your content has the same ID. Check everything one more time.</v:String>
+    <v:String x:Key="NE_0005_Desc">ID of a condition has same ID as a content. Check all conditions.</v:String>
     <v:String x:Key="NE_1000_Desc">Invalid skin color.</v:String>
     <v:String x:Key="NE_1001_Desc">Invalid hair color.</v:String>
     <v:String x:Key="NE_1002_Desc">Equipped slot empty.</v:String>

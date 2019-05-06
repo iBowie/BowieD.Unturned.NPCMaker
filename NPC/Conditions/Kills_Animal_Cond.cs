@@ -3,7 +3,7 @@ using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    public class Kills_Animal_Cond : Condition, Condition.IHasValue<uint>
+    public class Kills_Animal_Cond : Condition, Condition.IHasValue<uint>, Condition.IHasConditionID
     {
         public Kills_Animal_Cond()
         {
@@ -11,7 +11,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         }
 
         public ushort Animal { get; set; }
-        public ushort ID { get; set; }
+        public ushort FlagID { get; set; }
         public uint Value { get; set; }
 
         public override int Elements => 4;
@@ -30,7 +30,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             Init(uce);
             if (start != null)
             {
-                uce.SetMainValue(1, (start as Kills_Animal_Cond).ID);
+                uce.SetMainValue(1, (start as Kills_Animal_Cond).FlagID);
                 uce.SetMainValue(3, (start as Kills_Animal_Cond).Animal);
                 uce.SetMainValue(5, (start as Kills_Animal_Cond).Value);
                 uce.SetMainValue(7, start.Reset);
@@ -40,7 +40,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             return new Kills_Animal_Cond
             {
-                ID = ushort.Parse(input[0].ToString()),
+                FlagID = ushort.Parse(input[0].ToString()),
                 Animal = ushort.Parse(input[1].ToString()),
                 Value = uint.Parse(input[2].ToString()),
                 Reset = (bool)input[3]
@@ -55,7 +55,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             string output = "";
             output += ($"{prefix}{(prefix.Length > 0 ? $"{prefixIndex.ToString()}_" : "")}Condition_{conditionIndex}_Type Kills_Animal");
             output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Condition_{conditionIndex}_Animal {this.Animal}");
-            output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Condition_{conditionIndex}_ID {this.ID}");
+            output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Condition_{conditionIndex}_ID {this.FlagID}");
             output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Condition_{conditionIndex}_Value {this.Value}");
             return output;
         }

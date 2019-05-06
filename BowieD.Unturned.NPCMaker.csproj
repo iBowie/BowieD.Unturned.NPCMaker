@@ -153,9 +153,11 @@
     </Compile>
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Mistakes\DeepAnalysisManager.cs" />
+    <Compile Include="Mistakes\General\NE_0004.cs" />
     <Compile Include="Mistakes\MistakesManager.cs" />
     <Compile Include="Notification\INotificationManager.cs" />
     <Compile Include="Notification\NotificationManager.cs" />
+    <Compile Include="NPC\IHasComment.cs" />
     <Compile Include="NPC\IHasDisplayName.cs" />
     <Compile Include="NPC\NPCCharacter.cs" />
     <Compile Include="NPC\NPCClothing.cs" />

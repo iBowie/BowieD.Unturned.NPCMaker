@@ -177,5 +177,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             T Value { get; set; }
         }
+        public interface IHasConditionID
+        {
+            ushort FlagID { get; set; }
+        }
     }
 }

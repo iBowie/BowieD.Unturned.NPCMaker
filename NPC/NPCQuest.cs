@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    public class NPCQuest : IHasDisplayName
+    public class NPCQuest : IHasDisplayName, IHasComment
     {
         public NPCQuest()
         {
@@ -13,13 +13,14 @@ namespace BowieD.Unturned.NPCMaker.NPC
             title = "";
             description = "";
             guid = Guid.NewGuid().ToString("N");
-            comment = "";
+            Comment = "";
         }
         
         [XmlAttribute]
         public string guid;
         [XmlAttribute]
-        public string comment;
+        [XmlElement("comment")]
+        public string Comment { get; set; }
 
         public ushort id;
         public List<NPC.Condition> conditions;

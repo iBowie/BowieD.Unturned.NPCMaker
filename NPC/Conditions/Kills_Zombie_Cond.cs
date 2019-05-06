@@ -4,7 +4,7 @@ using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    public class Kills_Zombie_Cond : Condition
+    public class Kills_Zombie_Cond : Condition, Condition.IHasConditionID
     {
         public Kills_Zombie_Cond()
         {
@@ -12,7 +12,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         }
 
         public bool Spawn { get; set; }
-        public ushort Id { get; set; }
+        public ushort FlagID { get; set; }
         public ushort NavMesh { get; set; }
         public uint Amount { get; set; }
         public Zombie_Type Zombie_Type { get; set; }
@@ -38,7 +38,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             if (start != null)
             {
                 uce.SetMainValue(1, (start as Kills_Zombie_Cond).Zombie_Type);
-                uce.SetMainValue(3, (start as Kills_Zombie_Cond).Id);
+                uce.SetMainValue(3, (start as Kills_Zombie_Cond).FlagID);
                 uce.SetMainValue(5, (start as Kills_Zombie_Cond).Amount);
                 uce.SetMainValue(7, (start as Kills_Zombie_Cond).Spawn);
                 uce.SetMainValue(9, (start as Kills_Zombie_Cond).NavMesh);
@@ -50,7 +50,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             return new Kills_Zombie_Cond
             {
                 Zombie_Type = (Zombie_Type)input[0],
-                Id = ushort.Parse(input[1].ToString()),
+                FlagID = ushort.Parse(input[1].ToString()),
                 Amount = uint.Parse(input[2].ToString()),
                 Spawn = (bool)input[3],
                 NavMesh = ushort.Parse(input[4].ToString()),

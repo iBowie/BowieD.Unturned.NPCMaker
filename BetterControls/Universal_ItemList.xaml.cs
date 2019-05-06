@@ -16,7 +16,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             this.Value = input;
             mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
             if (type == ReturnType.Dialogue || type == ReturnType.Quest || type == ReturnType.Vendor)
-                mainLabel.ToolTip = Value is NPC.NPCDialogue ? (Value as NPC.NPCDialogue).comment : Value is NPC.NPCQuest ? (Value as NPC.NPCQuest).comment : Value is NPC.NPCVendor ? (Value as NPC.NPCVendor).comment : Value;
+                mainLabel.ToolTip = Value is IHasComment hasComment ? hasComment.Comment : Value.ToString();
             else
                 mainLabel.ToolTip = Value is IHasDisplayName displayName ? displayName : Value;
             this.Localizable = localizable;
@@ -37,7 +37,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                 {
                     Value = uce.Result;
                     mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
-                    mainLabel.ToolTip = Value;
+                    mainLabel.ToolTip = mainLabel.Content;
                 }
             }
             else if (Type == ReturnType.Dialogue)
@@ -57,7 +57,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                 {
                     Value = ure.Result;
                     mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
-                    mainLabel.ToolTip = Value;
+                    mainLabel.ToolTip = mainLabel.Content;
                 }
             }
             else if (Type == ReturnType.Vendor)
@@ -88,7 +88,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                     Value = NewItem;
                 }
                 mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
-                mainLabel.ToolTip = Value;
+                mainLabel.ToolTip = mainLabel.Content;
             }
             else if (Type == ReturnType.Character)
                 return;

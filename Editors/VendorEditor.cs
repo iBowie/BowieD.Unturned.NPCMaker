@@ -69,7 +69,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                     id = (ushort)(MainWindow.Instance.vendorIdTxtBox.Value ?? 0),
                     vendorDescription = MainWindow.Instance.vendorDescTxtBox.Text,
                     vendorTitle = MainWindow.Instance.vendorTitleTxtBox.Text,
-                    comment = MainWindow.Instance.vendor_commentbox.Text
+                    Comment = MainWindow.Instance.vendor_commentbox.Text
                 };
             }
             set
@@ -86,7 +86,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 MainWindow.Instance.vendorIdTxtBox.Value = value.id;
                 MainWindow.Instance.vendorTitleTxtBox.Text = value.vendorTitle;
                 MainWindow.Instance.vendorDescTxtBox.Text = value.vendorDescription;
-                MainWindow.Instance.vendor_commentbox.Text = value.comment;
+                MainWindow.Instance.vendor_commentbox.Text = value.Comment;
                 Logger.Log($"Set vendor {value.id}");
             }
         }

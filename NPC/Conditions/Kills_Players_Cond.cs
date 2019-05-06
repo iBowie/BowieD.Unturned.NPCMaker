@@ -3,14 +3,14 @@ using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    public class Kills_Players_Cond : Condition, Condition.IHasValue<short>
+    public class Kills_Players_Cond : Condition, Condition.IHasValue<short>, Condition.IHasConditionID
     {
         public Kills_Players_Cond()
         {
             Type = Condition_Type.Kills_Player;
         }
 
-        public ushort ID { get; set; }
+        public ushort FlagID { get; set; }
         public short Value { get; set; }
 
         public override int Elements => 3;
@@ -27,7 +27,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             Init(uce);
             if (start != null)
             {
-                uce.SetMainValue(1, (start as Kills_Players_Cond).ID);
+                uce.SetMainValue(1, (start as Kills_Players_Cond).FlagID);
                 uce.SetMainValue(3, (start as Kills_Players_Cond).Value);
                 uce.SetMainValue(5,  start.Reset);
             }
@@ -36,7 +36,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             return new Kills_Players_Cond()
             {
-                ID = ushort.Parse(input[0].ToString()),
+                FlagID = ushort.Parse(input[0].ToString()),
                 Value = short.Parse(input[1].ToString()),
                 Reset = (bool)input[2]
             } as T;
@@ -49,7 +49,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                     prefix += "_";
             string output = "";
             output += ($"{prefix}{(prefix.Length > 0 ? $"{prefixIndex.ToString()}_" : "")}Condition_{conditionIndex}_Type Kills_Players");
-            output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Condition_{conditionIndex}_ID {this.ID}");
+            output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Condition_{conditionIndex}_ID {this.FlagID}");
             output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Condition_{conditionIndex}_Value {this.Value}");
             return output;
         }

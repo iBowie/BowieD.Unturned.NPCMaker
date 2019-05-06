@@ -3,7 +3,7 @@ using BowieD.Unturned.NPCMaker.BetterForms;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    public class Flag_Short_Cond : Condition, Condition.IHasLogic, Condition.IHasValue<short>
+    public class Flag_Short_Cond : Condition, Condition.IHasLogic, Condition.IHasValue<short>, Condition.IHasConditionID
     {
         public Flag_Short_Cond()
         {
@@ -11,7 +11,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         }
 
         public Logic_Type Logic { get; set; }
-        public ushort Id { get; set; }
+        public ushort FlagID { get; set; }
         public short Value { get; set; }
         public bool AllowUnset { get; set; }
 
@@ -33,7 +33,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             Init(uce);   
             if (start != null)
             {
-                uce.SetMainValue(1, (start as Flag_Short_Cond).Id);
+                uce.SetMainValue(1, (start as Flag_Short_Cond).FlagID);
                 uce.SetMainValue(3, (start as Flag_Short_Cond).Logic);
                 uce.SetMainValue(5, (start as Flag_Short_Cond).Value);
                 uce.SetMainValue(7, (start as Flag_Short_Cond).AllowUnset);
@@ -44,7 +44,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             return new Flag_Short_Cond
             {
-                Id = ushort.Parse(input[0].ToString()),
+                FlagID = ushort.Parse(input[0].ToString()),
                 Logic = (Logic_Type)input[1],
                 Value = short.Parse(input[2].ToString()),
                 AllowUnset = (bool)input[3],
@@ -60,7 +60,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             string output = "";
             output += ($"{prefix}{(prefix.Length > 0 ? $"{prefixIndex.ToString()}_" : "")}Condition_{conditionIndex}_Type Flag_Short");
             output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Condition_{conditionIndex}_Logic {this.Logic}");
-            output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Condition_{conditionIndex}_ID {this.Id}");
+            output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Condition_{conditionIndex}_ID {this.FlagID}");
             output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Condition_{conditionIndex}_Value {this.Value}");
             if (this.AllowUnset)
                 output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Condition_{conditionIndex}_Allow_Unset");
