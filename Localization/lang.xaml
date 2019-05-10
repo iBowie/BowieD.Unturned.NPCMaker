@@ -226,7 +226,9 @@
     <v:String x:Key="Condition_Type_ConditionFlagBool">Flag (Bool)</v:String>
     <v:String x:Key="Condition_Type_ConditionFlagShort">Flag (Short)</v:String>
     <v:String x:Key="Condition_Type_ConditionSkillset">Skillset</v:String>
-    
+    <v:String x:Key="Condition_Type_ConditionHoliday">Holiday</v:String>
+    <v:String x:Key="Condition_Type_ConditionCompareFlags">Compare Flags</v:String>
+
     <v:String x:Key="Condition_Logic_Enum_None">None</v:String>
     <v:String x:Key="Condition_Logic_Enum_Less_Than">Less Than</v:String>
     <v:String x:Key="Condition_Logic_Enum_Less_Than_Or_Equal_To">Less Than Or Equal</v:String>
@@ -235,6 +237,10 @@
     <v:String x:Key="Condition_Logic_Enum_Greater_Than_Or_Equal_To">Greater Than Or Equal</v:String>
     <v:String x:Key="Condition_Logic_Enum_Greater_Than">Greater Than</v:String>
     <v:String x:Key="Condition_Logic_Enum_Has">Has</v:String>
+
+    <v:String x:Key="Condition_Holiday_Enum_None">None</v:String>
+    <v:String x:Key="Condition_Holiday_Enum_Halloween">Halloween</v:String>
+    <v:String x:Key="Condition_Holiday_Enum_Christmas">Christmas</v:String>
     
     <v:String x:Key="Condition_Skillset_Enum_Fire">Fire</v:String>
     <v:String x:Key="Condition_Skillset_Enum_Police">Police</v:String>

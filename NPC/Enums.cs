@@ -19,7 +19,9 @@
         Flag_Bool,
         Flag_Short,
         Skillset,
-        Kills_Object
+        Kills_Object,
+        Holiday,
+        Compare_Flags
     }
     public enum Logic_Type
     {
@@ -116,6 +118,12 @@
         Subtraction,
         Multiplication,
         Division
+    }
+    public enum ENPCHoliday
+    {
+        None,
+        Halloween,
+        Christmas
     }
     public enum Object_Type
     {

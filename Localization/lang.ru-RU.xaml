@@ -225,6 +225,8 @@
     <v:String x:Key="Condition_Type_ConditionFlagBool">Флаг (Логика)</v:String>
     <v:String x:Key="Condition_Type_ConditionFlagShort">Флаг (Число)</v:String>
     <v:String x:Key="Condition_Type_ConditionSkillset">Набор навыков</v:String>
+    <v:String x:Key="Condition_Type_ConditionHoliday">Праздник</v:String>
+    <v:String x:Key="Condition_Type_ConditionCompareFlags">Сравнить флаги</v:String>
 
     <v:String x:Key="Condition_Logic_Enum_None">Нет</v:String>
     <v:String x:Key="Condition_Logic_Enum_Less_Than">Меньше чем</v:String>
@@ -234,6 +236,10 @@
     <v:String x:Key="Condition_Logic_Enum_Greater_Than_Or_Equal_To">Больше или равно</v:String>
     <v:String x:Key="Condition_Logic_Enum_Greater_Than">Больше чем</v:String>
     <v:String x:Key="Condition_Logic_Enum_Has">Есть</v:String>
+
+    <v:String x:Key="Condition_Holiday_Enum_None">Нет</v:String>
+    <v:String x:Key="Condition_Holiday_Enum_Halloween">Хэллоуин</v:String>
+    <v:String x:Key="Condition_Holiday_Enum_Christmas">Рождество</v:String>
 
     <v:String x:Key="Condition_Skillset_Enum_Fire">Пожарный</v:String>
     <v:String x:Key="Condition_Skillset_Enum_Police">Полицейский</v:String>
