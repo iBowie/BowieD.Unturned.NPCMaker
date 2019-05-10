@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
+using Reward = BowieD.Unturned.NPCMaker.NPC.Rewards.Reward;
 
 namespace BowieD.Unturned.NPCMaker.BetterControls
 {
@@ -43,7 +44,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             };
             (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
             ulv.ShowDialog();
-            Response.rewards = ulv.Values.Cast<NPC.Reward>().ToArray();
+            Response.rewards = ulv.Values.Cast<Reward>().ToArray();
             MainWindow.Proxy.TabControl_SelectionChanged(MainWindow.Instance.mainTabControl, null);
         }
         private void EditConditionsButton_Click(object sender, RoutedEventArgs e)

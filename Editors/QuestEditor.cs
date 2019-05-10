@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
+using Reward = BowieD.Unturned.NPCMaker.NPC.Rewards.Reward;
 
 namespace BowieD.Unturned.NPCMaker.Editors
 {

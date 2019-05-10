@@ -9,6 +9,6 @@
     <ErrorReportUrlHistory />
     <FallbackCulture>ru-RU</FallbackCulture>
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
 </Project>

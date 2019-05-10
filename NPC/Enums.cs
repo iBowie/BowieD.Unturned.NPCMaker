@@ -61,7 +61,9 @@
         Flag_Bool,
         Flag_Short,
         Flag_Short_Random,
-        Flag_Math
+        Flag_Math,
+        Achievement,
+        Event
     }
     public enum Quest_Status
     {

@@ -237,6 +237,11 @@
     <v:String x:Key="conditionEditor_Fail">All field must have correct data.</v:String>
     <v:String x:Key="conditionEditor_Variables">Parameters</v:String>
 
+    <v:String x:Key="rewardEditor_Save">Save reward</v:String>
+    <v:String x:Key="rewardEditor_Title">Reward editor</v:String>
+    <v:String x:Key="rewardEditor_Type">Reward Type</v:String>
+    <v:String x:Key="rewardEditor_Variables">Parameters</v:String>
+
     <v:String x:Key="config_Title">App Settings</v:String>
     <v:String x:Key="config_Tab_General">General</v:String>
     <v:String x:Key="config_Tab_Appearance">Appearance</v:String>

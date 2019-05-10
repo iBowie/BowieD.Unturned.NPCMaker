@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.NPC;
 using System.Windows;
 using System.Windows.Controls;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
+using Reward = BowieD.Unturned.NPCMaker.NPC.Rewards.Reward;
 
 namespace BowieD.Unturned.NPCMaker.BetterControls
 {
@@ -16,10 +17,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             InitializeComponent();
             this.Value = input;
             mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
-            if (type == ReturnType.Dialogue || type == ReturnType.Quest || type == ReturnType.Vendor)
-                mainLabel.ToolTip = Value is NPC.NPCDialogue ? (Value as NPC.NPCDialogue).comment : Value is NPC.NPCQuest ? (Value as NPC.NPCQuest).comment : Value is NPC.NPCVendor ? (Value as NPC.NPCVendor).comment : Value;
-            else
-                mainLabel.ToolTip = Value;
+            mainLabel.ToolTip = mainLabel.Content;
             this.Localizable = localizable;
             this.Type = type;
         }
@@ -38,7 +36,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                 {
                     Value = uce.Result;
                     mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
-                    mainLabel.ToolTip = Value;
+                    mainLabel.ToolTip = mainLabel.Content;
                 }
             }
             else if (Type == ReturnType.Dialogue)
@@ -51,14 +49,14 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             }
             else if (Type == ReturnType.Reward)
             {
-                NPC.Reward reward = Value as NPC.Reward;
+                Reward reward = Value as Reward;
                 BetterForms.Universal_RewardEditor ure = new BetterForms.Universal_RewardEditor(reward, Localizable);
                 ure.ShowDialog();
                 if (ure.DialogResult == true)
                 {
                     Value = ure.Result;
                     mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
-                    mainLabel.ToolTip = Value;
+                    mainLabel.ToolTip = mainLabel.Content;
                 }
             }
             else if (Type == ReturnType.Vendor)
@@ -89,7 +87,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                     Value = NewItem;
                 }
                 mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
-                mainLabel.ToolTip = Value;
+                mainLabel.ToolTip = mainLabel.Content;
             }
             else if (Type == ReturnType.Character)
                 return;

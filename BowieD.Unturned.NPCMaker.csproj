@@ -185,6 +185,7 @@
     <Compile Include="NPC\NPCCharacter.cs" />
     <Compile Include="NPC\NPCClothing.cs" />
     <Compile Include="NPC\NPCSave.cs" />
+    <Compile Include="NPC\Rewards\Reward.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -227,18 +228,6 @@
     <Compile Include="NPC\NPCQuest.cs" />
     <Compile Include="NPC\NPCResponse.cs" />
     <Compile Include="NPC\NPCVendor.cs" />
-    <Compile Include="NPC\Reward.cs" />
-    <Compile Include="NPC\Rewards\Experience.cs" />
-    <Compile Include="NPC\Rewards\Flag_Bool.cs" />
-    <Compile Include="NPC\Rewards\Flag_Math.cs" />
-    <Compile Include="NPC\Rewards\Flag_Short.cs" />
-    <Compile Include="NPC\Rewards\Flag_Short_Random.cs" />
-    <Compile Include="NPC\Rewards\Item.cs" />
-    <Compile Include="NPC\Rewards\Item_Random.cs" />
-    <Compile Include="NPC\Rewards\Quest.cs" />
-    <Compile Include="NPC\Rewards\Reputation.cs" />
-    <Compile Include="NPC\Rewards\Teleport.cs" />
-    <Compile Include="NPC\Rewards\Vehicle.cs" />
     <Compile Include="PropertyProxy.cs" />
     <Compile Include="Util.cs" />
     <Page Include="BetterControls\Dialogue_Response.xaml">
@@ -343,6 +332,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Localization\lang.conditions.en-US.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

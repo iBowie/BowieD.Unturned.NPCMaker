@@ -30,7 +30,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [XmlInclude(typeof(ConditionHoliday))]
     public abstract class Condition : IHasDisplayName
     {
-        [ConditionTooltip("ConditionLocalization_Tooltip")]
+        [ConditionTooltip("Condition_Localization_Tooltip")]
         public string Localization;
         public abstract Condition_Type Type { get; }
 
@@ -43,16 +43,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             {
                 string fieldName = field.Name;
                 var fieldType = field.FieldType;
-                string localizedName = LocUtil.LocalizeCondition($"Condition{fieldName}");
+                string localizedName = LocUtil.LocalizeCondition($"Condition_{fieldName}");
                 Grid borderContents = new Grid();
                 Label l = new Label();
                 l.Content = localizedName;
-                var conditionTooltip = field.GetCustomAttribute<ConditionTooltip>();
+                var conditionTooltip = field.GetCustomAttribute<ConditionTooltipAttribute>();
                 if (conditionTooltip != null)
                 {
                     l.ToolTip = conditionTooltip.Text;
                 }
-                var conditionName = field.GetCustomAttribute<ConditionName>();
+                var conditionName = field.GetCustomAttribute<ConditionNameAttribute>();
                 if (conditionName != null)
                 {
                     l.Content = conditionName.Text;
@@ -181,12 +181,12 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             foreach (var field in this.GetType().GetFields())
             {
                 var fieldName = field.Name;
-                var skipFieldA = field.GetCustomAttribute<ConditionSkipField>();
+                var skipFieldA = field.GetCustomAttribute<ConditionSkipFieldAttribute>();
                 if ((skipLocalization && fieldName == "Localization") || skipFieldA != null)
                     continue;
                 var fieldValue = field.GetValue(this);
-                var noValueA = field.GetCustomAttribute<ConditionNoValue>();
-                var optionalA = field.GetCustomAttribute<ConditionOptional>();
+                var noValueA = field.GetCustomAttribute<ConditionNoValueAttribute>();
+                var optionalA = field.GetCustomAttribute<ConditionOptionalAttribute>();
                 if (skipFieldA != null)
                     continue;
                 if (noValueA != null)
@@ -204,18 +204,18 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         }
     }
     #region Attributes
-    public class ConditionName : Attribute
+    public class ConditionNameAttribute : Attribute
     {
         public string Text { get; private set; }
-        public ConditionName(string translationKey)
+        public ConditionNameAttribute(string translationKey)
         {
             Text = LocUtil.LocalizeCondition(translationKey);
         }
     }
-    public class ConditionTooltip : Attribute
+    public class ConditionTooltipAttribute : Attribute
     {
         public string Text { get; private set; }
-        public ConditionTooltip(string translationKey)
+        public ConditionTooltipAttribute(string translationKey)
         {
             Text = LocUtil.LocalizeCondition(translationKey);
         }
@@ -223,18 +223,18 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     /// <summary>
     /// Apply to booleans
     /// </summary>
-    public class ConditionNoValue : Attribute
+    public class ConditionNoValueAttribute : Attribute
     {
 
     }
-    public class ConditionSkipField : Attribute
+    public class ConditionSkipFieldAttribute : Attribute
     {
 
     }
-    public class ConditionOptional : Attribute
+    public class ConditionOptionalAttribute : Attribute
     {
         public object requiredValue { get; private set; }
-        public ConditionOptional(object requiredValue)
+        public ConditionOptionalAttribute(object requiredValue)
         {
             this.requiredValue = requiredValue;
         }

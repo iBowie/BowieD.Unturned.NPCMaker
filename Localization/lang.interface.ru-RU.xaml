@@ -237,6 +237,11 @@
     <v:String x:Key="conditionEditor_Fail">Все поля должны иметь корректные данные.</v:String>
     <v:String x:Key="conditionEditor_Variables">Параметры</v:String>
 
+    <v:String x:Key="rewardEditor_Save">Сохранить награду</v:String>
+    <v:String x:Key="rewardEditor_Title">Редактор награды</v:String>
+    <v:String x:Key="rewardEditor_Type">Тип награды</v:String>
+    <v:String x:Key="rewardEditor_Variables">Параметры</v:String>
+
     <v:String x:Key="config_Title">Настройки программы</v:String>
     <v:String x:Key="config_Tab_General">Основное</v:String>
     <v:String x:Key="config_Tab_Appearance">Внешний вид</v:String>
