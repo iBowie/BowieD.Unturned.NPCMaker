@@ -1,6 +1,7 @@
-﻿namespace BowieD.Unturned.NPCMaker.NPC.Conditions
+﻿using BowieD.Unturned.NPCMaker.Localization;
+
+namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    #endregion
     public sealed class ConditionQuest : Condition
     {
         public override Condition_Type Type => Condition_Type.Quest;
@@ -15,7 +16,7 @@
         {
             get
             {
-                string outp = MainWindow.Localize("Condition_Type_ConditionQuest") + $" [{ID}] ";
+                string outp = LocUtil.LocalizeCondition("Condition_Type_ConditionQuest") + $" [{ID}] ";
                 switch (Logic)
                 {
                     case Logic_Type.Equal:
@@ -37,7 +38,7 @@
                         outp += "<= ";
                         break;
                 }
-                outp += MainWindow.Localize($"Condition_Status_Enum_{Status.ToString()}");
+                outp += LocUtil.LocalizeCondition($"Condition_Status_Enum_{Status.ToString()}");
                 return outp;
             }
         }

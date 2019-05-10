@@ -9,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Vendor
     public class NE_3000 : Mistake
     {
         public override IMPORTANCE Importance => IMPORTANCE.CRITICAL;
-        public override bool IsMistake => MainWindow.CurrentSave.vendors.Any(d => d.id == 0);
+        public override bool IsMistake => MainWindow.CurrentProject.vendors.Any(d => d.id == 0);
         public override string MistakeNameKey => "NE_3000";
         public override string MistakeDescKey => "NE_3000_Desc";
         public override bool TranslateName => false;

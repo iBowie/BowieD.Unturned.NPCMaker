@@ -1,14 +1,13 @@
 ﻿using BowieD.Unturned.NPCMaker.BetterForms;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.Managers;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -19,16 +18,6 @@ namespace BowieD.Unturned.NPCMaker
     /// </summary>
     public partial class App : Application
     {
-        private static List<CultureInfo> languages = new List<CultureInfo>();
-
-        public static IList<CultureInfo> Languages
-        {
-            get
-            {
-                return languages;
-            }
-        }
-        
         public App()
         {
             InitializeComponent();
@@ -38,27 +27,20 @@ namespace BowieD.Unturned.NPCMaker
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
             Logger.Clear();
             Logger.Log("App started! Pre-launch stage.");
-            App.LanguageChanged += App_LanguageChanged;
-            languages.Clear();
-            languages.Add(new CultureInfo("en-US"));
-            languages.Add(new CultureInfo("ru-RU"));
-            //languages.Add(new CultureInfo("de-DE")); // German
-            //languages.Add(new CultureInfo("es-ES")); // Spanish
             Logger.Log("Loading configuration...");
             Config.Configuration.Load();
             Logger.Log("Configuration loaded!");
-            if (Config.Configuration.Properties.firstLaunch)
+            if (Config.Configuration.Properties.firstLaunch || Config.Configuration.Properties.language == null)
             {
                 Logger.Log("First launch! Detecting language...");
-                if (languages.Contains(CultureInfo.InstalledUICulture))
+                if (LocUtil.SupportedCultures().Contains(CultureInfo.InstalledUICulture))
                 {
-                    Language = CultureInfo.InstalledUICulture;
+                    Config.Configuration.Properties.language = CultureInfo.InstalledUICulture;
                 }
                 else
                 {
-                    Language = new CultureInfo("en-US");
+                    Config.Configuration.Properties.language = new CultureInfo("en-US");
                 }
-                Config.Configuration.Properties.language = Language;
             }
             #region SCALE
             Resources["Scale"] = Config.Configuration.Properties.scale;
@@ -82,6 +64,7 @@ namespace BowieD.Unturned.NPCMaker
             CopyResource(NPCMaker.Properties.Resources.MahApps_Metro_IconPacks_Core, Config.Configuration.ConfigDirectory + "MahApps.Metro.IconPacks.Core.dll");
             CopyResource(NPCMaker.Properties.Resources.MahApps_Metro_IconPacks_Material, Config.Configuration.ConfigDirectory + "MahApps.Metro.IconPacks.Material.dll");
             #endregion
+            LocUtil.LoadLanguage(Config.Configuration.Properties.Language);
         }
 
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
@@ -119,52 +102,6 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             catch { }
-        }
-
-        private void App_LanguageChanged(object sender, EventArgs e)
-        {
-            Config.Configuration.Properties.language = Language;
-        }
-
-        public static event EventHandler LanguageChanged;
-
-        public static CultureInfo Language
-        {
-            get
-            {
-                return System.Threading.Thread.CurrentThread.CurrentUICulture;
-            }
-            set
-            {
-                if (value == null) throw new ArgumentNullException("value");
-                if (value == System.Threading.Thread.CurrentThread.CurrentUICulture) return;
-                System.Threading.Thread.CurrentThread.CurrentUICulture = value;
-                ResourceDictionary dict = new ResourceDictionary();
-                switch (value.Name)
-                {
-                    case "ru-RU":
-                    case "es-ES":
-                        dict.Source = new Uri(String.Format("Localization/lang.{0}.xaml", value.Name), UriKind.Relative);
-                        break;
-                    default:
-                        dict.Source = new Uri("Localization/lang.xaml", UriKind.Relative);
-                        break;
-                }
-                ResourceDictionary oldDict = (from d in Application.Current.Resources.MergedDictionaries
-                                              where d.Source != null && d.Source.OriginalString.StartsWith("Localization/lang.")
-                                              select d).First();
-                if (oldDict != null)
-                {
-                    int ind = Application.Current.Resources.MergedDictionaries.IndexOf(oldDict);
-                    Application.Current.Resources.MergedDictionaries.Remove(oldDict);
-                    Application.Current.Resources.MergedDictionaries.Insert(ind, dict);
-                }
-                else
-                {
-                    Application.Current.Resources.MergedDictionaries.Add(dict);
-                }
-                LanguageChanged(Application.Current, new EventArgs());
-            }
         }
     }
 }

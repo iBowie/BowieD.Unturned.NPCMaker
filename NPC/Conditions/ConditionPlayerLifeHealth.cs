@@ -1,8 +1,8 @@
 ﻿using System.Text;
+using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    #endregion
     public sealed class ConditionPlayerLifeHealth : Condition
     {
         public override Condition_Type Type => Condition_Type.Player_Life_Health;
@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append(MainWindow.Localize("Condition_Type_ConditionPlayerLifeHealth") + " ");
+                sb.Append(LocUtil.LocalizeCondition("Condition_Type_ConditionPlayerLifeHealth") + " ");
                 switch (Logic)
                 {
                     case Logic_Type.Equal:

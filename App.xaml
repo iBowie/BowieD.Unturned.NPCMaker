@@ -10,7 +10,7 @@
             <SolidColorBrush x:Key="AccentColor" Color="Black"/>
             <system:Double x:Key="Scale">1</system:Double>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Localization/lang.xaml"/>
+                <ResourceDictionary Source="Localization/lang.interface.en-US.xaml"/>
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Green.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"/>-->

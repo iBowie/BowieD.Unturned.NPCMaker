@@ -1,6 +1,7 @@
-﻿namespace BowieD.Unturned.NPCMaker.NPC.Conditions
+﻿using BowieD.Unturned.NPCMaker.Localization;
+
+namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    #endregion
     public sealed class ConditionKillsHorde : Condition
     {
         public override Condition_Type Type => Condition_Type.Kills_Horde;
@@ -8,7 +9,7 @@
         {
             get
             {
-                return $"[{ID}] {MainWindow.Localize("Condition_Type_ConditionKillsHorde")} ({Nav}) >= {Value}";
+                return $"[{ID}] {LocUtil.LocalizeCondition("Condition_Type_ConditionKillsHorde")} ({Nav}) >= {Value}";
             }
         }
         public ushort ID;

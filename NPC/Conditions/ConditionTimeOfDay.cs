@@ -1,8 +1,8 @@
-﻿using System.Text;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    #endregion
     public sealed class ConditionTimeOfDay : Condition
     {
         public int Second;
@@ -15,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append($"{MainWindow.Localize("Condition_Type_ConditionTimeOfDay")} ");
+                sb.Append($"{LocUtil.LocalizeCondition("Condition_Type_ConditionTimeOfDay")} ");
                 switch (Logic)
                 {
                     case Logic_Type.Equal:

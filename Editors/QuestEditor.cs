@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.BetterControls;
 using BowieD.Unturned.NPCMaker.BetterForms;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using DiscordRPC;
 using System;
@@ -96,13 +97,13 @@ namespace BowieD.Unturned.NPCMaker.Editors
         }
         public void Open()
         {
-            Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentSave.quests.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Quest, false)).ToList(), Universal_ItemList.ReturnType.Quest);
+            Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentProject.quests.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Quest, false)).ToList(), Universal_ItemList.ReturnType.Quest);
             if (ulv.ShowDialog() == true)
             {
                 Save();
                 Current = ulv.SelectedValue as NPCQuest;
             }
-            MainWindow.CurrentSave.quests = ulv.Values.Cast<NPCQuest>().ToList();
+            MainWindow.CurrentProject.quests = ulv.Values.Cast<NPCQuest>().ToList();
         }
         public void Reset()
         {
@@ -117,11 +118,11 @@ namespace BowieD.Unturned.NPCMaker.Editors
             NPCQuest cur = Current;
             if (cur.id == 0)
                 return;
-            if (MainWindow.CurrentSave.quests.Where(d => d.id == MainWindow.Instance.questIdBox.Value).Count() > 0)
-                MainWindow.CurrentSave.quests.Remove(MainWindow.CurrentSave.quests.Where(d => d.id == MainWindow.Instance.questIdBox.Value).ElementAt(0));
-            MainWindow.CurrentSave.quests.Add(cur);
+            if (MainWindow.CurrentProject.quests.Where(d => d.id == MainWindow.Instance.questIdBox.Value).Count() > 0)
+                MainWindow.CurrentProject.quests.Remove(MainWindow.CurrentProject.quests.Where(d => d.id == MainWindow.Instance.questIdBox.Value).ElementAt(0));
+            MainWindow.CurrentProject.quests.Add(cur);
             MainWindow.isSaved = false;
-            MainWindow.NotificationManager.Notify(MainWindow.Localize("notify_Quest_Saved"));
+            MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Quest_Saved"));
         }
 
         public void SendPresence()
@@ -131,7 +132,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             presence.Timestamps.StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             presence.Assets = new Assets();
             presence.Assets.SmallImageKey = "icon_exclamation_outlined";
-            presence.Assets.SmallImageText = $"Quests: {MainWindow.CurrentSave.quests.Count}";
+            presence.Assets.SmallImageText = $"Quests: {MainWindow.CurrentProject.quests.Count}";
             presence.Details = $"Quest Name: {MainWindow.QuestEditor.Current.title}";
             presence.State = $"Rewards: {MainWindow.QuestEditor.Current.rewards.Count} | Conds: {MainWindow.QuestEditor.Current.conditions.Count}";
             MainWindow.DiscordManager.SendPresence(presence);

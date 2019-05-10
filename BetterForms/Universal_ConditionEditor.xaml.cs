@@ -1,13 +1,11 @@
-﻿using BowieD.Unturned.NPCMaker.NPC;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
-using BowieD.Unturned.NPCMaker.NPC.Conditions;
 using System.Windows.Media.Animation;
-using System.Windows.Media;
+using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.BetterForms
 {
@@ -33,7 +31,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             foreach (Type t in Condition.GetTypes())
             {
                 ComboBoxItem cbi = new ComboBoxItem();
-                cbi.Content = MainWindow.Localize($"Condition_Type_{t.Name}");
+                cbi.Content = LocUtil.LocalizeCondition($"Condition_Type_{t.Name}");
                 cbi.Tag = t;
                 typeBox.Items.Add(cbi);
                 if (!_chosen && condition != null && condition.GetType() == t)
@@ -53,11 +51,9 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         }
 
         #region DESIGN VARS
-        private double baseHeight = 178;
-        private double heightDelta = 35;
-        private double elementHeight = 32;
-        private Thickness elementMargin = new Thickness(5, 5, 5, 5);
-        private bool viewLocalizationField = false;
+        private readonly double baseHeight = 178;
+        private readonly double heightDelta = 35;
+        private readonly bool viewLocalizationField = false;
         #endregion
         public Condition Result { get; private set; }
 
@@ -117,7 +113,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 DialogResult = true;
                 Close();
             }
-            catch { MessageBox.Show(MainWindow.Localize("conditionEditor_Fail")); } // write some error message or something like that
+            catch { MessageBox.Show(LocUtil.LocalizeInterface("conditionEditor_Fail")); } // write some error message or something like that
         }
 
         private void SetValueToControl(FrameworkElement element, object value)

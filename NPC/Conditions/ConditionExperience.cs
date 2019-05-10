@@ -1,6 +1,7 @@
-﻿namespace BowieD.Unturned.NPCMaker.NPC.Conditions
+﻿using BowieD.Unturned.NPCMaker.Localization;
+
+namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    #endregion
     public sealed class ConditionExperience : Condition
     {
         public override Condition_Type Type => Condition_Type.Experience;
@@ -8,7 +9,7 @@
         {
             get
             {
-                string outp = MainWindow.Localize("Condition_Type_ConditionExperience") + " ";
+                string outp = LocUtil.LocalizeCondition("Condition_Type_ConditionExperience") + " ";
                 switch (Logic)
                 {
                     case Logic_Type.Equal:

@@ -1,13 +1,11 @@
-﻿using BowieD.Unturned.NPCMaker.Logging;
+﻿using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -15,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.Export
 {
     public static class Exporter
     {
-        public static void ExportNPC(NPCSave save)
+        public static void ExportNPC(NPCProject save)
         {
             if (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + $@"\results\{save.guid}"))
                 Directory.Delete(AppDomain.CurrentDomain.BaseDirectory + $@"\results\{save.guid}", true);
@@ -29,12 +27,12 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 Content = new TextBlock
                 {
-                    Text = MainWindow.Localize("export_Done_Goto")
+                    Text = LocUtil.LocalizeInterface("export_Done_Goto")
                 }
             };
             Action<object, RoutedEventArgs> action = new Action<object, RoutedEventArgs>((sender, e) => { Process.Start(AppDomain.CurrentDomain.BaseDirectory + $@"results\{save.guid}"); });
             button.Click += new RoutedEventHandler(action);
-            MainWindow.NotificationManager.Notify(MainWindow.Localize("export_Done"), buttons: button);
+            MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("export_Done"), buttons: button);
         }
         private static string dir = "";
 

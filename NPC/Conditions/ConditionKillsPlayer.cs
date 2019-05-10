@@ -1,6 +1,7 @@
-﻿namespace BowieD.Unturned.NPCMaker.NPC.Conditions
+﻿using BowieD.Unturned.NPCMaker.Localization;
+
+namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    #endregion
     public sealed class ConditionKillsPlayer : Condition
     {
         public override Condition_Type Type => Condition_Type.Kills_Player;
@@ -8,7 +9,7 @@
         {
             get
             {
-                return $"[{ID}] {MainWindow.Localize("Condition_Type_ConditionKillsPlayer")} >= {Value}";
+                return $"[{ID}] {LocUtil.LocalizeCondition("Condition_Type_ConditionKillsPlayer")} >= {Value}";
             }
         }
         public ushort ID;

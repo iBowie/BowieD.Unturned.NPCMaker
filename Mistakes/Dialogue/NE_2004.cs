@@ -1,9 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
 {
@@ -17,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         {
             get
             {
-                foreach (NPCDialogue dial in MainWindow.CurrentSave.dialogues)
+                foreach (NPCDialogue dial in MainWindow.CurrentProject.dialogues)
                 {
                     if (dial.MessagesAmount >= 2)
                     {
@@ -34,7 +32,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
                 return false;
             }
         }
-        public override string MistakeDescKey => MainWindow.Localize("NE_2004_Desc", errorDialogue.id);
+        public override string MistakeDescKey => LocUtil.LocalizeMistake("NE_2004_Desc", errorDialogue.id);
         public override string MistakeNameKey => "NE_2004";
         public override bool TranslateName => false;
         public override bool TranslateDesc => false;

@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.BetterForms;
+using BowieD.Unturned.NPCMaker.Localization;
 using DiscordRPC;
 using System.Linq;
 using System.Windows;
@@ -66,7 +67,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void QuestSelect_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.CurrentSave.quests.Count() == 0)
+            if (MainWindow.CurrentProject.quests.Count() == 0)
                 return;
             Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Quest);
             select.ShowDialog();
@@ -78,7 +79,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void VendorSelect_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.CurrentSave.vendors.Count() == 0)
+            if (MainWindow.CurrentProject.vendors.Count() == 0)
                 return;
             Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Vendor);
             select.ShowDialog();
@@ -90,7 +91,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void DialogueSelect_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.CurrentSave.dialogues.Count() == 0)
+            if (MainWindow.CurrentProject.dialogues.Count() == 0)
                 return;
             Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Dialogue);
             select.ShowDialog();
@@ -114,7 +115,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             }
             else
             {
-                MainWindow.NotificationManager.Notify(MainWindow.Localize("dialogue_Reply_EditVisibility_MessageCount"));
+                MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("dialogue_Reply_EditVisibility_MessageCount"));
             }
         }
 

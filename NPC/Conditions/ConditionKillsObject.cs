@@ -2,7 +2,6 @@
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    #endregion
     public sealed class ConditionKillsObject : Condition
     {
         public ushort ID;

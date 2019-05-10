@@ -1,9 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes.Quests
 {
@@ -14,7 +11,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Quests
         {
             get
             {
-                foreach (NPCQuest quest in MainWindow.CurrentSave.quests)
+                foreach (NPCQuest quest in MainWindow.CurrentProject.quests)
                 {
                     if (quest.rewards.Count == 0)
                     {
@@ -26,7 +23,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Quests
             }
         }
         private NPCQuest errorQuest;
-        public override string MistakeDescKey => MainWindow.Localize("NE_4003_Desc", errorQuest.id);
+        public override string MistakeDescKey => LocUtil.LocalizeMistake("NE_4003_Desc", errorQuest.id);
         public override string MistakeNameKey => "NE_4003";
         public override bool TranslateDesc => false;
         public override bool TranslateName => false;

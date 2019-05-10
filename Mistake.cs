@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using System;
 using System.Windows.Media;
 
 namespace BowieD.Unturned.NPCMaker
@@ -14,9 +15,9 @@ namespace BowieD.Unturned.NPCMaker
         public virtual IMPORTANCE Importance => IMPORTANCE.ADVICE;
         public ImageSource Image => (Importance == IMPORTANCE.ADVICE ? "Resources/ICON_INFO.png".GetImageSource() : Importance == IMPORTANCE.WARNING ? "Resources/ICON_WARNING.png".GetImageSource() : "Resources/ICON_CANCEL.png".GetImageSource());
 
-        public string MistakeName => TranslateName ? MainWindow.Localize(MistakeNameKey) : MistakeNameKey;
-        public string MistakeDesc => TranslateDesc ? MainWindow.Localize(MistakeDescKey) : MistakeDescKey;
-        public string MistakeImportance => Importance == IMPORTANCE.ADVICE ? MainWindow.Localize("IMPORTANCE_ADVICE") : Importance == IMPORTANCE.WARNING ? MainWindow.Localize("IMPORTANCE_WARNING") : MainWindow.Localize("IMPORTANCE_CRITICAL");
+        public string MistakeName => TranslateName ? LocUtil.LocalizeInterface(MistakeNameKey) : MistakeNameKey;
+        public string MistakeDesc => TranslateDesc ? LocUtil.LocalizeInterface(MistakeDescKey) : MistakeDescKey;
+        public string MistakeImportance => Importance == IMPORTANCE.ADVICE ? LocUtil.LocalizeInterface("IMPORTANCE_ADVICE") : Importance == IMPORTANCE.WARNING ? LocUtil.LocalizeInterface("IMPORTANCE_WARNING") : LocUtil.LocalizeInterface("IMPORTANCE_CRITICAL");
         public virtual bool IsMistake
         {
             get { return false; }

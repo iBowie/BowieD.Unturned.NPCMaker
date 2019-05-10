@@ -1,6 +1,7 @@
-﻿namespace BowieD.Unturned.NPCMaker.NPC.Conditions
+﻿using BowieD.Unturned.NPCMaker.Localization;
+
+namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    #endregion
     public sealed class ConditionHoliday : Condition
     {
         public ENPCHoliday Value;
@@ -9,7 +10,7 @@
         {
             get
             {
-                return MainWindow.Localize($"{MainWindow.Localize("Condition_Type_ConditionHoliday")} {MainWindow.Localize($"Condition_Holiday_Enum_{Value.ToString()}")}");
+                return LocUtil.LocalizeCondition($"{LocUtil.LocalizeCondition("Condition_Type_ConditionHoliday")} {LocUtil.LocalizeCondition($"Condition_Holiday_Enum_{Value.ToString()}")}");
             }
         }
     }

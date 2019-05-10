@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml.Serialization;
+using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -42,7 +43,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             {
                 string fieldName = field.Name;
                 var fieldType = field.FieldType;
-                string localizedName = MainWindow.Localize($"Condition{fieldName}");
+                string localizedName = LocUtil.LocalizeCondition($"Condition{fieldName}");
                 Grid borderContents = new Grid();
                 Label l = new Label();
                 l.Content = localizedName;
@@ -135,7 +136,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         ComboBoxItem cbi = new ComboBoxItem
                         {
                             Tag = eValue,
-                            Content = MainWindow.Localize($"Condition_{field.Name}_Enum_{(eValue.ToString())}")
+                            Content = LocUtil.LocalizeCondition($"Condition_{field.Name}_Enum_{(eValue.ToString())}")
                         };
                         cBox.Items.Add(cbi);
                     }
@@ -208,7 +209,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public string Text { get; private set; }
         public ConditionName(string translationKey)
         {
-            Text = MainWindow.Localize(translationKey);
+            Text = LocUtil.LocalizeCondition(translationKey);
         }
     }
     public class ConditionTooltip : Attribute
@@ -216,7 +217,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public string Text { get; private set; }
         public ConditionTooltip(string translationKey)
         {
-            Text = MainWindow.Localize(translationKey);
+            Text = LocUtil.LocalizeCondition(translationKey);
         }
     }
     /// <summary>

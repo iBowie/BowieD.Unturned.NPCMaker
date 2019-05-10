@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.BetterControls;
+using BowieD.Unturned.NPCMaker.Localization;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -14,8 +15,8 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         public Universal_ListView(List<BetterControls.Universal_ItemList> listUil, BetterControls.Universal_ItemList.ReturnType returnType)
         {
             InitializeComponent();
-            addButton.Content = MainWindow.Localize($"listView_Add_{returnType.ToString()}");
-            Title = MainWindow.Localize($"listView_Title_{returnType.ToString()}");
+            addButton.Content = LocUtil.LocalizeInterface($"listView_Add_{returnType.ToString()}");
+            Title = LocUtil.LocalizeInterface($"listView_Title_{returnType.ToString()}");
             ReturnType = returnType;
             Values = new List<object>();
             foreach (BetterControls.Universal_ItemList uil in listUil)

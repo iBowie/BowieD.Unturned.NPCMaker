@@ -1,5 +1,6 @@
 ﻿using System;
 using BowieD.Unturned.NPCMaker.BetterForms;
+using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
@@ -16,9 +17,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public override int Elements => 2;
         public override void Init(Universal_RewardEditor ure)
         {
-            ure.AddLabel(MainWindow.Localize("rewardEditor_FlagID"));
+            ure.AddLabel(LocUtil.LocalizeReward("rewardEditor_FlagID"));
             ure.AddTextBox(5);
-            ure.AddLabel(MainWindow.Localize("rewardEditor_Value"));
+            ure.AddLabel(LocUtil.LocalizeReward("rewardEditor_Value"));
             ure.AddCheckBox(false);
         }
         public override void Init(Universal_RewardEditor ure, Reward start)

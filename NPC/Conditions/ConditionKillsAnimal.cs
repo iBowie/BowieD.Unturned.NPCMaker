@@ -1,6 +1,7 @@
-﻿namespace BowieD.Unturned.NPCMaker.NPC.Conditions
+﻿using BowieD.Unturned.NPCMaker.Localization;
+
+namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    #endregion
     public sealed class ConditionKillsAnimal : Condition
     {
         public override Condition_Type Type => Condition_Type.Kills_Animal;
@@ -8,7 +9,7 @@
         {
             get
             {
-                return $"[{ID}] {MainWindow.Localize("Condition_Type_ConditionKillsAnimal")} ({Animal}) >= {Value}";
+                return $"[{ID}] {LocUtil.LocalizeCondition("Condition_Type_ConditionKillsAnimal")} ({Animal}) >= {Value}";
             }
         }
         public ushort ID; 

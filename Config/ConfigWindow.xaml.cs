@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
@@ -51,11 +52,13 @@ namespace BowieD.Unturned.NPCMaker.Config
                     }
                 }
                 Autosave_Box.SelectedIndex = value.autosaveOption;
-                foreach (var lang in App.Languages)
+                foreach (var lang in LocUtil.SupportedCultures())
                 {
-                    ComboBoxItem cbi = new ComboBoxItem();
-                    cbi.Content = lang.NativeName;
-                    cbi.Tag = lang;
+                    ComboBoxItem cbi = new ComboBoxItem
+                    {
+                        Content = lang.NativeName,
+                        Tag = lang
+                    };
                     Languages_Box.Items.Add(cbi);
                     if (lang.Name == value.language.Name)
                         Languages_Box.SelectedItem = cbi;
@@ -92,13 +95,13 @@ namespace BowieD.Unturned.NPCMaker.Config
         {
             Configuration.Force(CurrentConfig);
             Configuration.Save();
-            MainWindow.NotificationManager.Notify(MainWindow.Localize("config_OnExit"));
+            MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("config_OnExit"));
             Close();
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show(MainWindow.Localize("config_Default_Confirm"), "", MessageBoxButton.YesNo);
+            var result = MessageBox.Show(LocUtil.LocalizeInterface("config_Default_Confirm"), "", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
                 CurrentConfig = Configuration.GetDefaults();

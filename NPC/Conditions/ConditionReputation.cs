@@ -1,6 +1,7 @@
-﻿namespace BowieD.Unturned.NPCMaker.NPC.Conditions
+﻿using BowieD.Unturned.NPCMaker.Localization;
+
+namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    #endregion
     public sealed class ConditionReputation : Condition
     {
         public override Condition_Type Type => Condition_Type.Reputation;
@@ -14,7 +15,7 @@
         {
             get
             {
-                string outp = MainWindow.Localize("Condition_Type_ConditionReputation") + " ";
+                string outp = LocUtil.LocalizeCondition("Condition_Type_ConditionReputation") + " ";
                 switch (Logic)
                 {
                     case Logic_Type.Equal:

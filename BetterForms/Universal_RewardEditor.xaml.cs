@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             gridScale.ScaleY = scale;
             viewLocalizationField = viewLocalization;
             saveButton.IsEnabled = false;
-            typeBox.ItemsSource = Enum.GetValues(typeof(RewardType)).Cast<RewardType>().Where(d => d != RewardType.None).Select(d => new ComboBoxItem() { Content = MainWindow.Localize($"reward_Type_{d.ToString()}"), Tag = d });
+            typeBox.ItemsSource = Enum.GetValues(typeof(RewardType)).Cast<RewardType>().Where(d => d != RewardType.None).Select(d => new ComboBoxItem() { Content = LocUtil.LocalizeInterface($"reward_Type_{d.ToString()}"), Tag = d });
             Reward startReward = reward ?? new Reward();
             SelectRewardType(startReward.Type);
             if (reward != null)
@@ -35,7 +36,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 startReward.Init(this, startReward);
                 if (viewLocalization)
                 {
-                    AddLabel(MainWindow.Localize("rewardEditor_Localization"), MainWindow.Localize("rewardEditor_Localization_Tooltip"));
+                    AddLabel(LocUtil.LocalizeInterface("rewardEditor_Localization"), LocUtil.LocalizeInterface("rewardEditor_Localization_Tooltip"));
                     AddTextBox(200);
                     SetMainValue(variablesGrid.Children.Count-1, reward.Localization);
                 }
@@ -76,7 +77,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         }
         internal void AddComboBox<T>(IEnumerable<T> Items, string translationKeyFormat)
         {
-            variablesGrid.Children.Add(new ComboBox() { ItemsSource = Items.Select(d => new ComboBoxItem() { Content = MainWindow.Localize(string.Format(translationKeyFormat, d.ToString())), Tag = d }), HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Top, Margin = elementMargin, Width = 100, Height = elementHeight });
+            variablesGrid.Children.Add(new ComboBox() { ItemsSource = Items.Select(d => new ComboBoxItem() { Content = LocUtil.LocalizeInterface(string.Format(translationKeyFormat, d.ToString())), Tag = d }), HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Top, Margin = elementMargin, Width = 100, Height = elementHeight });
         }
         internal void AddCheckBox(bool checkState)
         {
@@ -96,7 +97,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 DialogResult = true;
                 Close();
             }
-            catch { MessageBox.Show(MainWindow.Localize("conditionEditor_Fail")); }
+            catch { MessageBox.Show(LocUtil.LocalizeInterface("conditionEditor_Fail")); }
         }
 
         private void TypeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -113,7 +114,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             if (viewLocalizationField)
             {
                 mult++;
-                AddLabel(MainWindow.Localize("rewardEditor_Localization"), MainWindow.Localize("rewardEditor_Localization_Tooltip"));
+                AddLabel(LocUtil.LocalizeInterface("rewardEditor_Localization"), LocUtil.LocalizeInterface("rewardEditor_Localization_Tooltip"));
                 AddTextBox(200);
             }
             double newHeight = (baseHeight + (heightDelta * (mult + (mult > 1 ? 1 : 0))));

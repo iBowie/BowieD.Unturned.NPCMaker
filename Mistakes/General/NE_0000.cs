@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC;
 using System;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes.General
@@ -14,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.General
         {
             get
             {
-                foreach (var _char in MainWindow.CurrentSave.characters)
+                foreach (var _char in MainWindow.CurrentProject.characters)
                 {
                     if (_char.id > 0 && _char.id <= 2000)
                     {
@@ -27,7 +28,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.General
         }
         private NPCCharacter failChar = null;
         public override string MistakeNameKey => "NE_0000";
-        public override string MistakeDescKey => MainWindow.Localize("NE_0000_Desc", failChar.displayName, failChar.id);
+        public override string MistakeDescKey => LocUtil.LocalizeMistake("NE_0000_Desc", failChar.displayName, failChar.id);
         public override bool TranslateName => false;
         public override bool TranslateDesc => false;
         public override Action OnClick => () => 

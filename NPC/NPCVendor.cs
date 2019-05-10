@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
@@ -52,9 +53,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
             {
                 if (isBuy)
                 {
-                    return MainWindow.Localize("vendor_Item_Format_Sell").Replace("%id%", id.ToString()).Replace("%cost%", cost.ToString()).Replace("%itemType%", MainWindow.Localize($"vendor_Type_{type.ToString()}"));
+                    return LocUtil.LocalizeInterface("vendor_Item_Format_Sell").Replace("%id%", id.ToString()).Replace("%cost%", cost.ToString()).Replace("%itemType%", LocUtil.LocalizeInterface($"vendor_Type_{type.ToString()}"));
                 }
-                return MainWindow.Localize("vendor_Item_Format_Buy").Replace("%id%", id.ToString()).Replace("%cost%", cost.ToString()).Replace("%itemType%", MainWindow.Localize($"vendor_Type_{type.ToString()}"));
+                return LocUtil.LocalizeInterface("vendor_Item_Format_Buy").Replace("%id%", id.ToString()).Replace("%cost%", cost.ToString()).Replace("%itemType%", LocUtil.LocalizeInterface($"vendor_Type_{type.ToString()}"));
             }
         }
     }

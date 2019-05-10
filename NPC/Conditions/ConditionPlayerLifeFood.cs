@@ -1,8 +1,8 @@
 ﻿using System.Text;
+using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    #endregion
 
     public sealed class ConditionPlayerLifeFood : Condition
     {
@@ -14,7 +14,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append(MainWindow.Localize("Condition_Type_ConditionPlayerLifeFood") + " ");
+                sb.Append(LocUtil.LocalizeCondition("Condition_Type_ConditionPlayerLifeFood") + " ");
                 switch (Logic)
                 {
                     case Logic_Type.Equal:

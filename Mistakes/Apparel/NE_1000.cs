@@ -14,7 +14,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Apparel
             get
             {
                 return false;
-                return MainWindow.Instance.apparelSkinColorBox.Text.Length > 0 && MainWindow.Instance.apparelSkinColorBox.Text.Length < 6 && !new BrushConverter().IsValid(MainWindow.Instance.apparelSkinColorBox.Text);
+                //return MainWindow.Instance.apparelSkinColorBox.Text.Length > 0 && MainWindow.Instance.apparelSkinColorBox.Text.Length < 6 && !new BrushConverter().IsValid(MainWindow.Instance.apparelSkinColorBox.Text);
             }
         }
 

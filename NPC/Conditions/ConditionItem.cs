@@ -1,8 +1,8 @@
 ﻿using System.Text;
+using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    #endregion
     public sealed class ConditionItem : Condition
     {
         public override Condition_Type Type => Condition_Type.Item;
@@ -15,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append(MainWindow.Localize($"Condition_Type_ConditionItem") + " ");
+                sb.Append(LocUtil.LocalizeCondition($"Condition_Type_ConditionItem") + " ");
                 sb.Append($"{ID} x{Amount}");
                 return sb.ToString();
             }

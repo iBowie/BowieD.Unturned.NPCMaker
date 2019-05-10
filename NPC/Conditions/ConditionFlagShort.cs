@@ -1,8 +1,8 @@
 ﻿using System.Text;
+using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    #endregion
     public sealed class ConditionFlagShort : Condition
     {
         public ushort ID;
@@ -16,7 +16,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append($"{MainWindow.Localize("Condition_Type_ConditionFlagShort")} [{ID}]");
+                sb.Append($"{LocUtil.LocalizeCondition("Condition_Type_ConditionFlagShort")} [{ID}]");
                 switch (Logic)
                 {
                     case Logic_Type.Equal:

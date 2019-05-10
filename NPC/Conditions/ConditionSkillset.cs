@@ -1,8 +1,8 @@
-﻿using System.Text;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    #endregion
     public sealed class ConditionSkillset : Condition
     {
         public override Condition_Type Type => Condition_Type.Skillset;
@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             get
             {
                 StringBuilder outp = new StringBuilder();
-                outp.Append(MainWindow.Localize("Condition_Type_ConditionSkillset") + " ");
+                outp.Append(LocUtil.LocalizeCondition("Condition_Type_ConditionSkillset") + " ");
                 switch (Logic)
                 {
                     case Logic_Type.Equal:
