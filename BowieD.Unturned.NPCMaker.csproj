@@ -349,6 +349,8 @@
     </EmbeddedResource>
     <Resource Include="Localization\lang.conditions.en-US.json" />
     <Resource Include="Localization\lang.conditions.ru-RU.json" />
+    <Resource Include="Localization\lang.rewards.en-US.json" />
+    <Resource Include="Localization\lang.rewards.ru-RU.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

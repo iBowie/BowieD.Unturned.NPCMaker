@@ -29,8 +29,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             foreach (var contentID in GetAllContentIDs())
                 yield return contentID;
-            foreach (var conditionID in GetAllConditionIDs())
-                yield return conditionID;
         }
         public IEnumerable<ushort> GetAllContentIDs()
         {
@@ -42,66 +40,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 yield return vendor.id;
             foreach (var quest in quests)
                 yield return quest.id;
-        }
-        public IEnumerable<ushort> GetAllConditionIDs()
-        {
-
-            foreach (var character in characters)
-            {
-                foreach (var condition in character.visibilityConditions)
-                {
-                    if (condition is Condition.IHasConditionID condId)
-                    {
-                        yield return condId.FlagID;
-                    }
-                }
-            }
-            foreach (var dialogue in dialogues)
-            {
-                foreach (var response in dialogue.responses)
-                {
-                    foreach (var condition in response.conditions)
-                    {
-                        if (condition is Condition.IHasConditionID condId)
-                        {
-                            yield return condId.FlagID;
-                        }
-                    }
-                }
-                foreach (var message in dialogue.messages)
-                {
-                    foreach (var condition in message.conditions)
-                    {
-                        if (condition is Condition.IHasConditionID condId)
-                        {
-                            yield return condId.FlagID;
-                        }
-                    }
-                }
-            }
-            foreach (var vendor in vendors)
-            {
-                foreach (var item in vendor.items)
-                {
-                    foreach (var condition in item.conditions)
-                    {
-                        if (condition is Condition.IHasConditionID condId)
-                        {
-                            yield return condId.FlagID;
-                        }
-                    }
-                }
-            }
-            foreach (var quest in quests)
-            {
-                foreach (var condition in quest.conditions)
-                {
-                    if (condition is Condition.IHasConditionID condId)
-                    {
-                        yield return condId.FlagID;
-                    }
-                }
-            }
         }
 
         public static explicit operator NPCProject(NPCSaveOld old)

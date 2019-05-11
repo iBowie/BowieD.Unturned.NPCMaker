@@ -6,8 +6,7 @@
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.BetterForms"
         xmlns:NPCMaker="clr-namespace:BowieD.Unturned.NPCMaker" x:Class="BowieD.Unturned.NPCMaker.BetterForms.Universal_ConditionEditor"
         mc:Ignorable="d"
-        Title="{DynamicResource conditionEditor_Title}" 
-        ResizeMode="NoResize" 
+        Title="{DynamicResource conditionEditor_Title}"
         Height="240" 
         Width="300"
         Icon="{DynamicResource app_Icon}">
