@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             }
         }
         public ushort ID;
-        [ConditionName("ConditionAmount")]
+        [ConditionName("Condition_Amount")]
         public short Value;
         [ConditionNoValue]
         public bool Reset;

@@ -5,10 +5,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public sealed class ConditionReputation : Condition
     {
         public override Condition_Type Type => Condition_Type.Reputation;
-        [ConditionName("ConditionAmount")]
+        [ConditionName("Condition_Amount")]
         public int Value;
         public Logic_Type Logic;
-        [ConditionName("ConditionReset_Reputation_Title")]
+        [ConditionName("Condition_Reset_Reputation_Title")]
         [ConditionNoValue]
         public bool Reset;
         public override string DisplayName

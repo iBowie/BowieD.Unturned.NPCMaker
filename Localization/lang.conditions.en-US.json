@@ -17,6 +17,7 @@
 	"Condition_Type_ConditionQuest": "Quest",
 	"Condition_Type_ConditionReputation": "Reputation",
 	"Condition_Type_ConditionSkillset": "Skillset",
+	"Condition_Type_ConditionTimeOfDay": "Time of Day",
 	"Condition_Status": "Quest Status",
 	"Condition_Status_Enum_None": "None",
 	"Condition_Status_Enum_Active": "Active",
@@ -71,6 +72,6 @@
 	"Condition_Reset": "Should Reset On Complete",
 	"Condition_Reset_Experience_Title": "Spend player's experience on complete",
 	"Condition_Reset_Reputation_Title": "Take reputation on complete",
-	"Condition_Reset_Quest_Title": "Change quest status on complete",
+	"Condition_Reset_Quest_Title": "Change quest status on complete (hover for a tip)",
 	"Condition_Reset_Quest_Tooltip": "Active -> Abandon; Ready -> Completed; Completed -> Remove"
 }

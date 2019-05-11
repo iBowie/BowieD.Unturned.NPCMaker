@@ -7,7 +7,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public ushort ID;
         public short Value;
         public string Object;
-        [ConditionOptional(byte.MaxValue)]
+        [ConditionOptional(byte.MaxValue, byte.MaxValue)]
         public byte Nav;
         [ConditionNoValue]
         public bool Reset;

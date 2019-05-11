@@ -8,8 +8,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public ushort ID;
         public Quest_Status Status;
         public Logic_Type Logic;
-        [ConditionName("ConditionReset_Quest_Title")]
-        [ConditionTooltip("ConditionReset_Quest_Tooltip")]
+        [ConditionName("Condition_Reset_Quest_Title")]
+        [ConditionTooltip("Condition_Reset_Quest_Tooltip")]
         [ConditionNoValue]
         public bool Reset;
         public override string DisplayName

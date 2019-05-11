@@ -234,13 +234,14 @@
     <v:String x:Key="conditionEditor_Save">Save condition</v:String>
     <v:String x:Key="conditionEditor_Title">Edit condition</v:String>
     <v:String x:Key="conditionEditor_ConditionType">Condition</v:String>
-    <v:String x:Key="conditionEditor_Fail">All field must have correct data.</v:String>
+    <v:String x:Key="conditionEditor_Fail">All fields must have correct data.</v:String>
     <v:String x:Key="conditionEditor_Variables">Parameters</v:String>
 
     <v:String x:Key="rewardEditor_Save">Save reward</v:String>
     <v:String x:Key="rewardEditor_Title">Reward editor</v:String>
     <v:String x:Key="rewardEditor_Type">Reward Type</v:String>
     <v:String x:Key="rewardEditor_Variables">Parameters</v:String>
+    <v:String x:Key="rewardEditor_Fail">All fields must have correct data.</v:String>
 
     <v:String x:Key="config_Title">App Settings</v:String>
     <v:String x:Key="config_Tab_General">General</v:String>

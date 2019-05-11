@@ -14,11 +14,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         }
         public ushort ID;
         public short Value;
-        [ConditionOptional(1)]
+        [ConditionOptional(1, 1)]
         public int Spawn_Quantity;
         [ConditionNoValue]
         public bool Spawn;
-        [ConditionOptional(255)]
+        [ConditionOptional(255, 255)]
         public byte Nav;
         [ConditionNoValue]
         public bool Reset;

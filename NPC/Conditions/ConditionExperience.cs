@@ -37,9 +37,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         }
 
         public Logic_Type Logic;
-        [ConditionName("ConditionAmount")]
+        [ConditionName("Condition_Amount")]
         public uint Value;
-        [ConditionName("ConditionReset_Experience_Title")]
+        [ConditionName("Condition_Reset_Experience_Title")]
         [ConditionNoValue]
         public bool Reset;
     }

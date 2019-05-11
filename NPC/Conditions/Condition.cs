@@ -158,6 +158,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                     Child = borderContents
                 };
                 b.Margin = new Thickness(0, 5, 0, 5);
+                if (field.GetCustomAttribute<ConditionOptionalAttribute>() != null)
+                    b.Opacity = 0.75;
                 yield return b;
             }
         }
@@ -233,14 +235,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     }
     public class ConditionOptionalAttribute : Attribute
     {
-        public object requiredValue { get; private set; }
-        public ConditionOptionalAttribute(object requiredValue)
+        public object defaultValue { get; private set; }
+        public object skipValue { get; private set; }
+        public ConditionOptionalAttribute(object defaultValue, object skipValue)
         {
-            this.requiredValue = requiredValue;
+            this.defaultValue = defaultValue;
+            this.skipValue = skipValue;
         }
         public bool ConditionApplied(object currentValue)
         {
-            if (requiredValue.Equals(currentValue))
+            if (skipValue.Equals(currentValue))
                 return true;
             return false;
         }

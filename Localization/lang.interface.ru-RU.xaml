@@ -241,6 +241,7 @@
     <v:String x:Key="rewardEditor_Title">Редактор награды</v:String>
     <v:String x:Key="rewardEditor_Type">Тип награды</v:String>
     <v:String x:Key="rewardEditor_Variables">Параметры</v:String>
+    <v:String x:Key="rewardEditor_Fail">Все поля должны иметь корректные данные.</v:String>
 
     <v:String x:Key="config_Title">Настройки программы</v:String>
     <v:String x:Key="config_Tab_General">Основное</v:String>

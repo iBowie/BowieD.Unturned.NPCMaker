@@ -58,8 +58,8 @@ namespace BowieD.Unturned.NPCMaker.Localization
         }
         public static string LocalizeMistake(string key)
         {
-            if (mistakesLang != null && mistakesLang.ContainsKey(key))
-                return mistakesLang[key];
+            if (_mistakesLang != null && _mistakesLang.ContainsKey(key))
+                return _mistakesLang[key];
             return key;
         }
         public static string LocalizeMistake(string key, params object[] args)
@@ -103,28 +103,30 @@ namespace BowieD.Unturned.NPCMaker.Localization
             catch (Exception) { Debug.WriteLine("Could not load interface lang."); }
             try
             {
-                using (StreamReader sr = new StreamReader(Application.GetResourceStream(new Uri($"Localization/lang.conditions.{langCode}.json")).Stream))
+                var sri = Application.GetResourceStream(new Uri($"Localization/lang.conditions.{langCode}.json", UriKind.Relative));
+                using (StreamReader sr = new StreamReader(sri.Stream))
                 {
                     string text = sr.ReadToEnd();
-                    var des = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(text);
+                    _conditionsLang = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(text);
                 }
+                sri.Stream.Close();
             }
             catch (Exception) { Debug.WriteLine("Could not load conditions lang."); }
             try
             {
-                using (StreamReader sr = new StreamReader(Application.GetResourceStream(new Uri($"Localization/lang.rewards.{langCode}.json")).Stream))
+                using (StreamReader sr = new StreamReader(Application.GetResourceStream(new Uri($"Localization/lang.rewards.{langCode}.json", UriKind.Relative)).Stream))
                 {
                     string text = sr.ReadToEnd();
-                    var des = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(text);
+                    _rewardsLang = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(text);
                 }
             }
             catch (Exception) { Debug.WriteLine("Could not load rewards lang."); }
             try
             {
-                using (StreamReader sr = new StreamReader(Application.GetResourceStream(new Uri($"Localization/lang.mistakes.{langCode}.json")).Stream))
+                using (StreamReader sr = new StreamReader(Application.GetResourceStream(new Uri($"Localization/lang.mistakes.{langCode}.json", UriKind.Relative)).Stream))
                 {
                     string text = sr.ReadToEnd();
-                    var des = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(text);
+                    _mistakesLang = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(text);
                 }
             }
             catch (Exception) { Debug.WriteLine("Could not load mistakes lang."); }
@@ -134,6 +136,6 @@ namespace BowieD.Unturned.NPCMaker.Localization
         private static Dictionary<string, string> 
             _conditionsLang = null,
             _rewardsLang = null,
-            mistakesLang = null;
+            _mistakesLang = null;
     }
 }
