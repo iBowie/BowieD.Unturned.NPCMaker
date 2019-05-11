@@ -1,41 +1,42 @@
 ﻿using System;
 using BowieD.Unturned.NPCMaker.BetterForms;
+using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
-    public class Flag_Bool : Reward
+    public class Item : Reward
     {
-        public Flag_Bool()
+        public Item()
         {
-            Type = RewardType.Flag_Bool;
+            Type = RewardType.Item;
         }
 
         public ushort Id { get; set; }
-        public bool Value { get; set; }
+        public uint Amount { get; set; }
 
         public override int Elements => 2;
         public override void Init(Universal_RewardEditor ure)
         {
-            ure.AddLabel(MainWindow.Localize("rewardEditor_FlagID"));
+            ure.AddLabel(LocUtil.LocalizeReward("rewardEditor_ID"));
             ure.AddTextBox(5);
-            ure.AddLabel(MainWindow.Localize("rewardEditor_Value"));
-            ure.AddCheckBox(false);
+            ure.AddLabel(LocUtil.LocalizeReward("rewardEditor_Amount"));
+            ure.AddTextBox(6);
         }
         public override void Init(Universal_RewardEditor ure, Reward start)
         {
             Init(ure);
             if (start != null)
             {
-                ure.SetMainValue(1, (start as Flag_Bool).Id);
-                ure.SetMainValue(3, (start as Flag_Bool).Value);
+                ure.SetMainValue(1, (start as Item).Id);
+                ure.SetMainValue(3, (start as Item).Amount);
             }
         }
         public override T Parse<T>(object[] input)
         {
-            return new Flag_Bool()
+            return new Item()
             {
                 Id = ushort.Parse(input[0].ToString()),
-                Value = (bool)input[1]
+                Amount = uint.Parse(input[1].ToString())
             } as T;
         }
 
@@ -45,15 +46,15 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 if (!prefix.EndsWith("_"))
                     prefix += "_";
             string output = "";
-            output += ($"{prefix}{(prefix.Length > 0 ? $"{prefixIndex.ToString()}_" : "")}Reward_{conditionIndex}_Type Flag_Bool");
+            output += ($"{prefix}{(prefix.Length > 0 ? $"{prefixIndex.ToString()}_" : "")}Reward_{conditionIndex}_Type Item");
             output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Reward_{conditionIndex}_ID {this.Id}");
-            output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Reward_{conditionIndex}_Value {this.Value}");
+            output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Reward_{conditionIndex}_Amount {this.Amount}");
             return output;
         }
 
         public override string ToString()
         {
-            return $"{(string)MainWindow.Instance.TryFindResource("reward_Type_Flag_Bool")} : {Value} ({Id})";
+            return $"{(string)MainWindow.Instance.TryFindResource("reward_Type_Item")} {Id} x{Amount}";
         }
     }
 }

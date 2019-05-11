@@ -1,11 +1,13 @@
-﻿using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using Reward = BowieD.Unturned.NPCMaker.NPC.Rewards.Reward;
 
 namespace BowieD.Unturned.NPCMaker.BetterForms
 {
@@ -14,42 +16,48 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
     /// </summary>
     public partial class Universal_RewardEditor : Window
     {
-        public Universal_RewardEditor(NPC.Reward reward = null, bool viewLocalization = false)
+        public Universal_RewardEditor(Reward reward = null, bool viewLocalization = false)
         {
             InitializeComponent();
             double scale = Config.Configuration.Properties.scale;
+            viewLocalizationField = viewLocalization;
+            ClearParameters();
             this.Height *= scale;
             this.Width *= scale;
             baseHeight = Height;
             heightDelta *= scale;
             gridScale.ScaleX = scale;
             gridScale.ScaleY = scale;
-            viewLocalizationField = viewLocalization;
-            saveButton.IsEnabled = false;
-            typeBox.ItemsSource = Enum.GetValues(typeof(RewardType)).Cast<RewardType>().Where(d => d != RewardType.None).Select(d => new ComboBoxItem() { Content = MainWindow.Localize($"reward_Type_{d.ToString()}"), Tag = d });
-            Reward startReward = reward ?? new Reward();
-            SelectRewardType(startReward.Type);
-            if (reward != null)
+            bool _chosen = false;
+            int _index = 0;
+            foreach (Type t in Reward.GetTypes())
             {
-                ClearParameters();
-                startReward.Init(this, startReward);
-                if (viewLocalization)
+                ComboBoxItem cbi = new ComboBoxItem();
+                cbi.Content = LocUtil.LocalizeReward($"Reward_Type_{t.Name}");
+                cbi.Tag = t;
+                typeBox.Items.Add(cbi);
+                if (!_chosen && reward != null && reward.GetType() == t)
                 {
-                    AddLabel(MainWindow.Localize("rewardEditor_Localization"), MainWindow.Localize("rewardEditor_Localization_Tooltip"));
-                    AddTextBox(200);
-                    SetMainValue(variablesGrid.Children.Count-1, reward.Localization);
+                    typeBox.SelectedIndex = _index;
+                    _chosen = true;
+                    var fieldControls = Util.FindVisualChildren<FrameworkElement>(variablesGrid).
+                        Where(d => d.Tag != null && d.Tag.ToString().StartsWith("variable::"));
+                    foreach (var fControl in fieldControls)
+                    {
+                        SetValueToControl(fControl, reward.GetType().GetField(fControl.Tag.ToString().Substring(10)).GetValue(reward));
+                    }
                 }
+                _index++;
             }
+            saveButton.IsEnabled = reward != null;
         }
 
         public Reward Result { get; private set; }
 
         #region DESIGN VARS
-        private double baseHeight = 178;
-        private double heightDelta = 35;
-        private double elementHeight = 32;
-        private Thickness elementMargin = new Thickness(5, 5, 5, 5);
-        private bool viewLocalizationField = false;
+        private readonly double baseHeight = 178;
+        private readonly double heightDelta = 35;
+        private readonly bool viewLocalizationField = false;
         #endregion
         #region METHODS
         internal void ClearParameters()
@@ -57,65 +65,47 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             variablesGrid.Children.Clear();
             this.Height = baseHeight;
         }
-        internal void AddLabel(string text, string tooltip = "")
-        {
-            //variablesGrid.Children.Add(new Label() { VerticalContentAlignment = VerticalAlignment.Top, HorizontalAlignment = HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Top, Content = text, Margin = elementMargin, Height = elementHeight });
-            //foreach (UIElement ui in variablesGrid.Children)
-            //{
-            //    if (ui is Label l && (l.ToolTip == null || l.ToolTip.ToString() == "" || l.ToolTip.ToString().Length == 0) && l.Content != null && l.Content.ToString().Length >= 17)
-            //    {
-            //        l.ToolTip = l.Content;
-            //        return;
-            //    }
-            //}
-            variablesGrid.Children.Add(new TextBlock() { ToolTip = tooltip ?? null, TextWrapping = TextWrapping.Wrap, TextAlignment = TextAlignment.Left, VerticalAlignment = VerticalAlignment.Top, HorizontalAlignment = HorizontalAlignment.Left, Text = text, Margin = elementMargin, Height = elementHeight });
-        }
-        internal void AddTextBox(int maxLength)
-        {
-            variablesGrid.Children.Add(new TextBox() { MaxLength = maxLength, HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Top, Margin = elementMargin, Width = 100, Height = elementHeight });
-        }
-        internal void AddComboBox<T>(IEnumerable<T> Items, string translationKeyFormat)
-        {
-            variablesGrid.Children.Add(new ComboBox() { ItemsSource = Items.Select(d => new ComboBoxItem() { Content = MainWindow.Localize(string.Format(translationKeyFormat, d.ToString())), Tag = d }), HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Top, Margin = elementMargin, Width = 100, Height = elementHeight });
-        }
-        internal void AddCheckBox(bool checkState)
-        {
-            variablesGrid.Children.Add(new CheckBox() { IsChecked = checkState, Margin = elementMargin, VerticalContentAlignment = VerticalAlignment.Center, Height = elementHeight, VerticalAlignment = VerticalAlignment.Top, HorizontalAlignment = HorizontalAlignment.Right });
-        }
         #endregion
 
+        private Type _CurrentRewardType = null;
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                object[] input = Input;
-                var rew = Reward.RewardObjects.First(d => d.Type == Selected_Reward).Parse<Reward>(input);
-                Result = rew;
-                if (viewLocalizationField)
-                    Result.Localization = input[input.Length - 1].ToString();
+                Reward returnReward = Activator.CreateInstance(_CurrentRewardType) as Reward;
+                Dictionary<string, object> _values = new Dictionary<string, object>();
+                var controls = Util.FindVisualChildren<FrameworkElement>(variablesGrid).Where(d => d.Tag != null && d.Tag.ToString().StartsWith("variable::"));
+                foreach (var c in controls)
+                {
+                    _values.Add(c.Tag.ToString().Substring(10), GetValueFromControl(c));
+                }
+                foreach (var k in _values)
+                {
+                    var field = returnReward.GetType().GetField(k.Key);
+                    field.SetValue(returnReward, Convert.ChangeType(k.Value, field.FieldType));
+                }
+                Result = returnReward;
                 DialogResult = true;
                 Close();
             }
-            catch { MessageBox.Show(MainWindow.Localize("conditionEditor_Fail")); }
+            catch { MessageBox.Show(LocUtil.LocalizeInterface("rewardEditor_Fail")); }
         }
-
         private void TypeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             saveButton.IsEnabled = true;
             if (e.AddedItems.Count == 0)
                 return;
+            var type = (typeBox.SelectedItem as ComboBoxItem).Tag as Type;
+            Reward newCondition = (Reward)Activator.CreateInstance(type);
+            _CurrentRewardType = type;
             ClearParameters();
-            RewardType newSelection = Selected_Reward;
-            Reward newReward = (Reward)Activator.CreateInstance(Reward.GetByType(newSelection));
-            ClearParameters();
-            newReward.Init(this);
-            int mult = newReward.Elements;
-            if (viewLocalizationField)
+            int mult = type.GetFields().Length;
+            foreach (var c in newCondition.GetControls())
             {
-                mult++;
-                AddLabel(MainWindow.Localize("rewardEditor_Localization"), MainWindow.Localize("rewardEditor_Localization_Tooltip"));
-                AddTextBox(200);
+                variablesGrid.Children.Add(c);
             }
+            if (!viewLocalizationField)
+                GetLocalizationControl().Visibility = Visibility.Collapsed;
             double newHeight = (baseHeight + (heightDelta * (mult + (mult > 1 ? 1 : 0))));
             if (Config.Configuration.Properties.animateControls)
             {
@@ -127,67 +117,51 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 Height = newHeight;
             }
         }
-
-        private void SelectRewardType(RewardType cType)
+        private void SetValueToControl(FrameworkElement element, object value)
         {
-            if (cType == RewardType.None)
-                typeBox.SelectedIndex = -1;
-            else
+            switch (element)
             {
-                for (int k = 0; k < typeBox.Items.Count; k++)
-                {
-                    if ((typeBox.Items[k] as ComboBoxItem).Tag is RewardType ctype && ctype == cType)
+                case MahApps.Metro.Controls.NumericUpDown nud:
+                    nud.Value = Convert.ToDouble(value);
+                    break;
+                case CheckBox c:
+                    c.IsChecked = value as bool?;
+                    break;
+                case TextBox textBox:
+                    textBox.Text = value as string;
+                    break;
+                case ComboBox comboBox:
+                    for (int k = 0; k < comboBox.Items.Count; k++)
                     {
-                        typeBox.SelectedIndex = k;
-                        return;
+                        if ((comboBox.Items[k] as ComboBoxItem).Tag.Equals(value))
+                        {
+                            comboBox.SelectedIndex = k;
+                            break;
+                        }
                     }
-                }
+                    break;
             }
         }
-        private RewardType Selected_Reward => typeBox.SelectedItem is ComboBoxItem cbi && cbi.Tag is RewardType crt ? crt : RewardType.None;
-
-        private object[] Input
+        private object GetValueFromControl(FrameworkElement element)
         {
-            get
+            switch (element)
             {
-                List<object> list = new List<object>();
-                for (int k = 1; k < variablesGrid.Children.Count; k += 2)
-                {
-                    list.Add(GetMainValue(variablesGrid.Children[k]));
-                }
-                return list.ToArray();
+                case MahApps.Metro.Controls.NumericUpDown nud:
+                    return nud.Value.HasValue ? nud.Value.Value : 0;
+                case CheckBox checkBox:
+                    return checkBox.IsChecked.HasValue ? checkBox.IsChecked.Value : false;
+                case TextBox textBox:
+                    return textBox.Text;
+                case ComboBox comboBox:
+                    return (comboBox.SelectedItem as ComboBoxItem).Tag;
+                default:
+                    return null;
             }
         }
-        private object GetMainValue(UIElement element)
+        private FrameworkElement GetLocalizationControl()
         {
-            if (element is TextBox a)
-                return a.Text;
-            if (element is CheckBox b)
-                return b.IsChecked.Value;
-            if (element is ComboBox c && c.SelectedItem is ComboBoxItem cc)
-                return cc.Tag;
-            return null;
-        }
-        internal void SetMainValue(int index, object value)
-        {
-            if (index < 0 || value == null || index > variablesGrid.Children.Count)
-                return;
-            UIElement ui = variablesGrid.Children[index];
-            if (ui is TextBox a)
-                a.Text = value.ToString();
-            if (ui is CheckBox b && value is bool bb)
-                b.IsChecked = bb;
-            if (ui is ComboBox c)
-            {
-                for (int k = 0; k < c.Items.Count; k++)
-                {
-                    if (c.Items[k] is ComboBoxItem cc && cc.Tag.Equals(value))
-                    {
-                        c.SelectedIndex = k;
-                        break;
-                    }
-                }
-            }
+            var control = Util.FindVisualChildren<FrameworkElement>(variablesGrid).First(d => d.Tag != null && d.Tag.ToString() == "variable::Localization");
+            return Util.FindParent<Border>(control);
         }
     }
 }

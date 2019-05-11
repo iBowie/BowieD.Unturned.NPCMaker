@@ -1,12 +1,11 @@
-﻿using BowieD.Unturned.NPCMaker.NPC;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using Condition = BowieD.Unturned.NPCMaker.NPC.Condition;
-using BowieD.Unturned.NPCMaker.NPC.Conditions;
+using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 using System.Windows.Media.Animation;
+using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.BetterForms
 {
@@ -19,6 +18,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         {
             InitializeComponent();
             double scale = Config.Configuration.Properties.scale;
+            viewLocalizationField = viewLocalization;
             ClearParameters();
             this.Height *= scale;
             this.Width *= scale;
@@ -26,49 +26,34 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             heightDelta *= scale;
             gridScale.ScaleX = scale;
             gridScale.ScaleY = scale;
-            Condition startCondition = condition ?? new Condition();
-            typeBox.ItemsSource = Condition.ConditionObjects.Select(d => d.Type).Where(d => d != Condition_Type.None).Select(d => new ComboBoxItem() { Content = MainWindow.Localize($"Condition_{d.ToString()}"), Tag = d }).ToList();
-            saveButton.IsEnabled = startCondition.Type != Condition_Type.None;
-            #region CONDITION INIT
-            viewLocalizationField = viewLocalization;
-            SelectConditionType(startCondition.Type);
-            if (condition != null)
+            bool _chosen = false;
+            int _index = 0;
+            foreach (Type t in Condition.GetTypes())
             {
-                ClearParameters();
-                startCondition.Init(this, startCondition);
-                if (viewLocalization)
+                ComboBoxItem cbi = new ComboBoxItem();
+                cbi.Content = LocUtil.LocalizeCondition($"Condition_Type_{t.Name}");
+                cbi.Tag = t;
+                typeBox.Items.Add(cbi);
+                if (!_chosen && condition != null && condition.GetType() == t)
                 {
-                    AddLabel(MainWindow.Localize("conditionEditor_Localization"), MainWindow.Localize("rewardEditor_Localization_Tooltip"));
-                    AddTextBox(200);
-                    SetMainValue(variablesGrid.Children.Count - 1, startCondition.Localization);
-                }
-            }
-            #endregion
-        }
-
-        private void SelectConditionType(Condition_Type cType)
-        {
-            if (cType == Condition_Type.None)
-                typeBox.SelectedIndex = -1;
-            else
-            {
-                for (int k = 0; k < typeBox.Items.Count; k++)
-                {
-                    if ((typeBox.Items[k] as ComboBoxItem).Tag is Condition_Type ctype && ctype == cType)
+                    typeBox.SelectedIndex = _index;
+                    _chosen = true;
+                    var fieldControls = Util.FindVisualChildren<FrameworkElement>(variablesGrid).
+                        Where(d => d.Tag != null && d.Tag.ToString().StartsWith("variable::"));
+                    foreach (var fControl in fieldControls)
                     {
-                        typeBox.SelectedIndex = k;
-                        return;
+                        SetValueToControl(fControl, condition.GetType().GetField(fControl.Tag.ToString().Substring(10)).GetValue(condition));
                     }
                 }
+                _index++;
             }
+            saveButton.IsEnabled = condition != null;
         }
 
         #region DESIGN VARS
-        private double baseHeight = 178;
-        private double heightDelta = 35;
-        private double elementHeight = 32;
-        private Thickness elementMargin = new Thickness(5, 5, 5, 5);
-        private bool viewLocalizationField = false;
+        private readonly double baseHeight = 178;
+        private readonly double heightDelta = 35;
+        private readonly bool viewLocalizationField = false;
         #endregion
         public Condition Result { get; private set; }
 
@@ -77,17 +62,17 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             saveButton.IsEnabled = true;
             if (e.AddedItems.Count == 0)
                 return;
-            Condition_Type newSelection = (Condition_Type)(typeBox.SelectedItem as ComboBoxItem).Tag;
-            Condition newCondition = (Condition)Activator.CreateInstance(Condition.GetByType(newSelection));
+            var type = (typeBox.SelectedItem as ComboBoxItem).Tag as Type; 
+            Condition newCondition = (Condition)Activator.CreateInstance(type);
+            _CurrentConditionType = type;
             ClearParameters();
-            newCondition.Init(this);
-            int mult = newCondition.Elements;
-            if (viewLocalizationField)
+            int mult = type.GetFields().Length;
+            foreach (var c in newCondition.GetControls())
             {
-                mult++;
-                AddLabel(MainWindow.Localize("conditionEditor_Localization"), MainWindow.Localize("conditionEditor_Localization_Tooltip"));
-                AddTextBox(200);
+                variablesGrid.Children.Add(c);
             }
+            if (!viewLocalizationField)
+                GetLocalizationControl().Visibility = Visibility.Collapsed;
             double newHeight = (baseHeight + (heightDelta * (mult + (mult > 1 ? 1 : 0))));
             if (Config.Configuration.Properties.animateControls)
             {
@@ -105,97 +90,77 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             variablesGrid.Children.Clear();
             this.Height = baseHeight;
         }
-        internal void AddResetLabelAndCheckbox(string currentType = "", bool checkState = false)
-        {
-            string text = MainWindow.Localize($"conditionEditor_Reset_{currentType}_Title");
-            string tooltip = MainWindow.Localize($"conditionEditor_Reset_{currentType}_Tooltip");
-            if (text != null)
-                AddLabel(text, tooltip != null ? tooltip.Replace("`", Environment.NewLine) : text);
-            else
-                AddLabel(MainWindow.Localize("conditionEditor_Reset"));
-            AddCheckBox(checkState);
-        }
-        internal void AddLabel(string text, string tooltip = "")
-        {
-            variablesGrid.Children.Add(new TextBlock() { ToolTip = tooltip ?? null, TextWrapping = TextWrapping.Wrap, TextAlignment = TextAlignment.Left, VerticalAlignment = VerticalAlignment.Top, HorizontalAlignment = HorizontalAlignment.Left, Text = text, Margin = elementMargin, Height = elementHeight });
-        }
-        internal void AddTextBox(int maxLength)
-        {
-            variablesGrid.Children.Add(new TextBox() { MaxLength = maxLength, HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Top, Margin = elementMargin, Width = 100, Height = elementHeight });
-        }
-        internal void AddLogicBox()
-        {
-            AddComboBox(Enum.GetValues(typeof(Logic_Type)).Cast<Logic_Type>(), "Logic_{0}");
-        }
-        internal void AddComboBox<T>(IEnumerable<T> Items, string translationKeyFormat)
-        {
-            variablesGrid.Children.Add(new ComboBox() { ItemsSource = Items.Select(d => new ComboBoxItem() { Content = MainWindow.Localize(string.Format(translationKeyFormat, d.ToString())), Tag = d }), HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Top, Margin = elementMargin, Width = 100, Height = elementHeight });
-        }
-        internal void AddCheckBox(bool checkState)
-        {
-            variablesGrid.Children.Add(new CheckBox() { IsChecked = checkState, Margin = elementMargin, VerticalContentAlignment = VerticalAlignment.Center, Height = elementHeight, VerticalAlignment = VerticalAlignment.Top, HorizontalAlignment = HorizontalAlignment.Right });
-        }
         #endregion
 
+        private Type _CurrentConditionType = null;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                object[] input = Input;
-                var cond = Condition.ConditionObjects.First(d => d.Type == Selected_Condition).Parse<Condition>(input);
-                Result = cond;
-                if (viewLocalizationField)
-                    Result.Localization = input[input.Length - 1].ToString();
+                Condition returnCondition = Activator.CreateInstance(_CurrentConditionType) as Condition;
+                Dictionary<string, object> _values = new Dictionary<string, object>();
+                var controls = Util.FindVisualChildren<FrameworkElement>(variablesGrid).Where(d => d.Tag != null && d.Tag.ToString().StartsWith("variable::"));
+                foreach (var c in controls)
+                {
+                    _values.Add(c.Tag.ToString().Substring(10), GetValueFromControl(c));
+                }
+                foreach (var k in _values)
+                {
+                    var field = returnCondition.GetType().GetField(k.Key);
+                    field.SetValue(returnCondition, Convert.ChangeType(k.Value, field.FieldType));
+                }
+                Result = returnCondition;
                 DialogResult = true;
                 Close();
             }
-            catch { MessageBox.Show(MainWindow.Localize("conditionEditor_Fail")); } // write some error message or something like that
+            catch { MessageBox.Show(LocUtil.LocalizeInterface("conditionEditor_Fail")); } // write some error message or something like that
         }
 
-        private Condition_Type Selected_Condition => (typeBox.SelectedItem as ComboBoxItem).Tag is Condition_Type condition ? condition : Condition_Type.None;
-
-        private object[] Input
+        private void SetValueToControl(FrameworkElement element, object value)
         {
-            get
+            switch (element)
             {
-                List<object> list = new List<object>();
-                for (int k = 1; k < variablesGrid.Children.Count; k += 2)
-                {
-                    list.Add(GetMainValue(variablesGrid.Children[k]));
-                }
-                return list.ToArray();
-            }
-        }
-        internal object GetMainValue(UIElement element)
-        {
-            if (element is TextBox a)
-                return a.Text;
-            if (element is CheckBox b)
-                return b.IsChecked.Value;
-            if (element is ComboBox c && c.SelectedItem is ComboBoxItem cc)
-                return cc.Tag;
-            return null;
-        }
-        internal void SetMainValue(int index, object value)
-        {
-            if (index < 0 || value == null || index > variablesGrid.Children.Count)
-                return;
-            UIElement ui = variablesGrid.Children[index];
-            if (ui is TextBox a)
-                a.Text = value.ToString();
-            if (ui is CheckBox b && value is bool bb)
-                b.IsChecked = bb;
-            if (ui is ComboBox c)
-            {
-                for (int k = 0; k < c.Items.Count; k++)
-                {
-                    if (c.Items[k] is ComboBoxItem cc && cc.Tag.Equals(value))
+                case MahApps.Metro.Controls.NumericUpDown nud:
+                    nud.Value = Convert.ToDouble(value);
+                    break;
+                case CheckBox c:
+                    c.IsChecked = value as bool?;
+                    break;
+                case TextBox textBox:
+                    textBox.Text = value as string;
+                    break;
+                case ComboBox comboBox:
+                    for (int k = 0; k < comboBox.Items.Count; k++)
                     {
-                        c.SelectedIndex = k;
-                        break;
+                        if ((comboBox.Items[k] as ComboBoxItem).Tag.Equals(value))
+                        {
+                            comboBox.SelectedIndex = k;
+                            break;
+                        }
                     }
-                }
+                    break;
             }
+        }
+        private object GetValueFromControl(FrameworkElement element)
+        {
+            switch (element)
+            {
+                case MahApps.Metro.Controls.NumericUpDown nud:
+                    return nud.Value.HasValue ? nud.Value.Value : 0;
+                case CheckBox checkBox:
+                    return checkBox.IsChecked.HasValue ? checkBox.IsChecked.Value : false;
+                case TextBox textBox:
+                    return textBox.Text;
+                case ComboBox comboBox:
+                    return (comboBox.SelectedItem as ComboBoxItem).Tag;
+                default:
+                    return null;
+            }
+        }
+        private FrameworkElement GetLocalizationControl()
+        {
+            var control = Util.FindVisualChildren<FrameworkElement>(variablesGrid).First(d => d.Tag != null && d.Tag.ToString() == "variable::Localization");
+            return Util.FindParent<Border>(control);
         }
     }
 }

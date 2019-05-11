@@ -2,6 +2,8 @@
 using BowieD.Unturned.NPCMaker.NPC;
 using System.Windows;
 using System.Windows.Controls;
+using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
+using Reward = BowieD.Unturned.NPCMaker.NPC.Rewards.Reward;
 
 namespace BowieD.Unturned.NPCMaker.BetterControls
 {
@@ -15,10 +17,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             InitializeComponent();
             this.Value = input;
             mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
-            if (type == ReturnType.Dialogue || type == ReturnType.Quest || type == ReturnType.Vendor)
-                mainLabel.ToolTip = Value is IHasComment hasComment ? hasComment.Comment : Value.ToString();
-            else
-                mainLabel.ToolTip = Value is IHasDisplayName displayName ? displayName : Value;
+mainLabel.ToolTip = mainLabel.Content;
             this.Localizable = localizable;
             this.Type = type;
         }
@@ -31,7 +30,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
         {
             if (Type == ReturnType.Condition)
             {
-                NPC.Condition Condition = Value as NPC.Condition;
+                Condition Condition = Value as Condition;
                 BetterForms.Universal_ConditionEditor uce = new BetterForms.Universal_ConditionEditor(Condition, Localizable);
                 if (uce.ShowDialog() == true)
                 {
@@ -50,7 +49,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             }
             else if (Type == ReturnType.Reward)
             {
-                NPC.Reward reward = Value as NPC.Reward;
+                Reward reward = Value as Reward;
                 BetterForms.Universal_RewardEditor ure = new BetterForms.Universal_RewardEditor(reward, Localizable);
                 ure.ShowDialog();
                 if (ure.DialogResult == true)

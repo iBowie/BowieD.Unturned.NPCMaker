@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.BetterControls;
 using BowieD.Unturned.NPCMaker.BetterForms;
 using BowieD.Unturned.NPCMaker.Editors;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using DiscordRPC;
 using Microsoft.Win32;
@@ -161,39 +162,39 @@ namespace BowieD.Unturned.NPCMaker
         }
         internal void RegenerateGuids_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.CurrentSave.characters != null)
+            if (MainWindow.CurrentProject.characters != null)
             {
-                foreach (NPCCharacter c in MainWindow.CurrentSave.characters)
+                foreach (NPCCharacter c in MainWindow.CurrentProject.characters)
                 {
                     if (c != null)
                         c.guid = Guid.NewGuid().ToString("N");
                 }
             }
-            if (MainWindow.CurrentSave.dialogues != null)
+            if (MainWindow.CurrentProject.dialogues != null)
             {
-                foreach (NPCDialogue d in MainWindow.CurrentSave.dialogues)
+                foreach (NPCDialogue d in MainWindow.CurrentProject.dialogues)
                 {
                     if (d != null)
                         d.guid = Guid.NewGuid().ToString("N");
                 }
             }
-            if (MainWindow.CurrentSave.vendors != null)
+            if (MainWindow.CurrentProject.vendors != null)
             {
-                foreach (NPCVendor v in MainWindow.CurrentSave.vendors)
+                foreach (NPCVendor v in MainWindow.CurrentProject.vendors)
                 {
                     if (v != null)
                         v.guid = Guid.NewGuid().ToString("N");
                 }
             }
-            if (MainWindow.CurrentSave.quests != null)
+            if (MainWindow.CurrentProject.quests != null)
             {
-                foreach (NPCQuest q in MainWindow.CurrentSave.quests)
+                foreach (NPCQuest q in MainWindow.CurrentProject.quests)
                 {
                     if (q != null)
                         q.guid = Guid.NewGuid().ToString("N");
                 }
             }
-            MainWindow.NotificationManager.Notify(MainWindow.Localize("general_Regenerated"));
+            MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("general_Regenerated"));
             MainWindow.isSaved = false;
         }
         internal void Options_Click(object sender, RoutedEventArgs e)
@@ -324,7 +325,7 @@ namespace BowieD.Unturned.NPCMaker
                     },
                     HorizontalAlignment = HorizontalAlignment.Right,
                     Margin = new Thickness(0, 0, 10, 0),
-                    ToolTip = MainWindow.Localize("apparel_User_Color_Remove")
+                    ToolTip = LocUtil.LocalizeInterface("apparel_User_Color_Remove")
                 };
                 (button.Content as MahApps.Metro.IconPacks.PackIconMaterial).SetResourceReference(MahApps.Metro.IconPacks.PackIconMaterial.ForegroundProperty, "AccentColor");
                 Button copyButton = new Button
@@ -397,18 +398,18 @@ namespace BowieD.Unturned.NPCMaker
             }
             if (Mistakes.MistakesManager.Warnings_Count > 0)
             {
-                var res = MessageBox.Show(MainWindow.Localize("export_Warnings_Desc"), MainWindow.Localize("export_Warnings_Title"), MessageBoxButton.YesNo);
+                var res = MessageBox.Show(LocUtil.LocalizeInterface("export_Warnings_Desc"), LocUtil.LocalizeInterface("export_Warnings_Title"), MessageBoxButton.YesNo);
                 if (!(res == MessageBoxResult.OK || res == MessageBoxResult.Yes))
                     return;
             }
             MainWindow.Save();
-            Export.Exporter.ExportNPC(MainWindow.CurrentSave);
+            Export.Exporter.ExportNPC(MainWindow.CurrentProject);
         }
         internal void NewButtonClick(object sender, RoutedEventArgs e)
         {
             if (!MainWindow.SavePrompt())
                 return;
-            inst.ConvertNPCToState(new NPCSave());
+            inst.ConvertNPCToState(new NPCProject());
             MainWindow.isSaved = true;
             MainWindow.Started = DateTime.UtcNow;
         }
@@ -428,7 +429,7 @@ namespace BowieD.Unturned.NPCMaker
             string path = "";
             OpenFileDialog ofd = new OpenFileDialog()
             {
-                Filter = $"{MainWindow.Localize("save_Filter")} (*.npc,*.npcproj)|*.npc;*.npcproj",
+                Filter = $"{LocUtil.LocalizeInterface("save_Filter")} (*.npc,*.npcproj)|*.npc;*.npcproj",
                 Multiselect = false
             };
             var res = ofd.ShowDialog();
@@ -439,7 +440,7 @@ namespace BowieD.Unturned.NPCMaker
             if (inst.Load(path))
             {
                 inst.notificationsStackPanel.Children.Clear();
-                MainWindow.NotificationManager.Notify(MainWindow.Localize("notify_Loaded"));
+                MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
             }
         }
         internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -624,13 +625,13 @@ namespace BowieD.Unturned.NPCMaker
                 inst.colorSliderR.AutoToolTipPrecision = 0;
                 inst.colorSliderG.AutoToolTipPrecision = 0;
                 inst.colorSliderB.AutoToolTipPrecision = 0;
-                inst.colorRLabel.Content = MainWindow.Localize("tool_Color_Red");
-                inst.colorGLabel.Content = MainWindow.Localize("tool_Color_Green");
-                inst.colorBLabel.Content = MainWindow.Localize("tool_Color_Blue");
-                inst.colorRLabel.ToolTip = MainWindow.Localize("tool_Color_Red_Tip");
-                inst.colorGLabel.ToolTip = MainWindow.Localize("tool_Color_Green_Tip");
-                inst.colorBLabel.ToolTip = MainWindow.Localize("tool_Color_Blue_Tip");
-                inst.switchToAnotherScheme.Content = MainWindow.Localize("tool_Color_SwitchTo_HSV");
+                inst.colorRLabel.Content = LocUtil.LocalizeInterface("tool_Color_Red");
+                inst.colorGLabel.Content = LocUtil.LocalizeInterface("tool_Color_Green");
+                inst.colorBLabel.Content = LocUtil.LocalizeInterface("tool_Color_Blue");
+                inst.colorRLabel.ToolTip = LocUtil.LocalizeInterface("tool_Color_Red_Tip");
+                inst.colorGLabel.ToolTip = LocUtil.LocalizeInterface("tool_Color_Green_Tip");
+                inst.colorBLabel.ToolTip = LocUtil.LocalizeInterface("tool_Color_Blue_Tip");
+                inst.switchToAnotherScheme.Content = LocUtil.LocalizeInterface("tool_Color_SwitchTo_HSV");
                 inst.colorSliderR.Value = c.R;
                 inst.colorSliderG.Value = c.G;
                 inst.colorSliderB.Value = c.B;
@@ -653,13 +654,13 @@ namespace BowieD.Unturned.NPCMaker
                 inst.colorSliderG.LargeChange = 0.1;
                 inst.colorSliderB.SmallChange = 0.01;
                 inst.colorSliderB.LargeChange = 0.1;
-                inst.colorRLabel.Content = MainWindow.Localize("tool_Color_Hue");
-                inst.colorGLabel.Content = MainWindow.Localize("tool_Color_Saturation");
-                inst.colorBLabel.Content = MainWindow.Localize("tool_Color_Value");
-                inst.colorRLabel.ToolTip = MainWindow.Localize("tool_Color_Hue_Tip");
-                inst.colorGLabel.ToolTip = MainWindow.Localize("tool_Color_Saturation_Tip");
-                inst.colorBLabel.ToolTip = MainWindow.Localize("tool_Color_Value_Tip");
-                inst.switchToAnotherScheme.Content = MainWindow.Localize("tool_Color_SwitchTo_RGB");
+                inst.colorRLabel.Content = LocUtil.LocalizeInterface("tool_Color_Hue");
+                inst.colorGLabel.Content = LocUtil.LocalizeInterface("tool_Color_Saturation");
+                inst.colorBLabel.Content = LocUtil.LocalizeInterface("tool_Color_Value");
+                inst.colorRLabel.ToolTip = LocUtil.LocalizeInterface("tool_Color_Hue_Tip");
+                inst.colorGLabel.ToolTip = LocUtil.LocalizeInterface("tool_Color_Saturation_Tip");
+                inst.colorBLabel.ToolTip = LocUtil.LocalizeInterface("tool_Color_Value_Tip");
+                inst.switchToAnotherScheme.Content = LocUtil.LocalizeInterface("tool_Color_SwitchTo_RGB");
                 var cHSV = c.HSV;
                 inst.colorSliderR.Value = cHSV.Item1;
                 inst.colorSliderG.Value = cHSV.Item2;
@@ -683,10 +684,10 @@ namespace BowieD.Unturned.NPCMaker
                 using (WebClient wc = new WebClient() { Encoding = Encoding.UTF8 })
                 {
                     new Whats_New(
-                                                    MainWindow.Localize("app_News_Title"),
-                                                    string.Format(MainWindow.Localize("app_News_BodyTitle"), MainWindow.Version),
+                                                    LocUtil.LocalizeInterface("app_News_Title"),
+                                                    string.Format(LocUtil.LocalizeInterface("app_News_BodyTitle"), MainWindow.Version),
                                                     wc.DownloadString($"https://raw.githubusercontent.com/iBowie/publicfiles/master/npcmakerpatch.{(Config.Configuration.Properties.Language == "ru-RU" ? Config.Configuration.Properties.Language.Replace('-', '_') : "en_US")}.txt"),
-                                                    MainWindow.Localize("app_News_OK")
+                                                    LocUtil.LocalizeInterface("app_News_OK")
                                                     ).ShowDialog();
                 }
             }

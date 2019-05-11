@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
+using Reward = BowieD.Unturned.NPCMaker.NPC.Rewards.Reward;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
@@ -23,8 +25,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public string Comment { get; set; }
 
         public ushort id;
-        public List<NPC.Condition> conditions;
-        public List<NPC.Reward> rewards;
+        public List<Condition> conditions;
+        public List<Reward> rewards;
         public string title;
         public string description;
 

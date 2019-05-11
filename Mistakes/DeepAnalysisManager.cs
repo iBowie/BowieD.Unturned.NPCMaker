@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Logging;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             bool skipCache = false;
             if (CachedUnturnedFiles?.Count() > 0)
             {
-                var res = MessageBox.Show(MainWindow.Localize("mistakes_DA_UpdateCache"), "", MessageBoxButton.YesNoCancel);
+                var res = MessageBox.Show(LocUtil.LocalizeInterface("mistakes_DA_UpdateCache"), "", MessageBoxButton.YesNoCancel);
                 if (res == MessageBoxResult.Cancel)
                 {
                     MainWindow.Instance.blockActionsOverlay.Visibility = Visibility.Collapsed;
@@ -47,40 +48,40 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 MainWindow.Instance.blockActionsOverlay.Visibility = Visibility.Collapsed;
             }
             MistakesManager.FindMistakes();
-            foreach (NPCDialogue dialogue in MainWindow.CurrentSave.dialogues)
+            foreach (NPCDialogue dialogue in MainWindow.CurrentProject.dialogues)
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Dialogue && d.Id == dialogue.id))
                 {
-                    MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(MainWindow.Localize("deep_dialogue", dialogue.id), "", IMPORTANCE.WARNING, true, false));
+                    MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(LocUtil.LocalizeInterface("deep_dialogue", dialogue.id), "", IMPORTANCE.WARNING, true, false));
                 }
                 await Task.Yield();
             }
-            foreach (NPCVendor vendor in MainWindow.CurrentSave.vendors)
+            foreach (NPCVendor vendor in MainWindow.CurrentProject.vendors)
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Vendor && d.Id == vendor.id))
                 {
-                    MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(MainWindow.Localize("deep_vendor", vendor.id), "", IMPORTANCE.WARNING, true, false));
+                    MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(LocUtil.LocalizeInterface("deep_vendor", vendor.id), "", IMPORTANCE.WARNING, true, false));
                 }
                 foreach (var it in vendor.items)
                 {
                     if (it.type == ItemType.VEHICLE && !CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Vehicle && d.Id == it.id))
                     {
-                        MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(MainWindow.Localize("deep_vehicle", it.id), "", IMPORTANCE.WARNING, true, false));
+                        MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(LocUtil.LocalizeInterface("deep_vehicle", it.id), "", IMPORTANCE.WARNING, true, false));
                         continue;
                     }
                     if (it.type == ItemType.ITEM && !CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Item && d.Id == it.id))
                     {
-                        MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(MainWindow.Localize("deep_item", it.id), "", IMPORTANCE.WARNING, true, false));
+                        MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(LocUtil.LocalizeInterface("deep_item", it.id), "", IMPORTANCE.WARNING, true, false));
                         continue;
                     }
                 }
                 await Task.Yield();
             }
-            foreach (NPCQuest quest in MainWindow.CurrentSave.quests)
+            foreach (NPCQuest quest in MainWindow.CurrentProject.quests)
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Quest && d.Id == quest.id))
                 {
-                    MainWindow.Instance.lstMistakes.Items.Add(new Generic(MainWindow.Localize("deep_quest", quest.id), "", IMPORTANCE.WARNING, true, false));
+                    MainWindow.Instance.lstMistakes.Items.Add(new Generic(LocUtil.LocalizeInterface("deep_quest", quest.id), "", IMPORTANCE.WARNING, true, false));
                 }
                 await Task.Yield();
             }
@@ -89,7 +90,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 ushort input = (ushort)MainWindow.Instance.txtID.Value;
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.NPC && d.Id == input))
                 {
-                    MainWindow.Instance.lstMistakes.Items.Add(new Generic(MainWindow.Localize("deep_char", input), "", IMPORTANCE.WARNING, true, false));
+                    MainWindow.Instance.lstMistakes.Items.Add(new Generic(LocUtil.LocalizeInterface("deep_char", input), "", IMPORTANCE.WARNING, true, false));
                 }
             }
             MainWindow.Instance.blockActionsOverlay.Visibility = Visibility.Collapsed;
@@ -104,6 +105,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 MainWindow.Instance.noErrorsLabel.Visibility = Visibility.Collapsed;
             }
         }
+
         private static HashSet<UnturnedFile> CachedUnturnedFiles { get; set; }
         public class UnturnedFile
         {

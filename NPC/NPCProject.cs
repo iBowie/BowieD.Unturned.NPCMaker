@@ -4,10 +4,10 @@ using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    [XmlRoot("NPCMakerSave")]
-    public class NPCSave
+    [XmlRoot("NPCProject")]
+    public class NPCProject
     {
-        public NPCSave()
+        public NPCProject()
         {
             guid = Guid.NewGuid().ToString("N");
             characters = new List<NPCCharacter>();
@@ -104,9 +104,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
             }
         }
 
-        public static explicit operator NPCSave(NPCSaveOld old)
+        public static explicit operator NPCProject(NPCSaveOld old)
         {
-            return new NPCSave
+            return new NPCProject
             {
                 dialogues = old.dialogues,
                 vendors = old.vendors,

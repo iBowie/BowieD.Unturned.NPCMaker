@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using System.Windows;
 using System.Windows.Controls;
 using static BowieD.Unturned.NPCMaker.BetterControls.Universal_ItemList;
 
@@ -21,25 +22,25 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             gridScale.ScaleY = scale;
             try
             {
-                Title = string.Format(MainWindow.Localize("select_Title"), MainWindow.Localize("select_" + returnType.ToString()));
+                Title = string.Format(LocUtil.LocalizeInterface("select_Title"), LocUtil.LocalizeInterface("select_" + returnType.ToString()));
             }
             catch { }
             switch (returnType)
             {
                 case ReturnType.Dialogue:
-                    foreach (var d in MainWindow.CurrentSave.dialogues)
+                    foreach (var d in MainWindow.CurrentProject.dialogues)
                     {
                         Add(d, d.DisplayName);
                     }
                     break;
                 case ReturnType.Quest:
-                    foreach (var q in MainWindow.CurrentSave.quests)
+                    foreach (var q in MainWindow.CurrentProject.quests)
                     {
                         Add(q, q.DisplayName);
                     }
                     break;
                 case ReturnType.Vendor:
-                    foreach (var v in MainWindow.CurrentSave.vendors)
+                    foreach (var v in MainWindow.CurrentProject.vendors)
                     {
                         Add(v, v.DisplayName);
                     }

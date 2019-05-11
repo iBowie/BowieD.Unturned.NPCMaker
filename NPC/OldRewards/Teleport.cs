@@ -1,36 +1,37 @@
 ﻿using System;
 using BowieD.Unturned.NPCMaker.BetterForms;
+using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
-    public class Reputation : Reward
+    public class Teleport : Reward
     {
-        public Reputation()
+        public Teleport()
         {
-            Type = RewardType.Reputation;
+            Type = RewardType.Teleport;
         }
 
-        public int Value { get; set; }
+        public string SpawnpointID { get; set; }
 
         public override int Elements => 1;
         public override void Init(Universal_RewardEditor ure)
         {
-            ure.AddLabel(MainWindow.Localize("rewardEditor_Amount"));
-            ure.AddTextBox(5);
+            ure.AddLabel(LocUtil.LocalizeReward("rewardEditor_SpawnpointID"));
+            ure.AddTextBox(int.MaxValue);
         }
         public override void Init(Universal_RewardEditor ure, Reward start)
         {
             Init(ure);
             if (start != null)
             {
-                ure.SetMainValue(1, (start as Reputation).Value);
+                ure.SetMainValue(1, (start as Teleport).SpawnpointID);
             }
         }
         public override T Parse<T>(object[] input)
         {
-            return new Reputation()
+            return new Teleport()
             {
-                Value = int.Parse(input[0].ToString())
+                SpawnpointID = input[0].ToString()
             } as T;
         }
 
@@ -40,14 +41,14 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 if (!prefix.EndsWith("_"))
                     prefix += "_";
             string output = "";
-            output += ($"{prefix}{(prefix.Length > 0 ? $"{prefixIndex.ToString()}_" : "")}Reward_{conditionIndex}_Type Reputation");
-            output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Reward_{conditionIndex}_Value {this.Value}");
+            output += ($"{prefix}{(prefix.Length > 0 ? $"{prefixIndex.ToString()}_" : "")}Reward_{conditionIndex}_Type Teleport");
+            output += ($"{Environment.NewLine}{prefix}{(prefix.Length > 0 ? $"{prefixIndex}_" : "")}Reward_{conditionIndex}_Spawnpoint {this.SpawnpointID}");
             return output;
         }
 
         public override string ToString()
         {
-            return $"{(string)MainWindow.Instance.TryFindResource("reward_Type_Reputation")} x{Value}";
+            return $"{(string)MainWindow.Instance.TryFindResource("reward_Type_Teleport")} {SpawnpointID}";
         }
     }
 }

@@ -18,6 +18,8 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 var box = new CheckBox();
                 box.Content = $"[{k + 1}]";
                 box.IsChecked = arr?.Count() == 0 || arr?.Length <= k ? true : arr?[k] == 1;
+                if (box.IsChecked == null)
+                    box.IsChecked = false;
                 mainTreeView.Items.Add(box);
             }
         }

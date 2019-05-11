@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.BetterForms;
 using BowieD.Unturned.NPCMaker.Editors;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.Notification;
 using BowieD.Unturned.NPCMaker.NPC;
@@ -55,10 +56,6 @@ namespace BowieD.Unturned.NPCMaker
             (Config.Configuration.Properties.currentTheme ?? Config.Configuration.DefaultTheme).Apply();
             Logger.Log($"Theme set to {(Config.Configuration.Properties.currentTheme ?? Config.Configuration.DefaultTheme).Name}");
             #endregion
-            #region LOCALIZATION
-            App.Language = Config.Configuration.Properties.language ?? new CultureInfo("en-US");
-            Logger.Log($"Language set to {Config.Configuration.Properties.language.Name}");
-            #endregion
             #region OPEN_WITH
             string[] args = Environment.GetCommandLineArgs();
             if (args != null && args.Length >= 0)
@@ -72,7 +69,7 @@ namespace BowieD.Unturned.NPCMaker
                             if (Load(args[k]))
                             {
                                 notificationsStackPanel.Children.Clear();
-                                MainWindow.NotificationManager.Notify(Localize("notify_Loaded"));
+                                MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
                             }
                             break;
                         }
@@ -193,22 +190,22 @@ namespace BowieD.Unturned.NPCMaker
             }
             #endregion
             Proxy.ColorSliderChange(null, null);
-            MainWindow.NotificationManager.Notify(MainWindow.Localize("app_Free"));
+            MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("app_Free"));
         }
-        public static string Localize(string key)
-        {
-            var res = Instance.TryFindResource(key);
-            if (res == null || !(res is string resString) || resString.Length == 0)
-                return key;
-            return resString;
-        }
-        public static string Localize(string key, params object[] format)
-        {
-            string res = Localize(key);
-            if (res == key)
-                return key;
-            return string.Format(res, format);
-        }
+        //public static string Localize(string key)
+        //{
+        //    var res = Instance.TryFindResource(key);
+        //    if (res == null || !(res is string resString) || resString.Length == 0)
+        //        return key;
+        //    return resString;
+        //}
+        //public static string Localize(string key, params object[] format)
+        //{
+        //    string res = Localize(key);
+        //    if (res == key)
+        //        return key;
+        //    return string.Format(res, format);
+        //}
         #region CONSTANTS
         public const int
         faceAmount = 32,
@@ -218,7 +215,7 @@ namespace BowieD.Unturned.NPCMaker
         #endregion
         #region STATIC
         public static MainWindow Instance;
-        public static NPCSave CurrentSave { get; set; } = new NPCSave();
+        public static NPCProject CurrentProject { get; set; } = new NPCProject();
         public static DispatcherTimer AutosaveTimer { get; set; }
         public static PropertyProxy Proxy { get; private set; }
         public static bool IsRGB { get; set; } = true;
@@ -254,7 +251,7 @@ namespace BowieD.Unturned.NPCMaker
             {
                 SaveFileDialog sfd = new SaveFileDialog
                 {
-                    Filter = $"{Localize("save_Filter")} (*.npcproj)|*.npcproj",
+                    Filter = $"{LocUtil.LocalizeInterface("save_Filter")} (*.npcproj)|*.npcproj",
                     FileName = $"{(CharacterEditor.Current?.editorName?.Length > 0 ? CharacterEditor.Current?.editorName : "Unnamed")}.npcproj",
                     OverwritePrompt = true
                 };
@@ -283,10 +280,10 @@ namespace BowieD.Unturned.NPCMaker
                     using (FileStream fs = new FileStream(saveFile, FileMode.Create))
                     using (XmlWriter writer = XmlWriter.Create(fs))
                     {
-                        XmlSerializer ser = new XmlSerializer(typeof(NPCSave));
-                        ser.Serialize(writer, CurrentSave);
+                        XmlSerializer ser = new XmlSerializer(typeof(NPCProject));
+                        ser.Serialize(writer, CurrentProject);
                     }
-                    MainWindow.NotificationManager.Notify(Localize("notify_Saved"));
+                    MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Saved"));
                     isSaved = true;
                 }
             }
@@ -309,30 +306,30 @@ namespace BowieD.Unturned.NPCMaker
                 using (XmlReader reader = XmlReader.Create(fs))
                 {
                     XmlSerializer oldDeser = new XmlSerializer(typeof(NPCSaveOld));
-                    XmlSerializer newDeser = new XmlSerializer(typeof(NPCSave));
+                    XmlSerializer newDeser = new XmlSerializer(typeof(NPCProject));
                     if (oldDeser.CanDeserialize(reader))
                     {
-                        CurrentSave = (NPCSave)(oldDeser.Deserialize(reader) as NPCSaveOld);
+                        CurrentProject = (NPCProject)(oldDeser.Deserialize(reader) as NPCSaveOld);
                     }
                     else if (newDeser.CanDeserialize(reader))
                     {
-                        CurrentSave = newDeser.Deserialize(reader) as NPCSave;
+                        CurrentProject = newDeser.Deserialize(reader) as NPCProject;
                     }
                     saveFile = path;
-                    ConvertNPCToState(CurrentSave);
+                    ConvertNPCToState(CurrentProject);
                     isSaved = true;
                 }
-                NotificationManager.Notify(Localize("notify_Loaded"));
+                NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
                 Started = DateTime.UtcNow;
                 return true;
             }
-            catch { NotificationManager.Notify(Localize("load_Incompatible")); return false; }
+            catch { NotificationManager.Notify(LocUtil.LocalizeInterface("load_Incompatible")); return false; }
         }
         public static bool SavePrompt()
         {
-            if (isSaved == true || CurrentSave == new NPCSave())
+            if (isSaved == true || CurrentProject == new NPCProject())
                 return true;
-            var result = MessageBox.Show(Localize("app_Exit_UnsavedChanges_Text"), Localize("app_Exit_UnsavedChanges_Title"), MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
+            var result = MessageBox.Show(LocUtil.LocalizeInterface("app_Exit_UnsavedChanges_Text"), LocUtil.LocalizeInterface("app_Exit_UnsavedChanges_Title"), MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
             if (result == MessageBoxResult.Yes)
             {
                 Save();
@@ -355,7 +352,7 @@ namespace BowieD.Unturned.NPCMaker
                     using (XmlReader reader = XmlReader.Create(fs))
                     {
                         XmlSerializer oldDeserializer = new XmlSerializer(typeof(NPC.NPCSaveOld));
-                        XmlSerializer newDeserializer = new XmlSerializer(typeof(NPCSave));
+                        XmlSerializer newDeserializer = new XmlSerializer(typeof(NPCProject));
                         return oldDeserializer.CanDeserialize(reader) || newDeserializer.CanDeserialize(reader);
                     }
                 }
@@ -365,9 +362,9 @@ namespace BowieD.Unturned.NPCMaker
 
         #endregion
         #region STATE CONVERTERS
-        public void ConvertNPCToState(NPCSave save)
+        public void ConvertNPCToState(NPCProject save)
         {
-            CurrentSave = save;
+            CurrentProject = save;
             CharacterEditor.Current = new NPCCharacter();
             DialogueEditor.Current = new NPCDialogue();
             QuestEditor.Current = new NPCQuest();
@@ -397,7 +394,7 @@ namespace BowieD.Unturned.NPCMaker
                 if (Load(path))
                 {
                     notificationsStackPanel.Children.Clear();
-                    NotificationManager.Notify(Localize("notify_Loaded"));
+                    NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
                 }
             }
             dropOverlay.Visibility = Visibility.Hidden;

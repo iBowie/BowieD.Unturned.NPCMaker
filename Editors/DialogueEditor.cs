@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.BetterControls;
 using BowieD.Unturned.NPCMaker.BetterForms;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
 using DiscordRPC;
@@ -36,14 +37,14 @@ namespace BowieD.Unturned.NPCMaker.Editors
 
         public void Open()
         {
-            var ulv = new Universal_ListView(MainWindow.CurrentSave.dialogues.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Dialogue, false)).ToList(), Universal_ItemList.ReturnType.Dialogue);
+            var ulv = new Universal_ListView(MainWindow.CurrentProject.dialogues.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Dialogue, false)).ToList(), Universal_ItemList.ReturnType.Dialogue);
             if (ulv.ShowDialog() == true)
             {
                 Save();
                 Current = ulv.SelectedValue as NPCDialogue;
                 Logger.Log($"Opened dialogue {MainWindow.Instance.dialogueInputIdControl.Value}");
             }
-            MainWindow.CurrentSave.dialogues = ulv.Values.Cast<NPCDialogue>().ToList();
+            MainWindow.CurrentProject.dialogues = ulv.Values.Cast<NPCDialogue>().ToList();
         }
         public void Reset()
         {
@@ -78,14 +79,14 @@ namespace BowieD.Unturned.NPCMaker.Editors
             var dil = Current;
             if (dil.id == 0)
             {
-                MainWindow.NotificationManager.Notify(MainWindow.Localize("dialogue_ID_Zero"));
+                MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("dialogue_ID_Zero"));
                 return;
             }
-            var o = MainWindow.CurrentSave.dialogues.Where(d => d.id == dil.id);
+            var o = MainWindow.CurrentProject.dialogues.Where(d => d.id == dil.id);
             if (o.Count() > 0)
-                MainWindow.CurrentSave.dialogues.Remove(o.ElementAt(0));
-            MainWindow.CurrentSave.dialogues.Add(dil);
-            MainWindow.NotificationManager.Notify(MainWindow.Localize("notify_Dialogue_Saved"));
+                MainWindow.CurrentProject.dialogues.Remove(o.ElementAt(0));
+            MainWindow.CurrentProject.dialogues.Add(dil);
+            MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Dialogue_Saved"));
             MainWindow.isSaved = false;
             Logger.Log($"Dialogue {dil.id} saved!");
         }
@@ -217,7 +218,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             if (dial.id > 0 && MainWindow.Instance.txtStartDialogueID.Value != dial.id)
             {
                 MainWindow.Instance.txtStartDialogueID.Value = dial.id;
-                MainWindow.NotificationManager.Notify(MainWindow.Localize("dialogue_Start_Notify", dial.id));
+                MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("dialogue_Start_Notify", dial.id));
                 Logger.Log($"Dialogue {dial.id} set as start!");
             }
         }
@@ -229,7 +230,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             presence.Timestamps.StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             presence.Assets = new Assets();
             presence.Assets.SmallImageKey = "icon_chat_outlined";
-            presence.Assets.SmallImageText = $"Dialogues: {MainWindow.CurrentSave.dialogues.Count}";
+            presence.Assets.SmallImageText = $"Dialogues: {MainWindow.CurrentProject.dialogues.Count}";
             presence.Details = $"Messages: {MainWindow.DialogueEditor.Current.MessagesAmount}";
             presence.State = $"Responses: {MainWindow.DialogueEditor.Current.ResponsesAmount}";
             MainWindow.DiscordManager.SendPresence(presence);

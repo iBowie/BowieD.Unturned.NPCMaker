@@ -31,37 +31,39 @@
             </Grid.RowDefinitions>
             <Menu VerticalAlignment="Top">
                 <MenuItem Header="{DynamicResource menu_File}">
-                    <MenuItem Header="{DynamicResource file_New}" Name="newButton">
+                    <MenuItem Header="{DynamicResource menu_File_New}" Name="newButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="File" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource file_Open}" Name="loadButton">
+                    <MenuItem Header="{DynamicResource menu_File_Open}" Name="loadButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="FolderOpen" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource file_Save}" Name="saveButton">
+                    <MenuItem Header="{DynamicResource menu_File_Save}" Name="saveButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="ContentSave" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource file_SaveAs}" Name="saveAsButton">
+                    <MenuItem Header="{DynamicResource menu_File_SaveAs}" Name="saveAsButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="ContentSave" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Name="RecentList" Header="{DynamicResource file_Recent}">
+                    <Separator/>
+                    <MenuItem Name="RecentList" Header="{DynamicResource menu_File_Recent}">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="History" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource file_Export}" Name="exportButton">
+                    <MenuItem Header="{DynamicResource menu_File_Export}" Name="exportButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Export" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource file_Exit}" Name="exitButton">
+                    <Separator/>
+                    <MenuItem Header="{DynamicResource menu_File_Exit}" Name="exitButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Close" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
@@ -69,8 +71,6 @@
                 </MenuItem>
                 <MenuItem Name="optionsMenuItem" Header="{DynamicResource menu_Options}"/>
                 <MenuItem Name="patchNotesMenuItem" Header="{DynamicResource menu_WhatsNew}"/>
-                <MenuItem Visibility="Collapsed" Name="checkForUpdatesButton" Header="{DynamicResource menu_CheckForUpdates}"/>
-                <MenuItem Visibility="Collapsed" IsEnabled="False" Name="forceUpdateButton" Header="{DynamicResource menu_Update}"/>
                 <MenuItem Header="{DynamicResource menu_Communication}">
                     <MenuItem Name="steamComm" Tag="https://steamcommunity.com/profiles/76561198085825110" Header="{DynamicResource feedback_Steam}">
                         <MenuItem.Icon>
@@ -112,52 +112,52 @@
                         <TabControl Margin="0,0,0,0" Background="Transparent">
                             <TabItem Name="generalInfoTab" Header="{DynamicResource tab_General}">
                                 <Grid>
-                                    <TextBlock FontSize="24" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="{DynamicResource general_Title}" VerticalAlignment="Top"/>
+                                    <TextBlock FontSize="24" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="{DynamicResource character_Title}" VerticalAlignment="Top"/>
                                     <TextBox Name="txtEditorName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,45,0,0">
                                         <TextBox.ToolTip>
                                             <StackPanel>
-                                                <Label Content="{DynamicResource general_EditorName_Tooltip}"/>
+                                                <Label Content="{DynamicResource character_EditorName_Tooltip}"/>
                                                 <Image Source="Resources/Help/img_help_editorName.png"/>
                                             </StackPanel>
                                         </TextBox.ToolTip>
                                     </TextBox>
-                                    <TextBlock HorizontalAlignment="Left" Margin="143,51,0,0" TextWrapping="Wrap" Text="{DynamicResource general_EditorName}" VerticalAlignment="Top"/>
+                                    <TextBlock HorizontalAlignment="Left" Margin="143,51,0,0" TextWrapping="Wrap" Text="{DynamicResource character_EditorName}" VerticalAlignment="Top"/>
                                     <TextBox Name="txtDisplayName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,76,0,0">
                                         <TextBox.ToolTip>
                                             <StackPanel>
-                                                <Label Content="{DynamicResource general_DisplayName_Tooltip}"/>
+                                                <Label Content="{DynamicResource character_DisplayName_Tooltip}"/>
                                                 <Image Source="Resources/Help/img_help_displayName.png"/>
                                             </StackPanel>
                                         </TextBox.ToolTip>
                                     </TextBox>
-                                    <TextBlock  HorizontalAlignment="Left" Margin="143,80,0,0" TextWrapping="Wrap" Text="{DynamicResource general_DisplayName}" VerticalAlignment="Top"/>
+                                    <TextBlock  HorizontalAlignment="Left" Margin="143,80,0,0" TextWrapping="Wrap" Text="{DynamicResource character_DisplayName}" VerticalAlignment="Top"/>
                                     <mah:NumericUpDown Name="txtID" HorizontalAlignment="Left" VerticalAlignment="Top" Width="64" Height="24" Margin="10,107,0,0" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
                                         <mah:NumericUpDown.ToolTip>
                                             <StackPanel>
-                                                <Label Content="{DynamicResource general_ID_Tooltip}"/>
+                                                <Label Content="{DynamicResource character_ID_Tooltip}"/>
                                             </StackPanel>
                                         </mah:NumericUpDown.ToolTip>
                                     </mah:NumericUpDown>
-                                    <TextBlock  HorizontalAlignment="Left" Margin="79,110,0,0" TextWrapping="Wrap" Text="{DynamicResource general_ID}" VerticalAlignment="Top"/>
+                                    <TextBlock  HorizontalAlignment="Left" Margin="79,110,0,0" TextWrapping="Wrap" Text="{DynamicResource character_ID}" VerticalAlignment="Top"/>
                                     <mah:NumericUpDown Name="txtStartDialogueID" HorizontalAlignment="Left" Height="23" Margin="10,138,0,0" VerticalAlignment="Top" Width="128" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
                                         <mah:NumericUpDown.ToolTip>
                                             <ToolTip>
                                                 <StackPanel>
-                                                    <Label Content="{DynamicResource general_StartDialogue_Tooltip}"/>
+                                                    <Label Content="{DynamicResource character_StartDialogue_Tooltip}"/>
                                                     <Image Source="Resources/Help/img_help_startDialogue.png"/>
                                                 </StackPanel>
                                             </ToolTip>
                                         </mah:NumericUpDown.ToolTip>
                                     </mah:NumericUpDown>
-                                    <TextBlock  HorizontalAlignment="Left" Margin="143,142,0,0" TextWrapping="Wrap" Text="{DynamicResource general_StartDialogue}" VerticalAlignment="Top"/>
-                                    <Button Name="visibilityCondsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource general_Conditions}" Margin="10,170,0,0" Width="212" Height="28">
+                                    <TextBlock  HorizontalAlignment="Left" Margin="143,142,0,0" TextWrapping="Wrap" Text="{DynamicResource character_StartDialogue}" VerticalAlignment="Top"/>
+                                    <Button Name="visibilityCondsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource character_Conditions}" Margin="10,170,0,0" Width="212" Height="28">
                                         <Button.ToolTip>
                                             <StackPanel>
                                                 <Image Source="Resources/Help/img_help_visibilityConditions.png"/>
                                             </StackPanel>
                                         </Button.ToolTip>
                                     </Button>
-                                    <Button Name="regenerateGuidsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource general_Regenerate}" Margin="10,202,0,0" MinWidth="212" Height="28"/>
+                                    <Button Name="regenerateGuidsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource character_Regenerate}" Margin="10,202,0,0" MinWidth="212" Height="28"/>
                                 </Grid>
                             </TabItem>
                             <TabItem Name="apparelTab" Header="{DynamicResource tab_Apparel}">
@@ -690,10 +690,10 @@
                         </Button>
                         <Button Grid.Column="2" Name="dialogueOpenButton" ToolTip="{DynamicResource dialogue_Open}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="FolderOutline" Width="16" Height="16"  Foreground="{DynamicResource AccentColor}"/>
+                                <iconPacks:PackIconMaterial Kind="FolderOutline" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <TextBlock  Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,0,10" Text="{DynamicResource dialogue_Tips}" TextWrapping="Wrap" Width="254"/>
+                        <TextBlock Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,0,10" Text="{DynamicResource dialogue_Tips}" TextWrapping="Wrap" Width="254"/>
                     </Grid>
                 </TabItem>
                 <TabItem Name="vendorTab" Header="{DynamicResource tab_Vendor}">

@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Linq;
+using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.BetterForms
 {
@@ -106,7 +107,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         {
             Universal_ListView ulv = new Universal_ListView(Result.conditions.Select(d => new BetterControls.Universal_ItemList(d, BetterControls.Universal_ItemList.ReturnType.Condition, false)).ToList(), BetterControls.Universal_ItemList.ReturnType.Condition);
             ulv.ShowDialog();
-            Result.conditions = ulv.Values.Cast<NPC.Condition>().ToList();
+            Result.conditions = ulv.Values.Cast<Condition>().ToList();
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -120,7 +121,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 Result.isBuy = IsBuy;
                 Result.cost = (uint)txtBoxCost.Value;
                 if (Result.conditions == null)
-                    Result.conditions = new List<NPC.Condition>();
+                    Result.conditions = new List<Condition>();
                 DialogResult = true;
                 Close();
             }

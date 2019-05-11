@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Linq;
+using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
 {
@@ -14,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         {
             get
             {
-                foreach (NPCDialogue dialogue in MainWindow.CurrentSave.dialogues)
+                foreach (NPCDialogue dialogue in MainWindow.CurrentProject.dialogues)
                 {
                     if (dialogue.MessagesAmount > 0 && dialogue.messages.Any(d => d.PagesAmount == 0))
                     {
@@ -27,7 +28,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         }
 
         public override string MistakeNameKey => "NE_2001";
-        public override string MistakeDescKey => MainWindow.Localize("NE_2001_Desc", errorDialogue.id);
+        public override string MistakeDescKey => LocUtil.LocalizeMistake("NE_2001_Desc", errorDialogue.id);
         public override bool TranslateName => false;
         public override bool TranslateDesc => false;
         private NPCDialogue errorDialogue;

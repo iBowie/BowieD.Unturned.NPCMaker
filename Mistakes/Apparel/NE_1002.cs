@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Apparel
         {
             get
             {
-                foreach (NPCCharacter character in MainWindow.CurrentSave.characters)
+                foreach (NPCCharacter character in MainWindow.CurrentProject.characters)
                 {
                     switch (character.equipped)
                     {

@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC;
 using System;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes.Vendor
@@ -13,7 +14,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Vendor
         {
             get
             {
-                foreach (NPCVendor vendor in MainWindow.CurrentSave.vendors)
+                foreach (NPCVendor vendor in MainWindow.CurrentProject.vendors)
                 {
                     if (vendor.items.Count == 0)
                     {
@@ -25,7 +26,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Vendor
             }
         }
         public NPCVendor errorVendor;
-        public override string MistakeDescKey => MainWindow.Localize("NE_3002_Desc", errorVendor.id);
+        public override string MistakeDescKey => LocUtil.LocalizeMistake("NE_3002_Desc", errorVendor.id);
         public override string MistakeNameKey => "NE_3002";
         public override bool TranslateName => false;
         public override bool TranslateDesc => false;

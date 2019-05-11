@@ -1,13 +1,11 @@
-﻿using BowieD.Unturned.NPCMaker.Logging;
+﻿using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -15,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.Export
 {
     public static class Exporter
     {
-        public static void ExportNPC(NPCSave save)
+        public static void ExportNPC(NPCProject save)
         {
             if (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + $@"\results\{save.guid}"))
                 Directory.Delete(AppDomain.CurrentDomain.BaseDirectory + $@"\results\{save.guid}", true);
@@ -29,12 +27,12 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 Content = new TextBlock
                 {
-                    Text = MainWindow.Localize("export_Done_Goto")
+                    Text = LocUtil.LocalizeInterface("export_Done_Goto")
                 }
             };
             Action<object, RoutedEventArgs> action = new Action<object, RoutedEventArgs>((sender, e) => { Process.Start(AppDomain.CurrentDomain.BaseDirectory + $@"results\{save.guid}"); });
             button.Click += new RoutedEventHandler(action);
-            MainWindow.NotificationManager.Notify(MainWindow.Localize("export_Done"), buttons: button);
+            MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("export_Done"), buttons: button);
         }
         private static string dir = "";
 
@@ -225,7 +223,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                                     int rwrdCnt = response.rewards.Count();
                                     for (int c = 0; c < rwrdCnt; c++)
                                     {
-                                        asset.WriteLine(response.rewards[c].GetFilePresentation("Response_", k, c));
+                                        asset.WriteLine(response.rewards[c].GetFullFilePresentation("Response_", k, c));
                                     }
                                 }
                             }
@@ -334,7 +332,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                             asset.WriteLine($"Conditions {quest.conditions.Count}");
                             for (int k = 0; k < quest.conditions.Count; k++)
                             {
-                                asset.WriteLine(quest.conditions[k].GetFullFilePresentation("", k, k));
+                                asset.WriteLine(quest.conditions[k].GetFullFilePresentation("", k, k, false));
                             }
                         }
 
@@ -343,7 +341,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                             asset.WriteLine($"Rewards {quest.rewards.Count}");
                             for (int k = 0; k < quest.rewards.Count; k++)
                             {
-                                asset.WriteLine(quest.rewards[k].GetFilePresentation("", k, k));
+                                asset.WriteLine(quest.rewards[k].GetFullFilePresentation("", k, k, false));
                             }
                         }
 

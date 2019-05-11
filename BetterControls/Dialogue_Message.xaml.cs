@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Linq;
+using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.BetterControls
 {
@@ -37,7 +38,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
                 Conditions = value.conditions;
             }
         }
-        public NPC.Condition[] Conditions { get; set; }
+        public Condition[] Conditions { get; set; }
         public List<string> Pages
         {
             get
@@ -77,7 +78,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
         {
             BetterForms.Universal_ListView ulv = new BetterForms.Universal_ListView(Conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
             ulv.ShowDialog();
-            Conditions = ulv.Values.Cast<NPC.Condition>().ToArray();
+            Conditions = ulv.Values.Cast<Condition>().ToArray();
         }
     }
 }

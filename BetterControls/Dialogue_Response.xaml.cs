@@ -1,8 +1,11 @@
 ﻿using BowieD.Unturned.NPCMaker.BetterForms;
+using BowieD.Unturned.NPCMaker.Localization;
 using DiscordRPC;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
+using Reward = BowieD.Unturned.NPCMaker.NPC.Rewards.Reward;
 
 namespace BowieD.Unturned.NPCMaker.BetterControls
 {
@@ -41,7 +44,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             };
             (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
             ulv.ShowDialog();
-            Response.rewards = ulv.Values.Cast<NPC.Reward>().ToArray();
+            Response.rewards = ulv.Values.Cast<Reward>().ToArray();
             MainWindow.Proxy.TabControl_SelectionChanged(MainWindow.Instance.mainTabControl, null);
         }
         private void EditConditionsButton_Click(object sender, RoutedEventArgs e)
@@ -54,7 +57,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             };
             (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
             ulv.ShowDialog();
-            Response.conditions = ulv.Values.Cast<NPC.Condition>().ToArray();
+            Response.conditions = ulv.Values.Cast<Condition>().ToArray();
             MainWindow.Proxy.TabControl_SelectionChanged(MainWindow.Instance.mainTabControl, null);
         }
         private void MainText_TextChanged(object sender, TextChangedEventArgs e)
@@ -65,7 +68,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void QuestSelect_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.CurrentSave.quests.Count() == 0)
+            if (MainWindow.CurrentProject.quests.Count() == 0)
                 return;
             Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Quest);
             select.ShowDialog();
@@ -77,7 +80,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void VendorSelect_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.CurrentSave.vendors.Count() == 0)
+            if (MainWindow.CurrentProject.vendors.Count() == 0)
                 return;
             Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Vendor);
             select.ShowDialog();
@@ -89,7 +92,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void DialogueSelect_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.CurrentSave.dialogues.Count() == 0)
+            if (MainWindow.CurrentProject.dialogues.Count() == 0)
                 return;
             Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Dialogue);
             select.ShowDialog();
@@ -113,7 +116,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             }
             else
             {
-                MainWindow.NotificationManager.Notify(MainWindow.Localize("dialogue_Reply_EditVisibility_MessageCount"));
+                MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("dialogue_Reply_EditVisibility_MessageCount"));
             }
         }
 

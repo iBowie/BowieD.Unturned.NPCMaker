@@ -72,6 +72,10 @@
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.0.1\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
@@ -151,6 +155,7 @@
     <Compile Include="Forms\Form_About.xaml.cs">
       <DependentUpon>Form_About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Localization\LocUtil.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Mistakes\DeepAnalysisManager.cs" />
     <Compile Include="Mistakes\General\NE_0004.cs" />
@@ -158,10 +163,44 @@
     <Compile Include="Notification\INotificationManager.cs" />
     <Compile Include="Notification\NotificationManager.cs" />
     <Compile Include="NPC\IHasComment.cs" />
+    <Compile Include="NPC\Conditions\Condition.cs" />
+    <Compile Include="NPC\Conditions\ConditionCompareFlags.cs" />
+    <Compile Include="NPC\Conditions\ConditionExperience.cs" />
+    <Compile Include="NPC\Conditions\ConditionFlagBool.cs" />
+    <Compile Include="NPC\Conditions\ConditionFlagShort.cs" />
+    <Compile Include="NPC\Conditions\ConditionHoliday.cs" />
+    <Compile Include="NPC\Conditions\ConditionItem.cs" />
+    <Compile Include="NPC\Conditions\ConditionKillsAnimal.cs" />
+    <Compile Include="NPC\Conditions\ConditionKillsHorde.cs" />
+    <Compile Include="NPC\Conditions\ConditionKillsObject.cs" />
+    <Compile Include="NPC\Conditions\ConditionKillsPlayer.cs" />
+    <Compile Include="NPC\Conditions\ConditionKillsZombie.cs" />
+    <Compile Include="NPC\Conditions\ConditionPlayerLifeFood.cs" />
+    <Compile Include="NPC\Conditions\ConditionPlayerLifeHealth.cs" />
+    <Compile Include="NPC\Conditions\ConditionPlayerLifeVirus.cs" />
+    <Compile Include="NPC\Conditions\ConditionPlayerLifeWater.cs" />
+    <Compile Include="NPC\Conditions\ConditionQuest.cs" />
+    <Compile Include="NPC\Conditions\ConditionReputation.cs" />
+    <Compile Include="NPC\Conditions\ConditionSkillset.cs" />
+    <Compile Include="NPC\Conditions\ConditionTimeOfDay.cs" />
     <Compile Include="NPC\IHasDisplayName.cs" />
     <Compile Include="NPC\NPCCharacter.cs" />
     <Compile Include="NPC\NPCClothing.cs" />
-    <Compile Include="NPC\NPCSave.cs" />
+    <Compile Include="NPC\NPCProject.cs" />
+    <Compile Include="NPC\Rewards\Reward.cs" />
+    <Compile Include="NPC\Rewards\RewardAchievement.cs" />
+    <Compile Include="NPC\Rewards\RewardEvent.cs" />
+    <Compile Include="NPC\Rewards\RewardExperience.cs" />
+    <Compile Include="NPC\Rewards\RewardFlagBool.cs" />
+    <Compile Include="NPC\Rewards\RewardFlagMath.cs" />
+    <Compile Include="NPC\Rewards\RewardFlagShort.cs" />
+    <Compile Include="NPC\Rewards\RewardFlagShortRandom.cs" />
+    <Compile Include="NPC\Rewards\RewardItem.cs" />
+    <Compile Include="NPC\Rewards\RewardItemRandom.cs" />
+    <Compile Include="NPC\Rewards\RewardQuest.cs" />
+    <Compile Include="NPC\Rewards\RewardReputation.cs" />
+    <Compile Include="NPC\Rewards\RewardTeleport.cs" />
+    <Compile Include="NPC\Rewards\RewardVehicle.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -196,24 +235,6 @@
     <Compile Include="Notification\NotificationBase.xaml.cs">
       <DependentUpon>NotificationBase.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NPC\Condition.cs" />
-    <Compile Include="NPC\Conditions\Experience_Cond.cs" />
-    <Compile Include="NPC\Conditions\Flag_Bool_Cond.cs" />
-    <Compile Include="NPC\Conditions\Flag_Short_Cond.cs" />
-    <Compile Include="NPC\Conditions\Item_Cond.cs" />
-    <Compile Include="NPC\Conditions\Kills_Animal_Cond.cs" />
-    <Compile Include="NPC\Conditions\Kills_Horde_Cond.cs" />
-    <Compile Include="NPC\Conditions\Kills_Object_Cond.cs" />
-    <Compile Include="NPC\Conditions\Kills_Players_Cond.cs" />
-    <Compile Include="NPC\Conditions\Player_Life_Food_Cond.cs" />
-    <Compile Include="NPC\Conditions\Player_Life_Health_Cond.cs" />
-    <Compile Include="NPC\Conditions\Player_Life_Virus_Cond.cs" />
-    <Compile Include="NPC\Conditions\Player_Life_Water_Cond.cs" />
-    <Compile Include="NPC\Conditions\Quest_Cond.cs" />
-    <Compile Include="NPC\Conditions\Kills_Zombie_Cond.cs" />
-    <Compile Include="NPC\Conditions\Reputation_Cond.cs" />
-    <Compile Include="NPC\Conditions\Skillset_Cond.cs" />
-    <Compile Include="NPC\Conditions\Time_Of_Day_Cond.cs" />
     <Compile Include="NPC\Enums.cs" />
     <Compile Include="NPC\NPCColor.cs" />
     <Compile Include="NPC\NPCDialogue.cs" />
@@ -222,18 +243,6 @@
     <Compile Include="NPC\NPCQuest.cs" />
     <Compile Include="NPC\NPCResponse.cs" />
     <Compile Include="NPC\NPCVendor.cs" />
-    <Compile Include="NPC\Reward.cs" />
-    <Compile Include="NPC\Rewards\Experience.cs" />
-    <Compile Include="NPC\Rewards\Flag_Bool.cs" />
-    <Compile Include="NPC\Rewards\Flag_Math.cs" />
-    <Compile Include="NPC\Rewards\Flag_Short.cs" />
-    <Compile Include="NPC\Rewards\Flag_Short_Random.cs" />
-    <Compile Include="NPC\Rewards\Item.cs" />
-    <Compile Include="NPC\Rewards\Item_Random.cs" />
-    <Compile Include="NPC\Rewards\Quest.cs" />
-    <Compile Include="NPC\Rewards\Reputation.cs" />
-    <Compile Include="NPC\Rewards\Teleport.cs" />
-    <Compile Include="NPC\Rewards\Vehicle.cs" />
     <Compile Include="PropertyProxy.cs" />
     <Compile Include="Util.cs" />
     <Page Include="BetterControls\Dialogue_Response.xaml">
@@ -300,18 +309,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Localization\lang.ru-RU.xaml">
-      <SubType>Designer</SubType>
+    <Resource Include="Localization\lang.interface.en-US.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Localization\lang.uk-UA.xaml">
+    </Resource>
+    <Resource Include="Localization\lang.interface.ru-RU.xaml">
       <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Localization\lang.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    </Resource>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -344,6 +347,8 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Localization\lang.conditions.en-US.json" />
+    <Resource Include="Localization\lang.conditions.ru-RU.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
