@@ -32,8 +32,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     {
         [ConditionTooltip("Condition_Localization_Tooltip")]
         public string Localization;
+        [XmlIgnore]
         public abstract Condition_Type Type { get; }
-
+        [XmlIgnore]
         public abstract string DisplayName { get; }
 
         public IEnumerable<FrameworkElement> GetControls()
@@ -249,6 +250,5 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             return false;
         }
     } 
-
 #endregion
 }

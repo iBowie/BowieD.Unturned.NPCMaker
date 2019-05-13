@@ -25,6 +25,8 @@
     <v:String x:Key="app_Desktop">Внимание! Вы хотите запустить программу на рабочем столе, что не рекомендуется из-за создания необходимых для работы программы файлов. Вы уверены что хотите продолжить?</v:String>
     <v:String x:Key="load_Incompatible">Не удалось распознать файл.</v:String>
     <v:String x:Key="save_Filter">Проекты NPC</v:String>
+    <v:String x:Key="save_Old_Title">Старый формат файла</v:String>
+    <v:String x:Key="save_Old_Content">Вы пытаетесь загрузить старый формат файла.\nРекомендуется создать нового NPC с нуля.\nКонвертация может привести к некорректным данным.\nСовершить конвертацию?.</v:String>
 
     <v:String x:Key="about_Text">Copyright BowieD 2019\n\nАвтор программы: BowieD. Перевод на русский: BowieD\nВерсия программы: %version%\nЗагляните в раздел "Обратная связь" для связи со мной.</v:String>
     <v:String x:Key="about_Title">О программе</v:String>
@@ -110,7 +112,7 @@
     <v:String x:Key="apparel_User_Color_Save">Сохранить цвет</v:String>
     <v:String x:Key="apparel_User_Color_Remove">Удалить цвет</v:String>
     <v:String x:Key="apparel_Color_Select">Палитра</v:String>
-    <v:String x:Key="apparel_Char_Random">Случайный цвет</v:String>
+    <v:String x:Key="apparel_Char_Random">Случайно</v:String>
     <v:String x:Key="apparel_Clothing_Default">Обычно</v:String>
     <v:String x:Key="apparel_Clothing_Christmas">Рождество</v:String>
     <v:String x:Key="apparel_Clothing_Halloween">Хэллоуин</v:String>
@@ -292,4 +294,11 @@
     <v:String x:Key="select_Dialogue">Диалог</v:String>
     <v:String x:Key="select_Vendor">Магазин</v:String>
     <v:String x:Key="select_Quest">Задание</v:String>
+
+    <v:String x:Key="notify_Dialogue_Saved">Диалог сохранён!</v:String>
+    <v:String x:Key="notify_Vendor_Saved">Магазин сохранён!</v:String>
+    <v:String x:Key="notify_Quest_Saved">Задание сохранено!</v:String>
+    <v:String x:Key="notify_Saved">Сохранено!</v:String>
+    <v:String x:Key="notify_Loaded">Загружено!</v:String>
+
 </ResourceDictionary>

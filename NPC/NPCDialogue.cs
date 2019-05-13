@@ -17,8 +17,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
         [XmlAttribute]
         public string guid;
-        [XmlAttribute]
-        [XmlElement("comment")]
+        [XmlAttribute("comment")]
         public string Comment { get; set; }
 
         [XmlAttribute]

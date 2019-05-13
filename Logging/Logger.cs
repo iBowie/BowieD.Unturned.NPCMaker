@@ -9,8 +9,6 @@ namespace BowieD.Unturned.NPCMaker.Logging
     {
         public static void Log(string message, Log_Level logLevel = Log_Level.Normal)
         {
-            if (logLevel > LoggingLevel)
-                return;
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "npcmaker.log"))
                 File.Create(AppDomain.CurrentDomain.BaseDirectory + "npcmaker.log").Close();
             using (StreamWriter sw = new StreamWriter(path: AppDomain.CurrentDomain.BaseDirectory + "npcmaker.log", encoding: Encoding.UTF8, append: true))

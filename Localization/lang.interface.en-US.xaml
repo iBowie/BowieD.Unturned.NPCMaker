@@ -25,6 +25,8 @@
     <v:String x:Key="app_Desktop">Warning! You want to launch app on desktop, which is not recommended due to file deploying. You sure you want to continue?</v:String>
     <v:String x:Key="load_Incompatible">Cannot recognize file.</v:String>
     <v:String x:Key="save_Filter">NPC projects</v:String>
+    <v:String x:Key="save_Old_Title">Old file format</v:String>
+    <v:String x:Key="save_Old_Content">You are trying to load old NPC format.\nRecommended to create a new one from start.\nConvertion can result in incorrect NPC data.\nProceed convertion?</v:String>
 
     <v:String x:Key="about_Text">Copyright BowieD 2019\n\nThis app was made by BowieD. English translator: BowieD\nApp Version: %version%\nView Feedback menu if you want contact me.</v:String>
     <v:String x:Key="about_Title">About</v:String>
@@ -292,4 +294,10 @@
     <v:String x:Key="select_Dialogue">Dialogue</v:String>
     <v:String x:Key="select_Vendor">Vendor</v:String>
     <v:String x:Key="select_Quest">Quest</v:String>
+    
+    <v:String x:Key="notify_Dialogue_Saved">Dialogue saved!</v:String>
+    <v:String x:Key="notify_Vendor_Saved">Vendor saved!</v:String>
+    <v:String x:Key="notify_Quest_Saved">Quest saved!</v:String>
+    <v:String x:Key="notify_Saved">Saved!</v:String>
+    <v:String x:Key="notify_Loaded">Loaded!</v:String>
 </ResourceDictionary>

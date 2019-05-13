@@ -12,6 +12,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Xml;
 using System.Xml.Serialization;
@@ -82,7 +83,15 @@ namespace BowieD.Unturned.NPCMaker
             if (Config.Configuration.Properties.recent == null)
                 Config.Configuration.Properties.recent = new string[0];
             Config.Configuration.Properties.recent = Config.Configuration.Properties.recent.Where(d => File.Exists(d)).ToArray();
-            RecentList.ItemsSource = Config.Configuration.Properties.recent;
+            foreach (var k in Config.Configuration.Properties.recent)
+            {
+                RecentList.Items.Add(Config.Configuration.Properties.recent);
+            }
+            RecentList.Items.Add(new Separator());
+            RecentList.Items.Add(new MenuItem()
+            {
+                Header = LocUtil.LocalizeInterface("menu_File_Recent_Clear")
+            });
             #endregion
             #region APPAREL SETUP
             faceImageIndex.Maximum = faceAmount - 1;
@@ -192,20 +201,6 @@ namespace BowieD.Unturned.NPCMaker
             Proxy.ColorSliderChange(null, null);
             MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("app_Free"));
         }
-        //public static string Localize(string key)
-        //{
-        //    var res = Instance.TryFindResource(key);
-        //    if (res == null || !(res is string resString) || resString.Length == 0)
-        //        return key;
-        //    return resString;
-        //}
-        //public static string Localize(string key, params object[] format)
-        //{
-        //    string res = Localize(key);
-        //    if (res == key)
-        //        return key;
-        //    return string.Format(res, format);
-        //}
         #region CONSTANTS
         public const int
         faceAmount = 32,
@@ -309,21 +304,30 @@ namespace BowieD.Unturned.NPCMaker
                     XmlSerializer newDeser = new XmlSerializer(typeof(NPCProject));
                     if (oldDeser.CanDeserialize(reader))
                     {
-                        CurrentProject = (NPCProject)(oldDeser.Deserialize(reader) as NPCSaveOld);
+                        if (MessageBox.Show(LocUtil.LocalizeInterface("save_Old_Content"), LocUtil.LocalizeInterface("save_Old_Title"), MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        {
+                            CurrentProject = (NPCProject)(oldDeser.Deserialize(reader) as NPCSaveOld);
+                            ConvertNPCToState(CurrentProject);
+                            isSaved = true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
                     else if (newDeser.CanDeserialize(reader))
                     {
                         CurrentProject = newDeser.Deserialize(reader) as NPCProject;
+                        saveFile = path;
+                        ConvertNPCToState(CurrentProject);
+                        isSaved = true;
                     }
-                    saveFile = path;
-                    ConvertNPCToState(CurrentProject);
-                    isSaved = true;
                 }
                 NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
                 Started = DateTime.UtcNow;
                 return true;
             }
-            catch { NotificationManager.Notify(LocUtil.LocalizeInterface("load_Incompatible")); return false; }
+            catch (Exception ex) { Logger.Log(ex, Log_Level.Errors); NotificationManager.Notify(LocUtil.LocalizeInterface("load_Incompatible")); return false; }
         }
         public static bool SavePrompt()
         {

@@ -75,6 +75,8 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.Instance.apparelBeardRandomize.Click += Apparel_Beard_Random_Button_Click;
             MainWindow.Instance.apparelFaceRandomize.Click += Apparel_Face_Random_Button_Click;
             MainWindow.Instance.visibilityCondsButton.Click += Char_EditConditions_Button_Click;
+            MainWindow.Instance.apparelSkinColorBox.Text = "#000000";
+            MainWindow.Instance.apparelHairColorBox.Text = "#000000";
         }
         public NPCCharacter Current
         {
@@ -168,6 +170,22 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 MainWindow.Instance.beardImageIndex.Value = value.beard;
                 MainWindow.Instance.hairImageIndex.Value = value.haircut;
                 MainWindow.Instance.apparelLeftHandedCheckbox.IsChecked = value.leftHanded;
+                for (int k = 0; k < MainWindow.Instance.apparelPoseBox.Items.Count; k++)
+                {
+                    if (((NPC_Pose)(MainWindow.Instance.apparelPoseBox.Items[k] as ComboBoxItem).Tag) == value.pose)
+                    {
+                        MainWindow.Instance.apparelPoseBox.SelectedIndex = k;
+                        break;
+                    }
+                }
+                for (int k = 0; k < MainWindow.Instance.equipSlotBox.Items.Count; k++)
+                {
+                    if (((Equip_Type)(MainWindow.Instance.equipSlotBox.Items[k] as ComboBoxItem).Tag) == value.equipped)
+                    {
+                        MainWindow.Instance.equipSlotBox.SelectedIndex = k;
+                        break;
+                    }
+                }
                 conditions = value.visibilityConditions;
                 loadedGUID = value.guid;
             }
@@ -221,6 +239,8 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.Instance.beardImageIndex.Value = value.beard;
             MainWindow.Instance.hairImageIndex.Value = value.haircut;
             MainWindow.Instance.apparelLeftHandedCheckbox.IsChecked = value.leftHanded;
+            MainWindow.Instance.equipSlotBox.SelectedIndex = 0;
+            MainWindow.Instance.apparelPoseBox.SelectedIndex = 0;
         }
 
         public void Save()

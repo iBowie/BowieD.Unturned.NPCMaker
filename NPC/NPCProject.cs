@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.NPC.Conditions;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
@@ -10,6 +12,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public NPCProject()
         {
             guid = Guid.NewGuid().ToString("N");
+            SAVEDATA_VERSION = 1;
             characters = new List<NPCCharacter>();
             dialogues = new List<NPCDialogue>();
             vendors = new List<NPCVendor>();
@@ -19,6 +22,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
         [XmlAttribute]
         public string guid;
+        public int SAVEDATA_VERSION;
         public List<NPCCharacter> characters;
         public List<NPCDialogue> dialogues;
         public List<NPCVendor> vendors;
@@ -42,6 +46,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 yield return quest.id;
         }
 
+        #pragma warning disable CS0618
         public static explicit operator NPCProject(NPCSaveOld old)
         {
             return new NPCProject
@@ -78,5 +83,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 //objects = new List<NPCObject>()
             };
         }
+        #pragma warning restore CS0618
     }
 }

@@ -36,7 +36,7 @@
                     <Grid Margin="2.5">
                         <CheckBox Name="Generate_GUIDS_Box" Content="{DynamicResource config_Tab_General_GUIDs}"/>
                     </Grid>
-                    <Grid Margin="2.5">
+                    <Grid Margin="2.5" Visibility="Collapsed">
                         <Label Content="{DynamicResource config_Tab_General_LogLevel}"/>
                         <ComboBox HorizontalAlignment="Right" Name="Log_Level_Box">
                             <ComboBoxItem Tag="None" Content="{DynamicResource config_Tab_General_LogLevel_None}"/>
