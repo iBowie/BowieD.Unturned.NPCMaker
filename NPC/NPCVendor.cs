@@ -7,7 +7,7 @@ using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    public class NPCVendor : IHasDisplayName, IHasComment
+    public class NPCVendor : IHasDisplayName
     {
         public NPCVendor()
         {

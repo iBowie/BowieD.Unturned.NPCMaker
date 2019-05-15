@@ -6,7 +6,7 @@ using Reward = BowieD.Unturned.NPCMaker.NPC.Rewards.Reward;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    public class NPCQuest : IHasDisplayName, IHasComment
+    public class NPCQuest : IHasDisplayName
     {
         public NPCQuest()
         {

@@ -162,7 +162,11 @@
     <Compile Include="Mistakes\MistakesManager.cs" />
     <Compile Include="Notification\INotificationManager.cs" />
     <Compile Include="Notification\NotificationManager.cs" />
-    <Compile Include="NPC\IHasComment.cs" />
+    <Compile Include="NPC\Conditions\Attributes\ConditionNameAttribute.cs" />
+    <Compile Include="NPC\Conditions\Attributes\ConditionNoValueAttribute.cs" />
+    <Compile Include="NPC\Conditions\Attributes\ConditionOptionalAttribute.cs" />
+    <Compile Include="NPC\Conditions\Attributes\ConditionSkipFieldAttribute.cs" />
+    <Compile Include="NPC\Conditions\Attributes\ConditionTooltipAttribute.cs" />
     <Compile Include="NPC\Conditions\Condition.cs" />
     <Compile Include="NPC\Conditions\ConditionCompareFlags.cs" />
     <Compile Include="NPC\Conditions\ConditionExperience.cs" />
@@ -197,9 +201,14 @@
     <Compile Include="NPC\Rewards\RewardFlagShortRandom.cs" />
     <Compile Include="NPC\Rewards\RewardItem.cs" />
     <Compile Include="NPC\Rewards\RewardItemRandom.cs" />
+    <Compile Include="NPC\Rewards\RewardNameAttribute.cs" />
+    <Compile Include="NPC\Rewards\RewardNoValueAttribute.cs" />
+    <Compile Include="NPC\Rewards\RewardOptionalAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardQuest.cs" />
     <Compile Include="NPC\Rewards\RewardReputation.cs" />
+    <Compile Include="NPC\Rewards\RewardSkipFieldAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardTeleport.cs" />
+    <Compile Include="NPC\Rewards\RewardTooltipAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardVehicle.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -437,6 +446,8 @@
     <Resource Include="Libs\MahApps.Metro.IconPacks.Core.dll" />
     <Resource Include="Libs\Newtonsoft.Json.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="NPC\Rewards\Attributes\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

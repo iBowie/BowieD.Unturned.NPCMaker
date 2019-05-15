@@ -79,20 +79,6 @@ namespace BowieD.Unturned.NPCMaker
                 catch { }
             }
             #endregion
-            #region PROPERTY SETUP
-            if (Config.Configuration.Properties.recent == null)
-                Config.Configuration.Properties.recent = new string[0];
-            Config.Configuration.Properties.recent = Config.Configuration.Properties.recent.Where(d => File.Exists(d)).ToArray();
-            foreach (var k in Config.Configuration.Properties.recent)
-            {
-                RecentList.Items.Add(Config.Configuration.Properties.recent);
-            }
-            RecentList.Items.Add(new Separator());
-            RecentList.Items.Add(new MenuItem()
-            {
-                Header = LocUtil.LocalizeInterface("menu_File_Recent_Clear")
-            });
-            #endregion
             #region APPAREL SETUP
             faceImageIndex.Maximum = faceAmount - 1;
             beardImageIndex.Maximum = beardAmount - 1;
@@ -102,6 +88,7 @@ namespace BowieD.Unturned.NPCMaker
             (CharacterEditor as CharacterEditor).BeardImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
             Proxy.UserColorListChanged();
             #endregion
+            RefreshRecentList();
             #region HOLIDAYS
             int day = DateTime.Now.Day;
             int month = DateTime.Now.Month;
@@ -259,15 +246,7 @@ namespace BowieD.Unturned.NPCMaker
                     return;
                 }
             }
-            if (Config.Configuration.Properties.recent == null)
-                Config.Configuration.Properties.recent = new string[0];
-            if (!Config.Configuration.Properties.recent.Contains(saveFile))
-            {
-                List<string> r = Config.Configuration.Properties.recent.ToList();
-                r.Insert(0, saveFile);
-                Config.Configuration.Properties.recent = r.ToArray();
-                Config.Configuration.Save();
-            }
+            AddToRecentList(saveFile);
             try
             {
                 if (saveFile != null && saveFile != "")
@@ -291,6 +270,21 @@ namespace BowieD.Unturned.NPCMaker
             if (oldFile != "")
                 MainWindow.saveFile = oldFile;
         }
+
+        public static void AddToRecentList(string path)
+        {
+            if (Config.Configuration.Properties.recent == null)
+                Config.Configuration.Properties.recent = new string[0];
+            if (!Config.Configuration.Properties.recent.Contains(saveFile))
+            {
+                List<string> r = Config.Configuration.Properties.recent.ToList();
+                r.Prepend(path);
+                Config.Configuration.Properties.recent = r.ToArray();
+                Config.Configuration.Save();
+            }
+            Instance.RefreshRecentList();
+        }
+
         public bool Load(string path, bool skipPrompt = false)
         {
             if (!skipPrompt && !SavePrompt())
@@ -321,6 +315,7 @@ namespace BowieD.Unturned.NPCMaker
                         saveFile = path;
                         ConvertNPCToState(CurrentProject);
                         isSaved = true;
+                        AddToRecentList(saveFile);
                     }
                 }
                 NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
@@ -404,6 +399,40 @@ namespace BowieD.Unturned.NPCMaker
             dropOverlay.Visibility = Visibility.Hidden;
         }
         #endregion
+        public void RefreshRecentList()
+        {
+            if (Config.Configuration.Properties.recent == null)
+                Config.Configuration.Properties.recent = new string[0];
+            Config.Configuration.Properties.recent = Config.Configuration.Properties.recent.Where(d => File.Exists(d)).ToArray();
+            foreach (var k in Config.Configuration.Properties.recent)
+            {
+                var mItem = new MenuItem()
+                {
+                    Header = k,
+                    Tag = "SAV"
+                };
+                mItem.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
+                {
+                    Load(k);
+                });
+                RecentList.Items.Add(mItem);
+            }
+            if (Config.Configuration.Properties.recent.Length > 0)
+            {
+                RecentList.Items.Add(new Separator());
+                var mItem = new MenuItem()
+                {
+                    Header = LocUtil.LocalizeInterface("menu_File_Recent_Clear"),
+                    Tag = "CLR"
+                };
+                mItem.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
+                {
+                    Config.Configuration.Properties.recent = new string[0];
+                    RefreshRecentList();
+                });
+                RecentList.Items.Add(mItem);
+            }
+        }
 
         public static void PerformExit()
         {

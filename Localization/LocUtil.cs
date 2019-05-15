@@ -24,7 +24,11 @@ namespace BowieD.Unturned.NPCMaker.Localization
         }
         public static string LocalizeInterface(string key)
         {
-            return (MainWindow.Instance.TryFindResource(key) as string).Replace(@"\n", Environment.NewLine) ?? key;
+            var file = MainWindow.Instance.TryFindResource(key) as string;
+            if (file == null)
+                return key;
+            else
+                return file.Replace(@"\n", Environment.NewLine);
         }
         public static string LocalizeInterface(string key, params object[] args)
         {

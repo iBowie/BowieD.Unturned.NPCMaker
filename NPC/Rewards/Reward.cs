@@ -25,6 +25,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     public abstract class Reward : IHasDisplayName
     {
         [RewardTooltip("Reward_Localization_Tooltip")]
+        [RewardSkipField]
         public string Localization;
         public abstract RewardType Type { get; }
         public abstract string DisplayName { get; }
@@ -171,7 +172,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 if (!prefix.EndsWith("_"))
                     prefix += "_";
             StringBuilder output = new StringBuilder();
-            output.AppendLine($"{prefix}{(prefix.Length > 0 ? $"{prefixIndex.ToString()}_" : "")}Condition_{rewardIndex}_Type {Type.ToString()}");
+            output.AppendLine($"{prefix}{(prefix.Length > 0 ? $"{prefixIndex.ToString()}_" : "")}Reward_{rewardIndex}_Type {Type.ToString()}");
             foreach (var field in this.GetType().GetFields())
             {
                 var fieldName = field.Name;
@@ -192,50 +193,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 }
                 if (optionalA != null && optionalA.ConditionApplied(fieldValue))
                     continue;
-                output.AppendLine($"{prefix}{(prefix.Length > 0 ? $"{prefixIndex.ToString()}_" : "")}Condition_{rewardIndex}_{fieldName}{(fieldValue.ToString().Length > 0 ? " " + fieldValue.ToString() : "")}");
+                output.AppendLine($"{prefix}{(prefix.Length > 0 ? $"{prefixIndex.ToString()}_" : "")}Reward_{rewardIndex}_{fieldName}{(fieldValue.ToString().Length > 0 ? " " + fieldValue.ToString() : "")}");
             }
             return output.ToString();
         }
     }
-
-    #region ATTRIBUTES
-    public class RewardNameAttribute : Attribute
-    {
-        public readonly string Text;
-        public RewardNameAttribute(string key)
-        {
-            Text = LocUtil.LocalizeReward(key);
-        }
-    }
-    public class RewardTooltipAttribute : Attribute
-    {
-        public readonly string Text;
-        public RewardTooltipAttribute(string key)
-        {
-            Text = LocUtil.LocalizeReward(key);
-        }
-    }
-    public class RewardOptionalAttribute : Attribute
-    {
-        public object defaultValue { get; private set; }
-        public object skipValue { get; private set; }
-        public RewardOptionalAttribute(object defaultValue, object skipValue)
-        {
-            this.defaultValue = defaultValue;
-            this.skipValue = skipValue;
-        }
-        public bool ConditionApplied(object currentValue)
-        {
-            if (skipValue.Equals(currentValue))
-                return true;
-            return false;
-        }
-    }
-    public class RewardNoValueAttribute : Attribute
-    {
-    }
-    public class RewardSkipFieldAttribute : Attribute
-    {
-    }
-    #endregion
 }

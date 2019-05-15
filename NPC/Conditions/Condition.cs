@@ -31,6 +31,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public abstract class Condition : IHasDisplayName
     {
         [ConditionTooltip("Condition_Localization_Tooltip")]
+        [ConditionSkipField]
         public string Localization;
         [XmlIgnore]
         public abstract Condition_Type Type { get; }
@@ -206,49 +207,4 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             return output.ToString();
         }
     }
-    #region Attributes
-    public class ConditionNameAttribute : Attribute
-    {
-        public string Text { get; private set; }
-        public ConditionNameAttribute(string translationKey)
-        {
-            Text = LocUtil.LocalizeCondition(translationKey);
-        }
-    }
-    public class ConditionTooltipAttribute : Attribute
-    {
-        public string Text { get; private set; }
-        public ConditionTooltipAttribute(string translationKey)
-        {
-            Text = LocUtil.LocalizeCondition(translationKey);
-        }
-    }
-    /// <summary>
-    /// Apply to booleans
-    /// </summary>
-    public class ConditionNoValueAttribute : Attribute
-    {
-
-    }
-    public class ConditionSkipFieldAttribute : Attribute
-    {
-
-    }
-    public class ConditionOptionalAttribute : Attribute
-    {
-        public object defaultValue { get; private set; }
-        public object skipValue { get; private set; }
-        public ConditionOptionalAttribute(object defaultValue, object skipValue)
-        {
-            this.defaultValue = defaultValue;
-            this.skipValue = skipValue;
-        }
-        public bool ConditionApplied(object currentValue)
-        {
-            if (skipValue.Equals(currentValue))
-                return true;
-            return false;
-        }
-    } 
-#endregion
 }

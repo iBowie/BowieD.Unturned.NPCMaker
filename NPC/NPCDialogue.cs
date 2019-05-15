@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    public class NPCDialogue : IHasDisplayName, IHasComment
+    public class NPCDialogue : IHasDisplayName
     {
         public NPCDialogue()
         {

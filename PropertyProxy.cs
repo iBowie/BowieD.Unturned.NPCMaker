@@ -38,7 +38,6 @@ namespace BowieD.Unturned.NPCMaker
             {
                 MainWindow.PerformExit();
             });
-            inst.RecentList.Click += RecentList_Click;
             inst.exportButton.Click += ExportClick;
             inst.saveButton.Click += SaveClick;
             inst.saveAsButton.Click += SaveAsClick;
@@ -379,13 +378,6 @@ namespace BowieD.Unturned.NPCMaker
             Config.Configuration.Properties.userColors = uColors.ToArray();
             Config.Configuration.Save();
             UserColorListChanged();
-        }
-        internal void RecentList_Click(object sender, RoutedEventArgs e)
-        {
-            if (e.OriginalSource.Equals(inst.RecentList))
-                return;
-            MenuItem m = e.OriginalSource as MenuItem;
-            inst.Load(m.Header.ToString());
         }
         internal void ExportClick(object sender, RoutedEventArgs e)
         {
