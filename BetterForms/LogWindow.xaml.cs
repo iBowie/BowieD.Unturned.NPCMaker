@@ -43,6 +43,8 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         public abstract class Command
         {
             public abstract string Name { get; }
+            public abstract string Help { get; }
+            public abstract string Syntax { get; }
             public abstract void Execute(string[] args);
 
             public static HashSet<Command> Commands
@@ -68,15 +70,52 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 }
             }
             private static HashSet<Command> _commands;
+            public static Command GetCommand(string name)
+            {
+                return Commands.SingleOrDefault(d => d.Name.ToLower() == name.ToLower());
+            }
         }
 
         public class HelpCommand : Command
         {
             public override string Name => "help";
+            public override string Help => "Show list of commands with help";
+            public override string Syntax => "[command]";
+
+#if DEBUG
+            public override void Execute(string[] args)
+            {
+                Command cmd = null;
+                if (args.Length == 0 || (cmd = Command.GetCommand(args[0])) == null)
+                {
+                    foreach (var c in Command.Commands)
+                    {
+                        Logger.Log($"{c.Name} {c.Syntax} - {c.Help}");
+                    }
+                }
+                else
+                {
+                    Logger.Log($"{cmd.Name} {cmd.Syntax} - {cmd.Help}");
+                }
+            }
+#endif
+#if !DEBUG
+            public override void Execute(string[] args)
+            {
+                Logger.Log("Nobody will help you");
+            }
+#endif
+        }
+        public class ExitCommand : Command
+        {
+            public override string Name => "exit";
+            public override string Help => "Force application exit";
+
+            public override string Syntax => "";
 
             public override void Execute(string[] args)
             {
-                Logger.Log("Nobody would help you.");
+                MainWindow.PerformExit();
             }
         }
     }
