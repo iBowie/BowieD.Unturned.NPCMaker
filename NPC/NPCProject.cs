@@ -109,17 +109,19 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public static NPCProject Load(string path)
         {
             using (FileStream fs = new FileStream(path, FileMode.Open))
-            using (XmlReader reader = XmlReader.Create(path))
+            using (XmlReader reader = XmlReader.Create(fs))
             {
-                return new XmlSerializer(typeof(NPCProject)).Deserialize(reader) as NPCProject;
+                var res = new XmlSerializer(typeof(NPCProject)).Deserialize(reader) as NPCProject;
+                return res;
             }
         }
         public static NPCProject LoadOld(string path)
         {
             using (FileStream fs = new FileStream(path, FileMode.Open))
-            using (XmlReader reader = XmlReader.Create(path))
+            using (XmlReader reader = XmlReader.Create(fs))
             {
-                return (NPCProject)(new XmlSerializer(typeof(NPCSaveOld)).Deserialize(reader) as NPCSaveOld);
+                var res = (NPCProject)(new XmlSerializer(typeof(NPCSaveOld)).Deserialize(reader) as NPCSaveOld);
+                return res;
             }
         }
         public static bool CanLoad(string path)
@@ -129,7 +131,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 using (FileStream fs = new FileStream(path, FileMode.Open))
                 using (XmlReader reader = XmlReader.Create(fs))
                 {
-                    return new XmlSerializer(typeof(NPCProject)).CanDeserialize(reader);
+                    var res = new XmlSerializer(typeof(NPCProject)).CanDeserialize(reader);
+                    return res;
                 }
             }
             catch (Exception)
@@ -144,7 +147,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 using (FileStream fs = new FileStream(path, FileMode.Open))
                 using (XmlReader reader = XmlReader.Create(fs))
                 {
-                    return new XmlSerializer(typeof(NPCSaveOld)).CanDeserialize(reader);
+                    var res = new XmlSerializer(typeof(NPCSaveOld)).CanDeserialize(reader);
+                    return res;
                 }
             }
             catch (Exception) { return false; }

@@ -361,6 +361,8 @@
     <Resource Include="Localization\lang.conditions.ru-RU.json" />
     <Resource Include="Localization\lang.rewards.en-US.json" />
     <Resource Include="Localization\lang.rewards.ru-RU.json" />
+    <Resource Include="Localization\lang.mistakes.en-US.json" />
+    <Resource Include="Localization\lang.mistakes.ru-RU.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

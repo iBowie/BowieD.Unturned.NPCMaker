@@ -52,7 +52,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Dialogue && d.Id == dialogue.id))
                 {
-                    MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(LocUtil.LocalizeInterface("deep_dialogue", dialogue.id), "", IMPORTANCE.WARNING, true, false));
+                    MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(LocUtil.LocalizeMistake("deep_dialogue", dialogue.id), "", IMPORTANCE.WARNING, true, false));
                 }
                 await Task.Yield();
             }
@@ -60,18 +60,18 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Vendor && d.Id == vendor.id))
                 {
-                    MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(LocUtil.LocalizeInterface("deep_vendor", vendor.id), "", IMPORTANCE.WARNING, true, false));
+                    MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(LocUtil.LocalizeMistake("deep_vendor", vendor.id), "", IMPORTANCE.WARNING, true, false));
                 }
                 foreach (var it in vendor.items)
                 {
                     if (it.type == ItemType.VEHICLE && !CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Vehicle && d.Id == it.id))
                     {
-                        MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(LocUtil.LocalizeInterface("deep_vehicle", it.id), "", IMPORTANCE.WARNING, true, false));
+                        MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(LocUtil.LocalizeMistake("deep_vehicle", it.id), "", IMPORTANCE.WARNING, true, false));
                         continue;
                     }
                     if (it.type == ItemType.ITEM && !CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Item && d.Id == it.id))
                     {
-                        MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(LocUtil.LocalizeInterface("deep_item", it.id), "", IMPORTANCE.WARNING, true, false));
+                        MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(LocUtil.LocalizeMistake("deep_item", it.id), "", IMPORTANCE.WARNING, true, false));
                         continue;
                     }
                 }
@@ -81,16 +81,18 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Quest && d.Id == quest.id))
                 {
-                    MainWindow.Instance.lstMistakes.Items.Add(new Generic(LocUtil.LocalizeInterface("deep_quest", quest.id), "", IMPORTANCE.WARNING, true, false));
+                    MainWindow.Instance.lstMistakes.Items.Add(new Generic(LocUtil.LocalizeMistake("deep_quest", quest.id), "", IMPORTANCE.WARNING, true, false));
                 }
                 await Task.Yield();
             }
-            if (MainWindow.Instance.txtID.Value > 0)
+            foreach (NPCCharacter character in MainWindow.CurrentProject.characters)
             {
-                ushort input = (ushort)MainWindow.Instance.txtID.Value;
-                if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.NPC && d.Id == input))
+                if (character.id > 0)
                 {
-                    MainWindow.Instance.lstMistakes.Items.Add(new Generic(LocUtil.LocalizeInterface("deep_char", input), "", IMPORTANCE.WARNING, true, false));
+                    if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.NPC && d.Id == character.id))
+                    {
+                        MainWindow.Instance.lstMistakes.Items.Add(new Generic(LocUtil.LocalizeMistake("deep_char", character.id), "", IMPORTANCE.WARNING, true, false));
+                    }
                 }
             }
             MainWindow.Instance.blockActionsOverlay.Visibility = Visibility.Collapsed;

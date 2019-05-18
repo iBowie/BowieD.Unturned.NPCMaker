@@ -1,0 +1,28 @@
+{
+    "NE_0000_Desc": "ID of {0} [{1}] is in reserved range (from 0 to 2000)",
+    "NE_0001_Desc": "Recommended to use english chars in editor name.",
+    "NE_0002_Desc": "Recommended to use name that longer than 3 chars. ({0} [{1}])",
+    "NE_0003_Desc": "Change ID of the character {0} [{1}] to any value greater than 0.",
+    "NE_1000_Desc": "Invalid skin color.",
+    "NE_1001_Desc": "Invalid hair color.",
+    "NE_1002_Desc": "Equipped slot empty.",
+    "NE_2000_Desc": "You have response with quest, that doesn't leads to the actual quest. Add reward of type \"Quest\" to response with quest.",
+    "NE_2001_Desc": "NPC's message must contain at least one page.",
+    "NE_2002_Desc": "Change ID of the dialogue with zero id.",
+    "NE_2003_Desc": "You have two or more dialogues with same ID.",
+    "NE_2004_Desc": "Some of messages in dialogue {0} will never appear.",
+    "NE_3000_Desc": "Change ID of the vendor with zero id.",
+    "NE_3001_Desc": "You have two or more vendors with same ID.",
+    "NE_3002_Desc": "No items in vendor {0}.",
+    "NE_4000_Desc": "Change ID of the quest with zero id.",
+    "NE_4001_Desc": "You have two or more quests with same ID.",
+    "NE_4002_Desc": "Quest {0} doesn't have any conditions.",
+    "NE_4003_Desc": "Quest {0} doesn't have any rewards.",
+
+    "deep_dialogue": "Dialogue conflicting in [{0}]",
+    "deep_vendor": "Vendors conflicting in [{0}]",
+    "deep_char": "Character error. ID [{0}] already used.",
+    "deep_item": "Item [{0}] not found.",
+    "deep_vehicle": "Vehicle [{0}] not found.",
+    "deep_quest": "Quest [{0}] already used."
+}
