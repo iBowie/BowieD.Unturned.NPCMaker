@@ -44,6 +44,7 @@
 	"Condition_ID": "ID",
 	"Condition_A_ID": "Flag A",
 	"Condition_B_ID": "Flag B",
+	"Condition_Allow_Unset": "Allow Unset",
 	"Condition_Allow_A_Unset": "Allow Flag A Unset",
 	"Condition_Allow_B_Unset": "Allow Flag B Unset",
 	"Condition_Logic": "Logic",

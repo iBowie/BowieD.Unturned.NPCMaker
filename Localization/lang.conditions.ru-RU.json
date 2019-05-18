@@ -44,6 +44,7 @@
 	"Condition_ID": "ID",
 	"Condition_A_ID": "Флаг A",
 	"Condition_B_ID": "Флаг B",
+	"Condition_Allow_Unset": "Разрешить флагу быть без значения",
 	"Condition_Allow_A_Unset": "Разрешить флагу A быть без значения",
 	"Condition_Allow_B_Unset": "Разрешить флагу B быть без значения",
 	"Condition_Logic": "Логика",
