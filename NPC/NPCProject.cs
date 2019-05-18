@@ -1,8 +1,9 @@
-﻿using BowieD.Unturned.NPCMaker.NPC.Conditions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml;
 using System.Xml.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
@@ -84,5 +85,69 @@ namespace BowieD.Unturned.NPCMaker.NPC
             };
         }
         #pragma warning restore CS0618
+
+        public void Save(string path)
+        {
+            XmlWriterSettings writerSettings;
+#if DEBUG
+            writerSettings = new XmlWriterSettings()
+            {
+                Indent = true,
+                IndentChars = "\t"
+            };
+#endif
+#if !DEBUG
+            writerSettings = new XmlWriterSettings();
+#endif
+            using (FileStream fs = new FileStream(path, FileMode.Create))
+            using (XmlWriter writer = XmlWriter.Create(fs, writerSettings))
+            {
+                XmlSerializer ser = new XmlSerializer(typeof(NPCProject));
+                ser.Serialize(writer, this);
+            }
+        }
+        public static NPCProject Load(string path)
+        {
+            using (FileStream fs = new FileStream(path, FileMode.Open))
+            using (XmlReader reader = XmlReader.Create(path))
+            {
+                return new XmlSerializer(typeof(NPCProject)).Deserialize(reader) as NPCProject;
+            }
+        }
+        public static NPCProject LoadOld(string path)
+        {
+            using (FileStream fs = new FileStream(path, FileMode.Open))
+            using (XmlReader reader = XmlReader.Create(path))
+            {
+                return (NPCProject)(new XmlSerializer(typeof(NPCSaveOld)).Deserialize(reader) as NPCSaveOld);
+            }
+        }
+        public static bool CanLoad(string path)
+        {
+            try
+            {
+                using (FileStream fs = new FileStream(path, FileMode.Open))
+                using (XmlReader reader = XmlReader.Create(fs))
+                {
+                    return new XmlSerializer(typeof(NPCProject)).CanDeserialize(reader);
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public static bool CanLoadOld(string path)
+        {
+            try
+            {
+                using (FileStream fs = new FileStream(path, FileMode.Open))
+                using (XmlReader reader = XmlReader.Create(fs))
+                {
+                    return new XmlSerializer(typeof(NPCSaveOld)).CanDeserialize(reader);
+                }
+            }
+            catch (Exception) { return false; }
+        }
     }
 }

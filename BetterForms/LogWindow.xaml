@@ -8,5 +8,6 @@
         Title="Application Log" Background="Black" Height="450" Width="800">
     <Grid>
         <TextBox TextWrapping="Wrap" Background="Black" Foreground="Gray" FontFamily="Lucida Console" Name="logBox" IsReadOnly="True"/>
+        <TextBox Name="executionBox" VerticalAlignment="Bottom" Height="32"/>
     </Grid>
 </Window>

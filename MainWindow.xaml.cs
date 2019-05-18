@@ -32,7 +32,19 @@ namespace BowieD.Unturned.NPCMaker
         public static IEditor<NPCDialogue> DialogueEditor { get; private set; }
         public static IEditor<NPCVendor> VendorEditor { get; private set; }
         public static IEditor<NPCQuest> QuestEditor { get; private set; }
-        //public static IEditor<NPCObject> ObjectEditor { get; private set; }
+#if OBJECTS
+        public static IEditor<NPCObject> ObjectEditor { get; private set; }
+#endif
+        public static void SaveAllEditors()
+        {
+            CharacterEditor.Save();
+            DialogueEditor.Save();
+            VendorEditor.Save();
+            QuestEditor.Save();
+#if OBJECTS
+            ObjectEditor.Save();
+#endif
+        }
         #endregion
         public MainWindow()
         {
@@ -42,7 +54,9 @@ namespace BowieD.Unturned.NPCMaker
             DialogueEditor = new DialogueEditor();
             VendorEditor = new VendorEditor();
             QuestEditor = new QuestEditor();
-            //ObjectEditor = new ObjectEditor();
+#if OBJECTS
+            ObjectEditor = new ObjectEditor();
+#endif
             DeepAnalysisManager = new Mistakes.DeepAnalysisManager();
             if (Config.Configuration.Properties == null)
                 Config.Configuration.Load();
@@ -51,11 +65,11 @@ namespace BowieD.Unturned.NPCMaker
             Logger.Log($"Launch stage. Version: {Version}.");
             Proxy = new PropertyProxy(this);
             Proxy.RegisterEvents();
-            #region THEME SETUP
+#region THEME SETUP
             (Config.Configuration.Properties.currentTheme ?? Config.Configuration.DefaultTheme).Apply();
             Logger.Log($"Theme set to {(Config.Configuration.Properties.currentTheme ?? Config.Configuration.DefaultTheme).Name}");
-            #endregion
-            #region OPEN_WITH
+#endregion
+#region OPEN_WITH
             string[] args = Environment.GetCommandLineArgs();
             if (args != null && args.Length >= 0)
             {
@@ -76,8 +90,8 @@ namespace BowieD.Unturned.NPCMaker
                 }
                 catch { }
             }
-            #endregion
-            #region APPAREL SETUP
+#endregion
+#region APPAREL SETUP
             faceImageIndex.Maximum = faceAmount - 1;
             beardImageIndex.Maximum = beardAmount - 1;
             hairImageIndex.Maximum = haircutAmount - 1;
@@ -85,20 +99,20 @@ namespace BowieD.Unturned.NPCMaker
             (CharacterEditor as CharacterEditor).HairImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
             (CharacterEditor as CharacterEditor).BeardImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
             Proxy.UserColorListChanged();
-            #endregion
+#endregion
             RefreshRecentList();
-            #region HOLIDAYS
+#region HOLIDAYS
             int day = DateTime.Now.Day;
             int month = DateTime.Now.Month;
-            #region PERSONAL HOLIDAYS
+#region PERSONAL HOLIDAYS
             if (day == 22 && month == 3)
                 MainWindow.NotificationManager.Notify("Happy Birthday, BowieD!");
             if (day == 30 && month == 9)
                 MainWindow.NotificationManager.Notify("International Translation Day! Congratz, BowieD!");
             if (day == 30 && month == 10)
                 MainWindow.NotificationManager.Notify("Happy Birthday, DimesAO!");
-            #endregion
-            #region OFFICIAL HOLIDAYS
+#endregion
+#region OFFICIAL HOLIDAYS
             if ((day == 1 && month == 1) || (day == 31 && month == 12))
                 MainWindow.NotificationManager.Notify("Happy New Year!");
             if (day == 14 && month == 2)
@@ -115,13 +129,13 @@ namespace BowieD.Unturned.NPCMaker
                 MainWindow.NotificationManager.Notify("May the force be with you...");
             if (day == 11 && month == 1)
                 MainWindow.NotificationManager.Notify("Thank You!");
-            #endregion
-            #region COMMUNITY HOLIDAYS
+#endregion
+#region COMMUNITY HOLIDAYS
             if (day == 7 && month == 5)
                 MainWindow.NotificationManager.Notify("Happy Birthday, Зефирка!");
-            #endregion
-            #endregion
-            #region AFTER UPDATE
+#endregion
+#endregion
+#region AFTER UPDATE
             try
             {
                 if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "updater.exe"))
@@ -132,8 +146,8 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             catch { Logger.Log("Can't delete updater."); }
-            #endregion
-            #region AUTOSAVE INIT
+#endregion
+#region AUTOSAVE INIT
             if (Config.Configuration.Properties.autosaveOption > 0)
             {
                 AutosaveTimer = new DispatcherTimer();
@@ -158,53 +172,53 @@ namespace BowieD.Unturned.NPCMaker
                 AutosaveTimer.Tick += AutosaveTimer_Tick;
                 AutosaveTimer.Start();
             }
-            #endregion
-            #region VERSION SPECIFIC CODE
-            #if !DEBUG
+#endregion
+#region VERSION SPECIFIC CODE
+#if !DEBUG
             debugOverlayText.Visibility = Visibility.Collapsed;
-            #endif
-            #if DEBUG
+#endif
+#if DEBUG
             LogWindow.Show();
-            #endif
-            #endregion
+#endif
+#endregion
             Config.Configuration.Properties.firstLaunch = false;
             isSaved = true;
-            #region DISCORD
+#region DISCORD
             DiscordManager = new DiscordRPC.DiscordManager(1000)
             {
                 descriptive = Config.Configuration.Properties.enableDiscord
             };
             DiscordManager?.Initialize();
             Proxy.TabControl_SelectionChanged(mainTabControl, null);
-            #endregion
-            #region ENABLE EXPERIMENTAL
+#endregion
+#region ENABLE EXPERIMENTAL
             if (Config.Configuration.Properties.experimentalFeatures)
             {
 
             }
-            #endregion
+#endregion
             Proxy.ColorSliderChange(null, null);
             MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("app_Free"));
         }
-        #region CONSTANTS
+#region CONSTANTS
         public const int
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
         public static Version Version => new Version(1, 0, 5, 0);
-        #endregion
-        #region STATIC
+#endregion
+#region STATIC
         public static MainWindow Instance;
         public static NPCProject CurrentProject { get; set; } = new NPCProject();
         public static DispatcherTimer AutosaveTimer { get; set; }
         public static PropertyProxy Proxy { get; private set; }
         public static bool IsRGB { get; set; } = true;
         public static DateTime Started { get; set; } = DateTime.UtcNow;
-        #endregion
-        #region CURRENT SAVE
+#endregion
+#region CURRENT SAVE
         public static string saveFile = "", oldFile = "";
         public static bool isSaved = true;
-        #endregion
+#endregion
         private void AutosaveTimer_Tick(object sender, EventArgs e)
         {
             AutosaveTimer.Stop();
@@ -219,7 +233,7 @@ namespace BowieD.Unturned.NPCMaker
             PerformExit();
             base.OnClosing(e);
         }
-        #region SAVE_LOAD
+#region SAVE_LOAD
         public static void Save()
         {
             CharacterEditor.Save();
@@ -247,17 +261,9 @@ namespace BowieD.Unturned.NPCMaker
             AddToRecentList(saveFile);
             try
             {
-                if (saveFile != null && saveFile != "")
-                {
-                    using (FileStream fs = new FileStream(saveFile, FileMode.Create))
-                    using (XmlWriter writer = XmlWriter.Create(fs))
-                    {
-                        XmlSerializer ser = new XmlSerializer(typeof(NPCProject));
-                        ser.Serialize(writer, CurrentProject);
-                    }
-                    MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Saved"));
-                    isSaved = true;
-                }
+                CurrentProject.Save(saveFile);
+                MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Saved"));
+                isSaved = true;
             }
             catch (Exception ex)
             {
@@ -268,7 +274,6 @@ namespace BowieD.Unturned.NPCMaker
             if (oldFile != "")
                 MainWindow.saveFile = oldFile;
         }
-
         public static void AddToRecentList(string path)
         {
             if (Config.Configuration.Properties.recent == null)
@@ -282,45 +287,38 @@ namespace BowieD.Unturned.NPCMaker
             }
             Instance.RefreshRecentList();
         }
-
         public bool Load(string path, bool skipPrompt = false)
         {
             if (!skipPrompt && !SavePrompt())
                 return false;
             try
             {
-                using (FileStream fs = new FileStream(path, FileMode.Open))
-                using (XmlReader reader = XmlReader.Create(fs))
+                if (NPCProject.CanLoad(path))
                 {
-                    XmlSerializer oldDeser = new XmlSerializer(typeof(NPCSaveOld));
-                    XmlSerializer newDeser = new XmlSerializer(typeof(NPCProject));
-                    if (oldDeser.CanDeserialize(reader))
+                    CurrentProject = NPCProject.Load(path);
+                    saveFile = path;
+                    ConvertNPCToState(CurrentProject);
+                    isSaved = true;
+                    AddToRecentList(saveFile);
+                }
+                else if (NPCProject.CanLoadOld(path))
+                {
+                    if (MessageBox.Show(LocUtil.LocalizeInterface("save_Old_Content"), LocUtil.LocalizeInterface("save_Old_Title"), MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        if (MessageBox.Show(LocUtil.LocalizeInterface("save_Old_Content"), LocUtil.LocalizeInterface("save_Old_Title"), MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                        {
-                            CurrentProject = (NPCProject)(oldDeser.Deserialize(reader) as NPCSaveOld);
-                            ConvertNPCToState(CurrentProject);
-                            isSaved = true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
-                    else if (newDeser.CanDeserialize(reader))
-                    {
-                        CurrentProject = newDeser.Deserialize(reader) as NPCProject;
-                        saveFile = path;
+                        CurrentProject = NPCProject.LoadOld(path);
                         ConvertNPCToState(CurrentProject);
                         isSaved = true;
-                        AddToRecentList(saveFile);
+                    }
+                    else
+                    {
+                        return false;
                     }
                 }
                 NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
                 Started = DateTime.UtcNow;
                 return true;
             }
-            catch (Exception ex) { Logger.Log(ex, Log_Level.Errors); NotificationManager.Notify(LocUtil.LocalizeInterface("load_Incompatible")); return false; }
+            catch (Exception ex) { Logger.Log(ex, Log_Level.Error); NotificationManager.Notify(LocUtil.LocalizeInterface("load_Incompatible")); return false; }
         }
         public static bool SavePrompt()
         {
@@ -357,8 +355,8 @@ namespace BowieD.Unturned.NPCMaker
             catch { return false; }
         }
 
-        #endregion
-        #region STATE CONVERTERS
+#endregion
+#region STATE CONVERTERS
         public void ConvertNPCToState(NPCProject save)
         {
             CurrentProject = save;
@@ -368,8 +366,8 @@ namespace BowieD.Unturned.NPCMaker
             VendorEditor.Current = new NPCVendor();
             //ObjectEditor.Current = new NPCObject();
         }
-        #endregion
-        #region DRAG AND DROP
+#endregion
+#region DRAG AND DROP
         private void Window_DragEnter(object sender, DragEventArgs e)
         {
             dropOverlay.Visibility = Visibility.Visible;
@@ -396,7 +394,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             dropOverlay.Visibility = Visibility.Hidden;
         }
-        #endregion
+#endregion
         public void RefreshRecentList()
         {
             if (Config.Configuration.Properties.recent == null)

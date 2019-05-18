@@ -82,7 +82,7 @@ namespace BowieD.Unturned.NPCMaker.Config
                     Properties = content;
                 }
             }
-            catch { Logger.Log("Can't load configuration. Loading defaults...", Log_Level.Errors); LoadDefaults(); }
+            catch { Logger.Log("Can't load configuration. Loading defaults...", Log_Level.Error); LoadDefaults(); }
         }
         public static void Save()
         {

@@ -47,6 +47,7 @@ namespace BowieD.Unturned.NPCMaker.Logging
         Normal,
         Warnings,
         Critical,
-        Errors
+        Error,
+        Debug
     }
 }
