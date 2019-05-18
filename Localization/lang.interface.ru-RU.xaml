@@ -75,6 +75,18 @@
     <v:String x:Key="character_ID_Zero">ID персонажа равен нулю</v:String>
     <v:String x:Key="notify_Character_Saved">Персонаж сохранён!</v:String>
 
+    <v:String x:Key="export_Title">Экспортирование</v:String>
+    <v:String x:Key="export_StepFormat">Шаг %done%/%total% (%step%)</v:String>
+    <v:String x:Key="export_Step_Character">Персонаж</v:String>
+    <v:String x:Key="export_Step_Dialogues">Диалоги</v:String>
+    <v:String x:Key="export_Step_Vendors">Магазины</v:String>
+    <v:String x:Key="export_Step_Quests">Задания</v:String>
+    <v:String x:Key="export_Done">НИП успешно экспортирован! Результат находится в папке results.</v:String>
+    <v:String x:Key="export_Done_Goto">Перейти к результату</v:String>
+    <v:String x:Key="export_Done_Title">Экспорт завершён!</v:String>
+    <v:String x:Key="export_Warnings_Desc">У Вас есть предупреждения в списке ошибок. Вы уверены что хотите продолжить экспорт?</v:String>
+    <v:String x:Key="export_Warnings_Title">Экспорт не безопасен</v:String>
+
     <v:String x:Key="apparel_Hair">Причёска</v:String>
     <v:String x:Key="apparel_Beard">Борода</v:String>
     <v:String x:Key="apparel_Face">Лицо</v:String>
@@ -212,6 +224,7 @@
     <v:String x:Key="vendor_ID">ID магазина</v:String>
     <v:String x:Key="vendor_Item_ID">ID</v:String>
     <v:String x:Key="vendor_Item_Cost">Цена</v:String>
+    <v:String x:Key="vendor_Item_Amount">Количество</v:String>
     <v:String x:Key="vendor_Item_Spawnpoint">Точка появления</v:String>
     <v:String x:Key="vendor_Type_ITEM">Предмет</v:String>
     <v:String x:Key="vendor_Type_VEHICLE">Транспорт</v:String>

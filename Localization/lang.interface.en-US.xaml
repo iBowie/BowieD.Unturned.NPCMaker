@@ -74,6 +74,18 @@
     <v:String x:Key="character_Clear">Clear Current</v:String>
     <v:String x:Key="character_ID_Zero">Character ID is zero</v:String>
     <v:String x:Key="notify_Character_Saved">Character saved!</v:String>
+    
+    <v:String x:Key="export_Title">Exporting</v:String>
+    <v:String x:Key="export_StepFormat">Step %done%/%total% (%step%)</v:String>
+    <v:String x:Key="export_Step_Character">Character</v:String>
+    <v:String x:Key="export_Step_Dialogues">Dialogues</v:String>
+    <v:String x:Key="export_Step_Vendors">Vendors</v:String>
+    <v:String x:Key="export_Step_Quests">Quests</v:String>
+    <v:String x:Key="export_Done">NPC succesfully exported! View results folder.</v:String>
+    <v:String x:Key="export_Done_Goto">Go to results</v:String>
+    <v:String x:Key="export_Done_Title">Exported</v:String>
+    <v:String x:Key="export_Warnings_Desc">You have at least one warning. Are you sure you want to export NPC?</v:String>
+    <v:String x:Key="export_Warnings_Title">Unsafe export</v:String>
 
     <v:String x:Key="apparel_Hair">Haircut</v:String>
     <v:String x:Key="apparel_Beard">Beard</v:String>
@@ -212,6 +224,7 @@
     <v:String x:Key="vendor_ID">Vendor ID</v:String>
     <v:String x:Key="vendor_Item_ID">ID</v:String>
     <v:String x:Key="vendor_Item_Cost">Cost</v:String>
+    <v:String x:Key="vendor_Item_Amount">Amount</v:String>
     <v:String x:Key="vendor_Item_Spawnpoint">Spawnpoint</v:String>
     <v:String x:Key="vendor_Type_ITEM">Item</v:String>
     <v:String x:Key="vendor_Type_VEHICLE">Vehicle</v:String>

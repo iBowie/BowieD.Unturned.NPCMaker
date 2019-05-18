@@ -6,9 +6,7 @@ using BowieD.Unturned.NPCMaker.Notification;
 using BowieD.Unturned.NPCMaker.NPC;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -277,8 +275,8 @@ namespace BowieD.Unturned.NPCMaker
                 Config.Configuration.Properties.recent = new string[0];
             if (!Config.Configuration.Properties.recent.Contains(saveFile))
             {
-                List<string> r = Config.Configuration.Properties.recent.ToList();
-                r.Prepend(path);
+                var r = Config.Configuration.Properties.recent.AsEnumerable();
+                r = r.Prepend(path);
                 Config.Configuration.Properties.recent = r.ToArray();
                 Config.Configuration.Save();
             }
@@ -403,6 +401,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             if (Config.Configuration.Properties.recent == null)
                 Config.Configuration.Properties.recent = new string[0];
+            RecentList.Items.Clear();
             Config.Configuration.Properties.recent = Config.Configuration.Properties.recent.Where(d => File.Exists(d)).ToArray();
             foreach (var k in Config.Configuration.Properties.recent)
             {

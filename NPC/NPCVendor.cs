@@ -1,5 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
@@ -44,6 +43,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public ItemType type;
         public uint cost;
         public ushort id;
+        public byte amount;
         public List<Condition> conditions;
         public string spawnPointID;
 
@@ -51,11 +51,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             get
             {
-                if (isBuy)
-                {
-                    return LocUtil.LocalizeInterface("vendor_Item_Format_Sell").Replace("%id%", id.ToString()).Replace("%cost%", cost.ToString()).Replace("%itemType%", LocUtil.LocalizeInterface($"vendor_Type_{type.ToString()}"));
-                }
-                return LocUtil.LocalizeInterface("vendor_Item_Format_Buy").Replace("%id%", id.ToString()).Replace("%cost%", cost.ToString()).Replace("%itemType%", LocUtil.LocalizeInterface($"vendor_Type_{type.ToString()}"));
+                return $"{(type == ItemType.ITEM ? "Item" : "Vehicle")} [{id}] x{amount} ({cost}) {(type == ItemType.VEHICLE ? $"({spawnPointID})" : "")}"; ;
             }
         }
     }

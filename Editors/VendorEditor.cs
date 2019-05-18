@@ -63,7 +63,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 {
                     items.Add((ui as Universal_ItemList).Value as VendorItem);
                 }
-                Logger.Log($"Built vendor {MainWindow.Instance.vendorIdTxtBox.Value}");
+                // Logger.Log($"Built vendor {MainWindow.Instance.vendorIdTxtBox.Value}");
                 return new NPCVendor()
                 {
                     items = items,
@@ -88,7 +88,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 MainWindow.Instance.vendorTitleTxtBox.Text = value.vendorTitle;
                 MainWindow.Instance.vendorDescTxtBox.Text = value.vendorDescription;
                 MainWindow.Instance.vendor_commentbox.Text = value.Comment;
-                Logger.Log($"Set vendor {value.id}");
+                // Logger.Log($"Set vendor {value.id}");
             }
         }
 

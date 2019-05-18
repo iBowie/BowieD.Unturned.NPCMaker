@@ -8,7 +8,7 @@
         xmlns:bettercontrols="clr-namespace:BowieD.Unturned.NPCMaker.BetterControls"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="{DynamicResource vendorEditor_Title}" ResizeMode="NoResize" Height="296" Width="300" Icon="{DynamicResource app_Icon}">
+        Title="{DynamicResource vendorEditor_Title}" ResizeMode="NoResize" Height="334" Width="300" Icon="{DynamicResource app_Icon}">
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform x:Name="gridScale"/>
@@ -31,14 +31,16 @@
             <ComboBoxItem Content="{DynamicResource vendor_SellType_Buy}" Tag="BUY" />
             <ComboBoxItem Content="{DynamicResource vendor_SellType_Sell}" Tag="SELL"/>
         </ComboBox>
-        <mah:NumericUpDown ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" x:Name="txtBoxID" HorizontalAlignment="Right" Height="23" Margin="0,172,10,0" VerticalAlignment="Top" Width="100"/>
-        <mah:NumericUpDown ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="4294967295" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" x:Name="txtBoxCost" HorizontalAlignment="Right" Height="23" Margin="0,200,10,0" VerticalAlignment="Top" Width="100"/>
-        <TextBox MaxLength="5" Name="txtBoxSpawnpoint" HorizontalAlignment="Right" Height="23" Margin="0,231,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="100"/>
-        <Label Name="labelSpawnpoint" Content="{DynamicResource vendor_Item_Spawnpoint}" HorizontalAlignment="Left" Margin="10,228,0,0" VerticalAlignment="Top" Width="169"/>
-        <Button Click="SaveButton_Click" Content="{DynamicResource vendorEditor_Save}" Margin="10,0,10,10" Height="26" VerticalAlignment="Bottom"/>
         <Button Click="EditConditions_Click" Height="28" Content="{DynamicResource vendorEditor_Edit_Conditions}" Margin="10,142,10,0" VerticalAlignment="Top"/>
-        <Label Content="{DynamicResource vendor_Item_ID}" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" Width="169"/>
-        <Label Content="{DynamicResource vendor_Item_Cost}" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" Width="169"/>
+        <mah:NumericUpDown ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" x:Name="txtBoxID" HorizontalAlignment="Right" Height="23" Margin="0,175,10,0" VerticalAlignment="Top" Width="100"/>
+        <mah:NumericUpDown ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="4294967295" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" x:Name="txtBoxCost" HorizontalAlignment="Right" Height="23" Margin="0,206,10,0" VerticalAlignment="Top" Width="100"/>
+        <mah:NumericUpDown x:Name="amountBox" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="255" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" HorizontalAlignment="Right" Height="23" Margin="0,237,10,0" VerticalAlignment="Top" Width="100"/>
+        <TextBox MaxLength="5" Name="txtBoxSpawnpoint" HorizontalAlignment="Right" Height="23" Margin="0,237,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="100"/>
+        <Label Name="labelSpawnpoint" Content="{DynamicResource vendor_Item_Spawnpoint}" HorizontalAlignment="Left" Margin="10,237,0,0" VerticalAlignment="Top" Width="169"/>
+        <Button Click="SaveButton_Click" Content="{DynamicResource vendorEditor_Save}" Margin="10,0,10,10" Height="26" VerticalAlignment="Bottom"/>
+        <Label Content="{DynamicResource vendor_Item_ID}" HorizontalAlignment="Left" Margin="10,175,0,0" VerticalAlignment="Top" Width="169"/>
+        <Label Content="{DynamicResource vendor_Item_Cost}" HorizontalAlignment="Left" Margin="10,206,0,0" VerticalAlignment="Top" Width="169"/>
+        <Label x:Name="amountLabel" Content="{DynamicResource vendor_Item_Amount}" HorizontalAlignment="Left" Margin="10,237,0,0" VerticalAlignment="Top" Width="169"/>
 
     </Grid>
 </Window>
