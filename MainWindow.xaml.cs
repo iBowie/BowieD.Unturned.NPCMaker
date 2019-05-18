@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.Editors;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
+using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.Notification;
 using BowieD.Unturned.NPCMaker.NPC;
 using Microsoft.Win32;
@@ -19,9 +20,7 @@ namespace BowieD.Unturned.NPCMaker
 {
     public partial class MainWindow : Window
     {
-        #if DEBUG
-        public static LogWindow LogWindow { get; private set; } = new LogWindow();
-#endif
+        public static LogWindow LogWindow { get; set; }
         #region MANAGERS
         public static INotificationManager NotificationManager { get; private set; } = new NotificationManager();
         public static Mistakes.DeepAnalysisManager DeepAnalysisManager { get; private set; }
@@ -101,40 +100,6 @@ namespace BowieD.Unturned.NPCMaker
             Proxy.UserColorListChanged();
 #endregion
             RefreshRecentList();
-#region HOLIDAYS
-            int day = DateTime.Now.Day;
-            int month = DateTime.Now.Month;
-#region PERSONAL HOLIDAYS
-            if (day == 22 && month == 3)
-                MainWindow.NotificationManager.Notify("Happy Birthday, BowieD!");
-            if (day == 30 && month == 9)
-                MainWindow.NotificationManager.Notify("International Translation Day! Congratz, BowieD!");
-            if (day == 30 && month == 10)
-                MainWindow.NotificationManager.Notify("Happy Birthday, DimesAO!");
-#endregion
-#region OFFICIAL HOLIDAYS
-            if ((day == 1 && month == 1) || (day == 31 && month == 12))
-                MainWindow.NotificationManager.Notify("Happy New Year!");
-            if (day == 14 && month == 2)
-                MainWindow.NotificationManager.Notify("Valentine's Day!");
-            if (day == 1 && month == 4)
-                MainWindow.NotificationManager.Notify("April Fools!");
-            if (day == 8 && month == 3)
-                MainWindow.NotificationManager.Notify("Have a nice day, women!");
-            if (day == 20 && month == 3)
-                MainWindow.NotificationManager.Notify("Earth Day! Don't forget to do something good to Earth today!");
-            if (day == 3 && month == 4)
-                MainWindow.NotificationManager.Notify("Sun Day! Say hi to our beatiful star!");
-            if (day == 4 && month == 4)
-                MainWindow.NotificationManager.Notify("May the force be with you...");
-            if (day == 11 && month == 1)
-                MainWindow.NotificationManager.Notify("Thank You!");
-#endregion
-#region COMMUNITY HOLIDAYS
-            if (day == 7 && month == 5)
-                MainWindow.NotificationManager.Notify("Happy Birthday, Зефирка!");
-#endregion
-#endregion
 #region AFTER UPDATE
             try
             {
@@ -177,9 +142,6 @@ namespace BowieD.Unturned.NPCMaker
 #if !DEBUG
             debugOverlayText.Visibility = Visibility.Collapsed;
 #endif
-#if DEBUG
-            LogWindow.Show();
-#endif
 #endregion
             Config.Configuration.Properties.firstLaunch = false;
             isSaved = true;
@@ -198,6 +160,7 @@ namespace BowieD.Unturned.NPCMaker
             }
 #endregion
             Proxy.ColorSliderChange(null, null);
+            HolidayManager.Check();
             MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("app_Free"));
         }
 #region CONSTANTS

@@ -157,6 +157,7 @@
     </Compile>
     <Compile Include="Localization\LocUtil.cs" />
     <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Managers\HolidayManager.cs" />
     <Compile Include="Mistakes\DeepAnalysisManager.cs" />
     <Compile Include="Mistakes\General\NE_0004.cs" />
     <Compile Include="Mistakes\MistakesManager.cs" />

@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.BetterForms;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
 using DiscordRPC;
 using Microsoft.Win32;
@@ -79,6 +80,18 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     NewButtonClick(sender, null);
                 })));
+            RoutedCommand logWindow = new RoutedCommand();
+            logWindow.InputGestures.Add(new KeyGesture(Key.F1, ModifierKeys.Control));
+            inst.CommandBindings.Add(new CommandBinding(logWindow,
+                new ExecutedRoutedEventHandler((object sender, ExecutedRoutedEventArgs e) =>
+            {
+                if (!LogWindow.IsOpened)
+                {
+                    Logger.Log("Opening Log Window...");
+                    MainWindow.LogWindow = new LogWindow();
+                    MainWindow.LogWindow.Show();
+                }
+            })));
         }
 
         private MainWindow inst;
