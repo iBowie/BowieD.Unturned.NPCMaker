@@ -11,7 +11,22 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.General
     public class NE_0003 : Mistake
     {
         public override IMPORTANCE Importance => IMPORTANCE.CRITICAL;
-        public override bool IsMistake => MainWindow.CurrentProject.characters.Any(d => d.id == 0);
+        public override bool IsMistake
+        {
+            get
+            {
+                foreach (var k in MainWindow.CurrentProject.characters)
+                {
+                    if (k.id == 0)
+                    {
+                        failChar = k;
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+
         public override string MistakeNameKey => "NE_0003";
         public override string MistakeDescKey => LocUtil.LocalizeMistake("NE_0003_Desc", failChar.displayName, failChar.id);
         public override bool TranslateName => false;

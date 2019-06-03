@@ -80,6 +80,7 @@ namespace BowieD.Unturned.NPCMaker.Config
                     XmlSerializer ser = new XmlSerializer(typeof(CFG));
                     var content = ser.Deserialize(reader) as CFG;
                     Properties = content;
+                    Properties.currentTheme.Apply();
                 }
             }
             catch { Logger.Log("Can't load configuration. Loading defaults...", Log_Level.Error); LoadDefaults(); }

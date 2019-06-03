@@ -115,7 +115,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
 #if !DEBUG
             public override void Execute(string[] args)
             {
-                Logger.Log("Nobody will help you");
+                Logger.Log("Don't beg for help! Be stronger!");
             }
 #endif
         }
@@ -211,7 +211,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         public class RestoreLogCommand : Command
         {
             public override string Name => "restorelog";
-            public override string Help => "Restores log";
+            public override string Help => "Prints entire log in window";
             public override string Syntax => "";
             public override void Execute(string[] args)
             {
@@ -225,7 +225,7 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
         {
             public override string Name => "reflect_mw";
 
-            public override string Help => "Execute any method without parameters in MainWindow";
+            public override string Help => "Execute any method without parameters in MainWindow [NOT RECOMMENDED]";
 
             public override string Syntax => "<method in MainWindow>";
 
@@ -236,6 +236,16 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                     MethodInfo method = typeof(MainWindow).GetMethod(args[0]);
                     method.Invoke(MainWindow.Instance, null);
                 }
+            }
+        }
+        public class ClearCommand : Command
+        {
+            public override string Name => "clear";
+            public override string Help => "Clears log window";
+            public override string Syntax => "";
+            public override void Execute(string[] args)
+            {
+                MainWindow.LogWindow.logBox.Clear();
             }
         }
 #endif
