@@ -77,6 +77,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.Instance.visibilityCondsButton.Click += Char_EditConditions_Button_Click;
             MainWindow.Instance.apparelSkinColorBox.Text = "#000000";
             MainWindow.Instance.apparelHairColorBox.Text = "#000000";
+            conditions = new List<Condition>();
         }
         public NPCCharacter Current
         {
