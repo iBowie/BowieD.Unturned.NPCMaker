@@ -169,9 +169,23 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        public static Version Version => new Version(FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).FileVersion);
-#endregion
-#region STATIC
+        private static Version _readVersion = null;
+        public static Version Version
+        {
+            get
+            {
+                try
+                {
+
+                    if (_readVersion == null)
+                        _readVersion = new Version(FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).FileVersion);
+                    return _readVersion;
+                }
+                catch { return new Version("0.0.0.0"); }
+            }
+        }
+        #endregion
+        #region STATIC
         public static MainWindow Instance;
         public static NPCProject CurrentProject { get; set; } = new NPCProject();
         public static DispatcherTimer AutosaveTimer { get; set; }
