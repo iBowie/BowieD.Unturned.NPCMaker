@@ -115,12 +115,24 @@
     <Compile Include="BetterForms\AppCrashReport.xaml.cs">
       <DependentUpon>AppCrashReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\ClearCommand.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CrashCommand.cs" />
+    <Compile Include="Commands\ExitCommand.cs" />
+    <Compile Include="Commands\GCCommand.cs" />
+    <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="BetterForms\LogWindow.xaml.cs">
       <DependentUpon>LogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="BetterForms\Message_TreeView.xaml.cs">
       <DependentUpon>Message_TreeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\InfoCommand.cs" />
+    <Compile Include="Commands\NotifyCommand.cs" />
+    <Compile Include="Commands\ReflectionCommand.cs" />
+    <Compile Include="Commands\RestoreLogCommand.cs" />
+    <Compile Include="Commands\SaveCommand.cs" />
+    <Compile Include="Commands\SwitchCommand.cs" />
     <Compile Include="BetterForms\Universal_ConditionEditor.xaml.cs">
       <DependentUpon>Universal_ConditionEditor.xaml</DependentUpon>
     </Compile>
@@ -136,6 +148,7 @@
     <Compile Include="BetterForms\Universal_VendorItemEditor.xaml.cs">
       <DependentUpon>Universal_VendorItemEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\UpdateCommand.cs" />
     <Compile Include="BetterForms\Whats_New.xaml.cs">
       <DependentUpon>Whats_New.xaml</DependentUpon>
     </Compile>

@@ -22,6 +22,13 @@ namespace BowieD.Unturned.NPCMaker.Logging
             }
             catch { }
         }
+        public static void Log(StringBuilder stringBuilder, Log_Level logLevel = Log_Level.Normal)
+        {
+            foreach (var line in stringBuilder.ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
+            {
+                Log(line, logLevel);
+            }
+        }
         public static void Log(Exception ex, Log_Level logLevel = Log_Level.Critical)
         {
             Log("Exception: " + ex.Message, logLevel);

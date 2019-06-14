@@ -36,30 +36,33 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 sb.AppendLine($"NPC Maker {MainWindow.Version} Crashed!");
             }
             catch { sb.AppendLine($"NPC Maker (Unknown) Crashed!"); }
-            sb.AppendLine($"Time: {DateTime.Now}");
-            sb.AppendLine($"Settings:");
-            sb.AppendLine();
-            sb.AppendLine($"Experimental Features: {(cfg.experimentalFeatures ? "Enabled" : "Disabled")}");
-            sb.AppendLine($"Language: {cfg.language.Name}");
-            sb.AppendLine($"Log Level: {cfg.LogLevel.ToString()}");
-            sb.AppendLine("User Colors:");
-            foreach (string s in cfg.userColors ?? new string[] { "No user colors" })
-            {
-                sb.AppendLine(s);
-            }
-            sb.AppendLine();
-            sb.AppendLine("Recent Files:");
-            foreach (string s in cfg.recent ?? new string[] { "No recent files" })
-            {
-                sb.AppendLine(s);
-            }
-            sb.AppendLine();
-            sb.AppendLine($"Autosave Option: {cfg.autosaveOption}");
-            sb.AppendLine($"GUID Generation: {(cfg.generateGuids ? "Enabled" : "Disabled")}");
-            sb.AppendLine($"Scale: {cfg.scale}");
-            sb.AppendLine($"Theme: {cfg.currentTheme.Name}");
-            sb.AppendLine($"Discord Rich Presence: {(cfg.enableDiscord ? "Detailed" : "Private")}");
-            sb.AppendLine($"Animation: {(cfg.animateControls ? "Animated" : "Inanimated")}");
+            Commands.Command.GetCommand<Commands.InfoCommand>().Execute(null);
+            #region DEPRECATED
+            //sb.AppendLine($"Time: {DateTime.Now}");
+            //sb.AppendLine($"Settings:");
+            //sb.AppendLine();
+            //sb.AppendLine($"Experimental Features: {(cfg.experimentalFeatures ? "Enabled" : "Disabled")}");
+            //sb.AppendLine($"Language: {cfg.language.Name}");
+            //sb.AppendLine($"Log Level: {cfg.LogLevel.ToString()}");
+            //sb.AppendLine("User Colors:");
+            //foreach (string s in cfg.userColors ?? new string[] { "No user colors" })
+            //{
+            //    sb.AppendLine(s);
+            //}
+            //sb.AppendLine();
+            //sb.AppendLine("Recent Files:");
+            //foreach (string s in cfg.recent ?? new string[] { "No recent files" })
+            //{
+            //    sb.AppendLine(s);
+            //}
+            //sb.AppendLine();
+            //sb.AppendLine($"Autosave Option: {cfg.autosaveOption}");
+            //sb.AppendLine($"GUID Generation: {(cfg.generateGuids ? "Enabled" : "Disabled")}");
+            //sb.AppendLine($"Scale: {cfg.scale}");
+            //sb.AppendLine($"Theme: {cfg.currentTheme.Name}");
+            //sb.AppendLine($"Discord Rich Presence: {(cfg.enableDiscord ? "Detailed" : "Private")}");
+            //sb.AppendLine($"Animation: {(cfg.animateControls ? "Animated" : "Inanimated")}");
+            #endregion
             sb.AppendLine();
             sb.AppendLine($"Application log:");
             sb.AppendLine();
