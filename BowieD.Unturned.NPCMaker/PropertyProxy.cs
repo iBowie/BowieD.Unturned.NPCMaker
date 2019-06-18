@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Forms;
+﻿using BowieD.Unturned.NPCMaker.Coloring;
+using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
@@ -99,67 +100,80 @@ namespace BowieD.Unturned.NPCMaker
         #region EVENTS
         internal void ColorHex_Input(object sender, TextCompositionEventArgs e)
         {
-            //string text = inst.colorHexOut.Text;
-            //int cursorPos = inst.colorHexOut.SelectionStart;
-            //text = text.Insert(inst.colorHexOut.SelectionStart, e.Text);
-            //if (text.StartsWith("#"))
-            //    text = text.Substring(1);
-            //if (text.Length < 6)
-            //    return;
-            //var parseAble = NPCColor.CanParseHex(text);
-            //e.Handled = !parseAble;
-            //inst.userColorSaveButton.IsEnabled = parseAble;
-            //if (parseAble)
-            //{
-            //    var color = NPCColor.FromHEX(text);
-            //    inst.colorHexOut.Text = color.HEX;
-            //    if (MainWindow.IsRGB)
-            //    {
-            //        inst.colorSliderR.Value = color.R;
-            //        inst.colorSliderG.Value = color.G;
-            //        inst.colorSliderB.Value = color.B;
-            //    }
-            //    else
-            //    {
-            //        var colorHSV = color.HSV;
-            //        inst.colorSliderR.Value = colorHSV.Item1;
-            //        inst.colorSliderG.Value = colorHSV.Item2;
-            //        inst.colorSliderB.Value = colorHSV.Item3;
-            //    }
-            //    inst.colorHexOut.SelectionStart = cursorPos + 1;
-            //}
+            string text = inst.colorHexOut.Text;
+            int cursorPos = inst.colorHexOut.SelectionStart;
+            text = text.Insert(inst.colorHexOut.SelectionStart, e.Text);
+            if (text.StartsWith("#"))
+                text = text.Substring(1);
+            if (text.Length < 6)
+                return;
+            try
+            {
+                PaletteHEX paletteHEX = new PaletteHEX() { HEX = text };
+
+                inst.colorHexOut.Text = paletteHEX.HEX;
+
+                if (MainWindow.IsRGB)
+                {
+                    var rgb = paletteHEX.ToRGB();
+                    inst.colorSliderR.Value = rgb.R;
+                    inst.colorSliderG.Value = rgb.G;
+                    inst.colorSliderB.Value = rgb.B;
+                }
+                else
+                {
+                    var hsv = Palette.Convert<PaletteHSV>(paletteHEX).HSV;
+                    inst.colorSliderR.Value = hsv.H;
+                    inst.colorSliderG.Value = hsv.S;
+                    inst.colorSliderB.Value = hsv.V;
+                }
+                inst.colorHexOut.SelectionStart = cursorPos + 1;
+                inst.userColorSaveButton.IsEnabled = true;
+            }
+            catch
+            {
+                e.Handled = true;
+                inst.userColorSaveButton.IsEnabled = false;
+            }
         }
         internal void ColorHex_Pasted(object sender, DataObjectPastingEventArgs e)
         {
-            //if (e.SourceDataObject.GetDataPresent(DataFormats.UnicodeText, true))
-            //{
-            //    var parseAble = NPCColor.CanParseHex(e.SourceDataObject.GetData(DataFormats.UnicodeText) as string);
-            //    e.Handled = !parseAble;
-            //    inst.userColorSaveButton.IsEnabled = parseAble;
-            //    if (parseAble)
-            //    {
-            //        var color = NPCColor.FromHEX(e.SourceDataObject.GetData(DataFormats.UnicodeText) as string);
-            //        inst.colorHexOut.Text = color.HEX;
-            //        if (MainWindow.IsRGB)
-            //        {
-            //            inst.colorSliderR.Value = color.R;
-            //            inst.colorSliderG.Value = color.G;
-            //            inst.colorSliderB.Value = color.B;
-            //        }
-            //        else
-            //        {
-            //            var colorHSV = color.HSV;
-            //            inst.colorSliderR.Value = colorHSV.Item1;
-            //            inst.colorSliderG.Value = colorHSV.Item2;
-            //            inst.colorSliderB.Value = colorHSV.Item3;
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    e.Handled = true;
-            //    inst.userColorSaveButton.IsEnabled = false;
-            //}
+            if (e.SourceDataObject.GetDataPresent(DataFormats.UnicodeText, true))
+            {
+                try
+                {
+                    var input = e.SourceDataObject.GetData(DataFormats.UnicodeText) as string;
+                    PaletteHEX paletteHEX = new PaletteHEX() { HEX = input };
+
+                    inst.colorHexOut.Text = paletteHEX.HEX;
+                    if (MainWindow.IsRGB)
+                    {
+                        var rgb = paletteHEX.ToRGB();
+                        inst.colorSliderR.Value = rgb.R;
+                        inst.colorSliderG.Value = rgb.G;
+                        inst.colorSliderB.Value = rgb.B;
+                    }
+                    else
+                    {
+                        var hsv = Palette.Convert<PaletteHSV>(paletteHEX).HSV;
+                        inst.colorSliderR.Value = hsv.H;
+                        inst.colorSliderG.Value = hsv.S;
+                        inst.colorSliderB.Value = hsv.V;
+                    }
+
+                    inst.userColorSaveButton.IsEnabled = true;
+                }
+                catch
+                {
+                    e.Handled = true;
+                    inst.userColorSaveButton.IsEnabled = false;
+                }
+            }
+            else
+            {
+                e.Handled = true;
+                inst.userColorSaveButton.IsEnabled = false;
+            }
         }
         internal void MistakeList_Selected(object sender, SelectionChangedEventArgs e)
         {
@@ -521,87 +535,87 @@ namespace BowieD.Unturned.NPCMaker
         }
         internal void ColorSliderChange(object sender, RoutedPropertyChangedEventArgs<double> value)
         {
-            //NPCColor c;
-            //if (MainWindow.IsRGB)
-            //    c = new NPCColor((byte)inst.colorSliderR.Value, (byte)inst.colorSliderG.Value, (byte)inst.colorSliderB.Value);
-            //else
-            //    c = NPCColor.FromHSV((int)inst.colorSliderR.Value, inst.colorSliderG.Value, inst.colorSliderB.Value);
-            //string res = c.HEX;
-            //inst.colorRectangle.Fill = new BrushConverter().ConvertFromString(res) as Brush;
-            //inst.colorHexOut.Text = res;
-            //inst.userColorSaveButton.IsEnabled = true;
-            //if (Config.Configuration.Properties.experimentalFeatures)
-            //{
-            //    if (!MainWindow.IsRGB)
-            //    {
-            //        var HSV = c.HSV;
-            //        // build first bar (Hue)
-            //        Slider senderSlider = sender as Slider ?? new Slider();
-            //        if (senderSlider.Name != inst.colorSliderR.Name)
-            //        {
-            //            List<GradientStop> stopsHue = new List<GradientStop>();
-            //            for (int k = 0; k <= 360; k++)
-            //            {
-            //                stopsHue.Add(new GradientStop(NPCColor.FromHSV(k, HSV.Item2, HSV.Item3).Color, k / 360d));
-            //            }
-            //            inst.colorSliderR.Background = new LinearGradientBrush(new GradientStopCollection(stopsHue), 0);
-            //        }
-            //        // build second bar (Saturation)
-            //        if (senderSlider.Name != inst.colorSliderG.Name)
-            //        {
-            //            List<GradientStop> stopsSatur = new List<GradientStop>();
-            //            for (double k = 0; k <= 1; k += 0.01)
-            //            {
-            //                stopsSatur.Add(new GradientStop(NPCColor.FromHSV(HSV.Item1, k, HSV.Item3).Color, k));
-            //            }
-            //            inst.colorSliderG.Background = new LinearGradientBrush(new GradientStopCollection(stopsSatur), 0);
-            //        }
-            //        // build third bar (Value)
-            //        if (senderSlider.Name != inst.colorSliderB.Name)
-            //        {
-            //            List<GradientStop> stopsValue = new List<GradientStop>();
-            //            for (double k = 0; k <= 1; k += 0.01)
-            //            {
-            //                stopsValue.Add(new GradientStop(NPCColor.FromHSV(HSV.Item1, HSV.Item2, k).Color, k));
-            //            }
-            //            inst.colorSliderB.Background = new LinearGradientBrush(new GradientStopCollection(stopsValue), 0);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        Slider senderSlider = sender as Slider ?? new Slider();
-            //        if (senderSlider.Name != inst.colorSliderR.Name)
-            //        {
-            //            List<GradientStop> stopsRed = new List<GradientStop>();
-            //            for (byte red = 0; red < 255; red++)
-            //            {
-            //                var clr = new NPCColor(red, c.G, c.B);
-            //                stopsRed.Add(new GradientStop(Color.FromRgb(clr.R, clr.G, clr.B), red / 255d));
-            //            }
-            //            inst.colorSliderR.Background = new LinearGradientBrush(new GradientStopCollection(stopsRed), 0);
-            //        }
-            //        if (senderSlider.Name != inst.colorSliderG.Name)
-            //        {
-            //            List<GradientStop> stopsGreen = new List<GradientStop>();
-            //            for (byte green = 0; green < 255; green++)
-            //            {
-            //                var clr = new NPCColor(c.R, green, c.B);
-            //                stopsGreen.Add(new GradientStop(Color.FromRgb(clr.R, clr.G, clr.B), green / 255d));
-            //            }
-            //            inst.colorSliderG.Background = new LinearGradientBrush(new GradientStopCollection(stopsGreen), 0);
-            //        }
-            //        if (senderSlider.Name != inst.colorSliderB.Name)
-            //        {
-            //            List<GradientStop> stopsBlue = new List<GradientStop>();
-            //            for (byte blue = 0; blue < 255; blue++)
-            //            {
-            //                var clr = new NPCColor(c.R, c.G, blue);
-            //                stopsBlue.Add(new GradientStop(Color.FromRgb(clr.R, clr.G, clr.B), blue / 255d));
-            //            }
-            //            inst.colorSliderB.Background = new LinearGradientBrush(new GradientStopCollection(stopsBlue), 0);
-            //        }
-            //    }
-            //}
+            NPCColor c;
+            if (MainWindow.IsRGB)
+                c = new NPCColor((byte)inst.colorSliderR.Value, (byte)inst.colorSliderG.Value, (byte)inst.colorSliderB.Value);
+            else
+                c = (NPCColor)new PaletteHSV() { HSV = ((int)inst.colorSliderR.Value, inst.colorSliderG.Value, inst.colorSliderB.Value) };
+            string res = Palette.Convert<PaletteHEX>((PaletteRGB)c).HEX;
+            inst.colorRectangle.Fill = new BrushConverter().ConvertFromString(res) as Brush;
+            inst.colorHexOut.Text = res;
+            inst.userColorSaveButton.IsEnabled = true;
+            if (Config.Configuration.Properties.experimentalFeatures)
+            {
+                if (!MainWindow.IsRGB)
+                {
+                    var HSV = Palette.Convert<PaletteHSV>((PaletteRGB)c).HSV;
+                    // build first bar (Hue)
+                    Slider senderSlider = sender as Slider ?? new Slider();
+                    if (senderSlider.Name != inst.colorSliderR.Name)
+                    {
+                        List<GradientStop> stopsHue = new List<GradientStop>();
+                        for (int k = 0; k <= 360; k++)
+                        {
+                            stopsHue.Add(new GradientStop(new PaletteHSV() { HSV = (k, HSV.Item2, HSV.Item3) }.GetColor(), k / 360d));
+                        }
+                        inst.colorSliderR.Background = new LinearGradientBrush(new GradientStopCollection(stopsHue), 0);
+                    }
+                    // build second bar (Saturation)
+                    if (senderSlider.Name != inst.colorSliderG.Name)
+                    {
+                        List<GradientStop> stopsSatur = new List<GradientStop>();
+                        for (double k = 0; k <= 1; k += 0.01)
+                        {
+                            stopsSatur.Add(new GradientStop(new PaletteHSV() { HSV = (HSV.Item1, k, HSV.Item3) }.GetColor(), k));
+                        }
+                        inst.colorSliderG.Background = new LinearGradientBrush(new GradientStopCollection(stopsSatur), 0);
+                    }
+                    // build third bar (Value)
+                    if (senderSlider.Name != inst.colorSliderB.Name)
+                    {
+                        List<GradientStop> stopsValue = new List<GradientStop>();
+                        for (double k = 0; k <= 1; k += 0.01)
+                        {
+                            stopsValue.Add(new GradientStop(new PaletteHSV() { HSV = (HSV.Item1, HSV.Item2, k) }.GetColor(), k));
+                        }
+                        inst.colorSliderB.Background = new LinearGradientBrush(new GradientStopCollection(stopsValue), 0);
+                    }
+                }
+                else
+                {
+                    Slider senderSlider = sender as Slider ?? new Slider();
+                    if (senderSlider.Name != inst.colorSliderR.Name)
+                    {
+                        List<GradientStop> stopsRed = new List<GradientStop>();
+                        for (byte red = 0; red < 255; red++)
+                        {
+                            var clr = new NPCColor(red, c.G, c.B);
+                            stopsRed.Add(new GradientStop(Color.FromRgb(clr.R, clr.G, clr.B), red / 255d));
+                        }
+                        inst.colorSliderR.Background = new LinearGradientBrush(new GradientStopCollection(stopsRed), 0);
+                    }
+                    if (senderSlider.Name != inst.colorSliderG.Name)
+                    {
+                        List<GradientStop> stopsGreen = new List<GradientStop>();
+                        for (byte green = 0; green < 255; green++)
+                        {
+                            var clr = new NPCColor(c.R, green, c.B);
+                            stopsGreen.Add(new GradientStop(Color.FromRgb(clr.R, clr.G, clr.B), green / 255d));
+                        }
+                        inst.colorSliderG.Background = new LinearGradientBrush(new GradientStopCollection(stopsGreen), 0);
+                    }
+                    if (senderSlider.Name != inst.colorSliderB.Name)
+                    {
+                        List<GradientStop> stopsBlue = new List<GradientStop>();
+                        for (byte blue = 0; blue < 255; blue++)
+                        {
+                            var clr = new NPCColor(c.R, c.G, blue);
+                            stopsBlue.Add(new GradientStop(Color.FromRgb(clr.R, clr.G, clr.B), blue / 255d));
+                        }
+                        inst.colorSliderB.Background = new LinearGradientBrush(new GradientStopCollection(stopsBlue), 0);
+                    }
+                }
+            }
         }
         internal void ColorScheme_Switch(object sender, RoutedEventArgs e)
         {
@@ -609,7 +623,7 @@ namespace BowieD.Unturned.NPCMaker
             NPCColor c;
             if (MainWindow.IsRGB)
             {
-                //c = NPCColor.FromHSV((int)inst.colorSliderR.Value, inst.colorSliderG.Value, inst.colorSliderB.Value);
+                c = (NPCColor)new PaletteHSV() { HSV = ((int)inst.colorSliderR.Value, inst.colorSliderG.Value, inst.colorSliderB.Value) };
                 inst.colorSliderR.Value = 0;
                 inst.colorSliderG.Value = 0;
                 inst.colorSliderB.Value = 0;
@@ -633,9 +647,9 @@ namespace BowieD.Unturned.NPCMaker
                 inst.colorGLabel.ToolTip = LocUtil.LocalizeInterface("tool_Color_Green_Tip");
                 inst.colorBLabel.ToolTip = LocUtil.LocalizeInterface("tool_Color_Blue_Tip");
                 inst.switchToAnotherScheme.Content = LocUtil.LocalizeInterface("tool_Color_SwitchTo_HSV");
-                //inst.colorSliderR.Value = c.R;
-                //inst.colorSliderG.Value = c.G;
-                //inst.colorSliderB.Value = c.B;
+                inst.colorSliderR.Value = c.R;
+                inst.colorSliderG.Value = c.G;
+                inst.colorSliderB.Value = c.B;
             }
             else
             {
@@ -662,10 +676,10 @@ namespace BowieD.Unturned.NPCMaker
                 inst.colorGLabel.ToolTip = LocUtil.LocalizeInterface("tool_Color_Saturation_Tip");
                 inst.colorBLabel.ToolTip = LocUtil.LocalizeInterface("tool_Color_Value_Tip");
                 inst.switchToAnotherScheme.Content = LocUtil.LocalizeInterface("tool_Color_SwitchTo_RGB");
-                //var cHSV = c.HSV;
-                //inst.colorSliderR.Value = cHSV.Item1;
-                //inst.colorSliderG.Value = cHSV.Item2;
-                //inst.colorSliderB.Value = cHSV.Item3;
+                var cHSV = Palette.Convert<PaletteHSV>((PaletteRGB)c).HSV;
+                inst.colorSliderR.Value = cHSV.H;
+                inst.colorSliderG.Value = cHSV.S;
+                inst.colorSliderB.Value = cHSV.V;
             }
             ColorSliderChange(null, null);
         }

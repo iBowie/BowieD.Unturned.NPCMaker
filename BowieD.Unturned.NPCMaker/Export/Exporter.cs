@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Coloring;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Collections.Generic;
@@ -108,8 +109,8 @@ namespace BowieD.Unturned.NPCMaker.Export
                         asset.WriteLine($"Face {character.face}");
                         asset.WriteLine($"Beard {character.beard}");
                         asset.WriteLine($"Hair {character.haircut}");
-                        //asset.WriteLine($"Color_Skin {character.skinColor.HEX}");
-                        //asset.WriteLine($"Color_Hair {character.hairColor.HEX}");
+                        asset.WriteLine($"Color_Skin {Palette.Convert<PaletteHEX>((PaletteRGB)character.skinColor).HEX}");
+                        asset.WriteLine($"Color_Hair {Palette.Convert<PaletteHEX>((PaletteRGB)character.hairColor).HEX}");
                         asset.WriteLine($"Pose {character.pose.ToString()}");
                         if (character.leftHanded)
                             asset.WriteLine($"Backward");

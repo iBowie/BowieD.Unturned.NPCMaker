@@ -24,7 +24,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             return !(a == b);
         }
-        public static implicit operator NPCColor(Palette palette)
+        public static explicit operator NPCColor(Palette palette)
         {
             return new NPCColor(palette.ToRGB());
         }

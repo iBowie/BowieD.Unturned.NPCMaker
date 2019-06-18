@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using BowieD.Unturned.NPCMaker.BetterControls;
+using BowieD.Unturned.NPCMaker.Coloring;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
@@ -34,18 +35,18 @@ namespace BowieD.Unturned.NPCMaker.Editors
         });
         private Func<NPCColor> getHairColor = new Func<NPCColor>(() =>
         {
-            //string text = MainWindow.Instance.apparelHairColorBox.Text;
-            //BrushConverter bc = new BrushConverter();
-            //if (bc.IsValid(text))
-            //    return NPCColor.FromHEX(text);
+            string text = MainWindow.Instance.apparelHairColorBox.Text;
+            BrushConverter bc = new BrushConverter();
+            if (bc.IsValid(text))
+                return (NPCColor)new PaletteHEX() { HEX = text };
             return new NPCColor(0, 0, 0);
         });
         private Func<NPCColor> getSkinColor = new Func<NPCColor>(() =>
         {
-            //string text = MainWindow.Instance.apparelSkinColorBox.Text;
-            //BrushConverter bc = new BrushConverter();
-            //if (bc.IsValid(text))
-            //    return NPCColor.FromHEX(text);
+            string text = MainWindow.Instance.apparelSkinColorBox.Text;
+            BrushConverter bc = new BrushConverter();
+            if (bc.IsValid(text))
+                return (NPCColor)new PaletteHEX() { HEX = text };
             return new NPCColor(0, 0, 0);
         });
         public CharacterEditor()
@@ -141,8 +142,8 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 MainWindow.Instance.txtStartDialogueID.Value = value.startDialogueId;
                 MainWindow.Instance.txtDisplayName.Text = value.displayName;
                 MainWindow.Instance.txtEditorName.Text = value.editorName;
-                //MainWindow.Instance.apparelSkinColorBox.Text = value.skinColor.HEX;
-                //MainWindow.Instance.apparelHairColorBox.Text = value.hairColor.HEX;
+                MainWindow.Instance.apparelSkinColorBox.Text = Palette.Convert<PaletteHEX>((PaletteRGB)value.skinColor).HEX;
+                MainWindow.Instance.apparelHairColorBox.Text = Palette.Convert<PaletteHEX>((PaletteRGB)value.hairColor).HEX;
                 MainWindow.Instance.backpackIdBox.Value = value.clothing.backpack;
                 MainWindow.Instance.maskIdBox.Value = value.clothing.mask;
                 MainWindow.Instance.vestIdBox.Value = value.clothing.vest;
@@ -210,8 +211,8 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.Instance.txtStartDialogueID.Value = value.startDialogueId;
             MainWindow.Instance.txtDisplayName.Text = value.displayName;
             MainWindow.Instance.txtEditorName.Text = value.editorName;
-            //MainWindow.Instance.apparelSkinColorBox.Text = value.skinColor.HEX;
-            //MainWindow.Instance.apparelHairColorBox.Text = value.hairColor.HEX;
+            MainWindow.Instance.apparelSkinColorBox.Text = Palette.Convert<PaletteHEX>((PaletteRGB)value.skinColor).HEX;
+            MainWindow.Instance.apparelHairColorBox.Text = Palette.Convert<PaletteHEX>((PaletteRGB)value.hairColor).HEX;
             MainWindow.Instance.backpackIdBox.Value = value.clothing.backpack;
             MainWindow.Instance.maskIdBox.Value = value.clothing.mask;
             MainWindow.Instance.vestIdBox.Value = value.clothing.vest;
@@ -297,22 +298,22 @@ namespace BowieD.Unturned.NPCMaker.Editors
             {
                 SolidColorBrush color = bc.ConvertFromString(text) as SolidColorBrush;
                 MainWindow.Instance.faceImageBorder.Background = color;
-                //NPCColor clr = NPCColor.FromBrush(color);
-                //if (clr.HSV.V <= 0.1d)
-                //{
-                //    var effect = new System.Windows.Media.Effects.DropShadowEffect
-                //    {
-                //        BlurRadius = 2,
-                //        Direction = 0,
-                //        Color = Brushes.White.Color,
-                //        ShadowDepth = 0
-                //    };
-                //    MainWindow.Instance.faceImageControl.Effect = effect;
-                //}
-                //else
-                //{
-                //    MainWindow.Instance.faceImageControl.Effect = null;
-                //}
+                var hsv = Palette.Convert<PaletteHSV>(new PaletteHEX() { HEX = text });
+                if (hsv.V <= 0.1d)
+                {
+                    var effect = new System.Windows.Media.Effects.DropShadowEffect
+                    {
+                        BlurRadius = 2,
+                        Direction = 0,
+                        Color = Brushes.White.Color,
+                        ShadowDepth = 0
+                    };
+                    MainWindow.Instance.faceImageControl.Effect = effect;
+                }
+                else
+                {
+                    MainWindow.Instance.faceImageControl.Effect = null;
+                }
             }
             else
             {
