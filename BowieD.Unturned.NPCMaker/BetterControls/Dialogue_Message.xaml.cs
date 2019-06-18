@@ -76,7 +76,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            BetterForms.Universal_ListView ulv = new BetterForms.Universal_ListView(Conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
+            Forms.Universal_ListView ulv = new Forms.Universal_ListView(Conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
             ulv.ShowDialog();
             Conditions = ulv.Values.Cast<Condition>().ToArray();
         }

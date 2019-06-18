@@ -1,9 +1,9 @@
-﻿<Window x:Class="BowieD.Unturned.NPCMaker.BetterForms.Universal_ListView"
+﻿<Window x:Class="BowieD.Unturned.NPCMaker.Forms.Universal_ListView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.BetterForms"
+        xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
         mc:Ignorable="d"
         Closed="Window_Closed"
         Title="Universal_ListView" MinWidth="256" MinHeight="128" Height="256" Width="400" Icon="{DynamicResource app_Icon}">

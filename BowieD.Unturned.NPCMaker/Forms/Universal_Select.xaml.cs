@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using static BowieD.Unturned.NPCMaker.BetterControls.Universal_ItemList;
 
-namespace BowieD.Unturned.NPCMaker.BetterForms
+namespace BowieD.Unturned.NPCMaker.Forms
 {
     /// <summary>
     /// Логика взаимодействия для Universal_Select.xaml

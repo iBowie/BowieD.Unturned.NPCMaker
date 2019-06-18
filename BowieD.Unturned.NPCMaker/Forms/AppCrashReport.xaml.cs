@@ -3,7 +3,7 @@ using System;
 using System.Text;
 using System.Windows;
 
-namespace BowieD.Unturned.NPCMaker.BetterForms
+namespace BowieD.Unturned.NPCMaker.Forms
 {
     /// <summary>
     /// Логика взаимодействия для AppCrashReport.xaml

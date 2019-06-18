@@ -1,4 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.BetterForms;
+﻿using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using DiscordRPC;
 using System.Linq;
@@ -36,7 +36,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
         #region EVENTS
         private void EditRewardsButton_Click(object sender, RoutedEventArgs e)
         {
-            BetterForms.Universal_ListView ulv = new BetterForms.Universal_ListView(Response.rewards.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Reward, false)).ToList(), Universal_ItemList.ReturnType.Reward);
+            Forms.Universal_ListView ulv = new Forms.Universal_ListView(Response.rewards.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Reward, false)).ToList(), Universal_ItemList.ReturnType.Reward);
             RichPresence presence = new RichPresence
             {
                 Details = $"Editing NPC {MainWindow.Instance.txtEditorName.Text ?? "without name"}",
@@ -49,7 +49,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
         }
         private void EditConditionsButton_Click(object sender, RoutedEventArgs e)
         {
-            BetterForms.Universal_ListView ulv = new BetterForms.Universal_ListView(Response.conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
+            Forms.Universal_ListView ulv = new Forms.Universal_ListView(Response.conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
             RichPresence presence = new RichPresence
             {
                 Details = $"Editing NPC {MainWindow.Instance.txtEditorName.Text ?? "without name"}",

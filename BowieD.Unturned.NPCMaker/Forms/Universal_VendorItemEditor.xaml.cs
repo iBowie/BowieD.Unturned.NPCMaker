@@ -7,7 +7,7 @@ using System.Linq;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 using System;
 
-namespace BowieD.Unturned.NPCMaker.BetterForms
+namespace BowieD.Unturned.NPCMaker.Forms
 {
     /// <summary>
     /// Логика взаимодействия для Universal_VendorItemEditor.xaml

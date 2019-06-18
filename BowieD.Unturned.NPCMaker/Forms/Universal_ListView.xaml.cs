@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace BowieD.Unturned.NPCMaker.BetterForms
+namespace BowieD.Unturned.NPCMaker.Forms
 {
     /// <summary>
     /// Логика взаимодействия для Universal_ListView.xaml

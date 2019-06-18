@@ -112,19 +112,25 @@
     <Compile Include="BetterControls\Dialogue_Message_Page.xaml.cs">
       <DependentUpon>Dialogue_Message_Page.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BetterForms\AppCrashReport.xaml.cs">
+    <Compile Include="Coloring\PaletteHSL.cs" />
+    <Compile Include="Forms\AppCrashReport.xaml.cs">
       <DependentUpon>AppCrashReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Coloring\Palette.cs" />
+    <Compile Include="Coloring\PaletteCMYK.cs" />
+    <Compile Include="Coloring\PaletteHEX.cs" />
+    <Compile Include="Coloring\PaletteHSV.cs" />
+    <Compile Include="Coloring\PaletteRGB.cs" />
     <Compile Include="Commands\ClearCommand.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CrashCommand.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\GCCommand.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
-    <Compile Include="BetterForms\LogWindow.xaml.cs">
+    <Compile Include="Forms\LogWindow.xaml.cs">
       <DependentUpon>LogWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BetterForms\Message_TreeView.xaml.cs">
+    <Compile Include="Forms\Message_TreeView.xaml.cs">
       <DependentUpon>Message_TreeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\InfoCommand.cs" />
@@ -133,23 +139,23 @@
     <Compile Include="Commands\RestoreLogCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
     <Compile Include="Commands\SwitchCommand.cs" />
-    <Compile Include="BetterForms\Universal_ConditionEditor.xaml.cs">
+    <Compile Include="Forms\Universal_ConditionEditor.xaml.cs">
       <DependentUpon>Universal_ConditionEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BetterForms\Universal_ListView.xaml.cs">
+    <Compile Include="Forms\Universal_ListView.xaml.cs">
       <DependentUpon>Universal_ListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BetterForms\Universal_RewardEditor.xaml.cs">
+    <Compile Include="Forms\Universal_RewardEditor.xaml.cs">
       <DependentUpon>Universal_RewardEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BetterForms\Universal_Select.xaml.cs">
+    <Compile Include="Forms\Universal_Select.xaml.cs">
       <DependentUpon>Universal_Select.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BetterForms\Universal_VendorItemEditor.xaml.cs">
+    <Compile Include="Forms\Universal_VendorItemEditor.xaml.cs">
       <DependentUpon>Universal_VendorItemEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\UpdateCommand.cs" />
-    <Compile Include="BetterForms\Whats_New.xaml.cs">
+    <Compile Include="Forms\Whats_New.xaml.cs">
       <DependentUpon>Whats_New.xaml</DependentUpon>
     </Compile>
     <Compile Include="Config\Configuration.cs" />
@@ -288,39 +294,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BetterForms\AppCrashReport.xaml">
+    <Page Include="Forms\AppCrashReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BetterForms\LogWindow.xaml">
+    <Page Include="Forms\LogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BetterForms\Message_TreeView.xaml">
+    <Page Include="Forms\Message_TreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BetterForms\Universal_ConditionEditor.xaml">
+    <Page Include="Forms\Universal_ConditionEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BetterForms\Universal_ListView.xaml">
+    <Page Include="Forms\Universal_ListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BetterForms\Universal_RewardEditor.xaml">
+    <Page Include="Forms\Universal_RewardEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BetterForms\Universal_Select.xaml">
+    <Page Include="Forms\Universal_Select.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BetterForms\Universal_VendorItemEditor.xaml">
+    <Page Include="Forms\Universal_VendorItemEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BetterForms\Whats_New.xaml">
+    <Page Include="Forms\Whats_New.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,20 +1,20 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 using System.Windows.Media.Animation;
-using Reward = BowieD.Unturned.NPCMaker.NPC.Rewards.Reward;
+using BowieD.Unturned.NPCMaker.Localization;
 
-namespace BowieD.Unturned.NPCMaker.BetterForms
+namespace BowieD.Unturned.NPCMaker.Forms
 {
     /// <summary>
-    /// Логика взаимодействия для Universal_RewardEditor.xaml
+    /// Логика взаимодействия для Universal_ConditionEditor.xaml
     /// </summary>
-    public partial class Universal_RewardEditor : Window
+    public partial class Universal_ConditionEditor : Window
     {
-        public Universal_RewardEditor(Reward reward = null, bool viewLocalization = false)
+        public Universal_ConditionEditor(Condition condition = null, bool viewLocalization = false)
         {
             InitializeComponent();
             double scale = Config.Configuration.Properties.scale;
@@ -28,13 +28,13 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
             gridScale.ScaleY = scale;
             bool _chosen = false;
             int _index = 0;
-            foreach (Type t in Reward.GetTypes())
+            foreach (Type t in Condition.GetTypes())
             {
                 ComboBoxItem cbi = new ComboBoxItem();
-                cbi.Content = LocUtil.LocalizeReward($"Reward_Type_{t.Name}");
+                cbi.Content = LocUtil.LocalizeCondition($"Condition_Type_{t.Name}");
                 cbi.Tag = t;
                 typeBox.Items.Add(cbi);
-                if (!_chosen && reward != null && reward.GetType() == t)
+                if (!_chosen && condition != null && condition.GetType() == t)
                 {
                     typeBox.SelectedIndex = _index;
                     _chosen = true;
@@ -42,60 +42,29 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                         Where(d => d.Tag != null && d.Tag.ToString().StartsWith("variable::"));
                     foreach (var fControl in fieldControls)
                     {
-                        SetValueToControl(fControl, reward.GetType().GetField(fControl.Tag.ToString().Substring(10)).GetValue(reward));
+                        SetValueToControl(fControl, condition.GetType().GetField(fControl.Tag.ToString().Substring(10)).GetValue(condition));
                     }
                 }
                 _index++;
             }
-            saveButton.IsEnabled = reward != null;
+            saveButton.IsEnabled = condition != null;
         }
-
-        public Reward Result { get; private set; }
 
         #region DESIGN VARS
         private readonly double baseHeight = 178;
         private readonly double heightDelta = 35;
         private readonly bool viewLocalizationField = false;
         #endregion
-        #region METHODS
-        internal void ClearParameters()
-        {
-            variablesGrid.Children.Clear();
-            this.Height = baseHeight;
-        }
-        #endregion
+        public Condition Result { get; private set; }
 
-        private Type _CurrentRewardType = null;
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Reward returnReward = Activator.CreateInstance(_CurrentRewardType) as Reward;
-                Dictionary<string, object> _values = new Dictionary<string, object>();
-                var controls = Util.FindVisualChildren<FrameworkElement>(variablesGrid).Where(d => d.Tag != null && d.Tag.ToString().StartsWith("variable::"));
-                foreach (var c in controls)
-                {
-                    _values.Add(c.Tag.ToString().Substring(10), GetValueFromControl(c));
-                }
-                foreach (var k in _values)
-                {
-                    var field = returnReward.GetType().GetField(k.Key);
-                    field.SetValue(returnReward, Convert.ChangeType(k.Value, field.FieldType));
-                }
-                Result = returnReward;
-                DialogResult = true;
-                Close();
-            }
-            catch { MessageBox.Show(LocUtil.LocalizeInterface("rewardEditor_Fail")); }
-        }
         private void TypeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             saveButton.IsEnabled = true;
             if (e.AddedItems.Count == 0)
                 return;
-            var type = (typeBox.SelectedItem as ComboBoxItem).Tag as Type;
-            Reward newCondition = (Reward)Activator.CreateInstance(type);
-            _CurrentRewardType = type;
+            var type = (typeBox.SelectedItem as ComboBoxItem).Tag as Type; 
+            Condition newCondition = (Condition)Activator.CreateInstance(type);
+            _CurrentConditionType = type;
             ClearParameters();
             int mult = type.GetFields().Length;
             foreach (var c in newCondition.GetControls())
@@ -115,6 +84,38 @@ namespace BowieD.Unturned.NPCMaker.BetterForms
                 Height = newHeight;
             }
         }
+        #region METHODS
+        internal void ClearParameters()
+        {
+            variablesGrid.Children.Clear();
+            this.Height = baseHeight;
+        }
+        #endregion
+
+        private Type _CurrentConditionType = null;
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Condition returnCondition = Activator.CreateInstance(_CurrentConditionType) as Condition;
+                Dictionary<string, object> _values = new Dictionary<string, object>();
+                var controls = Util.FindVisualChildren<FrameworkElement>(variablesGrid).Where(d => d.Tag != null && d.Tag.ToString().StartsWith("variable::"));
+                foreach (var c in controls)
+                {
+                    _values.Add(c.Tag.ToString().Substring(10), GetValueFromControl(c));
+                }
+                foreach (var k in _values)
+                {
+                    var field = returnCondition.GetType().GetField(k.Key);
+                    field.SetValue(returnCondition, Convert.ChangeType(k.Value, field.FieldType));
+                }
+                Result = returnCondition;
+                DialogResult = true;
+                Close();
+            }
+            catch { MessageBox.Show(LocUtil.LocalizeInterface("conditionEditor_Fail")); } // write some error message or something like that
+        }
+
         private void SetValueToControl(FrameworkElement element, object value)
         {
             switch (element)

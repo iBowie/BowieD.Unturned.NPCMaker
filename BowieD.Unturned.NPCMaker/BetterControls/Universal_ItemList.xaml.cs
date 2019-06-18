@@ -31,7 +31,7 @@ mainLabel.ToolTip = mainLabel.Content;
             if (Type == ReturnType.Condition)
             {
                 Condition Condition = Value as Condition;
-                BetterForms.Universal_ConditionEditor uce = new BetterForms.Universal_ConditionEditor(Condition, Localizable);
+                Forms.Universal_ConditionEditor uce = new Forms.Universal_ConditionEditor(Condition, Localizable);
                 if (uce.ShowDialog() == true)
                 {
                     Value = uce.Result;
@@ -50,7 +50,7 @@ mainLabel.ToolTip = mainLabel.Content;
             else if (Type == ReturnType.Reward)
             {
                 Reward reward = Value as Reward;
-                BetterForms.Universal_RewardEditor ure = new BetterForms.Universal_RewardEditor(reward, Localizable);
+                Forms.Universal_RewardEditor ure = new Forms.Universal_RewardEditor(reward, Localizable);
                 ure.ShowDialog();
                 if (ure.DialogResult == true)
                 {
@@ -67,7 +67,7 @@ mainLabel.ToolTip = mainLabel.Content;
             {
                 NPC.VendorItem Item = Value as NPC.VendorItem;
                 bool old = Item.isBuy;
-                BetterForms.Universal_VendorItemEditor uvie = new BetterForms.Universal_VendorItemEditor(Item);
+                Forms.Universal_VendorItemEditor uvie = new Forms.Universal_VendorItemEditor(Item);
                 if (uvie.ShowDialog() == true)
                 {
                     NPC.VendorItem NewItem = uvie.Result as NPC.VendorItem;
