@@ -1,7 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Managers;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -11,8 +10,6 @@ namespace BowieD.Unturned.NPCMaker
 {
     public static class Util
     {
-        public static bool IsEnglishChar(this char c) => "qwertyuiopasdfghjklzxcvbnm".Contains(c.ToString().ToLower());
-        public static bool IsDigit(this char c) => char.IsDigit(c);
         public static ImageSource GetImageSource(this string value) => value.StartsWith("pack://application") ? new BitmapImage(new Uri(value)) : new BitmapImage(new Uri("pack://application:,,,/" + value));
         public static T FindParent<T>(DependencyObject child) where T : DependencyObject
         {
@@ -24,7 +21,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             return FindParent<T>(parentObject);
         }
-        public static T FindChildren<T>(System.Windows.Controls.Grid parent) where T : UIElement
+        public static T FindChildren<T>(Grid parent) where T : UIElement
         {
             try
             {
