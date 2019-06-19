@@ -199,7 +199,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             {
                 Save();
                 Current = ulv.SelectedValue as NPCCharacter;
-                Logger.Log($"Opened dialogue {MainWindow.Instance.txtID.Value}");
+                Logger.Log($"Opened character {MainWindow.Instance.txtID.Value}");
             }
             MainWindow.CurrentProject.characters = ulv.Values.Cast<NPCCharacter>().ToList();
         }

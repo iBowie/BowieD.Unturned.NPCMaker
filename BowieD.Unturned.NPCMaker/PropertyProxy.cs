@@ -52,6 +52,9 @@ namespace BowieD.Unturned.NPCMaker
             inst.userColorSaveButton.Click += UserColorList_AddColor;
             inst.switchToAnotherScheme.Click += ColorScheme_Switch;
             inst.colorHexOut.PreviewTextInput += ColorHex_Input;
+            inst.colorBoxR.ValueChanged += ColorBox_ValueChanged;
+            inst.colorBoxG.ValueChanged += ColorBox_ValueChanged;
+            inst.colorBoxB.ValueChanged += ColorBox_ValueChanged;
             DataObject.AddPastingHandler(inst.colorHexOut, ColorHex_Pasted);
             RoutedCommand saveHotkey = new RoutedCommand();
             saveHotkey.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
@@ -95,9 +98,16 @@ namespace BowieD.Unturned.NPCMaker
             })));
         }
 
+
         private MainWindow inst;
 
         #region EVENTS
+        private void ColorBox_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            inst.colorSliderR.Value = inst.colorBoxR.Value ?? 0;
+            inst.colorSliderG.Value = inst.colorBoxG.Value ?? 0;
+            inst.colorSliderB.Value = inst.colorBoxB.Value ?? 0;
+        }
         internal void ColorHex_Input(object sender, TextCompositionEventArgs e)
         {
             string text = inst.colorHexOut.Text;
@@ -117,15 +127,27 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     var rgb = paletteHEX.ToRGB();
                     inst.colorSliderR.Value = rgb.R;
+                    inst.colorBoxR.Value = rgb.R;
                     inst.colorSliderG.Value = rgb.G;
+                    inst.colorBoxG.Value = rgb.G;
                     inst.colorSliderB.Value = rgb.B;
+                    inst.colorBoxB.Value = rgb.B;
+                    inst.colorBoxR.ParsingNumberStyle = System.Globalization.NumberStyles.Integer;
+                    inst.colorBoxG.ParsingNumberStyle = System.Globalization.NumberStyles.Integer;
+                    inst.colorBoxB.ParsingNumberStyle = System.Globalization.NumberStyles.Integer;
                 }
                 else
                 {
                     var hsv = Palette.Convert<PaletteHSV>(paletteHEX).HSV;
                     inst.colorSliderR.Value = hsv.H;
+                    inst.colorBoxR.Value = hsv.H;
                     inst.colorSliderG.Value = hsv.S;
+                    inst.colorBoxG.Value = hsv.S;
                     inst.colorSliderB.Value = hsv.V;
+                    inst.colorBoxB.Value = hsv.V;
+                    inst.colorBoxR.ParsingNumberStyle = System.Globalization.NumberStyles.Integer;
+                    inst.colorBoxG.ParsingNumberStyle = System.Globalization.NumberStyles.Float;
+                    inst.colorBoxB.ParsingNumberStyle = System.Globalization.NumberStyles.Float;
                 }
                 inst.colorHexOut.SelectionStart = cursorPos + 1;
                 inst.userColorSaveButton.IsEnabled = true;
@@ -150,15 +172,27 @@ namespace BowieD.Unturned.NPCMaker
                     {
                         var rgb = paletteHEX.ToRGB();
                         inst.colorSliderR.Value = rgb.R;
+                        inst.colorBoxR.Value = rgb.R;
                         inst.colorSliderG.Value = rgb.G;
+                        inst.colorBoxG.Value = rgb.G;
                         inst.colorSliderB.Value = rgb.B;
+                        inst.colorBoxB.Value = rgb.B;
+                        inst.colorBoxR.ParsingNumberStyle = System.Globalization.NumberStyles.Integer;
+                        inst.colorBoxG.ParsingNumberStyle = System.Globalization.NumberStyles.Integer;
+                        inst.colorBoxB.ParsingNumberStyle = System.Globalization.NumberStyles.Integer;
                     }
                     else
                     {
                         var hsv = Palette.Convert<PaletteHSV>(paletteHEX).HSV;
                         inst.colorSliderR.Value = hsv.H;
+                        inst.colorBoxR.Value = hsv.H;
                         inst.colorSliderG.Value = hsv.S;
+                        inst.colorBoxG.Value = hsv.S;
                         inst.colorSliderB.Value = hsv.V;
+                        inst.colorBoxB.Value = hsv.V;
+                        inst.colorBoxR.ParsingNumberStyle = System.Globalization.NumberStyles.Integer;
+                        inst.colorBoxG.ParsingNumberStyle = System.Globalization.NumberStyles.Float;
+                        inst.colorBoxB.ParsingNumberStyle = System.Globalization.NumberStyles.Float;
                     }
 
                     inst.userColorSaveButton.IsEnabled = true;
@@ -544,6 +578,9 @@ namespace BowieD.Unturned.NPCMaker
             inst.colorRectangle.Fill = new BrushConverter().ConvertFromString(res) as Brush;
             inst.colorHexOut.Text = res;
             inst.userColorSaveButton.IsEnabled = true;
+            inst.colorBoxR.Value = Math.Round(inst.colorSliderR.Value, 2);
+            inst.colorBoxG.Value = Math.Round(inst.colorSliderG.Value, 2);
+            inst.colorBoxB.Value = Math.Round(inst.colorSliderB.Value, 2);
             if (Config.Configuration.Properties.experimentalFeatures)
             {
                 if (!MainWindow.IsRGB)
