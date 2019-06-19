@@ -36,6 +36,9 @@
                     <Grid Margin="2.5">
                         <CheckBox Name="Generate_GUIDS_Box" Content="{DynamicResource config_Tab_General_GUIDs}"/>
                     </Grid>
+                    <Grid Margin="2.5">
+                        <CheckBox Name="Autoupdate_Box" Content="{DynamicResource config_Tab_General_Autoupdate}"/>
+                    </Grid>
                 </StackPanel>
             </TabItem>
             <TabItem Header="{DynamicResource config_Tab_Appearance}">

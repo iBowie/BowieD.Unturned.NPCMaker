@@ -275,12 +275,7 @@
     <v:String x:Key="config_Tab_General_Option_5">1 hour</v:String>
     <v:String x:Key="config_Tab_General_Language">Language</v:String>
     <v:String x:Key="config_Tab_General_GUIDs">Generate GUIDs</v:String>
-    <v:String x:Key="config_Tab_General_LogLevel">Logging Level</v:String>
-    <v:String x:Key="config_Tab_General_LogLevel_None">None</v:String>
-    <v:String x:Key="config_Tab_General_LogLevel_Normal">Normal</v:String>
-    <v:String x:Key="config_Tab_General_LogLevel_Warnings">Warnings</v:String>
-    <v:String x:Key="config_Tab_General_LogLevel_Errors">Errors</v:String>
-    <v:String x:Key="config_Tab_General_LogLevel_Critical">Critical</v:String>
+    <v:String x:Key="config_Tab_General_Autoupdate">Autoupdate</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme">Theme</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_Legacy">System (Legacy)</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_LightGreen">Light Green</v:String>
@@ -315,4 +310,7 @@
     <v:String x:Key="notify_Quest_Saved">Quest saved!</v:String>
     <v:String x:Key="notify_Saved">Saved!</v:String>
     <v:String x:Key="notify_Loaded">Loaded!</v:String>
+
+    <v:String x:Key="update_available_title">Update available</v:String>
+    <v:String x:Key="update_available_body">App update available. Do you want to download and install it now?</v:String>
 </ResourceDictionary>

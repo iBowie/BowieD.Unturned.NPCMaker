@@ -24,11 +24,20 @@ namespace BowieD.Unturned.NPCMaker.Localization
         }
         public static string LocalizeInterface(string key)
         {
-            var file = MainWindow.Instance.TryFindResource(key) as string;
-            if (file == null)
+            if (MainWindow.Instance == null)
+            {
+                if (_interfaceLang != null && _interfaceLang.ContainsKey(key))
+                    return _interfaceLang[key];
                 return key;
+            }
             else
-                return file.Replace(@"\n", Environment.NewLine);
+            {
+                var file = MainWindow.Instance.TryFindResource(key) as string;
+                if (file == null)
+                    return key;
+                else
+                    return file.Replace(@"\n", Environment.NewLine);
+            }
         }
         public static string LocalizeInterface(string key, params object[] args)
         {
@@ -103,6 +112,12 @@ namespace BowieD.Unturned.NPCMaker.Localization
                 {
                     Application.Current.Resources.MergedDictionaries.Add(dict);
                 }
+                _interfaceLang = new Dictionary<string, string>();
+                foreach (var k in dict.Keys)
+                {
+                    var value = dict[k];
+                    _interfaceLang.Add(k.ToString(), value.ToString());
+                }
             }
             catch (Exception) { Debug.WriteLine("Could not load interface lang."); }
             try
@@ -135,11 +150,15 @@ namespace BowieD.Unturned.NPCMaker.Localization
             }
             catch (Exception) { Debug.WriteLine("Could not load mistakes lang."); }
             _isInit = true;
+            IsLoaded = true;
         }
         private static bool _isInit = false;
         private static Dictionary<string, string> 
             _conditionsLang = null,
             _rewardsLang = null,
-            _mistakesLang = null;
+            _mistakesLang = null,
+            _interfaceLang = null;
+
+        public static bool IsLoaded { get; private set; } = false;
     }
 }

@@ -52,8 +52,21 @@ namespace BowieD.Unturned.NPCMaker
             Util.UpdateManager.CheckForUpdates().GetAwaiter().GetResult();
             if (Util.UpdateManager.UpdateAvailability == UpdateAvailability.AVAILABLE)
             {
-                Util.UpdateManager.StartUpdate();
-                return;
+                if (Config.Configuration.Properties.autoUpdate)
+                {
+                    Util.UpdateManager.StartUpdate();
+                    return;
+                }
+                else
+                {
+                    LocUtil.LoadLanguage(Config.Configuration.Properties.Language);
+                    var dlg = MessageBox.Show(LocUtil.LocalizeInterface("update_available_body"), LocUtil.LocalizeInterface("update_available_title"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (dlg == MessageBoxResult.Yes)
+                    {
+                        Util.UpdateManager.StartUpdate();
+                        return;
+                    }
+                }
             }
             #region COPY LIBS
             CopyResource(NPCMaker.Properties.Resources.DiscordRPC, Config.Configuration.ConfigDirectory + "DiscordRPC.dll");
@@ -64,7 +77,10 @@ namespace BowieD.Unturned.NPCMaker
             CopyResource(NPCMaker.Properties.Resources.MahApps_Metro_IconPacks_Core, Config.Configuration.ConfigDirectory + "MahApps.Metro.IconPacks.Core.dll");
             CopyResource(NPCMaker.Properties.Resources.MahApps_Metro_IconPacks_Material, Config.Configuration.ConfigDirectory + "MahApps.Metro.IconPacks.Material.dll");
             #endregion
-            LocUtil.LoadLanguage(Config.Configuration.Properties.Language);
+            if (!LocUtil.IsLoaded)
+                LocUtil.LoadLanguage(Config.Configuration.Properties.Language);
+            MainWindow mw = new MainWindow();
+            mw.Show();
         }
 
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)

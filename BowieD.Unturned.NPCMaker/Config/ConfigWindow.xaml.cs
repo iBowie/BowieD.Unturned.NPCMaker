@@ -40,6 +40,7 @@ namespace BowieD.Unturned.NPCMaker.Config
                 nc.generateGuids = Generate_GUIDS_Box.IsChecked.Value;
                 nc.experimentalFeatures = Experimental_Box.IsChecked.Value;
                 nc.animateControls = Animation_Enabled_Box.IsChecked.Value;
+                nc.autoUpdate = Autoupdate_Box.IsChecked.Value;
                 return nc;
             }
             set
@@ -76,6 +77,7 @@ namespace BowieD.Unturned.NPCMaker.Config
                 Discord_Enabled_Box.IsChecked = value.enableDiscord;
                 Generate_GUIDS_Box.IsChecked = value.generateGuids;
                 Animation_Enabled_Box.IsChecked = value.animateControls;
+                Autoupdate_Box.IsChecked = value.autoUpdate;
             }
         }
 
