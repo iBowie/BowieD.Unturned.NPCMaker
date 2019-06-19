@@ -17,6 +17,7 @@ namespace BowieD.Unturned.NPCMaker.Managers
             yield return new DayMonth("Happy Birthday, Minecraft!", 17, 5);
             yield return new DayMonth("Life is Strange...", 11, 10);
             yield return new DayMonth("Happy Anniversary, Sonic The Hedgehog!", 23, 6);
+            yield return new DayMonth("Happy Birthday, Terraria!", 16, 5);
         }
         public static void Check()
         {
