@@ -243,6 +243,8 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.Instance.apparelLeftHandedCheckbox.IsChecked = value.leftHanded;
             MainWindow.Instance.equipSlotBox.SelectedIndex = 0;
             MainWindow.Instance.apparelPoseBox.SelectedIndex = 0;
+            conditions = value.visibilityConditions;
+            loadedGUID = value.guid;
         }
 
         public void Save()
@@ -262,7 +264,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             Logger.Log($"Character {character.id} saved!");
         }
 
-        private string loadedGUID;
+        private string loadedGUID = Guid.NewGuid().ToString("N");
         public List<Condition> conditions;
 
         public void SendPresence()

@@ -16,24 +16,30 @@ namespace BowieD.Unturned.NPCMaker.Export
     {
         public static void ExportNPC(NPCProject save)
         {
-            if (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + $@"\results\{save.guid}"))
-                Directory.Delete(AppDomain.CurrentDomain.BaseDirectory + $@"\results\{save.guid}", true);
-            dir = AppDomain.CurrentDomain.BaseDirectory + $@"\results\{save.guid}\";
-            Export_Characters(save.characters);
-            Export_Dialogues(save.dialogues);
-            //Export_Objects(save.objects);
-            Export_Quests(save.quests);
-            Export_Vendors(save.vendors);
-            Button button = new Button
+            try
             {
-                Content = new TextBlock
+                if (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + $@"\results\{save.guid}"))
+                    Directory.Delete(AppDomain.CurrentDomain.BaseDirectory + $@"\results\{save.guid}", true);
+                dir = AppDomain.CurrentDomain.BaseDirectory + $@"\results\{save.guid}\";
+                Export_Characters(save.characters);
+                Export_Dialogues(save.dialogues);
+                Export_Quests(save.quests);
+                Export_Vendors(save.vendors);
+                Button button = new Button
                 {
-                    Text = LocUtil.LocalizeInterface("export_Done_Goto")
-                }
-            };
-            Action<object, RoutedEventArgs> action = new Action<object, RoutedEventArgs>((sender, e) => { Process.Start(AppDomain.CurrentDomain.BaseDirectory + $@"results\{save.guid}"); });
-            button.Click += new RoutedEventHandler(action);
-            MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("export_Done"), buttons: button);
+                    Content = new TextBlock
+                    {
+                        Text = LocUtil.LocalizeInterface("export_Done_Goto")
+                    }
+                };
+                Action<object, RoutedEventArgs> action = new Action<object, RoutedEventArgs>((sender, e) => { Process.Start(AppDomain.CurrentDomain.BaseDirectory + $@"results\{save.guid}"); });
+                button.Click += new RoutedEventHandler(action);
+                MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("export_Done"), buttons: button);
+            }
+            catch (Exception ex)
+            {
+                MainWindow.NotificationManager.Notify($"Export Error: {ex.Message}");
+            }
         }
         private static string dir = "";
 
