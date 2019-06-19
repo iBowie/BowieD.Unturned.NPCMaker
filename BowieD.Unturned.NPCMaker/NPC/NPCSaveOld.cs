@@ -8,6 +8,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
 {
     [XmlRoot("NPCSave")]
     [XmlInclude(typeof(NPCExample))]
+    [Obsolete("Use NPCProject instead")]
     public class NPCSaveOld
     {
         public NPCSaveOld()
