@@ -384,7 +384,7 @@
                                     <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Face}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,10,0,0" Width="98" Height="28"/>
                                     <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Hair}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="109,10,0,0" Width="98" Height="28"/>
                                     <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Beard}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,10,0,0" Width="98" Height="28"/>
-                                    <GroupBox Header="{DynamicResource apparel_Group_Clothing}" HorizontalAlignment="Left" Margin="10,240,0,10" Width="300">
+                                    <GroupBox Header="{DynamicResource apparel_Group_Clothing}" HorizontalAlignment="Left" Margin="10,230,0,10" Width="300">
                                         <TabControl>
                                             <TabItem Header="{DynamicResource apparel_Clothing_Default}" mah:ControlsHelper.HeaderFontSize="18">
                                                 <ScrollViewer>
