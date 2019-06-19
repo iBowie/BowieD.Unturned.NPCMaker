@@ -812,28 +812,6 @@
                         </Grid>
                     </Grid>
                 </TabItem>
-                <TabItem Visibility="Collapsed" Name="objectEditorTab" Header="Objects">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="25*"/>
-                            <ColumnDefinition Width="75*"/>
-                        </Grid.ColumnDefinitions>
-                        <ListView x:Name="objectsList" Margin="10,10,10,59">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="Объект" Width="{Binding ActualWidth, ElementName=objectsList}"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                        <Button Name="objectsListRemoveButton" Content="Remove Selected" Margin="10,0,10,10" Height="20" VerticalAlignment="Bottom"/>
-                        <Button Name="objectsListAddButton" Content="Add New" Margin="10,0,10,34" Height="20" VerticalAlignment="Bottom"/>
-                        <ScrollViewer Grid.Column="1" Margin="10">
-                            <Grid>
-                                <mah:NumericUpDown Name="objectsIDbox" HideUpDownButtons="True" InterceptMouseWheel="True" InterceptArrowKeys="True" ParsingNumberStyle="Integer" Maximum="65535" Minimum="0" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" Width="82"/>
-                            </Grid>
-                        </ScrollViewer>
-                    </Grid>
-                </TabItem>
                 <TabItem Name="mistakeListTab" Header="{DynamicResource tab_Mistakes}">
                     <Grid>
                         <ListView Name="lstMistakes" Margin="10,10,10,60">

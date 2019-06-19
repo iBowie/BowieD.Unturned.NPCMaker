@@ -524,12 +524,6 @@ namespace BowieD.Unturned.NPCMaker
                         MainWindow.QuestEditor.SendPresence();
                         break;
                     case 4:
-                        //MainWindow.ObjectEditor.SendPresence();
-
-                        //presence.Assets.SmallImageKey = "icon_object_outlined";
-                        //presence.Assets.SmallImageText = $"Objects: {MainWindow.CurrentSave.objects.Count}";
-                        break;
-                    case 5:
                         {
                             RichPresence presence = new RichPresence
                             {

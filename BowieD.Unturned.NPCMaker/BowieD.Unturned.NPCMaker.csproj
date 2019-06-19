@@ -166,7 +166,6 @@
     <Compile Include="Editors\CharacterEditor.cs" />
     <Compile Include="Editors\DialogueEditor.cs" />
     <Compile Include="Editors\IEditor.cs" />
-    <Compile Include="Editors\ObjectEditor.cs" />
     <Compile Include="Editors\QuestEditor.cs" />
     <Compile Include="Editors\VendorEditor.cs" />
     <Compile Include="Examples\NPCExample.cs" />
@@ -268,7 +267,6 @@
     <Compile Include="NPC\NPCColor.cs" />
     <Compile Include="NPC\NPCDialogue.cs" />
     <Compile Include="NPC\NPCMessage.cs" />
-    <Compile Include="NPC\NPCObject.cs" />
     <Compile Include="NPC\NPCQuest.cs" />
     <Compile Include="NPC\NPCResponse.cs" />
     <Compile Include="NPC\NPCVendor.cs" />
