@@ -410,24 +410,24 @@
                                                                 </StackPanel>
                                                             </mah:NumericUpDown.ToolTip>
                                                         </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="vestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_vest.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="topIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                        <mah:NumericUpDown x:Name="topIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                             <mah:NumericUpDown.ToolTip>
                                                                 <StackPanel>
                                                                     <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
                                                                 </StackPanel>
                                                             </mah:NumericUpDown.ToolTip>
                                                         </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="backpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                        <mah:NumericUpDown x:Name="backpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                             <mah:NumericUpDown.ToolTip>
                                                                 <StackPanel>
                                                                     <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
+                                                                </StackPanel>
+                                                            </mah:NumericUpDown.ToolTip>
+                                                        </mah:NumericUpDown>
+                                                        <mah:NumericUpDown x:Name="vestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                            <mah:NumericUpDown.ToolTip>
+                                                                <StackPanel>
+                                                                    <Image Source="Resources/Help/img_help_apparel_vest.png"/>
                                                                 </StackPanel>
                                                             </mah:NumericUpDown.ToolTip>
                                                         </mah:NumericUpDown>
@@ -441,9 +441,9 @@
                                                         <Label Content="{DynamicResource apparel_Hat_ID}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
                                                         <Label Content="{DynamicResource apparel_Mask_ID}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
                                                         <Label Content="{DynamicResource apparel_Glasses_ID}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Vest_ID}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Top_ID}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Backpack_ID}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
+                                                        <Label Content="{DynamicResource apparel_Top_ID}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
+                                                        <Label Content="{DynamicResource apparel_Backpack_ID}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
+                                                        <Label Content="{DynamicResource apparel_Vest_ID}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
                                                         <Label Content="{DynamicResource apparel_Bottom_ID}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
                                                     </Grid>
                                                 </ScrollViewer>
@@ -472,24 +472,24 @@
                                                                 </StackPanel>
                                                             </mah:NumericUpDown.ToolTip>
                                                         </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="christmasvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_vest.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="christmastopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                        <mah:NumericUpDown x:Name="christmastopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                             <mah:NumericUpDown.ToolTip>
                                                                 <StackPanel>
                                                                     <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
                                                                 </StackPanel>
                                                             </mah:NumericUpDown.ToolTip>
                                                         </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="christmasbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                        <mah:NumericUpDown x:Name="christmasbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                             <mah:NumericUpDown.ToolTip>
                                                                 <StackPanel>
                                                                     <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
+                                                                </StackPanel>
+                                                            </mah:NumericUpDown.ToolTip>
+                                                        </mah:NumericUpDown>
+                                                        <mah:NumericUpDown x:Name="christmasvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                            <mah:NumericUpDown.ToolTip>
+                                                                <StackPanel>
+                                                                    <Image Source="Resources/Help/img_help_apparel_vest.png"/>
                                                                 </StackPanel>
                                                             </mah:NumericUpDown.ToolTip>
                                                         </mah:NumericUpDown>
@@ -503,9 +503,9 @@
                                                         <Label Content="{DynamicResource apparel_Hat_ID}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
                                                         <Label Content="{DynamicResource apparel_Mask_ID}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
                                                         <Label Content="{DynamicResource apparel_Glasses_ID}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Vest_ID}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Top_ID}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Backpack_ID}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
+                                                        <Label Content="{DynamicResource apparel_Top_ID}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
+                                                        <Label Content="{DynamicResource apparel_Backpack_ID}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
+                                                        <Label Content="{DynamicResource apparel_Vest_ID}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
                                                         <Label Content="{DynamicResource apparel_Bottom_ID}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
                                                     </Grid>
                                                 </ScrollViewer>
@@ -534,24 +534,24 @@
                                                                 </StackPanel>
                                                             </mah:NumericUpDown.ToolTip>
                                                         </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="halloweenvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_vest.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="halloweentopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                        <mah:NumericUpDown x:Name="halloweentopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                             <mah:NumericUpDown.ToolTip>
                                                                 <StackPanel>
                                                                     <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
                                                                 </StackPanel>
                                                             </mah:NumericUpDown.ToolTip>
                                                         </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="halloweenbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                        <mah:NumericUpDown x:Name="halloweenbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                             <mah:NumericUpDown.ToolTip>
                                                                 <StackPanel>
                                                                     <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
+                                                                </StackPanel>
+                                                            </mah:NumericUpDown.ToolTip>
+                                                        </mah:NumericUpDown>
+                                                        <mah:NumericUpDown x:Name="halloweenvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                            <mah:NumericUpDown.ToolTip>
+                                                                <StackPanel>
+                                                                    <Image Source="Resources/Help/img_help_apparel_vest.png"/>
                                                                 </StackPanel>
                                                             </mah:NumericUpDown.ToolTip>
                                                         </mah:NumericUpDown>
