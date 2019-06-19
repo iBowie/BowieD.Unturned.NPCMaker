@@ -42,8 +42,6 @@ namespace BowieD.Unturned.NPCMaker.Logging
 
         public static string Format => "[%dateTime%] - [%level%]: %message%";
         public static string GetFormatted(Log_Level level, string message) => Format.Replace("%dateTime%", DateTime.Now.ToString()).Replace("%level%", level.ToString()).Replace("%message%", message);
-
-        public static Log_Level LoggingLevel => Config.Configuration.Properties == null ? Log_Level.Normal : Config.Configuration.Properties.LogLevel;
     }
 
     public enum Log_Level

@@ -22,7 +22,6 @@ namespace BowieD.Unturned.NPCMaker.Config
             public bool generateGuids;
             public byte autosaveOption;
             public bool animateControls;
-            public Logging.Log_Level LogLevel;
 
             [XmlIgnore]
             public CultureInfo language
@@ -49,7 +48,6 @@ namespace BowieD.Unturned.NPCMaker.Config
                 autosaveOption = 1;
                 experimentalFeatures = false;
                 animateControls = true;
-                LogLevel = Logging.Log_Level.Normal;
             }
         }
 

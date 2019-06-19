@@ -37,7 +37,6 @@ namespace BowieD.Unturned.NPCMaker.Config
                 nc.enableDiscord = Discord_Enabled_Box.IsChecked.Value;
                 nc.generateGuids = Generate_GUIDS_Box.IsChecked.Value;
                 nc.experimentalFeatures = Experimental_Box.IsChecked.Value;
-                nc.LogLevel = (Logging.Log_Level)Enum.Parse(typeof(Logging.Log_Level), (Log_Level_Box.SelectedItem as ComboBoxItem).Tag.ToString());
                 nc.animateControls = Animation_Enabled_Box.IsChecked.Value;
                 return nc;
             }
@@ -68,14 +67,6 @@ namespace BowieD.Unturned.NPCMaker.Config
                     if (cbi?.Tag.ToString() == value.scale.ToString().Replace(',', '.'))
                     {
                         Scale_Box.SelectedItem = cbi;
-                        break;
-                    }
-                }
-                foreach (ComboBoxItem cbi in Log_Level_Box.Items)
-                {
-                    if (cbi?.Tag.ToString() == value.LogLevel.ToString())
-                    {
-                        Log_Level_Box.SelectedItem = cbi;
                         break;
                     }
                 }
