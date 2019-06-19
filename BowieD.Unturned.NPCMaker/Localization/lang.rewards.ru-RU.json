@@ -35,5 +35,6 @@
 	"Reward_Barrel": "Ствол",
 	"Reward_Magazine": "Магазин",
 	"Reward_Ammo": "Количество патронов",
-	"Reward_Spawnpoint": "Точка появления"
+	"Reward_Spawnpoint": "Точка появления",
+	"Reward_Localization": "Текст в игре"
 }

@@ -35,5 +35,6 @@
 	"Reward_Barrel": "Gun Barrel",
 	"Reward_Magazine": "Gun Magazine",
 	"Reward_Ammo": "Gun Ammo Amount",
-	"Reward_Spawnpoint": "Spawnpoint"
+	"Reward_Spawnpoint": "Spawnpoint",
+	"Reward_Localization": "Localization"
 }

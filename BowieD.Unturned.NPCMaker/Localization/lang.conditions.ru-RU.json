@@ -74,5 +74,6 @@
 	"Condition_Reset_Experience_Title": "Тратить опыт игрока при выполнении",
 	"Condition_Reset_Reputation_Title": "Отбирать репутацию при выполнении",
 	"Condition_Reset_Quest_Title": "Изменить статус задания при выполнении (наведи)",
-	"Condition_Reset_Quest_Tooltip": "Активный -> Обнулить; Готов -> Завершён; Завершён -> Удалить"
+	"Condition_Reset_Quest_Tooltip": "Активный -> Обнулить; Готов -> Завершён; Завершён -> Удалить",
+	"Condition_Localization": "Текст в игре"
 }

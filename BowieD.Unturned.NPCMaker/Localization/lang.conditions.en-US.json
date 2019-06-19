@@ -74,5 +74,6 @@
 	"Condition_Reset_Experience_Title": "Spend player's experience on complete",
 	"Condition_Reset_Reputation_Title": "Take reputation on complete",
 	"Condition_Reset_Quest_Title": "Change quest status on complete (hover for a tip)",
-	"Condition_Reset_Quest_Tooltip": "Active -> Abandon; Ready -> Completed; Completed -> Remove"
+	"Condition_Reset_Quest_Tooltip": "Active -> Abandon; Ready -> Completed; Completed -> Remove",
+	"Condition_Localization": "Localization"
 }
