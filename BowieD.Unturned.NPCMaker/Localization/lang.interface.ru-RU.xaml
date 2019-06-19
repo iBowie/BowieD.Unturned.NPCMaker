@@ -288,11 +288,13 @@
     <v:String x:Key="config_Tab_Appearance_Theme_LightRed">Светлая красная</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_LightBlue">Светлая синяя</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_LightPurple">Светлая фиолетовая</v:String>
+    <v:String x:Key="config_Tab_Appearance_Theme_LightOrange">Светлая оранжевая</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkGreen">Тёмная зелёная</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkPink">Тёмная розовая</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkRed">Тёмная красная</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkBlue">Тёмная синяя</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkPurple">Тёмная фиолетовая</v:String>
+    <v:String x:Key="config_Tab_Appearance_Theme_DarkOrange">Тёмная оранжевая</v:String>
     <v:String x:Key="config_Tab_Appearance_Scale">Масштаб</v:String>
     <v:String x:Key="config_Tab_Appearance_Animation">Анимация</v:String>
     <v:String x:Key="config_Tab_Misc_Discord">Подробный Discord Rich Presence</v:String>

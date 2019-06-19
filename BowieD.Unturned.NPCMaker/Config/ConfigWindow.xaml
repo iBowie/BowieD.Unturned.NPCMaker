@@ -42,58 +42,7 @@
                 <StackPanel Margin="5" CanVerticallyScroll="True">
                     <Grid Margin="2.5">
                         <Label Content="{DynamicResource config_Tab_Appearance_Theme}"/>
-                        <ComboBox SelectedIndex="0" HorizontalAlignment="Right" Name="Selected_Theme_Box">
-                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_LightGreen}">
-                                <ComboBoxItem.Tag>
-                                    <npcmaker:MetroTheme R="84" G="142" B="25" Name="LightGreen" DictionaryName="Light.Green"/>
-                                </ComboBoxItem.Tag>
-                            </ComboBoxItem>
-                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_LightPink}">
-                                <ComboBoxItem.Tag>
-                                    <npcmaker:MetroTheme R="246" G="142" B="217" Name="LightPink" DictionaryName="Light.Pink"/>
-                                </ComboBoxItem.Tag>
-                            </ComboBoxItem>
-                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_LightRed}">
-                                <ComboBoxItem.Tag>
-                                    <npcmaker:MetroTheme R="234" G="67" B="51" Name="LightRed" DictionaryName="Light.Red"/>
-                                </ComboBoxItem.Tag>
-                            </ComboBoxItem>
-                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_LightBlue}">
-                                <ComboBoxItem.Tag>
-                                    <npcmaker:MetroTheme R="51" G="115" B="242" Name="LightBlue" DictionaryName="Light.Blue"/>
-                                </ComboBoxItem.Tag>
-                            </ComboBoxItem>
-                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_LightPurple}">
-                                <ComboBoxItem.Tag>
-                                    <npcmaker:MetroTheme R="87" G="78" B="185" Name="LightPurple" DictionaryName="Light.Purple"/>
-                                </ComboBoxItem.Tag>
-                            </ComboBoxItem>
-                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_DarkGreen}">
-                                <ComboBoxItem.Tag>
-                                    <npcmaker:MetroTheme R="84" G="142" B="25" Name="DarkGreen" DictionaryName="Dark.Green"/>
-                                </ComboBoxItem.Tag>
-                            </ComboBoxItem>
-                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_DarkPink}">
-                                <ComboBoxItem.Tag>
-                                    <npcmaker:MetroTheme R="246" G="142" B="217" Name="DarkPink" DictionaryName="Dark.Pink"/>
-                                </ComboBoxItem.Tag>
-                            </ComboBoxItem>
-                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_DarkRed}">
-                                <ComboBoxItem.Tag>
-                                    <npcmaker:MetroTheme R="234" G="67" B="51" Name="DarkRed" DictionaryName="Dark.Red"/>
-                                </ComboBoxItem.Tag>
-                            </ComboBoxItem>
-                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_DarkBlue}">
-                                <ComboBoxItem.Tag>
-                                    <npcmaker:MetroTheme R="51" G="115" B="242" Name="DarkBlue" DictionaryName="Dark.Blue"/>
-                                </ComboBoxItem.Tag>
-                            </ComboBoxItem>
-                            <ComboBoxItem Content="{DynamicResource config_Tab_Appearance_Theme_DarkPurple}">
-                                <ComboBoxItem.Tag>
-                                    <npcmaker:MetroTheme R="87" G="78" B="185" Name="DarkPurple" DictionaryName="Dark.Purple"/>
-                                </ComboBoxItem.Tag>
-                            </ComboBoxItem>
-                        </ComboBox>
+                        <ComboBox SelectedIndex="0" HorizontalAlignment="Right" Name="Selected_Theme_Box"/>
                     </Grid>
                     <Grid Margin="2.5">
                         <Label Content="{DynamicResource config_Tab_Appearance_Scale}"/>

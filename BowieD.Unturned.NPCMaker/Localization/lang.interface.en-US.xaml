@@ -288,11 +288,13 @@
     <v:String x:Key="config_Tab_Appearance_Theme_LightRed">Light Red</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_LightBlue">Light Blue</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_LightPurple">Light Purple</v:String>
+    <v:String x:Key="config_Tab_Appearance_Theme_LightOrange">Light Orange</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkGreen">Dark Green</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkPink">Dark Pink</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkRed">Dark Red</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkBlue">Dark Blue</v:String>
     <v:String x:Key="config_Tab_Appearance_Theme_DarkPurple">Dark Purple</v:String>
+    <v:String x:Key="config_Tab_Appearance_Theme_DarkOrange">Dark Orange</v:String>
     <v:String x:Key="config_Tab_Appearance_Scale">Scale</v:String>
     <v:String x:Key="config_Tab_Appearance_Animation">Animation</v:String>
     <v:String x:Key="config_Tab_Misc_Discord">Discord Rich Presence Advanced</v:String>
