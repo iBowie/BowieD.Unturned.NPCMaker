@@ -296,7 +296,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
         {
             string text = MainWindow.Instance.apparelSkinColorBox.Text;
             BrushConverter bc = new BrushConverter();
-            if (bc.IsValid(text))
+            if (text.Length >= 7 && bc.IsValid(text))
             {
                 SolidColorBrush color = bc.ConvertFromString(text) as SolidColorBrush;
                 MainWindow.Instance.faceImageBorder.Background = color;
@@ -326,7 +326,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
         {
             string text = MainWindow.Instance.apparelHairColorBox.Text;
             BrushConverter bc = new BrushConverter();
-            if (bc.IsValid(text))
+            if (text.Length >= 7 && bc.IsValid(text))
             {
                 SolidColorBrush color = bc.ConvertFromString(text) as SolidColorBrush;
                 MainWindow.Instance.beardRenderGrid.DataContext = color;

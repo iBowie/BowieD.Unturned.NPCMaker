@@ -218,7 +218,6 @@ namespace BowieD.Unturned.NPCMaker
             DialogueEditor.Save();
             VendorEditor.Save();
             QuestEditor.Save();
-            //ObjectEditor.Save();
             if (saveFile == null || saveFile == "")
             {
                 SaveFileDialog sfd = new SaveFileDialog
@@ -229,14 +228,16 @@ namespace BowieD.Unturned.NPCMaker
                 };
                 var result = sfd.ShowDialog();
                 if (result == true)
+                {
                     saveFile = sfd.FileName;
+                    AddToRecentList(saveFile);
+                }
                 else
                 {
                     saveFile = oldFile.Length > 0 ? oldFile : saveFile;
                     return;
                 }
             }
-            AddToRecentList(saveFile);
             try
             {
                 CurrentProject.Save(saveFile);

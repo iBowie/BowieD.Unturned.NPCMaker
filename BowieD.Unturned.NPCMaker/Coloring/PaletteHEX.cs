@@ -18,10 +18,19 @@ namespace BowieD.Unturned.NPCMaker.Coloring
             }
             set
             {
-                int offset = value.StartsWith("#") ? 1 : 0;
-                H1 = "" + value[0 + offset] + value[1 + offset];
-                H2 = "" + value[2 + offset] + value[3 + offset];
-                H3 = "" + value[4 + offset] + value[5 + offset];
+                try
+                {
+                    int offset = value.StartsWith("#") ? 1 : 0;
+                    H1 = "" + value[0 + offset] + value[1 + offset];
+                    H2 = "" + value[2 + offset] + value[3 + offset];
+                    H3 = "" + value[4 + offset] + value[5 + offset];
+                }
+                catch
+                {
+                    H1 = "00";
+                    H2 = "00";
+                    H3 = "00";
+                }
             }
         }
         /// <summary>

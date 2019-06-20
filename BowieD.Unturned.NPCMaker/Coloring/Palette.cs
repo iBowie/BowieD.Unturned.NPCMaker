@@ -15,8 +15,16 @@ namespace BowieD.Unturned.NPCMaker.Coloring
         }
         public Brush GetBrush()
         {
-            BrushConverter converter = new BrushConverter();
-            return converter.ConvertFromString(Convert<PaletteHEX>(this).HEX) as Brush;
+            var hex = Convert<PaletteHEX>(this).HEX;
+            if (hex.Length >= 6)
+            {
+                BrushConverter converter = new BrushConverter();
+                return converter.ConvertFromString(hex) as Brush;
+            }
+            else
+            {
+                return Brushes.Black;
+            }
         }
         public abstract Palette FromRGB((byte R, byte G, byte B) rgb);
         public abstract (byte R, byte G, byte B) ToRGB();
