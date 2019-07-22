@@ -27,5 +27,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public UInt16 Magazine;
         [RewardOptional(0, 0)]
         public byte Ammo;
+        public bool Auto_Equip;
     }
 }

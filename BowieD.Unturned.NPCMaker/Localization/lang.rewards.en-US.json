@@ -36,5 +36,6 @@
 	"Reward_Magazine": "Gun Magazine",
 	"Reward_Ammo": "Gun Ammo Amount",
 	"Reward_Spawnpoint": "Spawnpoint",
-	"Reward_Localization": "Localization"
+	"Reward_Localization": "Localization",
+	"Reward_Auto_Equip": "Equip when given"
 }

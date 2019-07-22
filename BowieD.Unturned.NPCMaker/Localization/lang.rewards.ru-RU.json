@@ -36,5 +36,6 @@
 	"Reward_Magazine": "Магазин",
 	"Reward_Ammo": "Количество патронов",
 	"Reward_Spawnpoint": "Точка появления",
-	"Reward_Localization": "Текст в игре"
+	"Reward_Localization": "Текст в игре",
+	"Reward_Auto_Equip": "Экипировать при выдаче"
 }
