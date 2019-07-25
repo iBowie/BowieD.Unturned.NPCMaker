@@ -128,14 +128,15 @@ namespace BowieD.Unturned.NPCMaker.Editors
 
         public void SendPresence()
         {
+            var current = MainWindow.QuestEditor.Current;
             RichPresence presence = new RichPresence();
             presence.Timestamps = new Timestamps();
             presence.Timestamps.StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             presence.Assets = new Assets();
             presence.Assets.SmallImageKey = "icon_exclamation_outlined";
             presence.Assets.SmallImageText = $"Quests: {MainWindow.CurrentProject.quests.Count}";
-            presence.Details = $"Quest Name: {MainWindow.QuestEditor.Current.title}";
-            presence.State = $"Rewards: {MainWindow.QuestEditor.Current.rewards.Count} | Conds: {MainWindow.QuestEditor.Current.conditions.Count}";
+            presence.Details = $"Quest Name: {(current == null ? "Untitled" : current.title)}";
+            presence.State = $"Rewards: {(current == null ? 0 : current.rewards.Count)} | Conds: {(current == null ? 0 : current.conditions.Count)}";
             MainWindow.DiscordManager.SendPresence(presence);
         }
 

@@ -161,14 +161,15 @@ namespace BowieD.Unturned.NPCMaker.Editors
 
         public void SendPresence()
         {
+            var current = MainWindow.VendorEditor.Current;
             RichPresence presence = new RichPresence();
             presence.Timestamps = new Timestamps();
             presence.Timestamps.StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             presence.Assets = new Assets();
             presence.Assets.SmallImageKey = "icon_money_outlined";
             presence.Assets.SmallImageText = $"Vendors: {MainWindow.CurrentProject.vendors.Count}";
-            presence.Details = $"Vendor Name: {MainWindow.VendorEditor.Current.vendorTitle}";
-            presence.State = $"Buy: {MainWindow.VendorEditor.Current.BuyItems.Count} / Sell: {MainWindow.VendorEditor.Current.SellItems.Count}";
+            presence.Details = $"Vendor Name: {(current == null ? "Untitled" : current.vendorTitle)}";
+            presence.State = $"Buy: {(current == null ? 0 : current.BuyItems.Count)} / Sell: {(current == null ? 0 : current.SellItems.Count)}";
             MainWindow.DiscordManager.SendPresence(presence);
         }
     }

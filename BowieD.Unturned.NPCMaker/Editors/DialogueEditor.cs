@@ -225,14 +225,15 @@ namespace BowieD.Unturned.NPCMaker.Editors
 
         public void SendPresence()
         {
+            var current = MainWindow.DialogueEditor.Current;
             RichPresence presence = new RichPresence();
             presence.Timestamps = new Timestamps();
             presence.Timestamps.StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             presence.Assets = new Assets();
             presence.Assets.SmallImageKey = "icon_chat_outlined";
             presence.Assets.SmallImageText = $"Dialogues: {MainWindow.CurrentProject.dialogues.Count}";
-            presence.Details = $"Messages: {MainWindow.DialogueEditor.Current.MessagesAmount}";
-            presence.State = $"Responses: {MainWindow.DialogueEditor.Current.ResponsesAmount}";
+            presence.Details = $"Messages: {(current == null ? 0 : current.MessagesAmount)}";
+            presence.State = $"Responses: {(current == null ? 0 : current.ResponsesAmount)}";
             MainWindow.DiscordManager.SendPresence(presence);
         }
     }
