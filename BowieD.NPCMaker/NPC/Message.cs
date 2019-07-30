@@ -6,10 +6,10 @@ namespace BowieD.NPCMaker.NPC
     {
         public Message()
         {
-            pages = new List<string>();
+            pages = new List<Dictionary<ELanguage, string>>();
             conditions = new List<Condition.Condition>();
         }
-        public List<string> pages;
+        public List<Dictionary<ELanguage, string>> pages;
         public List<Condition.Condition> conditions;
     }
 }

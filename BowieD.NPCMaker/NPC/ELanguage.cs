@@ -1,0 +1,35 @@
+﻿namespace BowieD.NPCMaker.NPC
+{
+    public enum ELanguage
+    {
+        Arabic,
+        Bulgarian,
+        Schinese,
+        Tchinese,
+        Czech,
+        Danish,
+        Dutch,
+        English,
+        Finnish,
+        French,
+        German,
+        Greek,
+        Hungarian,
+        Italian,
+        Japanese,
+        Koreana,
+        Norwegian,
+        Polish,
+        Portuguese,
+        Brazilian,
+        Romanian,
+        Russian,
+        Spanish,
+        Latam,
+        Swedish,
+        Thai,
+        Turkish,
+        Ukrainian,
+        Vietnamese
+    }
+}

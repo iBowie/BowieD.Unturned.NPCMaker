@@ -6,11 +6,13 @@ namespace BowieD.NPCMaker.NPC
     {
         public Character()
         {
+            editorName = new Dictionary<ELanguage, string>();
+            displayName = new Dictionary<ELanguage, string>();
             visibilityConditions = new List<Condition.Condition>();
         }
         public string guid;
-        public string editorName;
-        public string displayName;
+        public Dictionary<ELanguage, string> editorName;
+        public Dictionary<ELanguage, string> displayName;
         public ushort id;
         public ushort dialogueId;
         public byte face;

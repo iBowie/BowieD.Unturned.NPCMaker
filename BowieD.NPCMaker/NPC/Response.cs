@@ -6,11 +6,12 @@ namespace BowieD.NPCMaker.NPC
     {
         public Response()
         {
+            text = new Dictionary<ELanguage, string>();
             conditions = new List<Condition.Condition>();
             rewards = new List<Reward.Reward>();
             visiblePages = new HashSet<int>();
         }
-        public string text;
+        public Dictionary<ELanguage, string> text;
         public ushort dialogueId;
         public ushort vendorId;
         public ushort questId;
