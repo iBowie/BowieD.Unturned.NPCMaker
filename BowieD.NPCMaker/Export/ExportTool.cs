@@ -16,7 +16,7 @@ namespace BowieD.NPCMaker.Export
             {
                 string workDir = $"{directory}Characters{Path.DirectorySeparatorChar}{character.editorName}_{character.id}{Path.DirectorySeparatorChar}";
                 Directory.CreateDirectory(workDir);
-                using (StreamWriter assetWriter = new StreamWriter(workDir + "Asset.dat"))
+                using (StreamWriter assetWriter = new StreamWriter(workDir + "Asset.dat", false, Encoding.UTF8))
                 {
                     assetWriter.WriteLine(WaterText);
                     if (AppConfig.Instance.exportGuid)
@@ -104,6 +104,28 @@ namespace BowieD.NPCMaker.Export
                             }
                         }
                     }
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public static bool ExportDialogue(Dialogue dialogue, string directory)
+        {
+            try
+            {
+                string workDir = directory = $"Dialogues{Path.DirectorySeparatorChar}{dialogue.guid}_{dialogue.id}{Path.DirectorySeparatorChar}";
+                Directory.CreateDirectory(workDir);
+                using (StreamWriter asset = new StreamWriter(workDir + "Asset.dat", false, Encoding.UTF8))
+                {
+                    asset.WriteLine(WaterText);
+                    if (AppConfig.Instance.exportGuid)
+                        asset.WriteLine($"GUID {dialogue.guid}");
+                    asset.WriteLine($"Type Dialogue");
+                    asset.WriteLine($"ID {dialogue.id}");
+
                 }
                 return true;
             }

@@ -68,8 +68,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Coloring\Color.cs" />
+    <Compile Include="Export\ExportTool.cs" />
+    <Compile Include="Extensions\ArrayExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Math\Mathf.cs" />
+    <Compile Include="NPC\Character.cs" />
+    <Compile Include="NPC\Condition\Condition.cs" />
+    <Compile Include="NPC\Dialogue.cs" />
+    <Compile Include="NPC\ELanguage.cs" />
+    <Compile Include="NPC\ENPCPose.cs" />
+    <Compile Include="NPC\ESlotType.cs" />
+    <Compile Include="NPC\Message.cs" />
+    <Compile Include="NPC\Outfit.cs" />
+    <Compile Include="NPC\Response.cs" />
+    <Compile Include="NPC\Reward\Reward.cs" />
+    <Compile Include="Storage\Project.cs" />
     <Compile Include="Updater\ECheckResult.cs" />
     <Compile Include="Updater\GitHubUpdater.cs" />
     <Compile Include="Updater\IUpdater.cs" />
