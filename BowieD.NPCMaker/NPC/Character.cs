@@ -1,7 +1,13 @@
-﻿namespace BowieD.NPCMaker.NPC
+﻿using System.Collections.Generic;
+
+namespace BowieD.NPCMaker.NPC
 {
     public sealed class Character
     {
+        public Character()
+        {
+            visibilityConditions = new List<Condition.Condition>();
+        }
         public string guid;
         public string editorName;
         public string displayName;
@@ -21,6 +27,6 @@
         public ushort equipSecondary;
         public ushort equipTertiary;
         public ESlotType equippedSlot;
-        public Condition.Condition[] visibilityConditions;
+        public List<Condition.Condition> visibilityConditions;
     }
 }
