@@ -1,11 +1,15 @@
 ﻿using BowieD.NPCMaker.Configuration;
 using BowieD.NPCMaker.NPC;
 using System.IO;
+using BowieD.NPCMaker.Extensions;
+using System.Text;
+using System;
 
-namespace BowieD.Unturned.NPCMaker.Export
+namespace BowieD.NPCMaker.Export
 {
     public static class ExportTool
     {
+        private const string WaterText = "// Made in NPC Maker 2.0";
         public static bool ExportCharacter(Character character, string directory)
         {
             try
@@ -14,7 +18,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                 Directory.CreateDirectory(workDir);
                 using (StreamWriter assetWriter = new StreamWriter(workDir + "Asset.dat"))
                 {
-                    assetWriter.WriteLine($"// Made in NPC Maker 2.0");
+                    assetWriter.WriteLine(WaterText);
                     if (AppConfig.Instance.exportGuid)
                         assetWriter.WriteLine($"GUID {character.guid}");
                     assetWriter.WriteLine($"ID {character.id}");
@@ -71,17 +75,35 @@ namespace BowieD.Unturned.NPCMaker.Export
                     if (character.equipTertiary > 0)
                         assetWriter.WriteLine($"Tertiary {character.equipTertiary}");
                     if (character.equippedSlot != ESlotType.NONE)
-                        assetWriter.WriteLine($"Equipped {character.equipped.ToString()}");
+                        assetWriter.WriteLine($"Equipped {character.equippedSlot.ToString().FirstCharToUpper()}");
                     assetWriter.WriteLine($"Face {character.face}");
                     assetWriter.WriteLine($"Beard {character.beard}");
-                    assetWriter.WriteLine($"Hair {character.haircut}");
-                    assetWriter.WriteLine($"Color_Skin {Palette.Convert<PaletteHEX>((PaletteRGB)character.skinColor).HEX}");
-                    assetWriter.WriteLine($"Color_Hair {Palette.Convert<PaletteHEX>((PaletteRGB)character.hairColor).HEX}");
+                    assetWriter.WriteLine($"Hair {character.hair}");
+                    assetWriter.WriteLine($"Color_Skin {character.skinColor.ToHEX()}");
+                    assetWriter.WriteLine($"Color_Hair {character.hairColor.ToHEX()}");
                     assetWriter.WriteLine($"Pose {character.pose.ToString()}");
                     if (character.leftHanded)
                         assetWriter.WriteLine($"Backward");
-                    if (character.startDialogueId > 0)
-                        assetWriter.WriteLine($"Dialogue {character.startDialogueId}");
+                    if (character.dialogueId > 0)
+                        assetWriter.WriteLine($"Dialogue {character.dialogueId}");
+                    foreach (var k in Enum.GetValues(typeof(ELanguage)).ToEnumerable<ELanguage>())
+                    {
+                        if (character.editorName.ContainsKey(k) || character.displayName.ContainsKey(k))
+                        {
+                            using (StreamWriter localWriter = new StreamWriter(workDir + k + ".dat", false, Encoding.UTF8))
+                            {
+                                localWriter.WriteLine(WaterText);
+                                if (character.editorName.ContainsKey(k))
+                                    localWriter.WriteLine($"Name {character.editorName[k]}");
+                                else
+                                    localWriter.WriteLine($"Name UNDEFINED");
+                                if (character.displayName.ContainsKey(k))
+                                    localWriter.WriteLine($"Character {character.displayName[k]}");
+                                else
+                                    localWriter.WriteLine($"Character UNDEFINED");
+                            }
+                        }
+                    }
                 }
                 return true;
             }
