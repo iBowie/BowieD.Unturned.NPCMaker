@@ -18,5 +18,9 @@
         {
             return $"({R};{G};{B})";
         }
+        public string ToHEX()
+        {
+            return $"#{R:X2}{G:X2}{B:X2}";
+        }
     }
 }
