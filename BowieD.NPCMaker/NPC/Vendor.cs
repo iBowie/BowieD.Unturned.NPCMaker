@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BowieD.NPCMaker.NPC
 {
     public sealed class Vendor
     {
+        public Vendor()
+        {
+            guid = Guid.NewGuid().ToString("N");
+            title = new Dictionary<ELanguage, string>();
+            description = new Dictionary<ELanguage, string>();
+            shopSell = new List<VendorItem>();
+            shopBuy = new List<VendorItem>();
+        }
         public string guid;
         public ushort id;
         public Dictionary<ELanguage, string> title;

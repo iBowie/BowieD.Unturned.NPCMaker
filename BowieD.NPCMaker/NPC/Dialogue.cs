@@ -5,6 +5,7 @@ namespace BowieD.NPCMaker.NPC
     {
         public Dialogue()
         {
+            guid = Guid.NewGuid().ToString("N");
             messages = new List<Message>();
             responses = new List<Response>();
         }

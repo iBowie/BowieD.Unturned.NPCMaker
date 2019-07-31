@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BowieD.NPCMaker.NPC
 {
@@ -6,6 +7,7 @@ namespace BowieD.NPCMaker.NPC
     {
         public Character()
         {
+            guid = Guid.NewGuid().ToString("N");
             editorName = new Dictionary<ELanguage, string>();
             displayName = new Dictionary<ELanguage, string>();
             visibilityConditions = new List<Condition.Condition>();
