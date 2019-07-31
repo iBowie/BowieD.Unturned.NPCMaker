@@ -1,8 +1,10 @@
-﻿namespace BowieD.NPCMaker.NPC.Condition
+﻿using System.Collections.Generic;
+
+namespace BowieD.NPCMaker.NPC.Condition
 {
     public abstract class Condition
     {
         public abstract string ConditionType { get; }
-        public string localization;
+        public Dictionary<ELanguage, string> localization;
     }
 }

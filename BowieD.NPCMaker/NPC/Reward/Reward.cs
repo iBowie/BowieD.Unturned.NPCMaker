@@ -1,8 +1,10 @@
-﻿namespace BowieD.NPCMaker.NPC.Reward
+﻿using System.Collections.Generic;
+
+namespace BowieD.NPCMaker.NPC.Reward
 {
     public abstract class Reward
     {
         public abstract string RewardType { get; }
-        public string localization;
+        public Dictionary<ELanguage, string> localization;
     }
 }
