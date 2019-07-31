@@ -17,6 +17,8 @@ namespace BowieD.NPCMaker.Export
     public static class ExportTool
     {
         private const string WaterText = "// Made in NPC Maker 2.0";
+        private const string NoValue = "UNDEFINED";
+
         public static bool ExportCharacter(Character character, string directory)
         {
             try
@@ -104,12 +106,12 @@ namespace BowieD.NPCMaker.Export
                                 if (character.editorName.ContainsKey(k))
                                     localWriter.WriteLine(character.editorName[k]);
                                 else
-                                    localWriter.WriteLine("UNDEFINED");
+                                    localWriter.WriteLine(NoValue);
                                 localWriter.Write("Character ");
                                 if (character.displayName.ContainsKey(k))
                                     localWriter.WriteLine(character.displayName[k]);
                                 else
-                                    localWriter.WriteLine("UNDEFINED");
+                                    localWriter.WriteLine(NoValue);
                             }
                         }
                     }
@@ -221,9 +223,9 @@ namespace BowieD.NPCMaker.Export
                                     {
                                         localWriter.Write($"Message_{messageId}_Page_{pageId} ");
                                         if (dialogue.messages[messageId].pages[pageId].ContainsKey(k))
-                                            localWriter.WriteLine($"{dialogue.messages[messageId].pages[pageId][k]}");
+                                            localWriter.WriteLine(dialogue.messages[messageId].pages[pageId][k]);
                                         else
-                                            localWriter.WriteLine($"UNDEFINED");
+                                            localWriter.WriteLine(NoValue);
                                     }
                                 }
                                 // responses
@@ -231,9 +233,9 @@ namespace BowieD.NPCMaker.Export
                                 {
                                     localWriter.Write($"Response_{responseId} ");
                                     if (dialogue.responses[responseId].text.ContainsKey(k))
-                                        localWriter.WriteLine($"{dialogue.responses[responseId].text[k]}");
+                                        localWriter.WriteLine(dialogue.responses[responseId].text[k]);
                                     else
-                                        localWriter.WriteLine($"UNDEFINED");
+                                        localWriter.WriteLine(NoValue);
                                 }
                             }
                         }
@@ -286,12 +288,74 @@ namespace BowieD.NPCMaker.Export
                                 if (vendor.title.ContainsKey(k))
                                     localWriter.WriteLine(vendor.title[k]);
                                 else
-                                    localWriter.WriteLine("UNDEFINED");
+                                    localWriter.WriteLine(NoValue);
                                 localWriter.Write("Description ");
                                 if (vendor.description.ContainsKey(k))
                                     localWriter.WriteLine(vendor.description[k]);
                                 else
-                                    localWriter.WriteLine("UNDEFINED");
+                                    localWriter.WriteLine(NoValue);
+                            }
+                        }
+                    }
+                }
+                return true;
+            }
+            catch { return false; }
+        }
+        public static bool ExportQuest(Quest quest, string directory)
+        {
+            try
+            {
+                string workDir = $"{directory}Quests{Path.DirectorySeparatorChar}{quest.guid}_{quest.id}{Path.DirectorySeparatorChar}";
+                Directory.CreateDirectory(workDir);
+                using (StreamWriter asset = new StreamWriter(workDir + "Asset.dat", false, Encoding.UTF8))
+                {
+                    asset.WriteLine(WaterText);
+                    if (AppConfig.Instance.exportGuid)
+                        asset.WriteLine($"GUID {quest.guid}");
+                    asset.WriteLine("Type Quest");
+                    asset.WriteLine($"ID {quest.id}");
+                    if (quest.conditions.Count > 0)
+                    {
+                        asset.WriteLine($"Conditions {quest.conditions.Count}");
+                        for (int k = 0; k < quest.conditions.Count; k++)
+                        {
+                            asset.WriteLine(ExportCondition(quest.conditions[k], "", k));
+                        }
+                    }
+                    if (quest.rewards.Count > 0)
+                    {
+                        asset.WriteLine($"Rewards {quest.rewards.Count}");
+                        for (int k = 0; k < quest.rewards.Count; k++)
+                        {
+                            asset.WriteLine(ExportReward(quest.rewards[k], "", k));
+                        }
+                    }
+                    foreach (var k in Enum.GetValues(typeof(ELanguage)).ToEnumerable<ELanguage>())
+                    {
+                        if (quest.title.ContainsKey(k) || quest.description.ContainsKey(k) ||
+                            quest.conditions.Any(d => d.localization.ContainsKey(k)))
+                        {
+                            using (StreamWriter localWriter = new StreamWriter(workDir + k + ".dat", false, Encoding.UTF8))
+                            {
+                                localWriter.WriteLine(WaterText);
+                                localWriter.Write("Name ");
+                                if (quest.title.ContainsKey(k))
+                                    localWriter.WriteLine(quest.title[k]);
+                                else
+                                    localWriter.WriteLine(NoValue);
+                                localWriter.Write("Description ");
+                                if (quest.description.ContainsKey(k))
+                                    localWriter.WriteLine(quest.description[k]);
+                                else
+                                    localWriter.WriteLine(NoValue);
+                                for (int c = 0; c < quest.conditions.Count; c++)
+                                {
+                                    if (quest.conditions[c].localization.ContainsKey(k))
+                                        localWriter.WriteLine(quest.conditions[c].localization[k]);
+                                    else
+                                        localWriter.WriteLine(NoValue);
+                                }
                             }
                         }
                     }
