@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BowieD.NPCMaker.NPC.Reward
+﻿namespace BowieD.NPCMaker.NPC.Reward
 {
     public abstract class Reward
     {
-
+        public abstract string RewardType { get; }
+        public string localization;
     }
 }

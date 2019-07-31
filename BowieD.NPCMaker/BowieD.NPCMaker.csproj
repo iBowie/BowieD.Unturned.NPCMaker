@@ -76,10 +76,15 @@
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Math\Mathf.cs" />
     <Compile Include="NPC\Character.cs" />
+    <Compile Include="NPC\Condition\Attributes\ConditionFieldAttribute.cs" />
     <Compile Include="NPC\Condition\Condition.cs" />
     <Compile Include="NPC\Dialogue.cs" />
     <Compile Include="NPC\ELanguage.cs" />
+    <Compile Include="NPC\ENPCLogicType.cs" />
+    <Compile Include="NPC\ENPCModificationType.cs" />
+    <Compile Include="NPC\ENPCOperationType.cs" />
     <Compile Include="NPC\ENPCPose.cs" />
+    <Compile Include="NPC\ENPCQuestStatus.cs" />
     <Compile Include="NPC\ESlotType.cs" />
     <Compile Include="NPC\Message.cs" />
     <Compile Include="NPC\Outfit.cs" />

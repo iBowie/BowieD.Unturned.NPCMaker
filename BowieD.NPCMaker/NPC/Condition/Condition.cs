@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BowieD.NPCMaker.NPC.Condition
+﻿namespace BowieD.NPCMaker.NPC.Condition
 {
     public abstract class Condition
     {
-
+        public abstract string ConditionType { get; }
+        public string localization;
     }
 }

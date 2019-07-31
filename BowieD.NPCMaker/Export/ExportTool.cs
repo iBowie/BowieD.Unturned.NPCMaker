@@ -4,6 +4,13 @@ using System.IO;
 using BowieD.NPCMaker.Extensions;
 using System.Text;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using BowieD.NPCMaker.NPC.Condition;
+using System.Reflection;
+using BowieD.NPCMaker.NPC.Condition.Attributes;
+using BowieD.NPCMaker.NPC.Reward;
+using BowieD.NPCMaker.NPC.Reward.Attributes;
 
 namespace BowieD.NPCMaker.Export
 {
@@ -125,7 +132,110 @@ namespace BowieD.NPCMaker.Export
                         asset.WriteLine($"GUID {dialogue.guid}");
                     asset.WriteLine($"Type Dialogue");
                     asset.WriteLine($"ID {dialogue.id}");
-
+                    if (dialogue.messages.Count > 0)
+                    {
+                        asset.WriteLine($"Messages {dialogue.messages.Count}");
+                        for (int k = 0; k < dialogue.messages.Count; k++)
+                        {
+                            Message msg = dialogue.messages[k];
+                            if (msg.pages.Count > 0)
+                            {
+                                asset.WriteLine($"Message_{k}_Pages {msg.pages.Count}");
+                            }
+                            List<Response> responses = dialogue.responses.Where(d => d.visibleMessages.Contains(k)).ToList();
+                            if (responses.Count > 0 && responses.Count < dialogue.responses.Count)
+                            {
+                                asset.WriteLine($"Message_{k}_Responses {responses.Count}");
+                                for (int c = 0; c < responses.Count; c++)
+                                {
+                                    Response response = responses[c];
+                                    int id = dialogue.responses.IndexOf(response);
+                                    asset.WriteLine($"Message_{k}_Response_{c} {id}");
+                                }
+                            }
+                            if (msg.conditions.Count > 0)
+                            {
+                                asset.WriteLine($"Message_{k}_Conditions {msg.conditions.Count}");
+                                for (int c = 0; c < msg.conditions.Count; c++)
+                                {
+                                    asset.WriteLine(ExportCondition(msg.conditions[c], $"Message_{k}_", c));
+                                }
+                            }
+                        }
+                    }
+                    if (dialogue.responses.Count > 0)
+                    {
+                        asset.WriteLine($"Responses {dialogue.responses.Count}");
+                        for (int k = 0; k < dialogue.responses.Count; k++)
+                        {
+                            Response response = dialogue.responses[k];
+                            if (response.visibleMessages.Count < dialogue.messages.Count)
+                            {
+                                asset.WriteLine($"Response_{k}_Messages {response.visibleMessages.Count}");
+                                for (int c = 0, ind = 0; c < dialogue.messages.Count; c++)
+                                {
+                                    if (response.visibleMessages.Contains(c))
+                                    {
+                                        asset.WriteLine($"Response_{k}_Message_{ind++} {c}");
+                                    }
+                                }
+                            }
+                            if (response.dialogueId > 0)
+                                asset.WriteLine($"Response_{k}_Dialogue {response.dialogueId}");
+                            if (response.questId > 0)
+                                asset.WriteLine($"Response_{k}_Quest {response.questId}");
+                            if (response.vendorId > 0)
+                                asset.WriteLine($"Response_{k}_Vendor {response.vendorId}");
+                            if (response.conditions.Count > 0)
+                            {
+                                asset.WriteLine($"Response_{k}_Conditions {response.conditions.Count}");
+                                for (int c = 0; c < response.conditions.Count; c++)
+                                {
+                                    asset.WriteLine(ExportCondition(response.conditions[c], $"Response_{k}_", c));
+                                }
+                            }
+                            if (response.rewards.Count > 0)
+                            {
+                                asset.WriteLine($"Response_{k}_Rewards {response.rewards.Count}");
+                                for (int c = 0; c < response.rewards.Count; c++)
+                                {
+                                    asset.WriteLine(ExportReward(response.rewards[c], $"Response_{k}_", c));
+                                }
+                            }
+                        }
+                    }
+                    foreach (var k in Enum.GetValues(typeof(ELanguage)).ToEnumerable<ELanguage>())
+                    {
+                        if (dialogue.messages.Any(d => d.pages.Any(m => m.ContainsKey(k))) ||
+                            dialogue.responses.Any(d => d.text.ContainsKey(k)))
+                        {
+                            using (StreamWriter localWriter = new StreamWriter(workDir + k + ".dat", false, Encoding.UTF8))
+                            {
+                                localWriter.WriteLine(WaterText);
+                                // messages
+                                for (int messageId = 0; messageId < dialogue.messages.Count; messageId++)
+                                {
+                                    for (int pageId = 0; pageId < dialogue.messages[messageId].pages.Count; pageId++)
+                                    {
+                                        localWriter.Write($"Message_{messageId}_Page_{pageId} ");
+                                        if (dialogue.messages[messageId].pages[pageId].ContainsKey(k))
+                                            localWriter.WriteLine($"{dialogue.messages[messageId].pages[pageId][k]}");
+                                        else
+                                            localWriter.WriteLine($"UNDEFINED");
+                                    }
+                                }
+                                // responses
+                                for (int responseId = 0; responseId < dialogue.responses.Count; responseId++)
+                                {
+                                    localWriter.Write($"Response_{responseId} ");
+                                    if (dialogue.responses[responseId].text.ContainsKey(k))
+                                        localWriter.WriteLine($"{dialogue.responses[responseId].text[k]}");
+                                    else
+                                        localWriter.WriteLine($"UNDEFINED");
+                                }
+                            }
+                        }
+                    }
                 }
                 return true;
             }
@@ -133,6 +243,44 @@ namespace BowieD.NPCMaker.Export
             {
                 return false;
             }
+        }
+        private static string ExportCondition(Condition condition, string prefix, int conditionIndex)
+        {
+            StringBuilder result = new StringBuilder();
+            result.AppendLine($"{prefix}Condition_{conditionIndex}_Type {condition.ConditionType}");
+            foreach (var field in condition.GetType().GetFields())
+            {
+                var conditionAttribute = field.GetCustomAttribute<ConditionFieldAttribute>();
+                if (conditionAttribute == null)
+                    continue;
+                string conditionFieldName = conditionAttribute.NameOnExport;
+                var flagAttribute = field.GetCustomAttribute<ConditionFlagAttribute>();
+                if (field.FieldType == typeof(Boolean) && flagAttribute != null)
+                {
+                    result.AppendLine($"{prefix}Condition_{conditionIndex}_{conditionFieldName}");
+                }
+                else
+                {
+                    var fieldValue = field.GetValue(condition);
+                    result.AppendLine($"{prefix}Condition_{conditionIndex}_{conditionFieldName} {fieldValue.ToString().FirstCharToUpper()}");
+                }
+            }
+            return result.ToString();
+        }
+        private static string ExportReward(Reward reward, string prefix, int rewardIndex)
+        {
+            StringBuilder result = new StringBuilder();
+            result.AppendLine($"{prefix}Reward_{rewardIndex}_Type {reward.RewardType}");
+            foreach (var field in reward.GetType().GetFields())
+            {
+                var rewardAttribute = field.GetCustomAttribute<RewardFieldAttribute>();
+                if (rewardAttribute == null)
+                    continue;
+                string rewardFieldName = rewardAttribute.NameOnExport;
+                var fieldValue = field.GetValue(reward);
+                result.AppendLine($"{prefix}Reward_{rewardIndex}_{rewardFieldName} {fieldValue.ToString().FirstCharToUpper()}");
+            }
+            return result.ToString();
         }
     }
 }
