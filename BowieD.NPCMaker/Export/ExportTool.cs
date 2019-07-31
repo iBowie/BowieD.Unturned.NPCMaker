@@ -282,5 +282,32 @@ namespace BowieD.NPCMaker.Export
             }
             return result.ToString();
         }
+        private static string ExportVendorItem(Vendor.VendorItem vendorItem, string prefix)
+        {
+            StringBuilder result = new StringBuilder();
+            switch (vendorItem)
+            {
+                case Vendor.Item vitem:
+                    result.AppendLine($"{prefix}_ID {vitem.id}");
+                    result.AppendLine($"{prefix}_Cost {vitem.price}");
+                    if (vitem.amount > 1)
+                        result.AppendLine($"{prefix}_Amount {vitem.amount}");
+                    break;
+                case Vendor.Vehicle vvehicle:
+                    result.AppendLine($"{prefix}_ID {vvehicle.id}");
+                    result.AppendLine($"{prefix}_Cost {vvehicle.price}");
+                    result.AppendLine($"{prefix}_Spawnpoint {vvehicle.spawnpoint}");
+                    break;
+            }
+            if (vendorItem.conditions.Count > 0)
+            {
+                result.AppendLine($"{prefix}_Conditions {vendorItem.conditions.Count}");
+                for (int k = 0; k < vendorItem.conditions.Count; k++)
+                {
+                    result.AppendLine(ExportCondition(vendorItem.conditions[k], prefix, k));
+                }
+            }
+            return result.ToString();
+        }
     }
 }
