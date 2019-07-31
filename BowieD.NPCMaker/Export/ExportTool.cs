@@ -29,7 +29,7 @@ namespace BowieD.NPCMaker.Export
                     if (AppConfig.Instance.exportGuid)
                         assetWriter.WriteLine($"GUID {character.guid}");
                     assetWriter.WriteLine($"ID {character.id}");
-                    assetWriter.WriteLine($"Type NPC");
+                    assetWriter.WriteLine("Type NPC");
                     if (character.defaultClothing.shirt > 0)
                         assetWriter.WriteLine($"Shirt {character.defaultClothing.shirt}");
                     if (character.defaultClothing.pants > 0)
@@ -90,7 +90,7 @@ namespace BowieD.NPCMaker.Export
                     assetWriter.WriteLine($"Color_Hair {character.hairColor.ToHEX()}");
                     assetWriter.WriteLine($"Pose {character.pose.ToString()}");
                     if (character.leftHanded)
-                        assetWriter.WriteLine($"Backward");
+                        assetWriter.WriteLine("Backward");
                     if (character.dialogueId > 0)
                         assetWriter.WriteLine($"Dialogue {character.dialogueId}");
                     foreach (var k in Enum.GetValues(typeof(ELanguage)).ToEnumerable<ELanguage>())
@@ -100,14 +100,16 @@ namespace BowieD.NPCMaker.Export
                             using (StreamWriter localWriter = new StreamWriter(workDir + k + ".dat", false, Encoding.UTF8))
                             {
                                 localWriter.WriteLine(WaterText);
+                                localWriter.Write("Name ");
                                 if (character.editorName.ContainsKey(k))
-                                    localWriter.WriteLine($"Name {character.editorName[k]}");
+                                    localWriter.WriteLine(character.editorName[k]);
                                 else
-                                    localWriter.WriteLine($"Name UNDEFINED");
+                                    localWriter.WriteLine("UNDEFINED");
+                                localWriter.Write("Character ");
                                 if (character.displayName.ContainsKey(k))
-                                    localWriter.WriteLine($"Character {character.displayName[k]}");
+                                    localWriter.WriteLine(character.displayName[k]);
                                 else
-                                    localWriter.WriteLine($"Character UNDEFINED");
+                                    localWriter.WriteLine("UNDEFINED");
                             }
                         }
                     }
@@ -123,14 +125,14 @@ namespace BowieD.NPCMaker.Export
         {
             try
             {
-                string workDir = directory = $"Dialogues{Path.DirectorySeparatorChar}{dialogue.guid}_{dialogue.id}{Path.DirectorySeparatorChar}";
+                string workDir = $"{directory}Dialogues{Path.DirectorySeparatorChar}{dialogue.guid}_{dialogue.id}{Path.DirectorySeparatorChar}";
                 Directory.CreateDirectory(workDir);
                 using (StreamWriter asset = new StreamWriter(workDir + "Asset.dat", false, Encoding.UTF8))
                 {
                     asset.WriteLine(WaterText);
                     if (AppConfig.Instance.exportGuid)
                         asset.WriteLine($"GUID {dialogue.guid}");
-                    asset.WriteLine($"Type Dialogue");
+                    asset.WriteLine("Type Dialogue");
                     asset.WriteLine($"ID {dialogue.id}");
                     if (dialogue.messages.Count > 0)
                     {
@@ -243,6 +245,60 @@ namespace BowieD.NPCMaker.Export
             {
                 return false;
             }
+        }
+        public static bool ExportVendor(Vendor vendor, string directory)
+        {
+            try
+            {
+                string workDir = $"{directory}Vendors{Path.DirectorySeparatorChar}{vendor.guid}_{vendor.id}{Path.DirectorySeparatorChar}";
+                Directory.CreateDirectory(workDir);
+                using (StreamWriter asset = new StreamWriter(workDir + "Asset.dat", false, Encoding.UTF8))
+                {
+                    asset.WriteLine(WaterText);
+                    if (AppConfig.Instance.exportGuid)
+                        asset.WriteLine($"GUID {vendor.guid}");
+                    asset.WriteLine("Type Vendor");
+                    asset.WriteLine($"ID {vendor.id}");
+                    if (vendor.shopBuy.Count > 0)
+                    {
+                        asset.WriteLine($"Buying {vendor.shopBuy.Count}");
+                        for (int k = 0; k < vendor.shopBuy.Count; k++)
+                        {
+                            asset.WriteLine(ExportVendorItem(vendor.shopBuy[k], $"Buying_{k}_"));
+                        }
+                    }
+                    if (vendor.shopSell.Count > 0)
+                    {
+                        asset.WriteLine($"Selling {vendor.shopSell.Count}");
+                        for (int k = 0; k < vendor.shopSell.Count; k++)
+                        {
+                            asset.WriteLine(ExportVendorItem(vendor.shopSell[k], $"Selling_{k}_"));
+                        }
+                    }
+                    foreach (var k in Enum.GetValues(typeof(ELanguage)).ToEnumerable<ELanguage>())
+                    {
+                        if (vendor.title.ContainsKey(k) || vendor.description.ContainsKey(k))
+                        {
+                            using (StreamWriter localWriter = new StreamWriter(workDir + k + ".dat", false, Encoding.UTF8))
+                            {
+                                localWriter.WriteLine(WaterText);
+                                localWriter.Write("Name ");
+                                if (vendor.title.ContainsKey(k))
+                                    localWriter.WriteLine(vendor.title[k]);
+                                else
+                                    localWriter.WriteLine("UNDEFINED");
+                                localWriter.Write("Description ");
+                                if (vendor.description.ContainsKey(k))
+                                    localWriter.WriteLine(vendor.description[k]);
+                                else
+                                    localWriter.WriteLine("UNDEFINED");
+                            }
+                        }
+                    }
+                }
+                return true;
+            }
+            catch { return false; }
         }
         private static string ExportCondition(Condition condition, string prefix, int conditionIndex)
         {
