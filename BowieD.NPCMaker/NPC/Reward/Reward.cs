@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace BowieD.NPCMaker.NPC.Reward
+﻿namespace BowieD.NPCMaker.NPC.Reward
 {
     public abstract class Reward
     {
