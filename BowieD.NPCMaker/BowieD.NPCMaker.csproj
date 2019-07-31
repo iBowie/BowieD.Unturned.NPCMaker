@@ -44,6 +44,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>BowieD.NPCMaker.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -77,7 +80,9 @@
     <Compile Include="Math\Mathf.cs" />
     <Compile Include="NPC\Character.cs" />
     <Compile Include="NPC\Condition\Attributes\ConditionFieldAttribute.cs" />
+    <Compile Include="NPC\Condition\Attributes\ConditionFlagAttribute.cs" />
     <Compile Include="NPC\Condition\Condition.cs" />
+    <Compile Include="NPC\Condition\ConditionCompareFlags.cs" />
     <Compile Include="NPC\Dialogue.cs" />
     <Compile Include="NPC\ELanguage.cs" />
     <Compile Include="NPC\ENPCLogicType.cs" />
@@ -88,8 +93,11 @@
     <Compile Include="NPC\ESlotType.cs" />
     <Compile Include="NPC\Message.cs" />
     <Compile Include="NPC\Outfit.cs" />
+    <Compile Include="NPC\Quest.cs" />
     <Compile Include="NPC\Response.cs" />
+    <Compile Include="NPC\Reward\Attributes\RewardFieldAttribute.cs" />
     <Compile Include="NPC\Reward\Reward.cs" />
+    <Compile Include="NPC\Vendor.cs" />
     <Compile Include="Storage\Project.cs" />
     <Compile Include="Updater\ECheckResult.cs" />
     <Compile Include="Updater\GitHubUpdater.cs" />
