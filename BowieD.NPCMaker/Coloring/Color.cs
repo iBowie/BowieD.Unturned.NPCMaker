@@ -2,6 +2,12 @@
 {
     public struct Color
     {
+        public Color(byte r, byte g, byte b)
+        {
+            this.R = r;
+            this.G = g;
+            this.B = b;
+        }
         public byte R;
         public byte G;
         public byte B;
