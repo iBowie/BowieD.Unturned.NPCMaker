@@ -13,6 +13,7 @@ namespace BowieD.NPCMaker
     public partial class App : Application
     {
         public static Updater.IUpdater Updater { get; set; }
+        public static List<Logging.ILogger> Loggers { get; private set; } = new List<Logging.ILogger>();
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);

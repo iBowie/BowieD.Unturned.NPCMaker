@@ -74,6 +74,7 @@
     <Compile Include="Coloring\Color.cs" />
     <Compile Include="Export\ExportTool.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
+    <Compile Include="Extensions\ILoggerExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
