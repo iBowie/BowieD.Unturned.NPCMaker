@@ -1,10 +1,8 @@
 ﻿using BowieD.NPCMaker.Storage;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
+using System.Net;
 using System.Windows;
 
 namespace BowieD.NPCMaker
@@ -14,9 +12,14 @@ namespace BowieD.NPCMaker
     /// </summary>
     public partial class App : Application
     {
+        public static Updater.IUpdater Updater { get; set; }
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            if (!Directory.Exists(PathUtil.GetWorkDir()))
+                Directory.CreateDirectory(PathUtil.GetWorkDir());
+            UnpackLibraries();
+            Updater = new Updater.GitHubUpdater();
         }
 
         public void runCharacterExportTest()
@@ -77,6 +80,27 @@ namespace BowieD.NPCMaker
             string cnd2 = Export.ExportTool.ExportCondition(cnd, "", 0);
             MessageBox.Show($"cnd1: {Environment.NewLine}{cnd1}");
             MessageBox.Show($"cnd2: {Environment.NewLine}{cnd2}");
+        }
+        public void runUpdateTest()
+        {
+            Updater.DownloadUpdater(PathUtil.GetWorkDir() + "updater.exe");
+            System.Diagnostics.Process.Start(PathUtil.GetWorkDir() + "updater.exe", $"\"{System.Reflection.Assembly.GetEntryAssembly().Location}\"");
+            Application.Current.Shutdown();
+        }
+        public void UnpackLibraries()
+        {
+            copyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, PathUtil.GetWorkDir() + "Newtonsoft.Json.dll");
+        }
+        private void copyResource(byte[] resource, string file)
+        {
+            try
+            {
+                using (Stream output = File.OpenWrite(file))
+                {
+                    output.Write(resource, 0, resource.Length);
+                }
+            }
+            catch { }
         }
     }
 }
