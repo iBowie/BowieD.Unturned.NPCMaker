@@ -10,7 +10,7 @@ namespace BowieD.NPCMaker.Updater
     public sealed class GitHubUpdater : IUpdater
     {
         private const string url = @"https://api.github.com/repos/iBowie/BowieD.Unturned.NPCMaker/releases/latest";
-        private const string updaterUrl = @"https://raw.githubusercontent.com/iBowie/BowieD.Unturned.NPCMaker/master/BowieD.NPCMaker.Updater/BowieD.NPCMaker.Updater.exe"
+        private const string updaterUrl = @"https://raw.githubusercontent.com/iBowie/BowieD.Unturned.NPCMaker/master/BowieD.NPCMaker.Updater/BowieD.NPCMaker.Updater.exe";
         public ECheckResult CheckUpdate()
         {
             try
@@ -50,6 +50,13 @@ namespace BowieD.NPCMaker.Updater
             catch
             {
                 return ECheckResult.Error;
+            }
+        }
+        public void DownloadUpdater(string path)
+        {
+            using (WebClient client = new WebClient())
+            {
+                client.DownloadFile(updaterUrl, path);
             }
         }
     }

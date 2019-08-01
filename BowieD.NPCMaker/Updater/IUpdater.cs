@@ -3,5 +3,6 @@
     public interface IUpdater
     {
         ECheckResult CheckUpdate();
+        void DownloadUpdater(string path);
     }
 }
