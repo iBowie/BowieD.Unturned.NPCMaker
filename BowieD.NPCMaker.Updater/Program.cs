@@ -85,9 +85,11 @@ namespace BowieD.NPCMaker.Updater
                 {
 
                 }
+                WriteLine("Trying again in 1 second...", ConsoleColor.White);
+                Thread.Sleep(1000);
             }
-            Console.WriteLine($"Update failed. Try again later.");
-            Console.WriteLine($"Press any key to close.");
+            WriteLine($"Update failed. Try again later.", ConsoleColor.Red);
+            WriteLine($"Press any key to close.", ConsoleColor.White);
             Console.ReadKey(true);
         }
         static void WriteLine(object text, ConsoleColor color)
