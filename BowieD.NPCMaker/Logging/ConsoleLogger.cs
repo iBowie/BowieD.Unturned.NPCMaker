@@ -14,6 +14,7 @@ namespace BowieD.NPCMaker.Logging
             var oldclr = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"[{DateTime.Now}] [ERROR] - {message}");
+            Console.WriteLine($"[{DateTime.Now}] [ERROR] - {exception.StackTrace}");
             Console.ForegroundColor = oldclr;
         }
 
@@ -28,6 +29,14 @@ namespace BowieD.NPCMaker.Logging
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"[{DateTime.Now}] [WARN] - {message}");
             Console.ForegroundColor = oldclr;
+        }
+        public void Start()
+        {
+
+        }
+        public void Stop()
+        {
+
         }
     }
 }

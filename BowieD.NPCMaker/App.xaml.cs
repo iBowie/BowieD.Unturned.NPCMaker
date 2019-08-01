@@ -1,4 +1,7 @@
-﻿using BowieD.NPCMaker.Storage;
+﻿using BowieD.NPCMaker.Extensions;
+using BowieD.NPCMaker.Logging;
+using BowieD.NPCMaker.Storage;
+using BowieD.NPCMaker.Updater;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,15 +15,20 @@ namespace BowieD.NPCMaker
     /// </summary>
     public partial class App : Application
     {
-        public static Updater.IUpdater Updater { get; set; }
-        public static List<Logging.ILogger> Loggers { get; private set; } = new List<Logging.ILogger>();
+        public static IUpdater Updater { get; set; }
+        public static List<ILogger> Loggers { get; private set; } = new List<ILogger>();
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             if (!Directory.Exists(PathUtil.GetWorkDir()))
                 Directory.CreateDirectory(PathUtil.GetWorkDir());
             UnpackLibraries();
-            Updater = new Updater.GitHubUpdater();
+            Updater = new GitHubUpdater();
+            Loggers.Add(new ConsoleLogger());
+            Loggers.Add(new FileLogger());
+            Loggers.Start();
+            Loggers.LogInfo("Loggers init!");
+            Loggers.Stop();
         }
 
         public void runCharacterExportTest()

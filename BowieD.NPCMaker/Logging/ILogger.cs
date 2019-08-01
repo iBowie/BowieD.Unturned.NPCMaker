@@ -8,5 +8,7 @@ namespace BowieD.NPCMaker.Logging
         void LogWarning(string message);
         void LogException(string message, Exception exception);
         void LogDebug(string message);
+        void Start();
+        void Stop();
     }
 }

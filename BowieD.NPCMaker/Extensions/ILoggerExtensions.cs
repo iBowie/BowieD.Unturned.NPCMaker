@@ -34,5 +34,15 @@ namespace BowieD.NPCMaker.Extensions
                 k.LogException(message, exception);
             }
         }
+        public static void Start(this IEnumerable<ILogger> loggers)
+        {
+            foreach (var k in loggers)
+                k.Start();
+        }
+        public static void Stop(this IEnumerable<ILogger> loggers)
+        {
+            foreach (var k in loggers)
+                k.Stop();
+        }
     }
 }
