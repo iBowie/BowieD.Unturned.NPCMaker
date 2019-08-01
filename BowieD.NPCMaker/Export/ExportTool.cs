@@ -23,7 +23,7 @@ namespace BowieD.NPCMaker.Export
         {
             try
             {
-                string workDir = $"{directory}Characters{Path.DirectorySeparatorChar}{character.editorName}_{character.id}{Path.DirectorySeparatorChar}";
+                string workDir = $"{directory}Characters{Path.DirectorySeparatorChar}{character.guid}_{character.id}{Path.DirectorySeparatorChar}";
                 Directory.CreateDirectory(workDir);
                 using (StreamWriter assetWriter = new StreamWriter(workDir + "Asset.dat", false, Encoding.UTF8))
                 {
@@ -364,7 +364,7 @@ namespace BowieD.NPCMaker.Export
             }
             catch { return false; }
         }
-        private static string ExportCondition(Condition condition, string prefix, int conditionIndex)
+        internal static string ExportCondition(Condition condition, string prefix, int conditionIndex)
         {
             StringBuilder result = new StringBuilder();
             result.AppendLine($"{prefix}Condition_{conditionIndex}_Type {condition.ConditionType}");
@@ -377,7 +377,8 @@ namespace BowieD.NPCMaker.Export
                 var flagAttribute = field.GetCustomAttribute<ConditionFlagAttribute>();
                 if (field.FieldType == typeof(Boolean) && flagAttribute != null)
                 {
-                    result.AppendLine($"{prefix}Condition_{conditionIndex}_{conditionFieldName}");
+                    if ((bool)field.GetValue(condition) == true)
+                        result.AppendLine($"{prefix}Condition_{conditionIndex}_{conditionFieldName}");
                 }
                 else
                 {
@@ -387,7 +388,7 @@ namespace BowieD.NPCMaker.Export
             }
             return result.ToString();
         }
-        private static string ExportReward(Reward reward, string prefix, int rewardIndex)
+        internal static string ExportReward(Reward reward, string prefix, int rewardIndex)
         {
             StringBuilder result = new StringBuilder();
             result.AppendLine($"{prefix}Reward_{rewardIndex}_Type {reward.RewardType}");
@@ -402,7 +403,7 @@ namespace BowieD.NPCMaker.Export
             }
             return result.ToString();
         }
-        private static string ExportVendorItem(Vendor.VendorItem vendorItem, string prefix)
+        internal static string ExportVendorItem(Vendor.VendorItem vendorItem, string prefix)
         {
             StringBuilder result = new StringBuilder();
             switch (vendorItem)
