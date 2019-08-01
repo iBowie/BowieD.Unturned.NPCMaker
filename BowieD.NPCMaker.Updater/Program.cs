@@ -81,9 +81,9 @@ namespace BowieD.NPCMaker.Updater
                         return;
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-
+                    WriteLine($"FAILED: Exception: {ex.Message}", ConsoleColor.Red);
                 }
                 WriteLine("Trying again in 1 second...", ConsoleColor.White);
                 Thread.Sleep(1000);
