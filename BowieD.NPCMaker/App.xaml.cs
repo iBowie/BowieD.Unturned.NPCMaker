@@ -23,12 +23,13 @@ namespace BowieD.NPCMaker
             if (!Directory.Exists(PathUtil.GetWorkDir()))
                 Directory.CreateDirectory(PathUtil.GetWorkDir());
             UnpackLibraries();
-            Updater = new GitHubUpdater();
-            Loggers.Add(new ConsoleLogger());
-            Loggers.Add(new FileLogger());
-            Loggers.Start();
-            Loggers.LogInfo("Loggers init!");
-            Loggers.Stop();
+            InitLoggers();
+            Exit += new ExitEventHandler((object sender, ExitEventArgs exitArgs) =>
+            {
+                Loggers.LogInfo("Closing...");
+                Loggers.Stop();
+            });
+            Application.Current.Shutdown();
         }
 
         public void runCharacterExportTest()
@@ -99,6 +100,14 @@ namespace BowieD.NPCMaker
         public void UnpackLibraries()
         {
             copyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, PathUtil.GetWorkDir() + "Newtonsoft.Json.dll");
+        }
+        public void InitLoggers()
+        {
+            Updater = new GitHubUpdater();
+            Loggers.Add(new ConsoleLogger());
+            Loggers.Add(new FileLogger());
+            Loggers.Start();
+            Loggers.LogInfo("Loggers init!");
         }
         private void copyResource(byte[] resource, string file)
         {
