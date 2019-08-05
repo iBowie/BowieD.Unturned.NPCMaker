@@ -19,6 +19,7 @@ namespace BowieD.NPCMaker.NPC
         public Dictionary<ELanguage, string> description;
         public List<VendorItem> shopSell;
         public List<VendorItem> shopBuy;
+        public bool disableSorting;
 
         public abstract class VendorItem
         {

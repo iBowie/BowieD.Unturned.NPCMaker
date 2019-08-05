@@ -277,6 +277,8 @@ namespace BowieD.NPCMaker.Export
                             asset.WriteLine(ExportVendorItem(vendor.shopSell[k], $"Selling_{k}_"));
                         }
                     }
+                    if (vendor.disableSorting)
+                        asset.WriteLine($"Disable_Sorting");
                     foreach (var k in Enum.GetValues(typeof(ELanguage)).ToEnumerable<ELanguage>())
                     {
                         if (vendor.title.ContainsKey(k) || vendor.description.ContainsKey(k))
