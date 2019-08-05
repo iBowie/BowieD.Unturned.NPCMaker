@@ -1,0 +1,39 @@
+{
+	"Author": "Bowie_D",
+	"LastUpdate": "5th of August 2019",
+	"General":
+	{
+		"Configuration_Title": "Options",
+		"Configuration_Save": "Save"
+	},
+	"Options":
+	{
+		"locale": "Language",
+		"exportGuid": "Export GUID",
+		"animateControls": "Animation"
+	},
+	"Character": 
+	{
+
+	},
+	"Dialogue":
+	{
+
+	},
+	"Vendor":
+	{
+
+	},
+	"Quest":
+	{
+
+	},
+	"Condition":
+	{
+
+	},
+	"Reward":
+	{
+
+	}
+}
