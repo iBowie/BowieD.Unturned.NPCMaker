@@ -72,10 +72,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Coloring\Color.cs" />
+    <Compile Include="Configuration\Attributes\ConfigurationFieldAttribute.cs" />
     <Compile Include="Export\ExportTool.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Extensions\ILoggerExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Localization\Localization.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\FileLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
@@ -138,11 +140,15 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\Localization\English.localization" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Forms\" />
+    <Folder Include="Themes\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Libraries\Newtonsoft.Json.dll" />
   </ItemGroup>
