@@ -245,6 +245,7 @@
     <v:String x:Key="vendor_Item_Format_Sell">Type: Item, ID: %id%, Cost: %cost%</v:String>
     <v:String x:Key="vendorEditor_Edit_Conditions">Edit Conditions</v:String>
     <v:String x:Key="vendorEditor_Save">Save Vendor Item</v:String>
+    <v:String x:Key="vendor_DisableSorting">Disable sorting</v:String>
 
     <v:String x:Key="conditionEditor_Save">Save condition</v:String>
     <v:String x:Key="conditionEditor_Title">Edit condition</v:String>

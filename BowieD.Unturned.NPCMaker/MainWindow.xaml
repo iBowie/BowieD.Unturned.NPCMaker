@@ -719,6 +719,7 @@
                         <TextBlock  Grid.Column="1" HorizontalAlignment="Right" Margin="0,14,10,0" TextWrapping="Wrap" Text="{DynamicResource vendor_Title}" VerticalAlignment="Top" Width="128" Height="16"/>
                         <TextBox  Grid.Column="1" Name="vendorDescTxtBox" Height="26" VerticalAlignment="Bottom" Margin="10,0,146,10"/>
                         <TextBlock  Grid.Column="1" Width="128" HorizontalAlignment="Right" Margin="0,0,10,14" TextWrapping="Wrap" Text="{DynamicResource vendor_Desc}" VerticalAlignment="Bottom" Height="16"/>
+                        <CheckBox Name="vendorDisableSortingBox" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Content="{DynamicResource vendor_DisableSorting}" Margin="10,10,0,0" Grid.RowSpan="2"/>
                         <Button Grid.Column="2" Name="vendorSaveButton" Height="31" ToolTip="{DynamicResource vendor_Save}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>

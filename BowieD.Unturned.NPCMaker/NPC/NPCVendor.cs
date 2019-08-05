@@ -24,6 +24,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public string vendorTitle;
         public string vendorDescription;
         public List<VendorItem> items;
+        public bool disableSorting;
         [XmlIgnore]
         public List<VendorItem> BuyItems => (items ?? new List<VendorItem>()).Where(d => d.isBuy).ToList();
         [XmlIgnore]

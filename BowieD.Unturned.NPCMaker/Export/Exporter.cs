@@ -317,6 +317,8 @@ namespace BowieD.Unturned.NPCMaker.Export
                                 }
                             }
                         }
+                        if (vendor.disableSorting)
+                            asset.WriteLine("Disable_Sorting");
 
                         local.WriteLine($"Name {vendor.vendorTitle}");
                         local.WriteLine($"Description {vendor.vendorDescription}");

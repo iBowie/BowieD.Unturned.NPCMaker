@@ -70,7 +70,8 @@ namespace BowieD.Unturned.NPCMaker.Editors
                     id = (ushort)(MainWindow.Instance.vendorIdTxtBox.Value ?? 0),
                     vendorDescription = MainWindow.Instance.vendorDescTxtBox.Text,
                     vendorTitle = MainWindow.Instance.vendorTitleTxtBox.Text,
-                    Comment = MainWindow.Instance.vendor_commentbox.Text
+                    Comment = MainWindow.Instance.vendor_commentbox.Text,
+                    disableSorting = MainWindow.Instance.vendorDisableSortingBox.IsChecked ?? false
                 };
             }
             set
@@ -88,6 +89,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 MainWindow.Instance.vendorTitleTxtBox.Text = value.vendorTitle;
                 MainWindow.Instance.vendorDescTxtBox.Text = value.vendorDescription;
                 MainWindow.Instance.vendor_commentbox.Text = value.Comment;
+                MainWindow.Instance.vendorDisableSortingBox.IsChecked = value.disableSorting;
                 // Logger.Log($"Set vendor {value.id}");
             }
         }
@@ -109,6 +111,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.Instance.vendorListSellItems.Children.Clear();
             MainWindow.Instance.vendorDescTxtBox.Text = "";
             MainWindow.Instance.vendorTitleTxtBox.Text = "";
+            MainWindow.Instance.vendorDisableSortingBox.IsChecked = false;
             Logger.Log($"Vendor {MainWindow.Instance.vendorIdTxtBox.Value} cleared!");
         }
         public void Save()

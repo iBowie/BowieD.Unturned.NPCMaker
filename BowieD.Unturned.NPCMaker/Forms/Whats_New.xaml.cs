@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Forms;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
@@ -15,6 +16,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
             updateTitle.Text = bodyTitle;
             updateText.Text = mainText.Replace("`", Environment.NewLine);
             mainButton.Content = buttonName;
+            Height = SystemParameters.PrimaryScreenHeight / 2;
+            Width = SystemParameters.PrimaryScreenWidth / 2;
         }
 
         private void MainButton_Click(object sender, RoutedEventArgs e)

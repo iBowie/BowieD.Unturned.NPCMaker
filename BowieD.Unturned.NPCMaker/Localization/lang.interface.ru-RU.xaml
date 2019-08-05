@@ -245,6 +245,7 @@
     <v:String x:Key="vendor_Item_Format_Sell">Тип: Предмет, ID: %id%, Цена: %cost%</v:String>
     <v:String x:Key="vendorEditor_Edit_Conditions">Условия</v:String>
     <v:String x:Key="vendorEditor_Save">Сохранить предмет</v:String>
+    <v:String x:Key="vendor_DisableSorting">Отключить сортировку</v:String>
 
     <v:String x:Key="conditionEditor_Save">Сохранить условие</v:String>
     <v:String x:Key="conditionEditor_Title">Изменить условие</v:String>
