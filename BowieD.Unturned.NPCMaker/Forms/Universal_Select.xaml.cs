@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Config;
+using BowieD.Unturned.NPCMaker.Localization;
 using System.Windows;
 using System.Windows.Controls;
 using static BowieD.Unturned.NPCMaker.BetterControls.Universal_ItemList;
@@ -13,7 +14,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         public Universal_Select(ReturnType returnType)
         {
             InitializeComponent();
-            double scale = Config.Configuration.Properties.scale;
+            double scale = AppConfig.Instance.scale;
             this.Width *= scale;
             this.Height *= scale;
             this.MinWidth *= scale;

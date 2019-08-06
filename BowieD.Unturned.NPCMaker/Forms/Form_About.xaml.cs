@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Config;
+using System;
 using System.Windows;
 
 namespace BowieD.Unturned.NPCMaker.Forms
@@ -15,7 +16,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             r = r.Replace("%version%", MainWindow.Version.ToString());
             r = r.Replace(@"\n", Environment.NewLine);
             mainText.Text = r;
-            double scale = Config.Configuration.Properties.scale;
+            double scale = AppConfig.Instance.scale;
             this.Height *= scale;
             this.Width *= scale;
             gridScale.ScaleX = scale;

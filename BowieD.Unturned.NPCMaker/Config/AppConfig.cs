@@ -46,6 +46,7 @@ namespace BowieD.Unturned.NPCMaker.Config
             experimentalFeatures = false;
             animateControls = true;
             autoUpdate = true;
+            locale = "en-US";
         }
         public static string Directory
         {

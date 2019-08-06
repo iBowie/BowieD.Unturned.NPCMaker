@@ -67,7 +67,7 @@ namespace BowieD.Unturned.NPCMaker
             Proxy = new PropertyProxy(this);
             Proxy.RegisterEvents();
             #region THEME SETUP
-            var theme = ThemeManager.Themes.ContainsKey(AppConfig.Instance.currentTheme) ? ThemeManager.Themes[AppConfig.Instance.currentTheme] : ThemeManager.Themes["Metro/LightGreen"];
+            var theme = ThemeManager.Themes.ContainsKey(AppConfig.Instance.currentTheme ?? "") ? ThemeManager.Themes[AppConfig.Instance.currentTheme] : ThemeManager.Themes["Metro/LightGreen"];
             ThemeManager.Apply(theme);
 #endregion
 #region OPEN_WITH

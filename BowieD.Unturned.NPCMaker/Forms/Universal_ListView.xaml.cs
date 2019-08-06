@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.BetterControls;
+using BowieD.Unturned.NPCMaker.Config;
 using BowieD.Unturned.NPCMaker.Localization;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 Add(uil);
             }
-            double scale = Config.Configuration.Properties.scale;
+            double scale = AppConfig.Instance.scale;
             gridScale.ScaleX = scale;
             gridScale.ScaleY = scale;
             Height *= scale;

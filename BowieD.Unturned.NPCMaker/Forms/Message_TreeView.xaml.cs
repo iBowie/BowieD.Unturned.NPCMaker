@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using BowieD.Unturned.NPCMaker.Config;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -11,8 +12,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             InitializeComponent();
             _count = count;
-            Height *= Config.Configuration.Properties.scale;
-            Width *= Config.Configuration.Properties.scale;
+            Height *= AppConfig.Instance.scale;
+            Width *= AppConfig.Instance.scale;
             for (int k = 0; k < count; k++)
             {
                 var box = new CheckBox();

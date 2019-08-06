@@ -6,6 +6,7 @@ using System.Windows.Media.Animation;
 using System.Linq;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 using System;
+using BowieD.Unturned.NPCMaker.Config;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
@@ -18,7 +19,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             InitializeComponent();
 
-            double scale = Config.Configuration.Properties.scale;
+            double scale = AppConfig.Instance.scale;
             gridScale.ScaleX = scale;
             gridScale.ScaleY = scale;
             Width *= scale;
@@ -64,7 +65,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 return;
             if (Selected_ItemType == ItemType.ITEM)
             {
-                if (Config.Configuration.Properties.animateControls)
+                if (AppConfig.Instance.animateControls)
                 {
                     txtBoxSpawnpoint.BeginAnimation(OpacityProperty, DisappearAnimation(1));
                     labelSpawnpoint.BeginAnimation(OpacityProperty, DisappearAnimation(1));
@@ -83,7 +84,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             }
             else
             {
-                if (Config.Configuration.Properties.animateControls)
+                if (AppConfig.Instance.animateControls)
                 {
                     DoubleAnimation opacityAnimation = new DoubleAnimation(0, 1, new Duration(new System.TimeSpan(0, 0, 0, 0, 500)));
                     txtBoxSpawnpoint.BeginAnimation(OpacityProperty, AppearAnimation(0));

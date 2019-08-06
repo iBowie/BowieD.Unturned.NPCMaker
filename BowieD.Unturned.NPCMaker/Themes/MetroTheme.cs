@@ -41,8 +41,7 @@ namespace BowieD.Unturned.NPCMaker.Themes
                 var resourceDictionary = new ResourceDictionary() { Source = new Uri($"pack://application:,,,/MahApps.Metro;component/Styles/Themes/{DictionaryName}.xaml") };
                 if (resourceDictionary == null)
                 {
-                    Config.Configuration.DefaultTheme.Apply();
-                    return;
+                    throw new NullReferenceException();
                 }
                 Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
                 App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(R, G, B));

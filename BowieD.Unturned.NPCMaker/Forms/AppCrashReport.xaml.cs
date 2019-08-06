@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Logging;
+﻿using BowieD.Unturned.NPCMaker.Config;
+using BowieD.Unturned.NPCMaker.Logging;
 using System;
 using System.Text;
 using System.Windows;
@@ -13,8 +14,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
         public AppCrashReport(Exception exception, bool ableToSave = true, bool ableToHandle = true)
         {
             InitializeComponent();
-            Width *= Config.Configuration.Properties.scale;
-            Height *= Config.Configuration.Properties.scale;
+            Width *= AppConfig.Instance.scale;
+            Height *= AppConfig.Instance.scale;
             txtBox.Text = GetText(exception);
             if (!ableToSave)
             {
@@ -29,7 +30,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
         public bool Handle { get; set; } = false;
         public string GetText(Exception exception)
         {
-            var cfg = Config.Configuration.Properties;
             StringBuilder sb = new StringBuilder();
             try
             {
@@ -37,32 +37,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
             }
             catch { sb.AppendLine($"NPC Maker (Unknown) Crashed!"); }
             Commands.Command.GetCommand<Commands.InfoCommand>().Execute(null);
-            #region DEPRECATED
-            //sb.AppendLine($"Time: {DateTime.Now}");
-            //sb.AppendLine($"Settings:");
-            //sb.AppendLine();
-            //sb.AppendLine($"Experimental Features: {(cfg.experimentalFeatures ? "Enabled" : "Disabled")}");
-            //sb.AppendLine($"Language: {cfg.language.Name}");
-            //sb.AppendLine($"Log Level: {cfg.LogLevel.ToString()}");
-            //sb.AppendLine("User Colors:");
-            //foreach (string s in cfg.userColors ?? new string[] { "No user colors" })
-            //{
-            //    sb.AppendLine(s);
-            //}
-            //sb.AppendLine();
-            //sb.AppendLine("Recent Files:");
-            //foreach (string s in cfg.recent ?? new string[] { "No recent files" })
-            //{
-            //    sb.AppendLine(s);
-            //}
-            //sb.AppendLine();
-            //sb.AppendLine($"Autosave Option: {cfg.autosaveOption}");
-            //sb.AppendLine($"GUID Generation: {(cfg.generateGuids ? "Enabled" : "Disabled")}");
-            //sb.AppendLine($"Scale: {cfg.scale}");
-            //sb.AppendLine($"Theme: {cfg.currentTheme.Name}");
-            //sb.AppendLine($"Discord Rich Presence: {(cfg.enableDiscord ? "Detailed" : "Private")}");
-            //sb.AppendLine($"Animation: {(cfg.animateControls ? "Animated" : "Inanimated")}");
-            #endregion
             sb.AppendLine();
             sb.AppendLine($"Application log:");
             sb.AppendLine();

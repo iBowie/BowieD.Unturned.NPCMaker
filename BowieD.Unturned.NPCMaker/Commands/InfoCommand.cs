@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Config;
+using System;
 using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.Commands
@@ -11,7 +12,7 @@ namespace BowieD.Unturned.NPCMaker.Commands
         public override void Execute(string[] args)
         {
             StringBuilder sb = new StringBuilder();
-            var cfg = Config.Configuration.Properties;
+            var cfg = AppConfig.Instance;
             sb.AppendLine("== Debug Information ==");
             sb.AppendLine("");
             sb.AppendLine($"OS: {WindowsVersion}");
@@ -19,24 +20,13 @@ namespace BowieD.Unturned.NPCMaker.Commands
             sb.AppendLine($"Time: {DateTime.Now}");
             sb.AppendLine($"Settings:");
             sb.AppendLine($".Experimental Features: {cfg.experimentalFeatures}");
-            sb.AppendLine($".Language: {cfg.language.Name}");
+            sb.AppendLine($".Language: {cfg.locale}");
             sb.AppendLine($".Autosave Option: {cfg.autosaveOption}");
             sb.AppendLine($".GUID Generation: {cfg.generateGuids}");
             sb.AppendLine($".Detailed Discord Rich Presence: {cfg.enableDiscord}");
             sb.AppendLine($".Animation: {cfg.animateControls}");
             sb.AppendLine($".Scale: {cfg.scale}");
-            sb.AppendLine($".Theme: {cfg.currentTheme.Name}");
-            sb.AppendLine($".User Colors:");
-            foreach (string s in cfg.userColors ?? new string[] { "No user colors" })
-            {
-                sb.AppendLine(s);
-            }
-            sb.AppendLine(".");
-            sb.AppendLine($".Recent Files:");
-            foreach (string s in cfg.recent ?? new string[] { "No recent files" })
-            {
-                sb.AppendLine(s);
-            }
+            sb.AppendLine($".Theme: {cfg.currentTheme}");
             sb.AppendLine("");
             sb.AppendLine("== End of Debug Information ==");
             Logging.Logger.Log(sb);

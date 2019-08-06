@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Config;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -29,7 +30,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void DeleteButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (Config.Configuration.Properties.animateControls)
+            if (AppConfig.Instance.animateControls)
             {
                 DoubleAnimation anim = new DoubleAnimation(deleteButton.Opacity, Visible_Opacity, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
                 deleteButton.BeginAnimation(OpacityProperty, anim);
@@ -42,7 +43,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
 
         private void DeleteButton_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (Config.Configuration.Properties.animateControls)
+            if (AppConfig.Instance.animateControls)
             {
                 DoubleAnimation anim = new DoubleAnimation(deleteButton.Opacity, Hidden_Opacity, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
                 deleteButton.BeginAnimation(OpacityProperty, anim);

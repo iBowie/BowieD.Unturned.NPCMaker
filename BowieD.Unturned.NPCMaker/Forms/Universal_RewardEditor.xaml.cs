@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Config;
+using BowieD.Unturned.NPCMaker.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         public Universal_RewardEditor(Reward reward = null, bool viewLocalization = false)
         {
             InitializeComponent();
-            double scale = Config.Configuration.Properties.scale;
+            double scale = AppConfig.Instance.scale;
             viewLocalizationField = viewLocalization;
             ClearParameters();
             this.Height *= scale;
@@ -105,7 +106,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             if (!viewLocalizationField)
                 GetLocalizationControl().Visibility = Visibility.Collapsed;
             double newHeight = (baseHeight + (heightDelta * (mult + (mult > 1 ? 1 : 0))));
-            if (Config.Configuration.Properties.animateControls)
+            if (AppConfig.Instance.animateControls)
             {
                 DoubleAnimation anim = new DoubleAnimation(Height, newHeight, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
                 BeginAnimation(HeightProperty, anim);
