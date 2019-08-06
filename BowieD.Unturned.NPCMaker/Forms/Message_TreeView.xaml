@@ -1,0 +1,21 @@
+﻿<Window x:Class="BowieD.Unturned.NPCMaker.Forms.Message_TreeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
+        mc:Ignorable="d"
+        Title="{DynamicResource dialogue_Reply_Visibility_Title}" Height="420" Width="300"
+        Icon="{DynamicResource app_Icon}">
+    <Grid>
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
+        </Grid.LayoutTransform>
+        <ScrollViewer Margin="10,10,10,50" VerticalScrollBarVisibility="Auto">
+            <TreeView Name="mainTreeView">
+
+            </TreeView>
+        </ScrollViewer>
+        <Button Click="Button_Click" Content="{DynamicResource dialogue_Message_EditVisibility_Save}" FontSize="18" Margin="10,0,10,10" Height="35" VerticalAlignment="Bottom"/>
+    </Grid>
+</Window>
