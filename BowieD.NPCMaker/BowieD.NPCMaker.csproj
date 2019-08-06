@@ -102,6 +102,7 @@
     <Compile Include="NPC\Reward\Attributes\RewardFieldAttribute.cs" />
     <Compile Include="NPC\Reward\Reward.cs" />
     <Compile Include="NPC\Vendor.cs" />
+    <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Storage\Project.cs" />
     <Compile Include="Updater\ECheckResult.cs" />
     <Compile Include="Updater\GitHubUpdater.cs" />
@@ -147,10 +148,45 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Forms\" />
+    <Folder Include="Resources\Images\App\" />
     <Folder Include="Themes\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Libraries\Newtonsoft.Json.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Unturned\Faces\0.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\1.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\10.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\11.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\12.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\13.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\14.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\15.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\16.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\17.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\18.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\19.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\2.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\20.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\21.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\22.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\23.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\24.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\25.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\26.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\27.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\28.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\29.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\3.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\30.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\31.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\4.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\5.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\6.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\7.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\8.png" />
+    <Resource Include="Resources\Images\Unturned\Faces\9.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
