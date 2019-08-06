@@ -50,7 +50,6 @@ namespace BowieD.Unturned.NPCMaker
             inst.vkComm.Click += FeedbackItemClick;
             inst.discordComm.Click += FeedbackItemClick;
             inst.steamComm.Click += FeedbackItemClick;
-            inst.patchNotesMenuItem.Click += WhatsNew_Menu_Click;
             inst.userColorSaveButton.Click += UserColorList_AddColor;
             inst.switchToAnotherScheme.Click += ColorScheme_Switch;
             inst.colorHexOut.PreviewTextInput += ColorHex_Input;
@@ -730,12 +729,7 @@ namespace BowieD.Unturned.NPCMaker
             {
                 using (WebClient wc = new WebClient() { Encoding = Encoding.UTF8 })
                 {
-                    new Whats_New(
-                                                    LocUtil.LocalizeInterface("app_News_Title"),
-                                                    string.Format(LocUtil.LocalizeInterface("app_News_BodyTitle"), MainWindow.Version),
-                                                    wc.DownloadString($"https://raw.githubusercontent.com/iBowie/publicfiles/master/npcmakerpatch.{(AppConfig.Instance.locale == "ru-RU" ? AppConfig.Instance.locale.Replace('-', '_') : "en_US")}.txt"),
-                                                    LocUtil.LocalizeInterface("app_News_OK")
-                                                    ).ShowDialog();
+                    new Whats_New().ShowDialog();
                 }
             }
             catch (Exception ex) { Logging.Logger.Log(ex); }

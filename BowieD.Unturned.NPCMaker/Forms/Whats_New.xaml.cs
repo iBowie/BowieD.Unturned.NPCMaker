@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using System;
 using System.Windows;
 using System.Windows.Forms;
 
@@ -9,13 +10,13 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// </summary>
     public partial class Whats_New : Window
     {
-        public Whats_New(string title, string bodyTitle, string mainText, string buttonName)
+        public Whats_New()
         {
             InitializeComponent();
-            Title = title;
-            updateTitle.Text = bodyTitle;
-            updateText.Text = mainText.Replace("`", Environment.NewLine);
-            mainButton.Content = buttonName;
+            Title = LocUtil.LocalizeInterface("app_News_Title");
+            updateTitle.Text = Util.UpdateManager.Title;
+            updateText.Text = Util.UpdateManager.Content;
+            mainButton.Content = LocUtil.LocalizeInterface("app_News_OK");
             Height = SystemParameters.PrimaryScreenHeight / 2;
             Width = SystemParameters.PrimaryScreenWidth / 2;
         }

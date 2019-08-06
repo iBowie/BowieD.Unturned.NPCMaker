@@ -70,7 +70,6 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Name="optionsMenuItem" Header="{DynamicResource menu_Options}"/>
-                <MenuItem Name="patchNotesMenuItem" Header="{DynamicResource menu_WhatsNew}"/>
                 <MenuItem Header="{DynamicResource menu_Communication}">
                     <MenuItem Name="steamComm" Tag="https://steamcommunity.com/profiles/76561198085825110" Header="{DynamicResource feedback_Steam}">
                         <MenuItem.Icon>

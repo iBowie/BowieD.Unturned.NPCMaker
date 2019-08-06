@@ -105,7 +105,13 @@ namespace BowieD.Unturned.NPCMaker
 #region AFTER UPDATE
             try
             {
-                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "updater.exe"))
+                if (File.Exists(AppConfig.Directory + "updater.exe"))
+                {
+                    Proxy.WhatsNew_Menu_Click(null, null);
+                    File.Delete(AppConfig.Directory + "updater.exe");
+                    Logger.Log("Updater deleted.");
+                }
+                else if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "updater.exe"))
                 {
                     Proxy.WhatsNew_Menu_Click(null, null);
                     File.Delete(AppDomain.CurrentDomain.BaseDirectory + "updater.exe");
