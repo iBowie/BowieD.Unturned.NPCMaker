@@ -1,11 +1,12 @@
 ﻿using BowieD.Unturned.NPCMaker.Logging;
+using BowieD.Unturned.NPCMaker.Themes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
-namespace BowieD.Unturned.NPCMaker
+namespace BowieD.Unturned.NPCMaker.Themes
 {
     public class MetroTheme : Theme
     {
@@ -46,8 +47,6 @@ namespace BowieD.Unturned.NPCMaker
                 Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
                 App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(R, G, B));
                 Logging.Logger.Log($"Accent Color Set to ({R};{G};{B})");
-                Config.Configuration.Properties.currentTheme = this;
-                CurrentTheme = this;
 
             }
             catch { Logging.Logger.Log($"Can't apply {Name} theme"); }
@@ -76,6 +75,7 @@ namespace BowieD.Unturned.NPCMaker
                         Application.Current.Resources.MergedDictionaries.Remove(dic);
                     }
                 }
+                ThemeManager.CurrentTheme = null;
             }
             catch { Logger.Log("Could not clear theme"); }
         }

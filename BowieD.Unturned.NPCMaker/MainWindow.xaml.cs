@@ -16,6 +16,11 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Xml;
 using System.Xml.Serialization;
+using BowieD.Unturned.NPCMaker.Config;
+using BowieD.Unturned.NPCMaker.Themes;
+using BowieD.Unturned.NPCMaker.Data;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -32,18 +37,19 @@ namespace BowieD.Unturned.NPCMaker
         public static IEditor<NPCDialogue> DialogueEditor { get; private set; }
         public static IEditor<NPCVendor> VendorEditor { get; private set; }
         public static IEditor<NPCQuest> QuestEditor { get; private set; }
-#if OBJECTS
-        public static IEditor<NPCObject> ObjectEditor { get; private set; }
-#endif
         public static void SaveAllEditors()
         {
             CharacterEditor.Save();
             DialogueEditor.Save();
             VendorEditor.Save();
             QuestEditor.Save();
-#if OBJECTS
-            ObjectEditor.Save();
-#endif
+        }
+        public static void ResetEditors()
+        {
+            CharacterEditor.Reset();
+            DialogueEditor.Reset();
+            VendorEditor.Reset();
+            QuestEditor.Reset();
         }
         #endregion
         public MainWindow()
@@ -54,20 +60,15 @@ namespace BowieD.Unturned.NPCMaker
             DialogueEditor = new DialogueEditor();
             VendorEditor = new VendorEditor();
             QuestEditor = new QuestEditor();
-#if OBJECTS
-            ObjectEditor = new ObjectEditor();
-#endif
             DeepAnalysisManager = new Mistakes.DeepAnalysisManager();
-            if (Config.Configuration.Properties == null)
-                Config.Configuration.Load();
-            Width *= Config.Configuration.Properties.scale;
-            Height *= Config.Configuration.Properties.scale;
+            Width *= AppConfig.Instance.scale;
+            Height *= AppConfig.Instance.scale;
             Logger.Log($"Launch stage. Version: {Version}.");
             Proxy = new PropertyProxy(this);
             Proxy.RegisterEvents();
-#region THEME SETUP
-            (Config.Configuration.Properties.currentTheme ?? Config.Configuration.DefaultTheme).Apply();
-            Logger.Log($"Theme set to {(Config.Configuration.Properties.currentTheme ?? Config.Configuration.DefaultTheme).Name}");
+            #region THEME SETUP
+            var theme = ThemeManager.Themes.ContainsKey(AppConfig.Instance.currentTheme) ? ThemeManager.Themes[AppConfig.Instance.currentTheme] : ThemeManager.Themes["Metro/LightGreen"];
+            ThemeManager.Apply(theme);
 #endregion
 #region OPEN_WITH
             string[] args = Environment.GetCommandLineArgs();
@@ -114,10 +115,10 @@ namespace BowieD.Unturned.NPCMaker
             catch { Logger.Log("Can't delete updater."); }
 #endregion
 #region AUTOSAVE INIT
-            if (Config.Configuration.Properties.autosaveOption > 0)
+            if (AppConfig.Instance.autosaveOption > 0)
             {
                 AutosaveTimer = new DispatcherTimer();
-                switch (Config.Configuration.Properties.autosaveOption)
+                switch (AppConfig.Instance.autosaveOption)
                 {
                     case 1:
                         AutosaveTimer.Interval = new TimeSpan(0, 5, 0);
@@ -144,18 +145,17 @@ namespace BowieD.Unturned.NPCMaker
             debugOverlayText.Visibility = Visibility.Collapsed;
 #endif
 #endregion
-            Config.Configuration.Properties.firstLaunch = false;
             isSaved = true;
 #region DISCORD
             DiscordManager = new DiscordRPC.DiscordManager(1000)
             {
-                descriptive = Config.Configuration.Properties.enableDiscord
+                descriptive = AppConfig.Instance.enableDiscord
             };
             DiscordManager?.Initialize();
             Proxy.TabControl_SelectionChanged(mainTabControl, null);
 #endregion
 #region ENABLE EXPERIMENTAL
-            if (Config.Configuration.Properties.experimentalFeatures)
+            if (AppConfig.Instance.experimentalFeatures)
             {
 
             }
@@ -206,7 +206,6 @@ namespace BowieD.Unturned.NPCMaker
         }
         protected override void OnClosing(CancelEventArgs e)
         {
-            Config.Configuration.Save();
             e.Cancel = true;
             PerformExit();
             base.OnClosing(e);
@@ -214,10 +213,7 @@ namespace BowieD.Unturned.NPCMaker
 #region SAVE_LOAD
         public static void Save()
         {
-            CharacterEditor.Save();
-            DialogueEditor.Save();
-            VendorEditor.Save();
-            QuestEditor.Save();
+            SaveAllEditors();
             if (saveFile == null || saveFile == "")
             {
                 SaveFileDialog sfd = new SaveFileDialog
@@ -255,14 +251,14 @@ namespace BowieD.Unturned.NPCMaker
         }
         public static void AddToRecentList(string path)
         {
-            if (Config.Configuration.Properties.recent == null)
-                Config.Configuration.Properties.recent = new string[0];
-            if (!Config.Configuration.Properties.recent.Contains(saveFile))
+            RecentFileList recent = new RecentFileList();
+            recent.Load();
+            if (!recent.data.Contains(saveFile))
             {
-                var r = Config.Configuration.Properties.recent.AsEnumerable();
+                var r = recent.data.AsEnumerable();
                 r = r.Prepend(path);
-                Config.Configuration.Properties.recent = r.ToArray();
-                Config.Configuration.Save();
+                recent.data = r.ToArray();
+                recent.Save();
             }
             Instance.RefreshRecentList();
         }
@@ -276,7 +272,7 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     CurrentProject = NPCProject.Load(path);
                     saveFile = path;
-                    ConvertNPCToState(CurrentProject);
+                    ResetEditors();
                     isSaved = true;
                     AddToRecentList(saveFile);
                 }
@@ -285,7 +281,7 @@ namespace BowieD.Unturned.NPCMaker
                     if (MessageBox.Show(LocUtil.LocalizeInterface("save_Old_Content"), LocUtil.LocalizeInterface("save_Old_Title"), MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
                         CurrentProject = NPCProject.LoadOld(path);
-                        ConvertNPCToState(CurrentProject);
+                        ResetEditors();
                         isSaved = true;
                     }
                     else
@@ -335,17 +331,6 @@ namespace BowieD.Unturned.NPCMaker
         }
 
 #endregion
-#region STATE CONVERTERS
-        public void ConvertNPCToState(NPCProject save)
-        {
-            CurrentProject = save;
-            CharacterEditor.Current = new NPCCharacter();
-            DialogueEditor.Current = new NPCDialogue();
-            QuestEditor.Current = new NPCQuest();
-            VendorEditor.Current = new NPCVendor();
-            //ObjectEditor.Current = new NPCObject();
-        }
-#endregion
 #region DRAG AND DROP
         private void Window_DragEnter(object sender, DragEventArgs e)
         {
@@ -376,11 +361,11 @@ namespace BowieD.Unturned.NPCMaker
 #endregion
         public void RefreshRecentList()
         {
-            if (Config.Configuration.Properties.recent == null)
-                Config.Configuration.Properties.recent = new string[0];
+            RecentFileList recent = new RecentFileList();
+            recent.Load();
             RecentList.Items.Clear();
-            Config.Configuration.Properties.recent = Config.Configuration.Properties.recent.Where(d => File.Exists(d)).ToArray();
-            foreach (var k in Config.Configuration.Properties.recent)
+            recent.data = recent.data.Where(d => File.Exists(d)).ToArray();
+            foreach (var k in recent.data)
             {
                 var mItem = new MenuItem()
                 {
@@ -393,7 +378,7 @@ namespace BowieD.Unturned.NPCMaker
                 });
                 RecentList.Items.Add(mItem);
             }
-            if (Config.Configuration.Properties.recent.Length > 0)
+            if (recent.data.Length > 0)
             {
                 RecentList.Items.Add(new Separator());
                 var mItem = new MenuItem()
@@ -403,11 +388,12 @@ namespace BowieD.Unturned.NPCMaker
                 };
                 mItem.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
                 {
-                    Config.Configuration.Properties.recent = new string[0];
+                    recent.data = new string[0];
                     RefreshRecentList();
                 });
                 RecentList.Items.Add(mItem);
             }
+            recent.Save();
         }
 
         public static void PerformExit()
@@ -419,7 +405,6 @@ namespace BowieD.Unturned.NPCMaker
                     return;
                 }
             }
-            Config.Configuration.Save();
             DiscordManager?.Deinitialize();
             Environment.Exit(0);
         }

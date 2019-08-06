@@ -1,9 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Xml.Serialization;
-
-namespace BowieD.Unturned.NPCMaker
+﻿namespace BowieD.Unturned.NPCMaker.Themes
 {
-    [XmlInclude(typeof(MetroTheme))]
     public abstract class Theme
     {
         public abstract void Apply();

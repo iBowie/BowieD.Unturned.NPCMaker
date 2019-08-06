@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.Themes;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -15,39 +16,31 @@ namespace BowieD.Unturned.NPCMaker.Config
         public ConfigWindow()
         {
             InitializeComponent();
-            Width *= Configuration.Properties.scale;
-            Height *= Configuration.Properties.scale;
+            Width *= AppConfig.Instance.scale;
+            Height *= AppConfig.Instance.scale;
             InitThemeList();
-            CurrentConfig = Configuration.Properties;
+            CurrentConfig = AppConfig.Instance;
         }
 
-        public Configuration.CFG CurrentConfig
+        public AppConfig CurrentConfig
         {
-            get
+            get => new AppConfig
             {
-                Configuration.CFG nc = new Configuration.CFG();
-                Configuration.CFG cc = Configuration.Properties;
-                #region NOT CONFIG INFO
-                nc.userColors = cc.userColors;
-                nc.recent = cc.recent;
-                nc.firstLaunch = cc.firstLaunch;
-                #endregion
-                nc.currentTheme = (Selected_Theme_Box.SelectedItem as ComboBoxItem).Tag as MetroTheme;
-                nc.autosaveOption = (byte)Autosave_Box.SelectedIndex;
-                nc.language = (CultureInfo)(Languages_Box.SelectedItem as ComboBoxItem).Tag;
-                nc.scale = double.Parse((Scale_Box.SelectedItem as ComboBoxItem).Tag.ToString(), CultureInfo.InvariantCulture);
-                nc.enableDiscord = Discord_Enabled_Box.IsChecked.Value;
-                nc.generateGuids = Generate_GUIDS_Box.IsChecked.Value;
-                nc.experimentalFeatures = Experimental_Box.IsChecked.Value;
-                nc.animateControls = Animation_Enabled_Box.IsChecked.Value;
-                nc.autoUpdate = Autoupdate_Box.IsChecked.Value;
-                return nc;
-            }
+                currentTheme = ((Selected_Theme_Box.SelectedItem as ComboBoxItem).Tag as Theme).Name,
+                autosaveOption = (byte)Autosave_Box.SelectedIndex,
+                locale = (Languages_Box.SelectedItem as ComboBoxItem).Tag.ToString(),
+                scale = double.Parse((Scale_Box.SelectedItem as ComboBoxItem).Tag.ToString(), CultureInfo.InvariantCulture),
+                enableDiscord = Discord_Enabled_Box.IsChecked.Value,
+                generateGuids = Generate_GUIDS_Box.IsChecked.Value,
+                experimentalFeatures = Experimental_Box.IsChecked.Value,
+                animateControls = Animation_Enabled_Box.IsChecked.Value,
+                autoUpdate = Autoupdate_Box.IsChecked.Value
+            };
             set
             {
                 foreach (ComboBoxItem cbi in Selected_Theme_Box.Items)
                 {
-                    if ((cbi?.Tag as MetroTheme).Name == value.currentTheme.Name)
+                    if ((cbi?.Tag as Theme).Name == value.currentTheme)
                     {
                         Selected_Theme_Box.SelectedItem = cbi;
                         break;
@@ -59,10 +52,10 @@ namespace BowieD.Unturned.NPCMaker.Config
                     ComboBoxItem cbi = new ComboBoxItem
                     {
                         Content = lang.NativeName,
-                        Tag = lang
+                        Tag = lang.Name
                     };
                     Languages_Box.Items.Add(cbi);
-                    if (lang.Name == value.language.Name)
+                    if (lang.Name == value.locale)
                         Languages_Box.SelectedItem = cbi;
                 }
                 foreach (ComboBoxItem cbi in Scale_Box.Items)
@@ -88,8 +81,7 @@ namespace BowieD.Unturned.NPCMaker.Config
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            Configuration.Force(CurrentConfig);
-            Configuration.Save();
+            AppConfig.Instance.Save();
             MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("config_OnExit"));
             Close();
         }
@@ -99,141 +91,18 @@ namespace BowieD.Unturned.NPCMaker.Config
             var result = MessageBox.Show(LocUtil.LocalizeInterface("config_Default_Confirm"), "", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                CurrentConfig = Configuration.GetDefaults();
+                AppConfig.Instance.LoadDefaults();
+                Close();
             }
-        }
-
-        private IEnumerable<(string, Theme)> themeList()
-        {
-            yield return (
-                LocUtil.LocalizeInterface("config_Tab_Appearance_Theme_LightGreen"),
-                new MetroTheme()
-                {
-                    Name = "LightGreen",
-                    DictionaryName = "Light.Green",
-                    R = 84,
-                    G = 142,
-                    B = 25
-                });
-            yield return (
-                LocUtil.LocalizeInterface("config_Tab_Appearance_Theme_LightPink"),
-                new MetroTheme()
-                {
-                    Name = "LightPink",
-                    DictionaryName = "Light.Pink",
-                    R = 246,
-                    G = 142,
-                    B = 217
-                });
-            yield return (
-                LocUtil.LocalizeInterface("config_Tab_Appearance_Theme_LightRed"),
-                new MetroTheme()
-                {
-                    Name = "LightRed",
-                    DictionaryName = "Light.Red",
-                    R = 234,
-                    G = 67,
-                    B = 51
-                });
-            yield return (
-                LocUtil.LocalizeInterface("config_Tab_Appearance_Theme_LightBlue"),
-                new MetroTheme()
-                {
-                    Name = "LightBlue",
-                    DictionaryName = "Light.Blue",
-                    R = 51,
-                    G = 115,
-                    B = 242
-                });
-            yield return (
-                LocUtil.LocalizeInterface("config_Tab_Appearance_Theme_LightPurple"),
-                new MetroTheme()
-                {
-                    Name = "LightPurple",
-                    DictionaryName = "Light.Purple",
-                    R = 87,
-                    G = 78,
-                    B = 185
-                });
-            yield return (
-                LocUtil.LocalizeInterface("config_Tab_Appearance_Theme_LightOrange"),
-                new MetroTheme()
-                {
-                    Name = "LightOrange",
-                    DictionaryName = "Light.Orange",
-                    R = 255,
-                    G = 106,
-                    B = 0
-                });
-            yield return (
-                LocUtil.LocalizeInterface("config_Tab_Appearance_Theme_DarkGreen"),
-                new MetroTheme()
-                {
-                    Name = "DarkGreen",
-                    DictionaryName = "Dark.Green",
-                    R = 84,
-                    G = 142,
-                    B = 25
-                });
-            yield return (
-                LocUtil.LocalizeInterface("config_Tab_Appearance_Theme_DarkPink"),
-                new MetroTheme()
-                {
-                    Name = "DarkPink",
-                    DictionaryName = "Dark.Pink",
-                    R = 246,
-                    G = 142,
-                    B = 217
-                });
-            yield return (
-                LocUtil.LocalizeInterface("config_Tab_Appearance_Theme_DarkRed"),
-                new MetroTheme()
-                {
-                    Name = "DarkRed",
-                    DictionaryName = "Dark.Red",
-                    R = 234,
-                    G = 67,
-                    B = 51
-                });
-            yield return (
-                LocUtil.LocalizeInterface("config_Tab_Appearance_Theme_DarkBlue"),
-                new MetroTheme()
-                {
-                    Name = "DarkBlue",
-                    DictionaryName = "Dark.Blue",
-                    R = 51,
-                    G = 115,
-                    B = 242
-                });
-            yield return (
-                LocUtil.LocalizeInterface("config_Tab_Appearance_Theme_DarkPurple"),
-                new MetroTheme()
-                {
-                    Name = "DarkPurple",
-                    DictionaryName = "Dark.Purple",
-                    R = 87,
-                    G = 78,
-                    B = 185
-                });
-            yield return (
-                LocUtil.LocalizeInterface("config_Tab_Appearance_Theme_DarkOrange"),
-                new MetroTheme()
-                {
-                    Name = "DarkOrange",
-                    DictionaryName = "Dark.Orange",
-                    R = 255,
-                    G = 106,
-                    B = 0
-                });
         }
         private void InitThemeList()
         {
-            foreach (var k in themeList())
+            foreach (var k in ThemeManager.Themes)
             {
                 Selected_Theme_Box.Items.Add(new ComboBoxItem()
                 {
-                    Content = k.Item1,
-                    Tag = k.Item2
+                    Content = k.Key,
+                    Tag = k.Value
                 });
             }
         }

@@ -112,6 +112,8 @@
       <DependentUpon>Dialogue_Message_Page.xaml</DependentUpon>
     </Compile>
     <Compile Include="Coloring\PaletteHSL.cs" />
+    <Compile Include="Config\IConfig.cs" />
+    <Compile Include="Data\JsonData.cs" />
     <Compile Include="Forms\AppCrashReport.xaml.cs">
       <DependentUpon>AppCrashReport.xaml</DependentUpon>
     </Compile>
@@ -157,7 +159,7 @@
     <Compile Include="Forms\Whats_New.xaml.cs">
       <DependentUpon>Whats_New.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Config\Configuration.cs" />
+    <Compile Include="Config\AppConfig.cs" />
     <Compile Include="Config\ConfigWindow.xaml.cs">
       <DependentUpon>ConfigWindow.xaml</DependentUpon>
     </Compile>
@@ -235,6 +237,7 @@
     </Compile>
     <Compile Include="Themes\MetroTheme.cs" />
     <Compile Include="Themes\Theme.cs" />
+    <Compile Include="Themes\ThemeManager.cs" />
     <Compile Include="UpdateManagers\GitHubUpdateManager.cs" />
     <Compile Include="UpdateManagers\IUpdateManager.cs" />
     <Compile Include="UpdateManagers\UpdateAvailability.cs" />

@@ -1,4 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Coloring;
+using BowieD.Unturned.NPCMaker.Config;
+using BowieD.Unturned.NPCMaker.Data;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
@@ -344,9 +346,9 @@ namespace BowieD.Unturned.NPCMaker
                 g.Children.Add(copyButton);
                 inst.userColorSampleList.Children.Add(g);
             }
-            if (Config.Configuration.Properties.userColors == null)
-                return;
-            foreach (string uColor in Config.Configuration.Properties.userColors)
+            UserColorsList userColors = new UserColorsList();
+            userColors.Load();
+            foreach (string uColor in userColors.data)
             {
                 if (uColor.StartsWith("#"))
                 {
@@ -418,22 +420,21 @@ namespace BowieD.Unturned.NPCMaker
             Grid g = Util.FindParent<Grid>(sender as Button);
             Label l = Util.FindChildren<Label>(g);
             string color = l.Content.ToString();
-            Config.Configuration.Properties.userColors = Config.Configuration.Properties.userColors.Where(d => d != color.Trim('#')).ToArray();
-            Config.Configuration.Save();
+            UserColorsList userColors = new UserColorsList();
+            userColors.data = userColors.data.Where(d => d != color.Trim('#')).ToArray();
+            userColors.Save();
             UserColorListChanged();
         }
         internal void UserColorList_AddColor(object sender, RoutedEventArgs e)
         {
-            if (Config.Configuration.Properties.userColors == null)
-                Config.Configuration.Properties.userColors = new string[0];
-            if (Config.Configuration.Properties.userColors.Length > 0 && Config.Configuration.Properties.userColors.Contains(inst.colorHexOut.Text.Trim('#')))
+            UserColorsList userColors = new UserColorsList();
+            userColors.Load();
+            if (userColors.data.Contains(inst.colorHexOut.Text.Trim('#')))
                 return;
-            List<string> uColors = Config.Configuration.Properties.userColors.ToList();
-            if (uColors == null)
-                uColors = new List<string>();
-            uColors.Add(inst.colorHexOut.Text.Trim('#'));
-            Config.Configuration.Properties.userColors = uColors.ToArray();
-            Config.Configuration.Save();
+            var lst = userColors.data.ToList();
+            lst.Add(inst.colorHexOut.Text.Trim('#'));
+            userColors.data = lst.ToArray();
+            userColors.Save();
             UserColorListChanged();
         }
         internal void ExportClick(object sender, RoutedEventArgs e)
@@ -458,7 +459,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             if (!MainWindow.SavePrompt())
                 return;
-            inst.ConvertNPCToState(new NPCProject());
+            MainWindow.ResetEditors();
             MainWindow.isSaved = true;
             MainWindow.Started = DateTime.UtcNow;
         }
@@ -498,7 +499,7 @@ namespace BowieD.Unturned.NPCMaker
                 return;
             int selectedIndex = (sender as TabControl).SelectedIndex;
             TabItem tab = e?.AddedItems[0] as TabItem;
-            if (Config.Configuration.Properties.animateControls && tab?.Content is Grid g)
+            if (AppConfig.Instance.animateControls && tab?.Content is Grid g)
             {
                 DoubleAnimation anim = new DoubleAnimation(0, 1, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
                 g.BeginAnimation(MainWindow.OpacityProperty, anim);
@@ -575,7 +576,7 @@ namespace BowieD.Unturned.NPCMaker
             inst.colorBoxR.Value = Math.Round(inst.colorSliderR.Value, 2);
             inst.colorBoxG.Value = Math.Round(inst.colorSliderG.Value, 2);
             inst.colorBoxB.Value = Math.Round(inst.colorSliderB.Value, 2);
-            if (Config.Configuration.Properties.experimentalFeatures)
+            if (AppConfig.Instance.experimentalFeatures)
             {
                 if (!MainWindow.IsRGB)
                 {
@@ -732,7 +733,7 @@ namespace BowieD.Unturned.NPCMaker
                     new Whats_New(
                                                     LocUtil.LocalizeInterface("app_News_Title"),
                                                     string.Format(LocUtil.LocalizeInterface("app_News_BodyTitle"), MainWindow.Version),
-                                                    wc.DownloadString($"https://raw.githubusercontent.com/iBowie/publicfiles/master/npcmakerpatch.{(Config.Configuration.Properties.Language == "ru-RU" ? Config.Configuration.Properties.Language.Replace('-', '_') : "en_US")}.txt"),
+                                                    wc.DownloadString($"https://raw.githubusercontent.com/iBowie/publicfiles/master/npcmakerpatch.{(AppConfig.Instance.locale == "ru-RU" ? AppConfig.Instance.locale.Replace('-', '_') : "en_US")}.txt"),
                                                     LocUtil.LocalizeInterface("app_News_OK")
                                                     ).ShowDialog();
                 }
