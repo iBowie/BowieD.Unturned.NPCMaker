@@ -112,7 +112,7 @@
       <DependentUpon>Dialogue_Message_Page.xaml</DependentUpon>
     </Compile>
     <Compile Include="Coloring\PaletteHSL.cs" />
-    <Compile Include="Config\IConfig.cs" />
+    <Compile Include="Configuration\IConfig.cs" />
     <Compile Include="Data\JsonData.cs" />
     <Compile Include="Forms\AppCrashReport.xaml.cs">
       <DependentUpon>AppCrashReport.xaml</DependentUpon>
@@ -159,8 +159,8 @@
     <Compile Include="Forms\Whats_New.xaml.cs">
       <DependentUpon>Whats_New.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Config\AppConfig.cs" />
-    <Compile Include="Config\ConfigWindow.xaml.cs">
+    <Compile Include="Configuration\AppConfig.cs" />
+    <Compile Include="Configuration\ConfigWindow.xaml.cs">
       <DependentUpon>ConfigWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DiscordRPC\DiscordWorker.cs" />
@@ -330,7 +330,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Config\ConfigWindow.xaml">
+    <Page Include="Configuration\ConfigWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
