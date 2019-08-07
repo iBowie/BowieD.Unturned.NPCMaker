@@ -120,14 +120,13 @@
     <v:String x:Key="apparel_Equip_Primary">Primary</v:String>
     <v:String x:Key="apparel_Equip_Secondary">Secondary</v:String>
     <v:String x:Key="apparel_Equip_Tertiary">Non-weapon</v:String>
-    <v:String x:Key="apparel_Color_Samples">Colors</v:String>
-    <v:String x:Key="apparel_User_Color_Save">Save color</v:String>
-    <v:String x:Key="apparel_User_Color_Remove">Delete</v:String>
-    <v:String x:Key="apparel_Color_Select">Palette</v:String>
     <v:String x:Key="apparel_Char_Random">Randomize</v:String>
     <v:String x:Key="apparel_Clothing_Default">Default</v:String>
     <v:String x:Key="apparel_Clothing_Christmas">Christmas</v:String>
     <v:String x:Key="apparel_Clothing_Halloween">Halloween</v:String>
+    <v:String x:Key="picker_Available_Colors_Header">Available Colors</v:String>
+    <v:String x:Key="picker_Standard_Header">Pre-made</v:String>
+    <v:String x:Key="picker_Advanced_Header">Own color</v:String>
 
     <v:String x:Key="dialogue_Save">Save dialogue</v:String>
     <v:String x:Key="dialogue_Open">Open existing...</v:String>

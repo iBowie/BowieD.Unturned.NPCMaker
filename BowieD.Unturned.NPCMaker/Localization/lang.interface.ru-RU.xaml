@@ -120,14 +120,13 @@
     <v:String x:Key="apparel_Equip_Primary">Первый слот</v:String>
     <v:String x:Key="apparel_Equip_Secondary">Второй слот</v:String>
     <v:String x:Key="apparel_Equip_Tertiary">Неоружейный слот</v:String>
-    <v:String x:Key="apparel_Color_Samples">Цвета</v:String>
-    <v:String x:Key="apparel_User_Color_Save">Сохранить цвет</v:String>
-    <v:String x:Key="apparel_User_Color_Remove">Удалить цвет</v:String>
-    <v:String x:Key="apparel_Color_Select">Палитра</v:String>
     <v:String x:Key="apparel_Char_Random">Случайно</v:String>
     <v:String x:Key="apparel_Clothing_Default">Обычно</v:String>
     <v:String x:Key="apparel_Clothing_Christmas">Рождество</v:String>
     <v:String x:Key="apparel_Clothing_Halloween">Хэллоуин</v:String>
+    <v:String x:Key="picker_Available_Colors_Header">Доступные цвета</v:String>
+    <v:String x:Key="picker_Standard_Header">Выбор цвета</v:String>
+    <v:String x:Key="picker_Advanced_Header">Создание цвета</v:String>
 
     <v:String x:Key="dialogue_Save">Сохранить диалог</v:String>
     <v:String x:Key="dialogue_Open">Открыть диалог</v:String>

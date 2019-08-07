@@ -9,6 +9,7 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="{DynamicResource app_Title}"
         MinHeight="623" Height="623"
@@ -161,25 +162,6 @@
                             </TabItem>
                             <TabItem Name="apparelTab" Header="{DynamicResource tab_Apparel}">
                                 <Grid>
-                                    <GroupBox Header="{DynamicResource tool_Color}" HorizontalAlignment="Right" Height="231" Margin="0,10,10,0" VerticalAlignment="Top" Width="300">
-                                        <Grid>
-                                            <Rectangle Name="colorRectangle" Fill="#000000" HorizontalAlignment="Left" Height="16" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="16"/>
-                                            <TextBlock Text="{DynamicResource tool_Color_Preview_Label}" VerticalAlignment="Top" Height="17" Margin="31,10,10,0"/>
-                                            <Slider Maximum="255" SmallChange="1" AutoToolTipPlacement="TopLeft" LargeChange="5" Name="colorSliderR" Orientation="Horizontal" Margin="35,32,77,0" Height="20" VerticalAlignment="Top"/>
-                                            <mah:NumericUpDown Width="50" Name="colorBoxR" Maximum="{Binding Maximum, ElementName=colorSliderR}" Minimum="{Binding Minimum, ElementName=colorSliderR}" HideUpDownButtons="True" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,28,10,0" Height="22"/>
-                                            <Slider Maximum="255" SmallChange="1" AutoToolTipPlacement="TopLeft" LargeChange="5" Name="colorSliderG" Orientation="Horizontal" Margin="35,57,77,0" Height="20" VerticalAlignment="Top"/>
-                                            <mah:NumericUpDown Width="50" Name="colorBoxG" Maximum="{Binding Maximum, ElementName=colorSliderR}" Minimum="{Binding Minimum, ElementName=colorSliderR}" HideUpDownButtons="True" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,51,10,0" Height="22"/>
-                                            <Slider Maximum="255" SmallChange="1" AutoToolTipPlacement="TopLeft" LargeChange="5" Name="colorSliderB" Orientation="Horizontal" Margin="35,82,77,0" Height="20" VerticalAlignment="Top"/>
-                                            <mah:NumericUpDown Width="50" Name="colorBoxB" Maximum="{Binding Maximum, ElementName=colorSliderR}" Minimum="{Binding Minimum, ElementName=colorSliderR}" HideUpDownButtons="True" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,76,10,0" Height="22"/>
-                                            <Label Name="colorRLabel" Content="{DynamicResource tool_Color_Red}" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Width="20"/>
-                                            <Label Name="colorGLabel" Content="{DynamicResource tool_Color_Green}" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" Width="20"/>
-                                            <Label Name="colorBLabel" Content="{DynamicResource tool_Color_Blue}" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Width="20"/>
-                                            <TextBox Name="colorHexOut" Margin="0,0,10,40" TextWrapping="Wrap" Text="#000000" MaxLength="7" HorizontalAlignment="Right" Width="133" Height="24" VerticalAlignment="Bottom"/>
-                                            <Button Name="userColorSaveButton" Content="{DynamicResource apparel_User_Color_Save}" Margin="0,0,10,10" HorizontalAlignment="Right" Width="133" Height="20" VerticalAlignment="Bottom"/>
-                                            <Button Name="randomColorButton" Content="{DynamicResource tool_Color_Random}" Height="23" HorizontalAlignment="Right" Margin="0,0,147,40" VerticalAlignment="Bottom" Width="133"/>
-                                            <Button Name="switchToAnotherScheme" Content="{DynamicResource tool_Color_SwitchTo_HSV}" Height="23" HorizontalAlignment="Right" Margin="0,0,147,10" VerticalAlignment="Bottom" Width="133"/>
-                                        </Grid>
-                                    </GroupBox>
                                     <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" Background="Black" HorizontalAlignment="Left" Height="98" Margin="8,38,0,0" VerticalAlignment="Top" Width="98">
                                         <Image Name="faceImageControl" Source="Resources/Unturned/Faces/1.png" >
                                             <Image.Effect>
@@ -327,8 +309,8 @@
                                     <Button Name="apparelFaceRandomize" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="8,171,0,0" Width="98"/>
                                     <Button Name="apparelHairRandomize" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="109,171,0,0" Width="98"/>
                                     <Button Name="apparelBeardRandomize" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="210,171,0,0" Width="98"/>
-                                    <TextBox Name="apparelSkinColorBox" HorizontalAlignment="Left" Height="23" Margin="313,38,0,0" TextWrapping="Wrap" MaxLength="7" VerticalAlignment="Top" Width="120" mah:TextBoxHelper.Watermark="#000000" mah:TextBoxHelper.HasText="True"/>
-                                    <TextBox Name="apparelHairColorBox" HorizontalAlignment="Left" Height="23" Margin="313,69,0,0" TextWrapping="Wrap" MaxLength="7" VerticalAlignment="Top" Width="120" mah:TextBoxHelper.HasText="True" mah:TextBoxHelper.Watermark="#000000"/>
+                                    <xctk:ColorPicker AdvancedButtonHeader="{DynamicResource picker_Advanced_Header}" StandardButtonHeader="{DynamicResource picker_Standard_Header}" AvailableColorsHeader="{DynamicResource picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="skinColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,38,0,0" Width="120"/>
+                                    <xctk:ColorPicker AdvancedButtonHeader="{DynamicResource picker_Advanced_Header}" StandardButtonHeader="{DynamicResource picker_Standard_Header}" AvailableColorsHeader="{DynamicResource picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="hairColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,68,0,0" Width="120"/>
                                     <CheckBox Name="apparelLeftHandedCheckbox" Content="{DynamicResource apparel_LeftHanded}" HorizontalAlignment="Left" Margin="313,100,0,0" VerticalAlignment="Top"/>
                                     <ComboBox Name="apparelPoseBox" HorizontalAlignment="Left" SelectedIndex="0" Margin="313,123,0,0" VerticalAlignment="Top" Width="120">
                                         <ComboBoxItem Content="{DynamicResource apparel_Pose_Stand}">
@@ -379,7 +361,7 @@
                                     </ComboBox>
                                     <TextBlock HorizontalAlignment="Left" Margin="438,128,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Pose}" VerticalAlignment="Top"/>
                                     <TextBlock HorizontalAlignment="Left" Margin="438,41,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Skin}" VerticalAlignment="Top"/>
-                                    <TextBlock HorizontalAlignment="Left" Margin="438,72,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Hair}" VerticalAlignment="Top"/>
+                                    <TextBlock HorizontalAlignment="Left" Margin="438,71,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Hair}" VerticalAlignment="Top"/>
                                     <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Face}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,10,0,0" Width="98" Height="28"/>
                                     <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Hair}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="109,10,0,0" Width="98" Height="28"/>
                                     <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Beard}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,10,0,0" Width="98" Height="28"/>
@@ -572,11 +554,6 @@
                                                 </ScrollViewer>
                                             </TabItem>
                                         </TabControl>
-                                    </GroupBox>
-                                    <GroupBox Header="{DynamicResource apparel_Color_Samples}" HorizontalAlignment="Right" Height="201" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="200">
-                                        <ScrollViewer>
-                                            <StackPanel Name="userColorSampleList"/>
-                                        </ScrollViewer>
                                     </GroupBox>
                                     <GroupBox Header="{DynamicResource apparel_Group_Equipment}" HorizontalAlignment="Left" Margin="315,0,0,10" Width="300" Height="179" VerticalAlignment="Bottom">
                                         <ScrollViewer>

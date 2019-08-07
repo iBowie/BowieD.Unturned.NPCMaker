@@ -139,4 +139,19 @@
   <data name="Newtonsoft_Json" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\libs\newtonsoft.json.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Xceed_Wpf_AvalonDock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Libs\Xceed.Wpf.AvalonDock.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Xceed_Wpf_AvalonDock_Themes_Aero" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Libs\Xceed.Wpf.AvalonDock.Themes.Aero.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Xceed_Wpf_AvalonDock_Themes_Metro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Libs\Xceed.Wpf.AvalonDock.Themes.Metro.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Xceed_Wpf_AvalonDock_Themes_VS2010" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Libs\Xceed.Wpf.AvalonDock.Themes.VS2010.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Xceed_Wpf_Toolkit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Libs\Xceed.Wpf.Toolkit.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

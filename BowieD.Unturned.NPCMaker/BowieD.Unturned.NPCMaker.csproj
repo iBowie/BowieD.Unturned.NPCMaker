@@ -90,6 +90,26 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -111,17 +131,12 @@
     <Compile Include="BetterControls\Dialogue_Message_Page.xaml.cs">
       <DependentUpon>Dialogue_Message_Page.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Coloring\PaletteHSL.cs" />
+    <Compile Include="Coloring\Color.cs" />
     <Compile Include="Configuration\IConfig.cs" />
     <Compile Include="Data\JsonData.cs" />
     <Compile Include="Forms\AppCrashReport.xaml.cs">
       <DependentUpon>AppCrashReport.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Coloring\Palette.cs" />
-    <Compile Include="Coloring\PaletteCMYK.cs" />
-    <Compile Include="Coloring\PaletteHEX.cs" />
-    <Compile Include="Coloring\PaletteHSV.cs" />
-    <Compile Include="Coloring\PaletteRGB.cs" />
     <Compile Include="Commands\ClearCommand.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CrashCommand.cs" />
@@ -169,7 +184,6 @@
     <Compile Include="Editors\IEditor.cs" />
     <Compile Include="Editors\QuestEditor.cs" />
     <Compile Include="Editors\VendorEditor.cs" />
-    <Compile Include="Examples\NPCExample.cs" />
     <Compile Include="Export\Exporter.cs" />
     <Compile Include="Forms\Form_About.xaml.cs">
       <DependentUpon>Form_About.xaml</DependentUpon>
@@ -266,7 +280,6 @@
       <DependentUpon>NotificationBase.xaml</DependentUpon>
     </Compile>
     <Compile Include="NPC\Enums.cs" />
-    <Compile Include="NPC\NPCColor.cs" />
     <Compile Include="NPC\NPCDialogue.cs" />
     <Compile Include="NPC\NPCMessage.cs" />
     <Compile Include="NPC\NPCQuest.cs" />
@@ -362,7 +375,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NPC\NPCSaveOld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -470,6 +482,21 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="NPC\Rewards\Attributes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Libs\Xceed.Wpf.Toolkit.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Libs\Xceed.Wpf.AvalonDock.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Libs\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Libs\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Libs\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

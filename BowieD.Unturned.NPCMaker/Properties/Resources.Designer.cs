@@ -129,5 +129,55 @@ namespace BowieD.Unturned.NPCMaker.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] Xceed_Wpf_AvalonDock {
+            get {
+                object obj = ResourceManager.GetObject("Xceed_Wpf_AvalonDock", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] Xceed_Wpf_AvalonDock_Themes_Aero {
+            get {
+                object obj = ResourceManager.GetObject("Xceed_Wpf_AvalonDock_Themes_Aero", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] Xceed_Wpf_AvalonDock_Themes_Metro {
+            get {
+                object obj = ResourceManager.GetObject("Xceed_Wpf_AvalonDock_Themes_Metro", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] Xceed_Wpf_AvalonDock_Themes_VS2010 {
+            get {
+                object obj = ResourceManager.GetObject("Xceed_Wpf_AvalonDock_Themes_VS2010", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] Xceed_Wpf_Toolkit {
+            get {
+                object obj = ResourceManager.GetObject("Xceed_Wpf_Toolkit", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

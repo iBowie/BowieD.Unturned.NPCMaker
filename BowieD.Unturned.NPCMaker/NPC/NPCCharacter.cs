@@ -1,8 +1,6 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Coloring;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
@@ -21,8 +19,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
             face = 0;
             beard = 0;
             haircut = 0;
-            hairColor = new NPCColor(0, 0, 0);
-            skinColor = new NPCColor(0, 0, 0);
+            hairColor = new Color(0, 0, 0);
+            skinColor = new Color(0, 0, 0);
             clothing = new NPCClothing();
             halloweenClothing = new NPCClothing();
             christmasClothing = new NPCClothing();
@@ -40,8 +38,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public byte face;
         public byte beard;
         public byte haircut;
-        public NPCColor hairColor;
-        public NPCColor skinColor;
+        public Color hairColor;
+        public Color skinColor;
         public NPCClothing clothing;
         public NPCClothing christmasClothing;
         public NPCClothing halloweenClothing;

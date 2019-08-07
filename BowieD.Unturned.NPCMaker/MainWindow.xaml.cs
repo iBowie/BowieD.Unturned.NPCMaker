@@ -99,7 +99,6 @@ namespace BowieD.Unturned.NPCMaker
             (CharacterEditor as CharacterEditor).FaceImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
             (CharacterEditor as CharacterEditor).HairImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
             (CharacterEditor as CharacterEditor).BeardImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
-            Proxy.UserColorListChanged();
 #endregion
             RefreshRecentList();
 #region AFTER UPDATE
@@ -166,7 +165,6 @@ namespace BowieD.Unturned.NPCMaker
 
             }
 #endregion
-            Proxy.ColorSliderChange(null, null);
             HolidayManager.Check();
             MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("app_Free"));
         }
@@ -281,23 +279,11 @@ namespace BowieD.Unturned.NPCMaker
                     ResetEditors();
                     isSaved = true;
                     AddToRecentList(saveFile);
+                    NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
+                    Started = DateTime.UtcNow;
+                    return true;
                 }
-                else if (NPCProject.CanLoadOld(path))
-                {
-                    if (MessageBox.Show(LocUtil.LocalizeInterface("save_Old_Content"), LocUtil.LocalizeInterface("save_Old_Title"), MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                    {
-                        CurrentProject = NPCProject.LoadOld(path);
-                        ResetEditors();
-                        isSaved = true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
-                Started = DateTime.UtcNow;
-                return true;
+                return false;
             }
             catch (Exception ex) { Logger.Log(ex, Log_Level.Error); NotificationManager.Notify(LocUtil.LocalizeInterface("load_Incompatible")); return false; }
         }
@@ -327,9 +313,8 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     using (XmlReader reader = XmlReader.Create(fs))
                     {
-                        XmlSerializer oldDeserializer = new XmlSerializer(typeof(NPC.NPCSaveOld));
-                        XmlSerializer newDeserializer = new XmlSerializer(typeof(NPCProject));
-                        return oldDeserializer.CanDeserialize(reader) || newDeserializer.CanDeserialize(reader);
+                        XmlSerializer deserializer = new XmlSerializer(typeof(NPCProject));
+                        return deserializer.CanDeserialize(reader);
                     }
                 }
             }
@@ -350,6 +335,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             dropOverlay.Visibility = Visibility.Hidden;
         }
+
         private void Window_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))

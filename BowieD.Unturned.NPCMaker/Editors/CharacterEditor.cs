@@ -17,6 +17,28 @@ namespace BowieD.Unturned.NPCMaker.Editors
 {
     public class CharacterEditor : IEditor<NPCCharacter>
     {
+        private IEnumerable<Coloring.Color> getUnturnedColors()
+        {
+            yield return new Coloring.Color("#F4E6D2");
+            yield return new Coloring.Color("#D9CAB4");
+            yield return new Coloring.Color("#BEA582");
+            yield return new Coloring.Color("#9D886B");
+            yield return new Coloring.Color("#94764B");
+            yield return new Coloring.Color("#706049");
+            yield return new Coloring.Color("#534736");
+            yield return new Coloring.Color("#4B3D31");
+            yield return new Coloring.Color("#332C25");
+            yield return new Coloring.Color("#231F1C");
+            yield return new Coloring.Color("#D7D7D7");
+            yield return new Coloring.Color("#C1C1C1");
+            yield return new Coloring.Color("#CDC08C");
+            yield return new Coloring.Color("#AC6A39");
+            yield return new Coloring.Color("#665037");
+            yield return new Coloring.Color("#57452F");
+            yield return new Coloring.Color("#352C22");
+            yield return new Coloring.Color("#373737");
+            yield return new Coloring.Color("#191919");
+        }
         private Func<Equip_Type> getEquipType = new Func<Equip_Type>(() =>
         {
             var item = MainWindow.Instance.equipSlotBox.SelectedItem as ComboBoxItem;
@@ -32,22 +54,6 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 return NPC_Pose.Stand;
             var val = (NPC_Pose)item.Tag;
             return val;
-        });
-        private Func<NPCColor> getHairColor = new Func<NPCColor>(() =>
-        {
-            string text = MainWindow.Instance.apparelHairColorBox.Text;
-            BrushConverter bc = new BrushConverter();
-            if (bc.IsValid(text))
-                return (NPCColor)new PaletteHEX() { HEX = text };
-            return new NPCColor(0, 0, 0);
-        });
-        private Func<NPCColor> getSkinColor = new Func<NPCColor>(() =>
-        {
-            string text = MainWindow.Instance.apparelSkinColorBox.Text;
-            BrushConverter bc = new BrushConverter();
-            if (bc.IsValid(text))
-                return (NPCColor)new PaletteHEX() { HEX = text };
-            return new NPCColor(0, 0, 0);
         });
         public CharacterEditor()
         {
@@ -70,14 +76,16 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.Instance.faceImageIndex.ValueChanged += FaceImageIndex_Changed;
             MainWindow.Instance.beardImageIndex.ValueChanged += BeardImageIndex_Changed;
             MainWindow.Instance.hairImageIndex.ValueChanged += HairImageIndex_Changed;
-            MainWindow.Instance.apparelSkinColorBox.TextChanged += ApparelSkinColorBox_TextChanged;
-            MainWindow.Instance.apparelHairColorBox.TextChanged += ApparelHairColorBox_TextChanged;
             MainWindow.Instance.apparelHairRandomize.Click += Apparel_Hair_Random_Button_Click;
             MainWindow.Instance.apparelBeardRandomize.Click += Apparel_Beard_Random_Button_Click;
             MainWindow.Instance.apparelFaceRandomize.Click += Apparel_Face_Random_Button_Click;
             MainWindow.Instance.visibilityCondsButton.Click += Char_EditConditions_Button_Click;
-            MainWindow.Instance.apparelSkinColorBox.Text = "#000000";
-            MainWindow.Instance.apparelHairColorBox.Text = "#000000";
+            MainWindow.Instance.skinColorPicker.StandardColorsHeader = "Unturned";
+            MainWindow.Instance.hairColorPicker.StandardColorsHeader = "Unturned";
+            MainWindow.Instance.skinColorPicker.StandardColors = new System.Collections.ObjectModel.ObservableCollection<Xceed.Wpf.Toolkit.ColorItem>(getUnturnedColors().Select(d => new Xceed.Wpf.Toolkit.ColorItem(d, d.ToHEX())));
+            MainWindow.Instance.hairColorPicker.StandardColors = new System.Collections.ObjectModel.ObservableCollection<Xceed.Wpf.Toolkit.ColorItem>(getUnturnedColors().Select(d => new Xceed.Wpf.Toolkit.ColorItem(d, d.ToHEX())));
+            MainWindow.Instance.skinColorPicker.SelectedColorChanged += SkinColorPicker_SelectedColorChanged ;
+            MainWindow.Instance.hairColorPicker.SelectedColorChanged += HairColorPicker_SelectedColorChanged;
             conditions = new List<Condition>();
         }
         public NPCCharacter Current
@@ -128,11 +136,11 @@ namespace BowieD.Unturned.NPCMaker.Editors
                     face = (byte)(MainWindow.Instance.faceImageIndex.Value ?? 0),
                     haircut = (byte)(MainWindow.Instance.hairImageIndex.Value ?? 0),
                     guid = loadedGUID,
-                    hairColor = getHairColor.Invoke(),
-                    skinColor = getSkinColor.Invoke(),
                     leftHanded = MainWindow.Instance.apparelLeftHandedCheckbox.IsChecked == true,
                     startDialogueId = (ushort)(MainWindow.Instance.txtStartDialogueID.Value ?? 0),
-                    visibilityConditions = conditions
+                    visibilityConditions = conditions,
+                    skinColor = (MainWindow.Instance.skinColorPicker.SelectedColor ?? new Coloring.Color(0, 0, 0)),
+                    hairColor = (MainWindow.Instance.hairColorPicker.SelectedColor ?? new Coloring.Color(0, 0, 0))
                 };
             }
             set
@@ -142,8 +150,8 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 MainWindow.Instance.txtStartDialogueID.Value = value.startDialogueId;
                 MainWindow.Instance.txtDisplayName.Text = value.displayName;
                 MainWindow.Instance.txtEditorName.Text = value.editorName;
-                MainWindow.Instance.apparelSkinColorBox.Text = Palette.Convert<PaletteHEX>((PaletteRGB)value.skinColor).HEX;
-                MainWindow.Instance.apparelHairColorBox.Text = Palette.Convert<PaletteHEX>((PaletteRGB)value.hairColor).HEX;
+                MainWindow.Instance.skinColorPicker.SelectedColor = value.skinColor;
+                MainWindow.Instance.hairColorPicker.SelectedColor = value.hairColor;
                 MainWindow.Instance.backpackIdBox.Value = value.clothing.backpack;
                 MainWindow.Instance.maskIdBox.Value = value.clothing.mask;
                 MainWindow.Instance.vestIdBox.Value = value.clothing.vest;
@@ -211,8 +219,6 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.Instance.txtStartDialogueID.Value = value.startDialogueId;
             MainWindow.Instance.txtDisplayName.Text = value.displayName;
             MainWindow.Instance.txtEditorName.Text = value.editorName;
-            MainWindow.Instance.apparelSkinColorBox.Text = Palette.Convert<PaletteHEX>((PaletteRGB)value.skinColor).HEX;
-            MainWindow.Instance.apparelHairColorBox.Text = Palette.Convert<PaletteHEX>((PaletteRGB)value.hairColor).HEX;
             MainWindow.Instance.backpackIdBox.Value = value.clothing.backpack;
             MainWindow.Instance.maskIdBox.Value = value.clothing.mask;
             MainWindow.Instance.vestIdBox.Value = value.clothing.vest;
@@ -243,6 +249,8 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.Instance.apparelLeftHandedCheckbox.IsChecked = value.leftHanded;
             MainWindow.Instance.equipSlotBox.SelectedIndex = 0;
             MainWindow.Instance.apparelPoseBox.SelectedIndex = 0;
+            MainWindow.Instance.skinColorPicker.SelectedColor = new Coloring.Color(0, 0, 0);
+            MainWindow.Instance.hairColorPicker.SelectedColor = new Coloring.Color(0, 0, 0);
             conditions = value.visibilityConditions;
             loadedGUID = value.guid;
         }
@@ -280,6 +288,36 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.DiscordManager.SendPresence(presence);
         }
 
+
+
+        internal void SkinColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<System.Windows.Media.Color?> e)
+        {
+            Current.skinColor = (e.NewValue ?? new Coloring.Color(0, 0, 0));
+            MainWindow.Instance.faceImageBorder.Background = new SolidColorBrush(Current.skinColor);
+            var hsv = Coloring.ColorConverter.ColorToHSV(Current.skinColor);
+            if (hsv.V <= 0.1d)
+            {
+                var effect = new System.Windows.Media.Effects.DropShadowEffect
+                {
+                    BlurRadius = 2,
+                    Direction = 0,
+                    Color = Brushes.White.Color,
+                    ShadowDepth = 0
+                };
+                MainWindow.Instance.faceImageControl.Effect = effect;
+            }
+            else
+            {
+                MainWindow.Instance.faceImageControl.Effect = null;
+            }
+        }
+        internal void HairColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<System.Windows.Media.Color?> e)
+        {
+            Current.hairColor = (e.NewValue ?? new Coloring.Color(0, 0, 0));
+            SolidColorBrush color = new SolidColorBrush(Current.hairColor);
+            MainWindow.Instance.beardRenderGrid.DataContext = color;
+            MainWindow.Instance.hairRenderGrid.DataContext = color;
+        }
         internal void Apparel_Face_Random_Button_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.Instance.faceImageIndex.Value = new Random().Next(0, MainWindow.faceAmount);
@@ -291,52 +329,6 @@ namespace BowieD.Unturned.NPCMaker.Editors
         internal void Apparel_Hair_Random_Button_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.Instance.hairImageIndex.Value = new Random().Next(0, MainWindow.haircutAmount);
-        }
-        internal void ApparelSkinColorBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string text = MainWindow.Instance.apparelSkinColorBox.Text;
-            BrushConverter bc = new BrushConverter();
-            if (text.Length >= 7 && bc.IsValid(text))
-            {
-                SolidColorBrush color = bc.ConvertFromString(text) as SolidColorBrush;
-                MainWindow.Instance.faceImageBorder.Background = color;
-                var hsv = Palette.Convert<PaletteHSV>(new PaletteHEX() { HEX = text });
-                if (hsv.V <= 0.1d)
-                {
-                    var effect = new System.Windows.Media.Effects.DropShadowEffect
-                    {
-                        BlurRadius = 2,
-                        Direction = 0,
-                        Color = Brushes.White.Color,
-                        ShadowDepth = 0
-                    };
-                    MainWindow.Instance.faceImageControl.Effect = effect;
-                }
-                else
-                {
-                    MainWindow.Instance.faceImageControl.Effect = null;
-                }
-            }
-            else
-            {
-                MainWindow.Instance.faceImageBorder.Background = Brushes.Transparent;
-            }
-        }
-        internal void ApparelHairColorBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string text = MainWindow.Instance.apparelHairColorBox.Text;
-            BrushConverter bc = new BrushConverter();
-            if (text.Length >= 7 && bc.IsValid(text))
-            {
-                SolidColorBrush color = bc.ConvertFromString(text) as SolidColorBrush;
-                MainWindow.Instance.beardRenderGrid.DataContext = color;
-                MainWindow.Instance.hairRenderGrid.DataContext = color;
-            }
-            else
-            {
-                MainWindow.Instance.beardRenderGrid.DataContext = Brushes.Black;
-                MainWindow.Instance.hairRenderGrid.DataContext = Brushes.Black;
-            }
         }
         internal void FaceImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
