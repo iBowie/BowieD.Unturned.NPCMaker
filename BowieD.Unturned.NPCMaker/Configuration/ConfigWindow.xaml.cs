@@ -18,7 +18,6 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             InitializeComponent();
             Width *= AppConfig.Instance.scale;
             Height *= AppConfig.Instance.scale;
-            InitThemeList();
             CurrentConfig = AppConfig.Instance;
         }
 
@@ -38,13 +37,16 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             };
             set
             {
-                foreach (ComboBoxItem cbi in Selected_Theme_Box.Items)
+                foreach (var theme in ThemeManager.Themes)
                 {
-                    if ((cbi?.Tag as Theme).Name == value.currentTheme)
+                    ComboBoxItem cbi = new ComboBoxItem()
                     {
+                        Content = theme.Key,
+                        Tag = theme.Value
+                    };
+                    Selected_Theme_Box.Items.Add(cbi);
+                    if (theme.Key == value.currentTheme)
                         Selected_Theme_Box.SelectedItem = cbi;
-                        break;
-                    }
                 }
                 Autosave_Box.SelectedIndex = value.autosaveOption;
                 foreach (var lang in LocUtil.SupportedCultures())
@@ -93,17 +95,6 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             {
                 AppConfig.Instance.LoadDefaults();
                 Close();
-            }
-        }
-        private void InitThemeList()
-        {
-            foreach (var k in ThemeManager.Themes)
-            {
-                Selected_Theme_Box.Items.Add(new ComboBoxItem()
-                {
-                    Content = k.Key,
-                    Tag = k.Value
-                });
             }
         }
     }
