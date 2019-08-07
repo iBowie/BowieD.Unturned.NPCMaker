@@ -18,18 +18,7 @@ namespace BowieD.Unturned.NPCMaker.Themes
         /// Metro dictionary name
         /// </summary>
         public string DictionaryName { get; set; }
-        /// <summary>
-        /// Accent color (Red)
-        /// </summary>
-        public override byte R { get; set; }
-        /// <summary>
-        /// Accent color (Green)
-        /// </summary>
-        public override byte G { get; set; }
-        /// <summary>
-        /// Accent color (Blue)
-        /// </summary>
-        public override byte B { get; set; }
+        public override string AccentColor { get; set; }
 
         public override void Apply()
         {
@@ -44,8 +33,7 @@ namespace BowieD.Unturned.NPCMaker.Themes
                     throw new NullReferenceException();
                 }
                 Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
-                App.Current.Resources["AccentColor"] = new SolidColorBrush(Color.FromRgb(R, G, B));
-                Logging.Logger.Log($"Accent Color Set to ({R};{G};{B})");
+                App.Current.Resources["AccentColor"] = new BrushConverter().ConvertFromString(AccentColor);
 
             }
             catch { Logging.Logger.Log($"Can't apply {Name} theme"); }
