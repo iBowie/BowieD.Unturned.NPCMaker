@@ -1,4 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Config;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

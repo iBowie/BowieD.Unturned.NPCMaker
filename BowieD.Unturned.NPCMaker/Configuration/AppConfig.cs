@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace BowieD.Unturned.NPCMaker.Config
+namespace BowieD.Unturned.NPCMaker.Configuration
 {
     public class AppConfig : IConfig
     {

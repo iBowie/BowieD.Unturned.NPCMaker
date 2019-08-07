@@ -6,7 +6,7 @@ using System.Windows.Media.Animation;
 using System.Linq;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 using System;
-using BowieD.Unturned.NPCMaker.Config;
+using BowieD.Unturned.NPCMaker.Configuration;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {

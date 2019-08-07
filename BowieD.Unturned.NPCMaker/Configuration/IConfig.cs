@@ -1,4 +1,4 @@
-﻿namespace BowieD.Unturned.NPCMaker.Config
+﻿namespace BowieD.Unturned.NPCMaker.Configuration
 {
     public interface IConfig
     {

@@ -16,7 +16,7 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Xml;
 using System.Xml.Serialization;
-using BowieD.Unturned.NPCMaker.Config;
+using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Themes;
 using BowieD.Unturned.NPCMaker.Data;
 using System.Collections;

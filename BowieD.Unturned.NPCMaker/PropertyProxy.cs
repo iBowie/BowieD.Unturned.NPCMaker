@@ -1,5 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Coloring;
-using BowieD.Unturned.NPCMaker.Config;
+using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Data;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
@@ -256,7 +256,7 @@ namespace BowieD.Unturned.NPCMaker
         }
         internal void Options_Click(object sender, RoutedEventArgs e)
         {
-            Config.ConfigWindow cw = new Config.ConfigWindow();
+            Configuration.ConfigWindow cw = new Configuration.ConfigWindow();
             cw.ShowDialog();
         }
         internal void RandomColor_Click(object sender, RoutedEventArgs e)

@@ -1,4 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Config;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
 using System;
 using System.Windows;
 

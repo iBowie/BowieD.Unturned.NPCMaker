@@ -1,5 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Coloring;
-using BowieD.Unturned.NPCMaker.Config;
+using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using System;

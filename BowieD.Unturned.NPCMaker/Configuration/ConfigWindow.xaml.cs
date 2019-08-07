@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace BowieD.Unturned.NPCMaker.Config
+namespace BowieD.Unturned.NPCMaker.Configuration
 {
     /// <summary>
     /// Логика взаимодействия для ConfigWindow.xaml
