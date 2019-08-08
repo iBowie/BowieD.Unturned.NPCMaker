@@ -32,8 +32,16 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             }
             else
             {
-                string content = File.ReadAllText(path);
-                JsonConvert.PopulateObject(content, this);
+                try
+                {
+                    string content = File.ReadAllText(path);
+                    JsonConvert.PopulateObject(content, this);
+                }
+                catch
+                {
+                    LoadDefaults();
+                    Save();
+                }
             }
         }
         public void LoadDefaults()
