@@ -26,7 +26,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             Height *= scale;
             typeBox.SelectedIndex = 0;
             sellBox.SelectedIndex = 0;
-            Result = startItem ?? new VendorItem();
+            Result = startItem ?? new VendorItem() { isBuy = !isSellSelected, type = lastType };
             txtBoxCost.Value = Result.cost;
             txtBoxID.Value = Result.id;
             txtBoxSpawnpoint.Text = Result.spawnPointID;
@@ -79,6 +79,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     amountLabel.Opacity = 1;
                     amountBox.Opacity = 1;
                 }
+                amountBox.IsHitTestVisible = true;
+                txtBoxSpawnpoint.IsHitTestVisible = false;
                 sellBox.IsEnabled = true;
                 txtBoxSpawnpoint.Text = "";
             }
@@ -99,6 +101,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     amountLabel.Opacity = 0;
                     amountBox.Opacity = 0;
                 }
+                amountBox.IsHitTestVisible = false;
+                txtBoxSpawnpoint.IsHitTestVisible = true;
                 amountBox.Value = 0;
                 sellBox.IsEnabled = false;
                 sellBox.SelectedIndex = 1;
@@ -129,10 +133,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 Result.cost = (uint)txtBoxCost.Value;
                 if (Result.conditions == null)
                     Result.conditions = new List<Condition>();
+                isSellSelected = !IsBuy;
+                lastType = Selected_ItemType;
                 DialogResult = true;
                 Close();
             }
             catch { }
         }
+        private static bool isSellSelected = false;
+        private static ItemType lastType = ItemType.ITEM;
     }
 }
