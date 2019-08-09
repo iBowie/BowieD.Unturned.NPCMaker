@@ -25,12 +25,12 @@ namespace BowieD.Unturned.NPCMaker.Editors
                     if (resultedVendorItem.isBuy)
                     {
                         AddItemBuy(resultedVendorItem);
-                        Logger.Log($"Added item {resultedVendorItem.id} in buy list");
+                        App.Logger.LogInfo($"Added item {resultedVendorItem.id} in buy list");
                     }
                     else
                     {
                         AddItemSell(resultedVendorItem);
-                        Logger.Log($"Added item {resultedVendorItem.id} in sell list");
+                        App.Logger.LogInfo($"Added item {resultedVendorItem.id} in sell list");
                     }
                 }
             };
@@ -63,7 +63,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 {
                     items.Add((ui as Universal_ItemList).Value as VendorItem);
                 }
-                // Logger.Log($"Built vendor {MainWindow.Instance.vendorIdTxtBox.Value}");
+                // App.Logger.LogInfo($"Built vendor {MainWindow.Instance.vendorIdTxtBox.Value}");
                 return new NPCVendor()
                 {
                     items = items,
@@ -90,7 +90,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 MainWindow.Instance.vendorDescTxtBox.Text = value.vendorDescription;
                 MainWindow.Instance.vendor_commentbox.Text = value.Comment;
                 MainWindow.Instance.vendorDisableSortingBox.IsChecked = value.disableSorting;
-                // Logger.Log($"Set vendor {value.id}");
+                // App.Logger.LogInfo($"Set vendor {value.id}");
             }
         }
 
@@ -101,7 +101,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             {
                 Save();
                 Current = ulv.SelectedValue as NPCVendor;
-                Logger.Log($"Opened vendor {MainWindow.Instance.vendorIdTxtBox.Value}");
+                App.Logger.LogInfo($"Opened vendor {MainWindow.Instance.vendorIdTxtBox.Value}");
             }
             MainWindow.CurrentProject.vendors = ulv.Values.Cast<NPCVendor>().ToList();
         }
@@ -112,7 +112,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.Instance.vendorDescTxtBox.Text = "";
             MainWindow.Instance.vendorTitleTxtBox.Text = "";
             MainWindow.Instance.vendorDisableSortingBox.IsChecked = false;
-            Logger.Log($"Vendor {MainWindow.Instance.vendorIdTxtBox.Value} cleared!");
+            App.Logger.LogInfo($"Vendor {MainWindow.Instance.vendorIdTxtBox.Value} cleared!");
         }
         public void Save()
         {
@@ -126,7 +126,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.CurrentProject.vendors.Add(cur);
             App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Vendor_Saved"));
             MainWindow.isSaved = false;
-            Logger.Log($"Vendor {cur.id} saved!");
+            App.Logger.LogInfo($"Vendor {cur.id} saved!");
         }
 
         public void AddItemBuy(VendorItem item)

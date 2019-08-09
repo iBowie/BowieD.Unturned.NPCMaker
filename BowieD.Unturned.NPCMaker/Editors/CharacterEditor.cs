@@ -207,7 +207,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             {
                 Save();
                 Current = ulv.SelectedValue as NPCCharacter;
-                Logger.Log($"Opened character {MainWindow.Instance.txtID.Value}");
+                App.Logger.LogInfo($"Opened character {MainWindow.Instance.txtID.Value}");
             }
             MainWindow.CurrentProject.characters = ulv.Values.Cast<NPCCharacter>().ToList();
         }
@@ -269,7 +269,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.CurrentProject.characters.Add(character);
             App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Character_Saved"));
             MainWindow.isSaved = false;
-            Logger.Log($"Character {character.id} saved!");
+            App.Logger.LogInfo($"Character {character.id} saved!");
         }
 
         private string loadedGUID = Guid.NewGuid().ToString("N");

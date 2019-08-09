@@ -78,12 +78,10 @@ namespace BowieD.Unturned.NPCMaker
             inst.CommandBindings.Add(new CommandBinding(logWindow,
                 new ExecutedRoutedEventHandler((object sender, ExecutedRoutedEventArgs e) =>
             {
-                if (!LogWindow.IsOpened)
-                {
-                    Logger.Log("Opening Log Window...");
-                    MainWindow.LogWindow = new LogWindow();
-                    MainWindow.LogWindow.Show();
-                }
+                if (ConsoleLogger.IsOpened)
+                    ConsoleLogger.HideConsoleWindow();
+                else
+                    ConsoleLogger.ShowConsoleWindow();
             })));
         }
 
@@ -283,7 +281,7 @@ namespace BowieD.Unturned.NPCMaker
                     new Whats_New().ShowDialog();
                 }
             }
-            catch (Exception ex) { Logging.Logger.Log(ex); }
+            catch (Exception ex) { App.Logger.LogException("Could not open update notes window.", ex); }
         }
         #endregion
     }

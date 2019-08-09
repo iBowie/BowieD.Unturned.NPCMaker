@@ -22,6 +22,7 @@ namespace BowieD.Unturned.NPCMaker
     {
         public static IUpdateManager UpdateManager;
         public static INotificationManager NotificationManager;
+        public static List<ILogger> Logger { get; private set; } = new List<ILogger>();
         public App()
         {
             InitializeComponent();
@@ -29,8 +30,11 @@ namespace BowieD.Unturned.NPCMaker
             Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
             #endif
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
-            Logger.Clear();
-            Logger.Log("App started! Pre-launch stage.");
+        }
+        public new void Run()
+        {
+            InitLoggers();
+            App.Logger.LogInfo("App started! Pre-launch stage.");
             #region COPY LIBS
             CopyResource(NPCMaker.Properties.Resources.DiscordRPC, AppConfig.Directory + "DiscordRPC.dll");
             CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, AppConfig.Directory + "Newtonsoft.Json.dll");
@@ -45,11 +49,11 @@ namespace BowieD.Unturned.NPCMaker
             CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_VS2010, AppConfig.Directory + "Xceed.Wpf.AvalonDock.Themes.VS2010.dll");
             CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_Toolkit, AppConfig.Directory + "Xceed.Wpf.Toolkit.dll");
             #endregion
-            Logger.Log("Loading configuration...");
+            App.Logger.LogInfo("Loading configuration...");
             AppConfig.Instance.Load();
             #region SCALE
             Resources["Scale"] = AppConfig.Instance.scale;
-            Logger.Log($"Scale set to {AppConfig.Instance.scale}");
+            App.Logger.LogInfo($"Scale set to {AppConfig.Instance.scale}");
             #endregion
             Util.UpdateManager = new GitHubUpdateManager();
             Util.UpdateManager.CheckForUpdates().GetAwaiter().GetResult();
@@ -75,7 +79,9 @@ namespace BowieD.Unturned.NPCMaker
                 LocUtil.LoadLanguage(AppConfig.Instance.locale);
             MainWindow mw = new MainWindow();
             InitManagers();
+            ConsoleLogger.HideConsoleWindow();
             mw.Show();
+            base.Run();
         }
 
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
@@ -100,9 +106,14 @@ namespace BowieD.Unturned.NPCMaker
             acr.ShowDialog();
             e.Handled = acr.Handle;
             if (acr.Handle)
-                Logger.Log($"Ignoring exception {e.Exception.Message}.");
+                App.Logger.LogInfo($"Ignoring exception {e.Exception.Message}.");
         }
-
+        public static void InitLoggers()
+        {
+            Logger.Add(new ConsoleLogger());
+            Logger.Add(new FileLogger());
+            Logger.Open();
+        }
         public static void InitManagers()
         {
             UpdateManager = new GitHubUpdateManager();

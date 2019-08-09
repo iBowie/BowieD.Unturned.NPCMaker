@@ -7,7 +7,10 @@
         public override string Help => "Forces app to download latest version on the server";
         public override void Execute(string[] args)
         {
-            Util.UpdateManager.StartUpdate();
+            MainWindow.Instance.Dispatcher.Invoke(() =>
+            {
+                Util.UpdateManager.StartUpdate();
+            });
         }
     }
 }

@@ -48,8 +48,7 @@ namespace BowieD.Unturned.NPCMaker.Updating
             }
             catch (Exception ex)
             {
-                Logger.Log("Could not download updater!", Log_Level.Error);
-                Logger.Log(ex, Log_Level.Error);
+                App.Logger.LogException("Could not download updater!", ex);
             }
         }
         public void StartUpdate()
@@ -106,8 +105,7 @@ namespace BowieD.Unturned.NPCMaker.Updating
             }
             catch (Exception ex)
             {
-                Logger.Log("Could not check update!", Log_Level.Error);
-                Logger.Log(ex, Log_Level.Error);
+                App.Logger.LogException("Could not check for updates!", ex);
                 return null;
             }
         }

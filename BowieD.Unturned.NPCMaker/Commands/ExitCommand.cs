@@ -9,7 +9,10 @@
 
         public override void Execute(string[] args)
         {
-            MainWindow.PerformExit();
+            MainWindow.Instance.Dispatcher.Invoke(() =>
+            {
+                MainWindow.PerformExit();
+            });
         }
     }
 }

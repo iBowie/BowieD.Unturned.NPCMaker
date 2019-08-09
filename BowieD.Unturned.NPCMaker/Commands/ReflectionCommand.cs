@@ -13,11 +13,14 @@ namespace BowieD.Unturned.NPCMaker.Commands
 
         public override void Execute(string[] args)
         {
-            if (args.Length > 0)
+            MainWindow.Instance.Dispatcher.Invoke(() =>
             {
-                MethodInfo method = typeof(MainWindow).GetMethod(args[0]);
-                method.Invoke(MainWindow.Instance, null);
-            }
+                if (args.Length > 0)
+                {
+                    MethodInfo method = typeof(MainWindow).GetMethod(args[0]);
+                    method.Invoke(MainWindow.Instance, null);
+                }
+            });
         }
     }
 }

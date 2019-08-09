@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{76722CC9-A215-414E-8DFF-938AD2834D74}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>BowieD.Unturned.NPCMaker</RootNamespace>
     <AssemblyName>BowieD.Unturned.NPCMaker</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -51,6 +51,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Option_1_256x.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>BowieD.Unturned.NPCMaker.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
@@ -153,22 +156,17 @@
     <Compile Include="Forms\AppCrashReport.xaml.cs">
       <DependentUpon>AppCrashReport.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Commands\ClearCommand.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CrashCommand.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\GCCommand.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
-    <Compile Include="Forms\LogWindow.xaml.cs">
-      <DependentUpon>LogWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Message_TreeView.xaml.cs">
       <DependentUpon>Message_TreeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\InfoCommand.cs" />
     <Compile Include="Commands\NotifyCommand.cs" />
     <Compile Include="Commands\ReflectionCommand.cs" />
-    <Compile Include="Commands\RestoreLogCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
     <Compile Include="Commands\SwitchCommand.cs" />
     <Compile Include="Forms\Universal_ConditionEditor.xaml.cs">
@@ -205,7 +203,10 @@
       <DependentUpon>Form_About.xaml</DependentUpon>
     </Compile>
     <Compile Include="Localization\LocUtil.cs" />
-    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\FileLogger.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\ConsoleLogger.cs" />
+    <Compile Include="Logging\LoggerExtensions.cs" />
     <Compile Include="Managers\HolidayManager.cs" />
     <Compile Include="Mistakes\DeepAnalysisManager.cs" />
     <Compile Include="Mistakes\General\NE_0004.cs" />
@@ -260,6 +261,7 @@
     <Compile Include="NPC\Rewards\RewardTeleport.cs" />
     <Compile Include="NPC\Rewards\RewardTooltipAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardVehicle.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -324,10 +326,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\AppCrashReport.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Forms\LogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

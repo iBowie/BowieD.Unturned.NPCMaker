@@ -40,7 +40,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             sb.AppendLine();
             sb.AppendLine($"Application log:");
             sb.AppendLine();
-            Logger.lines.ForEach(s => sb.AppendLine(s));
+            sb.AppendLine(FileLogger.GetContents());
             sb.AppendLine();
             sb.AppendLine($"Exception message: {exception.Message}");
             sb.AppendLine($"Stack trace: {exception.StackTrace}");

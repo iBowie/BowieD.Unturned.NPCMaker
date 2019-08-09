@@ -8,7 +8,10 @@ namespace BowieD.Unturned.NPCMaker.Commands
         public override string Help => "Sends a notification to main window.";
         public override void Execute(string[] args)
         {
-            App.NotificationManager.Notify(string.Join(" ", args));
+            MainWindow.Instance.Dispatcher.Invoke(() =>
+            {
+                App.NotificationManager.Notify(string.Join(" ", args));
+            });
         }
     }
 }

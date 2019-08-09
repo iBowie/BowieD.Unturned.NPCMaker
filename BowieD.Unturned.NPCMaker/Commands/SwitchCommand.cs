@@ -16,7 +16,7 @@ namespace BowieD.Unturned.NPCMaker.Commands
             }
             else
             {
-                Logger.Log($"Index must be a digit and higher than -1");
+                App.Logger.LogInfo($"Index must be a digit and higher than -1");
             }
         }
     }

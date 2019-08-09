@@ -42,7 +42,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             {
                 Save();
                 Current = ulv.SelectedValue as NPCDialogue;
-                Logger.Log($"Opened dialogue {MainWindow.Instance.dialogueInputIdControl.Value}");
+                App.Logger.LogInfo($"Opened dialogue {MainWindow.Instance.dialogueInputIdControl.Value}");
             }
             MainWindow.CurrentProject.dialogues = ulv.Values.Cast<NPCDialogue>().ToList();
         }
@@ -72,7 +72,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             {
                 MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Remove(item);
             }
-            Logger.Log($"Cleared dialogue {MainWindow.Instance.dialogueInputIdControl.Value}");
+            App.Logger.LogInfo($"Cleared dialogue {MainWindow.Instance.dialogueInputIdControl.Value}");
         }
         public void Save()
         {
@@ -88,7 +88,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.CurrentProject.dialogues.Add(dil);
             App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Dialogue_Saved"));
             MainWindow.isSaved = false;
-            Logger.Log($"Dialogue {dil.id} saved!");
+            App.Logger.LogInfo($"Dialogue {dil.id} saved!");
         }
         public NPCDialogue Current
         {
@@ -219,7 +219,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             {
                 MainWindow.Instance.txtStartDialogueID.Value = dial.id;
                 App.NotificationManager.Notify(LocUtil.LocalizeInterface("dialogue_Start_Notify", dial.id));
-                Logger.Log($"Dialogue {dial.id} set as start!");
+                App.Logger.LogInfo($"Dialogue {dial.id} set as start!");
             }
         }
 

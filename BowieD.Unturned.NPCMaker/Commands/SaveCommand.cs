@@ -7,7 +7,10 @@
         public override string Help => "Emits user press on \"Save\" button";
         public override void Execute(string[] args)
         {
-            MainWindow.Save();
+            MainWindow.Instance.Dispatcher.Invoke(() =>
+            {
+                MainWindow.Save();
+            });
         }
     }
 }

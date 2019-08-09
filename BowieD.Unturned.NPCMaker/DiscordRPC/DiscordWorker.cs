@@ -1,4 +1,6 @@
-﻿using DiscordRPC;
+﻿using BowieD.Unturned.NPCMaker.Logging;
+using DiscordRPC;
+using ConsoleLogger = DiscordRPC.Logging.ConsoleLogger;
 using DiscordRPC.Logging;
 using System.Threading.Tasks;
 
@@ -19,7 +21,7 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
         {
             client = new DiscordRpcClient("528291563181178900")
             {
-                Logger = new ConsoleLogger() { Level = LogLevel.Warning }
+
             };
             client.OnReady += Client_OnReady;
             client.OnPresenceUpdate += Client_OnPresenceUpdate;
@@ -59,7 +61,7 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
         public void Deinitialize()
         {
             client.Dispose();
-            Logging.Logger.Log("Discord Rich Presence client deinitialized!");
+            App.Logger.LogInfo("Discord Rich Presence client deinitialized!");
         }
 
         private void Client_OnPresenceUpdate(object sender, global::DiscordRPC.Message.PresenceMessage args)
@@ -69,7 +71,7 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
 
         private void Client_OnReady(object sender, global::DiscordRPC.Message.ReadyMessage args)
         {
-            Logging.Logger.Log("Discord Rich Presence started!", Logging.Log_Level.Normal);
+            App.Logger.LogInfo("Discord Rich Presence started!");
         }
     }
 }

@@ -82,11 +82,11 @@
     //                Properties.currentTheme.Apply();
     //            }
     //        }
-    //        catch { Logger.Log("Can't load configuration. Loading defaults...", Log_Level.Error); LoadDefaults(); }
+    //        catch { App.Logger.LogInfo("Can't load configuration. Loading defaults...", Log_Level.Error); LoadDefaults(); }
     //    }
     //    public static void Save()
     //    {
-    //        Logger.Log("Saving configuration...");
+    //        App.Logger.LogInfo("Saving configuration...");
     //        var dir = ConfigDirectory;
     //        if (!Directory.Exists(dir))
     //            Directory.CreateDirectory(dir);
@@ -96,7 +96,7 @@
     //            XmlSerializer ser = new XmlSerializer(typeof(CFG));
     //            ser.Serialize(writer, Properties);
     //        }
-    //        Logger.Log("Configuration saved!");
+    //        App.Logger.LogInfo("Configuration saved!");
     //    }
     //    public static void LoadDefaults()
     //    {

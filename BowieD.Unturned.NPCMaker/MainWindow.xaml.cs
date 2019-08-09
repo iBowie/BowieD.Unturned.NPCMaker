@@ -26,7 +26,6 @@ namespace BowieD.Unturned.NPCMaker
 {
     public partial class MainWindow : Window
     {
-        public static LogWindow LogWindow { get; set; }
         #region MANAGERS
         public static Mistakes.DeepAnalysisManager DeepAnalysisManager { get; private set; }
         public static DiscordRPC.DiscordManager DiscordManager { get; set; }
@@ -65,7 +64,7 @@ namespace BowieD.Unturned.NPCMaker
             DeepAnalysisManager = new Mistakes.DeepAnalysisManager();
             Width *= AppConfig.Instance.scale;
             Height *= AppConfig.Instance.scale;
-            Logger.Log($"Launch stage. Version: {Version}.");
+            App.Logger.LogInfo($"Launch stage. Version: {Version}.");
             Proxy = new PropertyProxy(this);
             Proxy.RegisterEvents();
             #region THEME SETUP
@@ -110,16 +109,16 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     Proxy.WhatsNew_Menu_Click(null, null);
                     File.Delete(AppConfig.Directory + "updater.exe");
-                    Logger.Log("Updater deleted.");
+                    App.Logger.LogInfo("Updater deleted.");
                 }
                 else if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "updater.exe"))
                 {
                     Proxy.WhatsNew_Menu_Click(null, null);
                     File.Delete(AppDomain.CurrentDomain.BaseDirectory + "updater.exe");
-                    Logger.Log("Updater deleted.");
+                    App.Logger.LogInfo("Updater deleted.");
                 }
             }
-            catch { Logger.Log("Can't delete updater."); }
+            catch { App.Logger.LogWarning("Can't delete updater."); }
             #endregion
             #region AUTOSAVE INIT
             if (AppConfig.Instance.autosaveOption > 0)
@@ -288,7 +287,7 @@ namespace BowieD.Unturned.NPCMaker
                 }
                 return false;
             }
-            catch (Exception ex) { Logger.Log(ex, Log_Level.Error); App.NotificationManager.Notify(LocUtil.LocalizeInterface("load_Incompatible")); return false; }
+            catch (Exception ex) { App.Logger.LogException("Error occured while loading project.", ex); App.NotificationManager.Notify(LocUtil.LocalizeInterface("load_Incompatible")); return false; }
         }
         public static bool SavePrompt()
         {

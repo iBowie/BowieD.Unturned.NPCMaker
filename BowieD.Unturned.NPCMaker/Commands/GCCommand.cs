@@ -19,16 +19,16 @@ namespace BowieD.Unturned.NPCMaker.Commands
                 {
                     case "run":
                         GC.Collect();
-                        Logger.Log("GC Forced");
+                        App.Logger.LogInfo("GC Forced");
                         break;
                     case "stop" when GCSettings.LatencyMode != GCLatencyMode.LowLatency:
                         oldMode = GCSettings.LatencyMode;
                         GCSettings.LatencyMode = GCLatencyMode.LowLatency;
-                        Logger.Log("GC Paused");
+                        App.Logger.LogInfo("GC Paused");
                         break;
                     case "resume" when GCSettings.LatencyMode == GCLatencyMode.LowLatency:
                         GCSettings.LatencyMode = oldMode;
-                        Logger.Log("GC Resumed");
+                        App.Logger.LogInfo("GC Resumed");
                         break;
                 }
             }

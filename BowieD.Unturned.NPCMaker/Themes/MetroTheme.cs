@@ -36,7 +36,7 @@ namespace BowieD.Unturned.NPCMaker.Themes
                 App.Current.Resources["AccentColor"] = new BrushConverter().ConvertFromString(AccentColor);
 
             }
-            catch { Logging.Logger.Log($"Can't apply {Name} theme"); }
+            catch { App.Logger.LogWarning($"Can't apply {Name} theme"); }
         }
         public override void Remove()
         {
@@ -64,7 +64,7 @@ namespace BowieD.Unturned.NPCMaker.Themes
                 }
                 ThemeManager.CurrentTheme = null;
             }
-            catch { Logger.Log("Could not clear theme"); }
+            catch { App.Logger.LogInfo("Could not clear theme"); }
         }
     }
 }
