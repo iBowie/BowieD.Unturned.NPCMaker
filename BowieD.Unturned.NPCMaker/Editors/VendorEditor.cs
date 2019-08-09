@@ -124,7 +124,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 MainWindow.CurrentProject.vendors.Remove(MainWindow.CurrentProject.vendors.Where(d => d.id == cur.id).ElementAt(0));
             }
             MainWindow.CurrentProject.vendors.Add(cur);
-            MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Vendor_Saved"));
+            App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Vendor_Saved"));
             MainWindow.isSaved = false;
             Logger.Log($"Vendor {cur.id} saved!");
         }

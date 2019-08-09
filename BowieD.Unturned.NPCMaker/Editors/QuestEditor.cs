@@ -123,7 +123,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 MainWindow.CurrentProject.quests.Remove(MainWindow.CurrentProject.quests.Where(d => d.id == MainWindow.Instance.questIdBox.Value).ElementAt(0));
             MainWindow.CurrentProject.quests.Add(cur);
             MainWindow.isSaved = false;
-            MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Quest_Saved"));
+            App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Quest_Saved"));
         }
 
         public void SendPresence()

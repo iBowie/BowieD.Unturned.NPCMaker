@@ -116,7 +116,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             }
             else
             {
-                MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("dialogue_Reply_EditVisibility_MessageCount"));
+                App.NotificationManager.Notify(LocUtil.LocalizeInterface("dialogue_Reply_EditVisibility_MessageCount"));
             }
         }
 

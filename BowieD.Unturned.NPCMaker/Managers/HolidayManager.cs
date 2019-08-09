@@ -18,6 +18,7 @@ namespace BowieD.Unturned.NPCMaker.Managers
             yield return new DayMonth("Life is Strange...", 11, 10);
             yield return new DayMonth("Happy Anniversary, Sonic The Hedgehog!", 23, 6);
             yield return new DayMonth("Happy Birthday, Terraria!", 16, 5);
+            yield return new DayMonthYear("They CAN stop all of us...", 20, 9, 2019);
         }
         public static void Check()
         {
@@ -30,7 +31,7 @@ namespace BowieD.Unturned.NPCMaker.Managers
                 {
                     if (dmy.Day == day && dmy.Month == month && dmy.Year == year)
                     {
-                        MainWindow.NotificationManager.Notify(dmy.Text);
+                        App.NotificationManager.Notify(dmy.Text);
                         dmy.OnCheck?.Invoke();
                     }
                 }
@@ -38,7 +39,7 @@ namespace BowieD.Unturned.NPCMaker.Managers
                 {
                     if (k.Day == day && k.Month == month)
                     {
-                        MainWindow.NotificationManager.Notify(k.Text);
+                        App.NotificationManager.Notify(k.Text);
                         k.OnCheck?.Invoke();
                     }
                 }

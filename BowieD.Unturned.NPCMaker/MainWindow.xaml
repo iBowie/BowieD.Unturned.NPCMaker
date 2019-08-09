@@ -816,16 +816,13 @@
         <Grid Name="dropOverlay" Background="#99000000" Visibility="Hidden">
             <Image Source="Resources/ICON_OPEN.png" Width="256" Height="256"/>
         </Grid>
-        <Grid Name="notificationOverlay" Visibility="Visible">
-            <StackPanel Margin="10" Name="notificationsStackPanel" HorizontalAlignment="Right" VerticalAlignment="Top" Width="300" Height="{Binding Height, ElementName=mainWindow}"/>
-        </Grid>
+        <Grid Name="notificationOverlay" Visibility="Visible"/>
         <Grid Name="blockActionsOverlay" Visibility="Collapsed" IsHitTestVisible="True">
             <Rectangle Fill="Black" Opacity="0.8"/>
             <TextBlock Name="textBlockActions" TextAlignment="Center" Text="{DynamicResource app_Analysis}" FontSize="18" Foreground="White" Opacity="0.8" VerticalAlignment="Center"/>
             <ProgressBar Name="progrBar" VerticalAlignment="Bottom" Margin="10" Height="32" Opacity="0.8"/>
         </Grid>
         <Grid Name="notClickableOverlay" IsHitTestVisible="False">
-            <!--<TextBlock  Name="betaOverlayText" Margin="5" Text="BETA" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="36" Opacity="0.15"/>-->
             <Label Visibility="Collapsed" Name="betaOverlayText" Margin="5" Content="BETA" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="36" Opacity="0.15"/>
             <Grid Name="debugOverlayText" HorizontalAlignment="Left" Opacity="0.15" VerticalAlignment="Bottom" Margin="5">
                 <Image Width="36" Source="Resources/ICON_WARNING.png" Height="{Binding Width}" HorizontalAlignment="Left"/>

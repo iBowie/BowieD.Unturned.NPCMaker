@@ -28,7 +28,6 @@ namespace BowieD.Unturned.NPCMaker
     {
         public static LogWindow LogWindow { get; set; }
         #region MANAGERS
-        public static INotificationManager NotificationManager { get; private set; } = new NotificationManager();
         public static Mistakes.DeepAnalysisManager DeepAnalysisManager { get; private set; }
         public static DiscordRPC.DiscordManager DiscordManager { get; set; }
         #endregion
@@ -82,8 +81,8 @@ namespace BowieD.Unturned.NPCMaker
                         {
                             if (Load(args[k]))
                             {
-                                notificationsStackPanel.Children.Clear();
-                                MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
+                                App.NotificationManager.Clear();
+                                App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
                             }
                             break;
                         }
@@ -166,7 +165,7 @@ namespace BowieD.Unturned.NPCMaker
             }
 #endregion
             HolidayManager.Check();
-            MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("app_Free"));
+            App.NotificationManager.Notify(LocUtil.LocalizeInterface("app_Free"));
         }
 #region CONSTANTS
         public const int
@@ -241,12 +240,12 @@ namespace BowieD.Unturned.NPCMaker
             try
             {
                 CurrentProject.Save(saveFile);
-                MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Saved"));
+                App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Saved"));
                 isSaved = true;
             }
             catch (Exception ex)
             {
-                MainWindow.NotificationManager.Notify($"Saving failed! Exception: {ex.Message}");
+                App.NotificationManager.Notify($"Saving failed! Exception: {ex.Message}");
                 AppCrashReport acr = new AppCrashReport(ex, false, true);
                 acr.ShowDialog();
             }
@@ -279,13 +278,13 @@ namespace BowieD.Unturned.NPCMaker
                     ResetEditors();
                     isSaved = true;
                     AddToRecentList(saveFile);
-                    NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
+                    App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
                     Started = DateTime.UtcNow;
                     return true;
                 }
                 return false;
             }
-            catch (Exception ex) { Logger.Log(ex, Log_Level.Error); NotificationManager.Notify(LocUtil.LocalizeInterface("load_Incompatible")); return false; }
+            catch (Exception ex) { Logger.Log(ex, Log_Level.Error); App.NotificationManager.Notify(LocUtil.LocalizeInterface("load_Incompatible")); return false; }
         }
         public static bool SavePrompt()
         {
@@ -344,8 +343,8 @@ namespace BowieD.Unturned.NPCMaker
                 string path = (e.Data.GetData(DataFormats.FileDrop) as string[])[0];
                 if (Load(path))
                 {
-                    notificationsStackPanel.Children.Clear();
-                    NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
+                    App.NotificationManager.Clear();
+                    App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
                 }
             }
             dropOverlay.Visibility = Visibility.Hidden;

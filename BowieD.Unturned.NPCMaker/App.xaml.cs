@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
+using BowieD.Unturned.NPCMaker.Notification;
 using BowieD.Unturned.NPCMaker.Updating;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,8 @@ namespace BowieD.Unturned.NPCMaker
     /// </summary>
     public partial class App : Application
     {
+        public static IUpdateManager UpdateManager;
+        public static INotificationManager NotificationManager;
         public App()
         {
             InitializeComponent();
@@ -97,6 +100,12 @@ namespace BowieD.Unturned.NPCMaker
             e.Handled = acr.Handle;
             if (acr.Handle)
                 Logger.Log($"Ignoring exception {e.Exception.Message}.");
+        }
+
+        public static void InitManagers()
+        {
+            UpdateManager = new GitHubUpdateManager();
+            NotificationManager = new NotificationManager();
         }
 
         private void CopyResource(byte[] res, string file)

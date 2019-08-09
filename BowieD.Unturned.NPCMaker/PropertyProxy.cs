@@ -132,7 +132,7 @@ namespace BowieD.Unturned.NPCMaker
                         q.guid = Guid.NewGuid().ToString("N");
                 }
             }
-            MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("general_Regenerated"));
+            App.NotificationManager.Notify(LocUtil.LocalizeInterface("general_Regenerated"));
             MainWindow.isSaved = false;
         }
         internal void Options_Click(object sender, RoutedEventArgs e)
@@ -192,8 +192,8 @@ namespace BowieD.Unturned.NPCMaker
                 return;
             if (inst.Load(path))
             {
-                inst.notificationsStackPanel.Children.Clear();
-                MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
+                App.NotificationManager.Clear();
+                App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
             }
         }
         internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -186,7 +186,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             Logger.Log($"Found {validFiles.Count()} assets!");
             long oldTotal = validFiles.Count();
             validFiles = validFiles.Where(d => d.Name != "English.dat" && d.Name != "Russian.dat");
-            MainWindow.NotificationManager.Notify($"Skipped {oldTotal - validFiles.Count()} files.");
+            App.NotificationManager.Notify($"Skipped {oldTotal - validFiles.Count()} files.");
             long step = 1;
             MainWindow.Instance.progrBar.Maximum = validFiles.Count();
             foreach (FileInfo fi in validFiles)
