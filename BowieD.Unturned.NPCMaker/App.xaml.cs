@@ -74,6 +74,7 @@ namespace BowieD.Unturned.NPCMaker
             if (!LocUtil.IsLoaded)
                 LocUtil.LoadLanguage(AppConfig.Instance.locale);
             MainWindow mw = new MainWindow();
+            InitManagers();
             mw.Show();
         }
 

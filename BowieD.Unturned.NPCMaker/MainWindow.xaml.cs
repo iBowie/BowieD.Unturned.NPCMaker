@@ -55,6 +55,9 @@ namespace BowieD.Unturned.NPCMaker
         {
             Instance = this;
             InitializeComponent();
+        }
+        public new void Show()
+        {
             CharacterEditor = new CharacterEditor();
             DialogueEditor = new DialogueEditor();
             VendorEditor = new VendorEditor();
@@ -68,8 +71,8 @@ namespace BowieD.Unturned.NPCMaker
             #region THEME SETUP
             var theme = ThemeManager.Themes.ContainsKey(AppConfig.Instance.currentTheme ?? "") ? ThemeManager.Themes[AppConfig.Instance.currentTheme] : ThemeManager.Themes["Metro/LightGreen"];
             ThemeManager.Apply(theme);
-#endregion
-#region OPEN_WITH
+            #endregion
+            #region OPEN_WITH
             string[] args = Environment.GetCommandLineArgs();
             if (args != null && args.Length >= 0)
             {
@@ -90,17 +93,17 @@ namespace BowieD.Unturned.NPCMaker
                 }
                 catch { }
             }
-#endregion
-#region APPAREL SETUP
+            #endregion
+            #region APPAREL SETUP
             faceImageIndex.Maximum = faceAmount - 1;
             beardImageIndex.Maximum = beardAmount - 1;
             hairImageIndex.Maximum = haircutAmount - 1;
             (CharacterEditor as CharacterEditor).FaceImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
             (CharacterEditor as CharacterEditor).HairImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
             (CharacterEditor as CharacterEditor).BeardImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
-#endregion
+            #endregion
             RefreshRecentList();
-#region AFTER UPDATE
+            #region AFTER UPDATE
             try
             {
                 if (File.Exists(AppConfig.Directory + "updater.exe"))
@@ -117,8 +120,8 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             catch { Logger.Log("Can't delete updater."); }
-#endregion
-#region AUTOSAVE INIT
+            #endregion
+            #region AUTOSAVE INIT
             if (AppConfig.Instance.autosaveOption > 0)
             {
                 AutosaveTimer = new DispatcherTimer();
@@ -143,29 +146,30 @@ namespace BowieD.Unturned.NPCMaker
                 AutosaveTimer.Tick += AutosaveTimer_Tick;
                 AutosaveTimer.Start();
             }
-#endregion
-#region VERSION SPECIFIC CODE
+            #endregion
+            #region VERSION SPECIFIC CODE
 #if !DEBUG
             debugOverlayText.Visibility = Visibility.Collapsed;
 #endif
-#endregion
+            #endregion
             isSaved = true;
-#region DISCORD
+            #region DISCORD
             DiscordManager = new DiscordRPC.DiscordManager(1000)
             {
                 descriptive = AppConfig.Instance.enableDiscord
             };
             DiscordManager?.Initialize();
             Proxy.TabControl_SelectionChanged(mainTabControl, null);
-#endregion
-#region ENABLE EXPERIMENTAL
+            #endregion
+            #region ENABLE EXPERIMENTAL
             if (AppConfig.Instance.experimentalFeatures)
             {
 
             }
-#endregion
+            #endregion
             HolidayManager.Check();
             App.NotificationManager.Notify(LocUtil.LocalizeInterface("app_Free"));
+            base.Show();
         }
 #region CONSTANTS
         public const int
