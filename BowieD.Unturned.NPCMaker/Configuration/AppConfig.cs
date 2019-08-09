@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using BowieD.Unturned.NPCMaker.Logging;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 
@@ -20,13 +21,17 @@ namespace BowieD.Unturned.NPCMaker.Configuration
 
         public void Save()
         {
+            App.Logger.LogInfo($"[CFG] - Saving configuration to {path}");
             string content = JsonConvert.SerializeObject(this);
             File.WriteAllText(path, content);
+            App.Logger.LogInfo($"[CFG] - Saving complete!");
         }
         public void Load()
         {
+            App.Logger.LogInfo($"[CFG] - Loading configuration from {path}");
             if (!File.Exists(path))
             {
+                App.Logger.LogInfo($"[CFG] - File not found. Creating one...");
                 LoadDefaults();
                 Save();
             }
@@ -34,11 +39,14 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             {
                 try
                 {
+                    App.Logger.LogInfo($"[CFG] - File found. Loading configuration...");
                     string content = File.ReadAllText(path);
                     JsonConvert.PopulateObject(content, this);
+                    App.Logger.LogInfo($"[CFG] - Configuration loaded from {path}");
                 }
                 catch
                 {
+                    App.Logger.LogWarning($"[CFG] - Could not load configuration from file. Reverting to default...");
                     LoadDefaults();
                     Save();
                 }
@@ -46,6 +54,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         }
         public void LoadDefaults()
         {
+            App.Logger.LogInfo($"[CFG] - Loading default configuration...");
             scale = 1;
             enableDiscord = true;
             currentTheme = "Metro/LightGreen";
@@ -55,6 +64,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             animateControls = true;
             autoUpdate = true;
             locale = "en-US";
+            App.Logger.LogInfo($"[CFG] - Default configuration loaded!");
         }
         public static string Directory
         {

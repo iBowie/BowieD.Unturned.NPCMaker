@@ -34,7 +34,7 @@ namespace BowieD.Unturned.NPCMaker
         public new void Run()
         {
             InitLoggers();
-            App.Logger.LogInfo("App started! Pre-launch stage.");
+            Logger.LogInfo("Copying libraries...");
             #region COPY LIBS
             CopyResource(NPCMaker.Properties.Resources.DiscordRPC, AppConfig.Directory + "DiscordRPC.dll");
             CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, AppConfig.Directory + "Newtonsoft.Json.dll");
@@ -49,11 +49,10 @@ namespace BowieD.Unturned.NPCMaker
             CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_VS2010, AppConfig.Directory + "Xceed.Wpf.AvalonDock.Themes.VS2010.dll");
             CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_Toolkit, AppConfig.Directory + "Xceed.Wpf.Toolkit.dll");
             #endregion
-            App.Logger.LogInfo("Loading configuration...");
+            Logger.LogInfo("Copying complete!");
             AppConfig.Instance.Load();
             #region SCALE
             Resources["Scale"] = AppConfig.Instance.scale;
-            App.Logger.LogInfo($"Scale set to {AppConfig.Instance.scale}");
             #endregion
             Util.UpdateManager = new GitHubUpdateManager();
             Util.UpdateManager.CheckForUpdates().GetAwaiter().GetResult();
