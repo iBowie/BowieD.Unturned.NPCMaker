@@ -168,21 +168,6 @@ namespace BowieD.Unturned.NPCMaker
         faceAmount = 32,
         beardAmount = 16,
         haircutAmount = 23;
-        private static Version _readVersion = null;
-        public static Version Version
-        {
-            get
-            {
-                try
-                {
-
-                    if (_readVersion == null)
-                        _readVersion = new Version(FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).FileVersion);
-                    return _readVersion;
-                }
-                catch { return new Version("0.0.0.0"); }
-            }
-        }
         #endregion
         #region STATIC
         public static MainWindow Instance;
@@ -232,7 +217,6 @@ namespace BowieD.Unturned.NPCMaker
         {
             dropOverlay.Visibility = Visibility.Hidden;
         }
-
         private void Window_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -250,6 +234,7 @@ namespace BowieD.Unturned.NPCMaker
                 else
                 {
                     MainWindow.CurrentProject.file = oldPath;
+                    App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_NotLoaded"));
                 }
             }
             dropOverlay.Visibility = Visibility.Hidden;
@@ -272,8 +257,16 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     string oldPath = MainWindow.CurrentProject.file;
                     MainWindow.CurrentProject.file = k;
-                    if (!MainWindow.CurrentProject.Load(null))
+                    if (MainWindow.CurrentProject.Load(null))
+                    {
+                        App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
+                        ResetEditors();
+                    }
+                    else
+                    {
                         MainWindow.CurrentProject.file = oldPath;
+                        App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_NotLoaded"));
+                    }
                 });
                 RecentList.Items.Add(mItem);
             }
@@ -300,6 +293,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             if (MainWindow.CurrentProject.SavePrompt() == null)
                 return;
+            App.Logger.LogInfo("Closing app");
             DiscordManager?.Deinitialize();
             Environment.Exit(0);
         }

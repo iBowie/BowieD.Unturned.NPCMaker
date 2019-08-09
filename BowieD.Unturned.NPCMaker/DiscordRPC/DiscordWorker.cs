@@ -37,7 +37,7 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
             }
             if (rich.Assets == null)
                 rich.Assets = new Assets();
-            rich.Assets.LargeImageText = $"NPC Maker for Unturned by BowieD. Version: {MainWindow.Version}";
+            rich.Assets.LargeImageText = $"NPC Maker for Unturned by BowieD. Version: {App.Version}";
             rich.Assets.LargeImageKey = "mainimage_outline";
             if (client.IsInitialized)
                 client.SetPresence(rich);

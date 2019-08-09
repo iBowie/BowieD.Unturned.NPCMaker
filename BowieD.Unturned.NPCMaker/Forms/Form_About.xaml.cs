@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             InitializeComponent();
             string r = (string)FindResource("about_Text");
-            r = r.Replace("%version%", MainWindow.Version.ToString());
+            r = r.Replace("%version%", App.Version.ToString());
             r = r.Replace(@"\n", Environment.NewLine);
             mainText.Text = r;
             double scale = AppConfig.Instance.scale;

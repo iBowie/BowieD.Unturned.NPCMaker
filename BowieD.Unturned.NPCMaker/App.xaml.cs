@@ -6,6 +6,7 @@ using BowieD.Unturned.NPCMaker.Notification;
 using BowieD.Unturned.NPCMaker.Updating;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -19,9 +20,22 @@ namespace BowieD.Unturned.NPCMaker
     /// </summary>
     public partial class App : Application
     {
-        public static IUpdateManager UpdateManager;
-        public static INotificationManager NotificationManager;
+        public static IUpdateManager UpdateManager { get; private set; }
+        public static INotificationManager NotificationManager { get; private set; }
         public static List<ILogger> Logger { get; private set; } = new List<ILogger>();
+        public static Version Version
+        {
+            get
+            {
+                try
+                {
+                    if (_readVersion == null)
+                        _readVersion = new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion);
+                    return _readVersion;
+                }
+                catch { return new Version("0.0.0.0"); }
+            }
+        }
         public App()
         {
             InitializeComponent();
@@ -80,7 +94,26 @@ namespace BowieD.Unturned.NPCMaker
             mw.Show();
             base.Run();
         }
+        public static void InitLoggers()
+        {
+            Logger.Add(new ConsoleLogger());
+            Logger.Add(new FileLogger());
+            Logger.Open();
+        }
+        public static void InitManagers()
+        {
+            UpdateManager = new GitHubUpdateManager();
+            NotificationManager = new NotificationManager();
+        }
 
+        private void Current_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            AppCrashReport acr = new AppCrashReport(e.Exception);
+            acr.ShowDialog();
+            e.Handled = acr.Handle;
+            if (acr.Handle)
+                App.Logger.LogWarning($"Ignoring exception {e.Exception.Message}.");
+        }
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             if (args.Name.Contains(".resources"))
@@ -96,27 +129,6 @@ namespace BowieD.Unturned.NPCMaker
             }
             catch { return null; }
         }
-
-        private void Current_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
-            AppCrashReport acr = new AppCrashReport(e.Exception);
-            acr.ShowDialog();
-            e.Handled = acr.Handle;
-            if (acr.Handle)
-                App.Logger.LogWarning($"Ignoring exception {e.Exception.Message}.");
-        }
-        public static void InitLoggers()
-        {
-            Logger.Add(new ConsoleLogger());
-            Logger.Add(new FileLogger());
-            Logger.Open();
-        }
-        public static void InitManagers()
-        {
-            UpdateManager = new GitHubUpdateManager();
-            NotificationManager = new NotificationManager();
-        }
-
         private void CopyResource(byte[] res, string file)
         {
             try
@@ -128,5 +140,6 @@ namespace BowieD.Unturned.NPCMaker
             }
             catch { }
         }
+        private static Version _readVersion = null;
     }
 }

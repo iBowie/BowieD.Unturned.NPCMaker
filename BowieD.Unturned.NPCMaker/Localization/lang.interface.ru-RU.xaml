@@ -291,6 +291,7 @@
     <v:String x:Key="notify_Quest_Saved">Задание сохранено!</v:String>
     <v:String x:Key="notify_Saved">Сохранено!</v:String>
     <v:String x:Key="notify_Loaded">Загружено!</v:String>
+    <v:String x:Key="notify_NotLoaded">Не удалось загрузить файл!</v:String>
 
     <v:String x:Key="update_available_title">Доступно обновление</v:String>
     <v:String x:Key="update_available_body">Доступно обновление программы. Хотите загрузить и установить его сейчас?</v:String>

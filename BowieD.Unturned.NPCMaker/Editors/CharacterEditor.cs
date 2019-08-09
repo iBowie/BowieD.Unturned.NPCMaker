@@ -39,21 +39,17 @@ namespace BowieD.Unturned.NPCMaker.Editors
             yield return new Coloring.Color("#373737");
             yield return new Coloring.Color("#191919");
         }
-        private Func<Equip_Type> getEquipType = new Func<Equip_Type>(() =>
+        private readonly Func<Equip_Type> getEquipType = new Func<Equip_Type>(() =>
         {
-            var item = MainWindow.Instance.equipSlotBox.SelectedItem as ComboBoxItem;
-            if (item == null)
-                return Equip_Type.None;
-            var val = (Equip_Type)item.Tag;
-            return val;
+            if (MainWindow.Instance.equipSlotBox.SelectedItem is ComboBoxItem item)
+                return (Equip_Type)item.Tag;
+            return Equip_Type.None;
         });
-        private Func<NPC_Pose> getPose = new Func<NPC_Pose>(() =>
+        private readonly Func<NPC_Pose> getPose = new Func<NPC_Pose>(() =>
         {
-            var item = MainWindow.Instance.apparelPoseBox.SelectedItem as ComboBoxItem;
-            if (item == null)
-                return NPC_Pose.Stand;
-            var val = (NPC_Pose)item.Tag;
-            return val;
+            if (MainWindow.Instance.apparelPoseBox.SelectedItem is ComboBoxItem item)
+                return (NPC_Pose)item.Tag;
+            return NPC_Pose.Stand;
         });
         public CharacterEditor()
         {
@@ -95,7 +91,6 @@ namespace BowieD.Unturned.NPCMaker.Editors
             foreach (var k in UserColors.data)
             {
                 MainWindow.Instance.skinColorPicker.AvailableColors.Add(new Xceed.Wpf.Toolkit.ColorItem(new Coloring.Color(k), k));
-                //MainWindow.Instance.hairColorPicker.AvailableColors.Add(new Xceed.Wpf.Toolkit.ColorItem(new Coloring.Color(k), k));
             }
         }
         public NPCCharacter Current
@@ -285,14 +280,20 @@ namespace BowieD.Unturned.NPCMaker.Editors
 
         public void SendPresence()
         {
-            RichPresence presence = new RichPresence();
-            presence.Timestamps = new Timestamps();
-            presence.Timestamps.StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-            presence.Assets = new Assets();
-            presence.Assets.SmallImageKey = "icon_info_outlined";
-            presence.Assets.SmallImageText = $"Characters: {MainWindow.CurrentProject.data.characters.Count}";
-            presence.Details = $"Current NPC: {MainWindow.CharacterEditor.Current.editorName}";
-            presence.State = $"Display Name: {MainWindow.CharacterEditor.Current.displayName}";
+            RichPresence presence = new RichPresence
+            {
+                Timestamps = new Timestamps
+                {
+                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                },
+                Assets = new Assets
+                {
+                    SmallImageKey = "icon_info_outlined",
+                    SmallImageText = $"Characters: {MainWindow.CurrentProject.data.characters.Count}"
+                },
+                Details = $"Current NPC: {MainWindow.CharacterEditor.Current.editorName}",
+                State = $"Display Name: {MainWindow.CharacterEditor.Current.displayName}"
+            };
             MainWindow.DiscordManager.SendPresence(presence);
         }
         internal void SkinColorPicker_SaveButton_Click(object sender, RoutedEventArgs e)
@@ -314,14 +315,12 @@ namespace BowieD.Unturned.NPCMaker.Editors
             var color = new Coloring.Color(hex);
             var colorItem = new Xceed.Wpf.Toolkit.ColorItem(color, hex);
             MainWindow.Instance.skinColorPicker.AvailableColors.Insert(0, colorItem);
-            //MainWindow.Instance.hairColorPicker.AvailableColors.Insert(0, colorItem);
         }
         internal void SkinColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<System.Windows.Media.Color?> e)
         {
             Current.skinColor = (e.NewValue ?? new Coloring.Color(0, 0, 0));
             MainWindow.Instance.faceImageBorder.Background = new SolidColorBrush(Current.skinColor);
-            var hsv = Coloring.ColorConverter.ColorToHSV(Current.skinColor);
-            if (hsv.V <= 0.1d)
+            if (Coloring.ColorConverter.ColorToHSV(Current.skinColor).V <= 0.1d)
             {
                 var effect = new System.Windows.Media.Effects.DropShadowEffect
                 {

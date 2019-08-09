@@ -193,6 +193,7 @@ namespace BowieD.Unturned.NPCMaker
                 App.NotificationManager.Clear();
                 App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
                 MainWindow.AddToRecentList(MainWindow.CurrentProject.file);
+                MainWindow.ResetEditors();
             }
             else
             {

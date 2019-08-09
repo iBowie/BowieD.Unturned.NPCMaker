@@ -33,7 +33,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             StringBuilder sb = new StringBuilder();
             try
             {
-                sb.AppendLine($"NPC Maker {MainWindow.Version} Crashed!");
+                sb.AppendLine($"NPC Maker {App.Version} Crashed!");
             }
             catch { sb.AppendLine($"NPC Maker (Unknown) Crashed!"); }
             Commands.Command.GetCommand<Commands.InfoCommand>().Execute(null);
