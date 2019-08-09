@@ -256,7 +256,7 @@ namespace BowieD.Unturned.NPCMaker
         public static void AddToRecentList(string path)
         {
             RecentFileList recent = new RecentFileList();
-            recent.Load();
+            recent.Load(new string[0]);
             if (!recent.data.Contains(saveFile))
             {
                 var r = recent.data.AsEnumerable();
@@ -354,7 +354,7 @@ namespace BowieD.Unturned.NPCMaker
         public void RefreshRecentList()
         {
             RecentFileList recent = new RecentFileList();
-            recent.Load();
+            recent.Load(new string[0]);
             RecentList.Items.Clear();
             recent.data = recent.data.Where(d => File.Exists(d)).ToArray();
             foreach (var k in recent.data)
