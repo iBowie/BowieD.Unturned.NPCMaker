@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
+using BowieD.Unturned.NPCMaker.Mistakes;
 using BowieD.Unturned.NPCMaker.NPC;
 using DiscordRPC;
 using Microsoft.Win32;

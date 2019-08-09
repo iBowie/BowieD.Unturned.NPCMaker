@@ -52,7 +52,11 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Dialogue && d.Id == dialogue.id))
                 {
-                    MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(LocUtil.LocalizeMistake("deep_dialogue", dialogue.id), "", IMPORTANCE.WARNING, true, false));
+                    MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                    {
+                        MistakeName = LocUtil.LocalizeMistake("deep_dialogue", dialogue.id),
+                        Importance = IMPORTANCE.WARNING
+                    });
                 }
                 await Task.Yield();
             }
@@ -60,18 +64,30 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Vendor && d.Id == vendor.id))
                 {
-                    MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(LocUtil.LocalizeMistake("deep_vendor", vendor.id), "", IMPORTANCE.WARNING, true, false));
+                    MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                    {
+                        MistakeName = LocUtil.LocalizeMistake("deep_vendor", vendor.id),
+                        Importance = IMPORTANCE.WARNING
+                    });
                 }
                 foreach (var it in vendor.items)
                 {
                     if (it.type == ItemType.VEHICLE && !CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Vehicle && d.Id == it.id))
                     {
-                        MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(LocUtil.LocalizeMistake("deep_vehicle", it.id), "", IMPORTANCE.WARNING, true, false));
+                        MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                        {
+                            MistakeName = LocUtil.LocalizeMistake("deep_vehicle", it.id),
+                            Importance = IMPORTANCE.WARNING
+                        });
                         continue;
                     }
                     if (it.type == ItemType.ITEM && !CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Item && d.Id == it.id))
                     {
-                        MainWindow.Instance.lstMistakes.Items.Add(new Mistakes.Generic(LocUtil.LocalizeMistake("deep_item", it.id), "", IMPORTANCE.WARNING, true, false));
+                        MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                        {
+                            MistakeName = LocUtil.LocalizeMistake("deep_item", it.id),
+                            Importance = IMPORTANCE.WARNING
+                        });
                         continue;
                     }
                 }
@@ -81,7 +97,11 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             {
                 if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Quest && d.Id == quest.id))
                 {
-                    MainWindow.Instance.lstMistakes.Items.Add(new Generic(LocUtil.LocalizeMistake("deep_quest", quest.id), "", IMPORTANCE.WARNING, true, false));
+                    MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                    {
+                        MistakeName = LocUtil.LocalizeMistake("deep_quest", quest.id),
+                        Importance = IMPORTANCE.WARNING
+                    });
                 }
                 await Task.Yield();
             }
@@ -91,7 +111,11 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 {
                     if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.NPC && d.Id == character.id))
                     {
-                        MainWindow.Instance.lstMistakes.Items.Add(new Generic(LocUtil.LocalizeMistake("deep_char", character.id), "", IMPORTANCE.WARNING, true, false));
+                        MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                        {
+                            MistakeName = LocUtil.LocalizeMistake("deep_char", character.id),
+                            Importance = IMPORTANCE.WARNING
+                        });
                     }
                 }
             }

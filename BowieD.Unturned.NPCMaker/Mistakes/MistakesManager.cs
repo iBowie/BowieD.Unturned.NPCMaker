@@ -14,28 +14,32 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             {
                 CheckMistakes = new HashSet<Mistake>();
                 string[] nspaces = {
+                    "BowieD.Unturned.NPCMaker.Mistakes.Character",
                     "BowieD.Unturned.NPCMaker.Mistakes.Dialogue",
-                    "BowieD.Unturned.NPCMaker.Mistakes.General",
                     "BowieD.Unturned.NPCMaker.Mistakes.Vendor",
-                    "BowieD.Unturned.NPCMaker.Mistakes.Quests",
-                    "BowieD.Unturned.NPCMaker.Mistakes.Apparel"
+                    "BowieD.Unturned.NPCMaker.Mistakes.Quests"
                 };
                 var q = from t in Assembly.GetExecutingAssembly().GetTypes() where t.IsClass && nspaces.Contains(t.Namespace) select t;
                 foreach (Type t in q)
                 {
-                    var mistake = Activator.CreateInstance(t);
-                    if (mistake is Mistake mist)
-                        CheckMistakes.Add(mist);
+                    try
+                    {
+                        var mistake = Activator.CreateInstance(t);
+                        if (mistake is Mistake mist)
+                            CheckMistakes.Add(mist);
+                    }
+                    catch { }
                 }
             }
             MainWindow.Instance.lstMistakes.Items.Clear();
             FoundMistakes = new HashSet<Mistake>();
             foreach (Mistake m in CheckMistakes)
             {
-                if (m.IsMistake)
+                var mistakes = m.CheckMistake();
+                foreach (var fm in mistakes)
                 {
-                    FoundMistakes.Add(m);
-                    MainWindow.Instance.lstMistakes.Items.Add(m);
+                    FoundMistakes.Add(fm);
+                    MainWindow.Instance.lstMistakes.Items.Add(fm);
                 }
             }
             if (MainWindow.Instance.lstMistakes.Items.Count == 0)
