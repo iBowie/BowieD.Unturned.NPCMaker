@@ -26,9 +26,7 @@ namespace BowieD.Unturned.NPCMaker
         public App()
         {
             InitializeComponent();
-            #if !DEBUG
             Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
-            #endif
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
         }
         public new void Run()
@@ -76,6 +74,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             if (!LocUtil.IsLoaded)
                 LocUtil.LoadLanguage(AppConfig.Instance.locale);
+            Logger.LogInfo("Closing console and opening app...");
             MainWindow mw = new MainWindow();
             InitManagers();
             ConsoleLogger.HideConsoleWindow();
@@ -105,7 +104,7 @@ namespace BowieD.Unturned.NPCMaker
             acr.ShowDialog();
             e.Handled = acr.Handle;
             if (acr.Handle)
-                App.Logger.LogInfo($"Ignoring exception {e.Exception.Message}.");
+                App.Logger.LogWarning($"Ignoring exception {e.Exception.Message}.");
         }
         public static void InitLoggers()
         {

@@ -1,7 +1,10 @@
-﻿using BowieD.Unturned.NPCMaker.Logging;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.Logging;
 using Newtonsoft.Json;
 using System;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 
 namespace BowieD.Unturned.NPCMaker.Configuration
 {
@@ -63,7 +66,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             experimentalFeatures = false;
             animateControls = true;
             autoUpdate = true;
-            locale = "en-US";
+            locale = LocUtil.SupportedCultures().Contains(CultureInfo.InstalledUICulture) ? CultureInfo.InstalledUICulture.Name : "en-US";
             App.Logger.LogInfo($"[CFG] - Default configuration loaded!");
         }
         public static string Directory
