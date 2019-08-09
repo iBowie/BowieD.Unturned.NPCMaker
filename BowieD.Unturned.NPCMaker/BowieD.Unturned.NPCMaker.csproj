@@ -208,8 +208,11 @@
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\LoggerExtensions.cs" />
     <Compile Include="Managers\HolidayManager.cs" />
+    <Compile Include="Mistakes\Character\NE_0001.cs" />
+    <Compile Include="Mistakes\Character\NE_0002.cs" />
     <Compile Include="Mistakes\DeepAnalysisManager.cs" />
     <Compile Include="Mistakes\Character\NE_0000.cs" />
+    <Compile Include="Mistakes\Dialogue\NE_1000.cs" />
     <Compile Include="Mistakes\MistakesManager.cs" />
     <Compile Include="Notification\INotificationManager.cs" />
     <Compile Include="Notification\NotificationManager.cs" />

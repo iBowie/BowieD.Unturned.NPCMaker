@@ -1,5 +1,8 @@
 {
     "NE_0000_Desc": "ID of {0} [{1}] is in reserved range (from 0 to 2000)",
+	"NE_0001_Desc": "ID of {0} [{1}] equals zero.",
+	"NE_0002_Desc": "Equipped slot of {0} [{1}] is empty.",
+	"NE_1000_Desc": "Dialogue {0} has empty messages.",
 
     "deep_char": "[{0}] already used by other character in game.",
     "deep_dialogue": "[{0}] already used by other dialogue in game.",
