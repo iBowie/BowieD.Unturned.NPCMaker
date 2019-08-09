@@ -84,7 +84,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             CurrentConfig.Save();
-            MainWindow.NotificationManager.Notify(LocUtil.LocalizeInterface("config_OnExit"));
+            App.NotificationManager.Notify(LocUtil.LocalizeInterface("config_OnExit"));
             Close();
         }
 
