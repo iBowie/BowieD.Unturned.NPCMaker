@@ -2,7 +2,7 @@
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
-using BowieD.Unturned.NPCMaker.Managers;
+using BowieD.Unturned.NPCMaker.Updating;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

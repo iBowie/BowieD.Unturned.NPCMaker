@@ -1,4 +1,4 @@
-﻿namespace BowieD.Unturned.NPCMaker.Managers
+﻿namespace BowieD.Unturned.NPCMaker.Updating
 {
     public enum UpdateAvailability
     {

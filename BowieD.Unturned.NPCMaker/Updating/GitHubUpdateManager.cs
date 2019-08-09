@@ -8,7 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace BowieD.Unturned.NPCMaker.Managers
+namespace BowieD.Unturned.NPCMaker.Updating
 {
     public class GitHubUpdateManager : IUpdateManager
     {

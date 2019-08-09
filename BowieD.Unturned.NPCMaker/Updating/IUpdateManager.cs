@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace BowieD.Unturned.NPCMaker.Managers
+namespace BowieD.Unturned.NPCMaker.Updating
 {
     public interface IUpdateManager
     {

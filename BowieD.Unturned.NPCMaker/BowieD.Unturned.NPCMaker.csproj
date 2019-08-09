@@ -145,7 +145,11 @@
     </Compile>
     <Compile Include="Coloring\Color.cs" />
     <Compile Include="Configuration\IConfig.cs" />
+    <Compile Include="Data\IData.cs" />
     <Compile Include="Data\JsonData.cs" />
+    <Compile Include="Data\RecentFileList.cs" />
+    <Compile Include="Data\UserColorsList.cs" />
+    <Compile Include="Data\XmlData.cs" />
     <Compile Include="Forms\AppCrashReport.xaml.cs">
       <DependentUpon>AppCrashReport.xaml</DependentUpon>
     </Compile>
@@ -264,9 +268,9 @@
     <Compile Include="Themes\MetroTheme.cs" />
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
-    <Compile Include="UpdateManagers\GitHubUpdateManager.cs" />
-    <Compile Include="UpdateManagers\IUpdateManager.cs" />
-    <Compile Include="UpdateManagers\UpdateAvailability.cs" />
+    <Compile Include="Updating\GitHubUpdateManager.cs" />
+    <Compile Include="Updating\IUpdateManager.cs" />
+    <Compile Include="Updating\UpdateAvailability.cs" />
     <Compile Include="Mistake.cs" />
     <Compile Include="Mistakes\Apparel\NE_1000.cs" />
     <Compile Include="Mistakes\Apparel\NE_1001.cs" />

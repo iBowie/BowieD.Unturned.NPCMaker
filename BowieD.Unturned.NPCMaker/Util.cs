@@ -1,4 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Managers;
+﻿using BowieD.Unturned.NPCMaker.Updating;
 using System;
 using System.Collections.Generic;
 using System.Windows;
