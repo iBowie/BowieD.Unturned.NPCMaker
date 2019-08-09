@@ -14,8 +14,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -74,18 +72,16 @@ namespace BowieD.Unturned.NPCMaker
             {
                 try
                 {
-                    if (FileCompatible(args[0]))
+                    CurrentProject.file = args[0];
+                    if (CurrentProject.Load(new NPCProject()))
                     {
-                        CurrentProject.file = args[0];
-                        if (CurrentProject.Load(new NPCProject()))
-                        {
-                            App.NotificationManager.Clear();
-                            App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
-                        }
-                        else
-                        {
-                            CurrentProject.file = "";
-                        }
+                        App.NotificationManager.Clear();
+                        App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
+                        AddToRecentList(CurrentProject.file);
+                    }
+                    else
+                    {
+                        CurrentProject.file = "";
                     }
                 }
                 catch { }
@@ -209,7 +205,6 @@ namespace BowieD.Unturned.NPCMaker
             PerformExit();
             base.OnClosing(e);
         }
-        #region SAVE_LOAD
         public static void AddToRecentList(string path)
         {
             RecentFileList recent = new RecentFileList();
@@ -223,25 +218,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             Instance.RefreshRecentList();
         }
-        public bool FileCompatible(string path)
-        {
-            if (path == null || path.Length == 0 || !File.Exists(path))
-                return false;
-            try
-            {
-                using (FileStream fs = new FileStream(path, FileMode.Open))
-                {
-                    using (XmlReader reader = XmlReader.Create(fs))
-                    {
-                        XmlSerializer deserializer = new XmlSerializer(typeof(NPCProject));
-                        return deserializer.CanDeserialize(reader);
-                    }
-                }
-            }
-            catch { return false; }
-        }
 
-        #endregion
         #region DRAG AND DROP
         private void Window_DragEnter(object sender, DragEventArgs e)
         {
@@ -268,6 +245,7 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     App.NotificationManager.Clear();
                     App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
+                    AddToRecentList(CurrentProject.file);
                 }
                 else
                 {
@@ -310,6 +288,7 @@ namespace BowieD.Unturned.NPCMaker
                 mItem.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
                 {
                     recent.data = new string[0];
+                    recent.Save();
                     RefreshRecentList();
                 });
                 RecentList.Items.Add(mItem);
