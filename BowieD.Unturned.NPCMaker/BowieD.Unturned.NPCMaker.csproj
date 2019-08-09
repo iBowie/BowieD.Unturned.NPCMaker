@@ -131,19 +131,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BetterControls\Dialogue_Response.xaml.cs">
+    <Compile Include="Controls\Dialogue_Response.xaml.cs">
       <DependentUpon>Dialogue_Response.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BetterControls\Universal_ItemList.xaml.cs">
+    <Compile Include="Controls\Universal_ItemList.xaml.cs">
       <DependentUpon>Universal_ItemList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BetterControls\Dialogue_ItemList.xaml.cs">
+    <Compile Include="Controls\Dialogue_ItemList.xaml.cs">
       <DependentUpon>Dialogue_ItemList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BetterControls\Dialogue_Message.xaml.cs">
+    <Compile Include="Controls\Dialogue_Message.xaml.cs">
       <DependentUpon>Dialogue_Message.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BetterControls\Dialogue_Message_Page.xaml.cs">
+    <Compile Include="Controls\Dialogue_Message_Page.xaml.cs">
       <DependentUpon>Dialogue_Message_Page.xaml</DependentUpon>
     </Compile>
     <Compile Include="Coloring\Color.cs" />
@@ -289,23 +289,23 @@
     <Compile Include="NPC\NPCVendor.cs" />
     <Compile Include="PropertyProxy.cs" />
     <Compile Include="Util.cs" />
-    <Page Include="BetterControls\Dialogue_Response.xaml">
+    <Page Include="Controls\Dialogue_Response.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BetterControls\Universal_ItemList.xaml">
+    <Page Include="Controls\Universal_ItemList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BetterControls\Dialogue_ItemList.xaml">
+    <Page Include="Controls\Dialogue_ItemList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BetterControls\Dialogue_Message.xaml">
+    <Page Include="Controls\Dialogue_Message.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BetterControls\Dialogue_Message_Page.xaml">
+    <Page Include="Controls\Dialogue_Message_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

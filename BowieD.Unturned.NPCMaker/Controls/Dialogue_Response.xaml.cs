@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 using Reward = BowieD.Unturned.NPCMaker.NPC.Rewards.Reward;
 
-namespace BowieD.Unturned.NPCMaker.BetterControls
+namespace BowieD.Unturned.NPCMaker.Controls
 {
     /// <summary>
     /// Логика взаимодействия для Dialogue_Response.xaml

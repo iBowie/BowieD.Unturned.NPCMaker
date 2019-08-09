@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker"
         xmlns:npc="clr-namespace:BowieD.Unturned.NPCMaker.NPC"
-        xmlns:bettercontrols="clr-namespace:BowieD.Unturned.NPCMaker.BetterControls"
+        xmlns:bettercontrols="clr-namespace:BowieD.Unturned.NPCMaker.Controls"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"

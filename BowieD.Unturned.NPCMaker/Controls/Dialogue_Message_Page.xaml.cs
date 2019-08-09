@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
-namespace BowieD.Unturned.NPCMaker.BetterControls
+namespace BowieD.Unturned.NPCMaker.Controls
 {
     /// <summary>
     /// Логика взаимодействия для Dialogue_Message_Page.xaml

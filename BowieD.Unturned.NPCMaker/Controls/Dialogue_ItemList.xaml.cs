@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace BowieD.Unturned.NPCMaker.BetterControls
+namespace BowieD.Unturned.NPCMaker.Controls
 {
     /// <summary>
     /// Логика взаимодействия для Dialogue_ItemList.xaml

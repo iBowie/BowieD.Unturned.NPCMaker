@@ -1,4 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.BetterControls;
+﻿using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Data;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;

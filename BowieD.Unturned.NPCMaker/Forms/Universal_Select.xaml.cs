@@ -2,7 +2,7 @@
 using BowieD.Unturned.NPCMaker.Localization;
 using System.Windows;
 using System.Windows.Controls;
-using static BowieD.Unturned.NPCMaker.BetterControls.Universal_ItemList;
+using static BowieD.Unturned.NPCMaker.Controls.Universal_ItemList;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {

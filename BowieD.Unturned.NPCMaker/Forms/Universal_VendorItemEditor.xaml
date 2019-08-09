@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
         xmlns:npc="clr-namespace:BowieD.Unturned.NPCMaker.NPC"
-        xmlns:bettercontrols="clr-namespace:BowieD.Unturned.NPCMaker.BetterControls"
+        xmlns:bettercontrols="clr-namespace:BowieD.Unturned.NPCMaker.Controls"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         Title="{DynamicResource vendorEditor_Title}" ResizeMode="NoResize" Height="334" Width="300" Icon="{DynamicResource app_Icon}">

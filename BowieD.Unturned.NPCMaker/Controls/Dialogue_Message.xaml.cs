@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
-namespace BowieD.Unturned.NPCMaker.BetterControls
+namespace BowieD.Unturned.NPCMaker.Controls
 {
     /// <summary>
     /// Логика взаимодействия для Dialogue_Message.xaml

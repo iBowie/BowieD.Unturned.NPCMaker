@@ -1,4 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.BetterControls;
+﻿using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
 using System;
@@ -13,14 +13,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// </summary>
     public partial class Universal_ListView : Window
     {
-        public Universal_ListView(List<BetterControls.Universal_ItemList> listUil, BetterControls.Universal_ItemList.ReturnType returnType)
+        public Universal_ListView(List<Controls.Universal_ItemList> listUil, Controls.Universal_ItemList.ReturnType returnType)
         {
             InitializeComponent();
             addButton.Content = LocUtil.LocalizeInterface($"listView_Add_{returnType.ToString()}");
             Title = LocUtil.LocalizeInterface($"listView_Title_{returnType.ToString()}");
             ReturnType = returnType;
             Values = new List<object>();
-            foreach (BetterControls.Universal_ItemList uil in listUil)
+            foreach (Controls.Universal_ItemList uil in listUil)
             {
                 Add(uil);
             }
@@ -36,8 +36,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             foreach (UIElement ui in mainGrid.Children)
             {
-                var ll = ui as BetterControls.Universal_ItemList;
-                if (ll.Equals(Util.FindParent<BetterControls.Universal_ItemList>(sender as UIElement)))
+                var ll = ui as Controls.Universal_ItemList;
+                if (ll.Equals(Util.FindParent<Controls.Universal_ItemList>(sender as UIElement)))
                 {
                     mainGrid.Children.Remove(ll);
                     break;
@@ -46,7 +46,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             List<object> newValues = new List<object>();
             foreach (UIElement ui in mainGrid.Children)
             {
-                if (ui is BetterControls.Universal_ItemList uil)
+                if (ui is Controls.Universal_ItemList uil)
                 {
                     newValues.Add(uil.Value);
                 }
@@ -56,7 +56,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
         public bool Localizable { get; set; }
         public List<object> Values { get; private set; }
-        public BetterControls.Universal_ItemList.ReturnType ReturnType { get; private set; }
+        public Controls.Universal_ItemList.ReturnType ReturnType { get; private set; }
 
         public object SelectedValue { get; private set; }
 
@@ -64,33 +64,33 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             switch (ReturnType)
             {
-                case BetterControls.Universal_ItemList.ReturnType.Condition:
+                case Controls.Universal_ItemList.ReturnType.Condition:
                     Universal_ConditionEditor uce = new Universal_ConditionEditor();
                     if (uce.ShowDialog() == true)
                     {
-                        var a = new BetterControls.Universal_ItemList(uce.Result, BetterControls.Universal_ItemList.ReturnType.Condition, Localizable);
+                        var a = new Controls.Universal_ItemList(uce.Result, Controls.Universal_ItemList.ReturnType.Condition, Localizable);
                         Add(a);
                     }
                     break;
-                case BetterControls.Universal_ItemList.ReturnType.Dialogue:
+                case Controls.Universal_ItemList.ReturnType.Dialogue:
                     SelectedValue = new NPC.NPCDialogue();
                     DialogResult = true;
                     Close();
                     break;
-                case BetterControls.Universal_ItemList.ReturnType.Vendor:
+                case Controls.Universal_ItemList.ReturnType.Vendor:
                     SelectedValue = new NPC.NPCVendor();
                     DialogResult = true;
                     Close();
                     break;
-                case BetterControls.Universal_ItemList.ReturnType.Reward:
+                case Controls.Universal_ItemList.ReturnType.Reward:
                     Universal_RewardEditor ure = new Universal_RewardEditor();
                     if (ure.ShowDialog() == true)
                     {
-                        var aa = new BetterControls.Universal_ItemList(ure.Result, BetterControls.Universal_ItemList.ReturnType.Reward, Localizable);
+                        var aa = new Controls.Universal_ItemList(ure.Result, Controls.Universal_ItemList.ReturnType.Reward, Localizable);
                         Add(aa);
                     }
                     break;
-                case BetterControls.Universal_ItemList.ReturnType.Quest:
+                case Controls.Universal_ItemList.ReturnType.Quest:
                     SelectedValue = new NPC.NPCQuest();
                     DialogResult = true;
                     Close();
@@ -120,11 +120,11 @@ namespace BowieD.Unturned.NPCMaker.Forms
             }
         }
 
-        private void Add(BetterControls.Universal_ItemList uil)
+        private void Add(Controls.Universal_ItemList uil)
         {
             Values.Add(uil.Value);
             uil.deleteButton.Click += DeleteButton_Click;
-            if (ReturnType == Universal_ItemList.ReturnType.Object || ReturnType == Universal_ItemList.ReturnType.Character || ReturnType == BetterControls.Universal_ItemList.ReturnType.Dialogue || ReturnType == BetterControls.Universal_ItemList.ReturnType.Vendor || ReturnType == BetterControls.Universal_ItemList.ReturnType.Quest)
+            if (ReturnType == Universal_ItemList.ReturnType.Object || ReturnType == Universal_ItemList.ReturnType.Character || ReturnType == Controls.Universal_ItemList.ReturnType.Dialogue || ReturnType == Controls.Universal_ItemList.ReturnType.Vendor || ReturnType == Controls.Universal_ItemList.ReturnType.Quest)
                 uil.editButton.Click += EditButton_Click;
             uil.Width = mainGrid.Width;
             mainGrid.Children.Add(uil);
@@ -132,7 +132,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            SelectedValue = Util.FindParent<BetterControls.Universal_ItemList>(sender as Button).Value;
+            SelectedValue = Util.FindParent<Controls.Universal_ItemList>(sender as Button).Value;
             DialogResult = true;
             Close();
         }

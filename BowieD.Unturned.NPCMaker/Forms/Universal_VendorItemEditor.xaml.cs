@@ -114,7 +114,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
         private void EditConditions_Click(object sender, RoutedEventArgs e)
         {
-            Universal_ListView ulv = new Universal_ListView(Result.conditions.Select(d => new BetterControls.Universal_ItemList(d, BetterControls.Universal_ItemList.ReturnType.Condition, false)).ToList(), BetterControls.Universal_ItemList.ReturnType.Condition);
+            Universal_ListView ulv = new Universal_ListView(Result.conditions.Select(d => new Controls.Universal_ItemList(d, Controls.Universal_ItemList.ReturnType.Condition, false)).ToList(), Controls.Universal_ItemList.ReturnType.Condition);
             ulv.ShowDialog();
             Result.conditions = ulv.Values.Cast<Condition>().ToList();
         }
