@@ -37,14 +37,14 @@ namespace BowieD.Unturned.NPCMaker.Editors
 
         public void Open()
         {
-            var ulv = new Universal_ListView(MainWindow.CurrentProject.dialogues.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Dialogue, false)).ToList(), Universal_ItemList.ReturnType.Dialogue);
+            var ulv = new Universal_ListView(MainWindow.CurrentProject.data.dialogues.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Dialogue, false)).ToList(), Universal_ItemList.ReturnType.Dialogue);
             if (ulv.ShowDialog() == true)
             {
                 Save();
                 Current = ulv.SelectedValue as NPCDialogue;
                 App.Logger.LogInfo($"Opened dialogue {MainWindow.Instance.dialogueInputIdControl.Value}");
             }
-            MainWindow.CurrentProject.dialogues = ulv.Values.Cast<NPCDialogue>().ToList();
+            MainWindow.CurrentProject.data.dialogues = ulv.Values.Cast<NPCDialogue>().ToList();
         }
         public void Reset()
         {
@@ -82,12 +82,12 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 App.NotificationManager.Notify(LocUtil.LocalizeInterface("dialogue_ID_Zero"));
                 return;
             }
-            var o = MainWindow.CurrentProject.dialogues.Where(d => d.id == dil.id);
+            var o = MainWindow.CurrentProject.data.dialogues.Where(d => d.id == dil.id);
             if (o.Count() > 0)
-                MainWindow.CurrentProject.dialogues.Remove(o.ElementAt(0));
-            MainWindow.CurrentProject.dialogues.Add(dil);
+                MainWindow.CurrentProject.data.dialogues.Remove(o.ElementAt(0));
+            MainWindow.CurrentProject.data.dialogues.Add(dil);
             App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Dialogue_Saved"));
-            MainWindow.isSaved = false;
+            MainWindow.CurrentProject.isSaved = false;
             App.Logger.LogInfo($"Dialogue {dil.id} saved!");
         }
         public NPCDialogue Current
@@ -231,7 +231,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             presence.Timestamps.StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             presence.Assets = new Assets();
             presence.Assets.SmallImageKey = "icon_chat_outlined";
-            presence.Assets.SmallImageText = $"Dialogues: {MainWindow.CurrentProject.dialogues.Count}";
+            presence.Assets.SmallImageText = $"Dialogues: {MainWindow.CurrentProject.data.dialogues.Count}";
             presence.Details = $"Messages: {(current == null ? 0 : current.MessagesAmount)}";
             presence.State = $"Responses: {(current == null ? 0 : current.ResponsesAmount)}";
             MainWindow.DiscordManager.SendPresence(presence);

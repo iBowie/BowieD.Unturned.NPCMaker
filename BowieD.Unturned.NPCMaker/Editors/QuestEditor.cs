@@ -98,13 +98,13 @@ namespace BowieD.Unturned.NPCMaker.Editors
         }
         public void Open()
         {
-            Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentProject.quests.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Quest, false)).ToList(), Universal_ItemList.ReturnType.Quest);
+            Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentProject.data.quests.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Quest, false)).ToList(), Universal_ItemList.ReturnType.Quest);
             if (ulv.ShowDialog() == true)
             {
                 Save();
                 Current = ulv.SelectedValue as NPCQuest;
             }
-            MainWindow.CurrentProject.quests = ulv.Values.Cast<NPCQuest>().ToList();
+            MainWindow.CurrentProject.data.quests = ulv.Values.Cast<NPCQuest>().ToList();
         }
         public void Reset()
         {
@@ -119,10 +119,10 @@ namespace BowieD.Unturned.NPCMaker.Editors
             NPCQuest cur = Current;
             if (cur.id == 0)
                 return;
-            if (MainWindow.CurrentProject.quests.Where(d => d.id == MainWindow.Instance.questIdBox.Value).Count() > 0)
-                MainWindow.CurrentProject.quests.Remove(MainWindow.CurrentProject.quests.Where(d => d.id == MainWindow.Instance.questIdBox.Value).ElementAt(0));
-            MainWindow.CurrentProject.quests.Add(cur);
-            MainWindow.isSaved = false;
+            if (MainWindow.CurrentProject.data.quests.Where(d => d.id == MainWindow.Instance.questIdBox.Value).Count() > 0)
+                MainWindow.CurrentProject.data.quests.Remove(MainWindow.CurrentProject.data.quests.Where(d => d.id == MainWindow.Instance.questIdBox.Value).ElementAt(0));
+            MainWindow.CurrentProject.data.quests.Add(cur);
+            MainWindow.CurrentProject.isSaved = false;
             App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Quest_Saved"));
         }
 
@@ -134,7 +134,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             presence.Timestamps.StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             presence.Assets = new Assets();
             presence.Assets.SmallImageKey = "icon_exclamation_outlined";
-            presence.Assets.SmallImageText = $"Quests: {MainWindow.CurrentProject.quests.Count}";
+            presence.Assets.SmallImageText = $"Quests: {MainWindow.CurrentProject.data.quests.Count}";
             presence.Details = $"Quest Name: {(current == null ? "Untitled" : current.title)}";
             presence.State = $"Rewards: {(current == null ? 0 : current.rewards.Count)} | Conds: {(current == null ? 0 : current.conditions.Count)}";
             MainWindow.DiscordManager.SendPresence(presence);

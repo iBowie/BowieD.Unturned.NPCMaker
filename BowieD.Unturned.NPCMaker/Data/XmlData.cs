@@ -7,7 +7,7 @@ namespace BowieD.Unturned.NPCMaker.Data
 {
     public abstract class XmlData<T> : IData<T>
     {
-        private XmlSerializer _serializer;
+        protected XmlSerializer _serializer;
         protected XmlData()
         {
             _serializer = new XmlSerializer(typeof(T));
@@ -15,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.Data
         public virtual bool Indent => false;
         public abstract string FileName { get; }
         public T data;
-        public virtual void Save()
+        public virtual bool Save()
         {
             App.Logger.LogInfo($"[XDATA] - Saving {FileName}");
             using (FileStream fs = new FileStream(FileName, FileMode.Create))
@@ -23,9 +23,10 @@ namespace BowieD.Unturned.NPCMaker.Data
             {
                 _serializer.Serialize(writer, data);
                 App.Logger.LogInfo($"[XDATA] - Saved!");
+                return true;
             }
         }
-        public virtual void Load(T defaultValue)
+        public virtual bool Load(T defaultValue)
         {
             App.Logger.LogInfo($"[XDATA] - Loading {FileName}!");
             if (File.Exists(FileName))
@@ -38,12 +39,14 @@ namespace BowieD.Unturned.NPCMaker.Data
                     {
                         data = (T)_serializer.Deserialize(reader);
                         App.Logger.LogInfo($"[XDATA] - Loaded");
+                        return true;
                     }
                     else
                     {
                         App.Logger.LogInfo($"[XDATA] - Could not load {FileName}. Reverting to default value...");
                         data = defaultValue;
                         Save();
+                        return false;
                     }
                 }
             }
@@ -52,6 +55,7 @@ namespace BowieD.Unturned.NPCMaker.Data
                 App.Logger.LogInfo($"[XDATA] - {FileName} does not exist. Creating one with default value...");
                 data = defaultValue;
                 Save();
+                return false;
             }
         }
     }

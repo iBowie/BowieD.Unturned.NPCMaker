@@ -14,7 +14,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Vendor
         {
             get
             {
-                foreach (NPCVendor vendor in MainWindow.CurrentProject.vendors)
+                foreach (NPCVendor vendor in MainWindow.CurrentProject.data.vendors)
                 {
                     if (vendor.items.Count == 0)
                     {

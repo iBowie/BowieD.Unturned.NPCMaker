@@ -50,7 +50,7 @@ namespace BowieD.Unturned.NPCMaker
             inst.CommandBindings.Add(new CommandBinding(saveHotkey,
                 new ExecutedRoutedEventHandler((object sender, ExecutedRoutedEventArgs e) =>
                 {
-                    MainWindow.Save();
+                    MainWindow.CurrentProject.Save();
                 })));
             RoutedCommand loadHotkey = new RoutedCommand();
             loadHotkey.InputGestures.Add(new KeyGesture(Key.O, ModifierKeys.Control));
@@ -98,40 +98,40 @@ namespace BowieD.Unturned.NPCMaker
         }
         internal void RegenerateGuids_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.CurrentProject.characters != null)
+            if (MainWindow.CurrentProject.data.characters != null)
             {
-                foreach (NPCCharacter c in MainWindow.CurrentProject.characters)
+                foreach (NPCCharacter c in MainWindow.CurrentProject.data.characters)
                 {
                     if (c != null)
                         c.guid = Guid.NewGuid().ToString("N");
                 }
             }
-            if (MainWindow.CurrentProject.dialogues != null)
+            if (MainWindow.CurrentProject.data.dialogues != null)
             {
-                foreach (NPCDialogue d in MainWindow.CurrentProject.dialogues)
+                foreach (NPCDialogue d in MainWindow.CurrentProject.data.dialogues)
                 {
                     if (d != null)
                         d.guid = Guid.NewGuid().ToString("N");
                 }
             }
-            if (MainWindow.CurrentProject.vendors != null)
+            if (MainWindow.CurrentProject.data.vendors != null)
             {
-                foreach (NPCVendor v in MainWindow.CurrentProject.vendors)
+                foreach (NPCVendor v in MainWindow.CurrentProject.data.vendors)
                 {
                     if (v != null)
                         v.guid = Guid.NewGuid().ToString("N");
                 }
             }
-            if (MainWindow.CurrentProject.quests != null)
+            if (MainWindow.CurrentProject.data.quests != null)
             {
-                foreach (NPCQuest q in MainWindow.CurrentProject.quests)
+                foreach (NPCQuest q in MainWindow.CurrentProject.data.quests)
                 {
                     if (q != null)
                         q.guid = Guid.NewGuid().ToString("N");
                 }
             }
             App.NotificationManager.Notify(LocUtil.LocalizeInterface("general_Regenerated"));
-            MainWindow.isSaved = false;
+            MainWindow.CurrentProject.isSaved = false;
         }
         internal void Options_Click(object sender, RoutedEventArgs e)
         {
@@ -153,27 +153,29 @@ namespace BowieD.Unturned.NPCMaker
                 if (!(res == MessageBoxResult.OK || res == MessageBoxResult.Yes))
                     return;
             }
-            MainWindow.Save();
-            Export.Exporter.ExportNPC(MainWindow.CurrentProject);
+            MainWindow.CurrentProject.Save();
+            Export.Exporter.ExportNPC(MainWindow.CurrentProject.data);
         }
         internal void NewButtonClick(object sender, RoutedEventArgs e)
         {
-            if (!MainWindow.SavePrompt())
+            if (MainWindow.CurrentProject.SavePrompt() == null)
                 return;
             MainWindow.ResetEditors();
-            MainWindow.isSaved = true;
+            MainWindow.CurrentProject.isSaved = true;
             MainWindow.Started = DateTime.UtcNow;
         }
         internal void SaveClick(object sender, RoutedEventArgs e)
         {
-            MainWindow.Save();
+            MainWindow.CurrentProject.Save();
         }
         internal void SaveAsClick(object sender, RoutedEventArgs e)
         {
-            MainWindow.oldFile = MainWindow.saveFile;
-            MainWindow.saveFile = "";
-            MainWindow.Save();
-            MainWindow.oldFile = "";
+            string oldPath = MainWindow.CurrentProject.file;
+            MainWindow.CurrentProject.file = "";
+            if (!MainWindow.CurrentProject.Save())
+            {
+                MainWindow.CurrentProject.file = oldPath;
+            }
         }
         internal void LoadClick(object sender, RoutedEventArgs e)
         {
@@ -188,10 +190,16 @@ namespace BowieD.Unturned.NPCMaker
                 path = ofd.FileName;
             else
                 return;
-            if (inst.Load(path))
+            string oldPath = MainWindow.CurrentProject.file;
+            MainWindow.CurrentProject.file = path;
+            if (MainWindow.CurrentProject.Load(null))
             {
                 App.NotificationManager.Clear();
                 App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
+            }
+            else
+            {
+                MainWindow.CurrentProject.file = oldPath;
             }
         }
         internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)

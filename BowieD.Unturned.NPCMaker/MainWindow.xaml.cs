@@ -72,21 +72,23 @@ namespace BowieD.Unturned.NPCMaker
             ThemeManager.Apply(theme);
             #endregion
             #region OPEN_WITH
-            string[] args = Environment.GetCommandLineArgs();
-            if (args != null && args.Length >= 0)
+            string[] args = Environment.GetCommandLineArgs().Skip(1).ToArray();
+            App.Logger.LogInfo($"Command Line Args: {string.Join(";", args)}");
+            if (args?.Length >= 1)
             {
                 try
                 {
-                    for (int k = 0; k < args.Length; k++)
+                    if (FileCompatible(args[0]))
                     {
-                        if (FileCompatible(args[k]))
+                        CurrentProject.file = args[0];
+                        if (CurrentProject.Load(new NPCProject()))
                         {
-                            if (Load(args[k]))
-                            {
-                                App.NotificationManager.Clear();
-                                App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
-                            }
-                            break;
+                            App.NotificationManager.Clear();
+                            App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
+                        }
+                        else
+                        {
+                            CurrentProject.file = "";
                         }
                     }
                 }
@@ -151,7 +153,6 @@ namespace BowieD.Unturned.NPCMaker
             debugOverlayText.Visibility = Visibility.Collapsed;
 #endif
             #endregion
-            isSaved = true;
             #region DISCORD
             DiscordManager = new DiscordRPC.DiscordManager(1000)
             {
@@ -193,21 +194,17 @@ namespace BowieD.Unturned.NPCMaker
         #endregion
         #region STATIC
         public static MainWindow Instance;
-        public static NPCProject CurrentProject { get; set; } = new NPCProject();
+        public static ProjectData CurrentProject { get; private set; } = new ProjectData();
         public static DispatcherTimer AutosaveTimer { get; set; }
         public static PropertyProxy Proxy { get; private set; }
         public static bool IsRGB { get; set; } = true;
         public static DateTime Started { get; set; } = DateTime.UtcNow;
 #endregion
-#region CURRENT SAVE
-        public static string saveFile = "", oldFile = "";
-        public static bool isSaved = true;
-#endregion
         private void AutosaveTimer_Tick(object sender, EventArgs e)
         {
             AutosaveTimer.Stop();
-            if (saveFile?.Length > 0)
-                Save();
+            if (CurrentProject.file.Length > 0)
+                CurrentProject.Save();
             AutosaveTimer.Start();
         }
         protected override void OnClosing(CancelEventArgs e)
@@ -217,49 +214,11 @@ namespace BowieD.Unturned.NPCMaker
             base.OnClosing(e);
         }
 #region SAVE_LOAD
-        public static void Save()
-        {
-            SaveAllEditors();
-            if (saveFile == null || saveFile == "")
-            {
-                SaveFileDialog sfd = new SaveFileDialog
-                {
-                    Filter = $"{LocUtil.LocalizeInterface("save_Filter")} (*.npcproj)|*.npcproj",
-                    FileName = $"{(CharacterEditor.Current?.editorName?.Length > 0 ? CharacterEditor.Current?.editorName : "Unnamed")}.npcproj",
-                    OverwritePrompt = true
-                };
-                var result = sfd.ShowDialog();
-                if (result == true)
-                {
-                    saveFile = sfd.FileName;
-                    AddToRecentList(saveFile);
-                }
-                else
-                {
-                    saveFile = oldFile.Length > 0 ? oldFile : saveFile;
-                    return;
-                }
-            }
-            try
-            {
-                CurrentProject.Save(saveFile);
-                App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Saved"));
-                isSaved = true;
-            }
-            catch (Exception ex)
-            {
-                App.NotificationManager.Notify($"Saving failed! Exception: {ex.Message}");
-                AppCrashReport acr = new AppCrashReport(ex, false, true);
-                acr.ShowDialog();
-            }
-            if (oldFile != "")
-                MainWindow.saveFile = oldFile;
-        }
         public static void AddToRecentList(string path)
         {
             RecentFileList recent = new RecentFileList();
             recent.Load(new string[0]);
-            if (!recent.data.Contains(saveFile))
+            if (!recent.data.Contains(MainWindow.CurrentProject.file))
             {
                 var r = recent.data.AsEnumerable();
                 r = r.Prepend(path);
@@ -267,43 +226,6 @@ namespace BowieD.Unturned.NPCMaker
                 recent.Save();
             }
             Instance.RefreshRecentList();
-        }
-        public bool Load(string path, bool skipPrompt = false)
-        {
-            if (!skipPrompt && !SavePrompt())
-                return false;
-            try
-            {
-                if (NPCProject.CanLoad(path))
-                {
-                    CurrentProject = NPCProject.Load(path);
-                    saveFile = path;
-                    ResetEditors();
-                    isSaved = true;
-                    AddToRecentList(saveFile);
-                    App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
-                    Started = DateTime.UtcNow;
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception ex) { App.Logger.LogException("Error occured while loading project.", ex); App.NotificationManager.Notify(LocUtil.LocalizeInterface("load_Incompatible")); return false; }
-        }
-        public static bool SavePrompt()
-        {
-            if (isSaved == true || CurrentProject == new NPCProject())
-                return true;
-            var result = MessageBox.Show(LocUtil.LocalizeInterface("app_Exit_UnsavedChanges_Text"), LocUtil.LocalizeInterface("app_Exit_UnsavedChanges_Title"), MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
-            if (result == MessageBoxResult.Yes)
-            {
-                Save();
-                return true;
-            }
-            else if (result == MessageBoxResult.No)
-            {
-                return true;
-            }
-            return false;
         }
         public bool FileCompatible(string path)
         {
@@ -344,10 +266,16 @@ namespace BowieD.Unturned.NPCMaker
             {
                 e.Effects = DragDropEffects.Copy;
                 string path = (e.Data.GetData(DataFormats.FileDrop) as string[])[0];
-                if (Load(path))
+                string oldPath = MainWindow.CurrentProject.file;
+                MainWindow.CurrentProject.file = path;
+                if (MainWindow.CurrentProject.Load(null))
                 {
                     App.NotificationManager.Clear();
                     App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
+                }
+                else
+                {
+                    MainWindow.CurrentProject.file = oldPath;
                 }
             }
             dropOverlay.Visibility = Visibility.Hidden;
@@ -368,7 +296,10 @@ namespace BowieD.Unturned.NPCMaker
                 };
                 mItem.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
                 {
-                    Load(k);
+                    string oldPath = MainWindow.CurrentProject.file;
+                    MainWindow.CurrentProject.file = k;
+                    if (!MainWindow.CurrentProject.Load(null))
+                        MainWindow.CurrentProject.file = oldPath;
                 });
                 RecentList.Items.Add(mItem);
             }
@@ -392,13 +323,8 @@ namespace BowieD.Unturned.NPCMaker
 
         public static void PerformExit()
         {
-            if (!isSaved)
-            {
-                if (!SavePrompt())
-                {
-                    return;
-                }
-            }
+            if (MainWindow.CurrentProject.SavePrompt() == null)
+                return;
             DiscordManager?.Deinitialize();
             Environment.Exit(0);
         }

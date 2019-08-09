@@ -14,7 +14,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Quests
         {
             get
             {
-                foreach (NPCQuest quest in MainWindow.CurrentProject.quests)
+                foreach (NPCQuest quest in MainWindow.CurrentProject.data.quests)
                 {
                     if (quest.conditions.Count == 0)
                     {

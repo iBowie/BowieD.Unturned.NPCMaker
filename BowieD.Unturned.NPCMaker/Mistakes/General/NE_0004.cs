@@ -17,13 +17,13 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.General
             get
             {
                 HashSet<ushort> takenIds = new HashSet<ushort>();
-                foreach (var k in MainWindow.CurrentProject.dialogues)
+                foreach (var k in MainWindow.CurrentProject.data.dialogues)
                     takenIds.Add(k.id);
-                foreach (var k in MainWindow.CurrentProject.quests)
+                foreach (var k in MainWindow.CurrentProject.data.quests)
                     takenIds.Add(k.id);
-                foreach (var k in MainWindow.CurrentProject.vendors)
+                foreach (var k in MainWindow.CurrentProject.data.vendors)
                     takenIds.Add(k.id);
-                foreach (var k in MainWindow.CurrentProject.characters)
+                foreach (var k in MainWindow.CurrentProject.data.characters)
                     takenIds.Add(k.id);
                 return takenIds.Any(d => takenIds.Count(k => k == d) >= 2);
             }

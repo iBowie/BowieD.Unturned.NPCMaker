@@ -9,14 +9,15 @@ namespace BowieD.Unturned.NPCMaker.Data
         [JsonIgnore]
         public abstract string FileName { get; }
         public T data;
-        public virtual void Save()
+        public virtual bool Save()
         {
             App.Logger.LogInfo($"[JDATA] - Saving {FileName}");
             string content = JsonConvert.SerializeObject(data);
             File.WriteAllText(FileName, content);
             App.Logger.LogInfo($"[JDATA] - Saved!");
+            return true;
         }
-        public virtual void Load(T defaultValue)
+        public virtual bool Load(T defaultValue)
         {
             App.Logger.LogInfo($"[JDATA] - Loading {FileName}");
             if (File.Exists(FileName))
@@ -27,12 +28,14 @@ namespace BowieD.Unturned.NPCMaker.Data
                     string content = File.ReadAllText(FileName);
                     data = JsonConvert.DeserializeObject<T>(content);
                     App.Logger.LogInfo($"[JDATA] - Loaded");
+                    return true;
                 }
                 catch
                 {
                     App.Logger.LogInfo($"[JDATA] - Could not load {FileName}. Reverting to default value...");
                     data = defaultValue;
                     Save();
+                    return false;
                 }
             }
             else
@@ -40,6 +43,7 @@ namespace BowieD.Unturned.NPCMaker.Data
                 App.Logger.LogInfo($"[JDATA] - {FileName} does not exist. Creating one with default value...");
                 data = defaultValue;
                 Save();
+                return false;
             }
         }
     }

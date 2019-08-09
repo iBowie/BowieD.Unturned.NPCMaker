@@ -14,7 +14,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.General
         {
             get
             {
-                foreach (var _char in MainWindow.CurrentProject.characters)
+                foreach (var _char in MainWindow.CurrentProject.data.characters)
                 {
                     if (_char.displayName == null || _char.displayName.Length < 3)
                     {

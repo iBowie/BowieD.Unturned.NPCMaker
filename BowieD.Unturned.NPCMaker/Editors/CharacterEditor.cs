@@ -202,14 +202,14 @@ namespace BowieD.Unturned.NPCMaker.Editors
         }
         public void Open()
         {
-            var ulv = new Universal_ListView(MainWindow.CurrentProject.characters.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Character, false)).ToList(), Universal_ItemList.ReturnType.Character);
+            var ulv = new Universal_ListView(MainWindow.CurrentProject.data.characters.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Character, false)).ToList(), Universal_ItemList.ReturnType.Character);
             if (ulv.ShowDialog() == true)
             {
                 Save();
                 Current = ulv.SelectedValue as NPCCharacter;
                 App.Logger.LogInfo($"Opened character {MainWindow.Instance.txtID.Value}");
             }
-            MainWindow.CurrentProject.characters = ulv.Values.Cast<NPCCharacter>().ToList();
+            MainWindow.CurrentProject.data.characters = ulv.Values.Cast<NPCCharacter>().ToList();
         }
 
         public void Reset()
@@ -263,12 +263,12 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 App.NotificationManager.Notify(LocUtil.LocalizeInterface("character_ID_Zero"));
                 return;
             }
-            var o = MainWindow.CurrentProject.characters.Where(d => d.id == character.id);
+            var o = MainWindow.CurrentProject.data.characters.Where(d => d.id == character.id);
             if (o.Count() > 0)
-                MainWindow.CurrentProject.characters.Remove(o.ElementAt(0));
-            MainWindow.CurrentProject.characters.Add(character);
+                MainWindow.CurrentProject.data.characters.Remove(o.ElementAt(0));
+            MainWindow.CurrentProject.data.characters.Add(character);
             App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Character_Saved"));
-            MainWindow.isSaved = false;
+            MainWindow.CurrentProject.isSaved = false;
             App.Logger.LogInfo($"Character {character.id} saved!");
         }
 
@@ -282,7 +282,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             presence.Timestamps.StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             presence.Assets = new Assets();
             presence.Assets.SmallImageKey = "icon_info_outlined";
-            presence.Assets.SmallImageText = $"Characters: {MainWindow.CurrentProject.characters.Count}";
+            presence.Assets.SmallImageText = $"Characters: {MainWindow.CurrentProject.data.characters.Count}";
             presence.Details = $"Current NPC: {MainWindow.CharacterEditor.Current.editorName}";
             presence.State = $"Display Name: {MainWindow.CharacterEditor.Current.displayName}";
             MainWindow.DiscordManager.SendPresence(presence);
@@ -333,7 +333,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
         internal void FaceImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
             MainWindow.Instance.faceImageControl.Source = ("Resources/Unturned/Faces/" + e.NewValue + ".png").GetImageSource();
-            MainWindow.isSaved = false;
+            MainWindow.CurrentProject.isSaved = false;
         }
         internal void HairImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
@@ -345,7 +345,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 }
             }
             MainWindow.Instance.hairRenderGrid.Children[(int)e.NewValue].Visibility = Visibility.Visible;
-            MainWindow.isSaved = false;
+            MainWindow.CurrentProject.isSaved = false;
         }
         internal void BeardImageIndex_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
@@ -357,14 +357,14 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 }
             }
             MainWindow.Instance.beardRenderGrid.Children[(int)e.NewValue].Visibility = Visibility.Visible;
-            MainWindow.isSaved = false;
+            MainWindow.CurrentProject.isSaved = false;
         }
         internal void Char_EditConditions_Button_Click(object sender, RoutedEventArgs e)
         {
             Universal_ListView ulv = new Universal_ListView(conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
             ulv.ShowDialog();
             conditions = ulv.Values.Cast<Condition>().ToList();
-            MainWindow.isSaved = false;
+            MainWindow.CurrentProject.isSaved = false;
         }
     }
 }

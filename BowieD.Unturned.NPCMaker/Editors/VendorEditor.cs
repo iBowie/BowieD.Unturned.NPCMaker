@@ -96,14 +96,14 @@ namespace BowieD.Unturned.NPCMaker.Editors
 
         public void Open()
         {
-            Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentProject.vendors.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Vendor, false)).ToList(), Universal_ItemList.ReturnType.Vendor);
+            Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentProject.data.vendors.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Vendor, false)).ToList(), Universal_ItemList.ReturnType.Vendor);
             if (ulv.ShowDialog() == true)
             {
                 Save();
                 Current = ulv.SelectedValue as NPCVendor;
                 App.Logger.LogInfo($"Opened vendor {MainWindow.Instance.vendorIdTxtBox.Value}");
             }
-            MainWindow.CurrentProject.vendors = ulv.Values.Cast<NPCVendor>().ToList();
+            MainWindow.CurrentProject.data.vendors = ulv.Values.Cast<NPCVendor>().ToList();
         }
         public void Reset()
         {
@@ -119,13 +119,13 @@ namespace BowieD.Unturned.NPCMaker.Editors
             NPCVendor cur = Current;
             if (cur.id == 0)
                 return;
-            if (MainWindow.CurrentProject.vendors.Where(d => d.id == cur.id).Count() > 0)
+            if (MainWindow.CurrentProject.data.vendors.Where(d => d.id == cur.id).Count() > 0)
             {
-                MainWindow.CurrentProject.vendors.Remove(MainWindow.CurrentProject.vendors.Where(d => d.id == cur.id).ElementAt(0));
+                MainWindow.CurrentProject.data.vendors.Remove(MainWindow.CurrentProject.data.vendors.Where(d => d.id == cur.id).ElementAt(0));
             }
-            MainWindow.CurrentProject.vendors.Add(cur);
+            MainWindow.CurrentProject.data.vendors.Add(cur);
             App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Vendor_Saved"));
-            MainWindow.isSaved = false;
+            MainWindow.CurrentProject.isSaved = false;
             App.Logger.LogInfo($"Vendor {cur.id} saved!");
         }
 
@@ -170,7 +170,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             presence.Timestamps.StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             presence.Assets = new Assets();
             presence.Assets.SmallImageKey = "icon_money_outlined";
-            presence.Assets.SmallImageText = $"Vendors: {MainWindow.CurrentProject.vendors.Count}";
+            presence.Assets.SmallImageText = $"Vendors: {MainWindow.CurrentProject.data.vendors.Count}";
             presence.Details = $"Vendor Name: {(current == null ? "Untitled" : current.vendorTitle)}";
             presence.State = $"Buy: {(current == null ? 0 : current.BuyItems.Count)} / Sell: {(current == null ? 0 : current.SellItems.Count)}";
             MainWindow.DiscordManager.SendPresence(presence);

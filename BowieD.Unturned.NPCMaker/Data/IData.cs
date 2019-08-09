@@ -3,7 +3,7 @@
     public interface IData<T>
     {
         string FileName { get; }
-        void Save();
-        void Load(T defaultValue);
+        bool Save();
+        bool Load(T defaultValue);
     }
 }

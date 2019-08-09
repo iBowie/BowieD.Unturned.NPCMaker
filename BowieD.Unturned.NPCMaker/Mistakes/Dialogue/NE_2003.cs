@@ -12,7 +12,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         public override string MistakeNameKey => "NE_2003";
         public override bool TranslateName => false;
         public override string MistakeDescKey => "NE_2003_Desc";
-        public override bool IsMistake => MainWindow.CurrentProject.dialogues.Any(d => MainWindow.CurrentProject.dialogues.Count(k => k.id == d.id) > 1);
+        public override bool IsMistake => MainWindow.CurrentProject.data.dialogues.Any(d => MainWindow.CurrentProject.data.dialogues.Count(k => k.id == d.id) > 1);
         public override Action OnClick => () =>
         {
             MainWindow.Instance.mainTabControl.SelectedIndex = 2;

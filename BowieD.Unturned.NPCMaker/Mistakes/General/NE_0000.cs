@@ -15,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.General
         {
             get
             {
-                foreach (var _char in MainWindow.CurrentProject.characters)
+                foreach (var _char in MainWindow.CurrentProject.data.characters)
                 {
                     if (_char.id > 0 && _char.id <= 2000)
                     {

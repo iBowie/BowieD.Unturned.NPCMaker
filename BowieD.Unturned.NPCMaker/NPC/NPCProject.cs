@@ -1,12 +1,16 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Data;
+using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.Logging;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    [XmlRoot("NPCProject")]
     public class NPCProject
     {
         public NPCProject()
@@ -26,65 +30,89 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public List<NPCDialogue> dialogues;
         public List<NPCVendor> vendors;
         public List<NPCQuest> quests;
-
-        public IEnumerable<ushort> GetAllIDs()
+    }
+    public class ProjectData : XmlData<NPCProject>
+    {
+        public ProjectData()
         {
-            foreach (var contentID in GetAllContentIDs())
-                yield return contentID;
+            file = "";
+            data = new NPCProject();
         }
-        public IEnumerable<ushort> GetAllContentIDs()
+        public string file;
+        public override string FileName => file;
+        public bool isSaved = false;
+        /// <summary>
+        /// True - Yes / No prompt needed
+        /// False - No
+        /// Null - Cancel
+        /// </summary>
+        /// <returns></returns>
+        public bool? SavePrompt()
         {
-            foreach (var character in characters)
-                yield return character.id;
-            foreach (var dialogue in dialogues)
-                yield return dialogue.id;
-            foreach (var vendor in vendors)
-                yield return vendor.id;
-            foreach (var quest in quests)
-                yield return quest.id;
-        }
-        public void Save(string path)
-        {
-            XmlWriterSettings writerSettings;
-#if DEBUG
-            writerSettings = new XmlWriterSettings()
+            if (isSaved)
+                return true;
+            var result = MessageBox.Show(LocUtil.LocalizeInterface("app_Exit_UnsavedChanges_Text"), LocUtil.LocalizeInterface("app_Exit_UnsavedChanges_Title"), MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
+            if (result == MessageBoxResult.Yes)
             {
-                Indent = true,
-                IndentChars = "\t"
-            };
-#endif
-#if !DEBUG
-            writerSettings = new XmlWriterSettings();
-#endif
-            using (FileStream fs = new FileStream(path, FileMode.Create))
-            using (XmlWriter writer = XmlWriter.Create(fs, writerSettings))
-            {
-                XmlSerializer ser = new XmlSerializer(typeof(NPCProject));
-                ser.Serialize(writer, this);
+                Save();
+                return true;
             }
+            else if (result == MessageBoxResult.No)
+                return false;
+            else
+                return null;
         }
-        public static NPCProject Load(string path)
+        public override bool Save()
         {
-            using (FileStream fs = new FileStream(path, FileMode.Open))
-            using (XmlReader reader = XmlReader.Create(fs))
+            if (file == "")
             {
-                var res = new XmlSerializer(typeof(NPCProject)).Deserialize(reader) as NPCProject;
-                return res;
-            }
-        }
-        public static bool CanLoad(string path)
-        {
-            try
-            {
-                using (FileStream fs = new FileStream(path, FileMode.Open))
-                using (XmlReader reader = XmlReader.Create(fs))
+                SaveFileDialog sfd = new SaveFileDialog
                 {
-                    var res = new XmlSerializer(typeof(NPCProject)).CanDeserialize(reader);
-                    return res;
+                    FileName = "Unnamed",
+                    DefaultExt = ".npcproj",
+                    Filter = "NPC Project (.npcproj)|*.npcproj"
+                };
+                if (sfd.ShowDialog() == true)
+                {
+                    file = sfd.FileName;
+                    isSaved = base.Save();
+                }
+                else
+                {
+                    return false;
                 }
             }
-            catch (Exception)
+            else
             {
+                isSaved = base.Save();
+            }
+            return isSaved;
+        }
+        public override bool Load(NPCProject defaultValue)
+        {
+            App.Logger.LogInfo($"[XDATA] - Loading {FileName}!");
+            if (File.Exists(FileName))
+            {
+                App.Logger.LogInfo($"[XDATA] - Converting from XML...");
+                using (FileStream fs = new FileStream(FileName, FileMode.Open))
+                using (XmlReader reader = XmlReader.Create(fs))
+                {
+                    if (_serializer.CanDeserialize(reader))
+                    {
+                        data = (NPCProject)_serializer.Deserialize(reader);
+                        App.Logger.LogInfo($"[XDATA] - Loaded");
+                        return true;
+                    }
+                    else
+                    {
+                        App.Logger.LogInfo($"[XDATA] - Could not load {FileName}. Ignoring...");
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                App.Logger.LogInfo($"[XDATA] - {FileName} does not exist. Ignoring...");
                 return false;
             }
         }

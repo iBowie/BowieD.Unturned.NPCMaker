@@ -50,7 +50,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
         private void SaveNPC_Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.Save();
+            MainWindow.CurrentProject.Save();
         }
 
         private void CopyButton_Click(object sender, RoutedEventArgs e)

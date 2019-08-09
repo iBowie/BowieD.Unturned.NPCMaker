@@ -9,7 +9,7 @@
         {
             MainWindow.Instance.Dispatcher.Invoke(() =>
             {
-                MainWindow.Save();
+                MainWindow.CurrentProject.Save();
             });
         }
     }
