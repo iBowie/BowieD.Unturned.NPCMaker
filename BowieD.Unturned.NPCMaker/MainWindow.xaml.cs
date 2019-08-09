@@ -1,8 +1,11 @@
-﻿using BowieD.Unturned.NPCMaker.Editors;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Data;
+using BowieD.Unturned.NPCMaker.Editors;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.NPC;
+using BowieD.Unturned.NPCMaker.Themes;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -13,9 +16,6 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Xml;
 using System.Xml.Serialization;
-using BowieD.Unturned.NPCMaker.Configuration;
-using BowieD.Unturned.NPCMaker.Themes;
-using BowieD.Unturned.NPCMaker.Data;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -167,7 +167,7 @@ namespace BowieD.Unturned.NPCMaker
             App.NotificationManager.Notify(LocUtil.LocalizeInterface("app_Free"));
             base.Show();
         }
-#region CONSTANTS
+        #region CONSTANTS
         public const int
         faceAmount = 32,
         beardAmount = 16,
@@ -195,7 +195,7 @@ namespace BowieD.Unturned.NPCMaker
         public static PropertyProxy Proxy { get; private set; }
         public static bool IsRGB { get; set; } = true;
         public static DateTime Started { get; set; } = DateTime.UtcNow;
-#endregion
+        #endregion
         private void AutosaveTimer_Tick(object sender, EventArgs e)
         {
             AutosaveTimer.Stop();
@@ -209,7 +209,7 @@ namespace BowieD.Unturned.NPCMaker
             PerformExit();
             base.OnClosing(e);
         }
-#region SAVE_LOAD
+        #region SAVE_LOAD
         public static void AddToRecentList(string path)
         {
             RecentFileList recent = new RecentFileList();
@@ -241,8 +241,8 @@ namespace BowieD.Unturned.NPCMaker
             catch { return false; }
         }
 
-#endregion
-#region DRAG AND DROP
+        #endregion
+        #region DRAG AND DROP
         private void Window_DragEnter(object sender, DragEventArgs e)
         {
             dropOverlay.Visibility = Visibility.Visible;
@@ -276,7 +276,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             dropOverlay.Visibility = Visibility.Hidden;
         }
-#endregion
+        #endregion
         public void RefreshRecentList()
         {
             RecentFileList recent = new RecentFileList();

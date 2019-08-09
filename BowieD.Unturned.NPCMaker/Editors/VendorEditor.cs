@@ -34,7 +34,8 @@ namespace BowieD.Unturned.NPCMaker.Editors
                     }
                 }
             };
-            MainWindow.Instance.vendorSaveButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) => {
+            MainWindow.Instance.vendorSaveButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
+            {
                 Save();
                 SendPresence();
             });

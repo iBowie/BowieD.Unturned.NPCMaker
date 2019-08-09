@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Media;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes.Apparel
 {
@@ -21,7 +20,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Apparel
         public override string MistakeNameKey => "NE_1000";
         public override bool TranslateName => false;
         public override string MistakeDescKey => "NE_1000_Desc";
-        
+
         public override Action OnClick => () =>
         {
             //if (MainWindow.CharacterEditor.Current.id == 0)

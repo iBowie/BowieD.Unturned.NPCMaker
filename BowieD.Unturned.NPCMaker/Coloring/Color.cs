@@ -3,6 +3,8 @@ using System.Linq;
 
 namespace BowieD.Unturned.NPCMaker.Coloring
 {
+#pragma warning disable CS0660
+#pragma warning disable CS0661
     public struct Color
     {
         public Color(byte r, byte g, byte b)
@@ -51,6 +53,8 @@ namespace BowieD.Unturned.NPCMaker.Coloring
             return $"#{R:X2}{G:X2}{B:X2}";
         }
     }
+#pragma warning restore CS0661
+#pragma warning restore CS0660
     public static class ColorConverter
     {
         public static Color HSVtoColor(double H, double S, double V)
@@ -58,7 +62,7 @@ namespace BowieD.Unturned.NPCMaker.Coloring
             int hi = Convert.ToInt32(Math.Floor(H / 60)) % 6;
             double f = H / 60 - Math.Floor(H / 60);
 
-            V = V * 255;
+            V *= 255;
             byte v = (byte)Convert.ToInt32(V);
             byte p = (byte)Convert.ToInt32(V * (1 - S));
             byte q = (byte)Convert.ToInt32(V * (1 - f * S));

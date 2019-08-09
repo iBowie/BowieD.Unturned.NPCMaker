@@ -17,5 +17,5 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 return true;
             return false;
         }
-    } 
+    }
 }

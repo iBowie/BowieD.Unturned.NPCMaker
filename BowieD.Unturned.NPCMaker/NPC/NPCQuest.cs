@@ -17,7 +17,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             guid = Guid.NewGuid().ToString("N");
             Comment = "";
         }
-        
+
         [XmlAttribute]
         public string guid;
         [XmlAttribute("comment")]

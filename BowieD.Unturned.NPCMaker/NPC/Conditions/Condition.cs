@@ -1,11 +1,11 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml.Serialization;
-using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -148,7 +148,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 {
                     valueControl = new CheckBox()
                     {
-                        
+
                     };
                 }
                 valueControl.HorizontalAlignment = HorizontalAlignment.Right;

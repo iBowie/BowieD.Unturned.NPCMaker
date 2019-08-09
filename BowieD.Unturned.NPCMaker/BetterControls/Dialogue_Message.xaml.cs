@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Linq;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.BetterControls
@@ -16,7 +16,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             InitializeComponent();
             this.Message = message;
         }
-        
+
         public NPC.NPCMessage Message
         {
             get

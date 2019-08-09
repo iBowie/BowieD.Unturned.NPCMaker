@@ -1,12 +1,12 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 using System.Windows.Media.Animation;
-using BowieD.Unturned.NPCMaker.Localization;
-using BowieD.Unturned.NPCMaker.Configuration;
+using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
@@ -63,7 +63,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             saveButton.IsEnabled = true;
             if (e.AddedItems.Count == 0)
                 return;
-            var type = (typeBox.SelectedItem as ComboBoxItem).Tag as Type; 
+            var type = (typeBox.SelectedItem as ComboBoxItem).Tag as Type;
             Condition newCondition = (Condition)Activator.CreateInstance(type);
             _CurrentConditionType = type;
             ClearParameters();

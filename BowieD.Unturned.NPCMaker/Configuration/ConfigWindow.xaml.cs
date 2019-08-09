@@ -1,7 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Themes;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;

@@ -17,7 +17,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             InitializeComponent();
             this.Value = input;
             mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
-mainLabel.ToolTip = mainLabel.Content;
+            mainLabel.ToolTip = mainLabel.Content;
             this.Localizable = localizable;
             this.Type = type;
         }

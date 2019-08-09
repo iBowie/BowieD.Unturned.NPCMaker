@@ -1,5 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Logging;
-using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Collections.Generic;

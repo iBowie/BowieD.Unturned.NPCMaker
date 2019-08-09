@@ -23,7 +23,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             txtBoxQuestID.Value = Response.openQuestId;
             txtBoxVendorID.Value = Response.openVendorId;
         }
-        
+
         public NPC.NPCResponse Response { get; private set; }
         public void RebuildResponse()
         {
@@ -172,7 +172,7 @@ namespace BowieD.Unturned.NPCMaker.BetterControls
             int index = IndexInPanel;
             Dialogue_Response current = this;
             Dialogue_Response changeTo = panel.Children[index - 1] as Dialogue_Response;
-            panel.Children.RemoveAt(index-1);
+            panel.Children.RemoveAt(index - 1);
             panel.Children.Insert(index, changeTo);
             foreach (UIElement uie in panel.Children)
             {

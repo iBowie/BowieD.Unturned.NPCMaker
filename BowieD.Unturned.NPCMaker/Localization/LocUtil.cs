@@ -153,7 +153,7 @@ namespace BowieD.Unturned.NPCMaker.Localization
             IsLoaded = true;
         }
         private static bool _isInit = false;
-        private static Dictionary<string, string> 
+        private static Dictionary<string, string>
             _conditionsLang = null,
             _rewardsLang = null,
             _mistakesLang = null,

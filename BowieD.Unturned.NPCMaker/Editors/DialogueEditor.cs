@@ -16,7 +16,8 @@ namespace BowieD.Unturned.NPCMaker.Editors
     {
         public DialogueEditor()
         {
-            MainWindow.Instance.dialogueSaveButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) => {
+            MainWindow.Instance.dialogueSaveButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
+            {
                 Save();
                 SendPresence();
             });

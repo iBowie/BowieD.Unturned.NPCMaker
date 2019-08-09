@@ -31,7 +31,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.General
         public override string MistakeDescKey => LocUtil.LocalizeMistake("NE_0000_Desc", failChar.displayName, failChar.id);
         public override bool TranslateName => false;
         public override bool TranslateDesc => false;
-        public override Action OnClick => () => 
+        public override Action OnClick => () =>
         {
             if (MainWindow.CharacterEditor.Current.id == 0)
                 return;

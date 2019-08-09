@@ -34,7 +34,8 @@ namespace BowieD.Unturned.NPCMaker.Editors
                     AddReward(rew);
                 }
             };
-            MainWindow.Instance.questSaveButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) => {
+            MainWindow.Instance.questSaveButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
+            {
                 Save();
                 SendPresence();
             });
@@ -84,7 +85,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 foreach (Condition cond in value.conditions)
                 {
                     Universal_ItemList uil = new Universal_ItemList(cond, Universal_ItemList.ReturnType.Condition, true);
-                    uil.deleteButton.Click += (object sender, RoutedEventArgs e) => 
+                    uil.deleteButton.Click += (object sender, RoutedEventArgs e) =>
                     {
                         MainWindow.Instance.listQuestConditions.Children.Remove(Util.FindParent<Universal_ItemList>(sender as Button));
                     };

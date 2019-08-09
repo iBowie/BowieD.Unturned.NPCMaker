@@ -38,7 +38,7 @@ namespace BowieD.Unturned.NPCMaker
         }
         public static T FindByName<T>(Window window, string name) where T : UIElement
         {
-            var res=window.FindName(name);
+            var res = window.FindName(name);
             if (res is T result)
             {
                 return result;

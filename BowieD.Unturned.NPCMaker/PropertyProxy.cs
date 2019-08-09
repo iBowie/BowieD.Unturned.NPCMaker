@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
-using BowieD.Unturned.NPCMaker.Data;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
@@ -7,15 +6,12 @@ using BowieD.Unturned.NPCMaker.NPC;
 using DiscordRPC;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Media;
 using System.Net;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace BowieD.Unturned.NPCMaker
@@ -86,7 +82,7 @@ namespace BowieD.Unturned.NPCMaker
         }
 
 
-        private MainWindow inst;
+        private readonly MainWindow inst;
 
         #region EVENTS
         internal void MistakeList_Selected(object sender, SelectionChangedEventArgs e)
@@ -179,7 +175,7 @@ namespace BowieD.Unturned.NPCMaker
         }
         internal void LoadClick(object sender, RoutedEventArgs e)
         {
-            string path = "";
+            string path;
             OpenFileDialog ofd = new OpenFileDialog()
             {
                 Filter = $"{LocUtil.LocalizeInterface("save_Filter")} (*.npc,*.npcproj)|*.npc;*.npcproj",

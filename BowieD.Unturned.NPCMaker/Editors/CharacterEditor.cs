@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using BowieD.Unturned.NPCMaker.BetterControls;
-using BowieD.Unturned.NPCMaker.Coloring;
+﻿using BowieD.Unturned.NPCMaker.BetterControls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
 using DiscordRPC;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.Editors
@@ -84,7 +83,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.Instance.hairColorPicker.StandardColorsHeader = "Unturned";
             MainWindow.Instance.skinColorPicker.StandardColors = new System.Collections.ObjectModel.ObservableCollection<Xceed.Wpf.Toolkit.ColorItem>(getUnturnedColors().Select(d => new Xceed.Wpf.Toolkit.ColorItem(d, d.ToHEX())));
             MainWindow.Instance.hairColorPicker.StandardColors = new System.Collections.ObjectModel.ObservableCollection<Xceed.Wpf.Toolkit.ColorItem>(getUnturnedColors().Select(d => new Xceed.Wpf.Toolkit.ColorItem(d, d.ToHEX())));
-            MainWindow.Instance.skinColorPicker.SelectedColorChanged += SkinColorPicker_SelectedColorChanged ;
+            MainWindow.Instance.skinColorPicker.SelectedColorChanged += SkinColorPicker_SelectedColorChanged;
             MainWindow.Instance.hairColorPicker.SelectedColorChanged += HairColorPicker_SelectedColorChanged;
             conditions = new List<Condition>();
         }

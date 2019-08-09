@@ -1,6 +1,6 @@
-﻿using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC;
 using System;
-using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes.Quests
 {

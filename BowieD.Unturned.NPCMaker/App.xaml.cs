@@ -6,7 +6,6 @@ using BowieD.Unturned.NPCMaker.Notification;
 using BowieD.Unturned.NPCMaker.Updating;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;

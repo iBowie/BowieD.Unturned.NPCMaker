@@ -1,7 +1,7 @@
-﻿using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Linq;
-using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
 {
@@ -41,7 +41,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         {
             get
             {
-                return new Action(() => 
+                return new Action(() =>
                 {
                     if (MainWindow.DialogueEditor.Current.id == 0)
                         return;
