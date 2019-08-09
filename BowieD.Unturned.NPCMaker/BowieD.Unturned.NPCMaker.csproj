@@ -242,6 +242,7 @@
     <Compile Include="NPC\NPCCharacter.cs" />
     <Compile Include="NPC\NPCClothing.cs" />
     <Compile Include="NPC\NPCProject.cs" />
+    <Compile Include="NPC\ProjectData.cs" />
     <Compile Include="NPC\Rewards\Reward.cs" />
     <Compile Include="NPC\Rewards\RewardAchievement.cs" />
     <Compile Include="NPC\Rewards\RewardEvent.cs" />
