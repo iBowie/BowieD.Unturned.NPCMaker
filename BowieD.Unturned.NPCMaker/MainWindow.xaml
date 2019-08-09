@@ -301,8 +301,18 @@
                             <Button Name="apparelFaceRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="0,171,210,0" Width="98" Height="26"/>
                             <Button Name="apparelHairRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="0,171,109,0" Width="98" Height="26"/>
                             <Button Name="apparelBeardRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="0,171,8,0" Width="98" Height="26"/>
-                            <xctk:ColorPicker AdvancedButtonHeader="{DynamicResource picker_Advanced_Header}" StandardButtonHeader="{DynamicResource picker_Standard_Header}" AvailableColorsHeader="{DynamicResource picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="skinColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,59,0,0" Width="120"/>
-                            <xctk:ColorPicker AdvancedButtonHeader="{DynamicResource picker_Advanced_Header}" StandardButtonHeader="{DynamicResource picker_Standard_Header}" AvailableColorsHeader="{DynamicResource picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="hairColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,113,0,0" Width="120"/>
+                            <xctk:ColorPicker AdvancedButtonHeader="{DynamicResource picker_Advanced_Header}" StandardButtonHeader="{DynamicResource picker_Standard_Header}" AvailableColorsHeader="{DynamicResource picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="skinColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,54,0,0" Width="89" Height="26"/>
+                            <Button Name="skinColorPicker_SaveButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="26" Margin="93,54,0,0">
+                                <Button.Content>
+                                    <iconPacks:PackIconMaterial Kind="ContentSave" Margin="-4"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Name="hairColorPicker_SaveButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="26" Margin="93,110,0,0">
+                                <Button.Content>
+                                    <iconPacks:PackIconMaterial Kind="ContentSave" Margin="-4"/>
+                                </Button.Content>
+                            </Button>
+                            <xctk:ColorPicker AdvancedButtonHeader="{DynamicResource picker_Advanced_Header}" StandardButtonHeader="{DynamicResource picker_Standard_Header}" AvailableColorsHeader="{DynamicResource picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="hairColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,110,0,0" Width="89" Height="26"/>
                             <CheckBox Name="apparelLeftHandedCheckbox" HorizontalContentAlignment="Right" Content="{DynamicResource apparel_LeftHanded}" HorizontalAlignment="Left" Margin="0,140,0,0" VerticalAlignment="Top" Width="120" mah:ToggleButtonHelper.ContentDirection="RightToLeft"/>
                             <ComboBox Name="apparelPoseBox" HorizontalAlignment="Left" SelectedIndex="0" Margin="-1,171,0,0" VerticalAlignment="Top" Width="120" Height="26">
                                 <ComboBoxItem Content="{DynamicResource apparel_Pose_Stand}">
@@ -353,7 +363,7 @@
                             </ComboBox>
                             <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,155,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Pose}" VerticalAlignment="Top" Width="120" Height="16"/>
                             <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,38,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Skin}" VerticalAlignment="Top" Width="120" Height="16"/>
-                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,92,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Hair}" VerticalAlignment="Top" Width="120"/>
+                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,94,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Hair}" VerticalAlignment="Top" Width="120"/>
                             <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Face}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,210,0" Width="98" Height="28"/>
                             <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Hair}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,109,0" Width="98" Height="28"/>
                             <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Beard}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,8,0" Width="98" Height="28"/>

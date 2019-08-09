@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.BetterControls;
+using BowieD.Unturned.NPCMaker.Data;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
@@ -85,7 +86,17 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.Instance.hairColorPicker.StandardColors = new System.Collections.ObjectModel.ObservableCollection<Xceed.Wpf.Toolkit.ColorItem>(getUnturnedColors().Select(d => new Xceed.Wpf.Toolkit.ColorItem(d, d.ToHEX())));
             MainWindow.Instance.skinColorPicker.SelectedColorChanged += SkinColorPicker_SelectedColorChanged;
             MainWindow.Instance.hairColorPicker.SelectedColorChanged += HairColorPicker_SelectedColorChanged;
+            MainWindow.Instance.skinColorPicker_SaveButton.Click += SkinColorPicker_SaveButton_Click;
+            MainWindow.Instance.hairColorPicker_SaveButton.Click += HairColorPicker_SaveButton_Click;
             conditions = new List<Condition>();
+            UserColors.Load(new string[0]);
+            MainWindow.Instance.skinColorPicker.AvailableColors.Clear();
+            MainWindow.Instance.hairColorPicker.AvailableColors.Clear();
+            foreach (var k in UserColors.data)
+            {
+                MainWindow.Instance.skinColorPicker.AvailableColors.Add(new Xceed.Wpf.Toolkit.ColorItem(new Coloring.Color(k), k));
+                //MainWindow.Instance.hairColorPicker.AvailableColors.Add(new Xceed.Wpf.Toolkit.ColorItem(new Coloring.Color(k), k));
+            }
         }
         public NPCCharacter Current
         {
@@ -210,7 +221,6 @@ namespace BowieD.Unturned.NPCMaker.Editors
             }
             MainWindow.CurrentProject.data.characters = ulv.Values.Cast<NPCCharacter>().ToList();
         }
-
         public void Reset()
         {
             NPCCharacter value = new NPCCharacter();
@@ -253,7 +263,6 @@ namespace BowieD.Unturned.NPCMaker.Editors
             conditions = value.visibilityConditions;
             loadedGUID = value.guid;
         }
-
         public void Save()
         {
             var character = Current;
@@ -270,9 +279,9 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.CurrentProject.isSaved = false;
             App.Logger.LogInfo($"Character {character.id} saved!");
         }
-
         private string loadedGUID = Guid.NewGuid().ToString("N");
         public List<Condition> conditions;
+        public UserColorsList UserColors { get; private set; } = new UserColorsList();
 
         public void SendPresence()
         {
@@ -286,9 +295,27 @@ namespace BowieD.Unturned.NPCMaker.Editors
             presence.State = $"Display Name: {MainWindow.CharacterEditor.Current.displayName}";
             MainWindow.DiscordManager.SendPresence(presence);
         }
-
-
-
+        internal void SkinColorPicker_SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainWindow.Instance.skinColorPicker.SelectedColor != null)
+                SaveColor(((Coloring.Color)MainWindow.Instance.skinColorPicker.SelectedColor.Value).ToHEX());
+        }
+        internal void HairColorPicker_SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainWindow.Instance.hairColorPicker.SelectedColor != null)
+                SaveColor(((Coloring.Color)MainWindow.Instance.hairColorPicker.SelectedColor.Value).ToHEX());
+        }
+        internal void SaveColor(string hex)
+        {
+            if (UserColors.data.Contains(hex))
+                return;
+            UserColors.data = UserColors.data.Prepend(hex).ToArray();
+            UserColors.Save();
+            var color = new Coloring.Color(hex);
+            var colorItem = new Xceed.Wpf.Toolkit.ColorItem(color, hex);
+            MainWindow.Instance.skinColorPicker.AvailableColors.Insert(0, colorItem);
+            //MainWindow.Instance.hairColorPicker.AvailableColors.Insert(0, colorItem);
+        }
         internal void SkinColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<System.Windows.Media.Color?> e)
         {
             Current.skinColor = (e.NewValue ?? new Coloring.Color(0, 0, 0));

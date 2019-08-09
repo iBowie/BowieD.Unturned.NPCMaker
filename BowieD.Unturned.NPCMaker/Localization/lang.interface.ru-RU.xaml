@@ -124,7 +124,7 @@
     <v:String x:Key="apparel_Clothing_Default">Обычно</v:String>
     <v:String x:Key="apparel_Clothing_Christmas">Рождество</v:String>
     <v:String x:Key="apparel_Clothing_Halloween">Хэллоуин</v:String>
-    <v:String x:Key="picker_Available_Colors_Header">Доступные цвета</v:String>
+    <v:String x:Key="picker_Available_Colors_Header">Сохранённые цвета</v:String>
     <v:String x:Key="picker_Standard_Header">Выбор цвета</v:String>
     <v:String x:Key="picker_Advanced_Header">Создание цвета</v:String>
 
@@ -189,25 +189,6 @@
     <v:String x:Key="mistakes_ErrorDesc">Описание ошибки</v:String>
     <v:String x:Key="mistakes_NoMistakes">Ошибок нет! Вы отлично справляетесь!</v:String>
     <v:String x:Key="mistakes_ErrorImportance">Важность</v:String>
-
-    <v:String x:Key="tool_Color">Цвет</v:String>
-    <v:String x:Key="tool_Color_Preview_Label">Итоговый цвет</v:String>
-    <v:String x:Key="tool_Color_Red">R</v:String>
-    <v:String x:Key="tool_Color_Green">G</v:String>
-    <v:String x:Key="tool_Color_Blue">B</v:String>
-    <v:String x:Key="tool_Color_Red_Tip">Количество красного</v:String>
-    <v:String x:Key="tool_Color_Green_Tip">Количество зелёного</v:String>
-    <v:String x:Key="tool_Color_Blue_Tip">Количество синего</v:String>
-    <v:String x:Key="tool_Color_Hue">H</v:String>
-    <v:String x:Key="tool_Color_Saturation">S</v:String>
-    <v:String x:Key="tool_Color_Value">V</v:String>
-    <v:String x:Key="tool_Color_Hue_Tip">Оттенок</v:String>
-    <v:String x:Key="tool_Color_Saturation_Tip">Насыщенность</v:String>
-    <v:String x:Key="tool_Color_Value_Tip">Значение</v:String>
-    <v:String x:Key="tool_Color_HEX">HEX: {0}</v:String>
-    <v:String x:Key="tool_Color_Random">Случайный цвет</v:String>
-    <v:String x:Key="tool_Color_SwitchTo_HSV">Палитра: RGB</v:String>
-    <v:String x:Key="tool_Color_SwitchTo_RGB">Палитра: HSV</v:String>
 
     <v:String x:Key="quest_Title">Заголовок задания</v:String>
     <v:String x:Key="quest_Desc">Описание задания</v:String>
