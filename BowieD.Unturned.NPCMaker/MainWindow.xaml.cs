@@ -1,11 +1,8 @@
-﻿using BowieD.Unturned.NPCMaker.Forms;
-using BowieD.Unturned.NPCMaker.Editors;
+﻿using BowieD.Unturned.NPCMaker.Editors;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.Managers;
-using BowieD.Unturned.NPCMaker.Notification;
 using BowieD.Unturned.NPCMaker.NPC;
-using Microsoft.Win32;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -19,8 +16,6 @@ using System.Xml.Serialization;
 using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Themes;
 using BowieD.Unturned.NPCMaker.Data;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -64,7 +59,8 @@ namespace BowieD.Unturned.NPCMaker
             DeepAnalysisManager = new Mistakes.DeepAnalysisManager();
             Width *= AppConfig.Instance.scale;
             Height *= AppConfig.Instance.scale;
-            App.Logger.LogInfo($"Launch stage. Version: {Version}.");
+            MinWidth *= AppConfig.Instance.scale;
+            MinHeight *= AppConfig.Instance.scale;
             Proxy = new PropertyProxy(this);
             Proxy.RegisterEvents();
             #region THEME SETUP

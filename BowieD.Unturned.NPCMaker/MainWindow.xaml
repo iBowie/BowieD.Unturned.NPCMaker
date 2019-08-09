@@ -108,504 +108,494 @@
                                 <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-
-                        <TabControl Margin="0,0,0,0" Background="Transparent">
-                            <TabItem Name="generalInfoTab" Header="{DynamicResource tab_General}">
-                                <Grid>
-                                    <TextBlock FontSize="24" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="{DynamicResource character_Title}" VerticalAlignment="Top"/>
-                                    <TextBox Name="txtEditorName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,45,0,0">
-                                        <TextBox.ToolTip>
-                                            <StackPanel>
-                                                <Label Content="{DynamicResource character_EditorName_Tooltip}"/>
-                                                <Image Source="Resources/Help/img_help_editorName.png"/>
-                                            </StackPanel>
-                                        </TextBox.ToolTip>
-                                    </TextBox>
-                                    <TextBlock HorizontalAlignment="Left" Margin="143,51,0,0" TextWrapping="Wrap" Text="{DynamicResource character_EditorName}" VerticalAlignment="Top"/>
-                                    <TextBox Name="txtDisplayName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,76,0,0">
-                                        <TextBox.ToolTip>
-                                            <StackPanel>
-                                                <Label Content="{DynamicResource character_DisplayName_Tooltip}"/>
-                                                <Image Source="Resources/Help/img_help_displayName.png"/>
-                                            </StackPanel>
-                                        </TextBox.ToolTip>
-                                    </TextBox>
-                                    <TextBlock  HorizontalAlignment="Left" Margin="143,80,0,0" TextWrapping="Wrap" Text="{DynamicResource character_DisplayName}" VerticalAlignment="Top"/>
-                                    <mah:NumericUpDown Name="txtID" HorizontalAlignment="Left" VerticalAlignment="Top" Width="64" Height="24" Margin="10,107,0,0" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
-                                        <mah:NumericUpDown.ToolTip>
-                                            <StackPanel>
-                                                <Label Content="{DynamicResource character_ID_Tooltip}"/>
-                                            </StackPanel>
-                                        </mah:NumericUpDown.ToolTip>
-                                    </mah:NumericUpDown>
-                                    <TextBlock  HorizontalAlignment="Left" Margin="79,110,0,0" TextWrapping="Wrap" Text="{DynamicResource character_ID}" VerticalAlignment="Top"/>
-                                    <mah:NumericUpDown Name="txtStartDialogueID" HorizontalAlignment="Left" Height="23" Margin="10,138,0,0" VerticalAlignment="Top" Width="128" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
-                                        <mah:NumericUpDown.ToolTip>
-                                            <ToolTip>
-                                                <StackPanel>
-                                                    <Label Content="{DynamicResource character_StartDialogue_Tooltip}"/>
-                                                    <Image Source="Resources/Help/img_help_startDialogue.png"/>
-                                                </StackPanel>
-                                            </ToolTip>
-                                        </mah:NumericUpDown.ToolTip>
-                                    </mah:NumericUpDown>
-                                    <TextBlock  HorizontalAlignment="Left" Margin="143,142,0,0" TextWrapping="Wrap" Text="{DynamicResource character_StartDialogue}" VerticalAlignment="Top"/>
-                                    <Button Name="visibilityCondsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource character_Conditions}" Margin="10,170,0,0" Width="212" Height="28">
-                                        <Button.ToolTip>
-                                            <StackPanel>
-                                                <Image Source="Resources/Help/img_help_visibilityConditions.png"/>
-                                            </StackPanel>
-                                        </Button.ToolTip>
-                                    </Button>
-                                    <Button Name="regenerateGuidsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource character_Regenerate}" Margin="10,202,0,0" MinWidth="212" Height="28"/>
+                        <TextBox Name="txtEditorName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,10,0,0">
+                            <TextBox.ToolTip>
+                                <StackPanel>
+                                    <Label Content="{DynamicResource character_EditorName_Tooltip}"/>
+                                    <Image Source="Resources/Help/img_help_editorName.png"/>
+                                </StackPanel>
+                            </TextBox.ToolTip>
+                        </TextBox>
+                        <TextBlock HorizontalAlignment="Left" Margin="143,16,0,0" TextWrapping="Wrap" Text="{DynamicResource character_EditorName}" VerticalAlignment="Top"/>
+                        <TextBox Name="txtDisplayName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,41,0,0">
+                            <TextBox.ToolTip>
+                                <StackPanel>
+                                    <Label Content="{DynamicResource character_DisplayName_Tooltip}"/>
+                                    <Image Source="Resources/Help/img_help_displayName.png"/>
+                                </StackPanel>
+                            </TextBox.ToolTip>
+                        </TextBox>
+                        <TextBlock  HorizontalAlignment="Left" Margin="143,45,0,0" TextWrapping="Wrap" Text="{DynamicResource character_DisplayName}" VerticalAlignment="Top"/>
+                        <mah:NumericUpDown Name="txtID" HorizontalAlignment="Left" VerticalAlignment="Top" Width="64" Height="24" Margin="10,72,0,0" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
+                            <mah:NumericUpDown.ToolTip>
+                                <StackPanel>
+                                    <Label Content="{DynamicResource character_ID_Tooltip}"/>
+                                </StackPanel>
+                            </mah:NumericUpDown.ToolTip>
+                        </mah:NumericUpDown>
+                        <TextBlock  HorizontalAlignment="Left" Margin="79,75,0,0" TextWrapping="Wrap" Text="{DynamicResource character_ID}" VerticalAlignment="Top"/>
+                        <mah:NumericUpDown Name="txtStartDialogueID" HorizontalAlignment="Left" Height="23" Margin="10,103,0,0" VerticalAlignment="Top" Width="128" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
+                            <mah:NumericUpDown.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <Label Content="{DynamicResource character_StartDialogue_Tooltip}"/>
+                                        <Image Source="Resources/Help/img_help_startDialogue.png"/>
+                                    </StackPanel>
+                                </ToolTip>
+                            </mah:NumericUpDown.ToolTip>
+                        </mah:NumericUpDown>
+                        <TextBlock  HorizontalAlignment="Left" Margin="143,107,0,0" TextWrapping="Wrap" Text="{DynamicResource character_StartDialogue}" VerticalAlignment="Top"/>
+                        <Button Name="visibilityCondsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource character_Conditions}" Margin="10,135,0,0" Width="212" Height="28">
+                            <Button.ToolTip>
+                                <StackPanel>
+                                    <Image Source="Resources/Help/img_help_visibilityConditions.png"/>
+                                </StackPanel>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Name="regenerateGuidsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource character_Regenerate}" Margin="10,167,0,0" MinWidth="212" Height="28"/>
+                        <Grid Margin="0,26,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="432">
+                            <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" Background="Black" HorizontalAlignment="Right" Height="98" Margin="0,38,210,0" VerticalAlignment="Top" Width="98">
+                                <Image Name="faceImageControl" Source="Resources/Unturned/Faces/1.png" >
+                                    <Image.Effect>
+                                        <DropShadowEffect Color="White" Direction="0" BlurRadius="2" ShadowDepth="0"/>
+                                    </Image.Effect>
+                                </Image>
+                            </Border>
+                            <mah:NumericUpDown Minimum="0" x:Name="faceImageIndex" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,210,0" Width="{Binding Width, ElementName=faceImageBorder}" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
+                            <Border x:Name="beardImageBorder" BorderBrush="{Binding BorderBrush, ElementName=faceImageBorder}" BorderThickness="1" HorizontalAlignment="Right" Height="{Binding Height, ElementName=faceImageBorder}" Width="{Binding Width, ElementName=faceImageBorder}" VerticalAlignment="Top" Margin="0,38,8,0">
+                                <Grid Name="beardRenderGrid" DataContext="{Binding SolidColorBrush}" Background="#EEAAAAAA">
+                                    <Canvas>
+                                        <Line X1="27" Y1="27" X2="70" Y2="70" Stroke="Red" StrokeThickness="2" />
+                                        <Line X1="70" Y1="27" X2="27" Y2="70" Stroke="Red" StrokeThickness="2" />
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="7,74 7,22 16,22 16,32 79,32 79,22 88,22 88,74 7,74 25,56 70,56 70,40 25,40 25,56" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas Visibility="Collapsed">
+                                        <Polygon Points="8,63 8,45 20,45 20,39 33,39 33,33 62,33 62,39 75,39 75,45 87,45 87,63 82,63 82,57 69,57 69,51 25,51 25,57 13,57 13,63" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas Visibility="Collapsed">
+                                        <Polygon Points="5,77 90,77 90,19 5,19 5,77 17,52 17,31 78,31 78,52 17,52" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas Visibility="Collapsed">
+                                        <Polygon Points="2,62 2,49 16,49 16,42 30,42 30,35 65,35 65,42 79,42 79,49 93,49 93,62 87,62 87,55 73,55 73,48 59,48 59,35 36,35 36,48 22,48 22,55 8,55 8,62" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas Visibility="Collapsed">
+                                        <Polygon Points="9,42 9,31 14,31 14,42 9,42 4,42 4,54 9,54 9,60 21,60 21,66 26,66 26,60 69,60 69,66 74,66 74,60 86,60 86,49 91,49 91,37 86,37 86,31 81,31 81,42 86,42 86,49 81,49 81,55 62,55 62,49 33,49 33,55 14,55 14,49 9,49" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas Visibility="Collapsed">
+                                        <Polygon Points="5,21 14,21 14,56 81,56 81,21 90,21 90,75 5,75" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas Visibility="Collapsed">
+                                        <Polygon Points="4,37 4,31 17,31 17,25 31,25 31,18 64,18 64,25 77,25 77,31 91,31 91,37 72,37 72,30 57,30 57,71 50,71 50,78 45,78 45,71 38,71 38,59 57,59 57,30 23,30 23,37" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas Visibility="Collapsed">
+                                        <Polygon Points="3,12 13,12 13,17 82,17 82,12 92,12 92,74 81,74 81,80 71,80 71,85 24,85 24,80 14,80 14,74 3,74 3,12 28,32 66,32 66,49 28,49 28,32" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas Visibility="Collapsed">
+                                        <Polygon Points="2,2 12,2 12,13 83,13 83,2 93,2 93,60 82,60 82,87 72,87 72,60 60,60 60,65 55,65 55,93 39,93 39,65 34,65 34,60 22,60 22,87 13,87 13,60 2,60 2,2 22,28 72,28 72,39 22,39 22,28" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas Visibility="Collapsed">
+                                        <Polygon Points="35,2 59,2 59,7 70,7 70,12 80,12 80,52 75,52 75,61 70,61 70,72 64,72 64,82 59,82 59,93 35,93 35,82 30,82 30,72 24,72 24,61 19,61 19,52 14,52 14,12 24,12 24,7 35,7 35,2 29,21 65,21 65,37 29,37 29,21" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas Visibility="Collapsed">
+                                        <Polygon Points="2,7 93,7 93,60 87,60 87,65 82,65 82,76 72,76 72,65 66,65 66,60 55,60 55,71 49,71 49,87 45,87 45,76 39,76 39,65 28,65 28,76 22,76 22,82 16,82 16,87 13,87 13,71 7,71 7,55 2,55 28,39 66,39 66,22 28,22 28,39 2,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas Visibility="Collapsed">
+                                        <Polygon Points="3,55 13,55 13,59 3,59" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                        <Polygon Points="13,55 13,50 17,50 17,45 23,45 23,39 34,39 34,34 38,34 38,44 28,44 28,49 22,49 22,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                        <Polygon Points="92,59 92,55 82,55 82,59" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                        <Polygon Points="82,55 82,50 78,50 78,45 72,45 72,39 61,39 61,34 57,34 57,44 67,44 67,49 73,49 73,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas Visibility="Collapsed">
+                                        <Polygon Points="8,75 2,75 2,26 9,26 9,19 85,19 85,26 93,26 93,75 86,75 86,33 8,33" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas Visibility="Collapsed">
+                                        <Polygon Points="2,7 12,7 12,13 22,13 22,17 28,17 28,34 66,34 66,17 72,17 72,13 83,13 83,7 93,7 93,49 87,49 87,55 76,55 76,60 65,60 65,65 55,65 55,76 49,76 49,87 45,87 45,76 39,76 39,65 29,65 29,60 17,60 17,55 7,55 7,49 2,49" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas Visibility="Collapsed">
+                                        <Polygon Points="56,2 56,9 65,9 65,16 73,16 73,25 79,25 79,31 73,31 73,38 65,38 65,54 56,54 56,70 50,70 50,93 43,93 43,70 37,70 37,54 28,54 28,38 20,38 20,31 14,31 14,25 20,25 20,16 28,16 28,9 37,9 37,2" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                    </Canvas>
                                 </Grid>
-                            </TabItem>
-                            <TabItem Name="apparelTab" Header="{DynamicResource tab_Apparel}">
+                            </Border>
+                            <mah:NumericUpDown Minimum="0" x:Name="beardImageIndex" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,8,0" Width="{Binding Width, ElementName=beardImageBorder}" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
+                            <Border x:Name="hairImageBorder" BorderBrush="{Binding BorderBrush, ElementName=beardImageBorder}" BorderThickness="{Binding BorderThickness, ElementName=beardImageBorder}" HorizontalAlignment="Right" Height="{Binding Height, ElementName=beardImageBorder}" Width="{Binding Width, ElementName=beardImageBorder}" VerticalAlignment="Top" Margin="0,38,109,0">
+                                <Grid Name="hairRenderGrid" DataContext="{Binding SolidColorBrush}" Background="#EEAAAAAA">
+                                    <Canvas>
+                                        <Line X1="27" Y1="27" X2="70" Y2="70" Stroke="Red" StrokeThickness="2" />
+                                        <Line X1="70" Y1="27" X2="27" Y2="70" Stroke="Red" StrokeThickness="2" />
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="25,85 16,85 16,76 11,76 11,61 6,61 6,41 2,41 2,33 6,33 6,28 16,28 16,23 36,23 36,18 45,18 45,14 74,14 74,9 93,9 93,17 87,17 87,22 82,22 82,56 69,56 69,46 55,46 55,41 49,41 49,46 39,46 39,51 35,51 35,56 30,56 30,61 25,61" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="2,45 8,45 8,39 14,39 14,34 20,34 20,29 39,29 39,23 93,23 93,49 49,49 49,55 38,55 38,59 33,59 33,65 22,65 22,71 2,71" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="2,42 2,52 7,52 7,58 28,58 28,52 34,52 34,58 65,58 65,52 72,52 72,58 93,58 93,48 82,48 82,42 61,42 61,53 55,53 55,42 61,42 61,37 45,37 45,48 38,48 38,37 29,37 29,42 17,42 17,48 12,48 12,42" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="16,90 16,74 22,74 22,62 28,62 28,52 33,52 33,47 38,47 38,41 44,41 44,30 87,30 87,25 93,25 93,10 87,10 87,4 56,4 56,10 34,10 34,15 13,15 13,20 7,20 7,31 2,31 2,62 7,62 7,90" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="2,93 8,93 8,27 14,27 14,93 20,93 20,40 27,40 27,93 33,93 33,54 40,54 40,93 46,93 46,60 53,60 53,93 60,93 60,80 67,80 67,93 79,93 79,47 86,47 86,93 92,93 92,47 86,47 86,40 92,40 92,35 86,35 86,15 79,15 79,9 73,9 73,3 67,3 67,9 60,9 60,15 67,15 67,27 60,27 60,60 53,60 53,27 60,27 60,15 54,15 54,9 34,9 34,15 40,15 40,21 34,21 34,34 40,34 40,40 34,40 34,34 20,34 20,27 27,27 27,21 34,21 34,15 9,15 9,22 2,22" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="33,88 33,78 23,78 23,73 12,73 12,67 2,67 2,72 7,72 7,77 18,77 18,83 29,83 29,88" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                        <Polygon Points="33,66 33,57 28,57 28,51 24,51 24,47 18,47 18,36 13,36 13,31 7,31 7,26 3,26 3,31 7,31 7,36 7,40 13,40 13,47 18,47 18,51 24,51 24,61 29,61 29,66" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                        <Polygon Points="34,8 39,8 39,30 44,30 44,50 34,50" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                        <Polygon Points="51,50 61,50 61,29 66,29 66,8 62,8 62,19 56,19 56,40 51,40" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                        <Polygon Points="67,50 77,50 77,39 82,39 82,29 88,29 88,18 93,18 93,8 89,8 89,13 83,13 83,24 78,24 78,35 72,35 72,46 67,46" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="20,84 20,54 15,54 15,44 10,44 10,39 5,39 5,29 10,29 10,19 15,19 15,14 20,14 20,9 25,9 25,19 35,19 35,24 65,24 65,19 85,19 85,24 90,24 90,39 85,39 85,44 45,44 45,54 40,54 40,59 35,59 35,64 30,64 30,74 25,74 25,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="10,84 10,69 5,69 5,39 10,39 10,29 15,29 15,24 35,24 35,19 55,19 55,14 75,14 75,19 80,19 80,34 85,34 85,59 80,59 80,54 70,54 70,49 50,49 50,54 40,54 40,59 35,59 35,64 25,64 25,74 20,74 20,79 15,79 15,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="15,84 15,69 10,69 10,49 5,49 5,34 15,34 15,29 10,29 10,24 30,24 30,14 25,14 25,19 40,19 40,14 55,14 55,19 65,19 65,14 85,14 85,9 90,9 90,24 85,24 85,29 80,29 80,54 75,54 75,49 70,49 70,44 55,44 55,49 45,49 45,54 35,54 35,59 30,59 30,64 25,64 25,69 20,69 20,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="10,86 10,76 5,76 5,46 10,46 10,31 15,31 15,21 20,21 20,16 25,16 25,11 85,11 85,16 90,16 90,46 85,46 85,56 75,56 75,61 60,61 60,66 50,66 50,71 30,71 30,76 25,76 25,81 20,81 20,86" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="15,84 15,69 10,69 10,59 5,59 5,54 10,54 10,49 5,49 5,39 10,39 10,24 5,24 5,29 25,29 25,19 20,19 20,24 30,24 30,29 40,29 40,24 45,24 45,19 40,19 40,14 50,14 50,19 65,19 65,14 70,14 70,19 80,19 80,14 85,14 85,9 90,9 90,24 85,24 85,29 80,29 80,34 90,34 90,39 85,39 85,44 80,44 80,64 75,64 75,54 60,54 60,49 45,49 45,54 35,54 35,59 30,59 30,64 25,64 25,69 20,69 20,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="4,67 4,47 9,47 9,42 14,42 14,37 19,37 19,42 29,42 29,22 69,22 69,27 79,27 79,37 84,37 84,52 89,52 89,72 84,72 84,67 79,67 79,62 74,62 74,57 54,57 54,52 24,52 24,57 19,57 19,62 9,62 9,67" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="36,87 26,87 26,82 16,82 16,77 6,77 6,52 1,52 1,27 11,27 11,22 21,22 21,17 31,17 31,12 81,12 81,7 91,7 91,22 86,22 86,32 81,32 81,42 76,42 76,52 36,52" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="85,90 75,90 75,85 65,85 65,80 55,80 55,75 45,75 45,70 40,70 40,65 35,65 35,55 25,55 25,60 20,60 20,65 15,65 15,70 10,70 10,55 5,55 5,25 10,25 10,15 15,15 15,10 35,10 35,5 55,5 55,0 75,0 75,5 80,5 80,20 85,20 85,45 80,45 80,40 65,40 65,60 70,60 70,70 75,70 75,75 80,75 80,85 85,85" Canvas.Left="2" Canvas.Top="3" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="10,85 5,85 5,80 0,80 0,60 5,60 5,45 10,45 10,35 20,35 20,15 25,15 25,10 35,10 35,5 50,5 50,0 85,0 85,35 70,35 70,40 65,40 65,45 55,45 55,50 45,50 45,55 35,55 35,60 20,60 20,55 10,55" Canvas.Top="4" Canvas.Left="4" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="15,90 10,90 10,65 5,65 5,40 10,40 10,25 15,25 15,15 20,15 20,10 25,10 25,5 60,5 60,10 70,10 70,15 75,15 75,20 80,20 80,50 75,50 75,35 25,35 25,40 20,40 20,50 15,50" Canvas.Top="2" Canvas.Left="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="5,75 0,75 0,25 5,25 5,20 20,20 20,15 35,15 35,10 50,10 50,15 60,15 60,20 75,20 75,25 85,25 85,45 80,45 80,40 65,40 65,35 45,35 45,40 35,40 35,45 30,45 30,50 20,50 20,55 15,55 15,60 10,60 10,65 5,65" Canvas.Top="4" Canvas.Left="3" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="0,60 0,35 5,35 5,30 15,30 15,25 35,25 35,20 65,20 65,25 75,25 75,30 80,30 80,35 85,35 85,65 80,65 80,70 75,70 75,55 65,55 65,60 55,60 55,50 20,50 20,55 10,55 10,60" Canvas.Top="2" Canvas.Left="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="15,70 15,55 10,55 10,45 5,45 5,35 0,35 0,40 15,40 15,45 25,45 25,30 15,30 15,25 20,25 20,35 35,35 35,40 40,40 40,45 60,45 60,50 75,50 75,60 80,60 80,65 65,65 65,60 35,60 35,65 20,65 20,70" Canvas.Top="3" Canvas.Left="4" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="0,70 0,45 5,45 5,40 25,40 25,30 30,30 30,20 35,20 35,30 40,30 40,35 55,35 55,40 70,40 70,45 80,45 80,55 85,55 85,70 80,70 80,65 75,65 75,60 70,60 70,55 50,55 50,50 30,50 30,55 15,55 15,60 10,60 10,65 5,65 5,70" Canvas.Left="2" Canvas.Top="4" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="25,85 15,85 15,80 10,80 10,75 5,75 5,70 0,70 0,50 5,50 5,35 10,35 10,30 15,30 15,25 20,25 20,20 25,20 25,15 40,15 40,10 55,10 55,15 65,15 65,20 70,20 70,25 75,25 75,30 80,30 80,45 85,45 85,65 80,65 80,75 75,75 75,80 70,80 70,85 60,85 60,55 25,55" Canvas.Left="3" Canvas.Top="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                    <Canvas>
+                                        <Polygon Points="0,80 0,30 5,30 5,25 20,25 20,20 35,20 35,15 50,15 50,20 60,20 60,25 75,25 75,30 85,30 85,80 80,80 80,50 70,50 70,45 15,45 15,50 5,50 5,80" Canvas.Left="2" Canvas.Top="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                    </Canvas>
+                                </Grid>
+                            </Border>
+                            <mah:NumericUpDown Minimum="0" x:Name="hairImageIndex" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,109,0" Width="{Binding Width, ElementName=hairImageBorder}" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
+                            <Button Name="apparelFaceRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="0,171,210,0" Width="98" Height="26"/>
+                            <Button Name="apparelHairRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="0,171,109,0" Width="98" Height="26"/>
+                            <Button Name="apparelBeardRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="0,171,8,0" Width="98" Height="26"/>
+                            <xctk:ColorPicker AdvancedButtonHeader="{DynamicResource picker_Advanced_Header}" StandardButtonHeader="{DynamicResource picker_Standard_Header}" AvailableColorsHeader="{DynamicResource picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="skinColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,59,0,0" Width="120"/>
+                            <xctk:ColorPicker AdvancedButtonHeader="{DynamicResource picker_Advanced_Header}" StandardButtonHeader="{DynamicResource picker_Standard_Header}" AvailableColorsHeader="{DynamicResource picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="hairColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,113,0,0" Width="120"/>
+                            <CheckBox Name="apparelLeftHandedCheckbox" HorizontalContentAlignment="Right" Content="{DynamicResource apparel_LeftHanded}" HorizontalAlignment="Left" Margin="0,140,0,0" VerticalAlignment="Top" Width="120" mah:ToggleButtonHelper.ContentDirection="RightToLeft"/>
+                            <ComboBox Name="apparelPoseBox" HorizontalAlignment="Left" SelectedIndex="0" Margin="-1,171,0,0" VerticalAlignment="Top" Width="120" Height="26">
+                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Stand}">
+                                    <ComboBoxItem.Tag>
+                                        <npc:NPC_Pose>Stand</npc:NPC_Pose>
+                                    </ComboBoxItem.Tag>
+                                </ComboBoxItem>
+                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Sit}">
+                                    <ComboBoxItem.Tag>
+                                        <npc:NPC_Pose>Sit</npc:NPC_Pose>
+                                    </ComboBoxItem.Tag>
+                                </ComboBoxItem>
+                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Asleep}">
+                                    <ComboBoxItem.Tag>
+                                        <npc:NPC_Pose>Asleep</npc:NPC_Pose>
+                                    </ComboBoxItem.Tag>
+                                </ComboBoxItem>
+                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Passive}">
+                                    <ComboBoxItem.Tag>
+                                        <npc:NPC_Pose>Passive</npc:NPC_Pose>
+                                    </ComboBoxItem.Tag>
+                                </ComboBoxItem>
+                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Crouch}">
+                                    <ComboBoxItem.Tag>
+                                        <npc:NPC_Pose>Crouch</npc:NPC_Pose>
+                                    </ComboBoxItem.Tag>
+                                </ComboBoxItem>
+                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Prone}">
+                                    <ComboBoxItem.Tag>
+                                        <npc:NPC_Pose>Prone</npc:NPC_Pose>
+                                    </ComboBoxItem.Tag>
+                                </ComboBoxItem>
+                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Under_Arrest}">
+                                    <ComboBoxItem.Tag>
+                                        <npc:NPC_Pose>Under_Arrest</npc:NPC_Pose>
+                                    </ComboBoxItem.Tag>
+                                </ComboBoxItem>
+                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Rest}">
+                                    <ComboBoxItem.Tag>
+                                        <npc:NPC_Pose>Rest</npc:NPC_Pose>
+                                    </ComboBoxItem.Tag>
+                                </ComboBoxItem>
+                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Surrender}">
+                                    <ComboBoxItem.Tag>
+                                        <npc:NPC_Pose>Surrender</npc:NPC_Pose>
+                                    </ComboBoxItem.Tag>
+                                </ComboBoxItem>
+                            </ComboBox>
+                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,155,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Pose}" VerticalAlignment="Top" Width="120" Height="16"/>
+                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,38,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Skin}" VerticalAlignment="Top" Width="120" Height="16"/>
+                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,92,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Hair}" VerticalAlignment="Top" Width="120"/>
+                            <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Face}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,210,0" Width="98" Height="28"/>
+                            <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Hair}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,109,0" Width="98" Height="28"/>
+                            <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Beard}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,8,0" Width="98" Height="28"/>
+                        </Grid>
+                        <GroupBox Header="{DynamicResource apparel_Group_Clothing}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Height="274" Width="300">
+                            <TabControl>
+                                <TabItem Header="{DynamicResource apparel_Clothing_Default}" mah:ControlsHelper.HeaderFontSize="18">
+                                    <ScrollViewer>
+                                        <Grid>
+                                            <mah:NumericUpDown x:Name="hatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_hat.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="maskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_mask.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="glassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="topIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="backpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="vestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_vest.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="bottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <Label Content="{DynamicResource apparel_Hat_ID}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Mask_ID}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Glasses_ID}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Top_ID}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Backpack_ID}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Vest_ID}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Bottom_ID}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </TabItem>
+                                <TabItem Header="{DynamicResource apparel_Clothing_Christmas}" mah:ControlsHelper.HeaderFontSize="18">
+                                    <ScrollViewer>
+                                        <Grid>
+                                            <mah:NumericUpDown x:Name="christmashatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_hat.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="christmasmaskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_mask.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="christmasglassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="christmastopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="christmasbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="christmasvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_vest.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="christmasbottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <Label Content="{DynamicResource apparel_Hat_ID}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Mask_ID}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Glasses_ID}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Top_ID}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Backpack_ID}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Vest_ID}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Bottom_ID}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </TabItem>
+                                <TabItem Header="{DynamicResource apparel_Clothing_Halloween}" mah:ControlsHelper.HeaderFontSize="18">
+                                    <ScrollViewer>
+                                        <Grid>
+                                            <mah:NumericUpDown x:Name="halloweenhatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_hat.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="halloweenmaskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_mask.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="halloweenglassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="halloweentopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="halloweenbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="halloweenvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_vest.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <mah:NumericUpDown x:Name="halloweenbottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <mah:NumericUpDown.ToolTip>
+                                                    <StackPanel>
+                                                        <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
+                                                    </StackPanel>
+                                                </mah:NumericUpDown.ToolTip>
+                                            </mah:NumericUpDown>
+                                            <Label Content="{DynamicResource apparel_Hat_ID}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Mask_ID}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Glasses_ID}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Vest_ID}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Top_ID}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Backpack_ID}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource apparel_Bottom_ID}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </TabItem>
+                            </TabControl>
+                        </GroupBox>
+                        <GroupBox Header="{DynamicResource apparel_Group_Equipment}" HorizontalAlignment="Left" Margin="10,0,0,10" Width="300" Height="Auto" VerticalAlignment="Bottom">
+                            <ScrollViewer>
                                 <Grid>
-                                    <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" Background="Black" HorizontalAlignment="Left" Height="98" Margin="8,38,0,0" VerticalAlignment="Top" Width="98">
-                                        <Image Name="faceImageControl" Source="Resources/Unturned/Faces/1.png" >
-                                            <Image.Effect>
-                                                <DropShadowEffect Color="White" Direction="0" BlurRadius="2" ShadowDepth="0"/>
-                                            </Image.Effect>
-                                        </Image>
-                                    </Border>
-                                    <mah:NumericUpDown Minimum="0" x:Name="faceImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,140,0,0" Width="{Binding Width, ElementName=faceImageBorder}" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
-                                    <Border x:Name="beardImageBorder" BorderBrush="{Binding BorderBrush, ElementName=faceImageBorder}" BorderThickness="1" HorizontalAlignment="Left" Height="{Binding Height, ElementName=faceImageBorder}" Width="{Binding Width, ElementName=faceImageBorder}" VerticalAlignment="Top" Margin="210,38,0,0">
-                                        <Grid Name="beardRenderGrid" DataContext="{Binding SolidColorBrush}" Background="#EEAAAAAA">
-                                            <Canvas>
-                                                <Line X1="27" Y1="27" X2="70" Y2="70" Stroke="Red" StrokeThickness="2" />
-                                                <Line X1="70" Y1="27" X2="27" Y2="70" Stroke="Red" StrokeThickness="2" />
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="7,74 7,22 16,22 16,32 79,32 79,22 88,22 88,74 7,74 25,56 70,56 70,40 25,40 25,56" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="8,63 8,45 20,45 20,39 33,39 33,33 62,33 62,39 75,39 75,45 87,45 87,63 82,63 82,57 69,57 69,51 25,51 25,57 13,57 13,63" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="5,77 90,77 90,19 5,19 5,77 17,52 17,31 78,31 78,52 17,52" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="2,62 2,49 16,49 16,42 30,42 30,35 65,35 65,42 79,42 79,49 93,49 93,62 87,62 87,55 73,55 73,48 59,48 59,35 36,35 36,48 22,48 22,55 8,55 8,62" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="9,42 9,31 14,31 14,42 9,42 4,42 4,54 9,54 9,60 21,60 21,66 26,66 26,60 69,60 69,66 74,66 74,60 86,60 86,49 91,49 91,37 86,37 86,31 81,31 81,42 86,42 86,49 81,49 81,55 62,55 62,49 33,49 33,55 14,55 14,49 9,49" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="5,21 14,21 14,56 81,56 81,21 90,21 90,75 5,75" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="4,37 4,31 17,31 17,25 31,25 31,18 64,18 64,25 77,25 77,31 91,31 91,37 72,37 72,30 57,30 57,71 50,71 50,78 45,78 45,71 38,71 38,59 57,59 57,30 23,30 23,37" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="3,12 13,12 13,17 82,17 82,12 92,12 92,74 81,74 81,80 71,80 71,85 24,85 24,80 14,80 14,74 3,74 3,12 28,32 66,32 66,49 28,49 28,32" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="2,2 12,2 12,13 83,13 83,2 93,2 93,60 82,60 82,87 72,87 72,60 60,60 60,65 55,65 55,93 39,93 39,65 34,65 34,60 22,60 22,87 13,87 13,60 2,60 2,2 22,28 72,28 72,39 22,39 22,28" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="35,2 59,2 59,7 70,7 70,12 80,12 80,52 75,52 75,61 70,61 70,72 64,72 64,82 59,82 59,93 35,93 35,82 30,82 30,72 24,72 24,61 19,61 19,52 14,52 14,12 24,12 24,7 35,7 35,2 29,21 65,21 65,37 29,37 29,21" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="2,7 93,7 93,60 87,60 87,65 82,65 82,76 72,76 72,65 66,65 66,60 55,60 55,71 49,71 49,87 45,87 45,76 39,76 39,65 28,65 28,76 22,76 22,82 16,82 16,87 13,87 13,71 7,71 7,55 2,55 28,39 66,39 66,22 28,22 28,39 2,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="3,55 13,55 13,59 3,59" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                                <Polygon Points="13,55 13,50 17,50 17,45 23,45 23,39 34,39 34,34 38,34 38,44 28,44 28,49 22,49 22,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                                <Polygon Points="92,59 92,55 82,55 82,59" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                                <Polygon Points="82,55 82,50 78,50 78,45 72,45 72,39 61,39 61,34 57,34 57,44 67,44 67,49 73,49 73,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="8,75 2,75 2,26 9,26 9,19 85,19 85,26 93,26 93,75 86,75 86,33 8,33" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="2,7 12,7 12,13 22,13 22,17 28,17 28,34 66,34 66,17 72,17 72,13 83,13 83,7 93,7 93,49 87,49 87,55 76,55 76,60 65,60 65,65 55,65 55,76 49,76 49,87 45,87 45,76 39,76 39,65 29,65 29,60 17,60 17,55 7,55 7,49 2,49" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="56,2 56,9 65,9 65,16 73,16 73,25 79,25 79,31 73,31 73,38 65,38 65,54 56,54 56,70 50,70 50,93 43,93 43,70 37,70 37,54 28,54 28,38 20,38 20,31 14,31 14,25 20,25 20,16 28,16 28,9 37,9 37,2" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                        </Grid>
-                                    </Border>
-                                    <mah:NumericUpDown Minimum="0" x:Name="beardImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,140,0,0" Width="{Binding Width, ElementName=beardImageBorder}" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
-                                    <Border x:Name="hairImageBorder" BorderBrush="{Binding BorderBrush, ElementName=beardImageBorder}" BorderThickness="{Binding BorderThickness, ElementName=beardImageBorder}" HorizontalAlignment="Left" Height="{Binding Height, ElementName=beardImageBorder}" Width="{Binding Width, ElementName=beardImageBorder}" VerticalAlignment="Top" Margin="109,38,0,0">
-                                        <Grid Name="hairRenderGrid" DataContext="{Binding SolidColorBrush}" Background="#EEAAAAAA">
-                                            <Canvas>
-                                                <Line X1="27" Y1="27" X2="70" Y2="70" Stroke="Red" StrokeThickness="2" />
-                                                <Line X1="70" Y1="27" X2="27" Y2="70" Stroke="Red" StrokeThickness="2" />
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="25,85 16,85 16,76 11,76 11,61 6,61 6,41 2,41 2,33 6,33 6,28 16,28 16,23 36,23 36,18 45,18 45,14 74,14 74,9 93,9 93,17 87,17 87,22 82,22 82,56 69,56 69,46 55,46 55,41 49,41 49,46 39,46 39,51 35,51 35,56 30,56 30,61 25,61" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="2,45 8,45 8,39 14,39 14,34 20,34 20,29 39,29 39,23 93,23 93,49 49,49 49,55 38,55 38,59 33,59 33,65 22,65 22,71 2,71" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="2,42 2,52 7,52 7,58 28,58 28,52 34,52 34,58 65,58 65,52 72,52 72,58 93,58 93,48 82,48 82,42 61,42 61,53 55,53 55,42 61,42 61,37 45,37 45,48 38,48 38,37 29,37 29,42 17,42 17,48 12,48 12,42" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="16,90 16,74 22,74 22,62 28,62 28,52 33,52 33,47 38,47 38,41 44,41 44,30 87,30 87,25 93,25 93,10 87,10 87,4 56,4 56,10 34,10 34,15 13,15 13,20 7,20 7,31 2,31 2,62 7,62 7,90" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="2,93 8,93 8,27 14,27 14,93 20,93 20,40 27,40 27,93 33,93 33,54 40,54 40,93 46,93 46,60 53,60 53,93 60,93 60,80 67,80 67,93 79,93 79,47 86,47 86,93 92,93 92,47 86,47 86,40 92,40 92,35 86,35 86,15 79,15 79,9 73,9 73,3 67,3 67,9 60,9 60,15 67,15 67,27 60,27 60,60 53,60 53,27 60,27 60,15 54,15 54,9 34,9 34,15 40,15 40,21 34,21 34,34 40,34 40,40 34,40 34,34 20,34 20,27 27,27 27,21 34,21 34,15 9,15 9,22 2,22" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="33,88 33,78 23,78 23,73 12,73 12,67 2,67 2,72 7,72 7,77 18,77 18,83 29,83 29,88" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                                <Polygon Points="33,66 33,57 28,57 28,51 24,51 24,47 18,47 18,36 13,36 13,31 7,31 7,26 3,26 3,31 7,31 7,36 7,40 13,40 13,47 18,47 18,51 24,51 24,61 29,61 29,66" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                                <Polygon Points="34,8 39,8 39,30 44,30 44,50 34,50" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                                <Polygon Points="51,50 61,50 61,29 66,29 66,8 62,8 62,19 56,19 56,40 51,40" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                                <Polygon Points="67,50 77,50 77,39 82,39 82,29 88,29 88,18 93,18 93,8 89,8 89,13 83,13 83,24 78,24 78,35 72,35 72,46 67,46" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="20,84 20,54 15,54 15,44 10,44 10,39 5,39 5,29 10,29 10,19 15,19 15,14 20,14 20,9 25,9 25,19 35,19 35,24 65,24 65,19 85,19 85,24 90,24 90,39 85,39 85,44 45,44 45,54 40,54 40,59 35,59 35,64 30,64 30,74 25,74 25,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="10,84 10,69 5,69 5,39 10,39 10,29 15,29 15,24 35,24 35,19 55,19 55,14 75,14 75,19 80,19 80,34 85,34 85,59 80,59 80,54 70,54 70,49 50,49 50,54 40,54 40,59 35,59 35,64 25,64 25,74 20,74 20,79 15,79 15,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="15,84 15,69 10,69 10,49 5,49 5,34 15,34 15,29 10,29 10,24 30,24 30,14 25,14 25,19 40,19 40,14 55,14 55,19 65,19 65,14 85,14 85,9 90,9 90,24 85,24 85,29 80,29 80,54 75,54 75,49 70,49 70,44 55,44 55,49 45,49 45,54 35,54 35,59 30,59 30,64 25,64 25,69 20,69 20,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="10,86 10,76 5,76 5,46 10,46 10,31 15,31 15,21 20,21 20,16 25,16 25,11 85,11 85,16 90,16 90,46 85,46 85,56 75,56 75,61 60,61 60,66 50,66 50,71 30,71 30,76 25,76 25,81 20,81 20,86" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="15,84 15,69 10,69 10,59 5,59 5,54 10,54 10,49 5,49 5,39 10,39 10,24 5,24 5,29 25,29 25,19 20,19 20,24 30,24 30,29 40,29 40,24 45,24 45,19 40,19 40,14 50,14 50,19 65,19 65,14 70,14 70,19 80,19 80,14 85,14 85,9 90,9 90,24 85,24 85,29 80,29 80,34 90,34 90,39 85,39 85,44 80,44 80,64 75,64 75,54 60,54 60,49 45,49 45,54 35,54 35,59 30,59 30,64 25,64 25,69 20,69 20,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="4,67 4,47 9,47 9,42 14,42 14,37 19,37 19,42 29,42 29,22 69,22 69,27 79,27 79,37 84,37 84,52 89,52 89,72 84,72 84,67 79,67 79,62 74,62 74,57 54,57 54,52 24,52 24,57 19,57 19,62 9,62 9,67" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="36,87 26,87 26,82 16,82 16,77 6,77 6,52 1,52 1,27 11,27 11,22 21,22 21,17 31,17 31,12 81,12 81,7 91,7 91,22 86,22 86,32 81,32 81,42 76,42 76,52 36,52" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="85,90 75,90 75,85 65,85 65,80 55,80 55,75 45,75 45,70 40,70 40,65 35,65 35,55 25,55 25,60 20,60 20,65 15,65 15,70 10,70 10,55 5,55 5,25 10,25 10,15 15,15 15,10 35,10 35,5 55,5 55,0 75,0 75,5 80,5 80,20 85,20 85,45 80,45 80,40 65,40 65,60 70,60 70,70 75,70 75,75 80,75 80,85 85,85" Canvas.Left="2" Canvas.Top="3" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="10,85 5,85 5,80 0,80 0,60 5,60 5,45 10,45 10,35 20,35 20,15 25,15 25,10 35,10 35,5 50,5 50,0 85,0 85,35 70,35 70,40 65,40 65,45 55,45 55,50 45,50 45,55 35,55 35,60 20,60 20,55 10,55" Canvas.Top="4" Canvas.Left="4" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="15,90 10,90 10,65 5,65 5,40 10,40 10,25 15,25 15,15 20,15 20,10 25,10 25,5 60,5 60,10 70,10 70,15 75,15 75,20 80,20 80,50 75,50 75,35 25,35 25,40 20,40 20,50 15,50" Canvas.Top="2" Canvas.Left="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="5,75 0,75 0,25 5,25 5,20 20,20 20,15 35,15 35,10 50,10 50,15 60,15 60,20 75,20 75,25 85,25 85,45 80,45 80,40 65,40 65,35 45,35 45,40 35,40 35,45 30,45 30,50 20,50 20,55 15,55 15,60 10,60 10,65 5,65" Canvas.Top="4" Canvas.Left="3" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="0,60 0,35 5,35 5,30 15,30 15,25 35,25 35,20 65,20 65,25 75,25 75,30 80,30 80,35 85,35 85,65 80,65 80,70 75,70 75,55 65,55 65,60 55,60 55,50 20,50 20,55 10,55 10,60" Canvas.Top="2" Canvas.Left="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="15,70 15,55 10,55 10,45 5,45 5,35 0,35 0,40 15,40 15,45 25,45 25,30 15,30 15,25 20,25 20,35 35,35 35,40 40,40 40,45 60,45 60,50 75,50 75,60 80,60 80,65 65,65 65,60 35,60 35,65 20,65 20,70" Canvas.Top="3" Canvas.Left="4" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="0,70 0,45 5,45 5,40 25,40 25,30 30,30 30,20 35,20 35,30 40,30 40,35 55,35 55,40 70,40 70,45 80,45 80,55 85,55 85,70 80,70 80,65 75,65 75,60 70,60 70,55 50,55 50,50 30,50 30,55 15,55 15,60 10,60 10,65 5,65 5,70" Canvas.Left="2" Canvas.Top="4" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="25,85 15,85 15,80 10,80 10,75 5,75 5,70 0,70 0,50 5,50 5,35 10,35 10,30 15,30 15,25 20,25 20,20 25,20 25,15 40,15 40,10 55,10 55,15 65,15 65,20 70,20 70,25 75,25 75,30 80,30 80,45 85,45 85,65 80,65 80,75 75,75 75,80 70,80 70,85 60,85 60,55 25,55" Canvas.Left="3" Canvas.Top="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas>
-                                                <Polygon Points="0,80 0,30 5,30 5,25 20,25 20,20 35,20 35,15 50,15 50,20 60,20 60,25 75,25 75,30 85,30 85,80 80,80 80,50 70,50 70,45 15,45 15,50 5,50 5,80" Canvas.Left="2" Canvas.Top="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                            </Canvas>
-                                        </Grid>
-                                    </Border>
-                                    <mah:NumericUpDown Minimum="0" x:Name="hairImageIndex" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="109,140,0,0" Width="{Binding Width, ElementName=hairImageBorder}" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
-                                    <Button Name="apparelFaceRandomize" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="8,171,0,0" Width="98"/>
-                                    <Button Name="apparelHairRandomize" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="109,171,0,0" Width="98"/>
-                                    <Button Name="apparelBeardRandomize" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="210,171,0,0" Width="98"/>
-                                    <xctk:ColorPicker AdvancedButtonHeader="{DynamicResource picker_Advanced_Header}" StandardButtonHeader="{DynamicResource picker_Standard_Header}" AvailableColorsHeader="{DynamicResource picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="skinColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,38,0,0" Width="120"/>
-                                    <xctk:ColorPicker AdvancedButtonHeader="{DynamicResource picker_Advanced_Header}" StandardButtonHeader="{DynamicResource picker_Standard_Header}" AvailableColorsHeader="{DynamicResource picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="hairColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="313,68,0,0" Width="120"/>
-                                    <CheckBox Name="apparelLeftHandedCheckbox" Content="{DynamicResource apparel_LeftHanded}" HorizontalAlignment="Left" Margin="313,100,0,0" VerticalAlignment="Top"/>
-                                    <ComboBox Name="apparelPoseBox" HorizontalAlignment="Left" SelectedIndex="0" Margin="313,123,0,0" VerticalAlignment="Top" Width="120">
-                                        <ComboBoxItem Content="{DynamicResource apparel_Pose_Stand}">
+                                    <mah:NumericUpDown x:Name="primaryIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                        <mah:NumericUpDown.ToolTip>
+                                            <StackPanel></StackPanel>
+                                        </mah:NumericUpDown.ToolTip>
+                                    </mah:NumericUpDown>
+                                    <mah:NumericUpDown x:Name="secondaryIdBox"  ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                        <mah:NumericUpDown.ToolTip>
+                                            <StackPanel></StackPanel>
+                                        </mah:NumericUpDown.ToolTip>
+                                    </mah:NumericUpDown>
+                                    <mah:NumericUpDown x:Name="tertiaryIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,-7" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                        <mah:NumericUpDown.ToolTip>
+                                            <StackPanel></StackPanel>
+                                        </mah:NumericUpDown.ToolTip>
+                                    </mah:NumericUpDown>
+
+                                    <Label Content="{DynamicResource apparel_Primary_ID}"  Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
+                                    <Label Content="{DynamicResource apparel_Secondary_ID}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
+                                    <Label Content="{DynamicResource apparel_Tertiary_ID}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
+                                    <ComboBox Name="equipSlotBox" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="120">
+                                        <ComboBoxItem Content="{DynamicResource apparel_Equip_None}">
                                             <ComboBoxItem.Tag>
-                                                <npc:NPC_Pose>Stand</npc:NPC_Pose>
+                                                <npc:Equip_Type>None</npc:Equip_Type>
                                             </ComboBoxItem.Tag>
                                         </ComboBoxItem>
-                                        <ComboBoxItem Content="{DynamicResource apparel_Pose_Sit}">
+                                        <ComboBoxItem Content="{DynamicResource apparel_Equip_Primary}">
                                             <ComboBoxItem.Tag>
-                                                <npc:NPC_Pose>Sit</npc:NPC_Pose>
+                                                <npc:Equip_Type>Primary</npc:Equip_Type>
                                             </ComboBoxItem.Tag>
                                         </ComboBoxItem>
-                                        <ComboBoxItem Content="{DynamicResource apparel_Pose_Asleep}">
+                                        <ComboBoxItem Content="{DynamicResource apparel_Equip_Secondary}">
                                             <ComboBoxItem.Tag>
-                                                <npc:NPC_Pose>Asleep</npc:NPC_Pose>
+                                                <npc:Equip_Type>Secondary</npc:Equip_Type>
                                             </ComboBoxItem.Tag>
                                         </ComboBoxItem>
-                                        <ComboBoxItem Content="{DynamicResource apparel_Pose_Passive}">
+                                        <ComboBoxItem Content="{DynamicResource apparel_Equip_Tertiary}">
                                             <ComboBoxItem.Tag>
-                                                <npc:NPC_Pose>Passive</npc:NPC_Pose>
-                                            </ComboBoxItem.Tag>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem Content="{DynamicResource apparel_Pose_Crouch}">
-                                            <ComboBoxItem.Tag>
-                                                <npc:NPC_Pose>Crouch</npc:NPC_Pose>
-                                            </ComboBoxItem.Tag>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem Content="{DynamicResource apparel_Pose_Prone}">
-                                            <ComboBoxItem.Tag>
-                                                <npc:NPC_Pose>Prone</npc:NPC_Pose>
-                                            </ComboBoxItem.Tag>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem Content="{DynamicResource apparel_Pose_Under_Arrest}">
-                                            <ComboBoxItem.Tag>
-                                                <npc:NPC_Pose>Under_Arrest</npc:NPC_Pose>
-                                            </ComboBoxItem.Tag>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem Content="{DynamicResource apparel_Pose_Rest}">
-                                            <ComboBoxItem.Tag>
-                                                <npc:NPC_Pose>Rest</npc:NPC_Pose>
-                                            </ComboBoxItem.Tag>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem Content="{DynamicResource apparel_Pose_Surrender}">
-                                            <ComboBoxItem.Tag>
-                                                <npc:NPC_Pose>Surrender</npc:NPC_Pose>
+                                                <npc:Equip_Type>Tertiary</npc:Equip_Type>
                                             </ComboBoxItem.Tag>
                                         </ComboBoxItem>
                                     </ComboBox>
-                                    <TextBlock HorizontalAlignment="Left" Margin="438,128,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Pose}" VerticalAlignment="Top"/>
-                                    <TextBlock HorizontalAlignment="Left" Margin="438,41,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Skin}" VerticalAlignment="Top"/>
-                                    <TextBlock HorizontalAlignment="Left" Margin="438,71,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Hair}" VerticalAlignment="Top"/>
-                                    <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Face}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,10,0,0" Width="98" Height="28"/>
-                                    <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Hair}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="109,10,0,0" Width="98" Height="28"/>
-                                    <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Beard}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,10,0,0" Width="98" Height="28"/>
-                                    <GroupBox Header="{DynamicResource apparel_Group_Clothing}" HorizontalAlignment="Left" Margin="10,230,0,10" Width="300">
-                                        <TabControl>
-                                            <TabItem Header="{DynamicResource apparel_Clothing_Default}" mah:ControlsHelper.HeaderFontSize="18">
-                                                <ScrollViewer>
-                                                    <Grid>
-                                                        <mah:NumericUpDown x:Name="hatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_hat.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="maskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_mask.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="glassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="topIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="backpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="vestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_vest.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="bottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <Label Content="{DynamicResource apparel_Hat_ID}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Mask_ID}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Glasses_ID}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Top_ID}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Backpack_ID}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Vest_ID}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Bottom_ID}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
-                                                    </Grid>
-                                                </ScrollViewer>
-                                            </TabItem>
-                                            <TabItem Header="{DynamicResource apparel_Clothing_Christmas}" mah:ControlsHelper.HeaderFontSize="18">
-                                                <ScrollViewer>
-                                                    <Grid>
-                                                        <mah:NumericUpDown x:Name="christmashatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_hat.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="christmasmaskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_mask.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="christmasglassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="christmastopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="christmasbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="christmasvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_vest.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="christmasbottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <Label Content="{DynamicResource apparel_Hat_ID}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Mask_ID}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Glasses_ID}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Top_ID}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Backpack_ID}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Vest_ID}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Bottom_ID}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
-                                                    </Grid>
-                                                </ScrollViewer>
-                                            </TabItem>
-                                            <TabItem Header="{DynamicResource apparel_Clothing_Halloween}" mah:ControlsHelper.HeaderFontSize="18">
-                                                <ScrollViewer>
-                                                    <Grid>
-                                                        <mah:NumericUpDown x:Name="halloweenhatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_hat.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="halloweenmaskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_mask.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="halloweenglassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="halloweentopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="halloweenbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="halloweenvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_vest.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <mah:NumericUpDown x:Name="halloweenbottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                            <mah:NumericUpDown.ToolTip>
-                                                                <StackPanel>
-                                                                    <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
-                                                                </StackPanel>
-                                                            </mah:NumericUpDown.ToolTip>
-                                                        </mah:NumericUpDown>
-                                                        <Label Content="{DynamicResource apparel_Hat_ID}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Mask_ID}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Glasses_ID}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Vest_ID}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Top_ID}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Backpack_ID}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
-                                                        <Label Content="{DynamicResource apparel_Bottom_ID}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
-                                                    </Grid>
-                                                </ScrollViewer>
-                                            </TabItem>
-                                        </TabControl>
-                                    </GroupBox>
-                                    <GroupBox Header="{DynamicResource apparel_Group_Equipment}" HorizontalAlignment="Left" Margin="315,0,0,10" Width="300" Height="179" VerticalAlignment="Bottom">
-                                        <ScrollViewer>
-                                            <Grid>
-                                                <mah:NumericUpDown x:Name="primaryIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                    <mah:NumericUpDown.ToolTip>
-                                                        <StackPanel></StackPanel>
-                                                    </mah:NumericUpDown.ToolTip>
-                                                </mah:NumericUpDown>
-                                                <mah:NumericUpDown x:Name="secondaryIdBox"  ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                    <mah:NumericUpDown.ToolTip>
-                                                        <StackPanel></StackPanel>
-                                                    </mah:NumericUpDown.ToolTip>
-                                                </mah:NumericUpDown>
-                                                <mah:NumericUpDown x:Name="tertiaryIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,-7" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                    <mah:NumericUpDown.ToolTip>
-                                                        <StackPanel></StackPanel>
-                                                    </mah:NumericUpDown.ToolTip>
-                                                </mah:NumericUpDown>
-
-                                                <Label Content="{DynamicResource apparel_Primary_ID}"  Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
-                                                <Label Content="{DynamicResource apparel_Secondary_ID}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
-                                                <Label Content="{DynamicResource apparel_Tertiary_ID}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                                <ComboBox Name="equipSlotBox" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="120">
-                                                    <ComboBoxItem Content="{DynamicResource apparel_Equip_None}">
-                                                        <ComboBoxItem.Tag>
-                                                            <npc:Equip_Type>None</npc:Equip_Type>
-                                                        </ComboBoxItem.Tag>
-                                                    </ComboBoxItem>
-                                                    <ComboBoxItem Content="{DynamicResource apparel_Equip_Primary}">
-                                                        <ComboBoxItem.Tag>
-                                                            <npc:Equip_Type>Primary</npc:Equip_Type>
-                                                        </ComboBoxItem.Tag>
-                                                    </ComboBoxItem>
-                                                    <ComboBoxItem Content="{DynamicResource apparel_Equip_Secondary}">
-                                                        <ComboBoxItem.Tag>
-                                                            <npc:Equip_Type>Secondary</npc:Equip_Type>
-                                                        </ComboBoxItem.Tag>
-                                                    </ComboBoxItem>
-                                                    <ComboBoxItem Content="{DynamicResource apparel_Equip_Tertiary}">
-                                                        <ComboBoxItem.Tag>
-                                                            <npc:Equip_Type>Tertiary</npc:Equip_Type>
-                                                        </ComboBoxItem.Tag>
-                                                    </ComboBoxItem>
-                                                </ComboBox>
-                                                <Label Content="{DynamicResource apparel_Equipped_Slot}" Margin="135,100,0,0" VerticalAlignment="Top" Height="27"/>
-                                            </Grid>
-                                        </ScrollViewer>
-                                    </GroupBox>
+                                    <Label Content="{DynamicResource apparel_Equipped_Slot}" Margin="135,100,0,0" VerticalAlignment="Top" Height="27"/>
                                 </Grid>
-                            </TabItem>
-                        </TabControl>
+                            </ScrollViewer>
+                        </GroupBox>
                     </Grid>
                 </TabItem>
                 <TabItem Name="dialogueTab" Header="{DynamicResource tab_Dialogues}">
