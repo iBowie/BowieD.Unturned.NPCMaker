@@ -1,10 +1,10 @@
 {
     "NE_0000_Desc": "ID of {0} [{1}] is in reserved range (from 0 to 2000)",
 
-    "deep_dialogue": "Dialogue conflicting in [{0}]",
-    "deep_vendor": "Vendors conflicting in [{0}]",
-    "deep_char": "Character error. ID [{0}] already used.",
-    "deep_item": "Item [{0}] not found.",
-    "deep_vehicle": "Vehicle [{0}] not found.",
-    "deep_quest": "Quest [{0}] already used."
+    "deep_char": "[{0}] already used by other character in game.",
+    "deep_dialogue": "[{0}] already used by other dialogue in game.",
+    "deep_vendor": "[{0}] already used by other vendor in game.",
+    "deep_quest": "[{0}] already used by other quest in game.",
+    "deep_item": "Item [{0}] not found. If you are using item from a mod - ignore this.",
+    "deep_vehicle": "Vehicle [{0}] not found. If you are using vehicle from a mod - ignore this."
 }

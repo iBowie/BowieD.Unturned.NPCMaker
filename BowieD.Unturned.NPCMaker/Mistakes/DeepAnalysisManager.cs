@@ -54,7 +54,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 {
                     MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                     {
-                        MistakeName = LocUtil.LocalizeMistake("deep_dialogue", dialogue.id),
+                        MistakeDesc = LocUtil.LocalizeMistake("deep_dialogue", dialogue.id),
                         Importance = IMPORTANCE.WARNING
                     });
                 }
@@ -66,7 +66,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 {
                     MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                     {
-                        MistakeName = LocUtil.LocalizeMistake("deep_vendor", vendor.id),
+                        MistakeDesc = LocUtil.LocalizeMistake("deep_vendor", vendor.id),
                         Importance = IMPORTANCE.WARNING
                     });
                 }
@@ -76,7 +76,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     {
                         MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                         {
-                            MistakeName = LocUtil.LocalizeMistake("deep_vehicle", it.id),
+                            MistakeDesc = LocUtil.LocalizeMistake("deep_vehicle", it.id),
                             Importance = IMPORTANCE.WARNING
                         });
                         continue;
@@ -85,7 +85,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     {
                         MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                         {
-                            MistakeName = LocUtil.LocalizeMistake("deep_item", it.id),
+                            MistakeDesc = LocUtil.LocalizeMistake("deep_item", it.id),
                             Importance = IMPORTANCE.WARNING
                         });
                         continue;
@@ -99,7 +99,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 {
                     MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                     {
-                        MistakeName = LocUtil.LocalizeMistake("deep_quest", quest.id),
+                        MistakeDesc = LocUtil.LocalizeMistake("deep_quest", quest.id),
                         Importance = IMPORTANCE.WARNING
                     });
                 }
@@ -113,7 +113,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     {
                         MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                         {
-                            MistakeName = LocUtil.LocalizeMistake("deep_char", character.id),
+                            MistakeDesc = LocUtil.LocalizeMistake("deep_char", character.id),
                             Importance = IMPORTANCE.WARNING
                         });
                     }
