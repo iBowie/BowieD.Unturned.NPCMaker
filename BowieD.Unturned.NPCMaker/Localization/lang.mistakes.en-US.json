@@ -3,6 +3,8 @@
 	"NE_0001_Desc": "ID of {0} [{1}] equals zero.",
 	"NE_0002_Desc": "Equipped slot of {0} [{1}] is empty.",
 	"NE_1000_Desc": "Dialogue {0} has empty messages.",
+	"NE_1001_Desc": "Dialogue {0} has zero id.",
+	"NE_1002_Desc": "Some messages of dialogue {0} will never appear.",
 
     "deep_char": "[{0}] already used by other character in game.",
     "deep_dialogue": "[{0}] already used by other dialogue in game.",

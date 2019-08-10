@@ -213,6 +213,8 @@
     <Compile Include="Mistakes\DeepAnalysisManager.cs" />
     <Compile Include="Mistakes\Character\NE_0000.cs" />
     <Compile Include="Mistakes\Dialogue\NE_1000.cs" />
+    <Compile Include="Mistakes\Dialogue\NE_1001.cs" />
+    <Compile Include="Mistakes\Dialogue\NE_1002.cs" />
     <Compile Include="Mistakes\MistakesManager.cs" />
     <Compile Include="Notification\INotificationManager.cs" />
     <Compile Include="Notification\NotificationManager.cs" />
