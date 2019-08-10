@@ -17,7 +17,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     "BowieD.Unturned.NPCMaker.Mistakes.Character",
                     "BowieD.Unturned.NPCMaker.Mistakes.Dialogue",
                     "BowieD.Unturned.NPCMaker.Mistakes.Vendor",
-                    "BowieD.Unturned.NPCMaker.Mistakes.Quests"
+                    "BowieD.Unturned.NPCMaker.Mistakes.Quest"
                 };
                 var q = from t in Assembly.GetExecutingAssembly().GetTypes() where t.IsClass && nspaces.Contains(t.Namespace) select t;
                 foreach (Type t in q)
