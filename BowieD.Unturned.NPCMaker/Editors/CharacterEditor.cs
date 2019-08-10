@@ -86,12 +86,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.Instance.hairColorPicker_SaveButton.Click += HairColorPicker_SaveButton_Click;
             conditions = new List<Condition>();
             UserColors.Load(new string[0]);
-            MainWindow.Instance.skinColorPicker.AvailableColors.Clear();
-            MainWindow.Instance.hairColorPicker.AvailableColors.Clear();
-            foreach (var k in UserColors.data)
-            {
-                MainWindow.Instance.skinColorPicker.AvailableColors.Add(new Xceed.Wpf.Toolkit.ColorItem(new Coloring.Color(k), k));
-            }
+            UpdateColorPickerFromBuffer();
         }
         public NPCCharacter Current
         {
@@ -315,6 +310,23 @@ namespace BowieD.Unturned.NPCMaker.Editors
             var color = new Coloring.Color(hex);
             var colorItem = new Xceed.Wpf.Toolkit.ColorItem(color, hex);
             MainWindow.Instance.skinColorPicker.AvailableColors.Insert(0, colorItem);
+        }
+        internal void RemoveColor(string hex)
+        {
+            if (!UserColors.data.Contains(hex))
+                return;
+            UserColors.data = UserColors.data.Where(d => d != hex).ToArray();
+            UserColors.Save();
+            UpdateColorPickerFromBuffer();
+        }
+        internal void UpdateColorPickerFromBuffer()
+        {
+            MainWindow.Instance.skinColorPicker.AvailableColors.Clear();
+            MainWindow.Instance.hairColorPicker.AvailableColors.Clear();
+            foreach (var k in UserColors.data)
+            {
+                MainWindow.Instance.skinColorPicker.AvailableColors.Add(new Xceed.Wpf.Toolkit.ColorItem(new Coloring.Color(k), k));
+            }
         }
         internal void SkinColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<System.Windows.Media.Color?> e)
         {

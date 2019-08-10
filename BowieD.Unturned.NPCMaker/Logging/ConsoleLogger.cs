@@ -56,15 +56,20 @@ namespace BowieD.Unturned.NPCMaker.Logging
             Console.WriteLine($"[{DateTime.Now}] - [WARN] - {message}");
             Console.ForegroundColor = oldClr;
         }
-        public void Open() { Thread th = new Thread(() => WaitForInput()); th.Start(); }
-        public void WaitForInput()
+        public static void StartWaitForInput()
+        {
+            Thread th = new Thread(() => WaitForInput());
+            th.Start();
+        }
+        public void Open() {  }
+        public static void WaitForInput()
         {
             string input = Console.ReadLine();
             string[] command = input.Split(' ');
             var executionCommand = Command.Commands.SingleOrDefault(d => d.Name.ToLower() == command[0].ToLower());
             if (executionCommand == null)
             {
-                LogInfo($"Command {command[0]} not found");
+                App.Logger.LogInfo($"Command {command[0]} not found");
             }
             else
             {

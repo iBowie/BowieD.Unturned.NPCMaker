@@ -161,6 +161,7 @@ namespace BowieD.Unturned.NPCMaker
             #endregion
             HolidayManager.Check();
             App.NotificationManager.Notify(LocUtil.LocalizeInterface("app_Free"));
+            ConsoleLogger.StartWaitForInput();
             base.Show();
         }
         #region CONSTANTS
