@@ -20,9 +20,11 @@ namespace BowieD.Unturned.NPCMaker.Commands
                         case "add" when args.Length > 1 && Color.IsHEX(args[1]):
                             (MainWindow.CharacterEditor as CharacterEditor).SaveColor(args[1]);
                             (MainWindow.CharacterEditor as CharacterEditor).UpdateColorPickerFromBuffer();
+                            App.Logger.LogInfo($"Color {args[1]} saved.");
                             break;
                         case "remove" when args.Length > 1 && Color.IsHEX(args[1]):
                             (MainWindow.CharacterEditor as CharacterEditor).RemoveColor(args[1]);
+                            App.Logger.LogInfo($"Color {args[1]} removed.");
                             break;
                         case "list":
                             App.Logger.LogInfo($"Saved Colors: {string.Join(", ", (MainWindow.CharacterEditor as CharacterEditor).UserColors.data)}");
@@ -32,6 +34,10 @@ namespace BowieD.Unturned.NPCMaker.Commands
                             break;
                     }
                 });
+            }
+            else
+            {
+                App.Logger.LogInfo($"Use: color {Syntax}");
             }
         }
     }
