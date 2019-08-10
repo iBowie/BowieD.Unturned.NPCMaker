@@ -8,7 +8,6 @@ using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Themes;
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -19,6 +18,11 @@ namespace BowieD.Unturned.NPCMaker
 {
     public partial class MainWindow : Window
     {
+        public MainWindow()
+        {
+            Instance = this;
+            InitializeComponent();
+        }
         #region MANAGERS
         public static Mistakes.DeepAnalysisManager DeepAnalysisManager { get; private set; }
         public static DiscordRPC.DiscordManager DiscordManager { get; set; }
@@ -43,11 +47,6 @@ namespace BowieD.Unturned.NPCMaker
             QuestEditor.Reset();
         }
         #endregion
-        public MainWindow()
-        {
-            Instance = this;
-            InitializeComponent();
-        }
         public new void Show()
         {
             CharacterEditor = new CharacterEditor();
