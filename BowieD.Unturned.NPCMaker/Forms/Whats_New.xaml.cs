@@ -12,8 +12,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             InitializeComponent();
             Title = LocUtil.LocalizeInterface("app_News_Title");
-            updateTitle.Text = Util.UpdateManager.Title;
-            updateText.Text = Util.UpdateManager.Content;
+            updateTitle.Text = App.UpdateManager.Title;
+            updateText.Text = App.UpdateManager.Content;
             mainButton.Content = LocUtil.LocalizeInterface("app_News_OK");
             Height = SystemParameters.PrimaryScreenHeight / 2;
             Width = SystemParameters.PrimaryScreenWidth / 2;

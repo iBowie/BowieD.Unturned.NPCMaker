@@ -150,7 +150,9 @@ namespace BowieD.Unturned.NPCMaker
                 if (!(res == MessageBoxResult.OK || res == MessageBoxResult.Yes))
                     return;
             }
-            MainWindow.CurrentProject.Save();
+            MainWindow.SaveAllEditors();
+            if (MainWindow.CurrentProject.Save())
+                App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Saved"));
             Export.Exporter.ExportNPC(MainWindow.CurrentProject.data);
         }
         internal void NewButtonClick(object sender, RoutedEventArgs e)
@@ -163,15 +165,24 @@ namespace BowieD.Unturned.NPCMaker
         }
         internal void SaveClick(object sender, RoutedEventArgs e)
         {
-            MainWindow.CurrentProject.Save();
+            MainWindow.SaveAllEditors();
+            if (MainWindow.CurrentProject.Save())
+            {
+                App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Saved"));
+            }
         }
         internal void SaveAsClick(object sender, RoutedEventArgs e)
         {
+            MainWindow.SaveAllEditors();
             string oldPath = MainWindow.CurrentProject.file;
             MainWindow.CurrentProject.file = "";
             if (!MainWindow.CurrentProject.Save())
             {
                 MainWindow.CurrentProject.file = oldPath;
+            }
+            else
+            {
+                App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Saved"));
             }
         }
         internal void LoadClick(object sender, RoutedEventArgs e)

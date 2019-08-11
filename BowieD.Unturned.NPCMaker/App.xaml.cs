@@ -65,13 +65,13 @@ namespace BowieD.Unturned.NPCMaker
             #region SCALE
             Resources["Scale"] = AppConfig.Instance.scale;
             #endregion
-            Util.UpdateManager = new GitHubUpdateManager();
-            Util.UpdateManager.CheckForUpdates().GetAwaiter().GetResult();
-            if (Util.UpdateManager.UpdateAvailability == UpdateAvailability.AVAILABLE)
+            App.UpdateManager = new GitHubUpdateManager();
+            App.UpdateManager.CheckForUpdates().GetAwaiter().GetResult();
+            if (App.UpdateManager.UpdateAvailability == UpdateAvailability.AVAILABLE)
             {
                 if (AppConfig.Instance.autoUpdate)
                 {
-                    Util.UpdateManager.StartUpdate();
+                    App.UpdateManager.StartUpdate();
                     return;
                 }
                 else
@@ -80,7 +80,7 @@ namespace BowieD.Unturned.NPCMaker
                     var dlg = MessageBox.Show(LocUtil.LocalizeInterface("update_available_body"), LocUtil.LocalizeInterface("update_available_title"), MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (dlg == MessageBoxResult.Yes)
                     {
-                        Util.UpdateManager.StartUpdate();
+                        App.UpdateManager.StartUpdate();
                         return;
                     }
                 }

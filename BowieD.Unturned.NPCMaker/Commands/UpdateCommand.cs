@@ -9,7 +9,7 @@
         {
             MainWindow.Instance.Dispatcher.Invoke(() =>
             {
-                Util.UpdateManager.StartUpdate();
+                App.UpdateManager.StartUpdate();
             });
         }
     }
