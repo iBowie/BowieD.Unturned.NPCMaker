@@ -89,6 +89,7 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Name="aboutMenuItem" Header="{DynamicResource menu_About}"/>
+                <Label Margin="-5" IsEnabled="False" Name="menuCurrentFileLabel" Content="Current File: "/>
             </Menu>
             <TabControl Grid.Row="1" Background="Transparent" Padding="-1" Name="mainTabControl" SelectedIndex="0" Margin="0,5,0,0">
                 <TabItem Name="characterTab" Header="{DynamicResource tab_Character}">

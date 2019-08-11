@@ -139,6 +139,12 @@ namespace BowieD.Unturned.NPCMaker
                 AutosaveTimer.Start();
             }
             #endregion
+            #region AppUpdate
+            AppUpdateTimer = new DispatcherTimer();
+            AppUpdateTimer.Interval = new TimeSpan(0, 0, 1);
+            AppUpdateTimer.Tick += AppUpdateTimer_Tick;
+            AppUpdateTimer.Start();
+            #endregion
             #region VERSION SPECIFIC CODE
 #if !DEBUG
             debugOverlayText.Visibility = Visibility.Collapsed;
@@ -163,6 +169,8 @@ namespace BowieD.Unturned.NPCMaker
             ConsoleLogger.StartWaitForInput();
             base.Show();
         }
+
+        
         #region CONSTANTS
         public const int
         faceAmount = 32,
@@ -173,6 +181,7 @@ namespace BowieD.Unturned.NPCMaker
         public static MainWindow Instance;
         public static ProjectData CurrentProject { get; private set; } = new ProjectData();
         public static DispatcherTimer AutosaveTimer { get; set; }
+        public static DispatcherTimer AppUpdateTimer { get; set; }
         public static PropertyProxy Proxy { get; private set; }
         public static bool IsRGB { get; set; } = true;
         public static DateTime Started { get; set; } = DateTime.UtcNow;
@@ -183,6 +192,14 @@ namespace BowieD.Unturned.NPCMaker
             if (CurrentProject.file.Length > 0)
                 CurrentProject.Save();
             AutosaveTimer.Start();
+        }
+        private void AppUpdateTimer_Tick(object sender, EventArgs e)
+        {
+            if (CurrentProject.file.Length == 0)
+                menuCurrentFileLabel.Content = LocUtil.LocalizeInterface("menu_CurrentFile", "None");
+            else
+                menuCurrentFileLabel.Content = LocUtil.LocalizeInterface("menu_CurrentFile", Path.GetFileName(CurrentProject.file));
+            menuCurrentFileLabel.ToolTip = CurrentProject.file;
         }
         protected override void OnClosing(CancelEventArgs e)
         {

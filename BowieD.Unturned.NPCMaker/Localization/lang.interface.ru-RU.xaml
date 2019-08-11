@@ -45,6 +45,7 @@
     <v:String x:Key="menu_About">О программе</v:String>
     <v:String x:Key="menu_WhatsNew">Обновления</v:String>
     <v:String x:Key="menu_Discord_Start">Интеграция с Discord Rich Presence активирована!</v:String>
+    <v:String x:Key="menu_CurrentFile">Текущий файл: {0}</v:String>
     <v:String x:Key="feedback_Steam">Мой Steam (Нажать)</v:String>
     <v:String x:Key="feedback_Discord">Мой сервер в Discord (Нажать)</v:String>
     <v:String x:Key="feedback_VK">Мой ВК (Нажать)</v:String>
