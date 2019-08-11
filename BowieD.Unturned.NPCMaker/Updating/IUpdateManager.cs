@@ -8,6 +8,5 @@ namespace BowieD.Unturned.NPCMaker.Updating
         string Content { get; set; }
         void StartUpdate();
         Task<UpdateAvailability> CheckForUpdates();
-        UpdateAvailability UpdateAvailability { get; set; }
     }
 }

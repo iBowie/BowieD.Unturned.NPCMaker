@@ -66,8 +66,8 @@ namespace BowieD.Unturned.NPCMaker
             Resources["Scale"] = AppConfig.Instance.scale;
             #endregion
             App.UpdateManager = new GitHubUpdateManager();
-            App.UpdateManager.CheckForUpdates().GetAwaiter().GetResult();
-            if (App.UpdateManager.UpdateAvailability == UpdateAvailability.AVAILABLE)
+            var result = App.UpdateManager.CheckForUpdates().GetAwaiter().GetResult();
+            if (result == UpdateAvailability.AVAILABLE)
             {
                 if (AppConfig.Instance.autoUpdate)
                 {

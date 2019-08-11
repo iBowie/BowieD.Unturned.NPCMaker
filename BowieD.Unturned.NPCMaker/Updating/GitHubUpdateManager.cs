@@ -16,7 +16,6 @@ namespace BowieD.Unturned.NPCMaker.Updating
         public string Content { get; set; } = "";
         public const string ReleasesUrl = "https://api.github.com/repos/iBowie/BowieD.Unturned.NPCMaker/releases/latest";
         public const string UpdaterReleasesUrl = "https://api.github.com/repos/iBowie/BowieD.Unturned.NPCMaker.Updater/releases/latest";
-        public UpdateAvailability UpdateAvailability { get; set; } = UpdateAvailability.NOT_CHECKED;
         private static bool DownloadUpdater()
         {
             App.Logger.LogInfo("[UPDATE] - Downloading updater");
