@@ -65,7 +65,7 @@ namespace BowieD.Unturned.NPCMaker.Updating
                 string fileName = System.Reflection.Assembly.GetEntryAssembly().Location;
                 App.Logger.LogInfo("[UPDATE] - Launching updater");
                 System.Diagnostics.Process.Start(AppConfig.Directory + "updater.exe", fileName);
-                MainWindow.PerformExit();
+                Environment.Exit(0);
             }
             else
             {

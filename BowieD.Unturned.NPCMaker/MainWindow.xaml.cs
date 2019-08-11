@@ -65,25 +65,29 @@ namespace BowieD.Unturned.NPCMaker
             ThemeManager.Apply(theme);
             #endregion
             #region OPEN_WITH
-            string[] args = Environment.GetCommandLineArgs().Skip(1).ToArray();
+            string[] args = Environment.GetCommandLineArgs();
             App.Logger.LogInfo($"Command Line Args: {string.Join(";", args)}");
-            if (args?.Length >= 1)
+            if (args?.Length >= 2)
             {
-                try
+                for (int k = 1; k < args.Length; k++)
                 {
-                    CurrentProject.file = args[0];
-                    if (CurrentProject.Load(new NPCProject()))
+                    try
                     {
-                        App.NotificationManager.Clear();
-                        App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
-                        AddToRecentList(CurrentProject.file);
+                        CurrentProject.file = args[k];
+                        if (CurrentProject.Load(new NPCProject()))
+                        {
+                            App.NotificationManager.Clear();
+                            App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
+                            AddToRecentList(CurrentProject.file);
+                            break;
+                        }
+                        else
+                        {
+                            CurrentProject.file = "";
+                        }
                     }
-                    else
-                    {
-                        CurrentProject.file = "";
-                    }
+                    catch { }
                 }
-                catch { }
             }
             #endregion
             #region APPAREL SETUP
