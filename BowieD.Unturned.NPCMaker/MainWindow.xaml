@@ -34,39 +34,39 @@
                 <MenuItem Header="{DynamicResource menu_File}">
                     <MenuItem Header="{DynamicResource menu_File_New}" Name="newButton">
                         <MenuItem.Icon>
-                            <iconPacks:PackIconMaterial Kind="File" Foreground="{DynamicResource AccentColor}"/>
+                            <Image Source="/Resources/Icons/ICON_CANCEL.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="{DynamicResource menu_File_Open}" Name="loadButton">
                         <MenuItem.Icon>
-                            <iconPacks:PackIconMaterial Kind="FolderOpen" Foreground="{DynamicResource AccentColor}"/>
+                            <Image Source="/Resources/Icons/ICON_OPEN.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="{DynamicResource menu_File_Save}" Name="saveButton">
                         <MenuItem.Icon>
-                            <iconPacks:PackIconMaterial Kind="ContentSave" Foreground="{DynamicResource AccentColor}"/>
+                            <Image Source="/Resources/Icons/ICON_SAVE.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="{DynamicResource menu_File_SaveAs}" Name="saveAsButton">
                         <MenuItem.Icon>
-                            <iconPacks:PackIconMaterial Kind="ContentSave" Foreground="{DynamicResource AccentColor}"/>
+                            <Image Source="/Resources/Icons/ICON_SAVE.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
                     <MenuItem Name="RecentList" Header="{DynamicResource menu_File_Recent}">
                         <MenuItem.Icon>
-                            <iconPacks:PackIconMaterial Kind="History" Foreground="{DynamicResource AccentColor}"/>
+                            <Image Source="/Resources/Icons/ICON_RECENT.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="{DynamicResource menu_File_Export}" Name="exportButton">
                         <MenuItem.Icon>
-                            <iconPacks:PackIconMaterial Kind="Export" Foreground="{DynamicResource AccentColor}"/>
+                            <Image Source="/Resources/Icons/ICON_OK.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{DynamicResource menu_File_Exit}" Name="exitButton">
                         <MenuItem.Icon>
-                            <iconPacks:PackIconMaterial Kind="Close" Foreground="{DynamicResource AccentColor}"/>
+                            <Image Source="/Resources/Icons/ICON_CANCEL.png" Width="16" Height="16"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
@@ -96,17 +96,17 @@
                     <Grid>
                         <Button Name="characterSaveButton" ToolTip="{DynamicResource character_Save}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="ContentSave" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
+                                <Image Source="/Resources/Icons/ICON_SAVE.png" Width="24" Height="24"/>
                             </Button.Content>
                         </Button>
                         <Button Name="characterResetButton" ToolTip="{DynamicResource character_Clear}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
+                                <Image Source="/Resources/Icons/ICON_CANCEL.png" Width="24" Height="24"/>
                             </Button.Content>
                         </Button>
                         <Button Name="characterOpenButton" ToolTip="{DynamicResource character_Open}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
+                                <Image Source="/Resources/Icons/ICON_OPEN.png" Width="24" Height="24"/>
                             </Button.Content>
                         </Button>
                         <TextBox Name="txtEditorName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,10,0,0">
@@ -305,12 +305,12 @@
                             <xctk:ColorPicker AdvancedButtonHeader="{DynamicResource picker_Advanced_Header}" StandardButtonHeader="{DynamicResource picker_Standard_Header}" AvailableColorsHeader="{DynamicResource picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="skinColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,54,0,0" Width="89" Height="26"/>
                             <Button Name="skinColorPicker_SaveButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="26" Margin="93,54,0,0">
                                 <Button.Content>
-                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="ContentSave" Margin="-4"/>
+                                    <Image Source="/Resources/Icons/ICON_SAVE.png" Width="16" Height="16"/>
                                 </Button.Content>
                             </Button>
                             <Button Name="hairColorPicker_SaveButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="26" Margin="93,110,0,0">
                                 <Button.Content>
-                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="ContentSave" Margin="-4"/>
+                                    <Image Source="/Resources/Icons/ICON_SAVE.png" Width="16" Height="16"/>
                                 </Button.Content>
                             </Button>
                             <xctk:ColorPicker AdvancedButtonHeader="{DynamicResource picker_Advanced_Header}" StandardButtonHeader="{DynamicResource picker_Standard_Header}" AvailableColorsHeader="{DynamicResource picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="hairColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,110,0,0" Width="89" Height="26"/>
@@ -660,17 +660,17 @@
                         </GroupBox>
                         <Button Grid.Column="2" Name="dialogueSaveButton" ToolTip="{DynamicResource dialogue_Save}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="ContentSave" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
+                                <Image Source="/Resources/Icons/ICON_SAVE.png" Width="24" Height="24"/>
                             </Button.Content>
                         </Button>
                         <Button Grid.Column="2" Name="dialogueResetButton" ToolTip="{DynamicResource dialogue_Clear}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="Delete" Width="16" Height="16"  Foreground="{DynamicResource AccentColor}"/>
+                                <Image Source="/Resources/Icons/ICON_CANCEL.png" Width="24" Height="24"/>
                             </Button.Content>
                         </Button>
                         <Button Grid.Column="2" Name="dialogueOpenButton" ToolTip="{DynamicResource dialogue_Open}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="FolderOutline" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
+                                <Image Source="/Resources/Icons/ICON_OPEN.png" Width="24" Height="24"/>
                             </Button.Content>
                         </Button>
                         <TextBlock Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,0,10" Text="{DynamicResource dialogue_Tips}" TextWrapping="Wrap" Width="254"/>
@@ -699,17 +699,17 @@
                         <CheckBox Name="vendorDisableSortingBox" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Content="{DynamicResource vendor_DisableSorting}" Margin="10,10,0,0" Grid.RowSpan="2"/>
                         <Button Grid.Column="2" Name="vendorSaveButton" Height="31" ToolTip="{DynamicResource vendor_Save}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="ContentSave"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
+                                <Image Source="/Resources/Icons/ICON_SAVE.png" Width="24" Height="24"/>
                             </Button.Content>
                         </Button>
                         <Button Grid.Column="2" Name="vendorOpenButton" Height="31" ToolTip="{DynamicResource vendor_Open}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
+                                <Image Source="/Resources/Icons/ICON_OPEN.png" Width="24" Height="24"/>
                             </Button.Content>
                         </Button>
                         <Button Grid.Column="2" Name="vendorResetButton" Height="31" ToolTip="{DynamicResource vendor_Clear}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
+                                <Image Source="/Resources/Icons/ICON_CANCEL.png" Width="24" Height="24"/>
                             </Button.Content>
                         </Button>
                         <GroupBox Grid.Row="1" Margin="10,5,5,10" Header="{DynamicResource vendor_BuyList}">
@@ -751,17 +751,17 @@
                         <TextBlock Grid.Row="1" TextAlignment="Center" Text="{DynamicResource quest_Desc}" Height="23" VerticalAlignment="Top" Margin="10,66,10,0"/>
                         <Button Grid.Column="2" Name="questSaveButton" Height="31" ToolTip="{DynamicResource quest_Save}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="ContentSave"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
+                                <Image Source="/Resources/Icons/ICON_SAVE.png" Width="24" Height="24"/>
                             </Button.Content>
                         </Button>
                         <Button Grid.Column="2" Name="questOpenButton" Height="31" ToolTip="{DynamicResource quest_Open}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
+                                <Image Source="/Resources/Icons/ICON_OPEN.png" Width="24" Height="24"/>
                             </Button.Content>
                         </Button>
                         <Button Grid.Column="2" Name="questResetButton" Height="31" ToolTip="{DynamicResource quest_Clear}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
+                                <Image Source="/Resources/Icons/ICON_CANCEL.png" Width="24" Height="24"/>
                             </Button.Content>
                         </Button>
                         <Grid Grid.Column="1" Grid.Row="1">
@@ -815,7 +815,7 @@
             <TextBlock Name="genericTextBlock" Visibility="Collapsed"/>
         </Grid>
         <Grid Name="dropOverlay" Background="#99000000" Visibility="Hidden">
-            <Image Source="Resources/ICON_OPEN.png" Width="256" Height="256"/>
+            <Image Source="/Resources/Icons/ICON_OPEN.png" Width="256" Height="256"/>
         </Grid>
         <Grid Name="notificationOverlay" Visibility="Visible"/>
         <Grid Name="blockActionsOverlay" Visibility="Collapsed" IsHitTestVisible="True">
@@ -826,7 +826,7 @@
         <Grid Name="notClickableOverlay" IsHitTestVisible="False">
             <Label Visibility="Collapsed" Name="betaOverlayText" Margin="5" Content="BETA" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="36" Opacity="0.15"/>
             <Grid Name="debugOverlayText" HorizontalAlignment="Left" Opacity="0.15" VerticalAlignment="Bottom" Margin="5">
-                <Image Width="36" Source="Resources/ICON_WARNING.png" Height="{Binding Width}" HorizontalAlignment="Left"/>
+                <Image Width="36" Source="/Resources/Icons/ICON_WARNING.png" Height="{Binding Width}" HorizontalAlignment="Left"/>
                 <Label Margin="36,0,0,0" Content="DEBUG" HorizontalAlignment="Right" FontSize="36"/>
             </Grid>
         </Grid>

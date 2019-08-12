@@ -13,7 +13,7 @@
         </TextBox>
         <Button MouseEnter="DeleteButton_MouseEnter" Width="31" Height="31" MouseLeave="DeleteButton_MouseLeave" Name="deleteButton" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,10">
             <Button.Content>
-                <iconPacks:PackIconMaterial Kind="Delete" Foreground="{DynamicResource AccentColor}"/>
+                <Image Source="/Resources/Icons/ICON_CANCEL.png" Width="27" Height="27"/>
             </Button.Content>
         </Button>
     </Grid>

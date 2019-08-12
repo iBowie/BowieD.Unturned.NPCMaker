@@ -127,12 +127,6 @@
   <data name="MahApps_Metro" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\libs\mahapps.metro.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="MahApps_Metro_IconPacks_Core" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\libs\mahapps.metro.iconpacks.core.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="MahApps_Metro_IconPacks_Material" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\libs\mahapps.metro.iconpacks.material.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="Microsoft_Xaml_Behaviors" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\libs\microsoft.xaml.behaviors.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

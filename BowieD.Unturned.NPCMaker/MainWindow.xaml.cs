@@ -99,24 +99,6 @@ namespace BowieD.Unturned.NPCMaker
             (CharacterEditor as CharacterEditor).BeardImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
             #endregion
             RefreshRecentList();
-            #region AFTER UPDATE
-            try
-            {
-                if (File.Exists(AppConfig.Directory + "updater.exe"))
-                {
-                    Proxy.WhatsNew_Menu_Click(null, null);
-                    File.Delete(AppConfig.Directory + "updater.exe");
-                    App.Logger.LogInfo("Updater deleted.");
-                }
-                else if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "updater.exe"))
-                {
-                    Proxy.WhatsNew_Menu_Click(null, null);
-                    File.Delete(AppDomain.CurrentDomain.BaseDirectory + "updater.exe");
-                    App.Logger.LogInfo("Updater deleted.");
-                }
-            }
-            catch { App.Logger.LogWarning("Can't delete updater."); }
-            #endregion
             #region AUTOSAVE INIT
             if (AppConfig.Instance.autosaveOption > 0)
             {
@@ -217,9 +199,13 @@ namespace BowieD.Unturned.NPCMaker
             recent.Load(new string[0]);
             if (!recent.data.Contains(MainWindow.CurrentProject.file))
             {
-                var r = recent.data.AsEnumerable();
-                r = r.Prepend(path);
-                recent.data = r.ToArray();
+                string[] newArray = new string[recent.data.Length + 1];
+                newArray[0] = path;
+                for (int k = 1; k < newArray.Length; k++)
+                {
+                    newArray[k] = recent.data[k - 1];
+                }
+                recent.data = newArray;
                 recent.Save();
             }
             Instance.RefreshRecentList();

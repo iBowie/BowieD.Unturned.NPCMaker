@@ -1,4 +1,6 @@
-﻿namespace BowieD.Unturned.NPCMaker.Commands
+﻿using BowieD.Unturned.NPCMaker.Logging;
+
+namespace BowieD.Unturned.NPCMaker.Commands
 {
     public class UpdateCommand : Command
     {
@@ -7,10 +9,7 @@
         public override string Help => "Forces app to download latest version on the server";
         public override void Execute(string[] args)
         {
-            MainWindow.Instance.Dispatcher.Invoke(() =>
-            {
-                App.UpdateManager.StartUpdate();
-            });
+            App.Logger.LogWarning("THIS VERSION DOES NOT SUPPORT UPDATES");
         }
     }
 }

@@ -31,7 +31,7 @@ namespace BowieD.Unturned.NPCMaker.Coloring
             else
                 return new Color(v, p, q);
         }
-        public static (double H, double S, double V) ColorToHSV(Color color)
+        public static Tuple<double, double, double> ColorToHSV(Color color)
         {
             double RR = color.R / 255d;
             double GG = color.G / 255d;
@@ -54,29 +54,29 @@ namespace BowieD.Unturned.NPCMaker.Coloring
             double V = Cmax;
             S = Math.Round(S, 2);
             V = Math.Round(V, 2);
-            return (H, S, V);
+            return new Tuple<double, double, double>(H, S, V);
         }
         public static Color HSLtoColor(double H, double S, double L)
         {
             double C = (1d - Math.Abs(2d * L - 1d)) * S;
             double X = C * (1d - Math.Abs((H / 60d) % 2d - 1d));
             double m = L - C / 2d;
-            (double R, double G, double B) preResult;
+            Tuple<double, double, double> preResult;
             if (H < 60)
-                preResult = (C, X, 0);
+                preResult = new Tuple<double, double, double>(C, X, 0);
             else if (H < 120)
-                preResult = (X, C, 0);
+                preResult = new Tuple<double, double, double>(X, C, 0);
             else if (H < 180)
-                preResult = (0, C, X);
+                preResult = new Tuple<double, double, double>(0, C, X);
             else if (H < 240)
-                preResult = (0, X, C);
+                preResult = new Tuple<double, double, double>(0, X, C);
             else if (H < 300)
-                preResult = (X, 0, C);
+                preResult = new Tuple<double, double, double>(X, 0, C);
             else
-                preResult = (C, 0, X);
-            return new Color((byte)((preResult.R + m) * 255d), (byte)((preResult.G + m) * 255d), (byte)((preResult.B + m) * 255d));
+                preResult = new Tuple<double, double, double>(C, 0, X);
+            return new Color((byte)((preResult.Item1 + m) * 255d), (byte)((preResult.Item2 + m) * 255d), (byte)((preResult.Item3 + m) * 255d));
         }
-        public static (double H, double S, double L) ColorToHSL(Color color)
+        public static Tuple<double, double, double> ColorToHSL(Color color)
         {
             double RR = color.R / 255d;
             double GG = color.G / 255d;
@@ -125,13 +125,13 @@ namespace BowieD.Unturned.NPCMaker.Coloring
             }
             S = Math.Round(S, 2);
             L = Math.Round(L, 2);
-            return (H, S, L);
+            return new Tuple<double, double, double>(H, S, L);
         }
         public static Color CMYKtoColor(double C, double M, double Y, double K)
         {
             return new Color((byte)(255 * (1 - C) * (1 - K)), (byte)(255 * (1 - M) * (1 - K)), (byte)(255 * (1 - Y) * (1 - K)));
         }
-        public static (double C, double M, double Y, double K) ColorToCMYK(Color color)
+        public static Tuple<double, double, double, double> ColorToCMYK(Color color)
         {
             double RR = color.R / 255d;
             double GG = color.G / 255d;
@@ -145,7 +145,7 @@ namespace BowieD.Unturned.NPCMaker.Coloring
             C = double.IsNaN(C) ? 0 : C;
             M = double.IsNaN(M) ? 0 : M;
             Y = double.IsNaN(Y) ? 0 : Y;
-            return (C, M, Y, K);
+            return new Tuple<double, double, double, double>(C, M, Y, K);
         }
     }
 }

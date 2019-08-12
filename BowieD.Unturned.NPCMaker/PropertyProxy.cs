@@ -291,17 +291,6 @@ namespace BowieD.Unturned.NPCMaker
         {
             System.Diagnostics.Process.Start((sender as MenuItem).Tag.ToString());
         }
-        internal void WhatsNew_Menu_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                using (WebClient wc = new WebClient() { Encoding = Encoding.UTF8 })
-                {
-                    new Whats_New().ShowDialog();
-                }
-            }
-            catch (Exception ex) { App.Logger.LogException("Could not open update notes window.", ex); }
-        }
         #endregion
     }
 }

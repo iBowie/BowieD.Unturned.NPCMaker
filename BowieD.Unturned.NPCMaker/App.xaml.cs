@@ -3,13 +3,13 @@ using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.Notification;
-using BowieD.Unturned.NPCMaker.Updating;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -20,7 +20,6 @@ namespace BowieD.Unturned.NPCMaker
     /// </summary>
     public partial class App : Application
     {
-        public static IUpdateManager UpdateManager { get; private set; }
         public static INotificationManager NotificationManager { get; private set; }
         public static List<ILogger> Logger { get; private set; } = new List<ILogger>();
         public static Version Version
@@ -52,8 +51,6 @@ namespace BowieD.Unturned.NPCMaker
             CopyResource(NPCMaker.Properties.Resources.ControlzEx, AppConfig.Directory + "ControlzEx.dll");
             CopyResource(NPCMaker.Properties.Resources.MahApps_Metro, AppConfig.Directory + "MahApps.Metro.dll");
             CopyResource(NPCMaker.Properties.Resources.Microsoft_Xaml_Behaviors, AppConfig.Directory + "Microsoft.Xaml.Behaviors.dll");
-            CopyResource(NPCMaker.Properties.Resources.MahApps_Metro_IconPacks_Core, AppConfig.Directory + "MahApps.Metro.IconPacks.Core.dll");
-            CopyResource(NPCMaker.Properties.Resources.MahApps_Metro_IconPacks_Material, AppConfig.Directory + "MahApps.Metro.IconPacks.Material.dll");
             CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock, AppConfig.Directory + "Xceed.Wpf.AvalonDock.dll");
             CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_Aero, AppConfig.Directory + "Xceed.Wpf.AvalonDock.Themes.Aero.dll");
             CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_Metro, AppConfig.Directory + "Xceed.Wpf.AvalonDock.Themes.Metro.dll");
@@ -65,26 +62,9 @@ namespace BowieD.Unturned.NPCMaker
             #region SCALE
             Resources["Scale"] = AppConfig.Instance.scale;
             #endregion
-            App.UpdateManager = new GitHubUpdateManager();
-            var result = App.UpdateManager.CheckForUpdates().GetAwaiter().GetResult();
-            if (result == UpdateAvailability.AVAILABLE)
-            {
-                if (AppConfig.Instance.autoUpdate)
-                {
-                    App.UpdateManager.StartUpdate();
-                    return;
-                }
-                else
-                {
-                    LocUtil.LoadLanguage(AppConfig.Instance.locale);
-                    var dlg = MessageBox.Show(LocUtil.LocalizeInterface("update_available_body"), LocUtil.LocalizeInterface("update_available_title"), MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (dlg == MessageBoxResult.Yes)
-                    {
-                        App.UpdateManager.StartUpdate();
-                        return;
-                    }
-                }
-            }
+            App.Logger.LogWarning($"YOU ARE USING OFF-BRANCH VERSION OF THE APP. DO NOT REPORT ANY BUGS.");
+            App.Logger.LogWarning($"THIS APPLICATION WILL NOT UPDATE.");
+            Thread.Sleep(1000);
             if (!LocUtil.IsLoaded)
                 LocUtil.LoadLanguage(AppConfig.Instance.locale);
             Logger.LogInfo("Closing console and opening app...");
@@ -102,7 +82,6 @@ namespace BowieD.Unturned.NPCMaker
         }
         public static void InitManagers()
         {
-            UpdateManager = new GitHubUpdateManager();
             NotificationManager = new NotificationManager();
         }
 

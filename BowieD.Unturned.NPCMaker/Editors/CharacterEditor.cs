@@ -305,7 +305,13 @@ namespace BowieD.Unturned.NPCMaker.Editors
         {
             if (UserColors.data.Contains(hex))
                 return;
-            UserColors.data = UserColors.data.Prepend(hex).ToArray();
+            string[] newArray = new string[UserColors.data.Length + 1];
+            newArray[0] = hex;
+            for (int k = 1; k < newArray.Length; k++)
+            {
+                newArray[k] = UserColors.data[k - 1];
+            }
+            UserColors.data = newArray;
             UserColors.Save();
             var color = new Coloring.Color(hex);
             var colorItem = new Xceed.Wpf.Toolkit.ColorItem(color, hex);
@@ -332,7 +338,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
         {
             Current.skinColor = (e.NewValue ?? new Coloring.Color(0, 0, 0));
             MainWindow.Instance.faceImageBorder.Background = new SolidColorBrush(Current.skinColor);
-            if (Coloring.ColorConverter.ColorToHSV(Current.skinColor).V <= 0.1d)
+            if (Coloring.ColorConverter.ColorToHSV(Current.skinColor).Item3 <= 0.1d)
             {
                 var effect = new System.Windows.Media.Effects.DropShadowEffect
                 {
