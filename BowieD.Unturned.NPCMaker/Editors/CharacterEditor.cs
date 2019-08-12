@@ -332,7 +332,11 @@ namespace BowieD.Unturned.NPCMaker.Editors
         {
             Current.skinColor = (e.NewValue ?? new Coloring.Color(0, 0, 0));
             MainWindow.Instance.faceImageBorder.Background = new SolidColorBrush(Current.skinColor);
+#if LEGACY
+            if (Coloring.ColorConverter.ColorToHSV(Current.skinColor).Item3 <= 0.1d)
+#elif true
             if (Coloring.ColorConverter.ColorToHSV(Current.skinColor).V <= 0.1d)
+#endif
             {
                 var effect = new System.Windows.Media.Effects.DropShadowEffect
                 {
