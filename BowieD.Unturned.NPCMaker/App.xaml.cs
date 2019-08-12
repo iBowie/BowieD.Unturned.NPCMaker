@@ -65,9 +65,6 @@ namespace BowieD.Unturned.NPCMaker
             #region SCALE
             Resources["Scale"] = AppConfig.Instance.scale;
             #endregion
-#if LEGACY
-            Logger.LogInfo("Updating not available for this version of app");
-#elif true
             App.UpdateManager = new GitHubUpdateManager();
             var result = App.UpdateManager.CheckForUpdates().GetAwaiter().GetResult();
             if (result == UpdateAvailability.AVAILABLE)
@@ -88,7 +85,6 @@ namespace BowieD.Unturned.NPCMaker
                     }
                 }
             }
-#endif
             if (!LocUtil.IsLoaded)
                 LocUtil.LoadLanguage(AppConfig.Instance.locale);
             Logger.LogInfo("Closing console and opening app...");
@@ -106,10 +102,7 @@ namespace BowieD.Unturned.NPCMaker
         }
         public static void InitManagers()
         {
-#if LEGACY
-#elif true
             UpdateManager = new GitHubUpdateManager();
-#endif
             NotificationManager = new NotificationManager();
         }
 

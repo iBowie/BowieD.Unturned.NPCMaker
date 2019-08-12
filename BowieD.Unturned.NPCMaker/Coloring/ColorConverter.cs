@@ -31,11 +31,7 @@ namespace BowieD.Unturned.NPCMaker.Coloring
             else
                 return new Color(v, p, q);
         }
-#if LEGACY
-        public static Tuple<double, double, double> ColorToHSV(Color color)
-#elif true
         public static (double H, double S, double V) ColorToHSV(Color color)
-#endif
         {
             double RR = color.R / 255d;
             double GG = color.G / 255d;
@@ -58,11 +54,7 @@ namespace BowieD.Unturned.NPCMaker.Coloring
             double V = Cmax;
             S = Math.Round(S, 2);
             V = Math.Round(V, 2);
-#if LEGACY
-            return new Tuple<double, double, double>(H, S, V);
-#elif true
             return (H, S, V);
-#endif
         }
         public static Color HSLtoColor(double H, double S, double L)
         {
@@ -84,11 +76,7 @@ namespace BowieD.Unturned.NPCMaker.Coloring
                 preResult = (C, 0, X);
             return new Color((byte)((preResult.R + m) * 255d), (byte)((preResult.G + m) * 255d), (byte)((preResult.B + m) * 255d));
         }
-#if LEGACY
-        public static Tuple<double, double, double> ColorToHSL(Color color)
-#elif true
         public static (double H, double S, double L) ColorToHSL(Color color)
-#endif
         {
             double RR = color.R / 255d;
             double GG = color.G / 255d;
@@ -137,21 +125,13 @@ namespace BowieD.Unturned.NPCMaker.Coloring
             }
             S = Math.Round(S, 2);
             L = Math.Round(L, 2);
-#if LEGACY
-            return new Tuple<double, double, double>(H, S, L);
-#elif true
             return (H, S, L);
-#endif
         }
         public static Color CMYKtoColor(double C, double M, double Y, double K)
         {
             return new Color((byte)(255 * (1 - C) * (1 - K)), (byte)(255 * (1 - M) * (1 - K)), (byte)(255 * (1 - Y) * (1 - K)));
         }
-#if LEGACY
-        public static Tuple<double, double, double, double> ColorToCMYK(Color color)
-#elif true
         public static (double C, double M, double Y, double K) ColorToCMYK(Color color)
-#endif
         {
             double RR = color.R / 255d;
             double GG = color.G / 255d;
@@ -165,11 +145,7 @@ namespace BowieD.Unturned.NPCMaker.Coloring
             C = double.IsNaN(C) ? 0 : C;
             M = double.IsNaN(M) ? 0 : M;
             Y = double.IsNaN(Y) ? 0 : Y;
-#if LEGACY
-            return new Tuple<double, double, double, double>(C, M, Y, K);
-#elif true
             return (C, M, Y, K);
-#endif
         }
     }
 }

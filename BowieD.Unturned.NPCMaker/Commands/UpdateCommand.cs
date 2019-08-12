@@ -1,7 +1,5 @@
 ﻿namespace BowieD.Unturned.NPCMaker.Commands
 {
-#if LEGACY
-#elif true
     public class UpdateCommand : Command
     {
         public override string Name => "update";
@@ -15,5 +13,4 @@
             });
         }
     }
-#endif
 }
