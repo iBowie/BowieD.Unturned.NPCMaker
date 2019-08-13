@@ -159,6 +159,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             if (MainWindow.CurrentProject.SavePrompt() == null)
                 return;
+            MainWindow.CurrentProject.data = new NPCProject();
             MainWindow.CurrentProject.file = "";
             MainWindow.ResetEditors();
             MainWindow.CurrentProject.isSaved = true;
