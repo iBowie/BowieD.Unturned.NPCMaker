@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
 using System;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
