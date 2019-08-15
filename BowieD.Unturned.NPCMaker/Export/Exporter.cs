@@ -327,7 +327,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                                     int rwrdCnt = response.rewards.Count();
                                     for (int c = 0; c < rwrdCnt; c++)
                                     {
-                                        asset.WriteLine(response.rewards[c].GetFullFilePresentation("Response_", k, c));
+                                        asset.WriteLine(ExportReward(response.rewards[c], $"Response_{k}_", c));
                                     }
                                 }
                             }
@@ -452,7 +452,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                             asset.WriteLine($"Rewards {quest.rewards.Count}");
                             for (int k = 0; k < quest.rewards.Count; k++)
                             {
-                                asset.WriteLine(quest.rewards[k].GetFullFilePresentation("", k, k, false));
+                                asset.WriteLine(ExportReward(quest.rewards[k], "", k));
                             }
                         }
 
@@ -461,6 +461,10 @@ namespace BowieD.Unturned.NPCMaker.Export
                         for (int k = 0; k < quest.conditions?.Count; k++)
                         {
                             local.WriteLine($"Condition_{k} {quest.conditions[k].Localization}");
+                        }
+                        for (int k = 0; k < quest.rewards?.Count; k++)
+                        {
+                            local.WriteLine($"Reward_{k} {quest.rewards[k].Localization}");
                         }
                     }
                 }

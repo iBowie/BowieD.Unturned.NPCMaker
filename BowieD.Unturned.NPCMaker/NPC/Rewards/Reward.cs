@@ -166,36 +166,5 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 }
             }
         }
-        public string GetFullFilePresentation(string prefix, int prefixIndex, int rewardIndex, bool skipLocalization = true)
-        {
-            if (prefix.Length > 0)
-                if (!prefix.EndsWith("_"))
-                    prefix += "_";
-            StringBuilder output = new StringBuilder();
-            output.AppendLine($"{prefix}{(prefix.Length > 0 ? $"{prefixIndex.ToString()}_" : "")}Reward_{rewardIndex}_Type {Type.ToString()}");
-            foreach (var field in this.GetType().GetFields())
-            {
-                var fieldName = field.Name;
-                var skipFieldA = field.GetCustomAttribute<RewardSkipFieldAttribute>();
-                if ((skipLocalization && fieldName == "Localization") || skipFieldA != null)
-                    continue;
-                var fieldValue = field.GetValue(this);
-                var noValueA = field.GetCustomAttribute<RewardNoValueAttribute>();
-                var optionalA = field.GetCustomAttribute<RewardOptionalAttribute>();
-                if (skipFieldA != null)
-                    continue;
-                if (noValueA != null)
-                {
-                    if (fieldValue.Equals(true))
-                        fieldValue = "";
-                    else
-                        continue;
-                }
-                if (optionalA != null && optionalA.ConditionApplied(fieldValue))
-                    continue;
-                output.AppendLine($"{prefix}{(prefix.Length > 0 ? $"{prefixIndex.ToString()}_" : "")}Reward_{rewardIndex}_{fieldName}{(fieldValue.ToString().Length > 0 ? " " + fieldValue.ToString() : "")}");
-            }
-            return output.ToString();
-        }
     }
 }
