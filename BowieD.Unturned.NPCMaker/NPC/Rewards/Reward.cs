@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -38,8 +39,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 var fieldType = field.FieldType;
                 string localizedName = LocUtil.LocalizeReward($"Reward_{fieldName}");
                 Grid borderContents = new Grid();
-                Label l = new Label();
-                l.Content = localizedName;
+                Label l = new Label
+                {
+                    Content = localizedName
+                };
                 var rewardTooltip = field.GetCustomAttribute<RewardTooltipAttribute>();
                 if (rewardTooltip != null)
                 {
