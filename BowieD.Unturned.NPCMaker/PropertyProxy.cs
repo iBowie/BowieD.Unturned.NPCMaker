@@ -127,7 +127,7 @@ namespace BowieD.Unturned.NPCMaker
                         q.guid = Guid.NewGuid().ToString("N");
                 }
             }
-            App.NotificationManager.Notify(LocUtil.LocalizeInterface("general_Regenerated"));
+            App.NotificationManager.Notify(LocUtil.LocalizeInterface("character_Regenerated"));
             MainWindow.CurrentProject.isSaved = false;
         }
         internal void Options_Click(object sender, RoutedEventArgs e)
