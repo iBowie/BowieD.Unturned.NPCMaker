@@ -5,7 +5,7 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib">
     <Application.Resources>
         <ResourceDictionary>
-            <BitmapImage x:Key="app_Icon" UriSource="pack://application:,,,/Resources/Icons/Option_1_256x.png"/>
+            <BitmapImage x:Key="app_Icon" UriSource="pack://application:,,,/Resources/Icons/app.ico"/>
             <SolidColorBrush x:Key="AccentColor" Color="Black"/>
             <system:Double x:Key="Scale">1</system:Double>
             <ResourceDictionary.MergedDictionaries>

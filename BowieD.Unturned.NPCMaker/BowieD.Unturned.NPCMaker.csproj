@@ -50,7 +50,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Option_1_256x.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Icons\app.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>BowieD.Unturned.NPCMaker.Program</StartupObject>
@@ -460,10 +460,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\Option_1_256x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Option_1_256x.ico" />
+    <Resource Include="Resources\Icons\app.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Help\img_help_dialogueMessage.png" />
