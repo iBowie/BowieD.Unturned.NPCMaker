@@ -265,14 +265,14 @@
     <Compile Include="NPC\Rewards\RewardFlagShortRandom.cs" />
     <Compile Include="NPC\Rewards\RewardItem.cs" />
     <Compile Include="NPC\Rewards\RewardItemRandom.cs" />
-    <Compile Include="NPC\Rewards\RewardNameAttribute.cs" />
-    <Compile Include="NPC\Rewards\RewardNoValueAttribute.cs" />
-    <Compile Include="NPC\Rewards\RewardOptionalAttribute.cs" />
+    <Compile Include="NPC\Rewards\Attributes\RewardNameAttribute.cs" />
+    <Compile Include="NPC\Rewards\Attributes\RewardNoValueAttribute.cs" />
+    <Compile Include="NPC\Rewards\Attributes\RewardOptionalAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardQuest.cs" />
     <Compile Include="NPC\Rewards\RewardReputation.cs" />
-    <Compile Include="NPC\Rewards\RewardSkipFieldAttribute.cs" />
+    <Compile Include="NPC\Rewards\Attributes\RewardSkipFieldAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardTeleport.cs" />
-    <Compile Include="NPC\Rewards\RewardTooltipAttribute.cs" />
+    <Compile Include="NPC\Rewards\Attributes\RewardTooltipAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardVehicle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -484,9 +484,7 @@
     <Resource Include="Libs\MahApps.Metro.IconPacks.Core.dll" />
     <Resource Include="Libs\Newtonsoft.Json.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NPC\Rewards\Attributes\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Libs\Xceed.Wpf.Toolkit.dll" />
   </ItemGroup>
