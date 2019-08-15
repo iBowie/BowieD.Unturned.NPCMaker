@@ -17,7 +17,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
 {
     public class CharacterEditor : IEditor<NPCCharacter>
     {
-        private IEnumerable<Coloring.Color> getUnturnedColors()
+        private IEnumerable<Coloring.Color> GetUnturnedColors()
         {
             yield return new Coloring.Color("#F4E6D2");
             yield return new Coloring.Color("#D9CAB4");
@@ -78,8 +78,8 @@ namespace BowieD.Unturned.NPCMaker.Editors
             MainWindow.Instance.visibilityCondsButton.Click += Char_EditConditions_Button_Click;
             MainWindow.Instance.skinColorPicker.StandardColorsHeader = "Unturned";
             MainWindow.Instance.hairColorPicker.StandardColorsHeader = "Unturned";
-            MainWindow.Instance.skinColorPicker.StandardColors = new System.Collections.ObjectModel.ObservableCollection<Xceed.Wpf.Toolkit.ColorItem>(getUnturnedColors().Select(d => new Xceed.Wpf.Toolkit.ColorItem(d, d.ToHEX())));
-            MainWindow.Instance.hairColorPicker.StandardColors = new System.Collections.ObjectModel.ObservableCollection<Xceed.Wpf.Toolkit.ColorItem>(getUnturnedColors().Select(d => new Xceed.Wpf.Toolkit.ColorItem(d, d.ToHEX())));
+            MainWindow.Instance.skinColorPicker.StandardColors = new System.Collections.ObjectModel.ObservableCollection<Xceed.Wpf.Toolkit.ColorItem>(GetUnturnedColors().Select(d => new Xceed.Wpf.Toolkit.ColorItem(d, d.ToHEX())));
+            MainWindow.Instance.hairColorPicker.StandardColors = new System.Collections.ObjectModel.ObservableCollection<Xceed.Wpf.Toolkit.ColorItem>(GetUnturnedColors().Select(d => new Xceed.Wpf.Toolkit.ColorItem(d, d.ToHEX())));
             MainWindow.Instance.skinColorPicker.SelectedColorChanged += SkinColorPicker_SelectedColorChanged;
             MainWindow.Instance.hairColorPicker.SelectedColorChanged += HairColorPicker_SelectedColorChanged;
             MainWindow.Instance.skinColorPicker_SaveButton.Click += SkinColorPicker_SaveButton_Click;

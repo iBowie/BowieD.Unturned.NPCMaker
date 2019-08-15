@@ -32,11 +32,10 @@ namespace BowieD.Unturned.NPCMaker.Localization
             }
             else
             {
-                var file = MainWindow.Instance.TryFindResource(key) as string;
-                if (file == null)
-                    return key;
-                else
+                if (MainWindow.Instance.TryFindResource(key) is string file)
                     return file.Replace(@"\n", Environment.NewLine);
+                else
+                    return key;
             }
         }
         public static string LocalizeInterface(string key, params object[] args)

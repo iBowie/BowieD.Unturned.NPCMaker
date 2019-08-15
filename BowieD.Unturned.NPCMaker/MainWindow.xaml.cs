@@ -144,8 +144,10 @@ namespace BowieD.Unturned.NPCMaker
             }
             #endregion
             #region AppUpdate
-            AppUpdateTimer = new DispatcherTimer();
-            AppUpdateTimer.Interval = new TimeSpan(0, 0, 1);
+            AppUpdateTimer = new DispatcherTimer
+            {
+                Interval = new TimeSpan(0, 0, 1)
+            };
             AppUpdateTimer.Tick += AppUpdateTimer_Tick;
             AppUpdateTimer.Start();
             #endregion

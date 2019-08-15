@@ -46,8 +46,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 var fieldType = field.FieldType;
                 string localizedName = LocUtil.LocalizeCondition($"Condition_{fieldName}");
                 Grid borderContents = new Grid();
-                Label l = new Label();
-                l.Content = localizedName;
+                Label l = new Label
+                {
+                    Content = localizedName
+                };
                 var conditionTooltip = field.GetCustomAttribute<ConditionTooltipAttribute>();
                 if (conditionTooltip != null)
                 {
