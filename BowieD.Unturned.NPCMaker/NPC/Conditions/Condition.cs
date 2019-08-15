@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml.Serialization;
@@ -174,37 +173,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                     yield return t;
                 }
             }
-        }
-        public string GetFullFilePresentation(string prefix, int prefixIndex, int conditionIndex, bool skipLocalization = true)
-        {
-            if (prefix.Length > 0)
-                if (!prefix.EndsWith("_"))
-                    prefix += "_";
-            StringBuilder output = new StringBuilder();
-            output.AppendLine($"{prefix}{(prefix.Length > 0 ? $"{prefixIndex.ToString()}_" : "")}Condition_{conditionIndex}_Type {Type.ToString()}");
-            foreach (var field in this.GetType().GetFields())
-            {
-                var fieldName = field.Name;
-                var skipFieldA = field.GetCustomAttribute<ConditionSkipFieldAttribute>();
-                if ((skipLocalization && fieldName == "Localization") || skipFieldA != null)
-                    continue;
-                var fieldValue = field.GetValue(this);
-                var noValueA = field.GetCustomAttribute<ConditionNoValueAttribute>();
-                var optionalA = field.GetCustomAttribute<ConditionOptionalAttribute>();
-                if (skipFieldA != null)
-                    continue;
-                if (noValueA != null)
-                {
-                    if (fieldValue.Equals(true))
-                        fieldValue = "";
-                    else
-                        continue;
-                }
-                if (optionalA != null && optionalA.ConditionApplied(fieldValue))
-                    continue;
-                output.AppendLine($"{prefix}{(prefix.Length > 0 ? $"{prefixIndex.ToString()}_" : "")}Condition_{conditionIndex}_{fieldName}{(fieldValue.ToString().Length > 0 ? " " + fieldValue.ToString() : "")}");
-            }
-            return output.ToString();
         }
     }
 }

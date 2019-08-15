@@ -1,11 +1,14 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
+using BowieD.Unturned.NPCMaker.NPC.Conditions;
+using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -224,7 +227,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                             for (int k = 0; k < condCount; k++)
                             {
                                 var cond = character.visibilityConditions.ElementAt(k);
-                                asset.WriteLine(cond.GetFullFilePresentation("", -1, k));
+                                asset.WriteLine(ExportCondition(cond, "", k, true));
                             }
                         }
 
@@ -280,7 +283,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                                     int msgCnt = message.conditions.Count();
                                     for (int c = 0; c < msgCnt; c++)
                                     {
-                                        asset.WriteLine(message.conditions[c].GetFullFilePresentation("Message_", k, c));
+                                        asset.WriteLine(ExportCondition(message.conditions[c], $"Message_{k}_", c));
                                     }
                                 }
                             }
@@ -315,7 +318,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                                     int cndCnt = response.conditions.Count();
                                     for (int c = 0; c < cndCnt; c++)
                                     {
-                                        asset.WriteLine(response.conditions[c].GetFullFilePresentation("Response_", k, c));
+                                        asset.WriteLine(ExportCondition(response.conditions[c], $"Response_{k}_", c));
                                     }
                                 }
                                 if (response.rewards.Count() > 0)
@@ -376,7 +379,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                                     asset.WriteLine($"Buying_{k}_Conditions {buy[k].conditions.Count}");
                                     for (int c = 0; c < buy[k].conditions.Count; c++)
                                     {
-                                        asset.WriteLine(buy[k].conditions[c].GetFullFilePresentation("Buying", k, c));
+                                        asset.WriteLine(ExportCondition(buy[k].conditions[c], $"Buying_{k}_", c));
                                     }
                                 }
                             }
@@ -403,7 +406,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                                     asset.WriteLine($"Selling_{k}_Conditions {sell[k].conditions.Count}");
                                     for (int c = 0; c < sell[k].conditions.Count; c++)
                                     {
-                                        asset.WriteLine(sell[k].conditions[c].GetFullFilePresentation("Selling", k, c));
+                                        asset.WriteLine(ExportCondition(sell[k].conditions[c], $"Selling_{k}_", c));
                                     }
                                 }
                             }
@@ -440,7 +443,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                             asset.WriteLine($"Conditions {quest.conditions.Count}");
                             for (int k = 0; k < quest.conditions.Count; k++)
                             {
-                                asset.WriteLine(quest.conditions[k].GetFullFilePresentation("", k, k, false));
+                                asset.WriteLine(ExportCondition(quest.conditions[k], "", k));
                             }
                         }
 
@@ -463,6 +466,62 @@ namespace BowieD.Unturned.NPCMaker.Export
                 }
                 catch (Exception ex) { App.NotificationManager.Notify($"Can't export quest {quest.id}. Exception: {ex.Message}"); }
             }
+        }
+        internal static string ExportCondition(NPC.Conditions.Condition condition, string prefix, int conditionIndex, bool skipLocalization = true)
+        {
+            StringBuilder result = new StringBuilder();
+            result.AppendLine($"{prefix}Condition_{conditionIndex}_Type {condition.Type}");
+            foreach (var field in condition.GetType().GetFields())
+            {
+                var fieldName = field.Name;
+                var skipFieldA = field.GetCustomAttribute<ConditionSkipFieldAttribute>();
+                if ((skipLocalization && fieldName == "Localization") || skipFieldA != null)
+                    continue;
+                var fieldValue = field.GetValue(condition);
+                var noValueA = field.GetCustomAttribute<ConditionNoValueAttribute>();
+                var optionalA = field.GetCustomAttribute<ConditionOptionalAttribute>();
+                if (skipFieldA != null)
+                    continue;
+                if (noValueA != null)
+                {
+                    if (fieldValue.Equals(true))
+                        fieldValue = "";
+                    else
+                        continue;
+                }
+                if (optionalA != null && optionalA.ConditionApplied(fieldValue))
+                    continue;
+                result.AppendLine($"{prefix}Condition_{conditionIndex}_{fieldName} {fieldValue}");
+            }
+            return result.ToString();
+        }
+        internal static string ExportReward(Reward reward, string prefix, int rewardIndex, bool skipLocalization = true)
+        {
+            StringBuilder result = new StringBuilder();
+            result.AppendLine($"{prefix}Reward_{rewardIndex}_Type {reward.Type}");
+            foreach (var field in reward.GetType().GetFields())
+            {
+                var fieldName = field.Name;
+                var skipFieldA = field.GetCustomAttribute<RewardSkipFieldAttribute>();
+                if ((skipLocalization && fieldName == "Localization") || skipFieldA != null)
+                    continue;
+                var fieldValue = field.GetValue(reward);
+                var noValueA = field.GetCustomAttribute<RewardNoValueAttribute>();
+                var optionalA = field.GetCustomAttribute<RewardOptionalAttribute>();
+                if (skipFieldA != null)
+                    continue;
+                if (noValueA != null)
+                {
+                    if (fieldValue.Equals(true))
+                        fieldValue = "";
+                    else
+                        continue;
+                }
+                if (optionalA != null && optionalA.ConditionApplied(fieldValue))
+                    continue;
+                result.AppendLine($"{prefix}Reward_{rewardIndex}_{fieldName} {fieldValue}");
+            }
+            return result.ToString();
         }
     }
 }
