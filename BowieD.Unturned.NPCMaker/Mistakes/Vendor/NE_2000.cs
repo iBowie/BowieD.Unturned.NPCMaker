@@ -19,7 +19,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Vendor
                     yield return new NE_2000()
                     {
                         MistakeName = "NE_2000",
-                        MistakeDesc = LocUtil.LocalizeMistake("NE_2000_Desc", _vend.vendorTitle, _vend.id),
+                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_2000_Desc", _vend.vendorTitle, _vend.id),
                         Importance = IMPORTANCE.CRITICAL,
                         OnClick = new Action(() =>
                         {

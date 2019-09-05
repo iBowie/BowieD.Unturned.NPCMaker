@@ -11,10 +11,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
         public Whats_New()
         {
             InitializeComponent();
-            Title = LocUtil.LocalizeInterface("app_News_Title");
+            Title = LocalizationManager.Current.Interface["Update_Notes_Title"];
             updateTitle.Text = App.UpdateManager.Title;
             updateText.Text = App.UpdateManager.Content;
-            mainButton.Content = LocUtil.LocalizeInterface("app_News_OK");
+            mainButton.Content = LocalizationManager.Current.Interface["Update_Notes_OK"];
             Height = SystemParameters.PrimaryScreenHeight / 2;
             Width = SystemParameters.PrimaryScreenWidth / 2;
         }

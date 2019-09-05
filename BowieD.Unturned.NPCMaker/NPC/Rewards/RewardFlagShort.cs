@@ -12,7 +12,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append($"{LocUtil.LocalizeReward("Reward_Type_RewardFlagShort")} [{ID}] ");
+                sb.Append($"{LocalizationManager.Current.Reward["Type_Flag_Short"]} [{ID}] ");
                 switch (Modification)
                 {
                     case Modification_Type.Assign:

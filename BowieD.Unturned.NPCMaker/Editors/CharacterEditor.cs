@@ -258,14 +258,14 @@ namespace BowieD.Unturned.NPCMaker.Editors
             var character = Current;
             if (character.id == 0)
             {
-                App.NotificationManager.Notify(LocUtil.LocalizeInterface("character_ID_Zero"));
+                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Character_ID_Zero"]);
                 return;
             }
             var o = MainWindow.CurrentProject.data.characters.Where(d => d.id == character.id);
             if (o.Count() > 0)
                 MainWindow.CurrentProject.data.characters.Remove(o.ElementAt(0));
             MainWindow.CurrentProject.data.characters.Add(character);
-            App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Character_Saved"));
+            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Character_Saved"]);
             MainWindow.CurrentProject.isSaved = false;
             App.Logger.LogInfo($"Character {character.id} saved!");
         }

@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
+using BowieD.Unturned.NPCMaker.NPC;
 using Newtonsoft.Json;
 using System;
 using System.Globalization;
@@ -14,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
 
         public bool experimentalFeatures;
         public double scale;
-        public string locale;
+        public ELanguage language;
         public bool enableDiscord;
         public string currentTheme;
         public bool generateGuids;
@@ -66,7 +67,11 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             experimentalFeatures = false;
             animateControls = true;
             autoUpdate = true;
-            locale = LocUtil.SupportedCultures().Contains(CultureInfo.InstalledUICulture) ? CultureInfo.InstalledUICulture.Name : "en-US";
+            ELanguage c = LocalizationManager.GetLanguageFromCultureInfo(CultureInfo.InstalledUICulture);
+            if (LocalizationManager.SupportedLanguages().Contains(c))
+                language = c;
+            else
+                language = ELanguage.English;
             App.Logger.LogInfo($"[CFG] - Default configuration loaded!");
         }
         public static string Directory

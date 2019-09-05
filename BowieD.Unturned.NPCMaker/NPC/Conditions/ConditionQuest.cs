@@ -8,15 +8,14 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public ushort ID;
         public Quest_Status Status;
         public Logic_Type Logic;
-        [ConditionName("Condition_Reset_Quest_Title")]
-        [ConditionTooltip("Condition_Reset_Quest_Tooltip")]
+        [ConditionTooltip("Quest_Reset_Tooltip")]
         [ConditionNoValue]
         public bool Reset;
         public override string DisplayName
         {
             get
             {
-                string outp = LocUtil.LocalizeCondition("Condition_Type_ConditionQuest") + $" [{ID}] ";
+                string outp = LocalizationManager.Current.Condition[$"Type_Quest"] + $" [{ID}] ";
                 switch (Logic)
                 {
                     case Logic_Type.Equal:
@@ -38,7 +37,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         outp += "<= ";
                         break;
                 }
-                outp += LocUtil.LocalizeCondition($"Condition_Status_Enum_{Status.ToString()}");
+                outp += LocalizationManager.Current.Condition[$"Quest_Status_{Status}"];
                 return outp;
             }
         }

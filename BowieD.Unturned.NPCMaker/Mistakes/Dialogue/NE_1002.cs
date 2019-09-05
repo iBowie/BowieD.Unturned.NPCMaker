@@ -22,7 +22,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
                             yield return new NE_1002()
                             {
                                 MistakeName = "NE_1002",
-                                MistakeDesc = LocUtil.LocalizeMistake("NE_1002_Desc", _dial.id),
+                                MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_1002_Desc", _dial.id),
                                 Importance = IMPORTANCE.ADVICE,
                                 OnClick = new Action(() =>
                                 {

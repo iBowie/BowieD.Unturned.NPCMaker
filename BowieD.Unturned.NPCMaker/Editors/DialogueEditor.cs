@@ -80,14 +80,14 @@ namespace BowieD.Unturned.NPCMaker.Editors
             var dil = Current;
             if (dil.id == 0)
             {
-                App.NotificationManager.Notify(LocUtil.LocalizeInterface("dialogue_ID_Zero"));
+                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Dialogue_ID_Zero"]);
                 return;
             }
             var o = MainWindow.CurrentProject.data.dialogues.Where(d => d.id == dil.id);
             if (o.Count() > 0)
                 MainWindow.CurrentProject.data.dialogues.Remove(o.ElementAt(0));
             MainWindow.CurrentProject.data.dialogues.Add(dil);
-            App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Dialogue_Saved"));
+            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Dialogue_Saved"]);
             MainWindow.CurrentProject.isSaved = false;
             App.Logger.LogInfo($"Dialogue {dil.id} saved!");
         }
@@ -219,7 +219,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
             if (dial.id > 0 && MainWindow.Instance.txtStartDialogueID.Value != dial.id)
             {
                 MainWindow.Instance.txtStartDialogueID.Value = dial.id;
-                App.NotificationManager.Notify(LocUtil.LocalizeInterface("dialogue_Start_Notify", dial.id));
+                App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Dialogue_SetAsStart", dial.id));
                 App.Logger.LogInfo($"Dialogue {dial.id} set as start!");
             }
         }

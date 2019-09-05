@@ -10,7 +10,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         {
             get
             {
-                return $"{LocUtil.LocalizeReward("Reward_Type_RewardReputation")} x{Value}";
+                return $"{LocalizationManager.Current.Reward["Type_Reputation"]} x{Value}";
             }
         }
         public Int32 Value;

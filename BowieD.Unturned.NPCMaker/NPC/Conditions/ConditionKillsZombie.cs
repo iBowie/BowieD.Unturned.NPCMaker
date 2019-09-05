@@ -9,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             get
             {
-                return $"[{ID}] {LocUtil.LocalizeCondition("Condition_Type_ConditionKillsZombie")} : {LocUtil.LocalizeCondition($"Condition_Zombie_Enum_{Zombie.ToString()}")} ({Nav}) >= {Value} {(Spawn ? "Spawn" : "")}";
+                return $"[{ID}] {LocalizationManager.Current.Condition[$"Type_Kills_Zombie"]} : {LocalizationManager.Current.Condition[$"Kills_Zombie_Zombie_{Zombie}"]} ({Nav}) >= {Value} {(Spawn ? "Spawn" : "")}";
             }
         }
         public ushort ID;

@@ -12,26 +12,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append($"{LocUtil.LocalizeReward("Reward_Type_RewardFlagMath")} [{A_ID}] ");
+                sb.Append($"[{A_ID}] ");
                 switch (Operation)
                 {
-                    case Operation_Type.Addition:
-                        sb.Append("+ ");
-                        break;
-                    case Operation_Type.Assign:
-                        sb.Append("= ");
-                        break;
-                    case Operation_Type.Division:
-                        sb.Append("/ ");
-                        break;
-                    case Operation_Type.Multiplication:
-                        sb.Append("* ");
-                        break;
-                    case Operation_Type.Subtraction:
-                        sb.Append("- ");
-                        break;
+                    case Operation_Type.Addition: sb.Append("+"); break;
+                    case Operation_Type.Assign: sb.Append("="); break;
+                    case Operation_Type.Division: sb.Append("/"); break;
+                    case Operation_Type.Multiplication: sb.Append("*"); break;
+                    case Operation_Type.Subtraction: sb.Append("-"); break;
                 }
-                sb.Append($"[{B_ID}]");
+                sb.Append($" [{B_ID}]");
                 return sb.ToString();
             }
         }

@@ -23,7 +23,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
             gridScale.ScaleY = scale;
             try
             {
-                Title = string.Format(LocUtil.LocalizeInterface("select_Title"), LocUtil.LocalizeInterface("select_" + returnType.ToString()));
+                //Title = string.Format(LocalizationManager.Current.Interface("select_Title"), LocalizationManager.Current.Interface("select_" + returnType.ToString()));
+                Title = LocalizationManager.Current.Interface[$"Select_{returnType}_Title"];
             }
             catch { }
             switch (returnType)

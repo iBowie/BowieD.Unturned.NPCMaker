@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             get
             {
                 StringBuilder outp = new StringBuilder();
-                outp.Append(LocUtil.LocalizeCondition("Condition_Type_ConditionSkillset") + " ");
+                outp.Append(LocalizationManager.Current.Condition["Type_Skillset"] + " ");
                 switch (Logic)
                 {
                     case Logic_Type.Equal:

@@ -15,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append($"{LocUtil.LocalizeCondition("Condition_Type_ConditionTimeOfDay")} ");
+                sb.Append($"{LocalizationManager.Current.Condition["Type_Time_Of_Day"]} ");
                 switch (Logic)
                 {
                     case Logic_Type.Equal:

@@ -104,6 +104,15 @@ namespace BowieD.Unturned.NPCMaker.Updating
         {
             if (File.Exists(AppConfig.Directory + "update.manifest"))
             {
+                App.Logger.LogInfo("[UPDATE] - Reading Title and Body from old manifest...");
+                using (var reader = new StreamReader(AppConfig.Directory + "update.manifest"))
+                {
+                    var jsonData = reader.ReadToEnd();
+                    var manifest = JsonConvert.DeserializeObject<UpdateManifest>(jsonData);
+                    App.Logger.LogInfo("[UPDATE] - Read complete");
+                    Title = manifest.name;
+                    Content = manifest.body;
+                }
                 App.Logger.LogInfo("[UPDATE] - Deleting old update manifest...");
                 File.Delete(AppConfig.Directory + "update.manifest");
                 App.Logger.LogInfo("[UPDATE] - Deleted");

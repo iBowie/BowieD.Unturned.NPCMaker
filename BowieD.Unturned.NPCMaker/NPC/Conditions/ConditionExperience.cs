@@ -9,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             get
             {
-                string outp = LocUtil.LocalizeCondition("Condition_Type_ConditionExperience") + " ";
+                string outp = LocalizationManager.Current.Condition["Type_Experience"] + " ";
                 switch (Logic)
                 {
                     case Logic_Type.Equal:
@@ -37,9 +37,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         }
 
         public Logic_Type Logic;
-        [ConditionName("Condition_Amount")]
         public uint Value;
-        [ConditionName("Condition_Reset_Experience_Title")]
         [ConditionNoValue]
         public bool Reset;
     }

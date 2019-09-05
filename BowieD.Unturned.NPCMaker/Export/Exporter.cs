@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.NPC.Conditions;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
@@ -124,19 +125,31 @@ namespace BowieD.Unturned.NPCMaker.Export
                 {
                     Content = new TextBlock
                     {
-                        Text = LocUtil.LocalizeInterface("export_Done_Goto")
+                        Text = LocalizationManager.Current.Notification["Export_Done_Goto"]
                     }
                 };
                 if (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + $@"results\{save.guid}"))
                 {
                     Action<object, RoutedEventArgs> action = new Action<object, RoutedEventArgs>((sender, e) => { Process.Start(AppDomain.CurrentDomain.BaseDirectory + $@"results\{save.guid}"); });
                     button.Click += new RoutedEventHandler(action);
-                    App.NotificationManager.Notify(LocUtil.LocalizeInterface("export_Done"), buttons: button);
+                    App.NotificationManager.Notify(LocalizationManager.Current.Notification["Export_Done"], buttons: button);
                 }
             }
             catch (Exception ex)
             {
-                App.NotificationManager.Notify($"Export Error: {ex.Message}");
+                App.Logger.LogException("Unable to export NPC.", ex);
+                switch (ex)
+                {
+                    case IOException iOException:
+                        App.NotificationManager.Notify(LocalizationManager.Current.Notification["Export_Error_IOException"]);
+                        break;
+                    case UnauthorizedAccessException unauthorizedAccessException:
+                        App.NotificationManager.Notify(LocalizationManager.Current.Notification["Export_Error_UnauthorizedAccessException"]);
+                        break;
+                    default:
+                        App.NotificationManager.Notify(LocalizationManager.Current.Notification["Export_Error"]);
+                        break;
+                }
             }
         }
         private static string dir = "";
@@ -236,7 +249,11 @@ namespace BowieD.Unturned.NPCMaker.Export
                         local.WriteLine($"Character {character.displayName}");
                     }
                 }
-                catch (Exception ex) { App.NotificationManager.Notify($"Can't export character {character.id}. Exception: {ex.Message}"); }
+                catch (Exception ex)
+                {
+                    App.Logger.LogException($"Can't export character {character.id}", ex);
+                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Character_Error", character.id));
+                }
             }
         }
         private static void Export_Dialogues(IEnumerable<NPCDialogue> dialogues)
@@ -346,7 +363,11 @@ namespace BowieD.Unturned.NPCMaker.Export
                         }
                     }
                 }
-                catch (Exception ex) { App.NotificationManager.Notify($"Can't export dialogue {dialogue.id}. Exception: {ex.Message}"); }
+                catch (Exception ex)
+                {
+                    App.Logger.LogException($"Can't export dialogue {dialogue.id}", ex);
+                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Dialogue_Error", dialogue.id));
+                }
             }
         }
         private static void Export_Vendors(IEnumerable<NPCVendor> vendors)
@@ -419,7 +440,11 @@ namespace BowieD.Unturned.NPCMaker.Export
                         local.WriteLine($"Description {vendor.vendorDescription}");
                     }
                 }
-                catch (Exception ex) { App.NotificationManager.Notify($"Can't export vendor {vendor.id}. Exception: {ex.Message}"); }
+                catch (Exception ex)
+                {
+                    App.Logger.LogException($"Can't export vendor {vendor.id}", ex);
+                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Vendor_Error", vendor.id));
+                }
             }
         }
         private static void Export_Quests(IEnumerable<NPCQuest> quests)
@@ -475,7 +500,11 @@ namespace BowieD.Unturned.NPCMaker.Export
                         }
                     }
                 }
-                catch (Exception ex) { App.NotificationManager.Notify($"Can't export quest {quest.id}. Exception: {ex.Message}"); }
+                catch (Exception ex)
+                {
+                    App.Logger.LogException($"Can't export quest {quest.id}", ex);
+                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Quest_Error", quest.id));
+                }
             }
         }
         internal static string ExportCondition(NPC.Conditions.Condition condition, string prefix, int conditionIndex, bool skipLocalization = true)

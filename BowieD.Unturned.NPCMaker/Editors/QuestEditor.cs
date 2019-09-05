@@ -119,12 +119,15 @@ namespace BowieD.Unturned.NPCMaker.Editors
         {
             NPCQuest cur = Current;
             if (cur.id == 0)
+            {
+                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Quest_ID_Zero"]);
                 return;
+            }
             if (MainWindow.CurrentProject.data.quests.Where(d => d.id == MainWindow.Instance.questIdBox.Value).Count() > 0)
                 MainWindow.CurrentProject.data.quests.Remove(MainWindow.CurrentProject.data.quests.Where(d => d.id == MainWindow.Instance.questIdBox.Value).ElementAt(0));
             MainWindow.CurrentProject.data.quests.Add(cur);
             MainWindow.CurrentProject.isSaved = false;
-            App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Quest_Saved"));
+            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Quest_Saved"]);
         }
 
         public void SendPresence()

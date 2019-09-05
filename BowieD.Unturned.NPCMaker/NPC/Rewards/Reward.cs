@@ -3,7 +3,6 @@ using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml.Serialization;
@@ -25,7 +24,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     [XmlInclude(typeof(RewardFlagMath))]
     public abstract class Reward : IHasDisplayName
     {
-        [RewardTooltip("Reward_Localization_Tooltip")]
+        [RewardTooltip("Localization_Tooltip")]
         [RewardSkipField]
         public string Localization;
         public abstract RewardType Type { get; }
@@ -37,7 +36,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             {
                 string fieldName = field.Name;
                 var fieldType = field.FieldType;
-                string localizedName = LocUtil.LocalizeReward($"Reward_{fieldName}");
+                string localizedName = LocalizationManager.Current.Reward[$"{Type}_{fieldName}"];
                 Grid borderContents = new Grid();
                 Label l = new Label
                 {
@@ -47,11 +46,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 if (rewardTooltip != null)
                 {
                     l.ToolTip = rewardTooltip.Text;
-                }
-                var rewardName = field.GetCustomAttribute<RewardNameAttribute>();
-                if (rewardName != null)
-                {
-                    l.Content = rewardName.Text;
                 }
                 borderContents.Children.Add(l);
                 FrameworkElement valueControl = null;
@@ -132,7 +126,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                         ComboBoxItem cbi = new ComboBoxItem
                         {
                             Tag = eValue,
-                            Content = LocUtil.LocalizeReward($"Reward_{field.Name}_Enum_{(eValue.ToString())}")
+                            Content = LocalizationManager.Current.Reward[$"{Type}_{field.Name}_{eValue.ToString()}"]
                         };
                         cBox.Items.Add(cbi);
                     }

@@ -32,7 +32,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             foreach (Type t in Condition.GetTypes())
             {
                 ComboBoxItem cbi = new ComboBoxItem();
-                cbi.Content = LocUtil.LocalizeCondition($"Condition_Type_{t.Name}");
+                cbi.Content = LocalizationManager.Current.Interface[$"Type_{t.Name}"];
                 cbi.Tag = t;
                 typeBox.Items.Add(cbi);
                 if (!_chosen && condition != null && condition.GetType() == t)
@@ -114,7 +114,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 DialogResult = true;
                 Close();
             }
-            catch { MessageBox.Show(LocUtil.LocalizeInterface("conditionEditor_Fail")); } // write some error message or something like that
+            catch
+            {
+                MessageBox.Show(LocalizationManager.Current.Interface["Editor_Condition_Fail"]);
+            } // write some error message or something like that
         }
 
         private void SetValueToControl(FrameworkElement element, object value)

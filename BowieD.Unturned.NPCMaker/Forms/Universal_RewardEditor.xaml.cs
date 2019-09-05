@@ -32,7 +32,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             foreach (Type t in Reward.GetTypes())
             {
                 ComboBoxItem cbi = new ComboBoxItem();
-                cbi.Content = LocUtil.LocalizeReward($"Reward_Type_{t.Name}");
+                cbi.Content = LocalizationManager.Current.Reward[$"Type_{t.Name}"];
                 cbi.Tag = t;
                 typeBox.Items.Add(cbi);
                 if (!_chosen && reward != null && reward.GetType() == t)
@@ -87,7 +87,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 DialogResult = true;
                 Close();
             }
-            catch { MessageBox.Show(LocUtil.LocalizeInterface("rewardEditor_Fail")); }
+            catch
+            {
+                MessageBox.Show(LocalizationManager.Current.Interface["Editor_Reward_Fail"]);
+            }
         }
         private void TypeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

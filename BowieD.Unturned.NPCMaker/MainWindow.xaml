@@ -31,64 +31,64 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Menu VerticalAlignment="Top">
-                <MenuItem Header="{DynamicResource menu_File}">
-                    <MenuItem Header="{DynamicResource menu_File_New}" Name="newButton">
+                <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File}">
+                    <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_New}" Name="newButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="File" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource menu_File_Open}" Name="loadButton">
+                    <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_Open}" Name="loadButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="FolderOpen" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource menu_File_Save}" Name="saveButton">
+                    <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_Save}" Name="saveButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="ContentSave" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource menu_File_SaveAs}" Name="saveAsButton">
+                    <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_SaveAs}" Name="saveAsButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="ContentSave" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Name="RecentList" Header="{DynamicResource menu_File_Recent}">
+                    <MenuItem Name="RecentList" Header="{DynamicResource INTERFACE_Main_Menu_File_Recent}">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="History" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource menu_File_Export}" Name="exportButton">
+                    <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_Export}" Name="exportButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Export" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Header="{DynamicResource menu_File_Exit}" Name="exitButton">
+                    <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_Exit}" Name="exitButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Close" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Name="optionsMenuItem" Header="{DynamicResource menu_Options}"/>
-                <MenuItem Header="{DynamicResource menu_Communication}">
-                    <MenuItem Name="steamComm" Tag="https://steamcommunity.com/profiles/76561198085825110" Header="{DynamicResource feedback_Steam}">
+                <MenuItem Name="optionsMenuItem" Header="{DynamicResource INTERFACE_Main_Menu_Options}"/>
+                <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_Communication}">
+                    <MenuItem Name="steamComm" Tag="https://steamcommunity.com/profiles/76561198085825110" Header="{DynamicResource INTERFACE_Main_Menu_Communication_Steam}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/Services/Steam.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Name="discordComm" Tag="https://discord.gg/Geqtkx2" Header="{DynamicResource feedback_Discord}">
+                    <MenuItem Name="discordComm" Tag="https://discord.gg/Geqtkx2" Header="{DynamicResource INTERFACE_Main_Menu_Communication_Discord}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/Services/Discord.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Name="vkComm" Tag="https://vk.com/id250813640" Header="{DynamicResource feedback_VK}">
+                    <MenuItem Name="vkComm" Tag="https://vk.com/id250813640" Header="{DynamicResource INTERFACE_Main_Menu_Communication_VK}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/Services/VK.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Name="aboutMenuItem" Header="{DynamicResource menu_About}"/>
+                <MenuItem Name="aboutMenuItem" Header="{DynamicResource INTERFACE_Main_Menu_About}"/>
                 <Label Margin="-5" IsEnabled="False" Name="menuCurrentFileLabel" Content="Current File: "/>
             </Menu>
             <TabControl Grid.Row="1" Background="Transparent" Padding="-1" Name="mainTabControl" SelectedIndex="0" Margin="0,5,0,0">
@@ -112,48 +112,48 @@
                         <TextBox Name="txtEditorName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,10,0,0">
                             <TextBox.ToolTip>
                                 <StackPanel>
-                                    <Label Content="{DynamicResource character_EditorName_Tooltip}"/>
+                                    <Label Content="{DynamicResource INTERFACE_Main_Tab_Character_Name_Editor_Tooltip}"/>
                                     <Image Source="Resources/Help/img_help_editorName.png"/>
                                 </StackPanel>
                             </TextBox.ToolTip>
                         </TextBox>
-                        <TextBlock HorizontalAlignment="Left" Margin="143,16,0,0" TextWrapping="Wrap" Text="{DynamicResource character_EditorName}" VerticalAlignment="Top"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="143,16,0,0" TextWrapping="Wrap" Text="{DynamicResource CHARACTER_Name_Editor}" VerticalAlignment="Top"/>
                         <TextBox Name="txtDisplayName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,41,0,0">
                             <TextBox.ToolTip>
                                 <StackPanel>
-                                    <Label Content="{DynamicResource character_DisplayName_Tooltip}"/>
+                                    <Label Content="{DynamicResource INTERFACE_Main_Tab_Character_Name_Display_Tooltip}"/>
                                     <Image Source="Resources/Help/img_help_displayName.png"/>
                                 </StackPanel>
                             </TextBox.ToolTip>
                         </TextBox>
-                        <TextBlock  HorizontalAlignment="Left" Margin="143,45,0,0" TextWrapping="Wrap" Text="{DynamicResource character_DisplayName}" VerticalAlignment="Top"/>
+                        <TextBlock  HorizontalAlignment="Left" Margin="143,45,0,0" TextWrapping="Wrap" Text="{DynamicResource CHARACTER_Name_Display}" VerticalAlignment="Top"/>
                         <mah:NumericUpDown Name="txtID" HorizontalAlignment="Left" VerticalAlignment="Top" Width="64" Height="24" Margin="10,72,0,0" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
                             <mah:NumericUpDown.ToolTip>
                                 <StackPanel>
-                                    <Label Content="{DynamicResource character_ID_Tooltip}"/>
+                                    <Label Content="{DynamicResource INTERFACE_Main_Tab_Character_ID_Tooltip}"/>
                                 </StackPanel>
                             </mah:NumericUpDown.ToolTip>
                         </mah:NumericUpDown>
-                        <TextBlock  HorizontalAlignment="Left" Margin="79,75,0,0" TextWrapping="Wrap" Text="{DynamicResource character_ID}" VerticalAlignment="Top"/>
+                        <TextBlock  HorizontalAlignment="Left" Margin="79,75,0,0" TextWrapping="Wrap" Text="{DynamicResource CHARACTER_ID}" VerticalAlignment="Top"/>
                         <mah:NumericUpDown Name="txtStartDialogueID" HorizontalAlignment="Left" Height="23" Margin="10,103,0,0" VerticalAlignment="Top" Width="128" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
                             <mah:NumericUpDown.ToolTip>
                                 <ToolTip>
                                     <StackPanel>
-                                        <Label Content="{DynamicResource character_StartDialogue_Tooltip}"/>
+                                        <Label Content="{DynamicResource INTERFACE_Main_Tab_Character_Dialogue_Tooltip}"/>
                                         <Image Source="Resources/Help/img_help_startDialogue.png"/>
                                     </StackPanel>
                                 </ToolTip>
                             </mah:NumericUpDown.ToolTip>
                         </mah:NumericUpDown>
-                        <TextBlock  HorizontalAlignment="Left" Margin="143,107,0,0" TextWrapping="Wrap" Text="{DynamicResource character_StartDialogue}" VerticalAlignment="Top"/>
-                        <Button Name="visibilityCondsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource character_Conditions}" Margin="10,135,0,0" Width="212" Height="28">
+                        <TextBlock  HorizontalAlignment="Left" Margin="143,107,0,0" TextWrapping="Wrap" Text="{DynamicResource CHARACTER_Dialogue}" VerticalAlignment="Top"/>
+                        <Button Name="visibilityCondsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource CHARACTER_Conditions}" Margin="10,135,0,0" Width="212" Height="28">
                             <Button.ToolTip>
                                 <StackPanel>
                                     <Image Source="Resources/Help/img_help_visibilityConditions.png"/>
                                 </StackPanel>
                             </Button.ToolTip>
                         </Button>
-                        <Button Name="regenerateGuidsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource character_Regenerate}" Margin="10,167,0,0" MinWidth="212" Height="28"/>
+                        <Button Name="regenerateGuidsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource CHARACTER_Main_Tab_Character_Guid_Generate}" Margin="10,167,0,0" MinWidth="212" Height="28"/>
                         <Grid Margin="0,26,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="432">
                             <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" Background="Black" HorizontalAlignment="Right" Height="98" Margin="0,38,210,0" VerticalAlignment="Top" Width="98">
                                 <Image Name="faceImageControl" Source="Resources/Unturned/Faces/1.png" >
@@ -299,10 +299,10 @@
                                 </Grid>
                             </Border>
                             <mah:NumericUpDown Minimum="0" x:Name="hairImageIndex" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,109,0" Width="{Binding Width, ElementName=hairImageBorder}" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
-                            <Button Name="apparelFaceRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="0,171,210,0" Width="98" Height="26"/>
-                            <Button Name="apparelHairRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="0,171,109,0" Width="98" Height="26"/>
-                            <Button Name="apparelBeardRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource apparel_Char_Random}" Margin="0,171,8,0" Width="98" Height="26"/>
-                            <xctk:ColorPicker AdvancedButtonHeader="{DynamicResource picker_Advanced_Header}" StandardButtonHeader="{DynamicResource picker_Standard_Header}" AvailableColorsHeader="{DynamicResource picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="skinColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,54,0,0" Width="89" Height="26"/>
+                            <Button Name="apparelFaceRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource CHARACTER_Main_Tab_Character_Face_Random}" Margin="0,171,210,0" Width="98" Height="26"/>
+                            <Button Name="apparelHairRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource CHARACTER_Main_Tab_Character_Hair_Random}" Margin="0,171,109,0" Width="98" Height="26"/>
+                            <Button Name="apparelBeardRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource CHARACTER_Main_Tab_Character_Beard_Random}" Margin="0,171,8,0" Width="98" Height="26"/>
+                            <xctk:ColorPicker AdvancedButtonHeader="{DynamicResource INTERFACE_Color_Picker_Advanced_Header}" StandardButtonHeader="{DynamicResource INTERFACE_Color_Picker_Standard_Header}" AvailableColorsHeader="{DynamicResource INTERFACE_Color_Picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="skinColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,54,0,0" Width="89" Height="26"/>
                             <Button Name="skinColorPicker_SaveButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="26" Margin="93,54,0,0">
                                 <Button.Content>
                                     <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="ContentSave" Margin="-4"/>
@@ -313,50 +313,50 @@
                                     <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="ContentSave" Margin="-4"/>
                                 </Button.Content>
                             </Button>
-                            <xctk:ColorPicker AdvancedButtonHeader="{DynamicResource picker_Advanced_Header}" StandardButtonHeader="{DynamicResource picker_Standard_Header}" AvailableColorsHeader="{DynamicResource picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="hairColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,110,0,0" Width="89" Height="26"/>
-                            <CheckBox Name="apparelLeftHandedCheckbox" HorizontalContentAlignment="Right" Content="{DynamicResource apparel_LeftHanded}" HorizontalAlignment="Left" Margin="0,140,0,0" VerticalAlignment="Top" Width="120" mah:ToggleButtonHelper.ContentDirection="RightToLeft"/>
+                            <xctk:ColorPicker AdvancedButtonHeader="{DynamicResource INTERFACE_Color_Picker_Advanced_Header}" StandardButtonHeader="{DynamicResource INTERFACE_Color_Picker_Standard_Header}" AvailableColorsHeader="{DynamicResource INTERFACE_Color_Picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="hairColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,110,0,0" Width="89" Height="26"/>
+                            <CheckBox Name="apparelLeftHandedCheckbox" HorizontalContentAlignment="Right" Content="{DynamicResource CHARACTER_LeftHanded}" HorizontalAlignment="Left" Margin="0,140,0,0" VerticalAlignment="Top" Width="120" mah:ToggleButtonHelper.ContentDirection="RightToLeft"/>
                             <ComboBox Name="apparelPoseBox" HorizontalAlignment="Left" SelectedIndex="0" Margin="-1,171,0,0" VerticalAlignment="Top" Width="120" Height="26">
-                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Stand}">
+                                <ComboBoxItem Content="{DynamicResource CHARACTER_Pose_Stand}">
                                     <ComboBoxItem.Tag>
                                         <npc:NPC_Pose>Stand</npc:NPC_Pose>
                                     </ComboBoxItem.Tag>
                                 </ComboBoxItem>
-                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Sit}">
+                                <ComboBoxItem Content="{DynamicResource CHARACTER_Pose_Sit}">
                                     <ComboBoxItem.Tag>
                                         <npc:NPC_Pose>Sit</npc:NPC_Pose>
                                     </ComboBoxItem.Tag>
                                 </ComboBoxItem>
-                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Asleep}">
+                                <ComboBoxItem Content="{DynamicResource CHARACTER_Pose_Asleep}">
                                     <ComboBoxItem.Tag>
                                         <npc:NPC_Pose>Asleep</npc:NPC_Pose>
                                     </ComboBoxItem.Tag>
                                 </ComboBoxItem>
-                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Passive}">
+                                <ComboBoxItem Content="{DynamicResource CHARACTER_Pose_Passive}">
                                     <ComboBoxItem.Tag>
                                         <npc:NPC_Pose>Passive</npc:NPC_Pose>
                                     </ComboBoxItem.Tag>
                                 </ComboBoxItem>
-                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Crouch}">
+                                <ComboBoxItem Content="{DynamicResource CHARACTER_Pose_Crouch}">
                                     <ComboBoxItem.Tag>
                                         <npc:NPC_Pose>Crouch</npc:NPC_Pose>
                                     </ComboBoxItem.Tag>
                                 </ComboBoxItem>
-                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Prone}">
+                                <ComboBoxItem Content="{DynamicResource CHARACTER_Pose_Prone}">
                                     <ComboBoxItem.Tag>
                                         <npc:NPC_Pose>Prone</npc:NPC_Pose>
                                     </ComboBoxItem.Tag>
                                 </ComboBoxItem>
-                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Under_Arrest}">
+                                <ComboBoxItem Content="{DynamicResource CHARACTER_Pose_Under_Arrest}">
                                     <ComboBoxItem.Tag>
                                         <npc:NPC_Pose>Under_Arrest</npc:NPC_Pose>
                                     </ComboBoxItem.Tag>
                                 </ComboBoxItem>
-                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Rest}">
+                                <ComboBoxItem Content="{DynamicResource CHARACTER_Pose_Rest}">
                                     <ComboBoxItem.Tag>
                                         <npc:NPC_Pose>Rest</npc:NPC_Pose>
                                     </ComboBoxItem.Tag>
                                 </ComboBoxItem>
-                                <ComboBoxItem Content="{DynamicResource apparel_Pose_Surrender}">
+                                <ComboBoxItem Content="{DynamicResource CHARACTER_Pose_Surrender}">
                                     <ComboBoxItem.Tag>
                                         <npc:NPC_Pose>Surrender</npc:NPC_Pose>
                                     </ComboBoxItem.Tag>

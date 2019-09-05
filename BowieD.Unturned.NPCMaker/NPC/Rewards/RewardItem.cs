@@ -11,7 +11,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         {
             get
             {
-                return $"{LocUtil.LocalizeReward("Reward_Type_RewardItem")} {ID} x{Amount}";
+                return $"{LocalizationManager.Current.Reward["Type_Item"]} {ID} x{Amount}";
             }
         }
         public UInt16 ID;

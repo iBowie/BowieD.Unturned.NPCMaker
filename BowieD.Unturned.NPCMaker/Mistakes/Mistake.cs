@@ -9,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
         public Mistake() { }
         public string MistakeName { get; set; }
         public string MistakeDesc { get; set; }
-        public string MistakeImportance => Importance == IMPORTANCE.ADVICE ? LocUtil.LocalizeInterface("IMPORTANCE_ADVICE") : Importance == IMPORTANCE.WARNING ? LocUtil.LocalizeInterface("IMPORTANCE_WARNING") : LocUtil.LocalizeInterface("IMPORTANCE_CRITICAL");
+        public string MistakeImportance => LocalizationManager.Current.Mistakes[$"Importance_{Importance}"];
         public Action OnClick { get; set; }
         public IMPORTANCE Importance = IMPORTANCE.ADVICE;
         public virtual IEnumerable<Mistake> CheckMistake()

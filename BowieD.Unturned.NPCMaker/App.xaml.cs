@@ -76,8 +76,8 @@ namespace BowieD.Unturned.NPCMaker
                 }
                 else
                 {
-                    LocUtil.LoadLanguage(AppConfig.Instance.locale);
-                    var dlg = MessageBox.Show(LocUtil.LocalizeInterface("update_available_body"), LocUtil.LocalizeInterface("update_available_title"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    LocalizationManager.LoadLanguage(AppConfig.Instance.language);
+                    var dlg = MessageBox.Show(LocalizationManager.Current.Interface["Update_Available_Body"], LocalizationManager.Current.Interface["Update_Available_Title"], MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (dlg == MessageBoxResult.Yes)
                     {
                         App.UpdateManager.StartUpdate();
@@ -85,8 +85,8 @@ namespace BowieD.Unturned.NPCMaker
                     }
                 }
             }
-            if (!LocUtil.IsLoaded)
-                LocUtil.LoadLanguage(AppConfig.Instance.locale);
+            if (!LocalizationManager.IsLoaded)
+                LocalizationManager.LoadLanguage(AppConfig.Instance.language);
             Logger.LogInfo("Closing console and opening app...");
             MainWindow mw = new MainWindow();
             InitManagers();

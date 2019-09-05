@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append(LocUtil.LocalizeCondition("Condition_Type_ConditionPlayerLifeVirus") + " ");
+                sb.Append(LocalizationManager.Current.Condition["Type_Player_Life_Virus"] + " ");
                 switch (Logic)
                 {
                     case Logic_Type.Equal:
