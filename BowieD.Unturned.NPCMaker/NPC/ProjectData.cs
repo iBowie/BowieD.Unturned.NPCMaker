@@ -47,7 +47,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 {
                     FileName = "Unnamed",
                     DefaultExt = ".npcproj",
-                    Filter = "NPC Project (.npcproj)|*.npcproj"
+                    Filter = $"{LocalizationManager.Current.General["Project_SaveFilter"]}|*.npcproj"
                 };
                 if (sfd.ShowDialog() == true)
                 {

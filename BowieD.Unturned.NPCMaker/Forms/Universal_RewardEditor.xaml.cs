@@ -31,9 +31,11 @@ namespace BowieD.Unturned.NPCMaker.Forms
             int _index = 0;
             foreach (Type t in Reward.GetTypes())
             {
-                ComboBoxItem cbi = new ComboBoxItem();
-                cbi.Content = LocalizationManager.Current.Reward[$"Type_{t.Name}"];
-                cbi.Tag = t;
+                ComboBoxItem cbi = new ComboBoxItem
+                {
+                    Content = LocalizationManager.Current.Reward[$"Type{Reward.GetLocalizationKey(t.Name)}"],
+                    Tag = t
+                };
                 typeBox.Items.Add(cbi);
                 if (!_chosen && reward != null && reward.GetType() == t)
                 {
@@ -149,9 +151,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
             switch (element)
             {
                 case MahApps.Metro.Controls.NumericUpDown nud:
-                    return nud.Value.HasValue ? nud.Value.Value : 0;
+                    return nud.Value ?? 0;
                 case CheckBox checkBox:
-                    return checkBox.IsChecked.HasValue ? checkBox.IsChecked.Value : false;
+                    return checkBox.IsChecked ?? false;
                 case TextBox textBox:
                     return textBox.Text;
                 case ComboBox comboBox:

@@ -94,17 +94,17 @@
             <TabControl Grid.Row="1" Background="Transparent" Padding="-1" Name="mainTabControl" SelectedIndex="0" Margin="0,5,0,0">
                 <TabItem Name="characterTab" Header="{DynamicResource INTERFACE_Main_Tab_Character}">
                     <Grid>
-                        <Button Name="characterSaveButton" ToolTip="{DynamicResource character_Save}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Name="characterSaveButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Character_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Name="characterResetButton" ToolTip="{DynamicResource character_Clear}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Name="characterResetButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Character_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Name="characterOpenButton" ToolTip="{DynamicResource character_Open}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Name="characterOpenButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Character_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
@@ -153,7 +153,7 @@
                                 </StackPanel>
                             </Button.ToolTip>
                         </Button>
-                        <Button Name="regenerateGuidsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource CHARACTER_Main_Tab_Character_Guid_Generate}" Margin="10,167,0,0" MinWidth="212" Height="28"/>
+                        <Button Name="regenerateGuidsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource INTERFACE_Main_Tab_Character_Guid_Generate}" Margin="10,167,0,0" MinWidth="212" Height="28"/>
                         <Grid Margin="0,26,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="432">
                             <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" Background="Black" HorizontalAlignment="Right" Height="98" Margin="0,38,210,0" VerticalAlignment="Top" Width="98">
                                 <Image Name="faceImageControl" Source="Resources/Unturned/Faces/1.png" >
@@ -299,9 +299,9 @@
                                 </Grid>
                             </Border>
                             <mah:NumericUpDown Minimum="0" x:Name="hairImageIndex" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,109,0" Width="{Binding Width, ElementName=hairImageBorder}" Value="0" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
-                            <Button Name="apparelFaceRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource CHARACTER_Main_Tab_Character_Face_Random}" Margin="0,171,210,0" Width="98" Height="26"/>
-                            <Button Name="apparelHairRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource CHARACTER_Main_Tab_Character_Hair_Random}" Margin="0,171,109,0" Width="98" Height="26"/>
-                            <Button Name="apparelBeardRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource CHARACTER_Main_Tab_Character_Beard_Random}" Margin="0,171,8,0" Width="98" Height="26"/>
+                            <Button Name="apparelFaceRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource INTERFACE_Main_Tab_Character_Face_Random}" Margin="0,171,210,0" Width="98" Height="26"/>
+                            <Button Name="apparelHairRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource INTERFACE_Main_Tab_Character_Hair_Random}" Margin="0,171,109,0" Width="98" Height="26"/>
+                            <Button Name="apparelBeardRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource INTERFACE_Main_Tab_Character_Beard_Random}" Margin="0,171,8,0" Width="98" Height="26"/>
                             <xctk:ColorPicker AdvancedButtonHeader="{DynamicResource INTERFACE_Color_Picker_Advanced_Header}" StandardButtonHeader="{DynamicResource INTERFACE_Color_Picker_Standard_Header}" AvailableColorsHeader="{DynamicResource INTERFACE_Color_Picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="skinColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,54,0,0" Width="89" Height="26"/>
                             <Button Name="skinColorPicker_SaveButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="26" Margin="93,54,0,0">
                                 <Button.Content>
@@ -362,9 +362,9 @@
                                     </ComboBoxItem.Tag>
                                 </ComboBoxItem>
                             </ComboBox>
-                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,155,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Pose}" VerticalAlignment="Top" Width="120" Height="16"/>
-                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,38,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Skin}" VerticalAlignment="Top" Width="120" Height="16"/>
-                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,94,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Hair}" VerticalAlignment="Top" Width="120"/>
+                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,155,0,0" TextWrapping="Wrap" Text="{DynamicResource CHARACTER_Pose}" VerticalAlignment="Top" Width="120" Height="16"/>
+                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,38,0,0" TextWrapping="Wrap" Text="{DynamicResource CHARACTER_Color_Skin}" VerticalAlignment="Top" Width="120" Height="16"/>
+                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,94,0,0" TextWrapping="Wrap" Text="{DynamicResource CHARACTER_Color_Hair}" VerticalAlignment="Top" Width="120"/>
                             <Label HorizontalContentAlignment="Center" Content="{DynamicResource CHARACTER_Face}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,210,0" Width="98" Height="28"/>
                             <Label HorizontalContentAlignment="Center" Content="{DynamicResource CHARACTER_Hair}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,109,0" Width="98" Height="28"/>
                             <Label HorizontalContentAlignment="Center" Content="{DynamicResource CHARACTER_Beard}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,8,0" Width="98" Height="28"/>
@@ -427,7 +427,7 @@
                                             <Label Content="{DynamicResource CHARACTER_Clothing_Mask}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
                                             <Label Content="{DynamicResource CHARACTER_Clothing_Glasses}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
                                             <Label Content="{DynamicResource CHARACTER_Clothing_Shirt}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Backpack}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Back}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
                                             <Label Content="{DynamicResource CHARACTER_Clothing_Vest}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
                                             <Label Content="{DynamicResource CHARACTER_Clothing_Pants}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
                                         </Grid>
@@ -485,17 +485,17 @@
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <Label Content="{DynamicResource apparel_Hat_ID}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Mask_ID}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Glasses_ID}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Top_ID}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Backpack_ID}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Vest_ID}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Bottom_ID}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Hat}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Mask}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Glasses}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Shirt}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Back}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Vest}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Pants}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
                                         </Grid>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{DynamicResource apparel_Clothing_Halloween}" mah:ControlsHelper.HeaderFontSize="18">
+                                <TabItem Header="{DynamicResource CHARACTER_Clothing_Halloween}" mah:ControlsHelper.HeaderFontSize="18">
                                     <ScrollViewer>
                                         <Grid>
                                             <mah:NumericUpDown x:Name="halloweenhatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
@@ -547,19 +547,19 @@
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <Label Content="{DynamicResource apparel_Hat_ID}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Mask_ID}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Glasses_ID}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Vest_ID}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Top_ID}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Backpack_ID}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Bottom_ID}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Hat}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Mask}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Glasses}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Shirt}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Back}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Vest}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Pants}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
                                         </Grid>
                                     </ScrollViewer>
                                 </TabItem>
                             </TabControl>
                         </GroupBox>
-                        <GroupBox Header="{DynamicResource apparel_Group_Equipment}" HorizontalAlignment="Left" Margin="10,0,0,10" Width="300" Height="Auto" VerticalAlignment="Bottom">
+                        <GroupBox Header="{DynamicResource CHARACTER_Equipment}" HorizontalAlignment="Left" Margin="10,0,0,10" Width="300" Height="Auto" VerticalAlignment="Bottom">
                             <ScrollViewer>
                                 <Grid>
                                     <mah:NumericUpDown x:Name="primaryIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
@@ -578,38 +578,38 @@
                                         </mah:NumericUpDown.ToolTip>
                                     </mah:NumericUpDown>
 
-                                    <Label Content="{DynamicResource apparel_Primary_ID}"  Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
-                                    <Label Content="{DynamicResource apparel_Secondary_ID}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
-                                    <Label Content="{DynamicResource apparel_Tertiary_ID}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
+                                    <Label Content="{DynamicResource CHARACTER_Equipment_Primary}"  Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
+                                    <Label Content="{DynamicResource CHARACTER_Equipment_Secondary}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
+                                    <Label Content="{DynamicResource CHARACTER_Equipment_Tertiary}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
                                     <ComboBox Name="equipSlotBox" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="120">
-                                        <ComboBoxItem Content="{DynamicResource apparel_Equip_None}">
+                                        <ComboBoxItem Content="{DynamicResource CHARACTER_Equipment_Equipped_None}">
                                             <ComboBoxItem.Tag>
                                                 <npc:Equip_Type>None</npc:Equip_Type>
                                             </ComboBoxItem.Tag>
                                         </ComboBoxItem>
-                                        <ComboBoxItem Content="{DynamicResource apparel_Equip_Primary}">
+                                        <ComboBoxItem Content="{DynamicResource CHARACTER_Equipment_Equipped_Primary}">
                                             <ComboBoxItem.Tag>
                                                 <npc:Equip_Type>Primary</npc:Equip_Type>
                                             </ComboBoxItem.Tag>
                                         </ComboBoxItem>
-                                        <ComboBoxItem Content="{DynamicResource apparel_Equip_Secondary}">
+                                        <ComboBoxItem Content="{DynamicResource CHARACTER_Equipment_Equipped_Secondary}">
                                             <ComboBoxItem.Tag>
                                                 <npc:Equip_Type>Secondary</npc:Equip_Type>
                                             </ComboBoxItem.Tag>
                                         </ComboBoxItem>
-                                        <ComboBoxItem Content="{DynamicResource apparel_Equip_Tertiary}">
+                                        <ComboBoxItem Content="{DynamicResource CHARACTER_Equipment_Equipped_Tertiary}">
                                             <ComboBoxItem.Tag>
                                                 <npc:Equip_Type>Tertiary</npc:Equip_Type>
                                             </ComboBoxItem.Tag>
                                         </ComboBoxItem>
                                     </ComboBox>
-                                    <Label Content="{DynamicResource apparel_Equipped_Slot}" Margin="135,100,0,0" VerticalAlignment="Top" Height="27"/>
+                                    <Label Content="{DynamicResource CHARACTER_Equipment_Equipped}" Margin="135,100,0,0" VerticalAlignment="Top" Height="27"/>
                                 </Grid>
                             </ScrollViewer>
                         </GroupBox>
                     </Grid>
                 </TabItem>
-                <TabItem Name="dialogueTab" Header="{DynamicResource tab_Dialogues}">
+                <TabItem Name="dialogueTab" Header="{DynamicResource INTERFACE_Main_Tab_Dialogue}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="33*"/>
@@ -620,8 +620,8 @@
                             <RowDefinition Height="80"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBox mah:TextBoxHelper.Watermark="{DynamicResource app_Comment}" Name="dialogue_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
-                        <Button Name="setAsStartButton" Grid.Column="1" Margin="10,10,10,0" Height="32" VerticalAlignment="Top" VerticalContentAlignment="Center" Content="{DynamicResource dialogue_StartDialogue}">
+                        <TextBox mah:TextBoxHelper.Watermark="{DynamicResource INTERFACE_App_Comment}" Name="dialogue_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
+                        <Button Name="setAsStartButton" Grid.Column="1" Margin="10,10,10,0" Height="32" VerticalAlignment="Top" VerticalContentAlignment="Center" Content="{DynamicResource INTERFACE_Main_Tab_Dialogue_SetAsStart}">
                             <Button.ToolTip>
                                 <StackPanel>
                                     <Image Source="Resources/Help/img_help_startDialogue.png"/>
@@ -630,12 +630,12 @@
                         </Button>
                         <mah:NumericUpDown x:Name="dialogueInputIdControl" Width="62" Height="26" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
                         <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
-                            <TextBlock TextAlignment="Center" Text="{DynamicResource dialogue_ID}" VerticalAlignment="Center"/>
+                            <TextBlock TextAlignment="Center" Text="{DynamicResource DIALOGUE_ID}" VerticalAlignment="Center"/>
                         </Border>
-                        <GroupBox Grid.Row="1" Header="{DynamicResource dialogue_Group_Pages}" Margin="10,10,5,10">
+                        <GroupBox Grid.Row="1" Header="{DynamicResource DIALOGUE_Pages}" Margin="10,10,5,10">
                             <ScrollViewer>
                                 <StackPanel Name="messagePagesGrid" VerticalAlignment="Top">
-                                    <Button Name="dialogueAddMessageButton" Margin="10" Height="32" Content="{DynamicResource dialogue_Message_Add}">
+                                    <Button Name="dialogueAddMessageButton" Margin="10" Height="32" Content="{DynamicResource DIALOGUE_Message_Add}">
                                         <Button.ToolTip>
                                             <StackPanel>
                                                 <Image Source="Resources/Help/img_help_dialogueMessage.png"/>
@@ -645,10 +645,10 @@
                                 </StackPanel>
                             </ScrollViewer>
                         </GroupBox>
-                        <GroupBox Grid.Column="1" Grid.Row="1" Header="{DynamicResource dialogue_Group_Replys}" Margin="5,10,5,10" MinWidth="361">
+                        <GroupBox Grid.Column="1" Grid.Row="1" Header="{DynamicResource DIALOGUE_Replies}" Margin="5,10,5,10" MinWidth="361">
                             <ScrollViewer>
                                 <StackPanel x:Name="dialoguePlayerRepliesGrid">
-                                    <Button Name="dialogueAddReplyButton" Margin="10" VerticalAlignment="Top" Height="32" Content="{DynamicResource dialogue_Reply_Add}" Width="312">
+                                    <Button Name="dialogueAddReplyButton" Margin="10" VerticalAlignment="Top" Height="32" Content="{DynamicResource DIALOGUE_Reply_Add}" Width="312">
                                         <Button.ToolTip>
                                             <StackPanel>
                                                 <Image Source="Resources/Help/img_help_dialogueReply.png"/>
@@ -658,25 +658,25 @@
                                 </StackPanel>
                             </ScrollViewer>
                         </GroupBox>
-                        <Button Grid.Column="2" Name="dialogueSaveButton" ToolTip="{DynamicResource dialogue_Save}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Grid.Column="2" Name="dialogueSaveButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Dialogue_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="dialogueResetButton" ToolTip="{DynamicResource dialogue_Clear}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Grid.Column="2" Name="dialogueResetButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Dialogue_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Delete" Width="16" Height="16"  Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="dialogueOpenButton" ToolTip="{DynamicResource dialogue_Open}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Grid.Column="2" Name="dialogueOpenButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Dialogue_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="FolderOutline" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <TextBlock Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,0,10" Text="{DynamicResource dialogue_Tips}" TextWrapping="Wrap" Width="254"/>
+                        <TextBlock Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,0,10" Text="{DynamicResource DIALOGUE_Tips}" TextWrapping="Wrap" Width="254"/>
                     </Grid>
                 </TabItem>
-                <TabItem Name="vendorTab" Header="{DynamicResource tab_Vendor}">
+                <TabItem Name="vendorTab" Header="{DynamicResource INTERFACE_Main_Tab_Vendor}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="80"/>
@@ -687,49 +687,49 @@
                             <ColumnDefinition MinWidth="296" Width="33*"/>
                             <ColumnDefinition Width="33*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox mah:TextBoxHelper.Watermark="{DynamicResource app_Comment}" Name="vendor_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
+                        <TextBox mah:TextBoxHelper.Watermark="{DynamicResource INTERFACE_App_Comment}" Name="vendor_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
                         <mah:NumericUpDown x:Name="vendorIdTxtBox" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
                         <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
-                            <TextBlock TextWrapping="Wrap" Text="{DynamicResource vendor_ID}" VerticalAlignment="Center"/>
+                            <TextBlock TextWrapping="Wrap" Text="{DynamicResource VENDOR_ID}" VerticalAlignment="Center"/>
                         </Border>
                         <TextBox  Grid.Column="1" Name="vendorTitleTxtBox" Height="26" VerticalAlignment="Top" Margin="10,10,146,0"/>
-                        <TextBlock  Grid.Column="1" HorizontalAlignment="Right" Margin="0,14,10,0" TextWrapping="Wrap" Text="{DynamicResource vendor_Title}" VerticalAlignment="Top" Width="128" Height="16"/>
+                        <TextBlock  Grid.Column="1" HorizontalAlignment="Right" Margin="0,14,10,0" TextWrapping="Wrap" Text="{DynamicResource VENDOR_Title}" VerticalAlignment="Top" Width="128" Height="16"/>
                         <TextBox  Grid.Column="1" Name="vendorDescTxtBox" Height="26" VerticalAlignment="Bottom" Margin="10,0,146,10"/>
-                        <TextBlock  Grid.Column="1" Width="128" HorizontalAlignment="Right" Margin="0,0,10,14" TextWrapping="Wrap" Text="{DynamicResource vendor_Desc}" VerticalAlignment="Bottom" Height="16"/>
-                        <CheckBox Name="vendorDisableSortingBox" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Content="{DynamicResource vendor_DisableSorting}" Margin="10,10,0,0" Grid.RowSpan="2"/>
-                        <Button Grid.Column="2" Name="vendorSaveButton" Height="31" ToolTip="{DynamicResource vendor_Save}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
+                        <TextBlock  Grid.Column="1" Width="128" HorizontalAlignment="Right" Margin="0,0,10,14" TextWrapping="Wrap" Text="{DynamicResource VENDOR_Description}" VerticalAlignment="Bottom" Height="16"/>
+                        <CheckBox Name="vendorDisableSortingBox" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Content="{DynamicResource VENDOR_DisableSorting}" Margin="10,10,0,0" Grid.RowSpan="2"/>
+                        <Button Grid.Column="2" Name="vendorSaveButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Vendor_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="vendorOpenButton" Height="31" ToolTip="{DynamicResource vendor_Open}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
+                        <Button Grid.Column="2" Name="vendorOpenButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Vendor_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="vendorResetButton" Height="31" ToolTip="{DynamicResource vendor_Clear}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
+                        <Button Grid.Column="2" Name="vendorResetButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Vendor_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <GroupBox Grid.Row="1" Margin="10,5,5,10" Header="{DynamicResource vendor_BuyList}">
+                        <GroupBox Grid.Row="1" Margin="10,5,5,10" Header="{DynamicResource VENDOR_Items_Buy}">
                             <ScrollViewer>
                                 <StackPanel Name="vendorListBuyItems">
 
                                 </StackPanel>
                             </ScrollViewer>
                         </GroupBox>
-                        <GroupBox Grid.Row="1" Grid.Column="1" Margin="5,5,5,10" Header="{DynamicResource vendor_SellList}">
+                        <GroupBox Grid.Row="1" Grid.Column="1" Margin="5,5,5,10" Header="{DynamicResource VENDOR_Items_Sell}">
                             <ScrollViewer>
                                 <StackPanel Name="vendorListSellItems">
 
                                 </StackPanel>
                             </ScrollViewer>
                         </GroupBox>
-                        <Button Name="vendorAddItemButton" Content="{DynamicResource vendor_Add}" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="25"/>
+                        <Button Name="vendorAddItemButton" Content="{DynamicResource VENDOR_Item_Add}" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="25"/>
                     </Grid>
                 </TabItem>
-                <TabItem Name="questTab" Header="{DynamicResource tab_Quest}">
+                <TabItem Name="questTab" Header="{DynamicResource INTERFACE_Main_Tab_Quest}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="80"/>
@@ -740,26 +740,26 @@
                             <ColumnDefinition Width="33*"/>
                             <ColumnDefinition Width="33*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox mah:TextBoxHelper.Watermark="{DynamicResource app_Comment}" Name="quest_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
+                        <TextBox mah:TextBoxHelper.Watermark="{DynamicResource INTERFACE_App_Comment}" Name="quest_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
                         <mah:NumericUpDown x:Name="questIdBox" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
                         <Border VerticalAlignment="Top" HorizontalAlignment="Left" Margin="77,10,0,0" Height="26" Grid.ColumnSpan="2">
-                            <TextBlock Text="{DynamicResource quest_ID}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{DynamicResource QUEST_ID}" VerticalAlignment="Center"/>
                         </Border>
                         <TextBox Grid.Row="1" Name="questTitleBox" Height="26" VerticalAlignment="Top" Margin="10,38,10,0"/>
-                        <TextBlock Grid.Row="1" Text="{DynamicResource quest_Title}" TextAlignment="Center" Height="23" VerticalAlignment="Top" Margin="10,10,10,0"/>
+                        <TextBlock Grid.Row="1" Text="{DynamicResource QUEST_Title}" TextAlignment="Center" Height="23" VerticalAlignment="Top" Margin="10,10,10,0"/>
                         <TextBox Grid.Row="1" TextWrapping="Wrap" Name="questDescBox" Margin="10,94,10,10"/>
-                        <TextBlock Grid.Row="1" TextAlignment="Center" Text="{DynamicResource quest_Desc}" Height="23" VerticalAlignment="Top" Margin="10,66,10,0"/>
-                        <Button Grid.Column="2" Name="questSaveButton" Height="31" ToolTip="{DynamicResource quest_Save}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
+                        <TextBlock Grid.Row="1" TextAlignment="Center" Text="{DynamicResource QUEST_Description}" Height="23" VerticalAlignment="Top" Margin="10,66,10,0"/>
+                        <Button Grid.Column="2" Name="questSaveButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Quest_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="questOpenButton" Height="31" ToolTip="{DynamicResource quest_Open}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
+                        <Button Grid.Column="2" Name="questOpenButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Quest_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="questResetButton" Height="31" ToolTip="{DynamicResource quest_Clear}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
+                        <Button Grid.Column="2" Name="questResetButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Quest_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
@@ -769,40 +769,40 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <GroupBox Header="{DynamicResource quest_Conditions}" Margin="10">
+                            <GroupBox Header="{DynamicResource QUEST_Conditions}" Margin="10">
                                 <ScrollViewer>
                                     <StackPanel Name="listQuestConditions" />
                                 </ScrollViewer>
                             </GroupBox>
-                            <Button Grid.Column="1" Grid.Row="1" Name="questAddConditionButton" Height="23" Content="{DynamicResource quest_Add_Condition}" Margin="10" VerticalAlignment="Bottom"/>
+                            <Button Grid.Column="1" Grid.Row="1" Name="questAddConditionButton" Height="23" Content="{DynamicResource QUEST_Condition_Add}" Margin="10" VerticalAlignment="Bottom"/>
                         </Grid>
                         <Grid Grid.Column="2" Grid.Row="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <GroupBox Header="{DynamicResource quest_Rewards}" Margin="10">
+                            <GroupBox Header="{DynamicResource QUEST_Rewards}" Margin="10">
                                 <ScrollViewer>
                                     <StackPanel Name="listQuestRewards" />
                                 </ScrollViewer>
                             </GroupBox>
-                            <Button Grid.Row="1" Name="questAddRewardButton" Height="23" Content="{DynamicResource quest_Add_Reward}" Margin="10" VerticalAlignment="Bottom"/>
+                            <Button Grid.Row="1" Name="questAddRewardButton" Height="23" Content="{DynamicResource QUEST_Reward_Add}" Margin="10" VerticalAlignment="Bottom"/>
                         </Grid>
                     </Grid>
                 </TabItem>
-                <TabItem Name="mistakeListTab" Header="{DynamicResource tab_Mistakes}">
+                <TabItem Name="mistakeListTab" Header="{DynamicResource INTERFACE_Main_Tab_Errors}">
                     <Grid>
                         <ListView Name="lstMistakes" Margin="10,10,10,60">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn DisplayMemberBinding="{Binding MistakeImportance}" Header="{DynamicResource mistakes_ErrorImportance}" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding MistakeName}" Header="{DynamicResource mistakes_ErrorName}" Width="80"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding MistakeDesc}" Header="{DynamicResource mistakes_ErrorDesc}" Width="600"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding MistakeImportance}" Header="{DynamicResource INTERFACE_Main_Tab_Errors_Error_Importance}" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding MistakeName}" Header="{DynamicResource INTERFACE_Main_Tab_Errors_Error_Name}" Width="80"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding MistakeDesc}" Header="{DynamicResource INTERFACE_Main_Tab_Errors_Error_Description}" Width="600"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                        <Button Name="deepAnalysis_Button" FontSize="16" VerticalAlignment="Bottom" Content="{DynamicResource mistakes_DeepAnalysis}" ToolTip="{DynamicResource mistakes_DeepAnalysis_Tooltip}" Margin="10,0,10,10" Height="45"/>
-                        <Label Name="noErrorsLabel" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{DynamicResource mistakes_NoMistakes}" FontSize="24" Visibility="Collapsed" Margin="0,0,0,100"/>
+                        <Button Name="deepAnalysis_Button" FontSize="16" VerticalAlignment="Bottom" Content="{DynamicResource INTERFACE_Main_Tab_Errors_DeepAnalysis}" ToolTip="{DynamicResource INTERFACE_Main_Tab_Errors_DeepAnalysis_Tooltip}" Margin="10,0,10,10" Height="45"/>
+                        <Label Name="noErrorsLabel" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{DynamicResource INTERFACE_Main_Tab_Errors_Error_None}" FontSize="24" Visibility="Collapsed" Margin="0,0,0,100"/>
 
                     </Grid>
                 </TabItem>
@@ -820,13 +820,13 @@
         <Grid Name="notificationOverlay" Visibility="Visible"/>
         <Grid Name="blockActionsOverlay" Visibility="Collapsed" IsHitTestVisible="True">
             <Rectangle Fill="Black" Opacity="0.8"/>
-            <TextBlock Name="textBlockActions" TextAlignment="Center" Text="{DynamicResource app_Analysis}" FontSize="18" Foreground="White" Opacity="0.8" VerticalAlignment="Center"/>
+            <TextBlock Name="textBlockActions" TextAlignment="Center" Text="{DynamicResource INTERFACE_Main_Tab_Errors_DeepAnalysis_Progress}" FontSize="18" Foreground="White" Opacity="0.8" VerticalAlignment="Center"/>
             <ProgressBar Name="progrBar" VerticalAlignment="Bottom" Margin="10" Height="32" Opacity="0.8"/>
         </Grid>
         <Grid Name="notClickableOverlay" IsHitTestVisible="False">
-            <Label Visibility="Collapsed" Name="betaOverlayText" Margin="5" Content="BETA" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="36" Opacity="0.15"/>
             <Grid Name="debugOverlayText" HorizontalAlignment="Left" Opacity="0.15" VerticalAlignment="Bottom" Margin="5">
-                <Image Width="36" Source="Resources/ICON_WARNING.png" Height="{Binding Width}" HorizontalAlignment="Left"/>
+                <!--<Image Width="36" Source="Resources/ICON_WARNING.png" Height="{Binding Width}" HorizontalAlignment="Left"/>-->
+                <iconPacks:PackIconMaterial Kind="BugOutline" Width="36" Height="36" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Margin="36,0,0,0" Content="DEBUG" HorizontalAlignment="Right" FontSize="36"/>
             </Grid>
         </Grid>

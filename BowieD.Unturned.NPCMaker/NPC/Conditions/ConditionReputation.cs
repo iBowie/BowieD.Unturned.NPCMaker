@@ -7,8 +7,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public override Condition_Type Type => Condition_Type.Reputation;
         public int Value;
         public Logic_Type Logic;
-        [ConditionNoValue]
-        public bool Reset;
         public override string DisplayName
         {
             get

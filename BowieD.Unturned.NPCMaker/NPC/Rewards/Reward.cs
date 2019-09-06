@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml.Serialization;
@@ -24,7 +25,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     [XmlInclude(typeof(RewardFlagMath))]
     public abstract class Reward : IHasDisplayName
     {
-        [RewardTooltip("Localization_Tooltip")]
         [RewardSkipField]
         public string Localization;
         public abstract RewardType Type { get; }
@@ -162,6 +162,20 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                     yield return t;
                 }
             }
+        }
+        public static string GetLocalizationKey(string typeName)
+        {
+            string s1 = typeName.Substring(6);
+            StringBuilder sb = new StringBuilder();
+            foreach (char c in s1)
+            {
+                if (char.IsUpper(c))
+                {
+                    sb.Append("_");
+                }
+                sb.Append(c);
+            }
+            return sb.ToString();
         }
     }
 }

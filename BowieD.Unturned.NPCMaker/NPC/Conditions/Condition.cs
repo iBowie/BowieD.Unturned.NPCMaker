@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml.Serialization;
@@ -29,7 +30,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [XmlInclude(typeof(ConditionHoliday))]
     public abstract class Condition : IHasDisplayName
     {
-        [ConditionTooltip("Localization_Tooltip")]
         [ConditionSkipField]
         public string Localization;
         [XmlIgnore]
@@ -170,6 +170,20 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                     yield return t;
                 }
             }
+        }
+        public static string GetLocalizationKey(string typeName)
+        {
+            string s1 = typeName.Substring(9);
+            StringBuilder sb = new StringBuilder();
+            foreach (char c in s1)
+            {
+                if (char.IsUpper(c))
+                {
+                    sb.Append("_");
+                }
+                sb.Append(c);
+            }
+            return sb.ToString();
         }
     }
 }

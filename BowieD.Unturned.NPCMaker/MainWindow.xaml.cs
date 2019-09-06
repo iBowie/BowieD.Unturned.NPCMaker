@@ -171,7 +171,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             #endregion
             HolidayManager.Check();
-            App.NotificationManager.Notify(LocalizationManager.Current.Interface["App_StartUp"]);
+            App.NotificationManager.Notify(LocalizationManager.Current.Notification["App_StartUp"]);
             ConsoleLogger.StartWaitForInput();
             base.Show();
         }
@@ -298,7 +298,7 @@ namespace BowieD.Unturned.NPCMaker
                 RecentList.Items.Add(new Separator());
                 var mItem = new MenuItem()
                 {
-                    Header = LocalizationManager.Current.Notification["Main_Menu_File_Recent_Clear"],
+                    Header = LocalizationManager.Current.Interface["Main_Menu_File_Recent_Clear"],
                     Tag = "CLR"
                 };
                 mItem.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>

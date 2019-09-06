@@ -45,7 +45,7 @@ namespace BowieD.Unturned.NPCMaker
         public new void Run()
         {
             InitLoggers();
-            Logger.LogInfo("Copying libraries...");
+            Logger.LogInfo("[EXTRCT] - Extracting libraries...");
             #region COPY LIBS
             CopyResource(NPCMaker.Properties.Resources.DiscordRPC, AppConfig.Directory + "DiscordRPC.dll");
             CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, AppConfig.Directory + "Newtonsoft.Json.dll");
@@ -60,7 +60,7 @@ namespace BowieD.Unturned.NPCMaker
             CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_VS2010, AppConfig.Directory + "Xceed.Wpf.AvalonDock.Themes.VS2010.dll");
             CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_Toolkit, AppConfig.Directory + "Xceed.Wpf.Toolkit.dll");
             #endregion
-            Logger.LogInfo("Copying complete!");
+            Logger.LogInfo("[EXTRCT] - Extraction complete!");
             AppConfig.Instance.Load();
             #region SCALE
             Resources["Scale"] = AppConfig.Instance.scale;
@@ -86,10 +86,12 @@ namespace BowieD.Unturned.NPCMaker
                     }
                 }
             }
+#else
+            Logger.LogInfo("[APP] - DebugFast enabled! Skipping update check...");
 #endif
             if (!LocalizationManager.IsLoaded)
                 LocalizationManager.LoadLanguage(AppConfig.Instance.language);
-            Logger.LogInfo("Closing console and opening app...");
+            Logger.LogInfo("[APP] - Closing console and opening app...");
             MainWindow mw = new MainWindow();
             InitManagers();
             ConsoleLogger.HideConsoleWindow();
@@ -114,7 +116,7 @@ namespace BowieD.Unturned.NPCMaker
             acr.ShowDialog();
             e.Handled = acr.Handle;
             if (acr.Handle)
-                App.Logger.LogWarning($"Ignoring exception {e.Exception.Message}.");
+                App.Logger.LogWarning($"[ACR] - Ignoring exception {e.Exception.Message}.");
         }
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
@@ -133,6 +135,7 @@ namespace BowieD.Unturned.NPCMaker
         }
         private void CopyResource(byte[] res, string file)
         {
+            Logger.LogInfo($"[EXTRCT] - Extracting to {file}");
             try
             {
                 using (Stream output = File.OpenWrite(file))

@@ -4,6 +4,7 @@
     {
         public Localization()
         {
+            Name = "Unknown";
             Author = "Unknown";
             LastUpdate = "Never";
             General = new TranslationDictionary();
@@ -19,6 +20,7 @@
             Notification = new TranslationDictionary();
             Interface = new TranslationDictionary();
         }
+        public string Name;
         public string Author;
         public string LastUpdate;
         public TranslationDictionary General;
@@ -35,7 +37,7 @@
         public TranslationDictionary Interface;
         public override string ToString()
         {
-            return $"Localization. Author: {Author}";
+            return $"Localization {Name}. Author(s): {Author}";
         }
     }
 }

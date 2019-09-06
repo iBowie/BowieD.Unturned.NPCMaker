@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
         mc:Ignorable="d"
-        Title="{DynamicResource about_Title}" Height="200" Width="200" ResizeMode="NoResize" Icon="{DynamicResource app_Icon}">
+        Title="{DynamicResource INTERFACE_App_About_Title}" Height="200" Width="200" ResizeMode="NoResize" Icon="{DynamicResource app_Icon}">
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform x:Name="gridScale"/>

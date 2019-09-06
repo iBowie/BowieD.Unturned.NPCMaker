@@ -10,7 +10,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             get
             {
-                return LocalizationManager.Current.Condition["Type_Holiday"] + " " + LocalizationManager.Current.Condition[$"Type_Holiday_{Value}"];
+                return LocalizationManager.Current.Condition["Type_Holiday"] + " " + LocalizationManager.Current.Condition[$"Holiday_Value_{Value}"];
             }
         }
     }
