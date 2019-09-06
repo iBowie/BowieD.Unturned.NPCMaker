@@ -65,6 +65,7 @@ namespace BowieD.Unturned.NPCMaker
             #region SCALE
             Resources["Scale"] = AppConfig.Instance.scale;
             #endregion
+#if !FAST
             App.UpdateManager = new GitHubUpdateManager();
             var result = App.UpdateManager.CheckForUpdates().GetAwaiter().GetResult();
             if (result == UpdateAvailability.AVAILABLE)
@@ -85,6 +86,7 @@ namespace BowieD.Unturned.NPCMaker
                     }
                 }
             }
+#endif
             if (!LocalizationManager.IsLoaded)
                 LocalizationManager.LoadLanguage(AppConfig.Instance.language);
             Logger.LogInfo("Closing console and opening app...");

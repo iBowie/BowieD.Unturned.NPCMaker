@@ -3,7 +3,8 @@
 	"LastUpdate": "4th of August 2019",
 	"General":
 	{
-		"Project_SaveFilter": "NPC Project (*.npcproj)"
+		"Project_SaveFilter": "NPC Project (*.npcproj)",
+		"Title": "Unturned 3.0 NPC Maker by BowieD"
 	},
 	"Options":
 	{

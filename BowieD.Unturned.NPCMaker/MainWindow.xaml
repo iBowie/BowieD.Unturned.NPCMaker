@@ -11,7 +11,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="{DynamicResource app_Title}"
+        Title="{DynamicResource GENERAL_Title}"
         MinHeight="623" Height="623"
         MinWidth="1000" Width="1000"
         DragEnter="Window_DragEnter"
@@ -92,7 +92,7 @@
                 <Label Margin="-5" IsEnabled="False" Name="menuCurrentFileLabel" Content="Current File: "/>
             </Menu>
             <TabControl Grid.Row="1" Background="Transparent" Padding="-1" Name="mainTabControl" SelectedIndex="0" Margin="0,5,0,0">
-                <TabItem Name="characterTab" Header="{DynamicResource tab_Character}">
+                <TabItem Name="characterTab" Header="{DynamicResource INTERFACE_Main_Tab_Character}">
                     <Grid>
                         <Button Name="characterSaveButton" ToolTip="{DynamicResource character_Save}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
@@ -365,13 +365,13 @@
                             <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,155,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Pose}" VerticalAlignment="Top" Width="120" Height="16"/>
                             <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,38,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Skin}" VerticalAlignment="Top" Width="120" Height="16"/>
                             <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,94,0,0" TextWrapping="Wrap" Text="{DynamicResource apparel_Color_Hair}" VerticalAlignment="Top" Width="120"/>
-                            <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Face}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,210,0" Width="98" Height="28"/>
-                            <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Hair}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,109,0" Width="98" Height="28"/>
-                            <Label HorizontalContentAlignment="Center" Content="{DynamicResource apparel_Beard}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,8,0" Width="98" Height="28"/>
+                            <Label HorizontalContentAlignment="Center" Content="{DynamicResource CHARACTER_Face}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,210,0" Width="98" Height="28"/>
+                            <Label HorizontalContentAlignment="Center" Content="{DynamicResource CHARACTER_Hair}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,109,0" Width="98" Height="28"/>
+                            <Label HorizontalContentAlignment="Center" Content="{DynamicResource CHARACTER_Beard}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,8,0" Width="98" Height="28"/>
                         </Grid>
-                        <GroupBox Header="{DynamicResource apparel_Group_Clothing}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Height="274" Width="300">
+                        <GroupBox Header="{DynamicResource CHARACTER_Clothing}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Height="274" Width="300">
                             <TabControl>
-                                <TabItem Header="{DynamicResource apparel_Clothing_Default}" mah:ControlsHelper.HeaderFontSize="18">
+                                <TabItem Header="{DynamicResource CHARACTER_Clothing_Default}" mah:ControlsHelper.HeaderFontSize="18">
                                     <ScrollViewer>
                                         <Grid>
                                             <mah:NumericUpDown x:Name="hatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
@@ -423,17 +423,17 @@
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <Label Content="{DynamicResource apparel_Hat_ID}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Mask_ID}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Glasses_ID}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Top_ID}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Backpack_ID}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Vest_ID}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource apparel_Bottom_ID}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Hat}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Mask}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Glasses}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Shirt}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Backpack}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Vest}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{DynamicResource CHARACTER_Clothing_Pants}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
                                         </Grid>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{DynamicResource apparel_Clothing_Christmas}" mah:ControlsHelper.HeaderFontSize="18">
+                                <TabItem Header="{DynamicResource CHARACTER_Clothing_Christmas}" mah:ControlsHelper.HeaderFontSize="18">
                                     <ScrollViewer>
                                         <Grid>
                                             <mah:NumericUpDown x:Name="christmashatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
