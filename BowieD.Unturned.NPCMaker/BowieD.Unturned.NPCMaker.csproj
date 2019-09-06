@@ -399,6 +399,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Resources\Localization\Russian.json" />
     <Resource Include="Resources\Localization\English.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

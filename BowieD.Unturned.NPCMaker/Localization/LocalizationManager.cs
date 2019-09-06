@@ -16,7 +16,7 @@ namespace BowieD.Unturned.NPCMaker.Localization
         public static IEnumerable<ELanguage> SupportedLanguages()
         {
             yield return ELanguage.English;
-            //yield return ELanguage.Russian;
+            yield return ELanguage.Russian;
         }
         public static void LoadLanguage(ELanguage language)
         {
