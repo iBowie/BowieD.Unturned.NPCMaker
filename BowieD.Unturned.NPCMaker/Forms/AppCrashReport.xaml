@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
         mc:Ignorable="d"
-        Title="{DynamicResource acr_Title}" Icon="{StaticResource app_Icon}" Height="450" Width="358.5">
+        Title="{DynamicResource INTERFACE_CrashReport_Title}" Icon="{StaticResource app_Icon}" Height="450" Width="358.5">
     <Window.LayoutTransform>
         <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}">
         </ScaleTransform>
@@ -22,15 +22,15 @@
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Margin="10" HorizontalAlignment="Left">
                 <Label.Content>
-                    <TextBlock TextWrapping="Wrap" Text="{DynamicResource acr_Header}"/>
+                    <TextBlock TextWrapping="Wrap" Text="{DynamicResource INTERFACE_CrashReport_Header}"/>
                 </Label.Content>
             </Label>
             <TextBox Name="txtBox" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" IsReadOnly="True" Grid.Row="1" Margin="10"/>
         </Grid>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Name="stackPanel">
-            <Button Name="handleExceptionButton" Click="HandleException_Click" Margin="5" Content="{DynamicResource acr_HandleException}"/>
-            <Button Name="copyButton" Click="CopyButton_Click" Margin="5" Content="{DynamicResource acr_Copy}"/>
-            <Button Name="saveNpcButton" Click="SaveNPC_Button_Click" Margin="5" Content="{DynamicResource acr_Save}"/>
+            <Button Name="handleExceptionButton" Click="HandleException_Click" Margin="5" Content="{DynamicResource INTERFACE_CrashReport_Handle}"/>
+            <Button Name="copyButton" Click="CopyButton_Click" Margin="5" Content="{DynamicResource INTERFACE_CrashReport_Copy}"/>
+            <Button Name="saveNpcButton" Click="SaveNPC_Button_Click" Margin="5" Content="{DynamicResource INTERFACE_CrashReport_Save}"/>
         </StackPanel>
     </Grid>
 </Window>

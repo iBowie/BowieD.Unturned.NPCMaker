@@ -20,12 +20,12 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append($"{LocUtil.LocalizeCondition("Condition_Type_ConditionCompareFlags")} ");
+                sb.Append($"{LocalizationManager.Current.Condition["Type_Compare_Flags"]} ");
                 sb.Append($"[{A_ID}] ");
                 switch (Logic)
                 {
                     case Logic_Type.Equal:
-                        sb.Append("= ");
+                        sb.Append("== ");
                         break;
                     case Logic_Type.Greater_Than:
                         sb.Append("> ");

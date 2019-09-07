@@ -77,7 +77,7 @@ namespace BowieD.Unturned.NPCMaker
                         if (CurrentProject.Load(new NPCProject()))
                         {
                             App.NotificationManager.Clear();
-                            App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
+                            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Loaded"]);
                             AddToRecentList(CurrentProject.file);
                             break;
                         }
@@ -171,7 +171,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             #endregion
             HolidayManager.Check();
-            App.NotificationManager.Notify(LocUtil.LocalizeInterface("app_Free"));
+            App.NotificationManager.Notify(LocalizationManager.Current.Notification["App_StartUp"]);
             ConsoleLogger.StartWaitForInput();
             base.Show();
         }
@@ -202,9 +202,9 @@ namespace BowieD.Unturned.NPCMaker
         private void AppUpdateTimer_Tick(object sender, EventArgs e)
         {
             if (CurrentProject.file.Length == 0)
-                menuCurrentFileLabel.Content = LocUtil.LocalizeInterface("menu_CurrentFile", "None");
+                menuCurrentFileLabel.Content = LocalizationManager.Current.Interface.Translate("Main_Menu_CurrentFile", LocalizationManager.Current.Interface["Main_Menu_CurrentFile_None"]);
             else
-                menuCurrentFileLabel.Content = LocUtil.LocalizeInterface("menu_CurrentFile", Path.GetFileName(CurrentProject.file));
+                menuCurrentFileLabel.Content = LocalizationManager.Current.Interface.Translate("Main_Menu_CurrentFile", Path.GetFileName(CurrentProject.file));
             menuCurrentFileLabel.ToolTip = CurrentProject.file;
         }
         protected override void OnClosing(CancelEventArgs e)
@@ -251,13 +251,13 @@ namespace BowieD.Unturned.NPCMaker
                 if (MainWindow.CurrentProject.Load(null))
                 {
                     App.NotificationManager.Clear();
-                    App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
+                    App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Loaded"]);
                     AddToRecentList(CurrentProject.file);
                 }
                 else
                 {
                     MainWindow.CurrentProject.file = oldPath;
-                    App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_NotLoaded"));
+                    App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_NotLoaded_Incompatible"]);
                 }
             }
             dropOverlay.Visibility = Visibility.Hidden;
@@ -282,13 +282,13 @@ namespace BowieD.Unturned.NPCMaker
                     MainWindow.CurrentProject.file = k;
                     if (MainWindow.CurrentProject.Load(null))
                     {
-                        App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
+                        App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Loaded"]);
                         ResetEditors();
                     }
                     else
                     {
                         MainWindow.CurrentProject.file = oldPath;
-                        App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_NotLoaded"));
+                        App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_NotLoaded_Incompatible"]);
                     }
                 });
                 RecentList.Items.Add(mItem);
@@ -298,7 +298,7 @@ namespace BowieD.Unturned.NPCMaker
                 RecentList.Items.Add(new Separator());
                 var mItem = new MenuItem()
                 {
-                    Header = LocUtil.LocalizeInterface("menu_File_Recent_Clear"),
+                    Header = LocalizationManager.Current.Interface["Main_Menu_File_Recent_Clear"],
                     Tag = "CLR"
                 };
                 mItem.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>

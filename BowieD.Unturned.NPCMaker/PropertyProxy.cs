@@ -127,7 +127,7 @@ namespace BowieD.Unturned.NPCMaker
                         q.guid = Guid.NewGuid().ToString("N");
                 }
             }
-            App.NotificationManager.Notify(LocUtil.LocalizeInterface("character_Regenerated"));
+            App.NotificationManager.Notify(LocalizationManager.Current.Notification["App_GUID_Regenerated"]);
             MainWindow.CurrentProject.isSaved = false;
         }
         internal void Options_Click(object sender, RoutedEventArgs e)
@@ -146,13 +146,13 @@ namespace BowieD.Unturned.NPCMaker
             }
             if (Mistakes.MistakesManager.Warnings_Count > 0)
             {
-                var res = MessageBox.Show(LocUtil.LocalizeInterface("export_Warnings_Desc"), LocUtil.LocalizeInterface("export_Warnings_Title"), MessageBoxButton.YesNo);
+                var res = MessageBox.Show(LocalizationManager.Current.Interface["Export_Warnings_Text"], LocalizationManager.Current.Interface["Export_Warnings_Caption"], MessageBoxButton.YesNo);
                 if (!(res == MessageBoxResult.OK || res == MessageBoxResult.Yes))
                     return;
             }
             MainWindow.SaveAllEditors();
             if (MainWindow.CurrentProject.Save())
-                App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Saved"));
+                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Saved"]);
             Export.Exporter.ExportNPC(MainWindow.CurrentProject.data);
         }
         internal void NewButtonClick(object sender, RoutedEventArgs e)
@@ -170,7 +170,7 @@ namespace BowieD.Unturned.NPCMaker
             MainWindow.SaveAllEditors();
             if (MainWindow.CurrentProject.Save())
             {
-                App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Saved"));
+                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Saved"]);
             }
         }
         internal void SaveAsClick(object sender, RoutedEventArgs e)
@@ -184,7 +184,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             else
             {
-                App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Saved"));
+                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Saved"]);
             }
         }
         internal void LoadClick(object sender, RoutedEventArgs e)
@@ -192,7 +192,7 @@ namespace BowieD.Unturned.NPCMaker
             string path;
             OpenFileDialog ofd = new OpenFileDialog()
             {
-                Filter = $"{LocUtil.LocalizeInterface("save_Filter")} (*.npc,*.npcproj)|*.npc;*.npcproj",
+                Filter = $"{LocalizationManager.Current.General["Project_SaveFilter"]}|*.npcproj",
                 Multiselect = false
             };
             var res = ofd.ShowDialog();
@@ -205,7 +205,7 @@ namespace BowieD.Unturned.NPCMaker
             if (MainWindow.CurrentProject.Load(null))
             {
                 App.NotificationManager.Clear();
-                App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Loaded"));
+                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Loaded"]);
                 MainWindow.AddToRecentList(MainWindow.CurrentProject.file);
                 MainWindow.ResetEditors();
             }

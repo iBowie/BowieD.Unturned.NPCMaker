@@ -8,7 +8,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public string Text { get; private set; }
         public ConditionTooltipAttribute(string translationKey)
         {
-            Text = LocUtil.LocalizeCondition(translationKey);
+            Text = LocalizationManager.Current.Condition[translationKey];
         }
     }
 }

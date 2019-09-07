@@ -21,7 +21,7 @@ namespace BowieD.Unturned.NPCMaker.Commands
             sb.AppendLine($"Time: {DateTime.Now}");
             sb.AppendLine($"Settings:");
             sb.AppendLine($".Experimental Features: {cfg.experimentalFeatures}");
-            sb.AppendLine($".Language: {cfg.locale}");
+            sb.AppendLine($".Language: {cfg.language}");
             sb.AppendLine($".Autosave Option: {cfg.autosaveOption}");
             sb.AppendLine($".GUID Generation: {cfg.generateGuids}");
             sb.AppendLine($".Detailed Discord Rich Presence: {cfg.enableDiscord}");

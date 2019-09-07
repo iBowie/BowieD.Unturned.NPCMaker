@@ -16,8 +16,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
         public Universal_ListView(List<Controls.Universal_ItemList> listUil, Controls.Universal_ItemList.ReturnType returnType)
         {
             InitializeComponent();
-            addButton.Content = LocUtil.LocalizeInterface($"listView_Add_{returnType.ToString()}");
-            Title = LocUtil.LocalizeInterface($"listView_Title_{returnType.ToString()}");
+            addButton.Content = LocalizationManager.Current.Interface[$"ListView_{returnType}_Add"];
+            Title = LocalizationManager.Current.Interface[$"ListView_{returnType}_Title"];
             ReturnType = returnType;
             Values = new List<object>();
             foreach (Controls.Universal_ItemList uil in listUil)
@@ -100,11 +100,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     DialogResult = true;
                     Close();
                     break;
-                    //case Universal_ItemList.ReturnType.Object:
-                    //    SelectedValue = new NPC.NPCObject();
-                    //    DialogResult = true;
-                    //    Close();
-                    //    break;
             }
         }
 

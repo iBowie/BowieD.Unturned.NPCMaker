@@ -22,7 +22,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             bool skipCache = false;
             if (CachedUnturnedFiles?.Count() > 0)
             {
-                var res = MessageBox.Show(LocUtil.LocalizeInterface("mistakes_DA_UpdateCache"), "", MessageBoxButton.YesNoCancel);
+                var res = MessageBox.Show(LocalizationManager.Current.Interface["DeepAnalysis_Cache_Update"], "", MessageBoxButton.YesNoCancel);
                 if (res == MessageBoxResult.Cancel)
                 {
                     MainWindow.Instance.blockActionsOverlay.Visibility = Visibility.Collapsed;
@@ -34,17 +34,16 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             if (!skipCache)
             {
                 MainWindow.Instance.blockActionsOverlay.Visibility = Visibility.Visible;
-                System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog
+                using (var fbd = new System.Windows.Forms.FolderBrowserDialog() { ShowNewFolderButton = false })
                 {
-                    ShowNewFolderButton = false
-                };
-                var res = fbd.ShowDialog();
-                if (res == System.Windows.Forms.DialogResult.Cancel || !File.Exists(fbd.SelectedPath + @"\Unturned.exe"))
-                {
-                    MainWindow.Instance.blockActionsOverlay.Visibility = Visibility.Collapsed;
-                    return;
+                    var res = fbd.ShowDialog();
+                    if (res == System.Windows.Forms.DialogResult.Cancel || !File.Exists(fbd.SelectedPath + @"\Unturned.exe"))
+                    {
+                        MainWindow.Instance.blockActionsOverlay.Visibility = Visibility.Collapsed;
+                        return;
+                    }
+                    await CacheFiles(fbd.SelectedPath);
                 }
-                await CacheFiles(fbd.SelectedPath);
                 MainWindow.Instance.blockActionsOverlay.Visibility = Visibility.Collapsed;
             }
             MistakesManager.FindMistakes();
@@ -54,7 +53,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 {
                     MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                     {
-                        MistakeDesc = LocUtil.LocalizeMistake("deep_dialogue", dialogue.id),
+                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_dialogue", dialogue.id),
                         Importance = IMPORTANCE.WARNING
                     });
                 }
@@ -66,7 +65,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 {
                     MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                     {
-                        MistakeDesc = LocUtil.LocalizeMistake("deep_vendor", vendor.id),
+                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_vendor", vendor.id),
                         Importance = IMPORTANCE.WARNING
                     });
                 }
@@ -76,7 +75,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     {
                         MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                         {
-                            MistakeDesc = LocUtil.LocalizeMistake("deep_vehicle", it.id),
+                            MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_vehicle", it.id),
                             Importance = IMPORTANCE.WARNING
                         });
                         continue;
@@ -85,7 +84,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     {
                         MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                         {
-                            MistakeDesc = LocUtil.LocalizeMistake("deep_item", it.id),
+                            MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_item", it.id),
                             Importance = IMPORTANCE.WARNING
                         });
                         continue;
@@ -99,7 +98,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 {
                     MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                     {
-                        MistakeDesc = LocUtil.LocalizeMistake("deep_quest", quest.id),
+                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_quest", quest.id),
                         Importance = IMPORTANCE.WARNING
                     });
                 }
@@ -113,7 +112,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     {
                         MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                         {
-                            MistakeDesc = LocUtil.LocalizeMistake("deep_char", character.id),
+                            MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_char", character.id),
                             Importance = IMPORTANCE.WARNING
                         });
                     }
@@ -207,10 +206,10 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
         {
             HashSet<UnturnedFile> cache = new HashSet<UnturnedFile>();
             IEnumerable<FileInfo> validFiles = new DirectoryInfo(directory).GetFiles("*.dat", SearchOption.AllDirectories);
-            App.Logger.LogInfo($"Found {validFiles.Count()} assets!");
+            App.Logger.LogInfo($"[DeepAnalysis] - Found {validFiles.Count()} assets!");
             long oldTotal = validFiles.Count();
             validFiles = validFiles.Where(d => d.Name != "English.dat" && d.Name != "Russian.dat");
-            App.NotificationManager.Notify($"Skipped {oldTotal - validFiles.Count()} files.");
+            App.Logger.LogInfo($"[DeepAnalysis] - Skipped {oldTotal - validFiles.Count()} files.");
             long step = 1;
             MainWindow.Instance.progrBar.Maximum = validFiles.Count();
             foreach (FileInfo fi in validFiles)

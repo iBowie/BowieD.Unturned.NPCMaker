@@ -127,35 +127,9 @@
         Halloween,
         Christmas
     }
-    public enum Object_Type
+    public enum ELanguage
     {
-        SMALL,
-        MEDIUM,
-        LARGE
-    }
-    public enum Object_Interactability
-    {
-        None,
-        Binary_State,
-        Dropper,
-        Note,
-        Water,
-        Fuel,
-        Rubble,
-        Quest
-    }
-    public enum Object_Rubble
-    {
-        None,
-        Destroy
-    }
-    public enum Object_Hint
-    {
-        None,
-        Door,
-        Switch,
-        Fire,
-        Generator,
-        Use
+        English,
+        Russian
     }
 }

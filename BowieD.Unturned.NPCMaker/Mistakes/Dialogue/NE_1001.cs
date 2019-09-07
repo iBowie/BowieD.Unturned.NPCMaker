@@ -20,7 +20,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
                     {
                         MistakeName = "NE_1001",
                         Importance = IMPORTANCE.CRITICAL,
-                        MistakeDesc = LocUtil.LocalizeMistake("NE_1001_Desc", _dial.id),
+                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_1001_Desc", _dial.id),
                         OnClick = new Action(() =>
                         {
                             if (MainWindow.DialogueEditor.Current.id == 0)

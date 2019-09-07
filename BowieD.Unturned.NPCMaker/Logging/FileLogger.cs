@@ -23,6 +23,10 @@ namespace BowieD.Unturned.NPCMaker.Logging
         }
         public void LogException(string message, Exception ex)
         {
+            if (ex.InnerException != null)
+            {
+                LogException(message, ex.InnerException);
+            }
             stream.WriteLine($"[{DateTime.Now}] - [ERROR] - {message}");
             stream.WriteLine($"[{DateTime.Now}] - [ERROR] - {ex.Message}");
             stream.WriteLine($"[{DateTime.Now}] - [ERROR] - {ex.StackTrace}");

@@ -5,17 +5,13 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public sealed class ConditionReputation : Condition
     {
         public override Condition_Type Type => Condition_Type.Reputation;
-        [ConditionName("Condition_Amount")]
         public int Value;
         public Logic_Type Logic;
-        [ConditionName("Condition_Reset_Reputation_Title")]
-        [ConditionNoValue]
-        public bool Reset;
         public override string DisplayName
         {
             get
             {
-                string outp = LocUtil.LocalizeCondition("Condition_Type_ConditionReputation") + " ";
+                string outp = LocalizationManager.Current.Condition["Type_Reputation"] + " ";
                 switch (Logic)
                 {
                     case Logic_Type.Equal:

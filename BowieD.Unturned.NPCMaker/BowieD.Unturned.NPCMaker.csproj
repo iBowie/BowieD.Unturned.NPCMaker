@@ -55,6 +55,16 @@
   <PropertyGroup>
     <StartupObject>BowieD.Unturned.NPCMaker.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugFast|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugFast\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;FAST</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.4.0.0-alpha0222\lib\net45\ControlzEx.dll</HintPath>
@@ -204,7 +214,9 @@
     <Compile Include="Forms\Form_About.xaml.cs">
       <DependentUpon>Form_About.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Localization\LocUtil.cs" />
+    <Compile Include="Localization\Localization.cs" />
+    <Compile Include="Localization\LocalizationManager.cs" />
+    <Compile Include="Localization\TranslationDictionary.cs" />
     <Compile Include="Logging\FileLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
@@ -225,7 +237,6 @@
     <Compile Include="Mistakes\Vendor\NE_2001.cs" />
     <Compile Include="Notification\INotificationManager.cs" />
     <Compile Include="Notification\NotificationManager.cs" />
-    <Compile Include="NPC\Conditions\Attributes\ConditionNameAttribute.cs" />
     <Compile Include="NPC\Conditions\Attributes\ConditionNoValueAttribute.cs" />
     <Compile Include="NPC\Conditions\Attributes\ConditionOptionalAttribute.cs" />
     <Compile Include="NPC\Conditions\Attributes\ConditionSkipFieldAttribute.cs" />
@@ -265,7 +276,6 @@
     <Compile Include="NPC\Rewards\RewardFlagShortRandom.cs" />
     <Compile Include="NPC\Rewards\RewardItem.cs" />
     <Compile Include="NPC\Rewards\RewardItemRandom.cs" />
-    <Compile Include="NPC\Rewards\Attributes\RewardNameAttribute.cs" />
     <Compile Include="NPC\Rewards\Attributes\RewardNoValueAttribute.cs" />
     <Compile Include="NPC\Rewards\Attributes\RewardOptionalAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardQuest.cs" />
@@ -358,12 +368,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Resource Include="Localization\lang.interface.en-US.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
-    <Resource Include="Localization\lang.interface.ru-RU.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -395,12 +399,8 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="Localization\lang.conditions.en-US.json" />
-    <Resource Include="Localization\lang.conditions.ru-RU.json" />
-    <Resource Include="Localization\lang.rewards.en-US.json" />
-    <Resource Include="Localization\lang.rewards.ru-RU.json" />
-    <Resource Include="Localization\lang.mistakes.en-US.json" />
-    <Resource Include="Localization\lang.mistakes.ru-RU.json" />
+    <Resource Include="Resources\Localization\Russian.json" />
+    <Resource Include="Resources\Localization\English.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

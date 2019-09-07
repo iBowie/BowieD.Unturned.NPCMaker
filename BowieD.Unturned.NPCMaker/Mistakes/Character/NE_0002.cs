@@ -23,7 +23,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Character
                         {
                             MistakeName = "NE_0002",
                             Importance = IMPORTANCE.CRITICAL,
-                            MistakeDesc = LocUtil.LocalizeMistake("NE_0002_Desc", _char.displayName, _char.id),
+                            MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_0002_Desc", _char.displayName, _char.id),
                             OnClick = new Action(() =>
                             {
                                 if (MainWindow.CharacterEditor.Current.id == 0)

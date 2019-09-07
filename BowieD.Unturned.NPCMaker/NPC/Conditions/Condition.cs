@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml.Serialization;
@@ -29,7 +30,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [XmlInclude(typeof(ConditionHoliday))]
     public abstract class Condition : IHasDisplayName
     {
-        [ConditionTooltip("Condition_Localization_Tooltip")]
         [ConditionSkipField]
         public string Localization;
         [XmlIgnore]
@@ -44,7 +44,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             {
                 string fieldName = field.Name;
                 var fieldType = field.FieldType;
-                string localizedName = LocUtil.LocalizeCondition($"Condition_{fieldName}");
+                string localizedName = LocalizationManager.Current.Condition[$"{Type}_{fieldName}"];
                 Grid borderContents = new Grid();
                 Label l = new Label
                 {
@@ -54,11 +54,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 if (conditionTooltip != null)
                 {
                     l.ToolTip = conditionTooltip.Text;
-                }
-                var conditionName = field.GetCustomAttribute<ConditionNameAttribute>();
-                if (conditionName != null)
-                {
-                    l.Content = conditionName.Text;
                 }
                 borderContents.Children.Add(l);
                 FrameworkElement valueControl = null;
@@ -139,7 +134,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         ComboBoxItem cbi = new ComboBoxItem
                         {
                             Tag = eValue,
-                            Content = LocUtil.LocalizeCondition($"Condition_{field.Name}_Enum_{(eValue.ToString())}")
+                            Content = LocalizationManager.Current.Condition[$"{Type}_{field.Name}_{eValue.ToString()}"]
                         };
                         cBox.Items.Add(cbi);
                     }
@@ -175,6 +170,20 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                     yield return t;
                 }
             }
+        }
+        public static string GetLocalizationKey(string typeName)
+        {
+            string s1 = typeName.Substring(9);
+            StringBuilder sb = new StringBuilder();
+            foreach (char c in s1)
+            {
+                if (char.IsUpper(c))
+                {
+                    sb.Append("_");
+                }
+                sb.Append(c);
+            }
+            return sb.ToString();
         }
     }
 }

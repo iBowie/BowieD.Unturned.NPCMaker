@@ -18,7 +18,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append($"{LocUtil.LocalizeCondition("Condition_Type_ConditionFlagBool")} [{ID}] = {Value}");
+                sb.Append($"{LocalizationManager.Current.Condition["Type_Flag_Bool"]} [{ID}] = {Value}");
                 switch (Logic)
                 {
                     case Logic_Type.Equal:

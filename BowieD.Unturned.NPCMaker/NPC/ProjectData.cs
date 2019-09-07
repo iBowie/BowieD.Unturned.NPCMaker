@@ -28,7 +28,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             if (isSaved)
                 return true;
-            var result = MessageBox.Show(LocUtil.LocalizeInterface("app_Exit_UnsavedChanges_Text"), LocUtil.LocalizeInterface("app_Exit_UnsavedChanges_Title"), MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
+            var result = MessageBox.Show(LocalizationManager.Current.Interface["Project_UnsavedChanges_Text"], LocalizationManager.Current.Interface["Project_UnsavedChanges_Title"], MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
             if (result == MessageBoxResult.Yes)
             {
                 Save();
@@ -47,7 +47,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 {
                     FileName = "Unnamed",
                     DefaultExt = ".npcproj",
-                    Filter = "NPC Project (.npcproj)|*.npcproj"
+                    Filter = $"{LocalizationManager.Current.General["Project_SaveFilter"]}|*.npcproj"
                 };
                 if (sfd.ShowDialog() == true)
                 {

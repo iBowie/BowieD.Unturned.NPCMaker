@@ -119,13 +119,16 @@ namespace BowieD.Unturned.NPCMaker.Editors
         {
             NPCVendor cur = Current;
             if (cur.id == 0)
+            {
+                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Vendor_ID_Zero"]);
                 return;
+            }
             if (MainWindow.CurrentProject.data.vendors.Where(d => d.id == cur.id).Count() > 0)
             {
                 MainWindow.CurrentProject.data.vendors.Remove(MainWindow.CurrentProject.data.vendors.Where(d => d.id == cur.id).ElementAt(0));
             }
             MainWindow.CurrentProject.data.vendors.Add(cur);
-            App.NotificationManager.Notify(LocUtil.LocalizeInterface("notify_Vendor_Saved"));
+            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Vendor_Saved"]);
             MainWindow.CurrentProject.isSaved = false;
             App.Logger.LogInfo($"Vendor {cur.id} saved!");
         }

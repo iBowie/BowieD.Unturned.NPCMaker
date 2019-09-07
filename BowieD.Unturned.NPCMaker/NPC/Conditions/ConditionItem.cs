@@ -15,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append(LocUtil.LocalizeCondition($"Condition_Type_ConditionItem") + " ");
+                sb.Append(LocalizationManager.Current.Condition[$"Type_Item"] + " ");
                 sb.Append($"{ID} x{Amount}");
                 return sb.ToString();
             }

@@ -9,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             get
             {
-                return $"[{ID}] {LocUtil.LocalizeCondition("Condition_Type_ConditionKillsAnimal")} ({Animal}) >= {Value}";
+                return $"[{ID}] {LocalizationManager.Current.Condition[$"Type_Kills_Animal"]} ({Animal}) >= {Value}";
             }
         }
         public ushort ID;

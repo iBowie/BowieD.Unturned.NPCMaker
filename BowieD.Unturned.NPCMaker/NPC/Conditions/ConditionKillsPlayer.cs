@@ -9,11 +9,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             get
             {
-                return $"[{ID}] {LocUtil.LocalizeCondition("Condition_Type_ConditionKillsPlayer")} >= {Value}";
+                return $"[{ID}] {LocalizationManager.Current.Condition[$"Type_Kills_Player"]} >= {Value}";
             }
         }
         public ushort ID;
-        [ConditionName("Condition_Amount")]
         public short Value;
         [ConditionNoValue]
         public bool Reset;

@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Themes;
 using System.Globalization;
 using System.Windows;
@@ -25,7 +26,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             {
                 currentTheme = ((Selected_Theme_Box.SelectedItem as ComboBoxItem).Tag as Theme).Name,
                 autosaveOption = (byte)Autosave_Box.SelectedIndex,
-                locale = (Languages_Box.SelectedItem as ComboBoxItem).Tag.ToString(),
+                language = (ELanguage)(Languages_Box.SelectedItem as ComboBoxItem).Tag,
                 scale = double.Parse((Scale_Box.SelectedItem as ComboBoxItem).Tag.ToString(), CultureInfo.InvariantCulture),
                 enableDiscord = Discord_Enabled_Box.IsChecked.Value,
                 generateGuids = Generate_GUIDS_Box.IsChecked.Value,
@@ -47,15 +48,15 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                         Selected_Theme_Box.SelectedItem = cbi;
                 }
                 Autosave_Box.SelectedIndex = value.autosaveOption;
-                foreach (var lang in LocUtil.SupportedCultures())
+                foreach (var lang in LocalizationManager.SupportedLanguages())
                 {
                     ComboBoxItem cbi = new ComboBoxItem
                     {
-                        Content = lang.NativeName,
-                        Tag = lang.Name
+                        Content = LocalizationManager.GetLanguageName(lang),
+                        Tag = lang
                     };
                     Languages_Box.Items.Add(cbi);
-                    if (lang.Name == value.locale)
+                    if (lang == value.language)
                         Languages_Box.SelectedItem = cbi;
                 }
                 foreach (ComboBoxItem cbi in Scale_Box.Items)
@@ -82,13 +83,13 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             CurrentConfig.Save();
-            App.NotificationManager.Notify(LocUtil.LocalizeInterface("config_OnExit"));
+            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Configuration_OnExit"]);
             Close();
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show(LocUtil.LocalizeInterface("config_Default_Confirm"), "", MessageBoxButton.YesNo);
+            var result = MessageBox.Show(LocalizationManager.Current.Notification["Configuration_Default_Confirm"], "", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
                 AppConfig.Instance.LoadDefaults();

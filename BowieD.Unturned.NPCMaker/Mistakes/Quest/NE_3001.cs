@@ -18,7 +18,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Quest
                     yield return new NE_3001()
                     {
                         MistakeName = "NE_3001",
-                        MistakeDesc = LocUtil.LocalizeMistake("NE_3001_Desc", _quest.title, _quest.id),
+                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_3001_Desc", _quest.title, _quest.id),
                         Importance = IMPORTANCE.WARNING,
                         OnClick = new Action(() =>
                         {

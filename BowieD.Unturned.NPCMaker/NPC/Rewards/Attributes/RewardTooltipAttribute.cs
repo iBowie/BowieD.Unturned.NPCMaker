@@ -8,7 +8,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes
         public readonly string Text;
         public RewardTooltipAttribute(string key)
         {
-            Text = LocUtil.LocalizeReward(key);
+            Text = LocalizationManager.Current.Reward[key];
         }
     }
 }
