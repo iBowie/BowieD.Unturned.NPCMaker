@@ -38,6 +38,10 @@ namespace BowieD.Unturned.NPCMaker.Logging
         }
         public void LogException(string message, Exception ex)
         {
+            if (ex.InnerException != null)
+            {
+                LogException(message, ex.InnerException);
+            }
             var oldClr = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"[{DateTime.Now}] - [ERROR] - {message}");

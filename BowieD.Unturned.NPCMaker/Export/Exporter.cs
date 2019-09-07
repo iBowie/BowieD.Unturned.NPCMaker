@@ -283,7 +283,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                                 {
                                     asset.WriteLine($"Message_{k}_Pages {message.PagesAmount}");
                                 }
-                                List<NPCResponse> visibleResponses = dialogue.responses.Where(d => d.VisibleInAll || d.visibleIn[k] == 1).ToList();
+                                List<NPCResponse> visibleResponses = dialogue.responses.Where(d => d.VisibleInAll || d.visibleIn.Length <= k || d.visibleIn[k] == 1).ToList();
                                 if (visibleResponses.Count() > 0 && visibleResponses.Count() < dialogue.responses.Count())
                                 {
                                     asset.WriteLine($"Message_{k}_Responses {visibleResponses.Count()}");
@@ -318,7 +318,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                                     for (int c = 0, ind = 0; c < dialogue.MessagesAmount; c++)
                                     {
                                         var currentMessage = dialogue.messages[c];
-                                        if (response.visibleIn[c] == 1)
+                                        if (response.visibleIn.Length <= c || response.visibleIn[c] == 1)
                                         {
                                             asset.WriteLine($"Response_{k}_Message_{ind++} {dialogue.messages.IndexOf(currentMessage)}");
                                         }
