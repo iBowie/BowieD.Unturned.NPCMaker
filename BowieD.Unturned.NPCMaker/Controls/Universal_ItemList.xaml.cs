@@ -12,7 +12,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
     /// </summary>
     public partial class Universal_ItemList : UserControl
     {
-        public Universal_ItemList(object input, ReturnType type, bool localizable)
+        public Universal_ItemList(object input, ReturnType type, bool localizable, bool showMoveButtons = false)
         {
             InitializeComponent();
             this.Value = input;
@@ -20,6 +20,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
             mainLabel.ToolTip = mainLabel.Content;
             this.Localizable = localizable;
             this.Type = type;
+            moveUpButton.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
+            moveDownButton.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object Value { get; private set; }

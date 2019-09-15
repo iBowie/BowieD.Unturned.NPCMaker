@@ -6,19 +6,32 @@
              xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Controls"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
-             Height="40" MinHeight="40" Width="250" MinWidth="196" VerticalAlignment="Top" Margin="5,5">
+             Height="40" MinHeight="40" Width="Auto" MinWidth="250" VerticalAlignment="Top" Margin="5,5">
     <Grid>
-        <Label Name="mainLabel" Margin="0,0,82,4" VerticalAlignment="Bottom" Height="32" VerticalContentAlignment="Center"/>
-        <Button Click="EditButton_Click" Name="editButton" Width="31" HorizontalAlignment="Right" Height="31" Margin="0,4,46,4">
-            <Button.Content>
-                <iconPacks:PackIconMaterial Kind="Pencil" Foreground="{DynamicResource AccentColor}"/>
-            </Button.Content>
-        </Button>
-
-        <Button Name="deleteButton" Width="31" Height="31" HorizontalAlignment="Right" Margin="0,4,10,4">
-            <Button.Content>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Label Name="mainLabel" Margin="0,0,4,0" HorizontalAlignment="Left" MinWidth="100" Width="Auto" VerticalAlignment="Center" Height="32" VerticalContentAlignment="Center"/>
+        <StackPanel Grid.Column="1" Name="buttons" Orientation="Horizontal" HorizontalAlignment="Right" Margin="4,0,0,0">
+            <Button Click="EditButton_Click" Name="editButton" Width="31" HorizontalAlignment="Left" VerticalAlignment="Center" Height="31" Margin="0,4,4,4">
+                <Button.Content>
+                    <iconPacks:PackIconMaterial Kind="Pencil" Foreground="{DynamicResource AccentColor}"/>
+                </Button.Content>
+            </Button>
+            <Button x:Name="deleteButton" Width="31" Height="31" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,4,4,4">
                 <iconPacks:PackIconMaterial Kind="Delete" Foreground="{DynamicResource AccentColor}"/>
-            </Button.Content>
-        </Button>
+            </Button>
+            <Button Name="moveUpButton" Width="31" Height="31" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,4,4,4">
+                <Button.Content>
+                    <iconPacks:PackIconMaterial Kind="ArrowUp" Foreground="{DynamicResource AccentColor}"/>
+                </Button.Content>
+            </Button>
+            <Button Name="moveDownButton" Width="31" Height="31" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,4,4,4">
+                <Button.Content>
+                    <iconPacks:PackIconMaterial Kind="ArrowDown" Foreground="{DynamicResource AccentColor}"/>
+                </Button.Content>
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>
