@@ -8,12 +8,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// </summary>
     public partial class Whats_New : Window
     {
+        public static string UpdateTitle = "";
+        public static string UpdateContent = "";
         public Whats_New()
         {
             InitializeComponent();
             Title = LocalizationManager.Current.Interface["Update_Notes_Title"];
-            updateTitle.Text = App.UpdateManager.Title;
-            updateText.Text = App.UpdateManager.Content;
+            updateTitle.Text = UpdateTitle;
+            updateText.Text = UpdateContent;
             mainButton.Content = LocalizationManager.Current.Interface["Update_Notes_OK"];
             Height = SystemParameters.PrimaryScreenHeight / 2;
             Width = SystemParameters.PrimaryScreenWidth / 2;

@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -12,8 +13,6 @@ namespace BowieD.Unturned.NPCMaker.Updating
 {
     public class GitHubUpdateManager : IUpdateManager
     {
-        public string Title { get; set; } = "";
-        public string Content { get; set; } = "";
         public const string ReleasesUrl = "https://api.github.com/repos/iBowie/BowieD.Unturned.NPCMaker/releases/latest";
         public const string UpdaterReleasesUrl = "https://api.github.com/repos/iBowie/BowieD.Unturned.NPCMaker.Updater/releases/latest";
         private static bool DownloadUpdater()
@@ -80,8 +79,8 @@ namespace BowieD.Unturned.NPCMaker.Updating
                 var manifest = await GetManifest();
                 App.Logger.LogInfo("[UPDATE] - Got update manifest");
                 Version latestVers = Version.Parse(manifest.Value.tag_name);
-                Title = manifest.Value.name;
-                Content = manifest.Value.body;
+                Whats_New.UpdateTitle = manifest.Value.name;
+                Whats_New.UpdateContent = manifest.Value.body;
                 if (latestVers > App.Version)
                 {
                     App.Logger.LogInfo("[UPDATE] - Newer version available");
@@ -104,15 +103,6 @@ namespace BowieD.Unturned.NPCMaker.Updating
         {
             if (File.Exists(AppConfig.Directory + "update.manifest"))
             {
-                App.Logger.LogInfo("[UPDATE] - Reading Title and Body from old manifest...");
-                using (var reader = new StreamReader(AppConfig.Directory + "update.manifest"))
-                {
-                    var jsonData = reader.ReadToEnd();
-                    var manifest = JsonConvert.DeserializeObject<UpdateManifest>(jsonData);
-                    App.Logger.LogInfo("[UPDATE] - Read complete");
-                    Title = manifest.name;
-                    Content = manifest.body;
-                }
                 App.Logger.LogInfo("[UPDATE] - Deleting old update manifest...");
                 File.Delete(AppConfig.Directory + "update.manifest");
                 App.Logger.LogInfo("[UPDATE] - Deleted");
