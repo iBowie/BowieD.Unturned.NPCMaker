@@ -130,6 +130,7 @@
     public enum ELanguage
     {
         English,
-        Russian
+        Russian,
+        Spanish
     }
 }

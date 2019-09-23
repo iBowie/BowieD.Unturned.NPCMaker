@@ -17,6 +17,7 @@ namespace BowieD.Unturned.NPCMaker.Localization
         {
             yield return ELanguage.English;
             yield return ELanguage.Russian;
+            yield return ELanguage.Spanish;
         }
         public static void LoadLanguage(ELanguage language)
         {
@@ -98,6 +99,8 @@ namespace BowieD.Unturned.NPCMaker.Localization
             {
                 case ELanguage.English:
                     return "English (US)";
+                case ELanguage.Spanish:
+                    return "Español (Spanish)";
                 case ELanguage.Russian:
                     return "Русский (Russian)";
                 default:
@@ -110,6 +113,8 @@ namespace BowieD.Unturned.NPCMaker.Localization
             {
                 case "ru-RU":
                     return ELanguage.Russian;
+                case "es-ES":
+                    return ELanguage.Spanish;
                 default:
                     return ELanguage.English;
             }
