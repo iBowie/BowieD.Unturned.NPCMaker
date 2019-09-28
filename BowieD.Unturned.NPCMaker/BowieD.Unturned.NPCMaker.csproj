@@ -229,6 +229,7 @@
     <Compile Include="Mistakes\Dialogue\NE_1000.cs" />
     <Compile Include="Mistakes\Dialogue\NE_1001.cs" />
     <Compile Include="Mistakes\Dialogue\NE_1002.cs" />
+    <Compile Include="Mistakes\Dialogue\NE_1003.cs" />
     <Compile Include="Mistakes\MistakesManager.cs" />
     <Compile Include="Mistakes\Quest\NE_3000.cs" />
     <Compile Include="Mistakes\Quest\NE_3001.cs" />
