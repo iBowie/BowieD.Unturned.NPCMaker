@@ -143,6 +143,7 @@
     </ApplicationDefinition>
     <Compile Include="Coloring\ColorConverter.cs" />
     <Compile Include="Commands\ColorCommand.cs" />
+    <Compile Include="Common\ContextHelper.cs" />
     <Compile Include="Controls\Dialogue_Response.xaml.cs">
       <DependentUpon>Dialogue_Response.xaml</DependentUpon>
     </Compile>

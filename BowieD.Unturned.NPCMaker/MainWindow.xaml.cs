@@ -170,6 +170,9 @@ namespace BowieD.Unturned.NPCMaker
 
             }
             #endregion
+            #region CONTEXT MENUS
+            
+            #endregion
             HolidayManager.Check();
             App.NotificationManager.Notify(LocalizationManager.Current.Notification["App_StartUp"]);
             ConsoleLogger.StartWaitForInput();

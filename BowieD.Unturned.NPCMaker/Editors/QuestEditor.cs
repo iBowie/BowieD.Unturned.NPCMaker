@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Controls;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
@@ -14,6 +15,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
 {
     public class QuestEditor : IEditor<NPCQuest>
     {
+        private static bool isMenuInit = false;
         public QuestEditor()
         {
             MainWindow.Instance.questAddConditionButton.Click += (object sender, RoutedEventArgs e) =>
@@ -49,8 +51,16 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 Reset();
                 SendPresence();
             });
+            if (!isMenuInit)
+            {
+                MainWindow.Instance.questDescBox.ContextMenu = new ContextMenu();
+                MainWindow.Instance.questDescBox.ContextMenu.Items.Add(ContextHelper.CreatePasteNewLineButton());
+                MainWindow.Instance.questDescBox.ContextMenu.Items.Add(ContextHelper.CreatePasteColorMenu());
+                MainWindow.Instance.questTitleBox.ContextMenu = new ContextMenu();
+                MainWindow.Instance.questTitleBox.ContextMenu.Items.Add(ContextHelper.CreatePasteColorMenu());
+                isMenuInit = true;
+            }
         }
-
         public NPCQuest Current
         {
             get

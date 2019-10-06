@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Controls;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
@@ -14,6 +15,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
 {
     public class VendorEditor : IEditor<NPCVendor>
     {
+        private static bool isMenuInit = false;
         public VendorEditor()
         {
             MainWindow.Instance.vendorAddItemButton.Click += (object sender, RoutedEventArgs e) =>
@@ -49,6 +51,15 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 Reset();
                 SendPresence();
             });
+            if (!isMenuInit)
+            {
+                MainWindow.Instance.vendorDescTxtBox.ContextMenu = new ContextMenu();
+                MainWindow.Instance.vendorDescTxtBox.ContextMenu.Items.Add(ContextHelper.CreatePasteNewLineButton());
+                MainWindow.Instance.vendorDescTxtBox.ContextMenu.Items.Add(ContextHelper.CreatePasteColorMenu());
+                MainWindow.Instance.vendorTitleTxtBox.ContextMenu = new ContextMenu();
+                MainWindow.Instance.vendorTitleTxtBox.ContextMenu.Items.Add(ContextHelper.CreatePasteColorMenu());
+                isMenuInit = true;
+            }
         }
 
         public NPCVendor Current

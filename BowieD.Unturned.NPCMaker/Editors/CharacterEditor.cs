@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Controls;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Data;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
@@ -17,6 +18,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
 {
     public class CharacterEditor : IEditor<NPCCharacter>
     {
+        private static bool isMenuInit = false;
         private IEnumerable<Coloring.Color> GetUnturnedColors()
         {
             yield return new Coloring.Color("#F4E6D2");
@@ -87,6 +89,12 @@ namespace BowieD.Unturned.NPCMaker.Editors
             conditions = new List<Condition>();
             UserColors.Load(new string[0]);
             UpdateColorPickerFromBuffer();
+            if (!isMenuInit)
+            {
+                MainWindow.Instance.txtDisplayName.ContextMenu = new ContextMenu();
+                MainWindow.Instance.txtDisplayName.ContextMenu.Items.Add(ContextHelper.CreatePasteColorMenu());
+                isMenuInit = true;
+            }
         }
         public NPCCharacter Current
         {
