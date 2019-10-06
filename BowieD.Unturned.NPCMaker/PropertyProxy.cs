@@ -234,7 +234,7 @@ namespace BowieD.Unturned.NPCMaker
                 switch (selectedIndex)
                 {
                     case 0:
-                        MainWindow.CharacterEditor.SendPresence();
+                        //MainWindow.CharacterEditor.SendPresence();
                         break;
                     case 1:
                         MainWindow.DialogueEditor.SendPresence();

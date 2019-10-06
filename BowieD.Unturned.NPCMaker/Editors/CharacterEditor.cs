@@ -293,9 +293,9 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 {
                     SmallImageKey = "icon_info_outlined",
                     SmallImageText = $"Characters: {MainWindow.CurrentProject.data.characters.Count}"
-                },
-                Details = $"Current NPC: {MainWindow.CharacterEditor.Current.editorName}",
-                State = $"Display Name: {MainWindow.CharacterEditor.Current.displayName}"
+                }//,
+                //Details = $"Current NPC: {MainWindow.CharacterEditor.Current.editorName}",
+                //State = $"Display Name: {MainWindow.CharacterEditor.Current.displayName}"
             };
             MainWindow.DiscordManager.SendPresence(presence);
         }

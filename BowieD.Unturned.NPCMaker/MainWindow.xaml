@@ -94,22 +94,22 @@
             <TabControl Grid.Row="1" Background="Transparent" Padding="-1" Name="mainTabControl" SelectedIndex="0" Margin="0,5,0,0">
                 <TabItem Name="characterTab" Header="{DynamicResource INTERFACE_Main_Tab_Character}">
                     <Grid>
-                        <Button Name="characterSaveButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Character_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Command="{Binding SaveCommand}" Name="characterSaveButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Character_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Name="characterResetButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Character_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Command="{Binding ResetCommand}" Name="characterResetButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Character_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Name="characterOpenButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Character_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Command="{Binding OpenCommand}" Name="characterOpenButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Character_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <TextBox Name="txtEditorName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,10,0,0">
+                        <TextBox Text="{Binding EditorName, UpdateSourceTrigger=PropertyChanged}" Name="txtEditorName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,10,0,0">
                             <TextBox.ToolTip>
                                 <StackPanel>
                                     <Label Content="{DynamicResource INTERFACE_Main_Tab_Character_Name_Editor_Tooltip}"/>
@@ -118,7 +118,7 @@
                             </TextBox.ToolTip>
                         </TextBox>
                         <TextBlock HorizontalAlignment="Left" Margin="143,16,0,0" TextWrapping="Wrap" Text="{DynamicResource CHARACTER_Name_Editor}" VerticalAlignment="Top"/>
-                        <TextBox Name="txtDisplayName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,41,0,0">
+                        <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Name="txtDisplayName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,41,0,0">
                             <TextBox.ToolTip>
                                 <StackPanel>
                                     <Label Content="{DynamicResource INTERFACE_Main_Tab_Character_Name_Display_Tooltip}"/>
@@ -127,7 +127,7 @@
                             </TextBox.ToolTip>
                         </TextBox>
                         <TextBlock  HorizontalAlignment="Left" Margin="143,45,0,0" TextWrapping="Wrap" Text="{DynamicResource CHARACTER_Name_Display}" VerticalAlignment="Top"/>
-                        <mah:NumericUpDown Name="txtID" HorizontalAlignment="Left" VerticalAlignment="Top" Width="64" Height="24" Margin="10,72,0,0" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
+                        <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Name="txtID" HorizontalAlignment="Left" VerticalAlignment="Top" Width="64" Height="24" Margin="10,72,0,0" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
                             <mah:NumericUpDown.ToolTip>
                                 <StackPanel>
                                     <Label Content="{DynamicResource INTERFACE_Main_Tab_Character_ID_Tooltip}"/>

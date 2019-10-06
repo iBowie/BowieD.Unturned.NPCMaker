@@ -23,10 +23,10 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Character
                         MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_0000_Desc", _char.displayName, _char.id),
                         OnClick = new Action(() =>
                         {
-                            if (MainWindow.CharacterEditor.Current.id == 0)
-                                return;
-                            MainWindow.CharacterEditor.Save();
-                            MainWindow.CharacterEditor.Current = _char;
+                            //if (MainWindow.CharacterEditor.Current.id == 0)
+                            //    return;
+                            //MainWindow.CharacterEditor.Save();
+                            //MainWindow.CharacterEditor.Current = _char;
                             MainWindow.Instance.mainTabControl.SelectedIndex = 0;
                         })
                     };

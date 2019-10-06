@@ -6,6 +6,8 @@ using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Themes;
+using BowieD.Unturned.NPCMaker.ViewModels;
+using BowieD.Unturned.NPCMaker.ViewModels.Character;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -22,34 +24,39 @@ namespace BowieD.Unturned.NPCMaker
         {
             Instance = this;
             InitializeComponent();
+            MainWindowViewModel = new MainWindowViewModel(this);
+            this.DataContext = MainWindowViewModel;
+            characterTab.DataContext = CharacterTabViewModel;
         }
+        public MainWindowViewModel MainWindowViewModel { get; }
+        public CharacterTabViewModel CharacterTabViewModel { get; } = new CharacterTabViewModel();
         #region MANAGERS
         public static Mistakes.DeepAnalysisManager DeepAnalysisManager { get; private set; }
         public static DiscordRPC.DiscordManager DiscordManager { get; set; }
         #endregion
         #region EDITORS
-        public static IEditor<NPCCharacter> CharacterEditor { get; private set; }
+        //public static IEditor<NPCCharacter> CharacterEditor { get; private set; }
         public static IEditor<NPCDialogue> DialogueEditor { get; private set; }
         public static IEditor<NPCVendor> VendorEditor { get; private set; }
         public static IEditor<NPCQuest> QuestEditor { get; private set; }
         public static void SaveAllEditors()
         {
-            CharacterEditor.Save();
-            DialogueEditor.Save();
-            VendorEditor.Save();
-            QuestEditor.Save();
+            //CharacterEditor.Save();
+            //DialogueEditor.Save();
+            //VendorEditor.Save();
+            //QuestEditor.Save();
         }
         public static void ResetEditors()
         {
-            CharacterEditor.Reset();
-            DialogueEditor.Reset();
-            VendorEditor.Reset();
-            QuestEditor.Reset();
+            //CharacterEditor.Reset();
+            //DialogueEditor.Reset();
+            //VendorEditor.Reset();
+            //QuestEditor.Reset();
         }
         #endregion
         public new void Show()
         {
-            CharacterEditor = new CharacterEditor();
+            //CharacterEditor = new CharacterEditor();
             DialogueEditor = new DialogueEditor();
             VendorEditor = new VendorEditor();
             QuestEditor = new QuestEditor();
@@ -94,9 +101,9 @@ namespace BowieD.Unturned.NPCMaker
             faceImageIndex.Maximum = faceAmount - 1;
             beardImageIndex.Maximum = beardAmount - 1;
             hairImageIndex.Maximum = haircutAmount - 1;
-            (CharacterEditor as CharacterEditor).FaceImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
-            (CharacterEditor as CharacterEditor).HairImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
-            (CharacterEditor as CharacterEditor).BeardImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
+            //(CharacterEditor as CharacterEditor).FaceImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
+            //(CharacterEditor as CharacterEditor).HairImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
+            //(CharacterEditor as CharacterEditor).BeardImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
             #endregion
             RefreshRecentList();
             #region AFTER UPDATE
