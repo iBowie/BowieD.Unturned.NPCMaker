@@ -1,4 +1,6 @@
-﻿namespace BowieD.Unturned.NPCMaker.NPC
+﻿using System.ComponentModel;
+
+namespace BowieD.Unturned.NPCMaker.NPC
 {
     public enum Condition_Type
     {
@@ -38,14 +40,23 @@
     }
     public enum NPC_Pose
     {
+        [Description("Character.Pose_Stand")]
         Stand,
+        [Description("Character.Pose_Sit")]
         Sit,
+        [Description("Character.Pose_Asleep")]
         Asleep,
+        [Description("Character.Pose_Passive")]
         Passive,
+        [Description("Character.Pose_Crouch")]
         Crouch,
+        [Description("Character.Pose_Prone")]
         Prone,
+        [Description("Character.Pose_Under_Arrest")]
         Under_Arrest,
+        [Description("Character.Pose_Rest")]
         Rest,
+        [Description("Character.Pose_Surrender")]
         Surrender
     }
     public enum RewardType

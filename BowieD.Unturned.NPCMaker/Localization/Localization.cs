@@ -35,6 +35,16 @@
         public TranslationDictionary Mistakes;
         public TranslationDictionary Notification;
         public TranslationDictionary Interface;
+        public TranslationDictionary GetDictionary(string name)
+        {
+            switch (name.ToLower())
+            {
+                case "character":
+                    return Character;
+                default:
+                    return null;
+            }
+        }
         public override string ToString()
         {
             return $"Localization {Name}. Author(s): {Author}";

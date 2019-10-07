@@ -292,6 +292,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Random.cs" />
     <Compile Include="Themes\MetroTheme.cs" />
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
@@ -314,6 +315,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Character\CharacterTabViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="XAML\EnumItemsSource.cs" />
     <Page Include="Controls\Dialogue_Response.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

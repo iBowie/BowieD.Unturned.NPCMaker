@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         {
             this.action = action;
         }
-        private Action action;
+        private readonly Action action;
         public event EventHandler CanExecuteChanged;
         public virtual bool CanExecute(object parameter) => true;
         public virtual void Execute(object parameter)
