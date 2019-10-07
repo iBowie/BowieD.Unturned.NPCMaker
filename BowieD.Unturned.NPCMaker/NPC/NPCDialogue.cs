@@ -35,6 +35,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 return null;
             return responses.Where(d => d.VisibleInAll || d.visibleIn[messageIndex] == 1).ToList();
         }
-        public string DisplayName => $"[{id}]";
+        public string GameName => $"[{id}]";
     }
 }

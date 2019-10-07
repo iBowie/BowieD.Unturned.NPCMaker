@@ -5,7 +5,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public sealed class ConditionKillsZombie : Condition
     {
         public override Condition_Type Type => Condition_Type.Kills_Zombie;
-        public override string DisplayName
+        public override string GameName
         {
             get
             {

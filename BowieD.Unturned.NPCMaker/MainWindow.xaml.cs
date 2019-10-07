@@ -26,10 +26,8 @@ namespace BowieD.Unturned.NPCMaker
             InitializeComponent();
             MainWindowViewModel = new MainWindowViewModel(this);
             this.DataContext = MainWindowViewModel;
-            characterTab.DataContext = CharacterTabViewModel;
         }
         public MainWindowViewModel MainWindowViewModel { get; }
-        public CharacterTabViewModel CharacterTabViewModel { get; } = new CharacterTabViewModel();
         #region MANAGERS
         public static Mistakes.DeepAnalysisManager DeepAnalysisManager { get; private set; }
         public static DiscordRPC.DiscordManager DiscordManager { get; set; }

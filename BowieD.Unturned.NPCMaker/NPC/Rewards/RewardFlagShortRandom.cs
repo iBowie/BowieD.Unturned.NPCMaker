@@ -7,7 +7,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     public sealed class RewardFlagShortRandom : Reward
     {
         public override RewardType Type => RewardType.Flag_Short_Random;
-        public override string DisplayName
+        public override string GameName
         {
             get
             {

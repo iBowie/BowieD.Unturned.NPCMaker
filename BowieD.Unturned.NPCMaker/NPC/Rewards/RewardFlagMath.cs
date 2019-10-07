@@ -7,7 +7,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     public sealed class RewardFlagMath : Reward
     {
         public override RewardType Type => RewardType.Flag_Math;
-        public override string DisplayName
+        public override string GameName
         {
             get
             {

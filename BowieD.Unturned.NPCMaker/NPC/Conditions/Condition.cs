@@ -35,7 +35,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         [XmlIgnore]
         public abstract Condition_Type Type { get; }
         [XmlIgnore]
-        public abstract string DisplayName { get; }
+        public abstract string GameName { get; }
 
         public IEnumerable<FrameworkElement> GetControls()
         {

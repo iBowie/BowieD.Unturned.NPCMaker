@@ -11,7 +11,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public bool Allow_Unset;
         public Logic_Type Logic;
         public override Condition_Type Type => Condition_Type.Flag_Short;
-        public override string DisplayName
+        public override string GameName
         {
             get
             {

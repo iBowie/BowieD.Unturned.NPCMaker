@@ -29,6 +29,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public string title;
         public string description;
 
-        public string DisplayName => $"[{id}] {title}";
+        public string GameName => $"[{id}] {title}";
     }
 }

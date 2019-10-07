@@ -11,49 +11,67 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public NPCCharacter()
         {
             guid = Guid.NewGuid().ToString("N");
-            editorName = "";
-            displayName = "";
-            id = 0;
-            startDialogueId = 0;
+            EditorName = "";
+            GameName = "";
+            ID = 0;
+            DialogueID = 0;
             visibilityConditions = new List<Condition>();
-            face = 0;
-            beard = 0;
-            haircut = 0;
-            hairColor = new Color(0, 0, 0);
-            skinColor = new Color(0, 0, 0);
-            clothing = new NPCClothing();
-            halloweenClothing = new NPCClothing();
-            christmasClothing = new NPCClothing();
-            pose = NPC_Pose.Stand;
-            leftHanded = false;
-            equipPrimary = 0;
-            equipSecondary = 0;
-            equipTertiary = 0;
-            equipped = Equip_Type.None;
+            FaceID = 0;
+            Beard = 0;
+            Haircut = 0;
+            HairColor = new Color(0, 0, 0);
+            SkinColor = new Color(0, 0, 0);
+            Clothing = new NPCClothing();
+            HalloweenClothing = new NPCClothing();
+            ChristmasClothing = new NPCClothing();
+            Pose = NPC_Pose.Stand;
+            LeftHanded = false;
+            EquipPrimary = 0;
+            EquipSecondary = 0;
+            EquipTertiary = 0;
+            Equipped = Equip_Type.None;
         }
-        public string editorName;
-        public string displayName;
-        public ushort id;
-        public ushort startDialogueId;
-        public byte face;
-        public byte beard;
-        public byte haircut;
-        public Color hairColor;
-        public Color skinColor;
-        public NPCClothing clothing;
-        public NPCClothing christmasClothing;
-        public NPCClothing halloweenClothing;
-        public NPC_Pose pose;
-        public bool leftHanded;
-        public ushort equipPrimary;
-        public ushort equipSecondary;
-        public ushort equipTertiary;
-        public Equip_Type equipped;
+        [XmlElement("editorName")]
+        public string EditorName { get; set; }
+        [XmlElement("displayName")]
+        public string GameName { get; set; }
+        [XmlElement("id")]
+        public ushort ID { get; set; }
+        [XmlElement("startDialogueId")]
+        public ushort DialogueID { get; set; }
+        [XmlElement("face")]
+        public byte FaceID { get; set; }
+        [XmlElement("beard")]
+        public byte Beard{get;set;}
+        [XmlElement("haircut")]
+        public byte Haircut{get;set;}
+        [XmlElement("hairColor")]
+        public Color HairColor{get;set;}
+        [XmlElement("skinColor")]
+        public Color SkinColor{get;set;}
+        [XmlElement("clothing")]
+        public NPCClothing Clothing{get;set;}
+        [XmlElement("christmasClothing")]
+        public NPCClothing ChristmasClothing{get;set;}
+        [XmlElement("halloweenClothing")]
+        public NPCClothing HalloweenClothing{get;set;}
+        [XmlElement("pose")]
+        public NPC_Pose Pose{get;set;}
+        [XmlElement("leftHanded")]
+        public bool LeftHanded{get;set;}
+        [XmlElement("equipPrimary")]
+        public ushort EquipPrimary{get;set;}
+        [XmlElement("equipSecondary")]
+        public ushort EquipSecondary{get;set;}
+        [XmlElement("equipTertiary")]
+        public ushort EquipTertiary{get;set;}
+        [XmlElement("equipped")]
+        public Equip_Type Equipped{get;set;}
 
         [XmlAttribute]
         public string guid;
         public List<Condition> visibilityConditions;
 
-        public string DisplayName => $"[{id}] {editorName} - {displayName}";
+        public string DisplayName => $"[{ID}] {EditorName} - {GameName}";
     }
 }

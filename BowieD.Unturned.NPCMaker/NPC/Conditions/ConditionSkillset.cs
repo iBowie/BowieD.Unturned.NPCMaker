@@ -8,7 +8,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public override Condition_Type Type => Condition_Type.Skillset;
         public ESkillset Value;
         public Logic_Type Logic;
-        public override string DisplayName
+        public override string GameName
         {
             get
             {

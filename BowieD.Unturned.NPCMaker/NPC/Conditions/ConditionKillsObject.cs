@@ -12,7 +12,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         [ConditionNoValue]
         public bool Reset;
         public override Condition_Type Type => Condition_Type.Kills_Object;
-        public override string DisplayName
+        public override string GameName
         {
             get
             {

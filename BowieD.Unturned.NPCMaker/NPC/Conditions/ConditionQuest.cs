@@ -11,7 +11,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         [ConditionTooltip("Quest_Reset_Tooltip")]
         [ConditionNoValue]
         public bool Reset;
-        public override string DisplayName
+        public override string GameName
         {
             get
             {

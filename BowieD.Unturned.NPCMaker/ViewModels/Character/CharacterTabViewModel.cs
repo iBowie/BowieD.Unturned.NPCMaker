@@ -15,9 +15,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels.Character
             Character = new NPCCharacter();
         }
         public NPCCharacter Character { get; set; }
-        public string DisplayName { get => Character.displayName; set => Character.displayName = value; }
-        public string EditorName { get => Character.editorName; set => Character.editorName = value; }
-        public ushort ID { get => Character.id; set => Character.id = value; }
+        public string DisplayName { get => Character.DisplayName; set => Character.DisplayName = value; }
+        public string EditorName { get => Character.EditorName; set => Character.EditorName = value; }
+        public ushort ID { get => Character.ID; set => Character.ID = value; }
+        public ushort DialogueID { get => Character.DialogueID; set => Character.DialogueID = value; }
         private ICommand saveCommand;
         private ICommand openCommand;
         private ICommand resetCommand;
@@ -29,16 +30,16 @@ namespace BowieD.Unturned.NPCMaker.ViewModels.Character
                 {
                     saveCommand = new BaseCommand(() =>
                     {
-                        if (Character.id == 0)
+                        if (Character.ID == 0)
                         {
                             App.NotificationManager.Notify(LocalizationManager.Current.Notification["Character_ID_Zero"]);
                             return;
                         }
-                        MainWindow.CurrentProject.data.characters.RemoveAll(d => d.id == Character.id);
+                        MainWindow.CurrentProject.data.characters.RemoveAll(d => d.ID == Character.ID);
                         MainWindow.CurrentProject.data.characters.Add(Character);
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["Character_Saved"]);
                         MainWindow.CurrentProject.isSaved = false;
-                        App.Logger.LogInfo($"Character {Character.id} saved!");
+                        App.Logger.LogInfo($"Character {Character.ID} saved!");
                     });
                 }
                 return saveCommand;
@@ -52,7 +53,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels.Character
                 {
                     openCommand = new BaseCommand(() =>
                     {
-                        var ulv = new Universal_ListView(MainWindow.CurrentProject.data.characters.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Character, false)).ToList(), Universal_ItemList.ReturnType.Character);
+                        var ulv = new Universal_ListView(MainWindow.CurrentProject.data.characters.OrderBy(d => d.ID).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Character, false)).ToList(), Universal_ItemList.ReturnType.Character);
                         if (ulv.ShowDialog() == true)
                         {
                             SaveCommand.Execute(null);
