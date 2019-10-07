@@ -391,49 +391,49 @@
                                 <TabItem Header="{DynamicResource CHARACTER_Clothing_Christmas}" mah:ControlsHelper.HeaderFontSize="18">
                                     <ScrollViewer>
                                         <Grid>
-                                            <mah:NumericUpDown x:Name="christmashatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding ChristmasHat,UpdateSourceTrigger=PropertyChanged}" x:Name="christmashatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_hat.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="christmasmaskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding ChristmasMask,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasmaskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_mask.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="christmasglassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding ChristmasGlasses,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasglassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="christmastopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding ChristmasShirt,UpdateSourceTrigger=PropertyChanged}" x:Name="christmastopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="christmasbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding ChristmasBackpack,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="christmasvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding ChristmasVest,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_vest.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="christmasbottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding ChristmasPants,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasbottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
@@ -453,49 +453,49 @@
                                 <TabItem Header="{DynamicResource CHARACTER_Clothing_Halloween}" mah:ControlsHelper.HeaderFontSize="18">
                                     <ScrollViewer>
                                         <Grid>
-                                            <mah:NumericUpDown x:Name="halloweenhatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding HalloweenHat,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenhatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_hat.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="halloweenmaskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding HalloweenMask,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenmaskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_mask.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="halloweenglassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding HalloweenGlasses,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenglassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="halloweentopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding HalloweenShirt,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweentopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="halloweenbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding HalloweenBackpack,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="halloweenvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding HalloweenVest,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_vest.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="halloweenbottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding HalloweenPants,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenbottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
@@ -536,28 +536,7 @@
                                     <Label Content="{DynamicResource CHARACTER_Equipment_Primary}"  Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
                                     <Label Content="{DynamicResource CHARACTER_Equipment_Secondary}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
                                     <Label Content="{DynamicResource CHARACTER_Equipment_Tertiary}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                    <ComboBox Name="equipSlotBox" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="120">
-                                        <ComboBoxItem Content="{DynamicResource CHARACTER_Equipment_Equipped_None}">
-                                            <ComboBoxItem.Tag>
-                                                <npc:Equip_Type>None</npc:Equip_Type>
-                                            </ComboBoxItem.Tag>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem Content="{DynamicResource CHARACTER_Equipment_Equipped_Primary}">
-                                            <ComboBoxItem.Tag>
-                                                <npc:Equip_Type>Primary</npc:Equip_Type>
-                                            </ComboBoxItem.Tag>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem Content="{DynamicResource CHARACTER_Equipment_Equipped_Secondary}">
-                                            <ComboBoxItem.Tag>
-                                                <npc:Equip_Type>Secondary</npc:Equip_Type>
-                                            </ComboBoxItem.Tag>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem Content="{DynamicResource CHARACTER_Equipment_Equipped_Tertiary}">
-                                            <ComboBoxItem.Tag>
-                                                <npc:Equip_Type>Tertiary</npc:Equip_Type>
-                                            </ComboBoxItem.Tag>
-                                        </ComboBoxItem>
-                                    </ComboBox>
+                                    <ComboBox ItemsSource="{StaticResource Character_Equipment_Equipped_Enums}" SelectedValue="{Binding Equipped, UpdateSourceTrigger=PropertyChanged}" Name="equipSlotBox" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="120"/>
                                     <Label Content="{DynamicResource CHARACTER_Equipment_Equipped}" Margin="135,100,0,0" VerticalAlignment="Top" Height="27"/>
                                 </Grid>
                             </ScrollViewer>

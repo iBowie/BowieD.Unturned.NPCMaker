@@ -85,13 +85,13 @@ namespace BowieD.Unturned.NPCMaker.NPC
     }
     public enum Equip_Type
     {
-        [Description("Character.Equipment_None")]
+        [Description("Character.Equipment_Equipped_None")]
         None,
-        [Description("Character.Equipment_Primary")]
+        [Description("Character.Equipment_Equipped_Primary")]
         Primary,
-        [Description("Character.Equipment_Secondary")]
+        [Description("Character.Equipment_Equipped_Secondary")]
         Secondary,
-        [Description("Character.Equipment_Tertiary")]
+        [Description("Character.Equipment_Equipped_Tertiary")]
         Tertiary
     }
     public enum Zombie_Type
