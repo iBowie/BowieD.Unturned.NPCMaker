@@ -6,7 +6,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     public sealed class RewardReputation : Reward
     {
         public override RewardType Type => RewardType.Reputation;
-        public override string GameName
+        public override string DisplayName
         {
             get
             {

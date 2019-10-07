@@ -6,7 +6,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     {
         public ENPCHoliday Value;
         public override Condition_Type Type => Condition_Type.Holiday;
-        public override string GameName
+        public override string DisplayName
         {
             get
             {

@@ -2,6 +2,6 @@
 {
     public interface IHasDisplayName
     {
-        string GameName { get; }
+        string DisplayName { get; }
     }
 }

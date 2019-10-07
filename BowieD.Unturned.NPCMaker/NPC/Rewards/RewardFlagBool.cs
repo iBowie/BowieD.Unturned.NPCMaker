@@ -6,7 +6,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     public sealed class RewardFlagBool : Reward
     {
         public override RewardType Type => RewardType.Flag_Bool;
-        public override string GameName
+        public override string DisplayName
         {
             get
             {

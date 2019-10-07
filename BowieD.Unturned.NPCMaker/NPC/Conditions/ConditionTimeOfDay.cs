@@ -8,7 +8,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public int Second;
         public Logic_Type Logic;
         public override Condition_Type Type => Condition_Type.Time_Of_Day;
-        public override string GameName
+        public override string DisplayName
         {
             get
             {

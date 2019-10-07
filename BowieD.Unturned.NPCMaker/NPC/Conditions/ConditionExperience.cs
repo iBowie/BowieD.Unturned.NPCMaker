@@ -5,7 +5,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public sealed class ConditionExperience : Condition
     {
         public override Condition_Type Type => Condition_Type.Experience;
-        public override string GameName
+        public override string DisplayName
         {
             get
             {

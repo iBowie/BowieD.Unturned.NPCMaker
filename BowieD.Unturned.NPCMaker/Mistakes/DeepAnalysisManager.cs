@@ -106,13 +106,13 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             }
             foreach (NPCCharacter character in MainWindow.CurrentProject.data.characters)
             {
-                if (character.ID > 0)
+                if (character.id > 0)
                 {
-                    if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.NPC && d.Id == character.ID))
+                    if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.NPC && d.Id == character.id))
                     {
                         MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                         {
-                            MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_char", character.ID),
+                            MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_char", character.id),
                             Importance = IMPORTANCE.WARNING
                         });
                     }

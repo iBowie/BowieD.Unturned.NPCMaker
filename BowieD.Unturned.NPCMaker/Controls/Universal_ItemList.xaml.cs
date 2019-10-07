@@ -16,7 +16,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
         {
             InitializeComponent();
             this.Value = input;
-            mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).GameName : Value.ToString();
+            mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
             mainLabel.ToolTip = mainLabel.Content;
             this.Localizable = localizable;
             this.Type = type;
@@ -37,7 +37,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
                 if (uce.ShowDialog() == true)
                 {
                     Value = uce.Result;
-                    mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).GameName : Value.ToString();
+                    mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
                     mainLabel.ToolTip = mainLabel.Content;
                 }
             }
@@ -57,7 +57,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
                 if (ure.DialogResult == true)
                 {
                     Value = ure.Result;
-                    mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).GameName : Value.ToString();
+                    mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
                     mainLabel.ToolTip = mainLabel.Content;
                 }
             }
@@ -88,7 +88,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
                     }
                     Value = NewItem;
                 }
-                mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).GameName : Value.ToString();
+                mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
                 mainLabel.ToolTip = mainLabel.Content;
             }
             else if (Type == ReturnType.Character)

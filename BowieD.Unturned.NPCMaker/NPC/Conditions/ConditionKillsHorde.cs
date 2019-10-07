@@ -5,7 +5,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public sealed class ConditionKillsHorde : Condition
     {
         public override Condition_Type Type => Condition_Type.Kills_Horde;
-        public override string GameName
+        public override string DisplayName
         {
             get
             {

@@ -102,9 +102,9 @@ namespace BowieD.Unturned.NPCMaker.Editors
             {
                 return new NPCCharacter()
                 {
-                    ID = (ushort)(MainWindow.Instance.txtID.Value ?? 0),
-                    Beard = (byte)(MainWindow.Instance.beardImageIndex.Value ?? 0),
-                    ChristmasClothing = new NPCClothing()
+                    id = (ushort)(MainWindow.Instance.txtID.Value ?? 0),
+                    beard = (byte)(MainWindow.Instance.beardImageIndex.Value ?? 0),
+                    christmasClothing = new NPCClothing()
                     {
                         backpack = (ushort)(MainWindow.Instance.christmasbackpackIdBox.Value ?? 0),
                         bottom = (ushort)(MainWindow.Instance.christmasbottomIdBox.Value ?? 0),
@@ -114,7 +114,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                         top = (ushort)(MainWindow.Instance.christmastopIdBox.Value ?? 0),
                         vest = (ushort)(MainWindow.Instance.christmasvestIdBox.Value ?? 0)
                     },
-                    HalloweenClothing = new NPCClothing()
+                    halloweenClothing = new NPCClothing()
                     {
                         backpack = (ushort)(MainWindow.Instance.halloweenbackpackIdBox.Value ?? 0),
                         bottom = (ushort)(MainWindow.Instance.halloweenbottomIdBox.Value ?? 0),
@@ -124,7 +124,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                         top = (ushort)(MainWindow.Instance.halloweentopIdBox.Value ?? 0),
                         vest = (ushort)(MainWindow.Instance.halloweenvestIdBox.Value ?? 0)
                     },
-                    Clothing = new NPCClothing()
+                    clothing = new NPCClothing()
                     {
                         backpack = (ushort)(MainWindow.Instance.backpackIdBox.Value ?? 0),
                         bottom = (ushort)(MainWindow.Instance.bottomIdBox.Value ?? 0),
@@ -134,63 +134,63 @@ namespace BowieD.Unturned.NPCMaker.Editors
                         top = (ushort)(MainWindow.Instance.topIdBox.Value ?? 0),
                         vest = (ushort)(MainWindow.Instance.vestIdBox.Value ?? 0)
                     },
-                    DisplayName = MainWindow.Instance.txtDisplayName.Text ?? "",
-                    EditorName = MainWindow.Instance.txtEditorName.Text ?? "",
-                    Equipped = getEquipType.Invoke(),
-                    Pose = getPose.Invoke(),
-                    EquipPrimary = (ushort)(MainWindow.Instance.primaryIdBox.Value ?? 0),
-                    EquipSecondary = (ushort)(MainWindow.Instance.secondaryIdBox.Value ?? 0),
-                    EquipTertiary = (ushort)(MainWindow.Instance.tertiaryIdBox.Value ?? 0),
-                    FaceID = (byte)(MainWindow.Instance.faceImageIndex.Value ?? 0),
-                    Haircut = (byte)(MainWindow.Instance.hairImageIndex.Value ?? 0),
+                    displayName = MainWindow.Instance.txtDisplayName.Text ?? "",
+                    editorName = MainWindow.Instance.txtEditorName.Text ?? "",
+                    equipped = getEquipType.Invoke(),
+                    pose = getPose.Invoke(),
+                    equipPrimary = (ushort)(MainWindow.Instance.primaryIdBox.Value ?? 0),
+                    equipSecondary = (ushort)(MainWindow.Instance.secondaryIdBox.Value ?? 0),
+                    equipTertiary = (ushort)(MainWindow.Instance.tertiaryIdBox.Value ?? 0),
+                    face = (byte)(MainWindow.Instance.faceImageIndex.Value ?? 0),
+                    haircut = (byte)(MainWindow.Instance.hairImageIndex.Value ?? 0),
                     guid = loadedGUID,
-                    LeftHanded = MainWindow.Instance.apparelLeftHandedCheckbox.IsChecked == true,
-                    DialogueID = (ushort)(MainWindow.Instance.txtStartDialogueID.Value ?? 0),
+                    leftHanded = MainWindow.Instance.apparelLeftHandedCheckbox.IsChecked == true,
+                    startDialogueId = (ushort)(MainWindow.Instance.txtStartDialogueID.Value ?? 0),
                     visibilityConditions = conditions,
-                    SkinColor = (MainWindow.Instance.skinColorPicker.SelectedColor ?? new Coloring.Color(0, 0, 0)),
-                    HairColor = (MainWindow.Instance.hairColorPicker.SelectedColor ?? new Coloring.Color(0, 0, 0))
+                    skinColor = (MainWindow.Instance.skinColorPicker.SelectedColor ?? new Coloring.Color(0, 0, 0)),
+                    hairColor = (MainWindow.Instance.hairColorPicker.SelectedColor ?? new Coloring.Color(0, 0, 0))
                 };
             }
             set
             {
                 Reset();
-                MainWindow.Instance.txtID.Value = value.ID;
-                MainWindow.Instance.txtStartDialogueID.Value = value.DialogueID;
-                MainWindow.Instance.txtDisplayName.Text = value.DisplayName;
-                MainWindow.Instance.txtEditorName.Text = value.EditorName;
-                MainWindow.Instance.skinColorPicker.SelectedColor = value.SkinColor;
-                MainWindow.Instance.hairColorPicker.SelectedColor = value.HairColor;
-                MainWindow.Instance.backpackIdBox.Value = value.Clothing.backpack;
-                MainWindow.Instance.maskIdBox.Value = value.Clothing.mask;
-                MainWindow.Instance.vestIdBox.Value = value.Clothing.vest;
-                MainWindow.Instance.topIdBox.Value = value.Clothing.top;
-                MainWindow.Instance.bottomIdBox.Value = value.Clothing.bottom;
-                MainWindow.Instance.glassesIdBox.Value = value.Clothing.glasses;
-                MainWindow.Instance.hatIdBox.Value = value.Clothing.hat;
-                MainWindow.Instance.halloweenbackpackIdBox.Value = value.HalloweenClothing.backpack;
-                MainWindow.Instance.halloweenmaskIdBox.Value = value.HalloweenClothing.mask;
-                MainWindow.Instance.halloweenvestIdBox.Value = value.HalloweenClothing.vest;
-                MainWindow.Instance.halloweentopIdBox.Value = value.HalloweenClothing.top;
-                MainWindow.Instance.halloweenbottomIdBox.Value = value.HalloweenClothing.bottom;
-                MainWindow.Instance.halloweenglassesIdBox.Value = value.HalloweenClothing.glasses;
-                MainWindow.Instance.halloweenhatIdBox.Value = value.HalloweenClothing.hat;
-                MainWindow.Instance.christmasbackpackIdBox.Value = value.ChristmasClothing.backpack;
-                MainWindow.Instance.christmasmaskIdBox.Value = value.ChristmasClothing.mask;
-                MainWindow.Instance.christmasvestIdBox.Value = value.ChristmasClothing.vest;
-                MainWindow.Instance.christmastopIdBox.Value = value.ChristmasClothing.top;
-                MainWindow.Instance.christmasbottomIdBox.Value = value.ChristmasClothing.bottom;
-                MainWindow.Instance.christmasglassesIdBox.Value = value.ChristmasClothing.glasses;
-                MainWindow.Instance.christmashatIdBox.Value = value.ChristmasClothing.hat;
-                MainWindow.Instance.primaryIdBox.Value = value.EquipPrimary;
-                MainWindow.Instance.secondaryIdBox.Value = value.EquipSecondary;
-                MainWindow.Instance.tertiaryIdBox.Value = value.EquipTertiary;
-                MainWindow.Instance.faceImageIndex.Value = value.FaceID;
-                MainWindow.Instance.beardImageIndex.Value = value.Beard;
-                MainWindow.Instance.hairImageIndex.Value = value.Haircut;
-                MainWindow.Instance.apparelLeftHandedCheckbox.IsChecked = value.LeftHanded;
+                MainWindow.Instance.txtID.Value = value.id;
+                MainWindow.Instance.txtStartDialogueID.Value = value.startDialogueId;
+                MainWindow.Instance.txtDisplayName.Text = value.displayName;
+                MainWindow.Instance.txtEditorName.Text = value.editorName;
+                MainWindow.Instance.skinColorPicker.SelectedColor = value.skinColor;
+                MainWindow.Instance.hairColorPicker.SelectedColor = value.hairColor;
+                MainWindow.Instance.backpackIdBox.Value = value.clothing.backpack;
+                MainWindow.Instance.maskIdBox.Value = value.clothing.mask;
+                MainWindow.Instance.vestIdBox.Value = value.clothing.vest;
+                MainWindow.Instance.topIdBox.Value = value.clothing.top;
+                MainWindow.Instance.bottomIdBox.Value = value.clothing.bottom;
+                MainWindow.Instance.glassesIdBox.Value = value.clothing.glasses;
+                MainWindow.Instance.hatIdBox.Value = value.clothing.hat;
+                MainWindow.Instance.halloweenbackpackIdBox.Value = value.halloweenClothing.backpack;
+                MainWindow.Instance.halloweenmaskIdBox.Value = value.halloweenClothing.mask;
+                MainWindow.Instance.halloweenvestIdBox.Value = value.halloweenClothing.vest;
+                MainWindow.Instance.halloweentopIdBox.Value = value.halloweenClothing.top;
+                MainWindow.Instance.halloweenbottomIdBox.Value = value.halloweenClothing.bottom;
+                MainWindow.Instance.halloweenglassesIdBox.Value = value.halloweenClothing.glasses;
+                MainWindow.Instance.halloweenhatIdBox.Value = value.halloweenClothing.hat;
+                MainWindow.Instance.christmasbackpackIdBox.Value = value.christmasClothing.backpack;
+                MainWindow.Instance.christmasmaskIdBox.Value = value.christmasClothing.mask;
+                MainWindow.Instance.christmasvestIdBox.Value = value.christmasClothing.vest;
+                MainWindow.Instance.christmastopIdBox.Value = value.christmasClothing.top;
+                MainWindow.Instance.christmasbottomIdBox.Value = value.christmasClothing.bottom;
+                MainWindow.Instance.christmasglassesIdBox.Value = value.christmasClothing.glasses;
+                MainWindow.Instance.christmashatIdBox.Value = value.christmasClothing.hat;
+                MainWindow.Instance.primaryIdBox.Value = value.equipPrimary;
+                MainWindow.Instance.secondaryIdBox.Value = value.equipSecondary;
+                MainWindow.Instance.tertiaryIdBox.Value = value.equipTertiary;
+                MainWindow.Instance.faceImageIndex.Value = value.face;
+                MainWindow.Instance.beardImageIndex.Value = value.beard;
+                MainWindow.Instance.hairImageIndex.Value = value.haircut;
+                MainWindow.Instance.apparelLeftHandedCheckbox.IsChecked = value.leftHanded;
                 for (int k = 0; k < MainWindow.Instance.apparelPoseBox.Items.Count; k++)
                 {
-                    if (((NPC_Pose)(MainWindow.Instance.apparelPoseBox.Items[k] as ComboBoxItem).Tag) == value.Pose)
+                    if (((NPC_Pose)(MainWindow.Instance.apparelPoseBox.Items[k] as ComboBoxItem).Tag) == value.pose)
                     {
                         MainWindow.Instance.apparelPoseBox.SelectedIndex = k;
                         break;
@@ -198,7 +198,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
                 }
                 for (int k = 0; k < MainWindow.Instance.equipSlotBox.Items.Count; k++)
                 {
-                    if (((Equip_Type)(MainWindow.Instance.equipSlotBox.Items[k] as ComboBoxItem).Tag) == value.Equipped)
+                    if (((Equip_Type)(MainWindow.Instance.equipSlotBox.Items[k] as ComboBoxItem).Tag) == value.equipped)
                     {
                         MainWindow.Instance.equipSlotBox.SelectedIndex = k;
                         break;
@@ -210,7 +210,7 @@ namespace BowieD.Unturned.NPCMaker.Editors
         }
         public void Open()
         {
-            var ulv = new Universal_ListView(MainWindow.CurrentProject.data.characters.OrderBy(d => d.ID).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Character, false)).ToList(), Universal_ItemList.ReturnType.Character);
+            var ulv = new Universal_ListView(MainWindow.CurrentProject.data.characters.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Character, false)).ToList(), Universal_ItemList.ReturnType.Character);
             if (ulv.ShowDialog() == true)
             {
                 Save();
@@ -222,38 +222,38 @@ namespace BowieD.Unturned.NPCMaker.Editors
         public void Reset()
         {
             NPCCharacter value = new NPCCharacter();
-            MainWindow.Instance.txtID.Value = value.ID;
-            MainWindow.Instance.txtStartDialogueID.Value = value.DialogueID;
-            MainWindow.Instance.txtDisplayName.Text = value.DisplayName;
-            MainWindow.Instance.txtEditorName.Text = value.EditorName;
-            MainWindow.Instance.backpackIdBox.Value = value.Clothing.backpack;
-            MainWindow.Instance.maskIdBox.Value = value.Clothing.mask;
-            MainWindow.Instance.vestIdBox.Value = value.Clothing.vest;
-            MainWindow.Instance.topIdBox.Value = value.Clothing.top;
-            MainWindow.Instance.bottomIdBox.Value = value.Clothing.bottom;
-            MainWindow.Instance.glassesIdBox.Value = value.Clothing.glasses;
-            MainWindow.Instance.hatIdBox.Value = value.Clothing.hat;
-            MainWindow.Instance.halloweenbackpackIdBox.Value = value.HalloweenClothing.backpack;
-            MainWindow.Instance.halloweenmaskIdBox.Value = value.HalloweenClothing.mask;
-            MainWindow.Instance.halloweenvestIdBox.Value = value.HalloweenClothing.vest;
-            MainWindow.Instance.halloweentopIdBox.Value = value.HalloweenClothing.top;
-            MainWindow.Instance.halloweenbottomIdBox.Value = value.HalloweenClothing.bottom;
-            MainWindow.Instance.halloweenglassesIdBox.Value = value.HalloweenClothing.glasses;
-            MainWindow.Instance.halloweenhatIdBox.Value = value.HalloweenClothing.hat;
-            MainWindow.Instance.christmasbackpackIdBox.Value = value.ChristmasClothing.backpack;
-            MainWindow.Instance.christmasmaskIdBox.Value = value.ChristmasClothing.mask;
-            MainWindow.Instance.christmasvestIdBox.Value = value.ChristmasClothing.vest;
-            MainWindow.Instance.christmastopIdBox.Value = value.ChristmasClothing.top;
-            MainWindow.Instance.christmasbottomIdBox.Value = value.ChristmasClothing.bottom;
-            MainWindow.Instance.christmasglassesIdBox.Value = value.ChristmasClothing.glasses;
-            MainWindow.Instance.christmashatIdBox.Value = value.ChristmasClothing.hat;
-            MainWindow.Instance.primaryIdBox.Value = value.EquipPrimary;
-            MainWindow.Instance.secondaryIdBox.Value = value.EquipSecondary;
-            MainWindow.Instance.tertiaryIdBox.Value = value.EquipTertiary;
-            MainWindow.Instance.faceImageIndex.Value = value.FaceID;
-            MainWindow.Instance.beardImageIndex.Value = value.Beard;
-            MainWindow.Instance.hairImageIndex.Value = value.Haircut;
-            MainWindow.Instance.apparelLeftHandedCheckbox.IsChecked = value.LeftHanded;
+            MainWindow.Instance.txtID.Value = value.id;
+            MainWindow.Instance.txtStartDialogueID.Value = value.startDialogueId;
+            MainWindow.Instance.txtDisplayName.Text = value.displayName;
+            MainWindow.Instance.txtEditorName.Text = value.editorName;
+            MainWindow.Instance.backpackIdBox.Value = value.clothing.backpack;
+            MainWindow.Instance.maskIdBox.Value = value.clothing.mask;
+            MainWindow.Instance.vestIdBox.Value = value.clothing.vest;
+            MainWindow.Instance.topIdBox.Value = value.clothing.top;
+            MainWindow.Instance.bottomIdBox.Value = value.clothing.bottom;
+            MainWindow.Instance.glassesIdBox.Value = value.clothing.glasses;
+            MainWindow.Instance.hatIdBox.Value = value.clothing.hat;
+            MainWindow.Instance.halloweenbackpackIdBox.Value = value.halloweenClothing.backpack;
+            MainWindow.Instance.halloweenmaskIdBox.Value = value.halloweenClothing.mask;
+            MainWindow.Instance.halloweenvestIdBox.Value = value.halloweenClothing.vest;
+            MainWindow.Instance.halloweentopIdBox.Value = value.halloweenClothing.top;
+            MainWindow.Instance.halloweenbottomIdBox.Value = value.halloweenClothing.bottom;
+            MainWindow.Instance.halloweenglassesIdBox.Value = value.halloweenClothing.glasses;
+            MainWindow.Instance.halloweenhatIdBox.Value = value.halloweenClothing.hat;
+            MainWindow.Instance.christmasbackpackIdBox.Value = value.christmasClothing.backpack;
+            MainWindow.Instance.christmasmaskIdBox.Value = value.christmasClothing.mask;
+            MainWindow.Instance.christmasvestIdBox.Value = value.christmasClothing.vest;
+            MainWindow.Instance.christmastopIdBox.Value = value.christmasClothing.top;
+            MainWindow.Instance.christmasbottomIdBox.Value = value.christmasClothing.bottom;
+            MainWindow.Instance.christmasglassesIdBox.Value = value.christmasClothing.glasses;
+            MainWindow.Instance.christmashatIdBox.Value = value.christmasClothing.hat;
+            MainWindow.Instance.primaryIdBox.Value = value.equipPrimary;
+            MainWindow.Instance.secondaryIdBox.Value = value.equipSecondary;
+            MainWindow.Instance.tertiaryIdBox.Value = value.equipTertiary;
+            MainWindow.Instance.faceImageIndex.Value = value.face;
+            MainWindow.Instance.beardImageIndex.Value = value.beard;
+            MainWindow.Instance.hairImageIndex.Value = value.haircut;
+            MainWindow.Instance.apparelLeftHandedCheckbox.IsChecked = value.leftHanded;
             MainWindow.Instance.equipSlotBox.SelectedIndex = 0;
             MainWindow.Instance.apparelPoseBox.SelectedIndex = 0;
             MainWindow.Instance.skinColorPicker.SelectedColor = new Coloring.Color(0, 0, 0);
@@ -264,18 +264,18 @@ namespace BowieD.Unturned.NPCMaker.Editors
         public void Save()
         {
             var character = Current;
-            if (character.ID == 0)
+            if (character.id == 0)
             {
                 App.NotificationManager.Notify(LocalizationManager.Current.Notification["Character_ID_Zero"]);
                 return;
             }
-            var o = MainWindow.CurrentProject.data.characters.Where(d => d.ID == character.ID);
+            var o = MainWindow.CurrentProject.data.characters.Where(d => d.id == character.id);
             if (o.Count() > 0)
                 MainWindow.CurrentProject.data.characters.Remove(o.ElementAt(0));
             MainWindow.CurrentProject.data.characters.Add(character);
             App.NotificationManager.Notify(LocalizationManager.Current.Notification["Character_Saved"]);
             MainWindow.CurrentProject.isSaved = false;
-            App.Logger.LogInfo($"Character {character.ID} saved!");
+            App.Logger.LogInfo($"Character {character.id} saved!");
         }
         private string loadedGUID = Guid.NewGuid().ToString("N");
         public List<Condition> conditions;
@@ -338,9 +338,9 @@ namespace BowieD.Unturned.NPCMaker.Editors
         }
         internal void SkinColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<System.Windows.Media.Color?> e)
         {
-            Current.SkinColor = (e.NewValue ?? new Coloring.Color(0, 0, 0));
-            MainWindow.Instance.faceImageBorder.Background = new SolidColorBrush(Current.SkinColor);
-            if (Coloring.ColorConverter.ColorToHSV(Current.SkinColor).V <= 0.1d)
+            Current.skinColor = (e.NewValue ?? new Coloring.Color(0, 0, 0));
+            MainWindow.Instance.faceImageBorder.Background = new SolidColorBrush(Current.skinColor);
+            if (Coloring.ColorConverter.ColorToHSV(Current.skinColor).V <= 0.1d)
             {
                 var effect = new System.Windows.Media.Effects.DropShadowEffect
                 {
@@ -358,8 +358,8 @@ namespace BowieD.Unturned.NPCMaker.Editors
         }
         internal void HairColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<System.Windows.Media.Color?> e)
         {
-            Current.HairColor = (e.NewValue ?? new Coloring.Color(0, 0, 0));
-            SolidColorBrush color = new SolidColorBrush(Current.HairColor);
+            Current.hairColor = (e.NewValue ?? new Coloring.Color(0, 0, 0));
+            SolidColorBrush color = new SolidColorBrush(Current.hairColor);
             MainWindow.Instance.beardRenderGrid.DataContext = color;
             MainWindow.Instance.hairRenderGrid.DataContext = color;
         }

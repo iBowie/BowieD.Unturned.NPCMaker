@@ -14,13 +14,13 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Character
         {
             foreach (var _char in MainWindow.CurrentProject.data.characters)
             {
-                if (_char.ID > 0 && _char.ID <= 2000)
+                if (_char.id > 0 && _char.id <= 2000)
                 {
                     yield return new NE_0000()
                     {
                         MistakeName = "NE_0000",
                         Importance = IMPORTANCE.ADVICE,
-                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_0000_Desc", _char.DisplayName, _char.ID),
+                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_0000_Desc", _char.displayName, _char.id),
                         OnClick = new Action(() =>
                         {
                             //if (MainWindow.CharacterEditor.Current.id == 0)

@@ -15,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public Logic_Type Logic;
         [ConditionNoValue]
         public bool Reset;
-        public override string GameName
+        public override string DisplayName
         {
             get
             {

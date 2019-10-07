@@ -28,7 +28,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         [RewardSkipField]
         public string Localization;
         public abstract RewardType Type { get; }
-        public abstract string GameName { get; }
+        public abstract string DisplayName { get; }
         public IEnumerable<FrameworkElement> GetControls()
         {
             var fields = GetType().GetFields();

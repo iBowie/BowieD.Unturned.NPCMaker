@@ -8,7 +8,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public override Condition_Type Type => Condition_Type.Player_Life_Virus;
         public int Value;
         public Logic_Type Logic;
-        public override string GameName
+        public override string DisplayName
         {
             get
             {

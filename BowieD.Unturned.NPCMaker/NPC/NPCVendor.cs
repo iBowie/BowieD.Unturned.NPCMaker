@@ -30,7 +30,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         [XmlIgnore]
         public List<VendorItem> SellItems => (items ?? new List<VendorItem>()).Where(d => !d.isBuy).ToList();
 
-        public string GameName => $"[{id}] {vendorTitle}";
+        public string DisplayName => $"[{id}] {vendorTitle}";
     }
 
     public class VendorItem : IHasDisplayName
@@ -48,7 +48,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public List<Condition> conditions;
         public string spawnPointID;
 
-        public string GameName
+        public string DisplayName
         {
             get
             {
