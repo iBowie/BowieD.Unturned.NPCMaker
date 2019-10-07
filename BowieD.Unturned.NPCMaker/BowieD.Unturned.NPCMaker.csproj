@@ -206,11 +206,6 @@
       <DependentUpon>ConfigWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DiscordRPC\DiscordWorker.cs" />
-    <Compile Include="Editors\CharacterEditor.cs" />
-    <Compile Include="Editors\DialogueEditor.cs" />
-    <Compile Include="Editors\IEditor.cs" />
-    <Compile Include="Editors\QuestEditor.cs" />
-    <Compile Include="Editors\VendorEditor.cs" />
     <Compile Include="Export\Exporter.cs" />
     <Compile Include="Forms\Form_About.xaml.cs">
       <DependentUpon>Form_About.xaml</DependentUpon>
@@ -314,6 +309,7 @@
     <Compile Include="ViewModels\BaseCommand.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Character\CharacterTabViewModel.cs" />
+    <Compile Include="ViewModels\Dialogue\DialogueTabViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="XAML\EnumItemsSource.cs" />
     <Page Include="Controls\Dialogue_Response.xaml">
@@ -494,7 +490,6 @@
     <Resource Include="Libs\Newtonsoft.Json.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\Dialogue\" />
     <Folder Include="ViewModels\Quest\" />
     <Folder Include="ViewModels\Vendor\" />
   </ItemGroup>

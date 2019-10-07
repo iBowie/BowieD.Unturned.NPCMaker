@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.ViewModels.Character;
+using BowieD.Unturned.NPCMaker.ViewModels.Dialogue;
 
 namespace BowieD.Unturned.NPCMaker.ViewModels
 {
@@ -8,8 +9,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         {
             MainWindow = mainWindow;
             CharacterTabViewModel = new CharacterTabViewModel();
+            DialogueTabViewModel = new DialogueTabViewModel();
         }
         public MainWindow MainWindow { get; set; }
         public CharacterTabViewModel CharacterTabViewModel { get; set; }
+        public DialogueTabViewModel DialogueTabViewModel { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels.Character
 {
     public sealed class CharacterTabViewModel : BaseViewModel
     {
+        private NPCCharacter _character;
         public CharacterTabViewModel()
         {
             Character = new NPCCharacter();
@@ -24,11 +25,27 @@ namespace BowieD.Unturned.NPCMaker.ViewModels.Character
             UserColors.Load(new string[0]);
             UpdateColorPicker();
         }
-        public NPCCharacter Character { get; set; }
+        public NPCCharacter Character
+        {
+            get => _character;
+            set
+            {
+                _character = value;
+                OnPropertyChange("");
+            }
+        }
         public string DisplayName { get => Character.displayName; set => Character.displayName = value; }
         public string EditorName { get => Character.editorName; set => Character.editorName = value; }
         public ushort ID { get => Character.id; set => Character.id = value; }
-        public ushort DialogueID { get => Character.startDialogueId; set => Character.startDialogueId = value; }
+        public ushort DialogueID
+        {
+            get => Character.startDialogueId;
+            set
+            {
+                Character.startDialogueId = value;
+                OnPropertyChange("DialogueID");
+            }
+        }
         public byte FaceID
         {
             get => Character.face;
@@ -180,7 +197,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels.Character
                         {
                             SaveCommand.Execute(null);
                             Character = ulv.SelectedValue as NPCCharacter;
-                            OnPropertyChange("");
                             App.Logger.LogInfo($"Opened character {ID}");
                         }
                         MainWindow.CurrentProject.data.characters = ulv.Values.Cast<NPCCharacter>().ToList();
@@ -198,7 +214,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels.Character
                     resetCommand = new BaseCommand(() =>
                     {
                         Character = new NPCCharacter();
-                        OnPropertyChange("");
                     });
                 }
                 return resetCommand;

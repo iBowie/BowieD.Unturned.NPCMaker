@@ -543,7 +543,7 @@
                         </GroupBox>
                     </Grid>
                 </TabItem>
-                <TabItem Name="dialogueTab" Header="{DynamicResource INTERFACE_Main_Tab_Dialogue}">
+                <TabItem DataContext="{Binding DialogueTabViewModel}" Name="dialogueTab" Header="{DynamicResource INTERFACE_Main_Tab_Dialogue}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="33*"/>
@@ -554,22 +554,22 @@
                             <RowDefinition Height="80"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBox mah:TextBoxHelper.Watermark="{DynamicResource INTERFACE_App_Comment}" Name="dialogue_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
-                        <Button Name="setAsStartButton" Grid.Column="1" Margin="10,10,10,0" Height="32" VerticalAlignment="Top" VerticalContentAlignment="Center" Content="{DynamicResource INTERFACE_Main_Tab_Dialogue_SetAsStart}">
+                        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{DynamicResource INTERFACE_App_Comment}" Name="dialogue_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
+                        <Button Command="{Binding SetAsStartCommand}" Name="setAsStartButton" Grid.Column="1" Margin="10,10,10,0" Height="32" VerticalAlignment="Top" VerticalContentAlignment="Center" Content="{DynamicResource INTERFACE_Main_Tab_Dialogue_SetAsStart}">
                             <Button.ToolTip>
                                 <StackPanel>
                                     <Image Source="Resources/Help/img_help_startDialogue.png"/>
                                 </StackPanel>
                             </Button.ToolTip>
                         </Button>
-                        <mah:NumericUpDown x:Name="dialogueInputIdControl" Width="62" Height="26" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
+                        <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="dialogueInputIdControl" Width="62" Height="26" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
                         <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
                             <TextBlock TextAlignment="Center" Text="{DynamicResource DIALOGUE_ID}" VerticalAlignment="Center"/>
                         </Border>
                         <GroupBox Grid.Row="1" Header="{DynamicResource DIALOGUE_Pages}" Margin="10,10,5,10">
                             <ScrollViewer>
                                 <StackPanel Name="messagePagesGrid" VerticalAlignment="Top">
-                                    <Button Name="dialogueAddMessageButton" Margin="10" Height="32" Content="{DynamicResource DIALOGUE_Message_Add}">
+                                    <Button Command="{Binding AddMessageCommand}" Name="dialogueAddMessageButton" Margin="10" Height="32" Content="{DynamicResource DIALOGUE_Message_Add}">
                                         <Button.ToolTip>
                                             <StackPanel>
                                                 <Image Source="Resources/Help/img_help_dialogueMessage.png"/>
@@ -582,7 +582,7 @@
                         <GroupBox Grid.Column="1" Grid.Row="1" Header="{DynamicResource DIALOGUE_Replies}" Margin="5,10,5,10" MinWidth="361">
                             <ScrollViewer>
                                 <StackPanel x:Name="dialoguePlayerRepliesGrid">
-                                    <Button Name="dialogueAddReplyButton" Margin="10" VerticalAlignment="Top" Height="32" Content="{DynamicResource DIALOGUE_Reply_Add}" Width="312">
+                                    <Button Command="{Binding AddReplyCommand}" Name="dialogueAddReplyButton" Margin="10" VerticalAlignment="Top" Height="32" Content="{DynamicResource DIALOGUE_Reply_Add}" Width="312">
                                         <Button.ToolTip>
                                             <StackPanel>
                                                 <Image Source="Resources/Help/img_help_dialogueReply.png"/>
@@ -592,17 +592,17 @@
                                 </StackPanel>
                             </ScrollViewer>
                         </GroupBox>
-                        <Button Grid.Column="2" Name="dialogueSaveButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Dialogue_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="dialogueSaveButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Dialogue_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="dialogueResetButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Dialogue_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Command="{Binding ResetCommand}" Grid.Column="2" Name="dialogueResetButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Dialogue_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Delete" Width="16" Height="16"  Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="dialogueOpenButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Dialogue_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Command="{Binding OpenCommand}" Grid.Column="2" Name="dialogueOpenButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Dialogue_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="FolderOutline" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
@@ -759,7 +759,6 @@
         </Grid>
         <Grid Name="notClickableOverlay" IsHitTestVisible="False">
             <Grid Name="debugOverlayText" HorizontalAlignment="Left" Opacity="0.15" VerticalAlignment="Bottom" Margin="5">
-                <!--<Image Width="36" Source="Resources/ICON_WARNING.png" Height="{Binding Width}" HorizontalAlignment="Left"/>-->
                 <iconPacks:PackIconMaterial Kind="BugOutline" Width="36" Height="36" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Margin="36,0,0,0" Content="DEBUG" HorizontalAlignment="Right" FontSize="36"/>
             </Grid>

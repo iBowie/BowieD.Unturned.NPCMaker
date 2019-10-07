@@ -237,7 +237,7 @@ namespace BowieD.Unturned.NPCMaker
                         //MainWindow.CharacterEditor.SendPresence();
                         break;
                     case 1:
-                        MainWindow.DialogueEditor.SendPresence();
+                        //MainWindow.DialogueEditor.SendPresence();
                         break;
                     case 2:
                         MainWindow.VendorEditor.SendPresence();

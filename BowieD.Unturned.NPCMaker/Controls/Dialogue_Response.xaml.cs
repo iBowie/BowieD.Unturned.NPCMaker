@@ -104,9 +104,9 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         private void ChangeVisibilityButton_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.DialogueEditor.Current.MessagesAmount > 1)
+            if (MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Messages.Count > 1)
             {
-                Message_TreeView mtv = new Message_TreeView(Response.visibleIn, MainWindow.DialogueEditor.Current.MessagesAmount);
+                Message_TreeView mtv = new Message_TreeView(Response.visibleIn, MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Messages.Count);
                 mtv.ShowDialog();
                 if (mtv.DialogResult == true)
                 {

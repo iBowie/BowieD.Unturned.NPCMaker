@@ -34,7 +34,7 @@ namespace BowieD.Unturned.NPCMaker
         #endregion
         #region EDITORS
         //public static IEditor<NPCCharacter> CharacterEditor { get; private set; }
-        public static IEditor<NPCDialogue> DialogueEditor { get; private set; }
+        //public static IEditor<NPCDialogue> DialogueEditor { get; private set; }
         public static IEditor<NPCVendor> VendorEditor { get; private set; }
         public static IEditor<NPCQuest> QuestEditor { get; private set; }
         public static void SaveAllEditors()
@@ -55,7 +55,7 @@ namespace BowieD.Unturned.NPCMaker
         public new void Show()
         {
             //CharacterEditor = new CharacterEditor();
-            DialogueEditor = new DialogueEditor();
+            //DialogueEditor = new DialogueEditor();
             VendorEditor = new VendorEditor();
             QuestEditor = new QuestEditor();
             DeepAnalysisManager = new Mistakes.DeepAnalysisManager();
