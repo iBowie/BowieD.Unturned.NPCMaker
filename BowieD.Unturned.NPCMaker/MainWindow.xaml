@@ -33,22 +33,22 @@
             </Grid.RowDefinitions>
             <Menu VerticalAlignment="Top">
                 <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File}">
-                    <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_New}" Name="newButton">
+                    <MenuItem Command="{Binding NewProjectCommand}" Header="{DynamicResource INTERFACE_Main_Menu_File_New}" Name="newButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="File" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_Open}" Name="loadButton">
+                    <MenuItem Command="{Binding LoadProjectCommand}" Header="{DynamicResource INTERFACE_Main_Menu_File_Open}" Name="loadButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="FolderOpen" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_Save}" Name="saveButton">
+                    <MenuItem Command="{Binding SaveProjectCommand}" Header="{DynamicResource INTERFACE_Main_Menu_File_Save}" Name="saveButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="ContentSave" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_SaveAs}" Name="saveAsButton">
+                    <MenuItem Command="{Binding SaveAsProjectCommand}" Header="{DynamicResource INTERFACE_Main_Menu_File_SaveAs}" Name="saveAsButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="ContentSave" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
@@ -59,37 +59,37 @@
                             <iconPacks:PackIconMaterial Kind="History" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_Export}" Name="exportButton">
+                    <MenuItem Command="{Binding ExportProjectCommand}" Header="{DynamicResource INTERFACE_Main_Menu_File_Export}" Name="exportButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Export" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_Exit}" Name="exitButton">
+                    <MenuItem Command="{Binding ExitCommand}" Header="{DynamicResource INTERFACE_Main_Menu_File_Exit}" Name="exitButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Close" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Name="optionsMenuItem" Header="{DynamicResource INTERFACE_Main_Menu_Options}"/>
+                <MenuItem Command="{Binding OptionsCommand}" Name="optionsMenuItem" Header="{DynamicResource INTERFACE_Main_Menu_Options}"/>
                 <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_Communication}">
-                    <MenuItem Name="steamComm" Tag="https://steamcommunity.com/profiles/76561198085825110" Header="{DynamicResource INTERFACE_Main_Menu_Communication_Steam}">
+                    <MenuItem Command="{Binding FeedBackSteamCommand}" Name="steamComm" Header="{DynamicResource INTERFACE_Main_Menu_Communication_Steam}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/Services/Steam.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Name="discordComm" Tag="https://discord.gg/Geqtkx2" Header="{DynamicResource INTERFACE_Main_Menu_Communication_Discord}">
+                    <MenuItem Command="{Binding FeedBackDiscordCommand}" Name="discordComm" Header="{DynamicResource INTERFACE_Main_Menu_Communication_Discord}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/Services/Discord.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Name="vkComm" Tag="https://vk.com/id250813640" Header="{DynamicResource INTERFACE_Main_Menu_Communication_VK}">
+                    <MenuItem Command="{Binding FeedBackVKCommand}" Name="vkComm" Header="{DynamicResource INTERFACE_Main_Menu_Communication_VK}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/Services/VK.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Name="aboutMenuItem" Header="{DynamicResource INTERFACE_Main_Menu_About}"/>
+                <MenuItem Command="{Binding AboutCommand}" Name="aboutMenuItem" Header="{DynamicResource INTERFACE_Main_Menu_About}"/>
                 <Label Margin="-5" IsEnabled="False" Name="menuCurrentFileLabel" Content="Current File: "/>
             </Menu>
             <TabControl Grid.Row="1" Background="Transparent" Padding="-1" Name="mainTabControl" SelectedIndex="0" Margin="0,5,0,0">
@@ -610,7 +610,7 @@
                         <TextBlock Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,0,10" Text="{DynamicResource DIALOGUE_Tips}" TextWrapping="Wrap" Width="254"/>
                     </Grid>
                 </TabItem>
-                <TabItem Name="vendorTab" Header="{DynamicResource INTERFACE_Main_Tab_Vendor}">
+                <TabItem DataContext="{Binding VendorTabViewModel}" Name="vendorTab" Header="{DynamicResource INTERFACE_Main_Tab_Vendor}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="80"/>
@@ -621,27 +621,27 @@
                             <ColumnDefinition MinWidth="296" Width="33*"/>
                             <ColumnDefinition Width="33*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox mah:TextBoxHelper.Watermark="{DynamicResource INTERFACE_App_Comment}" Name="vendor_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
-                        <mah:NumericUpDown x:Name="vendorIdTxtBox" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
+                        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{DynamicResource INTERFACE_App_Comment}" Name="vendor_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
+                        <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="vendorIdTxtBox" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
                         <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
                             <TextBlock TextWrapping="Wrap" Text="{DynamicResource VENDOR_ID}" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBox  Grid.Column="1" Name="vendorTitleTxtBox" Height="26" VerticalAlignment="Top" Margin="10,10,146,0"/>
+                        <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Name="vendorTitleTxtBox" Height="26" VerticalAlignment="Top" Margin="10,10,146,0"/>
                         <TextBlock  Grid.Column="1" HorizontalAlignment="Right" Margin="0,14,10,0" TextWrapping="Wrap" Text="{DynamicResource VENDOR_Title}" VerticalAlignment="Top" Width="128" Height="16"/>
-                        <TextBox  Grid.Column="1" Name="vendorDescTxtBox" Height="26" VerticalAlignment="Bottom" Margin="10,0,146,10"/>
+                        <TextBox  Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Name="vendorDescTxtBox" Height="26" VerticalAlignment="Bottom" Margin="10,0,146,10"/>
                         <TextBlock  Grid.Column="1" Width="128" HorizontalAlignment="Right" Margin="0,0,10,14" TextWrapping="Wrap" Text="{DynamicResource VENDOR_Description}" VerticalAlignment="Bottom" Height="16"/>
-                        <CheckBox Name="vendorDisableSortingBox" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Content="{DynamicResource VENDOR_DisableSorting}" Margin="10,10,0,0" Grid.RowSpan="2"/>
-                        <Button Grid.Column="2" Name="vendorSaveButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Vendor_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
+                        <CheckBox IsChecked="{Binding DisableSorting, UpdateSourceTrigger=PropertyChanged}" Name="vendorDisableSortingBox" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Content="{DynamicResource VENDOR_DisableSorting}" Margin="10,10,0,0" Grid.RowSpan="2"/>
+                        <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="vendorSaveButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Vendor_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="vendorOpenButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Vendor_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
+                        <Button Command="{Binding OpenCommand}" Grid.Column="2" Name="vendorOpenButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Vendor_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="vendorResetButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Vendor_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
+                        <Button Command="{Binding ResetCommand}" Grid.Column="2" Name="vendorResetButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Vendor_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
@@ -660,10 +660,10 @@
                                 </StackPanel>
                             </ScrollViewer>
                         </GroupBox>
-                        <Button Name="vendorAddItemButton" Content="{DynamicResource VENDOR_Item_Add}" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="25"/>
+                        <Button Command="{Binding AddItemCommand}" Name="vendorAddItemButton" Content="{DynamicResource VENDOR_Item_Add}" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="25"/>
                     </Grid>
                 </TabItem>
-                <TabItem Name="questTab" Header="{DynamicResource INTERFACE_Main_Tab_Quest}">
+                <TabItem DataContext="{Binding QuestTabViewModel}" Name="questTab" Header="{DynamicResource INTERFACE_Main_Tab_Quest}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="80"/>
@@ -674,26 +674,26 @@
                             <ColumnDefinition Width="33*"/>
                             <ColumnDefinition Width="33*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox mah:TextBoxHelper.Watermark="{DynamicResource INTERFACE_App_Comment}" Name="quest_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
-                        <mah:NumericUpDown x:Name="questIdBox" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
+                        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{DynamicResource INTERFACE_App_Comment}" Name="quest_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
+                        <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="questIdBox" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
                         <Border VerticalAlignment="Top" HorizontalAlignment="Left" Margin="77,10,0,0" Height="26" Grid.ColumnSpan="2">
                             <TextBlock Text="{DynamicResource QUEST_ID}" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBox Grid.Row="1" Name="questTitleBox" Height="26" VerticalAlignment="Top" Margin="10,38,10,0"/>
+                        <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Name="questTitleBox" Height="26" VerticalAlignment="Top" Margin="10,38,10,0"/>
                         <TextBlock Grid.Row="1" Text="{DynamicResource QUEST_Title}" TextAlignment="Center" Height="23" VerticalAlignment="Top" Margin="10,10,10,0"/>
-                        <TextBox Grid.Row="1" TextWrapping="Wrap" Name="questDescBox" Margin="10,94,10,10"/>
+                        <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" TextWrapping="Wrap" Name="questDescBox" Margin="10,94,10,10"/>
                         <TextBlock Grid.Row="1" TextAlignment="Center" Text="{DynamicResource QUEST_Description}" Height="23" VerticalAlignment="Top" Margin="10,66,10,0"/>
-                        <Button Grid.Column="2" Name="questSaveButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Quest_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
+                        <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="questSaveButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Quest_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="questOpenButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Quest_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
+                        <Button Command="{Binding OpenCommand}" Grid.Column="2" Name="questOpenButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Quest_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Column="2" Name="questResetButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Quest_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
+                        <Button Command="{Binding ResetCommand}" Grid.Column="2" Name="questResetButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Quest_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
@@ -708,7 +708,7 @@
                                     <StackPanel Name="listQuestConditions" />
                                 </ScrollViewer>
                             </GroupBox>
-                            <Button Grid.Column="1" Grid.Row="1" Name="questAddConditionButton" Height="23" Content="{DynamicResource QUEST_Condition_Add}" Margin="10" VerticalAlignment="Bottom"/>
+                            <Button Command="{Binding AddConditionCommand}" Grid.Column="1" Grid.Row="1" Name="questAddConditionButton" Height="23" Content="{DynamicResource QUEST_Condition_Add}" Margin="10" VerticalAlignment="Bottom"/>
                         </Grid>
                         <Grid Grid.Column="2" Grid.Row="1">
                             <Grid.RowDefinitions>
@@ -720,11 +720,11 @@
                                     <StackPanel Name="listQuestRewards" />
                                 </ScrollViewer>
                             </GroupBox>
-                            <Button Grid.Row="1" Name="questAddRewardButton" Height="23" Content="{DynamicResource QUEST_Reward_Add}" Margin="10" VerticalAlignment="Bottom"/>
+                            <Button Command="{Binding AddRewardCommand}" Grid.Row="1" Name="questAddRewardButton" Height="23" Content="{DynamicResource QUEST_Reward_Add}" Margin="10" VerticalAlignment="Bottom"/>
                         </Grid>
                     </Grid>
                 </TabItem>
-                <TabItem Name="mistakeListTab" Header="{DynamicResource INTERFACE_Main_Tab_Errors}">
+                <TabItem DataContext="{Binding MistakeTabViewModel}" Name="mistakeListTab" Header="{DynamicResource INTERFACE_Main_Tab_Errors}">
                     <Grid>
                         <ListView Name="lstMistakes" Margin="10,10,10,60">
                             <ListView.View>

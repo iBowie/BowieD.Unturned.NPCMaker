@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Controls;
+﻿using BowieD.Unturned.NPCMaker;
+using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Data;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
@@ -13,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
-namespace BowieD.Unturned.NPCMaker.ViewModels.Character
+namespace BowieD.Unturned.NPCMaker.ViewModels
 {
     public sealed class CharacterTabViewModel : BaseViewModel
     {
@@ -130,7 +131,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels.Character
         public ushort DefaultGlasses { get => Character.clothing.glasses; set => Character.clothing.glasses = value; }
         public ushort DefaultShirt { get => Character.clothing.top; set => Character.clothing.top = value; }
         public ushort DefaultPants { get => Character.clothing.bottom; set => Character.clothing.bottom = value; }
-        public ushort DefaultVest { get => Character.clothing.vest; set => Character.clothing.vest= value; }
+        public ushort DefaultVest { get => Character.clothing.vest; set => Character.clothing.vest = value; }
         public ushort DefaultBackpack { get => Character.clothing.backpack; set => Character.clothing.backpack = value; }
         public ushort ChristmasHat { get => Character.christmasClothing.hat; set => Character.christmasClothing.hat = value; }
         public ushort ChristmasMask { get => Character.christmasClothing.mask; set => Character.christmasClothing.mask = value; }
@@ -357,7 +358,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels.Character
                 return regenerateGUIDsCommand;
             }
         }
-        private void SaveColor(string hex)
+        internal void SaveColor(string hex)
         {
             if (UserColors.data.Contains(hex))
                 return;
@@ -367,8 +368,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels.Character
             var colorItem = new Xceed.Wpf.Toolkit.ColorItem(color, hex);
             MainWindow.Instance.skinColorPicker.AvailableColors.Insert(0, colorItem);
         }
-        private readonly UserColorsList UserColors;
-        private void UpdateColorPicker()
+        internal readonly UserColorsList UserColors;
+        internal void UpdateColorPicker()
         {
             MainWindow.Instance.skinColorPicker.AvailableColors.Clear();
             MainWindow.Instance.hairColorPicker.AvailableColors.Clear();

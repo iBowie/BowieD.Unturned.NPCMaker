@@ -304,13 +304,15 @@
     <Compile Include="NPC\NPCQuest.cs" />
     <Compile Include="NPC\NPCResponse.cs" />
     <Compile Include="NPC\NPCVendor.cs" />
-    <Compile Include="PropertyProxy.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="ViewModels\BaseCommand.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\Character\CharacterTabViewModel.cs" />
-    <Compile Include="ViewModels\Dialogue\DialogueTabViewModel.cs" />
+    <Compile Include="ViewModels\CharacterTabViewModel.cs" />
+    <Compile Include="ViewModels\DialogueTabViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MistakeTabViewModel.cs" />
+    <Compile Include="ViewModels\QuestTabViewModel.cs" />
+    <Compile Include="ViewModels\VendorTabViewModel.cs" />
     <Compile Include="XAML\EnumItemsSource.cs" />
     <Page Include="Controls\Dialogue_Response.xaml">
       <SubType>Designer</SubType>
@@ -489,10 +491,7 @@
     <Resource Include="Libs\MahApps.Metro.IconPacks.Core.dll" />
     <Resource Include="Libs\Newtonsoft.Json.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\Quest\" />
-    <Folder Include="ViewModels\Vendor\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Libs\Xceed.Wpf.Toolkit.dll" />
   </ItemGroup>

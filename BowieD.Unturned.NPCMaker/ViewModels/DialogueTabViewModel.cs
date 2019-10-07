@@ -13,7 +13,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace BowieD.Unturned.NPCMaker.ViewModels.Dialogue
+namespace BowieD.Unturned.NPCMaker.ViewModels
 {
     public sealed class DialogueTabViewModel : BaseViewModel
     {
@@ -47,8 +47,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels.Dialogue
                         messages.Add(dm);
                     }
                 }
-                Dialogue.messages = messages.Select(d => d.Message).ToList();
-                return Dialogue.messages;
+                return messages.Select(d => d.Message).ToList();
             }
             set
             {
@@ -68,8 +67,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels.Dialogue
                         responses.Add(dr);
                     }
                 }
-                Dialogue.responses = responses.Select(d => d.Response).ToList();
-                return Dialogue.responses;
+                return responses.Select(d => d.Response).ToList();
             }
             set
             {

@@ -23,10 +23,10 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Vendor
                         Importance = IMPORTANCE.CRITICAL,
                         OnClick = new Action(() =>
                         {
-                            if (MainWindow.VendorEditor.Current.id == 0)
+                            if (MainWindow.Instance.MainWindowViewModel.VendorTabViewModel.ID == 0)
                                 return;
-                            MainWindow.VendorEditor.Save();
-                            MainWindow.VendorEditor.Current = _vend;
+                            MainWindow.Instance.MainWindowViewModel.VendorTabViewModel.SaveCommand.Execute(null);
+                            MainWindow.Instance.MainWindowViewModel.VendorTabViewModel.Vendor = _vend;
                             MainWindow.Instance.mainTabControl.SelectedIndex = 2;
                         })
                     };

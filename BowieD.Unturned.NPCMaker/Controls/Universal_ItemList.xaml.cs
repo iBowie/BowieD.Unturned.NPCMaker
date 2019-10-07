@@ -1,5 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Editors;
-using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.NPC;
 using System.Windows;
 using System.Windows.Controls;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
@@ -77,13 +76,13 @@ namespace BowieD.Unturned.NPCMaker.Controls
                     {
                         if (NewItem.isBuy)
                         {
-                            (MainWindow.VendorEditor as VendorEditor).RemoveItemSell(Util.FindParent<Universal_ItemList>(sender as Button));
-                            (MainWindow.VendorEditor as VendorEditor).AddItemBuy(NewItem);
+                            MainWindow.Instance.MainWindowViewModel.VendorTabViewModel.RemoveItemSell(Util.FindParent<Universal_ItemList>(sender as Button));
+                            MainWindow.Instance.MainWindowViewModel.VendorTabViewModel.AddItemBuy(NewItem);
                         }
                         else
                         {
-                            (MainWindow.VendorEditor as VendorEditor).RemoveItemBuy(Util.FindParent<Universal_ItemList>(sender as Button));
-                            (MainWindow.VendorEditor as VendorEditor).AddItemSell(NewItem);
+                            MainWindow.Instance.MainWindowViewModel.VendorTabViewModel.RemoveItemBuy(Util.FindParent<Universal_ItemList>(sender as Button));
+                            MainWindow.Instance.MainWindowViewModel.VendorTabViewModel.AddItemSell(NewItem);
                         }
                     }
                     Value = NewItem;
