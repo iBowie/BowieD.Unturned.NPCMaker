@@ -154,7 +154,7 @@
                                 </StackPanel>
                             </Button.ToolTip>
                         </Button>
-                        <Button Name="regenerateGuidsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource INTERFACE_Main_Tab_Character_Guid_Generate}" Margin="10,167,0,0" MinWidth="212" Height="28"/>
+                        <Button Command="{Binding RegenerateGUIDsCommand}" Name="regenerateGuidsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource INTERFACE_Main_Tab_Character_Guid_Generate}" Margin="10,167,0,0" MinWidth="212" Height="28"/>
                         <Grid Margin="0,26,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="432">
                             <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" Background="Black" HorizontalAlignment="Right" Height="98" Margin="0,38,210,0" VerticalAlignment="Top" Width="98">
                                 <Image Name="faceImageControl" Source="Resources/Unturned/Faces/1.png" >
@@ -329,49 +329,49 @@
                                 <TabItem Header="{DynamicResource CHARACTER_Clothing_Default}" mah:ControlsHelper.HeaderFontSize="18">
                                     <ScrollViewer>
                                         <Grid>
-                                            <mah:NumericUpDown x:Name="hatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding DefaultHat,UpdateSourceTrigger=PropertyChanged}" x:Name="hatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_hat.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="maskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding DefaultMask,UpdateSourceTrigger=PropertyChanged}" x:Name="maskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_mask.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="glassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding DefaultGlasses,UpdateSourceTrigger=PropertyChanged}" x:Name="glassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="topIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding DefaultShirt,UpdateSourceTrigger=PropertyChanged}" x:Name="topIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="backpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding DefaultBackpack,UpdateSourceTrigger=PropertyChanged}" x:Name="backpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="vestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding DefaultVest,UpdateSourceTrigger=PropertyChanged}" x:Name="vestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_vest.png"/>
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <mah:NumericUpDown x:Name="bottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                            <mah:NumericUpDown Value="{Binding DefaultPants,UpdateSourceTrigger=PropertyChanged}" x:Name="bottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                                 <mah:NumericUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
@@ -517,17 +517,17 @@
                         <GroupBox Header="{DynamicResource CHARACTER_Equipment}" HorizontalAlignment="Left" Margin="10,0,0,10" Width="300" Height="Auto" VerticalAlignment="Bottom">
                             <ScrollViewer>
                                 <Grid>
-                                    <mah:NumericUpDown x:Name="primaryIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                    <mah:NumericUpDown Value="{Binding EquipmentPrimary,UpdateSourceTrigger=PropertyChanged}" x:Name="primaryIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                         <mah:NumericUpDown.ToolTip>
                                             <StackPanel></StackPanel>
                                         </mah:NumericUpDown.ToolTip>
                                     </mah:NumericUpDown>
-                                    <mah:NumericUpDown x:Name="secondaryIdBox"  ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                    <mah:NumericUpDown Value="{Binding EquipmentSecondary,UpdateSourceTrigger=PropertyChanged}" x:Name="secondaryIdBox"  ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                         <mah:NumericUpDown.ToolTip>
                                             <StackPanel></StackPanel>
                                         </mah:NumericUpDown.ToolTip>
                                     </mah:NumericUpDown>
-                                    <mah:NumericUpDown x:Name="tertiaryIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,-7" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                    <mah:NumericUpDown Value="{Binding EquipmentTertiary,UpdateSourceTrigger=PropertyChanged}" x:Name="tertiaryIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,-7" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
                                         <mah:NumericUpDown.ToolTip>
                                             <StackPanel></StackPanel>
                                         </mah:NumericUpDown.ToolTip>

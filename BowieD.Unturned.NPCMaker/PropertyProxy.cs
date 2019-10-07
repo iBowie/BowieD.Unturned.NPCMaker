@@ -27,7 +27,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             inst.newButton.Click += NewButtonClick;
             inst.lstMistakes.SelectionChanged += MistakeList_Selected;
-            inst.regenerateGuidsButton.Click += RegenerateGuids_Click;
+            //inst.regenerateGuidsButton.Click += RegenerateGuids_Click;
             inst.optionsMenuItem.Click += Options_Click;
             inst.exitButton.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
             {
