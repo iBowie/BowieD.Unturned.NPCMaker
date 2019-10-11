@@ -147,7 +147,21 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     addReplyCommand = new BaseCommand(() =>
                     {
-                        Responses.Add(new NPCResponse());
+                        Dialogue_Response dialogue_Response = new Dialogue_Response(new NPCResponse());
+                        dialogue_Response.deleteButton.Click += (sender, e) =>
+                        {
+                            Dialogue_Response pag = Util.FindParent<Dialogue_Response>(sender as Button);
+                            MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Remove(pag);
+                        };
+                        int ind = 0;
+                        for (int k = 0; k < MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Count; k++)
+                        {
+                            if (MainWindow.Instance.dialoguePlayerRepliesGrid.Children[k] is Dialogue_Response)
+                            {
+                                ind = k + 1;
+                            }
+                        }
+                        MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Insert(ind, dialogue_Response);
                         UpdateResponses();
                     });
                 }
@@ -162,7 +176,21 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     addMessageCommand = new BaseCommand(() =>
                     {
-                        Messages.Add(new NPCMessage());
+                        Dialogue_Message dialogue_Message = new Dialogue_Message(new NPCMessage());
+                        dialogue_Message.deletePageButton.Click += (sender, e) =>
+                        {
+                            Dialogue_Message pag = Util.FindParent<Dialogue_Message>(sender as Button);
+                            MainWindow.Instance.messagePagesGrid.Children.Remove(pag);
+                        };
+                        int ind = 0;
+                        for (int k = 0; k < MainWindow.Instance.messagePagesGrid.Children.Count; k++)
+                        {
+                            if (MainWindow.Instance.messagePagesGrid.Children[k] is Dialogue_Message)
+                            {
+                                ind = k + 1;
+                            }
+                        }
+                        MainWindow.Instance.messagePagesGrid.Children.Insert(ind, dialogue_Message);
                         UpdateMessages();
                     });
                 }
