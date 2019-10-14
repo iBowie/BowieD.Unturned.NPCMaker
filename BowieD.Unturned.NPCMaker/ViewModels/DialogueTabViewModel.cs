@@ -3,12 +3,8 @@ using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -33,8 +29,24 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 OnPropertyChange("");
             }
         }
-        public ushort ID { get => Dialogue.id; set => Dialogue.id = value; }
-        public string Comment { get => Dialogue.Comment; set => Dialogue.Comment = value; }
+        public ushort ID
+        {
+            get => Dialogue.id;
+            set
+            {
+                Dialogue.id = value;
+                OnPropertyChange("ID");
+            }
+        }
+        public string Comment
+        {
+            get => Dialogue.Comment;
+            set
+            {
+                Dialogue.Comment = value;
+                OnPropertyChange("Comment");
+            }
+        }
         public List<NPCMessage> Messages
         {
             get
@@ -53,6 +65,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 Dialogue.messages = value;
                 UpdateMessages();
+                OnPropertyChange("Messages");
             }
         }
         public List<NPCResponse> Responses
@@ -73,6 +86,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 Dialogue.responses = value;
                 UpdateResponses();
+                OnPropertyChange("Responses");
             }
         }
 

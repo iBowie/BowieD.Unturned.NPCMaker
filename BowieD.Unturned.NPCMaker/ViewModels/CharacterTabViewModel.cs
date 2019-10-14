@@ -111,6 +111,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     MainWindow.Instance.faceImageControl.Effect = null;
                 }
+                OnPropertyChange("SkinColor");
             }
         }
         public Color? HairColor
@@ -122,31 +123,14 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 SolidColorBrush color = new SolidColorBrush(Character.hairColor);
                 MainWindow.Instance.beardRenderGrid.DataContext = color;
                 MainWindow.Instance.hairRenderGrid.DataContext = color;
+                OnPropertyChange("HairColor");
             }
         }
         public bool IsLeftHanded { get => Character.leftHanded; set => Character.leftHanded = value; }
         public NPC_Pose Pose { get => Character.pose; set => Character.pose = value; }
-        public ushort DefaultHat { get => Character.clothing.hat; set => Character.clothing.hat = value; }
-        public ushort DefaultMask { get => Character.clothing.mask; set => Character.clothing.mask = value; }
-        public ushort DefaultGlasses { get => Character.clothing.glasses; set => Character.clothing.glasses = value; }
-        public ushort DefaultShirt { get => Character.clothing.top; set => Character.clothing.top = value; }
-        public ushort DefaultPants { get => Character.clothing.bottom; set => Character.clothing.bottom = value; }
-        public ushort DefaultVest { get => Character.clothing.vest; set => Character.clothing.vest = value; }
-        public ushort DefaultBackpack { get => Character.clothing.backpack; set => Character.clothing.backpack = value; }
-        public ushort ChristmasHat { get => Character.christmasClothing.hat; set => Character.christmasClothing.hat = value; }
-        public ushort ChristmasMask { get => Character.christmasClothing.mask; set => Character.christmasClothing.mask = value; }
-        public ushort ChristmasGlasses { get => Character.christmasClothing.glasses; set => Character.christmasClothing.glasses = value; }
-        public ushort ChristmasShirt { get => Character.christmasClothing.top; set => Character.christmasClothing.top = value; }
-        public ushort ChristmasPants { get => Character.christmasClothing.bottom; set => Character.christmasClothing.bottom = value; }
-        public ushort ChristmasVest { get => Character.christmasClothing.vest; set => Character.christmasClothing.vest = value; }
-        public ushort ChristmasBackpack { get => Character.christmasClothing.backpack; set => Character.christmasClothing.backpack = value; }
-        public ushort HalloweenHat { get => Character.halloweenClothing.hat; set => Character.halloweenClothing.hat = value; }
-        public ushort HalloweenMask { get => Character.halloweenClothing.mask; set => Character.halloweenClothing.mask = value; }
-        public ushort HalloweenGlasses { get => Character.halloweenClothing.glasses; set => Character.halloweenClothing.glasses = value; }
-        public ushort HalloweenShirt { get => Character.halloweenClothing.top; set => Character.halloweenClothing.top = value; }
-        public ushort HalloweenPants { get => Character.halloweenClothing.bottom; set => Character.halloweenClothing.bottom = value; }
-        public ushort HalloweenVest { get => Character.halloweenClothing.vest; set => Character.halloweenClothing.vest = value; }
-        public ushort HalloweenBackpack { get => Character.halloweenClothing.backpack; set => Character.halloweenClothing.backpack = value; }
+        public NPCClothing DefaultClothing { get => Character.clothing; set => Character.clothing = value; }
+        public NPCClothing ChristmasClothing { get => Character.christmasClothing; set => Character.christmasClothing = value; }
+        public NPCClothing HalloweenClothing { get => Character.halloweenClothing; set => Character.halloweenClothing = value; }
         public ushort EquipmentPrimary { get => Character.equipPrimary; set => Character.equipPrimary = value; }
         public ushort EquipmentSecondary { get => Character.equipSecondary; set => Character.equipSecondary = value; }
         public ushort EquipmentTertiary { get => Character.equipTertiary; set => Character.equipTertiary = value; }
