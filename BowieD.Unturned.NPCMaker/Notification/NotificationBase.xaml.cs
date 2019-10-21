@@ -41,7 +41,6 @@ namespace BowieD.Unturned.NPCMaker.Notification
                 To = 0
             };
             Storyboard.SetTarget(anim2, this);
-
             Storyboard.SetTargetProperty(anim2, new PropertyPath(OpacityProperty));
             animationStoryboard.Children = new TimelineCollection() { anim2 };
             animationStoryboard.Completed += AnimationStoryboard_Completed;
