@@ -32,6 +32,17 @@ namespace BowieD.Unturned.NPCMaker.Notification
                 From = 300,
                 To = 0
             };
+            var endAnim = new DoubleAnimation()
+            {
+                BeginTime = TimeSpan.FromSeconds(5.5),
+                Duration = TimeSpan.FromSeconds(1),
+                From = 0,
+                To = -60
+            };
+            anim.Completed += new EventHandler((sender, e) =>
+            {
+                tt.BeginAnimation(TranslateTransform.YProperty, endAnim);
+            });
             tt.BeginAnimation(TranslateTransform.XProperty, anim);
             var anim2 = new DoubleAnimation
             {
