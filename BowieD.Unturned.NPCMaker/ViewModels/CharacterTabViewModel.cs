@@ -364,6 +364,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         internal readonly UserColorsList UserColors;
         internal void UpdateColorPicker()
         {
+            MainWindow.Instance.skinColorPicker.TabBackground = Brushes.Transparent;
+            MainWindow.Instance.hairColorPicker.TabBackground = Brushes.Transparent;
             MainWindow.Instance.skinColorPicker.AvailableColors.Clear();
             MainWindow.Instance.hairColorPicker.AvailableColors.Clear();
             MainWindow.Instance.skinColorPicker.StandardColors.Clear();

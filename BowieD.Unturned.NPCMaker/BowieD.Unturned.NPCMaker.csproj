@@ -494,19 +494,19 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Libs\Xceed.Wpf.Toolkit.dll" />
+    <Resource Include="Libs\Xceed.Wpf.Toolkit.dll" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Libs\Xceed.Wpf.AvalonDock.dll" />
+    <Resource Include="Libs\Xceed.Wpf.AvalonDock.dll" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Libs\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+    <Resource Include="Libs\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Libs\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+    <Resource Include="Libs\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Libs\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+    <Resource Include="Libs\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
