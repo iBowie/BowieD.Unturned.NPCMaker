@@ -536,7 +536,7 @@
                                     <Label Content="{DynamicResource CHARACTER_Equipment_Primary}"  Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
                                     <Label Content="{DynamicResource CHARACTER_Equipment_Secondary}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
                                     <Label Content="{DynamicResource CHARACTER_Equipment_Tertiary}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                    <ComboBox ItemsSource="{StaticResource Character_Equipment_Equipped_Enums}" SelectedValue="{Binding Equipped, UpdateSourceTrigger=PropertyChanged}" Name="equipSlotBox" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="120"/>
+                                    <ComboBox ItemsSource="{StaticResource Character_Equipment_Equipped_Enums}" SelectedValue="{Binding Equipped, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Character_Equipment_Equipped_Enums}}" Name="equipSlotBox" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="120"/>
                                     <Label Content="{DynamicResource CHARACTER_Equipment_Equipped}" Margin="135,100,0,0" VerticalAlignment="Top" Height="27"/>
                                 </Grid>
                             </ScrollViewer>
