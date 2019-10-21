@@ -6,6 +6,7 @@ using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -365,10 +366,38 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         {
             MainWindow.Instance.skinColorPicker.AvailableColors.Clear();
             MainWindow.Instance.hairColorPicker.AvailableColors.Clear();
+            MainWindow.Instance.skinColorPicker.StandardColors.Clear();
+            MainWindow.Instance.hairColorPicker.StandardColors.Clear();
             foreach (var k in UserColors.data)
             {
                 MainWindow.Instance.skinColorPicker.AvailableColors.Add(new Xceed.Wpf.Toolkit.ColorItem(new Coloring.Color(k), k));
             }
+            foreach (var k in GetUnturnedColors())
+            {
+                MainWindow.Instance.skinColorPicker.StandardColors.Add(new Xceed.Wpf.Toolkit.ColorItem(k, k.ToHEX()));
+            }
+        }
+        private IEnumerable<Coloring.Color> GetUnturnedColors()
+        {
+            yield return new Coloring.Color("#F4E6D2");
+            yield return new Coloring.Color("#D9CAB4");
+            yield return new Coloring.Color("#BEA582");
+            yield return new Coloring.Color("#9D886B");
+            yield return new Coloring.Color("#94764B");
+            yield return new Coloring.Color("#706049");
+            yield return new Coloring.Color("#534736");
+            yield return new Coloring.Color("#4B3D31");
+            yield return new Coloring.Color("#332C25");
+            yield return new Coloring.Color("#231F1C");
+            yield return new Coloring.Color("#D7D7D7");
+            yield return new Coloring.Color("#C1C1C1");
+            yield return new Coloring.Color("#CDC08C");
+            yield return new Coloring.Color("#AC6A39");
+            yield return new Coloring.Color("#665037");
+            yield return new Coloring.Color("#57452F");
+            yield return new Coloring.Color("#352C22");
+            yield return new Coloring.Color("#373737");
+            yield return new Coloring.Color("#191919");
         }
     }
 }
