@@ -32,6 +32,7 @@ namespace BowieD.Unturned.NPCMaker.Managers
             yield return new DayMonth("Happy Anniversary, Sonic The Hedgehog!", 23, JUN);
             yield return new DayMonth("Happy Birthday, Terraria!", 16, MAY);
             yield return new DayMonthYear("They CAN stop all of us...", 20, SEP, 2019);
+            yield return new DayMonthRange("Spooky!", 20, OCT, 1, NOV);
         }
         public static void Check()
         {
@@ -46,6 +47,16 @@ namespace BowieD.Unturned.NPCMaker.Managers
                     {
                         App.NotificationManager.Notify(dmy.Text);
                         dmy.OnCheck?.Invoke();
+                    }
+                }
+                else if (k is DayMonthRange dmr)
+                {
+                    var endDate = new DateTime(year, dmr.EndMonth, dmr.EndDay);
+                    var startDate = new DateTime(year, dmr.Month, dmr.Day);
+                    if (DateTime.Now > startDate && DateTime.Now < endDate)
+                    {
+                        App.NotificationManager.Notify(dmr.Text);
+                        dmr.OnCheck?.Invoke();
                     }
                 }
                 else
@@ -65,6 +76,7 @@ namespace BowieD.Unturned.NPCMaker.Managers
             {
                 this.Day = day;
                 this.Month = month;
+                this.Text = text;
             }
             public int Day { get; set; }
             public int Month { get; set; }
@@ -77,6 +89,16 @@ namespace BowieD.Unturned.NPCMaker.Managers
                 this.Year = year;
             }
             public int Year { get; set; }
+        }
+        private class DayMonthRange : DayMonth
+        {
+            public DayMonthRange(string text, int day, int month, int endDay, int endMonth) : base(text, day, month)
+            {
+                EndDay = endDay;
+                EndMonth = endMonth;
+            }
+            public int EndDay { get; set; }
+            public int EndMonth { get; set; }
         }
     }
 }
