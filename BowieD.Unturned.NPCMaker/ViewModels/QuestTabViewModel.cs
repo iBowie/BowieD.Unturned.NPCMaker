@@ -118,8 +118,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             App.NotificationManager.Notify(LocalizationManager.Current.Notification["Quest_ID_Zero"]);
                             return;
                         }
-                        MainWindow.CurrentProject.data.quests.RemoveAll(d => d.id == MainWindow.Instance.questIdBox.Value);
-                        MainWindow.CurrentProject.data.quests.Add(Quest);
+                        if (!MainWindow.CurrentProject.data.quests.Contains(Quest))
+                            MainWindow.CurrentProject.data.quests.Add(Quest);
                         MainWindow.CurrentProject.isSaved = false;
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["Quest_Saved"]);
                     });

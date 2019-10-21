@@ -106,8 +106,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         }
                         Dialogue.messages = Messages;
                         Dialogue.responses = Responses;
-                        MainWindow.CurrentProject.data.dialogues.RemoveAll(d => d.id == ID);
-                        MainWindow.CurrentProject.data.dialogues.Add(Dialogue);
+                        if (!MainWindow.CurrentProject.data.dialogues.Contains(Dialogue))
+                            MainWindow.CurrentProject.data.dialogues.Add(Dialogue);
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["Dialogue_Saved"]);
                         MainWindow.CurrentProject.isSaved = false;
                         App.Logger.LogInfo($"Dialogue {ID} saved!");

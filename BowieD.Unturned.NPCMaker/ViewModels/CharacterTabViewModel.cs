@@ -32,6 +32,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             set
             {
                 _character = value;
+                HairColor = Character.hairColor;
+                SkinColor = Character.skinColor;
+                FaceID = Character.face;
+                HairID = Character.haircut;
+                BeardID = Character.beard;
                 OnPropertyChange("");
             }
         }
@@ -55,6 +60,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 Character.face = value;
                 MainWindow.Instance.faceImageControl.Source = ("Resources/Unturned/Faces/" + value + ".png").GetImageSource();
+                OnPropertyChange("FaceID");
             }
         }
         public byte HairID
@@ -71,6 +77,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     }
                 }
                 MainWindow.Instance.hairRenderGrid.Children[value].Visibility = Visibility.Visible;
+                OnPropertyChange("HairID");
             }
         }
         public byte BeardID
@@ -87,6 +94,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     }
                 }
                 MainWindow.Instance.beardRenderGrid.Children[value].Visibility = Visibility.Visible;
+                OnPropertyChange("BeardID");
             }
         }
         public Color? SkinColor
@@ -159,8 +167,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             App.NotificationManager.Notify(LocalizationManager.Current.Notification["Character_ID_Zero"]);
                             return;
                         }
-                        MainWindow.CurrentProject.data.characters.RemoveAll(d => d.id == Character.id);
-                        MainWindow.CurrentProject.data.characters.Add(Character);
+                        if (!MainWindow.CurrentProject.data.characters.Contains(Character))
+                            MainWindow.CurrentProject.data.characters.Add(Character);
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["Character_Saved"]);
                         MainWindow.CurrentProject.isSaved = false;
                         App.Logger.LogInfo($"Character {Character.id} saved!");

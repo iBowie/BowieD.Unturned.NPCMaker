@@ -205,8 +205,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             App.NotificationManager.Notify(LocalizationManager.Current.Notification["Vendor_ID_Zero"]);
                             return;
                         }
-                        MainWindow.CurrentProject.data.vendors.RemoveAll(d => d.id == ID);
-                        MainWindow.CurrentProject.data.vendors.Add(Vendor);
+                        if (!MainWindow.CurrentProject.data.vendors.Contains(Vendor))
+                            MainWindow.CurrentProject.data.vendors.Add(Vendor);
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["Vendor_Saved"]);
                         MainWindow.CurrentProject.isSaved = false;
                         App.Logger.LogInfo($"Vendor {ID} saved!");
