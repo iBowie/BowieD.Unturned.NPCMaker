@@ -26,6 +26,13 @@ namespace BowieD.Unturned.NPCMaker.Notification
                 notificationContentGrid.Children.Add(l);
             }
             animationStoryboard = new Storyboard();
+            var anim = new DoubleAnimation()
+            {
+                Duration = TimeSpan.FromSeconds(0.5),
+                From = 300,
+                To = 0
+            };
+            tt.BeginAnimation(TranslateTransform.XProperty, anim);
             var anim2 = new DoubleAnimation
             {
                 BeginTime = TimeSpan.FromSeconds(6),
@@ -34,6 +41,7 @@ namespace BowieD.Unturned.NPCMaker.Notification
                 To = 0
             };
             Storyboard.SetTarget(anim2, this);
+
             Storyboard.SetTargetProperty(anim2, new PropertyPath(OpacityProperty));
             animationStoryboard.Children = new TimelineCollection() { anim2 };
             animationStoryboard.Completed += AnimationStoryboard_Completed;
