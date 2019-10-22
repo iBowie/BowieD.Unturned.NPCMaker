@@ -86,12 +86,6 @@ namespace BowieD.Unturned.NPCMaker
                     File.Delete(AppConfig.Directory + "updater.exe");
                     App.Logger.LogInfo("Updater deleted.");
                 }
-                else if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "updater.exe"))
-                {
-                    OpenPatchNotes();
-                    File.Delete(AppDomain.CurrentDomain.BaseDirectory + "updater.exe");
-                    App.Logger.LogInfo("Updater deleted.");
-                }
             }
             catch { App.Logger.LogWarning("Can't delete updater."); }
             #endregion
@@ -169,7 +163,6 @@ namespace BowieD.Unturned.NPCMaker
         public static ProjectData CurrentProject { get; private set; } = new ProjectData();
         public static DispatcherTimer AutosaveTimer { get; set; }
         public static DispatcherTimer AppUpdateTimer { get; set; }
-        public static bool IsRGB { get; set; } = true;
         public static DateTime Started { get; set; } = DateTime.UtcNow;
         #endregion
         private void AutosaveTimer_Tick(object sender, EventArgs e)
