@@ -178,7 +178,6 @@
     </Compile>
     <Compile Include="Commands\InfoCommand.cs" />
     <Compile Include="Commands\NotifyCommand.cs" />
-    <Compile Include="Commands\ReflectionCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
     <Compile Include="Commands\SwitchCommand.cs" />
     <Compile Include="Forms\Universal_ConditionEditor.xaml.cs">
