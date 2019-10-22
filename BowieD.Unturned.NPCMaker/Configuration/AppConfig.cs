@@ -102,10 +102,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 }
                 else
                 {
-                    string res = AppDomain.CurrentDomain.BaseDirectory;
-                    if (!res.EndsWith(Path.DirectorySeparatorChar + ""))
-                        res += Path.DirectorySeparatorChar;
-                    res += $"BowieD.Unturned.NPCMaker Configuration{Path.DirectorySeparatorChar}";
+                    string res = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"BowieD.Unturned.NPCMaker Configuration{Path.DirectorySeparatorChar}");
                     if (!System.IO.Directory.Exists(res))
                         System.IO.Directory.CreateDirectory(res);
                     return res;
