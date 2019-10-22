@@ -9,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.Commands
         public override string Syntax => "[command]";
         public override void Execute(string[] args)
         {
-            Command cmd = null;
+            Command cmd;
             if (args.Length == 0 || (cmd = Command.GetCommand(args[0])) == null)
             {
                 foreach (var c in Command.Commands)
