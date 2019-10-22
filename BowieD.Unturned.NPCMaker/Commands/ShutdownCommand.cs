@@ -1,4 +1,6 @@
-﻿namespace BowieD.Unturned.NPCMaker.Commands
+﻿using System;
+
+namespace BowieD.Unturned.NPCMaker.Commands
 {
     public class ShutdownCommand : Command
     {
@@ -7,10 +9,7 @@
         public override string Syntax => "";
         public override void Execute(string[] args)
         {
-            App.Current.Dispatcher.Invoke(() =>
-            {
-                App.Current.Shutdown();
-            });
+            Environment.Exit(0);
         }
     }
 }
