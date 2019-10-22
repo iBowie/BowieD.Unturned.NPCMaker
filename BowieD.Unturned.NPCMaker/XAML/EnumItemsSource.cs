@@ -28,6 +28,8 @@ namespace BowieD.Unturned.NPCMaker.XAML
                 Initialize();
             }
         }
+        public string LocalizationPrefix { get; set; }
+        public TranslationDictionary Dictionary { get; set; }
 
         public Object Convert(Object value, Type targetType, Object parameter, CultureInfo culture)
         {
@@ -41,11 +43,22 @@ namespace BowieD.Unturned.NPCMaker.XAML
 
         void Initialize()
         {
-            this.valueToNameMap = this.type
-              .GetFields(BindingFlags.Static | BindingFlags.Public)
-              .ToDictionary(fi => fi.GetValue(null), GetDescription);
-            this.nameToValueMap = this.valueToNameMap
-              .ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
+            if (Dictionary == null || LocalizationPrefix == null)
+            {
+                this.valueToNameMap = this.type
+                  .GetFields(BindingFlags.Static | BindingFlags.Public)
+                  .ToDictionary(fi => fi.GetValue(null), GetDescription);
+                this.nameToValueMap = this.valueToNameMap
+                  .ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
+            }
+            else
+            {
+                this.valueToNameMap = this.type
+                    .GetFields(BindingFlags.Static | BindingFlags.Public)
+                    .ToDictionary(fi => fi.GetValue(null), k => (object)Dictionary.Translate(LocalizationPrefix + k.Name));
+                this.nameToValueMap = this.valueToNameMap
+                    .ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
+            }
             Clear();
             foreach (String name in this.nameToValueMap.Keys)
                 Add(name);

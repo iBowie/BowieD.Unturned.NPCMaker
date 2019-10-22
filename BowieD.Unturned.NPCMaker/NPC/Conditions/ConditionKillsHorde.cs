@@ -12,10 +12,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 return $"[{ID}] {LocalizationManager.Current.Condition[$"Type_Kills_Horde"]} ({Nav}) >= {Value}";
             }
         }
-        public ushort ID;
-        public short Value;
-        public byte Nav;
+        public ushort ID { get; set; }
+        public short Value { get; set; }
+        public byte Nav { get; set; }
         [ConditionNoValue]
-        public bool Reset;
+        public bool Reset { get; set; }
     }
 }

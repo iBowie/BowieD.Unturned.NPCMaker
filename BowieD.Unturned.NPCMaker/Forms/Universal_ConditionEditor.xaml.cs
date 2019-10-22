@@ -42,15 +42,17 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 {
                     typeBox.SelectedIndex = _index;
                     _chosen = true;
-                    var fieldControls = Util.FindVisualChildren<FrameworkElement>(variablesGrid).
-                        Where(d => d.Tag != null && d.Tag.ToString().StartsWith("variable::"));
-                    foreach (var fControl in fieldControls)
-                    {
-                        SetValueToControl(fControl, condition.GetType().GetField(fControl.Tag.ToString().Substring(10)).GetValue(condition));
-                    }
+                    //var fieldControls = Util.FindVisualChildren<FrameworkElement>(variablesGrid).
+                    //    Where(d => d.Tag != null && d.Tag.ToString().StartsWith("variable::"));
+                    //foreach (var fControl in fieldControls)
+                    //{
+                    //    SetValueToControl(fControl, condition.GetType().GetField(fControl.Tag.ToString().Substring(10)).GetValue(condition));
+                    //}
                 }
                 _index++;
             }
+            if (condition != null)
+                variablesGrid.DataContext = condition;
             saveButton.IsEnabled = condition != null;
         }
 
@@ -70,8 +72,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
             Condition newCondition = (Condition)Activator.CreateInstance(type);
             _CurrentConditionType = type;
             ClearParameters();
-            int mult = type.GetFields().Length;
-            foreach (var c in newCondition.GetControls())
+            variablesGrid.DataContext = newCondition;
+            var controls = newCondition.GetControls();
+            int mult = controls.Count();
+            foreach (var c in controls)
             {
                 variablesGrid.Children.Add(c);
             }
@@ -101,20 +105,23 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             try
             {
-                Condition returnCondition = Activator.CreateInstance(_CurrentConditionType) as Condition;
-                Dictionary<string, object> _values = new Dictionary<string, object>();
-                var controls = Util.FindVisualChildren<FrameworkElement>(variablesGrid).Where(d => d.Tag != null && d.Tag.ToString().StartsWith("variable::"));
-                foreach (var c in controls)
-                {
-                    _values.Add(c.Tag.ToString().Substring(10), GetValueFromControl(c));
-                }
-                foreach (var k in _values)
-                {
-                    var field = returnCondition.GetType().GetField(k.Key);
-                    field.SetValue(returnCondition, Convert.ChangeType(k.Value, field.FieldType));
-                }
-                Result = returnCondition;
-                DialogResult = true;
+                //Condition returnCondition = Activator.CreateInstance(_CurrentConditionType) as Condition;
+                //Dictionary<string, object> _values = new Dictionary<string, object>();
+                //var controls = Util.FindVisualChildren<FrameworkElement>(variablesGrid).Where(d => d.Tag != null && d.Tag.ToString().StartsWith("variable::"));
+                //foreach (var c in controls)
+                //{
+                //    _values.Add(c.Tag.ToString().Substring(10), GetValueFromControl(c));
+                //}
+                //foreach (var k in _values)
+                //{
+                //    var field = returnCondition.GetType().GetField(k.Key);
+                //    field.SetValue(returnCondition, Convert.ChangeType(k.Value, field.FieldType));
+                //}
+                if (variablesGrid.DataContext == null)
+                    DialogResult = false;
+                else
+                    DialogResult = true;
+                Result = variablesGrid.DataContext as Condition;
                 Close();
             }
             catch
@@ -123,47 +130,47 @@ namespace BowieD.Unturned.NPCMaker.Forms
             } // write some error message or something like that
         }
 
-        private void SetValueToControl(FrameworkElement element, object value)
-        {
-            switch (element)
-            {
-                case MahApps.Metro.Controls.NumericUpDown nud:
-                    nud.Value = Convert.ToDouble(value);
-                    break;
-                case CheckBox c:
-                    c.IsChecked = value as bool?;
-                    break;
-                case TextBox textBox:
-                    textBox.Text = value as string;
-                    break;
-                case ComboBox comboBox:
-                    for (int k = 0; k < comboBox.Items.Count; k++)
-                    {
-                        if ((comboBox.Items[k] as ComboBoxItem).Tag.Equals(value))
-                        {
-                            comboBox.SelectedIndex = k;
-                            break;
-                        }
-                    }
-                    break;
-            }
-        }
-        private object GetValueFromControl(FrameworkElement element)
-        {
-            switch (element)
-            {
-                case MahApps.Metro.Controls.NumericUpDown nud:
-                    return nud.Value ?? 0;
-                case CheckBox checkBox:
-                    return checkBox.IsChecked ?? false;
-                case TextBox textBox:
-                    return textBox.Text;
-                case ComboBox comboBox:
-                    return (comboBox.SelectedItem as ComboBoxItem).Tag;
-                default:
-                    return null;
-            }
-        }
+        //private void SetValueToControl(FrameworkElement element, object value)
+        //{
+        //    switch (element)
+        //    {
+        //        case MahApps.Metro.Controls.NumericUpDown nud:
+        //            nud.Value = Convert.ToDouble(value);
+        //            break;
+        //        case CheckBox c:
+        //            c.IsChecked = value as bool?;
+        //            break;
+        //        case TextBox textBox:
+        //            textBox.Text = value as string;
+        //            break;
+        //        case ComboBox comboBox:
+        //            for (int k = 0; k < comboBox.Items.Count; k++)
+        //            {
+        //                if ((comboBox.Items[k] as ComboBoxItem).Tag.Equals(value))
+        //                {
+        //                    comboBox.SelectedIndex = k;
+        //                    break;
+        //                }
+        //            }
+        //            break;
+        //    }
+        //}
+        //private object GetValueFromControl(FrameworkElement element)
+        //{
+        //    switch (element)
+        //    {
+        //        case MahApps.Metro.Controls.NumericUpDown nud:
+        //            return nud.Value ?? 0;
+        //        case CheckBox checkBox:
+        //            return checkBox.IsChecked ?? false;
+        //        case TextBox textBox:
+        //            return textBox.Text;
+        //        case ComboBox comboBox:
+        //            return (comboBox.SelectedItem as ComboBoxItem).Tag;
+        //        default:
+        //            return null;
+        //    }
+        //}
         private FrameworkElement GetLocalizationControl()
         {
             var control = Util.FindVisualChildren<FrameworkElement>(variablesGrid).First(d => d.Tag != null && d.Tag.ToString() == "variable::Localization");

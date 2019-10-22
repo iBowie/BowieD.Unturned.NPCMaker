@@ -6,13 +6,13 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public sealed class ConditionFlagBool : Condition
     {
         public override Condition_Type Type => Condition_Type.Flag_Bool;
-        public ushort ID;
-        public bool Value;
+        public ushort ID { get; set; }
+        public bool Value { get; set; }
         [ConditionNoValue]
-        public bool Reset;
+        public bool Reset { get; set; }
         [ConditionNoValue]
-        public bool Allow_Unset;
-        public Logic_Type Logic;
+        public bool Allow_Unset { get; set; }
+        public Logic_Type Logic { get; set; }
         public override string DisplayName
         {
             get

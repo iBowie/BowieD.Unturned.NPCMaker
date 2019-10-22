@@ -5,12 +5,12 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public sealed class ConditionQuest : Condition
     {
         public override Condition_Type Type => Condition_Type.Quest;
-        public ushort ID;
-        public Quest_Status Status;
-        public Logic_Type Logic;
+        public ushort ID { get; set; }
+        public Quest_Status Status { get; set; }
+        public Logic_Type Logic { get; set; }
         [ConditionTooltip("Quest_Reset_Tooltip")]
         [ConditionNoValue]
-        public bool Reset;
+        public bool Reset { get; set; }
         public override string DisplayName
         {
             get

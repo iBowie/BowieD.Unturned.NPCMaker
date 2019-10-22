@@ -12,10 +12,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 return $"[{ID}] {LocalizationManager.Current.Condition[$"Type_Kills_Animal"]} ({Animal}) >= {Value}";
             }
         }
-        public ushort ID;
-        public ushort Animal;
-        public short Value;
+        public ushort ID { get; set; }
+        public ushort Animal { get; set; }
+        public short Value { get; set; }
         [ConditionNoValue]
-        public bool Reset;
+        public bool Reset { get; set; }
     }
 }

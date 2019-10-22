@@ -36,9 +36,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             }
         }
 
-        public Logic_Type Logic;
-        public uint Value;
+        public Logic_Type Logic { get; set; }
+        public uint Value { get; set; }
         [ConditionNoValue]
-        public bool Reset;
+        public bool Reset { get; set; }
     }
 }
