@@ -7,7 +7,10 @@
         public override string Syntax => "";
         public override void Execute(string[] args)
         {
-            App.Current.Shutdown();
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                App.Current.Shutdown();
+            });
         }
     }
 }
