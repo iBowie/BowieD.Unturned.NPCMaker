@@ -7,7 +7,7 @@ namespace BowieD.Unturned.NPCMaker.Logging
 {
     public sealed class FileLogger : ILogger
     {
-        public static readonly string Dir = AppConfig.Directory;
+        public static readonly string Dir = AppDomain.CurrentDomain.BaseDirectory;
         public static string GetContents()
         {
             return File.ReadAllText(Dir + "npcmaker.log");
