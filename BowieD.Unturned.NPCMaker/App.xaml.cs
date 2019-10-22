@@ -95,10 +95,17 @@ namespace BowieD.Unturned.NPCMaker
 #endif
             if (!LocalizationManager.IsLoaded)
                 LocalizationManager.LoadLanguage(AppConfig.Instance.language);
+#if DEBUG
+            Logger.LogInfo("[APP] - Opening MainWindow...");
+#else
             Logger.LogInfo("[APP] - Closing console and opening app...");
+#endif
             MainWindow mw = new MainWindow();
             InitManagers();
+#if DEBUG
+#else
             ConsoleLogger.HideConsoleWindow();
+#endif
             mw.Show();
             base.Run();
         }

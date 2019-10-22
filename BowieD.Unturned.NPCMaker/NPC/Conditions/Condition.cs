@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.XAML;
 using System;
 using System.Collections.Generic;
@@ -159,11 +160,12 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 }
                 else if (propType == typeof(bool))
                 {
-                    valueControl = new CheckBox()
-                    {
-
-                    };
+                    valueControl = new CheckBox() { };
                     (valueControl as CheckBox).SetBinding(CheckBox.IsCheckedProperty, propName);
+                }
+                else
+                {
+                    App.Logger.LogWarning($"{propName} does not have required type '{propType.FullName}'");
                 }
                 valueControl.HorizontalAlignment = HorizontalAlignment.Right;
                 valueControl.VerticalAlignment = VerticalAlignment.Center;
