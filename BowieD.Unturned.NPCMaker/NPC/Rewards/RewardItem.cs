@@ -14,20 +14,20 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 return $"{LocalizationManager.Current.Reward["Type_Item"]} {ID} x{Amount}";
             }
         }
-        public UInt16 ID;
-        public byte Amount;
+        public UInt16 ID { get; set; }
+        public byte Amount { get; set; }
         [RewardOptional(0, 0)]
-        public UInt16 Sight;
+        public UInt16 Sight { get; set; }
         [RewardOptional(0, 0)]
-        public UInt16 Tactical;
+        public UInt16 Tactical { get; set; }
         [RewardOptional(0, 0)]
-        public UInt16 Grip;
+        public UInt16 Grip { get; set; }
         [RewardOptional(0, 0)]
-        public UInt16 Barrel;
+        public UInt16 Barrel { get; set; }
         [RewardOptional(0, 0)]
-        public UInt16 Magazine;
+        public UInt16 Magazine { get; set; }
         [RewardOptional(0, 0)]
-        public byte Ammo;
-        public bool Auto_Equip;
+        public byte Ammo { get; set; }
+        public bool Auto_Equip { get; set; }
     }
 }

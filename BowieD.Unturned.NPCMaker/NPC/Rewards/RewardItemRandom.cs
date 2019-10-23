@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 return $"{LocalizationManager.Current.Reward["Type_Item_Random"]} [{ID}] x{Amount}";
             }
         }
-        public UInt16 ID;
-        public byte Amount;
+        public UInt16 ID { get; set; }
+        public byte Amount { get; set; }
     }
 }

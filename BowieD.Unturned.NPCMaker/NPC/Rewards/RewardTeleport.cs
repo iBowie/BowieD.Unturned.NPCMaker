@@ -13,6 +13,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             }
         }
 
-        public string Spawnpoint;
+        public string Spawnpoint { get; set; }
     }
 }

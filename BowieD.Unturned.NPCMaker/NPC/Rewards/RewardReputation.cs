@@ -13,6 +13,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 return $"{LocalizationManager.Current.Reward["Type_Reputation"]} x{Value}";
             }
         }
-        public Int32 Value;
+        public Int32 Value { get; set; }
     }
 }

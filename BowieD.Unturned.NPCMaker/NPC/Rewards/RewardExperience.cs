@@ -14,6 +14,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             }
         }
 
-        public UInt32 Value;
+        public UInt32 Value { get; set; }
     }
 }

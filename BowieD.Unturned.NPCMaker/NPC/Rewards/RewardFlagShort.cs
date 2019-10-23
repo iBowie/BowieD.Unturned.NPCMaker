@@ -29,8 +29,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 return sb.ToString();
             }
         }
-        public UInt16 ID;
-        public Int16 Value;
-        public Modification_Type Modification;
+        public UInt16 ID { get; set; }
+        public Int16 Value { get; set; }
+        public Modification_Type Modification { get; set; }
     }
 }

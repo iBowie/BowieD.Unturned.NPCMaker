@@ -13,6 +13,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 return $"{LocalizationManager.Current.Reward["Type_Quest"]} [{ID}]";
             }
         }
-        public UInt16 ID;
+        public UInt16 ID { get; set; }
     }
 }

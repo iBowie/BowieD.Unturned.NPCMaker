@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 return $"{LocalizationManager.Current.Reward["Type_Vehicle"]} [{ID}] -> [{Spawnpoint}]";
             }
         }
-        public UInt16 ID;
-        public string Spawnpoint;
+        public UInt16 ID { get; set; }
+        public string Spawnpoint { get; set; }
     }
 }

@@ -12,6 +12,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 return $"{LocalizationManager.Current.Reward["Type_Achievement"]} [{ID}]";
             }
         }
-        public string ID;
+        public string ID { get; set; }
     }
 }

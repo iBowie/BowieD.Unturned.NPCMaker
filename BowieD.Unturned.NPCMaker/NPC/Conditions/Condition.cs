@@ -34,7 +34,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public abstract class Condition : IHasDisplayName
     {
         [ConditionSkipField]
-        public string Localization;
+        public string Localization { get; set; }
         [XmlIgnore]
         public abstract Condition_Type Type { get; }
         [XmlIgnore]

@@ -13,6 +13,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             }
         }
 
-        public string ID;
+        public string ID { get; set; }
     }
 }
