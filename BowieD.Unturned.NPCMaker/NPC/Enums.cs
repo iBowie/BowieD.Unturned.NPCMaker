@@ -148,4 +148,18 @@ namespace BowieD.Unturned.NPCMaker.NPC
         Russian,
         Spanish
     }
+    public enum ParseType
+    {
+        None,
+        NPC,
+        Dialogue,
+        Vendor,
+        Quest
+    }
+    public enum Clothing_Type
+    {
+        Default,
+        Halloween,
+        Christmas
+    }
 }
