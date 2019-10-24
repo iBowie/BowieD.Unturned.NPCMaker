@@ -34,7 +34,9 @@ namespace BowieD.Unturned.NPCMaker.Commands
                             App.Logger.LogInfo("[ParseCommand] - 'Dialogue' parsed and imported into project.");
                             break;
                         case NPC.ParseType.Vendor:
-                            App.Logger.LogInfo("[ParseCommand] - Vendor parsing not added yet.");
+                            App.Logger.LogInfo("[ParseCommand] - Started parsing 'Vendor'.");
+                            MainWindow.CurrentProject.data.vendors.Add(pTool.ParseVendor());
+                            App.Logger.LogInfo("[ParseCommand] - 'Vendor' parsed and imported into project.");
                             break;
                         case NPC.ParseType.Quest:
                             App.Logger.LogInfo("[ParseCommand] - Quest parsing not added yet.");

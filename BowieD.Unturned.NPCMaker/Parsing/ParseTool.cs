@@ -100,6 +100,62 @@ namespace BowieD.Unturned.NPCMaker.Parsing
             }
             return d;
         }
+        public NPCVendor ParseVendor()
+        {
+            return new NPCVendor()
+            {
+                id = asset.ReadUInt16("ID"),
+                disableSorting = asset.Has("Disable_Sorting"),
+                guid = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
+                vendorTitle = local?.ReadString("Name") ?? "",
+                vendorDescription = local?.ReadString("Description") ?? "",
+                items = ParseVendorItems().ToList()
+            };
+        }
+        private VendorItem[] ParseVendorItems()
+        {
+            byte buyAmount = asset.ReadByte("Buying");
+            byte sellAmount = asset.ReadByte("Selling");
+            List<VendorItem> items = new List<VendorItem>(buyAmount + sellAmount);
+            for (byte i = 0; i < buyAmount; i++)
+            {
+                items.Add(new VendorItem()
+                {
+                    id = asset.ReadUInt16($"Buying_{i}_ID"),
+                    cost = asset.ReadUInt16($"Buying_{i}_Cost"),
+                    conditions = ParseConditions($"Buying_{i}_").ToList(),
+                    isBuy = true
+                });
+            }
+            for (byte i = 0; i < sellAmount; i++)
+            {
+                VendorItem vi = new VendorItem() { isBuy = false };
+                string text = null;
+                if (asset.Has($"Selling_{i}_Type"))
+                    text = asset.ReadString($"Selling_{i}_Type");
+                vi.id = asset.ReadUInt16($"Selling_{i}_ID");
+                vi.cost = asset.ReadUInt16($"Selling_{i}_Cost");
+                vi.conditions = ParseConditions($"Selling_{i}_").ToList();
+                if (text == null || (text.Equals("Item", StringComparison.InvariantCultureIgnoreCase)))
+                {
+                    items.Add(vi);
+                }
+                else
+                {
+                    if (!text.Equals("Vehicle", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        App.Logger.LogWarning($"Unknown VendorItem type '{text}'");
+                    }
+                    vi.spawnPointID = asset.ReadString($"Selling_{i}_Spawnpoint");
+                    if (string.IsNullOrEmpty(vi.spawnPointID))
+                    {
+                        App.Logger.LogWarning($"Selling Vehicle without Spawnpoint");
+                    }
+                    items.Add(vi);
+                }
+            }
+            return items.ToArray();
+        }
         private NPCClothing ParseClothing(Clothing_Type clothing)
         {
             NPCClothing c = new NPCClothing();

@@ -44,7 +44,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public ItemType type;
         public uint cost;
         public ushort id;
-        public byte amount;
         public List<Condition> conditions;
         public string spawnPointID;
 
@@ -52,7 +51,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             get
             {
-                return $"{(type == ItemType.ITEM ? "Item" : "Vehicle")} [{id}] x{amount} ({cost}) {(type == ItemType.VEHICLE ? $"({spawnPointID})" : "")}"; ;
+                return $"{(type == ItemType.ITEM ? "Item" : "Vehicle")} [{id}] ({cost}) {(type == ItemType.VEHICLE ? $"({spawnPointID})" : "")}"; ;
             }
         }
     }

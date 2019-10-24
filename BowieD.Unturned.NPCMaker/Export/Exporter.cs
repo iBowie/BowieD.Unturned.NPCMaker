@@ -314,7 +314,6 @@ namespace BowieD.Unturned.NPCMaker.Export
                             {
                                 asset.WriteLine($"Buying_{k}_ID {buy[k].id}");
                                 asset.WriteLine($"Buying_{k}_Cost {buy[k].cost}");
-                                asset.WriteLine($"Buying_{k}_Amount {buy[k].amount}");
                                 if (buy[k].conditions?.Count > 0)
                                 {
                                     asset.WriteLine($"Buying_{k}_Conditions {buy[k].conditions.Count}");
@@ -335,10 +334,6 @@ namespace BowieD.Unturned.NPCMaker.Export
                                 {
                                     asset.WriteLine($"Selling_{k}_Type Vehicle");
                                     asset.WriteLine($"Selling_{k}_Spawnpoint {sell[k].spawnPointID}");
-                                }
-                                else
-                                {
-                                    asset.WriteLine($"Selling_{k}_Amount {sell[k].amount}");
                                 }
                                 asset.WriteLine($"Selling_{k}_ID {sell[k].id}");
                                 asset.WriteLine($"Selling_{k}_Cost {sell[k].cost}");
