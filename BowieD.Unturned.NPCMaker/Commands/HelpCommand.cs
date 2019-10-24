@@ -14,12 +14,12 @@ namespace BowieD.Unturned.NPCMaker.Commands
             {
                 foreach (var c in Command.Commands)
                 {
-                    App.Logger.LogInfo($"{c.Name} {c.Syntax} - {c.Help}");
+                    App.Logger.LogInfo($"[HelpCommand] - {c.Name} {c.Syntax} - {c.Help}");
                 }
             }
             else
             {
-                App.Logger.LogInfo($"{cmd.Name} {cmd.Syntax} - {cmd.Help}");
+                App.Logger.LogInfo($"[HelpCommand] - {cmd.Name} {cmd.Syntax} - {cmd.Help}");
             }
         }
     }

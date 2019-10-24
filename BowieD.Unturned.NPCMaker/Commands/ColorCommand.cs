@@ -20,24 +20,24 @@ namespace BowieD.Unturned.NPCMaker.Commands
                         case "add" when args.Length > 1 && Color.IsHEX(args[1]):
                             MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.SaveColor(args[1]);
                             MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.UpdateColorPicker();
-                            App.Logger.LogInfo($"Color {args[1]} saved.");
+                            App.Logger.LogInfo($"[ColorCommand] - Color {args[1]} saved.");
                             break;
                         case "remove" when args.Length > 1 && Color.IsHEX(args[1]):
                             MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.UserColors.data = MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.UserColors.data.Where(d => d != args[1]).ToArray();
-                            App.Logger.LogInfo($"Color {args[1]} removed.");
+                            App.Logger.LogInfo($"[ColorCommand] - Color {args[1]} removed.");
                             break;
                         case "list":
-                            App.Logger.LogInfo($"Saved Colors: {string.Join(", ", MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.UserColors.data)}");
+                            App.Logger.LogInfo($"[ColorCommand] - Saved Colors: {string.Join(", ", MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.UserColors.data)}");
                             break;
                         default:
-                            App.Logger.LogInfo($"Use: color {Syntax}");
+                            App.Logger.LogInfo($"[ColorCommand] - Use: color {Syntax}");
                             break;
                     }
                 });
             }
             else
             {
-                App.Logger.LogInfo($"Use: color {Syntax}");
+                App.Logger.LogInfo($"[ColorCommand] - Use: color {Syntax}");
             }
         }
     }

@@ -19,6 +19,7 @@ namespace BowieD.Unturned.NPCMaker.Commands
             sb.AppendLine($"OS: {WindowsVersion}");
             sb.AppendLine($"Is Elevated: {IsElevated}");
             sb.AppendLine($"Time: {DateTime.Now}");
+            sb.AppendLine($"Use alternate path: {(AppConfig.AlternatePath == null ? "Not checked" : AppConfig.AlternatePath + "")}");
             sb.AppendLine($"Settings:");
             sb.AppendLine($".Experimental Features: {cfg.experimentalFeatures}");
             sb.AppendLine($".Language: {cfg.language}");

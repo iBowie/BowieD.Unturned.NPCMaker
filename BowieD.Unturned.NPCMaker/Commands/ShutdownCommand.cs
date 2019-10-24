@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Logging;
+using System;
 
 namespace BowieD.Unturned.NPCMaker.Commands
 {
@@ -9,6 +10,7 @@ namespace BowieD.Unturned.NPCMaker.Commands
         public override string Syntax => "";
         public override void Execute(string[] args)
         {
+            App.Logger.LogInfo("[ShutdownCommand] - Shutting down...");
             Environment.Exit(0);
         }
     }

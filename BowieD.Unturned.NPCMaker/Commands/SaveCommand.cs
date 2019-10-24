@@ -1,4 +1,6 @@
-﻿namespace BowieD.Unturned.NPCMaker.Commands
+﻿using System;
+
+namespace BowieD.Unturned.NPCMaker.Commands
 {
     public class SaveCommand : Command
     {

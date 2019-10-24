@@ -4,24 +4,33 @@ using BowieD.Unturned.NPCMaker.NPC.Conditions;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.Parsing
 {
-    public sealed partial class ParseTool : IDisposable
+    public sealed class ParseTool
     {
-        private Data local;
-        private Data asset;
+        private DataReader local;
+        private DataReader asset;
         private string dir;
         public ParseTool(string fileName)
         {
-            dir = Path.GetDirectoryName(fileName);
-            asset = new Data(File.ReadAllText(fileName));
-            if (File.Exists(dir + "English.dat"))
-                local = new Data(File.ReadAllText(fileName));
+            dir = Path.GetDirectoryName(fileName) + Path.DirectorySeparatorChar;
+            asset = new DataReader(File.ReadAllText(fileName));
+            foreach (var k in Enum.GetValues(typeof(ELanguage)))
+            {
+                if (File.Exists(dir + "English.dat"))
+                    local = new DataReader(File.ReadAllText(dir + "English.dat"));
+                else
+                {
+                    App.Logger.LogInfo($"[ParseTool] - English.dat not found. Checking all languages...");
+                    if (File.Exists(dir + $"{k}.dat"))
+                        local = new DataReader(File.ReadAllText(dir + $"{k}.dat"));
+                    else
+                        App.Logger.LogInfo($"[ParseTool] - {k}.dat not found. Checking next...");
+                }
+            }
         }
         public NPCCharacter ParseCharacter()
         {
@@ -46,7 +55,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 halloweenClothing = ParseClothing(Clothing_Type.Halloween),
                 pose = asset.ReadEnum("Pose", NPC_Pose.Stand),
                 equipped = asset.ReadEnum("Equipped", Equip_Type.None),
-                visibilityConditions = ParseConditions("Condition_").ToList()
+                visibilityConditions = ParseConditions("").ToList()
             };
         }
         public NPCDialogue ParseDialogue()
@@ -68,26 +77,26 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         App.Logger.LogWarning($"Page {pId} in message {mId} not found.");
                     d.messages[mId].pages.Add(page);
                 }
-                d.messages[mId].conditions = ParseConditions($"Message_{mId}_Condition_");
+                d.messages[mId].conditions = ParseConditions($"Message_{mId}_");
             }
             d.responses = new List<NPCResponse>(asset.ReadByte("Responses"));
             for (byte rId = 0; rId < d.responses.Capacity; rId++)
             {
+                d.responses.Add(new NPCResponse());
                 byte b = asset.ReadByte($"Response_{rId}_Messages");
                 d.responses[rId].visibleIn = new int[b];
                 for (byte i = 0; i < b; i++)
                 {
                     d.responses[rId].visibleIn[i] = asset.Has($"Response_{rId}_Message_{i}") ? 1 : 0;
                 }
-                d.responses.Add(new NPCResponse());
                 d.responses[rId].mainText = local?.ReadString($"Response_{rId}");
                 if (d.responses[rId].mainText == null)
                     break;
                 d.responses[rId].openDialogueId = asset.ReadUInt16($"Response_{rId}_Dialogue");
                 d.responses[rId].openQuestId = asset.ReadUInt16($"Response_{rId}_Quest");
                 d.responses[rId].openVendorId = asset.ReadUInt16($"Response_{rId}_Vendor");
-                d.responses[rId].conditions = ParseConditions($"Response_{rId}_Condition_");
-                d.responses[rId].rewards = ParseRewards($"Response_{rId}_Reward_");
+                d.responses[rId].conditions = ParseConditions($"Response_{rId}_");
+                d.responses[rId].rewards = ParseRewards($"Response_{rId}_");
             }
             return d;
         }
@@ -117,9 +126,9 @@ namespace BowieD.Unturned.NPCMaker.Parsing
             c.Vest = asset.ReadUInt16(prefix + "Vest");
             return c;
         }
-        private Condition[] ParseConditions(string prefix)
+        private Condition[] ParseConditions(string prefix, string postfix = "Condition_")
         {
-            Condition[] c = new Condition[asset.ReadByte("Conditions")];
+            Condition[] c = new Condition[asset.ReadByte(prefix + "Conditions")];
 
             int num = 0;
             string text;
@@ -127,14 +136,14 @@ namespace BowieD.Unturned.NPCMaker.Parsing
             {
                 if (num >= c.Length)
                     return c;
-                text = prefix + num + "_Type";
+                text = $"{prefix}{postfix}{num}_Type";
                 if (!asset.Has(text))
                     break;
                 Condition_Type type = asset.ReadEnum(text, Condition_Type.None);
-                string desc = local?.ReadString(prefix + num);
-                bool needToReset = asset.ReadBoolean(prefix + num + "_Reset");
-                Logic_Type logic = asset.ReadEnum(prefix + num + "_Logic", Logic_Type.Equal);
-                string tp = prefix + num + "_";
+                string desc = local?.ReadString($"{prefix}{postfix}{num}");
+                bool needToReset = asset.ReadBoolean($"{prefix}{postfix}{num}_Reset");
+                Logic_Type logic = asset.ReadEnum($"{prefix}{postfix}{num}_Logic", Logic_Type.Equal);
+                string tp = $"{prefix}{postfix}{num}_";
                 switch (type)
                 {
                     case Condition_Type.Experience:
@@ -208,218 +217,218 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         };
                         break;
                     case Condition_Type.Kills_Horde:
+                        c[num] = new ConditionKillsHorde()
+                        {
+                            ID = asset.ReadUInt16(tp + "ID"),
+                            Nav = asset.ReadByte(tp + "Nav"),
+                            Reset = needToReset,
+                            Value = asset.ReadInt16(tp + "Value")
+                        };
                         break;
                     case Condition_Type.Kills_Animal:
+                        c[num] = new ConditionKillsAnimal()
+                        {
+                            Animal = asset.ReadUInt16(tp + "Animal"),
+                            ID = asset.ReadUInt16(tp + "ID"),
+                            Reset = needToReset,
+                            Value = asset.ReadInt16(tp + "Value")
+                        };
                         break;
                     case Condition_Type.Compare_Flags:
+                        c[num] = new ConditionCompareFlags()
+                        {
+                            Allow_A_Unset = asset.Has(tp + "Allow_A_Unset"),
+                            Allow_B_Unset = asset.Has(tp + "Allow_B_Unset"),
+                            A_ID = asset.ReadUInt16(tp + "A_ID"),
+                            B_ID = asset.ReadUInt16(tp + "B_ID"),
+                            Logic = logic,
+                            Reset = needToReset
+                        };
                         break;
                     case Condition_Type.Time_Of_Day:
+                        c[num] = new ConditionTimeOfDay()
+                        {
+                            Logic = logic,
+                            Second = asset.ReadInt32(tp + "Second")
+                        };
                         break;
                     case Condition_Type.Player_Life_Health:
+                        c[num] = new ConditionPlayerLifeHealth()
+                        {
+                            Logic = logic,
+                            Value = asset.ReadInt32(tp + "Value")
+                        };
                         break;
                     case Condition_Type.Player_Life_Food:
+                        c[num] = new ConditionPlayerLifeFood()
+                        {
+                            Logic = logic,
+                            Value = asset.ReadInt32(tp + "Value")
+                        };
                         break;
                     case Condition_Type.Player_Life_Water:
+                        c[num] = new ConditionPlayerLifeWater()
+                        {
+                            Logic = logic,
+                            Value = asset.ReadInt32(tp + "Value")
+                        };
                         break;
                     case Condition_Type.Player_Life_Virus:
+                        c[num] = new ConditionPlayerLifeVirus()
+                        {
+                            Logic = logic,
+                            Value = asset.ReadInt32(tp + "Value")
+                        };
                         break;
                     case Condition_Type.Holiday:
+                        c[num] = new ConditionHoliday()
+                        {
+                            Value = asset.ReadEnum<ENPCHoliday>(tp + "Value")
+                        };
                         break;
                     case Condition_Type.Kills_Player:
+                        c[num] = new ConditionKillsPlayer()
+                        {
+                            ID = asset.ReadUInt16(tp + "ID"),
+                            Reset = needToReset,
+                            Value = asset.ReadInt16(tp + "Value")
+                        };
                         break;
                     case Condition_Type.Kills_Object:
+                        c[num] = new ConditionKillsObject()
+                        {
+                            ID = asset.ReadUInt16(tp + "ID"),
+                            Nav = asset.ReadByte(tp + "Nav"),
+                            Object = asset.ReadString(tp + "Object") ?? "",
+                            Reset = needToReset,
+                            Value = asset.ReadInt16(tp + "Value")
+                        };
                         break;
                 }
-                c[num].Localization = desc;
+                c[num].Localization = desc ?? "";
+                num++;
             }
             return c;
         }
-        private Reward[] ParseRewards(string prefix)
+        private Reward[] ParseRewards(string prefix, string postfix = "Reward_")
         {
-
-        }
-        public void Dispose()
-        {
-            asset.Dispose();
-            local?.Dispose();
+            Reward[] r = new Reward[asset.ReadByte($"{prefix}Rewards")];
+            int num = 0;
+            string text;
+            while (true)
+            {
+                if (num >= r.Length)
+                    return r;
+                text = $"{prefix}{postfix}{num}_Type";
+                if (!asset.Has(text))
+                    break;
+                RewardType type = asset.ReadEnum<RewardType>(text);
+                string desc = local?.ReadString($"{prefix}{postfix}{num}");
+                string tp = $"{prefix}{postfix}{num}_";
+                switch (type)
+                {
+                    case RewardType.Achievement:
+                        r[num] = new RewardAchievement()
+                        {
+                            ID = asset.ReadString(tp + "ID")
+                        };
+                        break;
+                    case RewardType.Event:
+                        r[num] = new RewardEvent()
+                        {
+                            ID = asset.ReadString(tp + "ID")
+                        };
+                        break;
+                    case RewardType.Experience:
+                        r[num] = new RewardExperience()
+                        {
+                            Value = asset.ReadUInt32(tp + "Value")
+                        };
+                        break;
+                    case RewardType.Flag_Bool:
+                        r[num] = new RewardFlagBool()
+                        {
+                            ID = asset.ReadUInt16(tp + "ID"),
+                            Value = asset.ReadBoolean(tp + "Value")
+                        };
+                        break;
+                    case RewardType.Flag_Math:
+                        r[num] = new RewardFlagMath()
+                        {
+                            A_ID = asset.ReadUInt16(tp + "A_ID"),
+                            B_ID = asset.ReadUInt16(tp + "B_ID"),
+                            Operation = asset.ReadEnum<Operation_Type>(tp + "Operation")
+                        };
+                        break;
+                    case RewardType.Flag_Short:
+                        r[num] = new RewardFlagShort()
+                        {
+                            ID = asset.ReadUInt16(tp + "ID"),
+                            Modification = asset.ReadEnum<Modification_Type>(tp + "Modification"),
+                            Value = asset.ReadInt16(tp + "Value")
+                        };
+                        break;
+                    case RewardType.Flag_Short_Random:
+                        r[num] = new RewardFlagShortRandom()
+                        {
+                            ID = asset.ReadUInt16(tp + "ID"),
+                            Max_Value = asset.ReadInt16(tp + "Max_Value"),
+                            Min_Value = asset.ReadInt16(tp + "Min_Value"),
+                            Modification = asset.ReadEnum<Modification_Type>(tp + "Modification")
+                        };
+                        break;
+                    case RewardType.Item:
+                        r[num] = new RewardItem()
+                        {
+                            Ammo = asset.ReadByte(tp + "Ammo"),
+                            Amount = asset.ReadByte(tp + "Amount"),
+                            Auto_Equip = asset.ReadBoolean(tp + "Auto_Equip"),
+                            Barrel = asset.ReadUInt16(tp + "Barrel"),
+                            Grip = asset.ReadUInt16(tp + "Grip"),
+                            Magazine = asset.ReadUInt16(tp + "Magazine"),
+                            Sight = asset.ReadUInt16(tp + "Sight"),
+                            Tactical = asset.ReadUInt16(tp + "Tactical"),
+                            ID = asset.ReadUInt16(tp + "ID")
+                        };
+                        break;
+                    case RewardType.Item_Random:
+                        r[num] = new RewardItemRandom()
+                        {
+                            Amount = asset.ReadByte(tp + "Amount"),
+                            ID = asset.ReadUInt16(tp + "ID")
+                        };
+                        break;
+                    case RewardType.Quest:
+                        r[num] = new RewardQuest()
+                        {
+                            ID = asset.ReadUInt16(tp + "ID")
+                        };
+                        break;
+                    case RewardType.Reputation:
+                        r[num] = new RewardReputation()
+                        {
+                            Value = asset.ReadInt32(tp + "Value")
+                        };
+                        break;
+                    case RewardType.Teleport:
+                        r[num] = new RewardTeleport()
+                        {
+                            Spawnpoint = asset.ReadString(tp + "Spawnpoint")
+                        };
+                        break;
+                    case RewardType.Vehicle:
+                        r[num] = new RewardVehicle()
+                        {
+                            ID = asset.ReadUInt16(tp + "ID"),
+                            Spawnpoint = asset.ReadString(tp + "Spawnpoint")
+                        };
+                        break;
+                }
+                r[num].Localization = desc ?? "";
+                num++;
+            }
+            return r;
         }
         public ParseType GetParseType() => asset.ReadEnum("Type", ParseType.None);
-    }
-    public sealed class Data
-    {
-        private Dictionary<string, string> data;
-        public Data(string content, bool overrideOldData = false)
-        {
-            data = new Dictionary<string, string>();
-            StringReader reader = null;
-            string line = "";
-            try
-            {
-                while ((line = reader.ReadLine()) != null)
-                {
-                    if (!(line == string.Empty) && (line.Length <= 1 || !(line.Substring(0, 2) == "//")))
-                    {
-                        int num = line.IndexOf(' ');
-                        string text;
-                        string value;
-                        if (num != -1)
-                        {
-                            text = line.Substring(0, num);
-                            value = line.Substring(num + 1, line.Length - num - 1);
-                        }
-                        else
-                        {
-                            text = line;
-                            value = string.Empty;
-                        }
-                        if (data.ContainsKey(text))
-                        {
-                            App.Logger.LogWarning("Multiple instances of '" + text + "'");
-                            if (overrideOldData)
-                            {
-                                App.Logger.LogWarning($"Overriding {text}...");
-                            }
-                        }
-                        else
-                        {
-                            data.Add(text, value);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                App.Logger.LogException("Failed to load data", ex);
-                data.Clear();
-            }
-            finally
-            {
-                reader?.Close();
-            }
-        }
-        public bool Has(string key) => data.ContainsKey(key);
-        public string ReadString(string key, string defaultValue = null)
-        {
-            if (!data.TryGetValue(key, out string res))
-                return defaultValue;
-            return res;
-        }
-        public T ReadEnum<T>(string key, T defaultValue = default(T)) where T : struct
-        {
-            if (data.TryGetValue(key, out string value))
-            {
-                try
-                {
-                    return (T)Enum.Parse(typeof(T), value, true);
-                }
-                catch
-                {
-                    return defaultValue;
-                }
-            }
-            return defaultValue;
-        }
-        public bool ReadBoolean(string key, bool defaultValue = false)
-        {
-            if (data.TryGetValue(key, out string value))
-            {
-                return value.Equals("y", StringComparison.InvariantCultureIgnoreCase) || value == "1" || value.Equals("true", StringComparison.InvariantCultureIgnoreCase);
-            }
-            return defaultValue;
-        }
-
-        public byte ReadByte(string key, byte defaultValue = 0)
-        {
-            if (!byte.TryParse(ReadString(key), NumberStyles.Any, CultureInfo.InvariantCulture, out byte result))
-            {
-                return defaultValue;
-            }
-            return result;
-        }
-
-        public byte[] ReadByteArray(string key)
-        {
-            string s = ReadString(key);
-            return Encoding.UTF8.GetBytes(s);
-        }
-
-        public short ReadInt16(string key, short defaultValue = 0)
-        {
-            if (!short.TryParse(ReadString(key), NumberStyles.Any, CultureInfo.InvariantCulture, out short result))
-            {
-                return defaultValue;
-            }
-            return result;
-        }
-
-        public ushort ReadUInt16(string key, ushort defaultValue = 0)
-        {
-            if (!ushort.TryParse(ReadString(key), NumberStyles.Any, CultureInfo.InvariantCulture, out ushort result))
-            {
-                return defaultValue;
-            }
-            return result;
-        }
-
-        public int ReadInt32(string key, int defaultValue = 0)
-        {
-            if (!int.TryParse(ReadString(key), NumberStyles.Any, CultureInfo.InvariantCulture, out int result))
-            {
-                return defaultValue;
-            }
-            return result;
-        }
-
-        public uint ReadUInt32(string key, uint defaultValue = 0u)
-        {
-            if (!uint.TryParse(ReadString(key), NumberStyles.Any, CultureInfo.InvariantCulture, out uint result))
-            {
-                return defaultValue;
-            }
-            return result;
-        }
-
-        public long ReadInt64(string key, long defaultValue = 0L)
-        {
-            if (!long.TryParse(ReadString(key), NumberStyles.Any, CultureInfo.InvariantCulture, out long result))
-            {
-                return defaultValue;
-            }
-            return result;
-        }
-
-        public ulong ReadUInt64(string key, ulong defaultValue = 0uL)
-        {
-            if (!ulong.TryParse(ReadString(key), NumberStyles.Any, CultureInfo.InvariantCulture, out ulong result))
-            {
-                return defaultValue;
-            }
-            return result;
-        }
-
-        public float ReadSingle(string key, float defaultValue = 0f)
-        {
-            if (!float.TryParse(ReadString(key), NumberStyles.Any, CultureInfo.InvariantCulture, out float result))
-            {
-                return defaultValue;
-            }
-            return result;
-        }
-        public Coloring.Color ReadColor(string key)
-        {
-            return ReadColor(key, new Coloring.Color(0, 0, 0));
-        }
-
-        public Coloring.Color ReadColor(string key, Coloring.Color defaultColor)
-        {
-            string d = ReadString(key);
-            if (d != null)
-                return new Coloring.Color(ReadString(key));
-            return defaultColor;
-        }
-        public Guid ReadGUID(string key)
-        {
-            return new Guid(ReadString(key));
-        }
     }
 }
