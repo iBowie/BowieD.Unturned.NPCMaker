@@ -33,7 +33,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
             {
                 Condition Condition = Value as Condition;
                 Forms.Universal_ConditionEditor uce = new Forms.Universal_ConditionEditor(Condition, Localizable);
-                if (uce.ShowDialog() == true)
+                uce.ShowDialog();
+                if (uce.DialogResult == true)
                 {
                     Value = uce.Result;
                     mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();

@@ -112,6 +112,19 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 items = ParseVendorItems().ToList()
             };
         }
+        public NPCQuest ParseQuest()
+        {
+            var q = new NPCQuest()
+            {
+                id = asset.ReadUInt16("ID"),
+                title = local?.ReadString("Name") ?? "",
+                description = local?.ReadString("Description") ?? "",
+                guid = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
+                conditions = ParseConditions("").ToList(),
+                rewards = ParseRewards("").ToList()
+            };
+            return q;
+        }
         private VendorItem[] ParseVendorItems()
         {
             byte buyAmount = asset.ReadByte("Buying");

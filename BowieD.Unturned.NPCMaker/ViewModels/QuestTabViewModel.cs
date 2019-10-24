@@ -78,7 +78,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             MainWindow.Instance.listQuestConditions.Children.Clear();
             foreach (var k in Quest.conditions)
             {
-                Universal_ItemList uil = new Universal_ItemList(k, Universal_ItemList.ReturnType.Quest, true);
+                Universal_ItemList uil = new Universal_ItemList(k, Universal_ItemList.ReturnType.Condition, true);
                 uil.deleteButton.Click += (object sender, RoutedEventArgs e) =>
                 {
                     MainWindow.Instance.listQuestConditions.Children.Remove(Util.FindParent<Universal_ItemList>(sender as Button));
