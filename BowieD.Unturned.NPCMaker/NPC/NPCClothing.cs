@@ -59,5 +59,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
 
         }
+        public bool IsEmpty => Hat == 0 || Backpack == 0 || Mask == 0 || Vest == 0 || Shirt == 0 || Glasses == 0 || Pants == 0;
     }
 }
