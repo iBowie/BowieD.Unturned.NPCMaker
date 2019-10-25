@@ -176,6 +176,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     addMessageCommand = new BaseCommand(() =>
                     {
+                        Dialogue.messages = Messages;
                         Dialogue.messages.Add(new NPCMessage());
                         UpdateMessages();
                     });
