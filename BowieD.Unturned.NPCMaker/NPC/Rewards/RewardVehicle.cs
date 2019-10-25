@@ -6,7 +6,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     public sealed class RewardVehicle : Reward
     {
         public override RewardType Type => RewardType.Vehicle;
-        public override string DisplayName
+        public override string UIText
         {
             get
             {

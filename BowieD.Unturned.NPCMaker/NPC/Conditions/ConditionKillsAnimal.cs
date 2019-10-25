@@ -5,7 +5,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public sealed class ConditionKillsAnimal : Condition
     {
         public override Condition_Type Type => Condition_Type.Kills_Animal;
-        public override string DisplayName
+        public override string UIText
         {
             get
             {

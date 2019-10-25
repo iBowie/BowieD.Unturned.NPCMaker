@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    public class NPCDialogue : IHasDisplayName
+    public class NPCDialogue : IHasUIText
     {
         public NPCDialogue()
         {
@@ -35,6 +36,19 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 return null;
             return responses.Where(d => d.VisibleInAll || d.visibleIn[messageIndex] == 1).ToList();
         }
-        public string DisplayName => $"[{id}]";
+        public string UIText
+        {
+            get
+            {
+                if (messages == null || messages.Count < 1 || messages[0].pages.Count < 1)
+                    return $"[{id}]";
+                else
+                {
+                    string t = messages[0].pages[0];
+                    const int tLengthMax = 24;
+                    return $"[{id}] - {(t.Substring(0, t.Length < tLengthMax ? t.Length : tLengthMax))}{(t.Length >= tLengthMax ? "..." : "")}";
+                }
+            }
+        }
     }
 }

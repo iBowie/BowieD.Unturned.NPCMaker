@@ -26,12 +26,12 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     [XmlInclude(typeof(RewardTeleport))]
     [XmlInclude(typeof(RewardEvent))]
     [XmlInclude(typeof(RewardFlagMath))]
-    public abstract class Reward : IHasDisplayName
+    public abstract class Reward : IHasUIText
     {
         [RewardSkipField]
         public string Localization { get; set; }
         public abstract RewardType Type { get; }
-        public abstract string DisplayName { get; }
+        public abstract string UIText { get; }
         public IEnumerable<FrameworkElement> GetControls()
         {
             var props = GetType().GetProperties();

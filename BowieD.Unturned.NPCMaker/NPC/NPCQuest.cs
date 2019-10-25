@@ -6,7 +6,7 @@ using Reward = BowieD.Unturned.NPCMaker.NPC.Rewards.Reward;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    public class NPCQuest : IHasDisplayName
+    public class NPCQuest : IHasUIText
     {
         public NPCQuest()
         {
@@ -29,6 +29,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public string title;
         public string description;
 
-        public string DisplayName => $"[{id}] {title}";
+        public string UIText => $"[{id}] {title}";
     }
 }

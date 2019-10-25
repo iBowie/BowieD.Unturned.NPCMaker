@@ -6,7 +6,7 @@ using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    public class NPCVendor : IHasDisplayName
+    public class NPCVendor : IHasUIText
     {
         public NPCVendor()
         {
@@ -30,10 +30,10 @@ namespace BowieD.Unturned.NPCMaker.NPC
         [XmlIgnore]
         public List<VendorItem> SellItems => (items ?? new List<VendorItem>()).Where(d => !d.isBuy).ToList();
 
-        public string DisplayName => $"[{id}] {vendorTitle}";
+        public string UIText => $"[{id}] {vendorTitle}";
     }
 
-    public class VendorItem : IHasDisplayName
+    public class VendorItem : IHasUIText
     {
         public VendorItem()
         {
@@ -47,7 +47,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public List<Condition> conditions;
         public string spawnPointID;
 
-        public string DisplayName
+        public string UIText
         {
             get
             {

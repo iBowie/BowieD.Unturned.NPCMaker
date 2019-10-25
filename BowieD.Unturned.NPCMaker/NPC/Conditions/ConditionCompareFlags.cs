@@ -15,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public Logic_Type Logic { get; set; }
         [ConditionNoValue]
         public bool Reset { get; set; }
-        public override string DisplayName
+        public override string UIText
         {
             get
             {

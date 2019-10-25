@@ -10,7 +10,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public ushort Amount { get; set; }
         [ConditionNoValue]
         public bool Reset { get; set; }
-        public override string DisplayName
+        public override string UIText
         {
             get
             {

@@ -31,14 +31,14 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [XmlInclude(typeof(ConditionQuest))]
     [XmlInclude(typeof(ConditionCompareFlags))]
     [XmlInclude(typeof(ConditionHoliday))]
-    public abstract class Condition : IHasDisplayName
+    public abstract class Condition : IHasUIText
     {
         [ConditionSkipField]
         public string Localization { get; set; }
         [XmlIgnore]
         public abstract Condition_Type Type { get; }
         [XmlIgnore]
-        public abstract string DisplayName { get; }
+        public abstract string UIText { get; }
 
         public IEnumerable<FrameworkElement> GetControls()
         {

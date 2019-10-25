@@ -6,7 +6,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     public sealed class RewardItemRandom : Reward
     {
         public override RewardType Type => RewardType.Item_Random;
-        public override string DisplayName
+        public override string UIText
         {
             get
             {

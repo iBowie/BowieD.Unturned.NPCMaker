@@ -9,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
 {
     public sealed class DataReader
     {
-        private Dictionary<string, string> data;
+        private readonly Dictionary<string, string> data;
         public DataReader(string content, bool overrideOldData = false)
         {
             data = new Dictionary<string, string>();
@@ -67,7 +67,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 return defaultValue;
             return res;
         }
-        public T ReadEnum<T>(string key, T defaultValue = default(T)) where T : struct
+        public T ReadEnum<T>(string key, T defaultValue = default) where T : struct
         {
             if (data.TryGetValue(key, out string value))
             {

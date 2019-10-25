@@ -6,7 +6,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     public sealed class RewardExperience : Reward
     {
         public override RewardType Type => RewardType.Experience;
-        public override string DisplayName
+        public override string UIText
         {
             get
             {

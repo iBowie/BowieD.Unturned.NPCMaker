@@ -257,7 +257,7 @@
     <Compile Include="NPC\Conditions\ConditionReputation.cs" />
     <Compile Include="NPC\Conditions\ConditionSkillset.cs" />
     <Compile Include="NPC\Conditions\ConditionTimeOfDay.cs" />
-    <Compile Include="NPC\IHasDisplayName.cs" />
+    <Compile Include="NPC\IHasUIText.cs" />
     <Compile Include="NPC\NPCCharacter.cs" />
     <Compile Include="NPC\NPCClothing.cs" />
     <Compile Include="NPC\NPCProject.cs" />

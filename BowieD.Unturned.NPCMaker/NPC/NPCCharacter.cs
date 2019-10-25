@@ -6,7 +6,7 @@ using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    public class NPCCharacter : IHasDisplayName
+    public class NPCCharacter : IHasUIText
     {
         public NPCCharacter()
         {
@@ -54,6 +54,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public string guid;
         public List<Condition> visibilityConditions;
 
-        public string DisplayName => $"[{id}] {editorName} - {displayName}";
+        public string UIText => $"[{id}] {editorName} - {displayName}";
     }
 }
