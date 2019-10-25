@@ -18,7 +18,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append($"{LocalizationManager.Current.Condition["Type_Flag_Bool"]} [{ID}] = {Value}");
+                sb.Append($"{LocalizationManager.Current.Condition["Type_Flag_Bool"]} [{ID}]");
                 switch (Logic)
                 {
                     case Logic_Type.Equal:
@@ -40,6 +40,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         sb.Append("<= ");
                         break;
                 }
+                sb.Append($" {Value}");
                 return sb.ToString();
             }
         }
