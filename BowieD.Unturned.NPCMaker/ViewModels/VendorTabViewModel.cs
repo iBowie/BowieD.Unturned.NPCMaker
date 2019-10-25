@@ -24,6 +24,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             set
             {
                 _vendor = value;
+                UpdateItems();
                 OnPropertyChange("");
             }
         }
@@ -57,6 +58,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 Vendor.items = value;
                 UpdateItems();
+                OnPropertyChange("Items");
             }
         }
         internal void UpdateItems()
@@ -176,16 +178,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         if (uvie.ShowDialog() == true)
                         {
                             VendorItem resultedVendorItem = uvie.Result;
-                            if (resultedVendorItem.isBuy)
-                            {
-                                AddItemBuy(resultedVendorItem);
-                                App.Logger.LogInfo($"Added item {resultedVendorItem.id} in buy list");
-                            }
-                            else
-                            {
-                                AddItemSell(resultedVendorItem);
-                                App.Logger.LogInfo($"Added item {resultedVendorItem.id} in sell list");
-                            }
+                            Vendor.items.Add(resultedVendorItem);
+                            UpdateItems();
                         }
                     });
                 }
