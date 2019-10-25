@@ -1,4 +1,6 @@
-﻿namespace BowieD.Unturned.NPCMaker.Commands
+﻿using System;
+
+namespace BowieD.Unturned.NPCMaker.Commands
 {
     public class SaveCommand : Command
     {
@@ -9,7 +11,7 @@
         {
             MainWindow.Instance.Dispatcher.Invoke(() =>
             {
-                MainWindow.Proxy.SaveClick(null, null);
+                MainWindow.Instance.MainWindowViewModel.SaveProjectCommand.Execute(null);
             });
         }
     }

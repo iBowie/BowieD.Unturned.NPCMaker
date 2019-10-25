@@ -2,12 +2,17 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker"
-             xmlns:system="clr-namespace:System;assembly=mscorlib">
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
+             xmlns:npc="clr-namespace:BowieD.Unturned.NPCMaker.NPC">
     <Application.Resources>
         <ResourceDictionary>
             <BitmapImage x:Key="app_Icon" UriSource="pack://application:,,,/Resources/Icons/app.ico"/>
             <SolidColorBrush x:Key="AccentColor" Color="Black"/>
+            <SolidColorBrush x:Key="BackgroundColor" Color="Black"/>
             <system:Double x:Key="Scale">1</system:Double>
+            <xaml:EnumItemsSource x:Key="Character_Pose_Enums" Type="{x:Type npc:NPC_Pose}"/>
+            <xaml:EnumItemsSource x:Key="Character_Equipment_Equipped_Enums" Type="{x:Type npc:Equip_Type}"/>
             <ResourceDictionary.MergedDictionaries>
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Green.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>

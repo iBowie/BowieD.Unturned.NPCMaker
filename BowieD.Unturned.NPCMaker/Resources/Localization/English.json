@@ -1,6 +1,6 @@
 {
 	"Author": "BowieD, TheCubicNoobik",
-	"LastUpdate": "28th of September 2019",
+	"LastUpdate": "25th of October 2019",
 	"Name": "English (US)",
 	"General":
 	{
@@ -416,6 +416,7 @@
 		"NE_0000_Desc": "ID of {0} [{1}] is in reserved range (from 0 to 2000)",
 		"NE_0001_Desc": "Character {0} [{1}] has zero id.",
 		"NE_0002_Desc": "Equipped slot of {0} [{1}] is empty.",
+		"NE_0003_Desc": "Character {0} [{1}] has restricted symbols in editor name.",
 		"NE_1000_Desc": "Dialogue {0} has empty messages.",
 		"NE_1001_Desc": "Dialogue {0} has zero id.",
 		"NE_1002_Desc": "Some messages of dialogue {0} will never appear.",
@@ -449,6 +450,9 @@
 		"Vendor_Saved": "Vendor saved!",
 		"Quest_ID_Zero": "Quest ID can't be equal to zero",
 		"Quest_Saved": "Quest saved!",
+		"Import_File_Done": "Imported {0}",
+		"Import_File_Fail": "Can't import {0}.",
+		"Import_Directory_Done": "Imported {0} files. Skipped {1}.",
 		"Export_Done": "Export done!",
 		"Export_Done_Goto": "Open result folder",
 		"Export_Error": "Something gone wrong. See logs for details.",
@@ -490,6 +494,9 @@
 		"Main_Menu_File_SaveAs": "Save Project _As...",
 		"Main_Menu_File_Recent": "Recent Projects",
 		"Main_Menu_File_Recent_Clear": "Clear Recent Projects",
+		"Main_Menu_File_Import": "Import...",
+		"Main_Menu_File_Import_File": "Single file",
+		"Main_Menu_File_Import_Directory": "Directory",
 		"Main_Menu_File_Export": "_Export NPC (Ctrl + E)",
 		"Main_Menu_File_Exit": "Exit",
 		"Main_Menu_Options": "Options",

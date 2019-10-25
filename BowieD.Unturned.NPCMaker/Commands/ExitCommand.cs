@@ -3,7 +3,7 @@
     public class ExitCommand : Command
     {
         public override string Name => "exit";
-        public override string Help => "Force application exit";
+        public override string Help => "Basically the 'Exit' button";
 
         public override string Syntax => "";
 

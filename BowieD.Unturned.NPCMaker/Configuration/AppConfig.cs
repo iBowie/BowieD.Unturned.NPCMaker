@@ -6,6 +6,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
 
 namespace BowieD.Unturned.NPCMaker.Configuration
 {
@@ -74,16 +75,41 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 language = ELanguage.English;
             App.Logger.LogInfo($"[CFG] - Default configuration loaded!");
         }
+        private static string defaultDir = $@"{Environment.SystemDirectory[0]}{Path.VolumeSeparatorChar}{Path.DirectorySeparatorChar}Users{Path.DirectorySeparatorChar}{Environment.UserName}{Path.DirectorySeparatorChar}AppData{Path.DirectorySeparatorChar}Local{Path.DirectorySeparatorChar}BowieD{Path.DirectorySeparatorChar}NPCMaker{Path.DirectorySeparatorChar}";
         public static string Directory
         {
             get
             {
-                string res = $@"C{Path.VolumeSeparatorChar}{Path.DirectorySeparatorChar}Users{Path.DirectorySeparatorChar}{Environment.UserName}{Path.DirectorySeparatorChar}AppData{Path.DirectorySeparatorChar}Local{Path.DirectorySeparatorChar}BowieD{Path.DirectorySeparatorChar}NPCMaker{Path.DirectorySeparatorChar}";
-                if (!System.IO.Directory.Exists(res))
-                    System.IO.Directory.CreateDirectory(res);
-                return res;
+                if (AlternatePath == null)
+                {
+                    DirectoryInfo dirInfo = new DirectoryInfo(defaultDir);
+                    try
+                    {
+                        DirectorySecurity dirAC = dirInfo.GetAccessControl(AccessControlSections.All);
+                        AlternatePath = true;
+                    }
+                    catch
+                    {
+                        AlternatePath = false;
+                    }
+                }
+                if (AlternatePath == false)
+                {
+                    string res = defaultDir;
+                    if (!System.IO.Directory.Exists(res))
+                        System.IO.Directory.CreateDirectory(res);
+                    return res;
+                }
+                else
+                {
+                    string res = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"BowieD.Unturned.NPCMaker Configuration{Path.DirectorySeparatorChar}");
+                    if (!System.IO.Directory.Exists(res))
+                        System.IO.Directory.CreateDirectory(res);
+                    return res;
+                }
             }
         }
+        public static bool? AlternatePath { get; private set; } = null;
         private static string path => Directory + "config.json";
     }
 }

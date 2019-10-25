@@ -6,14 +6,14 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     public sealed class RewardVehicle : Reward
     {
         public override RewardType Type => RewardType.Vehicle;
-        public override string DisplayName
+        public override string UIText
         {
             get
             {
                 return $"{LocalizationManager.Current.Reward["Type_Vehicle"]} [{ID}] -> [{Spawnpoint}]";
             }
         }
-        public UInt16 ID;
-        public string Spawnpoint;
+        public UInt16 ID { get; set; }
+        public string Spawnpoint { get; set; }
     }
 }

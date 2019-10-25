@@ -19,14 +19,14 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Character
                     yield return new NE_0000()
                     {
                         MistakeName = "NE_0000",
-                        Importance = IMPORTANCE.ADVICE,
+                        Importance = IMPORTANCE.WARNING,
                         MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_0000_Desc", _char.displayName, _char.id),
                         OnClick = new Action(() =>
                         {
-                            if (MainWindow.CharacterEditor.Current.id == 0)
-                                return;
-                            MainWindow.CharacterEditor.Save();
-                            MainWindow.CharacterEditor.Current = _char;
+                            //if (MainWindow.CharacterEditor.Current.id == 0)
+                            //    return;
+                            //MainWindow.CharacterEditor.Save();
+                            //MainWindow.CharacterEditor.Current = _char;
                             MainWindow.Instance.mainTabControl.SelectedIndex = 0;
                         })
                     };

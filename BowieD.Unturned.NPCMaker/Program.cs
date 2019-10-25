@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace BowieD.Unturned.NPCMaker
 {
     public class Program
     {
         [STAThread]
-        public static void Main()
+        static void Main()
         {
             var app = new App();
             app.InitializeComponent();

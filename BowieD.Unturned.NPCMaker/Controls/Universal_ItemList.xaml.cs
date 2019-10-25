@@ -1,5 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Editors;
-using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.NPC;
 using System.Windows;
 using System.Windows.Controls;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
@@ -16,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
         {
             InitializeComponent();
             this.Value = input;
-            mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
+            mainLabel.Content = Value is IHasUIText ? (Value as IHasUIText).UIText : Value.ToString();
             mainLabel.ToolTip = mainLabel.Content;
             this.Localizable = localizable;
             this.Type = type;
@@ -34,10 +33,11 @@ namespace BowieD.Unturned.NPCMaker.Controls
             {
                 Condition Condition = Value as Condition;
                 Forms.Universal_ConditionEditor uce = new Forms.Universal_ConditionEditor(Condition, Localizable);
-                if (uce.ShowDialog() == true)
+                uce.ShowDialog();
+                if (uce.DialogResult == true)
                 {
                     Value = uce.Result;
-                    mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
+                    mainLabel.Content = Value is IHasUIText ? (Value as IHasUIText).UIText : Value.ToString();
                     mainLabel.ToolTip = mainLabel.Content;
                 }
             }
@@ -57,7 +57,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
                 if (ure.DialogResult == true)
                 {
                     Value = ure.Result;
-                    mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
+                    mainLabel.Content = Value is IHasUIText ? (Value as IHasUIText).UIText : Value.ToString();
                     mainLabel.ToolTip = mainLabel.Content;
                 }
             }
@@ -77,18 +77,18 @@ namespace BowieD.Unturned.NPCMaker.Controls
                     {
                         if (NewItem.isBuy)
                         {
-                            (MainWindow.VendorEditor as VendorEditor).RemoveItemSell(Util.FindParent<Universal_ItemList>(sender as Button));
-                            (MainWindow.VendorEditor as VendorEditor).AddItemBuy(NewItem);
+                            MainWindow.Instance.MainWindowViewModel.VendorTabViewModel.RemoveItemSell(Util.FindParent<Universal_ItemList>(sender as Button));
+                            MainWindow.Instance.MainWindowViewModel.VendorTabViewModel.AddItemBuy(NewItem);
                         }
                         else
                         {
-                            (MainWindow.VendorEditor as VendorEditor).RemoveItemBuy(Util.FindParent<Universal_ItemList>(sender as Button));
-                            (MainWindow.VendorEditor as VendorEditor).AddItemSell(NewItem);
+                            MainWindow.Instance.MainWindowViewModel.VendorTabViewModel.RemoveItemBuy(Util.FindParent<Universal_ItemList>(sender as Button));
+                            MainWindow.Instance.MainWindowViewModel.VendorTabViewModel.AddItemSell(NewItem);
                         }
                     }
                     Value = NewItem;
                 }
-                mainLabel.Content = Value is IHasDisplayName ? (Value as IHasDisplayName).DisplayName : Value.ToString();
+                mainLabel.Content = Value is IHasUIText ? (Value as IHasUIText).UIText : Value.ToString();
                 mainLabel.ToolTip = mainLabel.Content;
             }
             else if (Type == ReturnType.Character)

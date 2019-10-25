@@ -34,13 +34,10 @@
         <Button Click="EditConditions_Click" Height="28" Content="{DynamicResource VENDORITEM_Conditions}" Margin="10,142,10,0" VerticalAlignment="Top"/>
         <mah:NumericUpDown ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" x:Name="txtBoxID" HorizontalAlignment="Right" Height="23" Margin="0,175,10,0" VerticalAlignment="Top" Width="100"/>
         <mah:NumericUpDown ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="4294967295" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" x:Name="txtBoxCost" HorizontalAlignment="Right" Height="23" Margin="0,206,10,0" VerticalAlignment="Top" Width="100"/>
-        <mah:NumericUpDown x:Name="amountBox" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="255" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" HorizontalAlignment="Right" Height="23" Margin="0,237,10,0" VerticalAlignment="Top" Width="100"/>
         <TextBox Name="txtBoxSpawnpoint" HorizontalAlignment="Right" Height="23" Margin="0,237,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="100"/>
         <Label Name="labelSpawnpoint" Content="{DynamicResource VENDORITEM_Spawnpoint}" HorizontalAlignment="Left" Margin="10,237,0,0" VerticalAlignment="Top" Width="169"/>
         <Button Click="SaveButton_Click" Content="{DynamicResource INTERFACE_Editor_VendorItem_Save}" Margin="10,0,10,10" Height="26" VerticalAlignment="Bottom"/>
         <Label Content="{DynamicResource VENDORITEM_ID}" HorizontalAlignment="Left" Margin="10,175,0,0" VerticalAlignment="Top" Width="169"/>
         <Label Content="{DynamicResource VENDORITEM_Cost}" HorizontalAlignment="Left" Margin="10,206,0,0" VerticalAlignment="Top" Width="169"/>
-        <Label x:Name="amountLabel" Content="{DynamicResource VENDORITEM_Amount}" HorizontalAlignment="Left" Margin="10,237,0,0" VerticalAlignment="Top" Width="169"/>
-
     </Grid>
 </Window>

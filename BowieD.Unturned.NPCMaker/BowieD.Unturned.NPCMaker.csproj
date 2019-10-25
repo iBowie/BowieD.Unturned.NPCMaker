@@ -66,28 +66,28 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.4.0.0-alpha0222\lib\net45\ControlzEx.dll</HintPath>
+    <Reference Include="ControlzEx">
+      <HintPath>Libs\ControlzEx.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DiscordRPC">
       <HintPath>Libs\DiscordRPC.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.2.0.0-alpha0212\lib\net45\MahApps.Metro.dll</HintPath>
+    <Reference Include="MahApps.Metro">
+      <HintPath>Libs\MahApps.Metro.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="MahApps.Metro.IconPacks.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.IconPacks.Material.3.0.0-alpha0141\lib\net47\MahApps.Metro.IconPacks.Core.dll</HintPath>
+    <Reference Include="MahApps.Metro.IconPacks.Core">
+      <HintPath>Libs\MahApps.Metro.IconPacks.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="MahApps.Metro.IconPacks.Material, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.IconPacks.Material.3.0.0-alpha0141\lib\net47\MahApps.Metro.IconPacks.Material.dll</HintPath>
+    <Reference Include="MahApps.Metro.IconPacks.Material">
+      <HintPath>Libs\MahApps.Metro.IconPacks.Material.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.0.1\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    <Reference Include="Microsoft.Xaml.Behaviors">
+      <HintPath>Libs\Microsoft.Xaml.Behaviors.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -96,6 +96,8 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -110,28 +112,23 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Xceed.Wpf.AvalonDock">
       <HintPath>Libs\Xceed.Wpf.AvalonDock.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
       <HintPath>Libs\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
       <HintPath>Libs\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
       <HintPath>Libs\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Xceed.Wpf.Toolkit, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Xceed.Wpf.Toolkit">
       <HintPath>Libs\Xceed.Wpf.Toolkit.dll</HintPath>
       <Private>False</Private>
     </Reference>
@@ -143,6 +140,9 @@
     </ApplicationDefinition>
     <Compile Include="Coloring\ColorConverter.cs" />
     <Compile Include="Commands\ColorCommand.cs" />
+    <Compile Include="Commands\LicenseCommand.cs" />
+    <Compile Include="Commands\ParseCommand.cs" />
+    <Compile Include="Commands\ShutdownCommand.cs" />
     <Compile Include="Common\ContextHelper.cs" />
     <Compile Include="Controls\Dialogue_Response.xaml.cs">
       <DependentUpon>Dialogue_Response.xaml</DependentUpon>
@@ -179,7 +179,6 @@
     </Compile>
     <Compile Include="Commands\InfoCommand.cs" />
     <Compile Include="Commands\NotifyCommand.cs" />
-    <Compile Include="Commands\ReflectionCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
     <Compile Include="Commands\SwitchCommand.cs" />
     <Compile Include="Forms\Universal_ConditionEditor.xaml.cs">
@@ -206,11 +205,6 @@
       <DependentUpon>ConfigWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DiscordRPC\DiscordWorker.cs" />
-    <Compile Include="Editors\CharacterEditor.cs" />
-    <Compile Include="Editors\DialogueEditor.cs" />
-    <Compile Include="Editors\IEditor.cs" />
-    <Compile Include="Editors\QuestEditor.cs" />
-    <Compile Include="Editors\VendorEditor.cs" />
     <Compile Include="Export\Exporter.cs" />
     <Compile Include="Forms\Form_About.xaml.cs">
       <DependentUpon>Form_About.xaml</DependentUpon>
@@ -225,6 +219,7 @@
     <Compile Include="Managers\HolidayManager.cs" />
     <Compile Include="Mistakes\Character\NE_0001.cs" />
     <Compile Include="Mistakes\Character\NE_0002.cs" />
+    <Compile Include="Mistakes\Character\NE_0003.cs" />
     <Compile Include="Mistakes\DeepAnalysisManager.cs" />
     <Compile Include="Mistakes\Character\NE_0000.cs" />
     <Compile Include="Mistakes\Dialogue\NE_1000.cs" />
@@ -263,7 +258,7 @@
     <Compile Include="NPC\Conditions\ConditionReputation.cs" />
     <Compile Include="NPC\Conditions\ConditionSkillset.cs" />
     <Compile Include="NPC\Conditions\ConditionTimeOfDay.cs" />
-    <Compile Include="NPC\IHasDisplayName.cs" />
+    <Compile Include="NPC\IHasUIText.cs" />
     <Compile Include="NPC\NPCCharacter.cs" />
     <Compile Include="NPC\NPCClothing.cs" />
     <Compile Include="NPC\NPCProject.cs" />
@@ -286,12 +281,15 @@
     <Compile Include="NPC\Rewards\RewardTeleport.cs" />
     <Compile Include="NPC\Rewards\Attributes\RewardTooltipAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardVehicle.cs" />
+    <Compile Include="Parsing\DataReader.cs" />
+    <Compile Include="Parsing\ParseTool.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Random.cs" />
     <Compile Include="Themes\MetroTheme.cs" />
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
@@ -308,8 +306,16 @@
     <Compile Include="NPC\NPCQuest.cs" />
     <Compile Include="NPC\NPCResponse.cs" />
     <Compile Include="NPC\NPCVendor.cs" />
-    <Compile Include="PropertyProxy.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="ViewModels\BaseCommand.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\CharacterTabViewModel.cs" />
+    <Compile Include="ViewModels\DialogueTabViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MistakeTabViewModel.cs" />
+    <Compile Include="ViewModels\QuestTabViewModel.cs" />
+    <Compile Include="ViewModels\VendorTabViewModel.cs" />
+    <Compile Include="XAML\EnumItemsSource.cs" />
     <Page Include="Controls\Dialogue_Response.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -489,19 +495,19 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Libs\Xceed.Wpf.Toolkit.dll" />
+    <Resource Include="Libs\Xceed.Wpf.Toolkit.dll" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Libs\Xceed.Wpf.AvalonDock.dll" />
+    <Resource Include="Libs\Xceed.Wpf.AvalonDock.dll" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Libs\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+    <Resource Include="Libs\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Libs\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+    <Resource Include="Libs\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Libs\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+    <Resource Include="Libs\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

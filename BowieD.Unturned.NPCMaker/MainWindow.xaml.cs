@@ -1,11 +1,12 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Data;
-using BowieD.Unturned.NPCMaker.Editors;
+using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Themes;
+using BowieD.Unturned.NPCMaker.ViewModels;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -22,44 +23,21 @@ namespace BowieD.Unturned.NPCMaker
         {
             Instance = this;
             InitializeComponent();
+            MainWindowViewModel = new MainWindowViewModel(this);
+            this.DataContext = MainWindowViewModel;
         }
+        public MainWindowViewModel MainWindowViewModel { get; }
         #region MANAGERS
         public static Mistakes.DeepAnalysisManager DeepAnalysisManager { get; private set; }
         public static DiscordRPC.DiscordManager DiscordManager { get; set; }
         #endregion
-        #region EDITORS
-        public static IEditor<NPCCharacter> CharacterEditor { get; private set; }
-        public static IEditor<NPCDialogue> DialogueEditor { get; private set; }
-        public static IEditor<NPCVendor> VendorEditor { get; private set; }
-        public static IEditor<NPCQuest> QuestEditor { get; private set; }
-        public static void SaveAllEditors()
-        {
-            CharacterEditor.Save();
-            DialogueEditor.Save();
-            VendorEditor.Save();
-            QuestEditor.Save();
-        }
-        public static void ResetEditors()
-        {
-            CharacterEditor.Reset();
-            DialogueEditor.Reset();
-            VendorEditor.Reset();
-            QuestEditor.Reset();
-        }
-        #endregion
         public new void Show()
         {
-            CharacterEditor = new CharacterEditor();
-            DialogueEditor = new DialogueEditor();
-            VendorEditor = new VendorEditor();
-            QuestEditor = new QuestEditor();
             DeepAnalysisManager = new Mistakes.DeepAnalysisManager();
             Width *= AppConfig.Instance.scale;
             Height *= AppConfig.Instance.scale;
             MinWidth *= AppConfig.Instance.scale;
             MinHeight *= AppConfig.Instance.scale;
-            Proxy = new PropertyProxy(this);
-            Proxy.RegisterEvents();
             #region THEME SETUP
             var theme = ThemeManager.Themes.ContainsKey(AppConfig.Instance.currentTheme ?? "") ? ThemeManager.Themes[AppConfig.Instance.currentTheme] : ThemeManager.Themes["Metro/LightGreen"];
             ThemeManager.Apply(theme);
@@ -94,9 +72,9 @@ namespace BowieD.Unturned.NPCMaker
             faceImageIndex.Maximum = faceAmount - 1;
             beardImageIndex.Maximum = beardAmount - 1;
             hairImageIndex.Maximum = haircutAmount - 1;
-            (CharacterEditor as CharacterEditor).FaceImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
-            (CharacterEditor as CharacterEditor).HairImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
-            (CharacterEditor as CharacterEditor).BeardImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
+            //(CharacterEditor as CharacterEditor).FaceImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
+            //(CharacterEditor as CharacterEditor).HairImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
+            //(CharacterEditor as CharacterEditor).BeardImageIndex_Changed(null, new RoutedPropertyChangedEventArgs<double?>(0, 0));
             #endregion
             RefreshRecentList();
             #region AFTER UPDATE
@@ -104,14 +82,8 @@ namespace BowieD.Unturned.NPCMaker
             {
                 if (File.Exists(AppConfig.Directory + "updater.exe"))
                 {
-                    Proxy.WhatsNew_Menu_Click(null, null);
+                    OpenPatchNotes();
                     File.Delete(AppConfig.Directory + "updater.exe");
-                    App.Logger.LogInfo("Updater deleted.");
-                }
-                else if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "updater.exe"))
-                {
-                    Proxy.WhatsNew_Menu_Click(null, null);
-                    File.Delete(AppDomain.CurrentDomain.BaseDirectory + "updater.exe");
                     App.Logger.LogInfo("Updater deleted.");
                 }
             }
@@ -162,7 +134,7 @@ namespace BowieD.Unturned.NPCMaker
                 descriptive = AppConfig.Instance.enableDiscord
             };
             DiscordManager?.Initialize();
-            Proxy.TabControl_SelectionChanged(mainTabControl, null);
+            MainWindowViewModel.TabControl_SelectionChanged(mainTabControl, null);
             #endregion
             #region ENABLE EXPERIMENTAL
             if (AppConfig.Instance.experimentalFeatures)
@@ -191,8 +163,6 @@ namespace BowieD.Unturned.NPCMaker
         public static ProjectData CurrentProject { get; private set; } = new ProjectData();
         public static DispatcherTimer AutosaveTimer { get; set; }
         public static DispatcherTimer AppUpdateTimer { get; set; }
-        public static PropertyProxy Proxy { get; private set; }
-        public static bool IsRGB { get; set; } = true;
         public static DateTime Started { get; set; } = DateTime.UtcNow;
         #endregion
         private void AutosaveTimer_Tick(object sender, EventArgs e)
@@ -286,7 +256,7 @@ namespace BowieD.Unturned.NPCMaker
                     if (MainWindow.CurrentProject.Load(null))
                     {
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Loaded"]);
-                        ResetEditors();
+                        MainWindowViewModel.ResetAll();
                     }
                     else
                     {
@@ -322,6 +292,14 @@ namespace BowieD.Unturned.NPCMaker
             App.Logger.LogInfo("Closing app");
             DiscordManager?.Deinitialize();
             Environment.Exit(0);
+        }
+        internal void OpenPatchNotes()
+        {
+            try
+            {
+                new Whats_New().ShowDialog();
+            }
+            catch (Exception ex) { App.Logger.LogException("Could not open update notes window.", ex); }
         }
     }
 }

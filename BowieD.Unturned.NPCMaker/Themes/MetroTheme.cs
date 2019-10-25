@@ -18,6 +18,7 @@ namespace BowieD.Unturned.NPCMaker.Themes
         /// </summary>
         public string DictionaryName { get; set; }
         public override string AccentColor { get; set; }
+        public override string BackgroundColor { get; set; }
 
         public override void Apply()
         {
@@ -33,7 +34,10 @@ namespace BowieD.Unturned.NPCMaker.Themes
                 }
                 Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
                 App.Current.Resources["AccentColor"] = new BrushConverter().ConvertFromString(AccentColor);
-
+                if (DictionaryName[0] == 'L')
+                    App.Current.Resources["BackgroundColor"] = new BrushConverter().ConvertFromString("#FFFFFF");
+                else if (DictionaryName[0] == 'D')
+                    App.Current.Resources["BackgroundColor"] = new BrushConverter().ConvertFromString("#252525");
             }
             catch { App.Logger.LogWarning($"Can't apply {Name} theme"); }
         }

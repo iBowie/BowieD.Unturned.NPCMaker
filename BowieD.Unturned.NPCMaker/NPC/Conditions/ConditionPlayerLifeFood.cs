@@ -7,9 +7,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public sealed class ConditionPlayerLifeFood : Condition
     {
         public override Condition_Type Type => Condition_Type.Player_Life_Food;
-        public int Value;
-        public Logic_Type Logic;
-        public override string DisplayName
+        public int Value { get; set; }
+        public Logic_Type Logic { get; set; }
+        public override string UIText
         {
             get
             {

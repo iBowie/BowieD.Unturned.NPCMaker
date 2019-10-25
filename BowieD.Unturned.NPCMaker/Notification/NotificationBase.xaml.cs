@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -26,12 +27,30 @@ namespace BowieD.Unturned.NPCMaker.Notification
                 notificationContentGrid.Children.Add(l);
             }
             animationStoryboard = new Storyboard();
+            var anim = new DoubleAnimation()
+            {
+                Duration = TimeSpan.FromSeconds(0.5),
+                From = AppConfig.Instance.animateControls ? 300 : 0,
+                To = 0
+            };
+            var endAnim = new DoubleAnimation()
+            {
+                BeginTime = TimeSpan.FromSeconds(5.5),
+                Duration = TimeSpan.FromSeconds(1),
+                From = 0,
+                To = AppConfig.Instance.animateControls ? -60 : 0
+            };
+            anim.Completed += new EventHandler((sender, e) =>
+            {
+                tt.BeginAnimation(TranslateTransform.YProperty, endAnim);
+            });
+            tt.BeginAnimation(TranslateTransform.XProperty, anim);
             var anim2 = new DoubleAnimation
             {
                 BeginTime = TimeSpan.FromSeconds(6),
                 Duration = TimeSpan.FromSeconds(1),
                 From = 0.8,
-                To = 0
+                To = AppConfig.Instance.animateControls ? 0 : 0.8
             };
             Storyboard.SetTarget(anim2, this);
             Storyboard.SetTargetProperty(anim2, new PropertyPath(OpacityProperty));

@@ -5,10 +5,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
     public sealed class ConditionTimeOfDay : Condition
     {
-        public int Second;
-        public Logic_Type Logic;
+        public int Second { get; set; }
+        public Logic_Type Logic { get; set; }
         public override Condition_Type Type => Condition_Type.Time_Of_Day;
-        public override string DisplayName
+        public override string UIText
         {
             get
             {

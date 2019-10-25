@@ -45,6 +45,10 @@ namespace BowieD.Unturned.NPCMaker
         public new void Run()
         {
             InitLoggers();
+            Logger.LogInfo($"BowieD.Unturned.NPCMaker {Version}. Copyright (C) 2019 Anton 'BowieD' Galakhov");
+            Logger.LogInfo("This program comes with ABSOLUTELY NO WARRANTY; for details type `license w'.");
+            Logger.LogInfo("This is free software, and you are welcome to redistribute it");
+            Logger.LogInfo("under certain conditions; type `license c' for details.");
             Logger.LogInfo("[EXTRCT] - Extracting libraries...");
             #region COPY LIBS
             CopyResource(NPCMaker.Properties.Resources.DiscordRPC, AppConfig.Directory + "DiscordRPC.dll");
@@ -91,10 +95,17 @@ namespace BowieD.Unturned.NPCMaker
 #endif
             if (!LocalizationManager.IsLoaded)
                 LocalizationManager.LoadLanguage(AppConfig.Instance.language);
+#if DEBUG
+            Logger.LogInfo("[APP] - Opening MainWindow...");
+#else
             Logger.LogInfo("[APP] - Closing console and opening app...");
+#endif
             MainWindow mw = new MainWindow();
             InitManagers();
+#if DEBUG
+#else
             ConsoleLogger.HideConsoleWindow();
+#endif
             mw.Show();
             base.Run();
         }

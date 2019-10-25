@@ -69,17 +69,12 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 {
                     txtBoxSpawnpoint.BeginAnimation(OpacityProperty, DisappearAnimation(1));
                     labelSpawnpoint.BeginAnimation(OpacityProperty, DisappearAnimation(1));
-                    amountLabel.BeginAnimation(OpacityProperty, AppearAnimation(0));
-                    amountBox.BeginAnimation(OpacityProperty, AppearAnimation(0));
                 }
                 else
                 {
                     labelSpawnpoint.Opacity = 0;
                     txtBoxSpawnpoint.Opacity = 0;
-                    amountLabel.Opacity = 1;
-                    amountBox.Opacity = 1;
                 }
-                amountBox.IsHitTestVisible = true;
                 txtBoxSpawnpoint.IsHitTestVisible = false;
                 sellBox.IsEnabled = true;
                 txtBoxSpawnpoint.Text = "";
@@ -91,19 +86,13 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     DoubleAnimation opacityAnimation = new DoubleAnimation(0, 1, new Duration(new System.TimeSpan(0, 0, 0, 0, 500)));
                     txtBoxSpawnpoint.BeginAnimation(OpacityProperty, AppearAnimation(0));
                     labelSpawnpoint.BeginAnimation(OpacityProperty, AppearAnimation(0));
-                    amountBox.BeginAnimation(OpacityProperty, DisappearAnimation(1));
-                    amountLabel.BeginAnimation(OpacityProperty, DisappearAnimation(1));
                 }
                 else
                 {
                     labelSpawnpoint.Opacity = 1;
                     txtBoxSpawnpoint.Opacity = 1;
-                    amountLabel.Opacity = 0;
-                    amountBox.Opacity = 0;
                 }
-                amountBox.IsHitTestVisible = false;
                 txtBoxSpawnpoint.IsHitTestVisible = true;
-                amountBox.Value = 0;
                 sellBox.IsEnabled = false;
                 sellBox.SelectedIndex = 1;
             }
@@ -127,8 +116,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 Result.type = Selected_ItemType;
                 if (Result.type == ItemType.VEHICLE)
                     Result.spawnPointID = txtBoxSpawnpoint.Text;
-                else
-                    Result.amount = (byte)(amountBox.Value ?? 1);
                 Result.isBuy = IsBuy;
                 Result.cost = (uint)txtBoxCost.Value;
                 if (Result.conditions == null)

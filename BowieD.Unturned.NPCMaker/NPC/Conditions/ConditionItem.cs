@@ -6,11 +6,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public sealed class ConditionItem : Condition
     {
         public override Condition_Type Type => Condition_Type.Item;
-        public ushort ID;
-        public ushort Amount;
+        public ushort ID { get; set; }
+        public ushort Amount { get; set; }
         [ConditionNoValue]
-        public bool Reset;
-        public override string DisplayName
+        public bool Reset { get; set; }
+        public override string UIText
         {
             get
             {

@@ -25,10 +25,10 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
                                 MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_1003_Desc", pId + 1, mId + 1, dial.id),
                                 OnClick = new Action(() =>
                                 {
-                                    if (MainWindow.DialogueEditor.Current.id == 0)
+                                    if (MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.ID == 0)
                                         return;
-                                    MainWindow.DialogueEditor.Save();
-                                    MainWindow.DialogueEditor.Current = dial;
+                                    MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.SaveCommand.Execute(null);
+                                    MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Dialogue = dial;
                                     MainWindow.Instance.mainTabControl.SelectedIndex = 1;
                                 })
                             };

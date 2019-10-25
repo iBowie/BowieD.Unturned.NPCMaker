@@ -6,16 +6,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public sealed class ConditionCompareFlags : Condition
     {
         public override Condition_Type Type => Condition_Type.Compare_Flags;
-        public ushort A_ID;
-        public ushort B_ID;
+        public ushort A_ID { get; set; }
+        public ushort B_ID { get; set; }
         [ConditionNoValue]
-        public bool Allow_A_Unset;
+        public bool Allow_A_Unset { get; set; }
         [ConditionNoValue]
-        public bool Allow_B_Unset;
-        public Logic_Type Logic;
+        public bool Allow_B_Unset { get; set; }
+        public Logic_Type Logic { get; set; }
         [ConditionNoValue]
-        public bool Reset;
-        public override string DisplayName
+        public bool Reset { get; set; }
+        public override string UIText
         {
             get
             {

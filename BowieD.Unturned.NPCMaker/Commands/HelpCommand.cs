@@ -9,17 +9,17 @@ namespace BowieD.Unturned.NPCMaker.Commands
         public override string Syntax => "[command]";
         public override void Execute(string[] args)
         {
-            Command cmd = null;
+            Command cmd;
             if (args.Length == 0 || (cmd = Command.GetCommand(args[0])) == null)
             {
                 foreach (var c in Command.Commands)
                 {
-                    App.Logger.LogInfo($"{c.Name} {c.Syntax} - {c.Help}");
+                    App.Logger.LogInfo($"[HelpCommand] - {c.Name} {c.Syntax} - {c.Help}");
                 }
             }
             else
             {
-                App.Logger.LogInfo($"{cmd.Name} {cmd.Syntax} - {cmd.Help}");
+                App.Logger.LogInfo($"[HelpCommand] - {cmd.Name} {cmd.Syntax} - {cmd.Help}");
             }
         }
     }

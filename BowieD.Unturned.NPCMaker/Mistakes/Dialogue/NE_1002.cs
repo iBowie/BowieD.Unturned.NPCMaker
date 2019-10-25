@@ -26,10 +26,10 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
                                 Importance = IMPORTANCE.ADVICE,
                                 OnClick = new Action(() =>
                                 {
-                                    if (MainWindow.DialogueEditor.Current.id == 0)
+                                    if (MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.ID == 0)
                                         return;
-                                    MainWindow.DialogueEditor.Save();
-                                    MainWindow.DialogueEditor.Current = _dial;
+                                    MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.SaveCommand.Execute(null);
+                                    MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Dialogue = _dial;
                                     MainWindow.Instance.mainTabControl.SelectedIndex = 1;
                                 })
                             };

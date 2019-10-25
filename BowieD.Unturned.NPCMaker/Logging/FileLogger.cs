@@ -7,9 +7,10 @@ namespace BowieD.Unturned.NPCMaker.Logging
 {
     public sealed class FileLogger : ILogger
     {
+        public static readonly string Dir = AppDomain.CurrentDomain.BaseDirectory;
         public static string GetContents()
         {
-            return File.ReadAllText(AppConfig.Directory + "npcmaker.log");
+            return File.ReadAllText(Dir + "npcmaker.log");
         }
         private StreamWriter stream;
         public void Close()
@@ -41,11 +42,11 @@ namespace BowieD.Unturned.NPCMaker.Logging
         }
         public void Open()
         {
-            if (File.Exists(AppConfig.Directory + "npcmaker.old.log"))
-                File.Delete(AppConfig.Directory + "npcmaker.old.log");
-            if (File.Exists(AppConfig.Directory + "npcmaker.log"))
-                File.Move(AppConfig.Directory + "npcmaker.log", AppConfig.Directory + "npcmaker.old.log");
-            stream = new StreamWriter(AppConfig.Directory + "npcmaker.log", false, Encoding.UTF8)
+            if (File.Exists(Dir + "npcmaker.old.log"))
+                File.Delete(Dir + "npcmaker.old.log");
+            if (File.Exists(Dir + "npcmaker.log"))
+                File.Move(Dir + "npcmaker.log", Dir + "npcmaker.old.log");
+            stream = new StreamWriter(Dir + "npcmaker.log", false, Encoding.UTF8)
             {
                 AutoFlush = true
             };

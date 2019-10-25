@@ -1,10 +1,13 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.Logging;
+using BowieD.Unturned.NPCMaker.XAML;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
@@ -28,36 +31,38 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [XmlInclude(typeof(ConditionQuest))]
     [XmlInclude(typeof(ConditionCompareFlags))]
     [XmlInclude(typeof(ConditionHoliday))]
-    public abstract class Condition : IHasDisplayName
+    public abstract class Condition : IHasUIText
     {
         [ConditionSkipField]
-        public string Localization;
+        public string Localization { get; set; }
         [XmlIgnore]
         public abstract Condition_Type Type { get; }
         [XmlIgnore]
-        public abstract string DisplayName { get; }
+        public abstract string UIText { get; }
 
         public IEnumerable<FrameworkElement> GetControls()
         {
-            var fields = GetType().GetFields();
-            foreach (var field in fields)
+            var props = GetType().GetProperties();
+            foreach (var prop in props)
             {
-                string fieldName = field.Name;
-                var fieldType = field.FieldType;
-                string localizedName = LocalizationManager.Current.Condition[$"{Type}_{fieldName}"];
+                if (!prop.CanWrite || !prop.CanRead)
+                    continue;
+                string propName = prop.Name;
+                var propType = prop.PropertyType;
+                string localizedName = LocalizationManager.Current.Condition[$"{Type}_{propName}"];
                 Grid borderContents = new Grid();
                 Label l = new Label
                 {
                     Content = localizedName
                 };
-                var conditionTooltip = field.GetCustomAttribute<ConditionTooltipAttribute>();
+                var conditionTooltip = prop.GetCustomAttribute<ConditionTooltipAttribute>();
                 if (conditionTooltip != null)
                 {
                     l.ToolTip = conditionTooltip.Text;
                 }
                 borderContents.Children.Add(l);
                 FrameworkElement valueControl = null;
-                if (fieldType == typeof(UInt16))
+                if (propType == typeof(UInt16))
                 {
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
@@ -66,8 +71,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };
+                    (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
                 }
-                else if (fieldType == typeof(UInt32))
+                else if (propType == typeof(UInt32))
                 {
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
@@ -76,8 +82,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };
+                    (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
                 }
-                else if (fieldType == typeof(Int32))
+                else if (propType == typeof(Int32))
                 {
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
@@ -86,8 +93,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };
+                    (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
                 }
-                else if (fieldType == typeof(Int16))
+                else if (propType == typeof(Int16))
                 {
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
@@ -96,8 +104,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };
+                    (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
                 }
-                else if (fieldType == typeof(UInt16))
+                else if (propType == typeof(UInt16))
                 {
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
@@ -106,8 +115,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };
+                    (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
                 }
-                else if (fieldType == typeof(Byte))
+                else if (propType == typeof(Byte))
                 {
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
@@ -116,47 +126,57 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };
+                    (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
                 }
-                else if (fieldType == typeof(string))
+                else if (propType == typeof(string))
                 {
                     valueControl = new TextBox()
                     {
                         MaxWidth = 100,
                         TextWrapping = TextWrapping.Wrap
                     };
+                    (valueControl as TextBox).SetBinding(TextBox.TextProperty, propName);
                 }
-                else if (fieldType.IsEnum)
+                else if (propType.IsEnum)
                 {
                     var cBox = new ComboBox();
-                    var values = Enum.GetValues(fieldType);
+                    var values = Enum.GetValues(propType);
                     foreach (var eValue in values)
                     {
-                        ComboBoxItem cbi = new ComboBoxItem
-                        {
-                            Tag = eValue,
-                            Content = LocalizationManager.Current.Condition[$"{Type}_{field.Name}_{eValue.ToString()}"]
-                        };
-                        cBox.Items.Add(cbi);
+                        cBox.Items.Add(LocalizationManager.Current.Condition[$"{Type}_{prop.Name}_{eValue.ToString()}"]);
                     }
+                    cBox.SetBinding(ComboBox.SelectedItemProperty, new Binding()
+                    {
+                        Converter = new EnumItemsSource()
+                        {
+                            Dictionary = LocalizationManager.Current.Condition,
+                            LocalizationPrefix = $"{Type}_{prop.Name}_",
+                            Type = propType
+                        },
+                        Path = new PropertyPath(propName),
+                        UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+                    });
                     valueControl = cBox;
                 }
-                else if (fieldType == typeof(bool))
+                else if (propType == typeof(bool))
                 {
-                    valueControl = new CheckBox()
-                    {
-
-                    };
+                    valueControl = new CheckBox() { };
+                    (valueControl as CheckBox).SetBinding(CheckBox.IsCheckedProperty, propName);
+                }
+                else
+                {
+                    App.Logger.LogWarning($"{propName} does not have required type '{propType.FullName}'");
                 }
                 valueControl.HorizontalAlignment = HorizontalAlignment.Right;
                 valueControl.VerticalAlignment = VerticalAlignment.Center;
                 borderContents.Children.Add(valueControl);
-                valueControl.Tag = "variable::" + fieldName;
+                valueControl.Tag = "variable::" + propName;
                 Border b = new Border
                 {
                     Child = borderContents
                 };
                 b.Margin = new Thickness(0, 5, 0, 5);
-                if (field.GetCustomAttribute<ConditionOptionalAttribute>() != null)
+                if (prop.GetCustomAttribute<ConditionOptionalAttribute>() != null)
                     b.Opacity = 0.75;
                 yield return b;
             }

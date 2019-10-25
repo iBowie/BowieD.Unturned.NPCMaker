@@ -21,95 +21,6 @@ namespace BowieD.Unturned.NPCMaker.Export
     {
         private const string WaterText = "// Made in NPC Maker by BowieD";
         private const string NoValue = "UNDEFINED";
-        public static bool ExportCharacter(NPCCharacter character, string directory)
-        {
-            try
-            {
-                string workDir = $"{directory}Characters{Path.DirectorySeparatorChar}{character.guid}_{character.id}{Path.DirectorySeparatorChar}";
-                Directory.CreateDirectory(workDir);
-                using (StreamWriter assetWriter = new StreamWriter(workDir + "Asset.dat", false, Encoding.UTF8))
-                using (StreamWriter localWriter = new StreamWriter(workDir + "English.dat", false, Encoding.UTF8))
-                {
-                    assetWriter.WriteLine(WaterText);
-                    if (AppConfig.Instance.generateGuids)
-                        assetWriter.WriteLine($"GUID {character.guid}");
-                    assetWriter.WriteLine($"ID {character.id}");
-                    assetWriter.WriteLine("Type NPC");
-                    if (character.clothing.top > 0)
-                        assetWriter.WriteLine($"Shirt {character.clothing.top}");
-                    if (character.clothing.bottom > 0)
-                        assetWriter.WriteLine($"Pants {character.clothing.bottom}");
-                    if (character.clothing.mask > 0)
-                        assetWriter.WriteLine($"Mask {character.clothing.mask}");
-                    if (character.clothing.vest > 0)
-                        assetWriter.WriteLine($"Vest {character.clothing.vest}");
-                    if (character.clothing.backpack > 0)
-                        assetWriter.WriteLine($"Backpack {character.clothing.backpack}");
-                    if (character.clothing.hat > 0)
-                        assetWriter.WriteLine($"Hat {character.clothing.hat}");
-                    if (character.clothing.glasses > 0)
-                        assetWriter.WriteLine($"Glasses {character.clothing.glasses}");
-
-                    if (character.christmasClothing.top > 0)
-                        assetWriter.WriteLine($"Christmas_Shirt {character.christmasClothing.top}");
-                    if (character.christmasClothing.bottom > 0)
-                        assetWriter.WriteLine($"Christmas_Pants {character.christmasClothing.bottom}");
-                    if (character.christmasClothing.mask > 0)
-                        assetWriter.WriteLine($"Christmas_Mask {character.christmasClothing.mask}");
-                    if (character.christmasClothing.vest > 0)
-                        assetWriter.WriteLine($"Christmas_Vest {character.christmasClothing.vest}");
-                    if (character.christmasClothing.backpack > 0)
-                        assetWriter.WriteLine($"Christmas_Backpack {character.christmasClothing.backpack}");
-                    if (character.christmasClothing.hat > 0)
-                        assetWriter.WriteLine($"Christmas_Hat {character.christmasClothing.hat}");
-                    if (character.christmasClothing.glasses > 0)
-                        assetWriter.WriteLine($"Christmas_Glasses {character.christmasClothing.glasses}");
-
-                    if (character.halloweenClothing.top > 0)
-                        assetWriter.WriteLine($"Halloween_Shirt {character.halloweenClothing.top}");
-                    if (character.halloweenClothing.bottom > 0)
-                        assetWriter.WriteLine($"Halloween_Pants {character.halloweenClothing.bottom}");
-                    if (character.halloweenClothing.mask > 0)
-                        assetWriter.WriteLine($"Halloween_Mask {character.halloweenClothing.mask}");
-                    if (character.halloweenClothing.vest > 0)
-                        assetWriter.WriteLine($"Halloween_Vest {character.halloweenClothing.vest}");
-                    if (character.halloweenClothing.backpack > 0)
-                        assetWriter.WriteLine($"Halloween_Backpack {character.halloweenClothing.backpack}");
-                    if (character.halloweenClothing.hat > 0)
-                        assetWriter.WriteLine($"Halloween_Hat {character.halloweenClothing.hat}");
-                    if (character.halloweenClothing.glasses > 0)
-                        assetWriter.WriteLine($"Halloween_Glasses {character.halloweenClothing.glasses}");
-
-                    if (character.equipPrimary > 0)
-                        assetWriter.WriteLine($"Primary {character.equipPrimary}");
-                    if (character.equipSecondary > 0)
-                        assetWriter.WriteLine($"Secondary {character.equipSecondary}");
-                    if (character.equipTertiary > 0)
-                        assetWriter.WriteLine($"Tertiary {character.equipTertiary}");
-                    if (character.equipped != Equip_Type.None)
-                        assetWriter.WriteLine($"Equipped {character.equipped.ToString()}");
-                    assetWriter.WriteLine($"Face {character.face}");
-                    assetWriter.WriteLine($"Beard {character.beard}");
-                    assetWriter.WriteLine($"Hair {character.haircut}");
-                    assetWriter.WriteLine($"Color_Skin {character.skinColor.ToHEX()}");
-                    assetWriter.WriteLine($"Color_Hair {character.hairColor.ToHEX()}");
-                    assetWriter.WriteLine($"Pose {character.pose.ToString()}");
-                    if (character.leftHanded)
-                        assetWriter.WriteLine("Backward");
-                    if (character.startDialogueId > 0)
-                        assetWriter.WriteLine($"Dialogue {character.startDialogueId}");
-
-                    localWriter.WriteLine(WaterText);
-                    localWriter.WriteLine($"Name {character.editorName}");
-                    localWriter.WriteLine($"Character {character.displayName}");
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
         public static void ExportNPC(NPCProject save)
         {
             try
@@ -170,50 +81,58 @@ namespace BowieD.Unturned.NPCMaker.Export
                             asset.WriteLine($"GUID {character.guid}");
                         asset.WriteLine($"ID {character.id}");
                         asset.WriteLine($"Type NPC");
-                        if (character.clothing.top > 0)
-                            asset.WriteLine($"Shirt {character.clothing.top}");
-                        if (character.clothing.bottom > 0)
-                            asset.WriteLine($"Pants {character.clothing.bottom}");
-                        if (character.clothing.mask > 0)
-                            asset.WriteLine($"Mask {character.clothing.mask}");
-                        if (character.clothing.vest > 0)
-                            asset.WriteLine($"Vest {character.clothing.vest}");
-                        if (character.clothing.backpack > 0)
-                            asset.WriteLine($"Backpack {character.clothing.backpack}");
-                        if (character.clothing.hat > 0)
-                            asset.WriteLine($"Hat {character.clothing.hat}");
-                        if (character.clothing.glasses > 0)
-                            asset.WriteLine($"Glasses {character.clothing.glasses}");
+                        if (character.clothing.Shirt > 0)
+                            asset.WriteLine($"Shirt {character.clothing.Shirt}");
+                        if (character.clothing.Pants > 0)
+                            asset.WriteLine($"Pants {character.clothing.Pants}");
+                        if (character.clothing.Mask > 0)
+                            asset.WriteLine($"Mask {character.clothing.Mask}");
+                        if (character.clothing.Vest > 0)
+                            asset.WriteLine($"Vest {character.clothing.Vest}");
+                        if (character.clothing.Backpack > 0)
+                            asset.WriteLine($"Backpack {character.clothing.Backpack}");
+                        if (character.clothing.Hat > 0)
+                            asset.WriteLine($"Hat {character.clothing.Hat}");
+                        if (character.clothing.Glasses > 0)
+                            asset.WriteLine($"Glasses {character.clothing.Glasses}");
 
-                        if (character.christmasClothing.top > 0)
-                            asset.WriteLine($"Christmas_Shirt {character.christmasClothing.top}");
-                        if (character.christmasClothing.bottom > 0)
-                            asset.WriteLine($"Christmas_Pants {character.christmasClothing.bottom}");
-                        if (character.christmasClothing.mask > 0)
-                            asset.WriteLine($"Christmas_Mask {character.christmasClothing.mask}");
-                        if (character.christmasClothing.vest > 0)
-                            asset.WriteLine($"Christmas_Vest {character.christmasClothing.vest}");
-                        if (character.christmasClothing.backpack > 0)
-                            asset.WriteLine($"Christmas_Backpack {character.christmasClothing.backpack}");
-                        if (character.christmasClothing.hat > 0)
-                            asset.WriteLine($"Christmas_Hat {character.christmasClothing.hat}");
-                        if (character.christmasClothing.glasses > 0)
-                            asset.WriteLine($"Christmas_Glasses {character.christmasClothing.glasses}");
+                        if (!character.christmasClothing.IsEmpty)
+                        {
+                            asset.WriteLine("Has_Christmas_Outfit True");
+                            if (character.christmasClothing.Shirt > 0)
+                                asset.WriteLine($"Christmas_Shirt {character.christmasClothing.Shirt}");
+                            if (character.christmasClothing.Pants > 0)
+                                asset.WriteLine($"Christmas_Pants {character.christmasClothing.Pants}");
+                            if (character.christmasClothing.Mask > 0)
+                                asset.WriteLine($"Christmas_Mask {character.christmasClothing.Mask}");
+                            if (character.christmasClothing.Vest > 0)
+                                asset.WriteLine($"Christmas_Vest {character.christmasClothing.Vest}");
+                            if (character.christmasClothing.Backpack > 0)
+                                asset.WriteLine($"Christmas_Backpack {character.christmasClothing.Backpack}");
+                            if (character.christmasClothing.Hat > 0)
+                                asset.WriteLine($"Christmas_Hat {character.christmasClothing.Hat}");
+                            if (character.christmasClothing.Glasses > 0)
+                                asset.WriteLine($"Christmas_Glasses {character.christmasClothing.Glasses}");
+                        }
 
-                        if (character.halloweenClothing.top > 0)
-                            asset.WriteLine($"Halloween_Shirt {character.halloweenClothing.top}");
-                        if (character.halloweenClothing.bottom > 0)
-                            asset.WriteLine($"Halloween_Pants {character.halloweenClothing.bottom}");
-                        if (character.halloweenClothing.mask > 0)
-                            asset.WriteLine($"Halloween_Mask {character.halloweenClothing.mask}");
-                        if (character.halloweenClothing.vest > 0)
-                            asset.WriteLine($"Halloween_Vest {character.halloweenClothing.vest}");
-                        if (character.halloweenClothing.backpack > 0)
-                            asset.WriteLine($"Halloween_Backpack {character.halloweenClothing.backpack}");
-                        if (character.halloweenClothing.hat > 0)
-                            asset.WriteLine($"Halloween_Hat {character.halloweenClothing.hat}");
-                        if (character.halloweenClothing.glasses > 0)
-                            asset.WriteLine($"Halloween_Glasses {character.halloweenClothing.glasses}");
+                        if (!character.halloweenClothing.IsEmpty)
+                        {
+                            asset.WriteLine("Has_Halloween_Outfit True");
+                            if (character.halloweenClothing.Shirt > 0)
+                                asset.WriteLine($"Halloween_Shirt {character.halloweenClothing.Shirt}");
+                            if (character.halloweenClothing.Pants > 0)
+                                asset.WriteLine($"Halloween_Pants {character.halloweenClothing.Pants}");
+                            if (character.halloweenClothing.Mask > 0)
+                                asset.WriteLine($"Halloween_Mask {character.halloweenClothing.Mask}");
+                            if (character.halloweenClothing.Vest > 0)
+                                asset.WriteLine($"Halloween_Vest {character.halloweenClothing.Vest}");
+                            if (character.halloweenClothing.Backpack > 0)
+                                asset.WriteLine($"Halloween_Backpack {character.halloweenClothing.Backpack}");
+                            if (character.halloweenClothing.Hat > 0)
+                                asset.WriteLine($"Halloween_Hat {character.halloweenClothing.Hat}");
+                            if (character.halloweenClothing.Glasses > 0)
+                                asset.WriteLine($"Halloween_Glasses {character.halloweenClothing.Glasses}");
+                        }
 
                         if (character.equipPrimary > 0)
                             asset.WriteLine($"Primary {character.equipPrimary}");
@@ -395,7 +314,6 @@ namespace BowieD.Unturned.NPCMaker.Export
                             {
                                 asset.WriteLine($"Buying_{k}_ID {buy[k].id}");
                                 asset.WriteLine($"Buying_{k}_Cost {buy[k].cost}");
-                                asset.WriteLine($"Buying_{k}_Amount {buy[k].amount}");
                                 if (buy[k].conditions?.Count > 0)
                                 {
                                     asset.WriteLine($"Buying_{k}_Conditions {buy[k].conditions.Count}");
@@ -416,10 +334,6 @@ namespace BowieD.Unturned.NPCMaker.Export
                                 {
                                     asset.WriteLine($"Selling_{k}_Type Vehicle");
                                     asset.WriteLine($"Selling_{k}_Spawnpoint {sell[k].spawnPointID}");
-                                }
-                                else
-                                {
-                                    asset.WriteLine($"Selling_{k}_Amount {sell[k].amount}");
                                 }
                                 asset.WriteLine($"Selling_{k}_ID {sell[k].id}");
                                 asset.WriteLine($"Selling_{k}_Cost {sell[k].cost}");

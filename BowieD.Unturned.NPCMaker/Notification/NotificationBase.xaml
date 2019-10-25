@@ -12,4 +12,7 @@
         </Border.Effect>
         <StackPanel Name="notificationContentGrid"/>
     </Border>
+    <UserControl.RenderTransform>
+        <TranslateTransform x:Name="tt" X="300"/>
+    </UserControl.RenderTransform>
 </UserControl>

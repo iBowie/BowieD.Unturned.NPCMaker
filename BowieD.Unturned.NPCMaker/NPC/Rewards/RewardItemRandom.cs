@@ -6,14 +6,14 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     public sealed class RewardItemRandom : Reward
     {
         public override RewardType Type => RewardType.Item_Random;
-        public override string DisplayName
+        public override string UIText
         {
             get
             {
                 return $"{LocalizationManager.Current.Reward["Type_Item_Random"]} [{ID}] x{Amount}";
             }
         }
-        public UInt16 ID;
-        public byte Amount;
+        public UInt16 ID { get; set; }
+        public byte Amount { get; set; }
     }
 }

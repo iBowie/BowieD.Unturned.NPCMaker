@@ -22,11 +22,11 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Quest
                         Importance = IMPORTANCE.CRITICAL,
                         OnClick = new Action(() =>
                         {
-                            if (MainWindow.QuestEditor.Current.id == 0)
+                            if (MainWindow.Instance.MainWindowViewModel.QuestTabViewModel.ID == 0)
                                 return;
-                            MainWindow.QuestEditor.Save();
-                            MainWindow.QuestEditor.Current = _quest;
-                            MainWindow.Instance.mainTabControl.SelectedIndex = 4;
+                            MainWindow.Instance.MainWindowViewModel.QuestTabViewModel.SaveCommand.Execute(null);
+                            MainWindow.Instance.MainWindowViewModel.QuestTabViewModel.Quest = _quest;
+                            MainWindow.Instance.mainTabControl.SelectedIndex = 3;
                         })
                     };
                 }

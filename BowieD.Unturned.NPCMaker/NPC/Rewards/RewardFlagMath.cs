@@ -7,7 +7,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     public sealed class RewardFlagMath : Reward
     {
         public override RewardType Type => RewardType.Flag_Math;
-        public override string DisplayName
+        public override string UIText
         {
             get
             {
@@ -25,8 +25,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 return sb.ToString();
             }
         }
-        public UInt16 A_ID;
-        public UInt16 B_ID;
-        public Operation_Type Operation;
+        public UInt16 A_ID { get; set; }
+        public UInt16 B_ID { get; set; }
+        public Operation_Type Operation { get; set; }
     }
 }

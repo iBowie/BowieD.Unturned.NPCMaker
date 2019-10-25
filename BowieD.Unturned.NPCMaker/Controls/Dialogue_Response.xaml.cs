@@ -45,7 +45,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
             ulv.ShowDialog();
             Response.rewards = ulv.Values.Cast<Reward>().ToArray();
-            MainWindow.Proxy.TabControl_SelectionChanged(MainWindow.Instance.mainTabControl, null);
+            MainWindow.Instance.MainWindowViewModel.TabControl_SelectionChanged(MainWindow.Instance.mainTabControl, null);
         }
         private void EditConditionsButton_Click(object sender, RoutedEventArgs e)
         {
@@ -58,7 +58,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
             ulv.ShowDialog();
             Response.conditions = ulv.Values.Cast<Condition>().ToArray();
-            MainWindow.Proxy.TabControl_SelectionChanged(MainWindow.Instance.mainTabControl, null);
+            MainWindow.Instance.MainWindowViewModel.TabControl_SelectionChanged(MainWindow.Instance.mainTabControl, null);
         }
         private void MainText_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -104,9 +104,9 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         private void ChangeVisibilityButton_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.DialogueEditor.Current.MessagesAmount > 1)
+            if (MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Messages.Count > 1)
             {
-                Message_TreeView mtv = new Message_TreeView(Response.visibleIn, MainWindow.DialogueEditor.Current.MessagesAmount);
+                Message_TreeView mtv = new Message_TreeView(Response.visibleIn, MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Messages.Count);
                 mtv.ShowDialog();
                 if (mtv.DialogResult == true)
                 {
@@ -154,7 +154,6 @@ namespace BowieD.Unturned.NPCMaker.Controls
             var panel = MainWindow.Instance.dialoguePlayerRepliesGrid;
             int index = IndexInPanel;
             Dialogue_Response current = this;
-            Dialogue_Response changeTo = panel.Children[index + 1] as Dialogue_Response;
             panel.Children.RemoveAt(index);
             panel.Children.Insert(index + 1, current);
             foreach (UIElement uie in panel.Children)
@@ -170,7 +169,6 @@ namespace BowieD.Unturned.NPCMaker.Controls
         {
             var panel = MainWindow.Instance.dialoguePlayerRepliesGrid;
             int index = IndexInPanel;
-            Dialogue_Response current = this;
             Dialogue_Response changeTo = panel.Children[index - 1] as Dialogue_Response;
             panel.Children.RemoveAt(index - 1);
             panel.Children.Insert(index, changeTo);

@@ -32,19 +32,19 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 case ReturnType.Dialogue:
                     foreach (var d in MainWindow.CurrentProject.data.dialogues)
                     {
-                        Add(d, d.DisplayName);
+                        Add(d, d.UIText);
                     }
                     break;
                 case ReturnType.Quest:
                     foreach (var q in MainWindow.CurrentProject.data.quests)
                     {
-                        Add(q, q.DisplayName);
+                        Add(q, q.UIText);
                     }
                     break;
                 case ReturnType.Vendor:
                     foreach (var v in MainWindow.CurrentProject.data.vendors)
                     {
-                        Add(v, v.DisplayName);
+                        Add(v, v.UIText);
                     }
                     break;
             }

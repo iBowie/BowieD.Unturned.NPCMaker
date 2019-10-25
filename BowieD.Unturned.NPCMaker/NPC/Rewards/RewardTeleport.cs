@@ -5,7 +5,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     public sealed class RewardTeleport : Reward
     {
         public override RewardType Type => RewardType.Teleport;
-        public override string DisplayName
+        public override string UIText
         {
             get
             {
@@ -13,6 +13,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             }
         }
 
-        public string Spawnpoint;
+        public string Spawnpoint { get; set; }
     }
 }

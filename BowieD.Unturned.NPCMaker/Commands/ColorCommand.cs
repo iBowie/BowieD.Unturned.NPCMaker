@@ -1,6 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Coloring;
-using BowieD.Unturned.NPCMaker.Editors;
 using BowieD.Unturned.NPCMaker.Logging;
+using System.Linq;
 
 namespace BowieD.Unturned.NPCMaker.Commands
 {
@@ -18,26 +18,26 @@ namespace BowieD.Unturned.NPCMaker.Commands
                     switch (args[0])
                     {
                         case "add" when args.Length > 1 && Color.IsHEX(args[1]):
-                            (MainWindow.CharacterEditor as CharacterEditor).SaveColor(args[1]);
-                            (MainWindow.CharacterEditor as CharacterEditor).UpdateColorPickerFromBuffer();
-                            App.Logger.LogInfo($"Color {args[1]} saved.");
+                            MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.SaveColor(args[1]);
+                            MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.UpdateColorPicker();
+                            App.Logger.LogInfo($"[ColorCommand] - Color {args[1]} saved.");
                             break;
                         case "remove" when args.Length > 1 && Color.IsHEX(args[1]):
-                            (MainWindow.CharacterEditor as CharacterEditor).RemoveColor(args[1]);
-                            App.Logger.LogInfo($"Color {args[1]} removed.");
+                            MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.UserColors.data = MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.UserColors.data.Where(d => d != args[1]).ToArray();
+                            App.Logger.LogInfo($"[ColorCommand] - Color {args[1]} removed.");
                             break;
                         case "list":
-                            App.Logger.LogInfo($"Saved Colors: {string.Join(", ", (MainWindow.CharacterEditor as CharacterEditor).UserColors.data)}");
+                            App.Logger.LogInfo($"[ColorCommand] - Saved Colors: {string.Join(", ", MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.UserColors.data)}");
                             break;
                         default:
-                            App.Logger.LogInfo($"Use: color {Syntax}");
+                            App.Logger.LogInfo($"[ColorCommand] - Use: color {Syntax}");
                             break;
                     }
                 });
             }
             else
             {
-                App.Logger.LogInfo($"Use: color {Syntax}");
+                App.Logger.LogInfo($"[ColorCommand] - Use: color {Syntax}");
             }
         }
     }
