@@ -82,6 +82,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             uil.deleteButton.Click += (object sender, RoutedEventArgs e) =>
             {
                 RemoveItemBuy(Util.FindParent<Universal_ItemList>(sender as Button));
+                Vendor.items = Items;
+                UpdateItems();
             };
             uil.moveUpButton.Click += (object sender, RoutedEventArgs e) =>
             {
@@ -92,6 +94,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     Universal_ItemList next = panel.Children[index - 1] as Universal_ItemList;
                     panel.Children.RemoveAt(index - 1);
                     panel.Children.Insert(index, next);
+                    Vendor.items = Items;
+                    UpdateItems();
                 }
             };
             uil.moveDownButton.Click += (object sender, RoutedEventArgs e) =>
@@ -102,6 +106,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     panel.Children.RemoveAt(index);
                     panel.Children.Insert(index + 1, uil);
+                    Vendor.items = Items;
+                    UpdateItems();
                 }
             };
             MainWindow.Instance.vendorListBuyItems.Children.Add(uil);
@@ -115,6 +121,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             uil.deleteButton.Click += (object sender, RoutedEventArgs e) =>
             {
                 RemoveItemSell(Util.FindParent<Universal_ItemList>(sender as Button));
+                Vendor.items = Items;
+                UpdateItems();
             };
             uil.moveUpButton.Click += (object sender, RoutedEventArgs e) =>
             {
@@ -125,6 +133,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     Universal_ItemList next = panel.Children[index - 1] as Universal_ItemList;
                     panel.Children.RemoveAt(index - 1);
                     panel.Children.Insert(index, next);
+                    Vendor.items = Items;
+                    UpdateItems();
                 }
             };
             uil.moveDownButton.Click += (object sender, RoutedEventArgs e) =>
@@ -135,6 +145,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     panel.Children.RemoveAt(index);
                     panel.Children.Insert(index + 1, uil);
+                    Vendor.items = Items;
+                    UpdateItems();
                 }
             };
             MainWindow.Instance.vendorListSellItems.Children.Add(uil);
@@ -142,10 +154,14 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         internal void RemoveItemSell(UIElement item)
         {
             MainWindow.Instance.vendorListSellItems.Children.Remove(item);
+            Vendor.items = Items;
+            UpdateItems();
         }
         internal void RemoveItemBuy(UIElement item)
         {
             MainWindow.Instance.vendorListBuyItems.Children.Remove(item);
+            Vendor.items = Items;
+            UpdateItems();
         }
         private int GetIndexInBuy(UIElement element)
         {

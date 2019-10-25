@@ -82,6 +82,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 uil.deleteButton.Click += (object sender, RoutedEventArgs e) =>
                 {
                     MainWindow.Instance.listQuestConditions.Children.Remove(Util.FindParent<Universal_ItemList>(sender as Button));
+                    Quest.conditions = Conditions;
+                    UpdateConditions();
                 };
                 MainWindow.Instance.listQuestConditions.Children.Add(uil);
             }
@@ -95,6 +97,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 uil.deleteButton.Click += (object sender, RoutedEventArgs e) =>
                 {
                     MainWindow.Instance.listQuestRewards.Children.Remove(Util.FindParent<Universal_ItemList>(sender as Button));
+                    Quest.rewards = Rewards;
+                    UpdateRewards();
                 };
                 MainWindow.Instance.listQuestRewards.Children.Add(uil);
             }
@@ -211,8 +215,12 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             uil.deleteButton.Click += (object sender, RoutedEventArgs e) =>
             {
                 MainWindow.Instance.listQuestRewards.Children.Remove(Util.FindParent<Universal_ItemList>(sender as Button));
+                Quest.rewards = Rewards;
+                UpdateRewards();
             };
             MainWindow.Instance.listQuestRewards.Children.Add(uil);
+            Quest.rewards = Rewards;
+            UpdateRewards();
         }
         private void AddCondition(Condition condition)
         {
@@ -220,8 +228,12 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             uil.deleteButton.Click += (object sender, RoutedEventArgs e) =>
             {
                 MainWindow.Instance.listQuestConditions.Children.Remove(Util.FindParent<Universal_ItemList>(sender as Button));
+                Quest.conditions = Conditions;
+                UpdateConditions();
             };
             MainWindow.Instance.listQuestConditions.Children.Add(uil);
+            Quest.conditions = Conditions;
+            UpdateConditions();
         }
     }
 }

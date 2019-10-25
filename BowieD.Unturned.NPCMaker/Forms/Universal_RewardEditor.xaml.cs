@@ -74,8 +74,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 else
                     DialogResult = true;
                 Result = variablesGrid.DataContext as Reward;
-                DialogResult = true;
-                Close();
+                if (DialogResult == true)
+                    Close();
             }
             catch
             {

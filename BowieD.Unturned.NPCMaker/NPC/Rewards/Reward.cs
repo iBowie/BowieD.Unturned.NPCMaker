@@ -141,7 +141,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                     {
                         Converter = new EnumItemsSource()
                         {
-                            Dictionary = LocalizationManager.Current.Condition,
+                            Dictionary = LocalizationManager.Current.Reward,
                             LocalizationPrefix = $"{Type}_{prop.Name}_",
                             Type = propType
                         },
