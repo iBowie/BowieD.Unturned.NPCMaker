@@ -19,7 +19,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Character
                     yield return new NE_0000()
                     {
                         MistakeName = "NE_0000",
-                        Importance = IMPORTANCE.ADVICE,
+                        Importance = IMPORTANCE.WARNING,
                         MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_0000_Desc", _char.displayName, _char.id),
                         OnClick = new Action(() =>
                         {
