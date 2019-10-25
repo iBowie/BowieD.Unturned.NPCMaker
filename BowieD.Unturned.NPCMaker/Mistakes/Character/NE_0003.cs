@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes.Character
 {
@@ -11,7 +12,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Character
         {
             foreach (var _char in MainWindow.CurrentProject.data.characters)
             {
-                if (_char.editorName.Contains("<>:\"/\\|?*"))
+                if (_char.editorName.Any(d => "<>:\"/\\|?*".Contains(d)))
                 {
                     yield return new Mistake()
                     {
