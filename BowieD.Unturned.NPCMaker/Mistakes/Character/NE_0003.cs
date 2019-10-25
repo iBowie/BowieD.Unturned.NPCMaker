@@ -11,7 +11,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Character
         {
             foreach (var _char in MainWindow.CurrentProject.data.characters)
             {
-                if ("<>:\"/\\|?*".Contains(_char.editorName))
+                if (_char.editorName.Contains("<>:\"/\\|?*"))
                 {
                     yield return new Mistake()
                     {
