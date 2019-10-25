@@ -1,10 +1,12 @@
-﻿using BowieD.Unturned.NPCMaker.Configuration;
+﻿using BowieD.Unturned.NPCMaker.Commands;
+using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
 using DiscordRPC;
 using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Windows;
@@ -224,7 +226,67 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             feedBackSteamCommand,
             feedBackDiscordCommand,
             feedBackVKCommand,
-            aboutCommand;
+            aboutCommand,
+            importFileCommand,
+            importDirectoryCommand;
+        public ICommand ImportDirectoryCommand
+        {
+            get
+            {
+                if (importDirectoryCommand == null)
+                {
+                    importDirectoryCommand = new BaseCommand(() =>
+                    {
+                        SaveFileDialog sfd = new SaveFileDialog()
+                        {
+                            OverwritePrompt = false,
+                            CreatePrompt = false,
+                            FileName = "Select This Folder"
+                        };
+                        if (sfd.ShowDialog() == true)
+                        {
+                            ParseDirCommand pCommand = Command.GetCommand<ParseDirCommand>() as ParseDirCommand;
+                            pCommand.Execute(new string[] { Path.GetDirectoryName(sfd.FileName) });
+                            if (pCommand.LastResult)
+                            {
+                                App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Import_Directory_Done", pCommand.LastImported, pCommand.LastSkipped));
+                            }
+                        }
+                    });
+                }
+                return importDirectoryCommand;
+            }
+        }
+        public ICommand ImportFileCommand
+        {
+            get
+            {
+                if (importFileCommand == null)
+                {
+                    importFileCommand = new BaseCommand(() =>
+                    {
+                        OpenFileDialog ofd = new OpenFileDialog()
+                        {
+                            Filter = $"Unturned Asset |Asset.dat",
+                            Multiselect = true
+                        };
+                        if (ofd.ShowDialog() == true)
+                        {
+                            ParseCommand pCommand = Command.GetCommand<ParseCommand>() as ParseCommand;
+                            foreach (var file in ofd.FileNames)
+                            {
+                                pCommand.Execute(new string[] { file });
+                                if (pCommand.LastResult)
+                                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Import_File_Done", file));
+                                else
+                                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Import_File_Fail", file));
+                            }
+                        }
+                    });
+                }
+                return importFileCommand;
+            }
+        }
         public ICommand NewProjectCommand
         {
             get

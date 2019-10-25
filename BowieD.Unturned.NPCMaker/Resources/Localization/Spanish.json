@@ -451,7 +451,7 @@
 		"Quest_ID_Zero": "la ID de la Quest no puede ser igual a 0",
 		"Quest_Saved": "Quest guardada!",
 		"Import_File_Done": "Imported {0}",
-		"Import_File_Fail": "Can't import this file.",
+		"Import_File_Fail": "Can't import {0}.",
 		"Import_Directory_Done": "Imported {0} files. Skipped {1}.",
 		"Export_Done": "Exportación hecha!",
 		"Export_Done_Goto": "Abrir carpeta de Resultados",

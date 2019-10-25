@@ -59,6 +59,21 @@
                             <iconPacks:PackIconMaterial Kind="History" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_Import}">
+                        <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_Import_File}" Command="{Binding ImportFileCommand}">
+                            <MenuItem.Icon>
+                                <iconPacks:PackIconMaterial Kind="FileDownloadOutline" Foreground="{DynamicResource AccentColor}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_Import_Directory}" Command="{Binding ImportDirectoryCommand}">
+                            <MenuItem.Icon>
+                                <iconPacks:PackIconMaterial Kind="FolderDownloadOutline" Foreground="{DynamicResource AccentColor}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="Import" Foreground="{DynamicResource AccentColor}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem Command="{Binding ExportProjectCommand}" Header="{DynamicResource INTERFACE_Main_Menu_File_Export}" Name="exportButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Export" Foreground="{DynamicResource AccentColor}"/>
