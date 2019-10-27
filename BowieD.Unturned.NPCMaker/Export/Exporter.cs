@@ -425,27 +425,29 @@ namespace BowieD.Unturned.NPCMaker.Export
         {
             StringBuilder result = new StringBuilder();
             result.AppendLine($"{prefix}Condition_{conditionIndex}_Type {condition.Type}");
-            foreach (var field in condition.GetType().GetFields())
+            foreach (var prop in condition.GetType().GetProperties())
             {
-                var fieldName = field.Name;
-                var skipFieldA = field.GetCustomAttribute<ConditionSkipFieldAttribute>();
-                if ((skipLocalization && fieldName == "Localization") || skipFieldA != null)
+                if (!prop.CanRead || !prop.CanWrite)
                     continue;
-                var fieldValue = field.GetValue(condition);
-                var noValueA = field.GetCustomAttribute<ConditionNoValueAttribute>();
-                var optionalA = field.GetCustomAttribute<ConditionOptionalAttribute>();
-                if (skipFieldA != null)
+                var propName = prop.Name;
+                var skipPropA = prop.GetCustomAttribute<ConditionSkipFieldAttribute>();
+                if ((skipLocalization && propName == "Localization") || skipPropA != null)
+                    continue;
+                var propValue = prop.GetValue(condition);
+                var noValueA = prop.GetCustomAttribute<ConditionNoValueAttribute>();
+                var optionalA = prop.GetCustomAttribute<ConditionOptionalAttribute>();
+                if (skipPropA != null)
                     continue;
                 if (noValueA != null)
                 {
-                    if (fieldValue.Equals(true))
-                        fieldValue = "";
+                    if (propValue.Equals(true))
+                        propValue = "";
                     else
                         continue;
                 }
-                if (optionalA != null && optionalA.ConditionApplied(fieldValue))
+                if (optionalA != null && optionalA.ConditionApplied(propValue))
                     continue;
-                result.AppendLine($"{prefix}Condition_{conditionIndex}_{fieldName} {fieldValue}");
+                result.AppendLine($"{prefix}Condition_{conditionIndex}_{propName} {propValue}");
             }
             return result.ToString();
         }
@@ -453,27 +455,29 @@ namespace BowieD.Unturned.NPCMaker.Export
         {
             StringBuilder result = new StringBuilder();
             result.AppendLine($"{prefix}Reward_{rewardIndex}_Type {reward.Type}");
-            foreach (var field in reward.GetType().GetFields())
+            foreach (var prop in reward.GetType().GetProperties())
             {
-                var fieldName = field.Name;
-                var skipFieldA = field.GetCustomAttribute<RewardSkipFieldAttribute>();
-                if ((skipLocalization && fieldName == "Localization") || skipFieldA != null)
+                if (!prop.CanRead || !prop.CanWrite)
                     continue;
-                var fieldValue = field.GetValue(reward);
-                var noValueA = field.GetCustomAttribute<RewardNoValueAttribute>();
-                var optionalA = field.GetCustomAttribute<RewardOptionalAttribute>();
-                if (skipFieldA != null)
+                var propName = prop.Name;
+                var skipPropA = prop.GetCustomAttribute<RewardSkipFieldAttribute>();
+                if ((skipLocalization && propName == "Localization") || skipPropA != null)
+                    continue;
+                var propValue = prop.GetValue(reward);
+                var noValueA = prop.GetCustomAttribute<RewardNoValueAttribute>();
+                var optionalA = prop.GetCustomAttribute<RewardOptionalAttribute>();
+                if (skipPropA != null)
                     continue;
                 if (noValueA != null)
                 {
-                    if (fieldValue.Equals(true))
-                        fieldValue = "";
+                    if (propValue.Equals(true))
+                        propValue = "";
                     else
                         continue;
                 }
-                if (optionalA != null && optionalA.ConditionApplied(fieldValue))
+                if (optionalA != null && optionalA.ConditionApplied(propValue))
                     continue;
-                result.AppendLine($"{prefix}Reward_{rewardIndex}_{fieldName} {fieldValue}");
+                result.AppendLine($"{prefix}Reward_{rewardIndex}_{propName} {propValue}");
             }
             return result.ToString();
         }

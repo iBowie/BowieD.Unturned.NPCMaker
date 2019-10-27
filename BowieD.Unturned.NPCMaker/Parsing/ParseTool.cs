@@ -21,12 +21,18 @@ namespace BowieD.Unturned.NPCMaker.Parsing
             foreach (var k in Enum.GetValues(typeof(ELanguage)))
             {
                 if (File.Exists(dir + "English.dat"))
+                {
                     local = new DataReader(File.ReadAllText(dir + "English.dat"));
+                    break;
+                }
                 else
                 {
                     App.Logger.LogInfo($"[ParseTool] - English.dat not found. Checking all languages...");
                     if (File.Exists(dir + $"{k}.dat"))
+                    {
                         local = new DataReader(File.ReadAllText(dir + $"{k}.dat"));
+                        break;
+                    }
                     else
                         App.Logger.LogInfo($"[ParseTool] - {k}.dat not found. Checking next...");
                 }
