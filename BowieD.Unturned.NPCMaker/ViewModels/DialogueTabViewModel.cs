@@ -223,8 +223,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 Dialogue_Message dialogue_Message = new Dialogue_Message(msg);
                 dialogue_Message.deletePageButton.Click += (sender, e) =>
                 {
-                    Dialogue_Message pag = Util.FindParent<Dialogue_Message>(sender as Button);
-                    MainWindow.Instance.messagePagesGrid.Children.Remove(pag);
+                    Dialogue.messages.Remove(msg);
+                    UpdateMessages();
                 };
                 int ind = 0;
                 for (int k = 0; k < MainWindow.Instance.messagePagesGrid.Children.Count; k++)
@@ -256,8 +256,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 Dialogue_Response dialogue_Response = new Dialogue_Response(res);
                 dialogue_Response.deleteButton.Click += (sender, e) =>
                 {
-                    Dialogue_Response pag = Util.FindParent<Dialogue_Response>(sender as Button);
-                    MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Remove(pag);
+                    Dialogue.responses.Remove(res);
+                    UpdateResponses();
                 };
                 int ind = 0;
                 for (int k = 0; k < MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Count; k++)

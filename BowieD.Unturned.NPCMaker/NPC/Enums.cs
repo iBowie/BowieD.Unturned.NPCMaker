@@ -107,7 +107,12 @@ namespace BowieD.Unturned.NPCMaker.NPC
         Acid,
         Boss_Electric,
         Boss_Wind,
-        Boss_Fire
+        Boss_Fire,
+        Boss_All,
+        Boss_Magma,
+        Spirit,
+        Boss_Spirit,
+        Boss_Nuclear
     }
     public enum ESkillset
     {
