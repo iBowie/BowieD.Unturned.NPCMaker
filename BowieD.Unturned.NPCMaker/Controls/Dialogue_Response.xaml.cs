@@ -151,34 +151,18 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         private void OrderButtonDown_Click(object sender, RoutedEventArgs e)
         {
-            var panel = MainWindow.Instance.dialoguePlayerRepliesGrid;
             int index = IndexInPanel;
-            Dialogue_Response current = this;
-            panel.Children.RemoveAt(index);
-            panel.Children.Insert(index + 1, current);
-            foreach (UIElement uie in panel.Children)
-            {
-                if (uie is Dialogue_Response dr)
-                {
-                    dr.UpdateOrderButtons();
-                }
-            }
+            MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Dialogue.responses.Remove(Response);
+            MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Dialogue.responses.Insert(index + 1, Response);
+            MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.UpdateResponses();
         }
 
         private void OrderButtonUp_Click(object sender, RoutedEventArgs e)
         {
-            var panel = MainWindow.Instance.dialoguePlayerRepliesGrid;
             int index = IndexInPanel;
-            Dialogue_Response changeTo = panel.Children[index - 1] as Dialogue_Response;
-            panel.Children.RemoveAt(index - 1);
-            panel.Children.Insert(index, changeTo);
-            foreach (UIElement uie in panel.Children)
-            {
-                if (uie is Dialogue_Response dr)
-                {
-                    dr.UpdateOrderButtons();
-                }
-            }
+            MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Dialogue.responses.Remove(Response);
+            MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Dialogue.responses.Insert(index - 1, Response);
+            MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.UpdateResponses();
         }
 
         private void TxtBoxVendorID_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)

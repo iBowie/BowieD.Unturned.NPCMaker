@@ -214,13 +214,20 @@ namespace BowieD.Unturned.NPCMaker.Export
                                         asset.WriteLine($"Message_{k}_Response_{c} {id}");
                                     }
                                 }
-                                if (message.conditions.Count() > 0)
+                                if (message.conditions.Length > 0)
                                 {
-                                    asset.WriteLine($"Message_{k}_Conditions {message.conditions.Count()}");
-                                    int msgCnt = message.conditions.Count();
-                                    for (int c = 0; c < msgCnt; c++)
+                                    asset.WriteLine($"Message_{k}_Conditions {message.conditions.Length}");
+                                    for (int c = 0; c < message.conditions.Length; c++)
                                     {
                                         asset.WriteLine(ExportCondition(message.conditions[c], $"Message_{k}_", c));
+                                    }
+                                }
+                                if (message.rewards.Length > 0)
+                                {
+                                    asset.WriteLine($"Message_{k}_Rewards {message.rewards.Length}");
+                                    for (int c = 0; c < message.rewards.Length; c++)
+                                    {
+                                        asset.WriteLine(ExportReward(message.rewards[c], $"Message_{k}_", c));
                                     }
                                 }
                             }

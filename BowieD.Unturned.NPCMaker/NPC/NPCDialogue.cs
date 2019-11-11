@@ -46,7 +46,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 {
                     string t = messages[0].pages[0];
                     const int tLengthMax = 24;
-                    return $"[{id}] - {(t.Substring(0, t.Length < tLengthMax ? t.Length : tLengthMax))}{(t.Length >= tLengthMax ? "..." : "")}";
+                    if (!string.IsNullOrEmpty(t))
+                        return $"[{id}] - {(t.Substring(0, t.Length < tLengthMax ? t.Length : tLengthMax))}{(t.Length >= tLengthMax ? "..." : "")}";
+                    return $"[{id}]";
                 }
             }
         }
