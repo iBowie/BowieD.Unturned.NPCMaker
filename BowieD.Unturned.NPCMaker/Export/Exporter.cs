@@ -355,6 +355,8 @@ namespace BowieD.Unturned.NPCMaker.Export
                         }
                         if (vendor.disableSorting)
                             asset.WriteLine("Disable_Sorting");
+                        if (vendor.currency?.Length > 0)
+                            asset.WriteLine("Currency " + vendor.currency);
 
                         local.WriteLine($"Name {vendor.vendorTitle}");
                         local.WriteLine($"Description {vendor.vendorDescription}");

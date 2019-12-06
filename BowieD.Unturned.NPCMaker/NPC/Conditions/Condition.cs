@@ -30,6 +30,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [XmlInclude(typeof(ConditionQuest))]
     [XmlInclude(typeof(ConditionCompareFlags))]
     [XmlInclude(typeof(ConditionHoliday))]
+    [XmlInclude(typeof(ConditionKillsTree))]
+    [XmlInclude(typeof(ConditionCurrency))]
     public abstract class Condition : IHasUIText
     {
         [ConditionSkipField]
@@ -112,6 +114,17 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         Maximum = UInt16.MaxValue,
                         Minimum = UInt16.MinValue,
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
+                        HideUpDownButtons = true
+                    };
+                    (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
+                }
+                else if (propType == typeof(Single))
+                {
+                    valueControl = new MahApps.Metro.Controls.NumericUpDown()
+                    {
+                        Maximum = Single.MaxValue,
+                        Minimum = Single.MinValue,
+                        ParsingNumberStyle = System.Globalization.NumberStyles.Float,
                         HideUpDownButtons = true
                     };
                     (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
