@@ -26,20 +26,23 @@ namespace BowieD.Unturned.NPCMaker.Logging
         }
         public async Task Log(string message, ELogLevel level = ELogLevel.INFO)
         {
-            string logMessage = LOG_FORMAT.Replace("%dt%", DateTime.Now.ToString()).Replace("%lv%", level.ToString()).Replace("%msg%", message);
-            foreach (var l in loggers)
+            if (level <= App.LogLevel)
             {
-                try
-                {
-                    await l.Log(logMessage, level);
-                }
-                catch (Exception ex)
+                string logMessage = LOG_FORMAT.Replace("%dt%", DateTime.Now.ToString()).Replace("%lv%", level.ToString()).Replace("%msg%", message);
+                foreach (var l in loggers)
                 {
                     try
                     {
-                        Debug.WriteLine("Can't log in {0}. Exception: \n{1}\n{2}", l.GetType().FullName, ex.Message, ex.StackTrace);
+                        await l.Log(logMessage, level);
                     }
-                    finally { }
+                    catch (Exception ex)
+                    {
+                        try
+                        {
+                            Debug.WriteLine("Can't log in {0}. Exception: \n{1}\n{2}", l.GetType().FullName, ex.Message, ex.StackTrace);
+                        }
+                        finally { }
+                    }
                 }
             }
         }
