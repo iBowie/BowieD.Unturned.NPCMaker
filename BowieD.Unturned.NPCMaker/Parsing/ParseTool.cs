@@ -517,6 +517,20 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                             Spawnpoint = asset.ReadString(tp + "Spawnpoint")
                         };
                         break;
+                    case RewardType.Currency:
+                        r[num] = new RewardCurrency()
+                        {
+                            GUID = asset.ReadString(tp + "GUID"),
+                            Value = asset.ReadUInt32(tp + "Value")
+                        };
+                        break;
+                    case RewardType.Hint:
+                        r[num] = new RewardHint()
+                        {
+                            Duration = asset.ReadSingle(tp + "Duration", 2f),
+                            Text = asset.ReadString(tp + "Text")
+                        };
+                        break;
                 }
                 r[num].Localization = desc ?? "";
                 num++;
