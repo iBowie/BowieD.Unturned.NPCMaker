@@ -172,7 +172,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             MainWindow.CurrentProject.data.characters.Add(Character);
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["Character_Saved"]);
                         MainWindow.CurrentProject.isSaved = false;
-                        App.Logger.LogInfo($"Character {Character.id} saved!");
+                        App.Logger.Log($"Character {Character.id} saved!");
                     });
                 }
                 return saveCommand;
@@ -191,7 +191,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         {
                             SaveCommand.Execute(null);
                             Character = ulv.SelectedValue as NPCCharacter;
-                            App.Logger.LogInfo($"Opened character {ID}");
+                            App.Logger.Log($"Opened character {ID}");
                         }
                         MainWindow.CurrentProject.data.characters = ulv.Values.Cast<NPCCharacter>().ToList();
                     });

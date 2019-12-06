@@ -26,17 +26,17 @@ namespace BowieD.Unturned.NPCMaker.Configuration
 
         public void Save()
         {
-            App.Logger.LogInfo($"[CFG] - Saving configuration to {path}");
+            App.Logger.Log($"[CFG] - Saving configuration to {path}");
             string content = JsonConvert.SerializeObject(this);
             File.WriteAllText(path, content);
-            App.Logger.LogInfo($"[CFG] - Saving complete!");
+            App.Logger.Log($"[CFG] - Saving complete!");
         }
         public void Load()
         {
-            App.Logger.LogInfo($"[CFG] - Loading configuration from {path}");
+            App.Logger.Log($"[CFG] - Loading configuration from {path}");
             if (!File.Exists(path))
             {
-                App.Logger.LogInfo($"[CFG] - File not found. Creating one...");
+                App.Logger.Log($"[CFG] - File not found. Creating one...");
                 LoadDefaults();
                 Save();
             }
@@ -44,14 +44,14 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             {
                 try
                 {
-                    App.Logger.LogInfo($"[CFG] - File found. Loading configuration...");
+                    App.Logger.Log($"[CFG] - File found. Loading configuration...");
                     string content = File.ReadAllText(path);
                     JsonConvert.PopulateObject(content, this);
-                    App.Logger.LogInfo($"[CFG] - Configuration loaded from {path}");
+                    App.Logger.Log($"[CFG] - Configuration loaded from {path}");
                 }
                 catch
                 {
-                    App.Logger.LogWarning($"[CFG] - Could not load configuration from file. Reverting to default...");
+                    App.Logger.Log($"[CFG] - Could not load configuration from file. Reverting to default...", LogLevel.WARNING);
                     LoadDefaults();
                     Save();
                 }
@@ -59,7 +59,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         }
         public void LoadDefaults()
         {
-            App.Logger.LogInfo($"[CFG] - Loading default configuration...");
+            App.Logger.Log($"[CFG] - Loading default configuration...");
             scale = 1;
             enableDiscord = true;
             currentTheme = "Metro/LightGreen";
@@ -73,7 +73,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 language = c;
             else
                 language = ELanguage.English;
-            App.Logger.LogInfo($"[CFG] - Default configuration loaded!");
+            App.Logger.Log($"[CFG] - Default configuration loaded!");
         }
         private static string defaultDir = $@"{Environment.SystemDirectory[0]}{Path.VolumeSeparatorChar}{Path.DirectorySeparatorChar}Users{Path.DirectorySeparatorChar}{Environment.UserName}{Path.DirectorySeparatorChar}AppData{Path.DirectorySeparatorChar}Local{Path.DirectorySeparatorChar}BowieD{Path.DirectorySeparatorChar}NPCMaker{Path.DirectorySeparatorChar}";
         public static string Directory

@@ -110,7 +110,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             MainWindow.CurrentProject.data.dialogues.Add(Dialogue);
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["Dialogue_Saved"]);
                         MainWindow.CurrentProject.isSaved = false;
-                        App.Logger.LogInfo($"Dialogue {ID} saved!");
+                        App.Logger.Log($"Dialogue {ID} saved!");
                     });
                 }
                 return saveCommand;
@@ -129,7 +129,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         {
                             SaveCommand.Execute(null);
                             Dialogue = ulv.SelectedValue as NPCDialogue;
-                            App.Logger.LogInfo($"Opened dialogue {ID}");
+                            App.Logger.Log($"Opened dialogue {ID}");
                         }
                         MainWindow.CurrentProject.data.dialogues = ulv.Values.Cast<NPCDialogue>().ToList();
                     });
@@ -147,7 +147,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     {
                         var id = ID;
                         Dialogue = new NPCDialogue();
-                        App.Logger.LogInfo($"Cleared dialogue {id}");
+                        App.Logger.Log($"Cleared dialogue {id}");
                     });
                 }
                 return resetCommand;
@@ -197,7 +197,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         {
                             MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.DialogueID = ID;
                             App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Dialogue_SetAsStart", ID));
-                            App.Logger.LogInfo($"Dialogue {ID} set as start!");
+                            App.Logger.Log($"Dialogue {ID} set as start!");
                         }
                     });
                 }

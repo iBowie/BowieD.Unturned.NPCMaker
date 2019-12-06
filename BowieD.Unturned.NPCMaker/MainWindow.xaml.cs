@@ -7,6 +7,7 @@ using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Themes;
 using BowieD.Unturned.NPCMaker.ViewModels;
+using MahApps.Metro.Controls;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -17,7 +18,7 @@ using System.Windows.Threading;
 
 namespace BowieD.Unturned.NPCMaker
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         public MainWindow()
         {
@@ -44,7 +45,7 @@ namespace BowieD.Unturned.NPCMaker
             #endregion
             #region OPEN_WITH
             string[] args = Environment.GetCommandLineArgs();
-            App.Logger.LogInfo($"Command Line Args: {string.Join(";", args)}");
+            App.Logger.Log($"Command Line Args: {string.Join(";", args)}");
             if (args?.Length >= 2)
             {
                 for (int k = 1; k < args.Length; k++)
@@ -84,10 +85,10 @@ namespace BowieD.Unturned.NPCMaker
                 {
                     OpenPatchNotes();
                     File.Delete(AppConfig.Directory + "updater.exe");
-                    App.Logger.LogInfo("Updater deleted.");
+                    App.Logger.Log("Updater deleted.");
                 }
             }
-            catch { App.Logger.LogWarning("Can't delete updater."); }
+            catch { App.Logger.Log("Can't delete updater.", LogLevel.WARNING); }
             #endregion
             #region AUTOSAVE INIT
             if (AppConfig.Instance.autosaveOption > 0)
@@ -289,7 +290,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             if (MainWindow.CurrentProject.SavePrompt() == null)
                 return;
-            App.Logger.LogInfo("Closing app");
+            App.Logger.Log("Closing app");
             DiscordManager?.Deinitialize();
             Environment.Exit(0);
         }
@@ -299,7 +300,10 @@ namespace BowieD.Unturned.NPCMaker
             {
                 new Whats_New().ShowDialog();
             }
-            catch (Exception ex) { App.Logger.LogException("Could not open update notes window.", ex); }
+            catch (Exception ex)
+            {
+                App.Logger.LogException("Could not open update notes window.", ex: ex);
+            }
         }
     }
 }

@@ -27,14 +27,14 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 }
                 else
                 {
-                    App.Logger.LogInfo($"[ParseTool] - English.dat not found. Checking all languages...");
+                    App.Logger.Log($"[ParseTool] - English.dat not found. Checking all languages...");
                     if (File.Exists(dir + $"{k}.dat"))
                     {
                         local = new DataReader(File.ReadAllText(dir + $"{k}.dat"));
                         break;
                     }
                     else
-                        App.Logger.LogInfo($"[ParseTool] - {k}.dat not found. Checking next...");
+                        App.Logger.Log($"[ParseTool] - {k}.dat not found. Checking next...");
                 }
             }
         }
@@ -80,7 +80,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 {
                     string page = local?.ReadString($"Message_{mId}_Page_{pId}");
                     if (page == null)
-                        App.Logger.LogWarning($"Page {pId} in message {mId} not found.");
+                        App.Logger.Log($"Page {pId} in message {mId} not found.");
                     d.messages[mId].pages.Add(page);
                 }
                 d.messages[mId].conditions = ParseConditions($"Message_{mId}_");
@@ -164,12 +164,12 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 {
                     if (!text.Equals("Vehicle", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        App.Logger.LogWarning($"Unknown VendorItem type '{text}'");
+                        App.Logger.Log($"Unknown VendorItem type '{text}'");
                     }
                     vi.spawnPointID = asset.ReadString($"Selling_{i}_Spawnpoint");
                     if (string.IsNullOrEmpty(vi.spawnPointID))
                     {
-                        App.Logger.LogWarning($"Selling Vehicle without Spawnpoint");
+                        App.Logger.Log($"Selling Vehicle without Spawnpoint");
                     }
                     items.Add(vi);
                 }

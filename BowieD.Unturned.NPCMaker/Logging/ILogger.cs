@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace BowieD.Unturned.NPCMaker.Logging
 {
@@ -6,9 +7,6 @@ namespace BowieD.Unturned.NPCMaker.Logging
     {
         void Open();
         void Close();
-        void LogInfo(string message);
-        void LogDebug(string message);
-        void LogException(string message, Exception ex);
-        void LogWarning(string message);
+        Task Log(string message, LogLevel level);
     }
 }

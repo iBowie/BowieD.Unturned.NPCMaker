@@ -21,7 +21,7 @@ namespace BowieD.Unturned.NPCMaker.Localization
         }
         public static void LoadLanguage(ELanguage language)
         {
-            App.Logger.LogInfo($"[LOCALIZATION] - Loading {language} localization...");
+            App.Logger.Log($"[LOCALIZATION] - Loading {language} localization...");
             try
             {
                 using (StreamReader sr = new StreamReader(Application.GetResourceStream(new Uri($"Resources/Localization/{language}.json", UriKind.Relative)).Stream))
@@ -85,12 +85,12 @@ namespace BowieD.Unturned.NPCMaker.Localization
                 }
                 catch (Exception ex)
                 {
-                    App.Logger.LogException($"[LOCALIZATION] - Could not convert JSON to XAML.", ex);
+                    App.Logger.LogException($"[LOCALIZATION] - Could not convert JSON to XAML.", ex: ex);
                 }
             }
             catch (Exception ex)
             {
-                App.Logger.LogException($"[LOCALIZATION] - Could not load {language} localization.", ex);
+                App.Logger.LogException($"[LOCALIZATION] - Could not load {language} localization.", ex: ex);
             }
         }
         public static string GetLanguageName(ELanguage language)

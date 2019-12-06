@@ -165,7 +165,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         Quest = new NPCQuest();
                         UpdateConditions();
                         UpdateRewards();
-                        App.Logger.LogInfo($"Quest {id} cleared!");
+                        App.Logger.Log($"Quest {id} cleared!");
                     });
                 }
                 return resetCommand;

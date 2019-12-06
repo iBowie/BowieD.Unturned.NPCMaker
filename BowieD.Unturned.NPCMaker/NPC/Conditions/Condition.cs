@@ -165,7 +165,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 }
                 else
                 {
-                    App.Logger.LogWarning($"{propName} does not have required type '{propType.FullName}'");
+                    App.Logger.Log($"{propName} does not have required type '{propType.FullName}'");
                 }
                 valueControl.HorizontalAlignment = HorizontalAlignment.Right;
                 valueControl.VerticalAlignment = VerticalAlignment.Center;

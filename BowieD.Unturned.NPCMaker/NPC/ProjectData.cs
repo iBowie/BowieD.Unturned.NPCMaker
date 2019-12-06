@@ -67,29 +67,29 @@ namespace BowieD.Unturned.NPCMaker.NPC
         }
         public override bool Load(NPCProject defaultValue)
         {
-            App.Logger.LogInfo($"[XDATA] - Loading {FileName}!");
+            App.Logger.Log($"[XDATA] - Loading {FileName}!");
             if (File.Exists(FileName))
             {
-                App.Logger.LogInfo($"[XDATA] - Converting from XML...");
+                App.Logger.Log($"[XDATA] - Converting from XML...");
                 using (FileStream fs = new FileStream(FileName, FileMode.Open))
                 using (XmlReader reader = XmlReader.Create(fs))
                 {
                     if (_serializer.CanDeserialize(reader))
                     {
                         data = (NPCProject)_serializer.Deserialize(reader);
-                        App.Logger.LogInfo($"[XDATA] - Loaded");
+                        App.Logger.Log($"[XDATA] - Loaded");
                         return true;
                     }
                     else
                     {
-                        App.Logger.LogInfo($"[XDATA] - Could not load {FileName}. Ignoring...");
+                        App.Logger.Log($"[XDATA] - Could not load {FileName}. Ignoring...");
                         return false;
                     }
                 }
             }
             else
             {
-                App.Logger.LogInfo($"[XDATA] - {FileName} does not exist. Ignoring...");
+                App.Logger.Log($"[XDATA] - {FileName} does not exist. Ignoring...");
                 return false;
             }
         }

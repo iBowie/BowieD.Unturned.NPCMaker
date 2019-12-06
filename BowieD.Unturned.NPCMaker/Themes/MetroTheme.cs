@@ -39,7 +39,7 @@ namespace BowieD.Unturned.NPCMaker.Themes
                 else if (DictionaryName[0] == 'D')
                     App.Current.Resources["BackgroundColor"] = new BrushConverter().ConvertFromString("#252525");
             }
-            catch { App.Logger.LogWarning($"Can't apply {Name} theme"); }
+            catch { App.Logger.Log($"Can't apply {Name} theme"); }
         }
         public override void Remove()
         {
@@ -67,7 +67,7 @@ namespace BowieD.Unturned.NPCMaker.Themes
                 }
                 ThemeManager.CurrentTheme = null;
             }
-            catch { App.Logger.LogInfo("Could not clear theme"); }
+            catch { App.Logger.Log("Could not clear theme"); }
         }
     }
 }

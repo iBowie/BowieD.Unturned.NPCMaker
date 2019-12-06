@@ -37,10 +37,10 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         }
                         if (data.ContainsKey(text))
                         {
-                            App.Logger.LogWarning("Multiple instances of '" + text + "'");
+                            App.Logger.Log("Multiple instances of '" + text + "'");
                             if (overrideOldData)
                             {
-                                App.Logger.LogWarning($"Overriding {text}...");
+                                App.Logger.Log($"Overriding {text}...");
                             }
                         }
                         else
@@ -52,7 +52,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
             }
             catch (Exception ex)
             {
-                App.Logger.LogException("Failed to load data", ex);
+                App.Logger.LogException("Failed to load data", ex: ex);
                 data.Clear();
             }
             finally

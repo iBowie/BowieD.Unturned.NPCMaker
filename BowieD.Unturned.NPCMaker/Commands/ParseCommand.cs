@@ -12,51 +12,51 @@ namespace BowieD.Unturned.NPCMaker.Commands
         public override void Execute(string[] args)
         {
             if (args.Length < 1)
-                App.Logger.LogInfo($"[ParseCommand] - Use: {Name} {Syntax}");
+                App.Logger.Log($"[ParseCommand] - Use: {Name} {Syntax}");
             else
             {
                 string joined = string.Join(" ", args);
                 if (File.Exists(joined))
                 {
-                    App.Logger.LogInfo("[ParseCommand] - File found. Checking...");
+                    App.Logger.Log("[ParseCommand] - File found. Checking...");
                     ParseTool pTool = new ParseTool(joined);
                     var type = pTool.GetParseType();
                     switch (type)
                     {
                         case NPC.ParseType.NPC:
-                            App.Logger.LogInfo("[ParseCommand] - Started parsing 'NPC'.");
+                            App.Logger.Log("[ParseCommand] - Started parsing 'NPC'.");
                             MainWindow.CurrentProject.data.characters.Add(pTool.ParseCharacter());
-                            App.Logger.LogInfo("[ParseCommand] - 'NPC' parsed and imported into project.");
+                            App.Logger.Log("[ParseCommand] - 'NPC' parsed and imported into project.");
                             LastResult = true;
                             break;
                         case NPC.ParseType.Dialogue:
-                            App.Logger.LogInfo("[ParseCommand] - Started parsing 'Dialogue'.");
+                            App.Logger.Log("[ParseCommand] - Started parsing 'Dialogue'.");
                             MainWindow.CurrentProject.data.dialogues.Add(pTool.ParseDialogue());
-                            App.Logger.LogInfo("[ParseCommand] - 'Dialogue' parsed and imported into project.");
+                            App.Logger.Log("[ParseCommand] - 'Dialogue' parsed and imported into project.");
                             LastResult = true;
                             break;
                         case NPC.ParseType.Vendor:
-                            App.Logger.LogInfo("[ParseCommand] - Started parsing 'Vendor'.");
+                            App.Logger.Log("[ParseCommand] - Started parsing 'Vendor'.");
                             MainWindow.CurrentProject.data.vendors.Add(pTool.ParseVendor());
-                            App.Logger.LogInfo("[ParseCommand] - 'Vendor' parsed and imported into project.");
+                            App.Logger.Log("[ParseCommand] - 'Vendor' parsed and imported into project.");
                             LastResult = true;
                             break;
                         case NPC.ParseType.Quest:
-                            App.Logger.LogInfo("[ParseCommand] - Started parsing 'Quest'.");
+                            App.Logger.Log("[ParseCommand] - Started parsing 'Quest'.");
                             MainWindow.CurrentProject.data.quests.Add(pTool.ParseQuest());
-                            App.Logger.LogInfo("[ParseCommand] - 'Quest' parsed and imported into project.");
+                            App.Logger.Log("[ParseCommand] - 'Quest' parsed and imported into project.");
                             LastResult = true;
                             break;
                         default:
                             LastResult = false;
-                            App.Logger.LogInfo("[ParseCommand] - Invalid file.");
+                            App.Logger.Log("[ParseCommand] - Invalid file.");
                             break;
                     }
                 }
                 else
                 {
                     LastResult = false;
-                    App.Logger.LogInfo("[ParseCommand] - File not found.");
+                    App.Logger.Log("[ParseCommand] - File not found.");
                 }
             }
         }
@@ -73,7 +73,7 @@ namespace BowieD.Unturned.NPCMaker.Commands
             LastSkipped = 0;
             if (args.Length < 1)
             {
-                App.Logger.LogInfo($"[ParseDirCommand] - Use {Name} {Syntax}.");
+                App.Logger.Log($"[ParseDirCommand] - Use {Name} {Syntax}.");
             }
             else
             {
@@ -94,7 +94,7 @@ namespace BowieD.Unturned.NPCMaker.Commands
                 }
                 else
                 {
-                    App.Logger.LogInfo("[ParseDirCommand] - Directory not found.");
+                    App.Logger.Log("[ParseDirCommand] - Directory not found.");
                     LastResult = false;
                 }
             }

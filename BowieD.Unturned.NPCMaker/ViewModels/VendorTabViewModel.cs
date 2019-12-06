@@ -219,7 +219,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             MainWindow.CurrentProject.data.vendors.Add(Vendor);
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["Vendor_Saved"]);
                         MainWindow.CurrentProject.isSaved = false;
-                        App.Logger.LogInfo($"Vendor {ID} saved!");
+                        App.Logger.Log($"Vendor {ID} saved!");
                     });
                 }
                 return saveCommand;
@@ -239,7 +239,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             SaveCommand.Execute(null);
                             Vendor = ulv.SelectedValue as NPCVendor;
                             UpdateItems();
-                            App.Logger.LogInfo($"Opened vendor {ID}");
+                            App.Logger.Log($"Opened vendor {ID}");
                         }
                         MainWindow.CurrentProject.data.vendors = ulv.Values.Cast<NPCVendor>().ToList();
                     });
@@ -258,7 +258,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         var id = ID;
                         Vendor = new NPCVendor();
                         UpdateItems();
-                        App.Logger.LogInfo($"Vendor {id} cleared!");
+                        App.Logger.Log($"Vendor {id} cleared!");
                     });
                 }
                 return resetCommand;

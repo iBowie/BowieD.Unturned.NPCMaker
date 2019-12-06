@@ -17,7 +17,6 @@ namespace BowieD.Unturned.NPCMaker.Logging
             IntPtr hSystemMenu = GetSystemMenu(hMenu, false);
             EnableMenuItem(hSystemMenu, SC_CLOSE, MF_GRAYED);
             RemoveMenu(hSystemMenu, SC_CLOSE, MF_BYCOMMAND);
-            App.Logger.LogInfo("[CONSOLE] - Disabled 'Close' button to prevent accident close.");
         }
         [DllImport("kernel32.dll")]
         private static extern IntPtr GetConsoleWindow();
@@ -53,40 +52,42 @@ namespace BowieD.Unturned.NPCMaker.Logging
         }
         public static bool IsOpened { get; private set; } = true;
         public void Close() { }
-        public void LogDebug(string message)
+        public Task Log(string message, LogLevel level = LogLevel.INFO)
         {
-            Console.WriteLine($"[{DateTime.Now}] - [DEBUG] - {message}");
-        }
-        public void LogException(string message, Exception ex)
-        {
-            if (ex.InnerException != null)
+            ConsoleColor color;
+            switch (level)
             {
-                LogException(message, ex.InnerException);
+                default:
+                case LogLevel.INFO:
+                    color = ConsoleColor.White;
+                    break;
+                case LogLevel.ERROR:
+                case LogLevel.CRITICAL:
+                    color = ConsoleColor.Red;
+                    break;
+                case LogLevel.DEBUG:
+                case LogLevel.TRACE:
+                    color = ConsoleColor.Gray;
+                    break;
+                case LogLevel.WARNING:
+                    color = ConsoleColor.Yellow;
+                    break;
             }
-            var oldClr = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"[{DateTime.Now}] - [ERROR] - {message}");
-            Console.WriteLine($"[{DateTime.Now}] - [ERROR] - {ex.Message}");
-            Console.WriteLine($"[{DateTime.Now}] - [ERROR] - {ex.StackTrace}");
-            Console.ForegroundColor = oldClr;
-        }
-        public void LogInfo(string message)
-        {
-            Console.WriteLine($"[{DateTime.Now}] - [INFO] - {message}");
-        }
-        public void LogWarning(string message)
-        {
-            var oldClr = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"[{DateTime.Now}] - [WARN] - {message}");
-            Console.ForegroundColor = oldClr;
+            var oldColor = Console.ForegroundColor;
+            Console.ForegroundColor = color;
+            Console.WriteLine(message);
+            Console.ForegroundColor = oldColor;
+            return Task.Delay(0);
         }
         public static void StartWaitForInput()
         {
             Thread th = new Thread(() => WaitForInput());
             th.Start();
         }
-        public void Open() {  }
+        public void Open()
+        {
+            Console.Title = "Unturned 3.0 NPC Maker by Bowie_D";
+        }
         public static void WaitForInput()
         {
             string input = Console.ReadLine();
@@ -94,14 +95,13 @@ namespace BowieD.Unturned.NPCMaker.Logging
             var executionCommand = Command.Commands.SingleOrDefault(d => d.Name.ToLower() == command[0].ToLower());
             if (executionCommand == null)
             {
-                App.Logger.LogInfo($"Command {command[0]} not found");
+                Console.WriteLine($"Command {command[0]} not found");
             }
             else
             {
                 var matches = Regex.Matches(string.Join(" ", command.Skip(1)), "[\\\"](.+?)[\\\"]|([^ ]+)", RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
                 var filtered = (from Match d in matches select d.Value.Trim('"')).ToArray();
                 executionCommand.Execute(filtered);
-                App.Logger.LogInfo($"User executed a command: {executionCommand.Name}");
             }
             WaitForInput();
         }

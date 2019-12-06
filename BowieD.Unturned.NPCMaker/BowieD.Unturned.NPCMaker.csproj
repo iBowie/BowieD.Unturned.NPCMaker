@@ -215,8 +215,9 @@
     <Compile Include="Logging\FileLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
-    <Compile Include="Logging\LoggerExtensions.cs" />
+    <Compile Include="Logging\ILoggingManager.cs" />
     <Compile Include="Managers\HolidayManager.cs" />
+    <Compile Include="Logging\LoggingManager.cs" />
     <Compile Include="Mistakes\Character\NE_0001.cs" />
     <Compile Include="Mistakes\Character\NE_0002.cs" />
     <Compile Include="Mistakes\Character\NE_0003.cs" />

@@ -59,7 +59,7 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
         public void Deinitialize()
         {
             client.Dispose();
-            App.Logger.LogInfo("[DISCORD] - Rich Presence client deinitialized!");
+            App.Logger.Log("[DISCORD] - Rich Presence client deinitialized!");
         }
 
         private void Client_OnPresenceUpdate(object sender, global::DiscordRPC.Message.PresenceMessage args)
@@ -69,7 +69,7 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
 
         private void Client_OnReady(object sender, global::DiscordRPC.Message.ReadyMessage args)
         {
-            App.Logger.LogInfo("[DISCORD] - Rich Presence started!");
+            App.Logger.Log("[DISCORD] - Rich Presence started!");
         }
     }
 }

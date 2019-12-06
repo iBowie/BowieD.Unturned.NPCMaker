@@ -31,7 +31,7 @@ namespace BowieD.Unturned.NPCMaker.Commands
             sb.AppendLine($".Theme: {cfg.currentTheme}");
             sb.AppendLine("");
             sb.AppendLine("== End of Debug Information ==");
-            App.Logger.LogInfo(sb.ToString());
+            App.Logger.Log(sb.ToString());
         }
         private OperatingSystem OS => Environment.OSVersion;
         private string WindowsVersion

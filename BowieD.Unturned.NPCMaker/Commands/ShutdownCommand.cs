@@ -10,7 +10,7 @@ namespace BowieD.Unturned.NPCMaker.Commands
         public override string Syntax => "";
         public override void Execute(string[] args)
         {
-            App.Logger.LogInfo("[ShutdownCommand] - Shutting down...");
+            App.Logger.Log("[ShutdownCommand] - Shutting down...");
             Environment.Exit(0);
         }
     }

@@ -48,7 +48,7 @@ namespace BowieD.Unturned.NPCMaker.Export
             }
             catch (Exception ex)
             {
-                App.Logger.LogException("Unable to export NPC.", ex);
+                App.Logger.LogException("Unable to export NPC.", ex: ex);
                 switch (ex)
                 {
                     case IOException iOException:
@@ -170,7 +170,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                 }
                 catch (Exception ex)
                 {
-                    App.Logger.LogException($"Can't export character {character.id}", ex);
+                    App.Logger.LogException($"Can't export character {character.id}", ex: ex);
                     App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Character_Error", character.id));
                 }
             }
@@ -291,7 +291,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                 }
                 catch (Exception ex)
                 {
-                    App.Logger.LogException($"Can't export dialogue {dialogue.id}", ex);
+                    App.Logger.LogException($"Can't export dialogue {dialogue.id}", ex: ex);
                     App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Dialogue_Error", dialogue.id));
                 }
             }
@@ -363,7 +363,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                 }
                 catch (Exception ex)
                 {
-                    App.Logger.LogException($"Can't export vendor {vendor.id}", ex);
+                    App.Logger.LogException($"Can't export vendor {vendor.id}", ex: ex);
                     App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Vendor_Error", vendor.id));
                 }
             }
@@ -423,7 +423,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                 }
                 catch (Exception ex)
                 {
-                    App.Logger.LogException($"Can't export quest {quest.id}", ex);
+                    App.Logger.LogException($"Can't export quest {quest.id}", ex: ex);
                     App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Quest_Error", quest.id));
                 }
             }

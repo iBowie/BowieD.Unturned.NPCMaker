@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BowieD.Unturned.NPCMaker.Logging
 {
@@ -18,28 +19,6 @@ namespace BowieD.Unturned.NPCMaker.Logging
             stream.Flush();
             stream.Close();
         }
-        public void LogDebug(string message)
-        {
-            stream.WriteLine($"[{DateTime.Now}] - [DEBUG] - {message}");
-        }
-        public void LogException(string message, Exception ex)
-        {
-            if (ex.InnerException != null)
-            {
-                LogException(message, ex.InnerException);
-            }
-            stream.WriteLine($"[{DateTime.Now}] - [ERROR] - {message}");
-            stream.WriteLine($"[{DateTime.Now}] - [ERROR] - {ex.Message}");
-            stream.WriteLine($"[{DateTime.Now}] - [ERROR] - {ex.StackTrace}");
-        }
-        public void LogInfo(string message)
-        {
-            stream.WriteLine($"[{DateTime.Now}] - [INFO] - {message}");
-        }
-        public void LogWarning(string message)
-        {
-            stream.WriteLine($"[{DateTime.Now}] - [WARN] - {message}");
-        }
         public void Open()
         {
             if (File.Exists(Dir + "npcmaker.old.log"))
@@ -50,6 +29,11 @@ namespace BowieD.Unturned.NPCMaker.Logging
             {
                 AutoFlush = true
             };
+        }
+
+        public async Task Log(string message, LogLevel level)
+        {
+            await stream.WriteLineAsync(message);
         }
     }
 }
