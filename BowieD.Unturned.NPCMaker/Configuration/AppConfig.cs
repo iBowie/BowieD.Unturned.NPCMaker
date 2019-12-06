@@ -51,7 +51,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 }
                 catch
                 {
-                    App.Logger.Log($"[CFG] - Could not load configuration from file. Reverting to default...", LogLevel.WARNING);
+                    App.Logger.Log($"[CFG] - Could not load configuration from file. Reverting to default...", ELogLevel.WARNING);
                     LoadDefaults();
                     Save();
                 }
@@ -75,7 +75,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 language = ELanguage.English;
             App.Logger.Log($"[CFG] - Default configuration loaded!");
         }
-        private static string defaultDir = $@"{Environment.SystemDirectory[0]}{Path.VolumeSeparatorChar}{Path.DirectorySeparatorChar}Users{Path.DirectorySeparatorChar}{Environment.UserName}{Path.DirectorySeparatorChar}AppData{Path.DirectorySeparatorChar}Local{Path.DirectorySeparatorChar}BowieD{Path.DirectorySeparatorChar}NPCMaker{Path.DirectorySeparatorChar}";
+        private static readonly string defaultDir = $@"{Environment.SystemDirectory[0]}{Path.VolumeSeparatorChar}{Path.DirectorySeparatorChar}Users{Path.DirectorySeparatorChar}{Environment.UserName}{Path.DirectorySeparatorChar}AppData{Path.DirectorySeparatorChar}Local{Path.DirectorySeparatorChar}BowieD{Path.DirectorySeparatorChar}NPCMaker{Path.DirectorySeparatorChar}";
         public static string Directory
         {
             get

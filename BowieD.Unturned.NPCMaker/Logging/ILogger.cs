@@ -7,6 +7,6 @@ namespace BowieD.Unturned.NPCMaker.Logging
     {
         void Open();
         void Close();
-        Task Log(string message, LogLevel level);
+        Task Log(string message, ELogLevel level);
     }
 }

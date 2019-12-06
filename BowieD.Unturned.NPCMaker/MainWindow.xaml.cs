@@ -88,7 +88,7 @@ namespace BowieD.Unturned.NPCMaker
                     App.Logger.Log("Updater deleted.");
                 }
             }
-            catch { App.Logger.Log("Can't delete updater.", LogLevel.WARNING); }
+            catch { App.Logger.Log("Can't delete updater.", ELogLevel.WARNING); }
             #endregion
             #region AUTOSAVE INIT
             if (AppConfig.Instance.autosaveOption > 0)

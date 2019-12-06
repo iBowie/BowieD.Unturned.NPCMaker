@@ -114,25 +114,27 @@ namespace BowieD.Unturned.NPCMaker.Updating
                 httpRequest.UserAgent =
                     "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36";
                 await App.Logger.Log("[UPDATE] - Waiting for response...");
-                var webResponse = await httpRequest.GetResponseAsync();
-                await App.Logger.Log("[UPDATE] - Reading response...");
-                var respStream = webResponse.GetResponseStream();
+                using (var webResponse = await httpRequest.GetResponseAsync())
+                {
+                    await App.Logger.Log("[UPDATE] - Reading response...");
+                    var respStream = webResponse.GetResponseStream();
 
-                if (respStream == null)
-                {
-                    await App.Logger.Log("[UPDATE] - Response is empty");
-                    return null;
+                    if (respStream == null)
+                    {
+                        await App.Logger.Log("[UPDATE] - Response is empty");
+                        return null;
+                    }
+                    await App.Logger.Log("[UPDATE] - Response is not empty");
+                    UpdateManifest? manifest = null;
+                    using (var reader = new StreamReader(respStream))
+                    {
+                        await App.Logger.Log("[UPDATE] - Converting response to manifest");
+                        var jsonData = reader.ReadToEnd();
+                        manifest = JsonConvert.DeserializeObject<UpdateManifest>(jsonData);
+                        await App.Logger.Log("[UPDATE] - Converted");
+                    }
+                    return manifest;
                 }
-                await App.Logger.Log("[UPDATE] - Response is not empty");
-                UpdateManifest? manifest = null;
-                using (var reader = new StreamReader(respStream))
-                {
-                    await App.Logger.Log("[UPDATE] - Converting response to manifest");
-                    var jsonData = reader.ReadToEnd();
-                    manifest = JsonConvert.DeserializeObject<UpdateManifest>(jsonData);
-                    await App.Logger.Log("[UPDATE] - Converted");
-                }
-                return manifest;
             }
             catch (Exception ex)
             {

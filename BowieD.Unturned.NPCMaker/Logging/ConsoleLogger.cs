@@ -52,24 +52,27 @@ namespace BowieD.Unturned.NPCMaker.Logging
         }
         public static bool IsOpened { get; private set; } = true;
         public void Close() { }
-        public Task Log(string message, LogLevel level = LogLevel.INFO)
+        public Task Log(string message, ELogLevel level = ELogLevel.INFO)
         {
             ConsoleColor color;
             switch (level)
             {
+                case ELogLevel.POSITIVE:
+                    color = ConsoleColor.Green;
+                    break;
                 default:
-                case LogLevel.INFO:
+                case ELogLevel.INFO:
                     color = ConsoleColor.White;
                     break;
-                case LogLevel.ERROR:
-                case LogLevel.CRITICAL:
+                case ELogLevel.ERROR:
+                case ELogLevel.CRITICAL:
                     color = ConsoleColor.Red;
                     break;
-                case LogLevel.DEBUG:
-                case LogLevel.TRACE:
+                case ELogLevel.DEBUG:
+                case ELogLevel.TRACE:
                     color = ConsoleColor.Gray;
                     break;
-                case LogLevel.WARNING:
+                case ELogLevel.WARNING:
                     color = ConsoleColor.Yellow;
                     break;
             }

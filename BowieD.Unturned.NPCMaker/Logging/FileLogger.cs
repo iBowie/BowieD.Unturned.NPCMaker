@@ -31,7 +31,7 @@ namespace BowieD.Unturned.NPCMaker.Logging
             };
         }
 
-        public async Task Log(string message, LogLevel level)
+        public async Task Log(string message, ELogLevel level)
         {
             await stream.WriteLineAsync(message);
         }

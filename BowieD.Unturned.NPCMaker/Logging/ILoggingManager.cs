@@ -9,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.Logging
 
         void CloseLogger(ILogger logger);
         void ConnectLogger(ILogger logger);
-        Task Log(string message, LogLevel level = LogLevel.INFO);
-        Task LogException(string message, LogLevel level = LogLevel.ERROR, Exception ex = null);
+        Task Log(string message, ELogLevel level = ELogLevel.INFO);
+        Task LogException(string message, ELogLevel level = ELogLevel.ERROR, Exception ex = null);
     }
 }

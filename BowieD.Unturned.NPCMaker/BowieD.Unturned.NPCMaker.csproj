@@ -144,6 +144,7 @@
     <Compile Include="Commands\ParseCommand.cs" />
     <Compile Include="Commands\ShutdownCommand.cs" />
     <Compile Include="Common\ContextHelper.cs" />
+    <Compile Include="Common\Utility\NETHelper.cs" />
     <Compile Include="Controls\Dialogue_Response.xaml.cs">
       <DependentUpon>Dialogue_Response.xaml</DependentUpon>
     </Compile>
@@ -216,6 +217,7 @@
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\ILoggingManager.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
     <Compile Include="Managers\HolidayManager.cs" />
     <Compile Include="Logging\LoggingManager.cs" />
     <Compile Include="Mistakes\Character\NE_0001.cs" />

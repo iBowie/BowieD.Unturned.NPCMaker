@@ -12,19 +12,19 @@ namespace BowieD.Unturned.NPCMaker.Logging
         {
             loggers = new List<ILogger>();
         }
-        private List<ILogger> loggers;
+        private readonly List<ILogger> loggers;
         public void ConnectLogger(ILogger logger)
         {
             loggers.Add(logger);
             logger.Open();
-            Log($"Connected new Logger of type {logger.GetType().FullName}", LogLevel.DEBUG);
+            Log($"Connected new Logger of type {logger.GetType().FullName}", ELogLevel.DEBUG);
         }
         public void CloseLogger(ILogger logger)
         {
             logger.Close();
             loggers.Remove(logger);
         }
-        public async Task Log(string message, LogLevel level = LogLevel.INFO)
+        public async Task Log(string message, ELogLevel level = ELogLevel.INFO)
         {
             string logMessage = LOG_FORMAT.Replace("%dt%", DateTime.Now.ToString()).Replace("%lv%", level.ToString()).Replace("%msg%", message);
             foreach (var l in loggers)
@@ -44,7 +44,7 @@ namespace BowieD.Unturned.NPCMaker.Logging
             }
         }
 
-        public async Task LogException(string message, LogLevel level = LogLevel.ERROR, Exception ex = null)
+        public async Task LogException(string message, ELogLevel level = ELogLevel.ERROR, Exception ex = null)
         {
             await Log(message, level);
             if (ex != null)
@@ -55,14 +55,5 @@ namespace BowieD.Unturned.NPCMaker.Logging
                 await Log(ex.StackTrace, level);
             }
         }
-    }
-    public enum LogLevel
-    {
-        INFO = 0,
-        ERROR = 1,
-        WARNING = 2,
-        CRITICAL = 3,
-        DEBUG = 4,
-        TRACE = 5
     }
 }

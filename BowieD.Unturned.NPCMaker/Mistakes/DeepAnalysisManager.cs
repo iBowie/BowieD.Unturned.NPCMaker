@@ -206,10 +206,10 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
         {
             HashSet<UnturnedFile> cache = new HashSet<UnturnedFile>();
             IEnumerable<FileInfo> validFiles = new DirectoryInfo(directory).GetFiles("*.dat", SearchOption.AllDirectories);
-            App.Logger.Log($"[DeepAnalysis] - Found {validFiles.Count()} assets!");
+            await App.Logger.Log($"[DeepAnalysis] - Found {validFiles.Count()} assets!");
             long oldTotal = validFiles.Count();
             validFiles = validFiles.Where(d => d.Name != "English.dat" && d.Name != "Russian.dat");
-            App.Logger.Log($"[DeepAnalysis] - Skipped {oldTotal - validFiles.Count()} files.");
+            await App.Logger.Log($"[DeepAnalysis] - Skipped {oldTotal - validFiles.Count()} files.");
             long step = 1;
             MainWindow.Instance.progrBar.Maximum = validFiles.Count();
             foreach (FileInfo fi in validFiles)
@@ -270,7 +270,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 MainWindow.Instance.progrBar.Value = step;
             }
             CachedUnturnedFiles = cache;
-            App.Logger.Log($"Cached {cache.Count} files!");
+            await App.Logger.Log($"Cached {cache.Count} files!");
             return true;
         }
     }
