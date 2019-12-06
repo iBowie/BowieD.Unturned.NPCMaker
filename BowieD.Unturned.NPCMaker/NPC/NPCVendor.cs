@@ -13,6 +13,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             guid = Guid.NewGuid().ToString("N");
             Comment = "";
             items = new List<VendorItem>();
+            currency = "";
         }
 
         [XmlAttribute]
@@ -25,6 +26,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public string vendorDescription;
         public List<VendorItem> items;
         public bool disableSorting;
+        public string currency;
         [XmlIgnore]
         public List<VendorItem> BuyItems => (items ?? new List<VendorItem>()).Where(d => d.isBuy).ToList();
         [XmlIgnore]

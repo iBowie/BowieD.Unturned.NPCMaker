@@ -243,6 +243,7 @@
     <Compile Include="NPC\Conditions\Attributes\ConditionTooltipAttribute.cs" />
     <Compile Include="NPC\Conditions\Condition.cs" />
     <Compile Include="NPC\Conditions\ConditionCompareFlags.cs" />
+    <Compile Include="NPC\Conditions\ConditionCurrency.cs" />
     <Compile Include="NPC\Conditions\ConditionExperience.cs" />
     <Compile Include="NPC\Conditions\ConditionFlagBool.cs" />
     <Compile Include="NPC\Conditions\ConditionFlagShort.cs" />
@@ -252,6 +253,7 @@
     <Compile Include="NPC\Conditions\ConditionKillsHorde.cs" />
     <Compile Include="NPC\Conditions\ConditionKillsObject.cs" />
     <Compile Include="NPC\Conditions\ConditionKillsPlayer.cs" />
+    <Compile Include="NPC\Conditions\ConditionKillsTree.cs" />
     <Compile Include="NPC\Conditions\ConditionKillsZombie.cs" />
     <Compile Include="NPC\Conditions\ConditionPlayerLifeFood.cs" />
     <Compile Include="NPC\Conditions\ConditionPlayerLifeHealth.cs" />
@@ -268,12 +270,14 @@
     <Compile Include="NPC\ProjectData.cs" />
     <Compile Include="NPC\Rewards\Reward.cs" />
     <Compile Include="NPC\Rewards\RewardAchievement.cs" />
+    <Compile Include="NPC\Rewards\RewardCurrency.cs" />
     <Compile Include="NPC\Rewards\RewardEvent.cs" />
     <Compile Include="NPC\Rewards\RewardExperience.cs" />
     <Compile Include="NPC\Rewards\RewardFlagBool.cs" />
     <Compile Include="NPC\Rewards\RewardFlagMath.cs" />
     <Compile Include="NPC\Rewards\RewardFlagShort.cs" />
     <Compile Include="NPC\Rewards\RewardFlagShortRandom.cs" />
+    <Compile Include="NPC\Rewards\RewardHint.cs" />
     <Compile Include="NPC\Rewards\RewardItem.cs" />
     <Compile Include="NPC\Rewards\RewardItemRandom.cs" />
     <Compile Include="NPC\Rewards\Attributes\RewardNoValueAttribute.cs" />

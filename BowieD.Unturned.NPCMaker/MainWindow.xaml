@@ -646,6 +646,8 @@
                         <TextBox  Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Name="vendorDescTxtBox" Height="26" VerticalAlignment="Bottom" Margin="10,0,146,10"/>
                         <TextBlock  Grid.Column="1" Width="128" HorizontalAlignment="Right" Margin="0,0,10,14" TextWrapping="Wrap" Text="{DynamicResource VENDOR_Description}" VerticalAlignment="Bottom" Height="16"/>
                         <CheckBox IsChecked="{Binding DisableSorting, UpdateSourceTrigger=PropertyChanged}" Name="vendorDisableSortingBox" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Content="{DynamicResource VENDOR_DisableSorting}" Margin="10,10,0,0" Grid.RowSpan="2"/>
+                        <TextBox Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Currency, UpdateSourceTrigger=PropertyChanged}" Margin="10,30,0,0" Width="150"/>
+                        <TextBlock Width="156" Grid.Column="2" Grid.Row="1" Text="{DynamicResource VENDOR_Currency}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="165,30,0,0"/>
                         <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="vendorSaveButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Vendor_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>

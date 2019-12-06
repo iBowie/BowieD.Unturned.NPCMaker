@@ -32,6 +32,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public string Title { get => Vendor.vendorTitle; set => Vendor.vendorTitle = value; }
         public string Description { get => Vendor.vendorDescription; set => Vendor.vendorDescription = value; }
         public bool DisableSorting { get => Vendor.disableSorting; set => Vendor.disableSorting = value; }
+        public string Currency
+        {
+            get => Vendor.currency;
+            set => Vendor.currency = value;
+        }
         public List<VendorItem> Items
         {
             get

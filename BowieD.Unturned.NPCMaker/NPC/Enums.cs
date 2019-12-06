@@ -23,7 +23,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
         Skillset,
         Kills_Object,
         Holiday,
-        Compare_Flags
+        Compare_Flags,
+        Currency,
+        Kills_Tree
     }
     public enum Logic_Type
     {
@@ -74,7 +76,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
         Flag_Short_Random,
         Flag_Math,
         Achievement,
-        Event
+        Event,
+        Currency,
+        Hint
     }
     public enum Quest_Status
     {

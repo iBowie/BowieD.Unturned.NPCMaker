@@ -25,6 +25,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     [XmlInclude(typeof(RewardTeleport))]
     [XmlInclude(typeof(RewardEvent))]
     [XmlInclude(typeof(RewardFlagMath))]
+    [XmlInclude(typeof(RewardCurrency))]
+    [XmlInclude(typeof(RewardHint))]
     public abstract class Reward : IHasUIText
     {
         [RewardSkipField]
@@ -104,6 +106,17 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                         Maximum = UInt16.MaxValue,
                         Minimum = UInt16.MinValue,
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
+                        HideUpDownButtons = true
+                    };
+                    (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
+                }
+                else if (propType == typeof(Single))
+                {
+                    valueControl = new MahApps.Metro.Controls.NumericUpDown()
+                    {
+                        Maximum = Single.MaxValue,
+                        Minimum = Single.MinValue,
+                        ParsingNumberStyle = System.Globalization.NumberStyles.Float,
                         HideUpDownButtons = true
                     };
                     (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);

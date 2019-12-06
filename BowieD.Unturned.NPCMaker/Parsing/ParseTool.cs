@@ -115,7 +115,8 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 guid = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
                 vendorTitle = local?.ReadString("Name") ?? "",
                 vendorDescription = local?.ReadString("Description") ?? "",
-                items = ParseVendorItems().ToList()
+                items = ParseVendorItems().ToList(),
+                currency = asset.Has("Currency") ? asset.ReadString("Currency") : ""
             };
         }
         public NPCQuest ParseQuest()
@@ -221,6 +222,24 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 string tp = $"{prefix}{postfix}{num}_";
                 switch (type)
                 {
+                    case Condition_Type.Kills_Tree:
+                        c[num] = new ConditionKillsTree()
+                        {
+                            ID = asset.ReadUInt16(tp + "ID"),
+                            Reset = needToReset,
+                            Tree = asset.ReadString(tp + "Tree"),
+                            Value = asset.ReadInt16(tp + "Value")
+                        };
+                        break;
+                    case Condition_Type.Currency:
+                        c[num] = new ConditionCurrency()
+                        {
+                            GUID = asset.ReadString(tp + "GUID"),
+                            Logic = logic,
+                            Reset = needToReset,
+                            Value = asset.ReadUInt32(tp + "Value")
+                        };
+                        break;
                     case Condition_Type.Experience:
                         c[num] = new ConditionExperience()
                         {
@@ -496,6 +515,20 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         {
                             ID = asset.ReadUInt16(tp + "ID"),
                             Spawnpoint = asset.ReadString(tp + "Spawnpoint")
+                        };
+                        break;
+                    case RewardType.Currency:
+                        r[num] = new RewardCurrency()
+                        {
+                            GUID = asset.ReadString(tp + "GUID"),
+                            Value = asset.ReadUInt32(tp + "Value")
+                        };
+                        break;
+                    case RewardType.Hint:
+                        r[num] = new RewardHint()
+                        {
+                            Duration = asset.ReadSingle(tp + "Duration", 2f),
+                            Text = asset.ReadString(tp + "Text")
                         };
                         break;
                 }
