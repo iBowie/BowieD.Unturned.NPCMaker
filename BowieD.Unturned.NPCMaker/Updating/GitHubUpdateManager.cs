@@ -132,6 +132,9 @@ namespace BowieD.Unturned.NPCMaker.Updating
                         manifest = JsonConvert.DeserializeObject<UpdateManifest>(jsonData);
                         await App.Logger.Log("[UPDATE] - Converted");
                     }
+                    await App.Logger.Log("[UPDATE] - Saving update manifest...");
+                    File.WriteAllText(AppConfig.Directory + "update.manifest", JsonConvert.SerializeObject(manifest));
+                    await App.Logger.Log("[UPDATE] - Saved");
                     return manifest;
                 }
             }
