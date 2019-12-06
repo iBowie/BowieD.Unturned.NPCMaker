@@ -6,7 +6,6 @@ using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.Notification;
 using BowieD.Unturned.NPCMaker.Updating;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -82,26 +81,26 @@ namespace BowieD.Unturned.NPCMaker
                 Resources["Scale"] = AppConfig.Instance.scale;
                 #endregion
 #if !FAST
-            App.UpdateManager = new GitHubUpdateManager();
-            var result = App.UpdateManager.CheckForUpdates().GetAwaiter().GetResult();
-            if (result == UpdateAvailability.AVAILABLE)
-            {
-                if (AppConfig.Instance.autoUpdate)
+                App.UpdateManager = new GitHubUpdateManager();
+                var result = App.UpdateManager.CheckForUpdates().GetAwaiter().GetResult();
+                if (result == UpdateAvailability.AVAILABLE)
                 {
-                    App.UpdateManager.StartUpdate();
-                    return;
-                }
-                else
-                {
-                    LocalizationManager.LoadLanguage(AppConfig.Instance.language);
-                    var dlg = MessageBox.Show(LocalizationManager.Current.Interface["Update_Available_Body"], LocalizationManager.Current.Interface["Update_Available_Title"], MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (dlg == MessageBoxResult.Yes)
+                    if (AppConfig.Instance.autoUpdate)
                     {
                         App.UpdateManager.StartUpdate();
                         return;
                     }
+                    else
+                    {
+                        LocalizationManager.LoadLanguage(AppConfig.Instance.language);
+                        var dlg = MessageBox.Show(LocalizationManager.Current.Interface["Update_Available_Body"], LocalizationManager.Current.Interface["Update_Available_Title"], MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (dlg == MessageBoxResult.Yes)
+                        {
+                            App.UpdateManager.StartUpdate();
+                            return;
+                        }
+                    }
                 }
-            }
 #else
                 Logger.Log("[APP] - DebugFast enabled! Skipping update check...", ELogLevel.DEBUG);
 #endif
@@ -110,13 +109,13 @@ namespace BowieD.Unturned.NPCMaker
 #if DEBUG
                 Logger.Log("[APP] - Opening MainWindow...");
 #else
-            Logger.Log("[APP] - Closing console and opening app...");
+                Logger.Log("[APP] - Closing console and opening app...");
 #endif
                 MainWindow mw = new MainWindow();
                 InitManagers();
 #if DEBUG
 #else
-            ConsoleLogger.HideConsoleWindow();
+                ConsoleLogger.HideConsoleWindow();
 #endif
                 mw.Show();
                 base.Run();

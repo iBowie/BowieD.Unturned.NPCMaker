@@ -1,5 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Logging;
-using System;
+﻿using System;
 
 namespace BowieD.Unturned.NPCMaker.Commands
 {

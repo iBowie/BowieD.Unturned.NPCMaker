@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using BowieD.Unturned.NPCMaker.NPC.Rewards;
+using System.Collections.Generic;
 using System.Xml.Serialization;
-using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.NPC

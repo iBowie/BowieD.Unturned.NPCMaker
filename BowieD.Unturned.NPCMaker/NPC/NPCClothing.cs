@@ -46,7 +46,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             get => glasses;
             set => glasses = value;
         }
-        private ushort 
+        private ushort
             hat,
             mask,
             top,

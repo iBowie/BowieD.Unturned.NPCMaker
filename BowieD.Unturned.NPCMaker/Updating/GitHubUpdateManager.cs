@@ -1,6 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Forms;
-using BowieD.Unturned.NPCMaker.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;

@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
-using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.XAML;
 using System;
 using System.Collections.Generic;

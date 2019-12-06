@@ -1,5 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Logging;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.IO;
 
 namespace BowieD.Unturned.NPCMaker.Data

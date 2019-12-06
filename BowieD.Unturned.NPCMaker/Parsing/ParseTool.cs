@@ -1,5 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Logging;
-using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.NPC.Conditions;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using System;
@@ -84,7 +83,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                     d.messages[mId].pages.Add(page);
                 }
                 d.messages[mId].conditions = ParseConditions($"Message_{mId}_");
-                d.responses[mId].rewards = ParseRewards($"Message_{mId}_");
+                d.messages[mId].rewards = ParseRewards($"Message_{mId}_");
             }
             d.responses = new List<NPCResponse>(asset.ReadByte("Responses"));
             for (byte rId = 0; rId < d.responses.Capacity; rId++)

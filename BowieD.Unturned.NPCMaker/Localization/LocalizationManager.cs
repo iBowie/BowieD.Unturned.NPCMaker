@@ -1,8 +1,6 @@
-﻿using BowieD.Unturned.NPCMaker.Logging;
-using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Windows;

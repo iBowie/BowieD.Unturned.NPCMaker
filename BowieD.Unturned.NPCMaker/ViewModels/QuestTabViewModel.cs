@@ -1,7 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
-using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using System.Collections.Generic;
@@ -103,9 +102,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.listQuestRewards.Children.Add(uil);
             }
         }
-        private ICommand 
-            saveCommand, 
-            openCommand, 
+        private ICommand
+            saveCommand,
+            openCommand,
             resetCommand,
             addConditionCommand,
             addRewardCommand;

@@ -29,7 +29,7 @@ namespace BowieD.Unturned.NPCMaker.Logging
         [DllImport("user32.dll")]
         static extern IntPtr RemoveMenu(IntPtr hMenu, uint nPosition, uint wFlags);
 
-        private const uint 
+        private const uint
             SC_CLOSE = 0xF060,
             MF_GRAYED = 0x00000001,
             MF_BYCOMMAND = 0x00000000;

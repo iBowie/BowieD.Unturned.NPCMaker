@@ -215,12 +215,12 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 }
             }
         }
-        private ICommand 
-            newProjectCommand, 
-            loadProjectCommand, 
-            saveProjectCommand, 
-            saveAsProjectCommand, 
-            exportProjectCommand, 
+        private ICommand
+            newProjectCommand,
+            loadProjectCommand,
+            saveProjectCommand,
+            saveAsProjectCommand,
+            exportProjectCommand,
             exitCommand,
             optionsCommand,
             feedBackSteamCommand,

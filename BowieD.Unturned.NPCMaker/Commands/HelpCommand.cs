@@ -1,6 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Logging;
-
-namespace BowieD.Unturned.NPCMaker.Commands
+﻿namespace BowieD.Unturned.NPCMaker.Commands
 {
     public class HelpCommand : Command
     {

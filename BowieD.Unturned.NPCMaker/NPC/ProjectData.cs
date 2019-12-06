@@ -1,6 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Data;
 using BowieD.Unturned.NPCMaker.Localization;
-using BowieD.Unturned.NPCMaker.Logging;
 using Microsoft.Win32;
 using System.IO;
 using System.Windows;

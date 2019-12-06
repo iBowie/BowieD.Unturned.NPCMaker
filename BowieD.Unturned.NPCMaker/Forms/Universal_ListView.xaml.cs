@@ -1,5 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Controls;
-using BowieD.Unturned.NPCMaker.Configuration;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Localization;
 using System;
 using System.Collections.Generic;

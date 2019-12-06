@@ -1,5 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Logging;
-using DiscordRPC;
+﻿using DiscordRPC;
 using System.Threading.Tasks;
 
 namespace BowieD.Unturned.NPCMaker.DiscordRPC

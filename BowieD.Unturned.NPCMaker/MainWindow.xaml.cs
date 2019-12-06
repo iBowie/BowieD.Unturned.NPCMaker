@@ -144,7 +144,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             #endregion
             #region CONTEXT MENUS
-            
+
             #endregion
             HolidayManager.Check();
             App.NotificationManager.Notify(LocalizationManager.Current.Notification["App_StartUp"]);
@@ -152,7 +152,7 @@ namespace BowieD.Unturned.NPCMaker
             base.Show();
         }
 
-        
+
         #region CONSTANTS
         public const int
         faceAmount = 32,

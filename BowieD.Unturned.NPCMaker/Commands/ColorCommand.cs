@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker.Coloring;
-using BowieD.Unturned.NPCMaker.Logging;
 using System.Linq;
 
 namespace BowieD.Unturned.NPCMaker.Commands
