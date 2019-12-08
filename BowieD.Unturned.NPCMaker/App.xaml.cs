@@ -1,6 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Common.Utility;
 using BowieD.Unturned.NPCMaker.Configuration;
-using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.Notification;
@@ -11,7 +10,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Threading;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -20,12 +18,10 @@ namespace BowieD.Unturned.NPCMaker
     /// </summary>
     public partial class App : Application
     {
-#if TRACE
+#if DEBUG
         internal static ELogLevel LogLevel => ELogLevel.TRACE;
-#elif DEBUG
-        internal static LogLevel LogLevel => LogLevel.DEBUG;
 #else
-        internal static LogLevel LogLevel => LogLevel.CRITICAL;
+        internal static ELogLevel LogLevel => ELogLevel.CRITICAL;
 #endif
         public static IUpdateManager UpdateManager { get; private set; }
         public static INotificationManager NotificationManager { get; private set; }
@@ -46,7 +42,6 @@ namespace BowieD.Unturned.NPCMaker
         public App()
         {
             InitializeComponent();
-            Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
         }
         public new void Run()
@@ -61,7 +56,7 @@ namespace BowieD.Unturned.NPCMaker
                 Logger.Log("This is free software, and you are welcome to redistribute it");
                 Logger.Log("under certain conditions; type `license c' for details.");
                 Logger.Log("[EXTRCT] - Extracting libraries...", ELogLevel.DEBUG);
-                #region COPY LIBS
+#region COPY LIBS
                 CopyResource(NPCMaker.Properties.Resources.DiscordRPC, AppConfig.Directory + "DiscordRPC.dll");
                 CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, AppConfig.Directory + "Newtonsoft.Json.dll");
                 CopyResource(NPCMaker.Properties.Resources.ControlzEx, AppConfig.Directory + "ControlzEx.dll");
@@ -74,12 +69,12 @@ namespace BowieD.Unturned.NPCMaker
                 CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_Metro, AppConfig.Directory + "Xceed.Wpf.AvalonDock.Themes.Metro.dll");
                 CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_VS2010, AppConfig.Directory + "Xceed.Wpf.AvalonDock.Themes.VS2010.dll");
                 CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_Toolkit, AppConfig.Directory + "Xceed.Wpf.Toolkit.dll");
-                #endregion
+#endregion
                 Logger.Log("[EXTRCT] - Extraction complete!", ELogLevel.DEBUG);
                 AppConfig.Instance.Load();
-                #region SCALE
+#region SCALE
                 Resources["Scale"] = AppConfig.Instance.scale;
-                #endregion
+#endregion
 #if !FAST
                 App.UpdateManager = new GitHubUpdateManager();
                 var result = App.UpdateManager.CheckForUpdates().GetAwaiter().GetResult();
@@ -136,15 +131,6 @@ namespace BowieD.Unturned.NPCMaker
         {
             UpdateManager = new GitHubUpdateManager();
             NotificationManager = new NotificationManager();
-        }
-
-        private void Current_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
-            AppCrashReport acr = new AppCrashReport(e.Exception);
-            acr.ShowDialog();
-            e.Handled = acr.Handle;
-            if (acr.Handle)
-                App.Logger.Log($"[ACR] - Ignoring exception {e.Exception.Message}.", ELogLevel.WARNING);
         }
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {

@@ -10,7 +10,10 @@ namespace BowieD.Unturned.NPCMaker.Commands
         public override string Syntax => "";
         public override void Execute(string[] args)
         {
-            throw new Exception("User executed a crash!");
+            MainWindow.Instance.Dispatcher.Invoke(() =>
+            {
+                throw new Exception("User crashed the app");
+            });
         }
     }
 }

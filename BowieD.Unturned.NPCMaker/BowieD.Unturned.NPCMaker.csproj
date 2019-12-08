@@ -64,6 +64,8 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx">
@@ -144,6 +146,7 @@
     <Compile Include="Commands\ParseCommand.cs" />
     <Compile Include="Commands\ShutdownCommand.cs" />
     <Compile Include="Common\ContextHelper.cs" />
+    <Compile Include="Common\Utility\DebugUtility.cs" />
     <Compile Include="Common\Utility\NETHelper.cs" />
     <Compile Include="Controls\Dialogue_Response.xaml.cs">
       <DependentUpon>Dialogue_Response.xaml</DependentUpon>
@@ -167,9 +170,6 @@
     <Compile Include="Data\RecentFileList.cs" />
     <Compile Include="Data\UserColorsList.cs" />
     <Compile Include="Data\XmlData.cs" />
-    <Compile Include="Forms\AppCrashReport.xaml.cs">
-      <DependentUpon>AppCrashReport.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CrashCommand.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
@@ -340,10 +340,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Dialogue_Message_Page.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Forms\AppCrashReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
