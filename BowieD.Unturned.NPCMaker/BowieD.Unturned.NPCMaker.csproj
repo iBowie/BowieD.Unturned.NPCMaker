@@ -323,6 +323,8 @@
     <Compile Include="ViewModels\QuestTabViewModel.cs" />
     <Compile Include="ViewModels\VendorTabViewModel.cs" />
     <Compile Include="XAML\EnumItemsSource.cs" />
+    <Compile Include="XAML\LocalizationConverter.cs" />
+    <Compile Include="XAML\LocalizeExtension.cs" />
     <Page Include="Controls\Dialogue_Response.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
