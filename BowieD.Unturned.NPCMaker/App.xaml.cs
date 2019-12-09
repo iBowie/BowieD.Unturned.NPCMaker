@@ -101,18 +101,7 @@ namespace BowieD.Unturned.NPCMaker
 #endif
                 if (!LocalizationManager.IsLoaded)
                     LocalizationManager.LoadLanguage(AppConfig.Instance.language);
-#if DEBUG
-                Logger.Log("[APP] - Opening MainWindow...");
-#else
-                Logger.Log("[APP] - Closing console and opening app...");
-#endif
-                MainWindow mw = new MainWindow();
-                InitManagers();
-#if DEBUG
-#else
-                ConsoleLogger.HideConsoleWindow();
-#endif
-                mw.Show();
+                PostRun();
                 base.Run();
             }
             else
@@ -120,6 +109,21 @@ namespace BowieD.Unturned.NPCMaker
                 Logger.Log("You have to install .NET Framework 4.7.2 to run this app properly.", ELogLevel.CRITICAL);
                 Console.ReadKey(true);
             }
+        }
+        public static void PostRun()
+        {
+#if DEBUG
+            Logger.Log("[APP] - Opening MainWindow...");
+#else
+                Logger.Log("[APP] - Closing console and opening app...");
+#endif
+            MainWindow mw = new MainWindow();
+            InitManagers();
+#if DEBUG
+#else
+                ConsoleLogger.HideConsoleWindow();
+#endif
+            mw.Show();
         }
         public static void InitLoggers()
         {
