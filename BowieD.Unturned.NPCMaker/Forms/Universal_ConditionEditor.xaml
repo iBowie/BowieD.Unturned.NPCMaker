@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
         xmlns:NPCMaker="clr-namespace:BowieD.Unturned.NPCMaker" x:Class="BowieD.Unturned.NPCMaker.Forms.Universal_ConditionEditor"
         mc:Ignorable="d"
-        Title="{DynamicResource INTERFACE_Editor_Condition_Title}"
+        Title="{xaml:Localize Key=INTERFACE_Editor_Condition_Title}"
         Height="240" 
         Width="300"
         Icon="{DynamicResource app_Icon}">
@@ -15,12 +16,12 @@
             <ScaleTransform x:Name="gridScale"/>
         </Grid.LayoutTransform>
         <ComboBox SelectionChanged="TypeBox_SelectionChanged" x:Name="typeBox" VerticalAlignment="Top" Height="24" Margin="10,41,10,0"/>
-        <GroupBox Header="{DynamicResource INTERFACE_Editor_Condition_Params}" Margin="10,70,10,47">
+        <GroupBox Header="{xaml:Localize Key=INTERFACE_Editor_Condition_Params}" Margin="10,70,10,47">
             <ScrollViewer>
                 <StackPanel x:Name="variablesGrid"/>
             </ScrollViewer>
         </GroupBox>
-        <Label HorizontalContentAlignment="Center" Content="{DynamicResource INTERFACE_Editor_Condition_Type}" Margin="10,10,10,0" VerticalAlignment="Top"/>
-        <Button x:Name="saveButton" Click="Button_Click" Height="32" Margin="10,0,10,10" VerticalAlignment="Bottom" Content="{DynamicResource INTERFACE_Editor_Condition_Save}"/>
+        <Label HorizontalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Editor_Condition_Type}" Margin="10,10,10,0" VerticalAlignment="Top"/>
+        <Button x:Name="saveButton" Click="Button_Click" Height="32" Margin="10,0,10,10" VerticalAlignment="Bottom" Content="{xaml:Localize Key=INTERFACE_Editor_Condition_Save}"/>
     </Grid>
 </Window>

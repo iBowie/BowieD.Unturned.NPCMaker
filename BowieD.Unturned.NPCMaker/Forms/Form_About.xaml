@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
         mc:Ignorable="d"
-        Title="{DynamicResource INTERFACE_App_About_Title}" Height="200" Width="200" ResizeMode="NoResize" Icon="{DynamicResource app_Icon}">
+        Title="{xaml:Localize Key=INTERFACE_App_About_Title}" Height="200" Width="200" ResizeMode="NoResize" Icon="{DynamicResource app_Icon}">
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform x:Name="gridScale"/>

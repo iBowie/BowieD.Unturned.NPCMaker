@@ -7,37 +7,38 @@
         xmlns:npc="clr-namespace:BowieD.Unturned.NPCMaker.NPC"
         xmlns:bettercontrols="clr-namespace:BowieD.Unturned.NPCMaker.Controls"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
         mc:Ignorable="d"
-        Title="{DynamicResource INTERFACE_Editor_VendorItem_Title}" ResizeMode="NoResize" Height="334" Width="300" Icon="{DynamicResource app_Icon}">
+        Title="{xaml:Localize Key=INTERFACE_Editor_VendorItem_Title}" ResizeMode="NoResize" Height="334" Width="300" Icon="{DynamicResource app_Icon}">
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform x:Name="gridScale"/>
         </Grid.LayoutTransform>
-        <Label Height="28" Margin="10,10" VerticalAlignment="Top" HorizontalContentAlignment="Center" Content="{DynamicResource VENDORITEM_Type}"/>
+        <Label Height="28" Margin="10,10" VerticalAlignment="Top" HorizontalContentAlignment="Center" Content="{xaml:Localize Key=VENDORITEM_Type}"/>
         <ComboBox Name="typeBox" SelectionChanged="TypeBox_SelectionChanged" Height="28" VerticalAlignment="Top" Margin="10,43,10,0">
-            <ComboBoxItem Content="{DynamicResource VENDORITEM_Type_Item}">
+            <ComboBoxItem Content="{xaml:Localize Key=VENDORITEM_Type_Item}">
                 <ComboBoxItem.Tag>
                     <npc:ItemType>Item</npc:ItemType>
                 </ComboBoxItem.Tag>
             </ComboBoxItem>
-            <ComboBoxItem Content="{DynamicResource VENDORITEM_Type_Vehicle}">
+            <ComboBoxItem Content="{xaml:Localize Key=VENDORITEM_Type_Vehicle}">
                 <ComboBoxItem.Tag>
                     <npc:ItemType>Vehicle</npc:ItemType>
                 </ComboBoxItem.Tag>
             </ComboBoxItem>
         </ComboBox>
-        <Label Height="28" Margin="10,76,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Content="{DynamicResource VENDORITEM_SellType}"/>
+        <Label Height="28" Margin="10,76,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Content="{xaml:Localize Key=VENDORITEM_SellType}"/>
         <ComboBox Name="sellBox" Height="28" VerticalAlignment="Top" Margin="10,109,10,0">
-            <ComboBoxItem Content="{DynamicResource VENDORITEM_SellType_Buy}" Tag="BUY" />
-            <ComboBoxItem Content="{DynamicResource VENDORITEM_SellType_Sell}" Tag="SELL"/>
+            <ComboBoxItem Content="{xaml:Localize Key=VENDORITEM_SellType_Buy}" Tag="BUY" />
+            <ComboBoxItem Content="{xaml:Localize Key=VENDORITEM_SellType_Sell}" Tag="SELL"/>
         </ComboBox>
-        <Button Click="EditConditions_Click" Height="28" Content="{DynamicResource VENDORITEM_Conditions}" Margin="10,142,10,0" VerticalAlignment="Top"/>
+        <Button Click="EditConditions_Click" Height="28" Content="{xaml:Localize Key=VENDORITEM_Conditions}" Margin="10,142,10,0" VerticalAlignment="Top"/>
         <mah:NumericUpDown ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" x:Name="txtBoxID" HorizontalAlignment="Right" Height="23" Margin="0,175,10,0" VerticalAlignment="Top" Width="100"/>
         <mah:NumericUpDown ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="4294967295" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" x:Name="txtBoxCost" HorizontalAlignment="Right" Height="23" Margin="0,206,10,0" VerticalAlignment="Top" Width="100"/>
         <TextBox Name="txtBoxSpawnpoint" HorizontalAlignment="Right" Height="23" Margin="0,237,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="100"/>
-        <Label Name="labelSpawnpoint" Content="{DynamicResource VENDORITEM_Spawnpoint}" HorizontalAlignment="Left" Margin="10,237,0,0" VerticalAlignment="Top" Width="169"/>
-        <Button Click="SaveButton_Click" Content="{DynamicResource INTERFACE_Editor_VendorItem_Save}" Margin="10,0,10,10" Height="26" VerticalAlignment="Bottom"/>
-        <Label Content="{DynamicResource VENDORITEM_ID}" HorizontalAlignment="Left" Margin="10,175,0,0" VerticalAlignment="Top" Width="169"/>
-        <Label Content="{DynamicResource VENDORITEM_Cost}" HorizontalAlignment="Left" Margin="10,206,0,0" VerticalAlignment="Top" Width="169"/>
+        <Label Name="labelSpawnpoint" Content="{xaml:Localize Key=VENDORITEM_Spawnpoint}" HorizontalAlignment="Left" Margin="10,237,0,0" VerticalAlignment="Top" Width="169"/>
+        <Button Click="SaveButton_Click" Content="{xaml:Localize Key=INTERFACE_Editor_VendorItem_Save}" Margin="10,0,10,10" Height="26" VerticalAlignment="Bottom"/>
+        <Label Content="{xaml:Localize Key=VENDORITEM_ID}" HorizontalAlignment="Left" Margin="10,175,0,0" VerticalAlignment="Top" Width="169"/>
+        <Label Content="{xaml:Localize Key=VENDORITEM_Cost}" HorizontalAlignment="Left" Margin="10,206,0,0" VerticalAlignment="Top" Width="169"/>
     </Grid>
 </Window>

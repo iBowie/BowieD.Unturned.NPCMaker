@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Configuration"
         xmlns:npcmaker="clr-namespace:BowieD.Unturned.NPCMaker"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
         mc:Ignorable="d"
-        Title="{DynamicResource GENERAL_Configuration_Title}" Icon="{DynamicResource app_Icon}" Height="240" Width="480">
+        Title="{xaml:Localize Key=GENERAL_Configuration_Title}" Icon="{DynamicResource app_Icon}" Height="240" Width="480">
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
@@ -16,39 +17,39 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TabControl TabStripPlacement="Left" Margin="10,10,10,10">
-            <TabItem Header="{DynamicResource INTERFACE_Configuration_Tab_General}">
+            <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_General}">
                 <StackPanel Margin="5" CanVerticallyScroll="True">
                     <Grid Margin="2.5">
-                        <Label Content="{DynamicResource OPTIONS_autosaveOption}"/>
+                        <Label Content="{xaml:Localize Key=OPTIONS_autosaveOption}"/>
                         <ComboBox SelectedIndex="1" Name="Autosave_Box" HorizontalAlignment="Right">
-                            <ComboBoxItem Content="{DynamicResource OPTIONS_autosaveOption_0}"/>
-                            <ComboBoxItem Content="{DynamicResource OPTIONS_autosaveOption_1}"/>
-                            <ComboBoxItem Content="{DynamicResource OPTIONS_autosaveOption_2}"/>
-                            <ComboBoxItem Content="{DynamicResource OPTIONS_autosaveOption_3}"/>
-                            <ComboBoxItem Content="{DynamicResource OPTIONS_autosaveOption_4}"/>
-                            <ComboBoxItem Content="{DynamicResource OPTIONS_autosaveOption_5}"/>
+                            <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_0}"/>
+                            <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_1}"/>
+                            <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_2}"/>
+                            <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_3}"/>
+                            <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_4}"/>
+                            <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_5}"/>
                         </ComboBox>
                     </Grid>
                     <Grid Margin="2.5">
-                        <Label Content="{DynamicResource OPTIONS_language}"/>
+                        <Label Content="{xaml:Localize Key=OPTIONS_language}"/>
                         <ComboBox Name="Languages_Box" HorizontalAlignment="Right"/>
                     </Grid>
                     <Grid Margin="2.5">
-                        <CheckBox Name="Generate_GUIDS_Box" Content="{DynamicResource OPTIONS_generateGuids}"/>
+                        <CheckBox Name="Generate_GUIDS_Box" Content="{xaml:Localize Key=OPTIONS_generateGuids}"/>
                     </Grid>
                     <Grid Margin="2.5">
-                        <CheckBox Name="Autoupdate_Box" Content="{DynamicResource OPTIONS_autoUpdate}"/>
+                        <CheckBox Name="Autoupdate_Box" Content="{xaml:Localize Key=OPTIONS_autoUpdate}"/>
                     </Grid>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="{DynamicResource INTERFACE_Configuration_Tab_Interface}">
+            <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Interface}">
                 <StackPanel Margin="5" CanVerticallyScroll="True">
                     <Grid Margin="2.5">
-                        <Label Content="{DynamicResource OPTIONS_currentTheme}"/>
+                        <Label Content="{xaml:Localize Key=OPTIONS_currentTheme}"/>
                         <ComboBox SelectedIndex="0" HorizontalAlignment="Right" Name="Selected_Theme_Box"/>
                     </Grid>
                     <Grid Margin="2.5">
-                        <Label Content="{DynamicResource OPTIONS_scale}"/>
+                        <Label Content="{xaml:Localize Key=OPTIONS_scale}"/>
                         <ComboBox SelectedIndex="1" Name="Scale_Box" HorizontalAlignment="Right">
                             <ComboBoxItem Tag="0.75" Content="75%"/>
                             <ComboBoxItem Tag="1" Content="100%"/>
@@ -57,20 +58,20 @@
                             <ComboBoxItem Tag="2" Content="200%"/>
                         </ComboBox>
                     </Grid>
-                    <CheckBox Content="{DynamicResource OPTIONS_animateControls}" Name="Animation_Enabled_Box" VerticalAlignment="Top" Margin="2.5"/>
+                    <CheckBox Content="{xaml:Localize Key=OPTIONS_animateControls}" Name="Animation_Enabled_Box" VerticalAlignment="Top" Margin="2.5"/>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="{DynamicResource INTERFACE_Configuration_Tab_Misc}">
+            <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Misc}">
                 <StackPanel Margin="5" CanVerticallyScroll="True">
-                    <CheckBox Name="Discord_Enabled_Box" VerticalAlignment="Top" Margin="2.5" Content="{DynamicResource OPTIONS_enableDiscord}"/>
-                    <CheckBox Name="Experimental_Box" VerticalAlignment="Top" Margin="2.5" Content="{DynamicResource OPTIONS_experimentalFeatures}"/>
+                    <CheckBox Name="Discord_Enabled_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_enableDiscord}"/>
+                    <CheckBox Name="Experimental_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_experimentalFeatures}"/>
                 </StackPanel>
             </TabItem>
         </TabControl>
         <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Click="ResetButton_Click" HorizontalAlignment="Right" Margin="0,0,10,0" Content="{DynamicResource INTERFACE_Configuration_Menu_Default}"/>
-            <Button Click="CancelButton_Click" HorizontalAlignment="Right" Margin="0,0,10,0" Content="{DynamicResource INTERFACE_Configuration_Menu_Cancel}"/>
-            <Button Click="SaveButton_Click" HorizontalAlignment="Right" Margin="0,0,0,0" Content="{DynamicResource INTERFACE_Configuration_Menu_Save}"/>
+            <Button Click="ResetButton_Click" HorizontalAlignment="Right" Margin="0,0,10,0" Content="{xaml:Localize Key=INTERFACE_Configuration_Menu_Default}"/>
+            <Button Click="CancelButton_Click" HorizontalAlignment="Right" Margin="0,0,10,0" Content="{xaml:Localize Key=INTERFACE_Configuration_Menu_Cancel}"/>
+            <Button Click="SaveButton_Click" HorizontalAlignment="Right" Margin="0,0,0,0" Content="{xaml:Localize Key=INTERFACE_Configuration_Menu_Save}"/>
         </StackPanel>
     </Grid>
 </Window>
