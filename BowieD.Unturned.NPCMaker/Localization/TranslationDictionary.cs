@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BowieD.Unturned.NPCMaker.Localization
 {
@@ -16,13 +17,28 @@ namespace BowieD.Unturned.NPCMaker.Localization
             if (this.ContainsKey(key))
             {
                 string line = base[key];
+                if (line == null)
+                    App.Logger.Log($"Key '{key}' has null translation.", Logging.ELogLevel.WARNING);
                 if (args?.Length > 0)
-                    return string.Format(line, args);
+                {
+                    try
+                    {
+                        return string.Format(line, args);
+                    }
+                    catch (Exception ex)
+                    {
+                        App.Logger.LogException($"Unable to translate key '{key}' in {LocalizationManager.Current.Name}", Logging.ELogLevel.ERROR, ex);
+                        return key;
+                    }
+                }
                 else
                     return line;
             }
             else
+            {
+                App.Logger.Log($"Missing translation key '{key}' in {LocalizationManager.Current.Name}", Logging.ELogLevel.WARNING);
                 return key;
+            }
         }
     }
 }

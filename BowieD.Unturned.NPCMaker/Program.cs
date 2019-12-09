@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Common.Utility;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace BowieD.Unturned.NPCMaker
@@ -12,6 +13,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             try
             {
+                SetupExceptionHandling();
                 var app = new App();
                 app.InitializeComponent();
                 app.Run();
@@ -22,10 +24,20 @@ namespace BowieD.Unturned.NPCMaker
             }
         }
 
-        internal static void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        internal static void SetupExceptionHandling()
         {
-            e.Handled = true;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
+        }
+
+        static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        {
             DisplayException(e.Exception);
+        }
+
+        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            DisplayException((Exception)e.ExceptionObject);
         }
 
         static void DisplayException(Exception e)
