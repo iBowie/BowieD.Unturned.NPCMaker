@@ -21,6 +21,7 @@ namespace BowieD.Unturned.NPCMaker
             catch (Exception e)
             {
                 DisplayException(e);
+                SaveToCrashException(e);
             }
         }
 
@@ -33,14 +34,24 @@ namespace BowieD.Unturned.NPCMaker
         static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
             DisplayException(e.Exception);
+            SaveToCrashException(e.Exception);
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             DisplayException((Exception)e.ExceptionObject);
+            SaveToCrashException((Exception)e.ExceptionObject);
         }
 
         static void DisplayException(Exception e)
+        {
+            try
+            {
+                MessageBox.Show(e.ToString(), "NPC Maker Crashed");
+            }
+            catch { }
+        }
+        static void SaveToCrashException(Exception e)
         {
             try
             {
@@ -50,7 +61,6 @@ namespace BowieD.Unturned.NPCMaker
                     writer.WriteLine();
                     writer.WriteLine(e);
                 }
-                MessageBox.Show(e.ToString(), "NPC Maker Crashed");
             }
             catch { }
         }
