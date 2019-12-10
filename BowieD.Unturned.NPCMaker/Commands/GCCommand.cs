@@ -1,5 +1,4 @@
 ﻿#if DEBUG
-using BowieD.Unturned.NPCMaker.Logging;
 using System;
 using System.Runtime;
 

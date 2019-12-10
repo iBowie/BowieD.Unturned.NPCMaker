@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
-using System;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {

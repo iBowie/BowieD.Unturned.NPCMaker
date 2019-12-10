@@ -56,7 +56,7 @@ namespace BowieD.Unturned.NPCMaker
                 Logger.Log("This is free software, and you are welcome to redistribute it");
                 Logger.Log("under certain conditions; type `license c' for details.");
                 Logger.Log("[EXTRCT] - Extracting libraries...", ELogLevel.DEBUG);
-#region COPY LIBS
+                #region COPY LIBS
                 CopyResource(NPCMaker.Properties.Resources.DiscordRPC, AppConfig.Directory + "DiscordRPC.dll");
                 CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, AppConfig.Directory + "Newtonsoft.Json.dll");
                 CopyResource(NPCMaker.Properties.Resources.ControlzEx, AppConfig.Directory + "ControlzEx.dll");
@@ -69,12 +69,12 @@ namespace BowieD.Unturned.NPCMaker
                 CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_Metro, AppConfig.Directory + "Xceed.Wpf.AvalonDock.Themes.Metro.dll");
                 CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_VS2010, AppConfig.Directory + "Xceed.Wpf.AvalonDock.Themes.VS2010.dll");
                 CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_Toolkit, AppConfig.Directory + "Xceed.Wpf.Toolkit.dll");
-#endregion
+                #endregion
                 Logger.Log("[EXTRCT] - Extraction complete!", ELogLevel.DEBUG);
                 AppConfig.Instance.Load();
-#region SCALE
+                #region SCALE
                 Resources["Scale"] = AppConfig.Instance.scale;
-#endregion
+                #endregion
 #if !FAST
                 App.UpdateManager = new GitHubUpdateManager();
                 var result = App.UpdateManager.CheckForUpdates().GetAwaiter().GetResult();
