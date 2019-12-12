@@ -5,6 +5,26 @@ namespace BowieD.Unturned.NPCMaker.Managers
 {
     public static class HolidayManager
     {
+        private static HashSet<DayMonth> days;
+        static HolidayManager()
+        {
+            days = new HashSet<DayMonth>()
+            {
+                new DayMonth("Happy Birthday, BowieD!", 22, MAR),
+                new DayMonth("Happy Birthday, DimesAO!", 30, NOV),
+                new DayMonth("Happy New Year's Eve!", 31, DEC),
+                new DayMonth("Happy New Year!", 1, JAN),
+                new DayMonth("April Fools!", 1, APR),
+                new DayMonth("Happy Birthday, Зефирка!", 7, MAY),
+                new DayMonth("May the force be with you...", 4, APR),
+                new DayMonth("Happy Birthday, Minecraft!", 17, MAY),
+                new DayMonth("Life is Strange...", 11, OCT),
+                new DayMonth("Happy Anniversary, Sonic The Hedgehog!", 23, JUN),
+                new DayMonth("Happy Birthday, Terraria!", 16, MAY),
+                new DayMonthYear("They CAN stop all of us...", 20, SEP, 2019),
+                new DayMonthRange("Spooky!", 20, OCT, 1, NOV)
+            };
+        }
         private const int
             JAN = 1,
             FEB = 2,
@@ -20,19 +40,8 @@ namespace BowieD.Unturned.NPCMaker.Managers
             DEC = 12;
         private static IEnumerable<DayMonth> Holidays()
         {
-            yield return new DayMonth("Happy Birthday, BowieD!", 22, MAR);
-            yield return new DayMonth("Happy Birthday, DimesAO!", 30, NOV);
-            yield return new DayMonth("Happy New Year's Eve!", 31, DEC);
-            yield return new DayMonth("Happy New Year!", 1, JAN);
-            yield return new DayMonth("April Fools!", 1, APR);
-            yield return new DayMonth("Happy Birthday, Зефирка!", 7, MAY);
-            yield return new DayMonth("May the force be with you...", 4, APR);
-            yield return new DayMonth("Happy Birthday, Minecraft!", 17, MAY);
-            yield return new DayMonth("Life is Strange...", 11, OCT);
-            yield return new DayMonth("Happy Anniversary, Sonic The Hedgehog!", 23, JUN);
-            yield return new DayMonth("Happy Birthday, Terraria!", 16, MAY);
-            yield return new DayMonthYear("They CAN stop all of us...", 20, SEP, 2019);
-            yield return new DayMonthRange("Spooky!", 20, OCT, 1, NOV);
+            foreach (var k in days)
+                yield return k;
         }
         public static void Check()
         {
@@ -41,31 +50,10 @@ namespace BowieD.Unturned.NPCMaker.Managers
             int year = DateTime.Now.Year;
             foreach (var k in Holidays())
             {
-                if (k is DayMonthYear dmy)
+                if (k.Check())
                 {
-                    if (dmy.Day == day && dmy.Month == month && dmy.Year == year)
-                    {
-                        App.NotificationManager.Notify(dmy.Text);
-                        dmy.OnCheck?.Invoke();
-                    }
-                }
-                else if (k is DayMonthRange dmr)
-                {
-                    var endDate = new DateTime(year, dmr.EndMonth, dmr.EndDay);
-                    var startDate = new DateTime(year, dmr.Month, dmr.Day);
-                    if (DateTime.Now > startDate && DateTime.Now < endDate)
-                    {
-                        App.NotificationManager.Notify(dmr.Text);
-                        dmr.OnCheck?.Invoke();
-                    }
-                }
-                else
-                {
-                    if (k.Day == day && k.Month == month)
-                    {
-                        App.NotificationManager.Notify(k.Text);
-                        k.OnCheck?.Invoke();
-                    }
+                    App.NotificationManager.Notify(k.Text);
+                    k.OnCheck?.Invoke();
                 }
             }
         }
@@ -81,6 +69,10 @@ namespace BowieD.Unturned.NPCMaker.Managers
             public int Day { get; set; }
             public int Month { get; set; }
             public Action OnCheck { get; }
+            public virtual bool Check()
+            {
+                return Day == DateTime.Now.Day && Month == DateTime.Now.Month;
+            }
         }
         private class DayMonthYear : DayMonth
         {
@@ -89,6 +81,10 @@ namespace BowieD.Unturned.NPCMaker.Managers
                 this.Year = year;
             }
             public int Year { get; set; }
+            public override bool Check()
+            {
+                return base.Check() && DateTime.Now.Year == Year;
+            }
         }
         private class DayMonthRange : DayMonth
         {
@@ -99,6 +95,12 @@ namespace BowieD.Unturned.NPCMaker.Managers
             }
             public int EndDay { get; set; }
             public int EndMonth { get; set; }
+            public override bool Check()
+            {
+                var endDate = new DateTime(DateTime.Now.Year, EndMonth, EndDay);
+                var startDate = new DateTime(DateTime.Now.Year, Month, Day);
+                return (DateTime.Now > startDate && DateTime.Now < endDate);
+            }
         }
     }
 }
