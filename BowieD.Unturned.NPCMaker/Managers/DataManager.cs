@@ -6,7 +6,6 @@ namespace BowieD.Unturned.NPCMaker.Managers
     {
         private static RecentFileList recentFile;
         private static UserColorsList userColors;
-        private static NPCNamePoolData namePool;
 
         public static RecentFileList RecentFileData 
         {
