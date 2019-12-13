@@ -189,14 +189,12 @@ namespace BowieD.Unturned.NPCMaker
         }
         public static void AddToRecentList(string path)
         {
-            RecentFileList recent = new RecentFileList();
-            recent.Load(new string[0]);
-            if (!recent.data.Contains(MainWindow.CurrentProject.file))
+            if (!DataManager.RecentFileData.data.Contains(MainWindow.CurrentProject.file))
             {
-                var r = recent.data.AsEnumerable();
+                var r = DataManager.RecentFileData.data.AsEnumerable();
                 r = r.Prepend(path);
-                recent.data = r.ToArray();
-                recent.Save();
+                DataManager.RecentFileData.data = r.ToArray();
+                DataManager.RecentFileData.Save();
             }
             Instance.RefreshRecentList();
         }
@@ -239,11 +237,9 @@ namespace BowieD.Unturned.NPCMaker
         #endregion
         public void RefreshRecentList()
         {
-            RecentFileList recent = new RecentFileList();
-            recent.Load(new string[0]);
             RecentList.Items.Clear();
-            recent.data = recent.data.Where(d => File.Exists(d)).ToArray();
-            foreach (var k in recent.data)
+            DataManager.RecentFileData.data = DataManager.RecentFileData.data.Where(d => File.Exists(d)).ToArray();
+            foreach (var k in DataManager.RecentFileData.data)
             {
                 var mItem = new MenuItem()
                 {
@@ -267,7 +263,7 @@ namespace BowieD.Unturned.NPCMaker
                 });
                 RecentList.Items.Add(mItem);
             }
-            if (recent.data.Length > 0)
+            if (DataManager.RecentFileData.data.Length > 0)
             {
                 RecentList.Items.Add(new Separator());
                 var mItem = new MenuItem()
@@ -277,13 +273,13 @@ namespace BowieD.Unturned.NPCMaker
                 };
                 mItem.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
                 {
-                    recent.data = new string[0];
-                    recent.Save();
+                    DataManager.RecentFileData.data = new string[0];
+                    DataManager.RecentFileData.Save();
                     RefreshRecentList();
                 });
                 RecentList.Items.Add(mItem);
             }
-            recent.Save();
+            DataManager.RecentFileData.Save();
         }
 
         public static void PerformExit()

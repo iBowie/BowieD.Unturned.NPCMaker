@@ -218,6 +218,7 @@
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\ILoggingManager.cs" />
     <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="Managers\DataManager.cs" />
     <Compile Include="Managers\HolidayManager.cs" />
     <Compile Include="Logging\LoggingManager.cs" />
     <Compile Include="Mistakes\Character\NE_0001.cs" />

@@ -5,7 +5,7 @@ namespace BowieD.Unturned.NPCMaker.Managers
 {
     public static class HolidayManager
     {
-        private static HashSet<DayMonth> days;
+        private static readonly HashSet<DayMonth> days;
         static HolidayManager()
         {
             days = new HashSet<DayMonth>()
