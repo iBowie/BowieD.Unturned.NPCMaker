@@ -77,7 +77,7 @@ namespace BowieD.Unturned.NPCMaker
                 #endregion
 #if !FAST
                 App.UpdateManager = new GitHubUpdateManager();
-                var result = App.UpdateManager.CheckForUpdates().GetAwaiter().GetResult();
+                var result = App.UpdateManager.CheckForUpdates(AppConfig.Instance.downloadPrerelease).GetAwaiter().GetResult();
                 if (result == UpdateAvailability.AVAILABLE)
                 {
                     if (AppConfig.Instance.autoUpdate)

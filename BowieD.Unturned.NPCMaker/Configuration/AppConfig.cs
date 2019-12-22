@@ -23,6 +23,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public byte autosaveOption;
         public bool animateControls;
         public bool autoUpdate;
+        public bool downloadPrerelease;
 
         public void Save()
         {
@@ -68,6 +69,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             experimentalFeatures = false;
             animateControls = true;
             autoUpdate = true;
+            downloadPrerelease = false;
             ELanguage c = LocalizationManager.GetLanguageFromCultureInfo(CultureInfo.InstalledUICulture);
             if (LocalizationManager.SupportedLanguages().Contains(c))
                 language = c;

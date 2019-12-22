@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -12,43 +13,25 @@ namespace BowieD.Unturned.NPCMaker.Updating
 {
     public class GitHubUpdateManager : IUpdateManager
     {
-        public const string ReleasesUrl = "https://api.github.com/repos/iBowie/BowieD.Unturned.NPCMaker/releases/latest";
+        public const string ReleasesUrl = "https://api.github.com/repos/iBowie/BowieD.Unturned.NPCMaker/releases";
         public const string UpdaterReleasesUrl = "https://api.github.com/repos/iBowie/BowieD.Unturned.NPCMaker.Updater/releases/latest";
         private static bool DownloadUpdater()
         {
             App.Logger.Log("[UPDATE] - Downloading updater");
             try
             {
-                App.Logger.Log("[UPDATE] - Creating HTTP request to GitHub...");
-                var httpRequest = (HttpWebRequest)WebRequest.Create(UpdaterReleasesUrl);
-                httpRequest.UserAgent =
-                    "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36";
-                App.Logger.Log("[UPDATE] - Waiting for response...");
-                var respStream = httpRequest.GetResponse().GetResponseStream();
-                App.Logger.Log("[UPDATE] - Reading response...");
-
-                if (respStream == null)
+                using (WebClient client = new WebClient())
                 {
-                    App.Logger.Log("[UPDATE] - Response is empty");
-                    throw new Exception("request returned null response");
-                }
-
-                using (var reader = new StreamReader(respStream))
-                {
-                    var jsonData = reader.ReadToEnd();
-                    var jsonObj = JObject.Parse(jsonData);
-
-                    var assets = jsonObj.GetValue("assets").Children<JObject>();
-                    App.Logger.Log("[UPDATE] - Downloading updater");
-
-                    using (WebClient wc = new WebClient())
+                    client.Headers.Add(HttpRequestHeader.UserAgent, "NPCMaker");
+                    string content = client.DownloadString(UpdaterReleasesUrl);
+                    var manifest = JsonConvert.DeserializeObject<UpdateManifest>(content);
+                    var data = client.DownloadData(manifest.assets[0].browser_download_url);
                     using (FileStream fs = new FileStream(AppConfig.Directory + "updater.exe", FileMode.Create))
                     {
-                        byte[] data = wc.DownloadData(assets.First().GetValue("browser_download_url").ToString());
                         fs.Write(data, 0, data.Length);
                     }
+                    return true;
                 }
-                return true;
             }
             catch (Exception ex)
             {
@@ -70,12 +53,12 @@ namespace BowieD.Unturned.NPCMaker.Updating
                 App.Logger.Log("[UPDATE] - Could not start update. Missing updater.");
             }
         }
-        public async Task<UpdateAvailability> CheckForUpdates()
+        public async Task<UpdateAvailability> CheckForUpdates(bool checkForPrerelease)
         {
             try
             {
                 await App.Logger.Log("[UPDATE] - Getting update manifest...");
-                var manifest = await GetManifest();
+                var manifest = await GetManifest(checkForPrerelease);
                 await App.Logger.Log("[UPDATE] - Got update manifest");
                 Version latestVers = Version.Parse(manifest.Value.tag_name);
                 Whats_New.UpdateTitle = manifest.Value.name;
@@ -98,50 +81,44 @@ namespace BowieD.Unturned.NPCMaker.Updating
             }
         }
 
-        private async Task<UpdateManifest?> GetManifest()
+        private async Task<UpdateManifest?> GetManifest(bool usePrerelease)
         {
-            if (File.Exists(AppConfig.Directory + "update.manifest"))
+            List<UpdateManifest> manifests = await GetManifests();
+            UpdateManifest? latestManifest;
+            await App.Logger.Log($"[UPDATE] - Use prerelease: {usePrerelease}");
+            if (usePrerelease)
             {
-                await App.Logger.Log("[UPDATE] - Deleting old update manifest...");
-                File.Delete(AppConfig.Directory + "update.manifest");
-                await App.Logger.Log("[UPDATE] - Deleted");
+                latestManifest = manifests.FirstOrDefault();
             }
-            try
+            else
             {
-                await App.Logger.Log("[UPDATE] - Creating HTTP request to GitHub...");
-                var httpRequest = (HttpWebRequest)WebRequest.Create(ReleasesUrl);
-                httpRequest.UserAgent =
-                    "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36";
-                await App.Logger.Log("[UPDATE] - Waiting for response...");
-                using (var webResponse = await httpRequest.GetResponseAsync())
-                {
-                    await App.Logger.Log("[UPDATE] - Reading response...");
-                    var respStream = webResponse.GetResponseStream();
-
-                    if (respStream == null)
-                    {
-                        await App.Logger.Log("[UPDATE] - Response is empty");
-                        return null;
-                    }
-                    await App.Logger.Log("[UPDATE] - Response is not empty");
-                    UpdateManifest? manifest = null;
-                    using (var reader = new StreamReader(respStream))
-                    {
-                        await App.Logger.Log("[UPDATE] - Converting response to manifest");
-                        var jsonData = reader.ReadToEnd();
-                        manifest = JsonConvert.DeserializeObject<UpdateManifest>(jsonData);
-                        await App.Logger.Log("[UPDATE] - Converted");
-                    }
-                    await App.Logger.Log("[UPDATE] - Saving update manifest...");
-                    File.WriteAllText(AppConfig.Directory + "update.manifest", JsonConvert.SerializeObject(manifest));
-                    await App.Logger.Log("[UPDATE] - Saved");
-                    return manifest;
-                }
+                latestManifest = manifests.FirstOrDefault(d => d.prerelease == false);
             }
-            catch (Exception ex)
+            if (latestManifest == null)
             {
-                await App.Logger.LogException("[UPDATE] - Could not check for updates!", ex: ex);
+                await App.Logger.Log("[UPDATE] - Could not get update manifest", Logging.ELogLevel.ERROR);
                 return null;
+            }
+            else
+            {
+                if (File.Exists(AppConfig.Directory + "update.manifest"))
+                {
+                    await App.Logger.Log("[UPDATE] - Deleting old update manifest...");
+                    File.Delete(AppConfig.Directory + "update.manifest");
+                    await App.Logger.Log("[UPDATE] - Deleted");
+                }
+                try
+                {
+                    await App.Logger.Log("[UPDATE] - Saving update manifest...");
+                    File.WriteAllText(AppConfig.Directory + "update.manifest", JsonConvert.SerializeObject(latestManifest));
+                    await App.Logger.Log("[UPDATE] - Saved");
+                    return latestManifest;
+                }
+                catch (Exception ex)
+                {
+                    await App.Logger.LogException("[UPDATE] - Could not check for updates!", ex: ex);
+                    return null;
+                }
             }
         }
         public struct UpdateManifest
@@ -150,10 +127,22 @@ namespace BowieD.Unturned.NPCMaker.Updating
             public string tag_name;
             public string body;
             public Asset[] assets;
+            public bool prerelease;
             [JsonObject("asset")]
             public class Asset
             {
                 public string browser_download_url;
+            }
+        }
+
+        private async Task<List<UpdateManifest>> GetManifests()
+        {
+            using (WebClient client = new WebClient())
+            {
+                client.Headers.Add(HttpRequestHeader.UserAgent, "NPCMaker");
+                string response = await client.DownloadStringTaskAsync(ReleasesUrl);
+                var manifests = JsonConvert.DeserializeObject<UpdateManifest[]>(response);
+                return manifests.ToList();
             }
         }
     }
