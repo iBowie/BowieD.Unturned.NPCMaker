@@ -142,6 +142,7 @@
     </ApplicationDefinition>
     <Compile Include="Coloring\ColorConverter.cs" />
     <Compile Include="Commands\ColorCommand.cs" />
+    <Compile Include="Commands\HideCommand.cs" />
     <Compile Include="Commands\LicenseCommand.cs" />
     <Compile Include="Commands\ParseCommand.cs" />
     <Compile Include="Commands\ShutdownCommand.cs" />
