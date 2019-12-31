@@ -8,7 +8,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("BowieD")]
 [assembly: AssemblyProduct("BowieD.Unturned.NPCMaker")]
-[assembly: AssemblyCopyright("Copyright © BowieD  2019")]
+[assembly: AssemblyCopyright("Copyright © BowieD  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

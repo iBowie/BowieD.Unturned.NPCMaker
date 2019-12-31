@@ -51,7 +51,7 @@ namespace BowieD.Unturned.NPCMaker
             if (NETHelper.GetVersion() >= NETVersion.v4_7_2)
             {
                 Logger.Log($"User has required .NET Framework version. Launching...", ELogLevel.POSITIVE);
-                Logger.Log($"BowieD.Unturned.NPCMaker {Version}. Copyright (C) 2019 Anton 'BowieD' Galakhov");
+                Logger.Log($"BowieD.Unturned.NPCMaker {Version}. Copyright (C) 2020 Anton 'BowieD' Galakhov");
                 Logger.Log("This program comes with ABSOLUTELY NO WARRANTY; for details type `license w'.");
                 Logger.Log("This is free software, and you are welcome to redistribute it");
                 Logger.Log("under certain conditions; type `license c' for details.");
