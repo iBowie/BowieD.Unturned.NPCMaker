@@ -26,7 +26,7 @@ namespace BowieD.Unturned.NPCMaker.Updating
                     string content = client.DownloadString(UpdaterReleasesUrl);
                     var manifest = JsonConvert.DeserializeObject<UpdateManifest>(content);
                     var data = client.DownloadData(manifest.assets[0].browser_download_url);
-                    using (FileStream fs = new FileStream(AppConfig.Directory + "updater.exe", FileMode.Create))
+                    using (FileStream fs = new FileStream(Path.Combine(AppConfig.Directory, "updater.exe"), FileMode.Create))
                     {
                         fs.Write(data, 0, data.Length);
                     }
@@ -45,7 +45,7 @@ namespace BowieD.Unturned.NPCMaker.Updating
             {
                 string fileName = System.Reflection.Assembly.GetEntryAssembly().Location;
                 App.Logger.Log("[UPDATE] - Launching updater");
-                System.Diagnostics.Process.Start(AppConfig.Directory + "updater.exe", $"\"{fileName}\"");
+                System.Diagnostics.Process.Start(Path.Combine(AppConfig.Directory + "updater.exe"), $"\"{fileName}\"");
                 Environment.Exit(0);
             }
             else
@@ -108,16 +108,17 @@ namespace BowieD.Unturned.NPCMaker.Updating
             }
             else
             {
-                if (File.Exists(AppConfig.Directory + "update.manifest"))
+                var manifestPath = Path.Combine(AppConfig.Directory + "update.manifest");
+                if (File.Exists(manifestPath))
                 {
                     await App.Logger.Log("[UPDATE] - Deleting old update manifest...");
-                    File.Delete(AppConfig.Directory + "update.manifest");
+                    File.Delete(manifestPath);
                     await App.Logger.Log("[UPDATE] - Deleted");
                 }
                 try
                 {
                     await App.Logger.Log("[UPDATE] - Saving update manifest...");
-                    File.WriteAllText(AppConfig.Directory + "update.manifest", JsonConvert.SerializeObject(latestManifest));
+                    File.WriteAllText(manifestPath, JsonConvert.SerializeObject(latestManifest));
                     await App.Logger.Log("[UPDATE] - Saved");
                     return latestManifest;
                 }

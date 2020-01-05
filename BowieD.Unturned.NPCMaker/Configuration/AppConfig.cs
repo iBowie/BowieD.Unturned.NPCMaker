@@ -104,7 +104,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 }
                 else
                 {
-                    string res = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"BowieD.Unturned.NPCMaker Configuration{Path.DirectorySeparatorChar}");
+                    string res = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"BowieD.Unturned.NPCMaker Configuration");
                     if (!System.IO.Directory.Exists(res))
                         System.IO.Directory.CreateDirectory(res);
                     return res;
@@ -112,6 +112,6 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             }
         }
         public static bool? AlternatePath { get; private set; } = null;
-        private static string path => Directory + "config.json";
+        private static string path => Path.Combine(Directory + "config.json");
     }
 }

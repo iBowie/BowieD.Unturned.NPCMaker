@@ -81,10 +81,11 @@ namespace BowieD.Unturned.NPCMaker
             #region AFTER UPDATE
             try
             {
-                if (File.Exists(AppConfig.Directory + "updater.exe"))
+                string updaterPath = Path.Combine(AppConfig.Directory, "updater.exe");
+                if (File.Exists(updaterPath))
                 {
                     OpenPatchNotes();
-                    File.Delete(AppConfig.Directory + "updater.exe");
+                    File.Delete(updaterPath);
                     App.Logger.Log("Updater deleted.");
                 }
             }
