@@ -112,6 +112,6 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             }
         }
         public static bool? AlternatePath { get; private set; } = null;
-        private static string path => Path.Combine(Directory + "config.json");
+        private static string path => Path.Combine(Directory, "config.json");
     }
 }
