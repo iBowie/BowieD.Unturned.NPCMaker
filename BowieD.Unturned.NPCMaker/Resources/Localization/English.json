@@ -8,8 +8,7 @@
 		"Title": "Unturned 3.0 NPC Maker by BowieD",
 		"Configuration_Title": "App Settings"
 	},
-	"Options":
-	{
+	"Options": {
 		"experimentalFeatures": "Experimental Features",
 		"scale": "GUI Scale",
 		"language": "Language",
@@ -24,7 +23,8 @@
 		"autosaveOption_4": "Every 30 minutes",
 		"autosaveOption_5": "Every 1 hour",
 		"animateControls": "Animation",
-		"autoUpdate": "Automatically install updates"
+		"autoUpdate": "Automatically install updates",
+		"downloadPrerelease":  "Download Preview Builds"
 	},
 	"Character":
 	{

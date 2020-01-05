@@ -32,7 +32,8 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 generateGuids = Generate_GUIDS_Box.IsChecked.Value,
                 experimentalFeatures = Experimental_Box.IsChecked.Value,
                 animateControls = Animation_Enabled_Box.IsChecked.Value,
-                autoUpdate = Autoupdate_Box.IsChecked.Value
+                autoUpdate = Autoupdate_Box.IsChecked.Value,
+                downloadPrerelease = DownloadPrerelease_Box.IsChecked.Value
             };
             set
             {
@@ -72,6 +73,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 Generate_GUIDS_Box.IsChecked = value.generateGuids;
                 Animation_Enabled_Box.IsChecked = value.animateControls;
                 Autoupdate_Box.IsChecked = value.autoUpdate;
+                DownloadPrerelease_Box.IsChecked = value.downloadPrerelease;
             }
         }
 

@@ -40,6 +40,9 @@
                     <Grid Margin="2.5">
                         <CheckBox Name="Autoupdate_Box" Content="{xaml:Localize Key=OPTIONS_autoUpdate}"/>
                     </Grid>
+                    <Grid Margin="2.5">
+                        <CheckBox Name="DownloadPrerelease_Box" Content="{xaml:Localize Key=OPTIONS_downloadPrerelease}"/>
+                    </Grid>
                 </StackPanel>
             </TabItem>
             <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Interface}">

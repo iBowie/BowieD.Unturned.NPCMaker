@@ -8,24 +8,24 @@
 		"Title": "Creador NPC para Unturned 3.0 por BowieD",
 		"Configuration_Title": "Ajustes"
 	},
-	"Options":
-	{
-		"experimentalFeatures": "Ajustes Experimentales",
-		"scale": "Escala GUI",
-		"language": "Idioma",
-		"enableDiscord": "Presencia de detalles en Discord",
-		"currentTheme": "Tema Actual",
-		"generateGuids": "Exportar GUIDs",
-		"autosaveOption": "Autoguardado",
-		"autosaveOption_0": "Nunca",
-		"autosaveOption_1": "Cada 5 minutos",
-		"autosaveOption_2": "Cada 10 minutos",
-		"autosaveOption_3": "Cada 15 minutos",
-		"autosaveOption_4": "Cada 30 minutos",
-		"autosaveOption_5": "Cada 1 hora",
-		"animateControls": "Animación",
-		"autoUpdate": "Automaticamente instalar actualizaciones"
-	},
+  "Options": {
+    "experimentalFeatures": "Ajustes Experimentales",
+    "scale": "Escala GUI",
+    "language": "Idioma",
+    "enableDiscord": "Presencia de detalles en Discord",
+    "currentTheme": "Tema Actual",
+    "generateGuids": "Exportar GUIDs",
+    "autosaveOption": "Autoguardado",
+    "autosaveOption_0": "Nunca",
+    "autosaveOption_1": "Cada 5 minutos",
+    "autosaveOption_2": "Cada 10 minutos",
+    "autosaveOption_3": "Cada 15 minutos",
+    "autosaveOption_4": "Cada 30 minutos",
+    "autosaveOption_5": "Cada 1 hora",
+    "animateControls": "Animación",
+    "autoUpdate": "Automaticamente instalar actualizaciones",
+    "downloadPrerelease": "Descargar versiones de vista previa"
+  },
 	"Character":
 	{
 		"Name_Editor": "Nombre en Editor",
