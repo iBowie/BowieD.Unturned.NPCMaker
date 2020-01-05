@@ -77,7 +77,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 language = ELanguage.English;
             App.Logger.Log($"[CFG] - Default configuration loaded!");
         }
-        private static readonly string defaultDir = $@"{Environment.SystemDirectory[0]}{Path.VolumeSeparatorChar}{Path.DirectorySeparatorChar}Users{Path.DirectorySeparatorChar}{Environment.UserName}{Path.DirectorySeparatorChar}AppData{Path.DirectorySeparatorChar}Local{Path.DirectorySeparatorChar}BowieD{Path.DirectorySeparatorChar}NPCMaker{Path.DirectorySeparatorChar}";
+        private static readonly string defaultDir = Path.Combine($@"{Environment.SystemDirectory[0]}{Path.VolumeSeparatorChar}{Path.DirectorySeparatorChar}", "Users", Environment.UserName, "AppData", "Local", "BowieD", "NPCMaker");
         public static string Directory
         {
             get

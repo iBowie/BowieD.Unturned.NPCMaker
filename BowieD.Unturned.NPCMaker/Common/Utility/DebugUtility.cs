@@ -45,6 +45,7 @@ namespace BowieD.Unturned.NPCMaker.Common.Utility
                 sb.AppendLine($".generateGuids: {cfg.generateGuids}");
                 sb.AppendLine($".language: {cfg.language}");
                 sb.AppendLine($".scale: {cfg.scale}");
+                sb.AppendLine($".downloadPrerelease: {cfg.downloadPrerelease}");
             }
             catch
             {
