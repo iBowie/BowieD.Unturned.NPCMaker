@@ -45,7 +45,7 @@ namespace BowieD.Unturned.NPCMaker.Updating
             {
                 string fileName = System.Reflection.Assembly.GetEntryAssembly().Location;
                 App.Logger.Log("[UPDATE] - Launching updater");
-                System.Diagnostics.Process.Start(Path.Combine(AppConfig.Directory + "updater.exe"), $"\"{fileName}\"");
+                System.Diagnostics.Process.Start(Path.Combine(AppConfig.Directory, "updater.exe"), $"\"{fileName}\"");
                 Environment.Exit(0);
             }
             else
@@ -108,7 +108,7 @@ namespace BowieD.Unturned.NPCMaker.Updating
             }
             else
             {
-                var manifestPath = Path.Combine(AppConfig.Directory + "update.manifest");
+                var manifestPath = Path.Combine(AppConfig.Directory, "update.manifest");
                 if (File.Exists(manifestPath))
                 {
                     await App.Logger.Log("[UPDATE] - Deleting old update manifest...");
