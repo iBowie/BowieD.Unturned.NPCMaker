@@ -70,7 +70,14 @@ namespace BowieD.Unturned.NPCMaker.Updating
                 }
                 else
                 {
-                    await App.Logger.Log("[UPDATE] - User has latest or newer version already");
+                    if (latestVers == App.Version)
+                    {
+                        await App.Logger.Log("[UPDATE] - User has latest version already");
+                    }
+                    else
+                    {
+                        await App.Logger.Log("[UPDATE] - User has newest version");
+                    }
                     return UpdateAvailability.NOT_AVAILABLE;
                 }
             }
