@@ -149,6 +149,7 @@
     <Compile Include="Common\ContextHelper.cs" />
     <Compile Include="Common\Utility\DebugUtility.cs" />
     <Compile Include="Common\Utility\NETHelper.cs" />
+    <Compile Include="Common\Utility\PathUtility.cs" />
     <Compile Include="Controls\Dialogue_Response.xaml.cs">
       <DependentUpon>Dialogue_Response.xaml</DependentUpon>
     </Compile>
