@@ -1,5 +1,13 @@
 # BowieD.Unturned.NPCMaker
-Unturned NPC Maker
+## Features
+* Character creation and edition
+* Dialogue creation and edition
+* Vendor creation and edition
+* Quest creation and edition
+* Rewards creation and edition
+* Condition creation and edition
+* Import existing NPCs
+* Export NPCs to Unturned
 
 ## Purpose
 This application allows people to make their own NPCs in Unturned very easy and visual.
