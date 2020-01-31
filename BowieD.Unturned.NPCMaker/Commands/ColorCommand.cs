@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Coloring;
+using BowieD.Unturned.NPCMaker.Managers;
 using System.Linq;
 
 namespace BowieD.Unturned.NPCMaker.Commands
@@ -22,11 +23,11 @@ namespace BowieD.Unturned.NPCMaker.Commands
                             App.Logger.Log($"[ColorCommand] - Color {args[1]} saved.");
                             break;
                         case "remove" when args.Length > 1 && Color.IsHEX(args[1]):
-                            MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.UserColors.data = MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.UserColors.data.Where(d => d != args[1]).ToArray();
+                            DataManager.UserColorsData.data = DataManager.UserColorsData.data.Where(d => d != args[1]).ToArray();
                             App.Logger.Log($"[ColorCommand] - Color {args[1]} removed.");
                             break;
                         case "list":
-                            App.Logger.Log($"[ColorCommand] - Saved Colors: {string.Join(", ", MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.UserColors.data)}");
+                            App.Logger.Log($"[ColorCommand] - Saved Colors: {string.Join(", ", DataManager.UserColorsData.data)}");
                             break;
                         default:
                             App.Logger.Log($"[ColorCommand] - Use: color {Syntax}");

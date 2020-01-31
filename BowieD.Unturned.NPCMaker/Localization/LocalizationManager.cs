@@ -26,64 +26,7 @@ namespace BowieD.Unturned.NPCMaker.Localization
                 {
                     string text = sr.ReadToEnd();
                     Current = Newtonsoft.Json.JsonConvert.DeserializeObject<Localization>(text);
-                }
-                try
-                {
-                    var dict = new ResourceDictionary();
-                    foreach (var k in Current.Character)
-                    {
-                        dict.Add($"CHARACTER_{k.Key}", k.Value);
-                    }
-                    foreach (var k in Current.Condition)
-                    {
-                        dict.Add($"CONDITION_{k.Key}", k.Value);
-                    }
-                    foreach (var k in Current.Dialogue)
-                    {
-                        dict.Add($"DIALOGUE_{k.Key}", k.Value);
-                    }
-                    foreach (var k in Current.General)
-                    {
-                        dict.Add($"GENERAL_{k.Key}", k.Value);
-                    }
-                    foreach (var k in Current.Interface)
-                    {
-                        dict.Add($"INTERFACE_{k.Key}", k.Value);
-                    }
-                    foreach (var k in Current.Mistakes)
-                    {
-                        dict.Add($"MISTAKES_{k.Key}", k.Value);
-                    }
-                    foreach (var k in Current.Notification)
-                    {
-                        dict.Add($"NOTIFICATION_{k.Key}", k.Value);
-                    }
-                    foreach (var k in Current.Options)
-                    {
-                        dict.Add($"OPTIONS_{k.Key}", k.Value);
-                    }
-                    foreach (var k in Current.Quest)
-                    {
-                        dict.Add($"QUEST_{k.Key}", k.Value);
-                    }
-                    foreach (var k in Current.Reward)
-                    {
-                        dict.Add($"REWARD_{k.Key}", k.Value);
-                    }
-                    foreach (var k in Current.Vendor)
-                    {
-                        dict.Add($"VENDOR_{k.Key}", k.Value);
-                    }
-                    foreach (var k in Current.VendorItem)
-                    {
-                        dict.Add($"VENDORITEM_{k.Key}", k.Value);
-                    }
-                    App.Current.Resources.MergedDictionaries.Add(dict);
                     IsLoaded = true;
-                }
-                catch (Exception ex)
-                {
-                    App.Logger.LogException($"[LOCALIZATION] - Could not convert JSON to XAML.", ex: ex);
                 }
             }
             catch (Exception ex)

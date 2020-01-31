@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Data;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Collections.Generic;
@@ -22,8 +23,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public CharacterTabViewModel()
         {
             Character = new NPCCharacter();
-            UserColors = new UserColorsList();
-            UserColors.Load(new string[0]);
             UpdateColorPicker();
         }
         public NPCCharacter Character
@@ -352,15 +351,14 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         }
         internal void SaveColor(string hex)
         {
-            if (UserColors.data.Contains(hex))
+            if (DataManager.UserColorsData.data.Contains(hex))
                 return;
-            UserColors.data = UserColors.data.Prepend(hex).ToArray();
-            UserColors.Save();
+            DataManager.UserColorsData.data = DataManager.UserColorsData.data.Prepend(hex).ToArray();
+            DataManager.UserColorsData.Save();
             var color = new Coloring.Color(hex);
             var colorItem = new Xceed.Wpf.Toolkit.ColorItem(color, hex);
             MainWindow.Instance.skinColorPicker.AvailableColors.Insert(0, colorItem);
         }
-        internal readonly UserColorsList UserColors;
         internal void UpdateColorPicker()
         {
             MainWindow.Instance.skinColorPicker.TabBackground = Brushes.Transparent;
@@ -369,7 +367,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             MainWindow.Instance.hairColorPicker.AvailableColors.Clear();
             MainWindow.Instance.skinColorPicker.StandardColors.Clear();
             MainWindow.Instance.hairColorPicker.StandardColors.Clear();
-            foreach (var k in UserColors.data)
+            foreach (var k in DataManager.UserColorsData.data)
             {
                 MainWindow.Instance.skinColorPicker.AvailableColors.Add(new Xceed.Wpf.Toolkit.ColorItem(new Coloring.Color(k), k));
             }

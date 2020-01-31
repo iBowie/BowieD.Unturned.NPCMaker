@@ -23,6 +23,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public byte autosaveOption;
         public bool animateControls;
         public bool autoUpdate;
+        public bool downloadPrerelease;
 
         public void Save()
         {
@@ -68,6 +69,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             experimentalFeatures = false;
             animateControls = true;
             autoUpdate = true;
+            downloadPrerelease = false;
             ELanguage c = LocalizationManager.GetLanguageFromCultureInfo(CultureInfo.InstalledUICulture);
             if (LocalizationManager.SupportedLanguages().Contains(c))
                 language = c;
@@ -75,7 +77,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 language = ELanguage.English;
             App.Logger.Log($"[CFG] - Default configuration loaded!");
         }
-        private static readonly string defaultDir = $@"{Environment.SystemDirectory[0]}{Path.VolumeSeparatorChar}{Path.DirectorySeparatorChar}Users{Path.DirectorySeparatorChar}{Environment.UserName}{Path.DirectorySeparatorChar}AppData{Path.DirectorySeparatorChar}Local{Path.DirectorySeparatorChar}BowieD{Path.DirectorySeparatorChar}NPCMaker{Path.DirectorySeparatorChar}";
+        private static readonly string defaultDir = Path.Combine($@"{Environment.SystemDirectory[0]}{Path.VolumeSeparatorChar}{Path.DirectorySeparatorChar}", "Users", Environment.UserName, "AppData", "Local", "BowieD", "NPCMaker");
         public static string Directory
         {
             get
@@ -102,7 +104,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 }
                 else
                 {
-                    string res = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"BowieD.Unturned.NPCMaker Configuration{Path.DirectorySeparatorChar}");
+                    string res = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"BowieD.Unturned.NPCMaker Configuration");
                     if (!System.IO.Directory.Exists(res))
                         System.IO.Directory.CreateDirectory(res);
                     return res;
@@ -110,6 +112,6 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             }
         }
         public static bool? AlternatePath { get; private set; } = null;
-        private static string path => Directory + "config.json";
+        private static string path => Path.Combine(Directory, "config.json");
     }
 }

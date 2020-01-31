@@ -1,6 +1,6 @@
 {
 	"Author": "BowieD",
-	"LastUpdate": "25-ое Октября 2019",
+	"LastUpdate": "7-ое Декабря 2019",
 	"Name": "Русский (Russian)",
 	"General":
 	{
@@ -8,24 +8,24 @@
 		"Title": "Unturned 3.0 NPC Maker by BowieD",
 		"Configuration_Title": "Настройки"
 	},
-	"Options":
-	{
-		"experimentalFeatures": "Экспериментальные функции",
-		"scale": "Масштаб интерфейса",
-		"language": "Язык",
-		"enableDiscord": "Подробный Discord Rich Presence",
-		"currentTheme": "Текущая тема",
-		"generateGuids": "Экспортировать GUID",
-		"autosaveOption": "Автосохранение",
-		"autosaveOption_0": "Никогда",
-		"autosaveOption_1": "Каждые 5 минут",
-		"autosaveOption_2": "Каждые 10 минут",
-		"autosaveOption_3": "Каждые 15 минут",
-		"autosaveOption_4": "Каждые 30 минут",
-		"autosaveOption_5": "Каждый 1 час",
-		"animateControls": "Анимация",
-		"autoUpdate": "Автоматическое обновление"
-	},
+  "Options": {
+    "experimentalFeatures": "Экспериментальные функции",
+    "scale": "Масштаб интерфейса",
+    "language": "Язык",
+    "enableDiscord": "Подробный Discord Rich Presence",
+    "currentTheme": "Текущая тема",
+    "generateGuids": "Экспортировать GUID",
+    "autosaveOption": "Автосохранение",
+    "autosaveOption_0": "Никогда",
+    "autosaveOption_1": "Каждые 5 минут",
+    "autosaveOption_2": "Каждые 10 минут",
+    "autosaveOption_3": "Каждые 15 минут",
+    "autosaveOption_4": "Каждые 30 минут",
+    "autosaveOption_5": "Каждый 1 час",
+    "animateControls": "Анимация",
+    "autoUpdate": "Автоматическое обновление",
+    "downloadPrerelease": "Загружать предв. версии"
+  },
 	"Character":
 	{
 		"Name_Editor": "Имя в редакторе",

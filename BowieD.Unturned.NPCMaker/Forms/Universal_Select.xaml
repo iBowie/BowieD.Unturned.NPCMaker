@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
         mc:Ignorable="d"
         Title="xD" Height="450" MinWidth="300" MaxWidth="300" Width="300" Icon="{DynamicResource app_Icon}">
     <Grid>

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Controls"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" MinHeight="64">
     <Grid>

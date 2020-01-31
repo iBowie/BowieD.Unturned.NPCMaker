@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
         mc:Ignorable="d"
-        Title="{DynamicResource INTERFACE_Dialogue_Reply_Visiblity_Title}" Height="420" Width="300"
+        Title="{xaml:Localize Key=INTERFACE_Dialogue_Reply_Visiblity_Title}" Height="420" Width="300"
         Icon="{DynamicResource app_Icon}">
     <Grid>
         <Grid.LayoutTransform>
@@ -16,6 +17,6 @@
 
             </TreeView>
         </ScrollViewer>
-        <Button Click="Button_Click" Content="{DynamicResource INTERFACE_Dialogue_Reply_Visiblity_Save}" FontSize="18" Margin="10,0,10,10" Height="35" VerticalAlignment="Bottom"/>
+        <Button Click="Button_Click" Content="{xaml:Localize Key=INTERFACE_Dialogue_Reply_Visiblity_Save}" FontSize="18" Margin="10,0,10,10" Height="35" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
         mc:Ignorable="d"
-        Title="{DynamicResource INTERFACE_Editor_Reward_Title}" 
+        Title="{xaml:Localize Key=INTERFACE_Editor_Reward_Title}" 
         Height="201.5" 
         Width="300"
         Icon="{DynamicResource app_Icon}">
@@ -14,10 +15,10 @@
             <ScaleTransform x:Name="gridScale"/>
         </Grid.LayoutTransform>
         <ComboBox SelectionChanged="TypeBox_SelectionChanged" x:Name="typeBox" Height="24" VerticalAlignment="Top" Margin="10,41,10,0"/>
-        <Label Content="{DynamicResource INTERFACE_Editor_Reward_Type}" HorizontalContentAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <GroupBox Header="{DynamicResource INTERFACE_Editor_Reward_Params}" Margin="10,70,10,47">
+        <Label Content="{xaml:Localize Key=INTERFACE_Editor_Reward_Type}" HorizontalContentAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <GroupBox Header="{xaml:Localize Key=INTERFACE_Editor_Reward_Params}" Margin="10,70,10,47">
             <StackPanel Name="variablesGrid"/>
         </GroupBox>
-        <Button Click="SaveButton_Click" x:Name="saveButton" Height="32" Margin="10,0,10,10" VerticalAlignment="Bottom" Content="{DynamicResource INTERFACE_Editor_Reward_Save}"/>
+        <Button Click="SaveButton_Click" x:Name="saveButton" Height="32" Margin="10,0,10,10" VerticalAlignment="Bottom" Content="{xaml:Localize Key=INTERFACE_Editor_Reward_Save}"/>
     </Grid>
 </Window>

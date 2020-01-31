@@ -31,7 +31,7 @@ namespace BowieD.Unturned.NPCMaker.Data
                 }
                 catch
                 {
-                    App.Logger.Log($"[JDATA] - Could not load {FileName}. Reverting to default value...");
+                    App.Logger.Log($"[JDATA] - Could not load {FileName}. Reverting to default value...", Logging.ELogLevel.WARNING);
                     data = defaultValue;
                     Save();
                     return false;
@@ -39,7 +39,7 @@ namespace BowieD.Unturned.NPCMaker.Data
             }
             else
             {
-                App.Logger.Log($"[JDATA] - {FileName} does not exist. Creating one with default value...");
+                App.Logger.Log($"[JDATA] - {FileName} does not exist. Creating one with default value...", Logging.ELogLevel.WARNING);
                 data = defaultValue;
                 Save();
                 return false;

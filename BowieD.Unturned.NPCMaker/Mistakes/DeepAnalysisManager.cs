@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Common.Utility;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 using (var fbd = new System.Windows.Forms.FolderBrowserDialog() { ShowNewFolderButton = false })
                 {
                     var res = fbd.ShowDialog();
-                    if (res == System.Windows.Forms.DialogResult.Cancel || !File.Exists(fbd.SelectedPath + @"\Unturned.exe"))
+                    if (res == System.Windows.Forms.DialogResult.Cancel || !PathUtility.IsUnturnedPath(fbd.SelectedPath))
                     {
                         MainWindow.Instance.blockActionsOverlay.Visibility = Visibility.Collapsed;
                         return;
@@ -203,16 +204,45 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
         }
         public static async Task<bool> CacheFiles(string directory)
         {
-            HashSet<UnturnedFile> cache = new HashSet<UnturnedFile>();
-            IEnumerable<FileInfo> validFiles = new DirectoryInfo(directory).GetFiles("*.dat", SearchOption.AllDirectories);
-            await App.Logger.Log($"[DeepAnalysis] - Found {validFiles.Count()} assets!");
-            long oldTotal = validFiles.Count();
-            validFiles = validFiles.Where(d => d.Name != "English.dat" && d.Name != "Russian.dat");
-            await App.Logger.Log($"[DeepAnalysis] - Skipped {oldTotal - validFiles.Count()} files.");
-            long step = 1;
-            MainWindow.Instance.progrBar.Maximum = validFiles.Count();
-            foreach (FileInfo fi in validFiles)
+            await App.Logger.Log($"[DeepAnalysis] - Caching started in {directory}.");
+            Queue<FileInfo> queuedFiles = new Queue<FileInfo>();
+            HashSet<string> ignoreFileNames = new HashSet<string>();
+            foreach (var langValue in Enum.GetValues(typeof(ELanguage)))
             {
+                ignoreFileNames.Add(langValue + ".dat");
+            }
+            int skippedCount = 0;
+            async Task enqueueFiles(string path)
+            {
+                foreach (var file in new DirectoryInfo(path).GetFiles("*.dat", SearchOption.AllDirectories))
+                {
+                    if (ignoreFileNames.Contains(file.Name))
+                    {
+                        skippedCount++;
+                        continue;
+                    }
+                    queuedFiles.Enqueue(file);
+                }
+                await App.Logger.Log($"[DeepAnalysis] - File search in {path} complete.");
+            }
+            #region add vanilla files
+            await enqueueFiles(directory);
+            #endregion
+            #region add workshop files
+            string workshopPath = PathUtility.GetUnturnedWorkshopPathFromUnturnedPath(directory);
+            if (PathUtility.IsUnturnedWorkshopPath(workshopPath))
+            {
+                await App.Logger.Log($"[DeepAnalysis] - Detected Unturned workshop path - {workshopPath}.");
+                await enqueueFiles(workshopPath);
+            }
+            #endregion
+            await App.Logger.Log($"[DeepAnalysis] - Skipped {skippedCount} files.");
+            HashSet<UnturnedFile> cache = new HashSet<UnturnedFile>();
+            long step = 1;
+            MainWindow.Instance.progrBar.Maximum = queuedFiles.Count;
+            while (queuedFiles.Count > 0)
+            {
+                FileInfo fi = queuedFiles.Dequeue();
                 step++;
                 try
                 {
@@ -262,14 +292,17 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     if (!skip && assetType != UnturnedFile.EAssetType.None)
                         cache.Add(unturnedFile);
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    await App.Logger.LogException($"[DeepAnalysis] - Exception occured while caching {fi.FullName}. You can ignore this error.", ex: ex);
+                }
                 await Task.Yield();
                 if (step % 25 == 0)
                     await Task.Delay(1);
                 MainWindow.Instance.progrBar.Value = step;
             }
             CachedUnturnedFiles = cache;
-            await App.Logger.Log($"Cached {cache.Count} files!");
+            await App.Logger.Log($"[DeepAnalysis] - Cached {cache.Count} files!");
             return true;
         }
     }

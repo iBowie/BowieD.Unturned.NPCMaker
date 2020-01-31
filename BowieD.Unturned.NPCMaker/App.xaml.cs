@@ -1,6 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Common.Utility;
 using BowieD.Unturned.NPCMaker.Configuration;
-using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.Notification;
@@ -11,7 +10,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Threading;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -20,12 +18,10 @@ namespace BowieD.Unturned.NPCMaker
     /// </summary>
     public partial class App : Application
     {
-#if TRACE
+#if DEBUG
         internal static ELogLevel LogLevel => ELogLevel.TRACE;
-#elif DEBUG
-        internal static LogLevel LogLevel => LogLevel.DEBUG;
 #else
-        internal static LogLevel LogLevel => LogLevel.CRITICAL;
+        internal static ELogLevel LogLevel => ELogLevel.CRITICAL;
 #endif
         public static IUpdateManager UpdateManager { get; private set; }
         public static INotificationManager NotificationManager { get; private set; }
@@ -46,7 +42,6 @@ namespace BowieD.Unturned.NPCMaker
         public App()
         {
             InitializeComponent();
-            Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
         }
         public new void Run()
@@ -56,24 +51,25 @@ namespace BowieD.Unturned.NPCMaker
             if (NETHelper.GetVersion() >= NETVersion.v4_7_2)
             {
                 Logger.Log($"User has required .NET Framework version. Launching...", ELogLevel.POSITIVE);
-                Logger.Log($"BowieD.Unturned.NPCMaker {Version}. Copyright (C) 2019 Anton 'BowieD' Galakhov");
+                Logger.Log($"BowieD.Unturned.NPCMaker {Version}. Copyright (C) 2020 Anton 'BowieD' Galakhov");
                 Logger.Log("This program comes with ABSOLUTELY NO WARRANTY; for details type `license w'.");
                 Logger.Log("This is free software, and you are welcome to redistribute it");
                 Logger.Log("under certain conditions; type `license c' for details.");
+                Logger.Log("This programs uses 3rd party apps, type `license l' for details.");
                 Logger.Log("[EXTRCT] - Extracting libraries...", ELogLevel.DEBUG);
                 #region COPY LIBS
-                CopyResource(NPCMaker.Properties.Resources.DiscordRPC, AppConfig.Directory + "DiscordRPC.dll");
-                CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, AppConfig.Directory + "Newtonsoft.Json.dll");
-                CopyResource(NPCMaker.Properties.Resources.ControlzEx, AppConfig.Directory + "ControlzEx.dll");
-                CopyResource(NPCMaker.Properties.Resources.MahApps_Metro, AppConfig.Directory + "MahApps.Metro.dll");
-                CopyResource(NPCMaker.Properties.Resources.Microsoft_Xaml_Behaviors, AppConfig.Directory + "Microsoft.Xaml.Behaviors.dll");
-                CopyResource(NPCMaker.Properties.Resources.MahApps_Metro_IconPacks_Core, AppConfig.Directory + "MahApps.Metro.IconPacks.Core.dll");
-                CopyResource(NPCMaker.Properties.Resources.MahApps_Metro_IconPacks_Material, AppConfig.Directory + "MahApps.Metro.IconPacks.Material.dll");
-                CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock, AppConfig.Directory + "Xceed.Wpf.AvalonDock.dll");
-                CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_Aero, AppConfig.Directory + "Xceed.Wpf.AvalonDock.Themes.Aero.dll");
-                CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_Metro, AppConfig.Directory + "Xceed.Wpf.AvalonDock.Themes.Metro.dll");
-                CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_VS2010, AppConfig.Directory + "Xceed.Wpf.AvalonDock.Themes.VS2010.dll");
-                CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_Toolkit, AppConfig.Directory + "Xceed.Wpf.Toolkit.dll");
+                CopyResource(NPCMaker.Properties.Resources.DiscordRPC, Path.Combine(AppConfig.Directory, "DiscordRPC.dll"));
+                CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, Path.Combine(AppConfig.Directory, "Newtonsoft.Json.dll"));
+                CopyResource(NPCMaker.Properties.Resources.ControlzEx, Path.Combine(AppConfig.Directory, "ControlzEx.dll"));
+                CopyResource(NPCMaker.Properties.Resources.MahApps_Metro, Path.Combine(AppConfig.Directory, "MahApps.Metro.dll"));
+                CopyResource(NPCMaker.Properties.Resources.Microsoft_Xaml_Behaviors, Path.Combine(AppConfig.Directory, "Microsoft.Xaml.Behaviors.dll"));
+                CopyResource(NPCMaker.Properties.Resources.MahApps_Metro_IconPacks_Core, Path.Combine(AppConfig.Directory, "MahApps.Metro.IconPacks.Core.dll"));
+                CopyResource(NPCMaker.Properties.Resources.MahApps_Metro_IconPacks_Material, Path.Combine(AppConfig.Directory, "MahApps.Metro.IconPacks.Material.dll"));
+                CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock, Path.Combine(AppConfig.Directory, "Xceed.Wpf.AvalonDock.dll"));
+                CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_Aero, Path.Combine(AppConfig.Directory, "Xceed.Wpf.AvalonDock.Themes.Aero.dll"));
+                CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_Metro, Path.Combine(AppConfig.Directory, "Xceed.Wpf.AvalonDock.Themes.Metro.dll"));
+                CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_VS2010, Path.Combine(AppConfig.Directory, "Xceed.Wpf.AvalonDock.Themes.VS2010.dll"));
+                CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_Toolkit, Path.Combine(AppConfig.Directory, "Xceed.Wpf.Toolkit.dll"));
                 #endregion
                 Logger.Log("[EXTRCT] - Extraction complete!", ELogLevel.DEBUG);
                 AppConfig.Instance.Load();
@@ -82,7 +78,7 @@ namespace BowieD.Unturned.NPCMaker
                 #endregion
 #if !FAST
                 App.UpdateManager = new GitHubUpdateManager();
-                var result = App.UpdateManager.CheckForUpdates().GetAwaiter().GetResult();
+                var result = App.UpdateManager.CheckForUpdates(AppConfig.Instance.downloadPrerelease).GetAwaiter().GetResult();
                 if (result == UpdateAvailability.AVAILABLE)
                 {
                     if (AppConfig.Instance.autoUpdate)
@@ -140,15 +136,6 @@ namespace BowieD.Unturned.NPCMaker
         {
             UpdateManager = new GitHubUpdateManager();
             NotificationManager = new NotificationManager();
-        }
-
-        private void Current_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
-            AppCrashReport acr = new AppCrashReport(e.Exception);
-            acr.ShowDialog();
-            e.Handled = acr.Handle;
-            if (acr.Handle)
-                App.Logger.Log($"[ACR] - Ignoring exception {e.Exception.Message}.", ELogLevel.WARNING);
         }
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {

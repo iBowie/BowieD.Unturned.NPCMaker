@@ -408,14 +408,14 @@ namespace BowieD.Unturned.NPCMaker.Export
                         local.WriteLine($"Description {quest.description}");
                         for (int k = 0; k < quest.conditions?.Count; k++)
                         {
-                            if (quest.conditions[k].Localization.Length > 0)
+                            if (quest.conditions[k].Localization?.Length > 0)
                             {
                                 local.WriteLine($"Condition_{k} {quest.conditions[k].Localization}");
                             }
                         }
                         for (int k = 0; k < quest.rewards?.Count; k++)
                         {
-                            if (quest.rewards[k].Localization.Length > 0)
+                            if (quest.rewards[k].Localization?.Length > 0)
                             {
                                 local.WriteLine($"Reward_{k} {quest.rewards[k].Localization}");
                             }

@@ -5,29 +5,30 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Controls"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
              mc:Ignorable="d" MinHeight="250">
     <Grid>
         <ScrollViewer Margin="10,10,10,130">
             <StackPanel Name="pagesGrid">
             </StackPanel>
         </ScrollViewer>
-        <Button Click="AddPageButton_Click" Content="{DynamicResource DIALOGUE_Page_Add}" Name="addPageButton" VerticalAlignment="Bottom" Height="35" Margin="10,0,50,10"/>
+        <Button Click="AddPageButton_Click" Content="{xaml:Localize Key=DIALOGUE_Page_Add}" Name="addPageButton" VerticalAlignment="Bottom" Height="35" Margin="10,0,50,10"/>
         <Button Name="deletePageButton" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="35" Height="35">
             <Button.Content>
                 <iconPacks:PackIconMaterial Kind="Delete" Foreground="{DynamicResource AccentColor}"/>
             </Button.Content>
         </Button>
-        <Button Click="Button_Click" Height="35" Content="{DynamicResource DIALOGUE_Message_Conditions}" Margin="10,0,10,90" VerticalAlignment="Bottom">
+        <Button Click="Button_Click" Height="35" Content="{xaml:Localize Key=DIALOGUE_Message_Conditions}" Margin="10,0,10,90" VerticalAlignment="Bottom">
             <Button.ToolTip>
                 <StackPanel>
-                    <Label Content="{DynamicResource DIALOGUE_Message_Conditions_Tooltip}"/>
+                    <Label Content="{xaml:Localize Key=DIALOGUE_Message_Conditions_Tooltip}"/>
                 </StackPanel>
             </Button.ToolTip>
         </Button>
-        <Button Click="EditRewardsButton_Click" Height="35" Content="{DynamicResource DIALOGUE_Message_Rewards}" Margin="10,0,9.92,50" VerticalAlignment="Bottom">
+        <Button Click="EditRewardsButton_Click" Height="35" Content="{xaml:Localize Key=DIALOGUE_Message_Rewards}" Margin="10,0,9.92,50" VerticalAlignment="Bottom">
             <Button.ToolTip>
                 <StackPanel>
-                    <Label Content="{DynamicResource DIALOGUE_Message_Rewards_Tooltip}"/>
+                    <Label Content="{xaml:Localize Key=DIALOGUE_Message_Rewards_Tooltip}"/>
                 </StackPanel>
             </Button.ToolTip>
         </Button>

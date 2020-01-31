@@ -64,6 +64,8 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx">
@@ -140,11 +142,15 @@
     </ApplicationDefinition>
     <Compile Include="Coloring\ColorConverter.cs" />
     <Compile Include="Commands\ColorCommand.cs" />
+    <Compile Include="Commands\ConfigCommand.cs" />
+    <Compile Include="Commands\HideCommand.cs" />
     <Compile Include="Commands\LicenseCommand.cs" />
     <Compile Include="Commands\ParseCommand.cs" />
     <Compile Include="Commands\ShutdownCommand.cs" />
     <Compile Include="Common\ContextHelper.cs" />
+    <Compile Include="Common\Utility\DebugUtility.cs" />
     <Compile Include="Common\Utility\NETHelper.cs" />
+    <Compile Include="Common\Utility\PathUtility.cs" />
     <Compile Include="Controls\Dialogue_Response.xaml.cs">
       <DependentUpon>Dialogue_Response.xaml</DependentUpon>
     </Compile>
@@ -167,9 +173,6 @@
     <Compile Include="Data\RecentFileList.cs" />
     <Compile Include="Data\UserColorsList.cs" />
     <Compile Include="Data\XmlData.cs" />
-    <Compile Include="Forms\AppCrashReport.xaml.cs">
-      <DependentUpon>AppCrashReport.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CrashCommand.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
@@ -218,6 +221,7 @@
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\ILoggingManager.cs" />
     <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="Managers\DataManager.cs" />
     <Compile Include="Managers\HolidayManager.cs" />
     <Compile Include="Logging\LoggingManager.cs" />
     <Compile Include="Mistakes\Character\NE_0001.cs" />
@@ -323,6 +327,8 @@
     <Compile Include="ViewModels\QuestTabViewModel.cs" />
     <Compile Include="ViewModels\VendorTabViewModel.cs" />
     <Compile Include="XAML\EnumItemsSource.cs" />
+    <Compile Include="XAML\LocalizationConverter.cs" />
+    <Compile Include="XAML\LocalizeExtension.cs" />
     <Page Include="Controls\Dialogue_Response.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -340,10 +346,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Dialogue_Message_Page.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Forms\AppCrashReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

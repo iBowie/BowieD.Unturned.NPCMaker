@@ -39,8 +39,30 @@
         {
             switch (name.ToLower())
             {
+                case "general":
+                    return General;
+                case "options":
+                    return Options;
                 case "character":
                     return Character;
+                case "dialogue":
+                    return Dialogue;
+                case "vendor":
+                    return Vendor;
+                case "quest":
+                    return Quest;
+                case "condition":
+                    return Condition;
+                case "reward":
+                    return Reward;
+                case "vendoritem":
+                    return VendorItem;
+                case "mistakes":
+                    return Mistakes;
+                case "notification":
+                    return Notification;
+                case "interface":
+                    return Interface;
                 default:
                     return null;
             }

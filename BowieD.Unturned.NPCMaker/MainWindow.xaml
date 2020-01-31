@@ -12,7 +12,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
         mc:Ignorable="d"
-        Title="{DynamicResource GENERAL_Title}"
+        Title="{xaml:Localize Key=GENERAL_Title}"
         MinHeight="623" Height="623"
         MinWidth="1000" Width="1000"
         DragEnter="Window_DragEnter"
@@ -32,40 +32,40 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Menu VerticalAlignment="Top">
-                <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File}">
-                    <MenuItem Command="{Binding NewProjectCommand}" Header="{DynamicResource INTERFACE_Main_Menu_File_New}" Name="newButton">
+                <MenuItem Header="{xaml:Localize Key=INTERFACE_Main_Menu_File}">
+                    <MenuItem Command="{Binding NewProjectCommand}" Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_New}" Name="newButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="File" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Command="{Binding LoadProjectCommand}" Header="{DynamicResource INTERFACE_Main_Menu_File_Open}" Name="loadButton">
+                    <MenuItem Command="{Binding LoadProjectCommand}" Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_Open}" Name="loadButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="FolderOpen" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Command="{Binding SaveProjectCommand}" Header="{DynamicResource INTERFACE_Main_Menu_File_Save}" Name="saveButton">
+                    <MenuItem Command="{Binding SaveProjectCommand}" Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_Save}" Name="saveButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="ContentSave" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Command="{Binding SaveAsProjectCommand}" Header="{DynamicResource INTERFACE_Main_Menu_File_SaveAs}" Name="saveAsButton">
+                    <MenuItem Command="{Binding SaveAsProjectCommand}" Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_SaveAs}" Name="saveAsButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="ContentSave" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Name="RecentList" Header="{DynamicResource INTERFACE_Main_Menu_File_Recent}">
+                    <MenuItem Name="RecentList" Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_Recent}">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="History" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_Import}">
-                        <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_Import_File}" Command="{Binding ImportFileCommand}">
+                    <MenuItem Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_Import}">
+                        <MenuItem Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_Import_File}" Command="{Binding ImportFileCommand}">
                             <MenuItem.Icon>
                                 <iconPacks:PackIconMaterial Kind="FileDownloadOutline" Foreground="{DynamicResource AccentColor}"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_File_Import_Directory}" Command="{Binding ImportDirectoryCommand}">
+                        <MenuItem Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_Import_Directory}" Command="{Binding ImportDirectoryCommand}">
                             <MenuItem.Icon>
                                 <iconPacks:PackIconMaterial Kind="FolderDownloadOutline" Foreground="{DynamicResource AccentColor}"/>
                             </MenuItem.Icon>
@@ -74,53 +74,53 @@
                             <iconPacks:PackIconMaterial Kind="Import" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Command="{Binding ExportProjectCommand}" Header="{DynamicResource INTERFACE_Main_Menu_File_Export}" Name="exportButton">
+                    <MenuItem Command="{Binding ExportProjectCommand}" Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_Export}" Name="exportButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Export" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Command="{Binding ExitCommand}" Header="{DynamicResource INTERFACE_Main_Menu_File_Exit}" Name="exitButton">
+                    <MenuItem Command="{Binding ExitCommand}" Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_Exit}" Name="exitButton">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Close" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Command="{Binding OptionsCommand}" Name="optionsMenuItem" Header="{DynamicResource INTERFACE_Main_Menu_Options}"/>
-                <MenuItem Header="{DynamicResource INTERFACE_Main_Menu_Communication}">
-                    <MenuItem Command="{Binding FeedBackSteamCommand}" Name="steamComm" Header="{DynamicResource INTERFACE_Main_Menu_Communication_Steam}">
+                <MenuItem Command="{Binding OptionsCommand}" Name="optionsMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Options}"/>
+                <MenuItem Header="{xaml:Localize Key=INTERFACE_Main_Menu_Communication}">
+                    <MenuItem Command="{Binding FeedBackSteamCommand}" Name="steamComm" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Communication_Steam}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/Services/Steam.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Command="{Binding FeedBackDiscordCommand}" Name="discordComm" Header="{DynamicResource INTERFACE_Main_Menu_Communication_Discord}">
+                    <MenuItem Command="{Binding FeedBackDiscordCommand}" Name="discordComm" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Communication_Discord}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/Services/Discord.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Command="{Binding FeedBackVKCommand}" Name="vkComm" Header="{DynamicResource INTERFACE_Main_Menu_Communication_VK}">
+                    <MenuItem Command="{Binding FeedBackVKCommand}" Name="vkComm" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Communication_VK}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="{Binding Width}" Source="Resources/Services/VK.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Command="{Binding AboutCommand}" Name="aboutMenuItem" Header="{DynamicResource INTERFACE_Main_Menu_About}"/>
+                <MenuItem Command="{Binding AboutCommand}" Name="aboutMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_About}"/>
                 <Label Margin="-5" IsEnabled="False" Name="menuCurrentFileLabel" Content="Current File: "/>
             </Menu>
             <TabControl Grid.Row="1" Background="Transparent" Padding="-1" Name="mainTabControl" SelectedIndex="0" Margin="0,5,0,0">
-                <TabItem DataContext="{Binding CharacterTabViewModel}" Name="characterTab" Header="{DynamicResource INTERFACE_Main_Tab_Character}">
+                <TabItem DataContext="{Binding CharacterTabViewModel}" Name="characterTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Character}">
                     <Grid>
-                        <Button Command="{Binding SaveCommand}" Name="characterSaveButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Character_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Command="{Binding SaveCommand}" Name="characterSaveButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Command="{Binding ResetCommand}" Name="characterResetButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Character_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Command="{Binding ResetCommand}" Name="characterResetButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Command="{Binding OpenCommand}" Name="characterOpenButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Character_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Command="{Binding OpenCommand}" Name="characterOpenButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
@@ -128,48 +128,48 @@
                         <TextBox Text="{Binding EditorName, UpdateSourceTrigger=PropertyChanged}" Name="txtEditorName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,10,0,0">
                             <TextBox.ToolTip>
                                 <StackPanel>
-                                    <Label Content="{DynamicResource INTERFACE_Main_Tab_Character_Name_Editor_Tooltip}"/>
+                                    <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Name_Editor_Tooltip}"/>
                                     <Image Source="Resources/Help/img_help_editorName.png"/>
                                 </StackPanel>
                             </TextBox.ToolTip>
                         </TextBox>
-                        <TextBlock HorizontalAlignment="Left" Margin="143,16,0,0" TextWrapping="Wrap" Text="{DynamicResource CHARACTER_Name_Editor}" VerticalAlignment="Top"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="143,16,0,0" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Editor}" VerticalAlignment="Top"/>
                         <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Name="txtDisplayName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,41,0,0">
                             <TextBox.ToolTip>
                                 <StackPanel>
-                                    <Label Content="{DynamicResource INTERFACE_Main_Tab_Character_Name_Display_Tooltip}"/>
+                                    <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Name_Display_Tooltip}"/>
                                     <Image Source="Resources/Help/img_help_displayName.png"/>
                                 </StackPanel>
                             </TextBox.ToolTip>
                         </TextBox>
-                        <TextBlock  HorizontalAlignment="Left" Margin="143,45,0,0" TextWrapping="Wrap" Text="{DynamicResource CHARACTER_Name_Display}" VerticalAlignment="Top"/>
+                        <TextBlock  HorizontalAlignment="Left" Margin="143,45,0,0" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Display}" VerticalAlignment="Top"/>
                         <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Name="txtID" HorizontalAlignment="Left" VerticalAlignment="Top" Width="64" Height="24" Margin="10,72,0,0" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
                             <mah:NumericUpDown.ToolTip>
                                 <StackPanel>
-                                    <Label Content="{DynamicResource INTERFACE_Main_Tab_Character_ID_Tooltip}"/>
+                                    <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_ID_Tooltip}"/>
                                 </StackPanel>
                             </mah:NumericUpDown.ToolTip>
                         </mah:NumericUpDown>
-                        <TextBlock  HorizontalAlignment="Left" Margin="79,75,0,0" TextWrapping="Wrap" Text="{DynamicResource CHARACTER_ID}" VerticalAlignment="Top"/>
+                        <TextBlock  HorizontalAlignment="Left" Margin="79,75,0,0" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_ID}" VerticalAlignment="Top"/>
                         <mah:NumericUpDown Value="{Binding DialogueID, UpdateSourceTrigger=PropertyChanged}" Name="txtStartDialogueID" HorizontalAlignment="Left" Height="23" Margin="10,103,0,0" VerticalAlignment="Top" Width="128" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
                             <mah:NumericUpDown.ToolTip>
                                 <ToolTip>
                                     <StackPanel>
-                                        <Label Content="{DynamicResource INTERFACE_Main_Tab_Character_Dialogue_Tooltip}"/>
+                                        <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Dialogue_Tooltip}"/>
                                         <Image Source="Resources/Help/img_help_startDialogue.png"/>
                                     </StackPanel>
                                 </ToolTip>
                             </mah:NumericUpDown.ToolTip>
                         </mah:NumericUpDown>
-                        <TextBlock  HorizontalAlignment="Left" Margin="143,107,0,0" TextWrapping="Wrap" Text="{DynamicResource CHARACTER_Dialogue}" VerticalAlignment="Top"/>
-                        <Button Command="{Binding EditVisibilityConditionsCommand}" Name="visibilityCondsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource CHARACTER_Conditions}" Margin="10,135,0,0" Width="212" Height="28">
+                        <TextBlock  HorizontalAlignment="Left" Margin="143,107,0,0" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Dialogue}" VerticalAlignment="Top"/>
+                        <Button Command="{Binding EditVisibilityConditionsCommand}" Name="visibilityCondsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{xaml:Localize Key=CHARACTER_Conditions}" Margin="10,135,0,0" Width="212" Height="28">
                             <Button.ToolTip>
                                 <StackPanel>
                                     <Image Source="Resources/Help/img_help_visibilityConditions.png"/>
                                 </StackPanel>
                             </Button.ToolTip>
                         </Button>
-                        <Button Command="{Binding RegenerateGUIDsCommand}" Name="regenerateGuidsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{DynamicResource INTERFACE_Main_Tab_Character_Guid_Generate}" Margin="10,167,0,0" MinWidth="212" Height="28"/>
+                        <Button Command="{Binding RegenerateGUIDsCommand}" Name="regenerateGuidsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Guid_Generate}" Margin="10,167,0,0" MinWidth="212" Height="28"/>
                         <Grid Margin="0,26,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="432">
                             <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" Background="Black" HorizontalAlignment="Right" Height="98" Margin="0,38,210,0" VerticalAlignment="Top" Width="98">
                                 <Image Name="faceImageControl" Source="Resources/Unturned/Faces/1.png" >
@@ -315,10 +315,10 @@
                                 </Grid>
                             </Border>
                             <mah:NumericUpDown Value="{Binding HairID, UpdateSourceTrigger=PropertyChanged}" Minimum="0" x:Name="hairImageIndex" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,109,0" Width="{Binding Width, ElementName=hairImageBorder}" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
-                            <Button Command="{Binding RandomFaceCommand}" Name="apparelFaceRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource INTERFACE_Main_Tab_Character_Face_Random}" Margin="0,171,210,0" Width="98" Height="26"/>
-                            <Button Command="{Binding RandomHairCommand}" Name="apparelHairRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource INTERFACE_Main_Tab_Character_Hair_Random}" Margin="0,171,109,0" Width="98" Height="26"/>
-                            <Button Command="{Binding RandomBeardCommand}" Name="apparelBeardRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{DynamicResource INTERFACE_Main_Tab_Character_Beard_Random}" Margin="0,171,8,0" Width="98" Height="26"/>
-                            <xctk:ColorPicker SelectedColor="{Binding SkinColor, UpdateSourceTrigger=PropertyChanged}" AdvancedTabHeader="{DynamicResource INTERFACE_Color_Picker_Advanced_Header}" StandardTabHeader="{DynamicResource INTERFACE_Color_Picker_Standard_Header}" AvailableColorsHeader="{DynamicResource INTERFACE_Color_Picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="skinColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,54,0,0" Width="89" Height="26" Background="{DynamicResource BackgroundColor}" BorderBrush="{DynamicResource AccentColor}" DropDownBackground="{DynamicResource BackgroundColor}" HeaderBackground="{DynamicResource BackgroundColor}" HeaderForeground="{DynamicResource AccentColor}" TabBackground="{DynamicResource BackgroundColor}" TabForeground="{DynamicResource AccentColor}"/>
+                            <Button Command="{Binding RandomFaceCommand}" Name="apparelFaceRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Face_Random}" Margin="0,171,210,0" Width="98" Height="26"/>
+                            <Button Command="{Binding RandomHairCommand}" Name="apparelHairRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Hair_Random}" Margin="0,171,109,0" Width="98" Height="26"/>
+                            <Button Command="{Binding RandomBeardCommand}" Name="apparelBeardRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Beard_Random}" Margin="0,171,8,0" Width="98" Height="26"/>
+                            <xctk:ColorPicker SelectedColor="{Binding SkinColor, UpdateSourceTrigger=PropertyChanged}" AdvancedTabHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Advanced_Header}" StandardTabHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Standard_Header}" AvailableColorsHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="skinColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,54,0,0" Width="89" Height="26" Background="{DynamicResource BackgroundColor}" BorderBrush="{DynamicResource AccentColor}" DropDownBackground="{DynamicResource BackgroundColor}" HeaderBackground="{DynamicResource BackgroundColor}" HeaderForeground="{DynamicResource AccentColor}" TabBackground="{DynamicResource BackgroundColor}" TabForeground="{DynamicResource AccentColor}"/>
                             <Button Command="{Binding SaveColorSkin}" Name="skinColorPicker_SaveButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="26" Margin="93,54,0,0">
                                 <Button.Content>
                                     <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="ContentSave" Margin="-4"/>
@@ -329,19 +329,19 @@
                                     <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="ContentSave" Margin="-4"/>
                                 </Button.Content>
                             </Button>
-                            <xctk:ColorPicker SelectedColor="{Binding HairColor, UpdateSourceTrigger=PropertyChanged}" AdvancedTabHeader="{DynamicResource INTERFACE_Color_Picker_Advanced_Header}" StandardTabHeader="{DynamicResource INTERFACE_Color_Picker_Standard_Header}" AvailableColorsHeader="{DynamicResource INTERFACE_Color_Picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="hairColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,110,0,0" Width="89" Height="26" Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource AccentColor}" TabBackground="{DynamicResource BackgroundColor}" TabForeground="{DynamicResource AccentColor}" HeaderForeground="{DynamicResource AccentColor}" HeaderBackground="{DynamicResource BackgroundColor}" DropDownBackground="{DynamicResource BackgroundColor}" BorderBrush="{DynamicResource AccentColor}"/>
-                            <CheckBox IsChecked="{Binding IsLeftHanded, UpdateSourceTrigger=PropertyChanged}" Name="apparelLeftHandedCheckbox" HorizontalContentAlignment="Right" Content="{DynamicResource CHARACTER_LeftHanded}" HorizontalAlignment="Left" Margin="0,140,0,0" VerticalAlignment="Top" Width="120" mah:ToggleButtonHelper.ContentDirection="RightToLeft"/>
+                            <xctk:ColorPicker SelectedColor="{Binding HairColor, UpdateSourceTrigger=PropertyChanged}" AdvancedTabHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Advanced_Header}" StandardTabHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Standard_Header}" AvailableColorsHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="hairColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,110,0,0" Width="89" Height="26" Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource AccentColor}" TabBackground="{DynamicResource BackgroundColor}" TabForeground="{DynamicResource AccentColor}" HeaderForeground="{DynamicResource AccentColor}" HeaderBackground="{DynamicResource BackgroundColor}" DropDownBackground="{DynamicResource BackgroundColor}" BorderBrush="{DynamicResource AccentColor}"/>
+                            <CheckBox IsChecked="{Binding IsLeftHanded, UpdateSourceTrigger=PropertyChanged}" Name="apparelLeftHandedCheckbox" HorizontalContentAlignment="Right" Content="{xaml:Localize Key=CHARACTER_LeftHanded}" HorizontalAlignment="Left" Margin="0,140,0,0" VerticalAlignment="Top" Width="120" mah:ToggleButtonHelper.ContentDirection="RightToLeft"/>
                             <ComboBox ItemsSource="{StaticResource Character_Pose_Enums}" SelectedValue="{Binding Pose, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Character_Pose_Enums}}" Name="apparelPoseBox" HorizontalAlignment="Left" SelectedIndex="0" Margin="-1,171,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
-                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,155,0,0" TextWrapping="Wrap" Text="{DynamicResource CHARACTER_Pose}" VerticalAlignment="Top" Width="120" Height="16"/>
-                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,38,0,0" TextWrapping="Wrap" Text="{DynamicResource CHARACTER_Color_Skin}" VerticalAlignment="Top" Width="120" Height="16"/>
-                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,94,0,0" TextWrapping="Wrap" Text="{DynamicResource CHARACTER_Color_Hair}" VerticalAlignment="Top" Width="120"/>
-                            <Label HorizontalContentAlignment="Center" Content="{DynamicResource CHARACTER_Face}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,210,0" Width="98" Height="28"/>
-                            <Label HorizontalContentAlignment="Center" Content="{DynamicResource CHARACTER_Hair}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,109,0" Width="98" Height="28"/>
-                            <Label HorizontalContentAlignment="Center" Content="{DynamicResource CHARACTER_Beard}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,8,0" Width="98" Height="28"/>
+                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,155,0,0" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Pose}" VerticalAlignment="Top" Width="120" Height="16"/>
+                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,38,0,0" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Color_Skin}" VerticalAlignment="Top" Width="120" Height="16"/>
+                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,94,0,0" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Color_Hair}" VerticalAlignment="Top" Width="120"/>
+                            <Label HorizontalContentAlignment="Center" Content="{xaml:Localize Key=CHARACTER_Face}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,210,0" Width="98" Height="28"/>
+                            <Label HorizontalContentAlignment="Center" Content="{xaml:Localize Key=CHARACTER_Hair}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,109,0" Width="98" Height="28"/>
+                            <Label HorizontalContentAlignment="Center" Content="{xaml:Localize Key=CHARACTER_Beard}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,8,0" Width="98" Height="28"/>
                         </Grid>
-                        <GroupBox Header="{DynamicResource CHARACTER_Clothing}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Height="274" Width="300">
+                        <GroupBox Header="{xaml:Localize Key=CHARACTER_Clothing}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Height="274" Width="300">
                             <TabControl>
-                                <TabItem DataContext="{Binding DefaultClothing, UpdateSourceTrigger=PropertyChanged}" Header="{DynamicResource CHARACTER_Clothing_Default}" mah:ControlsHelper.HeaderFontSize="18">
+                                <TabItem DataContext="{Binding DefaultClothing, UpdateSourceTrigger=PropertyChanged}" Header="{xaml:Localize Key=CHARACTER_Clothing_Default}" mah:ControlsHelper.HeaderFontSize="18">
                                     <ScrollViewer>
                                         <Grid>
                                             <mah:NumericUpDown Value="{Binding Hat,UpdateSourceTrigger=PropertyChanged}" x:Name="hatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
@@ -393,17 +393,17 @@
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Hat}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Mask}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Glasses}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Shirt}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Back}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Vest}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Pants}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
                                         </Grid>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem DataContext="{Binding ChristmasClothing}" Header="{DynamicResource CHARACTER_Clothing_Christmas}" mah:ControlsHelper.HeaderFontSize="18">
+                                <TabItem DataContext="{Binding ChristmasClothing}" Header="{xaml:Localize Key=CHARACTER_Clothing_Christmas}" mah:ControlsHelper.HeaderFontSize="18">
                                     <ScrollViewer>
                                         <Grid>
                                             <mah:NumericUpDown Value="{Binding Hat,UpdateSourceTrigger=PropertyChanged}" x:Name="christmashatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
@@ -455,17 +455,17 @@
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Hat}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Mask}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Glasses}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Shirt}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Back}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Vest}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Pants}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
                                         </Grid>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem DataContext="{Binding HalloweenClothing}" Header="{DynamicResource CHARACTER_Clothing_Halloween}" mah:ControlsHelper.HeaderFontSize="18">
+                                <TabItem DataContext="{Binding HalloweenClothing}" Header="{xaml:Localize Key=CHARACTER_Clothing_Halloween}" mah:ControlsHelper.HeaderFontSize="18">
                                     <ScrollViewer>
                                         <Grid>
                                             <mah:NumericUpDown Value="{Binding Hat,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenhatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
@@ -517,19 +517,19 @@
                                                     </StackPanel>
                                                 </mah:NumericUpDown.ToolTip>
                                             </mah:NumericUpDown>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Hat}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Mask}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Glasses}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Shirt}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Back}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Vest}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{DynamicResource CHARACTER_Clothing_Pants}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
+                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
                                         </Grid>
                                     </ScrollViewer>
                                 </TabItem>
                             </TabControl>
                         </GroupBox>
-                        <GroupBox Header="{DynamicResource CHARACTER_Equipment}" HorizontalAlignment="Left" Margin="10,0,0,10" Width="300" Height="Auto" VerticalAlignment="Bottom">
+                        <GroupBox Header="{xaml:Localize Key=CHARACTER_Equipment}" HorizontalAlignment="Left" Margin="10,0,0,10" Width="300" Height="Auto" VerticalAlignment="Bottom">
                             <ScrollViewer>
                                 <Grid>
                                     <mah:NumericUpDown Value="{Binding EquipmentPrimary,UpdateSourceTrigger=PropertyChanged}" x:Name="primaryIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
@@ -548,17 +548,17 @@
                                         </mah:NumericUpDown.ToolTip>
                                     </mah:NumericUpDown>
 
-                                    <Label Content="{DynamicResource CHARACTER_Equipment_Primary}"  Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
-                                    <Label Content="{DynamicResource CHARACTER_Equipment_Secondary}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
-                                    <Label Content="{DynamicResource CHARACTER_Equipment_Tertiary}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
+                                    <Label Content="{xaml:Localize Key=CHARACTER_Equipment_Primary}"  Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
+                                    <Label Content="{xaml:Localize Key=CHARACTER_Equipment_Secondary}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
+                                    <Label Content="{xaml:Localize Key=CHARACTER_Equipment_Tertiary}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
                                     <ComboBox ItemsSource="{StaticResource Character_Equipment_Equipped_Enums}" SelectedValue="{Binding Equipped, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Character_Equipment_Equipped_Enums}}" Name="equipSlotBox" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="120"/>
-                                    <Label Content="{DynamicResource CHARACTER_Equipment_Equipped}" Margin="135,100,0,0" VerticalAlignment="Top" Height="27"/>
+                                    <Label Content="{xaml:Localize Key=CHARACTER_Equipment_Equipped}" Margin="135,100,0,0" VerticalAlignment="Top" Height="27"/>
                                 </Grid>
                             </ScrollViewer>
                         </GroupBox>
                     </Grid>
                 </TabItem>
-                <TabItem DataContext="{Binding DialogueTabViewModel}" Name="dialogueTab" Header="{DynamicResource INTERFACE_Main_Tab_Dialogue}">
+                <TabItem DataContext="{Binding DialogueTabViewModel}" Name="dialogueTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="33*"/>
@@ -569,8 +569,8 @@
                             <RowDefinition Height="80"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{DynamicResource INTERFACE_App_Comment}" Name="dialogue_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
-                        <Button Command="{Binding SetAsStartCommand}" Name="setAsStartButton" Grid.Column="1" Margin="10,10,10,0" Height="32" VerticalAlignment="Top" VerticalContentAlignment="Center" Content="{DynamicResource INTERFACE_Main_Tab_Dialogue_SetAsStart}">
+                        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="dialogue_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
+                        <Button Command="{Binding SetAsStartCommand}" Name="setAsStartButton" Grid.Column="1" Margin="10,10,10,0" Height="32" VerticalAlignment="Top" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_SetAsStart}">
                             <Button.ToolTip>
                                 <StackPanel>
                                     <Image Source="Resources/Help/img_help_startDialogue.png"/>
@@ -579,12 +579,12 @@
                         </Button>
                         <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="dialogueInputIdControl" Width="62" Height="26" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
                         <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
-                            <TextBlock TextAlignment="Center" Text="{DynamicResource DIALOGUE_ID}" VerticalAlignment="Center"/>
+                            <TextBlock TextAlignment="Center" Text="{xaml:Localize Key=DIALOGUE_ID}" VerticalAlignment="Center"/>
                         </Border>
-                        <GroupBox Grid.Row="1" Header="{DynamicResource DIALOGUE_Pages}" Margin="10,10,5,10">
+                        <GroupBox Grid.Row="1" Header="{xaml:Localize Key=DIALOGUE_Pages}" Margin="10,10,5,10">
                             <ScrollViewer>
                                 <StackPanel Name="messagePagesGrid" VerticalAlignment="Top">
-                                    <Button Command="{Binding AddMessageCommand}" Name="dialogueAddMessageButton" Margin="10" Height="32" Content="{DynamicResource DIALOGUE_Message_Add}">
+                                    <Button Command="{Binding AddMessageCommand}" Name="dialogueAddMessageButton" Margin="10" Height="32" Content="{xaml:Localize Key=DIALOGUE_Message_Add}">
                                         <Button.ToolTip>
                                             <StackPanel>
                                                 <Image Source="Resources/Help/img_help_dialogueMessage.png"/>
@@ -594,10 +594,10 @@
                                 </StackPanel>
                             </ScrollViewer>
                         </GroupBox>
-                        <GroupBox Grid.Column="1" Grid.Row="1" Header="{DynamicResource DIALOGUE_Replies}" Margin="5,10,5,10" MinWidth="361">
+                        <GroupBox Grid.Column="1" Grid.Row="1" Header="{xaml:Localize Key=DIALOGUE_Replies}" Margin="5,10,5,10" MinWidth="361">
                             <ScrollViewer>
                                 <StackPanel x:Name="dialoguePlayerRepliesGrid">
-                                    <Button Command="{Binding AddReplyCommand}" Name="dialogueAddReplyButton" Margin="10" VerticalAlignment="Top" Height="32" Content="{DynamicResource DIALOGUE_Reply_Add}" Width="312">
+                                    <Button Command="{Binding AddReplyCommand}" Name="dialogueAddReplyButton" Margin="10" VerticalAlignment="Top" Height="32" Content="{xaml:Localize Key=DIALOGUE_Reply_Add}" Width="312">
                                         <Button.ToolTip>
                                             <StackPanel>
                                                 <Image Source="Resources/Help/img_help_dialogueReply.png"/>
@@ -607,25 +607,25 @@
                                 </StackPanel>
                             </ScrollViewer>
                         </GroupBox>
-                        <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="dialogueSaveButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Dialogue_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="dialogueSaveButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Command="{Binding ResetCommand}" Grid.Column="2" Name="dialogueResetButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Dialogue_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Command="{Binding ResetCommand}" Grid.Column="2" Name="dialogueResetButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Delete" Width="16" Height="16"  Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Command="{Binding OpenCommand}" Grid.Column="2" Name="dialogueOpenButton" ToolTip="{DynamicResource INTERFACE_Main_Tab_Dialogue_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
+                        <Button Command="{Binding OpenCommand}" Grid.Column="2" Name="dialogueOpenButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="FolderOutline" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <TextBlock Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,0,10" Text="{DynamicResource DIALOGUE_Tips}" TextWrapping="Wrap" Width="254"/>
+                        <TextBlock Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,0,10" Text="{xaml:Localize Key=DIALOGUE_Tips}" TextWrapping="Wrap" Width="254"/>
                     </Grid>
                 </TabItem>
-                <TabItem DataContext="{Binding VendorTabViewModel}" Name="vendorTab" Header="{DynamicResource INTERFACE_Main_Tab_Vendor}">
+                <TabItem DataContext="{Binding VendorTabViewModel}" Name="vendorTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="80"/>
@@ -636,51 +636,51 @@
                             <ColumnDefinition MinWidth="296" Width="33*"/>
                             <ColumnDefinition Width="33*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{DynamicResource INTERFACE_App_Comment}" Name="vendor_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
+                        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="vendor_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
                         <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="vendorIdTxtBox" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
                         <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
-                            <TextBlock TextWrapping="Wrap" Text="{DynamicResource VENDOR_ID}" VerticalAlignment="Center"/>
+                            <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_ID}" VerticalAlignment="Center"/>
                         </Border>
                         <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Name="vendorTitleTxtBox" Height="26" VerticalAlignment="Top" Margin="10,10,146,0"/>
-                        <TextBlock  Grid.Column="1" HorizontalAlignment="Right" Margin="0,14,10,0" TextWrapping="Wrap" Text="{DynamicResource VENDOR_Title}" VerticalAlignment="Top" Width="128" Height="16"/>
+                        <TextBlock  Grid.Column="1" HorizontalAlignment="Right" Margin="0,14,10,0" TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_Title}" VerticalAlignment="Top" Width="128" Height="16"/>
                         <TextBox  Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Name="vendorDescTxtBox" Height="26" VerticalAlignment="Bottom" Margin="10,0,146,10"/>
-                        <TextBlock  Grid.Column="1" Width="128" HorizontalAlignment="Right" Margin="0,0,10,14" TextWrapping="Wrap" Text="{DynamicResource VENDOR_Description}" VerticalAlignment="Bottom" Height="16"/>
-                        <CheckBox IsChecked="{Binding DisableSorting, UpdateSourceTrigger=PropertyChanged}" Name="vendorDisableSortingBox" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Content="{DynamicResource VENDOR_DisableSorting}" Margin="10,10,0,0" Grid.RowSpan="2"/>
-                        <TextBox Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Currency, UpdateSourceTrigger=PropertyChanged}" Margin="10,30,0,0" Width="150"/>
-                        <TextBlock Width="156" Grid.Column="2" Grid.Row="1" Text="{DynamicResource VENDOR_Currency}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="165,30,0,0"/>
-                        <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="vendorSaveButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Vendor_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
+                        <TextBlock  Grid.Column="1" Width="128" HorizontalAlignment="Right" Margin="0,0,10,14" TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_Description}" VerticalAlignment="Bottom" Height="16"/>
+                        <CheckBox IsChecked="{Binding DisableSorting, UpdateSourceTrigger=PropertyChanged}" Name="vendorDisableSortingBox" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Content="{xaml:Localize Key=VENDOR_DisableSorting}" Margin="10,10,0,0" Grid.RowSpan="2"/>
+                        <TextBox Height="26" Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Currency, UpdateSourceTrigger=PropertyChanged}" Margin="10,30,0,0" Width="150"/>
+                        <TextBlock Width="156" Grid.Column="2" Grid.Row="1" Text="{xaml:Localize Key=VENDOR_Currency}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="165,35,0,0"/>
+                        <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="vendorSaveButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Command="{Binding OpenCommand}" Grid.Column="2" Name="vendorOpenButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Vendor_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
+                        <Button Command="{Binding OpenCommand}" Grid.Column="2" Name="vendorOpenButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Command="{Binding ResetCommand}" Grid.Column="2" Name="vendorResetButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Vendor_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
+                        <Button Command="{Binding ResetCommand}" Grid.Column="2" Name="vendorResetButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <GroupBox Grid.Row="1" Margin="10,5,5,10" Header="{DynamicResource VENDOR_Items_Buy}">
+                        <GroupBox Grid.Row="1" Margin="10,5,5,10" Header="{xaml:Localize Key=VENDOR_Items_Buy}">
                             <ScrollViewer>
                                 <StackPanel Name="vendorListBuyItems">
 
                                 </StackPanel>
                             </ScrollViewer>
                         </GroupBox>
-                        <GroupBox Grid.Row="1" Grid.Column="1" Margin="5,5,5,10" Header="{DynamicResource VENDOR_Items_Sell}">
+                        <GroupBox Grid.Row="1" Grid.Column="1" Margin="5,5,5,10" Header="{xaml:Localize Key=VENDOR_Items_Sell}">
                             <ScrollViewer>
                                 <StackPanel Name="vendorListSellItems">
 
                                 </StackPanel>
                             </ScrollViewer>
                         </GroupBox>
-                        <Button Command="{Binding AddItemCommand}" Name="vendorAddItemButton" Content="{DynamicResource VENDOR_Item_Add}" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="25"/>
+                        <Button Command="{Binding AddItemCommand}" Name="vendorAddItemButton" Content="{xaml:Localize Key=VENDOR_Item_Add}" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="25"/>
                     </Grid>
                 </TabItem>
-                <TabItem DataContext="{Binding QuestTabViewModel}" Name="questTab" Header="{DynamicResource INTERFACE_Main_Tab_Quest}">
+                <TabItem DataContext="{Binding QuestTabViewModel}" Name="questTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Quest}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="80"/>
@@ -691,26 +691,26 @@
                             <ColumnDefinition Width="33*"/>
                             <ColumnDefinition Width="33*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{DynamicResource INTERFACE_App_Comment}" Name="quest_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
+                        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="quest_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
                         <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="questIdBox" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
                         <Border VerticalAlignment="Top" HorizontalAlignment="Left" Margin="77,10,0,0" Height="26" Grid.ColumnSpan="2">
-                            <TextBlock Text="{DynamicResource QUEST_ID}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{xaml:Localize Key=QUEST_ID}" VerticalAlignment="Center"/>
                         </Border>
                         <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Name="questTitleBox" Height="26" VerticalAlignment="Top" Margin="10,38,10,0"/>
-                        <TextBlock Grid.Row="1" Text="{DynamicResource QUEST_Title}" TextAlignment="Center" Height="23" VerticalAlignment="Top" Margin="10,10,10,0"/>
+                        <TextBlock Grid.Row="1" Text="{xaml:Localize Key=QUEST_Title}" TextAlignment="Center" Height="23" VerticalAlignment="Top" Margin="10,10,10,0"/>
                         <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" TextWrapping="Wrap" Name="questDescBox" Margin="10,94,10,10"/>
-                        <TextBlock Grid.Row="1" TextAlignment="Center" Text="{DynamicResource QUEST_Description}" Height="23" VerticalAlignment="Top" Margin="10,66,10,0"/>
-                        <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="questSaveButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Quest_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
+                        <TextBlock Grid.Row="1" TextAlignment="Center" Text="{xaml:Localize Key=QUEST_Description}" Height="23" VerticalAlignment="Top" Margin="10,66,10,0"/>
+                        <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="questSaveButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ContentSave"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Command="{Binding OpenCommand}" Grid.Column="2" Name="questOpenButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Quest_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
+                        <Button Command="{Binding OpenCommand}" Grid.Column="2" Name="questOpenButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Command="{Binding ResetCommand}" Grid.Column="2" Name="questResetButton" Height="31" ToolTip="{DynamicResource INTERFACE_Main_Tab_Quest_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
+                        <Button Command="{Binding ResetCommand}" Grid.Column="2" Name="questResetButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
@@ -720,40 +720,40 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <GroupBox Header="{DynamicResource QUEST_Conditions}" Margin="10">
+                            <GroupBox Header="{xaml:Localize Key=QUEST_Conditions}" Margin="10">
                                 <ScrollViewer>
                                     <StackPanel Name="listQuestConditions" />
                                 </ScrollViewer>
                             </GroupBox>
-                            <Button Command="{Binding AddConditionCommand}" Grid.Column="1" Grid.Row="1" Name="questAddConditionButton" Height="23" Content="{DynamicResource QUEST_Condition_Add}" Margin="10" VerticalAlignment="Bottom"/>
+                            <Button Command="{Binding AddConditionCommand}" Grid.Column="1" Grid.Row="1" Name="questAddConditionButton" Height="23" Content="{xaml:Localize Key=QUEST_Condition_Add}" Margin="10" VerticalAlignment="Bottom"/>
                         </Grid>
                         <Grid Grid.Column="2" Grid.Row="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <GroupBox Header="{DynamicResource QUEST_Rewards}" Margin="10">
+                            <GroupBox Header="{xaml:Localize Key=QUEST_Rewards}" Margin="10">
                                 <ScrollViewer>
                                     <StackPanel Name="listQuestRewards" />
                                 </ScrollViewer>
                             </GroupBox>
-                            <Button Command="{Binding AddRewardCommand}" Grid.Row="1" Name="questAddRewardButton" Height="23" Content="{DynamicResource QUEST_Reward_Add}" Margin="10" VerticalAlignment="Bottom"/>
+                            <Button Command="{Binding AddRewardCommand}" Grid.Row="1" Name="questAddRewardButton" Height="23" Content="{xaml:Localize Key=QUEST_Reward_Add}" Margin="10" VerticalAlignment="Bottom"/>
                         </Grid>
                     </Grid>
                 </TabItem>
-                <TabItem DataContext="{Binding MistakeTabViewModel}" Name="mistakeListTab" Header="{DynamicResource INTERFACE_Main_Tab_Errors}">
+                <TabItem DataContext="{Binding MistakeTabViewModel}" Name="mistakeListTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Errors}">
                     <Grid>
                         <ListView Name="lstMistakes" Margin="10,10,10,60">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn DisplayMemberBinding="{Binding MistakeImportance}" Header="{DynamicResource INTERFACE_Main_Tab_Errors_Error_Importance}" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding MistakeName}" Header="{DynamicResource INTERFACE_Main_Tab_Errors_Error_Name}" Width="80"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding MistakeDesc}" Header="{DynamicResource INTERFACE_Main_Tab_Errors_Error_Description}" Width="600"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding MistakeImportance}" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_Error_Importance}" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding MistakeName}" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_Error_Name}" Width="80"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding MistakeDesc}" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_Error_Description}" Width="600"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                        <Button Name="deepAnalysis_Button" FontSize="16" VerticalAlignment="Bottom" Content="{DynamicResource INTERFACE_Main_Tab_Errors_DeepAnalysis}" ToolTip="{DynamicResource INTERFACE_Main_Tab_Errors_DeepAnalysis_Tooltip}" Margin="10,0,10,10" Height="45"/>
-                        <Label Name="noErrorsLabel" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{DynamicResource INTERFACE_Main_Tab_Errors_Error_None}" FontSize="24" Visibility="Collapsed" Margin="0,0,0,100"/>
+                        <Button Name="deepAnalysis_Button" FontSize="16" VerticalAlignment="Bottom" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_DeepAnalysis}" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_DeepAnalysis_Tooltip}" Margin="10,0,10,10" Height="45"/>
+                        <Label Name="noErrorsLabel" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_Error_None}" FontSize="24" Visibility="Collapsed" Margin="0,0,0,100"/>
 
                     </Grid>
                 </TabItem>
@@ -771,7 +771,7 @@
         <Grid Name="notificationOverlay" Visibility="Visible"/>
         <Grid Name="blockActionsOverlay" Visibility="Collapsed" IsHitTestVisible="True">
             <Rectangle Fill="Black" Opacity="0.8"/>
-            <TextBlock Name="textBlockActions" TextAlignment="Center" Text="{DynamicResource INTERFACE_Main_Tab_Errors_DeepAnalysis_Progress}" FontSize="18" Foreground="White" Opacity="0.8" VerticalAlignment="Center"/>
+            <TextBlock Name="textBlockActions" TextAlignment="Center" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_DeepAnalysis_Progress}" FontSize="18" Foreground="White" Opacity="0.8" VerticalAlignment="Center"/>
             <ProgressBar Name="progrBar" VerticalAlignment="Bottom" Margin="10" Height="32" Opacity="0.8"/>
         </Grid>
         <Grid Name="notClickableOverlay" IsHitTestVisible="False">
