@@ -55,6 +55,7 @@ namespace BowieD.Unturned.NPCMaker
                 Logger.Log("This program comes with ABSOLUTELY NO WARRANTY; for details type `license w'.");
                 Logger.Log("This is free software, and you are welcome to redistribute it");
                 Logger.Log("under certain conditions; type `license c' for details.");
+                Logger.Log("This programs uses 3rd party apps, type `license l' for details.");
                 Logger.Log("[EXTRCT] - Extracting libraries...", ELogLevel.DEBUG);
                 #region COPY LIBS
                 CopyResource(NPCMaker.Properties.Resources.DiscordRPC, Path.Combine(AppConfig.Directory, "DiscordRPC.dll"));
