@@ -2,6 +2,17 @@
 {
     public sealed class LicenseCommand : Command
     {
+        static readonly (string lib,string author)[] used = new (string, string)[]
+        {
+            ("ControlzEx", "ControlzEx"),
+            ("Discord RPC CSharp", "Lachee"),
+            ("MahApps.Metro", "MahApps"),
+            ("MahApps.Metro.IconPacks.Material", "MahApps"),
+            ("Newtonsoft.Json", "Newtonsoft"),
+            ("Xceed.Wpf.Toolkit", "xceedsoftware"),
+            ("XamlBehaviorsWpf", "Microsoft"),
+            ("Unturned", "Smartly Dressed Games")
+        };
         public override string Name => "license";
         public override string Help => "Display license information";
         public override string Syntax => "[part of license]";
@@ -23,6 +34,13 @@
                         App.Logger.Log("[LicenseCommand] - it under the terms of the GNU General Public License as published by");
                         App.Logger.Log("[LicenseCommand] - the Free Software Foundation, either version 3 of the License, or");
                         App.Logger.Log("[LicenseCommand] - (at your option) any later version.");
+                        break;
+                    case "l":
+                        App.Logger.Log("[LicenseCommand] - Used libraries and other credits:");
+                        foreach (var u in used)
+                        {
+                            App.Logger.Log($"[LicenseCommand] - {u.lib} - {u.author}");
+                        }
                         break;
                 }
             }
