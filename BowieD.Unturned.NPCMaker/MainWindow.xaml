@@ -87,23 +87,8 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Command="{Binding OptionsCommand}" Name="optionsMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Options}"/>
-                <MenuItem Header="{xaml:Localize Key=INTERFACE_Main_Menu_Communication}">
-                    <MenuItem Command="{Binding FeedBackSteamCommand}" Name="steamComm" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Communication_Steam}">
-                        <MenuItem.Icon>
-                            <Image Width="16" Height="{Binding Width}" Source="Resources/Services/Steam.png"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Command="{Binding FeedBackDiscordCommand}" Name="discordComm" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Communication_Discord}">
-                        <MenuItem.Icon>
-                            <Image Width="16" Height="{Binding Width}" Source="Resources/Services/Discord.png"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Command="{Binding FeedBackVKCommand}" Name="vkComm" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Communication_VK}">
-                        <MenuItem.Icon>
-                            <Image Width="16" Height="{Binding Width}" Source="Resources/Services/VK.png"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                </MenuItem>
+                <MenuItem Name="commMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Communication}"/>
+                <MenuItem Name="guidesMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Guides}"/>
                 <MenuItem Command="{Binding AboutCommand}" Name="aboutMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_About}"/>
                 <Label Margin="-5" IsEnabled="False" Name="menuCurrentFileLabel" Content="Current File: "/>
             </Menu>

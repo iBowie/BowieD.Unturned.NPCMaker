@@ -1,13 +1,16 @@
 ﻿using BowieD.Unturned.NPCMaker.Common.Utility;
 using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Data;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.Notification;
 using BowieD.Unturned.NPCMaker.Updating;
+using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Windows;
 
@@ -26,6 +29,7 @@ namespace BowieD.Unturned.NPCMaker
         public static IUpdateManager UpdateManager { get; private set; }
         public static INotificationManager NotificationManager { get; private set; }
         public static ILoggingManager Logger { get; private set; }
+        public static AppPackage Package { get; private set; }
         public static Version Version
         {
             get
@@ -113,10 +117,40 @@ namespace BowieD.Unturned.NPCMaker
         }
         public static void PostRun()
         {
+            string packagePath = Path.Combine(AppConfig.Directory, "package.json");
+
+            try
+            {
+                using (WebClient client = new WebClient())
+                {
+                    string data = client.DownloadString(AppPackage.url);
+
+                    Package = JsonConvert.DeserializeObject<AppPackage>(data);
+
+                    File.WriteAllText(packagePath, data);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException("Could not load latest version of the package. Loading offline cache...", ex: ex);
+                if (File.Exists(packagePath))
+                {
+                    string data = File.ReadAllText(packagePath);
+
+                    Package = JsonConvert.DeserializeObject<AppPackage>(data);
+
+                    File.WriteAllText(packagePath, data);
+                }
+                else
+                {
+                    Logger.Log("Could not find offline cache. Creating placeholder...", ELogLevel.WARNING);
+                    Package = new AppPackage();
+                }
+            }
 #if DEBUG
             Logger.Log("[APP] - Opening MainWindow...");
 #else
-                Logger.Log("[APP] - Closing console and opening app...");
+            Logger.Log("[APP] - Closing console and opening app...");
 #endif
             MainWindow mw = new MainWindow();
             InitManagers();

@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 namespace BowieD.Unturned.NPCMaker
@@ -148,6 +149,46 @@ namespace BowieD.Unturned.NPCMaker
 
             #endregion
             HolidayManager.Check();
+            if (App.Package.Guides.Count > 0)
+            {
+                foreach (var guide in App.Package.Guides)
+                {
+                    guidesMenuItem.Items.Add(new MenuItem()
+                    {
+                        Header = guide.Key,
+                        Command = new BaseCommand(() =>
+                        {
+                            System.Diagnostics.Process.Start(guide.Value);
+                        })
+                    });
+                }
+            }
+            else
+                guidesMenuItem.IsEnabled = false;
+
+            if (App.Package.FeedbackLinks.Length > 0)
+            {
+                foreach (var link in App.Package.FeedbackLinks)
+                {
+                    commMenuItem.Items.Add(new MenuItem()
+                    {
+                        Header = link.Localize ? LocalizationManager.Current.Interface[link.Text] : link.Text,
+                        Command = new BaseCommand(() =>
+                        {
+                            System.Diagnostics.Process.Start(link.URL);
+                        }),
+                        Icon = new Image()
+                        {
+                            Width = 16,
+                            Height = 16,
+                            Source = new BitmapImage(new Uri(link.Icon))
+                        }
+                    });
+                }
+            }
+            else
+                commMenuItem.IsEnabled = false;
+
             App.NotificationManager.Notify(LocalizationManager.Current.Notification["App_StartUp"]);
             ConsoleLogger.StartWaitForInput();
             base.Show();

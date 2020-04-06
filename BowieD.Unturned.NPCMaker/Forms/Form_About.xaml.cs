@@ -1,6 +1,8 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Media.Animation;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
@@ -19,6 +21,17 @@ namespace BowieD.Unturned.NPCMaker.Forms
             this.Width *= scale;
             gridScale.ScaleX = scale;
             gridScale.ScaleY = scale;
+
+            if (AppConfig.Instance.animateControls)
+            {
+                DoubleAnimation da = new DoubleAnimation(0, 1, new Duration(new System.TimeSpan(0, 0, 1)));
+                authorText.BeginAnimation(OpacityProperty, da);
+            }
+
+            foreach (var patron in App.Package.Patrons)
+                patronsList.Items.Add(patron);
+            foreach (var credit in App.Package.Credits)
+                creditsList.Items.Add(credit);
         }
     }
 }

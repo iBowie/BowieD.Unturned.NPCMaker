@@ -501,10 +501,14 @@
 		"App_StartUp": "This app is absolutely free. If someone charged you for this app - report to BowieD.",
 		"App_GUID_Regenerated": "GUIDs regenerated."
 	},
-	"Interface":
-	{
+	"Interface": {
 		"App_About": "Made by BowieD.\nLocalization Author(s): {0}\nVersion: {1}\nLast Localization Update: {2}",
 		"App_About_Title": "About",
+		"App_About_Patreon_Title": "Patreon Supporters",
+		"App_About_Patreon_List_Item": "Supporter",
+		"App_About_Credits_Title": "Credits",
+		"App_About_Credits_List_Key": "Contribution",
+		"App_About_Credits_List_Value": "Author(s)",
 		"App_Comment": "Comment",
 		"CrashReport_Title": "App has crashed.",
 		"CrashReport_Header": "App ran into some problem. Information provided below.",
@@ -533,9 +537,11 @@
 		"Main_Menu_File_Exit": "Exit",
 		"Main_Menu_Options": "Options",
 		"Main_Menu_Communication": "Contact or Donate",
+		"Main_Menu_Communication_Patreon": "Patreon (Click)",
 		"Main_Menu_Communication_Steam": "BowieD's Steam (Click)",
 		"Main_Menu_Communication_Discord": "BowieD's Discord Server (Click)",
 		"Main_Menu_Communication_VK": "BowieD's VK Profile (Click)",
+		"Main_Menu_Guides": "Guides",
 		"Main_Menu_About": "About",
 		"Main_Tab_Character": "Character",
 		"Main_Tab_Character_ID_Tooltip": "ID of the NPC",

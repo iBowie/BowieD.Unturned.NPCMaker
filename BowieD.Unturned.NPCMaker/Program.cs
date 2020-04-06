@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Common.Utility;
 using System;
 using System.IO;
+using System.Security;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -45,9 +46,20 @@ namespace BowieD.Unturned.NPCMaker
 
         static void DisplayException(Exception e)
         {
+            const string caption = "NPC Maker Crashed";
+
             try
             {
-                MessageBox.Show(e.ToString(), "NPC Maker Crashed");
+                switch (e)
+                {
+                    case SecurityException _:
+                    case UnauthorizedAccessException _:
+                        MessageBox.Show($"Security exception.\nTry running the app with admin privileges.\n{e}", caption);
+                        break;
+                    default:
+                        MessageBox.Show(e.ToString(), caption);
+                        break;
+                }
             }
             catch { }
         }
