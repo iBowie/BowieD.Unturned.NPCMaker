@@ -6,14 +6,66 @@
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
         mc:Ignorable="d"
-        Title="{xaml:Localize Key=INTERFACE_App_About_Title}" Height="200" Width="200" ResizeMode="NoResize" Icon="{DynamicResource app_Icon}">
+        Title="{xaml:Localize Key=INTERFACE_App_About_Title}" MinHeight="200" Height="Auto" MinWidth="200" Width="300.25" Icon="{DynamicResource app_Icon}">
+
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform x:Name="gridScale"/>
         </Grid.LayoutTransform>
-        <Image VerticalAlignment="Center" Source="/Resources/BowieD_1000x.png" Height="128" StretchDirection="DownOnly" Margin="10,-46,10,89"/>
-        <Label Margin="0,34,0,0" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <!-- Author label -->
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="Auto"/>
+            <!-- About section -->
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <!-- Patrons section -->
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <!-- Credits section -->
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <TextBlock Name="authorText" Text="BowieD" TextAlignment="Center"/>
+        </Label>
+        <GridSplitter Grid.Row="1"/>
+        <Label Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Top">
             <TextBlock Name="mainText" TextWrapping="Wrap" TextAlignment="Center" />
         </Label>
+        <GridSplitter Grid.Row="3"/>
+        <Grid Grid.Row="4" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label HorizontalAlignment="Center">
+                <TextBlock  Name="patreonTitle" Text="{xaml:Localize Key=INTERFACE_App_About_Patreon_Title}"/>
+            </Label>
+            <ListView Name="patronsList" Grid.Row="1">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="{xaml:Localize Key=INTERFACE_App_About_Patreon_List_Item}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <GridSplitter Grid.Row="5"/>
+        <Grid Grid.Row="6" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label HorizontalAlignment="Center">
+                <TextBlock  Name="creditsTitle" Text="{xaml:Localize Key=INTERFACE_App_About_Credits_Title}"/>
+            </Label>
+            <ListView Name="creditsList" Grid.Row="1">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="{xaml:Localize Key=INTERFACE_App_About_Credits_List_Key}"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="{xaml:Localize Key=INTERFACE_App_About_Credits_List_Value}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
     </Grid>
 </Window>

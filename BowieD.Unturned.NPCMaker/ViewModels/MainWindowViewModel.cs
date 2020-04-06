@@ -223,9 +223,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             exportProjectCommand,
             exitCommand,
             optionsCommand,
-            feedBackSteamCommand,
-            feedBackDiscordCommand,
-            feedBackVKCommand,
             aboutCommand,
             importFileCommand,
             importDirectoryCommand;
@@ -428,48 +425,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     });
                 }
                 return exitCommand;
-            }
-        }
-        public ICommand FeedBackSteamCommand
-        {
-            get
-            {
-                if (feedBackSteamCommand == null)
-                {
-                    feedBackSteamCommand = new BaseCommand(() =>
-                    {
-                        System.Diagnostics.Process.Start("https://steamcommunity.com/profiles/76561198085825110");
-                    });
-                }
-                return feedBackSteamCommand;
-            }
-        }
-        public ICommand FeedBackDiscordCommand
-        {
-            get
-            {
-                if (feedBackDiscordCommand == null)
-                {
-                    feedBackDiscordCommand = new BaseCommand(() =>
-                    {
-                        System.Diagnostics.Process.Start("https://discord.gg/Geqtkx2");
-                    });
-                }
-                return feedBackDiscordCommand;
-            }
-        }
-        public ICommand FeedBackVKCommand
-        {
-            get
-            {
-                if (feedBackVKCommand == null)
-                {
-                    feedBackVKCommand = new BaseCommand(() =>
-                    {
-                        System.Diagnostics.Process.Start("https://vk.com/id250813640");
-                    });
-                }
-                return feedBackVKCommand;
             }
         }
         public ICommand AboutCommand
