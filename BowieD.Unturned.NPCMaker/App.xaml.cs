@@ -130,8 +130,9 @@ namespace BowieD.Unturned.NPCMaker
                     File.WriteAllText(packagePath, data);
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Logger.LogException("Could not load latest version of the package. Loading offline cache...", ex: ex);
                 if (File.Exists(packagePath))
                 {
                     string data = File.ReadAllText(packagePath);
@@ -142,6 +143,7 @@ namespace BowieD.Unturned.NPCMaker
                 }
                 else
                 {
+                    Logger.Log("Could not find offline cache. Creating placeholder...", ELogLevel.WARNING);
                     Package = new AppPackage();
                 }
             }
