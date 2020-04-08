@@ -51,6 +51,15 @@
 	"holidays":
 	[
 		{
+			"notification": "Stay Home!",
+			"range":
+			{
+				"from": "2020-01-04T00:00:01Z",
+				"to": "2020-20-04T23:59:59Z",
+				"annual": false
+			}
+		},
+		{
 			"notification": "Happy Birthday, BowieD",
 			"range":
 			{
