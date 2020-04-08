@@ -2,6 +2,12 @@
 	"feedback":
 	[
 		{
+			"icon": "pack://application:,,,/Resources/Services/GitHub.png",
+			"text": "Main_Menu_Communication_GitHub",
+			"loc": true,
+			"url": "https://github.com/iBowie/BowieD.Unturned.NPCMaker"
+		},
+		{
 			"icon": "pack://application:,,,/Resources/Services/Patreon.png",
 			"text": "Main_Menu_Communication_Patreon",
 			"loc": true,
