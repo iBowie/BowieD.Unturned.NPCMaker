@@ -521,5 +521,8 @@
   <ItemGroup>
     <Resource Include="Libs\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Services\GitHub.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

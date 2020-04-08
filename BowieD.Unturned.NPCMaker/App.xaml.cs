@@ -144,7 +144,19 @@ namespace BowieD.Unturned.NPCMaker
                 else
                 {
                     Logger.Log("Could not find offline cache. Creating placeholder...", ELogLevel.WARNING);
-                    Package = new AppPackage();
+                    Package = new AppPackage()
+                    {
+                        FeedbackLinks = new FeedbackLink[1]
+                        {
+                            new FeedbackLink()
+                            {
+                                Icon = "pack://application:,,,/Resources/Services/GitHub.png",
+                                Text = "Main_Menu_Communication_GitHub",
+                                Localize = true,
+                                URL = "https://github.com/iBowie/BowieD.Unturned.NPCMaker"
+                            }
+                        }
+                    };
                 }
             }
 #if DEBUG

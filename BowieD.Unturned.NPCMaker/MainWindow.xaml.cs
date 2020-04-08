@@ -170,20 +170,31 @@ namespace BowieD.Unturned.NPCMaker
             {
                 foreach (var link in App.Package.FeedbackLinks)
                 {
-                    commMenuItem.Items.Add(new MenuItem()
+                    MenuItem newItem = new MenuItem()
                     {
                         Header = link.Localize ? LocalizationManager.Current.Interface[link.Text] : link.Text,
                         Command = new BaseCommand(() =>
                         {
                             System.Diagnostics.Process.Start(link.URL);
-                        }),
-                        Icon = new Image()
+                        })
+                    };
+                    if (!string.IsNullOrEmpty(link.Icon))
+                    {
+                        try
                         {
-                            Width = 16,
-                            Height = 16,
-                            Source = new BitmapImage(new Uri(link.Icon))
+                            newItem.Icon = new Image()
+                            {
+                                Width = 16,
+                                Height = 16,
+                                Source = new BitmapImage(new Uri(link.Icon))
+                            };
                         }
-                    });
+                        catch (Exception ex)
+                        {
+                            App.Logger.LogException("Could not load feedback icon", ex: ex);
+                        }
+                    }
+                    commMenuItem.Items.Add(newItem);
                 }
             }
             else

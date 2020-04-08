@@ -535,6 +535,7 @@
     "Main_Menu_File_Exit": "Выход",
     "Main_Menu_Options": "Настройки",
     "Main_Menu_Communication": "Связаться или задонатить",
+    "Main_Menu_Communication_GitHub": "Репозиторий GitHub (Нажмите)",
     "Main_Menu_Communication_Patreon": "Patreon (Нажмите)",
     "Main_Menu_Communication_Steam": "Steam BowieD (Нажмите)",
     "Main_Menu_Communication_Discord": "Сервер BowieD в Discord (Нажмите)",
