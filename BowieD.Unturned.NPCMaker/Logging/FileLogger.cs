@@ -24,10 +24,7 @@ namespace BowieD.Unturned.NPCMaker.Logging
                 File.Delete(Dir + "npcmaker.old.log");
             if (File.Exists(Dir + "npcmaker.log"))
                 File.Move(Dir + "npcmaker.log", Dir + "npcmaker.old.log");
-            stream = new StreamWriter(Dir + "npcmaker.log", false, Encoding.UTF8)
-            {
-                AutoFlush = true
-            };
+            stream = new StreamWriter(Dir + "npcmaker.log", false, Encoding.UTF8);
         }
 
         public async Task Log(string message, ELogLevel level)
