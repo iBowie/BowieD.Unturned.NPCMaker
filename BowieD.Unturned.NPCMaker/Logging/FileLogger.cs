@@ -32,7 +32,19 @@ namespace BowieD.Unturned.NPCMaker.Logging
 
         public async Task Log(string message, ELogLevel level)
         {
-            await stream.WriteLineAsync(message);
+            try
+            {
+                await stream.WriteLineAsync(message);
+            }
+            catch (Exception ex)
+            {
+                var old = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Can't write in log file directly. Doubling the message in Console with error provided");
+                Console.WriteLine(message);
+                Console.WriteLine($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Console.ForegroundColor = old;
+            }
         }
     }
 }
