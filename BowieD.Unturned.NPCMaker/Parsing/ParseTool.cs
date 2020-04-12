@@ -10,9 +10,9 @@ namespace BowieD.Unturned.NPCMaker.Parsing
 {
     public sealed class ParseTool
     {
-        private DataReader local;
-        private DataReader asset;
-        private string dir;
+        private readonly DataReader local;
+        private readonly DataReader asset;
+        private readonly string dir;
         public ParseTool(string fileName)
         {
             dir = Path.GetDirectoryName(fileName) + Path.DirectorySeparatorChar;
@@ -527,8 +527,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                     case RewardType.Hint:
                         r[num] = new RewardHint()
                         {
-                            Duration = asset.ReadSingle(tp + "Duration", 2f),
-                            Text = asset.ReadString(tp + "Text")
+                            Duration = asset.ReadSingle(tp + "Duration", 2f)
                         };
                         break;
                 }
