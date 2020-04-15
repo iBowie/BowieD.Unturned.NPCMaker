@@ -233,6 +233,7 @@
     <Compile Include="Mistakes\Character\NE_0003.cs" />
     <Compile Include="Mistakes\DeepAnalysisManager.cs" />
     <Compile Include="Mistakes\Character\NE_0000.cs" />
+    <Compile Include="Mistakes\Dialogue\DialogueMistake.cs" />
     <Compile Include="Mistakes\Dialogue\NE_1000.cs" />
     <Compile Include="Mistakes\Dialogue\NE_1001.cs" />
     <Compile Include="Mistakes\Dialogue\NE_1002.cs" />

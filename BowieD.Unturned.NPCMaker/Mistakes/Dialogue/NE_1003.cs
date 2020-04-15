@@ -1,12 +1,19 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
-using System;
 using System.Collections.Generic;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
 {
-    public sealed class NE_1003 : Mistake
+    public sealed class NE_1003 : DialogueMistake
     {
-        public NE_1003() { }
+        public NE_1003() : base()
+        {
+            MistakeName = "NE_1003";
+            Importance = IMPORTANCE.WARNING;
+        }
+        public NE_1003(int pageId, int messageId, ushort id) : this()
+        {
+            MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_1003_Desc", pageId, messageId, id);
+        }
         public override IEnumerable<Mistake> CheckMistake()
         {
             foreach (var dial in MainWindow.CurrentProject.data.dialogues)
@@ -18,20 +25,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
                         var page = dial.messages[mId].pages[pId];
                         if (page == null || page.Length == 0)
                         {
-                            yield return new Mistake()
-                            {
-                                Importance = IMPORTANCE.WARNING,
-                                MistakeName = "NE_1003",
-                                MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_1003_Desc", pId + 1, mId + 1, dial.id),
-                                OnClick = new Action(() =>
-                                {
-                                    if (MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.ID == 0)
-                                        return;
-                                    MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.SaveCommand.Execute(null);
-                                    MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Dialogue = dial;
-                                    MainWindow.Instance.mainTabControl.SelectedIndex = 1;
-                                })
-                            };
+                            yield return new NE_1003(pId + 1, mId + 1, dial.id);
                         }
                     }
                 }
