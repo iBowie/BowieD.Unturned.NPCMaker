@@ -32,7 +32,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 }
             }
             MainWindow.Instance.lstMistakes.Items.Clear();
-            FoundMistakes = new HashSet<Mistake>();
+            FoundMistakes.Clear();
             foreach (Mistake m in CheckMistakes)
             {
                 var mistakes = m.CheckMistake();
@@ -57,6 +57,6 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
         public static int Advices_Count => FoundMistakes.Count(d => d.Importance == IMPORTANCE.ADVICE);
         public static int Warnings_Count => FoundMistakes.Count(d => d.Importance == IMPORTANCE.WARNING);
         public static int Criticals_Count => FoundMistakes.Count(d => d.Importance == IMPORTANCE.CRITICAL);
-        public static HashSet<Mistake> FoundMistakes { get; private set; } = new HashSet<Mistake>();
+        public static HashSet<Mistake> FoundMistakes { get; } = new HashSet<Mistake>();
     }
 }
