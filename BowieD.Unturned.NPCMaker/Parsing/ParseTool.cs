@@ -217,7 +217,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                     break;
                 Condition_Type type = asset.ReadEnum(text, Condition_Type.None);
                 string desc = local?.ReadString($"{prefix}{postfix}{num}");
-                bool needToReset = asset.ReadBoolean($"{prefix}{postfix}{num}_Reset");
+                bool needToReset = asset.Has($"{prefix}{postfix}{num}_Reset");
                 Logic_Type logic = asset.ReadEnum($"{prefix}{postfix}{num}_Logic", Logic_Type.Equal);
                 string tp = $"{prefix}{postfix}{num}_";
                 switch (type)
