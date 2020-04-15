@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
-using System;
 using System.Collections.Generic;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes.Character
@@ -7,16 +6,12 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Character
     /// <summary>
     /// NPC id between 1 and 2000 (Official content recommendation)
     /// </summary>
-    public class NE_0000 : Mistake
+    public class NE_0000 : CharacterMistake
     {
-        public NE_0000() 
+        public NE_0000() : base()
         {
             MistakeName = "NE_0000";
             Importance = IMPORTANCE.WARNING;
-            OnClick = new Action(() =>
-            {
-                MainWindow.Instance.mainTabControl.SelectedIndex = 0;
-            });
         }
         public NE_0000(string displayName, ushort id) : this()
         {

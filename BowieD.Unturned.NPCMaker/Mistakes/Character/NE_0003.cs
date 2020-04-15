@@ -5,16 +5,12 @@ using System.Linq;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes.Character
 {
-    public class NE_0003 : Mistake
+    public class NE_0003 : CharacterMistake
     {
         public NE_0003()
         {
             MistakeName = "NE_0003";
             Importance = IMPORTANCE.CRITICAL;
-            OnClick = new Action(() =>
-            {
-                MainWindow.Instance.mainTabControl.SelectedIndex = 0;
-            });
         }
         public NE_0003(string displayName, ushort id) : this()
         {

@@ -7,16 +7,12 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Character
     /// <summary>
     /// Equipped slot is empty
     /// </summary>
-    public class NE_0002 : Mistake
+    public class NE_0002 : CharacterMistake
     {
         public NE_0002()
         {
             MistakeName = "NE_0002";
             Importance = IMPORTANCE.CRITICAL;
-            OnClick = new Action(() =>
-            {
-                MainWindow.Instance.mainTabControl.SelectedIndex = 0;
-            });
         }
         public NE_0002(string displayName, ushort id) : this()
         {

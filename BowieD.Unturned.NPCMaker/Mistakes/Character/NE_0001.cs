@@ -7,16 +7,12 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Character
     /// <summary>
     /// NPC id equals zero
     /// </summary>
-    public class NE_0001 : Mistake
+    public class NE_0001 : CharacterMistake
     {
         public NE_0001()
         {
             MistakeName = "NE_0001";
             Importance = IMPORTANCE.CRITICAL;
-            OnClick = new Action(() =>
-            {
-                MainWindow.Instance.mainTabControl.SelectedIndex = 0;
-            });
         }
         public NE_0001(string displayName, ushort id) : this()
         {
