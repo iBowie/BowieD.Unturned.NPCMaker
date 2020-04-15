@@ -9,27 +9,26 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Character
     /// </summary>
     public class NE_0000 : Mistake
     {
-        public NE_0000() { }
+        public NE_0000() 
+        {
+            MistakeName = "NE_0000";
+            Importance = IMPORTANCE.WARNING;
+            OnClick = new Action(() =>
+            {
+                MainWindow.Instance.mainTabControl.SelectedIndex = 0;
+            });
+        }
+        public NE_0000(string displayName, ushort id) : this()
+        {
+            MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_0000_Desc", displayName, id);
+        }
         public override IEnumerable<Mistake> CheckMistake()
         {
             foreach (var _char in MainWindow.CurrentProject.data.characters)
             {
                 if (_char.id > 0 && _char.id <= 2000)
                 {
-                    yield return new NE_0000()
-                    {
-                        MistakeName = "NE_0000",
-                        Importance = IMPORTANCE.WARNING,
-                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_0000_Desc", _char.displayName, _char.id),
-                        OnClick = new Action(() =>
-                        {
-                            //if (MainWindow.CharacterEditor.Current.id == 0)
-                            //    return;
-                            //MainWindow.CharacterEditor.Save();
-                            //MainWindow.CharacterEditor.Current = _char;
-                            MainWindow.Instance.mainTabControl.SelectedIndex = 0;
-                        })
-                    };
+                    yield return new NE_0000(_char.displayName, _char.id);
                 }
             }
         }
