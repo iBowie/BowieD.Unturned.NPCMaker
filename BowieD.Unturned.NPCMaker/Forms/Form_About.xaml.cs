@@ -1,6 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media.Animation;
 

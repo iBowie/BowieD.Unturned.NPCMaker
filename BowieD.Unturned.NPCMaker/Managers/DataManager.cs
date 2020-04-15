@@ -7,7 +7,7 @@ namespace BowieD.Unturned.NPCMaker.Managers
         private static RecentFileList recentFile;
         private static UserColorsList userColors;
 
-        public static RecentFileList RecentFileData 
+        public static RecentFileList RecentFileData
         {
             get
             {

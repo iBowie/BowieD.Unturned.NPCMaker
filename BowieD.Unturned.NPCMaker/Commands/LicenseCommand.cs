@@ -2,7 +2,7 @@
 {
     public sealed class LicenseCommand : Command
     {
-        static readonly (string lib,string author)[] used = new (string, string)[]
+        static readonly (string lib, string author)[] used = new (string, string)[]
         {
             ("ControlzEx", "ControlzEx"),
             ("Discord RPC CSharp", "Lachee"),

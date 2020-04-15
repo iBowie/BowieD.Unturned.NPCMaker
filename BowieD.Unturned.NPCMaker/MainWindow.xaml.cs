@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
-using BowieD.Unturned.NPCMaker.Data;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;

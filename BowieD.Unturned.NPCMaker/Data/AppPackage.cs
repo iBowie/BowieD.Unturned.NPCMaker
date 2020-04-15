@@ -30,7 +30,7 @@ namespace BowieD.Unturned.NPCMaker.Data
         }
         private Dictionary<string, string> _credits;
         [JsonProperty("credits")]
-        public Dictionary<string, string> Credits 
+        public Dictionary<string, string> Credits
         {
             get => _credits ?? new Dictionary<string, string>();
             set => _credits = value;
