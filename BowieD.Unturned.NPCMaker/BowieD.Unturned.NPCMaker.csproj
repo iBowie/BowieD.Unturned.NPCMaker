@@ -245,6 +245,7 @@
     <Compile Include="Mistakes\Quest\QuestMistake.cs" />
     <Compile Include="Mistakes\Vendor\NE_2000.cs" />
     <Compile Include="Mistakes\Vendor\NE_2001.cs" />
+    <Compile Include="Mistakes\Vendor\VendorMistake.cs" />
     <Compile Include="Notification\INotificationManager.cs" />
     <Compile Include="Notification\NotificationManager.cs" />
     <Compile Include="NPC\Conditions\Attributes\ConditionNoValueAttribute.cs" />
