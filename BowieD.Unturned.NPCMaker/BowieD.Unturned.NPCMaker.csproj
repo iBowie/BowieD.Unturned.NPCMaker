@@ -239,6 +239,10 @@
     <Compile Include="Mistakes\Dialogue\NE_1001.cs" />
     <Compile Include="Mistakes\Dialogue\NE_1002.cs" />
     <Compile Include="Mistakes\Dialogue\NE_1003.cs" />
+    <Compile Include="Mistakes\Dialogue\NE_1004.cs" />
+    <Compile Include="Mistakes\Dialogue\NE_1005.cs" />
+    <Compile Include="Mistakes\Dialogue\NE_1006.cs" />
+    <Compile Include="Mistakes\Dialogue\NE_1007.cs" />
     <Compile Include="Mistakes\MistakesManager.cs" />
     <Compile Include="Mistakes\Quest\NE_3000.cs" />
     <Compile Include="Mistakes\Quest\NE_3001.cs" />
