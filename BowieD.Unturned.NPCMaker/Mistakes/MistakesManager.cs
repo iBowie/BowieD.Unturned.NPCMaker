@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -38,6 +39,16 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 var mistakes = m.CheckMistake();
                 foreach (var fm in mistakes)
                 {
+                    string descKey = $"{fm.MistakeName}_Desc";
+                    if (fm.MistakeDesc == null)
+                        if (LocalizationManager.Current.Mistakes.TryGetValue(descKey, out var desc))
+                            fm.MistakeDesc = desc;
+
+                    string solutionKey = $"{fm.MistakeName}_Solution";
+                    if (fm.MistakeSolution == null)
+                        if (LocalizationManager.Current.Mistakes.TryGetValue(solutionKey, out var solution))
+                            fm.MistakeSolution = solution;
+
                     FoundMistakes.Add(fm);
                     MainWindow.Instance.lstMistakes.Items.Add(fm);
                 }
