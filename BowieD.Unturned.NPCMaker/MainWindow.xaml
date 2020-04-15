@@ -734,6 +734,7 @@
                                     <GridViewColumn DisplayMemberBinding="{Binding MistakeImportance}" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_Error_Importance}" Width="100"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding MistakeName}" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_Error_Name}" Width="80"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding MistakeDesc}" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_Error_Description}" Width="600"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding MistakeSolution}" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_Error_Solution}" Width="600"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
