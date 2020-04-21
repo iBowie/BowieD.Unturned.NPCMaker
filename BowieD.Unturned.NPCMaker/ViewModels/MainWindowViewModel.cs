@@ -64,6 +64,23 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             VendorTabViewModel = new VendorTabViewModel();
             QuestTabViewModel = new QuestTabViewModel();
             MainWindow.mainTabControl.SelectionChanged += TabControl_SelectionChanged;
+
+            MainWindow.CurrentProject.OnDataLoaded += () =>
+            {
+                ResetAll();
+
+                var proj = MainWindow.CurrentProject;
+                var data = proj.data;
+
+                if (data.lastCharacter > -1)
+                    CharacterTabViewModel.Character = data.characters[data.lastCharacter];
+                if (data.lastDialogue > -1)
+                    DialogueTabViewModel.Dialogue = data.dialogues[data.lastDialogue];
+                if (data.lastVendor > -1)
+                    VendorTabViewModel.Vendor = data.vendors[data.lastVendor];
+                if (data.lastQuest > -1)
+                    QuestTabViewModel.Quest = data.quests[data.lastQuest];
+            };
         }
         public MainWindow MainWindow { get; set; }
         public CharacterTabViewModel CharacterTabViewModel { get; set; }
@@ -84,6 +101,14 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             DialogueTabViewModel.SaveCommand.Execute(null);
             VendorTabViewModel.SaveCommand.Execute(null);
             QuestTabViewModel.SaveCommand.Execute(null);
+
+            var proj = MainWindow.CurrentProject;
+            var data = proj.data;
+
+            data.lastCharacter = data.characters.IndexOf(CharacterTabViewModel.Character);
+            data.lastDialogue = data.dialogues.IndexOf(DialogueTabViewModel.Dialogue);
+            data.lastQuest = data.quests.IndexOf(QuestTabViewModel.Quest);
+            data.lastVendor = data.vendors.IndexOf(VendorTabViewModel.Vendor);
         }
         internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -313,6 +338,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     saveProjectCommand = new BaseCommand(() =>
                     {
                         SaveAll();
+
                         if (MainWindow.CurrentProject.Save())
                         {
                             App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Saved"]);
@@ -372,7 +398,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             App.NotificationManager.Clear();
                             App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Loaded"]);
                             MainWindow.AddToRecentList(MainWindow.CurrentProject.file);
-                            ResetAll();
                         }
                         else
                         {

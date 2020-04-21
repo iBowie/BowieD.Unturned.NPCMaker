@@ -17,6 +17,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public string file;
         public override string FileName => file;
         public bool isSaved = false;
+
+        public new event DataLoaded<NPCProject> OnDataLoaded;
+
         /// <summary>
         /// True - Yes / No prompt needed
         /// False - No
@@ -51,6 +54,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 if (sfd.ShowDialog() == true)
                 {
                     file = sfd.FileName;
+                    data.SAVEDATA_VERSION = NPCProject.CURRENT_SAVEDATA_VERSION;
                     isSaved = base.Save();
                 }
                 else
@@ -60,6 +64,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             }
             else
             {
+                data.SAVEDATA_VERSION = NPCProject.CURRENT_SAVEDATA_VERSION;
                 isSaved = base.Save();
             }
             return isSaved;
@@ -77,6 +82,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     {
                         data = (NPCProject)_serializer.Deserialize(reader);
                         App.Logger.Log($"[XDATA] - Loaded");
+                        OnDataLoaded?.Invoke();
                         return true;
                     }
                     else

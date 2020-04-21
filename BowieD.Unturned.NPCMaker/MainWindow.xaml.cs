@@ -213,7 +213,7 @@ namespace BowieD.Unturned.NPCMaker
         #endregion
         #region STATIC
         public static MainWindow Instance;
-        public static ProjectData CurrentProject { get; private set; } = new ProjectData();
+        public static ProjectData CurrentProject { get; } = new ProjectData();
         public static DispatcherTimer AutosaveTimer { get; set; }
         public static DispatcherTimer AppUpdateTimer { get; set; }
         public static DateTime Started { get; set; } = DateTime.UtcNow;
@@ -305,7 +305,6 @@ namespace BowieD.Unturned.NPCMaker
                     if (MainWindow.CurrentProject.Load(null))
                     {
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Loaded"]);
-                        MainWindowViewModel.ResetAll();
                     }
                     else
                     {

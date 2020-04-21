@@ -14,6 +14,10 @@ namespace BowieD.Unturned.NPCMaker.Data
         public virtual bool Indent => false;
         public abstract string FileName { get; }
         public T data;
+
+        public event DataLoaded<T> OnDataLoaded;
+        public event DataSaved<T> OnDataSaved;
+
         public virtual bool Save()
         {
             App.Logger.Log($"[XDATA] - Saving {FileName}");
@@ -22,6 +26,7 @@ namespace BowieD.Unturned.NPCMaker.Data
             {
                 _serializer.Serialize(writer, data);
                 App.Logger.Log($"[XDATA] - Saved!");
+                OnDataSaved?.Invoke();
                 return true;
             }
         }
@@ -38,6 +43,7 @@ namespace BowieD.Unturned.NPCMaker.Data
                     {
                         data = (T)_serializer.Deserialize(reader);
                         App.Logger.Log($"[XDATA] - Loaded");
+                        OnDataLoaded?.Invoke();
                         return true;
                     }
                     else
