@@ -8,11 +8,13 @@ using BowieD.Unturned.NPCMaker.Themes;
 using BowieD.Unturned.NPCMaker.ViewModels;
 using MahApps.Metro.Controls;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
@@ -199,7 +201,38 @@ namespace BowieD.Unturned.NPCMaker
             else
                 commMenuItem.IsEnabled = false;
 
-            App.NotificationManager.Notify(LocalizationManager.Current.Notification["App_StartUp"]);
+            try
+            {
+                foreach (var n in App.Package.Notifications)
+                {
+                    string text = n.Localize ? LocalizationManager.Current.Notification.Translate(n.Text) : n.Text;
+
+                    List<Button> _buttons = new List<Button>();
+
+                    foreach (var b in n.Buttons)
+                    {
+                        string bText = b.Localize ? LocalizationManager.Current.Notification.Translate(b.Text) : b.Text;
+
+                        Button elem = new Button()
+                        {
+                            Content = new TextBlock()
+                            {
+                                Text = bText
+                            }
+                        };
+                        elem.Click += (_, __) => b.GetButtonAction().Invoke();
+
+                        _buttons.Add(elem);
+                    }
+
+                    App.NotificationManager.Notify(text, buttons: _buttons.ToArray());
+                }
+            }
+            catch (Exception ex)
+            {
+                App.Logger.LogException("Could not display notification(s)", ex: ex);
+            }
+
             ConsoleLogger.StartWaitForInput();
             base.Show();
         }

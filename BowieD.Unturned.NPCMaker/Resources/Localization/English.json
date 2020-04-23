@@ -490,8 +490,7 @@
 		"Importance_WARNING": "Warning",
 		"Importance_CRITICAL": "Critical"
 	},
-	"Notification":
-	{
+	"Notification": {
 		"Configuration_OnExit": "Restart the app to apply changes.",
 		"Character_ID_Zero": "Character ID can't be equal to zero",
 		"Character_Saved": "Character saved!",
@@ -518,8 +517,10 @@
 		"Project_Saved": "Project saved!",
 		"Project_Loaded": "Project loaded!",
 		"Project_NotLoaded_Incompatible": "File not compatible with this version of the app.",
-		"App_StartUp": "This app is absolutely free. If someone charged you for this app - report to BowieD.",
-		"App_GUID_Regenerated": "GUIDs regenerated."
+		"App_GUID_Regenerated": "GUIDs regenerated.",
+		"StartUp_Free": "This app is absolutely free. If someone charged you for this app - report to BowieD.",
+		"StartUp_Patreon": "Consider supporting me on Patreon",
+		"StartUp_Patreon_Open": "Go to Patreon"
 	},
 	"Interface": {
 		"App_About": "Made by BowieD.\nLocalization Author(s): {0}\nVersion: {1}\nLast Localization Update: {2}",

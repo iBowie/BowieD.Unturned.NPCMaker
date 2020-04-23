@@ -13,6 +13,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Windows;
+using static BowieD.Unturned.NPCMaker.Data.AppPackage;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -121,6 +122,10 @@ namespace BowieD.Unturned.NPCMaker
 
             try
             {
+#if DEBUG
+                if (Environment.GetCommandLineArgs().Contains("-offline-package"))
+                    throw new Exception("Skipping cache downloading");
+#endif
                 using (WebClient client = new WebClient())
                 {
                     string data = client.DownloadString(AppPackage.url);

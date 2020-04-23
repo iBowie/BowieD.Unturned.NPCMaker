@@ -170,8 +170,6 @@
     <Compile Include="Configuration\IConfig.cs" />
     <Compile Include="Data\AppPackage.cs" />
     <Compile Include="Data\DateTimeRange.cs" />
-    <Compile Include="Data\FeedbackLink.cs" />
-    <Compile Include="Data\Holiday.cs" />
     <Compile Include="Data\IData.cs" />
     <Compile Include="Data\JsonData.cs" />
     <Compile Include="Data\RecentFileList.cs" />

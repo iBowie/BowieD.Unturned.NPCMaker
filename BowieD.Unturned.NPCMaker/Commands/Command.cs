@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace BowieD.Unturned.NPCMaker.Commands
 {
@@ -42,6 +43,22 @@ namespace BowieD.Unturned.NPCMaker.Commands
         public static Command GetCommand<T>() where T : Command
         {
             return Commands.SingleOrDefault(d => d is T);
+        }
+        public static string Execute(string input)
+        {
+            string[] command = input.Split(' ');
+            var executionCommand = Command.Commands.SingleOrDefault(d => d.Name.ToLower() == command[0].ToLower());
+            if (executionCommand == null)
+            {
+                return $"Command {command[0]} not found";
+            }
+            else
+            {
+                var matches = Regex.Matches(string.Join(" ", command.Skip(1)), "[\\\"](.+?)[\\\"]|([^ ]+)", RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+                var filtered = (from Match d in matches select d.Value.Trim('"')).ToArray();
+                executionCommand.Execute(filtered);
+                return $"Command {command[0]} executed";
+            }
         }
     }
 }

@@ -94,18 +94,7 @@ namespace BowieD.Unturned.NPCMaker.Logging
         public static void WaitForInput()
         {
             string input = Console.ReadLine();
-            string[] command = input.Split(' ');
-            var executionCommand = Command.Commands.SingleOrDefault(d => d.Name.ToLower() == command[0].ToLower());
-            if (executionCommand == null)
-            {
-                Console.WriteLine($"Command {command[0]} not found");
-            }
-            else
-            {
-                var matches = Regex.Matches(string.Join(" ", command.Skip(1)), "[\\\"](.+?)[\\\"]|([^ ]+)", RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
-                var filtered = (from Match d in matches select d.Value.Trim('"')).ToArray();
-                executionCommand.Execute(filtered);
-            }
+            Console.WriteLine(Command.Execute(input));
             WaitForInput();
         }
     }

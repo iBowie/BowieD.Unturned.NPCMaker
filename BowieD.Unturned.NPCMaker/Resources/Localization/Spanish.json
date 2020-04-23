@@ -515,8 +515,10 @@
     "Project_Saved": "Proyecto Guardadoo!",
     "Project_Loaded": "Proyecto Cargado!",
     "Project_NotLoaded_Incompatible": "El archivo no es compatible con esta versión de la app.",
-    "App_StartUp": "Esta app es absolutamente gratuita. Si alguien te ha cobrado por esta - reportalo a BowieD.",
-    "App_GUID_Regenerated": "GUIDs regenerated."
+    "App_GUID_Regenerated": "GUIDs regenerated.",
+    "StartUp_Free": "Esta app es absolutamente gratuita. Si alguien te ha cobrado por esta - reportalo a BowieD.",
+    "StartUp_Patreon": "Considera apoyarme en Patreon",
+    "StartUp_Patreon_Open": "Ir a Patreon"
   },
   "Interface": {
     "App_About": "Hecho por BowieD.\nAutor(es) Traducción: {0}\nVersión: {1}\nUltima Traducción: {2}",
