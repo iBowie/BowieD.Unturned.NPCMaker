@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         public Form_About()
         {
             InitializeComponent();
-            string aboutText = LocalizationManager.Current.Interface.Translate("App_About", LocalizationManager.Current.Author, App.Version, LocalizationManager.Current.LastUpdate);
+            string aboutText = LocalizationManager.Current.Interface.Translate("App_About", LocalizationManager.Current.Author, App.Version);
             mainText.Text = aboutText;
             double scale = AppConfig.Instance.scale;
             Height *= scale;

@@ -1,6 +1,5 @@
 {
 	"Author": "BowieD",
-	"LastUpdate": "7-ое Декабря 2019",
 	"Name": "Русский (Russian)",
 	"General":
 	{
@@ -521,7 +520,7 @@
     "StartUp_Patreon_Open": "Открыть Patreon"
   },
   "Interface": {
-    "App_About": "Автор программы: BowieD.\nПереводчик(и): {0}\nВерсия: {1}\nПоследнее обновление перевода: {2}",
+    "App_About": "Автор программы: BowieD.\nПереводчик(и): {0}\nВерсия: {1}",
     "App_About_Title": "О программе",
     "App_About_Patreon_Title": "Поддержавшие на Patreon",
     "App_About_Patreon_List_Item": "Поддержавший",

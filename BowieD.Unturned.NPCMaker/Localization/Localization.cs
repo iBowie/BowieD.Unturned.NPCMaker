@@ -6,7 +6,6 @@
         {
             Name = "Unknown";
             Author = "Unknown";
-            LastUpdate = "Never";
             General = new TranslationDictionary();
             Options = new TranslationDictionary();
             Character = new TranslationDictionary();
@@ -22,7 +21,6 @@
         }
         public string Name;
         public string Author;
-        public string LastUpdate;
         public TranslationDictionary General;
         public TranslationDictionary Options;
         public TranslationDictionary Character;

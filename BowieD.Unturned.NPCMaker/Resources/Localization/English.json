@@ -1,6 +1,5 @@
 {
 	"Author": "BowieD, TheCubicNoobik",
-	"LastUpdate": "7th of December 2019",
 	"Name": "English (US)",
 	"General":
 	{
@@ -523,7 +522,7 @@
 		"StartUp_Patreon_Open": "Go to Patreon"
 	},
 	"Interface": {
-		"App_About": "Made by BowieD.\nLocalization Author(s): {0}\nVersion: {1}\nLast Localization Update: {2}",
+		"App_About": "Made by BowieD.\nLocalization Author(s): {0}\nVersion: {1}",
 		"App_About_Title": "About",
 		"App_About_Patreon_Title": "Patreon Supporters",
 		"App_About_Patreon_List_Item": "Supporter",
