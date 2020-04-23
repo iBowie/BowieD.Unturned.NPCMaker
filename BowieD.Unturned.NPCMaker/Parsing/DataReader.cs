@@ -59,11 +59,18 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 reader?.Close();
             }
         }
-        public bool Has(string key) => data.ContainsKey(key);
+        public bool Has(string key)
+        {
+            return data.ContainsKey(key);
+        }
+
         public string ReadString(string key, string defaultValue = null)
         {
             if (!data.TryGetValue(key, out string res))
+            {
                 return defaultValue;
+            }
+
             return res;
         }
         public T ReadEnum<T>(string key, T defaultValue = default) where T : struct
@@ -176,7 +183,10 @@ namespace BowieD.Unturned.NPCMaker.Parsing
         {
             string d = ReadString(key);
             if (d != null)
+            {
                 return new Coloring.Color(ReadString(key));
+            }
+
             return defaultColor;
         }
         public Guid ReadGUID(string key)

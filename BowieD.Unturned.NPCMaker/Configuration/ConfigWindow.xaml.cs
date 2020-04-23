@@ -37,7 +37,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             };
             set
             {
-                foreach (var theme in ThemeManager.Themes)
+                foreach (System.Collections.Generic.KeyValuePair<string, Theme> theme in ThemeManager.Themes)
                 {
                     ComboBoxItem cbi = new ComboBoxItem()
                     {
@@ -46,10 +46,12 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                     };
                     Selected_Theme_Box.Items.Add(cbi);
                     if (theme.Key == value.currentTheme)
+                    {
                         Selected_Theme_Box.SelectedItem = cbi;
+                    }
                 }
                 Autosave_Box.SelectedIndex = value.autosaveOption;
-                foreach (var lang in LocalizationManager.SupportedLanguages())
+                foreach (ELanguage lang in LocalizationManager.SupportedLanguages())
                 {
                     ComboBoxItem cbi = new ComboBoxItem
                     {
@@ -58,7 +60,9 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                     };
                     Languages_Box.Items.Add(cbi);
                     if (lang == value.language)
+                    {
                         Languages_Box.SelectedItem = cbi;
+                    }
                 }
                 foreach (ComboBoxItem cbi in Scale_Box.Items)
                 {
@@ -91,7 +95,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show(LocalizationManager.Current.Notification["Configuration_Default_Confirm"], "", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show(LocalizationManager.Current.Notification["Configuration_Default_Confirm"], "", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
                 AppConfig.Instance.LoadDefaults();

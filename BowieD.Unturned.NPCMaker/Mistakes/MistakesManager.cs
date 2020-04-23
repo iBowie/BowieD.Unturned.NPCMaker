@@ -20,14 +20,16 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     "BowieD.Unturned.NPCMaker.Mistakes.Vendor",
                     "BowieD.Unturned.NPCMaker.Mistakes.Quest"
                 };
-                var q = from t in Assembly.GetExecutingAssembly().GetTypes() where t.IsClass && !t.IsAbstract && nspaces.Contains(t.Namespace) select t;
+                IEnumerable<Type> q = from t in Assembly.GetExecutingAssembly().GetTypes() where t.IsClass && !t.IsAbstract && nspaces.Contains(t.Namespace) select t;
                 foreach (Type t in q)
                 {
                     try
                     {
-                        var mistake = Activator.CreateInstance(t);
+                        object mistake = Activator.CreateInstance(t);
                         if (mistake is Mistake mist)
+                        {
                             CheckMistakes.Add(mist);
+                        }
                     }
                     catch { }
                 }
@@ -36,18 +38,26 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             FoundMistakes.Clear();
             foreach (Mistake m in CheckMistakes)
             {
-                var mistakes = m.CheckMistake();
-                foreach (var fm in mistakes)
+                IEnumerable<Mistake> mistakes = m.CheckMistake();
+                foreach (Mistake fm in mistakes)
                 {
                     string descKey = $"{fm.MistakeName}_Desc";
                     if (fm.MistakeDesc == null)
-                        if (LocalizationManager.Current.Mistakes.TryGetValue(descKey, out var desc))
+                    {
+                        if (LocalizationManager.Current.Mistakes.TryGetValue(descKey, out string desc))
+                        {
                             fm.MistakeDesc = desc;
+                        }
+                    }
 
                     string solutionKey = $"{fm.MistakeName}_Solution";
                     if (fm.MistakeSolution == null)
-                        if (LocalizationManager.Current.Mistakes.TryGetValue(solutionKey, out var solution))
+                    {
+                        if (LocalizationManager.Current.Mistakes.TryGetValue(solutionKey, out string solution))
+                        {
                             fm.MistakeSolution = solution;
+                        }
+                    }
 
                     FoundMistakes.Add(fm);
                     MainWindow.Instance.lstMistakes.Items.Add(fm);

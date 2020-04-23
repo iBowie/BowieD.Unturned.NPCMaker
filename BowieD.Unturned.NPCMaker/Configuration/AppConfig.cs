@@ -72,9 +72,14 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             downloadPrerelease = false;
             ELanguage c = LocalizationManager.GetLanguageFromCultureInfo(CultureInfo.InstalledUICulture);
             if (LocalizationManager.SupportedLanguages().Contains(c))
+            {
                 language = c;
+            }
             else
+            {
                 language = ELanguage.English;
+            }
+
             App.Logger.Log($"[CFG] - Default configuration loaded!");
         }
         private static readonly string defaultDir = Path.Combine($@"{Environment.SystemDirectory[0]}{Path.VolumeSeparatorChar}{Path.DirectorySeparatorChar}", "Users", Environment.UserName, "AppData", "Local", "BowieD", "NPCMaker");
@@ -99,14 +104,20 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 {
                     string res = defaultDir;
                     if (!System.IO.Directory.Exists(res))
+                    {
                         System.IO.Directory.CreateDirectory(res);
+                    }
+
                     return res;
                 }
                 else
                 {
                     string res = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"BowieD.Unturned.NPCMaker Configuration");
                     if (!System.IO.Directory.Exists(res))
+                    {
                         System.IO.Directory.CreateDirectory(res);
+                    }
+
                     return res;
                 }
             }

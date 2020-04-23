@@ -20,11 +20,11 @@ namespace BowieD.Unturned.NPCMaker.Commands
                 if (_commands == null)
                 {
                     _commands = new HashSet<Command>();
-                    foreach (var k in Assembly.GetExecutingAssembly().GetTypes())
+                    foreach (Type k in Assembly.GetExecutingAssembly().GetTypes())
                     {
                         if (k != null && k.IsSubclassOf(typeof(Command)))
                         {
-                            var commandInstance = (Command)Activator.CreateInstance(k);
+                            Command commandInstance = (Command)Activator.CreateInstance(k);
                             if (commandInstance != null)
                             {
                                 _commands.Add(commandInstance);
@@ -47,15 +47,15 @@ namespace BowieD.Unturned.NPCMaker.Commands
         public static string Execute(string input)
         {
             string[] command = input.Split(' ');
-            var executionCommand = Command.Commands.SingleOrDefault(d => d.Name.ToLower() == command[0].ToLower());
+            Command executionCommand = Command.Commands.SingleOrDefault(d => d.Name.ToLower() == command[0].ToLower());
             if (executionCommand == null)
             {
                 return $"Command {command[0]} not found";
             }
             else
             {
-                var matches = Regex.Matches(string.Join(" ", command.Skip(1)), "[\\\"](.+?)[\\\"]|([^ ]+)", RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
-                var filtered = (from Match d in matches select d.Value.Trim('"')).ToArray();
+                MatchCollection matches = Regex.Matches(string.Join(" ", command.Skip(1)), "[\\\"](.+?)[\\\"]|([^ ]+)", RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+                string[] filtered = (from Match d in matches select d.Value.Trim('"')).ToArray();
                 executionCommand.Execute(filtered);
                 return $"Command {command[0]} executed";
             }

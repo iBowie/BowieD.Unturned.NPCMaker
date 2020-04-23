@@ -9,20 +9,22 @@ namespace BowieD.Unturned.NPCMaker.Coloring
     {
         public Color(byte r, byte g, byte b)
         {
-            this.R = r;
-            this.G = g;
-            this.B = b;
+            R = r;
+            G = g;
+            B = b;
         }
         public Color(string hex)
         {
             if (hex.StartsWith("#"))
             {
-                this.R = byte.Parse(hex[1] + "" + hex[2], System.Globalization.NumberStyles.HexNumber);
-                this.G = byte.Parse(hex[3] + "" + hex[4], System.Globalization.NumberStyles.HexNumber);
-                this.B = byte.Parse(hex[5] + "" + hex[6], System.Globalization.NumberStyles.HexNumber);
+                R = byte.Parse(hex[1] + "" + hex[2], System.Globalization.NumberStyles.HexNumber);
+                G = byte.Parse(hex[3] + "" + hex[4], System.Globalization.NumberStyles.HexNumber);
+                B = byte.Parse(hex[5] + "" + hex[6], System.Globalization.NumberStyles.HexNumber);
             }
             else
+            {
                 throw new ArgumentException("Should start with #");
+            }
         }
         public byte R;
         public byte G;

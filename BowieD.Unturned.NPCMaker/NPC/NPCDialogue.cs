@@ -32,7 +32,10 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             int messageIndex = messages.IndexOf(message);
             if (messageIndex == -1)
+            {
                 return null;
+            }
+
             return responses.Where(d => d.VisibleInAll || d.visibleIn[messageIndex] == 1).ToList();
         }
         public string UIText
@@ -40,13 +43,18 @@ namespace BowieD.Unturned.NPCMaker.NPC
             get
             {
                 if (messages == null || messages.Count < 1 || messages[0].pages.Count < 1)
+                {
                     return $"[{id}]";
+                }
                 else
                 {
                     string t = messages[0].pages[0];
                     const int tLengthMax = 24;
                     if (!string.IsNullOrEmpty(t))
+                    {
                         return $"[{id}] - {(t.Substring(0, t.Length < tLengthMax ? t.Length : tLengthMax))}{(t.Length >= tLengthMax ? "..." : "")}";
+                    }
+
                     return $"[{id}]";
                 }
             }

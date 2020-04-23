@@ -38,7 +38,10 @@ namespace BowieD.Unturned.NPCMaker
                 try
                 {
                     if (_readVersion == null)
+                    {
                         _readVersion = new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion);
+                    }
+
                     return _readVersion;
                 }
                 catch { return new Version("0.0.0.0"); }
@@ -106,7 +109,10 @@ namespace BowieD.Unturned.NPCMaker
                 Logger.Log("[APP] - DebugFast enabled! Skipping update check...", ELogLevel.DEBUG);
 #endif
                 if (!LocalizationManager.IsLoaded)
+                {
                     LocalizationManager.LoadLanguage(AppConfig.Instance.language);
+                }
+
                 PostRun();
                 base.Run();
             }
@@ -124,7 +130,9 @@ namespace BowieD.Unturned.NPCMaker
             {
 #if DEBUG
                 if (Environment.GetCommandLineArgs().Contains("-offline-package"))
+                {
                     throw new Exception("Skipping cache downloading");
+                }
 #endif
                 using (WebClient client = new WebClient())
                 {
@@ -191,10 +199,16 @@ namespace BowieD.Unturned.NPCMaker
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             if (args.Name.Contains(".resources"))
+            {
                 return null;
+            }
+
             Assembly assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(d => d.FullName == args.Name);
             if (assembly != null)
+            {
                 return assembly;
+            }
+
             string fileName = args.Name.Split(',')[0] + ".dll";
             try
             {

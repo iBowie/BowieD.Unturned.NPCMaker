@@ -35,98 +35,101 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public abstract string UIText { get; }
         public IEnumerable<FrameworkElement> GetControls()
         {
-            var props = GetType().GetProperties();
-            foreach (var prop in props)
+            PropertyInfo[] props = GetType().GetProperties();
+            foreach (PropertyInfo prop in props)
             {
                 if (!prop.CanWrite || !prop.CanRead)
+                {
                     continue;
+                }
+
                 string propName = prop.Name;
-                var propType = prop.PropertyType;
+                Type propType = prop.PropertyType;
                 string localizedName = LocalizationManager.Current.Reward[$"{Type}_{propName}"];
                 Grid borderContents = new Grid();
                 Label l = new Label
                 {
                     Content = localizedName
                 };
-                var rewardTooltip = prop.GetCustomAttribute<RewardTooltipAttribute>();
+                RewardTooltipAttribute rewardTooltip = prop.GetCustomAttribute<RewardTooltipAttribute>();
                 if (rewardTooltip != null)
                 {
                     l.ToolTip = rewardTooltip.Text;
                 }
                 borderContents.Children.Add(l);
                 FrameworkElement valueControl = null;
-                if (propType == typeof(UInt16))
+                if (propType == typeof(ushort))
                 {
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
-                        Maximum = UInt16.MaxValue,
-                        Minimum = UInt16.MinValue,
+                        Maximum = ushort.MaxValue,
+                        Minimum = ushort.MinValue,
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };
                     (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
                 }
-                else if (propType == typeof(UInt32))
+                else if (propType == typeof(uint))
                 {
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
-                        Maximum = UInt32.MaxValue,
-                        Minimum = UInt32.MinValue,
+                        Maximum = uint.MaxValue,
+                        Minimum = uint.MinValue,
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };
                     (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
                 }
-                else if (propType == typeof(Int32))
+                else if (propType == typeof(int))
                 {
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
-                        Maximum = Int32.MaxValue,
-                        Minimum = Int32.MinValue,
+                        Maximum = int.MaxValue,
+                        Minimum = int.MinValue,
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };
                     (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
                 }
-                else if (propType == typeof(Int16))
+                else if (propType == typeof(short))
                 {
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
-                        Maximum = Int16.MaxValue,
-                        Minimum = Int16.MinValue,
+                        Maximum = short.MaxValue,
+                        Minimum = short.MinValue,
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };
                     (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
                 }
-                else if (propType == typeof(UInt16))
+                else if (propType == typeof(ushort))
                 {
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
-                        Maximum = UInt16.MaxValue,
-                        Minimum = UInt16.MinValue,
+                        Maximum = ushort.MaxValue,
+                        Minimum = ushort.MinValue,
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };
                     (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
                 }
-                else if (propType == typeof(Single))
+                else if (propType == typeof(float))
                 {
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
-                        Maximum = Single.MaxValue,
-                        Minimum = Single.MinValue,
+                        Maximum = float.MaxValue,
+                        Minimum = float.MinValue,
                         ParsingNumberStyle = System.Globalization.NumberStyles.Float,
                         HideUpDownButtons = true
                     };
                     (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
                 }
-                else if (propType == typeof(Byte))
+                else if (propType == typeof(byte))
                 {
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
-                        Maximum = Byte.MaxValue,
-                        Minimum = Byte.MinValue,
+                        Maximum = byte.MaxValue,
+                        Minimum = byte.MinValue,
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };
@@ -143,9 +146,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 }
                 else if (propType.IsEnum)
                 {
-                    var cBox = new ComboBox();
-                    var values = Enum.GetValues(propType);
-                    foreach (var eValue in values)
+                    ComboBox cBox = new ComboBox();
+                    Array values = Enum.GetValues(propType);
+                    foreach (object eValue in values)
                     {
                         cBox.Items.Add(LocalizationManager.Current.Reward[$"{Type}_{prop.Name}_{eValue.ToString()}"]);
                     }
@@ -181,13 +184,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 };
                 b.Margin = new Thickness(0, 5, 0, 5);
                 if (prop.GetCustomAttribute<RewardOptionalAttribute>() != null)
+                {
                     b.Opacity = 0.75;
+                }
+
                 yield return b;
             }
         }
         public static IEnumerable<Type> GetTypes()
         {
-            foreach (var t in Assembly.GetExecutingAssembly().GetTypes())
+            foreach (Type t in Assembly.GetExecutingAssembly().GetTypes())
             {
                 if (t != null && t.IsSealed && t.IsSubclassOf(typeof(Reward)))
                 {

@@ -21,11 +21,11 @@ namespace BowieD.Unturned.NPCMaker.Logging
         [DllImport("user32.dll")]
         private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
         [DllImport("user32.dll")]
-        static extern bool EnableMenuItem(IntPtr hMenu, uint uIDEnableItem, uint uEnable);
+        private static bool EnableMenuItem(IntPtr hMenu, uint uIDEnableItem, uint uEnable);
         [DllImport("user32.dll")]
-        static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+        private static IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
         [DllImport("user32.dll")]
-        static extern IntPtr RemoveMenu(IntPtr hMenu, uint nPosition, uint wFlags);
+        private static IntPtr RemoveMenu(IntPtr hMenu, uint nPosition, uint wFlags);
 
         private const uint
             SC_CLOSE = 0xF060,
@@ -37,14 +37,20 @@ namespace BowieD.Unturned.NPCMaker.Logging
         public static void ShowConsoleWindow()
         {
             if (IsOpened)
+            {
                 return;
+            }
+
             IsOpened = true;
             ShowWindow(GetConsoleWindow(), SW_SHOW);
         }
         public static void HideConsoleWindow()
         {
             if (!IsOpened)
+            {
                 return;
+            }
+
             IsOpened = false;
             ShowWindow(GetConsoleWindow(), SW_HIDE);
         }
@@ -74,7 +80,7 @@ namespace BowieD.Unturned.NPCMaker.Logging
                     color = ConsoleColor.Yellow;
                     break;
             }
-            var oldColor = Console.ForegroundColor;
+            ConsoleColor oldColor = Console.ForegroundColor;
             Console.ForegroundColor = color;
             Console.WriteLine(message);
             Console.ForegroundColor = oldColor;

@@ -10,12 +10,12 @@ namespace BowieD.Unturned.NPCMaker
     public sealed class Program
     {
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             try
             {
                 SetupExceptionHandling();
-                var app = new App();
+                App app = new App();
                 app.InitializeComponent();
                 app.Run();
             }
@@ -32,19 +32,19 @@ namespace BowieD.Unturned.NPCMaker
             TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
         }
 
-        static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
             DisplayException(e.Exception);
             SaveToCrashException(e.Exception);
         }
 
-        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             DisplayException((Exception)e.ExceptionObject);
             SaveToCrashException((Exception)e.ExceptionObject);
         }
 
-        static void DisplayException(Exception e)
+        private static void DisplayException(Exception e)
         {
             const string caption = "NPC Maker Crashed";
 
@@ -63,7 +63,8 @@ namespace BowieD.Unturned.NPCMaker
             }
             catch { }
         }
-        static void SaveToCrashException(Exception e)
+
+        private static void SaveToCrashException(Exception e)
         {
             try
             {

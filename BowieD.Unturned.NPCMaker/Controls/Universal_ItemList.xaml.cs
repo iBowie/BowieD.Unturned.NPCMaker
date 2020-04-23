@@ -14,11 +14,11 @@ namespace BowieD.Unturned.NPCMaker.Controls
         public Universal_ItemList(object input, ReturnType type, bool localizable, bool showMoveButtons = false)
         {
             InitializeComponent();
-            this.Value = input;
+            Value = input;
             mainLabel.Content = Value is IHasUIText ? (Value as IHasUIText).UIText : Value.ToString();
             mainLabel.ToolTip = mainLabel.Content;
-            this.Localizable = localizable;
-            this.Type = type;
+            Localizable = localizable;
+            Type = type;
             moveUpButton.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
             moveDownButton.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
         }
@@ -92,9 +92,13 @@ namespace BowieD.Unturned.NPCMaker.Controls
                 mainLabel.ToolTip = mainLabel.Content;
             }
             else if (Type == ReturnType.Character)
+            {
                 return;
+            }
             else if (Type == ReturnType.Object)
+            {
                 return;
+            }
         }
 
         public enum ReturnType

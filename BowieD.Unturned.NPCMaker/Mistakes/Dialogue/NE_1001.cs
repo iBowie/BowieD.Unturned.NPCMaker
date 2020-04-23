@@ -19,7 +19,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         }
         public override IEnumerable<Mistake> CheckMistake()
         {
-            foreach (var _dial in MainWindow.CurrentProject.data.dialogues)
+            foreach (NPC.NPCDialogue _dial in MainWindow.CurrentProject.data.dialogues)
             {
                 if (_dial.id == 0)
                 {

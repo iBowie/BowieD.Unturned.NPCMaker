@@ -79,8 +79,8 @@ namespace BowieD.Unturned.NPCMaker.Data
             [JsonConstructor]
             public Holiday(string notification, DateTimeRange range)
             {
-                this.Notification = notification;
-                this.Range = range;
+                Notification = notification;
+                Range = range;
             }
             [JsonProperty("notification")]
             public string Notification { get; }

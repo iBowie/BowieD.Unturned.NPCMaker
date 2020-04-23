@@ -1,18 +1,11 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
-using System;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
     public sealed class RewardQuest : Reward
     {
         public override RewardType Type => RewardType.Quest;
-        public override string UIText
-        {
-            get
-            {
-                return $"{LocalizationManager.Current.Reward["Type_Quest"]} [{ID}]";
-            }
-        }
-        public UInt16 ID { get; set; }
+        public override string UIText => $"{LocalizationManager.Current.Reward["Type_Quest"]} [{ID}]";
+        public ushort ID { get; set; }
     }
 }

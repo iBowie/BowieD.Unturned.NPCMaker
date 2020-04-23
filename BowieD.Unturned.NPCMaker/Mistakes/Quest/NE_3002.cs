@@ -19,7 +19,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Quest
         }
         public override IEnumerable<Mistake> CheckMistake()
         {
-            foreach (var _quest in MainWindow.CurrentProject.data.quests)
+            foreach (NPC.NPCQuest _quest in MainWindow.CurrentProject.data.quests)
             {
                 if (_quest.rewards.Count == 0)
                 {

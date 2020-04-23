@@ -6,12 +6,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     {
         public override RewardType Type => RewardType.Hint;
         public float Duration { get; set; }
-        public override string UIText
-        {
-            get
-            {
-                return $"{LocalizationManager.Current.Reward["Type_Hint"]}: {Localization} ({Duration} s.)";
-            }
-        }
+        public override string UIText => $"{LocalizationManager.Current.Reward["Type_Hint"]}: {Localization} ({Duration} s.)";
     }
 }

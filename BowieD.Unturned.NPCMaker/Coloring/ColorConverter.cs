@@ -18,18 +18,21 @@ namespace BowieD.Unturned.NPCMaker.Coloring
             byte q = (byte)Convert.ToInt32(V * (1 - f * S));
             byte t = (byte)Convert.ToInt32(V * (1 - (1 - f) * S));
 
-            if (hi == 0)
-                return new Color(v, t, p);
-            else if (hi == 1)
-                return new Color(q, v, p);
-            else if (hi == 2)
-                return new Color(p, v, t);
-            else if (hi == 3)
-                return new Color(p, q, v);
-            else if (hi == 4)
-                return new Color(t, p, v);
-            else
-                return new Color(v, p, q);
+            switch (hi)
+            {
+                case 0:
+                    return new Color(v, t, p);
+                case 1:
+                    return new Color(q, v, p);
+                case 2:
+                    return new Color(p, v, t);
+                case 3:
+                    return new Color(p, q, v);
+                case 4:
+                    return new Color(t, p, v);
+                default:
+                    return new Color(v, p, q);
+            }
         }
         public static (double H, double S, double V) ColorToHSV(Color color)
         {
@@ -41,16 +44,28 @@ namespace BowieD.Unturned.NPCMaker.Coloring
             double delta = Cmax - Cmin;
             double H = 0;
             if (delta == 0)
+            {
                 H = 0;
+            }
             else if (Cmax == RR)
+            {
                 H = 60d * (((GG - BB) / delta) % 6d);
+            }
             else if (Cmax == GG)
+            {
                 H = 60d * (((BB - RR) / delta) + 2d);
+            }
             else if (Cmax == BB)
+            {
                 H = 60d * (((RR - GG) / delta) + 4d);
+            }
+
             double S = 0;
             if (Cmax != 0)
+            {
                 S = delta / Cmax;
+            }
+
             double V = Cmax;
             S = Math.Round(S, 2);
             V = Math.Round(V, 2);
@@ -63,17 +78,30 @@ namespace BowieD.Unturned.NPCMaker.Coloring
             double m = L - C / 2d;
             (double R, double G, double B) preResult;
             if (H < 60)
+            {
                 preResult = (C, X, 0);
+            }
             else if (H < 120)
+            {
                 preResult = (X, C, 0);
+            }
             else if (H < 180)
+            {
                 preResult = (0, C, X);
+            }
             else if (H < 240)
+            {
                 preResult = (0, X, C);
+            }
             else if (H < 300)
+            {
                 preResult = (X, 0, C);
+            }
             else
+            {
                 preResult = (C, 0, X);
+            }
+
             return new Color((byte)((preResult.R + m) * 255d), (byte)((preResult.G + m) * 255d), (byte)((preResult.B + m) * 255d));
         }
         public static (double H, double S, double L) ColorToHSL(Color color)

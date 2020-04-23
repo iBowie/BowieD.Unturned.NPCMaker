@@ -29,17 +29,24 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public bool? SavePrompt()
         {
             if (isSaved)
+            {
                 return true;
-            var result = MessageBox.Show(LocalizationManager.Current.Interface["Project_UnsavedChanges_Text"], LocalizationManager.Current.Interface["Project_UnsavedChanges_Title"], MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
+            }
+
+            MessageBoxResult result = MessageBox.Show(LocalizationManager.Current.Interface["Project_UnsavedChanges_Text"], LocalizationManager.Current.Interface["Project_UnsavedChanges_Title"], MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
             if (result == MessageBoxResult.Yes)
             {
                 Save();
                 return true;
             }
             else if (result == MessageBoxResult.No)
+            {
                 return false;
+            }
             else
+            {
                 return null;
+            }
         }
         public override bool Save()
         {

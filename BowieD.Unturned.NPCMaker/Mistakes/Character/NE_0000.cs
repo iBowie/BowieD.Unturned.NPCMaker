@@ -19,7 +19,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Character
         }
         public override IEnumerable<Mistake> CheckMistake()
         {
-            foreach (var _char in MainWindow.CurrentProject.data.characters)
+            foreach (NPC.NPCCharacter _char in MainWindow.CurrentProject.data.characters)
             {
                 if (_char.id > 0 && _char.id <= 2000)
                 {

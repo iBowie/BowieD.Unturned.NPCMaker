@@ -13,16 +13,16 @@ namespace BowieD.Unturned.NPCMaker.XAML
         public LocalizeExtension() { }
         public LocalizeExtension(string key)
         {
-            this.Key = key;
+            Key = key;
         }
         public LocalizeExtension(Binding keySource)
         {
-            this.KeySource = keySource;
+            KeySource = keySource;
         }
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            var providerValueTarget = serviceProvider as IProvideValueTarget;
-            var multiBinding = new MultiBinding()
+            IProvideValueTarget providerValueTarget = serviceProvider as IProvideValueTarget;
+            MultiBinding multiBinding = new MultiBinding()
             {
                 Converter = new LocalizationConverter(Key),
                 NotifyOnSourceUpdated = true
@@ -33,7 +33,10 @@ namespace BowieD.Unturned.NPCMaker.XAML
                 Path = new PropertyPath("CurrentCulture")
             });
             if (KeySource != null)
+            {
                 multiBinding.Bindings.Add(KeySource);
+            }
+
             return multiBinding.ProvideValue(serviceProvider);
         }
     }

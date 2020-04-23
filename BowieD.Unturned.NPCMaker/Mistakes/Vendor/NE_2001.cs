@@ -19,7 +19,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Vendor
         }
         public override IEnumerable<Mistake> CheckMistake()
         {
-            foreach (var _vend in MainWindow.CurrentProject.data.vendors)
+            foreach (NPC.NPCVendor _vend in MainWindow.CurrentProject.data.vendors)
             {
                 if (_vend.items.Count == 0)
                 {

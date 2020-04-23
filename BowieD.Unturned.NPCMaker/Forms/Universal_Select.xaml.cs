@@ -15,10 +15,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             InitializeComponent();
             double scale = AppConfig.Instance.scale;
-            this.Width *= scale;
-            this.Height *= scale;
-            this.MinWidth *= scale;
-            this.MaxWidth *= scale;
+            Width *= scale;
+            Height *= scale;
+            MinWidth *= scale;
+            MaxWidth *= scale;
             gridScale.ScaleX = scale;
             gridScale.ScaleY = scale;
             try
@@ -30,19 +30,19 @@ namespace BowieD.Unturned.NPCMaker.Forms
             switch (returnType)
             {
                 case ReturnType.Dialogue:
-                    foreach (var d in MainWindow.CurrentProject.data.dialogues)
+                    foreach (NPC.NPCDialogue d in MainWindow.CurrentProject.data.dialogues)
                     {
                         Add(d, d.UIText);
                     }
                     break;
                 case ReturnType.Quest:
-                    foreach (var q in MainWindow.CurrentProject.data.quests)
+                    foreach (NPC.NPCQuest q in MainWindow.CurrentProject.data.quests)
                     {
                         Add(q, q.UIText);
                     }
                     break;
                 case ReturnType.Vendor:
-                    foreach (var v in MainWindow.CurrentProject.data.vendors)
+                    foreach (NPC.NPCVendor v in MainWindow.CurrentProject.data.vendors)
                     {
                         Add(v, v.UIText);
                     }

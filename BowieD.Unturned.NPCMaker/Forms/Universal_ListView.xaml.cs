@@ -36,7 +36,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             foreach (UIElement ui in mainGrid.Children)
             {
-                var ll = ui as Controls.Universal_ItemList;
+                Universal_ItemList ll = ui as Controls.Universal_ItemList;
                 if (ll.Equals(Util.FindParent<Controls.Universal_ItemList>(sender as UIElement)))
                 {
                     mainGrid.Children.Remove(ll);
@@ -68,7 +68,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     Universal_ConditionEditor uce = new Universal_ConditionEditor();
                     if (uce.ShowDialog() == true)
                     {
-                        var a = new Controls.Universal_ItemList(uce.Result, Controls.Universal_ItemList.ReturnType.Condition, Localizable);
+                        Universal_ItemList a = new Controls.Universal_ItemList(uce.Result, Controls.Universal_ItemList.ReturnType.Condition, Localizable);
                         Add(a);
                     }
                     break;
@@ -86,7 +86,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     Universal_RewardEditor ure = new Universal_RewardEditor();
                     if (ure.ShowDialog() == true)
                     {
-                        var aa = new Controls.Universal_ItemList(ure.Result, Controls.Universal_ItemList.ReturnType.Reward, Localizable);
+                        Universal_ItemList aa = new Controls.Universal_ItemList(ure.Result, Controls.Universal_ItemList.ReturnType.Reward, Localizable);
                         Add(aa);
                     }
                     break;
@@ -120,7 +120,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
             Values.Add(uil.Value);
             uil.deleteButton.Click += DeleteButton_Click;
             if (ReturnType == Universal_ItemList.ReturnType.Object || ReturnType == Universal_ItemList.ReturnType.Character || ReturnType == Controls.Universal_ItemList.ReturnType.Dialogue || ReturnType == Controls.Universal_ItemList.ReturnType.Vendor || ReturnType == Controls.Universal_ItemList.ReturnType.Quest)
+            {
                 uil.editButton.Click += EditButton_Click;
+            }
+
             uil.Width = mainGrid.Width;
             mainGrid.Children.Add(uil);
         }

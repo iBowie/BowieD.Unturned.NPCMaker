@@ -14,8 +14,8 @@ namespace BowieD.Unturned.NPCMaker.Common.Utility
         }
         public static string GetUnturnedWorkshopPathFromUnturnedPath(string unturnedPath)
         {
-            var dirInfo = Directory.GetParent(Directory.GetParent(unturnedPath).FullName);
-            var workshop = new DirectoryInfo(Path.Combine(dirInfo.FullName, "workshop", "content", "304930"));
+            DirectoryInfo dirInfo = Directory.GetParent(Directory.GetParent(unturnedPath).FullName);
+            DirectoryInfo workshop = new DirectoryInfo(Path.Combine(dirInfo.FullName, "workshop", "content", "304930"));
             return workshop.FullName;
         }
     }

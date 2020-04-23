@@ -42,14 +42,14 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             get
             {
                 List<VendorItem> res = new List<VendorItem>();
-                foreach (var r in MainWindow.Instance.vendorListBuyItems.Children)
+                foreach (object r in MainWindow.Instance.vendorListBuyItems.Children)
                 {
                     if (r is Universal_ItemList uil)
                     {
                         res.Add(uil.Value as VendorItem);
                     }
                 }
-                foreach (var r in MainWindow.Instance.vendorListSellItems.Children)
+                foreach (object r in MainWindow.Instance.vendorListSellItems.Children)
                 {
                     if (r is Universal_ItemList uil)
                     {
@@ -69,12 +69,16 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         {
             MainWindow.Instance.vendorListBuyItems.Children.Clear();
             MainWindow.Instance.vendorListSellItems.Children.Clear();
-            foreach (var item in Vendor.items)
+            foreach (VendorItem item in Vendor.items)
             {
                 if (item.isBuy)
+                {
                     AddItemBuy(item);
+                }
                 else
+                {
                     AddItemSell(item);
+                }
             }
         }
         internal void AddItemBuy(VendorItem item)
@@ -91,7 +95,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             };
             uil.moveUpButton.Click += (object sender, RoutedEventArgs e) =>
             {
-                var panel = MainWindow.Instance.vendorListBuyItems;
+                StackPanel panel = MainWindow.Instance.vendorListBuyItems;
                 int index = GetIndexInBuy(uil);
                 if (index >= 1)
                 {
@@ -104,7 +108,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             };
             uil.moveDownButton.Click += (object sender, RoutedEventArgs e) =>
             {
-                var panel = MainWindow.Instance.vendorListBuyItems;
+                StackPanel panel = MainWindow.Instance.vendorListBuyItems;
                 int index = GetIndexInBuy(uil);
                 if (index < panel.Children.Count - 1)
                 {
@@ -130,7 +134,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             };
             uil.moveUpButton.Click += (object sender, RoutedEventArgs e) =>
             {
-                var panel = MainWindow.Instance.vendorListSellItems;
+                StackPanel panel = MainWindow.Instance.vendorListSellItems;
                 int index = GetIndexInSell(uil);
                 if (index >= 1)
                 {
@@ -143,7 +147,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             };
             uil.moveDownButton.Click += (object sender, RoutedEventArgs e) =>
             {
-                var panel = MainWindow.Instance.vendorListSellItems;
+                StackPanel panel = MainWindow.Instance.vendorListSellItems;
                 int index = GetIndexInSell(uil);
                 if (index < panel.Children.Count - 1)
                 {
@@ -172,7 +176,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             for (int k = 0; k < MainWindow.Instance.vendorListBuyItems.Children.Count; k++)
             {
                 if (MainWindow.Instance.vendorListBuyItems.Children[k] == element)
+                {
                     return k;
+                }
             }
             return -1;
         }
@@ -181,7 +187,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             for (int k = 0; k < MainWindow.Instance.vendorListSellItems.Children.Count; k++)
             {
                 if (MainWindow.Instance.vendorListSellItems.Children[k] == element)
+                {
                     return k;
+                }
             }
             return -1;
         }
@@ -220,7 +228,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             return;
                         }
                         if (!MainWindow.CurrentProject.data.vendors.Contains(Vendor))
+                        {
                             MainWindow.CurrentProject.data.vendors.Add(Vendor);
+                        }
+
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["Vendor_Saved"]);
                         MainWindow.CurrentProject.isSaved = false;
                         App.Logger.Log($"Vendor {ID} saved!");
@@ -259,7 +270,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     resetCommand = new BaseCommand(() =>
                     {
-                        var id = ID;
+                        ushort id = ID;
                         Vendor = new NPCVendor();
                         UpdateItems();
                         App.Logger.Log($"Vendor {id} cleared!");

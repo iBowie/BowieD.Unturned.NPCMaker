@@ -17,7 +17,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
         {
             dir = Path.GetDirectoryName(fileName) + Path.DirectorySeparatorChar;
             asset = new DataReader(File.ReadAllText(fileName));
-            foreach (var k in Enum.GetValues(typeof(ELanguage)))
+            foreach (object k in Enum.GetValues(typeof(ELanguage)))
             {
                 if (File.Exists(dir + "English.dat"))
                 {
@@ -33,7 +33,9 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         break;
                     }
                     else
+                    {
                         App.Logger.Log($"[ParseTool] - {k}.dat not found. Checking next...");
+                    }
                 }
             }
         }
@@ -65,7 +67,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
         }
         public NPCDialogue ParseDialogue()
         {
-            var d = new NPCDialogue()
+            NPCDialogue d = new NPCDialogue()
             {
                 guid = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
                 id = asset.ReadUInt16("ID")
@@ -79,7 +81,10 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 {
                     string page = local?.ReadString($"Message_{mId}_Page_{pId}");
                     if (page == null)
+                    {
                         App.Logger.Log($"Page {pId} in message {mId} not found.");
+                    }
+
                     d.messages[mId].pages.Add(page);
                 }
                 d.messages[mId].conditions = ParseConditions($"Message_{mId}_");
@@ -97,7 +102,10 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 }
                 d.responses[rId].mainText = local?.ReadString($"Response_{rId}");
                 if (d.responses[rId].mainText == null)
+                {
                     break;
+                }
+
                 d.responses[rId].openDialogueId = asset.ReadUInt16($"Response_{rId}_Dialogue");
                 d.responses[rId].openQuestId = asset.ReadUInt16($"Response_{rId}_Quest");
                 d.responses[rId].openVendorId = asset.ReadUInt16($"Response_{rId}_Vendor");
@@ -121,7 +129,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
         }
         public NPCQuest ParseQuest()
         {
-            var q = new NPCQuest()
+            NPCQuest q = new NPCQuest()
             {
                 id = asset.ReadUInt16("ID"),
                 title = local?.ReadString("Name") ?? "",
@@ -152,7 +160,10 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 VendorItem vi = new VendorItem() { isBuy = false };
                 string text = null;
                 if (asset.Has($"Selling_{i}_Type"))
+                {
                     text = asset.ReadString($"Selling_{i}_Type");
+                }
+
                 vi.id = asset.ReadUInt16($"Selling_{i}_ID");
                 vi.cost = asset.ReadUInt16($"Selling_{i}_Cost");
                 vi.conditions = ParseConditions($"Selling_{i}_").ToList();
@@ -184,12 +195,18 @@ namespace BowieD.Unturned.NPCMaker.Parsing
             {
                 case Clothing_Type.Christmas:
                     if (!asset.Has("Has_Christmas_Outfit"))
+                    {
                         return c;
+                    }
+
                     prefix = "Christmas_";
                     break;
                 case Clothing_Type.Halloween:
                     if (!asset.Has("Has_Halloween_Outfit"))
+                    {
                         return c;
+                    }
+
                     prefix = "Halloween_";
                     break;
             }
@@ -211,10 +228,16 @@ namespace BowieD.Unturned.NPCMaker.Parsing
             while (true)
             {
                 if (num >= c.Length)
+                {
                     return c;
+                }
+
                 text = $"{prefix}{postfix}{num}_Type";
                 if (!asset.Has(text))
+                {
                     break;
+                }
+
                 Condition_Type type = asset.ReadEnum(text, Condition_Type.None);
                 string desc = local?.ReadString($"{prefix}{postfix}{num}");
                 bool needToReset = asset.Has($"{prefix}{postfix}{num}_Reset");
@@ -412,10 +435,16 @@ namespace BowieD.Unturned.NPCMaker.Parsing
             while (true)
             {
                 if (num >= r.Length)
+                {
                     return r;
+                }
+
                 text = $"{prefix}{postfix}{num}_Type";
                 if (!asset.Has(text))
+                {
                     break;
+                }
+
                 RewardType type = asset.ReadEnum<RewardType>(text);
                 string desc = local?.ReadString($"{prefix}{postfix}{num}");
                 string tp = $"{prefix}{postfix}{num}_";
@@ -536,6 +565,9 @@ namespace BowieD.Unturned.NPCMaker.Parsing
             }
             return r;
         }
-        public ParseType GetParseType() => asset.ReadEnum("Type", ParseType.None);
+        public ParseType GetParseType()
+        {
+            return asset.ReadEnum("Type", ParseType.None);
+        }
     }
 }

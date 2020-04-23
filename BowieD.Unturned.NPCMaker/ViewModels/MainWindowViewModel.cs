@@ -55,9 +55,13 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 new ExecutedRoutedEventHandler((object sender, ExecutedRoutedEventArgs e) =>
                 {
                     if (ConsoleLogger.IsOpened)
+                    {
                         ConsoleLogger.HideConsoleWindow();
+                    }
                     else
+                    {
                         ConsoleLogger.ShowConsoleWindow();
+                    }
                 })));
             CharacterTabViewModel = new CharacterTabViewModel();
             DialogueTabViewModel = new DialogueTabViewModel();
@@ -69,17 +73,28 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 ResetAll();
 
-                var proj = MainWindow.CurrentProject;
-                var data = proj.data;
+                ProjectData proj = MainWindow.CurrentProject;
+                NPCProject data = proj.data;
 
                 if (data.lastCharacter > -1)
+                {
                     CharacterTabViewModel.Character = data.characters[data.lastCharacter];
+                }
+
                 if (data.lastDialogue > -1)
+                {
                     DialogueTabViewModel.Dialogue = data.dialogues[data.lastDialogue];
+                }
+
                 if (data.lastVendor > -1)
+                {
                     VendorTabViewModel.Vendor = data.vendors[data.lastVendor];
+                }
+
                 if (data.lastQuest > -1)
+                {
                     QuestTabViewModel.Quest = data.quests[data.lastQuest];
+                }
             };
         }
         public MainWindow MainWindow { get; set; }
@@ -102,8 +117,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             VendorTabViewModel.SaveCommand.Execute(null);
             QuestTabViewModel.SaveCommand.Execute(null);
 
-            var proj = MainWindow.CurrentProject;
-            var data = proj.data;
+            ProjectData proj = MainWindow.CurrentProject;
+            NPCProject data = proj.data;
 
             data.lastCharacter = data.characters.IndexOf(CharacterTabViewModel.Character);
             data.lastDialogue = data.dialogues.IndexOf(DialogueTabViewModel.Dialogue);
@@ -113,7 +128,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e?.AddedItems.Count == 0 || sender == null)
+            {
                 return;
+            }
+
             int selectedIndex = (sender as TabControl).SelectedIndex;
             TabItem tab = e?.AddedItems[0] as TabItem;
             if (AppConfig.Instance.animateControls && tab?.Content is Grid g)
@@ -295,13 +313,17 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         if (ofd.ShowDialog() == true)
                         {
                             ParseCommand pCommand = Command.GetCommand<ParseCommand>() as ParseCommand;
-                            foreach (var file in ofd.FileNames)
+                            foreach (string file in ofd.FileNames)
                             {
                                 pCommand.Execute(new string[] { file });
                                 if (pCommand.LastResult)
+                                {
                                     App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Import_File_Done", file));
+                                }
                                 else
+                                {
                                     App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Import_File_Fail", file));
+                                }
                             }
                         }
                     });
@@ -318,7 +340,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     newProjectCommand = new BaseCommand(() =>
                     {
                         if (MainWindow.CurrentProject.SavePrompt() == null)
+                        {
                             return;
+                        }
+
                         MainWindow.CurrentProject.data = new NPCProject();
                         MainWindow.CurrentProject.file = "";
                         ResetAll();
@@ -386,11 +411,16 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             Filter = $"{LocalizationManager.Current.General["Project_SaveFilter"]}|*.npcproj",
                             Multiselect = false
                         };
-                        var res = ofd.ShowDialog();
+                        bool? res = ofd.ShowDialog();
                         if (res == true)
+                        {
                             path = ofd.FileName;
+                        }
                         else
+                        {
                             return;
+                        }
+
                         string oldPath = MainWindow.CurrentProject.file;
                         MainWindow.CurrentProject.file = path;
                         if (MainWindow.CurrentProject.Load(null))
@@ -425,13 +455,18 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         }
                         if (Mistakes.MistakesManager.Warnings_Count > 0)
                         {
-                            var res = MessageBox.Show(LocalizationManager.Current.Interface["Export_Warnings_Text"], LocalizationManager.Current.Interface["Export_Warnings_Caption"], MessageBoxButton.YesNo);
+                            MessageBoxResult res = MessageBox.Show(LocalizationManager.Current.Interface["Export_Warnings_Text"], LocalizationManager.Current.Interface["Export_Warnings_Caption"], MessageBoxButton.YesNo);
                             if (!(res == MessageBoxResult.OK || res == MessageBoxResult.Yes))
+                            {
                                 return;
+                            }
                         }
                         SaveAll();
                         if (MainWindow.CurrentProject.Save())
+                        {
                             App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Saved"]);
+                        }
+
                         Export.Exporter.ExportNPC(MainWindow.CurrentProject.data);
                     });
                 }

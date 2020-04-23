@@ -11,7 +11,9 @@ namespace BowieD.Unturned.NPCMaker.Commands
         public override void Execute(string[] args)
         {
             if (args.Length < 1)
+            {
                 App.Logger.Log($"[ParseCommand] - Use: {Name} {Syntax}");
+            }
             else
             {
                 string joined = string.Join(" ", args);
@@ -19,7 +21,7 @@ namespace BowieD.Unturned.NPCMaker.Commands
                 {
                     App.Logger.Log("[ParseCommand] - File found. Checking...");
                     ParseTool pTool = new ParseTool(joined);
-                    var type = pTool.GetParseType();
+                    NPC.ParseType type = pTool.GetParseType();
                     switch (type)
                     {
                         case NPC.ParseType.NPC:
@@ -79,15 +81,19 @@ namespace BowieD.Unturned.NPCMaker.Commands
                 string joined = string.Join(" ", args);
                 if (Directory.Exists(joined))
                 {
-                    var pCommand = Command.GetCommand<ParseCommand>() as ParseCommand;
+                    ParseCommand pCommand = Command.GetCommand<ParseCommand>() as ParseCommand;
                     DirectoryInfo dirInfo = new DirectoryInfo(joined);
-                    foreach (var fi in dirInfo.GetFiles("Asset.dat", SearchOption.AllDirectories))
+                    foreach (FileInfo fi in dirInfo.GetFiles("Asset.dat", SearchOption.AllDirectories))
                     {
                         pCommand.Execute(new string[] { fi.FullName });
                         if (pCommand.LastResult)
+                        {
                             LastImported++;
+                        }
                         else
+                        {
                             LastSkipped++;
+                        }
                     }
                     LastResult = true;
                 }

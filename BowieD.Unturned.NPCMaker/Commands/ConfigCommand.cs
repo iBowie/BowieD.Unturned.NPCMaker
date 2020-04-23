@@ -19,27 +19,28 @@ namespace BowieD.Unturned.NPCMaker.Commands
             public Type Type { get; }
             public object Value
             {
-                get
-                {
-                    return fInfo.GetValue(AppConfig.Instance);
-                }
+                get => fInfo.GetValue(AppConfig.Instance);
                 set
                 {
                     fInfo.SetValue(AppConfig.Instance, value);
                     AppConfig.Instance.Save();
                 }
             }
-            private FieldInfo fInfo;
+            private readonly FieldInfo fInfo;
         }
-        static HashSet<ConfigFieldInfo> Fields { get; }
+
+        private static HashSet<ConfigFieldInfo> Fields { get; }
         static ConfigCommand()
         {
             Fields = new HashSet<ConfigFieldInfo>();
-            var cfgType = typeof(AppConfig);
-            foreach (var field in cfgType.GetFields())
+            Type cfgType = typeof(AppConfig);
+            foreach (FieldInfo field in cfgType.GetFields())
             {
                 if (field.IsStatic)
+                {
                     continue;
+                }
+
                 Fields.Add(new ConfigFieldInfo(field));
             }
         }
@@ -54,7 +55,7 @@ namespace BowieD.Unturned.NPCMaker.Commands
                 {
                     case "set" when args.Length > 2:
                         {
-                            foreach (var field in Fields)
+                            foreach (ConfigFieldInfo field in Fields)
                             {
                                 if (field.Name == args[1])
                                 {
@@ -85,7 +86,7 @@ namespace BowieD.Unturned.NPCMaker.Commands
                         }
                     case "get" when args.Length > 1:
                         {
-                            foreach (var field in Fields)
+                            foreach (ConfigFieldInfo field in Fields)
                             {
                                 if (field.Name == args[1])
                                 {
@@ -98,7 +99,7 @@ namespace BowieD.Unturned.NPCMaker.Commands
                         }
                     case "list":
                         {
-                            foreach (var field in Fields)
+                            foreach (ConfigFieldInfo field in Fields)
                             {
                                 App.Logger.Log($"[ConfigCommand]/list - .{field.Name} ({field.Type.Name})");
                             }

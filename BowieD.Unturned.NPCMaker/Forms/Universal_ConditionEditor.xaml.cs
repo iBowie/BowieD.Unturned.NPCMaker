@@ -20,8 +20,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
             double scale = AppConfig.Instance.scale;
             viewLocalizationField = viewLocalization;
             ClearParameters();
-            this.Height *= scale;
-            this.Width *= scale;
+            Height *= scale;
+            Width *= scale;
             baseHeight = Height;
             heightDelta *= scale;
             gridScale.ScaleX = scale;
@@ -50,7 +50,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 _index++;
             }
             if (condition != null)
+            {
                 variablesGrid.DataContext = condition;
+            }
+
             saveButton.IsEnabled = condition != null;
         }
 
@@ -65,20 +68,26 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             saveButton.IsEnabled = true;
             if (e.AddedItems.Count == 0)
+            {
                 return;
-            var type = (typeBox.SelectedItem as ComboBoxItem).Tag as Type;
+            }
+
+            Type type = (typeBox.SelectedItem as ComboBoxItem).Tag as Type;
             Condition newCondition = (Condition)Activator.CreateInstance(type);
             _CurrentConditionType = type;
             ClearParameters();
             variablesGrid.DataContext = newCondition;
-            var controls = newCondition.GetControls();
+            System.Collections.Generic.IEnumerable<FrameworkElement> controls = newCondition.GetControls();
             int mult = controls.Count();
-            foreach (var c in controls)
+            foreach (FrameworkElement c in controls)
             {
                 variablesGrid.Children.Add(c);
             }
             if (!viewLocalizationField)
+            {
                 GetLocalizationControl().Visibility = Visibility.Collapsed;
+            }
+
             double newHeight = (baseHeight + (heightDelta * (mult + (mult > 1 ? 1 : 0))));
             if (AppConfig.Instance.animateControls)
             {
@@ -94,7 +103,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         internal void ClearParameters()
         {
             variablesGrid.Children.Clear();
-            this.Height = baseHeight;
+            Height = baseHeight;
         }
         #endregion
 
@@ -116,9 +125,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 //    field.SetValue(returnCondition, Convert.ChangeType(k.Value, field.FieldType));
                 //}
                 if (variablesGrid.DataContext == null)
+                {
                     DialogResult = false;
+                }
                 else
+                {
                     DialogResult = true;
+                }
+
                 Result = variablesGrid.DataContext as Condition;
                 Close();
             }
@@ -171,7 +185,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         //}
         private FrameworkElement GetLocalizationControl()
         {
-            var control = Util.FindVisualChildren<FrameworkElement>(variablesGrid).First(d => d.Tag != null && d.Tag.ToString() == "variable::Localization");
+            FrameworkElement control = Util.FindVisualChildren<FrameworkElement>(variablesGrid).First(d => d.Tag != null && d.Tag.ToString() == "variable::Localization");
             return Util.FindParent<Border>(control);
         }
     }

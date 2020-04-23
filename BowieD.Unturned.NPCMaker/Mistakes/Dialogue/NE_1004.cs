@@ -21,18 +21,18 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         }
         public override IEnumerable<Mistake> CheckMistake()
         {
-            foreach (var dial in MainWindow.CurrentProject.data.dialogues)
+            foreach (NPC.NPCDialogue dial in MainWindow.CurrentProject.data.dialogues)
             {
                 for (int i = 0; i < dial.responses.Count; i++)
                 {
-                    var response = dial.responses[i];
+                    NPC.NPCResponse response = dial.responses[i];
 
                     if (response.openQuestId > 0)
                     {
                         ConditionQuest questCondition = null;
                         RewardQuest questReward = null;
 
-                        foreach (var condition in response.conditions)
+                        foreach (Condition condition in response.conditions)
                         {
                             if (condition is ConditionQuest quest)
                             {
@@ -44,7 +44,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
                             }
                         }
 
-                        foreach (var reward in response.rewards)
+                        foreach (Reward reward in response.rewards)
                         {
                             if (reward is RewardQuest quest)
                             {

@@ -35,7 +35,7 @@ namespace BowieD.Unturned.NPCMaker.Common.Utility
             sb.AppendLine($"Settings:");
             try
             {
-                var cfg = AppConfig.Instance;
+                AppConfig cfg = AppConfig.Instance;
                 sb.AppendLine($".animateControls: {cfg.animateControls}");
                 sb.AppendLine($".autosaveOption: {cfg.autosaveOption}");
                 sb.AppendLine($".autoUpdate: {cfg.autoUpdate}");
@@ -57,7 +57,7 @@ namespace BowieD.Unturned.NPCMaker.Common.Utility
         {
             get
             {
-                var id = System.Security.Principal.WindowsIdentity.GetCurrent();
+                System.Security.Principal.WindowsIdentity id = System.Security.Principal.WindowsIdentity.GetCurrent();
                 return id.Owner != id.User;
             }
         }

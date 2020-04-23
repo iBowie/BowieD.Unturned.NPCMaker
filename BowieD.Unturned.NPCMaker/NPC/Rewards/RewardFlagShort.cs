@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
-using System;
 using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
@@ -29,8 +28,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 return sb.ToString();
             }
         }
-        public UInt16 ID { get; set; }
-        public Int16 Value { get; set; }
+        public ushort ID { get; set; }
+        public short Value { get; set; }
         public Modification_Type Modification { get; set; }
     }
 }

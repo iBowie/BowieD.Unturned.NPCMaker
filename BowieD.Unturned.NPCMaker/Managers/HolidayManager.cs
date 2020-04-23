@@ -6,7 +6,7 @@ namespace BowieD.Unturned.NPCMaker.Managers
     {
         public static void Check()
         {
-            foreach (var holiday in App.Package.Holidays)
+            foreach (Data.AppPackage.Holiday holiday in App.Package.Holidays)
             {
                 if (holiday.Range.IsInRange(DateTime.UtcNow))
                 {

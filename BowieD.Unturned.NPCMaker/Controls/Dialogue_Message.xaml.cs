@@ -15,20 +15,17 @@ namespace BowieD.Unturned.NPCMaker.Controls
         public Dialogue_Message(NPC.NPCMessage message)
         {
             InitializeComponent();
-            this.Message = message;
+            Message = message;
         }
 
         public NPC.NPCMessage Message
         {
-            get
+            get => new NPC.NPCMessage
             {
-                return new NPC.NPCMessage
-                {
-                    pages = Pages,
-                    conditions = Conditions,
-                    rewards = Rewards
-                };
-            }
+                pages = Pages,
+                conditions = Conditions,
+                rewards = Rewards
+            };
             set
             {
                 foreach (string page in value.pages)
@@ -70,7 +67,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            var parent = Util.FindParent<Dialogue_Message_Page>(sender as Button);
+            Dialogue_Message_Page parent = Util.FindParent<Dialogue_Message_Page>(sender as Button);
             pagesGrid.Children.Remove(parent);
         }
 
