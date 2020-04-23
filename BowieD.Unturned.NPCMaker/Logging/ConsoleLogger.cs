@@ -21,11 +21,11 @@ namespace BowieD.Unturned.NPCMaker.Logging
         [DllImport("user32.dll")]
         private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
         [DllImport("user32.dll")]
-        private static bool EnableMenuItem(IntPtr hMenu, uint uIDEnableItem, uint uEnable);
+        private static extern bool EnableMenuItem(IntPtr hMenu, uint uIDEnableItem, uint uEnable);
         [DllImport("user32.dll")]
-        private static IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+        private static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
         [DllImport("user32.dll")]
-        private static IntPtr RemoveMenu(IntPtr hMenu, uint nPosition, uint wFlags);
+        private static extern IntPtr RemoveMenu(IntPtr hMenu, uint nPosition, uint wFlags);
 
         private const uint
             SC_CLOSE = 0xF060,
