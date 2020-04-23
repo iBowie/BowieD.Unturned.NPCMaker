@@ -10,7 +10,7 @@
             Command cmd;
             if (args.Length == 0 || (cmd = Command.GetCommand(args[0])) == null)
             {
-                foreach (var c in Command.Commands)
+                foreach (Command c in Command.Commands)
                 {
                     App.Logger.Log($"[HelpCommand] - {c.Name} {c.Syntax} - {c.Help}");
                 }

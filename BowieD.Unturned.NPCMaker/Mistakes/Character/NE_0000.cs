@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
-using System;
 using System.Collections.Generic;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes.Character
@@ -7,29 +6,24 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Character
     /// <summary>
     /// NPC id between 1 and 2000 (Official content recommendation)
     /// </summary>
-    public class NE_0000 : Mistake
+    public class NE_0000 : CharacterMistake
     {
-        public NE_0000() { }
+        public NE_0000() : base()
+        {
+            MistakeName = "NE_0000";
+            Importance = IMPORTANCE.WARNING;
+        }
+        public NE_0000(string displayName, ushort id) : this()
+        {
+            MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_0000_Desc", displayName, id);
+        }
         public override IEnumerable<Mistake> CheckMistake()
         {
-            foreach (var _char in MainWindow.CurrentProject.data.characters)
+            foreach (NPC.NPCCharacter _char in MainWindow.CurrentProject.data.characters)
             {
                 if (_char.id > 0 && _char.id <= 2000)
                 {
-                    yield return new NE_0000()
-                    {
-                        MistakeName = "NE_0000",
-                        Importance = IMPORTANCE.WARNING,
-                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_0000_Desc", _char.displayName, _char.id),
-                        OnClick = new Action(() =>
-                        {
-                            //if (MainWindow.CharacterEditor.Current.id == 0)
-                            //    return;
-                            //MainWindow.CharacterEditor.Save();
-                            //MainWindow.CharacterEditor.Current = _char;
-                            MainWindow.Instance.mainTabControl.SelectedIndex = 0;
-                        })
-                    };
+                    yield return new NE_0000(_char.displayName, _char.id);
                 }
             }
         }

@@ -69,7 +69,10 @@ namespace BowieD.Unturned.NPCMaker.Controls
         private void QuestSelect_Click(object sender, RoutedEventArgs e)
         {
             if (MainWindow.CurrentProject.data.quests.Count() == 0)
+            {
                 return;
+            }
+
             Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Quest);
             select.ShowDialog();
             if (select.DialogResult == true)
@@ -81,7 +84,10 @@ namespace BowieD.Unturned.NPCMaker.Controls
         private void VendorSelect_Click(object sender, RoutedEventArgs e)
         {
             if (MainWindow.CurrentProject.data.vendors.Count() == 0)
+            {
                 return;
+            }
+
             Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Vendor);
             select.ShowDialog();
             if (select.DialogResult == true)
@@ -93,7 +99,10 @@ namespace BowieD.Unturned.NPCMaker.Controls
         private void DialogueSelect_Click(object sender, RoutedEventArgs e)
         {
             if (MainWindow.CurrentProject.data.dialogues.Count() == 0)
+            {
                 return;
+            }
+
             Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Dialogue);
             select.ShowDialog();
             if (select.DialogResult == true)
@@ -110,7 +119,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
                 mtv.ShowDialog();
                 if (mtv.DialogResult == true)
                 {
-                    var arr = mtv.AsIntArray;
+                    int[] arr = mtv.AsIntArray;
                     Response.visibleIn = arr.Count() == 0 ? null : arr;
                 }
             }
@@ -122,16 +131,25 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         public void UpdateOrderButtons()
         {
-            var panel = MainWindow.Instance.dialoguePlayerRepliesGrid;
+            StackPanel panel = MainWindow.Instance.dialoguePlayerRepliesGrid;
             int index = IndexInPanel;
             if (index == 0)
+            {
                 orderButtonUp.IsEnabled = false;
+            }
             else if (index >= 1)
+            {
                 orderButtonUp.IsEnabled = true;
+            }
+
             if (index == panel.Children.Count - 2)
+            {
                 orderButtonDown.IsEnabled = false;
+            }
             else if (index < panel.Children.Count - 2)
+            {
                 orderButtonDown.IsEnabled = true;
+            }
         }
 
         private int IndexInPanel

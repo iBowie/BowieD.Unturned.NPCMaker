@@ -1,7 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Forms;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,8 +23,8 @@ namespace BowieD.Unturned.NPCMaker.Updating
                 {
                     client.Headers.Add(HttpRequestHeader.UserAgent, "NPCMaker");
                     string content = client.DownloadString(UpdaterReleasesUrl);
-                    var manifest = JsonConvert.DeserializeObject<UpdateManifest>(content);
-                    var data = client.DownloadData(manifest.assets[0].browser_download_url);
+                    UpdateManifest manifest = JsonConvert.DeserializeObject<UpdateManifest>(content);
+                    byte[] data = client.DownloadData(manifest.assets[0].browser_download_url);
                     using (FileStream fs = new FileStream(Path.Combine(AppConfig.Directory, "updater.exe"), FileMode.Create))
                     {
                         fs.Write(data, 0, data.Length);
@@ -58,7 +57,7 @@ namespace BowieD.Unturned.NPCMaker.Updating
             try
             {
                 await App.Logger.Log("[UPDATE] - Getting update manifest...");
-                var manifest = await GetManifest(checkForPrerelease);
+                UpdateManifest? manifest = await GetManifest(checkForPrerelease);
                 await App.Logger.Log("[UPDATE] - Got update manifest");
                 Version latestVers = Version.Parse(manifest.Value.tag_name);
                 Whats_New.UpdateTitle = manifest.Value.name;
@@ -108,7 +107,7 @@ namespace BowieD.Unturned.NPCMaker.Updating
             }
             else
             {
-                var manifestPath = Path.Combine(AppConfig.Directory, "update.manifest");
+                string manifestPath = Path.Combine(AppConfig.Directory, "update.manifest");
                 if (File.Exists(manifestPath))
                 {
                     await App.Logger.Log("[UPDATE] - Deleting old update manifest...");
@@ -149,7 +148,7 @@ namespace BowieD.Unturned.NPCMaker.Updating
             {
                 client.Headers.Add(HttpRequestHeader.UserAgent, "NPCMaker");
                 string response = await client.DownloadStringTaskAsync(ReleasesUrl);
-                var manifests = JsonConvert.DeserializeObject<UpdateManifest[]>(response);
+                UpdateManifest[] manifests = JsonConvert.DeserializeObject<UpdateManifest[]>(response);
                 return manifests.ToList();
             }
         }

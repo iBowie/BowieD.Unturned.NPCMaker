@@ -8,13 +8,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes
         public object SkipValue { get; private set; }
         public RewardOptionalAttribute(object defaultValue, object skipValue)
         {
-            this.DefaultValue = defaultValue;
-            this.SkipValue = skipValue;
+            DefaultValue = defaultValue;
+            SkipValue = skipValue;
         }
         public bool ConditionApplied(object currentValue)
         {
             if (SkipValue.Equals(currentValue))
+            {
                 return true;
+            }
+
             return false;
         }
     }

@@ -14,7 +14,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public bool ConditionApplied(object currentValue)
         {
             if (skipValue.Equals(currentValue))
+            {
                 return true;
+            }
+
             return false;
         }
     }

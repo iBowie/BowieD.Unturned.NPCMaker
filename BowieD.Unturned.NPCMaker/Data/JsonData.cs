@@ -8,12 +8,17 @@ namespace BowieD.Unturned.NPCMaker.Data
         [JsonIgnore]
         public abstract string FileName { get; }
         public T data;
+
+        public event DataLoaded<T> OnDataLoaded;
+        public event DataSaved<T> OnDataSaved;
+
         public virtual bool Save()
         {
             App.Logger.Log($"[JDATA] - Saving {FileName}");
             string content = JsonConvert.SerializeObject(data);
             File.WriteAllText(FileName, content);
             App.Logger.Log($"[JDATA] - Saved!");
+            OnDataSaved?.Invoke();
             return true;
         }
         public virtual bool Load(T defaultValue)
@@ -27,6 +32,7 @@ namespace BowieD.Unturned.NPCMaker.Data
                     string content = File.ReadAllText(FileName);
                     data = JsonConvert.DeserializeObject<T>(content);
                     App.Logger.Log($"[JDATA] - Loaded");
+                    OnDataLoaded?.Invoke();
                     return true;
                 }
                 catch

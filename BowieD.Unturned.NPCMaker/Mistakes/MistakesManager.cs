@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -19,25 +20,45 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     "BowieD.Unturned.NPCMaker.Mistakes.Vendor",
                     "BowieD.Unturned.NPCMaker.Mistakes.Quest"
                 };
-                var q = from t in Assembly.GetExecutingAssembly().GetTypes() where t.IsClass && nspaces.Contains(t.Namespace) select t;
+                IEnumerable<Type> q = from t in Assembly.GetExecutingAssembly().GetTypes() where t.IsClass && !t.IsAbstract && nspaces.Contains(t.Namespace) select t;
                 foreach (Type t in q)
                 {
                     try
                     {
-                        var mistake = Activator.CreateInstance(t);
+                        object mistake = Activator.CreateInstance(t);
                         if (mistake is Mistake mist)
+                        {
                             CheckMistakes.Add(mist);
+                        }
                     }
                     catch { }
                 }
             }
             MainWindow.Instance.lstMistakes.Items.Clear();
-            FoundMistakes = new HashSet<Mistake>();
+            FoundMistakes.Clear();
             foreach (Mistake m in CheckMistakes)
             {
-                var mistakes = m.CheckMistake();
-                foreach (var fm in mistakes)
+                IEnumerable<Mistake> mistakes = m.CheckMistake();
+                foreach (Mistake fm in mistakes)
                 {
+                    string descKey = $"{fm.MistakeName}_Desc";
+                    if (fm.MistakeDesc == null)
+                    {
+                        if (LocalizationManager.Current.Mistakes.TryGetValue(descKey, out string desc))
+                        {
+                            fm.MistakeDesc = desc;
+                        }
+                    }
+
+                    string solutionKey = $"{fm.MistakeName}_Solution";
+                    if (fm.MistakeSolution == null)
+                    {
+                        if (LocalizationManager.Current.Mistakes.TryGetValue(solutionKey, out string solution))
+                        {
+                            fm.MistakeSolution = solution;
+                        }
+                    }
+
                     FoundMistakes.Add(fm);
                     MainWindow.Instance.lstMistakes.Items.Add(fm);
                 }
@@ -57,6 +78,6 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
         public static int Advices_Count => FoundMistakes.Count(d => d.Importance == IMPORTANCE.ADVICE);
         public static int Warnings_Count => FoundMistakes.Count(d => d.Importance == IMPORTANCE.WARNING);
         public static int Criticals_Count => FoundMistakes.Count(d => d.Importance == IMPORTANCE.CRITICAL);
-        public static HashSet<Mistake> FoundMistakes { get; private set; } = new HashSet<Mistake>();
+        public static HashSet<Mistake> FoundMistakes { get; } = new HashSet<Mistake>();
     }
 }

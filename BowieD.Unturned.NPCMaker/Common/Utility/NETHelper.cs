@@ -5,12 +5,16 @@ namespace BowieD.Unturned.NPCMaker.Common.Utility
 {
     public static class NETHelper
     {
-        static readonly NETVersion version;
+        private static readonly NETVersion version;
         public static string GetVersionString()
         {
             return GetVersion().ToString().Replace("_", ".");
         }
-        public static NETVersion GetVersion() => version;
+        public static NETVersion GetVersion()
+        {
+            return version;
+        }
+
         static NETHelper()
         {
             int dotNetVersion;
@@ -27,11 +31,13 @@ namespace BowieD.Unturned.NPCMaker.Common.Utility
                     dotNetVersion = 0;
                 }
             }
-            foreach (var ver in Enum.GetValues(typeof(NETVersion)))
+            foreach (object ver in Enum.GetValues(typeof(NETVersion)))
             {
-                var nv = (NETVersion)ver;
+                NETVersion nv = (NETVersion)ver;
                 if (dotNetVersion >= (int)nv)
+                {
                     version = nv;
+                }
             }
         }
     }

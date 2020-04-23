@@ -105,7 +105,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         Dialogue.messages = Messages;
                         Dialogue.responses = Responses;
                         if (!MainWindow.CurrentProject.data.dialogues.Contains(Dialogue))
+                        {
                             MainWindow.CurrentProject.data.dialogues.Add(Dialogue);
+                        }
+
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["Dialogue_Saved"]);
                         MainWindow.CurrentProject.isSaved = false;
                         App.Logger.Log($"Dialogue {ID} saved!");
@@ -122,7 +125,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     openCommand = new BaseCommand(() =>
                     {
-                        var ulv = new Universal_ListView(MainWindow.CurrentProject.data.dialogues.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Dialogue, false)).ToList(), Universal_ItemList.ReturnType.Dialogue);
+                        Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentProject.data.dialogues.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Dialogue, false)).ToList(), Universal_ItemList.ReturnType.Dialogue);
                         if (ulv.ShowDialog() == true)
                         {
                             SaveCommand.Execute(null);
@@ -143,7 +146,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     resetCommand = new BaseCommand(() =>
                     {
-                        var id = ID;
+                        ushort id = ID;
                         Dialogue = new NPCDialogue();
                         App.Logger.Log($"Cleared dialogue {id}");
                     });
@@ -216,7 +219,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 MainWindow.Instance.messagePagesGrid.Children.Remove(item);
             }
-            foreach (var msg in Dialogue.messages)
+            foreach (NPCMessage msg in Dialogue.messages)
             {
                 Dialogue_Message dialogue_Message = new Dialogue_Message(msg);
                 dialogue_Message.deletePageButton.Click += (sender, e) =>
@@ -249,7 +252,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Remove(item);
             }
-            foreach (var res in Dialogue.responses)
+            foreach (NPCResponse res in Dialogue.responses)
             {
                 Dialogue_Response dialogue_Response = new Dialogue_Response(res);
                 dialogue_Response.deleteButton.Click += (sender, e) =>
@@ -267,7 +270,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 }
                 MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Insert(ind, dialogue_Response);
             }
-            foreach (var res in MainWindow.Instance.dialoguePlayerRepliesGrid.Children)
+            foreach (object res in MainWindow.Instance.dialoguePlayerRepliesGrid.Children)
             {
                 if (res is Dialogue_Response dr)
                 {

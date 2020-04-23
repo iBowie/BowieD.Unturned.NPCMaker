@@ -1,6 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker;
 using BowieD.Unturned.NPCMaker.Controls;
-using BowieD.Unturned.NPCMaker.Data;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Managers;
@@ -105,7 +104,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.faceImageBorder.Background = new SolidColorBrush(Character.skinColor);
                 if (Coloring.ColorConverter.ColorToHSV(Character.skinColor).V <= 0.1d)
                 {
-                    var effect = new DropShadowEffect
+                    DropShadowEffect effect = new DropShadowEffect
                     {
                         BlurRadius = 2,
                         Direction = 0,
@@ -167,7 +166,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             return;
                         }
                         if (!MainWindow.CurrentProject.data.characters.Contains(Character))
+                        {
                             MainWindow.CurrentProject.data.characters.Add(Character);
+                        }
+
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["Character_Saved"]);
                         MainWindow.CurrentProject.isSaved = false;
                         App.Logger.Log($"Character {Character.id} saved!");
@@ -184,7 +186,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     openCommand = new BaseCommand(() =>
                     {
-                        var ulv = new Universal_ListView(MainWindow.CurrentProject.data.characters.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Character, false)).ToList(), Universal_ItemList.ReturnType.Character);
+                        Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentProject.data.characters.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Character, false)).ToList(), Universal_ItemList.ReturnType.Character);
                         if (ulv.ShowDialog() == true)
                         {
                             SaveCommand.Execute(null);
@@ -282,7 +284,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     saveColorSkin = new BaseCommand(() =>
                     {
                         if (MainWindow.Instance.skinColorPicker.SelectedColor != null)
+                        {
                             SaveColor(((Coloring.Color)MainWindow.Instance.skinColorPicker.SelectedColor.Value).ToHEX());
+                        }
                     });
                 }
                 return saveColorSkin;
@@ -297,7 +301,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     saveColorHair = new BaseCommand(() =>
                     {
                         if (MainWindow.Instance.hairColorPicker.SelectedColor != null)
+                        {
                             SaveColor(((Coloring.Color)MainWindow.Instance.hairColorPicker.SelectedColor.Value).ToHEX());
+                        }
                     });
                 }
                 return saveColorHair;
@@ -316,7 +322,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             foreach (NPCCharacter c in MainWindow.CurrentProject.data.characters)
                             {
                                 if (c != null)
+                                {
                                     c.guid = Guid.NewGuid().ToString("N");
+                                }
                             }
                         }
                         if (MainWindow.CurrentProject.data.dialogues != null)
@@ -324,7 +332,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             foreach (NPCDialogue d in MainWindow.CurrentProject.data.dialogues)
                             {
                                 if (d != null)
+                                {
                                     d.guid = Guid.NewGuid().ToString("N");
+                                }
                             }
                         }
                         if (MainWindow.CurrentProject.data.vendors != null)
@@ -332,7 +342,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             foreach (NPCVendor v in MainWindow.CurrentProject.data.vendors)
                             {
                                 if (v != null)
+                                {
                                     v.guid = Guid.NewGuid().ToString("N");
+                                }
                             }
                         }
                         if (MainWindow.CurrentProject.data.quests != null)
@@ -340,7 +352,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             foreach (NPCQuest q in MainWindow.CurrentProject.data.quests)
                             {
                                 if (q != null)
+                                {
                                     q.guid = Guid.NewGuid().ToString("N");
+                                }
                             }
                         }
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["App_GUID_Regenerated"]);
@@ -352,11 +366,14 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         internal void SaveColor(string hex)
         {
             if (DataManager.UserColorsData.data.Contains(hex))
+            {
                 return;
+            }
+
             DataManager.UserColorsData.data = DataManager.UserColorsData.data.Prepend(hex).ToArray();
             DataManager.UserColorsData.Save();
-            var color = new Coloring.Color(hex);
-            var colorItem = new Xceed.Wpf.Toolkit.ColorItem(color, hex);
+            Coloring.Color color = new Coloring.Color(hex);
+            Xceed.Wpf.Toolkit.ColorItem colorItem = new Xceed.Wpf.Toolkit.ColorItem(color, hex);
             MainWindow.Instance.skinColorPicker.AvailableColors.Insert(0, colorItem);
         }
         internal void UpdateColorPicker()
@@ -367,11 +384,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             MainWindow.Instance.hairColorPicker.AvailableColors.Clear();
             MainWindow.Instance.skinColorPicker.StandardColors.Clear();
             MainWindow.Instance.hairColorPicker.StandardColors.Clear();
-            foreach (var k in DataManager.UserColorsData.data)
+            foreach (string k in DataManager.UserColorsData.data)
             {
                 MainWindow.Instance.skinColorPicker.AvailableColors.Add(new Xceed.Wpf.Toolkit.ColorItem(new Coloring.Color(k), k));
             }
-            foreach (var k in GetUnturnedColors())
+            foreach (Coloring.Color k in GetUnturnedColors())
             {
                 MainWindow.Instance.skinColorPicker.StandardColors.Add(new Xceed.Wpf.Toolkit.ColorItem(k, k.ToHEX()));
             }

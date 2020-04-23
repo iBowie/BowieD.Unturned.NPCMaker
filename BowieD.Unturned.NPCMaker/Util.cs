@@ -9,11 +9,19 @@ namespace BowieD.Unturned.NPCMaker
 {
     public static class Util
     {
-        public static ImageSource GetImageSource(this string value) => value.StartsWith("pack://application") ? new BitmapImage(new Uri(value)) : new BitmapImage(new Uri("pack://application:,,,/" + value));
+        public static ImageSource GetImageSource(this string value)
+        {
+            return value.StartsWith("pack://application") ? new BitmapImage(new Uri(value)) : new BitmapImage(new Uri("pack://application:,,,/" + value));
+        }
+
         public static T FindParent<T>(DependencyObject child) where T : DependencyObject
         {
             DependencyObject parentObject = VisualTreeHelper.GetParent(child);
-            if (parentObject == null) return null;
+            if (parentObject == null)
+            {
+                return null;
+            }
+
             if (parentObject is T parent)
             {
                 return parent;
@@ -37,7 +45,7 @@ namespace BowieD.Unturned.NPCMaker
         }
         public static T FindByName<T>(Window window, string name) where T : UIElement
         {
-            var res = window.FindName(name);
+            object res = window.FindName(name);
             if (res is T result)
             {
                 return result;
@@ -54,10 +62,12 @@ namespace BowieD.Unturned.NPCMaker
         }
         public static bool Contains(this ItemCollection collection, Func<object, bool> func)
         {
-            foreach (var item in collection)
+            foreach (object item in collection)
             {
                 if (func.Invoke(item))
+                {
                     return true;
+                }
             }
             return false;
         }

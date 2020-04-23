@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
-using BowieD.Unturned.NPCMaker.Data;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
@@ -9,6 +8,7 @@ using BowieD.Unturned.NPCMaker.Themes;
 using BowieD.Unturned.NPCMaker.ViewModels;
 using MahApps.Metro.Controls;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -26,7 +26,7 @@ namespace BowieD.Unturned.NPCMaker
             Instance = this;
             InitializeComponent();
             MainWindowViewModel = new MainWindowViewModel(this);
-            this.DataContext = MainWindowViewModel;
+            DataContext = MainWindowViewModel;
         }
         public MainWindowViewModel MainWindowViewModel { get; }
         #region MANAGERS
@@ -41,7 +41,7 @@ namespace BowieD.Unturned.NPCMaker
             MinWidth *= AppConfig.Instance.scale;
             MinHeight *= AppConfig.Instance.scale;
             #region THEME SETUP
-            var theme = ThemeManager.Themes.ContainsKey(AppConfig.Instance.currentTheme ?? "") ? ThemeManager.Themes[AppConfig.Instance.currentTheme] : ThemeManager.Themes["Metro/LightGreen"];
+            Themes.Theme theme = ThemeManager.Themes.ContainsKey(AppConfig.Instance.currentTheme ?? "") ? ThemeManager.Themes[AppConfig.Instance.currentTheme] : ThemeManager.Themes["Metro/LightGreen"];
             ThemeManager.Apply(theme);
             #endregion
             #region OPEN_WITH
@@ -151,7 +151,7 @@ namespace BowieD.Unturned.NPCMaker
             HolidayManager.Check();
             if (App.Package.Guides.Count > 0)
             {
-                foreach (var guide in App.Package.Guides)
+                foreach (KeyValuePair<string, string> guide in App.Package.Guides)
                 {
                     guidesMenuItem.Items.Add(new MenuItem()
                     {
@@ -164,11 +164,13 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             else
+            {
                 guidesMenuItem.IsEnabled = false;
+            }
 
             if (App.Package.FeedbackLinks.Length > 0)
             {
-                foreach (var link in App.Package.FeedbackLinks)
+                foreach (Data.AppPackage.FeedbackLink link in App.Package.FeedbackLinks)
                 {
                     MenuItem newItem = new MenuItem()
                     {
@@ -198,9 +200,42 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             else
+            {
                 commMenuItem.IsEnabled = false;
+            }
 
-            App.NotificationManager.Notify(LocalizationManager.Current.Notification["App_StartUp"]);
+            try
+            {
+                foreach (Data.AppPackage.Notification n in App.Package.Notifications)
+                {
+                    string text = n.Localize ? LocalizationManager.Current.Notification.Translate(n.Text) : n.Text;
+
+                    List<Button> _buttons = new List<Button>();
+
+                    foreach (Data.AppPackage.Notification.Button b in n.Buttons)
+                    {
+                        string bText = b.Localize ? LocalizationManager.Current.Notification.Translate(b.Text) : b.Text;
+
+                        Button elem = new Button()
+                        {
+                            Content = new TextBlock()
+                            {
+                                Text = bText
+                            }
+                        };
+                        elem.Click += (_, __) => b.GetButtonAction().Invoke();
+
+                        _buttons.Add(elem);
+                    }
+
+                    App.NotificationManager.Notify(text, buttons: _buttons.ToArray());
+                }
+            }
+            catch (Exception ex)
+            {
+                App.Logger.LogException("Could not display notification(s)", ex: ex);
+            }
+
             ConsoleLogger.StartWaitForInput();
             base.Show();
         }
@@ -214,7 +249,7 @@ namespace BowieD.Unturned.NPCMaker
         #endregion
         #region STATIC
         public static MainWindow Instance;
-        public static ProjectData CurrentProject { get; private set; } = new ProjectData();
+        public static ProjectData CurrentProject { get; } = new ProjectData();
         public static DispatcherTimer AutosaveTimer { get; set; }
         public static DispatcherTimer AppUpdateTimer { get; set; }
         public static DateTime Started { get; set; } = DateTime.UtcNow;
@@ -223,15 +258,23 @@ namespace BowieD.Unturned.NPCMaker
         {
             AutosaveTimer.Stop();
             if (CurrentProject.file.Length > 0)
+            {
                 CurrentProject.Save();
+            }
+
             AutosaveTimer.Start();
         }
         private void AppUpdateTimer_Tick(object sender, EventArgs e)
         {
             if (CurrentProject.file.Length == 0)
+            {
                 menuCurrentFileLabel.Content = LocalizationManager.Current.Interface.Translate("Main_Menu_CurrentFile", LocalizationManager.Current.Interface["Main_Menu_CurrentFile_None"]);
+            }
             else
+            {
                 menuCurrentFileLabel.Content = LocalizationManager.Current.Interface.Translate("Main_Menu_CurrentFile", Path.GetFileName(CurrentProject.file));
+            }
+
             menuCurrentFileLabel.ToolTip = CurrentProject.file;
         }
         protected override void OnClosing(CancelEventArgs e)
@@ -244,7 +287,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             if (!DataManager.RecentFileData.data.Contains(MainWindow.CurrentProject.file))
             {
-                var r = DataManager.RecentFileData.data.AsEnumerable();
+                IEnumerable<string> r = DataManager.RecentFileData.data.AsEnumerable();
                 r = r.Prepend(path);
                 DataManager.RecentFileData.data = r.ToArray();
                 DataManager.RecentFileData.Save();
@@ -292,9 +335,9 @@ namespace BowieD.Unturned.NPCMaker
         {
             RecentList.Items.Clear();
             DataManager.RecentFileData.data = DataManager.RecentFileData.data.Where(d => File.Exists(d)).ToArray();
-            foreach (var k in DataManager.RecentFileData.data)
+            foreach (string k in DataManager.RecentFileData.data)
             {
-                var mItem = new MenuItem()
+                MenuItem mItem = new MenuItem()
                 {
                     Header = k,
                     Tag = "SAV"
@@ -306,7 +349,6 @@ namespace BowieD.Unturned.NPCMaker
                     if (MainWindow.CurrentProject.Load(null))
                     {
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Loaded"]);
-                        MainWindowViewModel.ResetAll();
                     }
                     else
                     {
@@ -319,7 +361,7 @@ namespace BowieD.Unturned.NPCMaker
             if (DataManager.RecentFileData.data.Length > 0)
             {
                 RecentList.Items.Add(new Separator());
-                var mItem = new MenuItem()
+                MenuItem mItem = new MenuItem()
                 {
                     Header = LocalizationManager.Current.Interface["Main_Menu_File_Recent_Clear"],
                     Tag = "CLR"
@@ -338,7 +380,10 @@ namespace BowieD.Unturned.NPCMaker
         public static void PerformExit()
         {
             if (MainWindow.CurrentProject.SavePrompt() == null)
+            {
                 return;
+            }
+
             App.Logger.Log("Closing app");
             DiscordManager?.Deinitialize();
             Environment.Exit(0);

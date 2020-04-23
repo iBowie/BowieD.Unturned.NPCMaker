@@ -62,7 +62,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
         private void TypeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count == 0)
+            {
                 return;
+            }
+
             if (Selected_ItemType == ItemType.ITEM)
             {
                 if (AppConfig.Instance.animateControls)
@@ -115,11 +118,17 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 Result.id = (ushort)txtBoxID.Value;
                 Result.type = Selected_ItemType;
                 if (Result.type == ItemType.VEHICLE)
+                {
                     Result.spawnPointID = txtBoxSpawnpoint.Text;
+                }
+
                 Result.isBuy = IsBuy;
                 Result.cost = (uint)txtBoxCost.Value;
                 if (Result.conditions == null)
+                {
                     Result.conditions = new List<Condition>();
+                }
+
                 isSellSelected = !IsBuy;
                 lastType = Selected_ItemType;
                 DialogResult = true;

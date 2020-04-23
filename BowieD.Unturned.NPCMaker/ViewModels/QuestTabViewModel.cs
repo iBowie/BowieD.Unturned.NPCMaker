@@ -75,7 +75,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         private void UpdateConditions()
         {
             MainWindow.Instance.listQuestConditions.Children.Clear();
-            foreach (var k in Quest.conditions)
+            foreach (Condition k in Quest.conditions)
             {
                 Universal_ItemList uil = new Universal_ItemList(k, Universal_ItemList.ReturnType.Condition, true);
                 uil.deleteButton.Click += (object sender, RoutedEventArgs e) =>
@@ -122,7 +122,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             return;
                         }
                         if (!MainWindow.CurrentProject.data.quests.Contains(Quest))
+                        {
                             MainWindow.CurrentProject.data.quests.Add(Quest);
+                        }
+
                         MainWindow.CurrentProject.isSaved = false;
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["Quest_Saved"]);
                     });
@@ -160,7 +163,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     resetCommand = new BaseCommand(() =>
                     {
-                        var id = ID;
+                        ushort id = ID;
                         Quest = new NPCQuest();
                         UpdateConditions();
                         UpdateRewards();

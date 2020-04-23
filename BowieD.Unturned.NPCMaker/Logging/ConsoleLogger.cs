@@ -1,9 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Commands;
 using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -23,11 +21,11 @@ namespace BowieD.Unturned.NPCMaker.Logging
         [DllImport("user32.dll")]
         private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
         [DllImport("user32.dll")]
-        static extern bool EnableMenuItem(IntPtr hMenu, uint uIDEnableItem, uint uEnable);
+        private static extern bool EnableMenuItem(IntPtr hMenu, uint uIDEnableItem, uint uEnable);
         [DllImport("user32.dll")]
-        static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+        private static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
         [DllImport("user32.dll")]
-        static extern IntPtr RemoveMenu(IntPtr hMenu, uint nPosition, uint wFlags);
+        private static extern IntPtr RemoveMenu(IntPtr hMenu, uint nPosition, uint wFlags);
 
         private const uint
             SC_CLOSE = 0xF060,
@@ -39,14 +37,20 @@ namespace BowieD.Unturned.NPCMaker.Logging
         public static void ShowConsoleWindow()
         {
             if (IsOpened)
+            {
                 return;
+            }
+
             IsOpened = true;
             ShowWindow(GetConsoleWindow(), SW_SHOW);
         }
         public static void HideConsoleWindow()
         {
             if (!IsOpened)
+            {
                 return;
+            }
+
             IsOpened = false;
             ShowWindow(GetConsoleWindow(), SW_HIDE);
         }
@@ -76,7 +80,7 @@ namespace BowieD.Unturned.NPCMaker.Logging
                     color = ConsoleColor.Yellow;
                     break;
             }
-            var oldColor = Console.ForegroundColor;
+            ConsoleColor oldColor = Console.ForegroundColor;
             Console.ForegroundColor = color;
             Console.WriteLine(message);
             Console.ForegroundColor = oldColor;
@@ -94,18 +98,7 @@ namespace BowieD.Unturned.NPCMaker.Logging
         public static void WaitForInput()
         {
             string input = Console.ReadLine();
-            string[] command = input.Split(' ');
-            var executionCommand = Command.Commands.SingleOrDefault(d => d.Name.ToLower() == command[0].ToLower());
-            if (executionCommand == null)
-            {
-                Console.WriteLine($"Command {command[0]} not found");
-            }
-            else
-            {
-                var matches = Regex.Matches(string.Join(" ", command.Skip(1)), "[\\\"](.+?)[\\\"]|([^ ]+)", RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
-                var filtered = (from Match d in matches select d.Value.Trim('"')).ToArray();
-                executionCommand.Execute(filtered);
-            }
+            Console.WriteLine(Command.Execute(input));
             WaitForInput();
         }
     }

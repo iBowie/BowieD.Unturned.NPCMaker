@@ -30,16 +30,23 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
         {
             if (!descriptive)
             {
-                rich = new RichPresence();
-                rich.State = "User hides details";
-                rich.Details = "Editing NPC";
+                rich = new RichPresence
+                {
+                    State = "User hides details",
+                    Details = "Editing NPC"
+                };
             }
             if (rich.Assets == null)
+            {
                 rich.Assets = new Assets();
+            }
+
             rich.Assets.LargeImageText = $"NPC Maker for Unturned by BowieD. Version: {App.Version}";
             rich.Assets.LargeImageKey = "mainimage_outline";
             if (client.IsInitialized)
+            {
                 client.SetPresence(rich);
+            }
         }
 
         public void SendPresence(string details, string state)
@@ -52,7 +59,9 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
             client.Invoke();
             await Task.Delay(ticksDelay);
             if (!client.Disposed)
+            {
                 Update();
+            }
         }
 
         public void Deinitialize()

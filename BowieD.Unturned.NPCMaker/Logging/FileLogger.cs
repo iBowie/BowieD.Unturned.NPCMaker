@@ -21,9 +21,15 @@ namespace BowieD.Unturned.NPCMaker.Logging
         public void Open()
         {
             if (File.Exists(Dir + "npcmaker.old.log"))
+            {
                 File.Delete(Dir + "npcmaker.old.log");
+            }
+
             if (File.Exists(Dir + "npcmaker.log"))
+            {
                 File.Move(Dir + "npcmaker.log", Dir + "npcmaker.old.log");
+            }
+
             stream = new StreamWriter(Dir + "npcmaker.log", false, Encoding.UTF8);
         }
 
@@ -35,7 +41,7 @@ namespace BowieD.Unturned.NPCMaker.Logging
             }
             catch (Exception ex)
             {
-                var old = Console.ForegroundColor;
+                ConsoleColor old = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"Can't write in log file directly. Doubling the message in Console with error provided");
                 Console.WriteLine(message);

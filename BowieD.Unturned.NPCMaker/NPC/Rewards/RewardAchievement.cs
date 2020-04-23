@@ -5,13 +5,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     public sealed class RewardAchievement : Reward
     {
         public override RewardType Type => RewardType.Achievement;
-        public override string UIText
-        {
-            get
-            {
-                return $"{LocalizationManager.Current.Reward["Type_Achievement"]} [{ID}]";
-            }
-        }
+        public override string UIText => $"{LocalizationManager.Current.Reward["Type_Achievement"]} [{ID}]";
         public string ID { get; set; }
     }
 }

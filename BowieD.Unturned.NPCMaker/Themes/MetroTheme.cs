@@ -26,7 +26,7 @@ namespace BowieD.Unturned.NPCMaker.Themes
                 CurrentTheme?.Remove();
                 Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml") });
                 Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml") });
-                var resourceDictionary = new ResourceDictionary() { Source = new Uri($"pack://application:,,,/MahApps.Metro;component/Styles/Themes/{DictionaryName}.xaml") };
+                ResourceDictionary resourceDictionary = new ResourceDictionary() { Source = new Uri($"pack://application:,,,/MahApps.Metro;component/Styles/Themes/{DictionaryName}.xaml") };
                 if (resourceDictionary == null)
                 {
                     throw new NullReferenceException();
@@ -34,9 +34,13 @@ namespace BowieD.Unturned.NPCMaker.Themes
                 Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
                 App.Current.Resources["AccentColor"] = new BrushConverter().ConvertFromString(AccentColor);
                 if (DictionaryName[0] == 'L')
+                {
                     App.Current.Resources["BackgroundColor"] = new BrushConverter().ConvertFromString("#FFFFFF");
+                }
                 else if (DictionaryName[0] == 'D')
+                {
                     App.Current.Resources["BackgroundColor"] = new BrushConverter().ConvertFromString("#252525");
+                }
             }
             catch { App.Logger.Log($"Can't apply {Name} theme"); }
         }
@@ -54,12 +58,18 @@ namespace BowieD.Unturned.NPCMaker.Themes
                                                         where d.Source != null && d.Source.OriginalString.StartsWith("pack://application:,,,/MahApps.Metro;component/Styles/Themes/")
                                                         select d).ToList();
                 if (metroControls != null)
+                {
                     Application.Current.Resources.MergedDictionaries.Remove(metroControls);
+                }
+
                 if (metroFonts != null)
+                {
                     Application.Current.Resources.MergedDictionaries.Remove(metroFonts);
+                }
+
                 if (metroThemes?.Count() > 0)
                 {
-                    foreach (var dic in metroThemes)
+                    foreach (ResourceDictionary dic in metroThemes)
                     {
                         Application.Current.Resources.MergedDictionaries.Remove(dic);
                     }

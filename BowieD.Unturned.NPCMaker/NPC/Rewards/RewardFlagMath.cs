@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
@@ -24,8 +23,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 return sb.ToString();
             }
         }
-        public UInt16 A_ID { get; set; }
-        public UInt16 B_ID { get; set; }
+        public ushort A_ID { get; set; }
+        public ushort B_ID { get; set; }
         public Operation_Type Operation { get; set; }
     }
 }

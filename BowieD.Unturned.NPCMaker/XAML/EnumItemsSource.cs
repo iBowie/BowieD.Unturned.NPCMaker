@@ -10,63 +10,67 @@ using System.Windows.Data;
 
 namespace BowieD.Unturned.NPCMaker.XAML
 {
-    public class EnumItemsSource : Collection<String>, IValueConverter
+    public class EnumItemsSource : Collection<string>, IValueConverter
     {
-
-        Type type;
-        IDictionary<Object, Object> valueToNameMap;
-        IDictionary<Object, Object> nameToValueMap;
+        private Type type;
+        private IDictionary<object, object> valueToNameMap;
+        private IDictionary<object, object> nameToValueMap;
 
         public Type Type
         {
-            get { return this.type; }
+            get => type;
             set
             {
                 if (!value.IsEnum)
+                {
                     throw new ArgumentException("Type is not an enum.", "value");
-                this.type = value;
+                }
+
+                type = value;
                 Initialize();
             }
         }
         public string LocalizationPrefix { get; set; }
         public TranslationDictionary Dictionary { get; set; }
 
-        public Object Convert(Object value, Type targetType, Object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return this.valueToNameMap[value];
+            return valueToNameMap[value];
         }
 
-        public Object ConvertBack(Object value, Type targetType, Object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return this.nameToValueMap[value];
+            return nameToValueMap[value];
         }
 
-        void Initialize()
+        private void Initialize()
         {
             if (Dictionary == null || LocalizationPrefix == null)
             {
-                this.valueToNameMap = this.type
+                valueToNameMap = type
                   .GetFields(BindingFlags.Static | BindingFlags.Public)
                   .ToDictionary(fi => fi.GetValue(null), GetDescription);
-                this.nameToValueMap = this.valueToNameMap
+                nameToValueMap = valueToNameMap
                   .ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
             }
             else
             {
-                this.valueToNameMap = this.type
+                valueToNameMap = type
                     .GetFields(BindingFlags.Static | BindingFlags.Public)
                     .ToDictionary(fi => fi.GetValue(null), k => (object)Dictionary.Translate(LocalizationPrefix + k.Name));
-                this.nameToValueMap = this.valueToNameMap
+                nameToValueMap = valueToNameMap
                     .ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
             }
             Clear();
-            foreach (String name in this.nameToValueMap.Keys)
+            foreach (string name in nameToValueMap.Keys)
+            {
                 Add(name);
+            }
         }
 
-        static Object GetDescription(FieldInfo fieldInfo)
+        private static object GetDescription(FieldInfo fieldInfo)
         {
-            var descriptionAttribute =
+            DescriptionAttribute descriptionAttribute =
               (DescriptionAttribute)Attribute.GetCustomAttribute(fieldInfo, typeof(DescriptionAttribute));
             string[] splitted = descriptionAttribute == null ? new string[0] : descriptionAttribute.Description.Split('.');
             return descriptionAttribute != null ? LocalizationManager.Current.GetDictionary(splitted[0]).Translate(splitted[1]) : fieldInfo.Name;

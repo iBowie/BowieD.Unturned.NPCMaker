@@ -7,17 +7,17 @@ namespace BowieD.Unturned.NPCMaker.XAML
 {
     public class LocalizationConverter : IMultiValueConverter
     {
-        private string _key;
+        private readonly string _key;
         public LocalizationConverter(string key)
         {
-            this._key = key;
+            _key = key;
         }
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             try
             {
                 string dictName = _key.Split('_')[0];
-                var dict = Localization.LocalizationManager.Current.GetDictionary(dictName);
+                Localization.TranslationDictionary dict = Localization.LocalizationManager.Current.GetDictionary(dictName);
                 return dict.Translate(string.Join("_", _key.Split('_').Skip(1)));
             }
             catch

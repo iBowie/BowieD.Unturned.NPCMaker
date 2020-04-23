@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
-using System;
 using System.Collections.Generic;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
@@ -7,32 +6,29 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
     /// <summary>
     /// Some messages will never appear
     /// </summary>
-    public class NE_1002 : Mistake
+    public class NE_1002 : DialogueMistake
     {
-        public NE_1002() { }
+        public NE_1002() : base()
+        {
+            MistakeName = "NE_1002";
+            Importance = IMPORTANCE.ADVICE;
+        }
+        public NE_1002(ushort id) : this()
+        {
+            MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_1002_Desc", id);
+        }
         public override IEnumerable<Mistake> CheckMistake()
         {
-            foreach (var _dial in MainWindow.CurrentProject.data.dialogues)
+            foreach (NPC.NPCDialogue _dial in MainWindow.CurrentProject.data.dialogues)
             {
                 if (_dial.messages.Count >= 2)
                 {
                     for (int k = 0; k < _dial.messages.Count - 1; k++)
                     {
                         if (_dial.messages[k].conditions.Length == 0)
-                            yield return new NE_1002()
-                            {
-                                MistakeName = "NE_1002",
-                                MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_1002_Desc", _dial.id),
-                                Importance = IMPORTANCE.ADVICE,
-                                OnClick = new Action(() =>
-                                {
-                                    if (MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.ID == 0)
-                                        return;
-                                    MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.SaveCommand.Execute(null);
-                                    MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Dialogue = _dial;
-                                    MainWindow.Instance.mainTabControl.SelectedIndex = 1;
-                                })
-                            };
+                        {
+                            yield return new NE_1002(_dial.id);
+                        }
                     }
                 }
             }

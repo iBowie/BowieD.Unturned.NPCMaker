@@ -5,20 +5,17 @@ namespace BowieD.Unturned.NPCMaker.Localization
 {
     public sealed class TranslationDictionary : Dictionary<string, string>
     {
-        public new string this[string key]
-        {
-            get
-            {
-                return Translate(key);
-            }
-        }
+        public new string this[string key] => Translate(key);
         public string Translate(string key, params object[] args)
         {
-            if (this.ContainsKey(key))
+            if (ContainsKey(key))
             {
                 string line = base[key];
                 if (line == null)
+                {
                     App.Logger.Log($"Key '{key}' has null translation.", Logging.ELogLevel.WARNING);
+                }
+
                 if (args?.Length > 0)
                 {
                     try
@@ -32,7 +29,9 @@ namespace BowieD.Unturned.NPCMaker.Localization
                     }
                 }
                 else
+                {
                     return line;
+                }
             }
             else
             {

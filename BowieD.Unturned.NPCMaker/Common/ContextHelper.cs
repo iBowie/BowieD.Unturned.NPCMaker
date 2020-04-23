@@ -10,75 +10,75 @@ namespace BowieD.Unturned.NPCMaker.Common
     {
         internal static MenuItem CreatePasteNewLineButton()
         {
-            var b = new MenuItem()
+            MenuItem b = new MenuItem()
             {
                 Header = LocalizationManager.Current.Interface["Context_Dialogue_PasteNewLine"]
             };
             b.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
             {
-                var context = (sender as MenuItem).Parent as ContextMenu;
-                var target = context.PlacementTarget as TextBox;
-                var pos = target.SelectionStart;
-                var l = target.SelectionLength;
+                ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                TextBox target = context.PlacementTarget as TextBox;
+                int pos = target.SelectionStart;
+                int l = target.SelectionLength;
                 target.Text = target.Text.Remove(pos, l).Insert(pos, "<br>");
             });
             return b;
         }
         internal static MenuItem CreatePastePauseButton()
         {
-            var b = new MenuItem()
+            MenuItem b = new MenuItem()
             {
                 Header = LocalizationManager.Current.Interface["Context_Dialogue_PastePause"]
             };
             b.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
             {
-                var context = (sender as MenuItem).Parent as ContextMenu;
-                var target = context.PlacementTarget as TextBox;
-                var pos = target.SelectionStart;
-                var l = target.SelectionLength;
+                ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                TextBox target = context.PlacementTarget as TextBox;
+                int pos = target.SelectionStart;
+                int l = target.SelectionLength;
                 target.Text = target.Text.Remove(pos, l).Insert(pos, "<pause>");
             });
             return b;
         }
         internal static MenuItem CreatePastePlayerNameButton()
         {
-            var b = new MenuItem()
+            MenuItem b = new MenuItem()
             {
                 Header = LocalizationManager.Current.Interface["Context_Dialogue_PastePlayerName"]
             };
             b.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
             {
-                var context = (sender as MenuItem).Parent as ContextMenu;
-                var target = context.PlacementTarget as TextBox;
-                var pos = target.SelectionStart;
-                var l = target.SelectionLength;
+                ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                TextBox target = context.PlacementTarget as TextBox;
+                int pos = target.SelectionStart;
+                int l = target.SelectionLength;
                 target.Text = target.Text.Remove(pos, l).Insert(pos, "<name_char>");
             });
             return b;
         }
         internal static MenuItem CreatePasteNPCNameButton()
         {
-            var b = new MenuItem()
+            MenuItem b = new MenuItem()
             {
                 Header = LocalizationManager.Current.Interface["Context_Dialogue_PasteNPCName"]
             };
             b.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
             {
-                var context = (sender as MenuItem).Parent as ContextMenu;
-                var target = context.PlacementTarget as TextBox;
-                var pos = target.SelectionStart;
-                var l = target.SelectionLength;
+                ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                TextBox target = context.PlacementTarget as TextBox;
+                int pos = target.SelectionStart;
+                int l = target.SelectionLength;
                 target.Text = target.Text.Remove(pos, l).Insert(pos, "<name_npc>");
             });
             return b;
         }
         internal static MenuItem CreatePasteColorMenu()
         {
-            var b = new MenuItem()
+            MenuItem b = new MenuItem()
             {
                 Header = LocalizationManager.Current.Interface["Context_Dialogue_PasteColor"]
             };
-            var bm1 = new MenuItem()
+            MenuItem bm1 = new MenuItem()
             {
                 Header = LocalizationManager.Current.Interface["Context_Dialogue_PasteColor_Unturned"]
             };
@@ -89,7 +89,7 @@ namespace BowieD.Unturned.NPCMaker.Common
             bm1.Items.Add(CreatePasteColorButton("legendary"));
             bm1.Items.Add(CreatePasteColorButton("mythical"));
             b.Items.Add(bm1);
-            var bm2 = new MenuItem()
+            MenuItem bm2 = new MenuItem()
             {
                 Header = LocalizationManager.Current.Interface["Context_Dialogue_PasteColor_Unity"]
             };
@@ -107,7 +107,7 @@ namespace BowieD.Unturned.NPCMaker.Common
         }
         internal static MenuItem CreatePasteColorButton(string color = "#FFFFFF")
         {
-            var brushConverter = new BrushConverter();
+            BrushConverter brushConverter = new BrushConverter();
             Brush clr;
             switch (color)
             {
@@ -169,20 +169,23 @@ namespace BowieD.Unturned.NPCMaker.Common
                     catch { clr = null; }
                     break;
             }
-            var b = new MenuItem()
+            MenuItem b = new MenuItem()
             {
                 Header = LocalizationManager.Current.Interface.ContainsKey($"Context_Dialogue_PasteColor_{color}") ? LocalizationManager.Current.Interface[$"Context_Dialogue_PasteColor_{color}"] : color
             };
             if (clr != null)
+            {
                 b.Icon = new Rectangle() { Width = 8, Height = 8, Fill = clr };
+            }
+
             b.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
             {
-                var submenu = (sender as MenuItem).Parent as MenuItem;
-                var menu = submenu.Parent as MenuItem;
-                var context = (menu as MenuItem).Parent as ContextMenu;
-                var target = context.PlacementTarget as TextBox;
-                var pos = target.SelectionStart;
-                var l = target.SelectionLength;
+                MenuItem submenu = (sender as MenuItem).Parent as MenuItem;
+                MenuItem menu = submenu.Parent as MenuItem;
+                ContextMenu context = (menu as MenuItem).Parent as ContextMenu;
+                TextBox target = context.PlacementTarget as TextBox;
+                int pos = target.SelectionStart;
+                int l = target.SelectionLength;
                 target.Text = target.Text.Insert(pos + l, "</color>").Insert(pos, $"<color={color}>");
             });
             return b;

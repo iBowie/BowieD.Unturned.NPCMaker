@@ -22,21 +22,23 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             bool skipCache = false;
             if (CachedUnturnedFiles?.Count() > 0)
             {
-                var res = MessageBox.Show(LocalizationManager.Current.Interface["DeepAnalysis_Cache_Update"], "", MessageBoxButton.YesNoCancel);
+                MessageBoxResult res = MessageBox.Show(LocalizationManager.Current.Interface["DeepAnalysis_Cache_Update"], "", MessageBoxButton.YesNoCancel);
                 if (res == MessageBoxResult.Cancel)
                 {
                     MainWindow.Instance.blockActionsOverlay.Visibility = Visibility.Collapsed;
                     return;
                 }
                 if (res == MessageBoxResult.No)
+                {
                     skipCache = true;
+                }
             }
             if (!skipCache)
             {
                 MainWindow.Instance.blockActionsOverlay.Visibility = Visibility.Visible;
-                using (var fbd = new System.Windows.Forms.FolderBrowserDialog() { ShowNewFolderButton = false })
+                using (System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog() { ShowNewFolderButton = false })
                 {
-                    var res = fbd.ShowDialog();
+                    System.Windows.Forms.DialogResult res = fbd.ShowDialog();
                     if (res == System.Windows.Forms.DialogResult.Cancel || !PathUtility.IsUnturnedPath(fbd.SelectedPath))
                     {
                         MainWindow.Instance.blockActionsOverlay.Visibility = Visibility.Collapsed;
@@ -69,7 +71,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                         Importance = IMPORTANCE.WARNING
                     });
                 }
-                foreach (var it in vendor.items)
+                foreach (VendorItem it in vendor.items)
                 {
                     if (it.type == ItemType.VEHICLE && !CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Vehicle && d.Id == it.id))
                     {
@@ -207,14 +209,14 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             await App.Logger.Log($"[DeepAnalysis] - Caching started in {directory}.");
             Queue<FileInfo> queuedFiles = new Queue<FileInfo>();
             HashSet<string> ignoreFileNames = new HashSet<string>();
-            foreach (var langValue in Enum.GetValues(typeof(ELanguage)))
+            foreach (object langValue in Enum.GetValues(typeof(ELanguage)))
             {
                 ignoreFileNames.Add(langValue + ".dat");
             }
             int skippedCount = 0;
             async Task enqueueFiles(string path)
             {
-                foreach (var file in new DirectoryInfo(path).GetFiles("*.dat", SearchOption.AllDirectories))
+                foreach (FileInfo file in new DirectoryInfo(path).GetFiles("*.dat", SearchOption.AllDirectories))
                 {
                     if (ignoreFileNames.Contains(file.Name))
                     {
@@ -286,11 +288,19 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                         }
                     }
                     if (idFound)
+                    {
                         unturnedFile.Id = id;
+                    }
+
                     if (typeFound)
+                    {
                         unturnedFile.Type = assetType;
+                    }
+
                     if (!skip && assetType != UnturnedFile.EAssetType.None)
+                    {
                         cache.Add(unturnedFile);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -298,7 +308,10 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 }
                 await Task.Yield();
                 if (step % 25 == 0)
+                {
                     await Task.Delay(1);
+                }
+
                 MainWindow.Instance.progrBar.Value = step;
             }
             CachedUnturnedFiles = cache;

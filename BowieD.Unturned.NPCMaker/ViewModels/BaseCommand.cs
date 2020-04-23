@@ -11,7 +11,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         }
         private readonly Action action;
         public event EventHandler CanExecuteChanged;
-        public virtual bool CanExecute(object parameter) => true;
+        public virtual bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
         public virtual void Execute(object parameter)
         {
             action?.Invoke();

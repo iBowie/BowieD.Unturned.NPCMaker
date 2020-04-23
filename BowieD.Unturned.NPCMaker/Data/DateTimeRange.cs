@@ -8,9 +8,9 @@ namespace BowieD.Unturned.NPCMaker.Data
     {
         public DateTimeRange(DateTime from, DateTime to, bool annual = false)
         {
-            this.From = from;
-            this.To = to;
-            this.Annual = annual;
+            From = from;
+            To = to;
+            Annual = annual;
         }
         [JsonProperty("from")]
         public DateTime From { get; }
@@ -23,8 +23,8 @@ namespace BowieD.Unturned.NPCMaker.Data
         {
             DateTime checkFrom, checkTo;
 
-            var fromDeltaYears = DateTime.UtcNow.Year - From.Year;
-            var toDeltaYears = DateTime.UtcNow.Year - To.Year;
+            int fromDeltaYears = DateTime.UtcNow.Year - From.Year;
+            int toDeltaYears = DateTime.UtcNow.Year - To.Year;
 
             if (Annual && fromDeltaYears >= 0 && toDeltaYears >= 0)
             {

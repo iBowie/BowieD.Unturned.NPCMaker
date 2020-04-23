@@ -1,6 +1,5 @@
 {
 	"Author": "BowieD, TheCubicNoobik",
-	"LastUpdate": "7th of December 2019",
 	"Name": "English (US)",
 	"General":
 	{
@@ -443,8 +442,7 @@
 		"Save": "Save Item",
 		"Conditions": "Edit Conditions"
 	},
-	"Mistakes":
-	{
+	"Mistakes": {
 		"NE_0000_Desc": "ID of {0} [{1}] is in reserved range (from 0 to 2000)",
 		"NE_0001_Desc": "Character {0} [{1}] has zero id.",
 		"NE_0002_Desc": "Equipped slot of {0} [{1}] is empty.",
@@ -453,25 +451,45 @@
 		"NE_1001_Desc": "Dialogue {0} has zero id.",
 		"NE_1002_Desc": "Some messages of dialogue {0} will never appear.",
 		"NE_1003_Desc": "Page {0} of message {1} in dialogue {2} is empty. This may end up in not showing this page at all.",
+		"NE_1004_Desc": "Response #{0} in dialogue {1} has a quest to preview, but does not have condition or reward related to the quest",
+		"NE_1005_Desc": "Response #{0} in dialogue {1} has a quest to preview, has required condition, but does not have correct reward of type 'Quest'",
+		"NE_1006_Desc": "Response #{0} in dialogue {1} has a quest or vendor to preview, but does not have a dialogue to open, causing late update of dialogue",
+		"NE_1007_Desc": "Response #{0} in dialogue {1} has a recursive call to the parent dialogue",
 		"NE_2000_Desc": "Vendor {0} [{1}] has zero id.",
 		"NE_2001_Desc": "Vendor {0} [{1}] has no items.",
 		"NE_3000_Desc": "Quest {0} [{1}] has zero id.",
 		"NE_3001_Desc": "Quest {0} [{1}] has no conditions.",
 		"NE_3002_Desc": "Quest {0} [{1}] has no rewards.",
-	
-	    "deep_char": "[{0}] already used by other character in game.",
-	    "deep_dialogue": "[{0}] already used by other dialogue in game.",
-	    "deep_vendor": "[{0}] already used by other vendor in game.",
-	    "deep_quest": "[{0}] already used by other quest in game.",
-	    "deep_item": "Item [{0}] not found. If you are using item from a mod - ignore this.",
-    	"deep_vehicle": "Vehicle [{0}] not found. If you are using vehicle from a mod - ignore this.",
+		"NE_0000_Solution": "Change ID to the value that will be bigger than 2000",
+		"NE_0001_Solution": "Change ID to the value that will be bigger than 0",
+		"NE_0002_Solution": "Change ID of the equipped slot to the value that will be bigger than 0",
+		"NE_0003_Solution": "Avoid using symbols that are restricted in filenames",
+		"NE_1000_Solution": "Add pages to the messages that does not contain any",
+		"NE_1001_Solution": "Change ID to the value that will be bigger than 0",
+		"NE_1002_Solution": "Check conditions of top messages",
+		"NE_1003_Solution": "Either delete the page, or add the text to it",
+		"NE_1004_Solution": "Add condition or reward of type 'Quest' to response",
+		"NE_1005_Solution": "Add reward of type 'Quest' to response",
+		"NE_1006_Solution": "Add 'Open Dialogue ID' to response",
+		"NE_1007_Solution": "Change ID",
+		"NE_2000_Solution": "Change ID to the value that will be bigger than 0",
+		"NE_2001_Solution": "Either delete the vendor, or add items to it",
+		"NE_3000_Solution": "Change ID to the value that will be bigger than 0",
+		"NE_3001_Solution": "Add conditions to the quest",
+		"NE_3002_Solution": "Either add rewards to the quest, or ignore this message",
 
-    	"Importance_ADVICE": "Advice",
-    	"Importance_WARNING": "Warning",
-    	"Importance_CRITICAL": "Critical"
+		"deep_char": "[{0}] already used by other character in game.",
+		"deep_dialogue": "[{0}] already used by other dialogue in game.",
+		"deep_vendor": "[{0}] already used by other vendor in game.",
+		"deep_quest": "[{0}] already used by other quest in game.",
+		"deep_item": "Item [{0}] not found. If you are using item from a mod - ignore this.",
+		"deep_vehicle": "Vehicle [{0}] not found. If you are using vehicle from a mod - ignore this.",
+
+		"Importance_ADVICE": "Advice",
+		"Importance_WARNING": "Warning",
+		"Importance_CRITICAL": "Critical"
 	},
-	"Notification":
-	{
+	"Notification": {
 		"Configuration_OnExit": "Restart the app to apply changes.",
 		"Character_ID_Zero": "Character ID can't be equal to zero",
 		"Character_Saved": "Character saved!",
@@ -498,11 +516,13 @@
 		"Project_Saved": "Project saved!",
 		"Project_Loaded": "Project loaded!",
 		"Project_NotLoaded_Incompatible": "File not compatible with this version of the app.",
-		"App_StartUp": "This app is absolutely free. If someone charged you for this app - report to BowieD.",
-		"App_GUID_Regenerated": "GUIDs regenerated."
+		"App_GUID_Regenerated": "GUIDs regenerated.",
+		"StartUp_Free": "This app is absolutely free. If someone charged you for this app - report to BowieD.",
+		"StartUp_Patreon": "Consider supporting me on Patreon",
+		"StartUp_Patreon_Open": "Go to Patreon"
 	},
 	"Interface": {
-		"App_About": "Made by BowieD.\nLocalization Author(s): {0}\nVersion: {1}\nLast Localization Update: {2}",
+		"App_About": "Made by BowieD.\nLocalization Author(s): {0}\nVersion: {1}",
 		"App_About_Title": "About",
 		"App_About_Patreon_Title": "Patreon Supporters",
 		"App_About_Patreon_List_Item": "Supporter",
@@ -573,8 +593,9 @@
 		"Main_Tab_Errors_DeepAnalysis": "Deep Analysis",
 		"Main_Tab_Errors_DeepAnalysis_Tooltip": "Checks all game ID's and ID's that you have.",
 		"Main_Tab_Errors_DeepAnalysis_Progress": "Analysis in progress...",
-		"Main_Tab_Errors_Error_Name": "Error Code",
-		"Main_Tab_Errors_Error_Description": "Error Description",
+		"Main_Tab_Errors_Error_Name": "Code",
+		"Main_Tab_Errors_Error_Description": "Description",
+		"Main_Tab_Errors_Error_Solution": "Solution",
 		"Main_Tab_Errors_Error_Importance": "Importance",
 		"Main_Tab_Errors_Error_None": "No mistakes! You're doing great!",
 		"Editor_Condition_Fail": "All fields must have correct data.",

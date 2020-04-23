@@ -7,7 +7,7 @@ namespace BowieD.Unturned.NPCMaker.Logging
 {
     public class LoggingManager : ILoggingManager
     {
-        public string LOG_FORMAT { get => "[%dt%] - [%lv%] - %msg%"; }
+        public string LOG_FORMAT => "[%dt%] - [%lv%] - %msg%";
         public LoggingManager()
         {
             loggers = new List<ILogger>();
@@ -29,7 +29,7 @@ namespace BowieD.Unturned.NPCMaker.Logging
             if (level <= App.LogLevel)
             {
                 string logMessage = LOG_FORMAT.Replace("%dt%", DateTime.Now.ToString()).Replace("%lv%", level.ToString()).Replace("%msg%", message);
-                foreach (var l in loggers)
+                foreach (ILogger l in loggers)
                 {
                     try
                     {
@@ -53,7 +53,10 @@ namespace BowieD.Unturned.NPCMaker.Logging
             if (ex != null)
             {
                 if (ex.InnerException != null)
+                {
                     await LogException(message, level, ex.InnerException);
+                }
+
                 await Log(ex.Message, level);
                 await Log(ex.StackTrace, level);
             }

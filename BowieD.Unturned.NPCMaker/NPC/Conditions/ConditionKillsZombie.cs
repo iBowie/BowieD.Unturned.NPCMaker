@@ -5,13 +5,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public sealed class ConditionKillsZombie : Condition
     {
         public override Condition_Type Type => Condition_Type.Kills_Zombie;
-        public override string UIText
-        {
-            get
-            {
-                return $"[{ID}] {LocalizationManager.Current.Condition[$"Type_Kills_Zombie"]} : {LocalizationManager.Current.Condition[$"Kills_Zombie_Zombie_{Zombie}"]} ({Nav}) >= {Value} {(Spawn ? "Spawn" : "")}";
-            }
-        }
+        public override string UIText => $"[{ID}] {LocalizationManager.Current.Condition[$"Type_Kills_Zombie"]} : {LocalizationManager.Current.Condition[$"Kills_Zombie_Zombie_{Zombie}"]} ({Nav}) >= {Value} {(Spawn ? "Spawn" : "")}";
         public ushort ID { get; set; }
         public short Value { get; set; }
         [ConditionOptional(1, 1)]

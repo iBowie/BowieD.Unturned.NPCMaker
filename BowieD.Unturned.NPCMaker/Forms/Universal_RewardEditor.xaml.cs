@@ -21,8 +21,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
             double scale = AppConfig.Instance.scale;
             viewLocalizationField = viewLocalization;
             ClearParameters();
-            this.Height *= scale;
-            this.Width *= scale;
+            Height *= scale;
+            Width *= scale;
             baseHeight = Height;
             heightDelta *= scale;
             gridScale.ScaleX = scale;
@@ -45,7 +45,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 _index++;
             }
             if (reward != null)
+            {
                 variablesGrid.DataContext = reward;
+            }
+
             saveButton.IsEnabled = reward != null;
         }
 
@@ -60,7 +63,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         internal void ClearParameters()
         {
             variablesGrid.Children.Clear();
-            this.Height = baseHeight;
+            Height = baseHeight;
         }
         #endregion
 
@@ -70,12 +73,19 @@ namespace BowieD.Unturned.NPCMaker.Forms
             try
             {
                 if (variablesGrid.DataContext == null)
+                {
                     DialogResult = false;
+                }
                 else
+                {
                     DialogResult = true;
+                }
+
                 Result = variablesGrid.DataContext as Reward;
                 if (DialogResult == true)
+                {
                     Close();
+                }
             }
             catch
             {
@@ -86,20 +96,26 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             saveButton.IsEnabled = true;
             if (e.AddedItems.Count == 0)
+            {
                 return;
-            var type = (typeBox.SelectedItem as ComboBoxItem).Tag as Type;
+            }
+
+            Type type = (typeBox.SelectedItem as ComboBoxItem).Tag as Type;
             Reward newReward = (Reward)Activator.CreateInstance(type);
             _CurrentRewardType = type;
             ClearParameters();
             variablesGrid.DataContext = newReward;
             IEnumerable<FrameworkElement> controls = newReward.GetControls();
             int mult = controls.Count();
-            foreach (var c in controls)
+            foreach (FrameworkElement c in controls)
             {
                 variablesGrid.Children.Add(c);
             }
             if (!viewLocalizationField)
+            {
                 GetLocalizationControl().Visibility = Visibility.Collapsed;
+            }
+
             double newHeight = (baseHeight + (heightDelta * (mult + (mult > 1 ? 1 : 0))));
             if (AppConfig.Instance.animateControls)
             {
@@ -113,7 +129,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         }
         private FrameworkElement GetLocalizationControl()
         {
-            var control = Util.FindVisualChildren<FrameworkElement>(variablesGrid).First(d => d.Tag != null && d.Tag.ToString() == "variable::Localization");
+            FrameworkElement control = Util.FindVisualChildren<FrameworkElement>(variablesGrid).First(d => d.Tag != null && d.Tag.ToString() == "variable::Localization");
             return Util.FindParent<Border>(control);
         }
     }

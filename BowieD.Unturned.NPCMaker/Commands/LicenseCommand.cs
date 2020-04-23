@@ -2,7 +2,7 @@
 {
     public sealed class LicenseCommand : Command
     {
-        static readonly (string lib,string author)[] used = new (string, string)[]
+        private static readonly (string lib, string author)[] used = new (string, string)[]
         {
             ("ControlzEx", "ControlzEx"),
             ("Discord RPC CSharp", "Lachee"),
@@ -18,7 +18,7 @@
         public override string Syntax => "[part of license]";
         public override void Execute(string[] args)
         {
-            App.Logger.Log("[LicenseCommand] - Copyright (C) 2019  Anton 'BowieD' Galakhov");
+            App.Logger.Log("[LicenseCommand] - Copyright (C) 2020  Anton 'BowieD' Galakhov");
             if (args.Length >= 1)
             {
                 switch (args[0].ToLower())
@@ -37,9 +37,9 @@
                         break;
                     case "l":
                         App.Logger.Log("[LicenseCommand] - Used libraries and other credits:");
-                        foreach (var u in used)
+                        foreach ((string lib, string author) in used)
                         {
-                            App.Logger.Log($"[LicenseCommand] - {u.lib} - {u.author}");
+                            App.Logger.Log($"[LicenseCommand] - {lib} - {author}");
                         }
                         break;
                 }
