@@ -30,7 +30,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public List<NPCDialogue> dialogues;
         public List<NPCVendor> vendors;
         public List<NPCQuest> quests;
-        public int 
+        public int
             lastCharacter = -1,
             lastDialogue = -1,
             lastVendor = -1,
