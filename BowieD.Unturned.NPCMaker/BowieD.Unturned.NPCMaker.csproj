@@ -148,6 +148,7 @@
     <Compile Include="Commands\ParseCommand.cs" />
     <Compile Include="Commands\ShutdownCommand.cs" />
     <Compile Include="Common\ContextHelper.cs" />
+    <Compile Include="Common\LogicTool.cs" />
     <Compile Include="Common\Utility\DebugUtility.cs" />
     <Compile Include="Common\Utility\NETHelper.cs" />
     <Compile Include="Common\Utility\PathUtility.cs" />
@@ -180,6 +181,9 @@
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\GCCommand.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
+    <Compile Include="Forms\DialogueView_Window.xaml.cs">
+      <DependentUpon>DialogueView_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Message_TreeView.xaml.cs">
       <DependentUpon>Message_TreeView.xaml</DependentUpon>
     </Compile>
@@ -302,6 +306,7 @@
     <Compile Include="NPC\Rewards\RewardTeleport.cs" />
     <Compile Include="NPC\Rewards\Attributes\RewardTooltipAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardVehicle.cs" />
+    <Compile Include="NPC\Simulation.cs" />
     <Compile Include="Parsing\DataReader.cs" />
     <Compile Include="Parsing\ParseTool.cs" />
     <Compile Include="Program.cs" />
@@ -356,6 +361,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Dialogue_Message_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\DialogueView_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

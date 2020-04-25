@@ -29,6 +29,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
             catch { }
             switch (returnType)
             {
+                case ReturnType.Character:
+                    {
+                        foreach (var c in MainWindow.CurrentProject.data.characters)
+                        {
+                            Add(c, c.UIText);
+                        }
+                    }
+                    break;
                 case ReturnType.Dialogue:
                     foreach (NPC.NPCDialogue d in MainWindow.CurrentProject.data.dialogues)
                     {

@@ -88,7 +88,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }
         }
 
-        private ICommand saveCommand, openCommand, resetCommand, addReplyCommand, addMessageCommand, setAsStartCommand;
+        private ICommand saveCommand, openCommand, resetCommand, addReplyCommand, addMessageCommand, setAsStartCommand, previewCommand;
         public ICommand SaveCommand
         {
             get
@@ -203,6 +203,29 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     });
                 }
                 return setAsStartCommand;
+            }
+        }
+        public ICommand PreviewCommand
+        {
+            get
+            {
+                if (previewCommand == null)
+                {
+                    previewCommand = new BaseCommand(() =>
+                    {
+                        SaveCommand.Execute(null);
+                        Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Character);
+                        if (select.ShowDialog() == true)
+                        {
+                            var character = select.SelectedValue as NPCCharacter;
+
+                            var dvw = new DialogueView_Window(character, Dialogue, new Simulation());
+                            dvw.Display();
+                            dvw.ShowDialog();
+                        }
+                    });
+                }
+                return previewCommand;
             }
         }
         public void UpdateMessages()

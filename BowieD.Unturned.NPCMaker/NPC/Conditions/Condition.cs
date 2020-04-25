@@ -223,5 +223,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             }
             return sb.ToString();
         }
+
+        //public abstract bool Check(Simulation simulation);
+        public virtual bool Check(Simulation simulation) => true;
     }
 }
