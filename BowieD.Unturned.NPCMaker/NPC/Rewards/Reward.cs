@@ -215,5 +215,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             }
             return sb.ToString();
         }
+
+        public abstract void Give(Simulation simulation);
     }
 }

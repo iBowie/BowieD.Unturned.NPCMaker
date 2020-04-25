@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Localization;
 using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
@@ -13,8 +14,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         [ConditionNoValue]
         public bool Allow_B_Unset { get; set; }
         public Logic_Type Logic { get; set; }
-        [ConditionNoValue]
-        public bool Reset { get; set; }
         public override string UIText
         {
             get
@@ -45,6 +44,29 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 }
                 sb.Append($"[{B_ID}]");
                 return sb.ToString();
+            }
+        }
+
+        public override bool Check(Simulation simulation)
+        {
+            if (!simulation.Flags.TryGetValue(A_ID, out short flagA))
+            {
+                return Allow_A_Unset;
+            }
+
+            if (!simulation.Flags.TryGetValue(B_ID, out short flagB))
+            {
+                return Allow_B_Unset;
+            }
+
+            return SimulationTool.Compare(flagA, flagB, Logic);
+        }
+        public override void Apply(Simulation simulation)
+        {
+            if (Reset)
+            {
+                simulation.Flags.Remove(A_ID);
+                simulation.Flags.Remove(B_ID);
             }
         }
     }

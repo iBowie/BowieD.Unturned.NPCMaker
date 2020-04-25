@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
+using System.Windows;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
@@ -8,5 +9,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public override string UIText => $"{LocalizationManager.Current.Reward["Type_Item_Random"]} [{ID}] x{Amount}";
         public ushort ID { get; set; }
         public byte Amount { get; set; }
+
+        public override void Give(Simulation simulation)
+        {
+            MessageBox.Show("This action requires app to load all in-game assets, which i don't want to.");
+        }
     }
 }

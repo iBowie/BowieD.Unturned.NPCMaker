@@ -1,4 +1,6 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Localization;
+using System.Linq;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -8,9 +10,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public ushort ID { get; set; }
         public Quest_Status Status { get; set; }
         public Logic_Type Logic { get; set; }
-        [ConditionTooltip("Quest_Reset_Tooltip")]
-        [ConditionNoValue]
-        public bool Reset { get; set; }
         public override string UIText
         {
             get
@@ -40,6 +39,46 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 outp += LocalizationManager.Current.Condition[$"Quest_Status_{Status}"];
                 return outp;
             }
+        }
+
+        public override void Apply(Simulation simulation)
+        {
+            if (Reset)
+            {
+                switch (simulation.GetQuestStatus(ID))
+                {
+                    case Quest_Status.Completed:
+                        {
+                            simulation.Flags.Remove(ID);
+                        }
+                        break;
+                    case Quest_Status.Active:
+                        {
+                            simulation.Quests.Remove(ID);
+                        }
+                        break;
+                    case Quest_Status.Ready:
+                        {
+                            simulation.Quests.Remove(ID);
+                            simulation.Flags[ID] = 1;
+
+                            var questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.id == ID);
+
+                            foreach (var c in questAsset.conditions)
+                                c.Apply(simulation);
+                            foreach (var r in questAsset.rewards)
+                                r.Give(simulation);
+                        }
+                        break;
+                    default:
+                    case Quest_Status.None:
+                        break;
+                }
+            }
+        }
+        public override bool Check(Simulation simulation)
+        {
+            return SimulationTool.Compare(simulation.GetQuestStatus(ID), Status, Logic);
         }
     }
 }

@@ -40,6 +40,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public abstract Condition_Type Type { get; }
         [XmlIgnore]
         public abstract string UIText { get; }
+        [ConditionNoValue]
+        public bool Reset { get; set; }
 
         public IEnumerable<FrameworkElement> GetControls()
         {
@@ -224,7 +226,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             return sb.ToString();
         }
 
-        //public abstract bool Check(Simulation simulation);
-        public virtual bool Check(Simulation simulation) => true;
+        public abstract bool Check(Simulation simulation);
+        public abstract void Apply(Simulation simulation);
+        //public virtual bool Check(Simulation simulation) => true;
     }
 }

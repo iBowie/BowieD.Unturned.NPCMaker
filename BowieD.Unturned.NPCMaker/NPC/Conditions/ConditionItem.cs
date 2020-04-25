@@ -1,4 +1,6 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Localization;
+using System.Linq;
 using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
@@ -8,8 +10,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public override Condition_Type Type => Condition_Type.Item;
         public ushort ID { get; set; }
         public ushort Amount { get; set; }
-        [ConditionNoValue]
-        public bool Reset { get; set; }
         public override string UIText
         {
             get
@@ -18,6 +18,21 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 sb.Append(LocalizationManager.Current.Condition[$"Type_Item"] + " ");
                 sb.Append($"{ID} x{Amount}");
                 return sb.ToString();
+            }
+        }
+
+        public override bool Check(Simulation simulation)
+        {
+            var items = simulation.Items.Where(d => d.ID == ID).ToList();
+
+            return SimulationTool.Compare(items.Count, Amount, Logic_Type.Greater_Than_Or_Equal_To);
+        }
+        public override void Apply(Simulation simulation)
+        {
+            if (Reset)
+            {
+                foreach (var i in simulation.Items.Where(d => d.ID == ID).Take(Amount).ToList())
+                    simulation.Items.Remove(i);
             }
         }
     }

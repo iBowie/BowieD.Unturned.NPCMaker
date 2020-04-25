@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -38,7 +39,23 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public string GUID { get; set; }
         public Logic_Type Logic { get; set; }
         public uint Value { get; set; }
-        [ConditionNoValue]
-        public bool Reset { get; set; }
+
+        public override bool Check(Simulation simulation)
+        {
+            if (!simulation.Currencies.TryGetValue(GUID, out var cur))
+            {
+                cur = 0;
+                simulation.Currencies[GUID] = 0;
+            }
+
+            return SimulationTool.Compare(cur, Value, Logic);
+        }
+        public override void Apply(Simulation simulation)
+        {
+            if (Reset)
+            {
+                simulation.Currencies[GUID] -= Value;
+            }
+        }
     }
 }

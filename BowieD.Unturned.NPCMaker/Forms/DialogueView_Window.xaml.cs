@@ -43,7 +43,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                 foreach (var res in Dialogue.responses)
                 {
-                    if (res.VisibleInAll || res.visibleIn.Length <= i || res.visibleIn[i] == 1)
+                    if (res.VisibleInAll || res.visibleIn.Length <= i || res.visibleIn[i] == 1 && res.conditions.All(d => d.Check(Simulation)))
                     {
                         Border border = new Border()
                         {
@@ -55,6 +55,11 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                         border.PreviewMouseLeftButtonDown += (sender, e) =>
                         {
+                            foreach (var c in res.conditions)
+                                c.Apply(Simulation);
+                            foreach (var r in res.rewards)
+                                r.Give(Simulation);
+
                             bool shouldClose = true;
 
                             if (res.openVendorId > 0)
@@ -143,6 +148,11 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 NPCMessage msg = Dialogue.messages[i];
                 if (msg.conditions.All(d => d.Check(Simulation)))
                 {
+                    foreach (var c in msg.conditions)
+                        c.Apply(Simulation);
+                    foreach (var r in msg.rewards)
+                        r.Give(Simulation);
+
                     lastMessageId = i;
                     lastPage = 0;
                     lastMessage = msg;

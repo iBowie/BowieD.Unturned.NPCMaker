@@ -37,5 +37,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 return outp;
             }
         }
+
+        public override void Apply(Simulation simulation) { }
+        public override bool Check(Simulation simulation)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

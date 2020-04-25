@@ -22,5 +22,15 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         [RewardOptional(0, 0)]
         public byte Ammo { get; set; }
         public bool Auto_Equip { get; set; }
+
+        public override void Give(Simulation simulation)
+        {
+            simulation.Items.Add(new Simulation.Item()
+            {
+                Amount = (byte)(Ammo == 0 ? 1 : Ammo),
+                ID = ID,
+                Quality = 100
+            });
+        }
     }
 }

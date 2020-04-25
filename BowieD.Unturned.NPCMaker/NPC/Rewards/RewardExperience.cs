@@ -8,5 +8,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public override string UIText => $"{LocalizationManager.Current.Reward["Type_Experience"]} x{Value}";
 
         public uint Value { get; set; }
+
+        public override void Give(Simulation simulation)
+        {
+            simulation.Experience += Value;
+        }
     }
 }

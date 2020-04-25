@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Localization;
 using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
@@ -41,6 +42,25 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 sb.Append(Value);
                 return sb.ToString();
             }
+        }
+
+        public override void Apply(Simulation simulation)
+        {
+            if (Reset)
+            {
+                simulation.Flags.Remove(ID);
+            }
+        }
+
+        public override bool Check(Simulation simulation)
+        {
+            if (!simulation.Flags.TryGetValue(ID, out short flag))
+            {
+                return Allow_Unset;
+            }
+
+
+            return SimulationTool.Compare(flag, Value, Logic);
         }
     }
 }
