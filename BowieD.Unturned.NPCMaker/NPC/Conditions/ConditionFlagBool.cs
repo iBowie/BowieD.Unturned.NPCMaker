@@ -56,10 +56,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             if (!simulation.Flags.TryGetValue(ID, out short flag))
             {
-                if (Allow_Unset)
-                    flag = 0;
-                else
-                    return false;
+                return Allow_Unset;
             }
 
             return SimulationTool.Compare(flag, (short)(Value ? 1 : 0), Logic);
