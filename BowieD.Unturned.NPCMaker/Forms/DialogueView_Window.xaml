@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="DialogueView_Window" Height="450" Width="800">
     <StackPanel>
+        <StackPanel.LayoutTransform>
+            <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
+        </StackPanel.LayoutTransform>
         <Border Margin="5" BorderBrush="Black" BorderThickness="1" CornerRadius="4">
             <StackPanel>
                 <Label Margin="5">

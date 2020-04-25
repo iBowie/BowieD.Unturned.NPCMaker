@@ -8,6 +8,9 @@
         mc:Ignorable="d"
         Title="SimulationView_Window" Height="450" Width="800">
     <Grid>
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
+        </Grid.LayoutTransform>
         <StackPanel>
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
