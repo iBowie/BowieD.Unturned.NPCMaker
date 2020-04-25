@@ -43,7 +43,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                 foreach (var res in Dialogue.responses)
                 {
-                    if (res.VisibleInAll || res.visibleIn.Length <= i || res.visibleIn[i] == 1 && res.conditions.All(d => d.Check(Simulation)))
+                    if ((res.VisibleInAll || res.visibleIn.Length <= i || res.visibleIn[i] == 1) && res.conditions.All(d => d.Check(Simulation)))
                     {
                         Border border = new Border()
                         {
