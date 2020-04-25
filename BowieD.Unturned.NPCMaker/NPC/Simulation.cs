@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    public class Simulation
+    public class Simulation : INotifyPropertyChanged
     {
         public Simulation()
         {
@@ -48,6 +49,13 @@ namespace BowieD.Unturned.NPCMaker.NPC
             public ushort ID { get; set; }
             public byte Quality { get; set; }
             public byte Amount { get; set; }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public Quest_Status GetQuestStatus(ushort id)

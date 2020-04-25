@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC;
 using MahApps.Metro.IconPacks;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +22,16 @@ namespace BowieD.Unturned.NPCMaker.Forms
             this.Dialogue = dialogue;
             this.Simulation = simulation;
             this.Previous = prev;
+
+            this.Loaded += (sender, e) =>
+            {
+                SimulationView_Window svw = new SimulationView_Window(this, Simulation);
+                svw.Show();
+                Closing += (sender2, e2) =>
+                {
+                    svw.Close();
+                };
+            };
         }
 
         public NPCCharacter Character { get; }
@@ -35,6 +46,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
         public void DisplayPage(NPCMessage message, int i, int page)
         {
+            Simulation.OnPropertyChanged("");
+
             mainText.Text = message.pages[page];
 
             if (page == message.pages.Count - 1)
@@ -138,6 +151,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
         }
         public void Display()
         {
+            Simulation.OnPropertyChanged("");
+
             mainText.Text = string.Empty;
             responsesPanel.Children.Clear();
 
