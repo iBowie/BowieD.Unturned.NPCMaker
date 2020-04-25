@@ -48,7 +48,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             Simulation.OnPropertyChanged("");
 
-            mainText.Text = message.pages[page];
+            mainText.Text = FormatText(message.pages[page]);
 
             if (page == message.pages.Count - 1)
             {
@@ -105,7 +105,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                         TextBlock tb = new TextBlock()
                         {
-                            Text = res.mainText
+                            Text = FormatText(res.mainText)
                         };
 
                         Label l = new Label()
@@ -156,7 +156,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             mainText.Text = string.Empty;
             responsesPanel.Children.Clear();
 
-            npcNameText.Text = Character.displayName ?? string.Empty;
+            npcNameText.Text = FormatText(Character.displayName) ?? string.Empty;
 
             for (int i = 0; i < Dialogue.messages.Count; i++)
             {
@@ -196,6 +196,22 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     Display();
                 }
             }
+        }
+
+        private string FormatText(string raw)
+        {
+            string result = raw;
+
+            if (result.Contains("<br>"))
+                result = result.Replace("<br>", Environment.NewLine);
+
+            if (result.Contains("<name_npc>"))
+                result = result.Replace("<name_npc>", FormatText(Character.displayName));
+            
+            if (result.Contains("<name_char>"))
+                result = result.Replace("<name_char>", Simulation.Name);
+
+            return result;
         }
     }
 }
