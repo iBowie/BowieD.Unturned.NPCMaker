@@ -217,5 +217,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         }
 
         public abstract void Give(Simulation simulation);
+        public virtual string FormatReward(Simulation simulation)
+        {
+            return null;
+        }
     }
 }

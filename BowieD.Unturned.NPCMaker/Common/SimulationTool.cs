@@ -1,5 +1,9 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Windows.Documents;
 
 namespace BowieD.Unturned.NPCMaker.Common
 {
@@ -53,6 +57,22 @@ namespace BowieD.Unturned.NPCMaker.Common
                     return (short)(a + b);
                 default: throw new Exception("Invalid modification");
             }
+        }
+
+        public static string ReplacePlaceholders(NPCCharacter character, Simulation simulation, string raw)
+        {
+            string result = raw;
+
+            if (result.Contains("<br>"))
+                result = result.Replace("<br>", Environment.NewLine);
+
+            if (result.Contains("<name_npc>"))
+                result = result.Replace("<name_npc>", ReplacePlaceholders(character, simulation, character.displayName));
+
+            if (result.Contains("<name_char>"))
+                result = result.Replace("<name_char>", simulation.Name);
+
+            return result;
         }
     }
 }

@@ -228,6 +228,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
         public abstract bool Check(Simulation simulation);
         public abstract void Apply(Simulation simulation);
-        //public virtual bool Check(Simulation simulation) => true;
+        public virtual string FormatCondition(Simulation simulation)
+        {
+            if (!string.IsNullOrEmpty(Localization))
+                return Localization;
+            return null;
+        }
     }
 }

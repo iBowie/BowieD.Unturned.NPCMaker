@@ -191,6 +191,9 @@
     <Compile Include="Commands\NotifyCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
     <Compile Include="Commands\SwitchCommand.cs" />
+    <Compile Include="Forms\QuestView_Window.xaml.cs">
+      <DependentUpon>QuestView_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SimulationView_Window.xaml.cs">
       <DependentUpon>SimulationView_Window.xaml</DependentUpon>
     </Compile>
@@ -372,6 +375,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\Message_TreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\QuestView_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

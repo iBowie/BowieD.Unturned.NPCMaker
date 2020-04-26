@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.NPC;
 using MahApps.Metro.IconPacks;
 using System;
 using System.Linq;
@@ -74,6 +75,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                 r.Give(Simulation);
 
                             bool shouldClose = true;
+                            bool shouldContinue = false;
 
                             if (res.openVendorId > 0)
                             {
@@ -82,21 +84,36 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             else if (res.openQuestId > 0)
                             {
                                 shouldClose = false;
+
+                                var questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.id == res.openQuestId);
+
+                                QuestView_Window qvw = new QuestView_Window(Character, Simulation, questAsset);
+                                if (qvw.ShowDialog() == true)
+                                {
+                                    shouldContinue = true;
+                                }
+                            }
+                            else
+                            {
+                                shouldContinue = true;
                             }
 
-                            if (res.openDialogueId > 0)
+                            if (shouldContinue)
                             {
-                                Previous = Dialogue;
+                                if (res.openDialogueId > 0)
+                                {
+                                    Previous = Dialogue;
 
-                                var next = MainWindow.CurrentProject.data.dialogues.Single(d => d.id == res.openDialogueId);
+                                    var next = MainWindow.CurrentProject.data.dialogues.Single(d => d.id == res.openDialogueId);
 
-                                Dialogue = next;
+                                    Dialogue = next;
 
-                                Display();
-                            }
-                            else if (shouldClose)
-                            {
-                                Close();
+                                    Display();
+                                }
+                                else if (shouldClose)
+                                {
+                                    Close();
+                                }
                             }
                         };
 
@@ -200,18 +217,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
         private string FormatText(string raw)
         {
-            string result = raw;
-
-            if (result.Contains("<br>"))
-                result = result.Replace("<br>", Environment.NewLine);
-
-            if (result.Contains("<name_npc>"))
-                result = result.Replace("<name_npc>", FormatText(Character.displayName));
-            
-            if (result.Contains("<name_char>"))
-                result = result.Replace("<name_char>", Simulation.Name);
-
-            return result;
+            return SimulationTool.ReplacePlaceholders(Character, Simulation, raw);
         }
     }
 }

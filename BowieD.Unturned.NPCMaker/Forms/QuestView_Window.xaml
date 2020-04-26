@@ -1,0 +1,46 @@
+﻿<Window x:Class="BowieD.Unturned.NPCMaker.Forms.QuestView_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
+        mc:Ignorable="d"
+        Title="QuestView_Window" Height="Auto" Width="800">
+    <Grid Height="Auto">
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
+        </Grid.LayoutTransform>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Height="Auto" BorderBrush="Black" BorderThickness="1" CornerRadius="4" Margin="5">
+            <StackPanel Grid.Row="0">
+                <Label>
+                    <TextBlock Name="title" Text="Quest Title" FontSize="14" TextWrapping="NoWrap"/>
+                </Label>
+                <Label>
+                    <TextBlock Name="desc" Text="Quest Description" TextWrapping="Wrap"/>
+                </Label>
+                <StackPanel Name="goalsPanel">
+                    <Label>
+                        <TextBlock Text="Goals:" FontSize="14" TextWrapping="NoWrap"/>
+                    </Label>
+                </StackPanel>
+                <StackPanel Name="rewardsPanel">
+                    <Label>
+                        <TextBlock Text="Rewards: " FontSize="14" TextWrapping="NoWrap"/>
+                    </Label>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Click="AcceptButton_Click" Grid.Column="0" Margin="10" Content="Accept"/>
+            <Button Click="DeclineButton_Click" Grid.Column="1" Margin="10" Content="Decline"/>
+        </Grid>
+    </Grid>
+</Window>
