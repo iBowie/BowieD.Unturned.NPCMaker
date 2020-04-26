@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Border Height="Auto" BorderBrush="Black" BorderThickness="1" CornerRadius="4" Margin="5">
+        <Border Height="Auto" BorderBrush="{DynamicResource AccentColor}" BorderThickness="1" CornerRadius="4" Margin="5">
             <StackPanel Grid.Row="0">
                 <Label>
                     <TextBlock Name="title" Text="Quest Title" FontSize="14" TextWrapping="NoWrap"/>

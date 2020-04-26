@@ -69,7 +69,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     {
                         Border border = new Border()
                         {
-                            BorderBrush = Brushes.Black,
+                            BorderBrush = App.Current.Resources["AccentColor"] as Brush,
                             BorderThickness = new Thickness(1),
                             CornerRadius = new CornerRadius(4),
                             Margin = new Thickness(0, 2.5, 0, 2.5)
@@ -176,18 +176,29 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                         PackIconMaterial icon = null;
 
-                        if (res.openVendorId > 0)
+                        if (res.openQuestId > 0)
+                        {
+                            switch (Simulation.GetQuestStatus(res.openQuestId))
+                            {
+                                case Quest_Status.Ready:
+                                    icon = new PackIconMaterial()
+                                    {
+                                        Kind = PackIconMaterialKind.Help
+                                    };
+                                    break;
+                                default:
+                                    icon = new PackIconMaterial()
+                                    {
+                                        Kind = PackIconMaterialKind.Exclamation
+                                    };
+                                    break;
+                            }
+                        }
+                        else if (res.openVendorId > 0)
                         {
                             icon = new PackIconMaterial()
                             {
                                 Kind = PackIconMaterialKind.ShoppingOutline
-                            };
-                        }
-                        else if (res.openQuestId > 0)
-                        {
-                            icon = new PackIconMaterial()
-                            {
-                                Kind = PackIconMaterialKind.Exclamation
                             };
                         }
 
@@ -196,6 +207,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             icon.VerticalAlignment = VerticalAlignment.Center;
                             icon.HorizontalAlignment = HorizontalAlignment.Left;
                             icon.Margin = new Thickness(5);
+                            icon.Foreground = App.Current.Resources["AccentColor"] as Brush;
 
                             g.Children.Add(icon);
                         }

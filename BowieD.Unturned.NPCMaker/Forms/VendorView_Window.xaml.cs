@@ -36,7 +36,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 Border b = new Border()
                 {
-                    BorderBrush = Brushes.Black,
+                    BorderBrush = App.Current.Resources["AccentColor"] as Brush,
                     BorderThickness = new Thickness(1),
                     CornerRadius = new CornerRadius(4),
                     Margin = new Thickness(2.5)

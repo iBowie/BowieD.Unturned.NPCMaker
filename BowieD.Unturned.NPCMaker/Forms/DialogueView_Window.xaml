@@ -10,7 +10,7 @@
         <StackPanel.LayoutTransform>
             <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
         </StackPanel.LayoutTransform>
-        <Border Margin="5" BorderBrush="Black" BorderThickness="1" CornerRadius="4">
+        <Border Margin="5" BorderBrush="{DynamicResource AccentColor}" BorderThickness="1" CornerRadius="4">
             <StackPanel>
                 <Label Margin="5">
                     <TextBlock Name="npcNameText" TextWrapping="NoWrap" FontSize="14"/>
