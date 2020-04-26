@@ -104,7 +104,29 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             else if (res.openVendorId > 0)
                             {
                                 shouldClose = false;
-                                
+
+                                var vendorAsset = MainWindow.CurrentProject.data.vendors.Single(d => d.id == res.openVendorId);
+
+                                VendorView_Window qvw = new VendorView_Window(Character, Simulation, vendorAsset);
+
+                                qvw.ShowDialog();
+
+                                foreach (var c in res.conditions)
+                                    c.Apply(Simulation);
+                                foreach (var r in res.rewards)
+                                    r.Give(Simulation);
+
+                                if (res.openDialogueId > 0)
+                                {
+                                    Previous = Start;
+
+                                    var next = MainWindow.CurrentProject.data.dialogues.Single(d => d.id == res.openDialogueId);
+
+                                    Dialogue = next;
+
+                                    Display();
+                                }
+
                                 return;
                             }
 

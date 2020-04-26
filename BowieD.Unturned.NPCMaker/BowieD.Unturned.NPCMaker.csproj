@@ -213,6 +213,9 @@
       <DependentUpon>Universal_VendorItemEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\UpdateCommand.cs" />
+    <Compile Include="Forms\VendorView_Window.xaml.cs">
+      <DependentUpon>VendorView_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Whats_New.xaml.cs">
       <DependentUpon>Whats_New.xaml</DependentUpon>
     </Compile>
@@ -403,6 +406,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\Universal_VendorItemEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\VendorView_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
