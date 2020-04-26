@@ -48,5 +48,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             return SimulationTool.Compare(simulation.Food, Value, Logic);
         }
+        public override string FormatCondition(Simulation simulation)
+        {
+            if (string.IsNullOrEmpty(Localization))
+                return null;
+            return string.Format(Localization, simulation.Food, Value);
+        }
     }
 }

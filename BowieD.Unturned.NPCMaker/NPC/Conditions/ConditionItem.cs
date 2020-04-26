@@ -35,5 +35,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                     simulation.Items.Remove(i);
             }
         }
+        public override string FormatCondition(Simulation simulation)
+        {
+            string text = Localization;
+
+            if (string.IsNullOrEmpty(text))
+                text = "{0}/{1} {2}";
+
+            var found = simulation.Items.Where(d => d.ID == ID);
+
+            return string.Format(text, found.Count(), Amount, $"Item '{ID}'");
+        }
     }
 }

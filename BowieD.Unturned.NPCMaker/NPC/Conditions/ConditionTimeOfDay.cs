@@ -47,5 +47,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             return SimulationTool.Compare(simulation.Time, Second, Logic);
         }
+        public override string FormatCondition(Simulation simulation)
+        {
+            if (string.IsNullOrEmpty(Localization))
+                return null;
+
+            int num = Second / 3600;
+            int num2 = Second / 60 - num * 60;
+            int num3 = Second - num * 3600 - num2 * 60;
+
+            return string.Format(Localization, $"{num:D2}:{num2:D2}:{num3:D2}");
+        }
     }
 }

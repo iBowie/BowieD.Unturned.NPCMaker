@@ -57,5 +57,15 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 simulation.Currencies[GUID] -= Value;
             }
         }
+
+        public override string FormatCondition(Simulation simulation)
+        {
+            string text = Localization;
+            if (string.IsNullOrEmpty(text))
+            {
+                text = "{0} Currency";
+            }
+            return string.Format(text, Value);
+        }
     }
 }

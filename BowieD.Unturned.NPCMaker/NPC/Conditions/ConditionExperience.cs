@@ -51,5 +51,13 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 simulation.Experience -= Value;
             }
         }
+
+        public override string FormatCondition(Simulation simulation)
+        {
+            string text = Localization;
+            if (string.IsNullOrEmpty(text))
+                text = "{0}/{1} Experience";
+            return string.Format(text, simulation.Experience, Value);
+        }
     }
 }

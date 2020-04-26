@@ -62,5 +62,18 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
             return SimulationTool.Compare(flag, Value, Logic);
         }
+
+        public override string FormatCondition(Simulation simulation)
+        {
+            string text = Localization;
+
+            if (string.IsNullOrEmpty(text))
+                return null;
+
+            if (!simulation.Flags.TryGetValue(ID, out short value))
+                value = (short)(Allow_Unset ? Value : 0);
+
+            return string.Format(text, value, Value);
+        }
     }
 }
