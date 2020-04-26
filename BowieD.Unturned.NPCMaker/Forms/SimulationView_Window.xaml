@@ -11,80 +11,86 @@
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
         </Grid.LayoutTransform>
-        <StackPanel>
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Label Content="Name" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
-                <TextBox Margin="10" Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
-            </Grid>
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Label Margin="10" Content="In-Game Time" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <Slider Grid.Column="1" Margin="10" Minimum="0" Maximum="3600" Value="{Binding Time, UpdateSourceTrigger=PropertyChanged}"/>
-            </Grid>
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Label Margin="10" Content="Experience" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <mah:NumericUpDown Margin="10" Minimum="0" Maximum="4294967295" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Experience, UpdateSourceTrigger=PropertyChanged}"/>
-            </Grid>
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Label Margin="10" Content="Reputation" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <mah:NumericUpDown Margin="10" Minimum="-2147483648" Maximum="2147483647" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Reputation, UpdateSourceTrigger=PropertyChanged}"/>
-            </Grid>
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Label Margin="10" Content="Health" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <mah:NumericUpDown Margin="10" Minimum="0" Maximum="100" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Health, UpdateSourceTrigger=PropertyChanged}"/>
-            </Grid>
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Label Margin="10" Content="Food" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <mah:NumericUpDown Margin="10" Minimum="0" Maximum="100" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Food, UpdateSourceTrigger=PropertyChanged}"/>
-            </Grid>
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Label Margin="10" Content="Water" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <mah:NumericUpDown Margin="10" Minimum="0" Maximum="100" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Water, UpdateSourceTrigger=PropertyChanged}"/>
-            </Grid>
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Label Margin="10" Content="Virus" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <mah:NumericUpDown Margin="10" Minimum="0" Maximum="100" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Virus, UpdateSourceTrigger=PropertyChanged}"/>
-            </Grid>
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Label Margin="10" Content="Holiday" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <ComboBox Margin="10" Grid.Column="1" ItemsSource="{StaticResource Simulation_Holidays_Enums}" SelectedValue="{Binding Holiday, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Simulation_Holidays_Enums}}"/>
-            </Grid>
-            <Button Click="Button_Click" Content="Reload current dialogue" Margin="10"/>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer>
+            <StackPanel>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Name" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
+                    <TextBox Margin="10" Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="In-Game Time" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Slider Grid.Column="1" Margin="10" Minimum="0" Maximum="3600" Value="{Binding Time, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="Experience" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <mah:NumericUpDown Margin="10" Minimum="0" Maximum="4294967295" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Experience, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="Reputation" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <mah:NumericUpDown Margin="10" Minimum="-2147483648" Maximum="2147483647" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Reputation, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="Health" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <mah:NumericUpDown Margin="10" Minimum="0" Maximum="100" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Health, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="Food" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <mah:NumericUpDown Margin="10" Minimum="0" Maximum="100" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Food, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="Water" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <mah:NumericUpDown Margin="10" Minimum="0" Maximum="100" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Water, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="Virus" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <mah:NumericUpDown Margin="10" Minimum="0" Maximum="100" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Virus, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="Holiday" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <ComboBox Margin="10" Grid.Column="1" ItemsSource="{StaticResource Simulation_Holidays_Enums}" SelectedValue="{Binding Holiday, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Simulation_Holidays_Enums}}"/>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        <Button Grid.Row="1" Click="Button_Click" Content="Reload current dialogue" Margin="10"/>
     </Grid>
 </Window>
