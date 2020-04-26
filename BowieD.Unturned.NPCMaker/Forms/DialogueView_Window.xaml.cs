@@ -69,19 +69,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                         border.PreviewMouseLeftButtonDown += (sender, e) =>
                         {
-                            foreach (var c in res.conditions)
-                                c.Apply(Simulation);
-                            foreach (var r in res.rewards)
-                                r.Give(Simulation);
-
                             bool shouldClose = true;
-                            bool shouldContinue = false;
 
-                            if (res.openVendorId > 0)
-                            {
-                                shouldClose = false;
-                            }
-                            else if (res.openQuestId > 0)
+                            if (res.openQuestId > 0)
                             {
                                 shouldClose = false;
 
@@ -90,30 +80,50 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                 QuestView_Window qvw = new QuestView_Window(Character, Simulation, questAsset);
                                 if (qvw.ShowDialog() == true)
                                 {
-                                    shouldContinue = true;
+                                    foreach (var c in res.conditions)
+                                        c.Apply(Simulation);
+                                    foreach (var r in res.rewards)
+                                        r.Give(Simulation);
+
+                                    if (res.openDialogueId > 0)
+                                    {
+                                        Previous = Dialogue;
+
+                                        var next = MainWindow.CurrentProject.data.dialogues.Single(d => d.id == res.openDialogueId);
+
+                                        Dialogue = next;
+
+                                        Display();
+                                    }
                                 }
+
+                                return;
                             }
-                            else
+                            else if (res.openVendorId > 0)
                             {
-                                shouldContinue = true;
+                                shouldClose = false;
+                                
+                                return;
                             }
 
-                            if (shouldContinue)
+                            foreach (var c in res.conditions)
+                                c.Apply(Simulation);
+                            foreach (var r in res.rewards)
+                                r.Give(Simulation);
+
+                            if (res.openDialogueId > 0)
                             {
-                                if (res.openDialogueId > 0)
-                                {
-                                    Previous = Dialogue;
+                                Previous = Dialogue;
 
-                                    var next = MainWindow.CurrentProject.data.dialogues.Single(d => d.id == res.openDialogueId);
+                                var next = MainWindow.CurrentProject.data.dialogues.Single(d => d.id == res.openDialogueId);
 
-                                    Dialogue = next;
+                                Dialogue = next;
 
-                                    Display();
-                                }
-                                else if (shouldClose)
-                                {
-                                    Close();
-                                }
+                                Display();
+                            }
+                            else if (shouldClose)
+                            {
+                                Close();
                             }
                         };
 
@@ -204,13 +214,16 @@ namespace BowieD.Unturned.NPCMaker.Forms
             }
             else
             {
-                if (Previous != null)
+                if (responsesPanel.Children.Count == 0)
                 {
-                    Dialogue = Previous;
+                    if (Previous != null)
+                    {
+                        Dialogue = Previous;
 
-                    Previous = null;
+                        Previous = null;
 
-                    Display();
+                        Display();
+                    }
                 }
             }
         }
