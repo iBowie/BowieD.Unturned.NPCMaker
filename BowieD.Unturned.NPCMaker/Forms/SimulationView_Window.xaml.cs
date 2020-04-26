@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC;
+using BowieD.Unturned.NPCMaker.NPC.Conditions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,11 @@ namespace BowieD.Unturned.NPCMaker.Forms
             this.Simulation = simulation;
             this.DialogueView = dialogueView;
             DataContext = simulation;
+
+            gameTimeSlider.ValueChanged += (sender, e) =>
+            {
+                gameTimeSlider.ToolTip = ConditionTimeOfDay.SecondToTime((int)gameTimeSlider.Value);
+            };
         }
 
         public DialogueView_Window DialogueView { get; }

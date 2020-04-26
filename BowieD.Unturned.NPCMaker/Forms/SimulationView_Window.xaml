@@ -31,7 +31,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Label Margin="10" Content="In-Game Time" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <Slider Grid.Column="1" Margin="10" Minimum="0" Maximum="3600" Value="{Binding Time, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Slider AutoToolTipPlacement="BottomRight" Name="gameTimeSlider" Grid.Column="1" Margin="10" Minimum="0" Maximum="3600" Value="{Binding Time, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>

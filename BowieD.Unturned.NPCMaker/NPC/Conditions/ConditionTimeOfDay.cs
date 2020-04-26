@@ -52,11 +52,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             if (string.IsNullOrEmpty(Localization))
                 return null;
 
-            int num = Second / 3600;
-            int num2 = Second / 60 - num * 60;
-            int num3 = Second - num * 3600 - num2 * 60;
+            return string.Format(Localization, SecondToTime(Second));
+        }
 
-            return string.Format(Localization, $"{num:D2}:{num2:D2}:{num3:D2}");
+        public static string SecondToTime(int second)
+        {
+            int num = second / 3600;
+            int num2 = second / 60 - num * 60;
+            int num3 = second - num * 3600 - num2 * 60;
+
+            return $"{num:D2}:{num2:D2}:{num3:D2}";
         }
     }
 }
