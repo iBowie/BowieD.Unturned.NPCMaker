@@ -20,7 +20,8 @@
                 </Label>
             </StackPanel>
         </Border>
-        <StackPanel Margin="5" Name="responsesPanel">
-        </StackPanel>
+        <ScrollViewer Margin="5" MaxHeight="152">
+            <StackPanel Name="responsesPanel"/>
+        </ScrollViewer>
     </StackPanel>
 </Window>
