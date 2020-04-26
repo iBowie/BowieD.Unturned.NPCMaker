@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="SimulationView_Window" Height="450" Width="800">
+        Title="SimulationView_Window" Height="Auto" Width="800">
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
@@ -35,6 +35,54 @@
                 </Grid.ColumnDefinitions>
                 <Label Margin="10" Content="Experience" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <mah:NumericUpDown Margin="10" Minimum="0" Maximum="4294967295" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Experience, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Margin="10" Content="Reputation" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <mah:NumericUpDown Margin="10" Minimum="-2147483648" Maximum="2147483647" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Reputation, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Margin="10" Content="Health" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <mah:NumericUpDown Margin="10" Minimum="0" Maximum="100" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Health, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Margin="10" Content="Food" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <mah:NumericUpDown Margin="10" Minimum="0" Maximum="100" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Food, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Margin="10" Content="Water" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <mah:NumericUpDown Margin="10" Minimum="0" Maximum="100" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Water, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Margin="10" Content="Virus" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <mah:NumericUpDown Margin="10" Minimum="0" Maximum="100" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Virus, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Margin="10" Content="Holiday" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <ComboBox Margin="10" Grid.Column="1" ItemsSource="{StaticResource Simulation_Holidays_Enums}" SelectedValue="{Binding Holiday, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Simulation_Holidays_Enums}}"/>
             </Grid>
             <Button Click="Button_Click" Content="Reload current dialogue" Margin="10"/>
         </StackPanel>
