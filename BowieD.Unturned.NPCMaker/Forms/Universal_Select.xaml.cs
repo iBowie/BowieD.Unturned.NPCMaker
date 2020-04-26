@@ -65,7 +65,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 Height = 23,
                 Content = text,
                 HorizontalContentAlignment = HorizontalAlignment.Center,
-                Tag = value
+                Tag = value,
+                Margin = new Thickness(2.5)
             };
             b.Click += B_Click;
             stackPanel.Children.Add(b);
