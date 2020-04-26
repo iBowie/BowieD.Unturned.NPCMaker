@@ -45,7 +45,13 @@ namespace BowieD.Unturned.NPCMaker.Forms
         private NPCMessage lastMessage;
         private int lastMessageId;
         private int lastPage = 0;
-        private bool canDisplayNextPage = true;
+        private bool canDisplayNextPage
+        {
+            get
+            {
+                return lastPage < lastMessage.pages.Count - 1;
+            }
+        }
 
         public void DisplayPage(NPCMessage message, int i, int page)
         {
@@ -53,10 +59,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             mainText.Text = FormatText(message.pages[page]);
 
-            if (page == message.pages.Count - 1)
-            {
-                canDisplayNextPage = false;
+            lastPage = page;
 
+            if (!canDisplayNextPage)
+            {
                 foreach (var res in Dialogue.responses)
                 {
                     if ((res.VisibleInAll || res.visibleIn.Length <= i || res.visibleIn[i] == 1) && res.conditions.All(d => d.Check(Simulation)))
