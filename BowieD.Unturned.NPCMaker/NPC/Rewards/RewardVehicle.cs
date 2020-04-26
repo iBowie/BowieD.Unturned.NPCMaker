@@ -10,5 +10,15 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public string Spawnpoint { get; set; }
 
         public override void Give(Simulation simulation) { }
+        public override string FormatReward(Simulation simulation)
+        {
+            string text = Localization;
+
+            if (string.IsNullOrEmpty(text))
+            {
+                text = "{0} x1";
+            }
+            return string.Format(text, $"Vehicle '{ID}'");
+        }
     }
 }

@@ -14,5 +14,15 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         {
             MessageBox.Show("This action requires app to load all in-game assets, which i don't want to.");
         }
+        public override string FormatReward(Simulation simulation)
+        {
+            string text = Localization;
+
+            if (string.IsNullOrEmpty(text))
+            {
+                text = "Random Item x{0}";
+            }
+            return string.Format(text, Amount);
+        }
     }
 }

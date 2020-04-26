@@ -16,5 +16,15 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             else
                 simulation.Currencies.Add(GUID, Value);
         }
+        public override string FormatReward(Simulation simulation)
+        {
+            string text = Localization;
+
+            if (string.IsNullOrEmpty(text))
+            {
+                text = "{0} Currency";
+            }
+            return string.Format(text, Value);
+        }
     }
 }

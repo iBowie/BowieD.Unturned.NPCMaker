@@ -12,5 +12,15 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         {
             simulation.Reputation += Value;
         }
+        public override string FormatReward(Simulation simulation)
+        {
+            string text = Localization;
+
+            if (string.IsNullOrEmpty(text))
+            {
+                text = "{0} Reputation";
+            }
+            return string.Format(text, Value > 0 ? $"+{Value}" : $"{Value}");
+        }
     }
 }

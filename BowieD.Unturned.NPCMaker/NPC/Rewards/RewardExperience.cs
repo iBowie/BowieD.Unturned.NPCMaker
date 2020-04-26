@@ -13,5 +13,15 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         {
             simulation.Experience += Value;
         }
+        public override string FormatReward(Simulation simulation)
+        {
+            string text = Localization;
+
+            if (string.IsNullOrEmpty(text))
+            {
+                text = "+{0} Experience";
+            }
+            return string.Format(text, Value);
+        }
     }
 }

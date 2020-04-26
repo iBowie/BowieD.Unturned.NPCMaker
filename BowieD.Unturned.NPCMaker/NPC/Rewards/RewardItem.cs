@@ -32,5 +32,15 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 Quality = 100
             });
         }
+        public override string FormatReward(Simulation simulation)
+        {
+            string text = Localization;
+
+            if (string.IsNullOrEmpty(text))
+            {
+                text = "{1} x{0}";
+            }
+            return string.Format(text, Amount, $"Item '{ID}'");
+        }
     }
 }
