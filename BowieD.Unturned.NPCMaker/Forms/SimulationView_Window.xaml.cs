@@ -1,18 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.NPC.Conditions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
@@ -38,7 +26,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         public DialogueView_Window DialogueView { get; }
         public Simulation Simulation { get; }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ReloadDialogue_Button_Click(object sender, RoutedEventArgs e)
         {
             DialogueView.Display();
         }

@@ -91,6 +91,6 @@
                 </Grid>
             </StackPanel>
         </ScrollViewer>
-        <Button Grid.Row="1" Click="Button_Click" Content="Reload current dialogue" Margin="10"/>
+        <Button Grid.Row="1" Click="ReloadDialogue_Button_Click" Content="Reload current dialogue" Margin="10"/>
     </Grid>
 </Window>
