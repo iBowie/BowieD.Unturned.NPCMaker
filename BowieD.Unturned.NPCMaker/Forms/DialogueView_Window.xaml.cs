@@ -23,6 +23,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             this.Dialogue = dialogue;
             this.Simulation = simulation;
             this.Previous = prev;
+            this.Start = dialogue;
 
             this.Loaded += (sender, e) =>
             {
@@ -39,6 +40,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         public NPCDialogue Dialogue { get; private set; }
         public Simulation Simulation { get; }
         public NPCDialogue Previous { get; private set; }
+        public NPCDialogue Start { get; }
 
         private NPCMessage lastMessage;
         private int lastMessageId;
@@ -87,7 +89,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                                     if (res.openDialogueId > 0)
                                     {
-                                        Previous = Dialogue;
+                                        Previous = Start;
 
                                         var next = MainWindow.CurrentProject.data.dialogues.Single(d => d.id == res.openDialogueId);
 
