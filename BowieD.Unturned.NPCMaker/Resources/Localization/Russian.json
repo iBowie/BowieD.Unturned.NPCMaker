@@ -1,12 +1,11 @@
 {
-	"Author": "BowieD",
-	"Name": "Русский (Russian)",
-	"General":
-	{
-		"Project_SaveFilter": "Файл проекта NPC (*.npcproj)",
-		"Title": "Unturned 3.0 NPC Maker by BowieD",
-		"Configuration_Title": "Настройки"
-	},
+  "Author": "BowieD",
+  "Name": "Русский (Russian)",
+  "General": {
+    "Project_SaveFilter": "Файл проекта NPC (*.npcproj)",
+    "Title": "Unturned 3.0 NPC Maker by BowieD",
+    "Configuration_Title": "Настройки"
+  },
   "Options": {
     "experimentalFeatures": "Экспериментальные функции",
     "scale": "Масштаб интерфейса",
@@ -25,50 +24,49 @@
     "autoUpdate": "Автоматическое обновление",
     "downloadPrerelease": "Загружать предв. версии"
   },
-	"Character":
-	{
-		"Name_Editor": "Имя в редакторе",
-		"Name_Display": "Отображаемое имя",
-		"ID": "ID персонажа",
-		"Dialogue": "Начальный диалог",
-		"Conditions": "Условия видимости",
-		"Hair": "Причёска",
-		"Beard": "Борода",
-		"Face": "Лицо",
-		"LeftHanded": "Левша",
-		"Pose": "Поза",
-		"Pose_Stand": "Стоит",
-		"Pose_Sit": "Сидит",
-		"Pose_Asleep": "Спит",
-		"Pose_Passive": "Пассивный",
-		"Pose_Crouch": "Приседает",
-		"Pose_Prone": "Лежит",
-		"Pose_Under_Arrest": "Арестован",
-		"Pose_Rest": "Отдых",
-		"Pose_Surrender": "Руки подняты вверх",
-		"Color_Skin": "Цвет кожи",
-		"Color_Hair": "Цвет волос",
-		"Clothing": "Одежда",
-		"Clothing_Default": "Обычно",
-		"Clothing_Christmas": "Рождество",
-		"Clothing_Halloween": "Хэллоуин",
-		"Clothing_Hat": "ID головного убора",
-		"Clothing_Mask": "ID маски",
-		"Clothing_Glasses": "ID очков",
-		"Clothing_Vest": "ID жилета",
-		"Clothing_Shirt": "ID рубашки",
-		"Clothing_Pants": "ID штанов",
-		"Clothing_Back": "ID рюкзака",
-		"Equipment": "Снаряжение",
-		"Equipment_Primary": "ID основного слота",
-		"Equipment_Secondary": "ID вторичного слота",
-		"Equipment_Tertiary": "ID третичного слота",
-		"Equipment_Equipped": "В руках",
-		"Equipment_Equipped_None": "Ничего",
-		"Equipment_Equipped_Primary": "Основной слот",
-		"Equipment_Equipped_Secondary": "Вторичный слот",
-		"Equipment_Equipped_Tertiary": "Третичный слот"
-	},
+  "Character": {
+    "Name_Editor": "Имя в редакторе",
+    "Name_Display": "Отображаемое имя",
+    "ID": "ID персонажа",
+    "Dialogue": "Начальный диалог",
+    "Conditions": "Условия видимости",
+    "Hair": "Причёска",
+    "Beard": "Борода",
+    "Face": "Лицо",
+    "LeftHanded": "Левша",
+    "Pose": "Поза",
+    "Pose_Stand": "Стоит",
+    "Pose_Sit": "Сидит",
+    "Pose_Asleep": "Спит",
+    "Pose_Passive": "Пассивный",
+    "Pose_Crouch": "Приседает",
+    "Pose_Prone": "Лежит",
+    "Pose_Under_Arrest": "Арестован",
+    "Pose_Rest": "Отдых",
+    "Pose_Surrender": "Руки подняты вверх",
+    "Color_Skin": "Цвет кожи",
+    "Color_Hair": "Цвет волос",
+    "Clothing": "Одежда",
+    "Clothing_Default": "Обычно",
+    "Clothing_Christmas": "Рождество",
+    "Clothing_Halloween": "Хэллоуин",
+    "Clothing_Hat": "ID головного убора",
+    "Clothing_Mask": "ID маски",
+    "Clothing_Glasses": "ID очков",
+    "Clothing_Vest": "ID жилета",
+    "Clothing_Shirt": "ID рубашки",
+    "Clothing_Pants": "ID штанов",
+    "Clothing_Back": "ID рюкзака",
+    "Equipment": "Снаряжение",
+    "Equipment_Primary": "ID основного слота",
+    "Equipment_Secondary": "ID вторичного слота",
+    "Equipment_Tertiary": "ID третичного слота",
+    "Equipment_Equipped": "В руках",
+    "Equipment_Equipped_None": "Ничего",
+    "Equipment_Equipped_Primary": "Основной слот",
+    "Equipment_Equipped_Secondary": "Вторичный слот",
+    "Equipment_Equipped_Tertiary": "Третичный слот"
+  },
   "Dialogue": {
     "ID": "ID диалога",
     "Message_Add": "Добавить сообщение",
@@ -107,16 +105,15 @@
     "DisableSorting": "Отключить сортировку",
     "Currency": "GUID валюты (пусто - опыт)"
   },
-	"Quest":
-	{
-		"ID": "ID задания",
-		"Title": "Название задания",
-		"Description": "Описание задания",
-		"Condition_Add": "Добавить условие",
-		"Conditions": "Условия",
-		"Reward_Add": "Добавить награду",
-		"Rewards": "Награды"
-	},
+  "Quest": {
+    "ID": "ID задания",
+    "Title": "Название задания",
+    "Description": "Описание задания",
+    "Condition_Add": "Добавить условие",
+    "Conditions": "Условия",
+    "Reward_Add": "Добавить награду",
+    "Rewards": "Награды"
+  },
   "Condition": {
     "Type_None": "Нет",
     "Type_Experience": "Опыт",
@@ -425,21 +422,20 @@
     "Flag_Math_Operation_Division": "Разделить значение флага A на B",
     "Flag_Math_Localization": "Локализация"
   },
-	"VendorItem":
-	{
-		"ID": "ID",
-		"Cost": "Цена",
-		"Amount": "Количество",
-		"Spawnpoint": "Точка появления",
-		"Type": "Тип предмета",
-		"Type_Item": "Предмет",
-		"Type_Vehicle": "Транспорт",
-		"SellType": "Тип продажи",
-		"SellType_Buy": "NPC покупает это",
-		"SellType_Sell": "NPC продаёт это",
-		"Save": "Сохранить предмет",
-		"Conditions": "Условия"
-	},
+  "VendorItem": {
+    "ID": "ID",
+    "Cost": "Цена",
+    "Amount": "Количество",
+    "Spawnpoint": "Точка появления",
+    "Type": "Тип предмета",
+    "Type_Item": "Предмет",
+    "Type_Vehicle": "Транспорт",
+    "SellType": "Тип продажи",
+    "SellType_Buy": "NPC покупает это",
+    "SellType_Sell": "NPC продаёт это",
+    "Save": "Сохранить предмет",
+    "Conditions": "Условия"
+  },
   "Mistakes": {
     "NE_0000_Desc": "ID персонажа {0} [{1}] в резервном пространстве (от 0 до 2000)",
     "NE_0001_Desc": "У персонажа {0} [{1}] нулевой ID.",
@@ -673,5 +669,54 @@
     "Context_Dialogue_PasteColor_red": "Красный",
     "Context_Dialogue_PasteColor_white": "Белый",
     "Context_Dialogue_PasteColor_yellow": "Жёлтый"
+  },
+  "Simulation": {
+    "Dialogue": {
+      "Window_Title": "Диалог"
+    },
+    "Vendor": {
+      "Window_Title": "Магазин",
+      "Header_Buying": "Покупает:",
+      "Header_Selling": "Продаёт:",
+      "Pay_Experience": "Опыт: {0}",
+      "Pay_Currency": "Валюта: {0}",
+      "Button_Close": "Закрыть",
+      "Item_Name": "Предмет '{0}'",
+      "Vehicle_Name": "Транспорт '{0}'",
+      "Vehicle_Spawned": "Транспорт '{0}' появился на точке '{1}'",
+      "Item_Cost": "Цена: {0}"
+    },
+    "Quest": {
+      "Window_Title": "Задание",
+      "Goals": "Цели: ",
+      "Rewards": "Награды: ",
+      "Button_Accept": "Принять",
+      "Button_Decline": "Отклонить",
+      "Button_Continue": "Продолжить",
+      "Default_Condition_Currency": "{0} Валюты",
+      "Default_Condition_Item": "{0}/{1} {2}",
+      "Default_Condition_Reputation": "{0}/{1} Репутации",
+      "Default_Condition_Experience": "{0}/{1} Опыта",
+      "Default_Reward_Experience": "+{0} Опыта",
+      "Default_Reward_Reputation": "{0} Репутации",
+      "Default_Reward_Item": "{1} x{0}",
+      "Default_Reward_Item_Random": "Случайный предмет x{0}",
+      "Default_Reward_Vehicle": "{0} x1",
+      "Default_Reward_Currency": "{0} Валюты"
+    },
+    "Simulation": {
+      "Window_Title": "Управление симуляцией",
+      "Name": "Имя игрока",
+      "Time": "Игровое время",
+      "Experience": "Опыт",
+      "Reputation": "Репутация",
+      "Health": "Здоровье игрока",
+      "Food": "Сытость игрока",
+      "Water": "Жажда игрока",
+      "Virus": "Заражение игрока",
+      "Skillset": "Набор навыков",
+      "Holiday": "Праздник",
+      "Button_Reload_Dialogue": "Перезагрузить текущий диалог"
+    }
   }
 }

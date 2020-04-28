@@ -1,12 +1,11 @@
 {
-	"Author": "Alvaro Manchino",
-	"Name": "Español (ES)",
-	"General":
-	{
-		"Project_SaveFilter": "Proyecto NPC (*.npcproj)",
-		"Title": "Creador NPC para Unturned 3.0 por BowieD",
-		"Configuration_Title": "Ajustes"
-	},
+  "Author": "Alvaro Manchino",
+  "Name": "Español (ES)",
+  "General": {
+    "Project_SaveFilter": "Proyecto NPC (*.npcproj)",
+    "Title": "Creador NPC para Unturned 3.0 por BowieD",
+    "Configuration_Title": "Ajustes"
+  },
   "Options": {
     "experimentalFeatures": "Ajustes Experimentales",
     "scale": "Escala GUI",
@@ -25,50 +24,49 @@
     "autoUpdate": "Automaticamente instalar actualizaciones",
     "downloadPrerelease": "Descargar versiones de vista previa"
   },
-	"Character":
-	{
-		"Name_Editor": "Nombre en Editor",
-		"Name_Display": "Nombre Mostrado",
-		"ID": "ID Personaje",
-		"Dialogue": "Dialogo Inicial",
-		"Conditions": "Condiciones de Visibilidad",
-		"Hair": "Corte de pelo",
-		"Beard": "Barba",
-		"Face": "Cara",
-		"LeftHanded": "Zurdo",
-		"Pose": "Pose",
-		"Pose_Stand": "De pie",
-		"Pose_Sit": "Sentado",
-		"Pose_Asleep": "Dormido",
-		"Pose_Passive": "Pasivo",
-		"Pose_Crouch": "Agachado",
-		"Pose_Prone": "Prone",
-		"Pose_Under_Arrest": "Bajo Arresto",
-		"Pose_Rest": "Rest",
-		"Pose_Surrender": "Manos Arriba",
-		"Color_Skin": "Color de Piel",
-		"Color_Hair": "Color del Pelo",
-		"Clothing": "Vestimenta",
-		"Clothing_Default": "por Defecto",
-		"Clothing_Christmas": "Navidad",
-		"Clothing_Halloween": "Halloween",
-		"Clothing_Hat": "ID Casco",
-		"Clothing_Mask": "ID Mascara",
-		"Clothing_Glasses": "ID Gafas",
-		"Clothing_Vest": "ID Chaleco",
-		"Clothing_Shirt": "ID Camiseta",
-		"Clothing_Pants": "ID Pantalones",
-		"Clothing_Back": "ID Mochila",
-		"Equipment": "Equipamiento",
-		"Equipment_Primary": "ID Primaria",
-		"Equipment_Secondary": "ID Secundaria",
-		"Equipment_Tertiary": "ID Terciaria",
-		"Equipment_Equipped": "Slot Equipado",
-		"Equipment_Equipped_None": "Ninguno",
-		"Equipment_Equipped_Primary": "Primario",
-		"Equipment_Equipped_Secondary": "Secundario",
-		"Equipment_Equipped_Tertiary": "Terciario"
-	},
+  "Character": {
+    "Name_Editor": "Nombre en Editor",
+    "Name_Display": "Nombre Mostrado",
+    "ID": "ID Personaje",
+    "Dialogue": "Dialogo Inicial",
+    "Conditions": "Condiciones de Visibilidad",
+    "Hair": "Corte de pelo",
+    "Beard": "Barba",
+    "Face": "Cara",
+    "LeftHanded": "Zurdo",
+    "Pose": "Pose",
+    "Pose_Stand": "De pie",
+    "Pose_Sit": "Sentado",
+    "Pose_Asleep": "Dormido",
+    "Pose_Passive": "Pasivo",
+    "Pose_Crouch": "Agachado",
+    "Pose_Prone": "Prone",
+    "Pose_Under_Arrest": "Bajo Arresto",
+    "Pose_Rest": "Rest",
+    "Pose_Surrender": "Manos Arriba",
+    "Color_Skin": "Color de Piel",
+    "Color_Hair": "Color del Pelo",
+    "Clothing": "Vestimenta",
+    "Clothing_Default": "por Defecto",
+    "Clothing_Christmas": "Navidad",
+    "Clothing_Halloween": "Halloween",
+    "Clothing_Hat": "ID Casco",
+    "Clothing_Mask": "ID Mascara",
+    "Clothing_Glasses": "ID Gafas",
+    "Clothing_Vest": "ID Chaleco",
+    "Clothing_Shirt": "ID Camiseta",
+    "Clothing_Pants": "ID Pantalones",
+    "Clothing_Back": "ID Mochila",
+    "Equipment": "Equipamiento",
+    "Equipment_Primary": "ID Primaria",
+    "Equipment_Secondary": "ID Secundaria",
+    "Equipment_Tertiary": "ID Terciaria",
+    "Equipment_Equipped": "Slot Equipado",
+    "Equipment_Equipped_None": "Ninguno",
+    "Equipment_Equipped_Primary": "Primario",
+    "Equipment_Equipped_Secondary": "Secundario",
+    "Equipment_Equipped_Tertiary": "Terciario"
+  },
   "Dialogue": {
     "ID": "ID Dialogo",
     "Message_Add": "Añadir Mensaje",
@@ -107,16 +105,15 @@
     "DisableSorting": "Desactivar ordenado",
     "Currency": "GUID dinero (vacio si hay XP)"
   },
-	"Quest":
-	{
-		"ID": "ID Quest",
-		"Title": "Nombre Quest",
-		"Description": "Descripccion de la Quest",
-		"Condition_Add": "Añadir Condición",
-		"Conditions": "Condiciones de la Quest",
-		"Reward_Add": "Añadir Recompensa",
-		"Rewards": "Recompensa Quest"
-	},
+  "Quest": {
+    "ID": "ID Quest",
+    "Title": "Nombre Quest",
+    "Description": "Descripccion de la Quest",
+    "Condition_Add": "Añadir Condición",
+    "Conditions": "Condiciones de la Quest",
+    "Reward_Add": "Añadir Recompensa",
+    "Rewards": "Recompensa Quest"
+  },
   "Conditions": {
     "Type_None": "Ninguna",
     "Type_Experience": "Tiene experiencia",
@@ -425,21 +422,20 @@
     "Flag_Math_Operation_Division": "Dividir A entre B",
     "Flag_Math_Localization": "Localización"
   },
-	"VendorItems":
-	{
-		"ID": "ID",
-		"Cost": "Coste",
-		"Amount": "Cantidad",
-		"Spawnpoint": "Spawnpoint",
-		"Type": "Tipo de Vendor",
-		"Type_Item": "Objeto",
-		"Type_Vehicle": "Vehiculo",
-		"SellType": "Tipo de Venta",
-		"SellType_Buy": "El NPC comprará esto",
-		"SellType_Sell": "El NPC venderá esto",
-		"Save": "Guardar Item",
-		"Conditions": "Editar Condiciones"
-	},
+  "VendorItems": {
+    "ID": "ID",
+    "Cost": "Coste",
+    "Amount": "Cantidad",
+    "Spawnpoint": "Spawnpoint",
+    "Type": "Tipo de Vendor",
+    "Type_Item": "Objeto",
+    "Type_Vehicle": "Vehiculo",
+    "SellType": "Tipo de Venta",
+    "SellType_Buy": "El NPC comprará esto",
+    "SellType_Sell": "El NPC venderá esto",
+    "Save": "Guardar Item",
+    "Conditions": "Editar Condiciones"
+  },
   "Mistakes": {
     "NE_0000_Desc": "ID de {0} [{1}] está en rango reservado (de 0 a 2000)",
     "NE_0001_Desc": "Personaje {0} [{1}] tiene ID de 0.",
@@ -673,5 +669,54 @@
     "Context_Dialogue_PasteColor_red": "Rojo",
     "Context_Dialogue_PasteColor_white": "Blanco",
     "Context_Dialogue_PasteColor_yellow": "Amarillo"
+  },
+  "Simulation": {
+    "Dialogue": {
+      "Window_Title": "Dialogue View"
+    },
+    "Vendor": {
+      "Window_Title": "Vendor View",
+      "Header_Buying": "Buying:",
+      "Header_Selling": "Selling:",
+      "Pay_Experience": "Experience: {0}",
+      "Pay_Currency": "Currency: {0}",
+      "Button_Close": "Close",
+      "Item_Name": "Item '{0}'",
+      "Vehicle_Name": "Vehicle '{0}'",
+      "Vehicle_Spawned": "Vehicle '{0}' was spawned at spawnpoint '{1}'",
+      "Item_Cost": "Cost: {0}"
+    },
+    "Quest": {
+      "Window_Title": "Quest View",
+      "Goals": "Goals: ",
+      "Rewards": "Rewards: ",
+      "Button_Accept": "Accept",
+      "Button_Decline": "Decline",
+      "Button_Continue": "Continue",
+      "Default_Condition_Currency": "{0} Currency",
+      "Default_Condition_Item": "{0}/{1} {2}",
+      "Default_Condition_Reputation": "{0}/{1} Reputation",
+      "Default_Condition_Experience": "{0}/{1} Experience",
+      "Default_Reward_Experience": "+{0} Experience",
+      "Default_Reward_Reputation": "{0} Reputation",
+      "Default_Reward_Item": "{1} x{0}",
+      "Default_Reward_Item_Random": "Random Item x{0}",
+      "Default_Reward_Vehicle": "{0} x1",
+      "Default_Reward_Currency": "{0} Currency"
+    },
+    "Simulation": {
+      "Window_Title": "Simulation Control",
+      "Name": "Player Name",
+      "Time": "In-Game Time",
+      "Experience": "Experience",
+      "Reputation": "Reputation",
+      "Health": "Player Health",
+      "Food": "Player Food",
+      "Water": "Player Water",
+      "Virus": "Player Virus",
+      "Skillset": "Skillset",
+      "Holiday": "Holiday",
+      "Button_Reload_Dialogue": "Reload Current Dialogue"
+    }
   }
 }
