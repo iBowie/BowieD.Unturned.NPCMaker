@@ -41,7 +41,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Name="acceptButton" Click="AcceptButton_Click" Grid.Column="0" Margin="10" Content="{xaml:Localize Key=SIMULATION.QUEST_Button_Acccept}"/>
+            <Button Name="acceptButton" Click="AcceptButton_Click" Grid.Column="0" Margin="10" Content="{xaml:Localize Key=SIMULATION.QUEST_Button_Accept}"/>
             <Button Name="declineButton" Click="DeclineButton_Click" Grid.Column="1" Margin="10" Content="{xaml:Localize Key=SIMULATION.QUEST_Button_Decline}"/>
             <Button Name="continueButton" Click="ContinueButton_Click" Grid.Column="2" Margin="10" Content="{xaml:Localize Key=SIMULATION.QUEST_Button_Continue}"/>
         </Grid>
