@@ -21,7 +21,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 case EMode.PREVIEW:
                     acceptButton.IsEnabled = false;
-                    declineButton.IsEnabled = false;
+                    acceptButton.Visibility = Visibility.Collapsed;
+                    continueButton.IsEnabled = false;
+                    continueButton.Visibility = Visibility.Collapsed;
                     break;
                 case EMode.BEGIN_QUEST:
                     continueButton.IsEnabled = false;
