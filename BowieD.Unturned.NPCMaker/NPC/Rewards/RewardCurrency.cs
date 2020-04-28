@@ -22,7 +22,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
             if (string.IsNullOrEmpty(text))
             {
-                text = "{0} Currency";
+                text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Reward_Currency");
             }
             return string.Format(text, Value);
         }

@@ -19,7 +19,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
             if (string.IsNullOrEmpty(text))
             {
-                text = "+{0} Experience";
+                text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Reward_Experience");
             }
             return string.Format(text, Value);
         }

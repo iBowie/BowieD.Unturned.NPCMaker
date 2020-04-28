@@ -20,7 +20,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
             if (string.IsNullOrEmpty(text))
             {
-                text = "Random Item x{0}";
+                text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Reward_Item_Random");
             }
             return string.Format(text, Amount);
         }

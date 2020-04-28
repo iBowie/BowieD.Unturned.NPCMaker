@@ -48,7 +48,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             string text = Localization;
             if (string.IsNullOrEmpty(text))
-                text = "{0}/{1} Reputation";
+                text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Condition_Reputation");
 
             return string.Format(text,
                 simulation.Reputation > 0 ? $"+{simulation.Reputation}" : $"{simulation.Reputation}",

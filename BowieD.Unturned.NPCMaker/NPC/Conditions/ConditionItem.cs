@@ -40,11 +40,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             string text = Localization;
 
             if (string.IsNullOrEmpty(text))
-                text = "{0}/{1} {2}";
+                text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Condition_Item");
 
             var found = simulation.Items.Where(d => d.ID == ID);
 
-            return string.Format(text, found.Count(), Amount, $"Item '{ID}'");
+            return string.Format(text, found.Count(), Amount, ID);
         }
     }
 }

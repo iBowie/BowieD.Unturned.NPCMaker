@@ -56,7 +56,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             string text = Localization;
             if (string.IsNullOrEmpty(text))
-                text = "{0}/{1} Experience";
+                text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Condition_Experience");
             return string.Format(text, simulation.Experience, Value);
         }
     }

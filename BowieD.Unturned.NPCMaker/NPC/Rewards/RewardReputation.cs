@@ -18,7 +18,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
             if (string.IsNullOrEmpty(text))
             {
-                text = "{0} Reputation";
+                text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Reward_Reputation");
             }
             return string.Format(text, Value > 0 ? $"+{Value}" : $"{Value}");
         }

@@ -16,9 +16,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
             if (string.IsNullOrEmpty(text))
             {
-                text = "{0} x1";
+                text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Reward_Vehicle");
             }
-            return string.Format(text, $"Vehicle '{ID}'");
+            return string.Format(text, ID);
         }
     }
 }

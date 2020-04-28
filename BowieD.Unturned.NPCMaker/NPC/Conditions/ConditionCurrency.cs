@@ -63,7 +63,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             string text = Localization;
             if (string.IsNullOrEmpty(text))
             {
-                text = "{0} Currency";
+                text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Condition_Currency");
             }
             return string.Format(text, Value);
         }

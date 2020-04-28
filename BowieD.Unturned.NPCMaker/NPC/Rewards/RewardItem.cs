@@ -38,9 +38,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
             if (string.IsNullOrEmpty(text))
             {
-                text = "{1} x{0}";
+                text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Reward_Item");
             }
-            return string.Format(text, Amount, $"Item '{ID}'");
+            return string.Format(text, Amount, ID);
         }
     }
 }
