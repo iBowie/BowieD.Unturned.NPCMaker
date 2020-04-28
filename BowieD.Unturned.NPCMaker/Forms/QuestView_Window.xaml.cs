@@ -11,11 +11,27 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// </summary>
     public partial class QuestView_Window : Window
     {
-        public QuestView_Window(NPCCharacter character, Simulation simulation, NPCQuest quest)
+        public QuestView_Window(NPCCharacter character, Simulation simulation, NPCQuest quest, EMode mode = EMode.PREVIEW)
         {
             InitializeComponent();
 
             this.Quest = quest;
+
+            switch (mode)
+            {
+                case EMode.PREVIEW:
+                    acceptButton.IsEnabled = false;
+                    declineButton.IsEnabled = false;
+                    break;
+                case EMode.BEGIN_QUEST:
+                    continueButton.IsEnabled = false;
+                    continueButton.Visibility = Visibility.Collapsed;
+                    break;
+                case EMode.END_QUEST:
+                    acceptButton.IsEnabled = false;
+                    acceptButton.Visibility = Visibility.Collapsed;
+                    break;
+            }
 
             title.Text = SimulationTool.ReplacePlaceholders(character, simulation, quest.title);
             desc.Text = SimulationTool.ReplacePlaceholders(character, simulation, quest.description);
@@ -89,6 +105,19 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             DialogResult = false;
             Close();
+        }
+
+        private void ContinueButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+            Close();
+        }
+
+        public enum EMode
+        {
+            BEGIN_QUEST,
+            END_QUEST,
+            PREVIEW
         }
     }
 }

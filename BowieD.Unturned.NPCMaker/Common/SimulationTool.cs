@@ -61,7 +61,7 @@ namespace BowieD.Unturned.NPCMaker.Common
 
         public static string ReplacePlaceholders(NPCCharacter character, Simulation simulation, string raw)
         {
-            string result = raw;
+            string result = raw ?? string.Empty;
 
             if (result.Contains("<br>"))
                 result = result.Replace("<br>", Environment.NewLine);

@@ -1,18 +1,10 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using MessageBox = System.Windows.MessageBox;
 
 namespace BowieD.Unturned.NPCMaker.Forms
@@ -34,19 +26,28 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             UIElement createElement(VendorItem item)
             {
-                Border b = new Border()
+                //Border b = new Border()
+                //{
+                //    BorderBrush = App.Current.Resources["AccentColor"] as Brush,
+                //    BorderThickness = new Thickness(1),
+                //    CornerRadius = new CornerRadius(4),
+                //    Margin = new Thickness(2.5)
+                //};
+
+                Button b = new Button()
                 {
-                    BorderBrush = App.Current.Resources["AccentColor"] as Brush,
-                    BorderThickness = new Thickness(1),
-                    CornerRadius = new CornerRadius(4),
-                    Margin = new Thickness(2.5)
+                    Margin = new Thickness(2.5),
+                    Height = 64,
+                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                    VerticalContentAlignment = VerticalAlignment.Stretch
                 };
 
                 Grid g = new Grid();
 
                 TextBlock tb = new TextBlock()
                 {
-                    Text = $"Cost: {item.cost}"
+                    // Text = $"Cost: {item.cost}"
+                    Text = LocalizationManager.Current.Simulation["Vendor"].Translate("Item_Cost", item.cost)
                 };
 
                 Label l = new Label()
@@ -56,9 +57,23 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     Content = tb
                 };
 
+                string nameKey;
+
+                switch (item.type)
+                {
+                    case ItemType.ITEM:
+                        nameKey = "Item_Name";
+                        break;
+                    case ItemType.VEHICLE:
+                        nameKey = "Vehicle_Name";
+                        break;
+                    default:
+                        throw new Exception("Invalid ItemType");
+                }
+
                 TextBlock tb2 = new TextBlock()
                 {
-                    Text = $"Item '{item.id}'"
+                    Text = LocalizationManager.Current.Simulation["Vendor"].Translate(nameKey, item.id)
                 };
 
                 Label l2 = new Label()
@@ -71,7 +86,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 g.Children.Add(l);
                 g.Children.Add(l2);
 
-                b.Child = g;
+                // b.Child = g;
+
+                b.Content = g;
 
                 return b;
             }
@@ -114,7 +131,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                 break;
                             case ItemType.VEHICLE:
                                 {
-                                    MessageBox.Show($"Vehicle '{s.id}' was spawned at '{s.spawnPointID}'");
+                                    MessageBox.Show(LocalizationManager.Current.Simulation["Vendor"].Translate("Vehicle_Spawned", s.id, s.spawnPointID));
                                 }
                                 break;
                         }
@@ -159,16 +176,20 @@ namespace BowieD.Unturned.NPCMaker.Forms
         }
         void updateCurrency()
         {
+            string translateKey;
+            uint value;
             if (string.IsNullOrEmpty(Vendor.currency)) // experience
             {
-                currencyText.Text = $"Experience: {Simulation.Experience}";
+                translateKey = "Pay_Experience";
+                value = Simulation.Experience;
             }
             else // currency
             {
-                if (!Simulation.Currencies.TryGetValue(Vendor.currency, out uint value))
+                if (!Simulation.Currencies.TryGetValue(Vendor.currency, out value))
                     value = 0;
-                currencyText.Text = $"Currency: {value}";
+                translateKey = "Pay_Currency";
             }
+            currencyText.Text = LocalizationManager.Current.Simulation["Vendor"].Translate(translateKey, value);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

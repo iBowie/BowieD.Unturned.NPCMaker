@@ -17,6 +17,12 @@ namespace BowieD.Unturned.NPCMaker.Forms
             this.DialogueView = dialogueView;
             DataContext = simulation;
 
+            if (dialogueView == null)
+            {
+                reloadDialogueButton.IsEnabled = false;
+                reloadDialogueButton.Visibility = Visibility.Collapsed;
+            }
+
             gameTimeSlider.ValueChanged += (sender, e) =>
             {
                 gameTimeSlider.ToolTip = ConditionTimeOfDay.SecondToTime((int)gameTimeSlider.Value);

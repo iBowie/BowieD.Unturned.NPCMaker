@@ -85,7 +85,21 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                                 var questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.id == res.openQuestId);
 
-                                QuestView_Window qvw = new QuestView_Window(Character, Simulation, questAsset);
+                                var questStatus = Simulation.GetQuestStatus(questAsset.id);
+
+                                QuestView_Window.EMode _mode;
+
+                                switch (questStatus)
+                                {
+                                    case Quest_Status.Ready:
+                                        _mode = QuestView_Window.EMode.END_QUEST;
+                                        break;
+                                    default:
+                                        _mode = QuestView_Window.EMode.BEGIN_QUEST;
+                                        break;
+                                }
+
+                                QuestView_Window qvw = new QuestView_Window(Character, Simulation, questAsset, _mode);
                                 if (qvw.ShowDialog() == true)
                                 {
                                     foreach (var c in res.conditions)

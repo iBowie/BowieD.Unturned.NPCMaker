@@ -583,10 +583,14 @@
 		"Main_Tab_Dialogue_Open_Tooltip": "Open another dialogue in project",
 		"Main_Tab_Dialogue_Reset_Tooltip": "New dialogue",
 		"Main_Tab_Vendor": "Vendor",
+		"Main_Tab_Vendor_Preview": "Preview Vendor",
+		"Main_Tab_Vendor_Preview_Message": "Set up simulation in next dialog window. Close to proceed.",
 		"Main_Tab_Vendor_Save_Tooltip": "Save vendor",
 		"Main_Tab_Vendor_Open_Tooltip": "Open another vendor in project",
 		"Main_Tab_Vendor_Reset_Tooltip": "New vendor",
 		"Main_Tab_Quest": "Quest",
+		"Main_Tab_Quest_Preview": "Preview Quest",
+		"Main_Tab_Quest_Preview_Message": "Set up simulation in next dialog window. Close to proceed.",
 		"Main_Tab_Quest_Save_Tooltip": "Save quest",
 		"Main_Tab_Quest_Open_Tooltip": "Open another quest in project",
 		"Main_Tab_Quest_Reset_Tooltip": "New quest",
@@ -671,5 +675,54 @@
 		"Context_Dialogue_PasteColor_red": "Red",
 		"Context_Dialogue_PasteColor_white": "White",
 		"Context_Dialogue_PasteColor_yellow": "Yellow"
+	},
+	"Simulation": {
+		"Dialogue": {
+			"Window_Title": "Dialogue View"
+		},
+		"Vendor": {
+			"Window_Title": "Vendor View",
+			"Header_Buying": "Buying:",
+			"Header_Selling": "Selling:",
+			"Pay_Experience": "Experience: {0}",
+			"Pay_Currency": "Currency: {0}",
+			"Button_Close": "Close",
+			"Item_Name": "Item '{0}'",
+			"Vehicle_Name": "Vehicle '{0}'",
+			"Vehicle_Spawned": "Vehicle '{0}' was spawned at spawnpoint '{1}'",
+			"Item_Cost": "Cost: {0}"
+		},
+		"Quest": {
+			"Window_Title": "Quest View",
+			"Goals": "Goals: ",
+			"Rewards": "Rewards: ",
+			"Button_Accept": "Accept",
+			"Button_Decline": "Decline",
+			"Button_Continue": "Continue",
+			"Default_Condition_Currency": "{0} Currency",
+			"Default_Condition_Item": "{0}/{1} {2}",
+			"Default_Condition_Reputation": "{0}/{1} Reputation",
+			"Default_Condition_Experience": "{0}/{1} Experience",
+			"Default_Reward_Experience": "+{0} Experience",
+			"Default_Reward_Reputation": "{0} Reputation",
+			"Default_Reward_Item": "{1} x{0}",
+			"Default_Reward_Item_Random": "Random Item x{0}",
+			"Default_Reward_Vehicle": "{0} x1",
+			"Default_Reward_Currency": "{0} Currency"
+		},
+		"Simulation": {
+			"Window_Title": "Simulation Control",
+			"Name": "Player Name",
+			"Time": "In-Game Time",
+			"Experience": "Experience",
+			"Reputation": "Reputation",
+			"Health": "Player Health",
+			"Food": "Player Food",
+			"Water": "Player Water",
+			"Virus": "Player Virus",
+			"Skillset": "Skillset",
+			"Holiday": "Holiday",
+			"Button_Reload_Dialogue": "Reload Current Dialogue"
+		}
 	}
 }

@@ -1,4 +1,6 @@
-﻿namespace BowieD.Unturned.NPCMaker.Localization
+﻿using System.Collections.Generic;
+
+namespace BowieD.Unturned.NPCMaker.Localization
 {
     public sealed class Localization
     {
@@ -18,6 +20,7 @@
             Mistakes = new TranslationDictionary();
             Notification = new TranslationDictionary();
             Interface = new TranslationDictionary();
+            Simulation = new Dictionary<string, TranslationDictionary>();
         }
         public string Name;
         public string Author;
@@ -33,6 +36,7 @@
         public TranslationDictionary Mistakes;
         public TranslationDictionary Notification;
         public TranslationDictionary Interface;
+        public Dictionary<string, TranslationDictionary> Simulation;
         public TranslationDictionary GetDictionary(string name)
         {
             switch (name.ToLower())
@@ -61,6 +65,12 @@
                     return Notification;
                 case "interface":
                     return Interface;
+                case "simulation.dialogue":
+                    return Simulation["Dialogue"];
+                case "simulation.vendor":
+                    return Simulation["Vendor"];
+                case "simulation.quest":
+                    return Simulation["Quest"];
                 default:
                     return null;
             }

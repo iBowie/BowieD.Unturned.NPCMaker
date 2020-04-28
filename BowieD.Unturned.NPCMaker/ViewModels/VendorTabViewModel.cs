@@ -193,7 +193,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }
             return -1;
         }
-        private ICommand addItemCommand, saveCommand, openCommand, resetCommand;
+        private ICommand addItemCommand, saveCommand, openCommand, resetCommand, previewCommand;
         public ICommand AddItemCommand
         {
             get
@@ -277,6 +277,30 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     });
                 }
                 return resetCommand;
+            }
+        }
+        public ICommand PreviewCommand
+        {
+            get
+            {
+                if (previewCommand == null)
+                {
+                    previewCommand = new BaseCommand(() =>
+                    {
+                        SaveCommand.Execute(null);
+
+                        var simulation = new Simulation();
+
+                        MessageBox.Show(LocalizationManager.Current.Interface.Translate("Main_Tab_Vendor_Preview_Message"));
+
+                        var sim = new SimulationView_Window(null, simulation);
+                        sim.ShowDialog();
+
+                        var dvw = new VendorView_Window(null, simulation, Vendor);
+                        dvw.ShowDialog();
+                    });
+                }
+                return previewCommand;
             }
         }
     }

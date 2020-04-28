@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
         mc:Ignorable="d"
-        Title="VendorView_Window" Height="450" Width="800">
+        Title="{xaml:Localize Key=SIMULATION.VENDOR_Window_Title}" Height="450" Width="800">
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
@@ -33,10 +34,10 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="Buying:"/>
+                <TextBlock Text="{xaml:Localize Key=SIMULATION.VENDOR_Header_Buying}"/>
             </Label>
             <Label Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="Selling:"/>
+                <TextBlock Text="{xaml:Localize Key=SIMULATION.VENDOR_Header_Selling}"/>
             </Label>
             <ScrollViewer Grid.Column="0" Grid.Row="1" Margin="10,0,10,0">
                 <StackPanel Name="buyingPanel"/>
@@ -55,7 +56,7 @@
                     <TextBlock Name="currencyText" Text="Experience: 0" />
                 </Label>
             </Border>
-            <Button Click="Button_Click" Margin="10" Grid.Column="1" Content="Close"/>
+            <Button Click="Button_Click" Margin="10" Grid.Column="1" Content="{xaml:Localize Key=SIMULATION.VENDOR_Button_Close}"/>
         </Grid>
     </Grid>
 </Window>
