@@ -71,6 +71,8 @@ namespace BowieD.Unturned.NPCMaker.Localization
                     return Simulation["Vendor"];
                 case "simulation.quest":
                     return Simulation["Quest"];
+                case "simulation.simulation":
+                    return Simulation["Simulation"];
                 default:
                     return null;
             }
