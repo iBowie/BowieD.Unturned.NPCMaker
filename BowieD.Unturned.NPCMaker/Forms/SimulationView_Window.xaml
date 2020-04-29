@@ -98,6 +98,30 @@
                     <Label Margin="10" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Skillset}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <ComboBox Margin="10" Grid.Column="1" ItemsSource="{StaticResource Simulation_Skillsets_Enums}" SelectedValue="{Binding Skillset, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Simulation_Skillsets_Enums}}"/>
                 </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Flags}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Button Grid.Column="1" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Flags_Button}" VerticalAlignment="Center" HorizontalAlignment="Center" Click="FlagEditor_Button_Click"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Quests}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Button Grid.Column="1" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Quests_Button}" VerticalAlignment="Center" HorizontalAlignment="Center" Click="QuestEditor_Button_Click"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Inventory}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Button Grid.Column="1" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Inventory_Button}" VerticalAlignment="Center" HorizontalAlignment="Center" Click="InventoryEditor_Button_Click"/>
+                </Grid>
             </StackPanel>
         </ScrollViewer>
         <Button Grid.Row="1" Name="reloadDialogueButton" Click="ReloadDialogue_Button_Click" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Button_Reload_Dialogue}" Margin="10"/>

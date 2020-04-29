@@ -716,7 +716,35 @@
       "Virus": "Заражение игрока",
       "Skillset": "Набор навыков",
       "Holiday": "Праздник",
-      "Button_Reload_Dialogue": "Перезагрузить текущий диалог"
+      "Button_Reload_Dialogue": "Перезагрузить текущий диалог",
+      "Flags": "Флаги",
+      "Flags_Button": "Открыть редактор",
+      "Quests": "Задания",
+      "Quests_Button": "Открыть редактор",
+      "Inventory": "Инвентарь",
+      "Inventory_Button": "Открыть редактор"
+    },
+    "Flags": {
+      "Window_Title": "Редактор флагов",
+      "Flag_ID": "ID флага",
+      "Flag_Value": "Значение флага",
+      "Flag_Set": "Установить флаг",
+      "Flag_Remove": "Удалить флаг"
+    },
+    "Quests": {
+      "Window_Title": "Редактор заданий",
+      "Quest_ID": "ID задания",
+      "Quest_Add": "Добавить задание",
+      "Quest_Remove": "Удалить задание"
+    },
+    "Inventory": {
+      "Window_Title": "Редактор инвентаря",
+      "Item_ID": "ID предмета",
+      "Item_Amount": "Количество/заряженность предмета",
+      "Item_Quality": "Качество предмета",
+      "Item_Add": "Добавить предмет",
+      "Item_Remove": "Удалить предмет",
+      "Item_Remove_Count": "Кол-во"
     }
   }
 }

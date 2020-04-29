@@ -184,6 +184,12 @@
     <Compile Include="Forms\DialogueView_Window.xaml.cs">
       <DependentUpon>DialogueView_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FlagEditorView_Window.xaml.cs">
+      <DependentUpon>FlagEditorView_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryEditorView_Window.xaml.cs">
+      <DependentUpon>InventoryEditorView_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Message_TreeView.xaml.cs">
       <DependentUpon>Message_TreeView.xaml</DependentUpon>
     </Compile>
@@ -191,6 +197,15 @@
     <Compile Include="Commands\NotifyCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
     <Compile Include="Commands\SwitchCommand.cs" />
+    <Compile Include="Forms\MultiFieldInputView_Dialog.xaml.cs">
+      <DependentUpon>MultiFieldInputView_Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OneFieldInputView_Dialog.xaml.cs">
+      <DependentUpon>OneFieldInputView_Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\QuestEditorView_Window.xaml.cs">
+      <DependentUpon>QuestEditorView_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\QuestView_Window.xaml.cs">
       <DependentUpon>QuestView_Window.xaml</DependentUpon>
     </Compile>
@@ -377,7 +392,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\FlagEditorView_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\InventoryEditorView_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\Message_TreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\MultiFieldInputView_Dialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\OneFieldInputView_Dialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\QuestEditorView_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

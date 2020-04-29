@@ -722,7 +722,35 @@
 			"Virus": "Player Virus",
 			"Skillset": "Skillset",
 			"Holiday": "Holiday",
-			"Button_Reload_Dialogue": "Reload Current Dialogue"
+			"Button_Reload_Dialogue": "Reload Current Dialogue",
+			"Flags": "Flags",
+			"Flags_Button": "Open Editor",
+			"Quests": "Quests",
+			"Quests_Button": "Open Editor",
+			"Inventory": "Inventory",
+			"Inventory_Button": "Open Editor"
+		},
+		"Flags": {
+			"Window_Title": "Flag Editor",
+			"Flag_ID": "Flag ID",
+			"Flag_Value": "Flag Value",
+			"Flag_Set": "Set Flag",
+			"Flag_Remove": "Remove Flag"
+		},
+		"Quests": {
+			"Window_Title": "Quest Editor",
+			"Quest_ID": "Quest ID",
+			"Quest_Add": "Add Quest",
+			"Quest_Remove": "Remove Quest"
+		},
+		"Inventory": {
+			"Window_Title": "Inventory Editor",
+			"Item_ID": "Item ID",
+			"Item_Amount": "Item Amount/Ammo",
+			"Item_Quality": "Item Quality",
+			"Item_Add": "Add Item",
+			"Item_Remove": "Remove Item",
+			"Item_Remove_Count": "Count"
 		}
 	}
 }

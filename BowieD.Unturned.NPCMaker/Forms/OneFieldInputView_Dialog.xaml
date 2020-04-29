@@ -1,0 +1,36 @@
+﻿<Window x:Class="BowieD.Unturned.NPCMaker.Forms.OneFieldInputView_Dialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
+        mc:Ignorable="d"
+        Title="OneFieldInputView_Dialog" SizeToContent="WidthAndHeight" Height="Auto" Width="Auto" ResizeMode="NoResize">
+    <Grid>
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
+        </Grid.LayoutTransform>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Margin="10" VerticalAlignment="Center">
+                <TextBlock MaxWidth="200" TextWrapping="Wrap" Name="fieldText1" Text="TEXT123124214124124124TEXT123124214124124124TEXT123124214124124124TEXT123124214124124124"/>
+            </Label>
+            <TextBox MaxWidth="300" TextWrapping="Wrap" Name="textBox1" Grid.Column="1" VerticalAlignment="Center" MinWidth="100" Margin="10"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Click="Button_Click" Content="OK" Margin="10"/>
+            <Button Click="Button_Click_1" Content="Cancel" Grid.Column="1" Margin="10"/>
+        </Grid>
+    </Grid>
+</Window>
