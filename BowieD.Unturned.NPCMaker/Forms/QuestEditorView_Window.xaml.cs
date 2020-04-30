@@ -17,6 +17,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
             DataContext = this;
 
             Simulation = simulation;
+
+            foreach (var q in Quests)
+                list.Items.Add(q);
         }
 
         public Simulation Simulation { get; }
@@ -32,7 +35,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 {
                     if (Quests.Add(flagID))
                     {
-                        list.ItemsSource = Quests;
+                        list.Items.Add(flagID);
                     }
                 }
                 else
@@ -52,7 +55,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 {
                     if (Quests.Remove(flagID))
                     {
-                        list.ItemsSource = Quests;
+                        list.Items.Clear();
+
+                        foreach (var q in Quests)
+                            list.Items.Add(q);
                     }
                 }
                 else

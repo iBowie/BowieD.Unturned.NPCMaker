@@ -17,6 +17,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
             DataContext = this;
 
             Simulation = simulation;
+
+            foreach (var f in Flags)
+                list.Items.Add(f);
         }
 
         public Simulation Simulation { get; }
@@ -32,7 +35,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 if (ushort.TryParse(values[0], out ushort flagID) && short.TryParse(values[1], out short flagValue))
                 {
                     Flags[flagID] = flagValue;
-                    list.ItemsSource = Flags;
+                    list.Items.Add(new KeyValuePair<ushort, short>(flagID, flagValue));
                 }
                 else
                 {
@@ -51,7 +54,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 {
                     if (Flags.Remove(flagID))
                     {
-                        list.ItemsSource = Flags;
+                        list.Items.Clear();
+
+                        foreach (var f in Flags)
+                            list.Items.Add(f);
                     }
                 }
                 else

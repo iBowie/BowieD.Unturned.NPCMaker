@@ -15,7 +15,7 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListView Name="list" Margin="10" IsEnabled="false" ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged}">
+        <ListView Name="list" Margin="10" IsEnabled="false">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="{xaml:Localize Key=SIMULATION.INVENTORY_Item_ID}" DisplayMemberBinding="{Binding ID}"/>

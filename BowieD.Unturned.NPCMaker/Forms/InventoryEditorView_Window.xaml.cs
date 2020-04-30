@@ -18,6 +18,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
             DataContext = this;
 
             Simulation = simulation;
+
+            foreach (var i in Items)
+                list.Items.Add(i);
         }
 
         public Simulation Simulation { get; }
@@ -39,7 +42,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                         Quality = itemQuality
                     };
                     Items.Add(i);
-                    list.ItemsSource = Items;
+                    list.Items.Add(i);
                 }
                 else
                 {
@@ -63,7 +66,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
                         Items.Remove(found[i]);
                     }
 
-                    list.ItemsSource = Items;
+                    list.Items.Clear();
+
+                    foreach (var i in Items)
+                        list.Items.Add(i);
                 }
                 else
                 {

@@ -15,7 +15,7 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListView Name="list" Margin="10" IsEnabled="false" ItemsSource="{Binding Quests, UpdateSourceTrigger=PropertyChanged}">
+        <ListView Name="list" Margin="10" IsEnabled="false">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="{xaml:Localize Key=SIMULATION.QUESTS_Quest_ID}"/>
