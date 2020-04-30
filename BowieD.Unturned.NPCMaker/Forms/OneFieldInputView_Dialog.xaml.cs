@@ -33,14 +33,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
         public string Value
         {
-            get
-            {
-                return textBox1.Text;
-            }
-            set
-            {
-                textBox1.Text = value;
-            }
+            get => textBox1.Text;
+            set => textBox1.Text = value;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

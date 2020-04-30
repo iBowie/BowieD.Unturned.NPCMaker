@@ -289,14 +289,14 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     {
                         SaveCommand.Execute(null);
 
-                        var simulation = new Simulation();
+                        Simulation simulation = new Simulation();
 
                         MessageBox.Show(LocalizationManager.Current.Interface.Translate("Main_Tab_Vendor_Preview_Message"));
 
-                        var sim = new SimulationView_Window(null, simulation);
+                        SimulationView_Window sim = new SimulationView_Window(null, simulation);
                         sim.ShowDialog();
 
-                        var dvw = new VendorView_Window(null, simulation, Vendor);
+                        VendorView_Window dvw = new VendorView_Window(null, simulation, Vendor);
                         dvw.ShowDialog();
                     });
                 }

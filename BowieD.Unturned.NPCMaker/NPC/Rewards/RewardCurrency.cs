@@ -12,9 +12,13 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public override void Give(Simulation simulation)
         {
             if (simulation.Currencies.ContainsKey(GUID))
+            {
                 simulation.Currencies[GUID] += Value;
+            }
             else
+            {
                 simulation.Currencies.Add(GUID, Value);
+            }
         }
         public override string FormatReward(Simulation simulation)
         {

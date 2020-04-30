@@ -12,7 +12,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
         public override bool Check(Simulation simulation)
         {
-            if (simulation.Flags.TryGetValue(ID, out var flag))
+            if (simulation.Flags.TryGetValue(ID, out short flag))
             {
                 return flag >= Value;
             }
@@ -21,14 +21,22 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public override void Apply(Simulation simulation)
         {
             if (Reset)
+            {
                 simulation.Flags.Remove(ID);
+            }
         }
         public override string FormatCondition(Simulation simulation)
         {
             if (string.IsNullOrEmpty(Localization))
+            {
                 return null;
+            }
+
             if (!simulation.Flags.TryGetValue(ID, out short value))
+            {
                 value = 0;
+            }
+
             return string.Format(Localization, value, Value);
         }
     }

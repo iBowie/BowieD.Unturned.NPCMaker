@@ -29,7 +29,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             MultiFieldInputView_Dialog mfiv = new MultiFieldInputView_Dialog();
             if (mfiv.ShowDialog(new string[3] { LocalizationManager.Current.Simulation["Inventory"]["Item_ID"], LocalizationManager.Current.Simulation["Inventory"]["Item_Amount"], LocalizationManager.Current.Simulation["Inventory"]["Item_Quality"] }, LocalizationManager.Current.Simulation["Inventory"]["Item_Add"]) == true)
             {
-                var values = mfiv.Values;
+                string[] values = mfiv.Values;
                 if (ushort.TryParse(values[0], out ushort itemID) && byte.TryParse(values[1], out byte itemAmount) && byte.TryParse(values[2], out byte itemQuality))
                 {
                     Simulation.Item i = new Simulation.Item()
@@ -42,7 +42,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     list.ItemsSource = Items;
                 }
                 else
+                {
                     goto ask;
+                }
             }
         }
 
@@ -52,16 +54,21 @@ namespace BowieD.Unturned.NPCMaker.Forms
             MultiFieldInputView_Dialog mfiv = new MultiFieldInputView_Dialog();
             if (mfiv.ShowDialog(new string[3] { LocalizationManager.Current.Simulation["Inventory"]["Item_ID"], LocalizationManager.Current.Simulation["Inventory"]["Item_Remove_Count"], LocalizationManager.Current.Simulation["Inventory"]["Item_Quality"] }, LocalizationManager.Current.Simulation["Inventory"]["Item_Remove"]) == true)
             {
-                var values = mfiv.Values;
+                string[] values = mfiv.Values;
                 if (ushort.TryParse(values[0], out ushort itemID) && byte.TryParse(values[1], out byte itemAmount))
                 {
-                    var found = Items.Where(d => d.ID == itemID).Take(itemAmount).ToList();
+                    List<Simulation.Item> found = Items.Where(d => d.ID == itemID).Take(itemAmount).ToList();
                     for (int i = 0; i < found.Count; i++)
+                    {
                         Items.Remove(found[i]);
+                    }
+
                     list.ItemsSource = Items;
                 }
                 else
+                {
                     goto ask;
+                }
             }
         }
     }

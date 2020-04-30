@@ -23,7 +23,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
         public override bool Check(Simulation simulation)
         {
-            var items = simulation.Items.Where(d => d.ID == ID).ToList();
+            System.Collections.Generic.List<Simulation.Item> items = simulation.Items.Where(d => d.ID == ID).ToList();
 
             return SimulationTool.Compare(items.Count, Amount, Logic_Type.Greater_Than_Or_Equal_To);
         }
@@ -31,8 +31,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             if (Reset)
             {
-                foreach (var i in simulation.Items.Where(d => d.ID == ID).Take(Amount).ToList())
+                foreach (Simulation.Item i in simulation.Items.Where(d => d.ID == ID).Take(Amount).ToList())
+                {
                     simulation.Items.Remove(i);
+                }
             }
         }
         public override string FormatCondition(Simulation simulation)
@@ -40,9 +42,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             string text = Localization;
 
             if (string.IsNullOrEmpty(text))
+            {
                 text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Condition_Item");
+            }
 
-            var found = simulation.Items.Where(d => d.ID == ID);
+            System.Collections.Generic.IEnumerable<Simulation.Item> found = simulation.Items.Where(d => d.ID == ID);
 
             return string.Format(text, found.Count(), Amount, ID);
         }

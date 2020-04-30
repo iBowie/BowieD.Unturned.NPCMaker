@@ -68,10 +68,14 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             string text = Localization;
 
             if (string.IsNullOrEmpty(text))
+            {
                 return null;
+            }
 
             if (!simulation.Flags.TryGetValue(ID, out short value))
+            {
                 value = (short)(Allow_Unset ? Value : 0);
+            }
 
             return string.Format(text, value, Value);
         }

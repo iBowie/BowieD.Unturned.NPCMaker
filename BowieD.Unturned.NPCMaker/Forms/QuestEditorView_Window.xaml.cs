@@ -31,10 +31,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 if (ushort.TryParse(ofiv.Value, out ushort flagID))
                 {
                     if (Quests.Add(flagID))
+                    {
                         list.ItemsSource = Quests;
+                    }
                 }
                 else
+                {
                     goto ask;
+                }
             }
         }
 
@@ -47,10 +51,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 if (ushort.TryParse(ofiv.Value, out ushort flagID))
                 {
                     if (Quests.Remove(flagID))
+                    {
                         list.ItemsSource = Quests;
+                    }
                 }
                 else
+                {
                     goto ask;
+                }
             }
         }
     }

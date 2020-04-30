@@ -16,7 +16,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             DataContext = this;
 
-            this.Simulation = simulation;
+            Simulation = simulation;
         }
 
         public Simulation Simulation { get; }
@@ -28,14 +28,16 @@ namespace BowieD.Unturned.NPCMaker.Forms
             MultiFieldInputView_Dialog mfiv = new MultiFieldInputView_Dialog();
             if (mfiv.ShowDialog(new string[2] { LocalizationManager.Current.Simulation["Flags"]["Flag_ID"], LocalizationManager.Current.Simulation["Flags"]["Flag_Value"] }, LocalizationManager.Current.Simulation["Flags"]["Flag_Set"]) == true)
             {
-                var values = mfiv.Values;
+                string[] values = mfiv.Values;
                 if (ushort.TryParse(values[0], out ushort flagID) && short.TryParse(values[1], out short flagValue))
                 {
                     Flags[flagID] = flagValue;
                     list.ItemsSource = Flags;
                 }
                 else
+                {
                     goto ask;
+                }
             }
         }
 
@@ -48,10 +50,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 if (ushort.TryParse(ofiv.Value, out ushort flagID))
                 {
                     if (Flags.Remove(flagID))
+                    {
                         list.ItemsSource = Flags;
+                    }
                 }
                 else
+                {
                     goto ask;
+                }
             }
         }
     }

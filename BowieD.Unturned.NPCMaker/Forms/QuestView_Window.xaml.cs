@@ -15,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             InitializeComponent();
 
-            this.Quest = quest;
+            Quest = quest;
 
             switch (mode)
             {
@@ -38,11 +38,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
             title.Text = SimulationTool.ReplacePlaceholders(character, simulation, quest.title);
             desc.Text = SimulationTool.ReplacePlaceholders(character, simulation, quest.description);
 
-            foreach (var c in quest.conditions)
+            foreach (NPC.Conditions.Condition c in quest.conditions)
             {
                 string text = c.FormatCondition(simulation);
 
-                if (text == null) continue;
+                if (text == null)
+                {
+                    continue;
+                }
 
                 Border b = new Border()
                 {
@@ -66,11 +69,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 goalsPanel.Children.Add(b);
             }
 
-            foreach (var r in quest.rewards)
+            foreach (NPC.Rewards.Reward r in quest.rewards)
             {
                 string text = r.FormatReward(simulation);
 
-                if (text == null) continue;
+                if (text == null)
+                {
+                    continue;
+                }
 
                 Border b = new Border()
                 {

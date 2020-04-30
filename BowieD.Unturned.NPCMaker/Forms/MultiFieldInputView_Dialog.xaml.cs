@@ -28,7 +28,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
         public bool? ShowDialog(string[] messages, string caption, string[] tooltips)
         {
             if (messages.Length != tooltips.Length)
+            {
                 throw new ArgumentException("Messages and tooltips must have same length");
+            }
 
             Title = caption;
 
@@ -85,14 +87,18 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 string[] result = new string[_textboxes.Length];
 
                 for (int i = 0; i < _textboxes.Length; i++)
+                {
                     result[i] = _textboxes[i].Text;
+                }
 
                 return result;
             }
             set
             {
                 if (value.Length != _textboxes.Length)
+                {
                     throw new ArgumentException("Invalid length");
+                }
 
                 for (int i = 0; i < value.Length; i++)
                 {

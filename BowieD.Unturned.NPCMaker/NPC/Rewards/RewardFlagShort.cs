@@ -36,7 +36,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public override void Give(Simulation simulation)
         {
             if (!simulation.Flags.TryGetValue(ID, out short a))
+            {
                 a = 0;
+            }
 
             simulation.Flags[ID] = SimulationTool.Modify(a, Value, Modification);
         }

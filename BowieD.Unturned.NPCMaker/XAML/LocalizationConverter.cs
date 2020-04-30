@@ -18,9 +18,13 @@ namespace BowieD.Unturned.NPCMaker.XAML
                 string dictName = _key.Split('_')[0];
                 Localization.TranslationDictionary dict = Localization.LocalizationManager.Current.GetDictionary(dictName);
                 if (dict != null)
+                {
                     return dict.Translate(_key.Substring(dictName.Length + 1));
+                }
                 else
+                {
                     return _key;
+                }
             }
             catch
             {

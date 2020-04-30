@@ -31,7 +31,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 case ReturnType.Character:
                     {
-                        foreach (var c in MainWindow.CurrentProject.data.characters)
+                        foreach (NPC.NPCCharacter c in MainWindow.CurrentProject.data.characters)
                         {
                             Add(c, c.UIText);
                         }

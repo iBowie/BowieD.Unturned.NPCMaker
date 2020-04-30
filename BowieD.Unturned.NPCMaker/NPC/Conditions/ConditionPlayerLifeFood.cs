@@ -51,7 +51,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public override string FormatCondition(Simulation simulation)
         {
             if (string.IsNullOrEmpty(Localization))
+            {
                 return null;
+            }
+
             return string.Format(Localization, simulation.Food, Value);
         }
     }

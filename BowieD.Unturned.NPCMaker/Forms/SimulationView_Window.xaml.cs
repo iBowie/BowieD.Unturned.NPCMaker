@@ -13,8 +13,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             InitializeComponent();
 
-            this.Simulation = simulation;
-            this.DialogueView = dialogueView;
+            Simulation = simulation;
+            DialogueView = dialogueView;
             DataContext = simulation;
 
             if (dialogueView == null)

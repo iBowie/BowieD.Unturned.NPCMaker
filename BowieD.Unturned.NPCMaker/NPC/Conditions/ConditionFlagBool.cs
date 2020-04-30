@@ -67,7 +67,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             string text = Localization;
 
             if (string.IsNullOrEmpty(text))
+            {
                 return null;
+            }
 
             return string.Format(text, Check(simulation) ? 1 : 0);
         }

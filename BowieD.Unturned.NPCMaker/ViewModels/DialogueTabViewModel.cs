@@ -217,9 +217,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Character);
                         if (select.ShowDialog() == true)
                         {
-                            var character = select.SelectedValue as NPCCharacter;
+                            NPCCharacter character = select.SelectedValue as NPCCharacter;
 
-                            var dvw = new DialogueView_Window(character, Dialogue, new Simulation());
+                            DialogueView_Window dvw = new DialogueView_Window(character, Dialogue, new Simulation());
                             dvw.Display();
                             dvw.ShowDialog();
                         }

@@ -18,13 +18,13 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             InitializeComponent();
 
-            this.Character = character;
-            this.Dialogue = dialogue;
-            this.Simulation = simulation;
-            this.Previous = prev;
-            this.Start = dialogue;
+            Character = character;
+            Dialogue = dialogue;
+            Simulation = simulation;
+            Previous = prev;
+            Start = dialogue;
 
-            this.Loaded += (sender, e) =>
+            Loaded += (sender, e) =>
             {
                 SimulationView_Window svw = new SimulationView_Window(this, Simulation);
                 svw.Show();
@@ -44,13 +44,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         private NPCMessage lastMessage;
         private int lastMessageId;
         private int lastPage = 0;
-        private bool canDisplayNextPage
-        {
-            get
-            {
-                return lastPage < lastMessage.pages.Count - 1;
-            }
-        }
+        private bool canDisplayNextPage => lastPage < lastMessage.pages.Count - 1;
 
         public void DisplayPage(NPCMessage message, int i, int page)
         {
@@ -62,7 +56,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             if (!canDisplayNextPage)
             {
-                foreach (var res in Dialogue.responses)
+                foreach (NPCResponse res in Dialogue.responses)
                 {
                     if ((res.VisibleInAll || res.visibleIn.Length <= i || res.visibleIn[i] == 1) && res.conditions.All(d => d.Check(Simulation)))
                     {
@@ -82,9 +76,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             {
                                 shouldClose = false;
 
-                                var questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.id == res.openQuestId);
+                                NPCQuest questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.id == res.openQuestId);
 
-                                var questStatus = Simulation.GetQuestStatus(questAsset.id);
+                                Quest_Status questStatus = Simulation.GetQuestStatus(questAsset.id);
 
                                 QuestView_Window.EMode _mode;
 
@@ -101,16 +95,21 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                 QuestView_Window qvw = new QuestView_Window(Character, Simulation, questAsset, _mode);
                                 if (qvw.ShowDialog() == true)
                                 {
-                                    foreach (var c in res.conditions)
+                                    foreach (NPC.Conditions.Condition c in res.conditions)
+                                    {
                                         c.Apply(Simulation);
-                                    foreach (var r in res.rewards)
+                                    }
+
+                                    foreach (NPC.Rewards.Reward r in res.rewards)
+                                    {
                                         r.Give(Simulation);
+                                    }
 
                                     if (res.openDialogueId > 0)
                                     {
                                         Previous = Start;
 
-                                        var next = MainWindow.CurrentProject.data.dialogues.Single(d => d.id == res.openDialogueId);
+                                        NPCDialogue next = MainWindow.CurrentProject.data.dialogues.Single(d => d.id == res.openDialogueId);
 
                                         Dialogue = next;
 
@@ -124,22 +123,27 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             {
                                 shouldClose = false;
 
-                                var vendorAsset = MainWindow.CurrentProject.data.vendors.Single(d => d.id == res.openVendorId);
+                                NPCVendor vendorAsset = MainWindow.CurrentProject.data.vendors.Single(d => d.id == res.openVendorId);
 
                                 VendorView_Window qvw = new VendorView_Window(Character, Simulation, vendorAsset);
 
                                 qvw.ShowDialog();
 
-                                foreach (var c in res.conditions)
+                                foreach (NPC.Conditions.Condition c in res.conditions)
+                                {
                                     c.Apply(Simulation);
-                                foreach (var r in res.rewards)
+                                }
+
+                                foreach (NPC.Rewards.Reward r in res.rewards)
+                                {
                                     r.Give(Simulation);
+                                }
 
                                 if (res.openDialogueId > 0)
                                 {
                                     Previous = Start;
 
-                                    var next = MainWindow.CurrentProject.data.dialogues.Single(d => d.id == res.openDialogueId);
+                                    NPCDialogue next = MainWindow.CurrentProject.data.dialogues.Single(d => d.id == res.openDialogueId);
 
                                     Dialogue = next;
 
@@ -149,16 +153,21 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                 return;
                             }
 
-                            foreach (var c in res.conditions)
+                            foreach (NPC.Conditions.Condition c in res.conditions)
+                            {
                                 c.Apply(Simulation);
-                            foreach (var r in res.rewards)
+                            }
+
+                            foreach (NPC.Rewards.Reward r in res.rewards)
+                            {
                                 r.Give(Simulation);
+                            }
 
                             if (res.openDialogueId > 0)
                             {
                                 Previous = Dialogue;
 
-                                var next = MainWindow.CurrentProject.data.dialogues.Single(d => d.id == res.openDialogueId);
+                                NPCDialogue next = MainWindow.CurrentProject.data.dialogues.Single(d => d.id == res.openDialogueId);
 
                                 Dialogue = next;
 
@@ -245,10 +254,15 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 NPCMessage msg = Dialogue.messages[i];
                 if (msg.conditions.All(d => d.Check(Simulation)))
                 {
-                    foreach (var c in msg.conditions)
+                    foreach (NPC.Conditions.Condition c in msg.conditions)
+                    {
                         c.Apply(Simulation);
-                    foreach (var r in msg.rewards)
+                    }
+
+                    foreach (NPC.Rewards.Reward r in msg.rewards)
+                    {
                         r.Give(Simulation);
+                    }
 
                     lastMessageId = i;
                     lastPage = 0;

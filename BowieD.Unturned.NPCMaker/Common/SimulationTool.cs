@@ -60,16 +60,24 @@ namespace BowieD.Unturned.NPCMaker.Common
             string result = raw ?? string.Empty;
 
             if (result.Contains("<br>"))
+            {
                 result = result.Replace("<br>", Environment.NewLine);
+            }
 
             if (character != null && result.Contains("<name_npc>"))
+            {
                 result = result.Replace("<name_npc>", ReplacePlaceholders(character, simulation, character.displayName));
+            }
 
             if (simulation != null && result.Contains("<name_char>"))
+            {
                 result = result.Replace("<name_char>", simulation.Name);
+            }
 
             if (result.Contains("<pause>"))
+            {
                 result = result.Replace("<pause>", "");
+            }
 
             return result;
         }

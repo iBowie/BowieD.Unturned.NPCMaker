@@ -18,8 +18,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             InitializeComponent();
 
-            this.Vendor = vendor;
-            this.Simulation = simulation;
+            Vendor = vendor;
+            Simulation = simulation;
 
             title.Text = SimulationTool.ReplacePlaceholders(character, simulation, vendor.vendorTitle);
             desc.Text = SimulationTool.ReplacePlaceholders(character, simulation, vendor.vendorDescription);
@@ -93,9 +93,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 return b;
             }
 
-            foreach (var b in vendor.BuyItems.Where(d => d.conditions.All(c => c.Check(simulation))))
+            foreach (VendorItem b in vendor.BuyItems.Where(d => d.conditions.All(c => c.Check(simulation))))
             {
-                var elem = createElement(b);
+                UIElement elem = createElement(b);
 
                 elem.PreviewMouseLeftButtonDown += (sender, e) =>
                 {
@@ -108,9 +108,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                 buyingPanel.Children.Add(elem);
             }
-            foreach (var s in vendor.SellItems.Where(d => d.conditions.All(c => c.Check(simulation))))
+            foreach (VendorItem s in vendor.SellItems.Where(d => d.conditions.All(c => c.Check(simulation))))
             {
-                var elem = createElement(s);
+                UIElement elem = createElement(s);
 
                 elem.PreviewMouseLeftButtonDown += (sender, e) =>
                 {
@@ -147,7 +147,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         public NPCVendor Vendor { get; }
         public Simulation Simulation { get; }
 
-        uint getCurrency()
+        private uint getCurrency()
         {
             if (string.IsNullOrEmpty(Vendor.currency)) // experience
             {
@@ -156,11 +156,15 @@ namespace BowieD.Unturned.NPCMaker.Forms
             else // currency
             {
                 if (!Simulation.Currencies.TryGetValue(Vendor.currency, out uint value))
+                {
                     value = 0;
+                }
+
                 return value;
             }
         }
-        void changeCurrency(uint delta, bool spend)
+
+        private void changeCurrency(uint delta, bool spend)
         {
             if (string.IsNullOrEmpty(Vendor.currency)) // experience
             {
@@ -169,12 +173,16 @@ namespace BowieD.Unturned.NPCMaker.Forms
             else // currency
             {
                 if (!Simulation.Currencies.TryGetValue(Vendor.currency, out uint value))
+                {
                     value = 0;
+                }
+
                 Simulation.Currencies[Vendor.currency] = spend ? value - delta : value + delta;
             }
             updateCurrency();
         }
-        void updateCurrency()
+
+        private void updateCurrency()
         {
             string translateKey;
             uint value;
@@ -186,7 +194,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
             else // currency
             {
                 if (!Simulation.Currencies.TryGetValue(Vendor.currency, out value))
+                {
                     value = 0;
+                }
+
                 translateKey = "Pay_Currency";
             }
             currencyText.Text = LocalizationManager.Current.Simulation["Vendor"].Translate(translateKey, value);

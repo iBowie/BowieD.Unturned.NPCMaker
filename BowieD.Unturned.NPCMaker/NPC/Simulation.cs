@@ -61,13 +61,19 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             if (Quests.Contains(id))
             {
-                var questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.id == id);
+                NPCQuest questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.id == id);
                 if (questAsset.conditions.All(d => d.Check(this)))
+                {
                     return Quest_Status.Ready;
+                }
+
                 return Quest_Status.Active;
             }
             if (Flags.ContainsKey(id))
+            {
                 return Quest_Status.Completed;
+            }
+
             return Quest_Status.None;
         }
     }

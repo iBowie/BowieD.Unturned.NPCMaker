@@ -231,7 +231,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public virtual string FormatCondition(Simulation simulation)
         {
             if (!string.IsNullOrEmpty(Localization))
+            {
                 return Localization;
+            }
+
             return null;
         }
     }

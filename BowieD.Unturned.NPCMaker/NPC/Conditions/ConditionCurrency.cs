@@ -42,7 +42,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
         public override bool Check(Simulation simulation)
         {
-            if (!simulation.Currencies.TryGetValue(GUID, out var cur))
+            if (!simulation.Currencies.TryGetValue(GUID, out uint cur))
             {
                 cur = 0;
                 simulation.Currencies[GUID] = 0;
