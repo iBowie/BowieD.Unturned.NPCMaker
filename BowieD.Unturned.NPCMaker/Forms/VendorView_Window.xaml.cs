@@ -26,14 +26,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             UIElement createElement(VendorItem item)
             {
-                //Border b = new Border()
-                //{
-                //    BorderBrush = App.Current.Resources["AccentColor"] as Brush,
-                //    BorderThickness = new Thickness(1),
-                //    CornerRadius = new CornerRadius(4),
-                //    Margin = new Thickness(2.5)
-                //};
-
                 Button b = new Button()
                 {
                     Margin = new Thickness(2.5),
@@ -46,7 +38,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                 TextBlock tb = new TextBlock()
                 {
-                    // Text = $"Cost: {item.cost}"
                     Text = LocalizationManager.Current.Simulation["Vendor"].Translate("Item_Cost", item.cost)
                 };
 
@@ -86,14 +77,21 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 g.Children.Add(l);
                 g.Children.Add(l2);
 
-                // b.Child = g;
-
                 b.Content = g;
 
                 return b;
             }
 
-            foreach (VendorItem b in vendor.BuyItems.Where(d => d.conditions.All(c => c.Check(simulation))))
+            System.Collections.Generic.IEnumerable<VendorItem> buyItems = vendor.BuyItems.Where(d => d.conditions.All(c => c.Check(simulation)));
+            System.Collections.Generic.IEnumerable<VendorItem> sellItems = vendor.SellItems.Where(d => d.conditions.All(c => c.Check(simulation)));
+
+            if (!vendor.disableSorting) // enable sorting
+            {
+                buyItems = buyItems.OrderBy(v => v.id);
+                sellItems = sellItems.OrderBy(v => v.id);
+            }
+
+            foreach (VendorItem b in buyItems)
             {
                 UIElement elem = createElement(b);
 
@@ -108,7 +106,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                 buyingPanel.Children.Add(elem);
             }
-            foreach (VendorItem s in vendor.SellItems.Where(d => d.conditions.All(c => c.Check(simulation))))
+            
+            foreach (VendorItem s in sellItems)
             {
                 UIElement elem = createElement(s);
 
