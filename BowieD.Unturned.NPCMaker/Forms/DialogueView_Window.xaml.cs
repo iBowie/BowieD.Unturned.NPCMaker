@@ -1,7 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.NPC;
 using MahApps.Metro.IconPacks;
-using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;

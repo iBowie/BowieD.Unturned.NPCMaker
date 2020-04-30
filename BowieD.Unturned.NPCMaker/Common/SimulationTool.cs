@@ -1,9 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Documents;
 
 namespace BowieD.Unturned.NPCMaker.Common
 {

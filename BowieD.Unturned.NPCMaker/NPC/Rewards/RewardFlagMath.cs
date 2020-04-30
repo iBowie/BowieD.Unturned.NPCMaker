@@ -30,7 +30,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
         public override void Give(Simulation simulation)
         {
-            short 
+            short
                 a = simulation.Flags[A_ID],
                 b = simulation.Flags[B_ID];
 
