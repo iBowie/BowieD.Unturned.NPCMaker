@@ -55,7 +55,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
         ask:
             MultiFieldInputView_Dialog mfiv = new MultiFieldInputView_Dialog();
-            if (mfiv.ShowDialog(new string[3] { LocalizationManager.Current.Simulation["Inventory"]["Item_ID"], LocalizationManager.Current.Simulation["Inventory"]["Item_Remove_Count"], LocalizationManager.Current.Simulation["Inventory"]["Item_Quality"] }, LocalizationManager.Current.Simulation["Inventory"]["Item_Remove"]) == true)
+            if (mfiv.ShowDialog(new string[2] { LocalizationManager.Current.Simulation["Inventory"]["Item_ID"], LocalizationManager.Current.Simulation["Inventory"]["Item_Remove_Count"] }, LocalizationManager.Current.Simulation["Inventory"]["Item_Remove"]) == true)
             {
                 string[] values = mfiv.Values;
                 if (ushort.TryParse(values[0], out ushort itemID) && byte.TryParse(values[1], out byte itemAmount))
