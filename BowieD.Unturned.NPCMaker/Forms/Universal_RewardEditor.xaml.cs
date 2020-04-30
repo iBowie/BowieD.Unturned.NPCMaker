@@ -15,11 +15,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// </summary>
     public partial class Universal_RewardEditor : Window
     {
-        public Universal_RewardEditor(Reward reward = null, bool viewLocalization = false)
+        public Universal_RewardEditor(Reward reward = null)
         {
             InitializeComponent();
             double scale = AppConfig.Instance.scale;
-            viewLocalizationField = viewLocalization;
             ClearParameters();
             Height *= scale;
             Width *= scale;
@@ -57,7 +56,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
         #region DESIGN VARS
         private readonly double baseHeight = 178;
         private readonly double heightDelta = 35;
-        private readonly bool viewLocalizationField = false;
         #endregion
         #region METHODS
         internal void ClearParameters()
@@ -110,10 +108,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
             foreach (FrameworkElement c in controls)
             {
                 variablesGrid.Children.Add(c);
-            }
-            if (!viewLocalizationField)
-            {
-                GetLocalizationControl().Visibility = Visibility.Collapsed;
             }
 
             double newHeight = (baseHeight + (heightDelta * (mult + (mult > 1 ? 1 : 0))));

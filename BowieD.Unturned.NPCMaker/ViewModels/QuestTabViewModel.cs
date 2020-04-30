@@ -182,7 +182,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     addConditionCommand = new BaseCommand(() =>
                     {
-                        Universal_ConditionEditor uce = new Universal_ConditionEditor(null, true);
+                        Universal_ConditionEditor uce = new Universal_ConditionEditor(null);
                         if (uce.ShowDialog() == true)
                         {
                             Condition cond = uce.Result;
@@ -201,7 +201,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     addRewardCommand = new BaseCommand(() =>
                     {
-                        Universal_RewardEditor ure = new Universal_RewardEditor(null, true);
+                        Universal_RewardEditor ure = new Universal_RewardEditor(null);
                         if (ure.ShowDialog() == true)
                         {
                             Reward rew = ure.Result;

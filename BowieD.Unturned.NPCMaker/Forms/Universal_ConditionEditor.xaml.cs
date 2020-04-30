@@ -14,11 +14,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// </summary>
     public partial class Universal_ConditionEditor : Window
     {
-        public Universal_ConditionEditor(Condition condition = null, bool viewLocalization = false)
+        public Universal_ConditionEditor(Condition condition = null)
         {
             InitializeComponent();
             double scale = AppConfig.Instance.scale;
-            viewLocalizationField = viewLocalization;
             ClearParameters();
             Height *= scale;
             Width *= scale;
@@ -40,12 +39,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 {
                     typeBox.SelectedIndex = _index;
                     _chosen = true;
-                    //var fieldControls = Util.FindVisualChildren<FrameworkElement>(variablesGrid).
-                    //    Where(d => d.Tag != null && d.Tag.ToString().StartsWith("variable::"));
-                    //foreach (var fControl in fieldControls)
-                    //{
-                    //    SetValueToControl(fControl, condition.GetType().GetField(fControl.Tag.ToString().Substring(10)).GetValue(condition));
-                    //}
                 }
                 _index++;
             }
@@ -60,7 +53,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
         #region DESIGN VARS
         private readonly double baseHeight = 178;
         private readonly double heightDelta = 35;
-        private readonly bool viewLocalizationField = false;
         #endregion
         public Condition Result { get; private set; }
 
@@ -82,10 +74,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
             foreach (FrameworkElement c in controls)
             {
                 variablesGrid.Children.Add(c);
-            }
-            if (!viewLocalizationField)
-            {
-                GetLocalizationControl().Visibility = Visibility.Collapsed;
             }
 
             double newHeight = (baseHeight + (heightDelta * (mult + (mult > 1 ? 1 : 0))));
@@ -112,18 +100,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             try
             {
-                //Condition returnCondition = Activator.CreateInstance(_CurrentConditionType) as Condition;
-                //Dictionary<string, object> _values = new Dictionary<string, object>();
-                //var controls = Util.FindVisualChildren<FrameworkElement>(variablesGrid).Where(d => d.Tag != null && d.Tag.ToString().StartsWith("variable::"));
-                //foreach (var c in controls)
-                //{
-                //    _values.Add(c.Tag.ToString().Substring(10), GetValueFromControl(c));
-                //}
-                //foreach (var k in _values)
-                //{
-                //    var field = returnCondition.GetType().GetField(k.Key);
-                //    field.SetValue(returnCondition, Convert.ChangeType(k.Value, field.FieldType));
-                //}
                 if (variablesGrid.DataContext == null)
                 {
                     DialogResult = false;
@@ -141,48 +117,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 MessageBox.Show(LocalizationManager.Current.Interface["Editor_Condition_Fail"]);
             } // write some error message or something like that
         }
-
-        //private void SetValueToControl(FrameworkElement element, object value)
-        //{
-        //    switch (element)
-        //    {
-        //        case MahApps.Metro.Controls.NumericUpDown nud:
-        //            nud.Value = Convert.ToDouble(value);
-        //            break;
-        //        case CheckBox c:
-        //            c.IsChecked = value as bool?;
-        //            break;
-        //        case TextBox textBox:
-        //            textBox.Text = value as string;
-        //            break;
-        //        case ComboBox comboBox:
-        //            for (int k = 0; k < comboBox.Items.Count; k++)
-        //            {
-        //                if ((comboBox.Items[k] as ComboBoxItem).Tag.Equals(value))
-        //                {
-        //                    comboBox.SelectedIndex = k;
-        //                    break;
-        //                }
-        //            }
-        //            break;
-        //    }
-        //}
-        //private object GetValueFromControl(FrameworkElement element)
-        //{
-        //    switch (element)
-        //    {
-        //        case MahApps.Metro.Controls.NumericUpDown nud:
-        //            return nud.Value ?? 0;
-        //        case CheckBox checkBox:
-        //            return checkBox.IsChecked ?? false;
-        //        case TextBox textBox:
-        //            return textBox.Text;
-        //        case ComboBox comboBox:
-        //            return (comboBox.SelectedItem as ComboBoxItem).Tag;
-        //        default:
-        //            return null;
-        //    }
-        //}
         private FrameworkElement GetLocalizationControl()
         {
             FrameworkElement control = Util.FindVisualChildren<FrameworkElement>(variablesGrid).First(d => d.Tag != null && d.Tag.ToString() == "variable::Localization");

@@ -83,7 +83,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         }
         internal void AddItemBuy(VendorItem item)
         {
-            Universal_ItemList uil = new Universal_ItemList(item, Universal_ItemList.ReturnType.VendorItem, false, true)
+            Universal_ItemList uil = new Universal_ItemList(item, Universal_ItemList.ReturnType.VendorItem, true)
             {
                 Width = 240
             };
@@ -122,7 +122,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         }
         internal void AddItemSell(VendorItem item)
         {
-            Universal_ItemList uil = new Universal_ItemList(item, Universal_ItemList.ReturnType.VendorItem, false, true)
+            Universal_ItemList uil = new Universal_ItemList(item, Universal_ItemList.ReturnType.VendorItem, true)
             {
                 Width = 240
             };
