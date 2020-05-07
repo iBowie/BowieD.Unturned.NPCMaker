@@ -45,7 +45,19 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
                 string propName = prop.Name;
                 Type propType = prop.PropertyType;
-                string localizedName = LocalizationManager.Current.Reward[$"{Type}_{propName}"];
+
+                string localizedName;
+
+                string key1 = $"{Type}_{propName}";
+                string key2 = $"Shared_{propName}";
+
+                if (LocalizationManager.Current.Reward.ContainsKey(key1))
+                    localizedName = LocalizationManager.Current.Reward.Translate(key1);
+                else if (LocalizationManager.Current.Reward.ContainsKey(key2))
+                    localizedName = LocalizationManager.Current.Reward.Translate(key2);
+                else
+                    localizedName = key1;
+
                 Grid borderContents = new Grid();
                 Label l = new Label
                 {

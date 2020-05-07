@@ -55,7 +55,19 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
                 string propName = prop.Name;
                 Type propType = prop.PropertyType;
-                string localizedName = LocalizationManager.Current.Condition[$"{Type}_{propName}"];
+                // string localizedName = LocalizationManager.Current.Condition[$"{Type}_{propName}"];
+                string localizedName;
+
+                string key1 = $"{Type}_{propName}";
+                string key2 = $"Shared_{propName}";
+
+                if (LocalizationManager.Current.Condition.ContainsKey(key1))
+                    localizedName = LocalizationManager.Current.Condition.Translate(key1);
+                else if (LocalizationManager.Current.Condition.ContainsKey(key2))
+                    localizedName = LocalizationManager.Current.Condition.Translate(key2);
+                else
+                    localizedName = key1;
+
                 Grid borderContents = new Grid();
                 Label l = new Label
                 {
