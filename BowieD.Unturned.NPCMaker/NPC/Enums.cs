@@ -155,7 +155,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
     {
         English,
         Russian,
-        Spanish
+        Spanish,
+        French
     }
     public enum ParseType
     {
