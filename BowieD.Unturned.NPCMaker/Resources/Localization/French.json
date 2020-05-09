@@ -1,17 +1,17 @@
 {
-	"Author": "Edwin",
+	"Author": "Edwin, RayZof",
 	"Name": "Français (FR)",
 	"General":
 	{
 		"Project_SaveFilter": "Fichier de projet NPC  (*.npcproj)",
-		"Title": "Unturned 3.0 NPC Maker Trad By Edwin et y'a moi nan",
+		"Title": "Unturned 3.0 NPC Maker by BowieD",
 		"Configuration_Title": "Paramètres"
 	},
 	"Options": {
 		"experimentalFeatures": "Fonctions expérimentales",
 		"scale": "Échelle de l'interface",
 		"language": "Langue",
-		"enableDiscord": "...",
+		"enableDiscord": "Détaillée \"Discord Rich Presence\"",
 		"currentTheme": "Thème actuel",
 		"generateGuids": "Exportation GUID",
 		"autosaveOption": "Préservation des voitures",
@@ -490,7 +490,7 @@
         "StartUp_Patreon_Open": "Aller à Patreon"
 	},
 	"Interface": {
-		"App_About": "Made by BowieD.\nLocalization Author(s): {0}\nVersion: {1}",
+		"App_About": "Fait par BowieD.\nLocalization Auteur(s): {0}\nVersion: {1}",
         "App_About_Title": "À propos",
         "App_About_Patreon_Title": "Patreon Supporters",
         "App_About_Patreon_List_Item": "Supporter",
@@ -512,9 +512,9 @@
         "Main_Menu_CurrentFile": "Fichier actuel: {0}",
         "Main_Menu_CurrentFile_None": "Aucun",
         "Main_Menu_File": "Fichier",
-        "Main_Menu_File_New": "_New Project (Ctrl + N)",
-        "Main_Menu_File_Open": "_Open Project (Ctrl + O)",
-        "Main_Menu_File_Save": "_Save Project (Ctrl + S)",
+        "Main_Menu_File_New": "_Nouveau projet (Ctrl + N)",
+        "Main_Menu_File_Open": "Projet _ouvert (Ctrl + O)",
+        "Main_Menu_File_Save": "_Sauvegarder le projet (Ctrl + S)",
         "Main_Menu_File_SaveAs": "Enregistrer le projet _As ...",
         "Main_Menu_File_Recent": "Projets récents",
         "Main_Menu_File_Recent_Clear": "Effacer les projets récents",
@@ -525,10 +525,10 @@
         "Main_Menu_File_Exit": "Quitter",
         "Main_Menu_Options": "Options",
         "Main_Menu_Communication": "Contacter ou faire un don",
-        "Main_Menu_Communication_GitHub": "GitHub Repository (Click)",
-        "Main_Menu_Communication_Patreon": "Patreon (Click)",
+        "Main_Menu_Communication_GitHub": "Référentiel GitHub (Cliquez)",
+        "Main_Menu_Communication_Patreon": "Patreon (Cliquez)",
         "Main_Menu_Communication_Steam": "Steam de BowieD (Cliquez)",
-        "Main_Menu_Communication_Discord": "BowieD's Discord Server (Cliquez)",
+        "Main_Menu_Communication_Discord": "BowieD's Serveur Discord (Cliquez)",
         "Main_Menu_Communication_VK": "Profil VK de BowieD (Cliquez)",
         "Main_Menu_Guides": "Guides",
         "Main_Menu_About": "À propos",
