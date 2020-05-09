@@ -17,14 +17,13 @@ namespace BowieD.Unturned.NPCMaker.Parsing
         {
             dir = Path.GetDirectoryName(fileName) + Path.DirectorySeparatorChar;
             asset = new DataReader(File.ReadAllText(fileName));
-            foreach (object k in Enum.GetValues(typeof(ELanguage)))
+            if (File.Exists(dir + "English.dat"))
             {
-                if (File.Exists(dir + "English.dat"))
-                {
-                    local = new DataReader(File.ReadAllText(dir + "English.dat"));
-                    break;
-                }
-                else
+                local = new DataReader(File.ReadAllText(dir + "English.dat"));
+            }
+            else
+            {
+                foreach (object k in Enum.GetValues(typeof(ELanguage)))
                 {
                     App.Logger.Log($"[ParseTool] - English.dat not found. Checking all languages...");
                     if (File.Exists(dir + $"{k}.dat"))
