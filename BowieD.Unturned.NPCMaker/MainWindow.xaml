@@ -110,51 +110,77 @@
                                 <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <TextBox Text="{Binding EditorName, UpdateSourceTrigger=PropertyChanged}" Name="txtEditorName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,10,0,0">
-                            <TextBox.ToolTip>
-                                <StackPanel>
-                                    <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Name_Editor_Tooltip}"/>
-                                    <Image Source="Resources/Help/img_help_editorName.png"/>
-                                </StackPanel>
-                            </TextBox.ToolTip>
-                        </TextBox>
-                        <TextBlock HorizontalAlignment="Left" Margin="143,16,0,0" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Editor}" VerticalAlignment="Top"/>
-                        <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Name="txtDisplayName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="128" Height="24" Margin="10,41,0,0">
-                            <TextBox.ToolTip>
-                                <StackPanel>
-                                    <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Name_Display_Tooltip}"/>
-                                    <Image Source="Resources/Help/img_help_displayName.png"/>
-                                </StackPanel>
-                            </TextBox.ToolTip>
-                        </TextBox>
-                        <TextBlock  HorizontalAlignment="Left" Margin="143,45,0,0" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Display}" VerticalAlignment="Top"/>
-                        <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Name="txtID" HorizontalAlignment="Left" VerticalAlignment="Top" Width="64" Height="24" Margin="10,72,0,0" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
-                            <mah:NumericUpDown.ToolTip>
-                                <StackPanel>
-                                    <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_ID_Tooltip}"/>
-                                </StackPanel>
-                            </mah:NumericUpDown.ToolTip>
-                        </mah:NumericUpDown>
-                        <TextBlock  HorizontalAlignment="Left" Margin="79,75,0,0" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_ID}" VerticalAlignment="Top"/>
-                        <mah:NumericUpDown Value="{Binding DialogueID, UpdateSourceTrigger=PropertyChanged}" Name="txtStartDialogueID" HorizontalAlignment="Left" Height="23" Margin="10,103,0,0" VerticalAlignment="Top" Width="128" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
-                            <mah:NumericUpDown.ToolTip>
-                                <ToolTip>
+                        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Width="300" Margin="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox VerticalAlignment="Center" Text="{Binding EditorName, UpdateSourceTrigger=PropertyChanged}" Name="txtEditorName" Margin="5">
+                                    <TextBox.ToolTip>
+                                        <StackPanel>
+                                            <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Name_Editor_Tooltip}"/>
+                                            <Image Source="Resources/Help/img_help_editorName.png"/>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
+                                <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Editor}"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox VerticalAlignment="Center" Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Name="txtDisplayName" Margin="5">
+                                    <TextBox.ToolTip>
+                                        <StackPanel>
+                                            <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Name_Display_Tooltip}"/>
+                                            <Image Source="Resources/Help/img_help_displayName.png"/>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
+                                <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Display}" VerticalAlignment="Top"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Name="txtID" VerticalAlignment="Center" Margin="5" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
+                                    <mah:NumericUpDown.ToolTip>
+                                        <StackPanel>
+                                            <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_ID_Tooltip}"/>
+                                        </StackPanel>
+                                    </mah:NumericUpDown.ToolTip>
+                                </mah:NumericUpDown>
+                                <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_ID}" />
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <mah:NumericUpDown Value="{Binding DialogueID, UpdateSourceTrigger=PropertyChanged}" Name="txtStartDialogueID" Margin="5" VerticalAlignment="Center" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
+                                    <mah:NumericUpDown.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Dialogue_Tooltip}"/>
+                                                <Image Source="Resources/Help/img_help_startDialogue.png"/>
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </mah:NumericUpDown.ToolTip>
+                                </mah:NumericUpDown>
+                                <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Dialogue}"/>
+                            </Grid>
+                            <Button Command="{Binding EditVisibilityConditionsCommand}" Name="visibilityCondsButton" Content="{xaml:Localize Key=CHARACTER_Conditions}" Margin="5">
+                                <Button.ToolTip>
                                     <StackPanel>
-                                        <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Dialogue_Tooltip}"/>
-                                        <Image Source="Resources/Help/img_help_startDialogue.png"/>
+                                        <Image Source="Resources/Help/img_help_visibilityConditions.png"/>
                                     </StackPanel>
-                                </ToolTip>
-                            </mah:NumericUpDown.ToolTip>
-                        </mah:NumericUpDown>
-                        <TextBlock  HorizontalAlignment="Left" Margin="143,107,0,0" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Dialogue}" VerticalAlignment="Top"/>
-                        <Button Command="{Binding EditVisibilityConditionsCommand}" Name="visibilityCondsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{xaml:Localize Key=CHARACTER_Conditions}" Margin="10,135,0,0" Width="212" Height="28">
-                            <Button.ToolTip>
-                                <StackPanel>
-                                    <Image Source="Resources/Help/img_help_visibilityConditions.png"/>
-                                </StackPanel>
-                            </Button.ToolTip>
-                        </Button>
-                        <Button Command="{Binding RegenerateGUIDsCommand}" Name="regenerateGuidsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Guid_Generate}" Margin="10,167,0,0" MinWidth="212" Height="28"/>
+                                </Button.ToolTip>
+                            </Button>
+                            <Button Command="{Binding RegenerateGUIDsCommand}" Name="regenerateGuidsButton" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Guid_Generate}" Margin="5" />
+                        </StackPanel>
                         <Grid Margin="0,26,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="432">
                             <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" Background="Black" HorizontalAlignment="Right" Height="98" Margin="0,38,210,0" VerticalAlignment="Top" Width="98">
                                 <Image Name="faceImageControl" Source="Resources/Unturned/Faces/1.png" >
@@ -516,29 +542,68 @@
                         </GroupBox>
                         <GroupBox Header="{xaml:Localize Key=CHARACTER_Equipment}" HorizontalAlignment="Left" Margin="10,0,0,10" Width="300" Height="Auto" VerticalAlignment="Bottom">
                             <ScrollViewer>
-                                <Grid>
-                                    <mah:NumericUpDown Value="{Binding EquipmentPrimary,UpdateSourceTrigger=PropertyChanged}" x:Name="primaryIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                        <mah:NumericUpDown.ToolTip>
-                                            <StackPanel></StackPanel>
-                                        </mah:NumericUpDown.ToolTip>
-                                    </mah:NumericUpDown>
-                                    <mah:NumericUpDown Value="{Binding EquipmentSecondary,UpdateSourceTrigger=PropertyChanged}" x:Name="secondaryIdBox"  ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                        <mah:NumericUpDown.ToolTip>
-                                            <StackPanel></StackPanel>
-                                        </mah:NumericUpDown.ToolTip>
-                                    </mah:NumericUpDown>
-                                    <mah:NumericUpDown Value="{Binding EquipmentTertiary,UpdateSourceTrigger=PropertyChanged}" x:Name="tertiaryIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,-7" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                        <mah:NumericUpDown.ToolTip>
-                                            <StackPanel></StackPanel>
-                                        </mah:NumericUpDown.ToolTip>
-                                    </mah:NumericUpDown>
-
-                                    <Label Content="{xaml:Localize Key=CHARACTER_Equipment_Primary}"  Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
-                                    <Label Content="{xaml:Localize Key=CHARACTER_Equipment_Secondary}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
-                                    <Label Content="{xaml:Localize Key=CHARACTER_Equipment_Tertiary}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                    <ComboBox ItemsSource="{StaticResource Character_Equipment_Equipped_Enums}" SelectedValue="{Binding Equipped, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Character_Equipment_Equipped_Enums}}" Name="equipSlotBox" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="120"/>
-                                    <Label Content="{xaml:Localize Key=CHARACTER_Equipment_Equipped}" Margin="135,100,0,0" VerticalAlignment="Top" Height="27"/>
-                                </Grid>
+                                <StackPanel>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <mah:NumericUpDown VerticalAlignment="Center" Margin="5" Value="{Binding EquipmentPrimary,UpdateSourceTrigger=PropertyChanged}" x:Name="primaryIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
+                                            <mah:NumericUpDown.ToolTip>
+                                                <StackPanel></StackPanel>
+                                            </mah:NumericUpDown.ToolTip>
+                                        </mah:NumericUpDown>
+                                        <Label Grid.Column="1" Margin="5">
+                                            <Label.Content>
+                                                <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Equipment_Primary}" />
+                                            </Label.Content>
+                                        </Label>
+                                    </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <mah:NumericUpDown VerticalAlignment="Center" Value="{Binding EquipmentSecondary,UpdateSourceTrigger=PropertyChanged}" x:Name="secondaryIdBox"  ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="5">
+                                            <mah:NumericUpDown.ToolTip>
+                                                <StackPanel></StackPanel>
+                                            </mah:NumericUpDown.ToolTip>
+                                        </mah:NumericUpDown>
+                                        <Label Grid.Column="1" Margin="5">
+                                            <Label.Content>
+                                                <TextBlock Text="{xaml:Localize Key=CHARACTER_Equipment_Secondary}" TextWrapping="Wrap"/>
+                                            </Label.Content>
+                                        </Label>
+                                    </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <mah:NumericUpDown VerticalAlignment="Center" Value="{Binding EquipmentTertiary,UpdateSourceTrigger=PropertyChanged}" x:Name="tertiaryIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="5">
+                                            <mah:NumericUpDown.ToolTip>
+                                                <StackPanel></StackPanel>
+                                            </mah:NumericUpDown.ToolTip>
+                                        </mah:NumericUpDown>
+                                        <Label Grid.Column="1" Margin="5">
+                                            <Label.Content>
+                                                <TextBlock Text="{xaml:Localize Key=CHARACTER_Equipment_Tertiary}" TextWrapping="Wrap"/>
+                                            </Label.Content>
+                                        </Label>
+                                    </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <ComboBox VerticalAlignment="Center" ItemsSource="{StaticResource Character_Equipment_Equipped_Enums}" SelectedValue="{Binding Equipped, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Character_Equipment_Equipped_Enums}}" Name="equipSlotBox" Margin="5"/>
+                                        <Label Grid.Column="1" Margin="5">
+                                            <Label.Content>
+                                                <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Equipment_Equipped}" />
+                                            </Label.Content>
+                                        </Label>
+                                    </Grid>
+                                </StackPanel>
                             </ScrollViewer>
                         </GroupBox>
                     </Grid>
