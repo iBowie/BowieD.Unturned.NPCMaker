@@ -8,5 +8,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public override string UIText => $"{LocalizationManager.Current.Reward["Type_Flag_Bool"]} [{ID}] -> {Value}";
         public ushort ID { get; set; }
         public bool Value { get; set; }
+
+        public override void Give(Simulation simulation)
+        {
+            simulation.Flags[ID] = (short)(Value ? 1 : 0);
+        }
     }
 }

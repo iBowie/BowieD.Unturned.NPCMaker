@@ -107,7 +107,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             openCommand,
             resetCommand,
             addConditionCommand,
-            addRewardCommand;
+            addRewardCommand,
+            previewCommand;
         public ICommand SaveCommand
         {
             get
@@ -181,7 +182,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     addConditionCommand = new BaseCommand(() =>
                     {
-                        Universal_ConditionEditor uce = new Universal_ConditionEditor(null, true);
+                        Universal_ConditionEditor uce = new Universal_ConditionEditor(null);
                         if (uce.ShowDialog() == true)
                         {
                             Condition cond = uce.Result;
@@ -200,7 +201,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     addRewardCommand = new BaseCommand(() =>
                     {
-                        Universal_RewardEditor ure = new Universal_RewardEditor(null, true);
+                        Universal_RewardEditor ure = new Universal_RewardEditor(null);
                         if (ure.ShowDialog() == true)
                         {
                             Reward rew = ure.Result;
@@ -209,6 +210,30 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     });
                 }
                 return addRewardCommand;
+            }
+        }
+        public ICommand PreviewCommand
+        {
+            get
+            {
+                if (previewCommand == null)
+                {
+                    previewCommand = new BaseCommand(() =>
+                    {
+                        SaveCommand.Execute(null);
+
+                        Simulation simulation = new Simulation();
+
+                        MessageBox.Show(LocalizationManager.Current.Interface.Translate("Main_Tab_Vendor_Preview_Message"));
+
+                        SimulationView_Window sim = new SimulationView_Window(null, simulation);
+                        sim.ShowDialog();
+
+                        QuestView_Window dvw = new QuestView_Window(null, simulation, Quest, QuestView_Window.EMode.PREVIEW);
+                        dvw.ShowDialog();
+                    });
+                }
+                return previewCommand;
             }
         }
         private void AddReward(Reward reward)

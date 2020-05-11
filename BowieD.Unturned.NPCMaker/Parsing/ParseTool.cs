@@ -17,14 +17,13 @@ namespace BowieD.Unturned.NPCMaker.Parsing
         {
             dir = Path.GetDirectoryName(fileName) + Path.DirectorySeparatorChar;
             asset = new DataReader(File.ReadAllText(fileName));
-            foreach (object k in Enum.GetValues(typeof(ELanguage)))
+            if (File.Exists(dir + "English.dat"))
             {
-                if (File.Exists(dir + "English.dat"))
-                {
-                    local = new DataReader(File.ReadAllText(dir + "English.dat"));
-                    break;
-                }
-                else
+                local = new DataReader(File.ReadAllText(dir + "English.dat"));
+            }
+            else
+            {
+                foreach (object k in Enum.GetValues(typeof(ELanguage)))
                 {
                     App.Logger.Log($"[ParseTool] - English.dat not found. Checking all languages...");
                     if (File.Exists(dir + $"{k}.dat"))
@@ -249,7 +248,6 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         c[num] = new ConditionKillsTree()
                         {
                             ID = asset.ReadUInt16(tp + "ID"),
-                            Reset = needToReset,
                             Tree = asset.ReadString(tp + "Tree"),
                             Value = asset.ReadInt16(tp + "Value")
                         };
@@ -259,7 +257,6 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         {
                             GUID = asset.ReadString(tp + "GUID"),
                             Logic = logic,
-                            Reset = needToReset,
                             Value = asset.ReadUInt32(tp + "Value")
                         };
                         break;
@@ -267,7 +264,6 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         c[num] = new ConditionExperience()
                         {
                             Logic = logic,
-                            Reset = needToReset,
                             Value = asset.ReadUInt32(tp + "Value")
                         };
                         break;
@@ -284,7 +280,6 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                             Logic = logic,
                             Allow_Unset = asset.Has(tp + "Allow_Unset"),
                             ID = asset.ReadUInt16(tp + "ID"),
-                            Reset = needToReset,
                             Value = asset.ReadBoolean(tp + "Value")
                         };
                         break;
@@ -302,7 +297,6 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         {
                             Logic = logic,
                             ID = asset.ReadUInt16(tp + "ID"),
-                            Reset = needToReset,
                             Status = asset.ReadEnum<Quest_Status>(tp + "Status")
                         };
                         break;
@@ -317,8 +311,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         c[num] = new ConditionItem()
                         {
                             ID = asset.ReadUInt16(tp + "ID"),
-                            Amount = asset.ReadUInt16(tp + "Amount"),
-                            Reset = needToReset
+                            Amount = asset.ReadUInt16(tp + "Amount")
                         };
                         break;
                     case Condition_Type.Kills_Zombie:
@@ -326,7 +319,6 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         {
                             ID = asset.ReadUInt16(tp + "ID"),
                             Nav = asset.ReadByte(tp + "Nav"),
-                            Reset = needToReset,
                             Spawn = asset.Has(tp + "Spawn"),
                             Spawn_Quantity = asset.Has(tp + "Spawn_Quantity") ? asset.ReadInt32(tp + "Spawn_Quantity") : 1,
                             Value = asset.ReadInt16(tp + "Value"),
@@ -338,7 +330,6 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         {
                             ID = asset.ReadUInt16(tp + "ID"),
                             Nav = asset.ReadByte(tp + "Nav"),
-                            Reset = needToReset,
                             Value = asset.ReadInt16(tp + "Value")
                         };
                         break;
@@ -347,7 +338,6 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         {
                             Animal = asset.ReadUInt16(tp + "Animal"),
                             ID = asset.ReadUInt16(tp + "ID"),
-                            Reset = needToReset,
                             Value = asset.ReadInt16(tp + "Value")
                         };
                         break;
@@ -358,8 +348,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                             Allow_B_Unset = asset.Has(tp + "Allow_B_Unset"),
                             A_ID = asset.ReadUInt16(tp + "A_ID"),
                             B_ID = asset.ReadUInt16(tp + "B_ID"),
-                            Logic = logic,
-                            Reset = needToReset
+                            Logic = logic
                         };
                         break;
                     case Condition_Type.Time_Of_Day:
@@ -407,7 +396,6 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         c[num] = new ConditionKillsPlayer()
                         {
                             ID = asset.ReadUInt16(tp + "ID"),
-                            Reset = needToReset,
                             Value = asset.ReadInt16(tp + "Value")
                         };
                         break;
@@ -417,12 +405,12 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                             ID = asset.ReadUInt16(tp + "ID"),
                             Nav = asset.ReadByte(tp + "Nav"),
                             Object = asset.ReadString(tp + "Object") ?? "",
-                            Reset = needToReset,
                             Value = asset.ReadInt16(tp + "Value")
                         };
                         break;
                 }
                 c[num].Localization = desc ?? "";
+                c[num].Reset = needToReset;
                 num++;
             }
             return c;

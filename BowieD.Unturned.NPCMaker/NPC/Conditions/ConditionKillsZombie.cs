@@ -14,8 +14,36 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public bool Spawn { get; set; }
         [ConditionOptional(255, 255)]
         public byte Nav { get; set; }
-        [ConditionNoValue]
-        public bool Reset { get; set; }
         public Zombie_Type Zombie { get; set; }
+
+        public override bool Check(Simulation simulation)
+        {
+            if (simulation.Flags.TryGetValue(ID, out short flag))
+            {
+                return flag >= Value;
+            }
+            return false;
+        }
+        public override void Apply(Simulation simulation)
+        {
+            if (Reset)
+            {
+                simulation.Flags.Remove(ID);
+            }
+        }
+        public override string FormatCondition(Simulation simulation)
+        {
+            if (string.IsNullOrEmpty(Localization))
+            {
+                return null;
+            }
+
+            if (!simulation.Flags.TryGetValue(ID, out short value))
+            {
+                value = 0;
+            }
+
+            return string.Format(Localization, value, Value);
+        }
     }
 }

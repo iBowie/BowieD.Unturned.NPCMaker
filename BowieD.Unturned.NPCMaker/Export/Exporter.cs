@@ -242,7 +242,11 @@ namespace BowieD.Unturned.NPCMaker.Export
                             for (int k = 0; k < condCount; k++)
                             {
                                 NPC.Conditions.Condition cond = character.visibilityConditions.ElementAt(k);
+
                                 asset.WriteLine(ExportCondition(cond, "", k, true));
+
+                                if (!string.IsNullOrEmpty(cond.Localization))
+                                    local.WriteLine($"Condition_{k} {cond.Localization}");
                             }
                         }
 
@@ -304,7 +308,12 @@ namespace BowieD.Unturned.NPCMaker.Export
                                     asset.WriteLine($"Message_{k}_Conditions {message.conditions.Length}");
                                     for (int c = 0; c < message.conditions.Length; c++)
                                     {
-                                        asset.WriteLine(ExportCondition(message.conditions[c], $"Message_{k}_", c));
+                                        NPC.Conditions.Condition cond = message.conditions[c];
+
+                                        asset.WriteLine(ExportCondition(cond, $"Message_{k}_", c));
+
+                                        if (!string.IsNullOrEmpty(cond.Localization))
+                                            local.WriteLine($"Message_{k}_Condition_{c} {cond.Localization}");
                                     }
                                 }
                                 if (message.rewards.Length > 0)
@@ -312,7 +321,12 @@ namespace BowieD.Unturned.NPCMaker.Export
                                     asset.WriteLine($"Message_{k}_Rewards {message.rewards.Length}");
                                     for (int c = 0; c < message.rewards.Length; c++)
                                     {
-                                        asset.WriteLine(ExportReward(message.rewards[c], $"Message_{k}_", c));
+                                        Reward rew = message.rewards[c];
+
+                                        asset.WriteLine(ExportReward(rew, $"Message_{k}_", c));
+
+                                        if (!string.IsNullOrEmpty(rew.Localization))
+                                            local.WriteLine($"Message_{k}_Reward_{c} {rew.Localization}");
                                     }
                                 }
                             }
@@ -356,7 +370,12 @@ namespace BowieD.Unturned.NPCMaker.Export
                                     int cndCnt = response.conditions.Count();
                                     for (int c = 0; c < cndCnt; c++)
                                     {
-                                        asset.WriteLine(ExportCondition(response.conditions[c], $"Response_{k}_", c));
+                                        NPC.Conditions.Condition cond = response.conditions[c];
+                                        
+                                        asset.WriteLine(ExportCondition(cond, $"Response_{k}_", c));
+
+                                        if (!string.IsNullOrEmpty(cond.Localization))
+                                            local.WriteLine($"Response_{k}_Condition_{c} {cond.Localization}");
                                     }
                                 }
                                 if (response.rewards.Count() > 0)
@@ -365,7 +384,12 @@ namespace BowieD.Unturned.NPCMaker.Export
                                     int rwrdCnt = response.rewards.Count();
                                     for (int c = 0; c < rwrdCnt; c++)
                                     {
-                                        asset.WriteLine(ExportReward(response.rewards[c], $"Response_{k}_", c));
+                                        Reward rew = response.rewards[c];
+
+                                        asset.WriteLine(ExportReward(rew, $"Response_{k}_", c));
+
+                                        if (!string.IsNullOrEmpty(rew.Localization))
+                                            local.WriteLine($"Response_{k}_Reward_{c} {rew.Localization}");
                                     }
                                 }
                             }

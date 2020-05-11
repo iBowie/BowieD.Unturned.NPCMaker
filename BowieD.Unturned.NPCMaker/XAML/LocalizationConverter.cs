@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Linq;
 using System.Windows.Data;
 
 namespace BowieD.Unturned.NPCMaker.XAML
@@ -18,7 +17,14 @@ namespace BowieD.Unturned.NPCMaker.XAML
             {
                 string dictName = _key.Split('_')[0];
                 Localization.TranslationDictionary dict = Localization.LocalizationManager.Current.GetDictionary(dictName);
-                return dict.Translate(string.Join("_", _key.Split('_').Skip(1)));
+                if (dict != null)
+                {
+                    return dict.Translate(_key.Substring(dictName.Length + 1));
+                }
+                else
+                {
+                    return _key;
+                }
             }
             catch
             {

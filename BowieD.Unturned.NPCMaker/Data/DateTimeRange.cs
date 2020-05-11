@@ -23,11 +23,11 @@ namespace BowieD.Unturned.NPCMaker.Data
         {
             DateTime checkFrom, checkTo;
 
-            int fromDeltaYears = DateTime.UtcNow.Year - From.Year;
-            int toDeltaYears = DateTime.UtcNow.Year - To.Year;
-
-            if (Annual && fromDeltaYears >= 0 && toDeltaYears >= 0)
+            if (Annual)
             {
+                int fromDeltaYears = DateTime.UtcNow.Year - From.Year;
+                int toDeltaYears = DateTime.UtcNow.Year - To.Year;
+                
                 checkFrom = From.AddYears(fromDeltaYears);
                 checkTo = To.AddYears(toDeltaYears);
             }

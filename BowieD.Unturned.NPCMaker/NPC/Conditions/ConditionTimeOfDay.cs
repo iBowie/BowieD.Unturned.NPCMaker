@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Localization;
 using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
@@ -38,6 +39,31 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 sb.Append(Second);
                 return sb.ToString();
             }
+        }
+
+
+        public override void Apply(Simulation simulation) { }
+        public override bool Check(Simulation simulation)
+        {
+            return SimulationTool.Compare(simulation.Time, Second, Logic);
+        }
+        public override string FormatCondition(Simulation simulation)
+        {
+            if (string.IsNullOrEmpty(Localization))
+            {
+                return null;
+            }
+
+            return string.Format(Localization, SecondToTime(Second));
+        }
+
+        public static string SecondToTime(int second)
+        {
+            int num = second / 3600;
+            int num2 = second / 60 - num * 60;
+            int num3 = second - num * 3600 - num2 * 60;
+
+            return $"{num:D2}:{num2:D2}:{num3:D2}";
         }
     }
 }

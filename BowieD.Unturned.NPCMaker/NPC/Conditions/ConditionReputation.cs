@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -36,6 +37,24 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 outp += Value;
                 return outp;
             }
+        }
+
+        public override void Apply(Simulation simulation) { }
+        public override bool Check(Simulation simulation)
+        {
+            return SimulationTool.Compare(simulation.Reputation, Value, Logic);
+        }
+        public override string FormatCondition(Simulation simulation)
+        {
+            string text = Localization;
+            if (string.IsNullOrEmpty(text))
+            {
+                text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Condition_Reputation");
+            }
+
+            return string.Format(text,
+                simulation.Reputation > 0 ? $"+{simulation.Reputation}" : $"{simulation.Reputation}",
+                Value > 0 ? $"+{Value}" : $"{Value}");
         }
     }
 }

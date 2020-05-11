@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Localization;
 using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
@@ -31,5 +32,15 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public ushort ID { get; set; }
         public short Value { get; set; }
         public Modification_Type Modification { get; set; }
+
+        public override void Give(Simulation simulation)
+        {
+            if (!simulation.Flags.TryGetValue(ID, out short a))
+            {
+                a = 0;
+            }
+
+            simulation.Flags[ID] = SimulationTool.Modify(a, Value, Modification);
+        }
     }
 }

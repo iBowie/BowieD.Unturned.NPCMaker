@@ -148,6 +148,7 @@
     <Compile Include="Commands\ParseCommand.cs" />
     <Compile Include="Commands\ShutdownCommand.cs" />
     <Compile Include="Common\ContextHelper.cs" />
+    <Compile Include="Common\SimulationTool.cs" />
     <Compile Include="Common\Utility\DebugUtility.cs" />
     <Compile Include="Common\Utility\NETHelper.cs" />
     <Compile Include="Common\Utility\PathUtility.cs" />
@@ -180,6 +181,15 @@
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\GCCommand.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
+    <Compile Include="Forms\DialogueView_Window.xaml.cs">
+      <DependentUpon>DialogueView_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlagEditorView_Window.xaml.cs">
+      <DependentUpon>FlagEditorView_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InventoryEditorView_Window.xaml.cs">
+      <DependentUpon>InventoryEditorView_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Message_TreeView.xaml.cs">
       <DependentUpon>Message_TreeView.xaml</DependentUpon>
     </Compile>
@@ -187,6 +197,21 @@
     <Compile Include="Commands\NotifyCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
     <Compile Include="Commands\SwitchCommand.cs" />
+    <Compile Include="Forms\MultiFieldInputView_Dialog.xaml.cs">
+      <DependentUpon>MultiFieldInputView_Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OneFieldInputView_Dialog.xaml.cs">
+      <DependentUpon>OneFieldInputView_Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\QuestEditorView_Window.xaml.cs">
+      <DependentUpon>QuestEditorView_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\QuestView_Window.xaml.cs">
+      <DependentUpon>QuestView_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SimulationView_Window.xaml.cs">
+      <DependentUpon>SimulationView_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Universal_ConditionEditor.xaml.cs">
       <DependentUpon>Universal_ConditionEditor.xaml</DependentUpon>
     </Compile>
@@ -203,6 +228,9 @@
       <DependentUpon>Universal_VendorItemEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\UpdateCommand.cs" />
+    <Compile Include="Forms\VendorView_Window.xaml.cs">
+      <DependentUpon>VendorView_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Whats_New.xaml.cs">
       <DependentUpon>Whats_New.xaml</DependentUpon>
     </Compile>
@@ -302,6 +330,7 @@
     <Compile Include="NPC\Rewards\RewardTeleport.cs" />
     <Compile Include="NPC\Rewards\Attributes\RewardTooltipAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardVehicle.cs" />
+    <Compile Include="NPC\Simulation.cs" />
     <Compile Include="Parsing\DataReader.cs" />
     <Compile Include="Parsing\ParseTool.cs" />
     <Compile Include="Program.cs" />
@@ -359,7 +388,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\DialogueView_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\FlagEditorView_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\InventoryEditorView_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\Message_TreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\MultiFieldInputView_Dialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\OneFieldInputView_Dialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\QuestEditorView_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\QuestView_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\SimulationView_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -380,6 +441,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\Universal_VendorItemEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\VendorView_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -426,6 +491,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Resources\Localization\French.json" />
     <Resource Include="Resources\Localization\Spanish.json" />
     <Resource Include="Resources\Localization\Russian.json" />
     <Resource Include="Resources\Localization\English.json" />

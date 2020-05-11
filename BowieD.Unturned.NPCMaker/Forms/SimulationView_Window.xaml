@@ -1,0 +1,129 @@
+﻿<Window x:Class="BowieD.Unturned.NPCMaker.Forms.SimulationView_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
+        mc:Ignorable="d"
+        Title="{xaml:Localize Key=SIMULATION.SIMULATION_Window_Title}" Height="Auto" Width="800">
+    <Grid>
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
+        </Grid.LayoutTransform>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer>
+            <StackPanel>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{xaml:Localize Key=SIMULATION.SIMULATION_Name}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
+                    <TextBox Margin="10" Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Time}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Slider AutoToolTipPlacement="BottomRight" Name="gameTimeSlider" Grid.Column="1" Margin="10" Minimum="0" Maximum="3600" Value="{Binding Time, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Experience}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <mah:NumericUpDown Margin="10" Minimum="0" Maximum="4294967295" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Experience, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Reputation}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <mah:NumericUpDown Margin="10" Minimum="-2147483648" Maximum="2147483647" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Reputation, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Health}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <mah:NumericUpDown Margin="10" Minimum="0" Maximum="100" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Health, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Food}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <mah:NumericUpDown Margin="10" Minimum="0" Maximum="100" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Food, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Water}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <mah:NumericUpDown Margin="10" Minimum="0" Maximum="100" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Water, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Virus}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <mah:NumericUpDown Margin="10" Minimum="0" Maximum="100" Interval="1" ParsingNumberStyle="Integer" Grid.Column="1" Value="{Binding Virus, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Holiday}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <ComboBox Margin="10" Grid.Column="1" ItemsSource="{StaticResource Simulation_Holidays_Enums}" SelectedValue="{Binding Holiday, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Simulation_Holidays_Enums}}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Skillset}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <ComboBox Margin="10" Grid.Column="1" ItemsSource="{StaticResource Simulation_Skillsets_Enums}" SelectedValue="{Binding Skillset, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Simulation_Skillsets_Enums}}"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Flags}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Button Grid.Column="1" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Flags_Button}" VerticalAlignment="Center" HorizontalAlignment="Center" Click="FlagEditor_Button_Click"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Quests}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Button Grid.Column="1" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Quests_Button}" VerticalAlignment="Center" HorizontalAlignment="Center" Click="QuestEditor_Button_Click"/>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="10" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Inventory}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Button Grid.Column="1" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Inventory_Button}" VerticalAlignment="Center" HorizontalAlignment="Center" Click="InventoryEditor_Button_Click"/>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        <Button Grid.Row="1" Name="reloadDialogueButton" Click="ReloadDialogue_Button_Click" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Button_Reload_Dialogue}" Margin="10"/>
+    </Grid>
+</Window>

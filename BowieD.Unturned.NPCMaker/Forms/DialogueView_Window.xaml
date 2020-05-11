@@ -1,0 +1,29 @@
+﻿<Window x:Class="BowieD.Unturned.NPCMaker.Forms.DialogueView_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms" 
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
+        mc:Ignorable="d"
+        Title="{xaml:Localize Key=SIMULATION.DIALOGUE_Window_Title}" Height="450" Width="800">
+    <StackPanel>
+        <StackPanel.LayoutTransform>
+            <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
+        </StackPanel.LayoutTransform>
+        <Border Margin="5" BorderBrush="{DynamicResource AccentColor}" BorderThickness="1" CornerRadius="4">
+            <StackPanel>
+                <Label Margin="5">
+                    <TextBlock Name="npcNameText" TextWrapping="NoWrap" FontSize="14"/>
+                </Label>
+                <Label Margin="5" PreviewMouseDown="Label_PreviewMouseDown">
+                    <TextBlock Name="mainText" TextWrapping="Wrap" MaxHeight="64" Height="64" MinHeight="64"/>
+                </Label>
+            </StackPanel>
+        </Border>
+        <ScrollViewer Margin="5" MaxHeight="152">
+            <StackPanel Name="responsesPanel"/>
+        </ScrollViewer>
+    </StackPanel>
+</Window>

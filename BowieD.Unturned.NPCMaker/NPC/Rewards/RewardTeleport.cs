@@ -8,5 +8,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public override string UIText => $"{LocalizationManager.Current.Reward["Type_Teleport"]} [{Spawnpoint}]";
 
         public string Spawnpoint { get; set; }
+
+        public override void Give(Simulation simulation) { }
     }
 }

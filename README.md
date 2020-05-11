@@ -1,9 +1,9 @@
 # BowieD.Unturned.NPCMaker
 ## Features
 * Character creation and edition
-* Dialogue creation and edition
-* Vendor creation and edition
-* Quest creation and edition
+* Dialogue creation, edition and preview
+* Vendor creation, edition and preview
+* Quest creation, edition and preview
 * Rewards creation and edition
 * Condition creation and edition
 * Import existing NPCs
@@ -26,7 +26,4 @@ This application allows people to make their own NPCs in Unturned very easy and 
 This application is free-to-use, and will not be sold.
 
 ## How to use it?
-If you need help with how the app works - check Steam Guide here: https://steamcommunity.com/sharedfiles/filedetails/?id=1664300090
-
-## Contribution
-If you want to contribute to this project - please, do really good contributions. I want this app to be the best in it's kind. I work hard to make this app really good.
+If you need help with how the app works - check guides in the app

@@ -29,6 +29,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
             catch { }
             switch (returnType)
             {
+                case ReturnType.Character:
+                    {
+                        foreach (NPC.NPCCharacter c in MainWindow.CurrentProject.data.characters)
+                        {
+                            Add(c, c.UIText);
+                        }
+                    }
+                    break;
                 case ReturnType.Dialogue:
                     foreach (NPC.NPCDialogue d in MainWindow.CurrentProject.data.dialogues)
                     {
@@ -57,7 +65,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 Height = 23,
                 Content = text,
                 HorizontalContentAlignment = HorizontalAlignment.Center,
-                Tag = value
+                Tag = value,
+                Margin = new Thickness(2.5)
             };
             b.Click += B_Click;
             stackPanel.Children.Add(b);

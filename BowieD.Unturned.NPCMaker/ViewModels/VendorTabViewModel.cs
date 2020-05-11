@@ -83,7 +83,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         }
         internal void AddItemBuy(VendorItem item)
         {
-            Universal_ItemList uil = new Universal_ItemList(item, Universal_ItemList.ReturnType.VendorItem, false, true)
+            Universal_ItemList uil = new Universal_ItemList(item, Universal_ItemList.ReturnType.VendorItem, true)
             {
                 Width = 240
             };
@@ -122,7 +122,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         }
         internal void AddItemSell(VendorItem item)
         {
-            Universal_ItemList uil = new Universal_ItemList(item, Universal_ItemList.ReturnType.VendorItem, false, true)
+            Universal_ItemList uil = new Universal_ItemList(item, Universal_ItemList.ReturnType.VendorItem, true)
             {
                 Width = 240
             };
@@ -193,7 +193,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }
             return -1;
         }
-        private ICommand addItemCommand, saveCommand, openCommand, resetCommand;
+        private ICommand addItemCommand, saveCommand, openCommand, resetCommand, previewCommand;
         public ICommand AddItemCommand
         {
             get
@@ -277,6 +277,30 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     });
                 }
                 return resetCommand;
+            }
+        }
+        public ICommand PreviewCommand
+        {
+            get
+            {
+                if (previewCommand == null)
+                {
+                    previewCommand = new BaseCommand(() =>
+                    {
+                        SaveCommand.Execute(null);
+
+                        Simulation simulation = new Simulation();
+
+                        MessageBox.Show(LocalizationManager.Current.Interface.Translate("Main_Tab_Vendor_Preview_Message"));
+
+                        SimulationView_Window sim = new SimulationView_Window(null, simulation);
+                        sim.ShowDialog();
+
+                        VendorView_Window dvw = new VendorView_Window(null, simulation, Vendor);
+                        dvw.ShowDialog();
+                    });
+                }
+                return previewCommand;
             }
         }
     }

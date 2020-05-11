@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
@@ -26,5 +27,14 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public ushort A_ID { get; set; }
         public ushort B_ID { get; set; }
         public Operation_Type Operation { get; set; }
+
+        public override void Give(Simulation simulation)
+        {
+            short
+                a = simulation.Flags[A_ID],
+                b = simulation.Flags[B_ID];
+
+            simulation.Flags[A_ID] = SimulationTool.Operate(a, b, Operation);
+        }
     }
 }

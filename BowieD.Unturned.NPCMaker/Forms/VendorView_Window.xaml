@@ -1,0 +1,62 @@
+﻿<Window x:Class="BowieD.Unturned.NPCMaker.Forms.VendorView_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
+        mc:Ignorable="d"
+        Title="{xaml:Localize Key=SIMULATION.VENDOR_Window_Title}" Height="450" Width="800">
+    <Grid>
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
+        </Grid.LayoutTransform>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="10">
+            <Label HorizontalAlignment="Center">
+                <TextBlock Name="title" Text="Vendor Title" FontSize="14"/>
+            </Label>
+            <Label HorizontalAlignment="Center">
+                <TextBlock Name="desc" Text="Vendor Desc" />
+            </Label>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="{xaml:Localize Key=SIMULATION.VENDOR_Header_Buying}"/>
+            </Label>
+            <Label Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="{xaml:Localize Key=SIMULATION.VENDOR_Header_Selling}"/>
+            </Label>
+            <ScrollViewer Grid.Column="0" Grid.Row="1" Margin="10,0,10,0">
+                <StackPanel Name="buyingPanel"/>
+            </ScrollViewer>
+            <ScrollViewer Grid.Column="1" Grid.Row="1" Margin="10,0,10,0">
+                <StackPanel Name="sellingPanel"/>
+            </ScrollViewer>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="{DynamicResource AccentColor}" BorderThickness="1" CornerRadius="4" Margin="10">
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Name="currencyText" Text="Experience: 0" />
+                </Label>
+            </Border>
+            <Button Click="Button_Click" Margin="10" Grid.Column="1" Content="{xaml:Localize Key=SIMULATION.VENDOR_Button_Close}"/>
+        </Grid>
+    </Grid>
+</Window>
