@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
         mc:Ignorable="d"
-        Title="xD" Height="450" MinWidth="300" MaxWidth="300" Width="300" Icon="{DynamicResource app_Icon}">
+        Title="xD" Height="450" WindowStartupLocation="CenterOwner" MinWidth="300" MaxWidth="300" Width="300" Icon="{DynamicResource app_Icon}">
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform x:Name="gridScale"/>

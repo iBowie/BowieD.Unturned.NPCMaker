@@ -509,7 +509,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     optionsCommand = new BaseCommand(() =>
                     {
-                        new Configuration.ConfigWindow().ShowDialog();
+                        ConfigWindow configWindow = new Configuration.ConfigWindow();
+                        configWindow.Owner = MainWindow;
+                        configWindow.ShowDialog();
                     });
                 }
                 return optionsCommand;

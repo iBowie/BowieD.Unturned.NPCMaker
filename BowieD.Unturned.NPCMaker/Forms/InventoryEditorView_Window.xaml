@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner"
         Title="{xaml:Localize Key=SIMULATION.INVENTORY_Window_Title}" Height="450" Width="800">
     <Grid>
         <Grid.LayoutTransform>

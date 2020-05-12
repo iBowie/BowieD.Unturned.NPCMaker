@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner"
         Title="{xaml:Localize Key=INTERFACE_Dialogue_Reply_Visiblity_Title}" Height="420" Width="300"
         Icon="{DynamicResource app_Icon}">
     <Grid>
