@@ -15,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker
         }
         public static MessageBoxResult Show(string messageBoxText, string captionText, MessageBoxButton messageBoxButton)
         {
-            return Show(messageBoxText, captionText, MessageBoxButton.OK, MessageBoxImage.None);
+            return Show(messageBoxText, captionText, messageBoxButton, MessageBoxImage.None);
         }
         public static MessageBoxResult Show(string messageBoxText, string captionText, MessageBoxButton messageBoxButton, MessageBoxImage image)
         {
