@@ -27,6 +27,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             Loaded += (sender, e) =>
             {
                 SimulationView_Window svw = new SimulationView_Window(this, Simulation);
+                svw.Owner = this;
                 svw.Show();
                 Closing += (sender2, e2) =>
                 {

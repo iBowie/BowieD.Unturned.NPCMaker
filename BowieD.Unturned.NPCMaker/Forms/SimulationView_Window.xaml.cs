@@ -40,16 +40,19 @@ namespace BowieD.Unturned.NPCMaker.Forms
         private void FlagEditor_Button_Click(object sender, RoutedEventArgs e)
         {
             FlagEditorView_Window fevw = new FlagEditorView_Window(Simulation);
+            fevw.Owner = this;
             fevw.ShowDialog();
         }
         private void QuestEditor_Button_Click(object sender, RoutedEventArgs e)
         {
             QuestEditorView_Window qevw = new QuestEditorView_Window(Simulation);
+            qevw.Owner = this;
             qevw.ShowDialog();
         }
         private void InventoryEditor_Button_Click(object sender, RoutedEventArgs e)
         {
             InventoryEditorView_Window ievw = new InventoryEditorView_Window(Simulation);
+            ievw.Owner = this;
             ievw.ShowDialog();
         }
     }

@@ -79,12 +79,14 @@ namespace BowieD.Unturned.NPCMaker.Controls
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Forms.Universal_ListView ulv = new Forms.Universal_ListView(Conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
+            ulv.Owner = MainWindow.Instance;
             ulv.ShowDialog();
             Conditions = ulv.Values.Cast<Condition>().ToArray();
         }
         private void EditRewardsButton_Click(object sender, RoutedEventArgs e)
         {
             Forms.Universal_ListView ulv = new Forms.Universal_ListView(Rewards.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Reward, false)).ToList(), Universal_ItemList.ReturnType.Reward);
+            ulv.Owner = MainWindow.Instance;
             ulv.ShowDialog();
             Rewards = ulv.Values.Cast<Reward>().ToArray();
         }

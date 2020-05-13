@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC;
+using MahApps.Metro.Controls;
 using System.Windows;
 using System.Windows.Controls;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
@@ -33,6 +34,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
                     {
                         Condition Condition = Value as Condition;
                         Forms.Universal_ConditionEditor uce = new Forms.Universal_ConditionEditor(Condition);
+                        uce.Owner = this.TryFindParent<Window>();
                         uce.ShowDialog();
                         if (uce.DialogResult == true)
                         {
@@ -51,6 +53,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
                     {
                         Reward reward = Value as Reward;
                         Forms.Universal_RewardEditor ure = new Forms.Universal_RewardEditor(reward);
+                        ure.Owner = this.TryFindParent<Window>();
                         ure.ShowDialog();
                         if (ure.DialogResult == true)
                         {
@@ -68,6 +71,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
                         VendorItem Item = Value as VendorItem;
                         bool old = Item.isBuy;
                         Forms.Universal_VendorItemEditor uvie = new Forms.Universal_VendorItemEditor(Item);
+                        uvie.Owner = this.TryFindParent<Window>();
                         if (uvie.ShowDialog() == true)
                         {
                             VendorItem NewItem = uvie.Result as VendorItem;

@@ -187,6 +187,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     openCommand = new BaseCommand(() =>
                     {
                         Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentProject.data.characters.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Character, false)).ToList(), Universal_ItemList.ReturnType.Character);
+                        ulv.Owner = MainWindow.Instance;
                         if (ulv.ShowDialog() == true)
                         {
                             SaveCommand.Execute(null);
@@ -222,6 +223,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     editVisibilityConditionsCommand = new BaseCommand(() =>
                     {
                         Universal_ListView ulv = new Universal_ListView(Character.visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
+                        ulv.Owner = MainWindow.Instance;
                         ulv.ShowDialog();
                         Character.visibilityConditions = ulv.Values.Cast<Condition>().ToList();
                         MainWindow.CurrentProject.isSaved = false;

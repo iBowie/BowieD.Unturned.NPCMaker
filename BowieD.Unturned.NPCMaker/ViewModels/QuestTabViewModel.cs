@@ -143,6 +143,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     openCommand = new BaseCommand(() =>
                     {
                         Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentProject.data.quests.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Quest, false)).ToList(), Universal_ItemList.ReturnType.Quest);
+                        ulv.Owner = MainWindow.Instance;
                         if (ulv.ShowDialog() == true)
                         {
                             SaveCommand.Execute(null);
@@ -227,9 +228,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         MessageBox.Show(LocalizationManager.Current.Interface.Translate("Main_Tab_Vendor_Preview_Message"));
 
                         SimulationView_Window sim = new SimulationView_Window(null, simulation);
+                        sim.Owner = MainWindow.Instance;
                         sim.ShowDialog();
 
                         QuestView_Window dvw = new QuestView_Window(null, simulation, Quest, QuestView_Window.EMode.PREVIEW);
+                        dvw.Owner = MainWindow.Instance;
                         dvw.ShowDialog();
                     });
                 }
