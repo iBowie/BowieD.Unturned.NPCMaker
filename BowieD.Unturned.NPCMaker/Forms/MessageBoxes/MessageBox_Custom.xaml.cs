@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using BowieD.Unturned.NPCMaker.Localization;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -73,28 +74,28 @@ namespace BowieD.Unturned.NPCMaker.Forms.MessageBoxes
         Button CreateOK()
         {
             var b = CreateBase();
-            b.Content = "OK";
+            b.Content = LocalizationManager.Current.Interface["MessageBox_Button_OK"];
             b.Click += Click_OK;
             return b;
         }
         Button CreateCancel()
         {
             var b = CreateBase();
-            b.Content = "Cancel";
+            b.Content = LocalizationManager.Current.Interface["MessageBox_Button_Cancel"];
             b.Click += Click_Cancel;
             return b;
         }
         Button CreateYes()
         {
             var b = CreateBase();
-            b.Content = "Yes";
+            b.Content = LocalizationManager.Current.Interface["MessageBox_Button_Yes"];
             b.Click += Click_Yes;
             return b;
         }
         Button CreateNo()
         {
             var b = CreateBase();
-            b.Content = "No";
+            b.Content = LocalizationManager.Current.Interface["MessageBox_Button_No"];
             b.Click += Click_No;
             return b;
         }

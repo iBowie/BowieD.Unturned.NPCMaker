@@ -635,7 +635,11 @@
     "Context_Dialogue_PasteColor_magenta": "Пурпурный",
     "Context_Dialogue_PasteColor_red": "Красный",
     "Context_Dialogue_PasteColor_white": "Белый",
-    "Context_Dialogue_PasteColor_yellow": "Жёлтый"
+    "Context_Dialogue_PasteColor_yellow": "Жёлтый",
+    "MessageBox_Button_OK": "ОК",
+    "MessageBox_Button_Cancel": "Отмена",
+    "MessageBox_Button_Yes": "Да",
+    "MessageBox_Button_No": "Нет"
   },
   "Simulation": {
     "Dialogue": {

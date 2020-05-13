@@ -635,7 +635,11 @@
 		"Context_Dialogue_PasteColor_magenta": "Violet",
 		"Context_Dialogue_PasteColor_red": "Rouge",
 		"Context_Dialogue_PasteColor_white": "Blanc",
-		"Context_Dialogue_PasteColor_yellow": "Jaune"
+		"Context_Dialogue_PasteColor_yellow": "Jaune",
+		"MessageBox_Button_OK": "D'accord",
+		"MessageBox_Button_Cancel": "Annuler",
+		"MessageBox_Button_Yes": "Oui",
+		"MessageBox_Button_No": "Non"
 	},
 	"Simulation": {
 		"Dialogue": {

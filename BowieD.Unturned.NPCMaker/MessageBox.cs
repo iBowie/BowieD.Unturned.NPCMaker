@@ -19,9 +19,34 @@ namespace BowieD.Unturned.NPCMaker
         }
         public static MessageBoxResult Show(string messageBoxText, string captionText, MessageBoxButton messageBoxButton, MessageBoxImage image)
         {
-            MessageBox_Custom mbc = new MessageBox_Custom(messageBoxText, captionText, messageBoxButton, image);
-            mbc.ShowDialog();
-            return mbc.Result;
+            try
+            {
+                MessageBox_Custom mbc = new MessageBox_Custom(messageBoxText, captionText, messageBoxButton, image);
+                mbc.ShowDialog();
+                return mbc.Result;
+            }
+            catch
+            {
+                System.Windows.MessageBoxButton orig;
+                switch (messageBoxButton)
+                {
+                    case MessageBoxButton.OKCancel:
+                        orig = System.Windows.MessageBoxButton.OKCancel;
+                        break;
+                    case MessageBoxButton.YesNo:
+                        orig = System.Windows.MessageBoxButton.YesNo;
+                        break;
+                    case MessageBoxButton.YesNoCancel:
+                        orig = System.Windows.MessageBoxButton.YesNoCancel;
+                        break;
+                    case MessageBoxButton.None:
+                    case MessageBoxButton.OK:
+                    default:
+                        orig = System.Windows.MessageBoxButton.OK;
+                        break;
+                }
+                return System.Windows.MessageBox.Show(messageBoxText, captionText, orig, image);
+            }
         }
     }
     public enum MessageBoxButton
