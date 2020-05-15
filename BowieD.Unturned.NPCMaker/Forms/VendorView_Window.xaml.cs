@@ -5,7 +5,6 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using MessageBox = System.Windows.MessageBox;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
@@ -106,7 +105,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                 buyingPanel.Children.Add(elem);
             }
-            
+
             foreach (VendorItem s in sellItems)
             {
                 UIElement elem = createElement(s);

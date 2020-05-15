@@ -181,7 +181,7 @@ namespace BowieD.Unturned.NPCMaker
             InitManagers();
 #if DEBUG
 #else
-                ConsoleLogger.HideConsoleWindow();
+            ConsoleLogger.HideConsoleWindow();
 #endif
             mw.Show();
         }
