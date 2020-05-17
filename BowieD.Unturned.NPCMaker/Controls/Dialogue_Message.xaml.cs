@@ -13,8 +13,6 @@ namespace BowieD.Unturned.NPCMaker.Controls
     /// </summary>
     public partial class Dialogue_Message : UserControl, INotifyPropertyChanged
     {
-        private ushort prev;
-
         public Dialogue_Message(NPC.NPCMessage message)
         {
             InitializeComponent();
@@ -64,18 +62,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
                 return ret;
             }
         }
-        public ushort Prev
-        {
-            get 
-            { 
-                return prev; 
-            }
-            set
-            {
-                MessageBox.Show($"new prev: {value}");
-                prev = value;
-            }
-        }
+        public ushort Prev { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
