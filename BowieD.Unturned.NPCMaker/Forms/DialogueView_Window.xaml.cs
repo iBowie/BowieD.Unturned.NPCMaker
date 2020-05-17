@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Markup;
 using BowieD.Unturned.NPCMaker.NPC;
 using MahApps.Metro.IconPacks;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// </summary>
     public partial class DialogueView_Window : Window
     {
+        static IMarkup formatter = new RichText();
+
         public DialogueView_Window(NPCCharacter character, NPCDialogue dialogue, Simulation simulation, NPCDialogue prev = null)
         {
             InitializeComponent();
@@ -51,7 +54,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             Simulation.OnPropertyChanged("");
 
-            mainText.Text = FormatText(message.pages[page]);
+            formatter.Markup(mainText, FormatText(message.pages[page]));
 
             lastPage = page;
 
@@ -183,10 +186,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                         Grid g = new Grid();
 
 
-                        TextBlock tb = new TextBlock()
-                        {
-                            Text = FormatText(res.mainText)
-                        };
+                        TextBlock tb = new TextBlock();
+                        formatter.Markup(tb, FormatText(res.mainText));
 
                         Label l = new Label()
                         {
@@ -248,7 +249,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             mainText.Text = string.Empty;
             responsesPanel.Children.Clear();
 
-            npcNameText.Text = FormatText(Character.displayName) ?? string.Empty;
+            formatter.Markup(npcNameText, FormatText(Character.displayName) ?? string.Empty);
 
             for (int i = 0; i < Dialogue.messages.Count; i++)
             {
