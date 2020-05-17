@@ -107,68 +107,7 @@ namespace BowieD.Unturned.NPCMaker.Common
         }
         internal static MenuItem CreatePasteColorButton(string color = "#FFFFFF")
         {
-            BrushConverter brushConverter = new BrushConverter();
-            Brush clr;
-            switch (color)
-            {
-                #region UNTURNED
-                case "common":
-                    clr = brushConverter.ConvertFromString("#ffffff") as Brush;
-                    break;
-                case "uncommon":
-                    clr = brushConverter.ConvertFromString("#1f871f") as Brush;
-                    break;
-                case "rare":
-                    clr = brushConverter.ConvertFromString("#4b64fa") as Brush;
-                    break;
-                case "epic":
-                    clr = brushConverter.ConvertFromString("#964bfa") as Brush;
-                    break;
-                case "legendary":
-                    clr = brushConverter.ConvertFromString("#c832fa") as Brush;
-                    break;
-                case "mythical":
-                    clr = brushConverter.ConvertFromString("#fa3219") as Brush;
-                    break;
-                #endregion
-                #region UNITY
-                case "black":
-                    clr = brushConverter.ConvertFromString("#000000") as Brush;
-                    break;
-                case "blue":
-                    clr = brushConverter.ConvertFromString("#0000FF") as Brush;
-                    break;
-                case "cyan":
-                    clr = brushConverter.ConvertFromString("#00FFFF") as Brush;
-                    break;
-                case "gray":
-                case "grey":
-                    clr = brushConverter.ConvertFromString("#7F7F7F") as Brush;
-                    break;
-                case "magenta":
-                    clr = brushConverter.ConvertFromString("#FF00FF") as Brush;
-                    break;
-                case "green":
-                    clr = brushConverter.ConvertFromString("#00FF00") as Brush;
-                    break;
-                case "red":
-                    clr = brushConverter.ConvertFromString("#FF0000") as Brush;
-                    break;
-                case "white":
-                    clr = brushConverter.ConvertFromString("#FFFFFF") as Brush;
-                    break;
-                case "yellow":
-                    clr = brushConverter.ConvertFromString("#FFEB04") as Brush;
-                    break;
-                #endregion
-                default:
-                    try
-                    {
-                        clr = brushConverter.ConvertFromString(color) as Brush;
-                    }
-                    catch { clr = null; }
-                    break;
-            }
+            Brush clr = Coloring.ColorConverter.ParseColor(color);
             MenuItem b = new MenuItem()
             {
                 Header = LocalizationManager.Current.Interface.ContainsKey($"Context_Dialogue_PasteColor_{color}") ? LocalizationManager.Current.Interface[$"Context_Dialogue_PasteColor_{color}"] : color
