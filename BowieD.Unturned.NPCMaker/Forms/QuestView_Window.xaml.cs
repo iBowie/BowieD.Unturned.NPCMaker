@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Markup;
 using BowieD.Unturned.NPCMaker.NPC;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +12,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// </summary>
     public partial class QuestView_Window : Window
     {
+        static IMarkup formatter = new RichText();
+
         public QuestView_Window(NPCCharacter character, Simulation simulation, NPCQuest quest, EMode mode = EMode.PREVIEW)
         {
             InitializeComponent();
@@ -35,8 +38,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     break;
             }
 
-            title.Text = SimulationTool.ReplacePlaceholders(character, simulation, quest.title);
-            desc.Text = SimulationTool.ReplacePlaceholders(character, simulation, quest.description);
+            formatter.Markup(title, SimulationTool.ReplacePlaceholders(character, simulation, quest.title));
+            formatter.Markup(desc, SimulationTool.ReplacePlaceholders(character, simulation, quest.description));
 
             foreach (NPC.Conditions.Condition c in quest.conditions)
             {
@@ -54,10 +57,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     CornerRadius = new CornerRadius(4)
                 };
 
-                TextBlock tb = new TextBlock()
-                {
-                    Text = text
-                };
+                TextBlock tb = new TextBlock();
+                formatter.Markup(tb, text);
 
                 Label l = new Label()
                 {
@@ -85,10 +86,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     CornerRadius = new CornerRadius(4)
                 };
 
-                TextBlock tb = new TextBlock()
-                {
-                    Text = text
-                };
+                TextBlock tb = new TextBlock();
+                formatter.Markup(tb, text);
 
                 Label l = new Label()
                 {
