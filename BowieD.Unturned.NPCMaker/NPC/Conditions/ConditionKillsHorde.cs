@@ -27,9 +27,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         }
         public override string FormatCondition(Simulation simulation)
         {
-            if (string.IsNullOrEmpty(Localization))
+            string text = Localization;
+
+            if (string.IsNullOrEmpty(text))
             {
-                return null;
+                text = LocalizationManager.Current.Simulation["Quest"]["Default_Condition_HordeKills"];
             }
 
             if (!simulation.Flags.TryGetValue(ID, out short value))
@@ -37,7 +39,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 value = 0;
             }
 
-            return string.Format(Localization, value, Value);
+            return string.Format(text, value, Value);
         }
     }
 }
