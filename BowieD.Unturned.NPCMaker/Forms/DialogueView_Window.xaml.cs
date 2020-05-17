@@ -269,6 +269,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     lastPage = 0;
                     lastMessage = msg;
 
+                    if (msg.prev != 0)
+                        Previous = MainWindow.CurrentProject.data.dialogues.SingleOrDefault(d => d.id == msg.prev);
+
                     DisplayPage(msg, i, 0);
 
                     break;
