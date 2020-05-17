@@ -4,6 +4,7 @@
     {
         public abstract void Apply();
         public abstract string AccentColor { get; set; }
+        public abstract string ForegroundColor { get; set; }
         public abstract string BackgroundColor { get; set; }
         public abstract string Name { get; set; }
         public abstract void Remove();
