@@ -116,7 +116,7 @@
     "Reward_Add": "Añadir Recompensa",
     "Rewards": "Recompensa Quest"
   },
-  "Conditions": {
+  "Condition": {
     "Type_None": "Ninguna",
     "Type_Experience": "Tiene experiencia",
     "Type_Reputation": "Tiene reputación",
@@ -326,7 +326,7 @@
     "Shared_Localization": "Localización",
     "Shared_Reset": "Resetear"
   },
-  "Rewards": {
+  "Reward": {
     "Type_None": "Ninguna",
     "Type_Experience": "Experiencia",
     "Type_Reputation": "Reputacón",
