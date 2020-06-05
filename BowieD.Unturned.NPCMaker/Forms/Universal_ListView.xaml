@@ -7,7 +7,7 @@
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
         mc:Ignorable="d"
         Closed="Window_Closed"
-        Title="Universal_ListView" MinWidth="256" MinHeight="128" Height="256" Width="400" Icon="{DynamicResource app_Icon}">
+        Title="Universal_ListView" WindowStartupLocation="CenterOwner" MinWidth="256" MinHeight="128" Height="256" Width="400" Icon="{DynamicResource app_Icon}">
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform x:Name="gridScale"/>

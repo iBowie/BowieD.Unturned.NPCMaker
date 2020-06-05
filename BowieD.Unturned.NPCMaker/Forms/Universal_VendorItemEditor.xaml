@@ -9,7 +9,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
         mc:Ignorable="d"
-        Title="{xaml:Localize Key=INTERFACE_Editor_VendorItem_Title}" ResizeMode="NoResize" Height="334" Width="300" Icon="{DynamicResource app_Icon}">
+        Title="{xaml:Localize Key=INTERFACE_Editor_VendorItem_Title}" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" Height="334" Width="300" Icon="{DynamicResource app_Icon}">
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform x:Name="gridScale"/>

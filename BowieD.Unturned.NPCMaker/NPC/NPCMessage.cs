@@ -12,7 +12,10 @@ namespace BowieD.Unturned.NPCMaker.NPC
             pages = new List<string>();
             conditions = new Condition[0];
             rewards = new Reward[0];
+            prev = 0;
         }
+
+        public ushort prev;
 
         public List<string> pages;
         [XmlIgnore]

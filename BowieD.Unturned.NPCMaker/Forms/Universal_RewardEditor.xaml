@@ -9,7 +9,7 @@
         Title="{xaml:Localize Key=INTERFACE_Editor_Reward_Title}" 
         Height="201.5" 
         Width="300"
-        Icon="{DynamicResource app_Icon}">
+        Icon="{DynamicResource app_Icon}" WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform x:Name="gridScale"/>

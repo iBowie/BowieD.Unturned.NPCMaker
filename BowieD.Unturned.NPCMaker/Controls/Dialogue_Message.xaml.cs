@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,12 +11,13 @@ namespace BowieD.Unturned.NPCMaker.Controls
     /// <summary>
     /// Логика взаимодействия для Dialogue_Message.xaml
     /// </summary>
-    public partial class Dialogue_Message : UserControl
+    public partial class Dialogue_Message : UserControl, INotifyPropertyChanged
     {
         public Dialogue_Message(NPC.NPCMessage message)
         {
             InitializeComponent();
             Message = message;
+            DataContext = this;
         }
 
         public NPC.NPCMessage Message
@@ -24,7 +26,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
             {
                 pages = Pages,
                 conditions = Conditions,
-                rewards = Rewards
+                rewards = Rewards,
+                prev = Prev
             };
             set
             {
@@ -37,6 +40,9 @@ namespace BowieD.Unturned.NPCMaker.Controls
                 }
                 Conditions = value.conditions;
                 Rewards = value.rewards;
+                Prev = value.prev;
+
+                PropertyChanged?.Invoke(null, new PropertyChangedEventArgs(""));
             }
         }
         public Condition[] Conditions { get; set; }
@@ -56,6 +62,9 @@ namespace BowieD.Unturned.NPCMaker.Controls
                 return ret;
             }
         }
+        public ushort Prev { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void AddPageButton_Click(object sender, RoutedEventArgs e)
         {
@@ -79,12 +88,14 @@ namespace BowieD.Unturned.NPCMaker.Controls
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Forms.Universal_ListView ulv = new Forms.Universal_ListView(Conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
+            ulv.Owner = MainWindow.Instance;
             ulv.ShowDialog();
             Conditions = ulv.Values.Cast<Condition>().ToArray();
         }
         private void EditRewardsButton_Click(object sender, RoutedEventArgs e)
         {
             Forms.Universal_ListView ulv = new Forms.Universal_ListView(Rewards.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Reward, false)).ToList(), Universal_ItemList.ReturnType.Reward);
+            ulv.Owner = MainWindow.Instance;
             ulv.ShowDialog();
             Rewards = ulv.Values.Cast<Reward>().ToArray();
         }

@@ -495,7 +495,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     aboutCommand = new BaseCommand(() =>
                     {
-                        new Forms.Form_About().ShowDialog();
+                        Forms.Form_About form_About = new Forms.Form_About();
+                        form_About.Owner = MainWindow;
+                        form_About.ShowDialog();
                     });
                 }
                 return aboutCommand;
@@ -509,7 +511,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     optionsCommand = new BaseCommand(() =>
                     {
-                        new Configuration.ConfigWindow().ShowDialog();
+                        ConfigWindow configWindow = new Configuration.ConfigWindow();
+                        configWindow.Owner = MainWindow;
+                        configWindow.ShowDialog();
                     });
                 }
                 return optionsCommand;

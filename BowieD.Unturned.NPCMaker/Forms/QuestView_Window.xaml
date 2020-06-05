@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
         mc:Ignorable="d"
-        Title="{xaml:Localize Key=SIMULATION.QUEST_Window_Title}" Height="Auto" SizeToContent="Height" Width="800">
+        Title="{xaml:Localize Key=SIMULATION.QUEST_Window_Title}" WindowStartupLocation="CenterOwner" Height="Auto" SizeToContent="Height" Width="800">
     <Grid Height="Auto">
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Media;
 
 namespace BowieD.Unturned.NPCMaker.Coloring
 {
@@ -7,6 +9,57 @@ namespace BowieD.Unturned.NPCMaker.Coloring
 #pragma warning restore CS0660
     public static class ColorConverter
     {
+        static readonly BrushConverter converter = new BrushConverter();
+        public static Dictionary<string, string> UnturnedColors { get; } = new Dictionary<string, string>()
+        {
+            { "common", "#ffffff" },
+            { "gold", "#d2bf22" },
+            { "uncommon", "#1f871f" },
+            { "rare", "#4b64fa" },
+            { "epic", "#964bfa" },
+            { "legendary", "#c832fa" },
+            { "mythical", "#fa3219" },
+            { "red", "#bf1f1f" },
+            { "green", "#1f871f" },
+            { "blue", "#3298c8" },
+            { "orange", "#ab8019" },
+            { "yellow", "#dcb413" },
+            { "purple", "#6a466d" }
+        };
+        public static Dictionary<string, string> UnityColors { get; } = new Dictionary<string, string>()
+        {
+            { "black", "#000000" },
+            { "blue", "#0000FF" },
+            { "cyan", "#00FFFF" },
+            { "gray", "#7F7F7F" },
+            { "grey", "#7F7F7F" },
+            { "magenta", "#FF00FF" },
+            { "green", "#00FF00" },
+            { "red", "#FF0000" },
+            { "white", "#FFFFFF" },
+            { "yellow", "#FFEB04" }
+        };
+        public static Brush ParseColor(string code)
+        {
+            string parse;
+
+            if (UnturnedColors.TryGetValue(code, out string ucolor))
+                parse = ucolor;
+            else if (UnityColors.TryGetValue(code, out string uncolor))
+                parse = uncolor;
+            else
+                parse = code;
+
+            try
+            {
+                return converter.ConvertFromString(parse) as Brush;
+            }
+            catch
+            {
+                return Brushes.Transparent;
+            }
+        }
+
         public static Color HSVtoColor(double H, double S, double V)
         {
             int hi = Convert.ToInt32(Math.Floor(H / 60)) % 6;

@@ -1,11 +1,11 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.Markup;
 using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using MessageBox = System.Windows.MessageBox;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
@@ -14,6 +14,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// </summary>
     public partial class VendorView_Window : Window
     {
+        static IMarkup formatter = new RichText();
+
         public VendorView_Window(NPCCharacter character, Simulation simulation, NPCVendor vendor)
         {
             InitializeComponent();
@@ -21,8 +23,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
             Vendor = vendor;
             Simulation = simulation;
 
-            title.Text = SimulationTool.ReplacePlaceholders(character, simulation, vendor.vendorTitle);
-            desc.Text = SimulationTool.ReplacePlaceholders(character, simulation, vendor.vendorDescription);
+            formatter.Markup(title, SimulationTool.ReplacePlaceholders(character, simulation, vendor.vendorTitle));
+            formatter.Markup(desc, SimulationTool.ReplacePlaceholders(character, simulation, vendor.vendorDescription));
 
             UIElement createElement(VendorItem item)
             {
@@ -36,10 +38,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                 Grid g = new Grid();
 
-                TextBlock tb = new TextBlock()
-                {
-                    Text = LocalizationManager.Current.Simulation["Vendor"].Translate("Item_Cost", item.cost)
-                };
+                TextBlock tb = new TextBlock();
+                formatter.Markup(tb, LocalizationManager.Current.Simulation["Vendor"].Translate("Item_Cost", item.cost));
 
                 Label l = new Label()
                 {
@@ -62,10 +62,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                         throw new Exception("Invalid ItemType");
                 }
 
-                TextBlock tb2 = new TextBlock()
-                {
-                    Text = LocalizationManager.Current.Simulation["Vendor"].Translate(nameKey, item.id)
-                };
+                TextBlock tb2 = new TextBlock();
+                formatter.Markup(tb2, LocalizationManager.Current.Simulation["Vendor"].Translate(nameKey, item.id));
 
                 Label l2 = new Label()
                 {
@@ -106,7 +104,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                 buyingPanel.Children.Add(elem);
             }
-            
+
             foreach (VendorItem s in sellItems)
             {
                 UIElement elem = createElement(s);
@@ -199,7 +197,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                 translateKey = "Pay_Currency";
             }
-            currencyText.Text = LocalizationManager.Current.Simulation["Vendor"].Translate(translateKey, value);
+            formatter.Markup(currencyText, LocalizationManager.Current.Simulation["Vendor"].Translate(translateKey, value));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

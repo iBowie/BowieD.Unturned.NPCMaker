@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Configuration"
         xmlns:npcmaker="clr-namespace:BowieD.Unturned.NPCMaker"
-        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML" WindowStartupLocation="CenterOwner"
         mc:Ignorable="d"
         Title="{xaml:Localize Key=GENERAL_Configuration_Title}" Icon="{DynamicResource app_Icon}" Height="240" Width="480">
     <Grid>

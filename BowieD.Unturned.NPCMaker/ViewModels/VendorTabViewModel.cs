@@ -249,6 +249,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     openCommand = new BaseCommand(() =>
                     {
                         Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentProject.data.vendors.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Vendor, false)).ToList(), Universal_ItemList.ReturnType.Vendor);
+                        ulv.Owner = MainWindow.Instance;
                         if (ulv.ShowDialog() == true)
                         {
                             SaveCommand.Execute(null);
@@ -294,9 +295,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         MessageBox.Show(LocalizationManager.Current.Interface.Translate("Main_Tab_Vendor_Preview_Message"));
 
                         SimulationView_Window sim = new SimulationView_Window(null, simulation);
+                        sim.Owner = MainWindow.Instance;
                         sim.ShowDialog();
 
                         VendorView_Window dvw = new VendorView_Window(null, simulation, Vendor);
+                        dvw.Owner = MainWindow.Instance;
                         dvw.ShowDialog();
                     });
                 }

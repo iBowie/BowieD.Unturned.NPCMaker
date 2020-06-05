@@ -66,6 +66,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 case Controls.Universal_ItemList.ReturnType.Condition:
                     Universal_ConditionEditor uce = new Universal_ConditionEditor();
+                    uce.Owner = this;
                     if (uce.ShowDialog() == true)
                     {
                         Universal_ItemList a = new Controls.Universal_ItemList(uce.Result, Controls.Universal_ItemList.ReturnType.Condition, Localizable);
@@ -84,6 +85,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     break;
                 case Controls.Universal_ItemList.ReturnType.Reward:
                     Universal_RewardEditor ure = new Universal_RewardEditor();
+                    ure.Owner = this;
                     if (ure.ShowDialog() == true)
                     {
                         Universal_ItemList aa = new Controls.Universal_ItemList(ure.Result, Controls.Universal_ItemList.ReturnType.Reward, Localizable);

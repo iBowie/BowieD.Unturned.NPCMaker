@@ -126,6 +126,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     openCommand = new BaseCommand(() =>
                     {
                         Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentProject.data.dialogues.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Dialogue, false)).ToList(), Universal_ItemList.ReturnType.Dialogue);
+                        ulv.Owner = MainWindow.Instance;
                         if (ulv.ShowDialog() == true)
                         {
                             SaveCommand.Execute(null);
@@ -220,6 +221,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             NPCCharacter character = select.SelectedValue as NPCCharacter;
 
                             DialogueView_Window dvw = new DialogueView_Window(character, Dialogue, new Simulation());
+                            dvw.Owner = MainWindow.Instance;
                             dvw.Display();
                             dvw.ShowDialog();
                         }

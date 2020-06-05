@@ -371,7 +371,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                                     for (int c = 0; c < cndCnt; c++)
                                     {
                                         NPC.Conditions.Condition cond = response.conditions[c];
-                                        
+
                                         asset.WriteLine(ExportCondition(cond, $"Response_{k}_", c));
 
                                         if (!string.IsNullOrEmpty(cond.Localization))

@@ -190,6 +190,9 @@
     <Compile Include="Forms\InventoryEditorView_Window.xaml.cs">
       <DependentUpon>InventoryEditorView_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MessageBoxes\MessageBox_Custom.xaml.cs">
+      <DependentUpon>MessageBox_Custom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Message_TreeView.xaml.cs">
       <DependentUpon>Message_TreeView.xaml</DependentUpon>
     </Compile>
@@ -254,6 +257,8 @@
     <Compile Include="Managers\DataManager.cs" />
     <Compile Include="Logging\LoggingManager.cs" />
     <Compile Include="Managers\HolidayManager.cs" />
+    <Compile Include="Markup\RichText.cs" />
+    <Compile Include="MessageBox.cs" />
     <Compile Include="Mistakes\Character\CharacterMistake.cs" />
     <Compile Include="Mistakes\Character\NE_0001.cs" />
     <Compile Include="Mistakes\Character\NE_0002.cs" />
@@ -340,6 +345,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Random.cs" />
+    <Compile Include="Markup\IMarkup.cs" />
+    <Compile Include="ScreenHelper.cs" />
     <Compile Include="Themes\MetroTheme.cs" />
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
@@ -356,6 +363,7 @@
     <Compile Include="NPC\NPCQuest.cs" />
     <Compile Include="NPC\NPCResponse.cs" />
     <Compile Include="NPC\NPCVendor.cs" />
+    <Compile Include="UPoint.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="ViewModels\BaseCommand.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -397,6 +405,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\InventoryEditorView_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\MessageBoxes\MessageBox_Custom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -43,6 +43,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
                 State = "Creating reward for a dialogue response"
             };
             (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
+            ulv.Owner = MainWindow.Instance;
             ulv.ShowDialog();
             Response.rewards = ulv.Values.Cast<Reward>().ToArray();
             MainWindow.Instance.MainWindowViewModel.TabControl_SelectionChanged(MainWindow.Instance.mainTabControl, null);
@@ -56,6 +57,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
                 State = "Creating condition for a dialogue response"
             };
             (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
+            ulv.Owner = MainWindow.Instance;
             ulv.ShowDialog();
             Response.conditions = ulv.Values.Cast<Condition>().ToArray();
             MainWindow.Instance.MainWindowViewModel.TabControl_SelectionChanged(MainWindow.Instance.mainTabControl, null);
@@ -116,6 +118,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             if (MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Messages.Count > 1)
             {
                 Message_TreeView mtv = new Message_TreeView(Response.visibleIn, MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Messages.Count);
+                mtv.Owner = MainWindow.Instance;
                 mtv.ShowDialog();
                 if (mtv.DialogResult == true)
                 {

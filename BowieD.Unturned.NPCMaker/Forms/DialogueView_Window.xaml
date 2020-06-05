@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms" 
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner"
         Title="{xaml:Localize Key=SIMULATION.DIALOGUE_Window_Title}" Height="450" Width="800">
     <StackPanel>
         <StackPanel.LayoutTransform>

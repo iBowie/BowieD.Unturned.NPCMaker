@@ -8,6 +8,7 @@ namespace BowieD.Unturned.NPCMaker.Themes
 {
     public class MetroTheme : Theme
     {
+        static readonly BrushConverter _converter = new BrushConverter();
         /// <summary>
         /// Name of theme
         /// </summary>
@@ -17,6 +18,7 @@ namespace BowieD.Unturned.NPCMaker.Themes
         /// </summary>
         public string DictionaryName { get; set; }
         public override string AccentColor { get; set; }
+        public override string ForegroundColor { get; set; }
         public override string BackgroundColor { get; set; }
 
         public override void Apply()
@@ -32,14 +34,16 @@ namespace BowieD.Unturned.NPCMaker.Themes
                     throw new NullReferenceException();
                 }
                 Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
-                App.Current.Resources["AccentColor"] = new BrushConverter().ConvertFromString(AccentColor);
+                App.Current.Resources["AccentColor"] = _converter.ConvertFromString(AccentColor);
                 if (DictionaryName[0] == 'L')
                 {
-                    App.Current.Resources["BackgroundColor"] = new BrushConverter().ConvertFromString("#FFFFFF");
+                    App.Current.Resources["ForegroundColor"] = _converter.ConvertFromString("#000000");
+                    App.Current.Resources["BackgroundColor"] = _converter.ConvertFromString("#FFFFFF");
                 }
                 else if (DictionaryName[0] == 'D')
                 {
-                    App.Current.Resources["BackgroundColor"] = new BrushConverter().ConvertFromString("#252525");
+                    App.Current.Resources["ForegroundColor"] = _converter.ConvertFromString("#FFFFFF");
+                    App.Current.Resources["BackgroundColor"] = _converter.ConvertFromString("#252525");
                 }
             }
             catch { App.Logger.Log($"Can't apply {Name} theme"); }

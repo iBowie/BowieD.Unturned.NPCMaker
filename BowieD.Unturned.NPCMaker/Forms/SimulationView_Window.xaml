@@ -7,7 +7,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
         mc:Ignorable="d"
-        Title="{xaml:Localize Key=SIMULATION.SIMULATION_Window_Title}" Height="Auto" Width="800">
+        Title="{xaml:Localize Key=SIMULATION.SIMULATION_Window_Title}" WindowStartupLocation="CenterOwner" Height="Auto" Width="800">
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
