@@ -19,7 +19,7 @@
         <TabControl TabStripPlacement="Left" Margin="10,10,10,10">
             <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_General}">
                 <StackPanel Margin="5" CanVerticallyScroll="True">
-                    <Grid Margin="2.5">
+                    <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_autosaveOption_Tooltip}">
                         <Label Content="{xaml:Localize Key=OPTIONS_autosaveOption}"/>
                         <ComboBox SelectedIndex="1" Name="Autosave_Box" HorizontalAlignment="Right">
                             <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_0}"/>
@@ -30,28 +30,28 @@
                             <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_5}"/>
                         </ComboBox>
                     </Grid>
-                    <Grid Margin="2.5">
+                    <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_language_Tooltip}">
                         <Label Content="{xaml:Localize Key=OPTIONS_language}"/>
                         <ComboBox Name="Languages_Box" HorizontalAlignment="Right"/>
                     </Grid>
-                    <Grid Margin="2.5">
+                    <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_generateGuids_Tooltip}">
                         <CheckBox Name="Generate_GUIDS_Box" Content="{xaml:Localize Key=OPTIONS_generateGuids}"/>
                     </Grid>
-                    <Grid Margin="2.5">
+                    <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_autoUpdate_Tooltip}">
                         <CheckBox Name="Autoupdate_Box" Content="{xaml:Localize Key=OPTIONS_autoUpdate}"/>
                     </Grid>
-                    <Grid Margin="2.5">
+                    <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_downloadPrerelease_Tooltip}">
                         <CheckBox Name="DownloadPrerelease_Box" Content="{xaml:Localize Key=OPTIONS_downloadPrerelease}"/>
                     </Grid>
                 </StackPanel>
             </TabItem>
             <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Interface}">
                 <StackPanel Margin="5" CanVerticallyScroll="True">
-                    <Grid Margin="2.5">
+                    <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_currentTheme_Tooltip}">
                         <Label Content="{xaml:Localize Key=OPTIONS_currentTheme}"/>
                         <ComboBox SelectedIndex="0" HorizontalAlignment="Right" Name="Selected_Theme_Box"/>
                     </Grid>
-                    <Grid Margin="2.5">
+                    <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_scale_Tooltip}">
                         <Label Content="{xaml:Localize Key=OPTIONS_scale}"/>
                         <ComboBox SelectedIndex="1" Name="Scale_Box" HorizontalAlignment="Right">
                             <ComboBoxItem Tag="0.75" Content="75%"/>
@@ -61,13 +61,14 @@
                             <ComboBoxItem Tag="2" Content="200%"/>
                         </ComboBox>
                     </Grid>
-                    <CheckBox Content="{xaml:Localize Key=OPTIONS_animateControls}" Name="Animation_Enabled_Box" VerticalAlignment="Top" Margin="2.5"/>
+                    <CheckBox Content="{xaml:Localize Key=OPTIONS_animateControls}" ToolTip="{xaml:Localize Key=OPTIONS_animateControls_Tooltip}" Name="Animation_Enabled_Box" VerticalAlignment="Top" Margin="2.5"/>
                 </StackPanel>
             </TabItem>
             <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Misc}">
                 <StackPanel Margin="5" CanVerticallyScroll="True">
-                    <CheckBox Name="Discord_Enabled_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_enableDiscord}"/>
-                    <CheckBox Name="Experimental_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_experimentalFeatures}"/>
+                    <CheckBox Name="Discord_Enabled_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_enableDiscord}" ToolTip="{xaml:Localize Key=OPTIONS_enableDiscord_Tooltip}"/>
+                    <CheckBox Name="AlternateLogicTranslation_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_alternateLogicTranslation}" ToolTip="{xaml:Localize Key=OPTIONS_alternateLogicTranslation_Tooltip}"/>
+                    <CheckBox Name="Experimental_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_experimentalFeatures}" ToolTip="{xaml:Localize Key=OPTIONS_experimentalFeatures_Tooltip}"/>
                 </StackPanel>
             </TabItem>
         </TabControl>
