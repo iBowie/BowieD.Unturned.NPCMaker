@@ -22,6 +22,7 @@ namespace BowieD.Unturned.NPCMaker
             {
                 DisplayException(e);
                 SaveToCrashException(e);
+                ForceExit();
             }
         }
 
@@ -35,12 +36,14 @@ namespace BowieD.Unturned.NPCMaker
         {
             DisplayException(e.Exception);
             SaveToCrashException(e.Exception);
+            ForceExit();
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             DisplayException((Exception)e.ExceptionObject);
             SaveToCrashException((Exception)e.ExceptionObject);
+            ForceExit();
         }
 
         private static void DisplayException(Exception e)
@@ -75,6 +78,11 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             catch { }
+        }
+
+        private static void ForceExit()
+        {
+            Environment.Exit(1);
         }
     }
 }
