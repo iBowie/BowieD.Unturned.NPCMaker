@@ -60,6 +60,9 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 christmasClothing = ParseClothing(Clothing_Type.Christmas),
                 halloweenClothing = ParseClothing(Clothing_Type.Halloween),
                 pose = asset.ReadEnum("Pose", NPC_Pose.Stand),
+                poseHeadOffset = asset.ReadSingle("Pose_Head_Offset"),
+                poseLean = asset.ReadSingle("Pose_Lean"),
+                posePitch = asset.ReadSingle("Pose_Pitch", 90f),
                 equipped = asset.ReadEnum("Equipped", Equip_Type.None),
                 visibilityConditions = ParseConditions("").ToList()
             };

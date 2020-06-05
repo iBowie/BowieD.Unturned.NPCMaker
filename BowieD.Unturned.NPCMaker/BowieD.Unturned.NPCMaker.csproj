@@ -181,6 +181,9 @@
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\GCCommand.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
+    <Compile Include="Forms\Character_PoseEditor.xaml.cs">
+      <DependentUpon>Character_PoseEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DialogueView_Window.xaml.cs">
       <DependentUpon>DialogueView_Window.xaml</DependentUpon>
     </Compile>
@@ -258,6 +261,7 @@
     <Compile Include="Logging\LoggingManager.cs" />
     <Compile Include="Managers\HolidayManager.cs" />
     <Compile Include="Markup\RichText.cs" />
+    <Compile Include="MathUtil.cs" />
     <Compile Include="MessageBox.cs" />
     <Compile Include="Mistakes\Character\CharacterMistake.cs" />
     <Compile Include="Mistakes\Character\NE_0001.cs" />
@@ -393,6 +397,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Dialogue_Message_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Character_PoseEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

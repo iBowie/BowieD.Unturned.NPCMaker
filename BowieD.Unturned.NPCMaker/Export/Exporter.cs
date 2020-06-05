@@ -7,6 +7,7 @@ using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -249,6 +250,13 @@ namespace BowieD.Unturned.NPCMaker.Export
                                     local.WriteLine($"Condition_{k} {cond.Localization}");
                             }
                         }
+
+                        if (!character.poseLean.ApproximateEquals(0))
+                            asset.WriteLine($"Pose_Lean {character.poseLean.ToString(CultureInfo.InvariantCulture)}");
+                        if (!character.posePitch.ApproximateEquals(90))
+                            asset.WriteLine($"Pose_Pitch {character.posePitch.ToString(CultureInfo.InvariantCulture)}");
+                        if (!character.poseHeadOffset.ApproximateEquals(0))
+                            asset.WriteLine($"Pose_Head_Offset {character.poseHeadOffset.ToString(CultureInfo.InvariantCulture)}");
 
                         local.WriteLine($"Name {character.editorName}");
                         local.WriteLine($"Character {character.displayName}");

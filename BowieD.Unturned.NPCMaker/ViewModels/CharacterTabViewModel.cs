@@ -133,7 +133,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }
         }
         public bool IsLeftHanded { get => Character.leftHanded; set => Character.leftHanded = value; }
-        public NPC_Pose Pose { get => Character.pose; set => Character.pose = value; }
         public NPCClothing DefaultClothing { get => Character.clothing; set => Character.clothing = value; }
         public NPCClothing ChristmasClothing { get => Character.christmasClothing; set => Character.christmasClothing = value; }
         public NPCClothing HalloweenClothing { get => Character.halloweenClothing; set => Character.halloweenClothing = value; }
@@ -152,6 +151,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         private ICommand saveColorSkin;
         private ICommand saveColorHair;
         private ICommand regenerateGUIDsCommand;
+        private ICommand poseEditorCommand;
         public ICommand SaveCommand
         {
             get
@@ -363,6 +363,24 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     });
                 }
                 return regenerateGUIDsCommand;
+            }
+        }
+        public ICommand PoseEditorCommand
+        {
+            get
+            {
+                if (poseEditorCommand == null)
+                {
+                    poseEditorCommand = new BaseCommand(() =>
+                    {
+                        Character_PoseEditor cpe = new Character_PoseEditor(Character)
+                        {
+                            Owner = MainWindow.Instance
+                        };
+                        cpe.ShowDialog();
+                    });
+                }
+                return poseEditorCommand;
             }
         }
         internal void SaveColor(string hex)

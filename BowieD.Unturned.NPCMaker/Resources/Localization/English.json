@@ -25,8 +25,7 @@
 		"autoUpdate": "Automatically install updates",
 		"downloadPrerelease":  "Download Preview Builds"
 	},
-	"Character":
-	{
+	"Character": {
 		"Name_Editor": "Editor Name",
 		"Name_Display": "Display Name",
 		"ID": "Character ID",
@@ -36,6 +35,13 @@
 		"Beard": "Beard",
 		"Face": "Face",
 		"LeftHanded": "Left Handed",
+		"Edit_Pose": "Open Editor",
+		"Edit_Pose_Title": "Pose Editor",
+		"Edit_Pose_Lean": "Lean",
+		"Edit_Pose_Pitch": "Pitch",
+		"Edit_Pose_Head_Offset": "Head Offset",
+		"Edit_Pose_OK": "OK",
+		"Edit_Pose_Reset": "Reset",
 		"Pose": "Pose",
 		"Pose_Stand": "Stand",
 		"Pose_Sit": "Sit",

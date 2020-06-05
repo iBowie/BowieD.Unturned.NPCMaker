@@ -30,6 +30,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
             equipSecondary = 0;
             equipTertiary = 0;
             equipped = Equip_Type.None;
+            poseLean = 0f;
+            posePitch = 90f;
+            poseHeadOffset = 0f;
         }
         public string editorName;
         public string displayName;
@@ -49,6 +52,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public ushort equipSecondary;
         public ushort equipTertiary;
         public Equip_Type equipped;
+        public float poseLean, posePitch, poseHeadOffset;
 
         [XmlAttribute]
         public string guid;
