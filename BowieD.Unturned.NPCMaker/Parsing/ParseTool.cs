@@ -168,6 +168,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 vi.conditions = ParseConditions($"Selling_{i}_").ToList();
                 if (text == null || (text.Equals("Item", StringComparison.InvariantCultureIgnoreCase)))
                 {
+                    vi.type = ItemType.ITEM;
                     items.Add(vi);
                 }
                 else
@@ -176,6 +177,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                     {
                         App.Logger.Log($"Unknown VendorItem type '{text}'");
                     }
+                    vi.type = ItemType.VEHICLE;
                     vi.spawnPointID = asset.ReadString($"Selling_{i}_Spawnpoint");
                     if (string.IsNullOrEmpty(vi.spawnPointID))
                     {
