@@ -91,7 +91,7 @@
 		"Reply_Move_Up": "Monter en grade",
 		"Reply_Move_Down": "Descendre",
 		"Replies": "Réponses des joueurs",
-		"Tips": "Conseils:\nUtiliser <pause> pour créer une pause en 0,5 sec.\nUtiliser <br> pour aller sur la nouvelle ligne\nUtiliser <nom_npc> pour placer le nom du PNJ dans texte\nUtiliser <nom_char> pour placer le nom du joueur dans Texte\nUtiliser <color=rare>TEXT</color> pour créer un texte coloré."
+		"Tips": "Conseils:\nUtiliser <pause> pour créer une pause en 0,5 sec.\nUtiliser <br> pour aller sur la nouvelle ligne\nUtiliser <name_npc> pour placer le nom du PNJ dans texte\nUtiliser <name_char> pour placer le nom du joueur dans Texte\nUtiliser <color=rarity>TEXT</color> pour créer un texte coloré."
 	},
 	"Vendor": {
 		"ID": "ID du magasin",
@@ -175,11 +175,11 @@
 		"Quest_Status_Ready": "Prêt",
 		"Quest_Status_Completed": "Terminé",
 		"Quest_Logic": "Logique",
-		"Quest_Logic_Less_Than": "<(NE PAS UTILISER)",
+		"Quest_Logic_Less_Than": "< (NE PAS UTILISER)",
 		"Quest_Logic_Less_Than_Or_Equal_To": "<= (NE PAS UTILISER)",
 		"Quest_Logic_Equal": "==",
-		"Quest_Logic_Not_Equal": "! =",
-		"Quest_Logic_Greater_Than_Or_Equal_To": "> = (NE PAS UTILISER)",
+		"Quest_Logic_Not_Equal": "!=",
+		"Quest_Logic_Greater_Than_Or_Equal_To": ">= (NE PAS UTILISER)",
 		"Quest_Logic_Greater_Than": "> (NE PAS UTILISER)",
 		"Quest_Reset": "Modifier le statut de la quête. Survolez pour plus de détails",
 		"Quest_Reset_Tooltip": "Actif -> Abandonner; Prêt -> Terminé; Terminé -> Supprimer",
