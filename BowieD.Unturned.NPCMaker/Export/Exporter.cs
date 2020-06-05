@@ -329,6 +329,8 @@ namespace BowieD.Unturned.NPCMaker.Export
                                             local.WriteLine($"Message_{k}_Reward_{c} {rew.Localization}");
                                     }
                                 }
+                                if (message.prev > 0)
+                                    asset.WriteLine($"Message_{k}_Prev {message.prev}");
                             }
                         }
                         if (dialogue.ResponsesAmount > 0)
