@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -28,6 +29,17 @@ namespace BowieD.Unturned.NPCMaker.Localization
                     string text = sr.ReadToEnd();
                     Current = Newtonsoft.Json.JsonConvert.DeserializeObject<Localization>(text);
                     IsLoaded = true;
+                }
+                if (AppConfig.Instance.replaceMissingKeysWithEnglish && language != ELanguage.English)
+                {
+                    App.Logger.Log("[LOCALIZATION] - Replacing missing keys...");
+                    using (StreamReader sr = new StreamReader(Application.GetResourceStream(new Uri($"Resources/Localization/{ELanguage.English}.json", UriKind.Relative)).Stream))
+                    {
+                        string text = sr.ReadToEnd();
+                        var secondary = Newtonsoft.Json.JsonConvert.DeserializeObject<Localization>(text);
+
+                        Current.AddMissingKeys(secondary);
+                    }
                 }
             }
             catch (Exception ex)

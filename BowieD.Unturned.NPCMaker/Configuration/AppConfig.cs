@@ -25,6 +25,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public bool autoUpdate;
         public bool downloadPrerelease;
         public bool alternateLogicTranslation;
+        public bool replaceMissingKeysWithEnglish;
 
         public void Save()
         {
@@ -72,6 +73,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             autoUpdate = true;
             downloadPrerelease = false;
             alternateLogicTranslation = false;
+            replaceMissingKeysWithEnglish = true;
             ELanguage c = LocalizationManager.GetLanguageFromCultureInfo(CultureInfo.InstalledUICulture);
             if (LocalizationManager.SupportedLanguages().Contains(c))
             {

@@ -24,6 +24,7 @@
     "autoUpdate": "Автоматическое обновление",
     "downloadPrerelease": "Загружать предв. версии",
     "alternateLogicTranslation": "Альтернативный перевод логики",
+    "replaceMissingKeysWithEnglish": "Замена недост. перевода английским",
 
     "experimentalFeatures_Tooltip": "ЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭксперименты",
     "scale_Tooltip": "Изменить размер программы на экране",
@@ -35,7 +36,8 @@
     "animateControls_Tooltip": "Делает некоторые элементы управления приятнее для глаз",
     "autoUpdate_Tooltip": "Программа автоматически установит обновление, если оно есть",
     "downloadPrerelease_Tooltip": "Также известно как: \"Загружать нестабильные версии\"",
-    "alternateLogicTranslation_Tooltip": "Заменяет математические символы словами"
+    "alternateLogicTranslation_Tooltip": "Заменяет математические символы словами",
+    "replaceMissingKeysWithEnglish_Tooltip": "Заменяет недостающий перевод английским вариантом"
   },
   "Character": {
     "Name_Editor": "Имя в редакторе",

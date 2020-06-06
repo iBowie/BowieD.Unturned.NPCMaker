@@ -34,7 +34,8 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 animateControls = Animation_Enabled_Box.IsChecked.Value,
                 autoUpdate = Autoupdate_Box.IsChecked.Value,
                 downloadPrerelease = DownloadPrerelease_Box.IsChecked.Value,
-                alternateLogicTranslation = AlternateLogicTranslation_Box.IsChecked.Value
+                alternateLogicTranslation = AlternateLogicTranslation_Box.IsChecked.Value,
+                replaceMissingKeysWithEnglish = ReplaceMissingKeysWithEnglish_Box.IsChecked.Value
             };
             set
             {
@@ -80,6 +81,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 Autoupdate_Box.IsChecked = value.autoUpdate;
                 DownloadPrerelease_Box.IsChecked = value.downloadPrerelease;
                 AlternateLogicTranslation_Box.IsChecked = value.alternateLogicTranslation;
+                ReplaceMissingKeysWithEnglish_Box.IsChecked = value.replaceMissingKeysWithEnglish;
             }
         }
 

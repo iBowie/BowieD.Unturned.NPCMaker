@@ -39,5 +39,17 @@ namespace BowieD.Unturned.NPCMaker.Localization
                 return key;
             }
         }
+
+        public static void AddMissingKeys(TranslationDictionary dictionary, TranslationDictionary from)
+        {
+            foreach (var kv in from)
+            {
+                if (!dictionary.ContainsKey(kv.Key))
+                {
+                    App.Logger.Log($"Missing translation key '{kv.Key}' in {LocalizationManager.Current.Name}", Logging.ELogLevel.WARNING);
+                    dictionary.Add(kv.Key, kv.Value);
+                }
+            }
+        }
     }
 }

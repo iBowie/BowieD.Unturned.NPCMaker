@@ -25,6 +25,7 @@
 		"autoUpdate": "Automatically install updates",
 		"downloadPrerelease": "Download Preview Builds",
 		"alternateLogicTranslation": "Use alternative logic translation",
+		"replaceMissingKeysWithEnglish": "Replace missing keys with English",
 
 		"experimentalFeatures_Tooltip": "Something experimental, maybe unstable",
 		"scale_Tooltip": "Adjust scale of the app on your screen",
@@ -36,7 +37,8 @@
 		"animateControls_Tooltip": "Adds nice touch to some controls",
 		"autoUpdate_Tooltip": "If there is an update - installs it on app start",
 		"downloadPrerelease_Tooltip": "Also known as download unstable versions",
-		"alternateLogicTranslation_Tooltip": "Replaces mathematical symbols with words"
+		"alternateLogicTranslation_Tooltip": "Replaces mathematical symbols with words",
+		"replaceMissingKeysWithEnglish_Tooltip": "Replaces missing keys from English dictionary"
 	},
 	"Character": {
 		"Name_Editor": "Editor Name",
