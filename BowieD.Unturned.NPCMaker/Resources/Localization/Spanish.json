@@ -24,6 +24,7 @@
     "autoUpdate": "Automaticamente instalar actualizaciones",
     "downloadPrerelease": "Descargar versiones de vista previa",
     "alternateLogicTranslation": "Usa logicas alternativas para cada caso",
+    "replaceMissingKeysWithEnglish": "Remplace las Keys faltantes con Ingles",
 
     "alternateLogicTranslation_Tooltip": "Remplaza los simbolos matematicos con letras",
     "animateControls_Tooltip": "Añade unos toques agradables a los controles",
@@ -35,7 +36,8 @@
     "experimentalFeatures_Tooltip": "En experimentacion, talvez sea inestable",
     "generateGuids_Tooltip": "Desmarca esta opcion para permitir que el juego maneje las GUIDs",
     "language_Tooltip": "Lenguaje, es el, lenguaje",
-    "scale_Tooltip": "Ajusta la escala de la APP en tu pantalla"
+    "scale_Tooltip": "Ajusta la escala de la APP en tu pantalla",
+    "replaceMissingKeysWithEnglish_Tooltip": "Remplace las Keys faltantes desde el Diccionario Ingles"
   },
   "Character": {
     "Name_Editor": "Nombre en Editor",
@@ -612,6 +614,12 @@
       "Default_Condition_Item": "{0}/{1} {2}",
       "Default_Condition_Reputation": "{0}/{1} Reputacion",
       "Default_Condition_Experience": "{0}/{1} Experiencia",
+      "Default_Condition_AnimalKills": "{0}/{1} Animales matados",
+      "Default_Condition_HordeKills": "{0}/{1} Hordas matadas",
+      "Default_Condition_ObjectKills": "{0}/{1} Objetos destruidos",
+      "Default_Condition_PlayerKills": "{0}/{1} Jugadores matados",
+      "Default_Condition_TreeKills": "{0}/{1} {2}",
+      "Default_Condition_ZombieKills": "{0}/{1} Zombies matados",
       "Default_Reward_Experience": "+{0} Experiencia",
       "Default_Reward_Reputation": "{0} Reputacion",
       "Default_Reward_Item": "{1} x{0}",
