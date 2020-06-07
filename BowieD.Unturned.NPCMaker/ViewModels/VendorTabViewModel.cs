@@ -96,7 +96,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             uil.moveUpButton.Click += (object sender, RoutedEventArgs e) =>
             {
                 StackPanel panel = MainWindow.Instance.vendorListBuyItems;
-                int index = GetIndexInBuy(uil);
+                int index = panel.IndexOf(uil);
                 if (index >= 1)
                 {
                     Universal_ItemList next = panel.Children[index - 1] as Universal_ItemList;
@@ -109,7 +109,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             uil.moveDownButton.Click += (object sender, RoutedEventArgs e) =>
             {
                 StackPanel panel = MainWindow.Instance.vendorListBuyItems;
-                int index = GetIndexInBuy(uil);
+                int index = panel.IndexOf(uil);
                 if (index < panel.Children.Count - 1)
                 {
                     panel.Children.RemoveAt(index);
@@ -135,7 +135,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             uil.moveUpButton.Click += (object sender, RoutedEventArgs e) =>
             {
                 StackPanel panel = MainWindow.Instance.vendorListSellItems;
-                int index = GetIndexInSell(uil);
+                int index = panel.IndexOf(uil);
                 if (index >= 1)
                 {
                     Universal_ItemList next = panel.Children[index - 1] as Universal_ItemList;
@@ -148,7 +148,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             uil.moveDownButton.Click += (object sender, RoutedEventArgs e) =>
             {
                 StackPanel panel = MainWindow.Instance.vendorListSellItems;
-                int index = GetIndexInSell(uil);
+                int index = panel.IndexOf(uil);
                 if (index < panel.Children.Count - 1)
                 {
                     panel.Children.RemoveAt(index);
@@ -170,28 +170,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             MainWindow.Instance.vendorListBuyItems.Children.Remove(item);
             Vendor.items = Items;
             UpdateItems();
-        }
-        private int GetIndexInBuy(UIElement element)
-        {
-            for (int k = 0; k < MainWindow.Instance.vendorListBuyItems.Children.Count; k++)
-            {
-                if (MainWindow.Instance.vendorListBuyItems.Children[k] == element)
-                {
-                    return k;
-                }
-            }
-            return -1;
-        }
-        private int GetIndexInSell(UIElement element)
-        {
-            for (int k = 0; k < MainWindow.Instance.vendorListSellItems.Children.Count; k++)
-            {
-                if (MainWindow.Instance.vendorListSellItems.Children[k] == element)
-                {
-                    return k;
-                }
-            }
-            return -1;
         }
         private ICommand addItemCommand, saveCommand, openCommand, resetCommand, previewCommand;
         public ICommand AddItemCommand

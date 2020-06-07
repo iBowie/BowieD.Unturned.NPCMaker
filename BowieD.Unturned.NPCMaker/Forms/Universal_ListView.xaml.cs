@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Localization;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -54,7 +55,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
             Values = newValues;
         }
 
-        public bool Localizable { get; set; }
         public List<object> Values { get; private set; }
         public Controls.Universal_ItemList.ReturnType ReturnType { get; private set; }
 
@@ -69,7 +69,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     uce.Owner = this;
                     if (uce.ShowDialog() == true)
                     {
-                        Universal_ItemList a = new Controls.Universal_ItemList(uce.Result, Controls.Universal_ItemList.ReturnType.Condition, Localizable);
+                        Universal_ItemList a = new Controls.Universal_ItemList(uce.Result, Controls.Universal_ItemList.ReturnType.Condition, true);
                         Add(a);
                     }
                     break;
@@ -88,7 +88,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     ure.Owner = this;
                     if (ure.ShowDialog() == true)
                     {
-                        Universal_ItemList aa = new Controls.Universal_ItemList(ure.Result, Controls.Universal_ItemList.ReturnType.Reward, Localizable);
+                        Universal_ItemList aa = new Controls.Universal_ItemList(ure.Result, Controls.Universal_ItemList.ReturnType.Reward, true);
                         Add(aa);
                     }
                     break;
@@ -127,6 +127,11 @@ namespace BowieD.Unturned.NPCMaker.Forms
             }
 
             uil.Width = mainGrid.Width;
+            if (uil.ShowMoveButtons)
+            {
+                uil.moveUpButton.Click += MoveUpButton_Click;
+                uil.moveDownButton.Click += MoveDownButton_Click;
+            }
             mainGrid.Children.Add(uil);
         }
 
@@ -135,6 +140,30 @@ namespace BowieD.Unturned.NPCMaker.Forms
             SelectedValue = Util.FindParent<Controls.Universal_ItemList>(sender as Button).Value;
             DialogResult = true;
             Close();
+        }
+        private void MoveUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            var panel = mainGrid;
+            int index = panel.IndexOf((sender as UIElement).TryFindParent<Universal_ItemList>());
+            if (index >= 1)
+            {
+                Universal_ItemList next = panel.Children[index - 1] as Universal_ItemList;
+                panel.Children.RemoveAt(index - 1);
+                panel.Children.Insert(index, next);
+                UpdateValues();
+            }
+        }
+        private void MoveDownButton_Click(object sender, RoutedEventArgs e)
+        {
+            var panel = mainGrid;
+            Universal_ItemList uil = (sender as UIElement).TryFindParent<Universal_ItemList>();
+            int index = panel.IndexOf(uil);
+            if (index < panel.Children.Count - 1)
+            {
+                panel.Children.RemoveAt(index);
+                panel.Children.Insert(index + 1, uil);
+                UpdateValues();
+            }
         }
 
         private void Window_Closed(object sender, EventArgs e)

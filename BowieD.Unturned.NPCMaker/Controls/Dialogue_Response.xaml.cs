@@ -36,7 +36,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
         #region EVENTS
         private void EditRewardsButton_Click(object sender, RoutedEventArgs e)
         {
-            Forms.Universal_ListView ulv = new Forms.Universal_ListView(Response.rewards.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Reward, false)).ToList(), Universal_ItemList.ReturnType.Reward);
+            Forms.Universal_ListView ulv = new Forms.Universal_ListView(Response.rewards.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Reward, true)).ToList(), Universal_ItemList.ReturnType.Reward);
             RichPresence presence = new RichPresence
             {
                 Details = $"Editing NPC {MainWindow.Instance.txtEditorName.Text ?? "without name"}",
@@ -50,7 +50,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
         }
         private void EditConditionsButton_Click(object sender, RoutedEventArgs e)
         {
-            Forms.Universal_ListView ulv = new Forms.Universal_ListView(Response.conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
+            Forms.Universal_ListView ulv = new Forms.Universal_ListView(Response.conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, true)).ToList(), Universal_ItemList.ReturnType.Condition);
             RichPresence presence = new RichPresence
             {
                 Details = $"Editing NPC {MainWindow.Instance.txtEditorName.Text ?? "without name"}",

@@ -13,7 +13,15 @@ namespace BowieD.Unturned.NPCMaker
         {
             return value.StartsWith("pack://application") ? new BitmapImage(new Uri(value)) : new BitmapImage(new Uri("pack://application:,,,/" + value));
         }
-
+        public static int IndexOf<T>(this Panel grid, T element) where T : UIElement
+        {
+            for (int i = 0; i < grid.Children.Count; i++)
+            {
+                if (grid.Children[i] == element)
+                    return i;
+            }
+            return -1;
+        }
         public static T FindParent<T>(DependencyObject child) where T : DependencyObject
         {
             DependencyObject parentObject = VisualTreeHelper.GetParent(child);

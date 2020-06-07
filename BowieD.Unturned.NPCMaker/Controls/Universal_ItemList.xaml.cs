@@ -21,10 +21,12 @@ namespace BowieD.Unturned.NPCMaker.Controls
             Type = type;
             moveUpButton.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
             moveDownButton.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
+            ShowMoveButtons = showMoveButtons;
         }
 
         public object Value { get; private set; }
-        public ReturnType Type { get; private set; }
+        public ReturnType Type { get; }
+        public bool ShowMoveButtons { get; }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {

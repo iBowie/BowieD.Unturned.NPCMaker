@@ -84,6 +84,31 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     Quest.conditions = Conditions;
                     UpdateConditions();
                 };
+                uil.moveUpButton.Click += (object sender, RoutedEventArgs e) =>
+                {
+                    StackPanel panel = MainWindow.Instance.listQuestConditions;
+                    int index = panel.IndexOf(uil);
+                    if (index >= 1)
+                    {
+                        Universal_ItemList next = panel.Children[index - 1] as Universal_ItemList;
+                        panel.Children.RemoveAt(index - 1);
+                        panel.Children.Insert(index, next);
+                        Quest.conditions = Conditions;
+                        UpdateConditions();
+                    }
+                };
+                uil.moveDownButton.Click += (object sender, RoutedEventArgs e) =>
+                {
+                    StackPanel panel = MainWindow.Instance.listQuestConditions;
+                    int index = panel.IndexOf(uil);
+                    if (index < panel.Children.Count - 1)
+                    {
+                        panel.Children.RemoveAt(index);
+                        panel.Children.Insert(index + 1, uil);
+                        Quest.conditions = Conditions;
+                        UpdateConditions();
+                    }
+                };
                 MainWindow.Instance.listQuestConditions.Children.Add(uil);
             }
         }
@@ -98,6 +123,31 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     MainWindow.Instance.listQuestRewards.Children.Remove(Util.FindParent<Universal_ItemList>(sender as Button));
                     Quest.rewards = Rewards;
                     UpdateRewards();
+                };
+                uil.moveUpButton.Click += (object sender, RoutedEventArgs e) =>
+                {
+                    StackPanel panel = MainWindow.Instance.listQuestRewards;
+                    int index = panel.IndexOf(uil);
+                    if (index >= 1)
+                    {
+                        Universal_ItemList next = panel.Children[index - 1] as Universal_ItemList;
+                        panel.Children.RemoveAt(index - 1);
+                        panel.Children.Insert(index, next);
+                        Quest.rewards = Rewards;
+                        UpdateRewards();
+                    }
+                };
+                uil.moveDownButton.Click += (object sender, RoutedEventArgs e) =>
+                {
+                    StackPanel panel = MainWindow.Instance.listQuestRewards;
+                    int index = panel.IndexOf(uil);
+                    if (index < panel.Children.Count - 1)
+                    {
+                        panel.Children.RemoveAt(index);
+                        panel.Children.Insert(index + 1, uil);
+                        Quest.rewards = Rewards;
+                        UpdateRewards();
+                    }
                 };
                 MainWindow.Instance.listQuestRewards.Children.Add(uil);
             }
