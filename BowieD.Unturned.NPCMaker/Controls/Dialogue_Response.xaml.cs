@@ -12,7 +12,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
     /// <summary>
     /// Логика взаимодействия для Dialogue_Response.xaml
     /// </summary>
-    public partial class Dialogue_Response : UserControl
+    public partial class Dialogue_Response : UserControl, IHasOrderButtons
     {
         public Dialogue_Response(NPC.NPCResponse startResponse = null)
         {
@@ -66,7 +66,6 @@ namespace BowieD.Unturned.NPCMaker.Controls
         {
             Response.mainText = mainText.Text;
         }
-        #endregion
 
         private void QuestSelect_Click(object sender, RoutedEventArgs e)
         {
@@ -132,60 +131,6 @@ namespace BowieD.Unturned.NPCMaker.Controls
             }
         }
 
-        public void UpdateOrderButtons()
-        {
-            StackPanel panel = MainWindow.Instance.dialoguePlayerRepliesGrid;
-            int index = IndexInPanel;
-            if (index == 0)
-            {
-                orderButtonUp.IsEnabled = false;
-            }
-            else if (index >= 1)
-            {
-                orderButtonUp.IsEnabled = true;
-            }
-
-            if (index == panel.Children.Count - 2)
-            {
-                orderButtonDown.IsEnabled = false;
-            }
-            else if (index < panel.Children.Count - 2)
-            {
-                orderButtonDown.IsEnabled = true;
-            }
-        }
-
-        private int IndexInPanel
-        {
-            get
-            {
-                for (int k = 0; k < MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Count; k++)
-                {
-                    if (MainWindow.Instance.dialoguePlayerRepliesGrid.Children[k] == this)
-                    {
-                        return k;
-                    }
-                }
-                return -1;
-            }
-        }
-
-        private void OrderButtonDown_Click(object sender, RoutedEventArgs e)
-        {
-            int index = IndexInPanel;
-            MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Dialogue.responses.Remove(Response);
-            MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Dialogue.responses.Insert(index + 1, Response);
-            MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.UpdateResponses();
-        }
-
-        private void OrderButtonUp_Click(object sender, RoutedEventArgs e)
-        {
-            int index = IndexInPanel;
-            MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Dialogue.responses.Remove(Response);
-            MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Dialogue.responses.Insert(index - 1, Response);
-            MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.UpdateResponses();
-        }
-
         private void TxtBoxVendorID_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
             if (e.NewValue.HasValue)
@@ -208,5 +153,9 @@ namespace BowieD.Unturned.NPCMaker.Controls
                 Response.openDialogueId = (ushort)e.NewValue.Value;
             }
         }
+        #endregion
+
+        public UIElement UpButton => orderButtonUp;
+        public UIElement DownButton => orderButtonDown;
     }
 }

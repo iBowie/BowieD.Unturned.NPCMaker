@@ -633,30 +633,40 @@
                             <TextBlock TextAlignment="Center" Text="{xaml:Localize Key=DIALOGUE_ID}" VerticalAlignment="Center"/>
                         </Border>
                         <GroupBox Grid.Row="1" Header="{xaml:Localize Key=DIALOGUE_Pages}" Margin="10,10,5,10">
-                            <ScrollViewer>
-                                <StackPanel Name="messagePagesGrid" VerticalAlignment="Top">
-                                    <Button Command="{Binding AddMessageCommand}" Name="dialogueAddMessageButton" Margin="10" Height="32" Content="{xaml:Localize Key=DIALOGUE_Message_Add}">
-                                        <Button.ToolTip>
-                                            <StackPanel>
-                                                <Image Source="Resources/Help/img_help_dialogueMessage.png"/>
-                                            </StackPanel>
-                                        </Button.ToolTip>
-                                    </Button>
-                                </StackPanel>
-                            </ScrollViewer>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <ScrollViewer Margin="10">
+                                    <StackPanel Name="messagePagesGrid" VerticalAlignment="Top"/>
+                                </ScrollViewer>
+                                <Button Grid.Row="1" Command="{Binding AddMessageCommand}" Name="dialogueAddMessageButton" Margin="10" Content="{xaml:Localize Key=DIALOGUE_Message_Add}">
+                                    <Button.ToolTip>
+                                        <StackPanel>
+                                            <Image Source="Resources/Help/img_help_dialogueMessage.png"/>
+                                        </StackPanel>
+                                    </Button.ToolTip>
+                                </Button>
+                            </Grid>
                         </GroupBox>
                         <GroupBox Grid.Column="1" Grid.Row="1" Header="{xaml:Localize Key=DIALOGUE_Replies}" Margin="5,10,5,10" MinWidth="361">
-                            <ScrollViewer>
-                                <StackPanel x:Name="dialoguePlayerRepliesGrid">
-                                    <Button Command="{Binding AddReplyCommand}" Name="dialogueAddReplyButton" Margin="10" VerticalAlignment="Top" Height="32" Content="{xaml:Localize Key=DIALOGUE_Reply_Add}" Width="312">
-                                        <Button.ToolTip>
-                                            <StackPanel>
-                                                <Image Source="Resources/Help/img_help_dialogueReply.png"/>
-                                            </StackPanel>
-                                        </Button.ToolTip>
-                                    </Button>
-                                </StackPanel>
-                            </ScrollViewer>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <ScrollViewer Margin="10">
+                                    <StackPanel x:Name="dialoguePlayerRepliesGrid"/>
+                                </ScrollViewer>
+                                <Button Grid.Row="1" Command="{Binding AddReplyCommand}" Name="dialogueAddReplyButton" Margin="10" Content="{xaml:Localize Key=DIALOGUE_Reply_Add}">
+                                    <Button.ToolTip>
+                                        <StackPanel>
+                                            <Image Source="Resources/Help/img_help_dialogueReply.png"/>
+                                        </StackPanel>
+                                    </Button.ToolTip>
+                                </Button>
+                            </Grid>
                         </GroupBox>
                         <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="dialogueSaveButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>

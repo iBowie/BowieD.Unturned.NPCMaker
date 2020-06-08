@@ -232,18 +232,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         }
         public void UpdateMessages()
         {
-            List<UIElement> toRemove = new List<UIElement>();
-            foreach (UIElement item in MainWindow.Instance.messagePagesGrid.Children)
-            {
-                if (item is Dialogue_Message)
-                {
-                    toRemove.Add(item);
-                }
-            }
-            foreach (UIElement item in toRemove)
-            {
-                MainWindow.Instance.messagePagesGrid.Children.Remove(item);
-            }
+            MainWindow.Instance.messagePagesGrid.Children.Clear();
             foreach (NPCMessage msg in Dialogue.messages)
             {
                 Dialogue_Message dialogue_Message = new Dialogue_Message(msg);
@@ -252,31 +241,28 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     Dialogue.messages.Remove(msg);
                     UpdateMessages();
                 };
-                int ind = 0;
-                for (int k = 0; k < MainWindow.Instance.messagePagesGrid.Children.Count; k++)
+                dialogue_Message.moveUpButton.Click += (sender, e) =>
                 {
-                    if (MainWindow.Instance.messagePagesGrid.Children[k] is Dialogue_Message)
-                    {
-                        ind = k + 1;
-                    }
-                }
-                MainWindow.Instance.messagePagesGrid.Children.Insert(ind, dialogue_Message);
+                    MainWindow.Instance.messagePagesGrid.MoveUp(dialogue_Message);
+                    UpdateMessagesFromUI();
+                };
+                dialogue_Message.moveDownButton.Click += (sender, e) =>
+                {
+                    MainWindow.Instance.messagePagesGrid.MoveDown(dialogue_Message);
+                    UpdateMessagesFromUI();
+                };
+                MainWindow.Instance.messagePagesGrid.Children.Add(dialogue_Message);
             }
+            MainWindow.Instance.messagePagesGrid.UpdateOrderButtons<Dialogue_Message>();
+        }
+        public void UpdateMessagesFromUI()
+        {
+            // hot spaghetti
+            Messages = Messages;
         }
         public void UpdateResponses()
         {
-            List<UIElement> toRemove = new List<UIElement>();
-            foreach (UIElement item in MainWindow.Instance.dialoguePlayerRepliesGrid.Children)
-            {
-                if (item is Dialogue_Response)
-                {
-                    toRemove.Add(item);
-                }
-            }
-            foreach (UIElement item in toRemove)
-            {
-                MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Remove(item);
-            }
+            MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Clear();
             foreach (NPCResponse res in Dialogue.responses)
             {
                 Dialogue_Response dialogue_Response = new Dialogue_Response(res);
@@ -285,23 +271,24 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     Dialogue.responses.Remove(res);
                     UpdateResponses();
                 };
-                int ind = 0;
-                for (int k = 0; k < MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Count; k++)
+                dialogue_Response.orderButtonDown.Click += (sender, e) =>
                 {
-                    if (MainWindow.Instance.dialoguePlayerRepliesGrid.Children[k] is Dialogue_Response)
-                    {
-                        ind = k + 1;
-                    }
-                }
-                MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Insert(ind, dialogue_Response);
-            }
-            foreach (object res in MainWindow.Instance.dialoguePlayerRepliesGrid.Children)
-            {
-                if (res is Dialogue_Response dr)
+                    MainWindow.Instance.dialoguePlayerRepliesGrid.MoveDown(dialogue_Response);
+                    UpdateResponsesFromUI();
+                };
+                dialogue_Response.orderButtonUp.Click += (sender, e) =>
                 {
-                    dr.UpdateOrderButtons();
-                }
+                    MainWindow.Instance.dialoguePlayerRepliesGrid.MoveUp(dialogue_Response);
+                    UpdateResponsesFromUI();
+                };
+                MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Add(dialogue_Response);
             }
+            MainWindow.Instance.dialoguePlayerRepliesGrid.UpdateOrderButtons<Dialogue_Response>();
+        }
+        public void UpdateResponsesFromUI()
+        {
+            // ya want some spaghetti?
+            Responses = Responses;
         }
     }
 }

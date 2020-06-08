@@ -11,7 +11,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
     /// <summary>
     /// Логика взаимодействия для Dialogue_Message.xaml
     /// </summary>
-    public partial class Dialogue_Message : UserControl, INotifyPropertyChanged
+    public partial class Dialogue_Message : UserControl, INotifyPropertyChanged, IHasOrderButtons
     {
         public Dialogue_Message(NPC.NPCMessage message)
         {
@@ -65,6 +65,9 @@ namespace BowieD.Unturned.NPCMaker.Controls
         public ushort Prev { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public UIElement UpButton => moveUpButton;
+        public UIElement DownButton => moveDownButton;
 
         private void AddPageButton_Click(object sender, RoutedEventArgs e)
         {

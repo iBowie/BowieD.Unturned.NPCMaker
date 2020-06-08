@@ -8,49 +8,75 @@
              xmlns:xceed="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
              mc:Ignorable="d">
-    <Grid>
-        <StackPanel Orientation="Vertical">
-            <ScrollViewer Margin="5" MinHeight="60" MaxHeight="120">
-                <StackPanel Name="pagesGrid" />
-            </ScrollViewer>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Label Margin="5" MaxWidth="100">
-                    <Label.Content>
-                        <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{xaml:Localize Key=DIALOGUE_Message_Prev}" ToolTip="{xaml:Localize Key=DIALOGUE_Message_Prev_Tooltip}"/>
-                    </Label.Content>
-                </Label>
-                <xceed:UShortUpDown VerticalAlignment="Center" Grid.Column="1" Foreground="{DynamicResource ForegroundColor}" Margin="5" ShowButtonSpinner="False" Value="{Binding Prev, UpdateSourceTrigger=PropertyChanged}"/>
-            </Grid>
-            <Button Click="Button_Click" Content="{xaml:Localize Key=DIALOGUE_Message_Conditions}" Margin="5">
-                <Button.ToolTip>
-                    <StackPanel>
-                        <Label Content="{xaml:Localize Key=DIALOGUE_Message_Conditions_Tooltip}"/>
-                    </StackPanel>
-                </Button.ToolTip>
-            </Button>
-            <Button Click="EditRewardsButton_Click" Content="{xaml:Localize Key=DIALOGUE_Message_Rewards}" Margin="5">
-                <Button.ToolTip>
-                    <StackPanel>
-                        <Label Content="{xaml:Localize Key=DIALOGUE_Message_Rewards_Tooltip}"/>
-                    </StackPanel>
-                </Button.ToolTip>
-            </Button>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Button Click="AddPageButton_Click" Content="{xaml:Localize Key=DIALOGUE_Page_Add}" Name="addPageButton" VerticalAlignment="Center" Margin="5"/>
-                <Button Grid.Column="1" Name="deletePageButton" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Bottom" Width="35" Height="35">
-                    <Button.Content>
-                        <iconPacks:PackIconMaterial Kind="Delete" Foreground="{DynamicResource AccentColor}"/>
-                    </Button.Content>
-                </Button>
-            </Grid>
-        </StackPanel>
+    <Grid Margin="5">
+        <Border BorderBrush="{StaticResource AccentColor}" BorderThickness="2" CornerRadius="4">
+            <StackPanel Orientation="Vertical">
+                <Border Margin="5" BorderBrush="{StaticResource AccentColor}" BorderThickness="2" CornerRadius="4">
+                    <ScrollViewer Margin="5" MinHeight="60" MaxHeight="120" VerticalScrollBarVisibility="Auto">
+                        <StackPanel Name="pagesGrid" />
+                    </ScrollViewer>
+                </Border>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="5" MaxWidth="100">
+                        <Label.Content>
+                            <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{xaml:Localize Key=DIALOGUE_Message_Prev}" ToolTip="{xaml:Localize Key=DIALOGUE_Message_Prev_Tooltip}"/>
+                        </Label.Content>
+                    </Label>
+                    <xceed:UShortUpDown VerticalAlignment="Center" Grid.Column="1" Foreground="{DynamicResource ForegroundColor}" Margin="5" ShowButtonSpinner="False" Value="{Binding Prev, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button VerticalAlignment="Center" Click="Button_Click" Content="{xaml:Localize Key=DIALOGUE_Message_Conditions}" Margin="5">
+                        <Button.ToolTip>
+                            <StackPanel>
+                                <Label Content="{xaml:Localize Key=DIALOGUE_Message_Conditions_Tooltip}"/>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Grid.Column="1" Name="moveUpButton" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Bottom" Width="35" Height="35">
+                        <Button.Content>
+                            <iconPacks:PackIconMaterial Kind="ArrowUp" Foreground="{DynamicResource AccentColor}"/>
+                        </Button.Content>
+                    </Button>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button VerticalAlignment="Center" Click="EditRewardsButton_Click" Content="{xaml:Localize Key=DIALOGUE_Message_Rewards}" Margin="5">
+                        <Button.ToolTip>
+                            <StackPanel>
+                                <Label Content="{xaml:Localize Key=DIALOGUE_Message_Rewards_Tooltip}"/>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Grid.Column="1" Name="moveDownButton" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Bottom" Width="35" Height="35">
+                        <Button.Content>
+                            <iconPacks:PackIconMaterial Kind="ArrowDown" Foreground="{DynamicResource AccentColor}"/>
+                        </Button.Content>
+                    </Button>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Click="AddPageButton_Click" Content="{xaml:Localize Key=DIALOGUE_Page_Add}" Name="addPageButton" VerticalAlignment="Center" Margin="5"/>
+                    <Button Grid.Column="1" Name="deletePageButton" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Bottom" Width="35" Height="35">
+                        <Button.Content>
+                            <iconPacks:PackIconMaterial Kind="Delete" Foreground="{DynamicResource AccentColor}"/>
+                        </Button.Content>
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

@@ -249,6 +249,7 @@
     <Compile Include="Forms\Form_About.xaml.cs">
       <DependentUpon>Form_About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IHasOrderButtons.cs" />
     <Compile Include="Localization\Localization.cs" />
     <Compile Include="Localization\LocalizationManager.cs" />
     <Compile Include="Localization\TranslationDictionary.cs" />
@@ -340,6 +341,7 @@
     <Compile Include="NPC\Rewards\Attributes\RewardTooltipAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardVehicle.cs" />
     <Compile Include="NPC\Simulation.cs" />
+    <Compile Include="OrderTool.cs" />
     <Compile Include="Parsing\DataReader.cs" />
     <Compile Include="Parsing\ParseTool.cs" />
     <Compile Include="Program.cs" />
