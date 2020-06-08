@@ -10,7 +10,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
     /// <summary>
     /// Логика взаимодействия для Condition_ItemList.xaml
     /// </summary>
-    public partial class Universal_ItemList : UserControl
+    public partial class Universal_ItemList : UserControl, IHasOrderButtons
     {
         public Universal_ItemList(object input, ReturnType type, bool showMoveButtons = false)
         {
@@ -27,6 +27,9 @@ namespace BowieD.Unturned.NPCMaker.Controls
         public object Value { get; private set; }
         public ReturnType Type { get; }
         public bool ShowMoveButtons { get; }
+
+        public UIElement UpButton => moveUpButton;
+        public UIElement DownButton => moveDownButton;
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {

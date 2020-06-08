@@ -53,6 +53,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 }
             }
             Values = newValues;
+
+            mainGrid.UpdateOrderButtons<Universal_ItemList>();
         }
 
         public List<object> Values { get; private set; }
@@ -115,6 +117,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     Values.Add(uil.Value);
                 }
             }
+            mainGrid.UpdateOrderButtons<Universal_ItemList>();
         }
 
         private void Add(Controls.Universal_ItemList uil)
@@ -133,6 +136,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 uil.moveDownButton.Click += MoveDownButton_Click;
             }
             mainGrid.Children.Add(uil);
+            mainGrid.UpdateOrderButtons<Universal_ItemList>();
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
@@ -143,27 +147,13 @@ namespace BowieD.Unturned.NPCMaker.Forms
         }
         private void MoveUpButton_Click(object sender, RoutedEventArgs e)
         {
-            var panel = mainGrid;
-            int index = panel.IndexOf((sender as UIElement).TryFindParent<Universal_ItemList>());
-            if (index >= 1)
-            {
-                Universal_ItemList next = panel.Children[index - 1] as Universal_ItemList;
-                panel.Children.RemoveAt(index - 1);
-                panel.Children.Insert(index, next);
-                UpdateValues();
-            }
+            mainGrid.MoveUp((sender as UIElement).TryFindParent<Universal_ItemList>());
+            UpdateValues();
         }
         private void MoveDownButton_Click(object sender, RoutedEventArgs e)
         {
-            var panel = mainGrid;
-            Universal_ItemList uil = (sender as UIElement).TryFindParent<Universal_ItemList>();
-            int index = panel.IndexOf(uil);
-            if (index < panel.Children.Count - 1)
-            {
-                panel.Children.RemoveAt(index);
-                panel.Children.Insert(index + 1, uil);
-                UpdateValues();
-            }
+            mainGrid.MoveDown((sender as UIElement).TryFindParent<Universal_ItemList>());
+            UpdateValues();
         }
 
         private void Window_Closed(object sender, EventArgs e)

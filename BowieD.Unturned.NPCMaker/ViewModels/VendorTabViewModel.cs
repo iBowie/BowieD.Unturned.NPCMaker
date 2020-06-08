@@ -80,6 +80,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     AddItemSell(item);
                 }
             }
+            MainWindow.Instance.vendorListBuyItems.UpdateOrderButtons<Universal_ItemList>();
+            MainWindow.Instance.vendorListSellItems.UpdateOrderButtons<Universal_ItemList>();
         }
         internal void AddItemBuy(VendorItem item)
         {
@@ -96,27 +98,18 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             uil.moveUpButton.Click += (object sender, RoutedEventArgs e) =>
             {
                 StackPanel panel = MainWindow.Instance.vendorListBuyItems;
-                int index = panel.IndexOf(uil);
-                if (index >= 1)
-                {
-                    Universal_ItemList next = panel.Children[index - 1] as Universal_ItemList;
-                    panel.Children.RemoveAt(index - 1);
-                    panel.Children.Insert(index, next);
-                    Vendor.items = Items;
-                    UpdateItems();
-                }
+
+                panel.MoveUp(uil);
+                Vendor.items = Items;
+                UpdateItems();
             };
             uil.moveDownButton.Click += (object sender, RoutedEventArgs e) =>
             {
                 StackPanel panel = MainWindow.Instance.vendorListBuyItems;
-                int index = panel.IndexOf(uil);
-                if (index < panel.Children.Count - 1)
-                {
-                    panel.Children.RemoveAt(index);
-                    panel.Children.Insert(index + 1, uil);
-                    Vendor.items = Items;
-                    UpdateItems();
-                }
+
+                panel.MoveDown(uil);
+                Vendor.items = Items;
+                UpdateItems();
             };
             MainWindow.Instance.vendorListBuyItems.Children.Add(uil);
         }
@@ -135,27 +128,18 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             uil.moveUpButton.Click += (object sender, RoutedEventArgs e) =>
             {
                 StackPanel panel = MainWindow.Instance.vendorListSellItems;
-                int index = panel.IndexOf(uil);
-                if (index >= 1)
-                {
-                    Universal_ItemList next = panel.Children[index - 1] as Universal_ItemList;
-                    panel.Children.RemoveAt(index - 1);
-                    panel.Children.Insert(index, next);
-                    Vendor.items = Items;
-                    UpdateItems();
-                }
+
+                panel.MoveUp(uil);
+                Vendor.items = Items;
+                UpdateItems();
             };
             uil.moveDownButton.Click += (object sender, RoutedEventArgs e) =>
             {
                 StackPanel panel = MainWindow.Instance.vendorListSellItems;
-                int index = panel.IndexOf(uil);
-                if (index < panel.Children.Count - 1)
-                {
-                    panel.Children.RemoveAt(index);
-                    panel.Children.Insert(index + 1, uil);
-                    Vendor.items = Items;
-                    UpdateItems();
-                }
+
+                panel.MoveDown(uil);
+                Vendor.items = Items;
+                UpdateItems();
             };
             MainWindow.Instance.vendorListSellItems.Children.Add(uil);
         }
