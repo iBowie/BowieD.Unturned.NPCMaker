@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.Controls
@@ -68,6 +69,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         public UIElement UpButton => moveUpButton;
         public UIElement DownButton => moveDownButton;
+        public Transform Transform => animateTransform;
 
         private void AddPageButton_Click(object sender, RoutedEventArgs e)
         {

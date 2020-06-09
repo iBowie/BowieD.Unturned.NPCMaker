@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Media;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -6,5 +7,6 @@ namespace BowieD.Unturned.NPCMaker
     {
         UIElement UpButton { get; }
         UIElement DownButton { get; }
+        Transform Transform { get; }
     }
 }

@@ -4,6 +4,7 @@ using DiscordRPC;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 using Reward = BowieD.Unturned.NPCMaker.NPC.Rewards.Reward;
 
@@ -157,5 +158,6 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         public UIElement UpButton => orderButtonUp;
         public UIElement DownButton => orderButtonDown;
+        public Transform Transform => animateTransform;
     }
 }

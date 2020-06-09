@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -45,17 +48,51 @@ namespace BowieD.Unturned.NPCMaker
         }
         public static void MoveUp<T>(this Panel container, T element) where T : UIElement, IHasOrderButtons
         {
+            MoveUp(container, element, out _, out _);
+        }
+        public static void MoveUp<T>(this Panel container, T element, out T upper, out T bottom) where T : UIElement, IHasOrderButtons
+        {
             int index = container.IndexOf(element);
             container.Children.Remove(element);
             container.Children.Insert(index - 1, element);
             container.UpdateOrderButtons<T>();
+
+            upper = element;
+            bottom = container.Children[index] as T;
+
+            if (AppConfig.Instance.animateControls)
+            {
+                AnimateSwap(upper, bottom);
+            }
         }
         public static void MoveDown<T>(this Panel container, T element) where T : UIElement, IHasOrderButtons
+        {
+            MoveDown(container, element, out _, out _);
+        }
+        public static void MoveDown<T>(this Panel container, T element, out T upper, out T bottom) where T : UIElement, IHasOrderButtons
         {
             int index = container.IndexOf(element);
             container.Children.Remove(element);
             container.Children.Insert(index + 1, element);
             container.UpdateOrderButtons<T>();
+
+            upper = container.Children[index] as T;
+            bottom = element;
+
+            if (AppConfig.Instance.animateControls)
+            {
+                AnimateSwap(upper, bottom);
+            }
+        }
+        public static void AnimateSwap<T>(T upper, T bottom) where T : UIElement, IHasOrderButtons
+        {
+            const double duration = 0.25;
+
+            DoubleAnimation upAnim = new DoubleAnimation(upper.RenderSize.Height, 0, new Duration(System.TimeSpan.FromSeconds(duration)));
+            DoubleAnimation downAnim = new DoubleAnimation(-bottom.RenderSize.Height, 0, new Duration(System.TimeSpan.FromSeconds(duration)));
+
+            upper.Transform.BeginAnimation(TranslateTransform.YProperty, upAnim);
+            bottom.Transform.BeginAnimation(TranslateTransform.YProperty, downAnim);
         }
         #endregion
         public static void MoveUp<T>(this IList<T> list, T element)

@@ -2,6 +2,7 @@
 using MahApps.Metro.Controls;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 using Reward = BowieD.Unturned.NPCMaker.NPC.Rewards.Reward;
 
@@ -30,6 +31,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         public UIElement UpButton => moveUpButton;
         public UIElement DownButton => moveDownButton;
+        public Transform Transform => animateTransform;
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {

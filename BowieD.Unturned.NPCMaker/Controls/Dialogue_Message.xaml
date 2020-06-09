@@ -9,6 +9,11 @@
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
              mc:Ignorable="d">
     <Grid Margin="5">
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <TranslateTransform x:Name="animateTransform"/>
+            </TransformGroup>
+        </Grid.RenderTransform>
         <Border BorderBrush="{StaticResource AccentColor}" BorderThickness="2" CornerRadius="4">
             <StackPanel Orientation="Vertical">
                 <Border Margin="5" BorderBrush="{StaticResource AccentColor}" BorderThickness="2" CornerRadius="4">
