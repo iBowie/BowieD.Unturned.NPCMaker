@@ -31,7 +31,6 @@ namespace BowieD.Unturned.NPCMaker.Common.Utility
             }
             sb.AppendLine($"Is Elevated: {IsElevated}");
             sb.AppendLine($"Time: {DateTime.Now}");
-            sb.AppendLine($"Alternate Path: {AppConfig.AlternatePath}");
             sb.AppendLine($"Settings:");
             try
             {

@@ -91,42 +91,16 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         {
             get
             {
-                if (AlternatePath == null)
-                {
-                    DirectoryInfo dirInfo = new DirectoryInfo(defaultDir);
-                    try
-                    {
-                        DirectorySecurity dirAC = dirInfo.GetAccessControl(AccessControlSections.All);
-                        AlternatePath = true;
-                    }
-                    catch
-                    {
-                        AlternatePath = false;
-                    }
-                }
-                if (AlternatePath == false)
-                {
-                    string res = defaultDir;
-                    if (!System.IO.Directory.Exists(res))
-                    {
-                        System.IO.Directory.CreateDirectory(res);
-                    }
+                string res = defaultDir;
 
-                    return res;
-                }
-                else
+                if (!System.IO.Directory.Exists(res))
                 {
-                    string res = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"BowieD.Unturned.NPCMaker Configuration");
-                    if (!System.IO.Directory.Exists(res))
-                    {
-                        System.IO.Directory.CreateDirectory(res);
-                    }
-
-                    return res;
+                    System.IO.Directory.CreateDirectory(res);
                 }
+
+                return res;
             }
         }
-        public static bool? AlternatePath { get; private set; } = null;
         private static string path => Path.Combine(Directory, "config.json");
     }
 }
