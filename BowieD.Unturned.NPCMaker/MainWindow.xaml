@@ -838,7 +838,7 @@
             <TextBlock Name="genericTextBlock" Visibility="Collapsed"/>
         </Grid>
         <Grid Name="dropOverlay" Background="#99000000" Visibility="Hidden">
-            <Image Source="Resources/ICON_OPEN.png" Width="256" Height="256"/>
+            <iconPacks:PackIconMaterial Kind="FolderUploadOutline" VerticalAlignment="Center" HorizontalAlignment="Center" Width="256" Height="256"/>
         </Grid>
         <Grid Name="notificationOverlay" Visibility="Visible"/>
         <Grid Name="blockActionsOverlay" Visibility="Collapsed" IsHitTestVisible="True">

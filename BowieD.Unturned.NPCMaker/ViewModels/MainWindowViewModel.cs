@@ -178,8 +178,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     SmallImageKey = "icon_chat_outlined",
                                     SmallImageText = $"Dialogues: {MainWindow.CurrentProject.data.dialogues.Count}"
                                 },
-                                Details = $"Messages: {DialogueTabViewModel.Messages.Count}",
-                                State = $"Responses: {DialogueTabViewModel.Responses.Count}"
+                                Details = $"Messages: {DialogueTabViewModel.Dialogue.messages.Count}",
+                                State = $"Responses: {DialogueTabViewModel.Dialogue.responses.Count}"
                             });
                         }
                         break;

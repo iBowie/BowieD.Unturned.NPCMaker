@@ -2,8 +2,10 @@
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
+using MahApps.Metro.Controls;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Windows;
 using System.Windows.Input;
 
@@ -22,8 +24,15 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             set
             {
                 _dialogue = value;
-                UpdateMessages();
-                UpdateResponses();
+
+                MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Clear();
+                foreach (var r in value.responses)
+                    AddResponse(new Dialogue_Response(r));
+
+                MainWindow.Instance.messagePagesGrid.Children.Clear();
+                foreach (var m in value.messages)
+                    AddMessage(new Dialogue_Message(m));
+
                 OnPropertyChange("");
             }
         }
@@ -45,48 +54,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 OnPropertyChange("Comment");
             }
         }
-        public List<NPCMessage> Messages
-        {
-            get
-            {
-                List<Dialogue_Message> messages = new List<Dialogue_Message>();
-                foreach (UIElement ui in MainWindow.Instance.messagePagesGrid.Children)
-                {
-                    if (ui is Dialogue_Message dm)
-                    {
-                        messages.Add(dm);
-                    }
-                }
-                return messages.Select(d => d.Message).ToList();
-            }
-            set
-            {
-                Dialogue.messages = value;
-                UpdateMessages();
-                OnPropertyChange("Messages");
-            }
-        }
-        public List<NPCResponse> Responses
-        {
-            get
-            {
-                List<Dialogue_Response> responses = new List<Dialogue_Response>();
-                foreach (UIElement ui in MainWindow.Instance.dialoguePlayerRepliesGrid.Children)
-                {
-                    if (ui is Dialogue_Response dr)
-                    {
-                        responses.Add(dr);
-                    }
-                }
-                return responses.Select(d => d.Response).ToList();
-            }
-            set
-            {
-                Dialogue.responses = value;
-                UpdateResponses();
-                OnPropertyChange("Responses");
-            }
-        }
 
         private ICommand saveCommand, openCommand, resetCommand, addReplyCommand, addMessageCommand, setAsStartCommand, previewCommand;
         public ICommand SaveCommand
@@ -102,8 +69,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             App.NotificationManager.Notify(LocalizationManager.Current.Notification["Dialogue_ID_Zero"]);
                             return;
                         }
-                        Dialogue.messages = Messages;
-                        Dialogue.responses = Responses;
+                        UpdateResponses();
+                        UpdateMessages();
                         if (!MainWindow.CurrentProject.data.dialogues.Contains(Dialogue))
                         {
                             MainWindow.CurrentProject.data.dialogues.Add(Dialogue);
@@ -163,8 +130,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     addReplyCommand = new BaseCommand(() =>
                     {
-                        Dialogue.responses.Add(new NPCResponse());
-                        UpdateResponses();
+                        AddResponse(new Dialogue_Response(new NPCResponse()));
                     });
                 }
                 return addReplyCommand;
@@ -178,9 +144,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     addMessageCommand = new BaseCommand(() =>
                     {
-                        Dialogue.messages = Messages;
-                        Dialogue.messages.Add(new NPCMessage());
-                        UpdateMessages();
+                        AddMessage(new Dialogue_Message(new NPCMessage()));
                     });
                 }
                 return addMessageCommand;
@@ -230,65 +194,113 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 return previewCommand;
             }
         }
-        public void UpdateMessages()
+
+        void AddMessage(Dialogue_Message message)
         {
-            MainWindow.Instance.messagePagesGrid.Children.Clear();
-            foreach (NPCMessage msg in Dialogue.messages)
+            message.deletePageButton.Click += (sender, e) =>
             {
-                Dialogue_Message dialogue_Message = new Dialogue_Message(msg);
-                dialogue_Message.deletePageButton.Click += (sender, e) =>
+                var current = (sender as UIElement).TryFindParent<Dialogue_Message>();
+                var panel = MainWindow.Instance.messagePagesGrid;
+                foreach (var ui in panel.Children)
                 {
-                    Dialogue.messages.Remove(msg);
-                    UpdateMessages();
-                };
-                dialogue_Message.moveUpButton.Click += (sender, e) =>
+                    var dr = ui as Dialogue_Message;
+                    if (dr.Equals(current))
+                    {
+                        panel.Children.Remove(dr);
+                        break;
+                    }
+                }
+                List<NPCMessage> newMessages = new List<NPCMessage>();
+
+                foreach (UIElement ui in panel.Children)
                 {
-                    MainWindow.Instance.messagePagesGrid.MoveUp(dialogue_Message);
-                    UpdateMessagesFromUI();
-                };
-                dialogue_Message.moveDownButton.Click += (sender, e) =>
-                {
-                    MainWindow.Instance.messagePagesGrid.MoveDown(dialogue_Message);
-                    UpdateMessagesFromUI();
-                };
-                MainWindow.Instance.messagePagesGrid.Children.Add(dialogue_Message);
-            }
+                    if (ui is Dialogue_Message dr)
+                    {
+                        newMessages.Add(dr.Message);
+                    }
+                }
+                Dialogue.messages = newMessages;
+
+                panel.UpdateOrderButtons<Dialogue_Message>();
+            };
+            message.moveUpButton.Click += (sender, e) =>
+            {
+                MainWindow.Instance.messagePagesGrid.MoveUp((sender as UIElement).TryFindParent<Dialogue_Message>());
+                UpdateMessages();
+            };
+            message.moveDownButton.Click += (sender, e) =>
+            {
+                MainWindow.Instance.messagePagesGrid.MoveDown((sender as UIElement).TryFindParent<Dialogue_Message>());
+                UpdateMessages();
+            };
+            MainWindow.Instance.messagePagesGrid.Children.Add(message);
             MainWindow.Instance.messagePagesGrid.UpdateOrderButtons<Dialogue_Message>();
         }
-        public void UpdateMessagesFromUI()
+        void AddResponse(Dialogue_Response response)
         {
-            // hot spaghetti
-            Messages = Messages;
+            response.deleteButton.Click += (sender, e) =>
+            {
+                var current = (sender as UIElement).TryFindParent<Dialogue_Response>();
+                var panel = MainWindow.Instance.dialoguePlayerRepliesGrid;
+                foreach (var ui in panel.Children)
+                {
+                    var dr = ui as Dialogue_Response;
+                    if (dr.Equals(current))
+                    {
+                        panel.Children.Remove(dr);
+                        break;
+                    }
+                }
+                List<NPCResponse> newResponses = new List<NPCResponse>();
+
+                foreach (UIElement ui in panel.Children)
+                {
+                    if (ui is Dialogue_Response dr)
+                    {
+                        newResponses.Add(dr.Response);
+                    }
+                }
+                Dialogue.responses = newResponses;
+
+                panel.UpdateOrderButtons<Dialogue_Response>();
+            };
+            response.orderButtonUp.Click += (sender, e) =>
+            {
+                MainWindow.Instance.dialoguePlayerRepliesGrid.MoveUp((sender as UIElement).TryFindParent<Dialogue_Response>());
+                UpdateResponses();
+            };
+            response.orderButtonDown.Click += (sender, e) =>
+            {
+                MainWindow.Instance.dialoguePlayerRepliesGrid.MoveDown((sender as UIElement).TryFindParent<Dialogue_Response>());
+                UpdateResponses();
+            };
+            MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Add(response);
+            MainWindow.Instance.dialoguePlayerRepliesGrid.UpdateOrderButtons<Dialogue_Response>();
         }
+
         public void UpdateResponses()
         {
-            MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Clear();
-            foreach (NPCResponse res in Dialogue.responses)
+            Dialogue.responses.Clear();
+            foreach (var uie in MainWindow.Instance.dialoguePlayerRepliesGrid.Children)
             {
-                Dialogue_Response dialogue_Response = new Dialogue_Response(res);
-                dialogue_Response.deleteButton.Click += (sender, e) =>
+                if (uie is Dialogue_Response dr)
                 {
-                    Dialogue.responses.Remove(res);
-                    UpdateResponses();
-                };
-                dialogue_Response.orderButtonDown.Click += (sender, e) =>
-                {
-                    MainWindow.Instance.dialoguePlayerRepliesGrid.MoveDown(dialogue_Response);
-                    UpdateResponsesFromUI();
-                };
-                dialogue_Response.orderButtonUp.Click += (sender, e) =>
-                {
-                    MainWindow.Instance.dialoguePlayerRepliesGrid.MoveUp(dialogue_Response);
-                    UpdateResponsesFromUI();
-                };
-                MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Add(dialogue_Response);
+                    Dialogue.responses.Add(dr.Response);
+                }
             }
             MainWindow.Instance.dialoguePlayerRepliesGrid.UpdateOrderButtons<Dialogue_Response>();
         }
-        public void UpdateResponsesFromUI()
+        public void UpdateMessages()
         {
-            // ya want some spaghetti?
-            Responses = Responses;
+            Dialogue.messages.Clear();
+            foreach (var uie in MainWindow.Instance.messagePagesGrid.Children)
+            {
+                if (uie is Dialogue_Message dm)
+                {
+                    Dialogue.messages.Add(dm.Message);
+                }
+            }
+            MainWindow.Instance.dialoguePlayerRepliesGrid.UpdateOrderButtons<Dialogue_Message>();
         }
     }
 }

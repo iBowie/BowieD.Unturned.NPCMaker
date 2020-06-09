@@ -48,7 +48,7 @@ namespace BowieD.Unturned.NPCMaker
         }
         public static void MoveUp<T>(this Panel container, T element) where T : UIElement, IHasOrderButtons
         {
-            MoveUp(container, element, out _, out _);
+            MoveUp(container, element, out T _, out T _);
         }
         public static void MoveUp<T>(this Panel container, T element, out T upper, out T bottom) where T : UIElement, IHasOrderButtons
         {
@@ -65,9 +65,15 @@ namespace BowieD.Unturned.NPCMaker
                 AnimateSwap(upper, bottom);
             }
         }
+        public static void MoveUp<T>(this Panel container, T element, out int upperIndex, out int bottomIndex) where T : UIElement, IHasOrderButtons
+        {
+            MoveUp(container, element, out T upper, out T bottom);
+            upperIndex = container.IndexOf(upper);
+            bottomIndex = container.IndexOf(bottom);
+        }
         public static void MoveDown<T>(this Panel container, T element) where T : UIElement, IHasOrderButtons
         {
-            MoveDown(container, element, out _, out _);
+            MoveDown(container, element, out T _, out T _);
         }
         public static void MoveDown<T>(this Panel container, T element, out T upper, out T bottom) where T : UIElement, IHasOrderButtons
         {
@@ -83,6 +89,12 @@ namespace BowieD.Unturned.NPCMaker
             {
                 AnimateSwap(upper, bottom);
             }
+        }
+        public static void MoveDown<T>(this Panel container, T element, out int upperIndex, out int bottomIndex) where T : UIElement, IHasOrderButtons
+        {
+            MoveDown(container, element, out T upper, out T bottom);
+            upperIndex = container.IndexOf(upper);
+            bottomIndex = container.IndexOf(bottom);
         }
         public static void AnimateSwap<T>(T upper, T bottom) where T : UIElement, IHasOrderButtons
         {
