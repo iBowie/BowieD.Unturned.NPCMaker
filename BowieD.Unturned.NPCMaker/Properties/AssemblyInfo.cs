@@ -13,7 +13,7 @@ using System.Windows;
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
-[assembly: AssemblyVersion("1.12.2.9")]
-[assembly: AssemblyFileVersion("1.12.2.9")]
+[assembly: AssemblyVersion("1.12.2.10")]
+[assembly: AssemblyFileVersion("1.12.2.10")]
 [assembly: NeutralResourcesLanguage("en-US")]
 

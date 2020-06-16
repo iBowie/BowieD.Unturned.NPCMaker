@@ -179,22 +179,32 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     previewCommand = new BaseCommand(() =>
                     {
                         SaveCommand.Execute(null);
-                        if (CheckDialogue(Dialogue, new Dictionary<ushort, bool>()))
+                        Dictionary<ushort, bool?> results = new Dictionary<ushort, bool?>();
+                        bool? checkResult = CheckDialogue(Dialogue, results);
+                        switch (checkResult)
                         {
-                            Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Character);
-                            if (select.ShowDialog() == true)
-                            {
-                                NPCCharacter character = select.SelectedValue as NPCCharacter;
+                            case true:
+                            case null:
+                                {
+                                    if (checkResult == null)
+                                        MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Dialogue_Preview_Loop"]);
+                                    
+                                    Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Character);
+                                    if (select.ShowDialog() == true)
+                                    {
+                                        NPCCharacter character = select.SelectedValue as NPCCharacter;
 
-                                DialogueView_Window dvw = new DialogueView_Window(character, Dialogue, new Simulation());
-                                dvw.Owner = MainWindow.Instance;
-                                dvw.Display();
-                                dvw.ShowDialog();
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Dialogue_Preview_Invalid"]);
+                                        DialogueView_Window dvw = new DialogueView_Window(character, Dialogue, new Simulation());
+                                        dvw.Owner = MainWindow.Instance;
+                                        dvw.Display();
+                                        dvw.ShowDialog();
+                                    }
+
+                                    break;
+                                }
+                            case false:
+                                MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Dialogue_Preview_Invalid"]);
+                                break;
                         }
                     });
                 }
@@ -310,13 +320,22 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             MainWindow.Instance.dialoguePlayerRepliesGrid.UpdateOrderButtons<Dialogue_Message>();
         }
 
-        public static bool CheckDialogue(NPCDialogue dialogue, Dictionary<ushort, bool> results)
+        /// <summary>
+        /// <list type="bullet">
+        /// <item>true - dialogue is safe</item>
+        /// <item>false - dialogue is not safe</item>
+        /// <item>null - dialogue can't be checked</item>
+        /// </list>
+        /// </summary>
+        public static bool? CheckDialogue(NPCDialogue dialogue, Dictionary<ushort, bool?> results)
         {
             if (dialogue is null)
                 return false;
 
             if (results.TryGetValue(dialogue.id, out var res))
                 return res;
+
+            results[dialogue.id] = null;
 
             foreach (var r in dialogue.responses)
             {
@@ -330,10 +349,17 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         return false;
                     }
 
-                    if (!CheckDialogue(nextD, results))
+                    bool? nextDres = CheckDialogue(nextD, results);
+                    
+                    if (nextDres == false)
                     {
                         results[dialogue.id] = false;
                         return false;
+                    }
+                    else if (nextDres == null)
+                    {
+                        results[dialogue.id] = null;
+                        return null;
                     }
                 }
 
