@@ -179,15 +179,22 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     previewCommand = new BaseCommand(() =>
                     {
                         SaveCommand.Execute(null);
-                        Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Character);
-                        if (select.ShowDialog() == true)
+                        if (CheckDialogue(Dialogue, new Dictionary<ushort, bool>()))
                         {
-                            NPCCharacter character = select.SelectedValue as NPCCharacter;
+                            Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Character);
+                            if (select.ShowDialog() == true)
+                            {
+                                NPCCharacter character = select.SelectedValue as NPCCharacter;
 
-                            DialogueView_Window dvw = new DialogueView_Window(character, Dialogue, new Simulation());
-                            dvw.Owner = MainWindow.Instance;
-                            dvw.Display();
-                            dvw.ShowDialog();
+                                DialogueView_Window dvw = new DialogueView_Window(character, Dialogue, new Simulation());
+                                dvw.Owner = MainWindow.Instance;
+                                dvw.Display();
+                                dvw.ShowDialog();
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Dialogue_Preview_Invalid"]);
                         }
                     });
                 }
@@ -301,6 +308,74 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 }
             }
             MainWindow.Instance.dialoguePlayerRepliesGrid.UpdateOrderButtons<Dialogue_Message>();
+        }
+
+        public static bool CheckDialogue(NPCDialogue dialogue, Dictionary<ushort, bool> results)
+        {
+            if (dialogue is null)
+                return false;
+
+            if (results.TryGetValue(dialogue.id, out var res))
+                return res;
+
+            foreach (var r in dialogue.responses)
+            {
+                if (r.openDialogueId != 0)
+                {
+                    var nextD = MainWindow.CurrentProject.data.dialogues.SingleOrDefault(d => d.id == r.openDialogueId);
+
+                    if (nextD is null)
+                    {
+                        results[dialogue.id] = false;
+                        return false;
+                    }
+
+                    if (!CheckDialogue(nextD, results))
+                    {
+                        results[dialogue.id] = false;
+                        return false;
+                    }
+                }
+
+                if (r.openQuestId != 0)
+                {
+                    var nextQ = MainWindow.CurrentProject.data.quests.SingleOrDefault(d => d.id == r.openQuestId);
+
+                    if (nextQ is null)
+                    {
+                        results[dialogue.id] = false;
+                        return false;
+                    }
+                }
+
+                if (r.openVendorId != 0)
+                {
+                    var nextV = MainWindow.CurrentProject.data.vendors.SingleOrDefault(d => d.id == r.openVendorId);
+
+                    if (nextV is null)
+                    {
+                        results[dialogue.id] = false;
+                        return false;
+                    }
+                }
+            }
+
+            foreach (var m in dialogue.messages)
+            {
+                if (m.prev != 0)
+                {
+                    var prevD = MainWindow.CurrentProject.data.dialogues.SingleOrDefault(d => d.id == m.prev);
+
+                    if (prevD is null)
+                    {
+                        results[dialogue.id] = false;
+                        return false;
+                    }
+                }
+            }
+
+            results[dialogue.id] = true;
+            return true;
         }
     }
 }

@@ -491,6 +491,7 @@
 		"Main_Tab_Dialogue": "Dialogue",
 		"Main_Tab_Dialogue_SetAsStart": "Set Current Dialogue as start for Current NPC",
 		"Main_Tab_Dialogue_Preview": "Preview Dialogue",
+		"Main_Tab_Dialogue_Preview_Invalid": "This dialogue is invalid and will crash the app on preview.\nIt might be caused by redirects to dialogues that aren't in this project.",
 		"Main_Tab_Dialogue_Save_Tooltip": "Save dialogue",
 		"Main_Tab_Dialogue_Open_Tooltip": "Open another dialogue in project",
 		"Main_Tab_Dialogue_Reset_Tooltip": "New dialogue",
