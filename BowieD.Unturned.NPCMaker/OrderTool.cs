@@ -10,6 +10,7 @@ namespace BowieD.Unturned.NPCMaker
     public static class OrderTool
     {
         #region UI
+        #region Generics
         public static void UpdateOrderButtons<T>(this Panel container) where T : UIElement, IHasOrderButtons
         {
             foreach (var c in container.Children)
@@ -105,6 +106,43 @@ namespace BowieD.Unturned.NPCMaker
 
             upper.Transform.BeginAnimation(TranslateTransform.YProperty, upAnim);
             bottom.Transform.BeginAnimation(TranslateTransform.YProperty, downAnim);
+        }
+        #endregion
+        public static void UpdateOrderButtons(this Panel container)
+        {
+            foreach (var c in container.Children)
+            {
+                if (c is IHasOrderButtons ct)
+                {
+                    UpdateOrderButtons(container, ct);
+                }
+            }
+        }
+        public static void UpdateOrderButtons(this Panel container, IHasOrderButtons element, UIElement upButton, UIElement downButton)
+        {
+            int index = container.IndexOf(element);
+
+            if (index >= 1)
+            {
+                upButton.IsEnabled = true;
+            }
+            else
+            {
+                upButton.IsEnabled = false;
+            }
+
+            if (index < container.Children.Count - 1)
+            {
+                downButton.IsEnabled = true;
+            }
+            else
+            {
+                downButton.IsEnabled = false;
+            }
+        }
+        public static void UpdateOrderButtons(this Panel container, IHasOrderButtons element)
+        {
+            container.UpdateOrderButtons(element, element.UpButton, element.DownButton);
         }
         #endregion
         public static void MoveUp<T>(this IList<T> list, T element)

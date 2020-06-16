@@ -13,6 +13,15 @@ namespace BowieD.Unturned.NPCMaker
         {
             return value.StartsWith("pack://application") ? new BitmapImage(new Uri(value)) : new BitmapImage(new Uri("pack://application:,,,/" + value));
         }
+        public static int IndexOf(this Panel grid, object element)
+        {
+            for (int i = 0; i < grid.Children.Count; i++)
+            {
+                if (grid.Children[i].Equals(element))
+                    return i;
+            }
+            return -1;
+        }
         public static int IndexOf<T>(this Panel grid, T element) where T : UIElement
         {
             for (int i = 0; i < grid.Children.Count; i++)

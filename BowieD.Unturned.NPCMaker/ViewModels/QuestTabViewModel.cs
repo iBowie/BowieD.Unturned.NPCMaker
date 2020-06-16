@@ -3,6 +3,8 @@ using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
+using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -25,6 +27,15 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             set
             {
                 _quest = value;
+
+                MainWindow.Instance.listQuestConditions.Children.Clear();
+                foreach (var c in value.conditions)
+                    AddCondition(new Universal_ItemList(c, true));
+
+                MainWindow.Instance.listQuestRewards.Children.Clear();
+                foreach (var r in value.rewards)
+                    AddReward(new Universal_ItemList(r, true));
+
                 OnPropertyChange("");
             }
         }
@@ -32,110 +43,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public ushort ID { get => Quest.id; set => Quest.id = value; }
         public string Title { get => Quest.title; set => Quest.title = value; }
         public string Description { get => Quest.description; set => Quest.description = value; }
-        public List<Condition> Conditions
-        {
-            get
-            {
-                List<Condition> res = new List<Condition>();
-                foreach (UIElement ui in MainWindow.Instance.listQuestConditions.Children)
-                {
-                    if (ui is Universal_ItemList uil)
-                    {
-                        res.Add(uil.Value as Condition);
-                    }
-                }
-                return res;
-            }
-            set
-            {
-                Quest.conditions = value;
-                UpdateConditions();
-            }
-        }
-        public List<Reward> Rewards
-        {
-            get
-            {
-                List<Reward> res = new List<Reward>();
-                foreach (UIElement ui in MainWindow.Instance.listQuestRewards.Children)
-                {
-                    if (ui is Universal_ItemList uil)
-                    {
-                        res.Add(uil.Value as Reward);
-                    }
-                }
-                return res;
-            }
-            set
-            {
-                Quest.rewards = value;
-                UpdateRewards();
-            }
-        }
-        private void UpdateConditions()
-        {
-            MainWindow.Instance.listQuestConditions.Children.Clear();
-            foreach (Condition k in Quest.conditions)
-            {
-                Universal_ItemList uil = new Universal_ItemList(k, Universal_ItemList.ReturnType.Condition, true);
-                uil.deleteButton.Click += (object sender, RoutedEventArgs e) =>
-                {
-                    MainWindow.Instance.listQuestConditions.Children.Remove(Util.FindParent<Universal_ItemList>(sender as Button));
-                    Quest.conditions = Conditions;
-                    UpdateConditions();
-                };
-                uil.moveUpButton.Click += (object sender, RoutedEventArgs e) =>
-                {
-                    StackPanel panel = MainWindow.Instance.listQuestConditions;
-
-                    panel.MoveUp(uil);
-                    Quest.conditions = Conditions;
-                    UpdateConditions();
-                };
-                uil.moveDownButton.Click += (object sender, RoutedEventArgs e) =>
-                {
-                    StackPanel panel = MainWindow.Instance.listQuestConditions;
-
-                    panel.MoveDown(uil);
-                    Quest.conditions = Conditions;
-                    UpdateConditions();
-                };
-                MainWindow.Instance.listQuestConditions.Children.Add(uil);
-            }
-            MainWindow.Instance.listQuestConditions.UpdateOrderButtons<Universal_ItemList>();
-        }
-        private void UpdateRewards()
-        {
-            MainWindow.Instance.listQuestRewards.Children.Clear();
-            foreach (Reward reward in Quest.rewards)
-            {
-                Universal_ItemList uil = new Universal_ItemList(reward, Universal_ItemList.ReturnType.Reward, true);
-                uil.deleteButton.Click += (object sender, RoutedEventArgs e) =>
-                {
-                    MainWindow.Instance.listQuestRewards.Children.Remove(Util.FindParent<Universal_ItemList>(sender as Button));
-                    Quest.rewards = Rewards;
-                    UpdateRewards();
-                };
-                uil.moveUpButton.Click += (object sender, RoutedEventArgs e) =>
-                {
-                    StackPanel panel = MainWindow.Instance.listQuestRewards;
-
-                    panel.MoveUp(uil);
-                    Quest.rewards = Rewards;
-                    UpdateRewards();
-                };
-                uil.moveDownButton.Click += (object sender, RoutedEventArgs e) =>
-                {
-                    StackPanel panel = MainWindow.Instance.listQuestRewards;
-
-                    panel.MoveDown(uil);
-                    Quest.rewards = Rewards;
-                    UpdateRewards();
-                };
-                MainWindow.Instance.listQuestRewards.Children.Add(uil);
-            }
-            MainWindow.Instance.listQuestRewards.UpdateOrderButtons<Universal_ItemList>();
-        }
         private ICommand
             saveCommand,
             openCommand,
@@ -156,6 +63,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             App.NotificationManager.Notify(LocalizationManager.Current.Notification["Quest_ID_Zero"]);
                             return;
                         }
+                        UpdateConditions();
+                        UpdateRewards();
                         if (!MainWindow.CurrentProject.data.quests.Contains(Quest))
                         {
                             MainWindow.CurrentProject.data.quests.Add(Quest);
@@ -221,7 +130,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         if (uce.ShowDialog() == true)
                         {
                             Condition cond = uce.Result;
-                            AddCondition(cond);
+                            AddCondition(new Universal_ItemList(cond, true));
                         }
                     });
                 }
@@ -240,7 +149,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         if (ure.ShowDialog() == true)
                         {
                             Reward rew = ure.Result;
-                            AddReward(rew);
+                            AddReward(new Universal_ItemList(rew, true));
                         }
                     });
                 }
@@ -273,31 +182,117 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 return previewCommand;
             }
         }
-        private void AddReward(Reward reward)
+
+        public void UpdateConditions()
         {
-            Universal_ItemList uil = new Universal_ItemList(reward, Universal_ItemList.ReturnType.Reward, true);
-            uil.deleteButton.Click += (object sender, RoutedEventArgs e) =>
+            Quest.conditions.Clear();
+            foreach (var uie in MainWindow.Instance.listQuestConditions.Children)
             {
-                MainWindow.Instance.listQuestRewards.Children.Remove(Util.FindParent<Universal_ItemList>(sender as Button));
-                Quest.rewards = Rewards;
-                UpdateRewards();
-            };
-            MainWindow.Instance.listQuestRewards.Children.Add(uil);
-            Quest.rewards = Rewards;
-            UpdateRewards();
+                if (uie is Universal_ItemList dr)
+                {
+                    Quest.conditions.Add(dr.Value as Condition);
+                }
+            }
+            MainWindow.Instance.listQuestConditions.UpdateOrderButtons();
         }
-        private void AddCondition(Condition condition)
+        public void UpdateRewards()
         {
-            Universal_ItemList uil = new Universal_ItemList(condition, Universal_ItemList.ReturnType.Condition, true);
-            uil.deleteButton.Click += (object sender, RoutedEventArgs e) =>
+            Quest.rewards.Clear();
+            foreach (var uie in MainWindow.Instance.listQuestRewards.Children)
             {
-                MainWindow.Instance.listQuestConditions.Children.Remove(Util.FindParent<Universal_ItemList>(sender as Button));
-                Quest.conditions = Conditions;
+                if (uie is Universal_ItemList dr)
+                {
+                    Quest.rewards.Add(dr.Value as Reward);
+                }
+            }
+            MainWindow.Instance.listQuestRewards.UpdateOrderButtons();
+        }
+
+        void AddCondition(Universal_ItemList uil)
+        {
+            if (uil.Type != Universal_ItemList.ReturnType.Condition)
+                throw new ArgumentException($"Expected Condition, got {uil.Type}");
+
+            uil.deleteButton.Click += (sender, e) =>
+            {
+                var current = (sender as UIElement).TryFindParent<Universal_ItemList>();
+                var panel = MainWindow.Instance.listQuestConditions;
+                foreach (var ui in panel.Children)
+                {
+                    var dr = ui as Universal_ItemList;
+                    if (dr.Equals(current))
+                    {
+                        panel.Children.Remove(dr);
+                        break;
+                    }
+                }
+                List<Condition> newConditions = new List<Condition>();
+                foreach (UIElement ui in panel.Children)
+                {
+                    if (ui is Universal_ItemList dr)
+                    {
+                        newConditions.Add(dr.Value as Condition);
+                    }
+                }
+                Quest.conditions = newConditions;
+
+                panel.UpdateOrderButtons();
+            };
+            uil.moveUpButton.Click += (sender, e) =>
+            {
+                MainWindow.Instance.listQuestConditions.MoveUp((sender as UIElement).TryFindParent<Universal_ItemList>());
+                UpdateConditions();
+            };
+            uil.moveDownButton.Click += (sender, e) =>
+            {
+                MainWindow.Instance.listQuestConditions.MoveDown((sender as UIElement).TryFindParent<Universal_ItemList>());
                 UpdateConditions();
             };
             MainWindow.Instance.listQuestConditions.Children.Add(uil);
-            Quest.conditions = Conditions;
-            UpdateConditions();
+            MainWindow.Instance.listQuestConditions.UpdateOrderButtons();
+        }
+        void AddReward(Universal_ItemList uil)
+        {
+            if (uil.Type != Universal_ItemList.ReturnType.Reward)
+                throw new ArgumentException($"Expected Reward, got {uil.Type}");
+
+            uil.deleteButton.Click += (sender, e) =>
+            {
+                var current = (sender as UIElement).TryFindParent<Universal_ItemList>();
+                var panel = MainWindow.Instance.listQuestRewards;
+                foreach (var ui in panel.Children)
+                {
+                    var dr = ui as Universal_ItemList;
+                    if (dr.Equals(current))
+                    {
+                        panel.Children.Remove(dr);
+                        break;
+                    }
+                }
+                List<Reward> newRewards = new List<Reward>();
+                foreach (UIElement ui in panel.Children)
+                {
+                    if (ui is Universal_ItemList dr)
+                    {
+                        newRewards.Add(dr.Value as Reward);
+                    }
+                }
+                Quest.rewards = newRewards;
+
+                panel.UpdateOrderButtons();
+            };
+            uil.moveUpButton.Click += (sender, e) =>
+            {
+                MainWindow.Instance.listQuestRewards.MoveUp((sender as UIElement).TryFindParent<Universal_ItemList>());
+                UpdateRewards();
+            };
+            uil.moveDownButton.Click += (sender, e) =>
+            {
+                MainWindow.Instance.listQuestRewards.MoveDown((sender as UIElement).TryFindParent<Universal_ItemList>());
+                UpdateRewards();
+            };
+            MainWindow.Instance.listQuestRewards.Children.Add(uil);
+            MainWindow.Instance.listQuestRewards.UpdateOrderButtons();
         }
     }
 }

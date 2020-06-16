@@ -24,6 +24,19 @@ namespace BowieD.Unturned.NPCMaker.Controls
             moveDownButton.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
             ShowMoveButtons = showMoveButtons;
         }
+        public Universal_ItemList(object input, bool showMoveButtons = false)
+        {
+            InitializeComponent();
+            Value = input;
+            mainLabel.Content = Value is IHasUIText ? (Value as IHasUIText).UIText : Value.ToString();
+            mainLabel.ToolTip = mainLabel.Content;
+
+            Type = AutoDetectType(input);
+
+            moveUpButton.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
+            moveDownButton.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
+            ShowMoveButtons = showMoveButtons;
+        }
 
         public object Value { get; private set; }
         public ReturnType Type { get; }
@@ -105,6 +118,29 @@ namespace BowieD.Unturned.NPCMaker.Controls
                     return;
                 case ReturnType.Object:
                     return;
+            }
+        }
+
+        ReturnType AutoDetectType(object input)
+        {
+            switch (input)
+            {
+                case Reward _:
+                    return ReturnType.Reward;
+                case Condition _:
+                    return ReturnType.Condition;
+                case NPCDialogue _:
+                    return ReturnType.Dialogue;
+                case NPCVendor _:
+                    return ReturnType.Vendor;
+                case NPCQuest _:
+                    return ReturnType.Quest;
+                case VendorItem _:
+                    return ReturnType.VendorItem;
+                case NPCCharacter _:
+                    return ReturnType.Character;
+                default:
+                    return ReturnType.Object;
             }
         }
 

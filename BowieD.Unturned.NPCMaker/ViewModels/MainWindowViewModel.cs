@@ -215,7 +215,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     SmallImageText = $"Quests: {MainWindow.CurrentProject.data.quests.Count}"
                                 },
                                 Details = $"Quest Name: {QuestTabViewModel.Title}",
-                                State = $"Rewards: {QuestTabViewModel.Rewards.Count} | Conds: {QuestTabViewModel.Conditions.Count}"
+                                State = $"Rewards: {QuestTabViewModel.Quest.rewards.Count} | Conds: {QuestTabViewModel.Quest.conditions.Count}"
                             });
                         }
                         break;
