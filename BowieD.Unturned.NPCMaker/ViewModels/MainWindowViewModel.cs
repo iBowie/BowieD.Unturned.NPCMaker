@@ -197,7 +197,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     SmallImageText = $"Vendors: {MainWindow.CurrentProject.data.vendors.Count}"
                                 },
                                 Details = $"Vendor Name: {VendorTabViewModel.Title}",
-                                State = $"Buy: {VendorTabViewModel.Items.Count(d => d.isBuy)} / Sell: {VendorTabViewModel.Items.Count(d => !d.isBuy)}"
+                                State = $"Buy: {VendorTabViewModel.Vendor.items.Count(d => d.isBuy)} / Sell: {VendorTabViewModel.Vendor.items.Count(d => !d.isBuy)}"
                             });
                         }
                         break;

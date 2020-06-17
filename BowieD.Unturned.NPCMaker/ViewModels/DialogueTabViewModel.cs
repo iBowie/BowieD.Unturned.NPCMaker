@@ -96,7 +96,12 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         ulv.Owner = MainWindow.Instance;
                         if (ulv.ShowDialog() == true)
                         {
-                            SaveCommand.Execute(null);
+                            var msgRes = MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Dialogue_Open_Confirm"], "", MessageBoxButton.YesNoCancel);
+                            if (msgRes == MessageBoxResult.Yes)
+                                SaveCommand.Execute(null);
+                            else if (msgRes != MessageBoxResult.No)
+                                return;
+
                             Dialogue = ulv.SelectedValue as NPCDialogue;
                             App.Logger.Log($"Opened dialogue {ID}");
                         }
