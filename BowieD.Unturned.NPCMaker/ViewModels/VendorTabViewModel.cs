@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Controls;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
@@ -111,11 +112,16 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         ulv.Owner = MainWindow.Instance;
                         if (ulv.ShowDialog() == true)
                         {
-                            var msgRes = MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Vendor_Open_Confirm"], "", MessageBoxButton.YesNoCancel);
-                            if (msgRes == MessageBoxResult.Yes)
+                            if (!AppConfig.Instance.automaticallySaveBeforeOpening)
+                            {
+                                var msgRes = MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Vendor_Open_Confirm"], "", MessageBoxButton.YesNoCancel);
+                                if (msgRes == MessageBoxResult.Yes)
+                                    SaveCommand.Execute(null);
+                                else if (msgRes != MessageBoxResult.No)
+                                    return;
+                            }
+                            else
                                 SaveCommand.Execute(null);
-                            else if (msgRes != MessageBoxResult.No)
-                                return;
 
                             Vendor = ulv.SelectedValue as NPCVendor;
                             UpdateItems();

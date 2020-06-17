@@ -43,6 +43,9 @@
                     <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_downloadPrerelease_Tooltip}">
                         <CheckBox Name="DownloadPrerelease_Box" Content="{xaml:Localize Key=OPTIONS_downloadPrerelease}"/>
                     </Grid>
+                    <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_automaticallySaveBeforeOpening_Tooltip}">
+                        <CheckBox Name="AutomaticallySaveBeforeOpening_Box" Content="{xaml:Localize Key=OPTIONS_automaticallySaveBeforeOpening}"/>
+                    </Grid>
                 </StackPanel>
             </TabItem>
             <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Interface}">

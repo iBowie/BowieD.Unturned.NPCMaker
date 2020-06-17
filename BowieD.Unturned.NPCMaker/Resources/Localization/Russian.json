@@ -25,6 +25,7 @@
     "downloadPrerelease": "Загружать предв. версии",
     "alternateLogicTranslation": "Альтернативный перевод логики",
     "replaceMissingKeysWithEnglish": "Замена недост. перевода английским",
+    "automaticallySaveBeforeOpening": "Всегда сохранять перед открытием",
 
     "experimentalFeatures_Tooltip": "ЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭксперименты",
     "scale_Tooltip": "Изменить размер программы на экране",
@@ -37,7 +38,8 @@
     "autoUpdate_Tooltip": "Программа автоматически установит обновление, если оно есть",
     "downloadPrerelease_Tooltip": "Также известно как: \"Загружать нестабильные версии\"",
     "alternateLogicTranslation_Tooltip": "Заменяет математические символы словами",
-    "replaceMissingKeysWithEnglish_Tooltip": "Заменяет недостающий перевод английским вариантом"
+    "replaceMissingKeysWithEnglish_Tooltip": "Заменяет недостающий перевод английским вариантом",
+    "automaticallySaveBeforeOpening_Tooltip": "Если включено, то программа перестанет спрашивать Вас о сохранении текущего персонажа/диалога/магазина/задания перед открытием другого"
   },
   "Character": {
     "Name_Editor": "Имя в редакторе",
