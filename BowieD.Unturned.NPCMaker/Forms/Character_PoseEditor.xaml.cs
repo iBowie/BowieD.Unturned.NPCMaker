@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC;
-using System.ComponentModel;
 using System.Windows;
 
 namespace BowieD.Unturned.NPCMaker.Forms

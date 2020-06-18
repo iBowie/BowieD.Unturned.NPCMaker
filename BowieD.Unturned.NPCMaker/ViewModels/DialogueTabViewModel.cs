@@ -6,7 +6,6 @@ using BowieD.Unturned.NPCMaker.NPC;
 using MahApps.Metro.Controls;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security;
 using System.Windows;
 using System.Windows.Input;
 
@@ -199,7 +198,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 {
                                     if (checkResult == null)
                                         MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Dialogue_Preview_Loop"]);
-                                    
+
                                     Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Character);
                                     if (select.ShowDialog() == true)
                                     {
@@ -361,7 +360,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     }
 
                     bool? nextDres = CheckDialogue(nextD, results);
-                    
+
                     if (nextDres == false)
                     {
                         results[dialogue.id] = false;
