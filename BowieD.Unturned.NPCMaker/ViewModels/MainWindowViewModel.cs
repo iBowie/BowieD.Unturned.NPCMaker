@@ -178,8 +178,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     SmallImageKey = "icon_chat_outlined",
                                     SmallImageText = $"Dialogues: {MainWindow.CurrentProject.data.dialogues.Count}"
                                 },
-                                Details = $"Messages: {DialogueTabViewModel.Messages.Count}",
-                                State = $"Responses: {DialogueTabViewModel.Responses.Count}"
+                                Details = $"Messages: {DialogueTabViewModel.Dialogue.messages.Count}",
+                                State = $"Responses: {DialogueTabViewModel.Dialogue.responses.Count}"
                             });
                         }
                         break;
@@ -197,7 +197,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     SmallImageText = $"Vendors: {MainWindow.CurrentProject.data.vendors.Count}"
                                 },
                                 Details = $"Vendor Name: {VendorTabViewModel.Title}",
-                                State = $"Buy: {VendorTabViewModel.Items.Count(d => d.isBuy)} / Sell: {VendorTabViewModel.Items.Count(d => !d.isBuy)}"
+                                State = $"Buy: {VendorTabViewModel.Vendor.items.Count(d => d.isBuy)} / Sell: {VendorTabViewModel.Vendor.items.Count(d => !d.isBuy)}"
                             });
                         }
                         break;
@@ -215,7 +215,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     SmallImageText = $"Quests: {MainWindow.CurrentProject.data.quests.Count}"
                                 },
                                 Details = $"Quest Name: {QuestTabViewModel.Title}",
-                                State = $"Rewards: {QuestTabViewModel.Rewards.Count} | Conds: {QuestTabViewModel.Conditions.Count}"
+                                State = $"Rewards: {QuestTabViewModel.Quest.rewards.Count} | Conds: {QuestTabViewModel.Quest.conditions.Count}"
                             });
                         }
                         break;

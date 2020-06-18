@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker;
+using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
@@ -133,7 +134,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }
         }
         public bool IsLeftHanded { get => Character.leftHanded; set => Character.leftHanded = value; }
-        public NPC_Pose Pose { get => Character.pose; set => Character.pose = value; }
         public NPCClothing DefaultClothing { get => Character.clothing; set => Character.clothing = value; }
         public NPCClothing ChristmasClothing { get => Character.christmasClothing; set => Character.christmasClothing = value; }
         public NPCClothing HalloweenClothing { get => Character.halloweenClothing; set => Character.halloweenClothing = value; }
@@ -152,6 +152,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         private ICommand saveColorSkin;
         private ICommand saveColorHair;
         private ICommand regenerateGUIDsCommand;
+        private ICommand poseEditorCommand;
         public ICommand SaveCommand
         {
             get
@@ -190,7 +191,17 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         ulv.Owner = MainWindow.Instance;
                         if (ulv.ShowDialog() == true)
                         {
-                            SaveCommand.Execute(null);
+                            if (!AppConfig.Instance.automaticallySaveBeforeOpening)
+                            {
+                                var msgRes = MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Character_Open_Confirm"], "", MessageBoxButton.YesNoCancel);
+                                if (msgRes == MessageBoxResult.Yes)
+                                    SaveCommand.Execute(null);
+                                else if (msgRes != MessageBoxResult.No)
+                                    return;
+                            }
+                            else
+                                SaveCommand.Execute(null);
+
                             Character = ulv.SelectedValue as NPCCharacter;
                             App.Logger.Log($"Opened character {ID}");
                         }
@@ -222,7 +233,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     editVisibilityConditionsCommand = new BaseCommand(() =>
                     {
-                        Universal_ListView ulv = new Universal_ListView(Character.visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, false)).ToList(), Universal_ItemList.ReturnType.Condition);
+                        Universal_ListView ulv = new Universal_ListView(Character.visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, true)).ToList(), Universal_ItemList.ReturnType.Condition);
                         ulv.Owner = MainWindow.Instance;
                         ulv.ShowDialog();
                         Character.visibilityConditions = ulv.Values.Cast<Condition>().ToList();
@@ -363,6 +374,24 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     });
                 }
                 return regenerateGUIDsCommand;
+            }
+        }
+        public ICommand PoseEditorCommand
+        {
+            get
+            {
+                if (poseEditorCommand == null)
+                {
+                    poseEditorCommand = new BaseCommand(() =>
+                    {
+                        Character_PoseEditor cpe = new Character_PoseEditor(Character)
+                        {
+                            Owner = MainWindow.Instance
+                        };
+                        cpe.ShowDialog();
+                    });
+                }
+                return poseEditorCommand;
             }
         }
         internal void SaveColor(string hex)

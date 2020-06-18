@@ -6,7 +6,6 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Security.AccessControl;
 
 namespace BowieD.Unturned.NPCMaker.Configuration
 {
@@ -24,6 +23,9 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public bool animateControls;
         public bool autoUpdate;
         public bool downloadPrerelease;
+        public bool alternateLogicTranslation;
+        public bool replaceMissingKeysWithEnglish;
+        public bool automaticallySaveBeforeOpening;
 
         public void Save()
         {
@@ -70,6 +72,9 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             animateControls = true;
             autoUpdate = true;
             downloadPrerelease = false;
+            alternateLogicTranslation = false;
+            replaceMissingKeysWithEnglish = true;
+            automaticallySaveBeforeOpening = false;
             ELanguage c = LocalizationManager.GetLanguageFromCultureInfo(CultureInfo.InstalledUICulture);
             if (LocalizationManager.SupportedLanguages().Contains(c))
             {
@@ -87,42 +92,16 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         {
             get
             {
-                if (AlternatePath == null)
-                {
-                    DirectoryInfo dirInfo = new DirectoryInfo(defaultDir);
-                    try
-                    {
-                        DirectorySecurity dirAC = dirInfo.GetAccessControl(AccessControlSections.All);
-                        AlternatePath = true;
-                    }
-                    catch
-                    {
-                        AlternatePath = false;
-                    }
-                }
-                if (AlternatePath == false)
-                {
-                    string res = defaultDir;
-                    if (!System.IO.Directory.Exists(res))
-                    {
-                        System.IO.Directory.CreateDirectory(res);
-                    }
+                string res = defaultDir;
 
-                    return res;
-                }
-                else
+                if (!System.IO.Directory.Exists(res))
                 {
-                    string res = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"BowieD.Unturned.NPCMaker Configuration");
-                    if (!System.IO.Directory.Exists(res))
-                    {
-                        System.IO.Directory.CreateDirectory(res);
-                    }
-
-                    return res;
+                    System.IO.Directory.CreateDirectory(res);
                 }
+
+                return res;
             }
         }
-        public static bool? AlternatePath { get; private set; } = null;
         private static string path => Path.Combine(Directory, "config.json");
     }
 }

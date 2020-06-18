@@ -33,7 +33,10 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 experimentalFeatures = Experimental_Box.IsChecked.Value,
                 animateControls = Animation_Enabled_Box.IsChecked.Value,
                 autoUpdate = Autoupdate_Box.IsChecked.Value,
-                downloadPrerelease = DownloadPrerelease_Box.IsChecked.Value
+                downloadPrerelease = DownloadPrerelease_Box.IsChecked.Value,
+                alternateLogicTranslation = AlternateLogicTranslation_Box.IsChecked.Value,
+                replaceMissingKeysWithEnglish = ReplaceMissingKeysWithEnglish_Box.IsChecked.Value,
+                automaticallySaveBeforeOpening = AutomaticallySaveBeforeOpening_Box.IsChecked.Value
             };
             set
             {
@@ -78,6 +81,9 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 Animation_Enabled_Box.IsChecked = value.animateControls;
                 Autoupdate_Box.IsChecked = value.autoUpdate;
                 DownloadPrerelease_Box.IsChecked = value.downloadPrerelease;
+                AlternateLogicTranslation_Box.IsChecked = value.alternateLogicTranslation;
+                ReplaceMissingKeysWithEnglish_Box.IsChecked = value.replaceMissingKeysWithEnglish;
+                AutomaticallySaveBeforeOpening_Box.IsChecked = value.automaticallySaveBeforeOpening;
             }
         }
 

@@ -342,7 +342,7 @@
                             </Button>
                             <xctk:ColorPicker SelectedColor="{Binding HairColor, UpdateSourceTrigger=PropertyChanged}" AdvancedTabHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Advanced_Header}" StandardTabHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Standard_Header}" AvailableColorsHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="hairColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,110,0,0" Width="89" Height="26" Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource AccentColor}" TabBackground="{DynamicResource BackgroundColor}" TabForeground="{DynamicResource AccentColor}" HeaderForeground="{DynamicResource AccentColor}" HeaderBackground="{DynamicResource BackgroundColor}" DropDownBackground="{DynamicResource BackgroundColor}" BorderBrush="{DynamicResource AccentColor}"/>
                             <CheckBox IsChecked="{Binding IsLeftHanded, UpdateSourceTrigger=PropertyChanged}" Name="apparelLeftHandedCheckbox" HorizontalContentAlignment="Right" Content="{xaml:Localize Key=CHARACTER_LeftHanded}" HorizontalAlignment="Left" Margin="0,140,0,0" VerticalAlignment="Top" Width="120" mah:ToggleButtonHelper.ContentDirection="RightToLeft"/>
-                            <ComboBox ItemsSource="{StaticResource Character_Pose_Enums}" SelectedValue="{Binding Pose, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Character_Pose_Enums}}" Name="apparelPoseBox" HorizontalAlignment="Left" SelectedIndex="0" Margin="-1,171,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
+                            <Button Command="{Binding PoseEditorCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="{xaml:Localize Key=CHARACTER_Edit_Pose}" Width="120" Height="26"/>
                             <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,155,0,0" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Pose}" VerticalAlignment="Top" Width="120" Height="16"/>
                             <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,38,0,0" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Color_Skin}" VerticalAlignment="Top" Width="120" Height="16"/>
                             <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,94,0,0" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Color_Hair}" VerticalAlignment="Top" Width="120"/>
@@ -633,30 +633,40 @@
                             <TextBlock TextAlignment="Center" Text="{xaml:Localize Key=DIALOGUE_ID}" VerticalAlignment="Center"/>
                         </Border>
                         <GroupBox Grid.Row="1" Header="{xaml:Localize Key=DIALOGUE_Pages}" Margin="10,10,5,10">
-                            <ScrollViewer>
-                                <StackPanel Name="messagePagesGrid" VerticalAlignment="Top">
-                                    <Button Command="{Binding AddMessageCommand}" Name="dialogueAddMessageButton" Margin="10" Height="32" Content="{xaml:Localize Key=DIALOGUE_Message_Add}">
-                                        <Button.ToolTip>
-                                            <StackPanel>
-                                                <Image Source="Resources/Help/img_help_dialogueMessage.png"/>
-                                            </StackPanel>
-                                        </Button.ToolTip>
-                                    </Button>
-                                </StackPanel>
-                            </ScrollViewer>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <ScrollViewer Margin="10">
+                                    <StackPanel Name="messagePagesGrid" VerticalAlignment="Top"/>
+                                </ScrollViewer>
+                                <Button Grid.Row="1" Command="{Binding AddMessageCommand}" Name="dialogueAddMessageButton" Margin="10" Content="{xaml:Localize Key=DIALOGUE_Message_Add}">
+                                    <Button.ToolTip>
+                                        <StackPanel>
+                                            <Image Source="Resources/Help/img_help_dialogueMessage.png"/>
+                                        </StackPanel>
+                                    </Button.ToolTip>
+                                </Button>
+                            </Grid>
                         </GroupBox>
                         <GroupBox Grid.Column="1" Grid.Row="1" Header="{xaml:Localize Key=DIALOGUE_Replies}" Margin="5,10,5,10" MinWidth="361">
-                            <ScrollViewer>
-                                <StackPanel x:Name="dialoguePlayerRepliesGrid">
-                                    <Button Command="{Binding AddReplyCommand}" Name="dialogueAddReplyButton" Margin="10" VerticalAlignment="Top" Height="32" Content="{xaml:Localize Key=DIALOGUE_Reply_Add}" Width="312">
-                                        <Button.ToolTip>
-                                            <StackPanel>
-                                                <Image Source="Resources/Help/img_help_dialogueReply.png"/>
-                                            </StackPanel>
-                                        </Button.ToolTip>
-                                    </Button>
-                                </StackPanel>
-                            </ScrollViewer>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <ScrollViewer Margin="10">
+                                    <StackPanel x:Name="dialoguePlayerRepliesGrid"/>
+                                </ScrollViewer>
+                                <Button Grid.Row="1" Command="{Binding AddReplyCommand}" Name="dialogueAddReplyButton" Margin="10" Content="{xaml:Localize Key=DIALOGUE_Reply_Add}">
+                                    <Button.ToolTip>
+                                        <StackPanel>
+                                            <Image Source="Resources/Help/img_help_dialogueReply.png"/>
+                                        </StackPanel>
+                                    </Button.ToolTip>
+                                </Button>
+                            </Grid>
                         </GroupBox>
                         <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="dialogueSaveButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
                             <Button.Content>
@@ -828,7 +838,7 @@
             <TextBlock Name="genericTextBlock" Visibility="Collapsed"/>
         </Grid>
         <Grid Name="dropOverlay" Background="#99000000" Visibility="Hidden">
-            <Image Source="Resources/ICON_OPEN.png" Width="256" Height="256"/>
+            <iconPacks:PackIconMaterial Kind="FolderUploadOutline" VerticalAlignment="Center" HorizontalAlignment="Center" Width="256" Height="256"/>
         </Grid>
         <Grid Name="notificationOverlay" Visibility="Visible"/>
         <Grid Name="blockActionsOverlay" Visibility="Collapsed" IsHitTestVisible="True">

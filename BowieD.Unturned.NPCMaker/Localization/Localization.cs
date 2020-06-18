@@ -87,5 +87,32 @@ namespace BowieD.Unturned.NPCMaker.Localization
         {
             return $"Localization {Name}. Author(s): {Author}";
         }
+
+        public void AddMissingKeys(Localization from)
+        {
+            TranslationDictionary.AddMissingKeys(General, from.General);
+            TranslationDictionary.AddMissingKeys(Options, from.Options);
+            TranslationDictionary.AddMissingKeys(Character, from.Character);
+            TranslationDictionary.AddMissingKeys(Dialogue, from.Dialogue);
+            TranslationDictionary.AddMissingKeys(Vendor, from.Vendor);
+            TranslationDictionary.AddMissingKeys(Quest, from.Quest);
+            TranslationDictionary.AddMissingKeys(Condition, from.Condition);
+            TranslationDictionary.AddMissingKeys(Reward, from.Reward);
+            TranslationDictionary.AddMissingKeys(VendorItem, from.VendorItem);
+            TranslationDictionary.AddMissingKeys(Mistakes, from.Mistakes);
+            TranslationDictionary.AddMissingKeys(Notification, from.Notification);
+            TranslationDictionary.AddMissingKeys(Interface, from.Interface);
+            try
+            {
+                TranslationDictionary.AddMissingKeys(Simulation["Dialogue"], from.Simulation["Dialogue"]);
+                TranslationDictionary.AddMissingKeys(Simulation["Vendor"], from.Simulation["Vendor"]);
+                TranslationDictionary.AddMissingKeys(Simulation["Quest"], from.Simulation["Quest"]);
+                TranslationDictionary.AddMissingKeys(Simulation["Simulation"], from.Simulation["Simulation"]);
+                TranslationDictionary.AddMissingKeys(Simulation["Flags"], from.Simulation["Flags"]);
+                TranslationDictionary.AddMissingKeys(Simulation["Quests"], from.Simulation["Quests"]);
+                TranslationDictionary.AddMissingKeys(Simulation["Inventory"], from.Simulation["Inventory"]);
+            }
+            catch { }
+        }
     }
 }

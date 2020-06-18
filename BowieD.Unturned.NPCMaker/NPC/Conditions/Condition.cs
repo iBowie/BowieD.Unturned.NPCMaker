@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.XAML;
 using System;
 using System.Collections.Generic;
@@ -170,16 +171,23 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 {
                     ComboBox cBox = new ComboBox();
                     Array values = Enum.GetValues(propType);
+                    string prefix;
+                    if (LocalizationManager.Current.Condition.ContainsKey($"{Type}_{prop.Name}"))
+                        prefix = $"{Type}_{prop.Name}_";
+                    else
+                        prefix = $"Shared_{prop.Name}_";
+                    if (propType == typeof(Logic_Type) && AppConfig.Instance.alternateLogicTranslation)
+                        prefix += "Alternate_";
                     foreach (object eValue in values)
                     {
-                        cBox.Items.Add(LocalizationManager.Current.Condition[$"{Type}_{prop.Name}_{eValue.ToString()}"]);
+                        cBox.Items.Add(LocalizationManager.Current.Condition[$"{prefix}{eValue.ToString()}"]);
                     }
                     cBox.SetBinding(ComboBox.SelectedItemProperty, new Binding()
                     {
                         Converter = new EnumItemsSource()
                         {
                             Dictionary = LocalizationManager.Current.Condition,
-                            LocalizationPrefix = $"{Type}_{prop.Name}_",
+                            LocalizationPrefix = prefix,
                             Type = propType
                         },
                         Path = new PropertyPath(propName),

@@ -1,11 +1,13 @@
-﻿using BowieD.Unturned.NPCMaker.Controls;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
+using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace BowieD.Unturned.NPCMaker.ViewModels
@@ -23,7 +25,17 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             set
             {
                 _vendor = value;
-                UpdateItems();
+
+                MainWindow.Instance.vendorListBuyItems.Children.Clear();
+                MainWindow.Instance.vendorListSellItems.Children.Clear();
+                foreach (var c in value.items)
+                {
+                    if (c.isBuy)
+                        AddItemBuy(new Universal_ItemList(c, true));
+                    else
+                        AddItemSell(new Universal_ItemList(c, true));
+                }
+
                 OnPropertyChange("");
             }
         }
@@ -36,162 +48,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         {
             get => Vendor.currency;
             set => Vendor.currency = value;
-        }
-        public List<VendorItem> Items
-        {
-            get
-            {
-                List<VendorItem> res = new List<VendorItem>();
-                foreach (object r in MainWindow.Instance.vendorListBuyItems.Children)
-                {
-                    if (r is Universal_ItemList uil)
-                    {
-                        res.Add(uil.Value as VendorItem);
-                    }
-                }
-                foreach (object r in MainWindow.Instance.vendorListSellItems.Children)
-                {
-                    if (r is Universal_ItemList uil)
-                    {
-                        res.Add(uil.Value as VendorItem);
-                    }
-                }
-                return res;
-            }
-            set
-            {
-                Vendor.items = value;
-                UpdateItems();
-                OnPropertyChange("Items");
-            }
-        }
-        internal void UpdateItems()
-        {
-            MainWindow.Instance.vendorListBuyItems.Children.Clear();
-            MainWindow.Instance.vendorListSellItems.Children.Clear();
-            foreach (VendorItem item in Vendor.items)
-            {
-                if (item.isBuy)
-                {
-                    AddItemBuy(item);
-                }
-                else
-                {
-                    AddItemSell(item);
-                }
-            }
-        }
-        internal void AddItemBuy(VendorItem item)
-        {
-            Universal_ItemList uil = new Universal_ItemList(item, Universal_ItemList.ReturnType.VendorItem, true)
-            {
-                Width = 240
-            };
-            uil.deleteButton.Click += (object sender, RoutedEventArgs e) =>
-            {
-                RemoveItemBuy(Util.FindParent<Universal_ItemList>(sender as Button));
-                Vendor.items = Items;
-                UpdateItems();
-            };
-            uil.moveUpButton.Click += (object sender, RoutedEventArgs e) =>
-            {
-                StackPanel panel = MainWindow.Instance.vendorListBuyItems;
-                int index = GetIndexInBuy(uil);
-                if (index >= 1)
-                {
-                    Universal_ItemList next = panel.Children[index - 1] as Universal_ItemList;
-                    panel.Children.RemoveAt(index - 1);
-                    panel.Children.Insert(index, next);
-                    Vendor.items = Items;
-                    UpdateItems();
-                }
-            };
-            uil.moveDownButton.Click += (object sender, RoutedEventArgs e) =>
-            {
-                StackPanel panel = MainWindow.Instance.vendorListBuyItems;
-                int index = GetIndexInBuy(uil);
-                if (index < panel.Children.Count - 1)
-                {
-                    panel.Children.RemoveAt(index);
-                    panel.Children.Insert(index + 1, uil);
-                    Vendor.items = Items;
-                    UpdateItems();
-                }
-            };
-            MainWindow.Instance.vendorListBuyItems.Children.Add(uil);
-        }
-        internal void AddItemSell(VendorItem item)
-        {
-            Universal_ItemList uil = new Universal_ItemList(item, Universal_ItemList.ReturnType.VendorItem, true)
-            {
-                Width = 240
-            };
-            uil.deleteButton.Click += (object sender, RoutedEventArgs e) =>
-            {
-                RemoveItemSell(Util.FindParent<Universal_ItemList>(sender as Button));
-                Vendor.items = Items;
-                UpdateItems();
-            };
-            uil.moveUpButton.Click += (object sender, RoutedEventArgs e) =>
-            {
-                StackPanel panel = MainWindow.Instance.vendorListSellItems;
-                int index = GetIndexInSell(uil);
-                if (index >= 1)
-                {
-                    Universal_ItemList next = panel.Children[index - 1] as Universal_ItemList;
-                    panel.Children.RemoveAt(index - 1);
-                    panel.Children.Insert(index, next);
-                    Vendor.items = Items;
-                    UpdateItems();
-                }
-            };
-            uil.moveDownButton.Click += (object sender, RoutedEventArgs e) =>
-            {
-                StackPanel panel = MainWindow.Instance.vendorListSellItems;
-                int index = GetIndexInSell(uil);
-                if (index < panel.Children.Count - 1)
-                {
-                    panel.Children.RemoveAt(index);
-                    panel.Children.Insert(index + 1, uil);
-                    Vendor.items = Items;
-                    UpdateItems();
-                }
-            };
-            MainWindow.Instance.vendorListSellItems.Children.Add(uil);
-        }
-        internal void RemoveItemSell(UIElement item)
-        {
-            MainWindow.Instance.vendorListSellItems.Children.Remove(item);
-            Vendor.items = Items;
-            UpdateItems();
-        }
-        internal void RemoveItemBuy(UIElement item)
-        {
-            MainWindow.Instance.vendorListBuyItems.Children.Remove(item);
-            Vendor.items = Items;
-            UpdateItems();
-        }
-        private int GetIndexInBuy(UIElement element)
-        {
-            for (int k = 0; k < MainWindow.Instance.vendorListBuyItems.Children.Count; k++)
-            {
-                if (MainWindow.Instance.vendorListBuyItems.Children[k] == element)
-                {
-                    return k;
-                }
-            }
-            return -1;
-        }
-        private int GetIndexInSell(UIElement element)
-        {
-            for (int k = 0; k < MainWindow.Instance.vendorListSellItems.Children.Count; k++)
-            {
-                if (MainWindow.Instance.vendorListSellItems.Children[k] == element)
-                {
-                    return k;
-                }
-            }
-            return -1;
         }
         private ICommand addItemCommand, saveCommand, openCommand, resetCommand, previewCommand;
         public ICommand AddItemCommand
@@ -206,8 +62,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         if (uvie.ShowDialog() == true)
                         {
                             VendorItem resultedVendorItem = uvie.Result;
-                            Vendor.items.Add(resultedVendorItem);
-                            UpdateItems();
+                            Universal_ItemList uil = new Universal_ItemList(resultedVendorItem, true);
+                            if (resultedVendorItem.isBuy)
+                                AddItemBuy(uil);
+                            else
+                                AddItemSell(uil);
                         }
                     });
                 }
@@ -227,6 +86,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             App.NotificationManager.Notify(LocalizationManager.Current.Notification["Vendor_ID_Zero"]);
                             return;
                         }
+                        UpdateItems();
                         if (!MainWindow.CurrentProject.data.vendors.Contains(Vendor))
                         {
                             MainWindow.CurrentProject.data.vendors.Add(Vendor);
@@ -252,7 +112,17 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         ulv.Owner = MainWindow.Instance;
                         if (ulv.ShowDialog() == true)
                         {
-                            SaveCommand.Execute(null);
+                            if (!AppConfig.Instance.automaticallySaveBeforeOpening)
+                            {
+                                var msgRes = MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Vendor_Open_Confirm"], "", MessageBoxButton.YesNoCancel);
+                                if (msgRes == MessageBoxResult.Yes)
+                                    SaveCommand.Execute(null);
+                                else if (msgRes != MessageBoxResult.No)
+                                    return;
+                            }
+                            else
+                                SaveCommand.Execute(null);
+
                             Vendor = ulv.SelectedValue as NPCVendor;
                             UpdateItems();
                             App.Logger.Log($"Opened vendor {ID}");
@@ -305,6 +175,134 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 }
                 return previewCommand;
             }
+        }
+
+        public void RemoveItemBuy(UIElement element)
+        {
+            MainWindow.Instance.vendorListBuyItems.Children.Remove(element);
+            UpdateItems();
+        }
+        public void RemoveItemSell(UIElement element)
+        {
+            MainWindow.Instance.vendorListSellItems.Children.Remove(element);
+            UpdateItems();
+        }
+
+        public void AddItemBuy(VendorItem item)
+        {
+            Universal_ItemList uil = new Universal_ItemList(item, true);
+            AddItemBuy(uil);
+        }
+        void AddItemBuy(Universal_ItemList item)
+        {
+            if (item.Type != Universal_ItemList.ReturnType.VendorItem)
+                throw new ArgumentException($"Expected VendorItem, got {item.Type}");
+
+            item.deleteButton.Click += (sender, e) =>
+            {
+                var current = (sender as UIElement).TryFindParent<Universal_ItemList>();
+                var panel = MainWindow.Instance.vendorListBuyItems;
+                foreach (var ui in panel.Children)
+                {
+                    var dr = ui as Universal_ItemList;
+                    if (dr.Equals(current))
+                    {
+                        panel.Children.Remove(dr);
+                        break;
+                    }
+                }
+                List<VendorItem> newItems = new List<VendorItem>();
+                foreach (UIElement ui in panel.Children)
+                {
+                    if (ui is Universal_ItemList dr)
+                    {
+                        newItems.Add(dr.Value as VendorItem);
+                    }
+                }
+                Vendor.items = newItems;
+
+                panel.UpdateOrderButtons();
+            };
+            item.moveUpButton.Click += (sender, e) =>
+            {
+                MainWindow.Instance.vendorListBuyItems.MoveUp((sender as UIElement).TryFindParent<Universal_ItemList>());
+                UpdateItems();
+            };
+            item.moveDownButton.Click += (sender, e) =>
+            {
+                MainWindow.Instance.vendorListBuyItems.MoveDown((sender as UIElement).TryFindParent<Universal_ItemList>());
+                UpdateItems();
+            };
+            MainWindow.Instance.vendorListBuyItems.Children.Add(item);
+            MainWindow.Instance.vendorListBuyItems.UpdateOrderButtons();
+        }
+        public void AddItemSell(VendorItem item)
+        {
+            Universal_ItemList uil = new Universal_ItemList(item, true);
+            AddItemSell(uil);
+        }
+        void AddItemSell(Universal_ItemList item)
+        {
+            if (item.Type != Universal_ItemList.ReturnType.VendorItem)
+                throw new ArgumentException($"Expected VendorItem, got {item.Type}");
+
+            item.deleteButton.Click += (sender, e) =>
+            {
+                var current = (sender as UIElement).TryFindParent<Universal_ItemList>();
+                var panel = MainWindow.Instance.vendorListSellItems;
+                foreach (var ui in panel.Children)
+                {
+                    var dr = ui as Universal_ItemList;
+                    if (dr.Equals(current))
+                    {
+                        panel.Children.Remove(dr);
+                        break;
+                    }
+                }
+                List<VendorItem> newItems = new List<VendorItem>();
+                foreach (UIElement ui in panel.Children)
+                {
+                    if (ui is Universal_ItemList dr)
+                    {
+                        newItems.Add(dr.Value as VendorItem);
+                    }
+                }
+                Vendor.items = newItems;
+
+                panel.UpdateOrderButtons();
+            };
+            item.moveUpButton.Click += (sender, e) =>
+            {
+                MainWindow.Instance.vendorListSellItems.MoveUp((sender as UIElement).TryFindParent<Universal_ItemList>());
+                UpdateItems();
+            };
+            item.moveDownButton.Click += (sender, e) =>
+            {
+                MainWindow.Instance.vendorListSellItems.MoveDown((sender as UIElement).TryFindParent<Universal_ItemList>());
+                UpdateItems();
+            };
+            MainWindow.Instance.vendorListSellItems.Children.Add(item);
+            MainWindow.Instance.vendorListSellItems.UpdateOrderButtons();
+        }
+        void UpdateItems()
+        {
+            Vendor.items.Clear();
+            foreach (var uie in MainWindow.Instance.vendorListBuyItems.Children)
+            {
+                if (uie is Universal_ItemList dr)
+                {
+                    Vendor.items.Add(dr.Value as VendorItem);
+                }
+            }
+            foreach (var uie in MainWindow.Instance.vendorListSellItems.Children)
+            {
+                if (uie is Universal_ItemList dr)
+                {
+                    Vendor.items.Add(dr.Value as VendorItem);
+                }
+            }
+            MainWindow.Instance.vendorListBuyItems.UpdateOrderButtons();
+            MainWindow.Instance.vendorListSellItems.UpdateOrderButtons();
         }
     }
 }

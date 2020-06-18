@@ -2,7 +2,10 @@
 using System;
 using System.IO;
 using System.Security;
+using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -20,8 +23,10 @@ namespace BowieD.Unturned.NPCMaker
             }
             catch (Exception e)
             {
+                TryToSaveProject();
                 DisplayException(e);
                 SaveToCrashException(e);
+                ForceExit();
             }
         }
 
@@ -33,14 +38,18 @@ namespace BowieD.Unturned.NPCMaker
 
         private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
+            TryToSaveProject();
             DisplayException(e.Exception);
             SaveToCrashException(e.Exception);
+            ForceExit();
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
+            TryToSaveProject();
             DisplayException((Exception)e.ExceptionObject);
             SaveToCrashException((Exception)e.ExceptionObject);
+            ForceExit();
         }
 
         private static void DisplayException(Exception e)
@@ -75,6 +84,26 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
             catch { }
+        }
+
+        private static void TryToSaveProject()
+        {
+            try
+            {
+                using (StreamWriter writer = new StreamWriter("crashSave.npcproj", false, Encoding.UTF8))
+                using (XmlWriter xmlw = XmlWriter.Create(writer))
+                {
+                    var proj = MainWindow.CurrentProject.data;
+                    XmlSerializer xmls = new XmlSerializer(proj.GetType());
+                    xmls.Serialize(xmlw, proj);
+                }
+            }
+            catch { }
+        }
+
+        private static void ForceExit()
+        {
+            Environment.Exit(1);
         }
     }
 }

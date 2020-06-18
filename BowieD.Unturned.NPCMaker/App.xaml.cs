@@ -134,6 +134,7 @@ namespace BowieD.Unturned.NPCMaker
                     throw new Exception("Skipping cache downloading");
                 }
 #endif
+                App.Logger.Log("Updating package...");
                 using (WebClient client = new WebClient())
                 {
                     string data = client.DownloadString(AppPackage.url);
