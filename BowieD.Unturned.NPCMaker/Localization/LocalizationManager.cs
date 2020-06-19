@@ -18,6 +18,7 @@ namespace BowieD.Unturned.NPCMaker.Localization
             yield return ELanguage.Russian;
             yield return ELanguage.Spanish;
             yield return ELanguage.French;
+            yield return ELanguage.Chinese;
         }
         public static void LoadLanguage(ELanguage language)
         {
@@ -59,6 +60,8 @@ namespace BowieD.Unturned.NPCMaker.Localization
                     return "Français (French)";
                 case ELanguage.Russian:
                     return "Русский (Russian)";
+                case ELanguage.Chinese:
+                    return "中文 (Chinese)";
                 default:
                     return "?";
             }
@@ -73,6 +76,8 @@ namespace BowieD.Unturned.NPCMaker.Localization
                     return ELanguage.Spanish;
                 case "fr-FR":
                     return ELanguage.French;
+                case "zh-CN":
+                    return ELanguage.Chinese;
                 default:
                     return ELanguage.English;
             }

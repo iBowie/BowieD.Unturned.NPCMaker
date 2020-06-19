@@ -513,6 +513,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Resources\Localization\Chinese.json" />
     <Resource Include="Resources\Localization\French.json" />
     <Resource Include="Resources\Localization\Spanish.json" />
     <Resource Include="Resources\Localization\Russian.json" />
