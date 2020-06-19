@@ -1,8 +1,7 @@
 {
-	"Author": "Longwind",
+	"Author": "长风",
 	"Name": "Chinese (CN)",
-	"General":
-	{
+	"General": {
 		"Project_SaveFilter": "NPC项目 (*.npcproj)",
 		"Title": "Unturned 3.0 NPC生成器，制作者：BowieD",
 		"Configuration_Title": "应用设置"
@@ -107,8 +106,8 @@
 		"Page_Remove": "删除一页",
 		"Pages": "消息页数",
 		"Reply": "回复文字",
-		"Reply_Add": "添加恢复",
-		"Reply_Remove": "移除恢复",
+		"Reply_Add": "添加回复消息",
+		"Reply_Remove": "移除回复消息",
 		"Reply_Conditions": "条件",
 		"Reply_Rewards": "奖励",
 		"Reply_Redirects_Dialogue": "下一条消息的ID (如果没有的话请空着)",
@@ -118,10 +117,9 @@
 		"Reply_Move_Up": "向上",
 		"Reply_Move_Down": "向下",
 		"Replies": "玩家的回答",
-		"Tips": "对话技巧:\n用 <pause> 可以让消息间隔0.5秒\n用 <br> 可以有新的一行\n用 <name_npc> 可以在对话中显示NPC的名字\n用 <name_char> 代表玩家的名字\n用 <color=rarity>文字</color> 来让对话的颜色发生改变"
+		"Tips": "对话技巧:\n用 <pause> 可以让消息间隔0.5秒\n用 <br> 可以有新的一行\n用 <name_npc> 可以在对话中显示NPC的名字\n用 <name_char> 代表玩家的名字\n用 <color=rarity>文字</color> 来让对话的颜色发生改变\n软件汉化：冰与火汉化组-长风"
 	},
-	"Vendor":
-	{
+	"Vendor": {
 		"ID": "商店ID",
 		"Title": "商店名字",
 		"Description": "商店介绍",
@@ -130,11 +128,10 @@
 		"Items_Buy": "NPC回收的物品",
 		"Item_Sell": "类型: {0} | ID: {1} | 花费: {2}",
 		"Items_Sell": "NPC出售的物品",
-    "DisableSorting": "禁用自动排序",
-    "Currency": "货币的GUID (如果空着则默认为经验货币)"
+		"DisableSorting": "禁用自动排序",
+		"Currency": "货币的GUID (如果空着则默认为经验货币)"
 	},
-	"Quest":
-	{
+	"Quest": {
 		"ID": "任务ID",
 		"Title": "任务名称",
 		"Description": "任务介绍",
@@ -160,9 +157,9 @@
 		"Type_Player_Life_Virus": "玩家辐射值",
 		"Type_Flag_Bool": "Flag规则 (Bool值)",
 		"Type_Flag_Short": "Flag规则 (Short值)",
-		"Type_Skillset": "检查技能分配",
+		"Type_Skillset": "检查玩家职业",
 		"Type_Kills_Object": "破坏建筑数",
-		"Type_Holiday": "检查是否节日",
+		"Type_Holiday": "检查是否为节日",
 		"Type_Compare_Flags": "比较Flags的数值",
 		"Type_Currency": "货币",
 		"Type_Kills_Tree": "砍树",
@@ -171,10 +168,10 @@
 		"Kills_Tree_Tree": "树的GUID",
 		"Kills_Tree_Reset": "重置Flag值",
 		"Currency_Value": "货币的数量",
-		"Currency_Reset": "扣除玩家货币的数量",
+		"Currency_Reset": "任务完成是否扣除玩家货币",
 		"Currency_GUID": "货币的GUI",
 		"Experience_Value": "经验数量",
-		"Experience_Reset": "从玩家扣除经验",
+		"Experience_Reset": "任务完成是否扣除经验",
 		"Reputation_Value": "声望数量",
 		"Quest_ID": "任务ID",
 		"Quest_Status": "任务进度",
@@ -186,7 +183,7 @@
 		"Quest_Reset_Tooltip": "已接受 -> 放弃; 已达到目标 -> 完成; 完成 -> 移除",
 		"Item_ID": "物品ID",
 		"Item_Amount": "物品数量",
-		"Item_Reset": "是否从玩家扣除物品",
+		"Item_Reset": "任务完成是否扣除物品",
 		"Kills_Zombie_ID": "Flag的ID",
 		"Kills_Zombie_Value": "僵尸的击杀数",
 		"Kills_Zombie_Spawn_Quantity": "刷新数量",
@@ -234,7 +231,7 @@
 		"Flag_Short_ID": "Flag的ID",
 		"Flag_Short_Value": "Flag的Value",
 		"Flag_Short_Allow_Unset": "允许取消",
-		"Skillset_Value": "玩家技能",
+		"Skillset_Value": "玩家职业",
 		"Skillset_Value_Fire": "消防员",
 		"Skillset_Value_Police": "警察",
 		"Skillset_Value_Army": "军队",
@@ -250,7 +247,7 @@
 		"Kills_Object_Object": "建筑的GUID",
 		"Kills_Object_Nav": "区域ID (如果不限定则填255)",
 		"Kills_Object_Reset": "重置Flag的数值",
-		"Holiday_Value": "需求节日",
+		"Holiday_Value": "需求的节日",
 		"Holiday_Value_None": "无",
 		"Holiday_Value_Halloween": "万圣节 (10/27 - 11/01)",
 		"Holiday_Value_Christmas": "圣诞节 (12/10 - 12/31)",
@@ -259,8 +256,8 @@
 		"Compare_Flags_Allow_A_Unset": "允许取消 (A)",
 		"Compare_Flags_Allow_B_Unset": "允许取消 (B)",
 		"Compare_Flags_Reset": "重置这两个Flag",
-		"Shared_Localization": "语言",
-		"Shared_Logic": "逻辑",
+		"Shared_Localization": "自定义语言",
+		"Shared_Logic": "判断逻辑",
 		"Shared_Logic_Less_Than": "<",
 		"Shared_Logic_Less_Than_Or_Equal_To": "<=",
 		"Shared_Logic_Equal": "==",
@@ -275,8 +272,7 @@
 		"Shared_Logic_Alternate_Greater_Than": "大于",
 		"Shared_Reset": "重置"
 	},
-	"Reward":
-	{
+	"Reward": {
 		"Type_None": "无",
 		"Type_Experience": "经验",
 		"Type_Reputation": "声望",
@@ -290,13 +286,13 @@
 		"Type_Vehicle": "刷新车辆",
 		"Type_Teleport": "传送玩家",
 		"Type_Event": "触发事件",
-    "Type_Flag_Math": "计算Flag的数值",
-    "Type_Currency": "货币",
-    "Type_Hint": "提示",
-    "Currency_Value": "货币的数量",
-    "Currency_GUID": "货币的GUID",
-    "Hint_Duration": "提示时间",
-    "Hint_Localization": "提示文本",
+		"Type_Flag_Math": "计算Flag的数值",
+		"Type_Currency": "货币",
+		"Type_Hint": "提示",
+		"Currency_Value": "货币的数量",
+		"Currency_GUID": "货币的GUID",
+		"Hint_Duration": "提示时间",
+		"Hint_Localization": "提示文本",
 		"Experience_Value": "经验数量",
 		"Reputation_Value": "声望数量",
 		"Flag_Bool_ID": "Flag的ID",
@@ -339,10 +335,9 @@
 		"Flag_Math_Operation_Subtraction": "从A里减去B的数值",
 		"Flag_Math_Operation_Multiplication": "将A乘以B",
 		"Flag_Math_Operation_Division": "将A除以B",
-		"Shared_Localization":  "语言"
+		"Shared_Localization": "语言"
 	},
-	"VendorItem":
-	{
+	"VendorItem": {
 		"ID": "物品ID",
 		"Cost": "花费",
 		"Amount": "数量",
@@ -350,9 +345,9 @@
 		"Type": "商店物品类型",
 		"Type_Item": "物品",
 		"Type_Vehicle": "车辆",
-		"SellType": "出售类型",
-		"SellType_Buy": "NPC回收类型",
-		"SellType_Sell": "NPC出售类型",
+		"SellType": "商店类型",
+		"SellType_Buy": "NPC回收",
+		"SellType_Sell": "NPC出售",
 		"Save": "保存物品",
 		"Conditions": "编辑条件"
 	},
@@ -466,7 +461,7 @@
 		"Main_Menu_File_Recent_Clear": "清理最近的文件",
 		"Main_Menu_File_Import": "导入...",
 		"Main_Menu_File_Import_File": "单个文件",
-		"Main_Menu_File_Import_Directory": "目录",
+		"Main_Menu_File_Import_Directory": "查找目录",
 		"Main_Menu_File_Export": "_导出NPC (Ctrl + E)",
 		"Main_Menu_File_Exit": "退出",
 		"Main_Menu_Options": "选项",
@@ -621,7 +616,7 @@
 			"Goals": "Goals: ",
 			"Rewards": "奖励: ",
 			"Button_Accept": "接受",
-			"Button_Decline": "减少",
+			"Button_Decline": "退出",
 			"Button_Continue": "继续",
 			"Default_Condition_Currency": "{0} 货币",
 			"Default_Condition_Item": "{0}/{1} {2}",
