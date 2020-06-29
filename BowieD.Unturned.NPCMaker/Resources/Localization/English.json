@@ -254,6 +254,8 @@
 		"Holiday_Value_None": "None",
 		"Holiday_Value_Halloween": "Halloween (10/27 - 11/01)",
 		"Holiday_Value_Christmas": "Christmas (12/10 - 12/31)",
+		"Holiday_Value_April_Fools": "April Fools",
+		"Holiday_Value_Max": "Max (?)",
 		"Compare_Flags_A_ID": "Flag ID (A)",
 		"Compare_Flags_B_ID": "Flag ID (B)",
 		"Compare_Flags_Allow_A_Unset": "Allow Unset (A)",

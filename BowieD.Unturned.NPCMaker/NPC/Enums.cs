@@ -149,7 +149,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
     {
         None,
         Halloween,
-        Christmas
+        Christmas,
+        April_Fools,
+        Max
     }
     public enum ELanguage
     {
