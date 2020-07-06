@@ -26,6 +26,21 @@ namespace BowieD.Unturned.NPCMaker.Controls
         }
 
         public NPC.NPCResponse Response { get; private set; }
+
+        public bool IsCollapsed { get; private set; }
+
+        public void Expand()
+        {
+            expandedGrid.Visibility = Visibility.Visible;
+            collapsedGrid.Visibility = Visibility.Collapsed;
+        }
+        public void Collapse()
+        {
+            expandedGrid.Visibility = Visibility.Collapsed;
+            collapsedGrid.Visibility = Visibility.Visible;
+            collapsedText.Text = TextUtil.Shortify(mainText.Text, 24);
+        }
+
         public void RebuildResponse()
         {
             Response.mainText = mainText.Text;
@@ -159,5 +174,14 @@ namespace BowieD.Unturned.NPCMaker.Controls
         public UIElement UpButton => orderButtonUp;
         public UIElement DownButton => orderButtonDown;
         public Transform Transform => animateTransform;
+
+        private void Collapse_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Collapse();
+        }
+        private void Expand_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Expand();
+        }
     }
 }

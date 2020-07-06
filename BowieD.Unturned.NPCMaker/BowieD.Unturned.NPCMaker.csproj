@@ -353,6 +353,7 @@
     <Compile Include="Random.cs" />
     <Compile Include="Markup\IMarkup.cs" />
     <Compile Include="ScreenHelper.cs" />
+    <Compile Include="TextUtil.cs" />
     <Compile Include="Themes\MetroTheme.cs" />
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
