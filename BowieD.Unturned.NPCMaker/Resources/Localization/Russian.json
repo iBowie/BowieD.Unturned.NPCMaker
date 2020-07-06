@@ -574,6 +574,8 @@
     "Context_Dialogue_PasteNewLine": "Вставить переход на новую строку",
     "Context_Dialogue_PastePlayerName": "Вставить имя игрока",
     "Context_Dialogue_PasteNPCName": "Вставить имя NPC",
+    "Context_Dialogue_PasteItalic": "Вставить наклонный текст",
+    "Context_Dialogue_PasteBold": "Вставить жирный текст",
     "Context_Dialogue_PasteColor": "Вставить цвет",
     "Context_Dialogue_PasteColor_Unturned": "Unturned",
     "Context_Dialogue_PasteColor_Unity": "Unity",

@@ -129,5 +129,37 @@ namespace BowieD.Unturned.NPCMaker.Common
             });
             return b;
         }
+        internal static MenuItem CreatePasteItalicButton()
+        {
+            MenuItem b = new MenuItem()
+            {
+                Header = LocalizationManager.Current.Interface["Context_Dialogue_PasteItalic"]
+            };
+            b.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
+            {
+                ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                TextBox target = context.PlacementTarget as TextBox;
+                int pos = target.SelectionStart;
+                int l = target.SelectionLength;
+                target.Text = target.Text.Insert(pos + l, "</i>").Insert(pos, "<i>");
+            });
+            return b;
+        }
+        internal static MenuItem CreatePasteBoldButton()
+        {
+            MenuItem b = new MenuItem()
+            {
+                Header = LocalizationManager.Current.Interface["Context_Dialogue_PasteBold"]
+            };
+            b.Click += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
+            {
+                ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                TextBox target = context.PlacementTarget as TextBox;
+                int pos = target.SelectionStart;
+                int l = target.SelectionLength;
+                target.Text = target.Text.Insert(pos + l, "</b>").Insert(pos, "<b>");
+            });
+            return b;
+        }
     }
 }

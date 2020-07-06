@@ -579,6 +579,8 @@
 		"Context_Dialogue_PasteNewLine": "Add new line",
 		"Context_Dialogue_PastePlayerName": "Paste Player Name",
 		"Context_Dialogue_PasteNPCName": "Paste NPC Name",
+		"Context_Dialogue_PasteItalic": "Paste italic tag",
+		"Context_Dialogue_PasteBold": "Paste bold tag",
 		"Context_Dialogue_PasteColor": "Paste color",
 		"Context_Dialogue_PasteColor_Unturned": "Unturned",
 		"Context_Dialogue_PasteColor_Unity": "Unity",

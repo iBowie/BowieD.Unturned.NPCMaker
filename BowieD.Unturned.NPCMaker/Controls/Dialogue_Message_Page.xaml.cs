@@ -24,6 +24,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
                 textField.ContextMenu.Items.Add(ContextHelper.CreatePasteNewLineButton());
                 textField.ContextMenu.Items.Add(ContextHelper.CreatePastePlayerNameButton());
                 textField.ContextMenu.Items.Add(ContextHelper.CreatePasteNPCNameButton());
+                textField.ContextMenu.Items.Add(ContextHelper.CreatePasteItalicButton());
+                textField.ContextMenu.Items.Add(ContextHelper.CreatePasteBoldButton());
                 textField.ContextMenu.Items.Add(ContextHelper.CreatePasteColorMenu());
                 isMenuInit = true;
             }
