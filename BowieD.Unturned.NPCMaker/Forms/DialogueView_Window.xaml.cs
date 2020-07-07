@@ -249,7 +249,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             mainText.Text = string.Empty;
             responsesPanel.Children.Clear();
 
-            formatter.Markup(npcNameText, FormatText(Character.displayName) ?? string.Empty);
+            formatter.Markup(npcNameText, FormatText(Character.DisplayName) ?? string.Empty);
 
             for (int i = 0; i < Dialogue.messages.Count; i++)
             {

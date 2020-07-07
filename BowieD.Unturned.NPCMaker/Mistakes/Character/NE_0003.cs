@@ -19,9 +19,9 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Character
         {
             foreach (NPC.NPCCharacter _char in MainWindow.CurrentProject.data.characters)
             {
-                if (_char.editorName.Any(d => "<>:\"/\\|?*".Contains(d)))
+                if (_char.EditorName.Any(d => "<>:\"/\\|?*".Contains(d)))
                 {
-                    yield return new NE_0003(_char.displayName, _char.id);
+                    yield return new NE_0003(_char.DisplayName, _char.ID);
                 }
             }
         }

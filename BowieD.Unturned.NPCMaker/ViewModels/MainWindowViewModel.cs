@@ -95,6 +95,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     QuestTabViewModel.Quest = data.quests[data.lastQuest];
                 }
+
+                UpdateAllTabs();
             };
         }
         public MainWindow MainWindow { get; set; }
@@ -105,14 +107,14 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public MistakeTabViewModel MistakeTabViewModel { get; set; }
         public void ResetAll()
         {
-            CharacterTabViewModel.ResetCommand.Execute(null);
+            CharacterTabViewModel.Reset();
             DialogueTabViewModel.ResetCommand.Execute(null);
             VendorTabViewModel.ResetCommand.Execute(null);
             QuestTabViewModel.ResetCommand.Execute(null);
         }
         public void SaveAll()
         {
-            CharacterTabViewModel.SaveCommand.Execute(null);
+            CharacterTabViewModel.Save();
             DialogueTabViewModel.SaveCommand.Execute(null);
             VendorTabViewModel.SaveCommand.Execute(null);
             QuestTabViewModel.SaveCommand.Execute(null);
@@ -124,6 +126,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             data.lastDialogue = data.dialogues.IndexOf(DialogueTabViewModel.Dialogue);
             data.lastQuest = data.quests.IndexOf(QuestTabViewModel.Quest);
             data.lastVendor = data.vendors.IndexOf(VendorTabViewModel.Vendor);
+        }
+        public void UpdateAllTabs()
+        {
+            CharacterTabViewModel.UpdateTabs();
         }
         internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -347,6 +353,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         MainWindow.CurrentProject.data = new NPCProject();
                         MainWindow.CurrentProject.file = "";
                         ResetAll();
+                        UpdateAllTabs();
                         MainWindow.CurrentProject.isSaved = true;
                         MainWindow.Started = DateTime.UtcNow;
                     });
@@ -425,6 +432,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         MainWindow.CurrentProject.file = path;
                         if (MainWindow.CurrentProject.Load(null))
                         {
+                            UpdateAllTabs();
                             App.NotificationManager.Clear();
                             App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Loaded"]);
                             MainWindow.AddToRecentList(MainWindow.CurrentProject.file);

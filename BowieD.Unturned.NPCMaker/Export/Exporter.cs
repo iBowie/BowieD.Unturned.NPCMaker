@@ -74,9 +74,9 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Characters\{character.editorName}_{character.id}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Characters\{character.editorName}_{character.id}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Characters\{character.editorName}_{character.id}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(dir + $@"Characters\{character.EditorName}_{character.ID}");
+                    using (StreamWriter asset = new StreamWriter(dir + $@"Characters\{character.EditorName}_{character.ID}\Asset.dat", false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(dir + $@"Characters\{character.EditorName}_{character.ID}\English.dat", false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -85,7 +85,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                             asset.WriteLine($"GUID {character.guid}");
                         }
 
-                        asset.WriteLine($"ID {character.id}");
+                        asset.WriteLine($"ID {character.ID}");
                         asset.WriteLine($"Type NPC");
                         if (character.clothing.Shirt > 0)
                         {
@@ -258,14 +258,14 @@ namespace BowieD.Unturned.NPCMaker.Export
                         if (!character.poseHeadOffset.ApproximateEquals(0))
                             asset.WriteLine($"Pose_Head_Offset {character.poseHeadOffset.ToString(CultureInfo.InvariantCulture)}");
 
-                        local.WriteLine($"Name {character.editorName}");
-                        local.WriteLine($"Character {character.displayName}");
+                        local.WriteLine($"Name {character.EditorName}");
+                        local.WriteLine($"Character {character.DisplayName}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    App.Logger.LogException($"Can't export character {character.id}", ex: ex);
-                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Character_Error", character.id));
+                    App.Logger.LogException($"Can't export character {character.ID}", ex: ex);
+                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Character_Error", character.ID));
                 }
             }
         }

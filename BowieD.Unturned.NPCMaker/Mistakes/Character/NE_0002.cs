@@ -26,7 +26,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Character
                     case NPC.Equip_Type.Primary when _char.equipPrimary == 0:
                     case NPC.Equip_Type.Secondary when _char.equipSecondary == 0:
                     case NPC.Equip_Type.Tertiary when _char.equipTertiary == 0:
-                        yield return new NE_0002(_char.displayName, _char.id);
+                        yield return new NE_0002(_char.DisplayName, _char.ID);
                         break;
                 }
             }

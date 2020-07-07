@@ -10,4 +10,13 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+    public interface INPCTab
+    {
+        void Save();
+        void Reset();
+    }
+    public interface ITabEditor
+    {
+        void UpdateTabs();
+    }
 }

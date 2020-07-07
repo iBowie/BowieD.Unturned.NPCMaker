@@ -5,11 +5,13 @@ using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.NPC;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
@@ -17,14 +19,72 @@ using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.ViewModels
 {
-    public sealed class CharacterTabViewModel : BaseViewModel
+    public sealed class CharacterTabViewModel : BaseViewModel, ITabEditor, INPCTab
     {
         private NPCCharacter _character;
         public CharacterTabViewModel()
         {
-            Character = new NPCCharacter();
+            MainWindow.Instance.characterTabSelect.SelectionChanged += CharacterTabSelect_SelectionChanged;
+            MainWindow.Instance.characterTabButtonAdd.Click += CharacterTabButtonAdd_Click;
+            NPCCharacter empty = new NPCCharacter();
+            MainWindow.CurrentProject.data.characters.Add(empty);
+            Character = empty;
             UpdateColorPicker();
+            UpdateTabs();
         }
+
+        private void CharacterTabButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NPCCharacter item = new NPCCharacter();
+            MainWindow.CurrentProject.data.characters.Add(item);
+            Character = item;
+            UpdateTabs();
+        }
+
+        private void CharacterTabSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var tab = MainWindow.Instance.characterTabSelect;
+            if (tab.SelectedItem != null && tab.SelectedItem is TabItem tabItem && tabItem.DataContext != null)
+            {
+                NPCCharacter selectedTabChar = tabItem.DataContext as NPCCharacter;
+                if (selectedTabChar != null)
+                    Character = selectedTabChar;
+            }
+        }
+
+        public void Save() { }
+        public void Reset() { }
+
+        public void UpdateTabs()
+        {
+            var tab = MainWindow.Instance.characterTabSelect;
+            tab.Items.Clear();
+            int selected = -1;
+            for (int i = 0; i < MainWindow.CurrentProject.data.characters.Count; i++)
+            {
+                var character = MainWindow.CurrentProject.data.characters[i];
+                if (character == _character)
+                    selected = i;
+                MetroTabItem tabItem = new MetroTabItem();
+                tabItem.CloseButtonEnabled = true;
+                tabItem.CloseTabCommand = CloseTabCommand;
+                tabItem.CloseTabCommandParameter = tabItem;
+                var binding = new Binding()
+                {
+                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                    Mode = BindingMode.OneWay,
+                    Path = new PropertyPath("UIText")
+                };
+                Label l = new Label();
+                l.SetBinding(Label.ContentProperty, binding);
+                tabItem.Header = l;
+                tabItem.DataContext = character;
+                tab.Items.Add(tabItem);
+            }
+            if (selected != -1)
+                tab.SelectedIndex = selected;
+        }
+
         public NPCCharacter Character
         {
             get => _character;
@@ -39,9 +99,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 OnPropertyChange("");
             }
         }
-        public string DisplayName { get => Character.displayName; set => Character.displayName = value; }
-        public string EditorName { get => Character.editorName; set => Character.editorName = value; }
-        public ushort ID { get => Character.id; set => Character.id = value; }
+        public string DisplayName { get => Character.DisplayName; set => Character.DisplayName = value; }
+        public string EditorName { get => Character.EditorName; set => Character.EditorName = value; }
+        public ushort ID { get => Character.ID; set => Character.ID = value; }
         public ushort DialogueID
         {
             get => Character.startDialogueId;
@@ -142,9 +202,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public ushort EquipmentTertiary { get => Character.equipTertiary; set => Character.equipTertiary = value; }
         public Equip_Type Equipped { get => Character.equipped; set => Character.equipped = value; }
 
-        private ICommand saveCommand;
-        private ICommand openCommand;
-        private ICommand resetCommand;
         private ICommand editVisibilityConditionsCommand;
         private ICommand randomFaceCommand;
         private ICommand randomHairCommand;
@@ -153,76 +210,21 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         private ICommand saveColorHair;
         private ICommand regenerateGUIDsCommand;
         private ICommand poseEditorCommand;
-        public ICommand SaveCommand
+        private ICommand closeTabCommand;
+        public ICommand CloseTabCommand
         {
             get
             {
-                if (saveCommand == null)
+                if (closeTabCommand == null)
                 {
-                    saveCommand = new BaseCommand(() =>
+                    closeTabCommand = new BaseCommand((sender) =>
                     {
-                        if (Character.id == 0)
-                        {
-                            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Character_ID_Zero"]);
-                            return;
-                        }
-                        if (!MainWindow.CurrentProject.data.characters.Contains(Character))
-                        {
-                            MainWindow.CurrentProject.data.characters.Add(Character);
-                        }
-
-                        App.NotificationManager.Notify(LocalizationManager.Current.Notification["Character_Saved"]);
-                        MainWindow.CurrentProject.isSaved = false;
-                        App.Logger.Log($"Character {Character.id} saved!");
+                        var tab = (sender as MetroTabItem);
+                        MainWindow.CurrentProject.data.characters.Remove(tab.DataContext as NPCCharacter);
+                        UpdateTabs();
                     });
                 }
-                return saveCommand;
-            }
-        }
-        public ICommand OpenCommand
-        {
-            get
-            {
-                if (openCommand == null)
-                {
-                    openCommand = new BaseCommand(() =>
-                    {
-                        Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentProject.data.characters.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Character, false)).ToList(), Universal_ItemList.ReturnType.Character);
-                        ulv.Owner = MainWindow.Instance;
-                        if (ulv.ShowDialog() == true)
-                        {
-                            if (!AppConfig.Instance.automaticallySaveBeforeOpening)
-                            {
-                                var msgRes = MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Character_Open_Confirm"], "", MessageBoxButton.YesNoCancel);
-                                if (msgRes == MessageBoxResult.Yes)
-                                    SaveCommand.Execute(null);
-                                else if (msgRes != MessageBoxResult.No)
-                                    return;
-                            }
-                            else
-                                SaveCommand.Execute(null);
-
-                            Character = ulv.SelectedValue as NPCCharacter;
-                            App.Logger.Log($"Opened character {ID}");
-                        }
-                        MainWindow.CurrentProject.data.characters = ulv.Values.Cast<NPCCharacter>().ToList();
-                    });
-                }
-                return openCommand;
-            }
-        }
-        public ICommand ResetCommand
-        {
-            get
-            {
-                if (resetCommand == null)
-                {
-                    resetCommand = new BaseCommand(() =>
-                    {
-                        Character = new NPCCharacter();
-                    });
-                }
-                return resetCommand;
+                return closeTabCommand;
             }
         }
         public ICommand EditVisibilityConditionsCommand

@@ -42,7 +42,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
         {
             return new NPCCharacter
             {
-                id = asset.ReadUInt16("ID"),
+                ID = asset.ReadUInt16("ID"),
                 beard = asset.ReadByte("Beard"),
                 face = asset.ReadByte("Face"),
                 haircut = asset.ReadByte("Hair"),
@@ -52,8 +52,8 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 equipSecondary = asset.ReadUInt16("Secondary"),
                 equipTertiary = asset.ReadUInt16("Tertiary"),
                 startDialogueId = asset.ReadUInt16("Dialogue"),
-                displayName = local?.ReadString("Character"),
-                editorName = local?.ReadString("Name"),
+                DisplayName = local?.ReadString("Character"),
+                EditorName = local?.ReadString("Name"),
                 guid = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
                 leftHanded = asset.Has("Backward"),
                 clothing = ParseClothing(Clothing_Type.Default),

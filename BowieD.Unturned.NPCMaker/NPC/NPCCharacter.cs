@@ -1,20 +1,21 @@
 ﻿using BowieD.Unturned.NPCMaker.Coloring;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Xml.Serialization;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
     [System.Serializable]
-    public class NPCCharacter : IHasUIText
+    public class NPCCharacter : IHasUIText, INotifyPropertyChanged
     {
         public NPCCharacter()
         {
             guid = Guid.NewGuid().ToString("N");
-            editorName = "";
-            displayName = "";
-            id = 0;
+            EditorName = "";
+            DisplayName = "";
+            ID = 0;
             startDialogueId = 0;
             visibilityConditions = new List<Condition>();
             face = 0;
@@ -35,9 +36,42 @@ namespace BowieD.Unturned.NPCMaker.NPC
             posePitch = 90f;
             poseHeadOffset = 0f;
         }
-        public string editorName;
-        public string displayName;
-        public ushort id;
+        private string _editorName;
+        [XmlElement("editorName")]
+        public string EditorName
+        {
+            get => _editorName;
+            set
+            {
+                _editorName = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(EditorName)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
+            }
+        }
+        private string _displayName;
+        [XmlElement("displayName")]
+        public string DisplayName
+        {
+            get => _displayName;
+            set
+            {
+                _displayName = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DisplayName)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
+            }
+        }
+        private ushort _id;
+        [XmlElement("id")]
+        public ushort ID
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ID)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
+            }
+        }
         public ushort startDialogueId;
         public byte face;
         public byte beard;
@@ -59,6 +93,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public string guid;
         public List<Condition> visibilityConditions;
 
-        public string UIText => $"[{id}] {editorName} - {displayName}";
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public string UIText => $"[{ID}] {EditorName} - {DisplayName}";
     }
 }

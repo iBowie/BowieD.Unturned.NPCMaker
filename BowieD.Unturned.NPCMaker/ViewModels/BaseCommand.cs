@@ -9,7 +9,12 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         {
             this.action = action;
         }
+        public BaseCommand(Action<object> action)
+        {
+            this.actionWithParameter = action;
+        }
         private readonly Action action;
+        private readonly Action<object> actionWithParameter;
         public event EventHandler CanExecuteChanged;
         public virtual bool CanExecute(object parameter)
         {
@@ -18,7 +23,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
         public virtual void Execute(object parameter)
         {
-            action?.Invoke();
+            if (actionWithParameter != null)
+                actionWithParameter.Invoke(parameter);
+            else
+                action?.Invoke();
         }
     }
 }
