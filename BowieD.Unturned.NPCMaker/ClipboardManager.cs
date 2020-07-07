@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.NPC;
+using BowieD.Unturned.NPCMaker.NPC.Conditions;
+using BowieD.Unturned.NPCMaker.NPC.Rewards;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Windows;
@@ -43,19 +46,6 @@ namespace BowieD.Unturned.NPCMaker
                 obj = Clipboard.GetData(format);
                 return obj != null;
             }
-            else
-            {
-                obj = default;
-                return false;
-            }
-        }
-        public static bool TryGetObject<T>(string format, out T obj)
-        {
-            if (TryGetObject(format, out object objObj))
-            {
-                obj = (T)objObj;
-                return true;
-            }
             else if (Clipboard.ContainsText())
             {
                 try
@@ -71,8 +61,8 @@ namespace BowieD.Unturned.NPCMaker
                     using (StringReader sr = new StringReader(data))
                     using (XmlReader reader = XmlReader.Create(sr, settings, context))
                     {
-                        XmlSerializer serializer = CreateDeserializer<T>();
-                        obj = (T)serializer.Deserialize(reader);
+                        XmlSerializer serializer = CreateDeserializer(GetTypeFromFormat(format));
+                        obj = serializer.Deserialize(reader);
                         return true;
                     }
                 }
@@ -82,9 +72,11 @@ namespace BowieD.Unturned.NPCMaker
                     return false;
                 }
             }
-
-            obj = default;
-            return false;
+            else
+            {
+                obj = default;
+                return false;
+            }
         }
         public static bool TryGetObject(ReturnType returnType, out object obj)
         {
@@ -105,11 +97,21 @@ namespace BowieD.Unturned.NPCMaker
                 default: return null;
             }
         }
-
-        private static XmlSerializer CreateDeserializer<T>()
+        public static Type GetTypeFromFormat(string format)
         {
-            return CreateDeserializer(typeof(T));
+            switch (format)
+            {
+                case CharacterFormat: return typeof(NPCCharacter);
+                case ConditionFormat: return typeof(Condition);
+                case DialogueFormat: return typeof(NPCDialogue);
+                case QuestFormat: return typeof(NPCQuest);
+                case RewardFormat: return typeof(Reward);
+                case VendorFormat: return typeof(NPCVendor);
+                case VendorItemFormat: return typeof(VendorItem);
+                default: return null;
+            }
         }
+
         private static XmlSerializer CreateDeserializer(Type type)
         {
             return new XmlSerializer(type);
