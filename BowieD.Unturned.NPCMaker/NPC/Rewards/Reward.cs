@@ -27,6 +27,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     [XmlInclude(typeof(RewardFlagMath))]
     [XmlInclude(typeof(RewardCurrency))]
     [XmlInclude(typeof(RewardHint))]
+    [System.Serializable]
     public abstract class Reward : IHasUIText
     {
         [RewardSkipField]

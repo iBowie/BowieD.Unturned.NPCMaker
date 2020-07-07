@@ -20,6 +20,11 @@
         </Grid.RenderTransform>
         <Label Name="mainLabel" Margin="0,0,4,0" HorizontalAlignment="Left" MinWidth="100" Width="Auto" VerticalAlignment="Center" Height="32" VerticalContentAlignment="Center"/>
         <StackPanel Grid.Column="1" Name="buttons" Orientation="Horizontal" HorizontalAlignment="Right" Margin="4,0,0,0">
+            <Button Click="CopyButton_Click" Name="copyButton" Width="31" HorizontalAlignment="Left" VerticalAlignment="Center" Height="31" Margin="0,4,4,4">
+                <Button.Content>
+                    <iconPacks:PackIconMaterial Kind="ContentCopy" Foreground="{DynamicResource AccentColor}"/>
+                </Button.Content>
+            </Button>
             <Button Click="EditButton_Click" Name="editButton" Width="31" HorizontalAlignment="Left" VerticalAlignment="Center" Height="31" Margin="0,4,4,4">
                 <Button.Content>
                     <iconPacks:PackIconMaterial Kind="Pencil" Foreground="{DynamicResource AccentColor}"/>

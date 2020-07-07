@@ -140,6 +140,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClipboardManager.cs" />
     <Compile Include="Coloring\ColorConverter.cs" />
     <Compile Include="Commands\ColorCommand.cs" />
     <Compile Include="Commands\ConfigCommand.cs" />

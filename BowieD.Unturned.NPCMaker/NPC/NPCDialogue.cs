@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
+    [System.Serializable]
     public class NPCDialogue : IHasUIText
     {
         public NPCDialogue()

@@ -2,6 +2,7 @@
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
+    [System.Serializable]
     public sealed class RewardTeleport : Reward
     {
         public override RewardType Type => RewardType.Teleport;

@@ -2,6 +2,7 @@
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
+    [System.Serializable]
     public class NPCClothing
     {
         [XmlElement("hat")]

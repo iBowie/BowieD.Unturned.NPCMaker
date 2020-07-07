@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
+    [System.Serializable]
     public sealed class RewardItem : Reward
     {
         public override RewardType Type => RewardType.Item;

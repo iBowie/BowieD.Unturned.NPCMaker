@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
+    [System.Serializable]
     public sealed class ConditionQuest : Condition
     {
         public override Condition_Type Type => Condition_Type.Quest;

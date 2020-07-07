@@ -4,6 +4,7 @@ using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
+    [System.Serializable]
     public sealed class ConditionPlayerLifeWater : Condition
     {
         public override Condition_Type Type => Condition_Type.Player_Life_Water;

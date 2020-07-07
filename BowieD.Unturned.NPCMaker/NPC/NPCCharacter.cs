@@ -6,6 +6,7 @@ using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
+    [System.Serializable]
     public class NPCCharacter : IHasUIText
     {
         public NPCCharacter()

@@ -4,6 +4,7 @@ using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
+    [System.Serializable]
     public sealed class RewardFlagShort : Reward
     {
         public override RewardType Type => RewardType.Flag_Short;

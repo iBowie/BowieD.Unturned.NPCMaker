@@ -33,6 +33,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [XmlInclude(typeof(ConditionHoliday))]
     [XmlInclude(typeof(ConditionKillsTree))]
     [XmlInclude(typeof(ConditionCurrency))]
+    [Serializable]
     public abstract class Condition : IHasUIText
     {
         [ConditionSkipField]

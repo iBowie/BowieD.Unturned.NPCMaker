@@ -4,6 +4,7 @@ using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
+    [System.Serializable]
     public sealed class ConditionFlagShort : Condition
     {
         public ushort ID { get; set; }

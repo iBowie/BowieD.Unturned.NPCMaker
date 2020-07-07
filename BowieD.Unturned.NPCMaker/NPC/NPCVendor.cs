@@ -6,6 +6,7 @@ using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
+    [System.Serializable]
     public class NPCVendor : IHasUIText
     {
         public NPCVendor()
@@ -34,7 +35,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
         public string UIText => $"[{id}] {vendorTitle}";
     }
-
+    [Serializable]
     public class VendorItem : IHasUIText
     {
         public VendorItem()

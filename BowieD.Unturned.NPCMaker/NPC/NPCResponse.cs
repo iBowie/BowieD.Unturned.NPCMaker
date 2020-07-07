@@ -5,6 +5,7 @@ using Reward = BowieD.Unturned.NPCMaker.NPC.Rewards.Reward;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
+    [System.Serializable]
     public class NPCResponse
     {
         public NPCResponse()

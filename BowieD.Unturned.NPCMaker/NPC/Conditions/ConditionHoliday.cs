@@ -2,6 +2,7 @@
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
+    [System.Serializable]
     public sealed class ConditionHoliday : Condition
     {
         public ENPCHoliday Value { get; set; }
