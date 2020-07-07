@@ -210,6 +210,15 @@
 				"to": "2020-11-01T00:00:01Z",
 				"annual": true
 			}
+		},
+		{
+			"notification": "Happy Birthday, Unturned!",
+			"range":
+			{
+				"from": "2017-07-07T00:00:01Z",
+				"to": "2017-07-07T23:59:59Z",
+				"annual": true
+			}
 		}
 	]
 }
