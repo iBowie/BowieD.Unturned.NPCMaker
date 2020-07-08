@@ -111,7 +111,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     UpdateResponses();
                     UpdateMessages();
-                    App.Logger.Log($"Caused dialogue update for {_dialogue.ID}", Logging.ELogLevel.DEBUG);
                 }
                 return _dialogue;
             }
@@ -121,7 +120,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     UpdateResponses();
                     UpdateMessages();
-                    App.Logger.Log($"Caused dialogue update for {_dialogue.ID}", Logging.ELogLevel.DEBUG);
                 }
 
                 _dialogue = value;
