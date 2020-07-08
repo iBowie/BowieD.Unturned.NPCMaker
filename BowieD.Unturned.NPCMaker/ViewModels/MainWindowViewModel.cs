@@ -108,14 +108,14 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public void ResetAll()
         {
             CharacterTabViewModel.Reset();
-            DialogueTabViewModel.ResetCommand.Execute(null);
+            DialogueTabViewModel.Reset();
             VendorTabViewModel.ResetCommand.Execute(null);
             QuestTabViewModel.ResetCommand.Execute(null);
         }
         public void SaveAll()
         {
             CharacterTabViewModel.Save();
-            DialogueTabViewModel.SaveCommand.Execute(null);
+            DialogueTabViewModel.Save();
             VendorTabViewModel.SaveCommand.Execute(null);
             QuestTabViewModel.SaveCommand.Execute(null);
 
@@ -130,6 +130,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public void UpdateAllTabs()
         {
             CharacterTabViewModel.UpdateTabs();
+            DialogueTabViewModel.UpdateTabs();
         }
         internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -184,8 +185,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     SmallImageKey = "icon_chat_outlined",
                                     SmallImageText = $"Dialogues: {MainWindow.CurrentProject.data.dialogues.Count}"
                                 },
-                                Details = $"Messages: {DialogueTabViewModel.Dialogue.messages.Count}",
-                                State = $"Responses: {DialogueTabViewModel.Dialogue.responses.Count}"
+                                Details = $"Messages: {DialogueTabViewModel.Dialogue.Messages.Count}",
+                                State = $"Responses: {DialogueTabViewModel.Dialogue.Responses.Count}"
                             });
                         }
                         break;

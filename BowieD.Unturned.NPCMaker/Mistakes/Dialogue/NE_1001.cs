@@ -21,9 +21,9 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         {
             foreach (NPC.NPCDialogue _dial in MainWindow.CurrentProject.data.dialogues)
             {
-                if (_dial.id == 0)
+                if (_dial.ID == 0)
                 {
-                    yield return new NE_1001(_dial.id);
+                    yield return new NE_1001(_dial.ID);
                 }
             }
         }

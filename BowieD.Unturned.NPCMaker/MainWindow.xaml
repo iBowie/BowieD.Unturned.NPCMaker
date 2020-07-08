@@ -107,9 +107,18 @@
                             <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
                                 <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="characterTabSelect"/>
                             </ScrollViewer>
-                            <Button Name="characterTabButtonAdd" Grid.Column="1" Margin="10" Content="+"/>
+                            <Button Style="{DynamicResource FlatButtonStyle}" Name="characterTabButtonAdd" Grid.Column="1" Margin="10">
+                                <Button.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Plus" Foreground="{DynamicResource AccentColor}"/>
+                                </Button.Content>
+                            </Button>
                         </Grid>
-                        <Grid Grid.Row="1">
+                        <Grid Grid.Row="1" Name="characterTabGridNoSelection" Visibility="Collapsed">
+                            <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock TextAlignment="Center" FontSize="36" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Character_NoSelection}" TextWrapping="Wrap"/>
+                            </Label>
+                        </Grid>
+                        <Grid Grid.Row="1" Name="characterTabGrid" Visibility="Visible">
                             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Width="300" Margin="10">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -611,80 +620,105 @@
                 </TabItem>
                 <TabItem DataContext="{Binding DialogueTabViewModel}" Name="dialogueTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue}">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="33*"/>
-                            <ColumnDefinition MinWidth="381" Width="33*"/>
-                            <ColumnDefinition MinWidth="128" Width="33*"/>
-                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="80"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="dialogue_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
-                        <Button Command="{Binding SetAsStartCommand}" Name="setAsStartButton" Grid.Column="1" Margin="10,10,10,0" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_SetAsStart}">
-                            <Button.ToolTip>
-                                <StackPanel>
-                                    <Image Source="Resources/Help/img_help_startDialogue.png"/>
-                                </StackPanel>
-                            </Button.ToolTip>
-                        </Button>
-                        <Button Command="{Binding PreviewCommand}" Name="previewDialogueButton" Grid.Column="1" Margin="10,10,10,10" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Preview}"/>
-                        <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="dialogueInputIdControl" Width="62" Height="26" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
-                        <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
-                            <TextBlock TextAlignment="Center" Text="{xaml:Localize Key=DIALOGUE_ID}" VerticalAlignment="Center"/>
-                        </Border>
-                        <GroupBox Grid.Row="1" Header="{xaml:Localize Key=DIALOGUE_Pages}" Margin="10,10,5,10">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <ScrollViewer Margin="10">
-                                    <StackPanel Name="messagePagesGrid" VerticalAlignment="Top"/>
-                                </ScrollViewer>
-                                <Button Grid.Row="1" Command="{Binding AddMessageCommand}" Name="dialogueAddMessageButton" Margin="10" Content="{xaml:Localize Key=DIALOGUE_Message_Add}">
-                                    <Button.ToolTip>
-                                        <StackPanel>
-                                            <Image Source="Resources/Help/img_help_dialogueMessage.png"/>
-                                        </StackPanel>
-                                    </Button.ToolTip>
-                                </Button>
-                            </Grid>
-                        </GroupBox>
-                        <GroupBox Grid.Column="1" Grid.Row="1" Header="{xaml:Localize Key=DIALOGUE_Replies}" Margin="5,10,5,10" MinWidth="361">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <ScrollViewer Margin="10">
-                                    <StackPanel x:Name="dialoguePlayerRepliesGrid"/>
-                                </ScrollViewer>
-                                <Button Grid.Row="1" Command="{Binding AddReplyCommand}" Name="dialogueAddReplyButton" Margin="10" Content="{xaml:Localize Key=DIALOGUE_Reply_Add}">
-                                    <Button.ToolTip>
-                                        <StackPanel>
-                                            <Image Source="Resources/Help/img_help_dialogueReply.png"/>
-                                        </StackPanel>
-                                    </Button.ToolTip>
-                                </Button>
-                            </Grid>
-                        </GroupBox>
-                        <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="dialogueSaveButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="ContentSave" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <Button Command="{Binding ResetCommand}" Grid.Column="2" Name="dialogueResetButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="Delete" Width="16" Height="16"  Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <Button Command="{Binding OpenCommand}" Grid.Column="2" Name="dialogueOpenButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="FolderOutline" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <TextBlock Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,0,10" Text="{xaml:Localize Key=DIALOGUE_Tips}" TextWrapping="Wrap" Width="254"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="dialogueTabSelect"/>
+                            </ScrollViewer>
+                            <Button Style="{DynamicResource FlatButtonStyle}" Name="dialogueTabButtonAdd" Grid.Column="1" Margin="10">
+                                <Button.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Plus" Foreground="{DynamicResource AccentColor}"/>
+                                </Button.Content>
+                            </Button>
+                        </Grid>
+                        <Grid Grid.Row="1" Name="dialogueTabGridNoSelection" Visibility="Collapsed">
+                            <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock TextAlignment="Center" FontSize="36" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_NoSelection}" TextWrapping="Wrap"/>
+                            </Label>
+                        </Grid>
+                        <Grid Grid.Row="1" Name="dialogueTabGrid" Visibility="Visible">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="33*"/>
+                                <ColumnDefinition MinWidth="381" Width="33*"/>
+                                <ColumnDefinition MinWidth="128" Width="33*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="80"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="dialogue_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
+                            <Button Command="{Binding SetAsStartCommand}" Name="setAsStartButton" Grid.Column="1" Margin="10,10,10,0" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_SetAsStart}">
+                                <Button.ToolTip>
+                                    <StackPanel>
+                                        <Image Source="Resources/Help/img_help_startDialogue.png"/>
+                                    </StackPanel>
+                                </Button.ToolTip>
+                            </Button>
+                            <Button Command="{Binding PreviewCommand}" Name="previewDialogueButton" Grid.Column="1" Margin="10,10,10,10" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Preview}"/>
+                            <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="dialogueInputIdControl" Width="62" Height="26" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
+                            <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
+                                <TextBlock TextAlignment="Center" Text="{xaml:Localize Key=DIALOGUE_ID}" VerticalAlignment="Center"/>
+                            </Border>
+                            <GroupBox Grid.Row="1" Header="{xaml:Localize Key=DIALOGUE_Pages}" Margin="10,10,5,10">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <ScrollViewer Margin="10">
+                                        <StackPanel Name="messagePagesGrid" VerticalAlignment="Top"/>
+                                    </ScrollViewer>
+                                    <Button Grid.Row="1" Command="{Binding AddMessageCommand}" Name="dialogueAddMessageButton" Margin="10" Content="{xaml:Localize Key=DIALOGUE_Message_Add}">
+                                        <Button.ToolTip>
+                                            <StackPanel>
+                                                <Image Source="Resources/Help/img_help_dialogueMessage.png"/>
+                                            </StackPanel>
+                                        </Button.ToolTip>
+                                    </Button>
+                                </Grid>
+                            </GroupBox>
+                            <GroupBox Grid.Column="1" Grid.Row="1" Header="{xaml:Localize Key=DIALOGUE_Replies}" Margin="5,10,5,10" MinWidth="361">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <ScrollViewer Margin="10">
+                                        <StackPanel x:Name="dialoguePlayerRepliesGrid"/>
+                                    </ScrollViewer>
+                                    <Button Grid.Row="1" Command="{Binding AddReplyCommand}" Name="dialogueAddReplyButton" Margin="10" Content="{xaml:Localize Key=DIALOGUE_Reply_Add}">
+                                        <Button.ToolTip>
+                                            <StackPanel>
+                                                <Image Source="Resources/Help/img_help_dialogueReply.png"/>
+                                            </StackPanel>
+                                        </Button.ToolTip>
+                                    </Button>
+                                </Grid>
+                            </GroupBox>
+                            <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="dialogueSaveButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
+                                <Button.Content>
+                                    <iconPacks:PackIconMaterial Kind="ContentSave" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Command="{Binding ResetCommand}" Grid.Column="2" Name="dialogueResetButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
+                                <Button.Content>
+                                    <iconPacks:PackIconMaterial Kind="Delete" Width="16" Height="16"  Foreground="{DynamicResource AccentColor}"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Command="{Binding OpenCommand}" Grid.Column="2" Name="dialogueOpenButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
+                                <Button.Content>
+                                    <iconPacks:PackIconMaterial Kind="FolderOutline" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
+                                </Button.Content>
+                            </Button>
+                            <TextBlock Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,0,10" Text="{xaml:Localize Key=DIALOGUE_Tips}" TextWrapping="Wrap" Width="254"/>
+                        </Grid>
                     </Grid>
                 </TabItem>
                 <TabItem DataContext="{Binding VendorTabViewModel}" Name="vendorTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor}">
@@ -856,6 +890,19 @@
     </Grid>
     <mah:MetroWindow.Resources>
         <ResourceDictionary>
+            <ControlTemplate x:Key="FlatButtonTemplate" TargetType="Button">
+                <Border Name="border" Opacity="0.5">
+                    <ContentPresenter Margin="2" Content="{TemplateBinding Content}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="border" Property="Opacity" Value="1"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+            <Style x:Key="FlatButtonStyle" TargetType="Button">
+                <Setter Property="Template" Value="{DynamicResource FlatButtonTemplate}"/>
+            </Style>
             <ControlTemplate x:Key="FancyTabItemCloseButtonTemplate" TargetType="Button">
                 <Border Name="border" Opacity="0.5" Background="{DynamicResource BackgroundColor}">
                     <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
@@ -890,8 +937,13 @@
                     </Grid>
                 </Grid>
                 <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="rect" Property="Fill" Value="{DynamicResource AccentColor}"/>
+                        <Setter TargetName="rect" Property="Opacity" Value="0.5"/>
+                    </Trigger>
                     <Trigger Property="IsSelected" Value="True">
                         <Setter TargetName="rect" Property="Fill" Value="{DynamicResource AccentColor}"/>
+                        <Setter TargetName="rect" Property="Opacity" Value="1"/>
                     </Trigger>
                 </ControlTemplate.Triggers>
             </ControlTemplate>

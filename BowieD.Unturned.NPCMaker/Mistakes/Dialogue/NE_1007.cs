@@ -21,13 +21,13 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         {
             foreach (NPC.NPCDialogue dial in MainWindow.CurrentProject.data.dialogues)
             {
-                for (int i = 0; i < dial.responses.Count; i++)
+                for (int i = 0; i < dial.Responses.Count; i++)
                 {
-                    NPC.NPCResponse response = dial.responses[i];
+                    NPC.NPCResponse response = dial.Responses[i];
 
-                    if (response.openDialogueId == dial.id)
+                    if (response.openDialogueId == dial.ID)
                     {
-                        yield return new NE_1007(i + 1, dial.id);
+                        yield return new NE_1007(i + 1, dial.ID);
                     }
                 }
             }

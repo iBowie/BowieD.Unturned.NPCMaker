@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker;
-using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
@@ -50,6 +49,19 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 if (selectedTabChar != null)
                     Character = selectedTabChar;
             }
+
+            if (tab.SelectedItem is null)
+            {
+                MainWindow.Instance.characterTabGrid.IsEnabled = false;
+                MainWindow.Instance.characterTabGrid.Visibility = Visibility.Collapsed;
+                MainWindow.Instance.characterTabGridNoSelection.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MainWindow.Instance.characterTabGrid.IsEnabled = true;
+                MainWindow.Instance.characterTabGrid.Visibility = Visibility.Visible;
+                MainWindow.Instance.characterTabGridNoSelection.Visibility = Visibility.Collapsed;
+            }
         }
 
         public void Save() { }
@@ -83,6 +95,19 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }
             if (selected != -1)
                 tab.SelectedIndex = selected;
+
+            if (tab.SelectedItem is null)
+            {
+                MainWindow.Instance.characterTabGrid.IsEnabled = false;
+                MainWindow.Instance.characterTabGrid.Visibility = Visibility.Collapsed;
+                MainWindow.Instance.characterTabGridNoSelection.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MainWindow.Instance.characterTabGrid.IsEnabled = true;
+                MainWindow.Instance.characterTabGrid.Visibility = Visibility.Visible;
+                MainWindow.Instance.characterTabGridNoSelection.Visibility = Visibility.Collapsed;
+            }
         }
 
         public NPCCharacter Character

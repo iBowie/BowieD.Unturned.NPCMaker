@@ -18,14 +18,14 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         {
             foreach (NPC.NPCDialogue dial in MainWindow.CurrentProject.data.dialogues)
             {
-                for (int mId = 0; mId < dial.messages.Count; mId++)
+                for (int mId = 0; mId < dial.Messages.Count; mId++)
                 {
-                    for (int pId = 0; pId < dial.messages[mId].pages.Count; pId++)
+                    for (int pId = 0; pId < dial.Messages[mId].pages.Count; pId++)
                     {
-                        string page = dial.messages[mId].pages[pId];
+                        string page = dial.Messages[mId].pages[pId];
                         if (page == null || page.Length == 0)
                         {
-                            yield return new NE_1003(pId + 1, mId + 1, dial.id);
+                            yield return new NE_1003(pId + 1, mId + 1, dial.ID);
                         }
                     }
                 }

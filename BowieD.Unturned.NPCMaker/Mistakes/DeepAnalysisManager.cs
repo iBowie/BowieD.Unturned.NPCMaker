@@ -51,11 +51,11 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             MistakesManager.FindMistakes();
             foreach (NPCDialogue dialogue in MainWindow.CurrentProject.data.dialogues)
             {
-                if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Dialogue && d.Id == dialogue.id))
+                if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Dialogue && d.Id == dialogue.ID))
                 {
                     MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                     {
-                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_dialogue", dialogue.id),
+                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_dialogue", dialogue.ID),
                         Importance = IMPORTANCE.WARNING
                     });
                 }

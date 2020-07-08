@@ -19,8 +19,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public ushort prev;
 
         public List<string> pages;
-        [XmlIgnore]
-        public int PagesAmount => pages == null ? 0 : pages.Count;
 
         public Reward[] rewards;
 

@@ -72,14 +72,14 @@ namespace BowieD.Unturned.NPCMaker.Parsing
             NPCDialogue d = new NPCDialogue()
             {
                 guid = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
-                id = asset.ReadUInt16("ID")
+                ID = asset.ReadUInt16("ID")
             };
-            d.messages = new List<NPCMessage>(asset.ReadByte("Messages"));
-            for (byte mId = 0; mId < d.messages.Capacity; mId++)
+            d.Messages = new List<NPCMessage>(asset.ReadByte("Messages"));
+            for (byte mId = 0; mId < d.Messages.Capacity; mId++)
             {
-                d.messages.Add(new NPCMessage());
-                d.messages[mId].pages = new List<string>(asset.ReadByte($"Message_{mId}_Pages"));
-                for (byte pId = 0; pId < d.messages[mId].pages.Capacity; pId++)
+                d.Messages.Add(new NPCMessage());
+                d.Messages[mId].pages = new List<string>(asset.ReadByte($"Message_{mId}_Pages"));
+                for (byte pId = 0; pId < d.Messages[mId].pages.Capacity; pId++)
                 {
                     string page = local?.ReadString($"Message_{mId}_Page_{pId}");
                     if (page == null)
@@ -87,33 +87,33 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         App.Logger.Log($"Page {pId} in message {mId} not found.");
                     }
 
-                    d.messages[mId].pages.Add(page);
+                    d.Messages[mId].pages.Add(page);
                 }
-                d.messages[mId].conditions = ParseConditions($"Message_{mId}_");
-                d.messages[mId].rewards = ParseRewards($"Message_{mId}_");
-                d.messages[mId].prev = asset.ReadUInt16($"Message_{mId}_Prev");
+                d.Messages[mId].conditions = ParseConditions($"Message_{mId}_");
+                d.Messages[mId].rewards = ParseRewards($"Message_{mId}_");
+                d.Messages[mId].prev = asset.ReadUInt16($"Message_{mId}_Prev");
             }
-            d.responses = new List<NPCResponse>(asset.ReadByte("Responses"));
-            for (byte rId = 0; rId < d.responses.Capacity; rId++)
+            d.Responses = new List<NPCResponse>(asset.ReadByte("Responses"));
+            for (byte rId = 0; rId < d.Responses.Capacity; rId++)
             {
-                d.responses.Add(new NPCResponse());
+                d.Responses.Add(new NPCResponse());
                 byte b = asset.ReadByte($"Response_{rId}_Messages");
-                d.responses[rId].visibleIn = new int[b];
+                d.Responses[rId].visibleIn = new int[b];
                 for (byte i = 0; i < b; i++)
                 {
-                    d.responses[rId].visibleIn[i] = asset.Has($"Response_{rId}_Message_{i}") ? 1 : 0;
+                    d.Responses[rId].visibleIn[i] = asset.Has($"Response_{rId}_Message_{i}") ? 1 : 0;
                 }
-                d.responses[rId].mainText = local?.ReadString($"Response_{rId}");
-                if (d.responses[rId].mainText == null)
+                d.Responses[rId].mainText = local?.ReadString($"Response_{rId}");
+                if (d.Responses[rId].mainText == null)
                 {
                     break;
                 }
 
-                d.responses[rId].openDialogueId = asset.ReadUInt16($"Response_{rId}_Dialogue");
-                d.responses[rId].openQuestId = asset.ReadUInt16($"Response_{rId}_Quest");
-                d.responses[rId].openVendorId = asset.ReadUInt16($"Response_{rId}_Vendor");
-                d.responses[rId].conditions = ParseConditions($"Response_{rId}_");
-                d.responses[rId].rewards = ParseRewards($"Response_{rId}_");
+                d.Responses[rId].openDialogueId = asset.ReadUInt16($"Response_{rId}_Dialogue");
+                d.Responses[rId].openQuestId = asset.ReadUInt16($"Response_{rId}_Quest");
+                d.Responses[rId].openVendorId = asset.ReadUInt16($"Response_{rId}_Vendor");
+                d.Responses[rId].conditions = ParseConditions($"Response_{rId}_");
+                d.Responses[rId].rewards = ParseRewards($"Response_{rId}_");
             }
             return d;
         }

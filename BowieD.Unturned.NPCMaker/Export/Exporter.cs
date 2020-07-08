@@ -275,9 +275,9 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Dialogues\{dialogue.guid}_{dialogue.id}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Dialogues\{dialogue.guid}_{dialogue.id}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Dialogues\{dialogue.guid}_{dialogue.id}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(dir + $@"Dialogues\{dialogue.guid}_{dialogue.ID}");
+                    using (StreamWriter asset = new StreamWriter(dir + $@"Dialogues\{dialogue.guid}_{dialogue.ID}\Asset.dat", false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(dir + $@"Dialogues\{dialogue.guid}_{dialogue.ID}\English.dat", false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -287,27 +287,27 @@ namespace BowieD.Unturned.NPCMaker.Export
                         }
 
                         asset.WriteLine($"Type Dialogue");
-                        asset.WriteLine($"ID {dialogue.id}");
+                        asset.WriteLine($"ID {dialogue.ID}");
 
-                        if (dialogue.MessagesAmount > 0)
+                        if (dialogue.Messages.Count > 0)
                         {
-                            asset.WriteLine($"Messages {dialogue.MessagesAmount}");
-                            for (int k = 0; k < dialogue.MessagesAmount; k++)
+                            asset.WriteLine($"Messages {dialogue.Messages.Count}");
+                            for (int k = 0; k < dialogue.Messages.Count; k++)
                             {
-                                NPCMessage message = dialogue.messages[k];
-                                if (message.PagesAmount > 0)
+                                NPCMessage message = dialogue.Messages[k];
+                                if (message.pages.Count > 0)
                                 {
-                                    asset.WriteLine($"Message_{k}_Pages {message.PagesAmount}");
+                                    asset.WriteLine($"Message_{k}_Pages {message.pages.Count}");
                                 }
-                                List<NPCResponse> visibleResponses = dialogue.responses.Where(d => d.VisibleInAll || d.visibleIn.Length <= k || d.visibleIn[k] == 1).ToList();
-                                if (visibleResponses.Count() > 0 && visibleResponses.Count() < dialogue.responses.Count())
+                                List<NPCResponse> visibleResponses = dialogue.Responses.Where(d => d.VisibleInAll || d.visibleIn.Length <= k || d.visibleIn[k] == 1).ToList();
+                                if (visibleResponses.Count() > 0 && visibleResponses.Count() < dialogue.Responses.Count())
                                 {
                                     asset.WriteLine($"Message_{k}_Responses {visibleResponses.Count()}");
                                     int visResCnt = visibleResponses.Count();
                                     for (int c = 0; c < visResCnt; c++)
                                     {
                                         NPCResponse response = visibleResponses[c];
-                                        int id = dialogue.responses.IndexOf(response);
+                                        int id = dialogue.Responses.IndexOf(response);
                                         asset.WriteLine($"Message_{k}_Response_{c} {id}");
                                     }
                                 }
@@ -341,21 +341,21 @@ namespace BowieD.Unturned.NPCMaker.Export
                                     asset.WriteLine($"Message_{k}_Prev {message.prev}");
                             }
                         }
-                        if (dialogue.ResponsesAmount > 0)
+                        if (dialogue.Responses.Count > 0)
                         {
-                            asset.WriteLine($"Responses {dialogue.ResponsesAmount}");
-                            for (int k = 0; k < dialogue.ResponsesAmount; k++)
+                            asset.WriteLine($"Responses {dialogue.Responses.Count}");
+                            for (int k = 0; k < dialogue.Responses.Count; k++)
                             {
-                                NPCResponse response = dialogue.responses[k];
+                                NPCResponse response = dialogue.Responses[k];
                                 if (!response.VisibleInAll)
                                 {
                                     asset.WriteLine($"Response_{k}_Messages {response.visibleIn.Count(d => d == 1)}");
-                                    for (int c = 0, ind = 0; c < dialogue.MessagesAmount; c++)
+                                    for (int c = 0, ind = 0; c < dialogue.Messages.Count; c++)
                                     {
-                                        NPCMessage currentMessage = dialogue.messages[c];
+                                        NPCMessage currentMessage = dialogue.Messages[c];
                                         if (response.visibleIn.Length <= c || response.visibleIn[c] == 1)
                                         {
-                                            asset.WriteLine($"Response_{k}_Message_{ind++} {dialogue.messages.IndexOf(currentMessage)}");
+                                            asset.WriteLine($"Response_{k}_Message_{ind++} {dialogue.Messages.IndexOf(currentMessage)}");
                                         }
                                     }
                                 }
@@ -404,23 +404,23 @@ namespace BowieD.Unturned.NPCMaker.Export
                                 }
                             }
                         }
-                        for (int k = 0; k < dialogue.MessagesAmount; k++)
+                        for (int k = 0; k < dialogue.Messages.Count; k++)
                         {
-                            for (int c = 0; c < dialogue.messages[k].PagesAmount; c++)
+                            for (int c = 0; c < dialogue.Messages[k].pages.Count; c++)
                             {
-                                local.WriteLine($"Message_{k}_Page_{c} {dialogue.messages[k].pages[c]}");
+                                local.WriteLine($"Message_{k}_Page_{c} {dialogue.Messages[k].pages[c]}");
                             }
                         }
-                        for (int k = 0; k < dialogue.ResponsesAmount; k++)
+                        for (int k = 0; k < dialogue.Responses.Count; k++)
                         {
-                            local.WriteLine($"Response_{k} {dialogue.responses[k].mainText}");
+                            local.WriteLine($"Response_{k} {dialogue.Responses[k].mainText}");
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    App.Logger.LogException($"Can't export dialogue {dialogue.id}", ex: ex);
-                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Dialogue_Error", dialogue.id));
+                    App.Logger.LogException($"Can't export dialogue {dialogue.ID}", ex: ex);
+                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Dialogue_Error", dialogue.ID));
                 }
             }
         }
