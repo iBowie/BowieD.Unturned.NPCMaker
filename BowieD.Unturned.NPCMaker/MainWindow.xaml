@@ -709,126 +709,146 @@
                 <TabItem DataContext="{Binding VendorTabViewModel}" Name="vendorTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor}">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="80"/>
-                            <RowDefinition />
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="33*"/>
-                            <ColumnDefinition MinWidth="296" Width="33*"/>
-                            <ColumnDefinition Width="33*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="vendor_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
-                        <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="vendorIdTxtBox" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
-                        <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
-                            <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_ID}" VerticalAlignment="Center"/>
-                        </Border>
-                        <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Name="vendorTitleTxtBox" Height="26" VerticalAlignment="Top" Margin="10,10,146,0"/>
-                        <TextBlock  Grid.Column="1" HorizontalAlignment="Right" Margin="0,14,10,0" TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_Title}" VerticalAlignment="Top" Width="128" Height="16"/>
-                        <TextBox  Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Name="vendorDescTxtBox" Height="26" VerticalAlignment="Bottom" Margin="10,0,146,10"/>
-                        <TextBlock  Grid.Column="1" Width="128" HorizontalAlignment="Right" Margin="0,0,10,14" TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_Description}" VerticalAlignment="Bottom" Height="16"/>
-                        <StackPanel Grid.Row="1" Grid.Column="2">
-                            <CheckBox IsChecked="{Binding DisableSorting, UpdateSourceTrigger=PropertyChanged}" Name="vendorDisableSortingBox" Content="{xaml:Localize Key=VENDOR_DisableSorting}" Margin="10" />
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <TextBox VerticalAlignment="Center" Text="{Binding Currency, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,10,0" />
-                                <TextBlock TextWrapping="Wrap" Grid.Column="1" Text="{xaml:Localize Key=VENDOR_Currency}" Margin="10"/>
-                            </Grid>
-                            <Button Command="{Binding PreviewCommand}" Name="previewVendorButton" Margin="10" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Preview}"/>
-                        </StackPanel>
-                        <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="vendorSaveButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="ContentSave"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <Button Command="{Binding OpenCommand}" Grid.Column="2" Name="vendorOpenButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <Button Command="{Binding ResetCommand}" Grid.Column="2" Name="vendorResetButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <GroupBox Grid.Row="1" Margin="10,5,5,10" Header="{xaml:Localize Key=VENDOR_Items_Buy}">
-                            <ScrollViewer>
-                                <StackPanel Name="vendorListBuyItems">
-
-                                </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="vendorTabSelect"/>
                             </ScrollViewer>
-                        </GroupBox>
-                        <GroupBox Grid.Row="1" Grid.Column="1" Margin="5,5,5,10" Header="{xaml:Localize Key=VENDOR_Items_Sell}">
-                            <ScrollViewer>
-                                <StackPanel Name="vendorListSellItems">
+                            <Button Style="{DynamicResource FlatButtonStyle}" Name="vendorTabButtonAdd" Grid.Column="1" Margin="10">
+                                <Button.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Plus" Foreground="{DynamicResource AccentColor}"/>
+                                </Button.Content>
+                            </Button>
+                        </Grid>
+                        <Grid Grid.Row="1" Name="vendorTabGridNoSelection" Visibility="Collapsed">
+                            <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock TextAlignment="Center" FontSize="36" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_NoSelection}" TextWrapping="Wrap"/>
+                            </Label>
+                        </Grid>
+                        <Grid Grid.Row="1" Name="vendorTabGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="80"/>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="33*"/>
+                                <ColumnDefinition MinWidth="296" Width="33*"/>
+                                <ColumnDefinition Width="33*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="vendor_commentbox" Grid.Column="2" VerticalAlignment="Top" Margin="10" Height="26"/>
+                            <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="vendorIdTxtBox" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
+                            <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
+                                <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_ID}" VerticalAlignment="Center"/>
+                            </Border>
+                            <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Name="vendorTitleTxtBox" Height="26" VerticalAlignment="Top" Margin="10,10,146,0"/>
+                            <TextBlock  Grid.Column="1" HorizontalAlignment="Right" Margin="0,14,10,0" TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_Title}" VerticalAlignment="Top" Width="128" Height="16"/>
+                            <TextBox  Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Name="vendorDescTxtBox" Height="26" VerticalAlignment="Bottom" Margin="10,0,146,10"/>
+                            <TextBlock  Grid.Column="1" Width="128" HorizontalAlignment="Right" Margin="0,0,10,14" TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_Description}" VerticalAlignment="Bottom" Height="16"/>
+                            <StackPanel Grid.Row="1" Grid.Column="2">
+                                <CheckBox IsChecked="{Binding DisableSorting, UpdateSourceTrigger=PropertyChanged}" Name="vendorDisableSortingBox" Content="{xaml:Localize Key=VENDOR_DisableSorting}" Margin="10" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox VerticalAlignment="Center" Text="{Binding Currency, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,10,0" />
+                                    <TextBlock TextWrapping="Wrap" Grid.Column="1" Text="{xaml:Localize Key=VENDOR_Currency}" Margin="10"/>
+                                </Grid>
+                                <Button Command="{Binding PreviewCommand}" Name="previewVendorButton" Margin="10" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Preview}"/>
+                            </StackPanel>
+                            <GroupBox Grid.Row="1" Margin="10,5,5,10" Header="{xaml:Localize Key=VENDOR_Items_Buy}">
+                                <ScrollViewer>
+                                    <StackPanel Name="vendorListBuyItems">
 
-                                </StackPanel>
-                            </ScrollViewer>
-                        </GroupBox>
-                        <Button Command="{Binding AddItemCommand}" Name="vendorAddItemButton" Content="{xaml:Localize Key=VENDOR_Item_Add}" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="25"/>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </GroupBox>
+                            <GroupBox Grid.Row="1" Grid.Column="1" Margin="5,5,5,10" Header="{xaml:Localize Key=VENDOR_Items_Sell}">
+                                <ScrollViewer>
+                                    <StackPanel Name="vendorListSellItems">
+
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </GroupBox>
+                            <Button Command="{Binding AddItemCommand}" Name="vendorAddItemButton" Content="{xaml:Localize Key=VENDOR_Item_Add}" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="25"/>
+                        </Grid>
                     </Grid>
                 </TabItem>
                 <TabItem DataContext="{Binding QuestTabViewModel}" Name="questTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Quest}">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="80"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="33*"/>
-                            <ColumnDefinition Width="33*"/>
-                            <ColumnDefinition Width="33*"/>
-                        </Grid.ColumnDefinitions>
-                        <Button Grid.Column="1" Command="{Binding PreviewCommand}" Name="previewQuestButton" Margin="10" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_Preview}"/>
-                        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="quest_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
-                        <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="questIdBox" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
-                        <Border VerticalAlignment="Top" HorizontalAlignment="Left" Margin="77,10,0,0" Height="26" Grid.ColumnSpan="2">
-                            <TextBlock Text="{xaml:Localize Key=QUEST_ID}" VerticalAlignment="Center"/>
-                        </Border>
-                        <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Name="questTitleBox" Height="26" VerticalAlignment="Top" Margin="10,38,10,0"/>
-                        <TextBlock Grid.Row="1" Text="{xaml:Localize Key=QUEST_Title}" TextAlignment="Center" Height="23" VerticalAlignment="Top" Margin="10,10,10,0"/>
-                        <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" TextWrapping="Wrap" Name="questDescBox" Margin="10,94,10,10"/>
-                        <TextBlock Grid.Row="1" TextAlignment="Center" Text="{xaml:Localize Key=QUEST_Description}" Height="23" VerticalAlignment="Top" Margin="10,66,10,0"/>
-                        <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="questSaveButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="ContentSave"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <Button Command="{Binding OpenCommand}" Grid.Column="2" Name="questOpenButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <Button Command="{Binding ResetCommand}" Grid.Column="2" Name="questResetButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <Grid Grid.Column="1" Grid.Row="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <GroupBox Header="{xaml:Localize Key=QUEST_Conditions}" Margin="10">
-                                <ScrollViewer>
-                                    <StackPanel Name="listQuestConditions" />
-                                </ScrollViewer>
-                            </GroupBox>
-                            <Button Command="{Binding AddConditionCommand}" Grid.Column="1" Grid.Row="1" Name="questAddConditionButton" Height="23" Content="{xaml:Localize Key=QUEST_Condition_Add}" Margin="10" VerticalAlignment="Bottom"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="questTabSelect"/>
+                            </ScrollViewer>
+                            <Button Style="{DynamicResource FlatButtonStyle}" Name="questTabButtonAdd" Grid.Column="1" Margin="10">
+                                <Button.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Plus" Foreground="{DynamicResource AccentColor}"/>
+                                </Button.Content>
+                            </Button>
                         </Grid>
-                        <Grid Grid.Column="2" Grid.Row="1">
+                        <Grid Grid.Row="1" Name="questTabGridNoSelection" Visibility="Collapsed">
+                            <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock TextAlignment="Center" FontSize="36" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_NoSelection}" TextWrapping="Wrap"/>
+                            </Label>
+                        </Grid>
+                        <Grid Grid.Row="1" Name="questTabGrid">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="80"/>
                                 <RowDefinition/>
-                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <GroupBox Header="{xaml:Localize Key=QUEST_Rewards}" Margin="10">
-                                <ScrollViewer>
-                                    <StackPanel Name="listQuestRewards" />
-                                </ScrollViewer>
-                            </GroupBox>
-                            <Button Command="{Binding AddRewardCommand}" Grid.Row="1" Name="questAddRewardButton" Height="23" Content="{xaml:Localize Key=QUEST_Reward_Add}" Margin="10" VerticalAlignment="Bottom"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="33*"/>
+                                <ColumnDefinition Width="33*"/>
+                                <ColumnDefinition Width="33*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="1" Command="{Binding PreviewCommand}" Name="previewQuestButton" Margin="10" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_Preview}"/>
+                            <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="quest_commentbox" Grid.Column="2" VerticalAlignment="Top" Margin="10" Height="26"/>
+                            <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="questIdBox" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
+                            <Border VerticalAlignment="Top" HorizontalAlignment="Left" Margin="77,10,0,0" Height="26" Grid.ColumnSpan="2">
+                                <TextBlock Text="{xaml:Localize Key=QUEST_ID}" VerticalAlignment="Center"/>
+                            </Border>
+                            <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Name="questTitleBox" Height="26" VerticalAlignment="Top" Margin="10,38,10,0"/>
+                            <TextBlock Grid.Row="1" Text="{xaml:Localize Key=QUEST_Title}" TextAlignment="Center" Height="23" VerticalAlignment="Top" Margin="10,10,10,0"/>
+                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" TextWrapping="Wrap" Name="questDescBox" Margin="10,94,10,10"/>
+                            <TextBlock Grid.Row="1" TextAlignment="Center" Text="{xaml:Localize Key=QUEST_Description}" Height="23" VerticalAlignment="Top" Margin="10,66,10,0"/>
+                            <Grid Grid.Column="1" Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <GroupBox Header="{xaml:Localize Key=QUEST_Conditions}" Margin="10">
+                                    <ScrollViewer>
+                                        <StackPanel Name="listQuestConditions" />
+                                    </ScrollViewer>
+                                </GroupBox>
+                                <Button Command="{Binding AddConditionCommand}" Grid.Column="1" Grid.Row="1" Name="questAddConditionButton" Height="23" Content="{xaml:Localize Key=QUEST_Condition_Add}" Margin="10" VerticalAlignment="Bottom"/>
+                            </Grid>
+                            <Grid Grid.Column="2" Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <GroupBox Header="{xaml:Localize Key=QUEST_Rewards}" Margin="10">
+                                    <ScrollViewer>
+                                        <StackPanel Name="listQuestRewards" />
+                                    </ScrollViewer>
+                                </GroupBox>
+                                <Button Command="{Binding AddRewardCommand}" Grid.Row="1" Name="questAddRewardButton" Height="23" Content="{xaml:Localize Key=QUEST_Reward_Add}" Margin="10" VerticalAlignment="Bottom"/>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </TabItem>

@@ -9,23 +9,118 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.ViewModels
 {
-    public sealed class QuestTabViewModel : BaseViewModel
+    public sealed class QuestTabViewModel : BaseViewModel, ITabEditor, INPCTab
     {
         private NPCQuest _quest;
         public QuestTabViewModel()
         {
-            Quest = new NPCQuest();
+            MainWindow.Instance.questTabSelect.SelectionChanged += QuestTabSelect_SelectionChanged;
+            MainWindow.Instance.questTabButtonAdd.Click += QuestTabButtonAdd_Click;
+            NPCQuest empty = new NPCQuest();
+            Quest = empty;
+            UpdateTabs();
+        }
+        private void QuestTabButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NPCQuest item = new NPCQuest();
+            MainWindow.CurrentProject.data.quests.Add(item);
+            Quest = item;
+            UpdateTabs();
+        }
+        private void QuestTabSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var tab = MainWindow.Instance.questTabSelect;
+            if (tab.SelectedItem != null && tab.SelectedItem is TabItem tabItem && tabItem.DataContext != null)
+            {
+                NPCQuest selectedTabChar = tabItem.DataContext as NPCQuest;
+                if (selectedTabChar != null)
+                    Quest = selectedTabChar;
+            }
+
+            if (tab.SelectedItem is null)
+            {
+                MainWindow.Instance.questTabGrid.IsEnabled = false;
+                MainWindow.Instance.questTabGrid.Visibility = Visibility.Collapsed;
+                MainWindow.Instance.questTabGridNoSelection.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MainWindow.Instance.questTabGrid.IsEnabled = true;
+                MainWindow.Instance.questTabGrid.Visibility = Visibility.Visible;
+                MainWindow.Instance.questTabGridNoSelection.Visibility = Visibility.Collapsed;
+            }
+        }
+        public void Save() { }
+        public void Reset() { }
+        public void UpdateTabs()
+        {
+            var tab = MainWindow.Instance.questTabSelect;
+            tab.Items.Clear();
+            int selected = -1;
+            for (int i = 0; i < MainWindow.CurrentProject.data.quests.Count; i++)
+            {
+                var quest = MainWindow.CurrentProject.data.quests[i];
+                if (quest == _quest)
+                    selected = i;
+                MetroTabItem tabItem = new MetroTabItem();
+                tabItem.CloseButtonEnabled = true;
+                tabItem.CloseTabCommand = CloseTabCommand;
+                tabItem.CloseTabCommandParameter = tabItem;
+                var binding = new Binding()
+                {
+                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                    Mode = BindingMode.OneWay,
+                    Path = new PropertyPath("UIText")
+                };
+                Label l = new Label();
+                l.SetBinding(Label.ContentProperty, binding);
+                tabItem.Header = l;
+                tabItem.DataContext = quest;
+                tab.Items.Add(tabItem);
+            }
+            if (selected != -1)
+                tab.SelectedIndex = selected;
+
+            if (tab.SelectedItem is null)
+            {
+                MainWindow.Instance.questTabGrid.IsEnabled = false;
+                MainWindow.Instance.questTabGrid.Visibility = Visibility.Collapsed;
+                MainWindow.Instance.questTabGridNoSelection.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MainWindow.Instance.questTabGrid.IsEnabled = true;
+                MainWindow.Instance.questTabGrid.Visibility = Visibility.Visible;
+                MainWindow.Instance.questTabGridNoSelection.Visibility = Visibility.Collapsed;
+            }
         }
         public NPCQuest Quest
         {
-            get => _quest;
+            get
+            {
+                if (!(_quest is null))
+                {
+                    UpdateConditions();
+                    UpdateRewards();
+                }
+                return _quest;
+            }
+
             set
             {
+                if (!(_quest is null))
+                {
+                    UpdateConditions();
+                    UpdateRewards();
+                }
+
                 _quest = value;
 
                 MainWindow.Instance.listQuestConditions.Children.Clear();
@@ -40,92 +135,28 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }
         }
         public string Comment { get => Quest.Comment; set => Quest.Comment = value; }
-        public ushort ID { get => Quest.id; set => Quest.id = value; }
-        public string Title { get => Quest.title; set => Quest.title = value; }
+        public ushort ID { get => Quest.ID; set => Quest.ID = value; }
+        public string Title { get => Quest.Title; set => Quest.Title = value; }
         public string Description { get => Quest.description; set => Quest.description = value; }
         private ICommand
-            saveCommand,
-            openCommand,
-            resetCommand,
             addConditionCommand,
             addRewardCommand,
             previewCommand;
-        public ICommand SaveCommand
+        private ICommand closeTabCommand;
+        public ICommand CloseTabCommand
         {
             get
             {
-                if (saveCommand == null)
+                if (closeTabCommand == null)
                 {
-                    saveCommand = new BaseCommand(() =>
+                    closeTabCommand = new BaseCommand((sender) =>
                     {
-                        if (ID == 0)
-                        {
-                            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Quest_ID_Zero"]);
-                            return;
-                        }
-                        UpdateConditions();
-                        UpdateRewards();
-                        if (!MainWindow.CurrentProject.data.quests.Contains(Quest))
-                        {
-                            MainWindow.CurrentProject.data.quests.Add(Quest);
-                        }
-
-                        MainWindow.CurrentProject.isSaved = false;
-                        App.NotificationManager.Notify(LocalizationManager.Current.Notification["Quest_Saved"]);
+                        var tab = (sender as MetroTabItem);
+                        MainWindow.CurrentProject.data.quests.Remove(tab.DataContext as NPCQuest);
+                        UpdateTabs();
                     });
                 }
-                return saveCommand;
-            }
-        }
-        public ICommand OpenCommand
-        {
-            get
-            {
-                if (openCommand == null)
-                {
-                    openCommand = new BaseCommand(() =>
-                    {
-                        Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentProject.data.quests.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Quest, false)).ToList(), Universal_ItemList.ReturnType.Quest);
-                        ulv.Owner = MainWindow.Instance;
-                        if (ulv.ShowDialog() == true)
-                        {
-                            if (!AppConfig.Instance.automaticallySaveBeforeOpening)
-                            {
-                                var msgRes = MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Quest_Open_Confirm"], "", MessageBoxButton.YesNoCancel);
-                                if (msgRes == MessageBoxResult.Yes)
-                                    SaveCommand.Execute(null);
-                                else if (msgRes != MessageBoxResult.No)
-                                    return;
-                            }
-                            else
-                                SaveCommand.Execute(null);
-
-                            Quest = ulv.SelectedValue as NPCQuest;
-                            UpdateConditions();
-                            UpdateRewards();
-                        }
-                        MainWindow.CurrentProject.data.quests = ulv.Values.Cast<NPCQuest>().ToList();
-                    });
-                }
-                return openCommand;
-            }
-        }
-        public ICommand ResetCommand
-        {
-            get
-            {
-                if (resetCommand == null)
-                {
-                    resetCommand = new BaseCommand(() =>
-                    {
-                        ushort id = ID;
-                        Quest = new NPCQuest();
-                        UpdateConditions();
-                        UpdateRewards();
-                        App.Logger.Log($"Quest {id} cleared!");
-                    });
-                }
-                return resetCommand;
+                return closeTabCommand;
             }
         }
         public ICommand AddConditionCommand
@@ -174,8 +205,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     previewCommand = new BaseCommand(() =>
                     {
-                        SaveCommand.Execute(null);
-
                         Simulation simulation = new Simulation();
 
                         MessageBox.Show(LocalizationManager.Current.Interface.Translate("Main_Tab_Vendor_Preview_Message"));
@@ -195,24 +224,24 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
         public void UpdateConditions()
         {
-            Quest.conditions.Clear();
+            _quest.conditions.Clear();
             foreach (var uie in MainWindow.Instance.listQuestConditions.Children)
             {
                 if (uie is Universal_ItemList dr)
                 {
-                    Quest.conditions.Add(dr.Value as Condition);
+                    _quest.conditions.Add(dr.Value as Condition);
                 }
             }
             MainWindow.Instance.listQuestConditions.UpdateOrderButtons();
         }
         public void UpdateRewards()
         {
-            Quest.rewards.Clear();
+            _quest.rewards.Clear();
             foreach (var uie in MainWindow.Instance.listQuestRewards.Children)
             {
                 if (uie is Universal_ItemList dr)
                 {
-                    Quest.rewards.Add(dr.Value as Reward);
+                    _quest.rewards.Add(dr.Value as Reward);
                 }
             }
             MainWindow.Instance.listQuestRewards.UpdateOrderButtons();
@@ -244,7 +273,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         newConditions.Add(dr.Value as Condition);
                     }
                 }
-                Quest.conditions = newConditions;
+                _quest.conditions = newConditions;
 
                 panel.UpdateOrderButtons();
             };
@@ -287,7 +316,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         newRewards.Add(dr.Value as Reward);
                     }
                 }
-                Quest.rewards = newRewards;
+                _quest.rewards = newRewards;
 
                 panel.UpdateOrderButtons();
             };

@@ -109,15 +109,15 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         {
             CharacterTabViewModel.Reset();
             DialogueTabViewModel.Reset();
-            VendorTabViewModel.ResetCommand.Execute(null);
-            QuestTabViewModel.ResetCommand.Execute(null);
+            VendorTabViewModel.Reset();
+            QuestTabViewModel.Reset();
         }
         public void SaveAll()
         {
             CharacterTabViewModel.Save();
             DialogueTabViewModel.Save();
-            VendorTabViewModel.SaveCommand.Execute(null);
-            QuestTabViewModel.SaveCommand.Execute(null);
+            VendorTabViewModel.Save();
+            QuestTabViewModel.Save();
 
             ProjectData proj = MainWindow.CurrentProject;
             NPCProject data = proj.data;
@@ -131,6 +131,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         {
             CharacterTabViewModel.UpdateTabs();
             DialogueTabViewModel.UpdateTabs();
+            VendorTabViewModel.UpdateTabs();
+            QuestTabViewModel.UpdateTabs();
         }
         internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

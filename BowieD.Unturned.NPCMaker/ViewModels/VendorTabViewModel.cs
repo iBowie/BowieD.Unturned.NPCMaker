@@ -1,29 +1,112 @@
-﻿using BowieD.Unturned.NPCMaker.Configuration;
-using BowieD.Unturned.NPCMaker.Controls;
+﻿using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace BowieD.Unturned.NPCMaker.ViewModels
 {
-    public sealed class VendorTabViewModel : BaseViewModel
+    public sealed class VendorTabViewModel : BaseViewModel, ITabEditor, INPCTab
     {
         private NPCVendor _vendor;
         public VendorTabViewModel()
         {
-            Vendor = new NPCVendor();
+            MainWindow.Instance.vendorTabSelect.SelectionChanged += VendorTabSelect_SelectionChanged;
+            MainWindow.Instance.vendorTabButtonAdd.Click += VendorTabButtonAdd_Click;
+            NPCVendor empty = new NPCVendor();
+            Vendor = empty;
+            UpdateTabs();
+        }
+        private void VendorTabButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NPCVendor item = new NPCVendor();
+            MainWindow.CurrentProject.data.vendors.Add(item);
+            Vendor = item;
+            UpdateTabs();
+        }
+        private void VendorTabSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var tab = MainWindow.Instance.vendorTabSelect;
+            if (tab.SelectedItem != null && tab.SelectedItem is TabItem tabItem && tabItem.DataContext != null)
+            {
+                NPCVendor selectedTabChar = tabItem.DataContext as NPCVendor;
+                if (selectedTabChar != null)
+                    Vendor = selectedTabChar;
+            }
+
+            if (tab.SelectedItem is null)
+            {
+                MainWindow.Instance.vendorTabGrid.IsEnabled = false;
+                MainWindow.Instance.vendorTabGrid.Visibility = Visibility.Collapsed;
+                MainWindow.Instance.vendorTabGridNoSelection.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MainWindow.Instance.vendorTabGrid.IsEnabled = true;
+                MainWindow.Instance.vendorTabGrid.Visibility = Visibility.Visible;
+                MainWindow.Instance.vendorTabGridNoSelection.Visibility = Visibility.Collapsed;
+            }
+        }
+        public void Save() { }
+        public void Reset() { }
+        public void UpdateTabs()
+        {
+            var tab = MainWindow.Instance.vendorTabSelect;
+            tab.Items.Clear();
+            int selected = -1;
+            for (int i = 0; i < MainWindow.CurrentProject.data.vendors.Count; i++)
+            {
+                var vendor = MainWindow.CurrentProject.data.vendors[i];
+                if (vendor == _vendor)
+                    selected = i;
+                MetroTabItem tabItem = new MetroTabItem();
+                tabItem.CloseButtonEnabled = true;
+                tabItem.CloseTabCommand = CloseTabCommand;
+                tabItem.CloseTabCommandParameter = tabItem;
+                var binding = new Binding()
+                {
+                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                    Mode = BindingMode.OneWay,
+                    Path = new PropertyPath("UIText")
+                };
+                Label l = new Label();
+                l.SetBinding(Label.ContentProperty, binding);
+                tabItem.Header = l;
+                tabItem.DataContext = vendor;
+                tab.Items.Add(tabItem);
+            }
+            if (selected != -1)
+                tab.SelectedIndex = selected;
+
+            if (tab.SelectedItem is null)
+            {
+                MainWindow.Instance.vendorTabGrid.IsEnabled = false;
+                MainWindow.Instance.vendorTabGrid.Visibility = Visibility.Collapsed;
+                MainWindow.Instance.vendorTabGridNoSelection.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MainWindow.Instance.vendorTabGrid.IsEnabled = true;
+                MainWindow.Instance.vendorTabGrid.Visibility = Visibility.Visible;
+                MainWindow.Instance.vendorTabGridNoSelection.Visibility = Visibility.Collapsed;
+            }
         }
         public NPCVendor Vendor
         {
             get => _vendor;
             set
             {
+                if (!(_vendor is null))
+                {
+                    UpdateItems();
+                }
+
                 _vendor = value;
 
                 MainWindow.Instance.vendorListBuyItems.Children.Clear();
@@ -40,8 +123,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }
         }
         public string Comment { get => Vendor.Comment; set => Vendor.Comment = value; }
-        public ushort ID { get => Vendor.id; set => Vendor.id = value; }
-        public string Title { get => Vendor.vendorTitle; set => Vendor.vendorTitle = value; }
+        public ushort ID { get => Vendor.ID; set => Vendor.ID = value; }
+        public string Title { get => Vendor.Title; set => Vendor.Title = value; }
         public string Description { get => Vendor.vendorDescription; set => Vendor.vendorDescription = value; }
         public bool DisableSorting { get => Vendor.disableSorting; set => Vendor.disableSorting = value; }
         public string Currency
@@ -49,7 +132,24 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             get => Vendor.currency;
             set => Vendor.currency = value;
         }
-        private ICommand addItemCommand, saveCommand, openCommand, resetCommand, previewCommand;
+        private ICommand addItemCommand, previewCommand;
+        private ICommand closeTabCommand;
+        public ICommand CloseTabCommand
+        {
+            get
+            {
+                if (closeTabCommand == null)
+                {
+                    closeTabCommand = new BaseCommand((sender) =>
+                    {
+                        var tab = (sender as MetroTabItem);
+                        MainWindow.CurrentProject.data.vendors.Remove(tab.DataContext as NPCVendor);
+                        UpdateTabs();
+                    });
+                }
+                return closeTabCommand;
+            }
+        }
         public ICommand AddItemCommand
         {
             get
@@ -73,83 +173,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 return addItemCommand;
             }
         }
-        public ICommand SaveCommand
-        {
-            get
-            {
-                if (saveCommand == null)
-                {
-                    saveCommand = new BaseCommand(() =>
-                    {
-                        if (ID == 0)
-                        {
-                            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Vendor_ID_Zero"]);
-                            return;
-                        }
-                        UpdateItems();
-                        if (!MainWindow.CurrentProject.data.vendors.Contains(Vendor))
-                        {
-                            MainWindow.CurrentProject.data.vendors.Add(Vendor);
-                        }
-
-                        App.NotificationManager.Notify(LocalizationManager.Current.Notification["Vendor_Saved"]);
-                        MainWindow.CurrentProject.isSaved = false;
-                        App.Logger.Log($"Vendor {ID} saved!");
-                    });
-                }
-                return saveCommand;
-            }
-        }
-        public ICommand OpenCommand
-        {
-            get
-            {
-                if (openCommand == null)
-                {
-                    openCommand = new BaseCommand(() =>
-                    {
-                        Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentProject.data.vendors.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Vendor, false)).ToList(), Universal_ItemList.ReturnType.Vendor);
-                        ulv.Owner = MainWindow.Instance;
-                        if (ulv.ShowDialog() == true)
-                        {
-                            if (!AppConfig.Instance.automaticallySaveBeforeOpening)
-                            {
-                                var msgRes = MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Vendor_Open_Confirm"], "", MessageBoxButton.YesNoCancel);
-                                if (msgRes == MessageBoxResult.Yes)
-                                    SaveCommand.Execute(null);
-                                else if (msgRes != MessageBoxResult.No)
-                                    return;
-                            }
-                            else
-                                SaveCommand.Execute(null);
-
-                            Vendor = ulv.SelectedValue as NPCVendor;
-                            UpdateItems();
-                            App.Logger.Log($"Opened vendor {ID}");
-                        }
-                        MainWindow.CurrentProject.data.vendors = ulv.Values.Cast<NPCVendor>().ToList();
-                    });
-                }
-                return openCommand;
-            }
-        }
-        public ICommand ResetCommand
-        {
-            get
-            {
-                if (resetCommand == null)
-                {
-                    resetCommand = new BaseCommand(() =>
-                    {
-                        ushort id = ID;
-                        Vendor = new NPCVendor();
-                        UpdateItems();
-                        App.Logger.Log($"Vendor {id} cleared!");
-                    });
-                }
-                return resetCommand;
-            }
-        }
         public ICommand PreviewCommand
         {
             get
@@ -158,8 +181,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     previewCommand = new BaseCommand(() =>
                     {
-                        SaveCommand.Execute(null);
-
                         Simulation simulation = new Simulation();
 
                         MessageBox.Show(LocalizationManager.Current.Interface.Translate("Main_Tab_Vendor_Preview_Message"));
@@ -219,7 +240,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         newItems.Add(dr.Value as VendorItem);
                     }
                 }
-                Vendor.items = newItems;
+                _vendor.items = newItems;
 
                 panel.UpdateOrderButtons();
             };
@@ -267,7 +288,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         newItems.Add(dr.Value as VendorItem);
                     }
                 }
-                Vendor.items = newItems;
+                _vendor.items = newItems;
 
                 panel.UpdateOrderButtons();
             };
@@ -286,19 +307,19 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         }
         void UpdateItems()
         {
-            Vendor.items.Clear();
+            _vendor.items.Clear();
             foreach (var uie in MainWindow.Instance.vendorListBuyItems.Children)
             {
                 if (uie is Universal_ItemList dr)
                 {
-                    Vendor.items.Add(dr.Value as VendorItem);
+                    _vendor.items.Add(dr.Value as VendorItem);
                 }
             }
             foreach (var uie in MainWindow.Instance.vendorListSellItems.Children)
             {
                 if (uie is Universal_ItemList dr)
                 {
-                    Vendor.items.Add(dr.Value as VendorItem);
+                    _vendor.items.Add(dr.Value as VendorItem);
                 }
             }
             MainWindow.Instance.vendorListBuyItems.UpdateOrderButtons();
