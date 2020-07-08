@@ -155,31 +155,31 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Name="txtID" VerticalAlignment="Center" Margin="5" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
-                                    <mah:NumericUpDown.ToolTip>
-                                        <StackPanel>
-                                            <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_ID_Tooltip}"/>
-                                        </StackPanel>
-                                    </mah:NumericUpDown.ToolTip>
-                                </mah:NumericUpDown>
-                                <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_ID}" />
+                                    <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Name="txtID" VerticalAlignment="Center" Margin="5" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Minimum="0" Maximum="65535">
+                                        <xctk:UShortUpDown.ToolTip>
+                                            <StackPanel>
+                                                <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_ID_Tooltip}"/>
+                                            </StackPanel>
+                                        </xctk:UShortUpDown.ToolTip>
+                                    </xctk:UShortUpDown>
+                                    <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_ID}" />
                             </Grid>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <mah:NumericUpDown Value="{Binding DialogueID, UpdateSourceTrigger=PropertyChanged}" Name="txtStartDialogueID" Margin="5" VerticalAlignment="Center" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
-                                    <mah:NumericUpDown.ToolTip>
-                                        <ToolTip>
-                                            <StackPanel>
-                                                <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Dialogue_Tooltip}"/>
-                                                <Image Source="Resources/Help/img_help_startDialogue.png"/>
-                                            </StackPanel>
-                                        </ToolTip>
-                                    </mah:NumericUpDown.ToolTip>
-                                </mah:NumericUpDown>
-                                <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Dialogue}"/>
+                                    </Grid.ColumnDefinitions>
+                                    <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding DialogueID, UpdateSourceTrigger=PropertyChanged}" Name="txtStartDialogueID" VerticalAlignment="Center" Margin="5" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Minimum="0" Maximum="65535">
+                                        <xctk:UShortUpDown.ToolTip>
+                                            <ToolTip>
+                                                <StackPanel>
+                                                    <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Dialogue_Tooltip}"/>
+                                                    <Image Source="Resources/Help/img_help_startDialogue.png"/>
+                                                </StackPanel>
+                                            </ToolTip>
+                                        </xctk:UShortUpDown.ToolTip>
+                                    </xctk:UShortUpDown>
+                                    <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Dialogue}"/>
                             </Grid>
                             <Button Command="{Binding EditVisibilityConditionsCommand}" Name="visibilityCondsButton" Content="{xaml:Localize Key=CHARACTER_Conditions}" Margin="5">
                                 <Button.ToolTip>
