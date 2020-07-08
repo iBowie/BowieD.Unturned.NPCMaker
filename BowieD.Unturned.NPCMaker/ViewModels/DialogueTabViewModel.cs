@@ -21,7 +21,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             MainWindow.Instance.dialogueTabSelect.SelectionChanged += DialogueTabSelect_SelectionChanged;
             MainWindow.Instance.dialogueTabButtonAdd.Click += DialogueTabButtonAdd_Click;
             NPCDialogue empty = new NPCDialogue();
-            MainWindow.CurrentProject.data.dialogues.Add(empty);
             Dialogue = empty;
             UpdateTabs();
         }
@@ -414,7 +413,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
                 if (r.openQuestId != 0)
                 {
-                    var nextQ = MainWindow.CurrentProject.data.quests.SingleOrDefault(d => d.id == r.openQuestId);
+                    var nextQ = MainWindow.CurrentProject.data.quests.SingleOrDefault(d => d.ID == r.openQuestId);
 
                     if (nextQ is null)
                     {
@@ -425,7 +424,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
                 if (r.openVendorId != 0)
                 {
-                    var nextV = MainWindow.CurrentProject.data.vendors.SingleOrDefault(d => d.id == r.openVendorId);
+                    var nextV = MainWindow.CurrentProject.data.vendors.SingleOrDefault(d => d.ID == r.openVendorId);
 
                     if (nextV is null)
                     {

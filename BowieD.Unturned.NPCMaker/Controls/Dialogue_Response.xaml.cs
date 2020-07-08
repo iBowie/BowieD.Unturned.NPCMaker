@@ -94,7 +94,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             select.ShowDialog();
             if (select.DialogResult == true)
             {
-                txtBoxQuestID.Value = (select.SelectedValue as NPC.NPCQuest).id;
+                txtBoxQuestID.Value = (select.SelectedValue as NPC.NPCQuest).ID;
             }
         }
 
@@ -109,7 +109,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             select.ShowDialog();
             if (select.DialogResult == true)
             {
-                txtBoxVendorID.Value = (select.SelectedValue as NPC.NPCVendor).id;
+                txtBoxVendorID.Value = (select.SelectedValue as NPC.NPCVendor).ID;
             }
         }
 

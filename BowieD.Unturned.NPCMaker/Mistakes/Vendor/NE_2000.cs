@@ -21,9 +21,9 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Vendor
         {
             foreach (NPC.NPCVendor _vend in MainWindow.CurrentProject.data.vendors)
             {
-                if (_vend.id == 0)
+                if (_vend.ID == 0)
                 {
-                    yield return new NE_2000(_vend.vendorTitle, _vend.id);
+                    yield return new NE_2000(_vend.Title, _vend.ID);
                 }
             }
         }

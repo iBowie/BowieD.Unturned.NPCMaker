@@ -26,7 +26,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             MainWindow.Instance.characterTabSelect.SelectionChanged += CharacterTabSelect_SelectionChanged;
             MainWindow.Instance.characterTabButtonAdd.Click += CharacterTabButtonAdd_Click;
             NPCCharacter empty = new NPCCharacter();
-            MainWindow.CurrentProject.data.characters.Add(empty);
             Character = empty;
             UpdateColorPicker();
             UpdateTabs();

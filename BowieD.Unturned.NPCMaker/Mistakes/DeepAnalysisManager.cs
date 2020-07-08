@@ -63,11 +63,11 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             }
             foreach (NPCVendor vendor in MainWindow.CurrentProject.data.vendors)
             {
-                if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Vendor && d.Id == vendor.id))
+                if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Vendor && d.Id == vendor.ID))
                 {
                     MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                     {
-                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_vendor", vendor.id),
+                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_vendor", vendor.ID),
                         Importance = IMPORTANCE.WARNING
                     });
                 }
@@ -96,11 +96,11 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             }
             foreach (NPCQuest quest in MainWindow.CurrentProject.data.quests)
             {
-                if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Quest && d.Id == quest.id))
+                if (CachedUnturnedFiles != null && CachedUnturnedFiles.Any(d => d.Type == UnturnedFile.EAssetType.Quest && d.Id == quest.ID))
                 {
                     MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                     {
-                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_quest", quest.id),
+                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_quest", quest.ID),
                         Importance = IMPORTANCE.WARNING
                     });
                 }

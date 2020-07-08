@@ -80,9 +80,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             {
                                 shouldClose = false;
 
-                                NPCQuest questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.id == res.openQuestId);
+                                NPCQuest questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.ID == res.openQuestId);
 
-                                Quest_Status questStatus = Simulation.GetQuestStatus(questAsset.id);
+                                Quest_Status questStatus = Simulation.GetQuestStatus(questAsset.ID);
 
                                 QuestView_Window.EMode _mode;
 
@@ -127,7 +127,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             {
                                 shouldClose = false;
 
-                                NPCVendor vendorAsset = MainWindow.CurrentProject.data.vendors.Single(d => d.id == res.openVendorId);
+                                NPCVendor vendorAsset = MainWindow.CurrentProject.data.vendors.Single(d => d.ID == res.openVendorId);
 
                                 VendorView_Window qvw = new VendorView_Window(Character, Simulation, vendorAsset);
 

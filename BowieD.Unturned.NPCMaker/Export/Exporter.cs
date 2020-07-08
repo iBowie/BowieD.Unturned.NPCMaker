@@ -430,9 +430,9 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Vendors\{vendor.guid}_{vendor.id}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Vendors\{vendor.guid}_{vendor.id}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Vendors\{vendor.guid}_{vendor.id}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(dir + $@"Vendors\{vendor.guid}_{vendor.ID}");
+                    using (StreamWriter asset = new StreamWriter(dir + $@"Vendors\{vendor.guid}_{vendor.ID}\Asset.dat", false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(dir + $@"Vendors\{vendor.guid}_{vendor.ID}\English.dat", false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -442,7 +442,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                         }
 
                         asset.WriteLine($"Type Vendor");
-                        asset.WriteLine($"ID {vendor.id}");
+                        asset.WriteLine($"ID {vendor.ID}");
 
                         if (vendor.BuyItems.Count > 0)
                         {
@@ -495,14 +495,14 @@ namespace BowieD.Unturned.NPCMaker.Export
                             asset.WriteLine("Currency " + vendor.currency);
                         }
 
-                        local.WriteLine($"Name {vendor.vendorTitle}");
+                        local.WriteLine($"Name {vendor.Title}");
                         local.WriteLine($"Description {vendor.vendorDescription}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    App.Logger.LogException($"Can't export vendor {vendor.id}", ex: ex);
-                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Vendor_Error", vendor.id));
+                    App.Logger.LogException($"Can't export vendor {vendor.ID}", ex: ex);
+                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Vendor_Error", vendor.ID));
                 }
             }
         }
@@ -512,9 +512,9 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Quests\{quest.guid}_{quest.id}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Quests\{quest.guid}_{quest.id}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Quests\{quest.guid}_{quest.id}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(dir + $@"Quests\{quest.guid}_{quest.ID}");
+                    using (StreamWriter asset = new StreamWriter(dir + $@"Quests\{quest.guid}_{quest.ID}\Asset.dat", false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(dir + $@"Quests\{quest.guid}_{quest.ID}\English.dat", false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -524,7 +524,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                         }
 
                         asset.WriteLine($"Type Quest");
-                        asset.WriteLine($"ID {quest.id}");
+                        asset.WriteLine($"ID {quest.ID}");
 
                         if (quest.conditions?.Count > 0)
                         {
@@ -544,7 +544,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                             }
                         }
 
-                        local.WriteLine($"Name {quest.title}");
+                        local.WriteLine($"Name {quest.Title}");
                         local.WriteLine($"Description {quest.description}");
                         for (int k = 0; k < quest.conditions?.Count; k++)
                         {
@@ -564,8 +564,8 @@ namespace BowieD.Unturned.NPCMaker.Export
                 }
                 catch (Exception ex)
                 {
-                    App.Logger.LogException($"Can't export quest {quest.id}", ex: ex);
-                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Quest_Error", quest.id));
+                    App.Logger.LogException($"Can't export quest {quest.ID}", ex: ex);
+                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Quest_Error", quest.ID));
                 }
             }
         }

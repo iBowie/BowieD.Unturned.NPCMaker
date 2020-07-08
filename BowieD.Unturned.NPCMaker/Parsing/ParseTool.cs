@@ -121,10 +121,10 @@ namespace BowieD.Unturned.NPCMaker.Parsing
         {
             return new NPCVendor()
             {
-                id = asset.ReadUInt16("ID"),
+                ID = asset.ReadUInt16("ID"),
                 disableSorting = asset.Has("Disable_Sorting"),
                 guid = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
-                vendorTitle = local?.ReadString("Name") ?? "",
+                Title = local?.ReadString("Name") ?? "",
                 vendorDescription = local?.ReadString("Description") ?? "",
                 items = ParseVendorItems().ToList(),
                 currency = asset.Has("Currency") ? asset.ReadString("Currency") : ""
@@ -134,8 +134,8 @@ namespace BowieD.Unturned.NPCMaker.Parsing
         {
             NPCQuest q = new NPCQuest()
             {
-                id = asset.ReadUInt16("ID"),
-                title = local?.ReadString("Name") ?? "",
+                ID = asset.ReadUInt16("ID"),
+                Title = local?.ReadString("Name") ?? "",
                 description = local?.ReadString("Description") ?? "",
                 guid = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
                 conditions = ParseConditions("").ToList(),

@@ -23,7 +23,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Vendor
             {
                 if (_vend.items.Count == 0)
                 {
-                    yield return new NE_2001(_vend.vendorTitle, _vend.id);
+                    yield return new NE_2001(_vend.Title, _vend.ID);
                 }
             }
         }

@@ -23,7 +23,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             Vendor = vendor;
             Simulation = simulation;
 
-            formatter.Markup(title, SimulationTool.ReplacePlaceholders(character, simulation, vendor.vendorTitle));
+            formatter.Markup(title, SimulationTool.ReplacePlaceholders(character, simulation, vendor.Title));
             formatter.Markup(desc, SimulationTool.ReplacePlaceholders(character, simulation, vendor.vendorDescription));
 
             UIElement createElement(VendorItem item)

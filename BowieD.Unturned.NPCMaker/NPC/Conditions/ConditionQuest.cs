@@ -63,7 +63,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                             simulation.Quests.Remove(ID);
                             simulation.Flags[ID] = 1;
 
-                            NPCQuest questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.id == ID);
+                            NPCQuest questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.ID == ID);
 
                             foreach (Condition c in questAsset.conditions)
                             {
