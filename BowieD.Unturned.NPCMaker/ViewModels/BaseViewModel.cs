@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows.Input;
 
 namespace BowieD.Unturned.NPCMaker.ViewModels
 {
@@ -18,5 +19,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
     public interface ITabEditor
     {
         void UpdateTabs();
+        ICommand CloseTabCommand { get; }
     }
 }
