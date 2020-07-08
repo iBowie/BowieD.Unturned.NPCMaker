@@ -26,7 +26,6 @@
 		"downloadPrerelease": "Download Preview Builds",
 		"alternateLogicTranslation": "Use alternative logic translation",
 		"replaceMissingKeysWithEnglish": "Replace missing keys with English",
-		"automaticallySaveBeforeOpening": "Always save before opening",
 
 		"experimentalFeatures_Tooltip": "Something experimental, maybe unstable",
 		"scale_Tooltip": "Adjust scale of the app on your screen",
@@ -39,8 +38,7 @@
 		"autoUpdate_Tooltip": "If there is an update - installs it on app start",
 		"downloadPrerelease_Tooltip": "Also known as download unstable versions",
 		"alternateLogicTranslation_Tooltip": "Replaces mathematical symbols with words",
-		"replaceMissingKeysWithEnglish_Tooltip": "Replaces missing keys from English dictionary",
-		"automaticallySaveBeforeOpening_Tooltip": "If enabled app won't ask you to save current character/dialogue/vendor/quest before opening another one"
+		"replaceMissingKeysWithEnglish_Tooltip": "Replaces missing keys from English dictionary"
 	},
 	"Character": {
 		"Name_Editor": "Editor Name",
