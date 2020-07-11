@@ -129,8 +129,9 @@ namespace BowieD.Unturned.NPCMaker
             #region VERSION SPECIFIC CODE
 #if !DEBUG
             debugOverlayText.Visibility = Visibility.Collapsed;
-            if (App.IsPreview)
-                previewOverlayText.Visibility = Visibility.Visible;
+#endif
+#if PREVIEW
+            previewOverlayText.Visibility = Visibility.Visible;
 #endif
             #endregion
             #region DISCORD
