@@ -31,8 +31,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         {
             NPCQuest item = new NPCQuest();
             MainWindow.CurrentProject.data.quests.Add(item);
-            Quest = item;
-            UpdateTabs();
+            MetroTabItem tabItem = CreateTab(item);
+            MainWindow.Instance.questTabSelect.Items.Add(tabItem);
+            MainWindow.Instance.questTabSelect.SelectedIndex = MainWindow.Instance.questTabSelect.Items.Count - 1;
         }
         private void QuestTabSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -69,20 +70,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 var quest = MainWindow.CurrentProject.data.quests[i];
                 if (quest == _quest)
                     selected = i;
-                MetroTabItem tabItem = new MetroTabItem();
-                tabItem.CloseButtonEnabled = true;
-                tabItem.CloseTabCommand = CloseTabCommand;
-                tabItem.CloseTabCommandParameter = tabItem;
-                var binding = new Binding()
-                {
-                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-                    Mode = BindingMode.OneWay,
-                    Path = new PropertyPath("UIText")
-                };
-                Label l = new Label();
-                l.SetBinding(Label.ContentProperty, binding);
-                tabItem.Header = l;
-                tabItem.DataContext = quest;
+                MetroTabItem tabItem = CreateTab(quest);
                 tab.Items.Add(tabItem);
             }
             if (selected != -1)
@@ -101,6 +89,26 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.questTabGridNoSelection.Visibility = Visibility.Collapsed;
             }
         }
+
+        private MetroTabItem CreateTab(NPCQuest quest)
+        {
+            MetroTabItem tabItem = new MetroTabItem();
+            tabItem.CloseButtonEnabled = true;
+            tabItem.CloseTabCommand = CloseTabCommand;
+            tabItem.CloseTabCommandParameter = tabItem;
+            var binding = new Binding()
+            {
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                Mode = BindingMode.OneWay,
+                Path = new PropertyPath("UIText")
+            };
+            Label l = new Label();
+            l.SetBinding(Label.ContentProperty, binding);
+            tabItem.Header = l;
+            tabItem.DataContext = quest;
+            return tabItem;
+        }
+
         public NPCQuest Quest
         {
             get
