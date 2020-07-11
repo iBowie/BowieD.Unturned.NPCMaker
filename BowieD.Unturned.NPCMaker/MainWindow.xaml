@@ -891,6 +891,10 @@
                 <iconPacks:PackIconMaterial Kind="BugOutline" Width="36" Height="36" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Margin="36,0,0,0" Content="DEBUG" HorizontalAlignment="Right" FontSize="36"/>
             </Grid>
+            <Grid Visibility="Collapsed" Name="previewOverlayText" HorizontalAlignment="Right" Opacity="0.15" VerticalAlignment="Top" Margin="5">
+                <iconPacks:PackIconMaterial Kind="EyeOutline" Width="36" Height="36" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Margin="36,0,0,0" Content="PREVIEW" HorizontalAlignment="Right" FontSize="36"/>
+            </Grid>
         </Grid>
     </Grid>
     <mah:MetroWindow.Resources>

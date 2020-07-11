@@ -90,7 +90,7 @@ namespace BowieD.Unturned.NPCMaker.Updating
         private async Task<UpdateManifest?> GetManifest(bool usePrerelease)
         {
             List<UpdateManifest> manifests = await GetManifests();
-            UpdateManifest? latestManifest;
+            UpdateManifest? latestManifest, realLatestManifest;
             await App.Logger.Log($"[UPDATE] - Use prerelease: {usePrerelease}");
             if (usePrerelease)
             {
@@ -99,6 +99,14 @@ namespace BowieD.Unturned.NPCMaker.Updating
             else
             {
                 latestManifest = manifests.FirstOrDefault(d => d.prerelease == false);
+            }
+            realLatestManifest = manifests.FirstOrDefault();
+            if (realLatestManifest.HasValue)
+            {
+                Version rlm_version = Version.Parse(realLatestManifest.Value.tag_name);
+                if (rlm_version < App.Version || 
+                    (realLatestManifest.Value.prerelease && rlm_version == App.Version))
+                    App.IsPreview = true;
             }
             if (latestManifest == null)
             {

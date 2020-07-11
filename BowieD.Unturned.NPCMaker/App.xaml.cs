@@ -31,6 +31,7 @@ namespace BowieD.Unturned.NPCMaker
         public static INotificationManager NotificationManager { get; private set; }
         public static ILoggingManager Logger { get; private set; }
         public static AppPackage Package { get; private set; }
+        public static bool IsPreview { get; internal set; } = false;
         public static Version Version
         {
             get
