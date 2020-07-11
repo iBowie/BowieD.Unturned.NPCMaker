@@ -142,6 +142,7 @@
     </ApplicationDefinition>
     <Compile Include="ClipboardManager.cs" />
     <Compile Include="Coloring\ColorConverter.cs" />
+    <Compile Include="Commands\CheckSyncCommand.cs" />
     <Compile Include="Commands\ColorCommand.cs" />
     <Compile Include="Commands\ConfigCommand.cs" />
     <Compile Include="Commands\HideCommand.cs" />

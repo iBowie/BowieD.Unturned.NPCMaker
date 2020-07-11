@@ -35,8 +35,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         {
             NPCCharacter item = new NPCCharacter();
             MainWindow.CurrentProject.data.characters.Add(item);
-            Character = item;
-            UpdateTabs();
+            MetroTabItem tabItem = CreateTab(item);
+            MainWindow.Instance.characterTabSelect.Items.Add(tabItem);
+            MainWindow.Instance.characterTabSelect.SelectedIndex = MainWindow.Instance.characterTabSelect.Items.Count - 1;
         }
 
         private void CharacterTabSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -76,20 +77,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 var character = MainWindow.CurrentProject.data.characters[i];
                 if (character == _character)
                     selected = i;
-                MetroTabItem tabItem = new MetroTabItem();
-                tabItem.CloseButtonEnabled = true;
-                tabItem.CloseTabCommand = CloseTabCommand;
-                tabItem.CloseTabCommandParameter = tabItem;
-                var binding = new Binding()
-                {
-                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-                    Mode = BindingMode.OneWay,
-                    Path = new PropertyPath("UIText")
-                };
-                Label l = new Label();
-                l.SetBinding(Label.ContentProperty, binding);
-                tabItem.Header = l;
-                tabItem.DataContext = character;
+                MetroTabItem tabItem = CreateTab(character);
                 tab.Items.Add(tabItem);
             }
             if (selected != -1)
@@ -107,6 +95,25 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.characterTabGrid.Visibility = Visibility.Visible;
                 MainWindow.Instance.characterTabGridNoSelection.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private MetroTabItem CreateTab(NPCCharacter character)
+        {
+            MetroTabItem tabItem = new MetroTabItem();
+            tabItem.CloseButtonEnabled = true;
+            tabItem.CloseTabCommand = CloseTabCommand;
+            tabItem.CloseTabCommandParameter = tabItem;
+            var binding = new Binding()
+            {
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                Mode = BindingMode.OneWay,
+                Path = new PropertyPath("UIText")
+            };
+            Label l = new Label();
+            l.SetBinding(Label.ContentProperty, binding);
+            tabItem.Header = l;
+            tabItem.DataContext = character;
+            return tabItem;
         }
 
         public NPCCharacter Character
@@ -245,7 +252,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     {
                         var tab = (sender as MetroTabItem);
                         MainWindow.CurrentProject.data.characters.Remove(tab.DataContext as NPCCharacter);
-                        UpdateTabs();
+                        MainWindow.Instance.characterTabSelect.Items.Remove(sender);
                     });
                 }
                 return closeTabCommand;
