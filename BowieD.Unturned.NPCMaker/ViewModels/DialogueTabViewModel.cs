@@ -29,8 +29,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         {
             NPCDialogue item = new NPCDialogue();
             MainWindow.CurrentProject.data.dialogues.Add(item);
-            Dialogue = item;
-            UpdateTabs();
+            MetroTabItem tabItem = CreateTab(item);
+            MainWindow.Instance.dialogueTabSelect.Items.Add(tabItem);
+            MainWindow.Instance.dialogueTabSelect.SelectedIndex = MainWindow.Instance.dialogueTabSelect.Items.Count - 1;
         }
 
         private void DialogueTabSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -70,20 +71,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 var dialogue = MainWindow.CurrentProject.data.dialogues[i];
                 if (dialogue == _dialogue)
                     selected = i;
-                MetroTabItem tabItem = new MetroTabItem();
-                tabItem.CloseButtonEnabled = true;
-                tabItem.CloseTabCommand = CloseTabCommand;
-                tabItem.CloseTabCommandParameter = tabItem;
-                var binding = new Binding()
-                {
-                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-                    Mode = BindingMode.OneWay,
-                    Path = new PropertyPath("UIText")
-                };
-                Label l = new Label();
-                l.SetBinding(Label.ContentProperty, binding);
-                tabItem.Header = l;
-                tabItem.DataContext = dialogue;
+                MetroTabItem tabItem = CreateTab(dialogue);
                 tab.Items.Add(tabItem);
             }
             if (selected != -1)
@@ -102,6 +90,26 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.dialogueTabGridNoSelection.Visibility = Visibility.Collapsed;
             }
         }
+
+        private MetroTabItem CreateTab(NPCDialogue dialogue)
+        {
+            MetroTabItem tabItem = new MetroTabItem();
+            tabItem.CloseButtonEnabled = true;
+            tabItem.CloseTabCommand = CloseTabCommand;
+            tabItem.CloseTabCommandParameter = tabItem;
+            var binding = new Binding()
+            {
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                Mode = BindingMode.OneWay,
+                Path = new PropertyPath("UIText")
+            };
+            Label l = new Label();
+            l.SetBinding(Label.ContentProperty, binding);
+            tabItem.Header = l;
+            tabItem.DataContext = dialogue;
+            return tabItem;
+        }
+
         public NPCDialogue Dialogue
         {
             get
