@@ -27,8 +27,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         {
             NPCVendor item = new NPCVendor();
             MainWindow.CurrentProject.data.vendors.Add(item);
-            Vendor = item;
-            UpdateTabs();
+            MetroTabItem tabItem = CreateTab(item);
+            MainWindow.Instance.questTabSelect.Items.Add(tabItem);
+            MainWindow.Instance.questTabSelect.SelectedIndex = MainWindow.Instance.questTabSelect.Items.Count - 1;
         }
         private void VendorTabSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -65,20 +66,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 var vendor = MainWindow.CurrentProject.data.vendors[i];
                 if (vendor == _vendor)
                     selected = i;
-                MetroTabItem tabItem = new MetroTabItem();
-                tabItem.CloseButtonEnabled = true;
-                tabItem.CloseTabCommand = CloseTabCommand;
-                tabItem.CloseTabCommandParameter = tabItem;
-                var binding = new Binding()
-                {
-                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-                    Mode = BindingMode.OneWay,
-                    Path = new PropertyPath("UIText")
-                };
-                Label l = new Label();
-                l.SetBinding(Label.ContentProperty, binding);
-                tabItem.Header = l;
-                tabItem.DataContext = vendor;
+                MetroTabItem tabItem = CreateTab(vendor);
                 tab.Items.Add(tabItem);
             }
             if (selected != -1)
@@ -97,6 +85,26 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.vendorTabGridNoSelection.Visibility = Visibility.Collapsed;
             }
         }
+
+        private MetroTabItem CreateTab(NPCVendor vendor)
+        {
+            MetroTabItem tabItem = new MetroTabItem();
+            tabItem.CloseButtonEnabled = true;
+            tabItem.CloseTabCommand = CloseTabCommand;
+            tabItem.CloseTabCommandParameter = tabItem;
+            var binding = new Binding()
+            {
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                Mode = BindingMode.OneWay,
+                Path = new PropertyPath("UIText")
+            };
+            Label l = new Label();
+            l.SetBinding(Label.ContentProperty, binding);
+            tabItem.Header = l;
+            tabItem.DataContext = vendor;
+            return tabItem;
+        }
+
         public NPCVendor Vendor
         {
             get => _vendor;
