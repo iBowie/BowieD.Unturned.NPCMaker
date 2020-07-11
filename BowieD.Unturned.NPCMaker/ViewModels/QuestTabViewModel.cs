@@ -153,7 +153,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     {
                         var tab = (sender as MetroTabItem);
                         MainWindow.CurrentProject.data.quests.Remove(tab.DataContext as NPCQuest);
-                        UpdateTabs();
+                        MainWindow.Instance.questTabSelect.Items.Remove(sender);
                     });
                 }
                 return closeTabCommand;

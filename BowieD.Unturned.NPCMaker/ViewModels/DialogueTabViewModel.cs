@@ -166,7 +166,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     {
                         var tab = (sender as MetroTabItem);
                         MainWindow.CurrentProject.data.dialogues.Remove(tab.DataContext as NPCDialogue);
-                        UpdateTabs();
+                        MainWindow.Instance.dialogueTabSelect.Items.Remove(sender);
                     });
                 }
                 return closeTabCommand;

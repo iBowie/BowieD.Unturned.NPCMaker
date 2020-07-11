@@ -144,7 +144,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     {
                         var tab = (sender as MetroTabItem);
                         MainWindow.CurrentProject.data.vendors.Remove(tab.DataContext as NPCVendor);
-                        UpdateTabs();
+                        MainWindow.Instance.vendorTabSelect.Items.Remove(sender);
                     });
                 }
                 return closeTabCommand;
