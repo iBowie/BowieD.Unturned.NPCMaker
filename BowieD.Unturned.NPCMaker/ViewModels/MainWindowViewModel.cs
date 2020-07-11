@@ -299,6 +299,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             if (pCommand.LastResult)
                             {
                                 App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Import_Directory_Done", pCommand.LastImported, pCommand.LastSkipped));
+                                MainWindow.MainWindowViewModel.UpdateAllTabs();
                             }
                         }
                     });
@@ -328,6 +329,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 if (pCommand.LastResult)
                                 {
                                     App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Import_File_Done", file));
+                                    MainWindow.MainWindowViewModel.UpdateAllTabs();
                                 }
                                 else
                                 {
