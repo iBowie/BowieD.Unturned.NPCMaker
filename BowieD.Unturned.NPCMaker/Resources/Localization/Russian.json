@@ -179,6 +179,7 @@
     "Quest_Status_Active": "Активен",
     "Quest_Status_Ready": "Готов к сдаче",
     "Quest_Status_Completed": "Завершён",
+    "Quest_Ignore_NPC": "Игнорировать NPC",
     "Quest_Reset": "Изменить статус объекта. Наведите для информации",
     "Quest_Reset_Tooltip": "Активен -> Не взят; Готов к сдаче -> Завершён; Завершён -> Удалить",
     "Item_ID": "ID предмета",

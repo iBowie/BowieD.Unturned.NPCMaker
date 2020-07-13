@@ -303,7 +303,8 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         {
                             Logic = logic,
                             ID = asset.ReadUInt16(tp + "ID"),
-                            Status = asset.ReadEnum<Quest_Status>(tp + "Status")
+                            Status = asset.ReadEnum<Quest_Status>(tp + "Status"),
+                            Ignore_NPC = asset.Has(tp + "Ignore_NPC")
                         };
                         break;
                     case Condition_Type.Skillset:

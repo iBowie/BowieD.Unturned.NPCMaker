@@ -180,6 +180,7 @@
 		"Quest_Status_Active": "Active",
 		"Quest_Status_Ready": "Ready",
 		"Quest_Status_Completed": "Completed",
+		"Quest_Ignore_NPC": "Ignore NPC",
 		"Quest_Reset": "Change quest status. Hover for details",
 		"Quest_Reset_Tooltip": "Active -> Abandon; Ready -> Completed; Completed -> Remove",
 		"Item_ID": "Item ID",
