@@ -28,8 +28,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             NPCVendor item = new NPCVendor();
             MainWindow.CurrentProject.data.vendors.Add(item);
             MetroTabItem tabItem = CreateTab(item);
-            MainWindow.Instance.questTabSelect.Items.Add(tabItem);
-            MainWindow.Instance.questTabSelect.SelectedIndex = MainWindow.Instance.questTabSelect.Items.Count - 1;
+            MainWindow.Instance.vendorTabSelect.Items.Add(tabItem);
+            MainWindow.Instance.vendorTabSelect.SelectedIndex = MainWindow.Instance.vendorTabSelect.Items.Count - 1;
         }
         private void VendorTabSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
