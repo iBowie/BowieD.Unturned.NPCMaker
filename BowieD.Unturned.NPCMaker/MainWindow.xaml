@@ -644,6 +644,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
                                 <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="dialogueTabSelect"/>
@@ -653,6 +654,17 @@
                                     <iconPacks:PackIconMaterial Background="Transparent" Kind="Plus" Foreground="{DynamicResource AccentColor}"/>
                                 </Button.Content>
                             </Button>
+                            <xctk:DropDownButton Style="{DynamicResource FlatDropDownButtonStyle}" Name="dialogueTabButtonSort" Grid.Column="2" Margin="10">
+                                <xctk:DropDownButton.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Sort" Foreground="{DynamicResource AccentColor}"/>
+                                </xctk:DropDownButton.Content>
+                                <xctk:DropDownButton.DropDownContent>
+                                    <StackPanel>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Ascending}" Command="{Binding SortIDAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Descending}" Command="{Binding SortIDDescending}"/>
+                                    </StackPanel>
+                                </xctk:DropDownButton.DropDownContent>
+                            </xctk:DropDownButton>
                         </Grid>
                         <Grid Grid.Row="1" Name="dialogueTabGridNoSelection" Visibility="Collapsed">
                             <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -732,6 +744,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
                                 <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="vendorTabSelect"/>
@@ -741,6 +754,19 @@
                                     <iconPacks:PackIconMaterial Background="Transparent" Kind="Plus" Foreground="{DynamicResource AccentColor}"/>
                                 </Button.Content>
                             </Button>
+                            <xctk:DropDownButton Style="{DynamicResource FlatDropDownButtonStyle}" Name="vendorTabButtonSort" Grid.Column="2" Margin="10">
+                                <xctk:DropDownButton.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Sort" Foreground="{DynamicResource AccentColor}"/>
+                                </xctk:DropDownButton.Content>
+                                <xctk:DropDownButton.DropDownContent>
+                                    <StackPanel>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_Title_Ascending}" Command="{Binding SortTitleAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_Title_Descending}" Command="{Binding SortTitleDescending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Ascending}" Command="{Binding SortIDAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Descending}" Command="{Binding SortIDDescending}"/>
+                                    </StackPanel>
+                                </xctk:DropDownButton.DropDownContent>
+                            </xctk:DropDownButton>
                         </Grid>
                         <Grid Grid.Row="1" Name="vendorTabGridNoSelection" Visibility="Collapsed">
                             <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -806,6 +832,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
                                 <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="questTabSelect"/>
@@ -815,6 +842,19 @@
                                     <iconPacks:PackIconMaterial Background="Transparent" Kind="Plus" Foreground="{DynamicResource AccentColor}"/>
                                 </Button.Content>
                             </Button>
+                            <xctk:DropDownButton Style="{DynamicResource FlatDropDownButtonStyle}" Name="questTabButtonSort" Grid.Column="2" Margin="10">
+                                <xctk:DropDownButton.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Sort" Foreground="{DynamicResource AccentColor}"/>
+                                </xctk:DropDownButton.Content>
+                                <xctk:DropDownButton.DropDownContent>
+                                    <StackPanel>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_Title_Ascending}" Command="{Binding SortTitleAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_Title_Descending}" Command="{Binding SortTitleDescending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Ascending}" Command="{Binding SortIDAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Descending}" Command="{Binding SortIDDescending}"/>
+                                    </StackPanel>
+                                </xctk:DropDownButton.DropDownContent>
+                            </xctk:DropDownButton>
                         </Grid>
                         <Grid Grid.Row="1" Name="questTabGridNoSelection" Visibility="Collapsed">
                             <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
