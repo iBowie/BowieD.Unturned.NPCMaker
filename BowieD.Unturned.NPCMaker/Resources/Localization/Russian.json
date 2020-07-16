@@ -588,7 +588,16 @@
     "MessageBox_Button_OK": "ОК",
     "MessageBox_Button_Cancel": "Отмена",
     "MessageBox_Button_Yes": "Да",
-    "MessageBox_Button_No": "Нет"
+    "MessageBox_Button_No": "Нет",
+
+    "Sort_EditorName_Ascending": "Упорядочить по имени в редакторе (А-Я)",
+    "Sort_EditorName_Descending": "Упорядочить по имени в редакторе (Я-А)",
+    "Sort_DisplayName_Ascending": "Упорядочить по видимому имени (А-Я)",
+    "Sort_DisplayName_Descending": "Упорядочить по видимому имени (Я-А)",
+    "Sort_Title_Ascending": "Упорядочить по названию (А-Я)",
+    "Sort_Title_Descending": "Упорядочить по названию (Я-А)",
+    "Sort_ID_Ascending": "Упорядочить по ID (0-9)",
+    "Sort_ID_Descending": "Упорядочить по ID (9-0)"
   },
   "Simulation": {
     "Dialogue": {

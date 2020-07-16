@@ -242,6 +242,97 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         private ICommand regenerateGUIDsCommand;
         private ICommand poseEditorCommand;
         private ICommand closeTabCommand;
+        private ICommand sortEditorNameA, sortEditorNameD, sortDisplayNameA, sortDisplayNameD, sortIDA, sortIDD;
+        public ICommand SortEditorNameAscending
+        {
+            get
+            {
+                if (sortEditorNameA == null)
+                {
+                    sortEditorNameA = new BaseCommand(() =>
+                    {
+                        MainWindow.CurrentProject.data.characters = MainWindow.CurrentProject.data.characters.OrderBy(d => d.EditorName).ToList();
+                        UpdateTabs();
+                    });
+                }
+                return sortEditorNameA;
+            }
+        }
+        public ICommand SortEditorNameDescending
+        {
+            get
+            {
+                if (sortEditorNameD == null)
+                {
+                    sortEditorNameD = new BaseCommand(() =>
+                    {
+                        MainWindow.CurrentProject.data.characters = MainWindow.CurrentProject.data.characters.OrderByDescending(d => d.EditorName).ToList();
+                        UpdateTabs();
+                    });
+                }
+                return sortEditorNameD;
+            }
+        }
+        public ICommand SortDisplayNameAscending
+        {
+            get
+            {
+                if (sortDisplayNameA == null)
+                {
+                    sortDisplayNameA = new BaseCommand(() =>
+                    {
+                        MainWindow.CurrentProject.data.characters = MainWindow.CurrentProject.data.characters.OrderBy(d => d.DisplayName).ToList();
+                        UpdateTabs();
+                    });
+                }
+                return sortDisplayNameA;
+            }
+        }
+        public ICommand SortDisplayNameDescending
+        {
+            get
+            {
+                if (sortDisplayNameD == null)
+                {
+                    sortDisplayNameD = new BaseCommand(() =>
+                    {
+                        MainWindow.CurrentProject.data.characters = MainWindow.CurrentProject.data.characters.OrderByDescending(d => d.DisplayName).ToList();
+                        UpdateTabs();
+                    });
+                }
+                return sortDisplayNameD;
+            }
+        }
+        public ICommand SortIDAscending
+        {
+            get
+            {
+                if (sortIDA == null)
+                {
+                    sortIDA = new BaseCommand(() =>
+                    {
+                        MainWindow.CurrentProject.data.characters = MainWindow.CurrentProject.data.characters.OrderBy(d => d.ID).ToList();
+                        UpdateTabs();
+                    });
+                }
+                return sortIDA;
+            }
+        }
+        public ICommand SortIDDescending
+        {
+            get
+            {
+                if (sortIDD == null)
+                {
+                    sortIDD = new BaseCommand(() =>
+                    {
+                        MainWindow.CurrentProject.data.characters = MainWindow.CurrentProject.data.characters.OrderByDescending(d => d.ID).ToList();
+                        UpdateTabs();
+                    });
+                }
+                return sortIDD;
+            }
+        }
         public ICommand CloseTabCommand
         {
             get

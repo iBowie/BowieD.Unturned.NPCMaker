@@ -103,6 +103,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
                                 <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="characterTabSelect"/>
@@ -112,6 +113,21 @@
                                     <iconPacks:PackIconMaterial Background="Transparent" Kind="Plus" Foreground="{DynamicResource AccentColor}"/>
                                 </Button.Content>
                             </Button>
+                            <xctk:DropDownButton Style="{DynamicResource FlatDropDownButtonStyle}" Name="characterTabButtonSort" Grid.Column="2" Margin="10">
+                                <xctk:DropDownButton.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Sort" Foreground="{DynamicResource AccentColor}"/>
+                                </xctk:DropDownButton.Content>
+                                <xctk:DropDownButton.DropDownContent>
+                                    <StackPanel>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_EditorName_Ascending}" Command="{Binding SortEditorNameAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_EditorName_Descending}" Command="{Binding SortEditorNameDescending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_DisplayName_Ascending}" Command="{Binding SortDisplayNameAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_DisplayName_Descending}" Command="{Binding SortDisplayNameDescending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Ascending}" Command="{Binding SortIDAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Descending}" Command="{Binding SortIDDescending}"/>
+                                    </StackPanel>
+                                </xctk:DropDownButton.DropDownContent>
+                            </xctk:DropDownButton>
                         </Grid>
                         <Grid Grid.Row="1" Name="characterTabGridNoSelection" Visibility="Collapsed">
                             <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -899,6 +915,38 @@
     </Grid>
     <mah:MetroWindow.Resources>
         <ResourceDictionary>
+            <ControlTemplate x:Key="FlatToggleButtonTemplate" TargetType="ToggleButton">
+                <Border Name="border" Opacity="0.5">
+                    <ContentPresenter Margin="2" Content="{TemplateBinding Content}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="border" Property="Opacity" Value="1"/>
+                    </Trigger>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter TargetName="border" Property="Opacity" Value="1"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+            <Style x:Key="FlagToggleButtonStyle" TargetType="ToggleButton">
+                <Setter Property="Template" Value="{DynamicResource FlatToggleButtonTemplate}"/>
+            </Style>
+            <ControlTemplate x:Key="FlatDropDownButtonTemplate" TargetType="xctk:DropDownButton">
+                <Grid>
+                    <ToggleButton Name="toggleButton" Content="{TemplateBinding Content}"
+                                  IsChecked="{Binding IsOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Style="{DynamicResource FlagToggleButtonStyle}"/>
+                    <Popup IsOpen="{Binding IsChecked, ElementName=toggleButton}">
+                        <Border>
+                            <ScrollViewer>
+                                <ContentPresenter Content="{TemplateBinding DropDownContent}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </Popup>
+                </Grid>
+            </ControlTemplate>
+            <Style x:Key="FlatDropDownButtonStyle" TargetType="xctk:DropDownButton">
+                <Setter Property="Template" Value="{DynamicResource FlatDropDownButtonTemplate}"/>
+            </Style>
             <ControlTemplate x:Key="FlatButtonTemplate" TargetType="Button">
                 <Border Name="border" Opacity="0.5">
                     <ContentPresenter Margin="2" Content="{TemplateBinding Content}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>

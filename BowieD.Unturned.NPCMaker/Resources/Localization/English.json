@@ -591,7 +591,16 @@
 		"MessageBox_Button_OK": "OK",
 		"MessageBox_Button_Cancel": "Cancel",
 		"MessageBox_Button_Yes": "Yes",
-		"MessageBox_Button_No": "No"
+		"MessageBox_Button_No": "No",
+
+		"Sort_EditorName_Ascending": "Sort by Editor Name (A-Z)",
+		"Sort_EditorName_Descending": "Sort by Editor Name (Z-A)",
+		"Sort_DisplayName_Ascending": "Sort by Display Name (A-Z)",
+		"Sort_DisplayName_Descending": "Sort by Display Name (Z-A)",
+		"Sort_Title_Ascending": "Sort by Title (A-Z)",
+		"Sort_Title_Descending": "Sort by Title (Z-A)",
+		"Sort_ID_Ascending": "Sort by ID (0-9)",
+		"Sort_ID_Descending": "Sort by ID (9-0)"
 	},
 	"Simulation": {
 		"Dialogue": {
