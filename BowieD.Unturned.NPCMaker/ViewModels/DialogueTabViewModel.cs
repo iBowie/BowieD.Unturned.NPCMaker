@@ -164,6 +164,37 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         private ICommand addReplyCommand, addMessageCommand, setAsStartCommand, previewCommand;
 
         private ICommand closeTabCommand;
+        private ICommand sortIDA, sortIDD;
+        public ICommand SortIDAscending
+        {
+            get
+            {
+                if (sortIDA == null)
+                {
+                    sortIDA = new BaseCommand(() =>
+                    {
+                        MainWindow.CurrentProject.data.dialogues = MainWindow.CurrentProject.data.dialogues.OrderBy(d => d.ID).ToList();
+                        UpdateTabs();
+                    });
+                }
+                return sortIDA;
+            }
+        }
+        public ICommand SortIDDescending
+        {
+            get
+            {
+                if (sortIDD == null)
+                {
+                    sortIDD = new BaseCommand(() =>
+                    {
+                        MainWindow.CurrentProject.data.dialogues = MainWindow.CurrentProject.data.dialogues.OrderByDescending(d => d.ID).ToList();
+                        UpdateTabs();
+                    });
+                }
+                return sortIDD;
+            }
+        }
         public ICommand CloseTabCommand
         {
             get

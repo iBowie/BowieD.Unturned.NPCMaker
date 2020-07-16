@@ -151,6 +151,67 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             addRewardCommand,
             previewCommand;
         private ICommand closeTabCommand;
+        private ICommand sortIDA, sortIDD, sortTitleA, sortTitleD;
+        public ICommand SortIDAscending
+        {
+            get
+            {
+                if (sortIDA == null)
+                {
+                    sortIDA = new BaseCommand(() =>
+                    {
+                        MainWindow.CurrentProject.data.quests = MainWindow.CurrentProject.data.quests.OrderBy(d => d.ID).ToList();
+                        UpdateTabs();
+                    });
+                }
+                return sortIDA;
+            }
+        }
+        public ICommand SortIDDescending
+        {
+            get
+            {
+                if (sortIDD == null)
+                {
+                    sortIDD = new BaseCommand(() =>
+                    {
+                        MainWindow.CurrentProject.data.quests = MainWindow.CurrentProject.data.quests.OrderByDescending(d => d.ID).ToList();
+                        UpdateTabs();
+                    });
+                }
+                return sortIDD;
+            }
+        }
+        public ICommand SortTitleAscending
+        {
+            get
+            {
+                if (sortTitleA == null)
+                {
+                    sortTitleA = new BaseCommand(() =>
+                    {
+                        MainWindow.CurrentProject.data.quests = MainWindow.CurrentProject.data.quests.OrderBy(d => d.Title).ToList();
+                        UpdateTabs();
+                    });
+                }
+                return sortTitleA;
+            }
+        }
+        public ICommand SortTitleDescending
+        {
+            get
+            {
+                if (sortTitleD == null)
+                {
+                    sortTitleD = new BaseCommand(() =>
+                    {
+                        MainWindow.CurrentProject.data.quests = MainWindow.CurrentProject.data.quests.OrderByDescending(d => d.Title).ToList();
+                        UpdateTabs();
+                    });
+                }
+                return sortTitleD;
+            }
+        }
         public ICommand CloseTabCommand
         {
             get
