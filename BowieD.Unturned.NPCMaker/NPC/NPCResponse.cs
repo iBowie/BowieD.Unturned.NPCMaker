@@ -24,6 +24,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public Reward[] rewards;
         public int[] visibleIn;
         [XmlIgnore]
-        public bool VisibleInAll => visibleIn == null || visibleIn.All(d => d == 1);
+        public bool VisibleInAll => visibleIn == null || visibleIn.All(d => d == 1) || visibleIn.All(d => d == 0); // last condition may cause invalid logic, but it works for now
     }
 }

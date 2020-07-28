@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.NPC.Conditions;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
+using ControlzEx.Standard;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -75,33 +76,61 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 ID = asset.ReadUInt16("ID")
             };
             d.Messages = new List<NPCMessage>(asset.ReadByte("Messages"));
+            Dictionary<ushort, byte[]> m_visible = new Dictionary<ushort, byte[]>();
             for (byte mId = 0; mId < d.Messages.Capacity; mId++)
             {
-                d.Messages.Add(new NPCMessage());
-                d.Messages[mId].pages = new List<string>(asset.ReadByte($"Message_{mId}_Pages"));
-                for (byte pId = 0; pId < d.Messages[mId].pages.Capacity; pId++)
+                string[] pages = new string[asset.ReadByte($"Message_{mId}_Pages")];
+                for (byte pId = 0; pId < pages.Length; pId++)
                 {
                     string page = local?.ReadString($"Message_{mId}_Page_{pId}");
                     if (page == null)
                     {
                         App.Logger.Log($"Page {pId} in message {mId} not found.");
                     }
-
-                    d.Messages[mId].pages.Add(page);
+                    pages[pId] = page ?? string.Empty;
                 }
-                d.Messages[mId].conditions = ParseConditions($"Message_{mId}_");
-                d.Messages[mId].rewards = ParseRewards($"Message_{mId}_");
-                d.Messages[mId].prev = asset.ReadUInt16($"Message_{mId}_Prev");
+                byte[] array2 = new byte[asset.ReadByte($"Message_{mId}_Responses")];
+                for (byte rId = 0; rId < array2.Length; rId++)
+                {
+                    array2[rId] = asset.ReadByte($"Message_{mId}_Response_{rId}");
+                }
+                m_visible.Add(mId, array2);
+
+                d.Messages.Add(new NPCMessage()
+                {
+                    conditions = ParseConditions($"Message_{mId}_"),
+                    pages = pages.ToList(),
+                    prev = asset.ReadUInt16($"Message_{mId}_Prev"),
+                    rewards = ParseRewards($"Message_{mId}_")
+                });
             }
             d.Responses = new List<NPCResponse>(asset.ReadByte("Responses"));
             for (byte rId = 0; rId < d.Responses.Capacity; rId++)
             {
                 d.Responses.Add(new NPCResponse());
                 byte b = asset.ReadByte($"Response_{rId}_Messages");
-                d.Responses[rId].visibleIn = new int[b];
-                for (byte i = 0; i < b; i++)
+                d.Responses[rId].visibleIn = new int[d.Messages.Count];
+                for (byte i = 0; i < d.Responses[rId].visibleIn.Length; i++)
                 {
-                    d.Responses[rId].visibleIn[i] = asset.Has($"Response_{rId}_Message_{i}") ? 1 : 0;
+                    if (m_visible.TryGetValue(i, out var pages))
+                    {
+                        if (pages.Contains(rId))
+                        {
+                            d.Responses[rId].visibleIn[i] = 1;
+                            continue;
+                        }
+                    }
+
+                    for (byte i2 = 0; i2 < b; i2++)
+                    {
+                        byte? m;
+                        if (asset.Has($"Response_{rId}_Message_{i2}"))
+                            m = asset.ReadByte($"Response_{rId}_Message_{i2}");
+                        else
+                            m = null;
+                        if (m != null)
+                            d.Responses[rId].visibleIn[m.Value] = 1;
+                    }
                 }
                 d.Responses[rId].mainText = local?.ReadString($"Response_{rId}");
                 if (d.Responses[rId].mainText == null)
