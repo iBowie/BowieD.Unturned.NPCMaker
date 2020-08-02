@@ -274,6 +274,7 @@
     <Compile Include="Managers\DataManager.cs" />
     <Compile Include="Logging\LoggingManager.cs" />
     <Compile Include="Managers\HolidayManager.cs" />
+    <Compile Include="Markup\Markdown.cs" />
     <Compile Include="Markup\RichText.cs" />
     <Compile Include="MathUtil.cs" />
     <Compile Include="MessageBox.cs" />
