@@ -108,7 +108,14 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
         public NPCVendor Vendor
         {
-            get => _vendor;
+            get
+            {
+                if (!(_vendor is null))
+                {
+                    UpdateItems();
+                }
+                return _vendor;
+            }
             set
             {
                 if (!(_vendor is null))
