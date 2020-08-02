@@ -190,6 +190,7 @@
     "Kills_Zombie_Spawn_Quantity": "Кол-во для спавна",
     "Kills_Zombie_Spawn": "Спавнить при приближении",
     "Kills_Zombie_Nav": "ID навигации",
+    "Kills_Zombie_Radius": "Радиус",
     "Kills_Zombie_Reset": "Сбросить значение при выполнении",
     "Kills_Zombie_Zombie": "Тип зомби",
     "Kills_Zombie_Zombie_None": "Любой",

@@ -81,13 +81,25 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                     l.ToolTip = conditionTooltip.Text;
                 }
                 borderContents.Children.Add(l);
+                ConditionRangeAttribute rangeAttribute = prop.GetCustomAttribute<ConditionRangeAttribute>();
                 FrameworkElement valueControl = null;
                 if (propType == typeof(ushort))
                 {
+                    ushort newMax, newMin;
+                    if (rangeAttribute != null && rangeAttribute.Maximum is ushort rMax && rangeAttribute.Minimum is ushort rMin)
+                    {
+                        newMax = rMax;
+                        newMin = rMin;
+                    }
+                    else
+                    {
+                        newMax = ushort.MaxValue;
+                        newMin = ushort.MinValue;
+                    }
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
-                        Maximum = ushort.MaxValue,
-                        Minimum = ushort.MinValue,
+                        Maximum = newMax,
+                        Minimum = newMin,
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };
@@ -95,10 +107,21 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 }
                 else if (propType == typeof(uint))
                 {
+                    uint newMax, newMin;
+                    if (rangeAttribute != null && rangeAttribute.Maximum is uint rMax && rangeAttribute.Minimum is uint rMin)
+                    {
+                        newMax = rMax;
+                        newMin = rMin;
+                    }
+                    else
+                    {
+                        newMax = uint.MaxValue;
+                        newMin = uint.MinValue;
+                    }
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
-                        Maximum = uint.MaxValue,
-                        Minimum = uint.MinValue,
+                        Maximum = newMax,
+                        Minimum = newMin,
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };
@@ -106,10 +129,21 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 }
                 else if (propType == typeof(int))
                 {
+                    int newMax, newMin;
+                    if (rangeAttribute != null && rangeAttribute.Maximum is int rMax && rangeAttribute.Minimum is int rMin)
+                    {
+                        newMax = rMax;
+                        newMin = rMin;
+                    }
+                    else
+                    {
+                        newMax = int.MaxValue;
+                        newMin = int.MinValue;
+                    }
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
-                        Maximum = int.MaxValue,
-                        Minimum = int.MinValue,
+                        Maximum = newMax,
+                        Minimum = newMin,
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };
@@ -117,21 +151,21 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 }
                 else if (propType == typeof(short))
                 {
+                    short newMax, newMin;
+                    if (rangeAttribute != null && rangeAttribute.Maximum is short rMax && rangeAttribute.Minimum is short rMin)
+                    {
+                        newMax = rMax;
+                        newMin = rMin;
+                    }
+                    else
+                    {
+                        newMax = short.MaxValue;
+                        newMin = short.MinValue;
+                    }
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
-                        Maximum = short.MaxValue,
-                        Minimum = short.MinValue,
-                        ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
-                        HideUpDownButtons = true
-                    };
-                    (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
-                }
-                else if (propType == typeof(ushort))
-                {
-                    valueControl = new MahApps.Metro.Controls.NumericUpDown()
-                    {
-                        Maximum = ushort.MaxValue,
-                        Minimum = ushort.MinValue,
+                        Maximum = newMax,
+                        Minimum = newMin,
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };
@@ -139,10 +173,21 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 }
                 else if (propType == typeof(float))
                 {
+                    float newMax, newMin;
+                    if (rangeAttribute != null && rangeAttribute.Maximum is float rMax && rangeAttribute.Minimum is float rMin)
+                    {
+                        newMax = rMax;
+                        newMin = rMin;
+                    }
+                    else
+                    {
+                        newMax = float.MaxValue;
+                        newMin = float.MinValue;
+                    }
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
-                        Maximum = float.MaxValue,
-                        Minimum = float.MinValue,
+                        Maximum = newMax,
+                        Minimum = newMin,
                         ParsingNumberStyle = System.Globalization.NumberStyles.Float,
                         HideUpDownButtons = true
                     };
@@ -150,10 +195,21 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 }
                 else if (propType == typeof(byte))
                 {
+                    byte newMax, newMin;
+                    if (rangeAttribute != null && rangeAttribute.Maximum is byte rMax && rangeAttribute.Minimum is byte rMin)
+                    {
+                        newMax = rMax;
+                        newMin = rMin;
+                    }
+                    else
+                    {
+                        newMax = byte.MaxValue;
+                        newMin = byte.MinValue;
+                    }
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
-                        Maximum = byte.MaxValue,
-                        Minimum = byte.MinValue,
+                        Maximum = newMax,
+                        Minimum = newMin,
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };

@@ -15,6 +15,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public bool Spawn { get; set; }
         [ConditionOptional(255, 255)]
         public byte Nav { get; set; }
+        [ConditionRange(0f, float.MaxValue)]
+        public float Radius { get; set; } = 512f;
         public Zombie_Type Zombie { get; set; }
 
         public override bool Check(Simulation simulation)

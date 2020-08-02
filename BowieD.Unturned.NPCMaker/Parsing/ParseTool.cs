@@ -358,6 +358,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                             Spawn = asset.Has(tp + "Spawn"),
                             Spawn_Quantity = asset.Has(tp + "Spawn_Quantity") ? asset.ReadInt32(tp + "Spawn_Quantity") : 1,
                             Value = asset.ReadInt16(tp + "Value"),
+                            Radius = asset.ReadSingle(tp + "Radius", 512f),
                             Zombie = asset.ReadEnum<Zombie_Type>(tp + "Zombie")
                         };
                         break;

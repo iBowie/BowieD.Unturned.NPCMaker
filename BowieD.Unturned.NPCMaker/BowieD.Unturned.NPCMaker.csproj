@@ -304,6 +304,7 @@
     <Compile Include="Notification\NotificationManager.cs" />
     <Compile Include="NPC\Conditions\Attributes\ConditionNoValueAttribute.cs" />
     <Compile Include="NPC\Conditions\Attributes\ConditionOptionalAttribute.cs" />
+    <Compile Include="NPC\Conditions\Attributes\ConditionRangeAttribute.cs" />
     <Compile Include="NPC\Conditions\Attributes\ConditionSkipFieldAttribute.cs" />
     <Compile Include="NPC\Conditions\Attributes\ConditionTooltipAttribute.cs" />
     <Compile Include="NPC\Conditions\Condition.cs" />
