@@ -57,7 +57,15 @@ namespace BowieD.Unturned.NPCMaker
             InitLoggers();
             Logger.Log($"Detected .NET {NETHelper.GetVersionString()}");
             NETVersion netVersion = NETHelper.GetVersion();
-            if (netVersion >= NETVersion.v4_7_1)
+            
+            NETVersion checkVersion;
+
+            if (File.Exists("ignoredotnet"))
+                checkVersion = NETVersion.v4_7_1;
+            else
+                checkVersion = NETVersion.v4_7_2;
+
+            if (netVersion >= checkVersion)
             {
                 if (netVersion < NETVersion.v4_7_2)
                     Logger.Log($"You have .NET Framework that does meet minimal requirement, but does not meet recommended. Crashes may occur.", ELogLevel.WARNING);
