@@ -301,9 +301,9 @@ namespace BowieD.Unturned.NPCMaker
         #region DRAG AND DROP
         private void Window_DragEnter(object sender, DragEventArgs e)
         {
-            dropOverlay.Visibility = Visibility.Visible;
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
+                dropOverlay.Visibility = Visibility.Visible;
                 e.Effects = DragDropEffects.Copy;
             }
         }
