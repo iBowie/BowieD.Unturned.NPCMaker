@@ -145,17 +145,5 @@ namespace BowieD.Unturned.NPCMaker
             container.UpdateOrderButtons(element, element.UpButton, element.DownButton);
         }
         #endregion
-        public static void MoveUp<T>(this IList<T> list, T element)
-        {
-            int index = list.IndexOf(element);
-            list.RemoveAt(index);
-            list.Insert(index - 1, element);
-        }
-        public static void MoveDown<T>(this IList<T> list, T element)
-        {
-            int index = list.IndexOf(element);
-            list.RemoveAt(index);
-            list.Insert(index + 1, element);
-        }
     }
 }
