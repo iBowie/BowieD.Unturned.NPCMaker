@@ -260,7 +260,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                     Child = borderContents
                 };
                 b.Margin = new Thickness(0, 5, 0, 5);
-                
+
                 yield return b;
             }
         }
