@@ -73,7 +73,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     switch (MainWindow.mainTabControl.SelectedIndex)
                     {
-                        case 0: // character (condition)
+                        case 0 when CharacterTabViewModel.Character != null: // character (condition)
                             {
                                 if (ClipboardManager.TryGetObject(ClipboardManager.ConditionFormat, out var obj) && obj is Condition cond)
                                 {
@@ -81,12 +81,12 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 }
                             }
                             break;
-                        case 1: // dialogue (nothing at this moment)
+                        case 1 when DialogueTabViewModel.Dialogue != null: // dialogue (nothing at this moment)
                             {
 
                             }
                             break;
-                        case 2: // vendor (vendor item)
+                        case 2 when VendorTabViewModel.Vendor != null: // vendor (vendor item)
                             {
                                 if (ClipboardManager.TryGetObject(ClipboardManager.VendorItemFormat, out var obj) && obj is VendorItem item)
                                 {
@@ -97,7 +97,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 }
                             }
                             break;
-                        case 3: // quest (condition, reward)
+                        case 3 when QuestTabViewModel.Quest != null: // quest (condition, reward)
                             {
                                 if (ClipboardManager.TryGetObject(ClipboardManager.ConditionFormat, out var obj) && obj is Condition cond)
                                 {
