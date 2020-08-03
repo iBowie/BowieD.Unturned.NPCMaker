@@ -56,7 +56,19 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.vendorTabGridNoSelection.Visibility = Visibility.Collapsed;
             }
         }
-        public void Save() { }
+        public void Save() 
+        {
+            if (!(_vendor is null))
+            {
+                UpdateItems(); 
+                
+                var tab = MainWindow.Instance.vendorTabSelect;
+                if (tab.SelectedItem != null && tab.SelectedItem is TabItem tabItem && tabItem.DataContext != null)
+                {
+                    tabItem.DataContext = _vendor;
+                }
+            }
+        }
         public void Reset() { }
         public void UpdateTabs()
         {
@@ -110,12 +122,16 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 ContextHelper.CreateCopyButton((object sender, RoutedEventArgs e) =>
                 {
+                    Save();
+
                     ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
                     MetroTabItem target = context.PlacementTarget as MetroTabItem;
                     ClipboardManager.SetObject(Universal_ItemList.ReturnType.Vendor, target.DataContext);
                 }),
                 ContextHelper.CreateDuplicateButton((object sender, RoutedEventArgs e) =>
                 {
+                    Save();
+
                     ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
                     MetroTabItem target = context.PlacementTarget as MetroTabItem;
                     var cloned = (target.DataContext as NPCVendor).Clone();
@@ -146,18 +162,13 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         {
             get
             {
-                if (!(_vendor is null))
-                {
-                    UpdateItems();
-                }
+                Save();
+
                 return _vendor;
             }
             set
             {
-                if (!(_vendor is null))
-                {
-                    UpdateItems();
-                }
+                Save();
 
                 _vendor = value;
 
@@ -367,6 +378,56 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.vendorListBuyItems.MoveDown((sender as UIElement).TryFindParent<Universal_ItemList>());
                 UpdateItems();
             };
+
+            var cmenu = new ContextMenu();
+            List<MenuItem> cmenuItems = new List<MenuItem>()
+            {
+                ContextHelper.CreateCopyButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    Universal_ItemList target = context.PlacementTarget as Universal_ItemList;
+                    ClipboardManager.SetObject(Universal_ItemList.ReturnType.VendorItem, target.Value);
+                }),
+                ContextHelper.CreateDuplicateButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    Universal_ItemList target = context.PlacementTarget as Universal_ItemList;
+                    var cloned = (target.Value as VendorItem).Clone();
+
+                    switch (cloned.type)
+                    {
+                        case ItemType.ITEM:
+                            cloned.isBuy = true;
+                            AddItemBuy(cloned);
+                            break;
+                    }
+                }),
+                ContextHelper.CreatePasteButton((object sender, RoutedEventArgs e) =>
+                {
+                    if (ClipboardManager.TryGetObject(ClipboardManager.VendorItemFormat, out var obj) && !(obj is null) && obj is VendorItem cloned)
+                    {
+                        switch (cloned.type)
+                        {
+                            case ItemType.ITEM:
+                                cloned.isBuy = true;
+                                AddItemBuy(cloned);
+                                break;
+                        }
+                    }
+                })
+            };
+
+            foreach (var cmenuItem in cmenuItems)
+                cmenu.Items.Add(cmenuItem);
+
+            item.ContextMenu = cmenu;
+
+            item.copyButton.Visibility = Visibility.Collapsed;
+
             MainWindow.Instance.vendorListBuyItems.Children.Add(item);
             MainWindow.Instance.vendorListBuyItems.UpdateOrderButtons();
         }
@@ -415,6 +476,57 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.vendorListSellItems.MoveDown((sender as UIElement).TryFindParent<Universal_ItemList>());
                 UpdateItems();
             };
+
+            item.copyButton.Visibility = Visibility.Collapsed;
+
+            var cmenu = new ContextMenu();
+            List<MenuItem> cmenuItems = new List<MenuItem>()
+            {
+                ContextHelper.CreateCopyButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    Universal_ItemList target = context.PlacementTarget as Universal_ItemList;
+                    ClipboardManager.SetObject(Universal_ItemList.ReturnType.VendorItem, target.Value);
+                }),
+                ContextHelper.CreateDuplicateButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    Universal_ItemList target = context.PlacementTarget as Universal_ItemList;
+                    var cloned = (target.Value as VendorItem).Clone();
+
+                    switch (cloned.type)
+                    {
+                        case ItemType.ITEM:
+                        case ItemType.VEHICLE:
+                            cloned.isBuy = false;
+                            AddItemSell(cloned);
+                            break;
+                    }
+                }),
+                ContextHelper.CreatePasteButton((object sender, RoutedEventArgs e) =>
+                {
+                    if (ClipboardManager.TryGetObject(ClipboardManager.VendorItemFormat, out var obj) && !(obj is null) && obj is VendorItem cloned)
+                    {
+                        switch (cloned.type)
+                        {
+                            case ItemType.ITEM:
+                            case ItemType.VEHICLE:
+                                cloned.isBuy = false;
+                                AddItemSell(cloned);
+                                break;
+                        }
+                    }
+                })
+            };
+
+            foreach (var cmenuItem in cmenuItems)
+                cmenu.Items.Add(cmenuItem);
+
+            item.ContextMenu = cmenu;
             MainWindow.Instance.vendorListSellItems.Children.Add(item);
             MainWindow.Instance.vendorListSellItems.UpdateOrderButtons();
         }
