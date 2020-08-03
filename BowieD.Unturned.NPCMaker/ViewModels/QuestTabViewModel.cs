@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
+using BowieD.Unturned.NPCMaker.NPC.Conditions;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using MahApps.Metro.Controls;
 using System;
@@ -395,6 +396,44 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.listQuestConditions.MoveDown((sender as UIElement).TryFindParent<Universal_ItemList>());
                 UpdateConditions();
             };
+
+            uil.copyButton.Visibility = Visibility.Collapsed;
+
+            var cmenu = new ContextMenu();
+            List<MenuItem> cmenuItems = new List<MenuItem>()
+            {
+                ContextHelper.CreateCopyButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    Universal_ItemList target = context.PlacementTarget as Universal_ItemList;
+                    ClipboardManager.SetObject(Universal_ItemList.ReturnType.Condition, target.Value);
+                }),
+                ContextHelper.CreateDuplicateButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    Universal_ItemList target = context.PlacementTarget as Universal_ItemList;
+                    var cloned = (target.Value as Condition).Clone();
+
+                    AddCondition(new Universal_ItemList(cloned, true));
+                }),
+                ContextHelper.CreatePasteButton((object sender, RoutedEventArgs e) =>
+                {
+                    if (ClipboardManager.TryGetObject(ClipboardManager.ConditionFormat, out var obj) && !(obj is null) && obj is Condition cloned)
+                    {
+                        AddCondition(new Universal_ItemList(cloned, true));
+                    }
+                })
+            };
+
+            foreach (var cmenuItem in cmenuItems)
+                cmenu.Items.Add(cmenuItem);
+
+            uil.ContextMenu = cmenu;
+
             MainWindow.Instance.listQuestConditions.Children.Add(uil);
             MainWindow.Instance.listQuestConditions.UpdateOrderButtons();
         }
@@ -438,6 +477,44 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.listQuestRewards.MoveDown((sender as UIElement).TryFindParent<Universal_ItemList>());
                 UpdateRewards();
             };
+
+            uil.copyButton.Visibility = Visibility.Collapsed;
+
+            var cmenu = new ContextMenu();
+            List<MenuItem> cmenuItems = new List<MenuItem>()
+            {
+                ContextHelper.CreateCopyButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    Universal_ItemList target = context.PlacementTarget as Universal_ItemList;
+                    ClipboardManager.SetObject(Universal_ItemList.ReturnType.Reward, target.Value);
+                }),
+                ContextHelper.CreateDuplicateButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    Universal_ItemList target = context.PlacementTarget as Universal_ItemList;
+                    var cloned = (target.Value as Reward).Clone();
+
+                    AddReward(new Universal_ItemList(cloned, true));
+                }),
+                ContextHelper.CreatePasteButton((object sender, RoutedEventArgs e) =>
+                {
+                    if (ClipboardManager.TryGetObject(ClipboardManager.RewardFormat, out var obj) && !(obj is null) && obj is Reward cloned)
+                    {
+                        AddReward(new Universal_ItemList(cloned, true));
+                    }
+                })
+            };
+
+            foreach (var cmenuItem in cmenuItems)
+                cmenu.Items.Add(cmenuItem);
+
+            uil.ContextMenu = cmenu;
+
             MainWindow.Instance.listQuestRewards.Children.Add(uil);
             MainWindow.Instance.listQuestRewards.UpdateOrderButtons();
         }
