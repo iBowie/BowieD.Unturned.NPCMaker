@@ -169,6 +169,15 @@
     <Compile Include="Controls\Dialogue_Response.xaml.cs">
       <DependentUpon>Dialogue_Response.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\OptionalByteValueControl.xaml.cs">
+      <DependentUpon>OptionalByteValueControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OptionalInt32ValueControl.xaml.cs">
+      <DependentUpon>OptionalInt32ValueControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OptionalUInt16ValueControl.xaml.cs">
+      <DependentUpon>OptionalUInt16ValueControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Universal_ItemList.xaml.cs">
       <DependentUpon>Universal_ItemList.xaml</DependentUpon>
     </Compile>
@@ -401,6 +410,18 @@
     <Compile Include="XAML\LocalizationConverter.cs" />
     <Compile Include="XAML\LocalizeExtension.cs" />
     <Page Include="Controls\Dialogue_Response.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionalByteValueControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionalInt32ValueControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionalUInt16ValueControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

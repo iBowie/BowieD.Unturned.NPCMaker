@@ -606,9 +606,19 @@ namespace BowieD.Unturned.NPCMaker.Export
                         continue;
                     }
                 }
-                if (optionalA != null && optionalA.ConditionApplied(propValue))
+
+                if (prop.PropertyType.IsNullable())
                 {
-                    continue;
+                    if (propValue == null)
+                    {
+                        if (optionalA != null)
+                        {
+                            if (optionalA.defaultValue == null)
+                                continue;
+
+                            propValue = optionalA.defaultValue;
+                        }
+                    }
                 }
 
                 result.AppendLine($"{prefix}Condition_{conditionIndex}_{propName} {propValue}");

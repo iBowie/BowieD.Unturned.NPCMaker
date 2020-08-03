@@ -9,12 +9,14 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public override string UIText => $"[{ID}] {LocalizationManager.Current.Condition[$"Type_Kills_Zombie"]} : {LocalizationManager.Current.Condition[$"Kills_Zombie_Zombie_{Zombie}"]} ({Nav}) >= {Value} {(Spawn ? "Spawn" : "")}";
         public ushort ID { get; set; }
         public short Value { get; set; }
-        [ConditionOptional(1, 1)]
-        public int Spawn_Quantity { get; set; }
+        [ConditionOptional(1)]
+        [ConditionRange(0, int.MaxValue)]
+        public int? Spawn_Quantity { get; set; }
         [ConditionNoValue]
         public bool Spawn { get; set; }
-        [ConditionOptional(255, 255)]
-        public byte Nav { get; set; }
+        [ConditionOptional(byte.MaxValue)]
+        [ConditionRange((byte)0, (byte)254)]
+        public byte? Nav { get; set; }
         [ConditionRange(0f, float.MaxValue)]
         public float Radius { get; set; } = 512f;
         public Zombie_Type Zombie { get; set; }
