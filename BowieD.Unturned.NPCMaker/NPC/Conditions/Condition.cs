@@ -80,6 +80,15 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 {
                     l.ToolTip = conditionTooltip.Text;
                 }
+                else if (LocalizationManager.Current.Condition.ContainsKey($"{key1}_Tooltip"))
+                {
+                    l.ToolTip = LocalizationManager.Current.Condition[$"{key1}_Tooltip"];
+                }
+                else if (LocalizationManager.Current.Condition.ContainsKey($"{key2}_Tooltip"))
+                {
+                    l.ToolTip = LocalizationManager.Current.Condition[$"{key2}_Tooltip"];
+                }
+
                 borderContents.Children.Add(l);
                 ConditionRangeAttribute rangeAttribute = prop.GetCustomAttribute<ConditionRangeAttribute>();
                 FrameworkElement valueControl = null;

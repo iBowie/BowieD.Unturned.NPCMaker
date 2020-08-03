@@ -69,6 +69,15 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 {
                     l.ToolTip = rewardTooltip.Text;
                 }
+                else if (LocalizationManager.Current.Reward.ContainsKey($"{key1}_Tooltip"))
+                {
+                    l.ToolTip = LocalizationManager.Current.Reward[$"{key1}_Tooltip"];
+                }
+                else if (LocalizationManager.Current.Reward.ContainsKey($"{key2}_Tooltip"))
+                {
+                    l.ToolTip = LocalizationManager.Current.Reward[$"{key2}_Tooltip"];
+                }
+
                 RewardRangeAttribute rangeAttribute = prop.GetCustomAttribute<RewardRangeAttribute>();
                 borderContents.Children.Add(l);
                 FrameworkElement valueControl = null;
