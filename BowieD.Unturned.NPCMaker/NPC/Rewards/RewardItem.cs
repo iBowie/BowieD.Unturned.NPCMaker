@@ -10,17 +10,17 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public override string UIText => $"{LocalizationManager.Current.Reward["Type_Item"]} {ID} x{Amount}";
         public ushort ID { get; set; }
         public byte Amount { get; set; }
-        [RewardOptional((ushort)0)]
+        [RewardOptional(null)]
         public ushort? Sight { get; set; }
-        [RewardOptional((ushort)0)]
+        [RewardOptional(null)]
         public ushort? Tactical { get; set; }
-        [RewardOptional((ushort)0)]
+        [RewardOptional(null)]
         public ushort? Grip { get; set; }
-        [RewardOptional((ushort)0)]
+        [RewardOptional(null)]
         public ushort? Barrel { get; set; }
-        [RewardOptional((ushort)0)]
+        [RewardOptional(null)]
         public ushort? Magazine { get; set; }
-        [RewardOptional((byte)0)]
+        [RewardOptional(null)]
         public byte? Ammo { get; set; }
         public bool Auto_Equip { get; set; }
 
