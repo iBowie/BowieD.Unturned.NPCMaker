@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
-using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
@@ -59,7 +58,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }
         }
 
-        public void Save() 
+        public void Save()
         {
             if (!(_dialogue is null))
             {

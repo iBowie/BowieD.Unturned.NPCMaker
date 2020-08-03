@@ -1,7 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Markup;
 using System;
-using System.Text;
 using System.Windows;
 
 namespace BowieD.Unturned.NPCMaker.Forms

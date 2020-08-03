@@ -56,12 +56,12 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.vendorTabGridNoSelection.Visibility = Visibility.Collapsed;
             }
         }
-        public void Save() 
+        public void Save()
         {
             if (!(_vendor is null))
             {
-                UpdateItems(); 
-                
+                UpdateItems();
+
                 var tab = MainWindow.Instance.vendorTabSelect;
                 if (tab.SelectedItem != null && tab.SelectedItem is TabItem tabItem && tabItem.DataContext != null)
                 {

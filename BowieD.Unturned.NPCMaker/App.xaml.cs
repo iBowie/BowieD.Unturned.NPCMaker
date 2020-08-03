@@ -57,7 +57,7 @@ namespace BowieD.Unturned.NPCMaker
             InitLoggers();
             Logger.Log($"Detected .NET {NETHelper.GetVersionString()}");
             NETVersion netVersion = NETHelper.GetVersion();
-            
+
             NETVersion checkVersion;
 
             if (File.Exists("ignoredotnet"))

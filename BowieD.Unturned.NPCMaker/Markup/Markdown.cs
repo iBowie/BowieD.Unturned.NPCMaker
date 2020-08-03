@@ -25,7 +25,7 @@ namespace BowieD.Unturned.NPCMaker.Markup
             {
                 List<Inline> inlines = null;
                 Inline inline = null;
-                
+
                 if (line.StartsWith("# "))
                 {
                     inline = new Run(line.Substring(2));
@@ -161,7 +161,7 @@ namespace BowieD.Unturned.NPCMaker.Markup
                     }
                     flush();
                 }
-                
+
                 if (inlines != null && inlines.Count > 0)
                 {
                     foreach (var i in inlines)
