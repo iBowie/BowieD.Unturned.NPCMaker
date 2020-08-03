@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Configuration;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
@@ -107,6 +108,41 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             l.SetBinding(Label.ContentProperty, binding);
             tabItem.Header = l;
             tabItem.DataContext = dialogue;
+
+            var cmenu = new ContextMenu();
+            List<MenuItem> cmenuItems = new List<MenuItem>()
+            {
+                ContextHelper.CreateCopyButton((object sender, RoutedEventArgs e) =>
+                {
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    MetroTabItem target = context.PlacementTarget as MetroTabItem;
+                    ClipboardManager.SetObject(Universal_ItemList.ReturnType.Dialogue, target.DataContext);
+                }),
+                ContextHelper.CreateDuplicateButton((object sender, RoutedEventArgs e) =>
+                {
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    MetroTabItem target = context.PlacementTarget as MetroTabItem;
+                    var cloned = (target.DataContext as NPCDialogue).Clone();
+
+                    MainWindow.CurrentProject.data.dialogues.Add(cloned);
+                    MetroTabItem ti = CreateTab(cloned);
+                    MainWindow.Instance.dialogueTabSelect.Items.Add(ti);
+                }),
+                ContextHelper.CreatePasteButton((object sender, RoutedEventArgs e) =>
+                {
+                    if (ClipboardManager.TryGetObject(ClipboardManager.DialogueFormat, out var obj) && !(obj is null) && obj is NPCDialogue cloned)
+                    {
+                        MainWindow.CurrentProject.data.dialogues.Add(cloned);
+                        MetroTabItem ti = CreateTab(cloned);
+                        MainWindow.Instance.dialogueTabSelect.Items.Add(ti);
+                    }
+                })
+            };
+
+            foreach (var cmenuItem in cmenuItems)
+                cmenu.Items.Add(cmenuItem);
+
+            tabItem.ContextMenu = cmenu;
             return tabItem;
         }
 

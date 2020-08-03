@@ -160,6 +160,7 @@
     <Compile Include="Commands\LicenseCommand.cs" />
     <Compile Include="Commands\ParseCommand.cs" />
     <Compile Include="Commands\ShutdownCommand.cs" />
+    <Compile Include="Common\CloneHelper.cs" />
     <Compile Include="Common\ContextHelper.cs" />
     <Compile Include="Common\SimulationTool.cs" />
     <Compile Include="Common\Utility\DebugUtility.cs" />

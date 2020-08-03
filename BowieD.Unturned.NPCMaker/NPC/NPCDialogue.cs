@@ -60,6 +60,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             }
         }
 
+        [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
         public List<NPCResponse> GetVisibleResponses(NPCMessage message)

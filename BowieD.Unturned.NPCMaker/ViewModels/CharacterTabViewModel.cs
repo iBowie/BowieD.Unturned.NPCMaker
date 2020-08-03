@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker;
+using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
@@ -99,10 +100,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
         private MetroTabItem CreateTab(NPCCharacter character)
         {
-            MetroTabItem tabItem = new MetroTabItem();
-            tabItem.CloseButtonEnabled = true;
-            tabItem.CloseTabCommand = CloseTabCommand;
-            tabItem.CloseTabCommandParameter = tabItem;
             var binding = new Binding()
             {
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
@@ -111,8 +108,51 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             };
             Label l = new Label();
             l.SetBinding(Label.ContentProperty, binding);
-            tabItem.Header = l;
-            tabItem.DataContext = character;
+
+            MetroTabItem tabItem = new MetroTabItem
+            {
+                CloseButtonEnabled = true,
+                CloseTabCommand = CloseTabCommand,
+                Header = l,
+                DataContext = character
+            };
+            tabItem.CloseTabCommandParameter = tabItem;
+
+            var cmenu = new ContextMenu();
+            List<MenuItem> cmenuItems = new List<MenuItem>()
+            {
+                ContextHelper.CreateCopyButton((object sender, RoutedEventArgs e) =>
+                {
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    MetroTabItem target = context.PlacementTarget as MetroTabItem;
+                    ClipboardManager.SetObject(Universal_ItemList.ReturnType.Character, target.DataContext);
+                }),
+                ContextHelper.CreateDuplicateButton((object sender, RoutedEventArgs e) =>
+                {
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    MetroTabItem target = context.PlacementTarget as MetroTabItem;
+                    var cloned = (target.DataContext as NPCCharacter).Clone();
+
+                    MainWindow.CurrentProject.data.characters.Add(cloned);
+                    MetroTabItem ti = CreateTab(cloned);
+                    MainWindow.Instance.characterTabSelect.Items.Add(ti);
+                }),
+                ContextHelper.CreatePasteButton((object sender, RoutedEventArgs e) =>
+                {
+                    if (ClipboardManager.TryGetObject(ClipboardManager.CharacterFormat, out var obj) && !(obj is null) && obj is NPCCharacter cloned)
+                    {
+                        MainWindow.CurrentProject.data.characters.Add(cloned);
+                        MetroTabItem ti = CreateTab(cloned);
+                        MainWindow.Instance.characterTabSelect.Items.Add(ti);
+                    }
+                })
+            };
+
+            foreach (var cmenuItem in cmenuItems)
+                cmenu.Items.Add(cmenuItem);
+
+            tabItem.ContextMenu = cmenu;
+
             return tabItem;
         }
 

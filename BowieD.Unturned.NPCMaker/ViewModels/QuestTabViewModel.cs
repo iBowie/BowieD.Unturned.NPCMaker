@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Configuration;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
@@ -106,6 +107,41 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             l.SetBinding(Label.ContentProperty, binding);
             tabItem.Header = l;
             tabItem.DataContext = quest;
+
+            var cmenu = new ContextMenu();
+            List<MenuItem> cmenuItems = new List<MenuItem>()
+            {
+                ContextHelper.CreateCopyButton((object sender, RoutedEventArgs e) =>
+                {
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    MetroTabItem target = context.PlacementTarget as MetroTabItem;
+                    ClipboardManager.SetObject(Universal_ItemList.ReturnType.Quest, target.DataContext);
+                }),
+                ContextHelper.CreateDuplicateButton((object sender, RoutedEventArgs e) =>
+                {
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    MetroTabItem target = context.PlacementTarget as MetroTabItem;
+                    var cloned = (target.DataContext as NPCQuest).Clone();
+
+                    MainWindow.CurrentProject.data.quests.Add(cloned);
+                    MetroTabItem ti = CreateTab(cloned);
+                    MainWindow.Instance.questTabSelect.Items.Add(ti);
+                }),
+                ContextHelper.CreatePasteButton((object sender, RoutedEventArgs e) =>
+                {
+                    if (ClipboardManager.TryGetObject(ClipboardManager.QuestFormat, out var obj) && !(obj is null) && obj is NPCQuest cloned)
+                    {
+                        MainWindow.CurrentProject.data.quests.Add(cloned);
+                        MetroTabItem ti = CreateTab(cloned);
+                        MainWindow.Instance.questTabSelect.Items.Add(ti);
+                    }
+                })
+            };
+
+            foreach (var cmenuItem in cmenuItems)
+                cmenu.Items.Add(cmenuItem);
+
+            tabItem.ContextMenu = cmenu;
             return tabItem;
         }
 

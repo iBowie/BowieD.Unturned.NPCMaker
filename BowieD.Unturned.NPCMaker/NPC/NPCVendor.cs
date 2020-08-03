@@ -52,6 +52,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public bool disableSorting;
         public string currency;
 
+        [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
         [XmlIgnore]

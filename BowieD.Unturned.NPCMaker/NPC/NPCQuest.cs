@@ -53,6 +53,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         }
         public string description;
 
+        [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string UIText => $"[{ID}] {Title}";

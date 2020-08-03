@@ -161,5 +161,33 @@ namespace BowieD.Unturned.NPCMaker.Common
             });
             return b;
         }
+
+        internal static MenuItem CreateCopyButton(RoutedEventHandler copy)
+        {
+            MenuItem b = new MenuItem()
+            {
+                Header = LocalizationManager.Current.Interface["Control_Copy"]
+            };
+            b.Click += copy;
+            return b;
+        }
+        internal static MenuItem CreateDuplicateButton(RoutedEventHandler dupl)
+        {
+            MenuItem b = new MenuItem()
+            {
+                Header = LocalizationManager.Current.Interface["Control_Duplicate"]
+            };
+            b.Click += dupl;
+            return b;
+        }
+        internal static MenuItem CreatePasteButton(RoutedEventHandler paste)
+        {
+            MenuItem b = new MenuItem()
+            {
+                Header = LocalizationManager.Current.Interface["Control_Paste"]
+            };
+            b.Click += paste;
+            return b;
+        }
     }
 }

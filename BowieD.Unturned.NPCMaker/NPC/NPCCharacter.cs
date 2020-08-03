@@ -93,6 +93,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public string guid;
         public List<Condition> visibilityConditions;
 
+        [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string UIText => $"[{ID}] {EditorName} - {DisplayName}";
