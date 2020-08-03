@@ -123,12 +123,16 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 ContextHelper.CreateCopyButton((object sender, RoutedEventArgs e) =>
                 {
+                    Save();
+
                     ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
                     MetroTabItem target = context.PlacementTarget as MetroTabItem;
                     ClipboardManager.SetObject(Universal_ItemList.ReturnType.Character, target.DataContext);
                 }),
                 ContextHelper.CreateDuplicateButton((object sender, RoutedEventArgs e) =>
                 {
+                    Save();
+
                     ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
                     MetroTabItem target = context.PlacementTarget as MetroTabItem;
                     var cloned = (target.DataContext as NPCCharacter).Clone();
@@ -158,10 +162,19 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
         public NPCCharacter Character
         {
-            get => _character;
+            get
+            {
+                Save();
+
+                return _character;
+            }
+
             set
             {
+                Save();
+
                 _character = value;
+
                 HairColor = Character.hairColor;
                 SkinColor = Character.skinColor;
                 FaceID = Character.face;

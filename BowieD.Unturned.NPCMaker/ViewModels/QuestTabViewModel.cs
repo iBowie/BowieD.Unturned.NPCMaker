@@ -59,7 +59,14 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.questTabGridNoSelection.Visibility = Visibility.Collapsed;
             }
         }
-        public void Save() { }
+        public void Save() 
+        {
+            if (!(_quest is null))
+            {
+                UpdateConditions();
+                UpdateRewards();
+            }
+        }
         public void Reset() { }
         public void UpdateTabs()
         {
@@ -113,12 +120,16 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 ContextHelper.CreateCopyButton((object sender, RoutedEventArgs e) =>
                 {
+                    Save();
+
                     ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
                     MetroTabItem target = context.PlacementTarget as MetroTabItem;
                     ClipboardManager.SetObject(Universal_ItemList.ReturnType.Quest, target.DataContext);
                 }),
                 ContextHelper.CreateDuplicateButton((object sender, RoutedEventArgs e) =>
                 {
+                    Save();
+
                     ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
                     MetroTabItem target = context.PlacementTarget as MetroTabItem;
                     var cloned = (target.DataContext as NPCQuest).Clone();
@@ -149,21 +160,14 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         {
             get
             {
-                if (!(_quest is null))
-                {
-                    UpdateConditions();
-                    UpdateRewards();
-                }
+                Save();
+
                 return _quest;
             }
 
             set
             {
-                if (!(_quest is null))
-                {
-                    UpdateConditions();
-                    UpdateRewards();
-                }
+                Save();
 
                 _quest = value;
 

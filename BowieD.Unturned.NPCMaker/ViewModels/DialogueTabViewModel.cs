@@ -59,7 +59,14 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }
         }
 
-        public void Save() { }
+        public void Save() 
+        {
+            if (!(_dialogue is null))
+            {
+                UpdateResponses();
+                UpdateMessages();
+            }
+        }
         public void Reset() { }
 
         public void UpdateTabs()
@@ -114,12 +121,16 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 ContextHelper.CreateCopyButton((object sender, RoutedEventArgs e) =>
                 {
+                    Save();
+
                     ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
                     MetroTabItem target = context.PlacementTarget as MetroTabItem;
                     ClipboardManager.SetObject(Universal_ItemList.ReturnType.Dialogue, target.DataContext);
                 }),
                 ContextHelper.CreateDuplicateButton((object sender, RoutedEventArgs e) =>
                 {
+                    Save();
+
                     ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
                     MetroTabItem target = context.PlacementTarget as MetroTabItem;
                     var cloned = (target.DataContext as NPCDialogue).Clone();
@@ -150,20 +161,13 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         {
             get
             {
-                if (!(_dialogue is null))
-                {
-                    UpdateResponses();
-                    UpdateMessages();
-                }
+                Save();
+
                 return _dialogue;
             }
             set
             {
-                if (!(_dialogue is null))
-                {
-                    UpdateResponses();
-                    UpdateMessages();
-                }
+                Save();
 
                 _dialogue = value;
 
