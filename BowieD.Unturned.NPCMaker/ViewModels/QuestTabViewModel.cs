@@ -356,7 +356,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             MainWindow.Instance.listQuestRewards.UpdateOrderButtons();
         }
 
-        void AddCondition(Universal_ItemList uil)
+        internal void AddCondition(Universal_ItemList uil)
         {
             if (uil.Type != Universal_ItemList.ReturnType.Condition)
                 throw new ArgumentException($"Expected Condition, got {uil.Type}");
@@ -437,7 +437,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             MainWindow.Instance.listQuestConditions.Children.Add(uil);
             MainWindow.Instance.listQuestConditions.UpdateOrderButtons();
         }
-        void AddReward(Universal_ItemList uil)
+        internal void AddReward(Universal_ItemList uil)
         {
             if (uil.Type != Universal_ItemList.ReturnType.Reward)
                 throw new ArgumentException($"Expected Reward, got {uil.Type}");

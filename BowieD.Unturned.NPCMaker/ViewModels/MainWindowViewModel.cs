@@ -3,6 +3,8 @@ using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
+using BowieD.Unturned.NPCMaker.NPC.Conditions;
+using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using DiscordRPC;
 using Microsoft.Win32;
 using System;
@@ -13,6 +15,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.ViewModels
 {
@@ -61,6 +64,51 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     else
                     {
                         ConsoleLogger.ShowConsoleWindow();
+                    }
+                })));
+            RoutedCommand pasteCommand = new RoutedCommand();
+            pasteCommand.InputGestures.Add(new KeyGesture(Key.V, ModifierKeys.Control));
+            MainWindow.CommandBindings.Add(new CommandBinding(pasteCommand,
+                new ExecutedRoutedEventHandler((object sender, ExecutedRoutedEventArgs e) =>
+                {
+                    switch (MainWindow.mainTabControl.SelectedIndex)
+                    {
+                        case 0: // character (condition)
+                            {
+                                if (ClipboardManager.TryGetObject(ClipboardManager.ConditionFormat, out var obj) && obj is Condition cond)
+                                {
+                                    CharacterTabViewModel.Character.visibilityConditions.Add(cond);
+                                }
+                            }
+                            break;
+                        case 1: // dialogue (nothing at this moment)
+                            {
+
+                            }
+                            break;
+                        case 2: // vendor (vendor item)
+                            {
+                                if (ClipboardManager.TryGetObject(ClipboardManager.VendorItemFormat, out var obj) && obj is VendorItem item)
+                                {
+                                    if (item.isBuy)
+                                        VendorTabViewModel.AddItemBuy(item);
+                                    else
+                                        VendorTabViewModel.AddItemSell(item);
+                                }
+                            }
+                            break;
+                        case 3: // quest (condition, reward)
+                            {
+                                if (ClipboardManager.TryGetObject(ClipboardManager.ConditionFormat, out var obj) && obj is Condition cond)
+                                {
+                                    QuestTabViewModel.AddCondition(new Controls.Universal_ItemList(cond, true));
+                                }
+                                else if (ClipboardManager.TryGetObject(ClipboardManager.RewardFormat, out obj) && obj is Reward rew)
+                                {
+                                    QuestTabViewModel.AddReward(new Controls.Universal_ItemList(rew, true));
+                                }
+                            }
+                            break;
                     }
                 })));
             CharacterTabViewModel = new CharacterTabViewModel();
