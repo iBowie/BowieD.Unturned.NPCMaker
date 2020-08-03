@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
@@ -55,7 +56,22 @@ namespace BowieD.Unturned.NPCMaker
         {
             int index = container.IndexOf(element);
             container.Children.Remove(element);
-            container.Children.Insert(index - 1, element);
+
+            if (InputTool.IsKeyDown(Key.LeftShift)) // move to top
+            {
+                container.Children.Insert(0, element);
+            }
+            else if (InputTool.IsKeyDown(Key.LeftCtrl)) // move by 5
+            {
+                int newIndex = MathUtil.Clamp(index - 5, 0, container.Children.Count);
+
+                container.Children.Insert(newIndex, element);
+            }
+            else
+            {
+                container.Children.Insert(index - 1, element);
+            }
+
             container.UpdateOrderButtons<T>();
 
             upper = element;
@@ -80,7 +96,22 @@ namespace BowieD.Unturned.NPCMaker
         {
             int index = container.IndexOf(element);
             container.Children.Remove(element);
-            container.Children.Insert(index + 1, element);
+
+            if (InputTool.IsKeyDown(Key.LeftShift)) // move to bottom
+            {
+                container.Children.Add(element);
+            }
+            else if (InputTool.IsKeyDown(Key.LeftCtrl)) // move by 5
+            {
+                int newIndex = MathUtil.Clamp(index + 5, 0, container.Children.Count);
+
+                container.Children.Insert(newIndex, element);
+            }
+            else
+            {
+                container.Children.Insert(index + 1, element);
+            }
+
             container.UpdateOrderButtons<T>();
 
             upper = container.Children[index] as T;
