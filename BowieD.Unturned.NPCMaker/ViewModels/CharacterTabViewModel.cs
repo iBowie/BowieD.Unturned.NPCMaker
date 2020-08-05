@@ -547,6 +547,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 }
                             }
                         }
+                        MainWindow.CurrentProject.data.guid = Guid.NewGuid().ToString("N");
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["App_GUID_Regenerated"]);
                     });
                 }
