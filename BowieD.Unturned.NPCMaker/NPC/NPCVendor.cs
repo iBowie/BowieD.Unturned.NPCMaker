@@ -8,18 +8,18 @@ using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 namespace BowieD.Unturned.NPCMaker.NPC
 {
     [System.Serializable]
-    public class NPCVendor : IHasUIText, INotifyPropertyChanged
+    public class NPCVendor : IHasUIText, INotifyPropertyChanged, IHasUniqueGUID
     {
         public NPCVendor()
         {
-            guid = Guid.NewGuid().ToString("N");
+            GUID = Guid.NewGuid().ToString("N");
             Comment = "";
             items = new List<VendorItem>();
             currency = "";
         }
 
-        [XmlAttribute]
-        public string guid;
+        [XmlAttribute("guid")]
+        public string GUID { get; set; }
         [XmlAttribute("comment")]
         public string Comment { get; set; }
 

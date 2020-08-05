@@ -8,11 +8,11 @@ using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 namespace BowieD.Unturned.NPCMaker.NPC
 {
     [System.Serializable]
-    public class NPCCharacter : IHasUIText, INotifyPropertyChanged
+    public class NPCCharacter : IHasUIText, INotifyPropertyChanged, IHasUniqueGUID
     {
         public NPCCharacter()
         {
-            guid = Guid.NewGuid().ToString("N");
+            GUID = Guid.NewGuid().ToString("N");
             EditorName = "";
             DisplayName = "";
             ID = 0;
@@ -89,8 +89,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public Equip_Type equipped;
         public float poseLean, posePitch, poseHeadOffset;
 
-        [XmlAttribute]
-        public string guid;
+        [XmlAttribute("guid")]
+        public string GUID { get; set; }
         public List<Condition> visibilityConditions;
 
         [field: NonSerialized]

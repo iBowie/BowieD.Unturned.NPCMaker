@@ -17,7 +17,7 @@ namespace BowieD.Unturned.NPCMaker.Logging
         {
             loggers.Add(logger);
             logger.Open();
-            Log($"Connected new Logger of type {logger.GetType().FullName}", ELogLevel.DEBUG);
+            Log($"Connected new Logger of type {logger.GetType().FullName}", ELogLevel.DEBUG).ConfigureAwait(false).GetAwaiter().GetResult();
         }
         public void CloseLogger(ILogger logger)
         {

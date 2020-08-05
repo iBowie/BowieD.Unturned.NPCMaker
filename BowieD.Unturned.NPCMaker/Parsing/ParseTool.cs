@@ -54,7 +54,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 startDialogueId = asset.ReadUInt16("Dialogue"),
                 DisplayName = local?.ReadString("Character"),
                 EditorName = local?.ReadString("Name"),
-                guid = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
+                GUID = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
                 leftHanded = asset.Has("Backward"),
                 clothing = ParseClothing(Clothing_Type.Default),
                 christmasClothing = ParseClothing(Clothing_Type.Christmas),
@@ -71,7 +71,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
         {
             NPCDialogue d = new NPCDialogue()
             {
-                guid = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
+                GUID = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
                 ID = asset.ReadUInt16("ID")
             };
             d.Messages = new List<NPCMessage>(asset.ReadByte("Messages"));
@@ -151,7 +151,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
             {
                 ID = asset.ReadUInt16("ID"),
                 disableSorting = asset.Has("Disable_Sorting"),
-                guid = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
+                GUID = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
                 Title = local?.ReadString("Name") ?? "",
                 vendorDescription = local?.ReadString("Description") ?? "",
                 items = ParseVendorItems().ToList(),
@@ -165,7 +165,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 ID = asset.ReadUInt16("ID"),
                 Title = local?.ReadString("Name") ?? "",
                 description = local?.ReadString("Description") ?? "",
-                guid = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
+                GUID = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
                 conditions = ParseConditions("").ToList(),
                 rewards = ParseRewards("").ToList()
             };

@@ -20,7 +20,7 @@ namespace BowieD.Unturned.NPCMaker.Export
     public static class Exporter
     {
         private const string WaterText = "// Made in NPC Maker by BowieD";
-        private const string NoValue = "UNDEFINED";
+
         public static void ExportNPC(NPCProject save)
         {
             try
@@ -82,7 +82,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                         local.WriteLine(WaterText);
                         if (AppConfig.Instance.generateGuids)
                         {
-                            asset.WriteLine($"GUID {character.guid}");
+                            asset.WriteLine($"GUID {character.GUID}");
                         }
 
                         asset.WriteLine($"ID {character.ID}");
@@ -217,7 +217,7 @@ namespace BowieD.Unturned.NPCMaker.Export
 
                         if (character.equipped != Equip_Type.None)
                         {
-                            asset.WriteLine($"Equipped {character.equipped.ToString()}");
+                            asset.WriteLine($"Equipped {character.equipped}");
                         }
 
                         asset.WriteLine($"Face {character.face}");
@@ -225,7 +225,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                         asset.WriteLine($"Hair {character.haircut}");
                         asset.WriteLine($"Color_Skin {character.skinColor.ToHEX()}");
                         asset.WriteLine($"Color_Hair {character.hairColor.ToHEX()}");
-                        asset.WriteLine($"Pose {character.pose.ToString()}");
+                        asset.WriteLine($"Pose {character.pose}");
                         if (character.leftHanded)
                         {
                             asset.WriteLine($"Backward");
@@ -275,15 +275,15 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Dialogues\{dialogue.guid}_{dialogue.ID}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Dialogues\{dialogue.guid}_{dialogue.ID}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Dialogues\{dialogue.guid}_{dialogue.ID}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(dir + $@"Dialogues\{dialogue.GUID}_{dialogue.ID}");
+                    using (StreamWriter asset = new StreamWriter(dir + $@"Dialogues\{dialogue.GUID}_{dialogue.ID}\Asset.dat", false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(dir + $@"Dialogues\{dialogue.GUID}_{dialogue.ID}\English.dat", false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
                         if (AppConfig.Instance.generateGuids)
                         {
-                            asset.WriteLine($"GUID {dialogue.guid}");
+                            asset.WriteLine($"GUID {dialogue.GUID}");
                         }
 
                         asset.WriteLine($"Type Dialogue");
@@ -430,15 +430,15 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Vendors\{vendor.guid}_{vendor.ID}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Vendors\{vendor.guid}_{vendor.ID}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Vendors\{vendor.guid}_{vendor.ID}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(dir + $@"Vendors\{vendor.GUID}_{vendor.ID}");
+                    using (StreamWriter asset = new StreamWriter(dir + $@"Vendors\{vendor.GUID}_{vendor.ID}\Asset.dat", false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(dir + $@"Vendors\{vendor.GUID}_{vendor.ID}\English.dat", false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
                         if (AppConfig.Instance.generateGuids)
                         {
-                            asset.WriteLine($"GUID {vendor.guid}");
+                            asset.WriteLine($"GUID {vendor.GUID}");
                         }
 
                         asset.WriteLine($"Type Vendor");
@@ -512,15 +512,15 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Quests\{quest.guid}_{quest.ID}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Quests\{quest.guid}_{quest.ID}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Quests\{quest.guid}_{quest.ID}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(dir + $@"Quests\{quest.GUID}_{quest.ID}");
+                    using (StreamWriter asset = new StreamWriter(dir + $@"Quests\{quest.GUID}_{quest.ID}\Asset.dat", false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(dir + $@"Quests\{quest.GUID}_{quest.ID}\English.dat", false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
                         if (AppConfig.Instance.generateGuids)
                         {
-                            asset.WriteLine($"GUID {quest.guid}");
+                            asset.WriteLine($"GUID {quest.GUID}");
                         }
 
                         asset.WriteLine($"Type Quest");

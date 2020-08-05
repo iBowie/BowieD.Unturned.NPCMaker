@@ -46,8 +46,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             var tab = MainWindow.Instance.characterTabSelect;
             if (tab.SelectedItem != null && tab.SelectedItem is TabItem tabItem && tabItem.DataContext != null)
             {
-                NPCCharacter selectedTabChar = tabItem.DataContext as NPCCharacter;
-                if (selectedTabChar != null)
+                if (tabItem.DataContext is NPCCharacter selectedTabChar)
                     Character = selectedTabChar;
             }
 
@@ -410,8 +409,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     editVisibilityConditionsCommand = new BaseCommand(() =>
                     {
-                        Universal_ListView ulv = new Universal_ListView(Character.visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, true)).ToList(), Universal_ItemList.ReturnType.Condition);
-                        ulv.Owner = MainWindow.Instance;
+                        Universal_ListView ulv = new Universal_ListView(Character.visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, true)).ToList(), Universal_ItemList.ReturnType.Condition)
+                        {
+                            Owner = MainWindow.Instance
+                        };
                         ulv.ShowDialog();
                         Character.visibilityConditions = ulv.Values.Cast<Condition>().ToList();
                         MainWindow.CurrentProject.isSaved = false;
@@ -513,7 +514,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             {
                                 if (c != null)
                                 {
-                                    c.guid = Guid.NewGuid().ToString("N");
+                                    c.GUID = Guid.NewGuid().ToString("N");
                                 }
                             }
                         }
@@ -523,7 +524,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             {
                                 if (d != null)
                                 {
-                                    d.guid = Guid.NewGuid().ToString("N");
+                                    d.GUID = Guid.NewGuid().ToString("N");
                                 }
                             }
                         }
@@ -533,7 +534,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             {
                                 if (v != null)
                                 {
-                                    v.guid = Guid.NewGuid().ToString("N");
+                                    v.GUID = Guid.NewGuid().ToString("N");
                                 }
                             }
                         }
@@ -543,7 +544,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             {
                                 if (q != null)
                                 {
-                                    q.guid = Guid.NewGuid().ToString("N");
+                                    q.GUID = Guid.NewGuid().ToString("N");
                                 }
                             }
                         }

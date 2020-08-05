@@ -8,7 +8,7 @@ using Reward = BowieD.Unturned.NPCMaker.NPC.Rewards.Reward;
 namespace BowieD.Unturned.NPCMaker.NPC
 {
     [System.Serializable]
-    public class NPCQuest : IHasUIText, INotifyPropertyChanged
+    public class NPCQuest : IHasUIText, INotifyPropertyChanged, IHasUniqueGUID
     {
         public NPCQuest()
         {
@@ -16,12 +16,12 @@ namespace BowieD.Unturned.NPCMaker.NPC
             rewards = new List<Reward>();
             Title = "";
             description = "";
-            guid = Guid.NewGuid().ToString("N");
+            GUID = Guid.NewGuid().ToString("N");
             Comment = "";
         }
 
-        [XmlAttribute]
-        public string guid;
+        [XmlAttribute("guid")]
+        public string GUID { get; set; }
         [XmlAttribute("comment")]
         public string Comment { get; set; }
 

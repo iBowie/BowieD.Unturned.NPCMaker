@@ -23,7 +23,7 @@ namespace BowieD.Unturned.NPCMaker.Common
             if (!typeof(T).IsSerializable)
                 throw new ArgumentException("Presented type is not serializable");
 
-            if (Object.ReferenceEquals(source, null))
+            if (source == null)
                 return default;
 
 
@@ -32,7 +32,12 @@ namespace BowieD.Unturned.NPCMaker.Common
             {
                 Formatter.Serialize(stream, source);
                 stream.Seek(0, SeekOrigin.Begin);
-                return (T)Formatter.Deserialize(stream);
+                T result = (T)Formatter.Deserialize(stream);
+                
+                if (result is IHasUniqueGUID uniqueGUID)
+                    uniqueGUID.GUID = Guid.NewGuid().ToString("N");
+                
+                return result;
             }
         }
     }

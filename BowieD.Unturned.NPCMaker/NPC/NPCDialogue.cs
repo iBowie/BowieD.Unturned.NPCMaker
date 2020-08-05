@@ -7,18 +7,18 @@ using System.Xml.Serialization;
 namespace BowieD.Unturned.NPCMaker.NPC
 {
     [System.Serializable]
-    public class NPCDialogue : IHasUIText, INotifyPropertyChanged
+    public class NPCDialogue : IHasUIText, INotifyPropertyChanged, IHasUniqueGUID
     {
         public NPCDialogue()
         {
             Messages = new List<NPCMessage>();
             Responses = new List<NPCResponse>();
-            guid = Guid.NewGuid().ToString("N");
+            GUID = Guid.NewGuid().ToString("N");
             Comment = "";
         }
 
-        [XmlAttribute]
-        public string guid;
+        [XmlAttribute("guid")]
+        public string GUID { get; set; }
         [XmlAttribute("comment")]
         public string Comment { get; set; }
 
