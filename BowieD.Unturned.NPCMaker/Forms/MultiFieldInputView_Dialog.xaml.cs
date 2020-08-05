@@ -13,6 +13,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             InitializeComponent();
         }
+        public MultiFieldInputView_Dialog(string[] defaultValues)
+        {
+            InitializeComponent();
+
+            this.defaults = defaultValues;
+        }
+
+        private readonly string[] defaults;
 
         [Obsolete("Use ShowDialog", true)]
         public new void Show() { base.Show(); }
@@ -31,6 +39,11 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 throw new ArgumentException("Messages and tooltips must have same length");
             }
+
+            string[] pDefaults = defaults ?? new string[messages.Length];
+
+            if (messages.Length != pDefaults.Length)
+                throw new ArgumentException("Messages and default values must have same length");
 
             Title = caption;
 
@@ -65,6 +78,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     TextWrapping = TextWrapping.Wrap
                 };
 
+                MahApps.Metro.Controls.TextBoxHelper.SetAutoWatermark(tx, true);
+                MahApps.Metro.Controls.TextBoxHelper.SetWatermark(tx, pDefaults[i]);
+
                 _textboxes[i] = tx;
 
                 g.Children.Add(l);
@@ -85,10 +101,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
             get
             {
                 string[] result = new string[_textboxes.Length];
+                string[] pDefaults = defaults ?? new string[_textboxes.Length];
 
                 for (int i = 0; i < _textboxes.Length; i++)
                 {
-                    result[i] = _textboxes[i].Text;
+                    if (string.IsNullOrEmpty(_textboxes[i].Text))
+                        result[i] = pDefaults[i] ?? string.Empty;
+                    else
+                        result[i] = _textboxes[i].Text;
                 }
 
                 return result;
