@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    public class NPCDialogue : IHasUIText
+    [System.Serializable]
+    public class NPCDialogue : IHasUIText, INotifyPropertyChanged
     {
         public NPCDialogue()
         {
-            messages = new List<NPCMessage>();
-            responses = new List<NPCResponse>();
+            Messages = new List<NPCMessage>();
+            Responses = new List<NPCResponse>();
             guid = Guid.NewGuid().ToString("N");
             Comment = "";
         }
@@ -20,41 +22,74 @@ namespace BowieD.Unturned.NPCMaker.NPC
         [XmlAttribute("comment")]
         public string Comment { get; set; }
 
-        [XmlAttribute]
-        public ushort id;
-        public List<NPCMessage> messages;
-        [XmlIgnore]
-        public int MessagesAmount => messages == null ? 0 : messages.Count;
-        [XmlIgnore]
-        public int ResponsesAmount => responses == null ? 0 : responses.Count;
-        public List<NPCResponse> responses;
+        private ushort _id;
+        [XmlAttribute("id")]
+        public ushort ID
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ID)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
+            }
+        }
+
+        private List<NPCMessage> _messages;
+        [XmlArray("messages")]
+        public List<NPCMessage> Messages
+        {
+            get => _messages;
+            set
+            {
+                _messages = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Messages)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
+            }
+        }
+
+        private List<NPCResponse> _responses;
+        [XmlArray("responses")]
+        public List<NPCResponse> Responses
+        {
+            get => _responses;
+            set
+            {
+                _responses = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Responses)));
+            }
+        }
+
+        [field: NonSerialized]
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public List<NPCResponse> GetVisibleResponses(NPCMessage message)
         {
-            int messageIndex = messages.IndexOf(message);
+            int messageIndex = Messages.IndexOf(message);
             if (messageIndex == -1)
             {
                 return null;
             }
 
-            return responses.Where(d => d.VisibleInAll || d.visibleIn[messageIndex] == 1).ToList();
+            return Responses.Where(d => d.VisibleInAll || d.visibleIn[messageIndex] == 1).ToList();
         }
         public string UIText
         {
             get
             {
-                if (messages == null || messages.Count < 1 || messages[0].pages.Count < 1)
+                if (Messages == null || Messages.Count < 1 || Messages[0].pages.Count < 1)
                 {
-                    return $"[{id}]";
+                    return $"[{ID}]";
                 }
                 else
                 {
-                    string t = messages[0].pages[0];
+                    string t = Messages[0].pages[0];
                     if (!string.IsNullOrEmpty(t))
                     {
-                        return TextUtil.Shortify($"[{id}] - {t}", 24);
+                        return TextUtil.Shortify($"[{ID}] - {t}", 24);
                     }
 
-                    return $"[{id}]";
+                    return $"[{ID}]";
                 }
             }
         }

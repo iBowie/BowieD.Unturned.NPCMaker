@@ -38,7 +38,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     break;
             }
 
-            formatter.Markup(title, SimulationTool.ReplacePlaceholders(character, simulation, quest.title));
+            formatter.Markup(title, SimulationTool.ReplacePlaceholders(character, simulation, quest.Title));
             formatter.Markup(desc, SimulationTool.ReplacePlaceholders(character, simulation, quest.description));
 
             foreach (NPC.Conditions.Condition c in quest.conditions)

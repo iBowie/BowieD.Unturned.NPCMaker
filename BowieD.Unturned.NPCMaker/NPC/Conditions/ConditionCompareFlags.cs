@@ -4,6 +4,7 @@ using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
+    [System.Serializable]
     public sealed class ConditionCompareFlags : Condition
     {
         public override Condition_Type Type => Condition_Type.Compare_Flags;

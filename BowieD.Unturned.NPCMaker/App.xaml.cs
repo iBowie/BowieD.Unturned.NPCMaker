@@ -56,8 +56,20 @@ namespace BowieD.Unturned.NPCMaker
         {
             InitLoggers();
             Logger.Log($"Detected .NET {NETHelper.GetVersionString()}");
-            if (NETHelper.GetVersion() >= NETVersion.v4_7_2)
+            NETVersion netVersion = NETHelper.GetVersion();
+
+            NETVersion checkVersion;
+
+            if (File.Exists("ignoredotnet"))
+                checkVersion = NETVersion.v4_7_1;
+            else
+                checkVersion = NETVersion.v4_7_2;
+
+            if (netVersion >= checkVersion)
             {
+                if (netVersion < NETVersion.v4_7_2)
+                    Logger.Log($"You have .NET Framework that does meet minimal requirement, but does not meet recommended. Crashes may occur.", ELogLevel.WARNING);
+
                 Logger.Log($"User has required .NET Framework version. Launching...", ELogLevel.POSITIVE);
                 Logger.Log($"BowieD.Unturned.NPCMaker {Version}. Copyright (C) 2020 Anton 'BowieD' Galakhov");
                 Logger.Log("This program comes with ABSOLUTELY NO WARRANTY; for details type `license w'.");
@@ -118,7 +130,7 @@ namespace BowieD.Unturned.NPCMaker
             }
             else
             {
-                Logger.Log("You have to install .NET Framework 4.7.2 to run this app properly.", ELogLevel.CRITICAL);
+                Logger.Log("You have to install .NET Framework 4.7.1 to run this app properly.", ELogLevel.CRITICAL);
                 Console.ReadKey(true);
             }
         }

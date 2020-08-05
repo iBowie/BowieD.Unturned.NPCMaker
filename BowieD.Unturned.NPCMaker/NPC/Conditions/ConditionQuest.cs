@@ -4,12 +4,14 @@ using System.Linq;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
+    [System.Serializable]
     public sealed class ConditionQuest : Condition
     {
         public override Condition_Type Type => Condition_Type.Quest;
         public ushort ID { get; set; }
         public Quest_Status Status { get; set; }
         public Logic_Type Logic { get; set; }
+        public bool Ignore_NPC { get; set; }
         public override string UIText
         {
             get
@@ -62,7 +64,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                             simulation.Quests.Remove(ID);
                             simulation.Flags[ID] = 1;
 
-                            NPCQuest questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.id == ID);
+                            NPCQuest questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.ID == ID);
 
                             foreach (Condition c in questAsset.conditions)
                             {

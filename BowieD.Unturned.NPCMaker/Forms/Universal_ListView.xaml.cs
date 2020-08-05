@@ -33,6 +33,22 @@ namespace BowieD.Unturned.NPCMaker.Forms
             MinWidth *= scale;
         }
 
+        public bool ShowMoveButtons
+        {
+            get
+            {
+                switch (ReturnType)
+                {
+                    case Universal_ItemList.ReturnType.Condition:
+                    case Universal_ItemList.ReturnType.VendorItem:
+                    case Universal_ItemList.ReturnType.Reward:
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        }
+
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             foreach (UIElement ui in mainGrid.Children)
@@ -130,6 +146,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
             }
 
             uil.Width = mainGrid.Width;
+
+            uil.ShowMoveButtons |= ShowMoveButtons;
+
             if (uil.ShowMoveButtons)
             {
                 uil.moveUpButton.Click += MoveUpButton_Click;
@@ -159,6 +178,12 @@ namespace BowieD.Unturned.NPCMaker.Forms
         private void Window_Closed(object sender, EventArgs e)
         {
             UpdateValues();
+        }
+
+        private void PasteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ClipboardManager.TryGetObject(ReturnType, out object obj))
+                Add(new Universal_ItemList(obj, ShowMoveButtons));
         }
     }
 }

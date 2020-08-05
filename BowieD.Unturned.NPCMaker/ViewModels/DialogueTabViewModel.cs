@@ -1,4 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Configuration;
+﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
@@ -7,30 +7,175 @@ using MahApps.Metro.Controls;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace BowieD.Unturned.NPCMaker.ViewModels
 {
-    public sealed class DialogueTabViewModel : BaseViewModel
+    public sealed class DialogueTabViewModel : BaseViewModel, ITabEditor, INPCTab
     {
         private NPCDialogue _dialogue;
         public DialogueTabViewModel()
         {
-            Dialogue = new NPCDialogue();
+            MainWindow.Instance.dialogueTabSelect.SelectionChanged += DialogueTabSelect_SelectionChanged;
+            MainWindow.Instance.dialogueTabButtonAdd.Click += DialogueTabButtonAdd_Click;
+            NPCDialogue empty = new NPCDialogue();
+            Dialogue = empty;
+            UpdateTabs();
         }
+
+        private void DialogueTabButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NPCDialogue item = new NPCDialogue();
+            MainWindow.CurrentProject.data.dialogues.Add(item);
+            MetroTabItem tabItem = CreateTab(item);
+            MainWindow.Instance.dialogueTabSelect.Items.Add(tabItem);
+            MainWindow.Instance.dialogueTabSelect.SelectedIndex = MainWindow.Instance.dialogueTabSelect.Items.Count - 1;
+        }
+
+        private void DialogueTabSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var tab = MainWindow.Instance.dialogueTabSelect;
+            if (tab.SelectedItem != null && tab.SelectedItem is TabItem tabItem && tabItem.DataContext != null)
+            {
+                NPCDialogue selectedTabChar = tabItem.DataContext as NPCDialogue;
+                if (selectedTabChar != null)
+                    Dialogue = selectedTabChar;
+            }
+
+            if (tab.SelectedItem is null)
+            {
+                MainWindow.Instance.dialogueTabGrid.IsEnabled = false;
+                MainWindow.Instance.dialogueTabGrid.Visibility = Visibility.Collapsed;
+                MainWindow.Instance.dialogueTabGridNoSelection.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MainWindow.Instance.dialogueTabGrid.IsEnabled = true;
+                MainWindow.Instance.dialogueTabGrid.Visibility = Visibility.Visible;
+                MainWindow.Instance.dialogueTabGridNoSelection.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        public void Save()
+        {
+            if (!(_dialogue is null))
+            {
+                UpdateResponses();
+                UpdateMessages();
+            }
+        }
+        public void Reset() { }
+
+        public void UpdateTabs()
+        {
+            var tab = MainWindow.Instance.dialogueTabSelect;
+            tab.Items.Clear();
+            int selected = -1;
+            for (int i = 0; i < MainWindow.CurrentProject.data.dialogues.Count; i++)
+            {
+                var dialogue = MainWindow.CurrentProject.data.dialogues[i];
+                if (dialogue == _dialogue)
+                    selected = i;
+                MetroTabItem tabItem = CreateTab(dialogue);
+                tab.Items.Add(tabItem);
+            }
+            if (selected != -1)
+                tab.SelectedIndex = selected;
+
+            if (tab.SelectedItem is null)
+            {
+                MainWindow.Instance.dialogueTabGrid.IsEnabled = false;
+                MainWindow.Instance.dialogueTabGrid.Visibility = Visibility.Collapsed;
+                MainWindow.Instance.dialogueTabGridNoSelection.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MainWindow.Instance.dialogueTabGrid.IsEnabled = true;
+                MainWindow.Instance.dialogueTabGrid.Visibility = Visibility.Visible;
+                MainWindow.Instance.dialogueTabGridNoSelection.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private MetroTabItem CreateTab(NPCDialogue dialogue)
+        {
+            MetroTabItem tabItem = new MetroTabItem();
+            tabItem.CloseButtonEnabled = true;
+            tabItem.CloseTabCommand = CloseTabCommand;
+            tabItem.CloseTabCommandParameter = tabItem;
+            var binding = new Binding()
+            {
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                Mode = BindingMode.OneWay,
+                Path = new PropertyPath("UIText")
+            };
+            Label l = new Label();
+            l.SetBinding(Label.ContentProperty, binding);
+            tabItem.Header = l;
+            tabItem.DataContext = dialogue;
+
+            var cmenu = new ContextMenu();
+            List<MenuItem> cmenuItems = new List<MenuItem>()
+            {
+                ContextHelper.CreateCopyButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    MetroTabItem target = context.PlacementTarget as MetroTabItem;
+                    ClipboardManager.SetObject(Universal_ItemList.ReturnType.Dialogue, target.DataContext);
+                }),
+                ContextHelper.CreateDuplicateButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    MetroTabItem target = context.PlacementTarget as MetroTabItem;
+                    var cloned = (target.DataContext as NPCDialogue).Clone();
+
+                    MainWindow.CurrentProject.data.dialogues.Add(cloned);
+                    MetroTabItem ti = CreateTab(cloned);
+                    MainWindow.Instance.dialogueTabSelect.Items.Add(ti);
+                }),
+                ContextHelper.CreatePasteButton((object sender, RoutedEventArgs e) =>
+                {
+                    if (ClipboardManager.TryGetObject(ClipboardManager.DialogueFormat, out var obj) && !(obj is null) && obj is NPCDialogue cloned)
+                    {
+                        MainWindow.CurrentProject.data.dialogues.Add(cloned);
+                        MetroTabItem ti = CreateTab(cloned);
+                        MainWindow.Instance.dialogueTabSelect.Items.Add(ti);
+                    }
+                })
+            };
+
+            foreach (var cmenuItem in cmenuItems)
+                cmenu.Items.Add(cmenuItem);
+
+            tabItem.ContextMenu = cmenu;
+            return tabItem;
+        }
+
         public NPCDialogue Dialogue
         {
-            get => _dialogue;
+            get
+            {
+                Save();
+
+                return _dialogue;
+            }
             set
             {
+                Save();
+
                 _dialogue = value;
 
                 MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Clear();
-                foreach (var r in value.responses)
+                foreach (var r in value.Responses)
                     AddResponse(new Dialogue_Response(r));
 
                 MainWindow.Instance.messagePagesGrid.Children.Clear();
-                foreach (var m in value.messages)
+                foreach (var m in value.Messages)
                     AddMessage(new Dialogue_Message(m));
 
                 OnPropertyChange("");
@@ -38,10 +183,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         }
         public ushort ID
         {
-            get => Dialogue.id;
+            get => Dialogue.ID;
             set
             {
-                Dialogue.id = value;
+                Dialogue.ID = value;
                 OnPropertyChange("ID");
             }
         }
@@ -55,81 +200,54 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }
         }
 
-        private ICommand saveCommand, openCommand, resetCommand, addReplyCommand, addMessageCommand, setAsStartCommand, previewCommand;
-        public ICommand SaveCommand
+        private ICommand addReplyCommand, addMessageCommand, setAsStartCommand, previewCommand;
+
+        private ICommand closeTabCommand;
+        private ICommand sortIDA, sortIDD;
+        public ICommand SortIDAscending
         {
             get
             {
-                if (saveCommand == null)
+                if (sortIDA == null)
                 {
-                    saveCommand = new BaseCommand(() =>
+                    sortIDA = new BaseCommand(() =>
                     {
-                        if (ID == 0)
-                        {
-                            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Dialogue_ID_Zero"]);
-                            return;
-                        }
-                        UpdateResponses();
-                        UpdateMessages();
-                        if (!MainWindow.CurrentProject.data.dialogues.Contains(Dialogue))
-                        {
-                            MainWindow.CurrentProject.data.dialogues.Add(Dialogue);
-                        }
-
-                        App.NotificationManager.Notify(LocalizationManager.Current.Notification["Dialogue_Saved"]);
-                        MainWindow.CurrentProject.isSaved = false;
-                        App.Logger.Log($"Dialogue {ID} saved!");
+                        MainWindow.CurrentProject.data.dialogues = MainWindow.CurrentProject.data.dialogues.OrderBy(d => d.ID).ToList();
+                        UpdateTabs();
                     });
                 }
-                return saveCommand;
+                return sortIDA;
             }
         }
-        public ICommand OpenCommand
+        public ICommand SortIDDescending
         {
             get
             {
-                if (openCommand == null)
+                if (sortIDD == null)
                 {
-                    openCommand = new BaseCommand(() =>
+                    sortIDD = new BaseCommand(() =>
                     {
-                        Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentProject.data.dialogues.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Dialogue, false)).ToList(), Universal_ItemList.ReturnType.Dialogue);
-                        ulv.Owner = MainWindow.Instance;
-                        if (ulv.ShowDialog() == true)
-                        {
-                            if (!AppConfig.Instance.automaticallySaveBeforeOpening)
-                            {
-                                var msgRes = MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Dialogue_Open_Confirm"], "", MessageBoxButton.YesNoCancel);
-                                if (msgRes == MessageBoxResult.Yes)
-                                    SaveCommand.Execute(null);
-                                else if (msgRes != MessageBoxResult.No)
-                                    return;
-                            }
-                            else
-                                SaveCommand.Execute(null);
-
-                            Dialogue = ulv.SelectedValue as NPCDialogue;
-                            App.Logger.Log($"Opened dialogue {ID}");
-                        }
-                        MainWindow.CurrentProject.data.dialogues = ulv.Values.Cast<NPCDialogue>().ToList();
+                        MainWindow.CurrentProject.data.dialogues = MainWindow.CurrentProject.data.dialogues.OrderByDescending(d => d.ID).ToList();
+                        UpdateTabs();
                     });
                 }
-                return openCommand;
+                return sortIDD;
             }
         }
-        public ICommand ResetCommand
+        public ICommand CloseTabCommand
         {
             get
             {
-                if (resetCommand == null)
+                if (closeTabCommand == null)
                 {
-                    resetCommand = new BaseCommand(() =>
+                    closeTabCommand = new BaseCommand((sender) =>
                     {
-                        ushort id = ID;
-                        Dialogue = new NPCDialogue();
-                        App.Logger.Log($"Cleared dialogue {id}");
+                        var tab = (sender as MetroTabItem);
+                        MainWindow.CurrentProject.data.dialogues.Remove(tab.DataContext as NPCDialogue);
+                        MainWindow.Instance.dialogueTabSelect.Items.Remove(sender);
                     });
                 }
-                return resetCommand;
+                return closeTabCommand;
             }
         }
         public ICommand AddReplyCommand
@@ -168,7 +286,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     setAsStartCommand = new BaseCommand(() =>
                     {
-                        SaveCommand.Execute(null);
                         if (ID > 0 && MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.DialogueID != ID)
                         {
                             MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.DialogueID = ID;
@@ -188,7 +305,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     previewCommand = new BaseCommand(() =>
                     {
-                        SaveCommand.Execute(null);
                         Dictionary<ushort, bool?> results = new Dictionary<ushort, bool?>();
                         bool? checkResult = CheckDialogue(Dialogue, results);
                         switch (checkResult)
@@ -246,7 +362,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         newMessages.Add(dr.Message);
                     }
                 }
-                Dialogue.messages = newMessages;
+                _dialogue.Messages = newMessages;
 
                 panel.UpdateOrderButtons<Dialogue_Message>();
             };
@@ -287,7 +403,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         newResponses.Add(dr.Response);
                     }
                 }
-                Dialogue.responses = newResponses;
+                _dialogue.Responses = newResponses;
 
                 panel.UpdateOrderButtons<Dialogue_Response>();
             };
@@ -307,24 +423,24 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
         public void UpdateResponses()
         {
-            Dialogue.responses.Clear();
+            _dialogue.Responses.Clear();
             foreach (var uie in MainWindow.Instance.dialoguePlayerRepliesGrid.Children)
             {
                 if (uie is Dialogue_Response dr)
                 {
-                    Dialogue.responses.Add(dr.Response);
+                    _dialogue.Responses.Add(dr.Response);
                 }
             }
             MainWindow.Instance.dialoguePlayerRepliesGrid.UpdateOrderButtons<Dialogue_Response>();
         }
         public void UpdateMessages()
         {
-            Dialogue.messages.Clear();
+            _dialogue.Messages.Clear();
             foreach (var uie in MainWindow.Instance.messagePagesGrid.Children)
             {
                 if (uie is Dialogue_Message dm)
                 {
-                    Dialogue.messages.Add(dm.Message);
+                    _dialogue.Messages.Add(dm.Message);
                 }
             }
             MainWindow.Instance.dialoguePlayerRepliesGrid.UpdateOrderButtons<Dialogue_Message>();
@@ -342,20 +458,20 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             if (dialogue is null)
                 return false;
 
-            if (results.TryGetValue(dialogue.id, out var res))
+            if (results.TryGetValue(dialogue.ID, out var res))
                 return res;
 
-            results[dialogue.id] = null;
+            results[dialogue.ID] = null;
 
-            foreach (var r in dialogue.responses)
+            foreach (var r in dialogue.Responses)
             {
                 if (r.openDialogueId != 0)
                 {
-                    var nextD = MainWindow.CurrentProject.data.dialogues.SingleOrDefault(d => d.id == r.openDialogueId);
+                    var nextD = MainWindow.CurrentProject.data.dialogues.SingleOrDefault(d => d.ID == r.openDialogueId);
 
                     if (nextD is null)
                     {
-                        results[dialogue.id] = false;
+                        results[dialogue.ID] = false;
                         return false;
                     }
 
@@ -363,54 +479,54 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
                     if (nextDres == false)
                     {
-                        results[dialogue.id] = false;
+                        results[dialogue.ID] = false;
                         return false;
                     }
                     else if (nextDres == null)
                     {
-                        results[dialogue.id] = null;
+                        results[dialogue.ID] = null;
                         return null;
                     }
                 }
 
                 if (r.openQuestId != 0)
                 {
-                    var nextQ = MainWindow.CurrentProject.data.quests.SingleOrDefault(d => d.id == r.openQuestId);
+                    var nextQ = MainWindow.CurrentProject.data.quests.SingleOrDefault(d => d.ID == r.openQuestId);
 
                     if (nextQ is null)
                     {
-                        results[dialogue.id] = false;
+                        results[dialogue.ID] = false;
                         return false;
                     }
                 }
 
                 if (r.openVendorId != 0)
                 {
-                    var nextV = MainWindow.CurrentProject.data.vendors.SingleOrDefault(d => d.id == r.openVendorId);
+                    var nextV = MainWindow.CurrentProject.data.vendors.SingleOrDefault(d => d.ID == r.openVendorId);
 
                     if (nextV is null)
                     {
-                        results[dialogue.id] = false;
+                        results[dialogue.ID] = false;
                         return false;
                     }
                 }
             }
 
-            foreach (var m in dialogue.messages)
+            foreach (var m in dialogue.Messages)
             {
                 if (m.prev != 0)
                 {
-                    var prevD = MainWindow.CurrentProject.data.dialogues.SingleOrDefault(d => d.id == m.prev);
+                    var prevD = MainWindow.CurrentProject.data.dialogues.SingleOrDefault(d => d.ID == m.prev);
 
                     if (prevD is null)
                     {
-                        results[dialogue.id] = false;
+                        results[dialogue.ID] = false;
                         return false;
                     }
                 }
             }
 
-            results[dialogue.id] = true;
+            results[dialogue.ID] = true;
             return true;
         }
     }

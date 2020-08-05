@@ -9,6 +9,10 @@ namespace BowieD.Unturned.NPCMaker
 {
     public static class Util
     {
+        public static bool IsNullable(this Type type)
+        {
+            return Nullable.GetUnderlyingType(type) != null;
+        }
         public static ImageSource GetImageSource(this string value)
         {
             return value.StartsWith("pack://application") ? new BitmapImage(new Uri(value)) : new BitmapImage(new Uri("pack://application:,,,/" + value));

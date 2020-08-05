@@ -130,6 +130,9 @@ namespace BowieD.Unturned.NPCMaker
 #if !DEBUG
             debugOverlayText.Visibility = Visibility.Collapsed;
 #endif
+#if PREVIEW
+            previewOverlayText.Visibility = Visibility.Visible;
+#endif
             #endregion
             #region DISCORD
             DiscordManager = new DiscordRPC.DiscordManager(1000)
@@ -298,9 +301,9 @@ namespace BowieD.Unturned.NPCMaker
         #region DRAG AND DROP
         private void Window_DragEnter(object sender, DragEventArgs e)
         {
-            dropOverlay.Visibility = Visibility.Visible;
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
+                dropOverlay.Visibility = Visibility.Visible;
                 e.Effects = DragDropEffects.Copy;
             }
         }

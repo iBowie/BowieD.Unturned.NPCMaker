@@ -23,9 +23,9 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         {
             foreach (NPC.NPCDialogue dial in MainWindow.CurrentProject.data.dialogues)
             {
-                for (int i = 0; i < dial.responses.Count; i++)
+                for (int i = 0; i < dial.Responses.Count; i++)
                 {
-                    NPC.NPCResponse response = dial.responses[i];
+                    NPC.NPCResponse response = dial.Responses[i];
 
                     if (response.openQuestId > 0)
                     {
@@ -58,7 +58,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
 
                         if (questCondition == null && questReward == null) // no quest condition yet previewing quest
                         {
-                            yield return new NE_1004(i + 1, dial.id);
+                            yield return new NE_1004(i + 1, dial.ID);
                         }
                     }
                 }

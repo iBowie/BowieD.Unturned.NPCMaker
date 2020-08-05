@@ -3,6 +3,7 @@ using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
+    [System.Serializable]
     public sealed class ConditionKillsTree : Condition
     {
         public ushort ID { get; set; }

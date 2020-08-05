@@ -2,6 +2,7 @@
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
+    [System.Serializable]
     public sealed class ConditionKillsAnimal : Condition
     {
         public override Condition_Type Type => Condition_Type.Kills_Animal;

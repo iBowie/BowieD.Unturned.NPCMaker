@@ -23,7 +23,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Quest
             {
                 if (_quest.conditions.Count == 0)
                 {
-                    yield return new NE_3001(_quest.title, _quest.id);
+                    yield return new NE_3001(_quest.Title, _quest.ID);
                 }
             }
         }

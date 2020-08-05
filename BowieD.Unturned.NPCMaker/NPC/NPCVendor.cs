@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Xml.Serialization;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    public class NPCVendor : IHasUIText
+    [System.Serializable]
+    public class NPCVendor : IHasUIText, INotifyPropertyChanged
     {
         public NPCVendor()
         {
@@ -21,20 +23,46 @@ namespace BowieD.Unturned.NPCMaker.NPC
         [XmlAttribute("comment")]
         public string Comment { get; set; }
 
-        public ushort id;
-        public string vendorTitle;
+        private ushort _id;
+        [XmlElement("id")]
+        public ushort ID
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ID)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
+            }
+        }
+        private string _title;
+        [XmlElement("vendorTitle")]
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                _title = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Title)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
+            }
+        }
         public string vendorDescription;
         public List<VendorItem> items;
         public bool disableSorting;
         public string currency;
+
+        [field: NonSerialized]
+        public event PropertyChangedEventHandler PropertyChanged;
+
         [XmlIgnore]
         public List<VendorItem> BuyItems => (items ?? new List<VendorItem>()).Where(d => d.isBuy).ToList();
         [XmlIgnore]
         public List<VendorItem> SellItems => (items ?? new List<VendorItem>()).Where(d => !d.isBuy).ToList();
 
-        public string UIText => $"[{id}] {vendorTitle}";
+        public string UIText => $"[{ID}] {Title}";
     }
-
+    [Serializable]
     public class VendorItem : IHasUIText
     {
         public VendorItem()

@@ -5,6 +5,7 @@ using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
+    [System.Serializable]
     public sealed class ConditionItem : Condition
     {
         public override Condition_Type Type => Condition_Type.Item;

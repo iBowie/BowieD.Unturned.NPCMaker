@@ -5,6 +5,7 @@ namespace BowieD.Unturned.NPCMaker.Coloring
 {
 #pragma warning disable CS0660
 #pragma warning disable CS0661
+    [Serializable]
     public struct Color
     {
         public Color(byte r, byte g, byte b)

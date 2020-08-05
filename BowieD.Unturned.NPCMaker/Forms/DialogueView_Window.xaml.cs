@@ -60,7 +60,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             if (!canDisplayNextPage)
             {
-                foreach (NPCResponse res in Dialogue.responses)
+                foreach (NPCResponse res in Dialogue.Responses)
                 {
                     if ((res.VisibleInAll || res.visibleIn.Length <= i || res.visibleIn[i] == 1) && res.conditions.All(d => d.Check(Simulation)))
                     {
@@ -80,9 +80,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             {
                                 shouldClose = false;
 
-                                NPCQuest questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.id == res.openQuestId);
+                                NPCQuest questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.ID == res.openQuestId);
 
-                                Quest_Status questStatus = Simulation.GetQuestStatus(questAsset.id);
+                                Quest_Status questStatus = Simulation.GetQuestStatus(questAsset.ID);
 
                                 QuestView_Window.EMode _mode;
 
@@ -113,7 +113,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                     {
                                         Previous = Start;
 
-                                        NPCDialogue next = MainWindow.CurrentProject.data.dialogues.Single(d => d.id == res.openDialogueId);
+                                        NPCDialogue next = MainWindow.CurrentProject.data.dialogues.Single(d => d.ID == res.openDialogueId);
 
                                         Dialogue = next;
 
@@ -127,7 +127,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             {
                                 shouldClose = false;
 
-                                NPCVendor vendorAsset = MainWindow.CurrentProject.data.vendors.Single(d => d.id == res.openVendorId);
+                                NPCVendor vendorAsset = MainWindow.CurrentProject.data.vendors.Single(d => d.ID == res.openVendorId);
 
                                 VendorView_Window qvw = new VendorView_Window(Character, Simulation, vendorAsset);
 
@@ -147,7 +147,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                 {
                                     Previous = Start;
 
-                                    NPCDialogue next = MainWindow.CurrentProject.data.dialogues.Single(d => d.id == res.openDialogueId);
+                                    NPCDialogue next = MainWindow.CurrentProject.data.dialogues.Single(d => d.ID == res.openDialogueId);
 
                                     Dialogue = next;
 
@@ -171,7 +171,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             {
                                 Previous = Dialogue;
 
-                                NPCDialogue next = MainWindow.CurrentProject.data.dialogues.Single(d => d.id == res.openDialogueId);
+                                NPCDialogue next = MainWindow.CurrentProject.data.dialogues.Single(d => d.ID == res.openDialogueId);
 
                                 Dialogue = next;
 
@@ -249,11 +249,11 @@ namespace BowieD.Unturned.NPCMaker.Forms
             mainText.Text = string.Empty;
             responsesPanel.Children.Clear();
 
-            formatter.Markup(npcNameText, FormatText(Character.displayName) ?? string.Empty);
+            formatter.Markup(npcNameText, FormatText(Character.DisplayName) ?? string.Empty);
 
-            for (int i = 0; i < Dialogue.messages.Count; i++)
+            for (int i = 0; i < Dialogue.Messages.Count; i++)
             {
-                NPCMessage msg = Dialogue.messages[i];
+                NPCMessage msg = Dialogue.Messages[i];
                 if (msg.conditions.All(d => d.Check(Simulation)))
                 {
                     foreach (NPC.Conditions.Condition c in msg.conditions)
@@ -271,7 +271,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     lastMessage = msg;
 
                     if (msg.prev != 0)
-                        Previous = MainWindow.CurrentProject.data.dialogues.SingleOrDefault(d => d.id == msg.prev);
+                        Previous = MainWindow.CurrentProject.data.dialogues.SingleOrDefault(d => d.ID == msg.prev);
 
                     DisplayPage(msg, i, 0);
 

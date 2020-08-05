@@ -95,22 +95,47 @@
             <TabControl Grid.Row="1" Background="Transparent" Padding="-1" Name="mainTabControl" SelectedIndex="0" Margin="0,5,0,0">
                 <TabItem DataContext="{Binding CharacterTabViewModel}" Name="characterTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Character}">
                     <Grid>
-                        <Button Command="{Binding SaveCommand}" Name="characterSaveButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="ContentSave" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <Button Command="{Binding ResetCommand}" Name="characterResetButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <Button Command="{Binding OpenCommand}" Name="characterOpenButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Width="300" Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="characterTabSelect"/>
+                            </ScrollViewer>
+                            <Button Style="{DynamicResource FlatButtonStyle}" Name="characterTabButtonAdd" Grid.Column="1" Margin="10">
+                                <Button.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Plus" Foreground="{DynamicResource AccentColor}"/>
+                                </Button.Content>
+                            </Button>
+                            <xctk:DropDownButton Style="{DynamicResource FlatDropDownButtonStyle}" Name="characterTabButtonSort" Grid.Column="2" Margin="10">
+                                <xctk:DropDownButton.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Sort" Foreground="{DynamicResource AccentColor}"/>
+                                </xctk:DropDownButton.Content>
+                                <xctk:DropDownButton.DropDownContent>
+                                    <StackPanel>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_EditorName_Ascending}" Command="{Binding SortEditorNameAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_EditorName_Descending}" Command="{Binding SortEditorNameDescending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_DisplayName_Ascending}" Command="{Binding SortDisplayNameAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_DisplayName_Descending}" Command="{Binding SortDisplayNameDescending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Ascending}" Command="{Binding SortIDAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Descending}" Command="{Binding SortIDDescending}"/>
+                                    </StackPanel>
+                                </xctk:DropDownButton.DropDownContent>
+                            </xctk:DropDownButton>
+                        </Grid>
+                        <Grid Grid.Row="1" Name="characterTabGridNoSelection" Visibility="Collapsed">
+                            <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock TextAlignment="Center" FontSize="36" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Character_NoSelection}" TextWrapping="Wrap"/>
+                            </Label>
+                        </Grid>
+                        <Grid Grid.Row="1" Name="characterTabGrid" Visibility="Visible">
+                            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Width="300" Margin="10">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
@@ -126,51 +151,51 @@
                                 </TextBox>
                                 <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Editor}"/>
                             </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <TextBox VerticalAlignment="Center" Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Name="txtDisplayName" Margin="5">
-                                    <TextBox.ToolTip>
-                                        <StackPanel>
-                                            <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Name_Display_Tooltip}"/>
-                                            <Image Source="Resources/Help/img_help_displayName.png"/>
-                                        </StackPanel>
-                                    </TextBox.ToolTip>
-                                </TextBox>
-                                <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Display}" VerticalAlignment="Top"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Name="txtID" VerticalAlignment="Center" Margin="5" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
-                                    <mah:NumericUpDown.ToolTip>
-                                        <StackPanel>
-                                            <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_ID_Tooltip}"/>
-                                        </StackPanel>
-                                    </mah:NumericUpDown.ToolTip>
-                                </mah:NumericUpDown>
-                                <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_ID}" />
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <mah:NumericUpDown Value="{Binding DialogueID, UpdateSourceTrigger=PropertyChanged}" Name="txtStartDialogueID" Margin="5" VerticalAlignment="Center" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
-                                    <mah:NumericUpDown.ToolTip>
-                                        <ToolTip>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox VerticalAlignment="Center" Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Name="txtDisplayName" Margin="5">
+                                        <TextBox.ToolTip>
                                             <StackPanel>
-                                                <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Dialogue_Tooltip}"/>
-                                                <Image Source="Resources/Help/img_help_startDialogue.png"/>
+                                                <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Name_Display_Tooltip}"/>
+                                                <Image Source="Resources/Help/img_help_displayName.png"/>
                                             </StackPanel>
-                                        </ToolTip>
-                                    </mah:NumericUpDown.ToolTip>
-                                </mah:NumericUpDown>
-                                <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Dialogue}"/>
+                                        </TextBox.ToolTip>
+                                    </TextBox>
+                                    <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Display}" VerticalAlignment="Top"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                    <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Name="txtID" VerticalAlignment="Center" Margin="5" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Minimum="0" Maximum="65535">
+                                        <xctk:UShortUpDown.ToolTip>
+                                            <StackPanel>
+                                                <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_ID_Tooltip}"/>
+                                            </StackPanel>
+                                        </xctk:UShortUpDown.ToolTip>
+                                    </xctk:UShortUpDown>
+                                    <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_ID}" />
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding DialogueID, UpdateSourceTrigger=PropertyChanged}" Name="txtStartDialogueID" VerticalAlignment="Center" Margin="5" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Minimum="0" Maximum="65535">
+                                        <xctk:UShortUpDown.ToolTip>
+                                            <ToolTip>
+                                                <StackPanel>
+                                                    <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Dialogue_Tooltip}"/>
+                                                    <Image Source="Resources/Help/img_help_startDialogue.png"/>
+                                                </StackPanel>
+                                            </ToolTip>
+                                        </xctk:UShortUpDown.ToolTip>
+                                    </xctk:UShortUpDown>
+                                    <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Dialogue}"/>
                             </Grid>
                             <Button Command="{Binding EditVisibilityConditionsCommand}" Name="visibilityCondsButton" Content="{xaml:Localize Key=CHARACTER_Conditions}" Margin="5">
                                 <Button.ToolTip>
@@ -181,7 +206,7 @@
                             </Button>
                             <Button Command="{Binding RegenerateGUIDsCommand}" Name="regenerateGuidsButton" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Guid_Generate}" Margin="5" />
                         </StackPanel>
-                        <Grid Margin="0,26,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="432">
+                        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Width="432">
                             <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" Background="Black" HorizontalAlignment="Right" Height="98" Margin="0,38,210,0" VerticalAlignment="Top" Width="98">
                                 <Image Name="faceImageControl" Source="Resources/Unturned/Faces/1.png" >
                                     <Image.Effect>
@@ -189,7 +214,7 @@
                                     </Image.Effect>
                                 </Image>
                             </Border>
-                            <mah:NumericUpDown Minimum="0" x:Name="faceImageIndex" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,210,0" Width="{Binding Width, ElementName=faceImageBorder}" Value="{Binding FaceID, UpdateSourceTrigger=PropertyChanged}" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
+                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Minimum="0" x:Name="faceImageIndex" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,210,0" Width="{Binding Width, ElementName=faceImageBorder}" Value="{Binding FaceID, UpdateSourceTrigger=PropertyChanged}"   ParsingNumberStyle="Integer"/>
                             <Border x:Name="beardImageBorder" BorderBrush="{Binding BorderBrush, ElementName=faceImageBorder}" BorderThickness="1" HorizontalAlignment="Right" Height="{Binding Height, ElementName=faceImageBorder}" Width="{Binding Width, ElementName=faceImageBorder}" VerticalAlignment="Top" Margin="0,38,8,0">
                                 <Grid Name="beardRenderGrid" DataContext="{Binding SolidColorBrush}" Background="#EEAAAAAA">
                                     <Canvas>
@@ -246,7 +271,7 @@
                                     </Canvas>
                                 </Grid>
                             </Border>
-                            <mah:NumericUpDown Value="{Binding BeardID, UpdateSourceTrigger=PropertyChanged}" Minimum="0" x:Name="beardImageIndex" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,8,0" Width="{Binding Width, ElementName=beardImageBorder}" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
+                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding BeardID, UpdateSourceTrigger=PropertyChanged}" Minimum="0" x:Name="beardImageIndex" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,8,0" Width="{Binding Width, ElementName=beardImageBorder}"   ParsingNumberStyle="Integer"/>
                             <Border x:Name="hairImageBorder" BorderBrush="{Binding BorderBrush, ElementName=beardImageBorder}" BorderThickness="{Binding BorderThickness, ElementName=beardImageBorder}" HorizontalAlignment="Right" Height="{Binding Height, ElementName=beardImageBorder}" Width="{Binding Width, ElementName=beardImageBorder}" VerticalAlignment="Top" Margin="0,38,109,0">
                                 <Grid Name="hairRenderGrid" DataContext="{Binding SolidColorBrush}" Background="#EEAAAAAA">
                                     <Canvas>
@@ -325,7 +350,7 @@
                                     </Canvas>
                                 </Grid>
                             </Border>
-                            <mah:NumericUpDown Value="{Binding HairID, UpdateSourceTrigger=PropertyChanged}" Minimum="0" x:Name="hairImageIndex" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,109,0" Width="{Binding Width, ElementName=hairImageBorder}" InterceptManualEnter="False" NumericInputMode="Numbers" ParsingNumberStyle="Integer"/>
+                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding HairID, UpdateSourceTrigger=PropertyChanged}" Minimum="0" x:Name="hairImageIndex" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,109,0" Width="{Binding Width, ElementName=hairImageBorder}"   ParsingNumberStyle="Integer"/>
                             <Button Command="{Binding RandomFaceCommand}" Name="apparelFaceRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Face_Random}" Margin="0,171,210,0" Width="98" Height="26"/>
                             <Button Command="{Binding RandomHairCommand}" Name="apparelHairRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Hair_Random}" Margin="0,171,109,0" Width="98" Height="26"/>
                             <Button Command="{Binding RandomBeardCommand}" Name="apparelBeardRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Beard_Random}" Margin="0,171,8,0" Width="98" Height="26"/>
@@ -355,55 +380,55 @@
                                 <TabItem DataContext="{Binding DefaultClothing, UpdateSourceTrigger=PropertyChanged}" Header="{xaml:Localize Key=CHARACTER_Clothing_Default}" mah:ControlsHelper.HeaderFontSize="18">
                                     <ScrollViewer>
                                         <Grid>
-                                            <mah:NumericUpDown Value="{Binding Hat,UpdateSourceTrigger=PropertyChanged}" x:Name="hatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Hat,UpdateSourceTrigger=PropertyChanged}" x:Name="hatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_hat.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Mask,UpdateSourceTrigger=PropertyChanged}" x:Name="maskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Mask,UpdateSourceTrigger=PropertyChanged}" x:Name="maskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_mask.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Glasses,UpdateSourceTrigger=PropertyChanged}" x:Name="glassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Glasses,UpdateSourceTrigger=PropertyChanged}" x:Name="glassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Shirt,UpdateSourceTrigger=PropertyChanged}" x:Name="topIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Shirt,UpdateSourceTrigger=PropertyChanged}" x:Name="topIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Backpack,UpdateSourceTrigger=PropertyChanged}" x:Name="backpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Backpack,UpdateSourceTrigger=PropertyChanged}" x:Name="backpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Vest,UpdateSourceTrigger=PropertyChanged}" x:Name="vestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Vest,UpdateSourceTrigger=PropertyChanged}" x:Name="vestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_vest.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Pants,UpdateSourceTrigger=PropertyChanged}" x:Name="bottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Pants,UpdateSourceTrigger=PropertyChanged}" x:Name="bottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
                                             <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
                                             <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
                                             <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
@@ -417,55 +442,55 @@
                                 <TabItem DataContext="{Binding ChristmasClothing}" Header="{xaml:Localize Key=CHARACTER_Clothing_Christmas}" mah:ControlsHelper.HeaderFontSize="18">
                                     <ScrollViewer>
                                         <Grid>
-                                            <mah:NumericUpDown Value="{Binding Hat,UpdateSourceTrigger=PropertyChanged}" x:Name="christmashatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Hat,UpdateSourceTrigger=PropertyChanged}" x:Name="christmashatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_hat.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Mask,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasmaskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Mask,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasmaskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_mask.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Glasses,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasglassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Glasses,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasglassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Shirt,UpdateSourceTrigger=PropertyChanged}" x:Name="christmastopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Shirt,UpdateSourceTrigger=PropertyChanged}" x:Name="christmastopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Backpack,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Backpack,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Vest,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Vest,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_vest.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Pants,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasbottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Pants,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasbottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
                                             <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
                                             <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
                                             <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
@@ -479,55 +504,55 @@
                                 <TabItem DataContext="{Binding HalloweenClothing}" Header="{xaml:Localize Key=CHARACTER_Clothing_Halloween}" mah:ControlsHelper.HeaderFontSize="18">
                                     <ScrollViewer>
                                         <Grid>
-                                            <mah:NumericUpDown Value="{Binding Hat,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenhatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Hat,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenhatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_hat.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Mask,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenmaskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Mask,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenmaskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_mask.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Glasses,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenglassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Glasses,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenglassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Shirt,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweentopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Shirt,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweentopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Backpack,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Backpack,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Vest,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Vest,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_vest.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
-                                            <mah:NumericUpDown Value="{Binding Pants,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenbottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <mah:NumericUpDown.ToolTip>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Pants,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenbottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
+                                                <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel>
                                                         <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
                                                     </StackPanel>
-                                                </mah:NumericUpDown.ToolTip>
-                                            </mah:NumericUpDown>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
                                             <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
                                             <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
                                             <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
@@ -548,11 +573,11 @@
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
-                                        <mah:NumericUpDown VerticalAlignment="Center" Margin="5" Value="{Binding EquipmentPrimary,UpdateSourceTrigger=PropertyChanged}" x:Name="primaryIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False">
-                                            <mah:NumericUpDown.ToolTip>
+                                        <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Margin="5" Value="{Binding EquipmentPrimary,UpdateSourceTrigger=PropertyChanged}" x:Name="primaryIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"   >
+                                            <xctk:UShortUpDown.ToolTip>
                                                 <StackPanel></StackPanel>
-                                            </mah:NumericUpDown.ToolTip>
-                                        </mah:NumericUpDown>
+                                            </xctk:UShortUpDown.ToolTip>
+                                        </xctk:UShortUpDown>
                                         <Label Grid.Column="1" Margin="5">
                                             <Label.Content>
                                                 <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Equipment_Primary}" />
@@ -564,11 +589,11 @@
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
-                                        <mah:NumericUpDown VerticalAlignment="Center" Value="{Binding EquipmentSecondary,UpdateSourceTrigger=PropertyChanged}" x:Name="secondaryIdBox"  ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="5">
-                                            <mah:NumericUpDown.ToolTip>
+                                        <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Value="{Binding EquipmentSecondary,UpdateSourceTrigger=PropertyChanged}" x:Name="secondaryIdBox"  ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="5">
+                                            <xctk:UShortUpDown.ToolTip>
                                                 <StackPanel></StackPanel>
-                                            </mah:NumericUpDown.ToolTip>
-                                        </mah:NumericUpDown>
+                                            </xctk:UShortUpDown.ToolTip>
+                                        </xctk:UShortUpDown>
                                         <Label Grid.Column="1" Margin="5">
                                             <Label.Content>
                                                 <TextBlock Text="{xaml:Localize Key=CHARACTER_Equipment_Secondary}" TextWrapping="Wrap"/>
@@ -580,11 +605,11 @@
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
-                                        <mah:NumericUpDown VerticalAlignment="Center" Value="{Binding EquipmentTertiary,UpdateSourceTrigger=PropertyChanged}" x:Name="tertiaryIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Margin="5">
-                                            <mah:NumericUpDown.ToolTip>
+                                        <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Value="{Binding EquipmentTertiary,UpdateSourceTrigger=PropertyChanged}" x:Name="tertiaryIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="5">
+                                            <xctk:UShortUpDown.ToolTip>
                                                 <StackPanel></StackPanel>
-                                            </mah:NumericUpDown.ToolTip>
-                                        </mah:NumericUpDown>
+                                            </xctk:UShortUpDown.ToolTip>
+                                        </xctk:UShortUpDown>
                                         <Label Grid.Column="1" Margin="5">
                                             <Label.Content>
                                                 <TextBlock Text="{xaml:Localize Key=CHARACTER_Equipment_Tertiary}" TextWrapping="Wrap"/>
@@ -607,208 +632,279 @@
                             </ScrollViewer>
                         </GroupBox>
                     </Grid>
+                    </Grid>
                 </TabItem>
                 <TabItem DataContext="{Binding DialogueTabViewModel}" Name="dialogueTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue}">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="33*"/>
-                            <ColumnDefinition MinWidth="381" Width="33*"/>
-                            <ColumnDefinition MinWidth="128" Width="33*"/>
-                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="80"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="dialogue_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
-                        <Button Command="{Binding SetAsStartCommand}" Name="setAsStartButton" Grid.Column="1" Margin="10,10,10,0" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_SetAsStart}">
-                            <Button.ToolTip>
-                                <StackPanel>
-                                    <Image Source="Resources/Help/img_help_startDialogue.png"/>
-                                </StackPanel>
-                            </Button.ToolTip>
-                        </Button>
-                        <Button Command="{Binding PreviewCommand}" Name="previewDialogueButton" Grid.Column="1" Margin="10,10,10,10" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Preview}"/>
-                        <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="dialogueInputIdControl" Width="62" Height="26" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
-                        <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
-                            <TextBlock TextAlignment="Center" Text="{xaml:Localize Key=DIALOGUE_ID}" VerticalAlignment="Center"/>
-                        </Border>
-                        <GroupBox Grid.Row="1" Header="{xaml:Localize Key=DIALOGUE_Pages}" Margin="10,10,5,10">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <ScrollViewer Margin="10">
-                                    <StackPanel Name="messagePagesGrid" VerticalAlignment="Top"/>
-                                </ScrollViewer>
-                                <Button Grid.Row="1" Command="{Binding AddMessageCommand}" Name="dialogueAddMessageButton" Margin="10" Content="{xaml:Localize Key=DIALOGUE_Message_Add}">
-                                    <Button.ToolTip>
-                                        <StackPanel>
-                                            <Image Source="Resources/Help/img_help_dialogueMessage.png"/>
-                                        </StackPanel>
-                                    </Button.ToolTip>
-                                </Button>
-                            </Grid>
-                        </GroupBox>
-                        <GroupBox Grid.Column="1" Grid.Row="1" Header="{xaml:Localize Key=DIALOGUE_Replies}" Margin="5,10,5,10" MinWidth="361">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <ScrollViewer Margin="10">
-                                    <StackPanel x:Name="dialoguePlayerRepliesGrid"/>
-                                </ScrollViewer>
-                                <Button Grid.Row="1" Command="{Binding AddReplyCommand}" Name="dialogueAddReplyButton" Margin="10" Content="{xaml:Localize Key=DIALOGUE_Reply_Add}">
-                                    <Button.ToolTip>
-                                        <StackPanel>
-                                            <Image Source="Resources/Help/img_help_dialogueReply.png"/>
-                                        </StackPanel>
-                                    </Button.ToolTip>
-                                </Button>
-                            </Grid>
-                        </GroupBox>
-                        <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="dialogueSaveButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31" Height="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="ContentSave" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <Button Command="{Binding ResetCommand}" Grid.Column="2" Name="dialogueResetButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31" Height="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="Delete" Width="16" Height="16"  Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <Button Command="{Binding OpenCommand}" Grid.Column="2" Name="dialogueOpenButton" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31" Height="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="FolderOutline" Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <TextBlock Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,0,10" Text="{xaml:Localize Key=DIALOGUE_Tips}" TextWrapping="Wrap" Width="254"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="dialogueTabSelect"/>
+                            </ScrollViewer>
+                            <Button Style="{DynamicResource FlatButtonStyle}" Name="dialogueTabButtonAdd" Grid.Column="1" Margin="10">
+                                <Button.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Plus" Foreground="{DynamicResource AccentColor}"/>
+                                </Button.Content>
+                            </Button>
+                            <xctk:DropDownButton Style="{DynamicResource FlatDropDownButtonStyle}" Name="dialogueTabButtonSort" Grid.Column="2" Margin="10">
+                                <xctk:DropDownButton.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Sort" Foreground="{DynamicResource AccentColor}"/>
+                                </xctk:DropDownButton.Content>
+                                <xctk:DropDownButton.DropDownContent>
+                                    <StackPanel>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Ascending}" Command="{Binding SortIDAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Descending}" Command="{Binding SortIDDescending}"/>
+                                    </StackPanel>
+                                </xctk:DropDownButton.DropDownContent>
+                            </xctk:DropDownButton>
+                        </Grid>
+                        <Grid Grid.Row="1" Name="dialogueTabGridNoSelection" Visibility="Collapsed">
+                            <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock TextAlignment="Center" FontSize="36" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_NoSelection}" TextWrapping="Wrap"/>
+                            </Label>
+                        </Grid>
+                        <Grid Grid.Row="1" Name="dialogueTabGrid" Visibility="Visible">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="33*"/>
+                                <ColumnDefinition MinWidth="381" Width="33*"/>
+                                <ColumnDefinition MinWidth="128" Width="33*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="80"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="dialogue_commentbox" Grid.Column="2" VerticalAlignment="Top" Margin="10,10,10,10" Height="26"/>
+                            <Button Command="{Binding SetAsStartCommand}" Name="setAsStartButton" Grid.Column="1" Margin="10,10,10,0" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_SetAsStart}">
+                                <Button.ToolTip>
+                                    <StackPanel>
+                                        <Image Source="Resources/Help/img_help_startDialogue.png"/>
+                                    </StackPanel>
+                                </Button.ToolTip>
+                            </Button>
+                            <Button Command="{Binding PreviewCommand}" Name="previewDialogueButton" Grid.Column="1" Margin="10,10,10,10" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Preview}"/>
+                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="dialogueInputIdControl" Width="62" Height="26" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"   />
+                            <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
+                                <TextBlock TextAlignment="Center" Text="{xaml:Localize Key=DIALOGUE_ID}" VerticalAlignment="Center"/>
+                            </Border>
+                            <GroupBox Grid.Row="1" Header="{xaml:Localize Key=DIALOGUE_Pages}" Margin="10,10,5,10">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <ScrollViewer Margin="10">
+                                        <StackPanel Name="messagePagesGrid" VerticalAlignment="Top"/>
+                                    </ScrollViewer>
+                                    <Button Grid.Row="1" Command="{Binding AddMessageCommand}" Name="dialogueAddMessageButton" Margin="10" Content="{xaml:Localize Key=DIALOGUE_Message_Add}">
+                                        <Button.ToolTip>
+                                            <StackPanel>
+                                                <Image Source="Resources/Help/img_help_dialogueMessage.png"/>
+                                            </StackPanel>
+                                        </Button.ToolTip>
+                                    </Button>
+                                </Grid>
+                            </GroupBox>
+                            <GroupBox Grid.Column="1" Grid.Row="1" Header="{xaml:Localize Key=DIALOGUE_Replies}" Margin="5,10,5,10" MinWidth="361">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <ScrollViewer Margin="10">
+                                        <StackPanel x:Name="dialoguePlayerRepliesGrid"/>
+                                    </ScrollViewer>
+                                    <Button Grid.Row="1" Command="{Binding AddReplyCommand}" Name="dialogueAddReplyButton" Margin="10" Content="{xaml:Localize Key=DIALOGUE_Reply_Add}">
+                                        <Button.ToolTip>
+                                            <StackPanel>
+                                                <Image Source="Resources/Help/img_help_dialogueReply.png"/>
+                                            </StackPanel>
+                                        </Button.ToolTip>
+                                    </Button>
+                                </Grid>
+                            </GroupBox>
+                            <TextBlock Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,0,10" Text="{xaml:Localize Key=DIALOGUE_Tips}" TextWrapping="Wrap" Width="254"/>
+                        </Grid>
                     </Grid>
                 </TabItem>
                 <TabItem DataContext="{Binding VendorTabViewModel}" Name="vendorTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor}">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="80"/>
-                            <RowDefinition />
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="33*"/>
-                            <ColumnDefinition MinWidth="296" Width="33*"/>
-                            <ColumnDefinition Width="33*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="vendor_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
-                        <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="vendorIdTxtBox" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
-                        <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
-                            <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_ID}" VerticalAlignment="Center"/>
-                        </Border>
-                        <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Name="vendorTitleTxtBox" Height="26" VerticalAlignment="Top" Margin="10,10,146,0"/>
-                        <TextBlock  Grid.Column="1" HorizontalAlignment="Right" Margin="0,14,10,0" TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_Title}" VerticalAlignment="Top" Width="128" Height="16"/>
-                        <TextBox  Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Name="vendorDescTxtBox" Height="26" VerticalAlignment="Bottom" Margin="10,0,146,10"/>
-                        <TextBlock  Grid.Column="1" Width="128" HorizontalAlignment="Right" Margin="0,0,10,14" TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_Description}" VerticalAlignment="Bottom" Height="16"/>
-                        <StackPanel Grid.Row="1" Grid.Column="2">
-                            <CheckBox IsChecked="{Binding DisableSorting, UpdateSourceTrigger=PropertyChanged}" Name="vendorDisableSortingBox" Content="{xaml:Localize Key=VENDOR_DisableSorting}" Margin="10" />
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <TextBox VerticalAlignment="Center" Text="{Binding Currency, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,10,0" />
-                                <TextBlock TextWrapping="Wrap" Grid.Column="1" Text="{xaml:Localize Key=VENDOR_Currency}" Margin="10"/>
-                            </Grid>
-                            <Button Command="{Binding PreviewCommand}" Name="previewVendorButton" Margin="10" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Preview}"/>
-                        </StackPanel>
-                        <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="vendorSaveButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="ContentSave"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <Button Command="{Binding OpenCommand}" Grid.Column="2" Name="vendorOpenButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <Button Command="{Binding ResetCommand}" Grid.Column="2" Name="vendorResetButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <GroupBox Grid.Row="1" Margin="10,5,5,10" Header="{xaml:Localize Key=VENDOR_Items_Buy}">
-                            <ScrollViewer>
-                                <StackPanel Name="vendorListBuyItems">
-
-                                </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="vendorTabSelect"/>
                             </ScrollViewer>
-                        </GroupBox>
-                        <GroupBox Grid.Row="1" Grid.Column="1" Margin="5,5,5,10" Header="{xaml:Localize Key=VENDOR_Items_Sell}">
-                            <ScrollViewer>
-                                <StackPanel Name="vendorListSellItems">
+                            <Button Style="{DynamicResource FlatButtonStyle}" Name="vendorTabButtonAdd" Grid.Column="1" Margin="10">
+                                <Button.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Plus" Foreground="{DynamicResource AccentColor}"/>
+                                </Button.Content>
+                            </Button>
+                            <xctk:DropDownButton Style="{DynamicResource FlatDropDownButtonStyle}" Name="vendorTabButtonSort" Grid.Column="2" Margin="10">
+                                <xctk:DropDownButton.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Sort" Foreground="{DynamicResource AccentColor}"/>
+                                </xctk:DropDownButton.Content>
+                                <xctk:DropDownButton.DropDownContent>
+                                    <StackPanel>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_Title_Ascending}" Command="{Binding SortTitleAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_Title_Descending}" Command="{Binding SortTitleDescending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Ascending}" Command="{Binding SortIDAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Descending}" Command="{Binding SortIDDescending}"/>
+                                    </StackPanel>
+                                </xctk:DropDownButton.DropDownContent>
+                            </xctk:DropDownButton>
+                        </Grid>
+                        <Grid Grid.Row="1" Name="vendorTabGridNoSelection" Visibility="Collapsed">
+                            <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock TextAlignment="Center" FontSize="36" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_NoSelection}" TextWrapping="Wrap"/>
+                            </Label>
+                        </Grid>
+                        <Grid Grid.Row="1" Name="vendorTabGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="80"/>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="33*"/>
+                                <ColumnDefinition MinWidth="296" Width="33*"/>
+                                <ColumnDefinition Width="33*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="vendor_commentbox" Grid.Column="2" VerticalAlignment="Top" Margin="10" Height="26"/>
+                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="vendorIdTxtBox" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"   />
+                            <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
+                                <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_ID}" VerticalAlignment="Center"/>
+                            </Border>
+                            <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Name="vendorTitleTxtBox" Height="26" VerticalAlignment="Top" Margin="10,10,146,0"/>
+                            <TextBlock  Grid.Column="1" HorizontalAlignment="Right" Margin="0,14,10,0" TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_Title}" VerticalAlignment="Top" Width="128" Height="16"/>
+                            <TextBox  Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Name="vendorDescTxtBox" Height="26" VerticalAlignment="Bottom" Margin="10,0,146,10"/>
+                            <TextBlock  Grid.Column="1" Width="128" HorizontalAlignment="Right" Margin="0,0,10,14" TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_Description}" VerticalAlignment="Bottom" Height="16"/>
+                            <StackPanel Grid.Row="1" Grid.Column="2">
+                                <CheckBox IsChecked="{Binding DisableSorting, UpdateSourceTrigger=PropertyChanged}" Name="vendorDisableSortingBox" Content="{xaml:Localize Key=VENDOR_DisableSorting}" Margin="10" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox VerticalAlignment="Center" Text="{Binding Currency, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,10,0" />
+                                    <TextBlock TextWrapping="Wrap" Grid.Column="1" Text="{xaml:Localize Key=VENDOR_Currency}" Margin="10"/>
+                                </Grid>
+                                <Button Command="{Binding PreviewCommand}" Name="previewVendorButton" Margin="10" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Preview}"/>
+                            </StackPanel>
+                            <GroupBox Grid.Row="1" Margin="10,5,5,10" Header="{xaml:Localize Key=VENDOR_Items_Buy}">
+                                <ScrollViewer>
+                                    <StackPanel Name="vendorListBuyItems">
 
-                                </StackPanel>
-                            </ScrollViewer>
-                        </GroupBox>
-                        <Button Command="{Binding AddItemCommand}" Name="vendorAddItemButton" Content="{xaml:Localize Key=VENDOR_Item_Add}" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="25"/>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </GroupBox>
+                            <GroupBox Grid.Row="1" Grid.Column="1" Margin="5,5,5,10" Header="{xaml:Localize Key=VENDOR_Items_Sell}">
+                                <ScrollViewer>
+                                    <StackPanel Name="vendorListSellItems">
+
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </GroupBox>
+                            <Button Command="{Binding AddItemCommand}" Name="vendorAddItemButton" Content="{xaml:Localize Key=VENDOR_Item_Add}" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="25"/>
+                        </Grid>
                     </Grid>
                 </TabItem>
                 <TabItem DataContext="{Binding QuestTabViewModel}" Name="questTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Quest}">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="80"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="33*"/>
-                            <ColumnDefinition Width="33*"/>
-                            <ColumnDefinition Width="33*"/>
-                        </Grid.ColumnDefinitions>
-                        <Button Grid.Column="1" Command="{Binding PreviewCommand}" Name="previewQuestButton" Margin="10" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_Preview}"/>
-                        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="quest_commentbox" Grid.Column="2" VerticalAlignment="Bottom" Margin="10,0,10,10" Height="26"/>
-                        <mah:NumericUpDown Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="questIdBox" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False"/>
-                        <Border VerticalAlignment="Top" HorizontalAlignment="Left" Margin="77,10,0,0" Height="26" Grid.ColumnSpan="2">
-                            <TextBlock Text="{xaml:Localize Key=QUEST_ID}" VerticalAlignment="Center"/>
-                        </Border>
-                        <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Name="questTitleBox" Height="26" VerticalAlignment="Top" Margin="10,38,10,0"/>
-                        <TextBlock Grid.Row="1" Text="{xaml:Localize Key=QUEST_Title}" TextAlignment="Center" Height="23" VerticalAlignment="Top" Margin="10,10,10,0"/>
-                        <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" TextWrapping="Wrap" Name="questDescBox" Margin="10,94,10,10"/>
-                        <TextBlock Grid.Row="1" TextAlignment="Center" Text="{xaml:Localize Key=QUEST_Description}" Height="23" VerticalAlignment="Top" Margin="10,66,10,0"/>
-                        <Button Command="{Binding SaveCommand}" Grid.Column="2" Name="questSaveButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_Save_Tooltip}" HorizontalAlignment="Right" Margin="0,8,82,0" VerticalAlignment="Top" Width="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="ContentSave"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <Button Command="{Binding OpenCommand}" Grid.Column="2" Name="questOpenButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_Open_Tooltip}" HorizontalAlignment="Right" Margin="0,8,46,0" VerticalAlignment="Top" Width="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="FolderOutline"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <Button Command="{Binding ResetCommand}" Grid.Column="2" Name="questResetButton" Height="31" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_Reset_Tooltip}" HorizontalAlignment="Right" Margin="0,8,10,0" VerticalAlignment="Top" Width="31">
-                            <Button.Content>
-                                <iconPacks:PackIconMaterial Kind="Delete"  Width="16" Height="16" Foreground="{DynamicResource AccentColor}"/>
-                            </Button.Content>
-                        </Button>
-                        <Grid Grid.Column="1" Grid.Row="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <GroupBox Header="{xaml:Localize Key=QUEST_Conditions}" Margin="10">
-                                <ScrollViewer>
-                                    <StackPanel Name="listQuestConditions" />
-                                </ScrollViewer>
-                            </GroupBox>
-                            <Button Command="{Binding AddConditionCommand}" Grid.Column="1" Grid.Row="1" Name="questAddConditionButton" Height="23" Content="{xaml:Localize Key=QUEST_Condition_Add}" Margin="10" VerticalAlignment="Bottom"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="questTabSelect"/>
+                            </ScrollViewer>
+                            <Button Style="{DynamicResource FlatButtonStyle}" Name="questTabButtonAdd" Grid.Column="1" Margin="10">
+                                <Button.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Plus" Foreground="{DynamicResource AccentColor}"/>
+                                </Button.Content>
+                            </Button>
+                            <xctk:DropDownButton Style="{DynamicResource FlatDropDownButtonStyle}" Name="questTabButtonSort" Grid.Column="2" Margin="10">
+                                <xctk:DropDownButton.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Sort" Foreground="{DynamicResource AccentColor}"/>
+                                </xctk:DropDownButton.Content>
+                                <xctk:DropDownButton.DropDownContent>
+                                    <StackPanel>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_Title_Ascending}" Command="{Binding SortTitleAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_Title_Descending}" Command="{Binding SortTitleDescending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Ascending}" Command="{Binding SortIDAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Descending}" Command="{Binding SortIDDescending}"/>
+                                    </StackPanel>
+                                </xctk:DropDownButton.DropDownContent>
+                            </xctk:DropDownButton>
                         </Grid>
-                        <Grid Grid.Column="2" Grid.Row="1">
+                        <Grid Grid.Row="1" Name="questTabGridNoSelection" Visibility="Collapsed">
+                            <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock TextAlignment="Center" FontSize="36" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_NoSelection}" TextWrapping="Wrap"/>
+                            </Label>
+                        </Grid>
+                        <Grid Grid.Row="1" Name="questTabGrid">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="80"/>
                                 <RowDefinition/>
-                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <GroupBox Header="{xaml:Localize Key=QUEST_Rewards}" Margin="10">
-                                <ScrollViewer>
-                                    <StackPanel Name="listQuestRewards" />
-                                </ScrollViewer>
-                            </GroupBox>
-                            <Button Command="{Binding AddRewardCommand}" Grid.Row="1" Name="questAddRewardButton" Height="23" Content="{xaml:Localize Key=QUEST_Reward_Add}" Margin="10" VerticalAlignment="Bottom"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="33*"/>
+                                <ColumnDefinition Width="33*"/>
+                                <ColumnDefinition Width="33*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="1" Command="{Binding PreviewCommand}" Name="previewQuestButton" Margin="10" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_Preview}"/>
+                            <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="quest_commentbox" Grid.Column="2" VerticalAlignment="Top" Margin="10" Height="26"/>
+                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="questIdBox" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"   />
+                            <Border VerticalAlignment="Top" HorizontalAlignment="Left" Margin="77,10,0,0" Height="26" Grid.ColumnSpan="2">
+                                <TextBlock Text="{xaml:Localize Key=QUEST_ID}" VerticalAlignment="Center"/>
+                            </Border>
+                            <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Name="questTitleBox" Height="26" VerticalAlignment="Top" Margin="10,38,10,0"/>
+                            <TextBlock Grid.Row="1" Text="{xaml:Localize Key=QUEST_Title}" TextAlignment="Center" Height="23" VerticalAlignment="Top" Margin="10,10,10,0"/>
+                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" TextWrapping="Wrap" Name="questDescBox" Margin="10,94,10,10"/>
+                            <TextBlock Grid.Row="1" TextAlignment="Center" Text="{xaml:Localize Key=QUEST_Description}" Height="23" VerticalAlignment="Top" Margin="10,66,10,0"/>
+                            <Grid Grid.Column="1" Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <GroupBox Header="{xaml:Localize Key=QUEST_Conditions}" Margin="10">
+                                    <ScrollViewer>
+                                        <StackPanel Name="listQuestConditions" />
+                                    </ScrollViewer>
+                                </GroupBox>
+                                <Button Command="{Binding AddConditionCommand}" Grid.Column="1" Grid.Row="1" Name="questAddConditionButton" Height="23" Content="{xaml:Localize Key=QUEST_Condition_Add}" Margin="10" VerticalAlignment="Bottom"/>
+                            </Grid>
+                            <Grid Grid.Column="2" Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <GroupBox Header="{xaml:Localize Key=QUEST_Rewards}" Margin="10">
+                                    <ScrollViewer>
+                                        <StackPanel Name="listQuestRewards" />
+                                    </ScrollViewer>
+                                </GroupBox>
+                                <Button Command="{Binding AddRewardCommand}" Grid.Row="1" Name="questAddRewardButton" Height="23" Content="{xaml:Localize Key=QUEST_Reward_Add}" Margin="10" VerticalAlignment="Bottom"/>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </TabItem>
@@ -851,6 +947,106 @@
                 <iconPacks:PackIconMaterial Kind="BugOutline" Width="36" Height="36" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Margin="36,0,0,0" Content="DEBUG" HorizontalAlignment="Right" FontSize="36"/>
             </Grid>
+            <Grid Visibility="Collapsed" Name="previewOverlayText" HorizontalAlignment="Right" Opacity="0.15" VerticalAlignment="Top" Margin="5">
+                <iconPacks:PackIconMaterial Kind="EyeOutline" Width="36" Height="36" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Margin="36,0,0,0" Content="PREVIEW" HorizontalAlignment="Right" FontSize="36"/>
+            </Grid>
         </Grid>
     </Grid>
+    <mah:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ControlTemplate x:Key="FlatToggleButtonTemplate" TargetType="ToggleButton">
+                <Border Name="border" Opacity="0.5">
+                    <ContentPresenter Margin="2" Content="{TemplateBinding Content}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="border" Property="Opacity" Value="1"/>
+                    </Trigger>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter TargetName="border" Property="Opacity" Value="1"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+            <Style x:Key="FlagToggleButtonStyle" TargetType="ToggleButton">
+                <Setter Property="Template" Value="{DynamicResource FlatToggleButtonTemplate}"/>
+            </Style>
+            <ControlTemplate x:Key="FlatDropDownButtonTemplate" TargetType="xctk:DropDownButton">
+                <Grid>
+                    <ToggleButton Name="toggleButton" Content="{TemplateBinding Content}"
+                                  IsChecked="{Binding IsOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Style="{DynamicResource FlagToggleButtonStyle}"/>
+                    <Popup IsOpen="{Binding IsChecked, ElementName=toggleButton}">
+                        <Border>
+                            <ScrollViewer>
+                                <ContentPresenter Content="{TemplateBinding DropDownContent}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </Popup>
+                </Grid>
+            </ControlTemplate>
+            <Style x:Key="FlatDropDownButtonStyle" TargetType="xctk:DropDownButton">
+                <Setter Property="Template" Value="{DynamicResource FlatDropDownButtonTemplate}"/>
+            </Style>
+            <ControlTemplate x:Key="FlatButtonTemplate" TargetType="Button">
+                <Border Name="border" Opacity="0.5">
+                    <ContentPresenter Margin="2" Content="{TemplateBinding Content}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="border" Property="Opacity" Value="1"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+            <Style x:Key="FlatButtonStyle" TargetType="Button">
+                <Setter Property="Template" Value="{DynamicResource FlatButtonTemplate}"/>
+            </Style>
+            <ControlTemplate x:Key="FancyTabItemCloseButtonTemplate" TargetType="Button">
+                <Border Name="border" Opacity="0.5" Background="{DynamicResource BackgroundColor}">
+                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="border" Property="Opacity" Value="1"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+            <Style x:Key="FancyTabItemCloseButtonStyle" TargetType="Button">
+                <Setter Property="Template" Value="{DynamicResource FancyTabItemCloseButtonTemplate}"/>
+            </Style>
+            <ControlTemplate x:Key="FancyTabItemControlTemplate" TargetType="mah:MetroTabItem">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Rectangle Name="rect" Fill="Transparent" Height="2"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ContentPresenter Content="{TemplateBinding Header}" Grid.Column="0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <Button Style="{DynamicResource FancyTabItemCloseButtonStyle}" Command="{TemplateBinding CloseTabCommand}" CommandParameter="{TemplateBinding CloseTabCommandParameter}" Grid.Column="1" Margin="5" Background="Transparent" Foreground="{DynamicResource ForegroundColor}">
+                            <Button.Content>
+                                <iconPacks:PackIconMaterial Kind="Close" Margin="1" Width="12" Height="12"/>
+                            </Button.Content>
+                        </Button>
+                    </Grid>
+                </Grid>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="rect" Property="Fill" Value="{DynamicResource AccentColor}"/>
+                        <Setter TargetName="rect" Property="Opacity" Value="0.5"/>
+                    </Trigger>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter TargetName="rect" Property="Fill" Value="{DynamicResource AccentColor}"/>
+                        <Setter TargetName="rect" Property="Opacity" Value="1"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+            <Style x:Key="FancyTabItem" TargetType="mah:MetroTabItem">
+                <Setter Property="Template" Value="{DynamicResource FancyTabItemControlTemplate}"/>
+            </Style>
+        </ResourceDictionary>
+    </mah:MetroWindow.Resources>
 </mah:MetroWindow>

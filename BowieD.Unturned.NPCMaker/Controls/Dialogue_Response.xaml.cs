@@ -94,7 +94,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             select.ShowDialog();
             if (select.DialogResult == true)
             {
-                txtBoxQuestID.Value = (select.SelectedValue as NPC.NPCQuest).id;
+                txtBoxQuestID.Value = (select.SelectedValue as NPC.NPCQuest).ID;
             }
         }
 
@@ -109,7 +109,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             select.ShowDialog();
             if (select.DialogResult == true)
             {
-                txtBoxVendorID.Value = (select.SelectedValue as NPC.NPCVendor).id;
+                txtBoxVendorID.Value = (select.SelectedValue as NPC.NPCVendor).ID;
             }
         }
 
@@ -124,15 +124,15 @@ namespace BowieD.Unturned.NPCMaker.Controls
             select.ShowDialog();
             if (select.DialogResult == true)
             {
-                txtBoxDialogueID.Value = (select.SelectedValue as NPC.NPCDialogue).id;
+                txtBoxDialogueID.Value = (select.SelectedValue as NPC.NPCDialogue).ID;
             }
         }
 
         private void ChangeVisibilityButton_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Dialogue.messages.Count > 1)
+            if (MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Dialogue.Messages.Count > 1)
             {
-                Message_TreeView mtv = new Message_TreeView(Response.visibleIn, MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Dialogue.messages.Count);
+                Message_TreeView mtv = new Message_TreeView(Response.visibleIn, MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Dialogue.Messages.Count);
                 mtv.Owner = MainWindow.Instance;
                 mtv.ShowDialog();
                 if (mtv.DialogResult == true)

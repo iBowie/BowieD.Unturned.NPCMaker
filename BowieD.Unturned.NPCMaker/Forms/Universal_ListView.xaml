@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
+        xmlns:iconpack="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Closed="Window_Closed"
         Title="Universal_ListView" WindowStartupLocation="CenterOwner" MinWidth="256" MinHeight="128" Height="256" Width="400" Icon="{DynamicResource app_Icon}">
@@ -12,9 +13,24 @@
         <Grid.LayoutTransform>
             <ScaleTransform x:Name="gridScale"/>
         </Grid.LayoutTransform>
-        <ScrollViewer Margin="10,10,10,49">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Margin="10,10,10,10">
             <StackPanel x:Name="mainGrid" />
         </ScrollViewer>
-        <Button Click="AddButton_Click" Name="addButton" VerticalAlignment="Bottom" Height="34" Margin="10,0,10,10"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Click="AddButton_Click" Name="addButton" Height="34" Margin="10,10,5,10"/>
+            <Button Grid.Column="1" Click="PasteButton_Click" Name="pasteButton" Width="34" Height="34" Margin="5,10,10,10">
+                <Button.Content>
+                    <iconpack:PackIconMaterial Kind="ContentPaste" Foreground="{DynamicResource AccentColor}"/>
+                </Button.Content>
+            </Button>
+        </Grid>
     </Grid>
 </Window>

@@ -40,11 +40,16 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         public object Value { get; private set; }
         public ReturnType Type { get; }
-        public bool ShowMoveButtons { get; }
+        public bool ShowMoveButtons { get; internal set; }
 
         public UIElement UpButton => moveUpButton;
         public UIElement DownButton => moveDownButton;
         public Transform Transform => animateTransform;
+
+        private void CopyButton_Click(object sender, RoutedEventArgs e)
+        {
+            ClipboardManager.SetObject(Type, Value);
+        }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {

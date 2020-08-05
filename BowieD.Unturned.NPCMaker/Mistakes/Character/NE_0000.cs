@@ -21,9 +21,9 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Character
         {
             foreach (NPC.NPCCharacter _char in MainWindow.CurrentProject.data.characters)
             {
-                if (_char.id > 0 && _char.id <= 2000)
+                if (_char.ID > 0 && _char.ID <= 2000)
                 {
-                    yield return new NE_0000(_char.displayName, _char.id);
+                    yield return new NE_0000(_char.DisplayName, _char.ID);
                 }
             }
         }

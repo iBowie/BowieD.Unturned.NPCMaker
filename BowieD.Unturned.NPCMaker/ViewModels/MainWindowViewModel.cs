@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
+using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using DiscordRPC;
 using Microsoft.Win32;
 using System;
@@ -13,6 +14,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.ViewModels
 {
@@ -63,6 +65,51 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         ConsoleLogger.ShowConsoleWindow();
                     }
                 })));
+            RoutedCommand pasteCommand = new RoutedCommand();
+            pasteCommand.InputGestures.Add(new KeyGesture(Key.V, ModifierKeys.Control));
+            MainWindow.CommandBindings.Add(new CommandBinding(pasteCommand,
+                new ExecutedRoutedEventHandler((object sender, ExecutedRoutedEventArgs e) =>
+                {
+                    switch (MainWindow.mainTabControl.SelectedIndex)
+                    {
+                        case 0 when CharacterTabViewModel.Character != null: // character (condition)
+                            {
+                                if (ClipboardManager.TryGetObject(ClipboardManager.ConditionFormat, out var obj) && obj is Condition cond)
+                                {
+                                    CharacterTabViewModel.Character.visibilityConditions.Add(cond);
+                                }
+                            }
+                            break;
+                        case 1 when DialogueTabViewModel.Dialogue != null: // dialogue (nothing at this moment)
+                            {
+
+                            }
+                            break;
+                        case 2 when VendorTabViewModel.Vendor != null: // vendor (vendor item)
+                            {
+                                if (ClipboardManager.TryGetObject(ClipboardManager.VendorItemFormat, out var obj) && obj is VendorItem item)
+                                {
+                                    if (item.isBuy)
+                                        VendorTabViewModel.AddItemBuy(item);
+                                    else
+                                        VendorTabViewModel.AddItemSell(item);
+                                }
+                            }
+                            break;
+                        case 3 when QuestTabViewModel.Quest != null: // quest (condition, reward)
+                            {
+                                if (ClipboardManager.TryGetObject(ClipboardManager.ConditionFormat, out var obj) && obj is Condition cond)
+                                {
+                                    QuestTabViewModel.AddCondition(new Controls.Universal_ItemList(cond, true));
+                                }
+                                else if (ClipboardManager.TryGetObject(ClipboardManager.RewardFormat, out obj) && obj is Reward rew)
+                                {
+                                    QuestTabViewModel.AddReward(new Controls.Universal_ItemList(rew, true));
+                                }
+                            }
+                            break;
+                    }
+                })));
             CharacterTabViewModel = new CharacterTabViewModel();
             DialogueTabViewModel = new DialogueTabViewModel();
             VendorTabViewModel = new VendorTabViewModel();
@@ -95,6 +142,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     QuestTabViewModel.Quest = data.quests[data.lastQuest];
                 }
+
+                UpdateAllTabs();
             };
         }
         public MainWindow MainWindow { get; set; }
@@ -105,17 +154,17 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public MistakeTabViewModel MistakeTabViewModel { get; set; }
         public void ResetAll()
         {
-            CharacterTabViewModel.ResetCommand.Execute(null);
-            DialogueTabViewModel.ResetCommand.Execute(null);
-            VendorTabViewModel.ResetCommand.Execute(null);
-            QuestTabViewModel.ResetCommand.Execute(null);
+            CharacterTabViewModel.Reset();
+            DialogueTabViewModel.Reset();
+            VendorTabViewModel.Reset();
+            QuestTabViewModel.Reset();
         }
         public void SaveAll()
         {
-            CharacterTabViewModel.SaveCommand.Execute(null);
-            DialogueTabViewModel.SaveCommand.Execute(null);
-            VendorTabViewModel.SaveCommand.Execute(null);
-            QuestTabViewModel.SaveCommand.Execute(null);
+            CharacterTabViewModel.Save();
+            DialogueTabViewModel.Save();
+            VendorTabViewModel.Save();
+            QuestTabViewModel.Save();
 
             ProjectData proj = MainWindow.CurrentProject;
             NPCProject data = proj.data;
@@ -124,6 +173,13 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             data.lastDialogue = data.dialogues.IndexOf(DialogueTabViewModel.Dialogue);
             data.lastQuest = data.quests.IndexOf(QuestTabViewModel.Quest);
             data.lastVendor = data.vendors.IndexOf(VendorTabViewModel.Vendor);
+        }
+        public void UpdateAllTabs()
+        {
+            CharacterTabViewModel.UpdateTabs();
+            DialogueTabViewModel.UpdateTabs();
+            VendorTabViewModel.UpdateTabs();
+            QuestTabViewModel.UpdateTabs();
         }
         internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -178,8 +234,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     SmallImageKey = "icon_chat_outlined",
                                     SmallImageText = $"Dialogues: {MainWindow.CurrentProject.data.dialogues.Count}"
                                 },
-                                Details = $"Messages: {DialogueTabViewModel.Dialogue.messages.Count}",
-                                State = $"Responses: {DialogueTabViewModel.Dialogue.responses.Count}"
+                                Details = $"Messages: {DialogueTabViewModel.Dialogue.Messages.Count}",
+                                State = $"Responses: {DialogueTabViewModel.Dialogue.Responses.Count}"
                             });
                         }
                         break;
@@ -290,6 +346,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             if (pCommand.LastResult)
                             {
                                 App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Import_Directory_Done", pCommand.LastImported, pCommand.LastSkipped));
+                                MainWindow.MainWindowViewModel.UpdateAllTabs();
                             }
                         }
                     });
@@ -319,6 +376,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 if (pCommand.LastResult)
                                 {
                                     App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Import_File_Done", file));
+                                    MainWindow.MainWindowViewModel.UpdateAllTabs();
                                 }
                                 else
                                 {
@@ -347,6 +405,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         MainWindow.CurrentProject.data = new NPCProject();
                         MainWindow.CurrentProject.file = "";
                         ResetAll();
+                        UpdateAllTabs();
                         MainWindow.CurrentProject.isSaved = true;
                         MainWindow.Started = DateTime.UtcNow;
                     });
@@ -425,6 +484,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         MainWindow.CurrentProject.file = path;
                         if (MainWindow.CurrentProject.Load(null))
                         {
+                            UpdateAllTabs();
                             App.NotificationManager.Clear();
                             App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Loaded"]);
                             MainWindow.AddToRecentList(MainWindow.CurrentProject.file);

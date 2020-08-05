@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Xml.Serialization;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 using Reward = BowieD.Unturned.NPCMaker.NPC.Rewards.Reward;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    public class NPCQuest : IHasUIText
+    [System.Serializable]
+    public class NPCQuest : IHasUIText, INotifyPropertyChanged
     {
         public NPCQuest()
         {
             conditions = new List<Condition>();
             rewards = new List<Reward>();
-            title = "";
+            Title = "";
             description = "";
             guid = Guid.NewGuid().ToString("N");
             Comment = "";
@@ -23,12 +25,37 @@ namespace BowieD.Unturned.NPCMaker.NPC
         [XmlAttribute("comment")]
         public string Comment { get; set; }
 
-        public ushort id;
+        private ushort _id;
+        [XmlElement("id")]
+        public ushort ID
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ID)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
+            }
+        }
         public List<Condition> conditions;
         public List<Reward> rewards;
-        public string title;
+        private string _title;
+        [XmlElement("title")]
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                _title = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Title)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
+            }
+        }
         public string description;
 
-        public string UIText => $"[{id}] {title}";
+        [field: NonSerialized]
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public string UIText => $"[{ID}] {Title}";
     }
 }

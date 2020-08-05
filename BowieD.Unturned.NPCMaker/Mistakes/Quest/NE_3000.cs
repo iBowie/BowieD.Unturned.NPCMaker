@@ -21,9 +21,9 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Quest
         {
             foreach (NPC.NPCQuest _quest in MainWindow.CurrentProject.data.quests)
             {
-                if (_quest.id == 0)
+                if (_quest.ID == 0)
                 {
-                    yield return new NE_3000(_quest.title, _quest.id);
+                    yield return new NE_3000(_quest.Title, _quest.ID);
                 }
             }
         }

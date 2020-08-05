@@ -11,10 +11,6 @@ namespace BowieD.Unturned.NPCMaker.Logging
     {
         public ConsoleLogger()
         {
-            IntPtr hMenu = Process.GetCurrentProcess().MainWindowHandle;
-            IntPtr hSystemMenu = GetSystemMenu(hMenu, false);
-            EnableMenuItem(hSystemMenu, SC_CLOSE, MF_GRAYED);
-            RemoveMenu(hSystemMenu, SC_CLOSE, MF_BYCOMMAND);
         }
         [DllImport("kernel32.dll")]
         private static extern IntPtr GetConsoleWindow();
@@ -43,6 +39,10 @@ namespace BowieD.Unturned.NPCMaker.Logging
 
             IsOpened = true;
             ShowWindow(GetConsoleWindow(), SW_SHOW);
+            IntPtr hMenu = Process.GetCurrentProcess().MainWindowHandle;
+            IntPtr hSystemMenu = GetSystemMenu(hMenu, false);
+            EnableMenuItem(hSystemMenu, SC_CLOSE, MF_GRAYED);
+            RemoveMenu(hSystemMenu, SC_CLOSE, MF_BYCOMMAND);
         }
         public static void HideConsoleWindow()
         {

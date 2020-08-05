@@ -27,6 +27,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     [XmlInclude(typeof(RewardFlagMath))]
     [XmlInclude(typeof(RewardCurrency))]
     [XmlInclude(typeof(RewardHint))]
+    [System.Serializable]
     public abstract class Reward : IHasUIText
     {
         [RewardSkipField]
@@ -68,6 +69,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 {
                     l.ToolTip = rewardTooltip.Text;
                 }
+                else if (LocalizationManager.Current.Reward.ContainsKey($"{key1}_Tooltip"))
+                {
+                    l.ToolTip = LocalizationManager.Current.Reward[$"{key1}_Tooltip"];
+                }
+                else if (LocalizationManager.Current.Reward.ContainsKey($"{key2}_Tooltip"))
+                {
+                    l.ToolTip = LocalizationManager.Current.Reward[$"{key2}_Tooltip"];
+                }
+
+                RewardRangeAttribute rangeAttribute = prop.GetCustomAttribute<RewardRangeAttribute>();
                 borderContents.Children.Add(l);
                 FrameworkElement valueControl = null;
                 if (propType == typeof(ushort))
@@ -91,6 +102,60 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                         HideUpDownButtons = true
                     };
                     (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
+                }
+                else if (propType == typeof(byte?))
+                {
+                    byte newMax, newMin;
+                    if (rangeAttribute != null && rangeAttribute.Maximum is byte rMax && rangeAttribute.Minimum is byte rMin)
+                    {
+                        newMax = rMax;
+                        newMin = rMin;
+                    }
+                    else
+                    {
+                        newMax = byte.MaxValue;
+                        newMin = byte.MinValue;
+                    }
+                    valueControl = new Controls.OptionalByteValueControl();
+                    (valueControl as Controls.OptionalByteValueControl).upDown.Maximum = newMax;
+                    (valueControl as Controls.OptionalByteValueControl).upDown.Minimum = newMin;
+                    (valueControl as Controls.OptionalByteValueControl).upDown.SetBinding(Xceed.Wpf.Toolkit.ByteUpDown.ValueProperty, propName);
+                }
+                else if (propType == typeof(int?))
+                {
+                    int newMax, newMin;
+                    if (rangeAttribute != null && rangeAttribute.Maximum is int rMax && rangeAttribute.Minimum is int rMin)
+                    {
+                        newMax = rMax;
+                        newMin = rMin;
+                    }
+                    else
+                    {
+                        newMax = int.MaxValue;
+                        newMin = int.MinValue;
+                    }
+                    valueControl = new Controls.OptionalInt32ValueControl();
+                    (valueControl as Controls.OptionalInt32ValueControl).upDown.Maximum = newMax;
+                    (valueControl as Controls.OptionalInt32ValueControl).upDown.Minimum = newMin;
+                    (valueControl as Controls.OptionalInt32ValueControl).upDown.SetBinding(Xceed.Wpf.Toolkit.IntegerUpDown.ValueProperty, propName);
+                }
+                else if (propType == typeof(ushort?))
+                {
+                    ushort newMax, newMin;
+                    if (rangeAttribute != null && rangeAttribute.Maximum is ushort rMax && rangeAttribute.Minimum is ushort rMin)
+                    {
+                        newMax = rMax;
+                        newMin = rMin;
+                    }
+                    else
+                    {
+                        newMax = ushort.MaxValue;
+                        newMin = ushort.MinValue;
+                    }
+                    valueControl = new Controls.OptionalUInt16ValueControl();
+                    (valueControl as Controls.OptionalUInt16ValueControl).upDown.Maximum = newMax;
+                    (valueControl as Controls.OptionalUInt16ValueControl).upDown.Minimum = newMin;
+                    (valueControl as Controls.OptionalUInt16ValueControl).upDown.SetBinding(Xceed.Wpf.Toolkit.UShortUpDown.ValueProperty, propName);
                 }
                 else if (propType == typeof(int))
                 {
@@ -195,10 +260,6 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                     Child = borderContents
                 };
                 b.Margin = new Thickness(0, 5, 0, 5);
-                if (prop.GetCustomAttribute<RewardOptionalAttribute>() != null)
-                {
-                    b.Opacity = 0.75;
-                }
 
                 yield return b;
             }

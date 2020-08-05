@@ -1,4 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Configuration;
+﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
@@ -9,23 +9,165 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.ViewModels
 {
-    public sealed class QuestTabViewModel : BaseViewModel
+    public sealed class QuestTabViewModel : BaseViewModel, ITabEditor, INPCTab
     {
         private NPCQuest _quest;
         public QuestTabViewModel()
         {
-            Quest = new NPCQuest();
+            MainWindow.Instance.questTabSelect.SelectionChanged += QuestTabSelect_SelectionChanged;
+            MainWindow.Instance.questTabButtonAdd.Click += QuestTabButtonAdd_Click;
+            NPCQuest empty = new NPCQuest();
+            Quest = empty;
+            UpdateTabs();
         }
+        private void QuestTabButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NPCQuest item = new NPCQuest();
+            MainWindow.CurrentProject.data.quests.Add(item);
+            MetroTabItem tabItem = CreateTab(item);
+            MainWindow.Instance.questTabSelect.Items.Add(tabItem);
+            MainWindow.Instance.questTabSelect.SelectedIndex = MainWindow.Instance.questTabSelect.Items.Count - 1;
+        }
+        private void QuestTabSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var tab = MainWindow.Instance.questTabSelect;
+            if (tab.SelectedItem != null && tab.SelectedItem is TabItem tabItem && tabItem.DataContext != null)
+            {
+                NPCQuest selectedTabChar = tabItem.DataContext as NPCQuest;
+                if (selectedTabChar != null)
+                    Quest = selectedTabChar;
+            }
+
+            if (tab.SelectedItem is null)
+            {
+                MainWindow.Instance.questTabGrid.IsEnabled = false;
+                MainWindow.Instance.questTabGrid.Visibility = Visibility.Collapsed;
+                MainWindow.Instance.questTabGridNoSelection.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MainWindow.Instance.questTabGrid.IsEnabled = true;
+                MainWindow.Instance.questTabGrid.Visibility = Visibility.Visible;
+                MainWindow.Instance.questTabGridNoSelection.Visibility = Visibility.Collapsed;
+            }
+        }
+        public void Save()
+        {
+            if (!(_quest is null))
+            {
+                UpdateConditions();
+                UpdateRewards();
+            }
+        }
+        public void Reset() { }
+        public void UpdateTabs()
+        {
+            var tab = MainWindow.Instance.questTabSelect;
+            tab.Items.Clear();
+            int selected = -1;
+            for (int i = 0; i < MainWindow.CurrentProject.data.quests.Count; i++)
+            {
+                var quest = MainWindow.CurrentProject.data.quests[i];
+                if (quest == _quest)
+                    selected = i;
+                MetroTabItem tabItem = CreateTab(quest);
+                tab.Items.Add(tabItem);
+            }
+            if (selected != -1)
+                tab.SelectedIndex = selected;
+
+            if (tab.SelectedItem is null)
+            {
+                MainWindow.Instance.questTabGrid.IsEnabled = false;
+                MainWindow.Instance.questTabGrid.Visibility = Visibility.Collapsed;
+                MainWindow.Instance.questTabGridNoSelection.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MainWindow.Instance.questTabGrid.IsEnabled = true;
+                MainWindow.Instance.questTabGrid.Visibility = Visibility.Visible;
+                MainWindow.Instance.questTabGridNoSelection.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private MetroTabItem CreateTab(NPCQuest quest)
+        {
+            MetroTabItem tabItem = new MetroTabItem();
+            tabItem.CloseButtonEnabled = true;
+            tabItem.CloseTabCommand = CloseTabCommand;
+            tabItem.CloseTabCommandParameter = tabItem;
+            var binding = new Binding()
+            {
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                Mode = BindingMode.OneWay,
+                Path = new PropertyPath("UIText")
+            };
+            Label l = new Label();
+            l.SetBinding(Label.ContentProperty, binding);
+            tabItem.Header = l;
+            tabItem.DataContext = quest;
+
+            var cmenu = new ContextMenu();
+            List<MenuItem> cmenuItems = new List<MenuItem>()
+            {
+                ContextHelper.CreateCopyButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    MetroTabItem target = context.PlacementTarget as MetroTabItem;
+                    ClipboardManager.SetObject(Universal_ItemList.ReturnType.Quest, target.DataContext);
+                }),
+                ContextHelper.CreateDuplicateButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    MetroTabItem target = context.PlacementTarget as MetroTabItem;
+                    var cloned = (target.DataContext as NPCQuest).Clone();
+
+                    MainWindow.CurrentProject.data.quests.Add(cloned);
+                    MetroTabItem ti = CreateTab(cloned);
+                    MainWindow.Instance.questTabSelect.Items.Add(ti);
+                }),
+                ContextHelper.CreatePasteButton((object sender, RoutedEventArgs e) =>
+                {
+                    if (ClipboardManager.TryGetObject(ClipboardManager.QuestFormat, out var obj) && !(obj is null) && obj is NPCQuest cloned)
+                    {
+                        MainWindow.CurrentProject.data.quests.Add(cloned);
+                        MetroTabItem ti = CreateTab(cloned);
+                        MainWindow.Instance.questTabSelect.Items.Add(ti);
+                    }
+                })
+            };
+
+            foreach (var cmenuItem in cmenuItems)
+                cmenu.Items.Add(cmenuItem);
+
+            tabItem.ContextMenu = cmenu;
+            return tabItem;
+        }
+
         public NPCQuest Quest
         {
-            get => _quest;
+            get
+            {
+                Save();
+
+                return _quest;
+            }
+
             set
             {
+                Save();
+
                 _quest = value;
 
                 MainWindow.Instance.listQuestConditions.Children.Clear();
@@ -40,92 +182,89 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }
         }
         public string Comment { get => Quest.Comment; set => Quest.Comment = value; }
-        public ushort ID { get => Quest.id; set => Quest.id = value; }
-        public string Title { get => Quest.title; set => Quest.title = value; }
+        public ushort ID { get => Quest.ID; set => Quest.ID = value; }
+        public string Title { get => Quest.Title; set => Quest.Title = value; }
         public string Description { get => Quest.description; set => Quest.description = value; }
         private ICommand
-            saveCommand,
-            openCommand,
-            resetCommand,
             addConditionCommand,
             addRewardCommand,
             previewCommand;
-        public ICommand SaveCommand
+        private ICommand closeTabCommand;
+        private ICommand sortIDA, sortIDD, sortTitleA, sortTitleD;
+        public ICommand SortIDAscending
         {
             get
             {
-                if (saveCommand == null)
+                if (sortIDA == null)
                 {
-                    saveCommand = new BaseCommand(() =>
+                    sortIDA = new BaseCommand(() =>
                     {
-                        if (ID == 0)
-                        {
-                            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Quest_ID_Zero"]);
-                            return;
-                        }
-                        UpdateConditions();
-                        UpdateRewards();
-                        if (!MainWindow.CurrentProject.data.quests.Contains(Quest))
-                        {
-                            MainWindow.CurrentProject.data.quests.Add(Quest);
-                        }
-
-                        MainWindow.CurrentProject.isSaved = false;
-                        App.NotificationManager.Notify(LocalizationManager.Current.Notification["Quest_Saved"]);
+                        MainWindow.CurrentProject.data.quests = MainWindow.CurrentProject.data.quests.OrderBy(d => d.ID).ToList();
+                        UpdateTabs();
                     });
                 }
-                return saveCommand;
+                return sortIDA;
             }
         }
-        public ICommand OpenCommand
+        public ICommand SortIDDescending
         {
             get
             {
-                if (openCommand == null)
+                if (sortIDD == null)
                 {
-                    openCommand = new BaseCommand(() =>
+                    sortIDD = new BaseCommand(() =>
                     {
-                        Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentProject.data.quests.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Quest, false)).ToList(), Universal_ItemList.ReturnType.Quest);
-                        ulv.Owner = MainWindow.Instance;
-                        if (ulv.ShowDialog() == true)
-                        {
-                            if (!AppConfig.Instance.automaticallySaveBeforeOpening)
-                            {
-                                var msgRes = MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Quest_Open_Confirm"], "", MessageBoxButton.YesNoCancel);
-                                if (msgRes == MessageBoxResult.Yes)
-                                    SaveCommand.Execute(null);
-                                else if (msgRes != MessageBoxResult.No)
-                                    return;
-                            }
-                            else
-                                SaveCommand.Execute(null);
-
-                            Quest = ulv.SelectedValue as NPCQuest;
-                            UpdateConditions();
-                            UpdateRewards();
-                        }
-                        MainWindow.CurrentProject.data.quests = ulv.Values.Cast<NPCQuest>().ToList();
+                        MainWindow.CurrentProject.data.quests = MainWindow.CurrentProject.data.quests.OrderByDescending(d => d.ID).ToList();
+                        UpdateTabs();
                     });
                 }
-                return openCommand;
+                return sortIDD;
             }
         }
-        public ICommand ResetCommand
+        public ICommand SortTitleAscending
         {
             get
             {
-                if (resetCommand == null)
+                if (sortTitleA == null)
                 {
-                    resetCommand = new BaseCommand(() =>
+                    sortTitleA = new BaseCommand(() =>
                     {
-                        ushort id = ID;
-                        Quest = new NPCQuest();
-                        UpdateConditions();
-                        UpdateRewards();
-                        App.Logger.Log($"Quest {id} cleared!");
+                        MainWindow.CurrentProject.data.quests = MainWindow.CurrentProject.data.quests.OrderBy(d => d.Title).ToList();
+                        UpdateTabs();
                     });
                 }
-                return resetCommand;
+                return sortTitleA;
+            }
+        }
+        public ICommand SortTitleDescending
+        {
+            get
+            {
+                if (sortTitleD == null)
+                {
+                    sortTitleD = new BaseCommand(() =>
+                    {
+                        MainWindow.CurrentProject.data.quests = MainWindow.CurrentProject.data.quests.OrderByDescending(d => d.Title).ToList();
+                        UpdateTabs();
+                    });
+                }
+                return sortTitleD;
+            }
+        }
+        public ICommand CloseTabCommand
+        {
+            get
+            {
+                if (closeTabCommand == null)
+                {
+                    closeTabCommand = new BaseCommand((sender) =>
+                    {
+                        var tab = (sender as MetroTabItem);
+                        MainWindow.CurrentProject.data.quests.Remove(tab.DataContext as NPCQuest);
+                        MainWindow.Instance.questTabSelect.Items.Remove(sender);
+                    });
+                }
+                return closeTabCommand;
             }
         }
         public ICommand AddConditionCommand
@@ -174,8 +313,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     previewCommand = new BaseCommand(() =>
                     {
-                        SaveCommand.Execute(null);
-
                         Simulation simulation = new Simulation();
 
                         MessageBox.Show(LocalizationManager.Current.Interface.Translate("Main_Tab_Vendor_Preview_Message"));
@@ -195,30 +332,30 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
         public void UpdateConditions()
         {
-            Quest.conditions.Clear();
+            _quest.conditions.Clear();
             foreach (var uie in MainWindow.Instance.listQuestConditions.Children)
             {
                 if (uie is Universal_ItemList dr)
                 {
-                    Quest.conditions.Add(dr.Value as Condition);
+                    _quest.conditions.Add(dr.Value as Condition);
                 }
             }
             MainWindow.Instance.listQuestConditions.UpdateOrderButtons();
         }
         public void UpdateRewards()
         {
-            Quest.rewards.Clear();
+            _quest.rewards.Clear();
             foreach (var uie in MainWindow.Instance.listQuestRewards.Children)
             {
                 if (uie is Universal_ItemList dr)
                 {
-                    Quest.rewards.Add(dr.Value as Reward);
+                    _quest.rewards.Add(dr.Value as Reward);
                 }
             }
             MainWindow.Instance.listQuestRewards.UpdateOrderButtons();
         }
 
-        void AddCondition(Universal_ItemList uil)
+        internal void AddCondition(Universal_ItemList uil)
         {
             if (uil.Type != Universal_ItemList.ReturnType.Condition)
                 throw new ArgumentException($"Expected Condition, got {uil.Type}");
@@ -244,7 +381,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         newConditions.Add(dr.Value as Condition);
                     }
                 }
-                Quest.conditions = newConditions;
+                _quest.conditions = newConditions;
 
                 panel.UpdateOrderButtons();
             };
@@ -258,10 +395,48 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.listQuestConditions.MoveDown((sender as UIElement).TryFindParent<Universal_ItemList>());
                 UpdateConditions();
             };
+
+            uil.copyButton.Visibility = Visibility.Collapsed;
+
+            var cmenu = new ContextMenu();
+            List<MenuItem> cmenuItems = new List<MenuItem>()
+            {
+                ContextHelper.CreateCopyButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    Universal_ItemList target = context.PlacementTarget as Universal_ItemList;
+                    ClipboardManager.SetObject(Universal_ItemList.ReturnType.Condition, target.Value);
+                }),
+                ContextHelper.CreateDuplicateButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    Universal_ItemList target = context.PlacementTarget as Universal_ItemList;
+                    var cloned = (target.Value as Condition).Clone();
+
+                    AddCondition(new Universal_ItemList(cloned, true));
+                }),
+                ContextHelper.CreatePasteButton((object sender, RoutedEventArgs e) =>
+                {
+                    if (ClipboardManager.TryGetObject(ClipboardManager.ConditionFormat, out var obj) && !(obj is null) && obj is Condition cloned)
+                    {
+                        AddCondition(new Universal_ItemList(cloned, true));
+                    }
+                })
+            };
+
+            foreach (var cmenuItem in cmenuItems)
+                cmenu.Items.Add(cmenuItem);
+
+            uil.ContextMenu = cmenu;
+
             MainWindow.Instance.listQuestConditions.Children.Add(uil);
             MainWindow.Instance.listQuestConditions.UpdateOrderButtons();
         }
-        void AddReward(Universal_ItemList uil)
+        internal void AddReward(Universal_ItemList uil)
         {
             if (uil.Type != Universal_ItemList.ReturnType.Reward)
                 throw new ArgumentException($"Expected Reward, got {uil.Type}");
@@ -287,7 +462,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         newRewards.Add(dr.Value as Reward);
                     }
                 }
-                Quest.rewards = newRewards;
+                _quest.rewards = newRewards;
 
                 panel.UpdateOrderButtons();
             };
@@ -301,6 +476,44 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.listQuestRewards.MoveDown((sender as UIElement).TryFindParent<Universal_ItemList>());
                 UpdateRewards();
             };
+
+            uil.copyButton.Visibility = Visibility.Collapsed;
+
+            var cmenu = new ContextMenu();
+            List<MenuItem> cmenuItems = new List<MenuItem>()
+            {
+                ContextHelper.CreateCopyButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    Universal_ItemList target = context.PlacementTarget as Universal_ItemList;
+                    ClipboardManager.SetObject(Universal_ItemList.ReturnType.Reward, target.Value);
+                }),
+                ContextHelper.CreateDuplicateButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    Universal_ItemList target = context.PlacementTarget as Universal_ItemList;
+                    var cloned = (target.Value as Reward).Clone();
+
+                    AddReward(new Universal_ItemList(cloned, true));
+                }),
+                ContextHelper.CreatePasteButton((object sender, RoutedEventArgs e) =>
+                {
+                    if (ClipboardManager.TryGetObject(ClipboardManager.RewardFormat, out var obj) && !(obj is null) && obj is Reward cloned)
+                    {
+                        AddReward(new Universal_ItemList(cloned, true));
+                    }
+                })
+            };
+
+            foreach (var cmenuItem in cmenuItems)
+                cmenu.Items.Add(cmenuItem);
+
+            uil.ContextMenu = cmenu;
+
             MainWindow.Instance.listQuestRewards.Children.Add(uil);
             MainWindow.Instance.listQuestRewards.UpdateOrderButtons();
         }

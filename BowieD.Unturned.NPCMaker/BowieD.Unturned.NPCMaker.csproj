@@ -67,6 +67,17 @@
     <DocumentationFile>
     </DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Preview|AnyCPU'">
+    <OutputPath>bin\Preview\</OutputPath>
+    <DefineConstants>TRACE;PREVIEW</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx">
       <HintPath>Libs\ControlzEx.dll</HintPath>
@@ -140,13 +151,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClipboardManager.cs" />
     <Compile Include="Coloring\ColorConverter.cs" />
+    <Compile Include="Commands\CheckSyncCommand.cs" />
     <Compile Include="Commands\ColorCommand.cs" />
     <Compile Include="Commands\ConfigCommand.cs" />
     <Compile Include="Commands\HideCommand.cs" />
     <Compile Include="Commands\LicenseCommand.cs" />
     <Compile Include="Commands\ParseCommand.cs" />
     <Compile Include="Commands\ShutdownCommand.cs" />
+    <Compile Include="Common\CloneHelper.cs" />
     <Compile Include="Common\ContextHelper.cs" />
     <Compile Include="Common\SimulationTool.cs" />
     <Compile Include="Common\Utility\DebugUtility.cs" />
@@ -154,6 +168,15 @@
     <Compile Include="Common\Utility\PathUtility.cs" />
     <Compile Include="Controls\Dialogue_Response.xaml.cs">
       <DependentUpon>Dialogue_Response.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OptionalByteValueControl.xaml.cs">
+      <DependentUpon>OptionalByteValueControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OptionalInt32ValueControl.xaml.cs">
+      <DependentUpon>OptionalInt32ValueControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OptionalUInt16ValueControl.xaml.cs">
+      <DependentUpon>OptionalUInt16ValueControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Universal_ItemList.xaml.cs">
       <DependentUpon>Universal_ItemList.xaml</DependentUpon>
@@ -250,6 +273,7 @@
       <DependentUpon>Form_About.xaml</DependentUpon>
     </Compile>
     <Compile Include="IHasOrderButtons.cs" />
+    <Compile Include="InputTool.cs" />
     <Compile Include="Localization\Localization.cs" />
     <Compile Include="Localization\LocalizationManager.cs" />
     <Compile Include="Localization\TranslationDictionary.cs" />
@@ -261,6 +285,7 @@
     <Compile Include="Managers\DataManager.cs" />
     <Compile Include="Logging\LoggingManager.cs" />
     <Compile Include="Managers\HolidayManager.cs" />
+    <Compile Include="Markup\Markdown.cs" />
     <Compile Include="Markup\RichText.cs" />
     <Compile Include="MathUtil.cs" />
     <Compile Include="MessageBox.cs" />
@@ -291,6 +316,7 @@
     <Compile Include="Notification\NotificationManager.cs" />
     <Compile Include="NPC\Conditions\Attributes\ConditionNoValueAttribute.cs" />
     <Compile Include="NPC\Conditions\Attributes\ConditionOptionalAttribute.cs" />
+    <Compile Include="NPC\Conditions\Attributes\ConditionRangeAttribute.cs" />
     <Compile Include="NPC\Conditions\Attributes\ConditionSkipFieldAttribute.cs" />
     <Compile Include="NPC\Conditions\Attributes\ConditionTooltipAttribute.cs" />
     <Compile Include="NPC\Conditions\Condition.cs" />
@@ -320,6 +346,7 @@
     <Compile Include="NPC\NPCClothing.cs" />
     <Compile Include="NPC\NPCProject.cs" />
     <Compile Include="NPC\ProjectData.cs" />
+    <Compile Include="NPC\Rewards\Attributes\RewardRangeAttribute.cs" />
     <Compile Include="NPC\Rewards\Reward.cs" />
     <Compile Include="NPC\Rewards\RewardAchievement.cs" />
     <Compile Include="NPC\Rewards\RewardCurrency.cs" />
@@ -384,6 +411,18 @@
     <Compile Include="XAML\LocalizationConverter.cs" />
     <Compile Include="XAML\LocalizeExtension.cs" />
     <Page Include="Controls\Dialogue_Response.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionalByteValueControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionalInt32ValueControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionalUInt16ValueControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

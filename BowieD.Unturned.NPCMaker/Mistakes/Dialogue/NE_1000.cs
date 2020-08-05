@@ -22,9 +22,9 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         {
             foreach (NPC.NPCDialogue _dial in MainWindow.CurrentProject.data.dialogues)
             {
-                if (_dial.messages.Count > 0 && _dial.messages.Any(d => d.pages.Count == 0))
+                if (_dial.Messages.Count > 0 && _dial.Messages.Any(d => d.pages.Count == 0))
                 {
-                    yield return new NE_1000(_dial.id);
+                    yield return new NE_1000(_dial.ID);
                 }
             }
         }

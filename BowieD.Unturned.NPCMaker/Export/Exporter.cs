@@ -74,9 +74,9 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Characters\{character.editorName}_{character.id}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Characters\{character.editorName}_{character.id}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Characters\{character.editorName}_{character.id}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(dir + $@"Characters\{character.EditorName}_{character.ID}");
+                    using (StreamWriter asset = new StreamWriter(dir + $@"Characters\{character.EditorName}_{character.ID}\Asset.dat", false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(dir + $@"Characters\{character.EditorName}_{character.ID}\English.dat", false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -85,7 +85,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                             asset.WriteLine($"GUID {character.guid}");
                         }
 
-                        asset.WriteLine($"ID {character.id}");
+                        asset.WriteLine($"ID {character.ID}");
                         asset.WriteLine($"Type NPC");
                         if (character.clothing.Shirt > 0)
                         {
@@ -258,14 +258,14 @@ namespace BowieD.Unturned.NPCMaker.Export
                         if (!character.poseHeadOffset.ApproximateEquals(0))
                             asset.WriteLine($"Pose_Head_Offset {character.poseHeadOffset.ToString(CultureInfo.InvariantCulture)}");
 
-                        local.WriteLine($"Name {character.editorName}");
-                        local.WriteLine($"Character {character.displayName}");
+                        local.WriteLine($"Name {character.EditorName}");
+                        local.WriteLine($"Character {character.DisplayName}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    App.Logger.LogException($"Can't export character {character.id}", ex: ex);
-                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Character_Error", character.id));
+                    App.Logger.LogException($"Can't export character {character.ID}", ex: ex);
+                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Character_Error", character.ID));
                 }
             }
         }
@@ -275,9 +275,9 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Dialogues\{dialogue.guid}_{dialogue.id}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Dialogues\{dialogue.guid}_{dialogue.id}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Dialogues\{dialogue.guid}_{dialogue.id}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(dir + $@"Dialogues\{dialogue.guid}_{dialogue.ID}");
+                    using (StreamWriter asset = new StreamWriter(dir + $@"Dialogues\{dialogue.guid}_{dialogue.ID}\Asset.dat", false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(dir + $@"Dialogues\{dialogue.guid}_{dialogue.ID}\English.dat", false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -287,27 +287,27 @@ namespace BowieD.Unturned.NPCMaker.Export
                         }
 
                         asset.WriteLine($"Type Dialogue");
-                        asset.WriteLine($"ID {dialogue.id}");
+                        asset.WriteLine($"ID {dialogue.ID}");
 
-                        if (dialogue.MessagesAmount > 0)
+                        if (dialogue.Messages.Count > 0)
                         {
-                            asset.WriteLine($"Messages {dialogue.MessagesAmount}");
-                            for (int k = 0; k < dialogue.MessagesAmount; k++)
+                            asset.WriteLine($"Messages {dialogue.Messages.Count}");
+                            for (int k = 0; k < dialogue.Messages.Count; k++)
                             {
-                                NPCMessage message = dialogue.messages[k];
-                                if (message.PagesAmount > 0)
+                                NPCMessage message = dialogue.Messages[k];
+                                if (message.pages.Count > 0)
                                 {
-                                    asset.WriteLine($"Message_{k}_Pages {message.PagesAmount}");
+                                    asset.WriteLine($"Message_{k}_Pages {message.pages.Count}");
                                 }
-                                List<NPCResponse> visibleResponses = dialogue.responses.Where(d => d.VisibleInAll || d.visibleIn.Length <= k || d.visibleIn[k] == 1).ToList();
-                                if (visibleResponses.Count() > 0 && visibleResponses.Count() < dialogue.responses.Count())
+                                List<NPCResponse> visibleResponses = dialogue.Responses.Where(d => d.VisibleInAll || d.visibleIn.Length <= k || d.visibleIn[k] == 1).ToList();
+                                if (visibleResponses.Count() > 0 && visibleResponses.Count() < dialogue.Responses.Count())
                                 {
                                     asset.WriteLine($"Message_{k}_Responses {visibleResponses.Count()}");
                                     int visResCnt = visibleResponses.Count();
                                     for (int c = 0; c < visResCnt; c++)
                                     {
                                         NPCResponse response = visibleResponses[c];
-                                        int id = dialogue.responses.IndexOf(response);
+                                        int id = dialogue.Responses.IndexOf(response);
                                         asset.WriteLine($"Message_{k}_Response_{c} {id}");
                                     }
                                 }
@@ -341,21 +341,21 @@ namespace BowieD.Unturned.NPCMaker.Export
                                     asset.WriteLine($"Message_{k}_Prev {message.prev}");
                             }
                         }
-                        if (dialogue.ResponsesAmount > 0)
+                        if (dialogue.Responses.Count > 0)
                         {
-                            asset.WriteLine($"Responses {dialogue.ResponsesAmount}");
-                            for (int k = 0; k < dialogue.ResponsesAmount; k++)
+                            asset.WriteLine($"Responses {dialogue.Responses.Count}");
+                            for (int k = 0; k < dialogue.Responses.Count; k++)
                             {
-                                NPCResponse response = dialogue.responses[k];
+                                NPCResponse response = dialogue.Responses[k];
                                 if (!response.VisibleInAll)
                                 {
                                     asset.WriteLine($"Response_{k}_Messages {response.visibleIn.Count(d => d == 1)}");
-                                    for (int c = 0, ind = 0; c < dialogue.MessagesAmount; c++)
+                                    for (int c = 0, ind = 0; c < dialogue.Messages.Count; c++)
                                     {
-                                        NPCMessage currentMessage = dialogue.messages[c];
+                                        NPCMessage currentMessage = dialogue.Messages[c];
                                         if (response.visibleIn.Length <= c || response.visibleIn[c] == 1)
                                         {
-                                            asset.WriteLine($"Response_{k}_Message_{ind++} {dialogue.messages.IndexOf(currentMessage)}");
+                                            asset.WriteLine($"Response_{k}_Message_{ind++} {dialogue.Messages.IndexOf(currentMessage)}");
                                         }
                                     }
                                 }
@@ -404,23 +404,23 @@ namespace BowieD.Unturned.NPCMaker.Export
                                 }
                             }
                         }
-                        for (int k = 0; k < dialogue.MessagesAmount; k++)
+                        for (int k = 0; k < dialogue.Messages.Count; k++)
                         {
-                            for (int c = 0; c < dialogue.messages[k].PagesAmount; c++)
+                            for (int c = 0; c < dialogue.Messages[k].pages.Count; c++)
                             {
-                                local.WriteLine($"Message_{k}_Page_{c} {dialogue.messages[k].pages[c]}");
+                                local.WriteLine($"Message_{k}_Page_{c} {dialogue.Messages[k].pages[c]}");
                             }
                         }
-                        for (int k = 0; k < dialogue.ResponsesAmount; k++)
+                        for (int k = 0; k < dialogue.Responses.Count; k++)
                         {
-                            local.WriteLine($"Response_{k} {dialogue.responses[k].mainText}");
+                            local.WriteLine($"Response_{k} {dialogue.Responses[k].mainText}");
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    App.Logger.LogException($"Can't export dialogue {dialogue.id}", ex: ex);
-                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Dialogue_Error", dialogue.id));
+                    App.Logger.LogException($"Can't export dialogue {dialogue.ID}", ex: ex);
+                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Dialogue_Error", dialogue.ID));
                 }
             }
         }
@@ -430,9 +430,9 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Vendors\{vendor.guid}_{vendor.id}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Vendors\{vendor.guid}_{vendor.id}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Vendors\{vendor.guid}_{vendor.id}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(dir + $@"Vendors\{vendor.guid}_{vendor.ID}");
+                    using (StreamWriter asset = new StreamWriter(dir + $@"Vendors\{vendor.guid}_{vendor.ID}\Asset.dat", false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(dir + $@"Vendors\{vendor.guid}_{vendor.ID}\English.dat", false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -442,7 +442,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                         }
 
                         asset.WriteLine($"Type Vendor");
-                        asset.WriteLine($"ID {vendor.id}");
+                        asset.WriteLine($"ID {vendor.ID}");
 
                         if (vendor.BuyItems.Count > 0)
                         {
@@ -495,14 +495,14 @@ namespace BowieD.Unturned.NPCMaker.Export
                             asset.WriteLine("Currency " + vendor.currency);
                         }
 
-                        local.WriteLine($"Name {vendor.vendorTitle}");
+                        local.WriteLine($"Name {vendor.Title}");
                         local.WriteLine($"Description {vendor.vendorDescription}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    App.Logger.LogException($"Can't export vendor {vendor.id}", ex: ex);
-                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Vendor_Error", vendor.id));
+                    App.Logger.LogException($"Can't export vendor {vendor.ID}", ex: ex);
+                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Vendor_Error", vendor.ID));
                 }
             }
         }
@@ -512,9 +512,9 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Quests\{quest.guid}_{quest.id}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Quests\{quest.guid}_{quest.id}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Quests\{quest.guid}_{quest.id}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(dir + $@"Quests\{quest.guid}_{quest.ID}");
+                    using (StreamWriter asset = new StreamWriter(dir + $@"Quests\{quest.guid}_{quest.ID}\Asset.dat", false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(dir + $@"Quests\{quest.guid}_{quest.ID}\English.dat", false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -524,7 +524,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                         }
 
                         asset.WriteLine($"Type Quest");
-                        asset.WriteLine($"ID {quest.id}");
+                        asset.WriteLine($"ID {quest.ID}");
 
                         if (quest.conditions?.Count > 0)
                         {
@@ -544,7 +544,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                             }
                         }
 
-                        local.WriteLine($"Name {quest.title}");
+                        local.WriteLine($"Name {quest.Title}");
                         local.WriteLine($"Description {quest.description}");
                         for (int k = 0; k < quest.conditions?.Count; k++)
                         {
@@ -564,8 +564,8 @@ namespace BowieD.Unturned.NPCMaker.Export
                 }
                 catch (Exception ex)
                 {
-                    App.Logger.LogException($"Can't export quest {quest.id}", ex: ex);
-                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Quest_Error", quest.id));
+                    App.Logger.LogException($"Can't export quest {quest.ID}", ex: ex);
+                    App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Quest_Error", quest.ID));
                 }
             }
         }
@@ -606,9 +606,19 @@ namespace BowieD.Unturned.NPCMaker.Export
                         continue;
                     }
                 }
-                if (optionalA != null && optionalA.ConditionApplied(propValue))
+
+                if (prop.PropertyType.IsNullable())
                 {
-                    continue;
+                    if (propValue == null)
+                    {
+                        if (optionalA != null)
+                        {
+                            if (optionalA.defaultValue == null)
+                                continue;
+
+                            propValue = optionalA.defaultValue;
+                        }
+                    }
                 }
 
                 result.AppendLine($"{prefix}Condition_{conditionIndex}_{propName} {propValue}");
@@ -652,9 +662,19 @@ namespace BowieD.Unturned.NPCMaker.Export
                         continue;
                     }
                 }
-                if (optionalA != null && optionalA.ConditionApplied(propValue))
+
+                if (prop.PropertyType.IsNullable())
                 {
-                    continue;
+                    if (propValue == null)
+                    {
+                        if (optionalA != null)
+                        {
+                            if (optionalA.DefaultValue == null)
+                                continue;
+
+                            propValue = optionalA.DefaultValue;
+                        }
+                    }
                 }
 
                 result.AppendLine($"{prefix}Reward_{rewardIndex}_{propName} {propValue}");

@@ -15,9 +15,12 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// </summary>
     public partial class Universal_VendorItemEditor : Window
     {
+        private bool ignoreAnimation = true;
         public Universal_VendorItemEditor(VendorItem startItem = null)
         {
             InitializeComponent();
+
+            ignoreAnimation = true;
 
             double scale = AppConfig.Instance.scale;
             gridScale.ScaleX = scale;
@@ -30,6 +33,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             txtBoxCost.Value = Result.cost;
             txtBoxID.Value = Result.id;
             txtBoxSpawnpoint.Text = Result.spawnPointID;
+
             foreach (ComboBoxItem cbi in typeBox.Items)
             {
                 ItemType it = (ItemType)cbi.Tag;
@@ -68,13 +72,15 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             if (Selected_ItemType == ItemType.ITEM)
             {
-                if (AppConfig.Instance.animateControls)
+                if (AppConfig.Instance.animateControls && !ignoreAnimation)
                 {
-                    txtBoxSpawnpoint.BeginAnimation(OpacityProperty, DisappearAnimation(1));
-                    labelSpawnpoint.BeginAnimation(OpacityProperty, DisappearAnimation(1));
+                    txtBoxSpawnpoint.BeginAnimation(OpacityProperty, DisappearAnimation(txtBoxSpawnpoint.Opacity));
+                    labelSpawnpoint.BeginAnimation(OpacityProperty, DisappearAnimation(labelSpawnpoint.Opacity));
                 }
                 else
                 {
+                    ignoreAnimation = false;
+
                     labelSpawnpoint.Opacity = 0;
                     txtBoxSpawnpoint.Opacity = 0;
                 }
@@ -84,14 +90,15 @@ namespace BowieD.Unturned.NPCMaker.Forms
             }
             else
             {
-                if (AppConfig.Instance.animateControls)
+                if (AppConfig.Instance.animateControls && !ignoreAnimation)
                 {
-                    DoubleAnimation opacityAnimation = new DoubleAnimation(0, 1, new Duration(new System.TimeSpan(0, 0, 0, 0, 500)));
-                    txtBoxSpawnpoint.BeginAnimation(OpacityProperty, AppearAnimation(0));
-                    labelSpawnpoint.BeginAnimation(OpacityProperty, AppearAnimation(0));
+                    txtBoxSpawnpoint.BeginAnimation(OpacityProperty, AppearAnimation(txtBoxSpawnpoint.Opacity));
+                    labelSpawnpoint.BeginAnimation(OpacityProperty, AppearAnimation(labelSpawnpoint.Opacity));
                 }
                 else
                 {
+                    ignoreAnimation = false;
+
                     labelSpawnpoint.Opacity = 1;
                     txtBoxSpawnpoint.Opacity = 1;
                 }

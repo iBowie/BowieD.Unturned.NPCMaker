@@ -1,15 +1,17 @@
 ﻿using BowieD.Unturned.NPCMaker;
-using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.NPC;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
@@ -17,20 +19,162 @@ using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.ViewModels
 {
-    public sealed class CharacterTabViewModel : BaseViewModel
+    public sealed class CharacterTabViewModel : BaseViewModel, ITabEditor, INPCTab
     {
         private NPCCharacter _character;
         public CharacterTabViewModel()
         {
-            Character = new NPCCharacter();
+            MainWindow.Instance.characterTabSelect.SelectionChanged += CharacterTabSelect_SelectionChanged;
+            MainWindow.Instance.characterTabButtonAdd.Click += CharacterTabButtonAdd_Click;
+            NPCCharacter empty = new NPCCharacter();
+            Character = empty;
             UpdateColorPicker();
+            UpdateTabs();
         }
+
+        private void CharacterTabButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NPCCharacter item = new NPCCharacter();
+            MainWindow.CurrentProject.data.characters.Add(item);
+            MetroTabItem tabItem = CreateTab(item);
+            MainWindow.Instance.characterTabSelect.Items.Add(tabItem);
+            MainWindow.Instance.characterTabSelect.SelectedIndex = MainWindow.Instance.characterTabSelect.Items.Count - 1;
+        }
+
+        private void CharacterTabSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var tab = MainWindow.Instance.characterTabSelect;
+            if (tab.SelectedItem != null && tab.SelectedItem is TabItem tabItem && tabItem.DataContext != null)
+            {
+                NPCCharacter selectedTabChar = tabItem.DataContext as NPCCharacter;
+                if (selectedTabChar != null)
+                    Character = selectedTabChar;
+            }
+
+            if (tab.SelectedItem is null)
+            {
+                MainWindow.Instance.characterTabGrid.IsEnabled = false;
+                MainWindow.Instance.characterTabGrid.Visibility = Visibility.Collapsed;
+                MainWindow.Instance.characterTabGridNoSelection.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MainWindow.Instance.characterTabGrid.IsEnabled = true;
+                MainWindow.Instance.characterTabGrid.Visibility = Visibility.Visible;
+                MainWindow.Instance.characterTabGridNoSelection.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        public void Save() { }
+        public void Reset() { }
+
+        public void UpdateTabs()
+        {
+            var tab = MainWindow.Instance.characterTabSelect;
+            tab.Items.Clear();
+            int selected = -1;
+            for (int i = 0; i < MainWindow.CurrentProject.data.characters.Count; i++)
+            {
+                var character = MainWindow.CurrentProject.data.characters[i];
+                if (character == _character)
+                    selected = i;
+                MetroTabItem tabItem = CreateTab(character);
+                tab.Items.Add(tabItem);
+            }
+            if (selected != -1)
+                tab.SelectedIndex = selected;
+
+            if (tab.SelectedItem is null)
+            {
+                MainWindow.Instance.characterTabGrid.IsEnabled = false;
+                MainWindow.Instance.characterTabGrid.Visibility = Visibility.Collapsed;
+                MainWindow.Instance.characterTabGridNoSelection.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MainWindow.Instance.characterTabGrid.IsEnabled = true;
+                MainWindow.Instance.characterTabGrid.Visibility = Visibility.Visible;
+                MainWindow.Instance.characterTabGridNoSelection.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private MetroTabItem CreateTab(NPCCharacter character)
+        {
+            var binding = new Binding()
+            {
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                Mode = BindingMode.OneWay,
+                Path = new PropertyPath("UIText")
+            };
+            Label l = new Label();
+            l.SetBinding(Label.ContentProperty, binding);
+
+            MetroTabItem tabItem = new MetroTabItem
+            {
+                CloseButtonEnabled = true,
+                CloseTabCommand = CloseTabCommand,
+                Header = l,
+                DataContext = character
+            };
+            tabItem.CloseTabCommandParameter = tabItem;
+
+            var cmenu = new ContextMenu();
+            List<MenuItem> cmenuItems = new List<MenuItem>()
+            {
+                ContextHelper.CreateCopyButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    MetroTabItem target = context.PlacementTarget as MetroTabItem;
+                    ClipboardManager.SetObject(Universal_ItemList.ReturnType.Character, target.DataContext);
+                }),
+                ContextHelper.CreateDuplicateButton((object sender, RoutedEventArgs e) =>
+                {
+                    Save();
+
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    MetroTabItem target = context.PlacementTarget as MetroTabItem;
+                    var cloned = (target.DataContext as NPCCharacter).Clone();
+
+                    MainWindow.CurrentProject.data.characters.Add(cloned);
+                    MetroTabItem ti = CreateTab(cloned);
+                    MainWindow.Instance.characterTabSelect.Items.Add(ti);
+                }),
+                ContextHelper.CreatePasteButton((object sender, RoutedEventArgs e) =>
+                {
+                    if (ClipboardManager.TryGetObject(ClipboardManager.CharacterFormat, out var obj) && !(obj is null) && obj is NPCCharacter cloned)
+                    {
+                        MainWindow.CurrentProject.data.characters.Add(cloned);
+                        MetroTabItem ti = CreateTab(cloned);
+                        MainWindow.Instance.characterTabSelect.Items.Add(ti);
+                    }
+                })
+            };
+
+            foreach (var cmenuItem in cmenuItems)
+                cmenu.Items.Add(cmenuItem);
+
+            tabItem.ContextMenu = cmenu;
+
+            return tabItem;
+        }
+
         public NPCCharacter Character
         {
-            get => _character;
+            get
+            {
+                Save();
+
+                return _character;
+            }
+
             set
             {
+                Save();
+
                 _character = value;
+
                 HairColor = Character.hairColor;
                 SkinColor = Character.skinColor;
                 FaceID = Character.face;
@@ -39,9 +183,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 OnPropertyChange("");
             }
         }
-        public string DisplayName { get => Character.displayName; set => Character.displayName = value; }
-        public string EditorName { get => Character.editorName; set => Character.editorName = value; }
-        public ushort ID { get => Character.id; set => Character.id = value; }
+        public string DisplayName { get => Character.DisplayName; set => Character.DisplayName = value; }
+        public string EditorName { get => Character.EditorName; set => Character.EditorName = value; }
+        public ushort ID { get => Character.ID; set => Character.ID = value; }
         public ushort DialogueID
         {
             get => Character.startDialogueId;
@@ -142,9 +286,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public ushort EquipmentTertiary { get => Character.equipTertiary; set => Character.equipTertiary = value; }
         public Equip_Type Equipped { get => Character.equipped; set => Character.equipped = value; }
 
-        private ICommand saveCommand;
-        private ICommand openCommand;
-        private ICommand resetCommand;
         private ICommand editVisibilityConditionsCommand;
         private ICommand randomFaceCommand;
         private ICommand randomHairCommand;
@@ -153,76 +294,112 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         private ICommand saveColorHair;
         private ICommand regenerateGUIDsCommand;
         private ICommand poseEditorCommand;
-        public ICommand SaveCommand
+        private ICommand closeTabCommand;
+        private ICommand sortEditorNameA, sortEditorNameD, sortDisplayNameA, sortDisplayNameD, sortIDA, sortIDD;
+        public ICommand SortEditorNameAscending
         {
             get
             {
-                if (saveCommand == null)
+                if (sortEditorNameA == null)
                 {
-                    saveCommand = new BaseCommand(() =>
+                    sortEditorNameA = new BaseCommand(() =>
                     {
-                        if (Character.id == 0)
-                        {
-                            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Character_ID_Zero"]);
-                            return;
-                        }
-                        if (!MainWindow.CurrentProject.data.characters.Contains(Character))
-                        {
-                            MainWindow.CurrentProject.data.characters.Add(Character);
-                        }
-
-                        App.NotificationManager.Notify(LocalizationManager.Current.Notification["Character_Saved"]);
-                        MainWindow.CurrentProject.isSaved = false;
-                        App.Logger.Log($"Character {Character.id} saved!");
+                        MainWindow.CurrentProject.data.characters = MainWindow.CurrentProject.data.characters.OrderBy(d => d.EditorName).ToList();
+                        UpdateTabs();
                     });
                 }
-                return saveCommand;
+                return sortEditorNameA;
             }
         }
-        public ICommand OpenCommand
+        public ICommand SortEditorNameDescending
         {
             get
             {
-                if (openCommand == null)
+                if (sortEditorNameD == null)
                 {
-                    openCommand = new BaseCommand(() =>
+                    sortEditorNameD = new BaseCommand(() =>
                     {
-                        Universal_ListView ulv = new Universal_ListView(MainWindow.CurrentProject.data.characters.OrderBy(d => d.id).Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Character, false)).ToList(), Universal_ItemList.ReturnType.Character);
-                        ulv.Owner = MainWindow.Instance;
-                        if (ulv.ShowDialog() == true)
-                        {
-                            if (!AppConfig.Instance.automaticallySaveBeforeOpening)
-                            {
-                                var msgRes = MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Character_Open_Confirm"], "", MessageBoxButton.YesNoCancel);
-                                if (msgRes == MessageBoxResult.Yes)
-                                    SaveCommand.Execute(null);
-                                else if (msgRes != MessageBoxResult.No)
-                                    return;
-                            }
-                            else
-                                SaveCommand.Execute(null);
-
-                            Character = ulv.SelectedValue as NPCCharacter;
-                            App.Logger.Log($"Opened character {ID}");
-                        }
-                        MainWindow.CurrentProject.data.characters = ulv.Values.Cast<NPCCharacter>().ToList();
+                        MainWindow.CurrentProject.data.characters = MainWindow.CurrentProject.data.characters.OrderByDescending(d => d.EditorName).ToList();
+                        UpdateTabs();
                     });
                 }
-                return openCommand;
+                return sortEditorNameD;
             }
         }
-        public ICommand ResetCommand
+        public ICommand SortDisplayNameAscending
         {
             get
             {
-                if (resetCommand == null)
+                if (sortDisplayNameA == null)
                 {
-                    resetCommand = new BaseCommand(() =>
+                    sortDisplayNameA = new BaseCommand(() =>
                     {
-                        Character = new NPCCharacter();
+                        MainWindow.CurrentProject.data.characters = MainWindow.CurrentProject.data.characters.OrderBy(d => d.DisplayName).ToList();
+                        UpdateTabs();
                     });
                 }
-                return resetCommand;
+                return sortDisplayNameA;
+            }
+        }
+        public ICommand SortDisplayNameDescending
+        {
+            get
+            {
+                if (sortDisplayNameD == null)
+                {
+                    sortDisplayNameD = new BaseCommand(() =>
+                    {
+                        MainWindow.CurrentProject.data.characters = MainWindow.CurrentProject.data.characters.OrderByDescending(d => d.DisplayName).ToList();
+                        UpdateTabs();
+                    });
+                }
+                return sortDisplayNameD;
+            }
+        }
+        public ICommand SortIDAscending
+        {
+            get
+            {
+                if (sortIDA == null)
+                {
+                    sortIDA = new BaseCommand(() =>
+                    {
+                        MainWindow.CurrentProject.data.characters = MainWindow.CurrentProject.data.characters.OrderBy(d => d.ID).ToList();
+                        UpdateTabs();
+                    });
+                }
+                return sortIDA;
+            }
+        }
+        public ICommand SortIDDescending
+        {
+            get
+            {
+                if (sortIDD == null)
+                {
+                    sortIDD = new BaseCommand(() =>
+                    {
+                        MainWindow.CurrentProject.data.characters = MainWindow.CurrentProject.data.characters.OrderByDescending(d => d.ID).ToList();
+                        UpdateTabs();
+                    });
+                }
+                return sortIDD;
+            }
+        }
+        public ICommand CloseTabCommand
+        {
+            get
+            {
+                if (closeTabCommand == null)
+                {
+                    closeTabCommand = new BaseCommand((sender) =>
+                    {
+                        var tab = (sender as MetroTabItem);
+                        MainWindow.CurrentProject.data.characters.Remove(tab.DataContext as NPCCharacter);
+                        MainWindow.Instance.characterTabSelect.Items.Remove(sender);
+                    });
+                }
+                return closeTabCommand;
             }
         }
         public ICommand EditVisibilityConditionsCommand
@@ -370,6 +547,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 }
                             }
                         }
+                        MainWindow.CurrentProject.data.guid = Guid.NewGuid().ToString("N");
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["App_GUID_Regenerated"]);
                     });
                 }

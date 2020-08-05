@@ -21,7 +21,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             Virus = 100;
 
             Flags = new Dictionary<ushort, short>(ushort.MaxValue);
-            Quests = new HashSet<ushort>(ushort.MaxValue);
+            Quests = new HashSet<ushort>();
             Currencies = new Dictionary<string, uint>();
             Items = new List<Item>();
         }
@@ -61,7 +61,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             if (Quests.Contains(id))
             {
-                NPCQuest questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.id == id);
+                NPCQuest questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.ID == id);
                 if (questAsset.conditions.All(d => d.Check(this)))
                 {
                     return Quest_Status.Ready;

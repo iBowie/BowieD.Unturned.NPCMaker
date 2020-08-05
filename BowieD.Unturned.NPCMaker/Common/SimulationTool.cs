@@ -66,7 +66,7 @@ namespace BowieD.Unturned.NPCMaker.Common
 
             if (character != null && result.Contains("<name_npc>"))
             {
-                result = result.Replace("<name_npc>", ReplacePlaceholders(character, simulation, character.displayName));
+                result = result.Replace("<name_npc>", ReplacePlaceholders(character, simulation, character.DisplayName));
             }
 
             if (simulation != null && result.Contains("<name_char>"))

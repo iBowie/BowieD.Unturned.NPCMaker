@@ -42,7 +42,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
         {
             return new NPCCharacter
             {
-                id = asset.ReadUInt16("ID"),
+                ID = asset.ReadUInt16("ID"),
                 beard = asset.ReadByte("Beard"),
                 face = asset.ReadByte("Face"),
                 haircut = asset.ReadByte("Hair"),
@@ -52,8 +52,8 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 equipSecondary = asset.ReadUInt16("Secondary"),
                 equipTertiary = asset.ReadUInt16("Tertiary"),
                 startDialogueId = asset.ReadUInt16("Dialogue"),
-                displayName = local?.ReadString("Character"),
-                editorName = local?.ReadString("Name"),
+                DisplayName = local?.ReadString("Character"),
+                EditorName = local?.ReadString("Name"),
                 guid = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
                 leftHanded = asset.Has("Backward"),
                 clothing = ParseClothing(Clothing_Type.Default),
@@ -72,48 +72,76 @@ namespace BowieD.Unturned.NPCMaker.Parsing
             NPCDialogue d = new NPCDialogue()
             {
                 guid = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
-                id = asset.ReadUInt16("ID")
+                ID = asset.ReadUInt16("ID")
             };
-            d.messages = new List<NPCMessage>(asset.ReadByte("Messages"));
-            for (byte mId = 0; mId < d.messages.Capacity; mId++)
+            d.Messages = new List<NPCMessage>(asset.ReadByte("Messages"));
+            Dictionary<ushort, byte[]> m_visible = new Dictionary<ushort, byte[]>();
+            for (byte mId = 0; mId < d.Messages.Capacity; mId++)
             {
-                d.messages.Add(new NPCMessage());
-                d.messages[mId].pages = new List<string>(asset.ReadByte($"Message_{mId}_Pages"));
-                for (byte pId = 0; pId < d.messages[mId].pages.Capacity; pId++)
+                string[] pages = new string[asset.ReadByte($"Message_{mId}_Pages")];
+                for (byte pId = 0; pId < pages.Length; pId++)
                 {
                     string page = local?.ReadString($"Message_{mId}_Page_{pId}");
                     if (page == null)
                     {
                         App.Logger.Log($"Page {pId} in message {mId} not found.");
                     }
-
-                    d.messages[mId].pages.Add(page);
+                    pages[pId] = page ?? string.Empty;
                 }
-                d.messages[mId].conditions = ParseConditions($"Message_{mId}_");
-                d.messages[mId].rewards = ParseRewards($"Message_{mId}_");
-                d.messages[mId].prev = asset.ReadUInt16($"Message_{mId}_Prev");
-            }
-            d.responses = new List<NPCResponse>(asset.ReadByte("Responses"));
-            for (byte rId = 0; rId < d.responses.Capacity; rId++)
-            {
-                d.responses.Add(new NPCResponse());
-                byte b = asset.ReadByte($"Response_{rId}_Messages");
-                d.responses[rId].visibleIn = new int[b];
-                for (byte i = 0; i < b; i++)
+                byte[] array2 = new byte[asset.ReadByte($"Message_{mId}_Responses")];
+                for (byte rId = 0; rId < array2.Length; rId++)
                 {
-                    d.responses[rId].visibleIn[i] = asset.Has($"Response_{rId}_Message_{i}") ? 1 : 0;
+                    array2[rId] = asset.ReadByte($"Message_{mId}_Response_{rId}");
                 }
-                d.responses[rId].mainText = local?.ReadString($"Response_{rId}");
-                if (d.responses[rId].mainText == null)
+                m_visible.Add(mId, array2);
+
+                d.Messages.Add(new NPCMessage()
+                {
+                    conditions = ParseConditions($"Message_{mId}_"),
+                    pages = pages.ToList(),
+                    prev = asset.ReadUInt16($"Message_{mId}_Prev"),
+                    rewards = ParseRewards($"Message_{mId}_")
+                });
+            }
+            d.Responses = new List<NPCResponse>(asset.ReadByte("Responses"));
+            for (byte rId = 0; rId < d.Responses.Capacity; rId++)
+            {
+                d.Responses.Add(new NPCResponse());
+                byte b = asset.ReadByte($"Response_{rId}_Messages");
+                d.Responses[rId].visibleIn = new int[d.Messages.Count];
+                for (byte i = 0; i < d.Responses[rId].visibleIn.Length; i++)
+                {
+                    if (m_visible.TryGetValue(i, out var pages))
+                    {
+                        if (pages.Contains(rId))
+                        {
+                            d.Responses[rId].visibleIn[i] = 1;
+                            continue;
+                        }
+                    }
+
+                    for (byte i2 = 0; i2 < b; i2++)
+                    {
+                        byte? m;
+                        if (asset.Has($"Response_{rId}_Message_{i2}"))
+                            m = asset.ReadByte($"Response_{rId}_Message_{i2}");
+                        else
+                            m = null;
+                        if (m != null)
+                            d.Responses[rId].visibleIn[m.Value] = 1;
+                    }
+                }
+                d.Responses[rId].mainText = local?.ReadString($"Response_{rId}");
+                if (d.Responses[rId].mainText == null)
                 {
                     break;
                 }
 
-                d.responses[rId].openDialogueId = asset.ReadUInt16($"Response_{rId}_Dialogue");
-                d.responses[rId].openQuestId = asset.ReadUInt16($"Response_{rId}_Quest");
-                d.responses[rId].openVendorId = asset.ReadUInt16($"Response_{rId}_Vendor");
-                d.responses[rId].conditions = ParseConditions($"Response_{rId}_");
-                d.responses[rId].rewards = ParseRewards($"Response_{rId}_");
+                d.Responses[rId].openDialogueId = asset.ReadUInt16($"Response_{rId}_Dialogue");
+                d.Responses[rId].openQuestId = asset.ReadUInt16($"Response_{rId}_Quest");
+                d.Responses[rId].openVendorId = asset.ReadUInt16($"Response_{rId}_Vendor");
+                d.Responses[rId].conditions = ParseConditions($"Response_{rId}_");
+                d.Responses[rId].rewards = ParseRewards($"Response_{rId}_");
             }
             return d;
         }
@@ -121,10 +149,10 @@ namespace BowieD.Unturned.NPCMaker.Parsing
         {
             return new NPCVendor()
             {
-                id = asset.ReadUInt16("ID"),
+                ID = asset.ReadUInt16("ID"),
                 disableSorting = asset.Has("Disable_Sorting"),
                 guid = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
-                vendorTitle = local?.ReadString("Name") ?? "",
+                Title = local?.ReadString("Name") ?? "",
                 vendorDescription = local?.ReadString("Description") ?? "",
                 items = ParseVendorItems().ToList(),
                 currency = asset.Has("Currency") ? asset.ReadString("Currency") : ""
@@ -134,8 +162,8 @@ namespace BowieD.Unturned.NPCMaker.Parsing
         {
             NPCQuest q = new NPCQuest()
             {
-                id = asset.ReadUInt16("ID"),
-                title = local?.ReadString("Name") ?? "",
+                ID = asset.ReadUInt16("ID"),
+                Title = local?.ReadString("Name") ?? "",
                 description = local?.ReadString("Description") ?? "",
                 guid = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
                 conditions = ParseConditions("").ToList(),
@@ -303,7 +331,8 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         {
                             Logic = logic,
                             ID = asset.ReadUInt16(tp + "ID"),
-                            Status = asset.ReadEnum<Quest_Status>(tp + "Status")
+                            Status = asset.ReadEnum<Quest_Status>(tp + "Status"),
+                            Ignore_NPC = asset.Has(tp + "Ignore_NPC")
                         };
                         break;
                     case Condition_Type.Skillset:
@@ -328,6 +357,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                             Spawn = asset.Has(tp + "Spawn"),
                             Spawn_Quantity = asset.Has(tp + "Spawn_Quantity") ? asset.ReadInt32(tp + "Spawn_Quantity") : 1,
                             Value = asset.ReadInt16(tp + "Value"),
+                            Radius = asset.ReadSingle(tp + "Radius", 512f),
                             Zombie = asset.ReadEnum<Zombie_Type>(tp + "Zombie")
                         };
                         break;
