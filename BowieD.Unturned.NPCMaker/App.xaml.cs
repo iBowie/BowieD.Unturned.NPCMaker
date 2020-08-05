@@ -109,7 +109,7 @@ namespace BowieD.Unturned.NPCMaker
                     else
                     {
                         LocalizationManager.LoadLanguage(AppConfig.Instance.language);
-                        var dlg = MessageBox.Show(LocalizationManager.Current.Interface["Update_Available_Body"], LocalizationManager.Current.Interface["Update_Available_Title"], MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        var dlg = System.Windows.MessageBox.Show(LocalizationManager.Current.Interface["Update_Available_Body"], LocalizationManager.Current.Interface["Update_Available_Title"], System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (dlg == MessageBoxResult.Yes)
                         {
                             App.UpdateManager.StartUpdate();
@@ -206,7 +206,6 @@ namespace BowieD.Unturned.NPCMaker
         }
         public static void InitManagers()
         {
-            UpdateManager = new GitHubUpdateManager();
             NotificationManager = new NotificationManager();
         }
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
