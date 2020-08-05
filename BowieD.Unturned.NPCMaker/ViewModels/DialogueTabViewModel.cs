@@ -3,7 +3,9 @@ using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
+using BowieD.Unturned.NPCMaker.Templating;
 using MahApps.Metro.Controls;
+using Microsoft.Win32;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -23,6 +25,33 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             NPCDialogue empty = new NPCDialogue();
             Dialogue = empty;
             UpdateTabs();
+
+            ContextMenu cmenu = new ContextMenu();
+
+            cmenu.Items.Add(new MenuItem()
+            {
+                Header = "Add from template",
+                Command = new BaseCommand(() =>
+                {
+                    OpenFileDialog ofd = new OpenFileDialog();
+                    ofd.Filter = "*.json|*.json";
+                    if (ofd.ShowDialog() == true)
+                    {
+                        var template = TemplateManager.LoadTemplate(ofd.FileName);
+
+                        if (TemplateManager.IsCorrectContext(template, typeof(NPCResponse)))
+                        {
+                            TemplateManager.PrepareTemplate(template);
+                            TemplateManager.AskForInput(template);
+                            var result = TemplateManager.ApplyTemplate(template) as NPCResponse;
+
+                            AddResponse(new Dialogue_Response(result));
+                        }
+                    }
+                })
+            });
+
+            MainWindow.Instance.dialogueAddReplyButton.ContextMenu = cmenu;
         }
 
         private void DialogueTabButtonAdd_Click(object sender, RoutedEventArgs e)
