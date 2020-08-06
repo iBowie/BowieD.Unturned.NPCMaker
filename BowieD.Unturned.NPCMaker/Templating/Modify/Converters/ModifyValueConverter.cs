@@ -10,7 +10,7 @@ namespace BowieD.Unturned.NPCMaker.Templating.Modify.Converters
 {
     public sealed class ModifyValueConverter : JsonConverter
     {
-        private class TypeInfo
+        internal class TypeInfo
         {
             public TypeInfo(Type modifyType, Type innerType)
             {
@@ -24,7 +24,7 @@ namespace BowieD.Unturned.NPCMaker.Templating.Modify.Converters
 
         public override bool CanWrite => false;
 
-        static Dictionary<string, TypeInfo> Types { get; } = new Dictionary<string, TypeInfo>();
+        internal static Dictionary<string, TypeInfo> Types { get; } = new Dictionary<string, TypeInfo>();
 
         public static void Register<T>()
         {
