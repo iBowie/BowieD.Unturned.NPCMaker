@@ -27,6 +27,30 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             Quest = empty;
             UpdateTabs();
 
+            ContextMenu cmenu = new ContextMenu();
+
+            cmenu.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(Condition), (result) =>
+            {
+                if (result is Condition item)
+                {
+                    AddCondition(new Universal_ItemList(item, true));
+                }
+            }));
+
+            MainWindow.Instance.questAddConditionButton.ContextMenu = cmenu;
+
+            ContextMenu cmenu2 = new ContextMenu();
+
+            cmenu2.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(Reward), (result) =>
+            {
+                if (result is Reward item)
+                {
+                    AddReward(new Universal_ItemList(item, true));
+                }
+            }));
+
+            MainWindow.Instance.questAddRewardButton.ContextMenu = cmenu2;
+
             ContextMenu cmenu3 = new ContextMenu();
 
             cmenu3.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(NPCQuest), (result) =>
