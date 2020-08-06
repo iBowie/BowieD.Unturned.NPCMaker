@@ -25,6 +25,21 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             Vendor = empty;
             UpdateTabs();
 
+            ContextMenu cmenu2 = new ContextMenu();
+
+            cmenu2.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(VendorItem), (result) =>
+            {
+                if (result is VendorItem item)
+                {
+                    if (item.isBuy)
+                        AddItemBuy(item);
+                    else
+                        AddItemSell(item);
+                }
+            }));
+
+            MainWindow.Instance.vendorAddItemButton.ContextMenu = cmenu2;
+
             ContextMenu cmenu3 = new ContextMenu();
 
             cmenu3.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(NPCVendor), (result) =>
