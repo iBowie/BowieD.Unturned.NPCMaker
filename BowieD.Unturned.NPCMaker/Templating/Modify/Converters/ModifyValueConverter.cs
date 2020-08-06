@@ -60,7 +60,7 @@ namespace BowieD.Unturned.NPCMaker.Templating.Modify.Converters
         {
             JObject j = JObject.Load(reader);
 
-            if (j.TryGetValue("type", out var typetoken) && j.TryGetValue("value", out var valuetoken))
+            if (j.TryGetValue("type", out var typetoken))
             {
                 if (Types.TryGetValue(typetoken.Value<string>(), out var typeInfo))
                 {
@@ -72,7 +72,17 @@ namespace BowieD.Unturned.NPCMaker.Templating.Modify.Converters
 
                     Type inType = typeInfo.InnerType;
 
-                    object v = js.Deserialize(valuetoken.CreateReader(), inType);
+                    object v;
+
+                    if (j.TryGetValue("value", out var valuetoken))
+                    {
+                        v = js.Deserialize(valuetoken.CreateReader(), inType);
+                    }
+                    else
+                    {
+                        v = Activator.CreateInstance(inType);
+                    }
+
                     IModifyValue[] p;
                     if (j.TryGetValue("parameter", out var parametertoken))
                     {
