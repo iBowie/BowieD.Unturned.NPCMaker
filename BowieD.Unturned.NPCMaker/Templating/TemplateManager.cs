@@ -50,6 +50,19 @@ namespace BowieD.Unturned.NPCMaker.Templating
             ModifyValueConverter.Register<ModifyValue_Parameterless>("float", typeof(float));
             ModifyValueConverter.Register<ModifyValue_Parameterless>("double", typeof(double));
             ModifyValueConverter.Register<ModifyValue_Parameterless>("decimal", typeof(decimal));
+
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("bool?", typeof(bool?));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("sbyte?", typeof(sbyte?));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("byte?", typeof(byte?));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("short?", typeof(short?));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("ushort?", typeof(ushort?));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("int?", typeof(int?));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("uint?", typeof(uint?));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("long?", typeof(long?));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("ulong?", typeof(ulong?));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("float?", typeof(float?));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("double?", typeof(double?));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("decimal?", typeof(decimal?));
             #endregion
             #region Enums
             ModifyValueConverter.Register<ModifyValue_Parameterless>("Clothing_Type", typeof(Clothing_Type));
