@@ -35,6 +35,16 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }));
 
             MainWindow.Instance.dialogueAddReplyButton.ContextMenu = cmenu;
+
+            ContextMenu cmenu2 = new ContextMenu();
+
+            cmenu2.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(NPCMessage), (result) =>
+            {
+                if (result is NPCMessage npcm)
+                    AddMessage(new Dialogue_Message(npcm));
+            }));
+
+            MainWindow.Instance.dialogueAddMessageButton.ContextMenu = cmenu2;
         }
 
         private void DialogueTabButtonAdd_Click(object sender, RoutedEventArgs e)
