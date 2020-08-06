@@ -269,21 +269,37 @@ namespace BowieD.Unturned.NPCMaker.Common
                 };
                 if (ofd.ShowDialog() == true)
                 {
-                    var template = TemplateManager.LoadTemplate(ofd.FileName);
-
-                    if (template != null)
+                    try
                     {
-                        if (TemplateManager.IsCorrectContext(template, context))
+                        var template = TemplateManager.LoadTemplate(ofd.FileName);
+
+                        if (template != null)
                         {
-                            TemplateManager.PrepareTemplate(template);
+                            if (TemplateManager.IsCorrectContext(template, context))
+                            {
+                                TemplateManager.PrepareTemplate(template);
 
-                            if (template.Inputs.Count > 0)
-                                TemplateManager.AskForInput(template);
+                                if (template.Inputs.Count > 0)
+                                    TemplateManager.AskForInput(template);
 
-                            var result = TemplateManager.ApplyTemplate(template);
+                                var result = TemplateManager.ApplyTemplate(template);
 
-                            add.Invoke(result);
+                                add.Invoke(result);
+                            }
+                            else
+                            {
+                                App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Template_InvalidContext"));
+                            }
                         }
+                        else
+                        {
+                            App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Template_InvalidFile"));
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Template_Error"));
+                        App.Logger.LogException("Could not add item from template", ex: ex);
                     }
                 }
             });

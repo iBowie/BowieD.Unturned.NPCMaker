@@ -407,6 +407,9 @@
 		"Importance_CRITICAL": "Critical"
 	},
 	"Notification": {
+		"Template_InvalidContext":  "This template is not valid for this context. It must be for something else.",
+		"Template_InvalidFile":  "This template file is not valid.",
+		"Template_Error":  "Something wrong happened while adding from template. See details in logs.",
 		"Configuration_OnExit": "Restart the app to apply changes.",
 		"Character_ID_Zero": "Character ID can't be equal to zero",
 		"Character_Saved": "Character saved!",
