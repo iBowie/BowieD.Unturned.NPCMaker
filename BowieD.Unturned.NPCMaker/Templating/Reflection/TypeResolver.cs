@@ -19,8 +19,63 @@ namespace BowieD.Unturned.NPCMaker.Templating.Reflection
 
                         switch (cType)
                         {
+                            case "compareflags":
+                            case "compare_flags":
+                                return typeof(ConditionCompareFlags);
+                            case "currency":
+                                return typeof(ConditionCurrency);
+                            case "experience":
+                                return typeof(ConditionExperience);
+                            case "flagbool":
+                            case "flagboolean":
+                            case "flag_bool":
+                            case "flag_boolean":
+                                return typeof(ConditionFlagBool);
+                            case "flagshort":
+                            case "flagint16":
+                            case "flag_short":
+                            case "flag_int16":
+                                return typeof(ConditionFlagShort);
+                            case "holiday": // also check out Boulevard of Broken Dreams
+                                return typeof(ConditionHoliday);
                             case "item":
                                 return typeof(ConditionItem);
+                            case "kills_animal":
+                            case "killsanimal": // peta won't be happy
+                                return typeof(ConditionKillsAnimal);
+                            case "kills_horde":
+                            case "killshorde":
+                                return typeof(ConditionKillsHorde);
+                            case "kills_object":
+                            case "killsobject":
+                                return typeof(ConditionKillsObject);
+                            case "kills_player":
+                            case "killsplayer":
+                                return typeof(ConditionKillsPlayer);
+                            case "kills_tree":
+                            case "killstree": // mr beast won't be happy
+                                return typeof(ConditionKillsTree);
+                            case "player_life_food":
+                            case "playerlifefood":
+                                return typeof(ConditionPlayerLifeFood);
+                            case "player_life_health":
+                            case "playerlifehealth":
+                                return typeof(ConditionPlayerLifeHealth);
+                            case "player_life_virus":
+                            case "playerlifevirus":
+                                return typeof(ConditionPlayerLifeVirus);
+                            case "player_life_water":
+                            case "playerlifewater":
+                                return typeof(ConditionPlayerLifeWater);
+                            case "quest":
+                                return typeof(ConditionQuest);
+                            case "reputation":
+                                return typeof(ConditionReputation);
+                            case "skillset":
+                                return typeof(ConditionSkillset);
+                            case "time_of_day":
+                            case "timeofday":
+                                return typeof(ConditionTimeOfDay);
                             default:
                                 return null;
                         }
