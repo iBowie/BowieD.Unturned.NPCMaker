@@ -10,9 +10,21 @@ namespace BowieD.Unturned.NPCMaker.Templating.Modify.Converters
 {
     public sealed class ModifyValueConverter : JsonConverter
     {
+        private class TypeInfo
+        {
+            public TypeInfo(Type modifyType, Type innerType)
+            {
+                this.ModifyType = modifyType;
+                this.InnerType = innerType;
+            }
+
+            public Type ModifyType { get; }
+            public Type InnerType { get; }
+        }
+
         public override bool CanWrite => false;
 
-        static Dictionary<string, Type> Types { get; } = new Dictionary<string, Type>();
+        static Dictionary<string, TypeInfo> Types { get; } = new Dictionary<string, TypeInfo>();
 
         public static void Register<T>()
         {
@@ -25,7 +37,18 @@ namespace BowieD.Unturned.NPCMaker.Templating.Modify.Converters
             else
                 name = typeof(T).Name;
 
-            Types[name] = typeof(T);
+            Types[name] = new TypeInfo(typeof(T), attrib.InnerType ?? typeof(T));
+        }
+        public static void Register<T>(string id, Type innerType)
+        {
+            string name;
+
+            if (!string.IsNullOrEmpty(id))
+                name = id;
+            else
+                name = typeof(T).Name;
+
+            Types[name] = new TypeInfo(typeof(T), innerType ?? typeof(T));
         }
 
         public override bool CanConvert(Type objectType)
@@ -39,21 +62,15 @@ namespace BowieD.Unturned.NPCMaker.Templating.Modify.Converters
 
             if (j.TryGetValue("type", out var typetoken) && j.TryGetValue("value", out var valuetoken))
             {
-                if (Types.TryGetValue(typetoken.Value<string>(), out var type))
+                if (Types.TryGetValue(typetoken.Value<string>(), out var typeInfo))
                 {
-                    var attrib = type.GetCustomAttribute<ModifyValueAttribute>();
                     var js = new JsonSerializer();
                     js.Converters.Add(new StringEnumConverter());
                     var pjs = new JsonSerializer();
                     foreach (var c in serializer.Converters)
                         pjs.Converters.Add(c);
 
-                    Type inType;
-
-                    if (attrib != null && attrib.InnerType != null)
-                        inType = attrib.InnerType;
-                    else
-                        inType = type;
+                    Type inType = typeInfo.InnerType;
 
                     object v = js.Deserialize(valuetoken.CreateReader(), inType);
                     IModifyValue[] p;
@@ -71,7 +88,7 @@ namespace BowieD.Unturned.NPCMaker.Templating.Modify.Converters
                     else
                         entries = new ModifyEntry[0];
 
-                    IModifyValue imv = (IModifyValue)Activator.CreateInstance(type);
+                    IModifyValue imv = (IModifyValue)Activator.CreateInstance(typeInfo.ModifyType);
 
                     imv.Parameter = p;
                     imv.Value = v;

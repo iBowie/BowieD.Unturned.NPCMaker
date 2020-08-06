@@ -1,11 +1,9 @@
-﻿using BowieD.Unturned.NPCMaker.Templating.Modify.Attributes;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace BowieD.Unturned.NPCMaker.Templating.Modify
 {
     [JsonObject(MemberSerialization.OptIn)]
-    [ModifyValue("boolean", typeof(bool))]
-    public sealed class ModifyValue_Boolean : IModifyValue
+    public sealed class ModifyValue_Parameterless : IModifyValue
     {
         [JsonProperty("value")]
         public object Value { get; set; }

@@ -395,13 +395,11 @@
     <Compile Include="Templating\Modify\IModifyValue.cs" />
     <Compile Include="Templating\Modify\ModifyEntry.cs" />
     <Compile Include="Templating\Modify\ModifyTool.cs" />
-    <Compile Include="Templating\Modify\ModifyValue_Boolean.cs" />
     <Compile Include="Templating\Modify\ModifyValue_Condition.cs" />
     <Compile Include="Templating\Modify\ModifyValue_Input.cs" />
-    <Compile Include="Templating\Modify\ModifyValue_Modification_Type.cs" />
+    <Compile Include="Templating\Modify\ModifyValue_Parameterless.cs" />
     <Compile Include="Templating\Modify\ModifyValue_Reward.cs" />
     <Compile Include="Templating\Modify\ModifyValue_String.cs" />
-    <Compile Include="Templating\Modify\ModifyValue_UInt16.cs" />
     <Compile Include="Templating\Reflection\FPInfo.cs" />
     <Compile Include="Templating\Reflection\TypeResolver.cs" />
     <Compile Include="Templating\Template.cs" />
