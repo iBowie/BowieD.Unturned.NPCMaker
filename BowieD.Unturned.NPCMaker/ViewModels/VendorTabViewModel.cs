@@ -24,6 +24,21 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             NPCVendor empty = new NPCVendor();
             Vendor = empty;
             UpdateTabs();
+
+            ContextMenu cmenu3 = new ContextMenu();
+
+            cmenu3.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(NPCVendor), (result) =>
+            {
+                if (result is NPCVendor item)
+                {
+                    MainWindow.CurrentProject.data.vendors.Add(item);
+                    MetroTabItem tabItem = CreateTab(item);
+                    MainWindow.Instance.vendorTabSelect.Items.Add(tabItem);
+                    MainWindow.Instance.vendorTabSelect.SelectedIndex = MainWindow.Instance.vendorTabSelect.Items.Count - 1;
+                }
+            }));
+
+            MainWindow.Instance.vendorTabButtonAdd.ContextMenu = cmenu3;
         }
         private void VendorTabButtonAdd_Click(object sender, RoutedEventArgs e)
         {

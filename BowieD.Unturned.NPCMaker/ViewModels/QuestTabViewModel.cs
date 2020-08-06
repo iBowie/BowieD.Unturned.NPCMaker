@@ -26,6 +26,21 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             NPCQuest empty = new NPCQuest();
             Quest = empty;
             UpdateTabs();
+
+            ContextMenu cmenu3 = new ContextMenu();
+
+            cmenu3.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(NPCQuest), (result) =>
+            {
+                if (result is NPCQuest item)
+                {
+                    MainWindow.CurrentProject.data.quests.Add(item);
+                    MetroTabItem tabItem = CreateTab(item);
+                    MainWindow.Instance.questTabSelect.Items.Add(tabItem);
+                    MainWindow.Instance.questTabSelect.SelectedIndex = MainWindow.Instance.questTabSelect.Items.Count - 1;
+                }
+            }));
+
+            MainWindow.Instance.questTabButtonAdd.ContextMenu = cmenu3;
         }
         private void QuestTabButtonAdd_Click(object sender, RoutedEventArgs e)
         {
