@@ -602,6 +602,8 @@
 		"MessageBox_Button_Yes": "Yes",
 		"MessageBox_Button_No": "No",
 
+		"Template_Caption": "Template '{0}' by {1}",
+
 		"Sort_EditorName_Ascending": "Sort by Editor Name (A-Z)",
 		"Sort_EditorName_Descending": "Sort by Editor Name (Z-A)",
 		"Sort_DisplayName_Ascending": "Sort by Display Name (A-Z)",

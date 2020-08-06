@@ -599,6 +599,8 @@
     "MessageBox_Button_Yes": "Да",
     "MessageBox_Button_No": "Нет",
 
+    "Template_Caption": "Шаблон '{0}'. Автор: {1}",
+
     "Sort_EditorName_Ascending": "Упорядочить по имени в редакторе (А-Я)",
     "Sort_EditorName_Descending": "Упорядочить по имени в редакторе (Я-А)",
     "Sort_DisplayName_Ascending": "Упорядочить по видимому имени (А-Я)",

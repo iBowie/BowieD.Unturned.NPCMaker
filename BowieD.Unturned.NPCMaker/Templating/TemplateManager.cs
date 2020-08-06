@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Forms;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Templating.Conditions;
 using BowieD.Unturned.NPCMaker.Templating.Conditions.Converters;
@@ -112,7 +113,9 @@ namespace BowieD.Unturned.NPCMaker.Templating
             string[] texts = template.Inputs.Select(kv => kv.Value.Text ?? kv.Key).ToArray();
             string[] tooltips = template.Inputs.Select(kv => kv.Value.ToolTip ?? string.Empty).ToArray();
 
-            if (multiField.ShowDialog(texts, template.Name, tooltips) == true)
+            string caption = LocalizationManager.Current.Interface.Translate("Template_Caption", template.Name, template.Author);
+
+            if (multiField.ShowDialog(texts, caption, tooltips) == true)
             {
                 var values = multiField.Values;
 
