@@ -19,8 +19,6 @@ namespace BowieD.Unturned.NPCMaker.Templating.Modify
 
                 if (LogicTool.Evaluate(entry.Expression, entry.Conditions, template))
                 {
-                    Console.WriteLine($"Applying #{i}");
-
                     var foType = FinalObject.GetType();
 
                     FPInfo fp;
@@ -94,10 +92,6 @@ namespace BowieD.Unturned.NPCMaker.Templating.Modify
                             }
                             break;
                     }
-                }
-                else
-                {
-                    Console.WriteLine($"Skipped modify entry #{i}");
                 }
             }
         }
