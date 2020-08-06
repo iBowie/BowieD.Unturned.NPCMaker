@@ -3,6 +3,7 @@
   "Name": "Русский (Russian)",
   "General": {
     "Project_SaveFilter": "Файл проекта NPC (*.npcproj)",
+    "Project_TemplateFilter": "Файл шаблона NPC (*.npctemplate)",
     "Title": "Unturned 3.0 NPC Maker by BowieD",
     "Configuration_Title": "Настройки"
   },
@@ -453,6 +454,7 @@
     "Control_Copy": "Копировать",
     "Control_Duplicate": "Дублировать",
     "Control_Paste": "Вставить",
+    "Control_AddFromTemplate": "Создать на основе шаблона...",
     "Update_Available_Title": "Доступно обновление",
     "Update_Available_Body": "Доступно обновление программы! Хотите установить его сейчас?",
     "Update_Notes_Title": "Изменения",

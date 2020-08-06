@@ -4,6 +4,7 @@
 	"General":
 	{
 		"Project_SaveFilter": "NPC Project (*.npcproj)",
+		"Project_TemplateFilter": "NPC Template (*.npctemplate)",
 		"Title": "Unturned 3.0 NPC Maker by BowieD",
 		"Configuration_Title": "App Settings"
 	},
@@ -456,6 +457,7 @@
 		"Control_Copy": "Copy",
 		"Control_Duplicate": "Duplicate",
 		"Control_Paste": "Paste",
+		"Control_AddFromTemplate": "Add From Template...",
 		"Update_Available_Title": "An update is available",
 		"Update_Available_Body": "An app update available! Do you want to download and install it now?",
 		"Update_Notes_Title": "Update Notes",

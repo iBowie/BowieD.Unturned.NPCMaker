@@ -1,5 +1,8 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.Templating;
 using MahApps.Metro.IconPacks;
+using Microsoft.Win32;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -248,6 +251,47 @@ namespace BowieD.Unturned.NPCMaker.Common
                 Kind = PackIconMaterialKind.ContentPaste,
                 Foreground = App.Current.Resources["AccentColor"] as Brush
             };
+            return b;
+        }
+
+        internal static MenuItem CreateAddFromTemplateButton(Type context, Action<object> add)
+        {
+            MenuItem b = new MenuItem()
+            {
+                Header = LocalizationManager.Current.Interface["Control_AddFromTemplate"]
+            };
+            b.Click += new RoutedEventHandler((sender, e) =>
+            {
+                OpenFileDialog ofd = new OpenFileDialog()
+                {
+                    Filter = $"{LocalizationManager.Current.General["Project_TemplateFilter"]}|*.npctemplate",
+                    Multiselect = false
+                };
+                if (ofd.ShowDialog() == true)
+                {
+                    var template = TemplateManager.LoadTemplate(ofd.FileName);
+
+                    if (template != null)
+                    {
+                        if (TemplateManager.IsCorrectContext(template, context))
+                        {
+                            TemplateManager.PrepareTemplate(template);
+
+                            if (template.Inputs.Count > 0)
+                                TemplateManager.AskForInput(template);
+
+                            var result = TemplateManager.ApplyTemplate(template);
+
+                            add.Invoke(result);
+                        }
+                    }
+                }
+            });
+            b.Icon = new PackIconMaterial()
+            {
+                Kind = PackIconMaterialKind.FolderPlusOutline
+            };
+            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
         }
     }

@@ -28,28 +28,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
             ContextMenu cmenu = new ContextMenu();
 
-            cmenu.Items.Add(new MenuItem()
+            cmenu.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(NPCResponse), (result) =>
             {
-                Header = "Add from template",
-                Command = new BaseCommand(() =>
-                {
-                    OpenFileDialog ofd = new OpenFileDialog();
-                    ofd.Filter = "*.json|*.json";
-                    if (ofd.ShowDialog() == true)
-                    {
-                        var template = TemplateManager.LoadTemplate(ofd.FileName);
-
-                        if (TemplateManager.IsCorrectContext(template, typeof(NPCResponse)))
-                        {
-                            TemplateManager.PrepareTemplate(template);
-                            TemplateManager.AskForInput(template);
-                            var result = TemplateManager.ApplyTemplate(template) as NPCResponse;
-
-                            AddResponse(new Dialogue_Response(result));
-                        }
-                    }
-                })
-            });
+                if (result is NPCResponse npcr)
+                    AddResponse(new Dialogue_Response(npcr));
+            }));
 
             MainWindow.Instance.dialogueAddReplyButton.ContextMenu = cmenu;
         }
