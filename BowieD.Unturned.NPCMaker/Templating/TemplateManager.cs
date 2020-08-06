@@ -21,11 +21,23 @@ namespace BowieD.Unturned.NPCMaker.Templating
             TemplateConditionConverter.Register<TemplateCondition_AlwaysTrue>();
             TemplateConditionConverter.Register<TemplateCondition_AlwaysFalse>();
 
+            #region Complex
             ModifyValueConverter.Register<ModifyValue_String>();
             ModifyValueConverter.Register<ModifyValue_Input>();
             ModifyValueConverter.Register<ModifyValue_Reward>();
             ModifyValueConverter.Register<ModifyValue_Condition>();
 
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("character", typeof(NPCCharacter));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("dialogue", typeof(NPCDialogue));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("vendor", typeof(NPCVendor));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("quest", typeof(NPCQuest));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("vendoritem", typeof(VendorItem));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("clothing", typeof(NPCClothing));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("message", typeof(NPCMessage));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("response", typeof(NPCResponse));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("project", typeof(NPCProject));
+            #endregion
+            #region Primitives
             ModifyValueConverter.Register<ModifyValue_Parameterless>("bool", typeof(bool));
             ModifyValueConverter.Register<ModifyValue_Parameterless>("sbyte", typeof(sbyte));
             ModifyValueConverter.Register<ModifyValue_Parameterless>("byte", typeof(byte));
@@ -38,7 +50,8 @@ namespace BowieD.Unturned.NPCMaker.Templating
             ModifyValueConverter.Register<ModifyValue_Parameterless>("float", typeof(float));
             ModifyValueConverter.Register<ModifyValue_Parameterless>("double", typeof(double));
             ModifyValueConverter.Register<ModifyValue_Parameterless>("decimal", typeof(decimal));
-
+            #endregion
+            #region Enums
             ModifyValueConverter.Register<ModifyValue_Parameterless>("Clothing_Type", typeof(Clothing_Type));
             ModifyValueConverter.Register<ModifyValue_Parameterless>("ParseType", typeof(ParseType));
             ModifyValueConverter.Register<ModifyValue_Parameterless>("ELanguage", typeof(ELanguage));
@@ -54,6 +67,7 @@ namespace BowieD.Unturned.NPCMaker.Templating
             ModifyValueConverter.Register<ModifyValue_Parameterless>("Logic_Type", typeof(Logic_Type));
             ModifyValueConverter.Register<ModifyValue_Parameterless>("Condition_Type", typeof(Condition_Type));
             ModifyValueConverter.Register<ModifyValue_Parameterless>("Modification_Type", typeof(Modification_Type));
+            #endregion
         }
         public static Template LoadTemplate(string fileName)
         {
