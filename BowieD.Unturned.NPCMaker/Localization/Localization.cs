@@ -39,7 +39,7 @@ namespace BowieD.Unturned.NPCMaker.Localization
         public Dictionary<string, TranslationDictionary> Simulation;
         public TranslationDictionary GetDictionary(string name)
         {
-            switch (name.ToLower())
+            switch (name.ToLowerInvariant())
             {
                 case "general":
                     return General;
