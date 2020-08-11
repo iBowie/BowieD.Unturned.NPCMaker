@@ -46,7 +46,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             {
                 _id = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ID)));
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
             }
         }
         public List<Condition> conditions;

@@ -33,10 +33,10 @@ namespace BowieD.Unturned.NPCMaker.Common
                 Formatter.Serialize(stream, source);
                 stream.Seek(0, SeekOrigin.Begin);
                 T result = (T)Formatter.Deserialize(stream);
-                
+
                 if (result is IHasUniqueGUID uniqueGUID)
                     uniqueGUID.GUID = Guid.NewGuid().ToString("N");
-                
+
                 return result;
             }
         }

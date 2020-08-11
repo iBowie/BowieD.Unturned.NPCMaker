@@ -109,7 +109,7 @@ namespace BowieD.Unturned.NPCMaker.Templating
         public static void AskForInput(Template template)
         {
             MultiFieldInputView_Dialog multiField = new MultiFieldInputView_Dialog(template.Inputs.Values.Select(d => d.Default.ToString()).ToArray());
-            
+
             string[] texts = template.Inputs.Select(kv => kv.Value.Text ?? kv.Key).ToArray();
             string[] tooltips = template.Inputs.Select(kv => kv.Value.ToolTip ?? string.Empty).ToArray();
 
