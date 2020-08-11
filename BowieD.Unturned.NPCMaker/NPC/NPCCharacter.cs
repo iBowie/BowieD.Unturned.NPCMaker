@@ -138,7 +138,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     if (!string.IsNullOrEmpty(DisplayName))
                     {
                         if (flag)
-                            sb.Append(" - ");
+                            sb.Append(" -");
+                        sb.Append(" ");
                         sb.Append(DisplayName);
                     }
                     return TextUtil.Shortify(sb.ToString(), 24);
