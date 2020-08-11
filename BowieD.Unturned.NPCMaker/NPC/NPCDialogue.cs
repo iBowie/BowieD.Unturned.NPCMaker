@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -19,8 +20,19 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
         [XmlAttribute("guid")]
         public string GUID { get; set; }
+        private string _comment;
         [XmlAttribute("comment")]
-        public string Comment { get; set; }
+        public string Comment
+        {
+            get => _comment;
+            set
+            {
+                _comment = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Comment)));
+                if (AppConfig.Instance.useCommentsInsteadOfData)
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
+            }
+        }
 
         private ushort _id;
         [XmlAttribute("id")]
@@ -44,7 +56,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
             {
                 _messages = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Messages)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
+                if (!AppConfig.Instance.useCommentsInsteadOfData)
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
             }
         }
 
@@ -77,19 +90,30 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             get
             {
-                if (Messages == null || Messages.Count < 1 || Messages[0].pages.Count < 1)
+                if (AppConfig.Instance.useCommentsInsteadOfData)
                 {
-                    return $"[{ID}]";
+                    if (string.IsNullOrEmpty(Comment))
+                    {
+                        return $"[{ID}]";
+                    }
+                    return TextUtil.Shortify($"[{ID}] - {Comment}", 24);
                 }
                 else
                 {
-                    string t = Messages[0].pages[0];
-                    if (!string.IsNullOrEmpty(t))
+                    if (Messages == null || Messages.Count < 1 || Messages[0].pages.Count < 1)
                     {
-                        return TextUtil.Shortify($"[{ID}] - {t}", 24);
+                        return $"[{ID}]";
                     }
+                    else
+                    {
+                        string t = Messages[0].pages[0];
+                        if (!string.IsNullOrEmpty(t))
+                        {
+                            return TextUtil.Shortify($"[{ID}] - {t}", 24);
+                        }
 
-                    return $"[{ID}]";
+                        return $"[{ID}]";
+                    }
                 }
             }
         }

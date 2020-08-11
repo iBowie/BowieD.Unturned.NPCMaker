@@ -27,6 +27,7 @@
 		"downloadPrerelease": "Download Preview Builds",
 		"alternateLogicTranslation": "Use alternative logic translation",
 		"replaceMissingKeysWithEnglish": "Replace missing keys with English",
+		"useCommentsInsteadOfData": "Use comments instead of data",
 
 		"experimentalFeatures_Tooltip": "Something experimental, maybe unstable",
 		"scale_Tooltip": "Adjust scale of the app on your screen",
@@ -39,7 +40,8 @@
 		"autoUpdate_Tooltip": "If there is an update - installs it on app start",
 		"downloadPrerelease_Tooltip": "Also known as download unstable versions",
 		"alternateLogicTranslation_Tooltip": "Replaces mathematical symbols with words",
-		"replaceMissingKeysWithEnglish_Tooltip": "Replaces missing keys from English dictionary"
+		"replaceMissingKeysWithEnglish_Tooltip": "Replaces missing keys from English dictionary",
+		"useCommentsInsteadOfData_Tooltip": "In tabs uses comments defined by you instead of data contained in the tab"
 	},
 	"Character": {
 		"Name_Editor": "Editor Name",

@@ -136,21 +136,21 @@
                         </Grid>
                         <Grid Grid.Row="1" Name="characterTabGrid" Visibility="Visible">
                             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Width="300" Margin="10">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <TextBox VerticalAlignment="Center" Text="{Binding EditorName, UpdateSourceTrigger=PropertyChanged}" Name="txtEditorName" Margin="5">
-                                    <TextBox.ToolTip>
-                                        <StackPanel>
-                                            <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Name_Editor_Tooltip}"/>
-                                            <Image Source="Resources/Help/img_help_editorName.png"/>
-                                        </StackPanel>
-                                    </TextBox.ToolTip>
-                                </TextBox>
-                                <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Editor}"/>
-                            </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox VerticalAlignment="Center" Text="{Binding EditorName, UpdateSourceTrigger=PropertyChanged}" Name="txtEditorName" Margin="5">
+                                        <TextBox.ToolTip>
+                                            <StackPanel>
+                                                <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Name_Editor_Tooltip}"/>
+                                                <Image Source="Resources/Help/img_help_editorName.png"/>
+                                            </StackPanel>
+                                        </TextBox.ToolTip>
+                                    </TextBox>
+                                    <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Editor}"/>
+                                </Grid>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -168,9 +168,9 @@
                                 </Grid>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
                                     <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Name="txtID" VerticalAlignment="Center" Margin="5" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Minimum="0" Maximum="65535">
                                         <xctk:UShortUpDown.ToolTip>
                                             <StackPanel>
@@ -179,11 +179,11 @@
                                         </xctk:UShortUpDown.ToolTip>
                                     </xctk:UShortUpDown>
                                     <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_ID}" />
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding DialogueID, UpdateSourceTrigger=PropertyChanged}" Name="txtStartDialogueID" VerticalAlignment="Center" Margin="5" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Minimum="0" Maximum="65535">
                                         <xctk:UShortUpDown.ToolTip>
@@ -196,17 +196,18 @@
                                         </xctk:UShortUpDown.ToolTip>
                                     </xctk:UShortUpDown>
                                     <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Dialogue}"/>
-                            </Grid>
-                            <Button Command="{Binding EditVisibilityConditionsCommand}" Name="visibilityCondsButton" Content="{xaml:Localize Key=CHARACTER_Conditions}" Margin="5">
-                                <Button.ToolTip>
-                                    <StackPanel>
-                                        <Image Source="Resources/Help/img_help_visibilityConditions.png"/>
-                                    </StackPanel>
-                                </Button.ToolTip>
-                            </Button>
-                            <Button Command="{Binding RegenerateGUIDsCommand}" Name="regenerateGuidsButton" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Guid_Generate}" Margin="5" />
-                        </StackPanel>
-                        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Width="432">
+                                </Grid>
+                                <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="character_commentbox" Margin="5" Height="26"/>
+                                <Button Command="{Binding EditVisibilityConditionsCommand}" Name="visibilityCondsButton" Content="{xaml:Localize Key=CHARACTER_Conditions}" Margin="5">
+                                    <Button.ToolTip>
+                                        <StackPanel>
+                                            <Image Source="Resources/Help/img_help_visibilityConditions.png"/>
+                                        </StackPanel>
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button Command="{Binding RegenerateGUIDsCommand}" Name="regenerateGuidsButton" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Guid_Generate}" Margin="5" />
+                            </StackPanel>
+                            <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Width="432">
                             <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" Background="Black" HorizontalAlignment="Right" Height="98" Margin="0,38,210,0" VerticalAlignment="Top" Width="98">
                                 <Image Name="faceImageControl" Source="Resources/Unturned/Faces/1.png" >
                                     <Image.Effect>

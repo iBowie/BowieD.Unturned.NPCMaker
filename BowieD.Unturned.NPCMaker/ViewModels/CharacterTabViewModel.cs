@@ -200,6 +200,15 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public string DisplayName { get => Character.DisplayName; set => Character.DisplayName = value; }
         public string EditorName { get => Character.EditorName; set => Character.EditorName = value; }
         public ushort ID { get => Character.ID; set => Character.ID = value; }
+        public string Comment
+        {
+            get => Character.Comment;
+            set
+            {
+                Character.Comment = value;
+                OnPropertyChange("Comment");
+            }
+        }
         public ushort DialogueID
         {
             get => Character.startDialogueId;
