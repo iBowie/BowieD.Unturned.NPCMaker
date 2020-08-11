@@ -255,7 +255,7 @@
     "Holiday_Value_Halloween": "Хэллоуин (27.10 - 01.11)",
     "Holiday_Value_Christmas": "Рождество (10.12 - 31.12)",
     "Holiday_Value_April_Fools": "Первое апреля",
-    "Holiday_Value_Max": "Макс (?)",
+    "Holiday_Value_Max": "Максимум (Ничего не делает)",
     "Compare_Flags_A_ID": "ID флага (A)",
     "Compare_Flags_B_ID": "ID флага (B)",
     "Compare_Flags_Allow_A_Unset": "Разрешить неустанов. знач. (A)",
