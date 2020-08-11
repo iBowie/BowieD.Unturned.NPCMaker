@@ -260,7 +260,14 @@ namespace BowieD.Unturned.NPCMaker
         private void AutosaveTimer_Tick(object sender, EventArgs e)
         {
             AutosaveTimer.Stop();
-            if (CurrentProject.file.Length > 0)
+            if (string.IsNullOrEmpty(CurrentProject.file))
+            {
+                var old = CurrentProject.file;
+                CurrentProject.file = "autosave.npcproj";
+                CurrentProject.Save();
+                CurrentProject.file = old;
+            }
+            else
             {
                 CurrentProject.Save();
             }
@@ -269,7 +276,7 @@ namespace BowieD.Unturned.NPCMaker
         }
         private void AppUpdateTimer_Tick(object sender, EventArgs e)
         {
-            if (CurrentProject.file.Length == 0)
+            if (string.IsNullOrEmpty(CurrentProject.file))
             {
                 menuCurrentFileLabel.Content = LocalizationManager.Current.Interface.Translate("Main_Menu_CurrentFile", LocalizationManager.Current.Interface["Main_Menu_CurrentFile_None"]);
             }
