@@ -310,7 +310,7 @@
     "Flag_Short_Modification_Decrement": "Уменьшить",
     "Flag_Short_Random_ID": "ID флага",
     "Flag_Short_Random_Min_Value": "Минимальное значение (включительно)",
-    "Flag_Short_Random_Max_Value": "Максимальное значение (исключительно)",
+    "Flag_Short_Random_Max_Value": "Максимальное значение (включительно)",
     "Flag_Short_Random_Modification": "Изменение значения",
     "Flag_Short_Random_Modification_Assign": "Присвоить",
     "Flag_Short_Random_Modification_Increment": "Увеличить",

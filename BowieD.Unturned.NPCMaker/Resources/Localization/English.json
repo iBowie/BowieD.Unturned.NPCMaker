@@ -314,7 +314,7 @@
 		"Flag_Short_Modification_Decrement": "Decrement",
 		"Flag_Short_Random_ID": "Flag ID",
 		"Flag_Short_Random_Min_Value": "Minimal Value (inclusive)",
-		"Flag_Short_Random_Max_Value": "Maximum Value (exclusive)",
+		"Flag_Short_Random_Max_Value": "Maximum Value (inclusive)",
 		"Flag_Short_Random_Modification": "Modification",
 		"Flag_Short_Random_Modification_Assign": "Assign",
 		"Flag_Short_Random_Modification_Increment": "Increment",

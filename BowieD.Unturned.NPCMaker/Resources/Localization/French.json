@@ -303,7 +303,7 @@
 		"Flag_Short_Modification_Decrement": "Decrement",
 		"Flag_Short_Random_ID": "ID du drapeau",
 		"Flag_Short_Random_Min_Value": "Valeur minimale (incluse)",
-		"Flag_Short_Random_Max_Value": "Valeur maximale (exclusive)",
+		"Flag_Short_Random_Max_Value": "Valeur maximale (incluse)",
 		"Flag_Short_Random_Modification": "Modification",
 		"Flag_Short_Random_Modification_Assign": "Attribuer",
 		"Flag_Short_Random_Modification_Increment": "Incrément",
