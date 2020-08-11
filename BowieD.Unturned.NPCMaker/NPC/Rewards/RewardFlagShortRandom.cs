@@ -26,7 +26,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                         sb.Append("- ");
                         break;
                 }
-                sb.Append($"[{Min_Value};{Max_Value})");
+                sb.Append($"[{Min_Value};{Max_Value}]");
                 return sb.ToString();
             }
         }
