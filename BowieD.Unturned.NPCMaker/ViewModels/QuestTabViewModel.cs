@@ -66,14 +66,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
             MainWindow.Instance.questTabButtonAdd.ContextMenu = cmenu3;
 
-            ContextMenu cmenu4 = new ContextMenu();
-
-            cmenu4.Items.Add(ContextHelper.CreatePasteItalicButton());
-            cmenu4.Items.Add(ContextHelper.CreatePasteBoldButton());
-            cmenu4.Items.Add(ContextHelper.CreatePasteColorMenu());
-
-            MainWindow.Instance.questTitleBox.ContextMenu = cmenu4;
-            MainWindow.Instance.questDescBox.ContextMenu = cmenu4;
+            MainWindow.Instance.questTitleBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich);
+            MainWindow.Instance.questDescBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich);
         }
         private void QuestTabButtonAdd_Click(object sender, RoutedEventArgs e)
         {
