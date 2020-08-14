@@ -12,23 +12,23 @@ namespace BowieD.Unturned.NPCMaker.Controls
     /// </summary>
     public partial class Dialogue_Message_Page : UserControl
     {
-        private static bool isMenuInit = false;
         public Dialogue_Message_Page(string text)
         {
             InitializeComponent();
             textField.Text = text;
             deleteButton.Opacity = Hidden_Opacity;
-            if (!isMenuInit)
-            {
-                textField.ContextMenu.Items.Add(ContextHelper.CreatePastePauseButton());
-                textField.ContextMenu.Items.Add(ContextHelper.CreatePasteNewLineButton());
-                textField.ContextMenu.Items.Add(ContextHelper.CreatePastePlayerNameButton());
-                textField.ContextMenu.Items.Add(ContextHelper.CreatePasteNPCNameButton());
-                textField.ContextMenu.Items.Add(ContextHelper.CreatePasteItalicButton());
-                textField.ContextMenu.Items.Add(ContextHelper.CreatePasteBoldButton());
-                textField.ContextMenu.Items.Add(ContextHelper.CreatePasteColorMenu());
-                isMenuInit = true;
-            }
+
+            ContextMenu cmenu = new ContextMenu();
+
+            cmenu.Items.Add(ContextHelper.CreatePastePauseButton());
+            cmenu.Items.Add(ContextHelper.CreatePasteNewLineButton());
+            cmenu.Items.Add(ContextHelper.CreatePastePlayerNameButton());
+            cmenu.Items.Add(ContextHelper.CreatePasteNPCNameButton());
+            cmenu.Items.Add(ContextHelper.CreatePasteItalicButton());
+            cmenu.Items.Add(ContextHelper.CreatePasteBoldButton());
+            cmenu.Items.Add(ContextHelper.CreatePasteColorMenu());
+
+            textField.ContextMenu = cmenu;
         }
 
         public string Page { get; private set; }
