@@ -26,8 +26,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
             get => new NPC.NPCMessage
             {
                 pages = Pages,
-                conditions = Conditions,
-                rewards = Rewards,
+                conditions = Conditions.ToList(),
+                rewards = Rewards.ToList(),
                 prev = Prev
             };
             set
@@ -39,8 +39,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
                     dmp.deleteButton.Click += DeleteButton_Click;
                     pagesGrid.Children.Add(dmp);
                 }
-                Conditions = value.conditions;
-                Rewards = value.rewards;
+                Conditions = value.conditions.ToArray();
+                Rewards = value.rewards.ToArray();
                 Prev = value.prev;
 
                 PropertyChanged?.Invoke(null, new PropertyChangedEventArgs(""));
