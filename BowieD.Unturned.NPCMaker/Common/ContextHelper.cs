@@ -446,7 +446,7 @@ namespace BowieD.Unturned.NPCMaker.Common
                     switch (l)
                     {
                         case 0:
-                            target.Text = ctext;
+                            target.Text = target.Text.Insert(pos, ctext);
                             break;
                         default:
                             target.Text = target.Text.Substring(0, pos) + ctext + target.Text.Substring(pos + l);
