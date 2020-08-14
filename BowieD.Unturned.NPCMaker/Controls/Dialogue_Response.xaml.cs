@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Forms;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using DiscordRPC;
 using System.Linq;
@@ -23,6 +24,18 @@ namespace BowieD.Unturned.NPCMaker.Controls
             txtBoxDialogueID.Value = Response.openDialogueId;
             txtBoxQuestID.Value = Response.openQuestId;
             txtBoxVendorID.Value = Response.openVendorId;
+
+            ContextMenu cmenu = new ContextMenu();
+
+            cmenu.Items.Add(ContextHelper.CreatePastePauseButton());
+            cmenu.Items.Add(ContextHelper.CreatePasteNewLineButton());
+            cmenu.Items.Add(ContextHelper.CreatePastePlayerNameButton());
+            cmenu.Items.Add(ContextHelper.CreatePasteNPCNameButton());
+            cmenu.Items.Add(ContextHelper.CreatePasteItalicButton());
+            cmenu.Items.Add(ContextHelper.CreatePasteBoldButton());
+            cmenu.Items.Add(ContextHelper.CreatePasteColorMenu());
+
+            mainText.ContextMenu = cmenu;
         }
 
         public NPC.NPCResponse Response { get; private set; }
