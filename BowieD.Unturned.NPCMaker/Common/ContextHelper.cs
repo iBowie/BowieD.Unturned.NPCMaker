@@ -12,9 +12,18 @@ namespace BowieD.Unturned.NPCMaker.Common
 {
     internal static class ContextHelper
     {
-        internal static ContextMenu CreateContextMenu(EContextOption option, RoutedEventHandler copy = null, RoutedEventHandler dupl = null, RoutedEventHandler paste = null, Type context = null, Action<object> addTemplateMethod = null)
+        internal static ContextMenu CreateContextMenu(EContextOption option)
         {
             ContextMenu cmenu = new ContextMenu();
+
+            if (option.HasFlag(EContextOption.CopyText))
+                cmenu.Items.Add(CreateCopyTextButton());
+
+            if (option.HasFlag(EContextOption.PasteText))
+                cmenu.Items.Add(CreatePasteTextButton());
+
+            if (option.HasFlag(EContextOption.CutText))
+                cmenu.Items.Add(CreateCutTextButton());
 
             if (option.HasFlag(EContextOption.NewLine))
                 cmenu.Items.Add(CreatePasteNewLineButton());
@@ -42,16 +51,16 @@ namespace BowieD.Unturned.NPCMaker.Common
                 cmenu.Items.Add(CreatePasteBoldButton());
 
             if (option.HasFlag(EContextOption.CopyObject))
-                cmenu.Items.Add(CreateCopyButton(copy));
+                throw new ArgumentException("CopyObject is not supported here");
 
             if (option.HasFlag(EContextOption.DuplicateObject))
-                cmenu.Items.Add(CreateDuplicateButton(dupl));
+                throw new ArgumentException("DuplicateObject is not supported here");
 
             if (option.HasFlag(EContextOption.PasteObject))
-                cmenu.Items.Add(CreatePasteButton(paste));
+                throw new ArgumentException("PasteObject is not supported here");
 
             if (option.HasFlag(EContextOption.AddFromTemplate))
-                cmenu.Items.Add(CreateAddFromTemplateButton(context, addTemplateMethod));
+                throw new ArgumentException("AddFromTemplate is not supported here");
 
             return cmenu;
         }
@@ -78,7 +87,13 @@ namespace BowieD.Unturned.NPCMaker.Common
 
             AddFromTemplate = 1 << 10,
 
-            Color_Unturned = 1 << 11
+            Color_Unturned = 1 << 11,
+
+            CopyText = 1 << 12,
+            PasteText = 1 << 13,
+            CutText = 1 << 14,
+
+            Group_TextEdit = CopyText | PasteText | CutText
         }
 
         internal static MenuItem CreatePasteNewLineButton()
@@ -384,6 +399,97 @@ namespace BowieD.Unturned.NPCMaker.Common
             b.Icon = new PackIconMaterial()
             {
                 Kind = PackIconMaterialKind.FolderPlusOutline
+            };
+            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
+            return b;
+        }
+
+        internal static MenuItem CreateCopyTextButton()
+        {
+            MenuItem b = new MenuItem()
+            {
+                Header = LocalizationManager.Current.Interface["Control_CopyText"]
+            };
+            b.Click += (object sender, RoutedEventArgs e) =>
+            {
+                ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                TextBox target = context.PlacementTarget as TextBox;
+                int pos = target.SelectionStart;
+                int l = target.SelectionLength;
+
+                Clipboard.SetText(target.Text.Substring(pos, l));
+            };
+            b.Icon = new PackIconMaterial()
+            {
+                Kind = PackIconMaterialKind.ContentCopy
+            };
+            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
+            return b;
+        }
+        internal static MenuItem CreatePasteTextButton()
+        {
+            MenuItem b = new MenuItem()
+            {
+                Header = LocalizationManager.Current.Interface["Control_PasteText"]
+            };
+            b.Click += (object sender, RoutedEventArgs e) =>
+            {
+                if (Clipboard.ContainsText())
+                {
+                    ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                    TextBox target = context.PlacementTarget as TextBox;
+                    int pos = target.SelectionStart;
+                    int l = target.SelectionLength;
+
+                    string ctext = Clipboard.GetText();
+
+                    switch (l)
+                    {
+                        case 0:
+                            target.Text = ctext;
+                            break;
+                        default:
+                            target.Text = target.Text.Substring(0, pos) + ctext + target.Text.Substring(pos + l);
+                            break;
+                    }
+                }
+            };
+            b.Icon = new PackIconMaterial()
+            {
+                Kind = PackIconMaterialKind.ContentPaste
+            };
+            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
+            return b;
+        }
+        internal static MenuItem CreateCutTextButton()
+        {
+            MenuItem b = new MenuItem()
+            {
+                Header = LocalizationManager.Current.Interface["Control_CutText"]
+            };
+            b.Click += (object sender, RoutedEventArgs e) =>
+            {
+                ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                TextBox target = context.PlacementTarget as TextBox;
+                int pos = target.SelectionStart;
+                int l = target.SelectionLength;
+
+                if (l > 0)
+                {
+                    switch (l)
+                    {
+                        case 0:
+                            break;
+                        default:
+                            Clipboard.SetText(target.Text.Substring(pos, l));
+                            target.Text = target.Text.Substring(0, pos) + target.Text.Substring(pos + l);
+                            break;
+                    }
+                }
+            };
+            b.Icon = new PackIconMaterial()
+            {
+                Kind = PackIconMaterialKind.ContentCut
             };
             (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
