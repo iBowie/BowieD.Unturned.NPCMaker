@@ -25,17 +25,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             txtBoxQuestID.Value = Response.openQuestId;
             txtBoxVendorID.Value = Response.openVendorId;
 
-            ContextMenu cmenu = new ContextMenu();
-
-            cmenu.Items.Add(ContextHelper.CreatePastePauseButton());
-            cmenu.Items.Add(ContextHelper.CreatePasteNewLineButton());
-            cmenu.Items.Add(ContextHelper.CreatePastePlayerNameButton());
-            cmenu.Items.Add(ContextHelper.CreatePasteNPCNameButton());
-            cmenu.Items.Add(ContextHelper.CreatePasteItalicButton());
-            cmenu.Items.Add(ContextHelper.CreatePasteBoldButton());
-            cmenu.Items.Add(ContextHelper.CreatePasteColorMenu());
-
-            mainText.ContextMenu = cmenu;
+            mainText.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Dialogue);
         }
 
         public NPC.NPCResponse Response { get; private set; }

@@ -12,6 +12,75 @@ namespace BowieD.Unturned.NPCMaker.Common
 {
     internal static class ContextHelper
     {
+        internal static ContextMenu CreateContextMenu(EContextOption option, RoutedEventHandler copy = null, RoutedEventHandler dupl = null, RoutedEventHandler paste = null, Type context = null, Action<object> addTemplateMethod = null)
+        {
+            ContextMenu cmenu = new ContextMenu();
+
+            if (option.HasFlag(EContextOption.NewLine))
+                cmenu.Items.Add(CreatePasteNewLineButton());
+
+            if (option.HasFlag(EContextOption.Pause))
+                cmenu.Items.Add(CreatePastePauseButton());
+
+            if (option.HasFlag(EContextOption.PlayerName))
+                cmenu.Items.Add(CreatePastePlayerNameButton());
+
+            if (option.HasFlag(EContextOption.NPCName))
+                cmenu.Items.Add(CreatePasteNPCNameButton());
+
+            bool 
+                flag1 = option.HasFlag(EContextOption.Color_Unity), 
+                flag2 = option.HasFlag(EContextOption.Color_Unturned);
+
+            if (flag1 || flag2)
+                cmenu.Items.Add(CreatePasteColorMenu(flag2, flag1));
+
+            if (option.HasFlag(EContextOption.Italic))
+                cmenu.Items.Add(CreatePasteItalicButton());
+
+            if (option.HasFlag(EContextOption.Bold))
+                cmenu.Items.Add(CreatePasteBoldButton());
+
+            if (option.HasFlag(EContextOption.CopyObject))
+                cmenu.Items.Add(CreateCopyButton(copy));
+
+            if (option.HasFlag(EContextOption.DuplicateObject))
+                cmenu.Items.Add(CreateDuplicateButton(dupl));
+
+            if (option.HasFlag(EContextOption.PasteObject))
+                cmenu.Items.Add(CreatePasteButton(paste));
+
+            if (option.HasFlag(EContextOption.AddFromTemplate))
+                cmenu.Items.Add(CreateAddFromTemplateButton(context, addTemplateMethod));
+
+            return cmenu;
+        }
+
+        internal enum EContextOption
+        {
+            NewLine = 1 << 0,
+            Pause = 1 << 1,
+            PlayerName = 1 << 2,
+            NPCName = 1 << 3,
+            Color_Unity = 1 << 4,
+            Italic = 1 << 5,
+            Bold = 1 << 6,
+
+            Group_Color = Color_Unity | Color_Unturned,
+            Group_Rich = Group_Color | Italic | Bold,
+            Group_Dialogue = Group_Rich | NewLine | Pause | PlayerName | NPCName,
+
+            CopyObject = 1 << 7,
+            DuplicateObject = 1 << 8,
+            PasteObject = 1 << 9,
+
+            Group_CopyPasteObject = CopyObject | DuplicateObject | PasteObject,
+
+            AddFromTemplate = 1 << 10,
+
+            Color_Unturned = 1 << 11
+        }
+
         internal static MenuItem CreatePasteNewLineButton()
         {
             MenuItem b = new MenuItem()
@@ -96,47 +165,56 @@ namespace BowieD.Unturned.NPCMaker.Common
             (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
         }
-        internal static MenuItem CreatePasteColorMenu()
+        internal static MenuItem CreatePasteColorMenu(bool includeUnturned = true, bool includeUnity = true)
         {
             MenuItem b = new MenuItem()
             {
                 Header = LocalizationManager.Current.Interface["Context_Dialogue_PasteColor"]
             };
-            MenuItem bm1 = new MenuItem()
+
+            if (includeUnturned)
             {
-                Header = LocalizationManager.Current.Interface["Context_Dialogue_PasteColor_Unturned"]
-            };
-            bm1.Items.Add(CreatePasteColorButton("common"));
-            bm1.Items.Add(CreatePasteColorButton("uncommon"));
-            bm1.Items.Add(CreatePasteColorButton("rare"));
-            bm1.Items.Add(CreatePasteColorButton("epic"));
-            bm1.Items.Add(CreatePasteColorButton("legendary"));
-            bm1.Items.Add(CreatePasteColorButton("mythical"));
-            bm1.Icon = new PackIconMaterial()
+                MenuItem bm1 = new MenuItem()
+                {
+                    Header = LocalizationManager.Current.Interface["Context_Dialogue_PasteColor_Unturned"]
+                };
+                bm1.Items.Add(CreatePasteColorButton("common"));
+                bm1.Items.Add(CreatePasteColorButton("uncommon"));
+                bm1.Items.Add(CreatePasteColorButton("rare"));
+                bm1.Items.Add(CreatePasteColorButton("epic"));
+                bm1.Items.Add(CreatePasteColorButton("legendary"));
+                bm1.Items.Add(CreatePasteColorButton("mythical"));
+                bm1.Icon = new PackIconMaterial()
+                {
+                    Kind = PackIconMaterialKind.Gamepad
+                };
+                (bm1.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
+                b.Items.Add(bm1);
+            }
+
+            if (includeUnity)
             {
-                Kind = PackIconMaterialKind.Gamepad
-            };
-            (bm1.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
-            b.Items.Add(bm1);
-            MenuItem bm2 = new MenuItem()
-            {
-                Header = LocalizationManager.Current.Interface["Context_Dialogue_PasteColor_Unity"]
-            };
-            bm2.Items.Add(CreatePasteColorButton("black"));
-            bm2.Items.Add(CreatePasteColorButton("blue"));
-            bm2.Items.Add(CreatePasteColorButton("cyan"));
-            bm2.Items.Add(CreatePasteColorButton("gray"));
-            bm2.Items.Add(CreatePasteColorButton("green"));
-            bm2.Items.Add(CreatePasteColorButton("magenta"));
-            bm2.Items.Add(CreatePasteColorButton("red"));
-            bm2.Items.Add(CreatePasteColorButton("white"));
-            bm2.Items.Add(CreatePasteColorButton("yellow"));
-            bm2.Icon = new PackIconMaterial()
-            {
-                Kind = PackIconMaterialKind.Unity
-            };
-            (bm2.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
-            b.Items.Add(bm2);
+                MenuItem bm2 = new MenuItem()
+                {
+                    Header = LocalizationManager.Current.Interface["Context_Dialogue_PasteColor_Unity"]
+                };
+                bm2.Items.Add(CreatePasteColorButton("black"));
+                bm2.Items.Add(CreatePasteColorButton("blue"));
+                bm2.Items.Add(CreatePasteColorButton("cyan"));
+                bm2.Items.Add(CreatePasteColorButton("gray"));
+                bm2.Items.Add(CreatePasteColorButton("green"));
+                bm2.Items.Add(CreatePasteColorButton("magenta"));
+                bm2.Items.Add(CreatePasteColorButton("red"));
+                bm2.Items.Add(CreatePasteColorButton("white"));
+                bm2.Items.Add(CreatePasteColorButton("yellow"));
+                bm2.Icon = new PackIconMaterial()
+                {
+                    Kind = PackIconMaterialKind.Unity
+                };
+                (bm2.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
+                b.Items.Add(bm2);
+            }
+
             b.Icon = new PackIconMaterial()
             {
                 Kind = PackIconMaterialKind.BasketFill

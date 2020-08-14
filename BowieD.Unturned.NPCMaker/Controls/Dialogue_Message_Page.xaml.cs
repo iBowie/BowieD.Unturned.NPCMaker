@@ -15,17 +15,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             InitializeComponent();
             textField.Text = text;
 
-            ContextMenu cmenu = new ContextMenu();
-
-            cmenu.Items.Add(ContextHelper.CreatePastePauseButton());
-            cmenu.Items.Add(ContextHelper.CreatePasteNewLineButton());
-            cmenu.Items.Add(ContextHelper.CreatePastePlayerNameButton());
-            cmenu.Items.Add(ContextHelper.CreatePasteNPCNameButton());
-            cmenu.Items.Add(ContextHelper.CreatePasteItalicButton());
-            cmenu.Items.Add(ContextHelper.CreatePasteBoldButton());
-            cmenu.Items.Add(ContextHelper.CreatePasteColorMenu());
-
-            textField.ContextMenu = cmenu;
+            textField.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Dialogue);
         }
 
         public string Page { get; private set; }

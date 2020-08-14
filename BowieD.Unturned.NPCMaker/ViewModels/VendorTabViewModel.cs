@@ -53,16 +53,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 }
             }));
 
-            MainWindow.Instance.vendorTabButtonAdd.ContextMenu = cmenu3;
-
-            ContextMenu cmenu4 = new ContextMenu();
-
-            cmenu4.Items.Add(ContextHelper.CreatePasteItalicButton());
-            cmenu4.Items.Add(ContextHelper.CreatePasteBoldButton());
-            cmenu4.Items.Add(ContextHelper.CreatePasteColorMenu());
-
-            MainWindow.Instance.vendorTitleTxtBox.ContextMenu = cmenu4;
-            MainWindow.Instance.vendorDescTxtBox.ContextMenu = cmenu4;
+            MainWindow.Instance.vendorTitleTxtBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich);
+            MainWindow.Instance.vendorDescTxtBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich);
         }
         private void VendorTabButtonAdd_Click(object sender, RoutedEventArgs e)
         {
