@@ -45,6 +45,14 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }));
 
             MainWindow.Instance.characterTabButtonAdd.ContextMenu = cmenu3;
+
+            ContextMenu cmenu4 = new ContextMenu();
+
+            cmenu4.Items.Add(ContextHelper.CreatePasteItalicButton());
+            cmenu4.Items.Add(ContextHelper.CreatePasteBoldButton());
+            cmenu4.Items.Add(ContextHelper.CreatePasteColorMenu());
+
+            MainWindow.Instance.txtDisplayName.ContextMenu = cmenu4;
         }
 
         private void CharacterTabButtonAdd_Click(object sender, RoutedEventArgs e)
