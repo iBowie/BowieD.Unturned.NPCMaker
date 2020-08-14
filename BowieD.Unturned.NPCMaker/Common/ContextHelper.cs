@@ -28,9 +28,9 @@ namespace BowieD.Unturned.NPCMaker.Common
             });
             b.Icon = new PackIconMaterial()
             {
-                Kind = PackIconMaterialKind.FormatPageBreak,
-                Foreground = App.Current.Resources["AccentColor"] as Brush
+                Kind = PackIconMaterialKind.FormatPageBreak
             };
+            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
         }
         internal static MenuItem CreatePastePauseButton()
@@ -49,9 +49,9 @@ namespace BowieD.Unturned.NPCMaker.Common
             });
             b.Icon = new PackIconMaterial()
             {
-                Kind = PackIconMaterialKind.Clock,
-                Foreground = App.Current.Resources["AccentColor"] as Brush
+                Kind = PackIconMaterialKind.Clock
             };
+            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
         }
         internal static MenuItem CreatePastePlayerNameButton()
@@ -70,9 +70,9 @@ namespace BowieD.Unturned.NPCMaker.Common
             });
             b.Icon = new PackIconMaterial()
             {
-                Kind = PackIconMaterialKind.Account,
-                Foreground = App.Current.Resources["AccentColor"] as Brush
+                Kind = PackIconMaterialKind.Account
             };
+            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
         }
         internal static MenuItem CreatePasteNPCNameButton()
@@ -91,9 +91,9 @@ namespace BowieD.Unturned.NPCMaker.Common
             });
             b.Icon = new PackIconMaterial()
             {
-                Kind = PackIconMaterialKind.AccountAlert,
-                Foreground = App.Current.Resources["AccentColor"] as Brush
+                Kind = PackIconMaterialKind.AccountAlert
             };
+            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
         }
         internal static MenuItem CreatePasteColorMenu()
@@ -114,9 +114,9 @@ namespace BowieD.Unturned.NPCMaker.Common
             bm1.Items.Add(CreatePasteColorButton("mythical"));
             bm1.Icon = new PackIconMaterial()
             {
-                Kind = PackIconMaterialKind.Gamepad,
-                Foreground = App.Current.Resources["AccentColor"] as Brush
+                Kind = PackIconMaterialKind.Gamepad
             };
+            (bm1.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             b.Items.Add(bm1);
             MenuItem bm2 = new MenuItem()
             {
@@ -133,15 +133,15 @@ namespace BowieD.Unturned.NPCMaker.Common
             bm2.Items.Add(CreatePasteColorButton("yellow"));
             bm2.Icon = new PackIconMaterial()
             {
-                Kind = PackIconMaterialKind.Unity,
-                Foreground = App.Current.Resources["AccentColor"] as Brush
+                Kind = PackIconMaterialKind.Unity
             };
+            (bm2.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             b.Items.Add(bm2);
             b.Icon = new PackIconMaterial()
             {
-                Kind = PackIconMaterialKind.BasketFill,
-                Foreground = App.Current.Resources["AccentColor"] as Brush
+                Kind = PackIconMaterialKind.BasketFill
             };
+            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
         }
         internal static MenuItem CreatePasteColorButton(string color = "#FFFFFF")
@@ -184,9 +184,9 @@ namespace BowieD.Unturned.NPCMaker.Common
             });
             b.Icon = new PackIconMaterial()
             {
-                Kind = PackIconMaterialKind.FormatItalic,
-                Foreground = App.Current.Resources["AccentColor"] as Brush
+                Kind = PackIconMaterialKind.FormatItalic
             };
+            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
         }
         internal static MenuItem CreatePasteBoldButton()
@@ -205,9 +205,9 @@ namespace BowieD.Unturned.NPCMaker.Common
             });
             b.Icon = new PackIconMaterial()
             {
-                Kind = PackIconMaterialKind.FormatBold,
-                Foreground = App.Current.Resources["AccentColor"] as Brush
+                Kind = PackIconMaterialKind.FormatBold
             };
+            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
         }
 
@@ -220,9 +220,9 @@ namespace BowieD.Unturned.NPCMaker.Common
             b.Click += copy;
             b.Icon = new PackIconMaterial()
             {
-                Kind = PackIconMaterialKind.ContentCopy,
-                Foreground = App.Current.Resources["AccentColor"] as Brush
+                Kind = PackIconMaterialKind.ContentCopy
             };
+            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
         }
         internal static MenuItem CreateDuplicateButton(RoutedEventHandler dupl)
@@ -234,9 +234,9 @@ namespace BowieD.Unturned.NPCMaker.Common
             b.Click += dupl;
             b.Icon = new PackIconMaterial()
             {
-                Kind = PackIconMaterialKind.ContentDuplicate,
-                Foreground = App.Current.Resources["AccentColor"] as Brush
+                Kind = PackIconMaterialKind.ContentDuplicate
             };
+            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
         }
         internal static MenuItem CreatePasteButton(RoutedEventHandler paste)
@@ -248,9 +248,9 @@ namespace BowieD.Unturned.NPCMaker.Common
             b.Click += paste;
             b.Icon = new PackIconMaterial()
             {
-                Kind = PackIconMaterialKind.ContentPaste,
-                Foreground = App.Current.Resources["AccentColor"] as Brush
+                Kind = PackIconMaterialKind.ContentPaste
             };
+            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
         }
 
