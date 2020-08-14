@@ -25,7 +25,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             txtBoxQuestID.Value = Response.openQuestId;
             txtBoxVendorID.Value = Response.openVendorId;
 
-            mainText.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Dialogue);
+            mainText.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Dialogue | ContextHelper.EContextOption.Group_TextEdit);
         }
 
         public NPC.NPCResponse Response { get; private set; }

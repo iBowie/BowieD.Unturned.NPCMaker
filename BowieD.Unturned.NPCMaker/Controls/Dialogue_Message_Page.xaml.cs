@@ -15,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             InitializeComponent();
             textField.Text = text;
 
-            textField.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Dialogue);
+            textField.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Dialogue | ContextHelper.EContextOption.Group_TextEdit);
         }
 
         public string Page { get; private set; }

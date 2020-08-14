@@ -66,8 +66,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
             MainWindow.Instance.questTabButtonAdd.ContextMenu = cmenu3;
 
-            MainWindow.Instance.questTitleBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich);
-            MainWindow.Instance.questDescBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich);
+            MainWindow.Instance.questTitleBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich | ContextHelper.EContextOption.Group_TextEdit);
+            MainWindow.Instance.questDescBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich | ContextHelper.EContextOption.Group_TextEdit);
         }
         private void QuestTabButtonAdd_Click(object sender, RoutedEventArgs e)
         {

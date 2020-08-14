@@ -53,8 +53,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 }
             }));
 
-            MainWindow.Instance.vendorTitleTxtBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich);
-            MainWindow.Instance.vendorDescTxtBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich);
+            MainWindow.Instance.vendorTitleTxtBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich | ContextHelper.EContextOption.Group_TextEdit);
+            MainWindow.Instance.vendorDescTxtBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich | ContextHelper.EContextOption.Group_TextEdit);
         }
         private void VendorTabButtonAdd_Click(object sender, RoutedEventArgs e)
         {
