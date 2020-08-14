@@ -97,10 +97,10 @@ namespace BowieD.Unturned.NPCMaker.Parsing
 
                 d.Messages.Add(new NPCMessage()
                 {
-                    conditions = ParseConditions($"Message_{mId}_"),
+                    conditions = ParseConditions($"Message_{mId}_").ToList(),
                     pages = pages.ToList(),
                     prev = asset.ReadUInt16($"Message_{mId}_Prev"),
-                    rewards = ParseRewards($"Message_{mId}_")
+                    rewards = ParseRewards($"Message_{mId}_").ToList()
                 });
             }
             d.Responses = new List<NPCResponse>(asset.ReadByte("Responses"));

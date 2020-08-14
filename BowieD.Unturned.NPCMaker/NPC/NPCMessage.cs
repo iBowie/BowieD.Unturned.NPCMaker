@@ -10,8 +10,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public NPCMessage()
         {
             pages = new List<string>();
-            conditions = new Condition[0];
-            rewards = new Reward[0];
+            conditions = new List<Condition>();
+            rewards = new List<Reward>();
             prev = 0;
         }
 
@@ -19,8 +19,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
         public List<string> pages;
 
-        public Reward[] rewards;
+        public List<Reward> rewards;
 
-        public Condition[] conditions;
+        public List<Condition> conditions;
     }
 }

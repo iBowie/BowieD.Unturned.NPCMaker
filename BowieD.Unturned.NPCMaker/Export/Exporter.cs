@@ -311,10 +311,10 @@ namespace BowieD.Unturned.NPCMaker.Export
                                         asset.WriteLine($"Message_{k}_Response_{c} {id}");
                                     }
                                 }
-                                if (message.conditions.Length > 0)
+                                if (message.conditions.Count > 0)
                                 {
-                                    asset.WriteLine($"Message_{k}_Conditions {message.conditions.Length}");
-                                    for (int c = 0; c < message.conditions.Length; c++)
+                                    asset.WriteLine($"Message_{k}_Conditions {message.conditions.Count}");
+                                    for (int c = 0; c < message.conditions.Count; c++)
                                     {
                                         NPC.Conditions.Condition cond = message.conditions[c];
 
@@ -324,10 +324,10 @@ namespace BowieD.Unturned.NPCMaker.Export
                                             local.WriteLine($"Message_{k}_Condition_{c} {cond.Localization}");
                                     }
                                 }
-                                if (message.rewards.Length > 0)
+                                if (message.rewards.Count > 0)
                                 {
-                                    asset.WriteLine($"Message_{k}_Rewards {message.rewards.Length}");
-                                    for (int c = 0; c < message.rewards.Length; c++)
+                                    asset.WriteLine($"Message_{k}_Rewards {message.rewards.Count}");
+                                    for (int c = 0; c < message.rewards.Count; c++)
                                     {
                                         Reward rew = message.rewards[c];
 
