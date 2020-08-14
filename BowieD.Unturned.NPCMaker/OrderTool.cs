@@ -62,7 +62,7 @@ namespace BowieD.Unturned.NPCMaker
                 animateAction = () =>
                 {
                     int ampl = 0;
-                    for (int i = 0; i < container.Children.Count - 2; i++)
+                    for (int i = 0; i <= container.Children.Count - 2; i++)
                     {
                         AnimateGoDown(container.Children[i] as T);
                         ampl++;
@@ -121,7 +121,7 @@ namespace BowieD.Unturned.NPCMaker
                 animateAction = () =>
                 {
                     int ampl = 0;
-                    for (int i = 0; i < container.Children.Count - 2; i++)
+                    for (int i = 0; i <= container.Children.Count - 2; i++)
                     {
                         AnimateGoUp(container.Children[i] as T);
                         ampl++;
