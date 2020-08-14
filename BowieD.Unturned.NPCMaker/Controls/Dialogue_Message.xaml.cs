@@ -34,10 +34,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             {
                 foreach (string page in value.pages)
                 {
-                    Dialogue_Message_Page dmp = new Dialogue_Message_Page(page);
-                    dmp.textField.TextChanged += TextField_TextChanged;
-                    dmp.deleteButton.Click += DeleteButton_Click;
-                    pagesGrid.Children.Add(dmp);
+                    AddPage(page);
                 }
                 Conditions = value.conditions.ToArray();
                 Rewards = value.rewards.ToArray();
@@ -73,10 +70,25 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         private void AddPageButton_Click(object sender, RoutedEventArgs e)
         {
-            Dialogue_Message_Page dmp = new Dialogue_Message_Page("");
+            AddPage();
+        }
+
+        private void AddPage(string content = "")
+        {
+            Dialogue_Message_Page dmp = new Dialogue_Message_Page(content);
             dmp.textField.TextChanged += TextField_TextChanged;
             dmp.deleteButton.Click += DeleteButton_Click;
+            dmp.moveUpButton.Click += (object sender2, RoutedEventArgs e2) =>
+            {
+                OrderTool.MoveUp<Dialogue_Message_Page>(pagesGrid, dmp);
+            };
+            dmp.moveDownButton.Click += (object sender2, RoutedEventArgs e2) =>
+            {
+                OrderTool.MoveDown<Dialogue_Message_Page>(pagesGrid, dmp);
+            };
             pagesGrid.Children.Add(dmp);
+
+            OrderTool.UpdateOrderButtons(pagesGrid);
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
