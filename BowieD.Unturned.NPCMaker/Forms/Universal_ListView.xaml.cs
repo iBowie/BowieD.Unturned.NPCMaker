@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Configuration;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Localization;
 using MahApps.Metro.Controls;
@@ -31,6 +32,15 @@ namespace BowieD.Unturned.NPCMaker.Forms
             Height *= scale;
             Width *= scale;
             MinWidth *= scale;
+
+            ContextMenu cmenu = new ContextMenu();
+
+            cmenu.Items.Add(ContextHelper.CreateAddFromTemplateButton(ClipboardManager.GetTypeFromFormat(ClipboardManager.GetFormat(ReturnType)), (result) =>
+            {
+                Add(new Universal_ItemList(result));
+            }));
+
+            addButton.ContextMenu = cmenu;
         }
 
         public bool ShowMoveButtons
