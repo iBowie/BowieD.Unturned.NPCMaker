@@ -10,6 +10,7 @@ using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -169,6 +170,18 @@ namespace BowieD.Unturned.NPCMaker
             else
             {
                 guidesMenuItem.IsEnabled = false;
+            }
+
+            if (string.IsNullOrEmpty(App.Package.GetTemplatesURL))
+            {
+                getTemplatesMenuItem.IsEnabled = false;
+            }
+            else
+            {
+                getTemplatesMenuItem.Click += (sender, e) =>
+                {
+                    Process.Start(App.Package.GetTemplatesURL);
+                };
             }
 
             if (App.Package.FeedbackLinks.Length > 0)

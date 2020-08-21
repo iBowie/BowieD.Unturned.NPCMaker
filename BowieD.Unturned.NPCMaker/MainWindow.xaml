@@ -89,6 +89,7 @@
                 <MenuItem Command="{Binding OptionsCommand}" Name="optionsMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Options}"/>
                 <MenuItem Name="commMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Communication}"/>
                 <MenuItem Name="guidesMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Guides}"/>
+                <MenuItem Name="getTemplatesMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Templates}"/>
                 <MenuItem Command="{Binding AboutCommand}" Name="aboutMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_About}"/>
                 <Label Margin="-5" IsEnabled="False" Name="menuCurrentFileLabel" Content="Current File: "/>
             </Menu>
