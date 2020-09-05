@@ -3,6 +3,7 @@
   "Name": "Русский (Russian)",
   "General": {
     "Project_SaveFilter": "Файл проекта NPC (*.npcproj)",
+    "Project_TemplateFilter": "Файл шаблона NPC (*.npctemplate)",
     "Title": "Unturned 3.0 NPC Maker by BowieD",
     "Configuration_Title": "Настройки"
   },
@@ -25,7 +26,7 @@
     "downloadPrerelease": "Загружать предв. версии",
     "alternateLogicTranslation": "Альтернативный перевод логики",
     "replaceMissingKeysWithEnglish": "Замена недост. перевода английским",
-    "automaticallySaveBeforeOpening": "Всегда сохранять перед открытием",
+    "useCommentsInsteadOfData": "Комментарии вместо данных",
 
     "experimentalFeatures_Tooltip": "ЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭксперименты",
     "scale_Tooltip": "Изменить размер программы на экране",
@@ -39,7 +40,7 @@
     "downloadPrerelease_Tooltip": "Также известно как: \"Загружать нестабильные версии\"",
     "alternateLogicTranslation_Tooltip": "Заменяет математические символы словами",
     "replaceMissingKeysWithEnglish_Tooltip": "Заменяет недостающий перевод английским вариантом",
-    "automaticallySaveBeforeOpening_Tooltip": "Если включено, то программа перестанет спрашивать Вас о сохранении текущего персонажа/диалога/магазина/задания перед открытием другого"
+    "useCommentsInsteadOfData_Tooltip": "Во вкладках использует введённый Вами комментарий вместо части данных из непосредственно вкладки"
   },
   "Character": {
     "Name_Editor": "Имя в редакторе",
@@ -309,7 +310,7 @@
     "Flag_Short_Modification_Decrement": "Уменьшить",
     "Flag_Short_Random_ID": "ID флага",
     "Flag_Short_Random_Min_Value": "Минимальное значение (включительно)",
-    "Flag_Short_Random_Max_Value": "Максимальное значение (исключительно)",
+    "Flag_Short_Random_Max_Value": "Максимальное значение (включительно)",
     "Flag_Short_Random_Modification": "Изменение значения",
     "Flag_Short_Random_Modification_Assign": "Присвоить",
     "Flag_Short_Random_Modification_Increment": "Увеличить",
@@ -403,6 +404,9 @@
     "Importance_CRITICAL": "Критическое"
   },
   "Notification": {
+    "Template_InvalidContext": "Этот шаблон не подходит в данном контексте. Должно быть он используется для чего-то другого.",
+    "Template_InvalidFile": "Этот файл шаблона не является корректным.",
+    "Template_Error": "Что-то пошло не так во время создания из шаблона. Смотрите логи для подробностей.",
     "Configuration_OnExit": "Перезапустите программу для применения изменений.",
     "Character_ID_Zero": "ID персонажа не может быть равен нулю",
     "Character_Saved": "Персонаж сохранён!",
@@ -453,6 +457,10 @@
     "Control_Copy": "Копировать",
     "Control_Duplicate": "Дублировать",
     "Control_Paste": "Вставить",
+    "Control_CopyText": "Копировать текст (Ctrl + C)",
+    "Control_PasteText": "Вставить текст (Ctrl + V)",
+    "Control_CutText": "Вырезать текст (Ctrl + X)",
+    "Control_AddFromTemplate": "Создать на основе шаблона...",
     "Update_Available_Title": "Доступно обновление",
     "Update_Available_Body": "Доступно обновление программы! Хотите установить его сейчас?",
     "Update_Notes_Title": "Изменения",
@@ -481,6 +489,7 @@
     "Main_Menu_Communication_Discord": "Сервер BowieD в Discord (Нажмите)",
     "Main_Menu_Communication_VK": "Профиль BowieD в ВК (Нажмите)",
     "Main_Menu_Guides": "Руководства",
+    "Main_Menu_Templates": "Получить шаблоны",
     "Main_Menu_About": "О программе",
     "Main_Tab_Character": "Персонаж",
     "Main_Tab_Character_ID_Tooltip": "ID NPC",
@@ -593,6 +602,8 @@
     "MessageBox_Button_Cancel": "Отмена",
     "MessageBox_Button_Yes": "Да",
     "MessageBox_Button_No": "Нет",
+
+    "Template_Caption": "Шаблон '{0}'. Автор: {1}",
 
     "Sort_EditorName_Ascending": "Упорядочить по имени в редакторе (А-Я)",
     "Sort_EditorName_Descending": "Упорядочить по имени в редакторе (Я-А)",

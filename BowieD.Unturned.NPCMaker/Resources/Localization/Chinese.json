@@ -307,7 +307,7 @@
 		"Flag_Short_Modification_Decrement": "减少",
 		"Flag_Short_Random_ID": "Flag的ID",
 		"Flag_Short_Random_Min_Value": "最小值(包含)",
-		"Flag_Short_Random_Max_Value": "最大值(不包含)",
+		"Flag_Short_Random_Max_Value": "最大值(包含)",
 		"Flag_Short_Random_Modification": "修改",
 		"Flag_Short_Random_Modification_Assign": "指定",
 		"Flag_Short_Random_Modification_Increment": "增加",

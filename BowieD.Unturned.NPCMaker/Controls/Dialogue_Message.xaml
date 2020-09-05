@@ -17,7 +17,7 @@
         <Border BorderBrush="{StaticResource AccentColor}" BorderThickness="2" CornerRadius="4">
             <StackPanel Orientation="Vertical">
                 <Border Margin="5" BorderBrush="{StaticResource AccentColor}" BorderThickness="2" CornerRadius="4">
-                    <ScrollViewer Margin="5" MinHeight="60" MaxHeight="120" VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer Margin="5" MinHeight="60" MaxHeight="120" VerticalScrollBarVisibility="Visible">
                         <StackPanel Name="pagesGrid" />
                     </ScrollViewer>
                 </Border>

@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Forms;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using DiscordRPC;
 using System.Linq;
@@ -23,6 +24,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
             txtBoxDialogueID.Value = Response.openDialogueId;
             txtBoxQuestID.Value = Response.openQuestId;
             txtBoxVendorID.Value = Response.openVendorId;
+
+            mainText.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Dialogue | ContextHelper.EContextOption.Group_TextEdit);
         }
 
         public NPC.NPCResponse Response { get; private set; }
@@ -61,7 +64,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
             ulv.Owner = MainWindow.Instance;
             ulv.ShowDialog();
-            Response.rewards = ulv.Values.Cast<Reward>().ToArray();
+            Response.rewards = ulv.Values.Cast<Reward>().ToList();
             MainWindow.Instance.MainWindowViewModel.TabControl_SelectionChanged(MainWindow.Instance.mainTabControl, null);
         }
         private void EditConditionsButton_Click(object sender, RoutedEventArgs e)
@@ -75,7 +78,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
             ulv.Owner = MainWindow.Instance;
             ulv.ShowDialog();
-            Response.conditions = ulv.Values.Cast<Condition>().ToArray();
+            Response.conditions = ulv.Values.Cast<Condition>().ToList();
             MainWindow.Instance.MainWindowViewModel.TabControl_SelectionChanged(MainWindow.Instance.mainTabControl, null);
         }
         private void MainText_TextChanged(object sender, TextChangedEventArgs e)

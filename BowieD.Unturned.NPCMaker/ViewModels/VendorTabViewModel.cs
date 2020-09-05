@@ -24,6 +24,37 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             NPCVendor empty = new NPCVendor();
             Vendor = empty;
             UpdateTabs();
+
+            ContextMenu cmenu2 = new ContextMenu();
+
+            cmenu2.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(VendorItem), (result) =>
+            {
+                if (result is VendorItem item)
+                {
+                    if (item.isBuy)
+                        AddItemBuy(item);
+                    else
+                        AddItemSell(item);
+                }
+            }));
+
+            MainWindow.Instance.vendorAddItemButton.ContextMenu = cmenu2;
+
+            ContextMenu cmenu3 = new ContextMenu();
+
+            cmenu3.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(NPCVendor), (result) =>
+            {
+                if (result is NPCVendor item)
+                {
+                    MainWindow.CurrentProject.data.vendors.Add(item);
+                    MetroTabItem tabItem = CreateTab(item);
+                    MainWindow.Instance.vendorTabSelect.Items.Add(tabItem);
+                    MainWindow.Instance.vendorTabSelect.SelectedIndex = MainWindow.Instance.vendorTabSelect.Items.Count - 1;
+                }
+            }));
+
+            MainWindow.Instance.vendorTitleTxtBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich | ContextHelper.EContextOption.Group_TextEdit);
+            MainWindow.Instance.vendorDescTxtBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich | ContextHelper.EContextOption.Group_TextEdit);
         }
         private void VendorTabButtonAdd_Click(object sender, RoutedEventArgs e)
         {

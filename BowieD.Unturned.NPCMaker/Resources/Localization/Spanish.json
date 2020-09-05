@@ -305,7 +305,7 @@
     "Flag_Short_Modification_Decrement": "Decrementar",
     "Flag_Short_Random_ID": "ID Flag",
     "Flag_Short_Random_Min_Value": "Valor Minimo (inclusivo)",
-    "Flag_Short_Random_Max_Value": "Valor Maximo (exclusivo)",
+    "Flag_Short_Random_Max_Value": "Valor Maximo (inclusivo)",
     "Flag_Short_Random_Modification": "Modificación",
     "Flag_Short_Random_Modification_Assign": "Asignar",
     "Flag_Short_Random_Modification_Increment": "Incrementar",

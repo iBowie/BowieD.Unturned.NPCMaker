@@ -89,6 +89,7 @@
                 <MenuItem Command="{Binding OptionsCommand}" Name="optionsMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Options}"/>
                 <MenuItem Name="commMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Communication}"/>
                 <MenuItem Name="guidesMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Guides}"/>
+                <MenuItem Name="getTemplatesMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Templates}"/>
                 <MenuItem Command="{Binding AboutCommand}" Name="aboutMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_About}"/>
                 <Label Margin="-5" IsEnabled="False" Name="menuCurrentFileLabel" Content="Current File: "/>
             </Menu>
@@ -136,21 +137,21 @@
                         </Grid>
                         <Grid Grid.Row="1" Name="characterTabGrid" Visibility="Visible">
                             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Width="300" Margin="10">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <TextBox VerticalAlignment="Center" Text="{Binding EditorName, UpdateSourceTrigger=PropertyChanged}" Name="txtEditorName" Margin="5">
-                                    <TextBox.ToolTip>
-                                        <StackPanel>
-                                            <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Name_Editor_Tooltip}"/>
-                                            <Image Source="Resources/Help/img_help_editorName.png"/>
-                                        </StackPanel>
-                                    </TextBox.ToolTip>
-                                </TextBox>
-                                <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Editor}"/>
-                            </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox VerticalAlignment="Center" Text="{Binding EditorName, UpdateSourceTrigger=PropertyChanged}" Name="txtEditorName" Margin="5">
+                                        <TextBox.ToolTip>
+                                            <StackPanel>
+                                                <Label Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Name_Editor_Tooltip}"/>
+                                                <Image Source="Resources/Help/img_help_editorName.png"/>
+                                            </StackPanel>
+                                        </TextBox.ToolTip>
+                                    </TextBox>
+                                    <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Editor}"/>
+                                </Grid>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -168,9 +169,9 @@
                                 </Grid>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
                                     <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Name="txtID" VerticalAlignment="Center" Margin="5" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Minimum="0" Maximum="65535">
                                         <xctk:UShortUpDown.ToolTip>
                                             <StackPanel>
@@ -179,11 +180,11 @@
                                         </xctk:UShortUpDown.ToolTip>
                                     </xctk:UShortUpDown>
                                     <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_ID}" />
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding DialogueID, UpdateSourceTrigger=PropertyChanged}" Name="txtStartDialogueID" VerticalAlignment="Center" Margin="5" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Minimum="0" Maximum="65535">
                                         <xctk:UShortUpDown.ToolTip>
@@ -196,442 +197,801 @@
                                         </xctk:UShortUpDown.ToolTip>
                                     </xctk:UShortUpDown>
                                     <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Dialogue}"/>
-                            </Grid>
-                            <Button Command="{Binding EditVisibilityConditionsCommand}" Name="visibilityCondsButton" Content="{xaml:Localize Key=CHARACTER_Conditions}" Margin="5">
-                                <Button.ToolTip>
-                                    <StackPanel>
-                                        <Image Source="Resources/Help/img_help_visibilityConditions.png"/>
+                                </Grid>
+                                <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="character_commentbox" Margin="5" Height="26"/>
+                                <Button Command="{Binding EditVisibilityConditionsCommand}" Name="visibilityCondsButton" Content="{xaml:Localize Key=CHARACTER_Conditions}" Margin="5">
+                                    <Button.ToolTip>
+                                        <StackPanel>
+                                            <Image Source="Resources/Help/img_help_visibilityConditions.png"/>
+                                        </StackPanel>
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button Command="{Binding RegenerateGUIDsCommand}" Name="regenerateGuidsButton" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Guid_Generate}" Margin="5" />
+                            </StackPanel>
+                            <Grid HorizontalAlignment="Right" VerticalAlignment="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                                        <Grid Margin="0,0,0,5">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Color_Skin}"/>
+                                            <Grid Margin="5" Grid.Row="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <xctk:ColorPicker SelectedColor="{Binding SkinColor, UpdateSourceTrigger=PropertyChanged}" AdvancedTabHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Advanced_Header}" StandardTabHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Standard_Header}" AvailableColorsHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="skinColorPicker" Background="{DynamicResource BackgroundColor}" BorderBrush="{DynamicResource AccentColor}" DropDownBackground="{DynamicResource BackgroundColor}" HeaderBackground="{DynamicResource BackgroundColor}" HeaderForeground="{DynamicResource AccentColor}" TabBackground="{DynamicResource BackgroundColor}" TabForeground="{DynamicResource AccentColor}"/>
+                                                <Button Margin="5,0,0,0" Grid.Column="1" Command="{Binding SaveColorSkin}" Name="skinColorPicker_SaveButton" Style="{DynamicResource FlatOutlineButtonStyle}">
+                                                    <Button.Content>
+                                                        <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="ContentSave"/>
+                                                    </Button.Content>
+                                                </Button>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid Margin="0,0,0,5">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Color_Hair}"/>
+                                            <Grid Margin="5" Grid.Row="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Button Margin="5,0,0,0" Grid.Column="1" Command="{Binding SaveColorHair}" Name="hairColorPicker_SaveButton" Style="{DynamicResource FlatOutlineButtonStyle}">
+                                                    <Button.Content>
+                                                        <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="ContentSave"/>
+                                                    </Button.Content>
+                                                </Button>
+                                                <xctk:ColorPicker SelectedColor="{Binding HairColor, UpdateSourceTrigger=PropertyChanged}" AdvancedTabHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Advanced_Header}" StandardTabHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Standard_Header}" AvailableColorsHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="hairColorPicker" Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource AccentColor}" TabBackground="{DynamicResource BackgroundColor}" TabForeground="{DynamicResource AccentColor}" HeaderForeground="{DynamicResource AccentColor}" HeaderBackground="{DynamicResource BackgroundColor}" DropDownBackground="{DynamicResource BackgroundColor}" BorderBrush="{DynamicResource AccentColor}"/>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid Margin="0,0,0,5">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Pose}"/>
+                                            <Button Margin="5" Grid.Row="1" Command="{Binding PoseEditorCommand}" Content="{xaml:Localize Key=CHARACTER_Edit_Pose}"/>
+                                        </Grid>
+                                        <CheckBox IsChecked="{Binding IsLeftHanded, UpdateSourceTrigger=PropertyChanged}" Name="apparelLeftHandedCheckbox" HorizontalContentAlignment="Right" Content="{xaml:Localize Key=CHARACTER_LeftHanded}" mah:ToggleButtonHelper.ContentDirection="RightToLeft"/>
                                     </StackPanel>
-                                </Button.ToolTip>
-                            </Button>
-                            <Button Command="{Binding RegenerateGUIDsCommand}" Name="regenerateGuidsButton" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Guid_Generate}" Margin="5" />
-                        </StackPanel>
-                        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Width="432">
-                            <Border x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" Background="Black" HorizontalAlignment="Right" Height="98" Margin="0,38,210,0" VerticalAlignment="Top" Width="98">
-                                <Image Name="faceImageControl" Source="Resources/Unturned/Faces/1.png" >
-                                    <Image.Effect>
-                                        <DropShadowEffect Color="White" Direction="0" BlurRadius="2" ShadowDepth="0"/>
-                                    </Image.Effect>
-                                </Image>
-                            </Border>
-                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Minimum="0" x:Name="faceImageIndex" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,210,0" Width="{Binding Width, ElementName=faceImageBorder}" Value="{Binding FaceID, UpdateSourceTrigger=PropertyChanged}"   ParsingNumberStyle="Integer"/>
-                            <Border x:Name="beardImageBorder" BorderBrush="{Binding BorderBrush, ElementName=faceImageBorder}" BorderThickness="1" HorizontalAlignment="Right" Height="{Binding Height, ElementName=faceImageBorder}" Width="{Binding Width, ElementName=faceImageBorder}" VerticalAlignment="Top" Margin="0,38,8,0">
-                                <Grid Name="beardRenderGrid" DataContext="{Binding SolidColorBrush}" Background="#EEAAAAAA">
-                                    <Canvas>
-                                        <Line X1="27" Y1="27" X2="70" Y2="70" Stroke="Red" StrokeThickness="2" />
-                                        <Line X1="70" Y1="27" X2="27" Y2="70" Stroke="Red" StrokeThickness="2" />
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="7,74 7,22 16,22 16,32 79,32 79,22 88,22 88,74 7,74 25,56 70,56 70,40 25,40 25,56" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="8,63 8,45 20,45 20,39 33,39 33,33 62,33 62,39 75,39 75,45 87,45 87,63 82,63 82,57 69,57 69,51 25,51 25,57 13,57 13,63" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="5,77 90,77 90,19 5,19 5,77 17,52 17,31 78,31 78,52 17,52" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="2,62 2,49 16,49 16,42 30,42 30,35 65,35 65,42 79,42 79,49 93,49 93,62 87,62 87,55 73,55 73,48 59,48 59,35 36,35 36,48 22,48 22,55 8,55 8,62" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="9,42 9,31 14,31 14,42 9,42 4,42 4,54 9,54 9,60 21,60 21,66 26,66 26,60 69,60 69,66 74,66 74,60 86,60 86,49 91,49 91,37 86,37 86,31 81,31 81,42 86,42 86,49 81,49 81,55 62,55 62,49 33,49 33,55 14,55 14,49 9,49" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="5,21 14,21 14,56 81,56 81,21 90,21 90,75 5,75" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="4,37 4,31 17,31 17,25 31,25 31,18 64,18 64,25 77,25 77,31 91,31 91,37 72,37 72,30 57,30 57,71 50,71 50,78 45,78 45,71 38,71 38,59 57,59 57,30 23,30 23,37" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="3,12 13,12 13,17 82,17 82,12 92,12 92,74 81,74 81,80 71,80 71,85 24,85 24,80 14,80 14,74 3,74 3,12 28,32 66,32 66,49 28,49 28,32" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="2,2 12,2 12,13 83,13 83,2 93,2 93,60 82,60 82,87 72,87 72,60 60,60 60,65 55,65 55,93 39,93 39,65 34,65 34,60 22,60 22,87 13,87 13,60 2,60 2,2 22,28 72,28 72,39 22,39 22,28" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="35,2 59,2 59,7 70,7 70,12 80,12 80,52 75,52 75,61 70,61 70,72 64,72 64,82 59,82 59,93 35,93 35,82 30,82 30,72 24,72 24,61 19,61 19,52 14,52 14,12 24,12 24,7 35,7 35,2 29,21 65,21 65,37 29,37 29,21" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="2,7 93,7 93,60 87,60 87,65 82,65 82,76 72,76 72,65 66,65 66,60 55,60 55,71 49,71 49,87 45,87 45,76 39,76 39,65 28,65 28,76 22,76 22,82 16,82 16,87 13,87 13,71 7,71 7,55 2,55 28,39 66,39 66,22 28,22 28,39 2,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="3,55 13,55 13,59 3,59" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                        <Polygon Points="13,55 13,50 17,50 17,45 23,45 23,39 34,39 34,34 38,34 38,44 28,44 28,49 22,49 22,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                        <Polygon Points="92,59 92,55 82,55 82,59" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                        <Polygon Points="82,55 82,50 78,50 78,45 72,45 72,39 61,39 61,34 57,34 57,44 67,44 67,49 73,49 73,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="8,75 2,75 2,26 9,26 9,19 85,19 85,26 93,26 93,75 86,75 86,33 8,33" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="2,7 12,7 12,13 22,13 22,17 28,17 28,34 66,34 66,17 72,17 72,13 83,13 83,7 93,7 93,49 87,49 87,55 76,55 76,60 65,60 65,65 55,65 55,76 49,76 49,87 45,87 45,76 39,76 39,65 29,65 29,60 17,60 17,55 7,55 7,49 2,49" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="56,2 56,9 65,9 65,16 73,16 73,25 79,25 79,31 73,31 73,38 65,38 65,54 56,54 56,70 50,70 50,93 43,93 43,70 37,70 37,54 28,54 28,38 20,38 20,31 14,31 14,25 20,25 20,16 28,16 28,9 37,9 37,2" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                    </Canvas>
+                                </ScrollViewer>
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label HorizontalContentAlignment="Center" Content="{xaml:Localize Key=CHARACTER_Face}" Margin="5"/>
+                                    <Border Width="96" Height="96" Margin="5" Grid.Row="1" x:Name="faceImageBorder" BorderBrush="Black" BorderThickness="1" Background="Black">
+                                        <Image Name="faceImageControl" Source="Resources/Unturned/Faces/1.png" >
+                                            <Image.Effect>
+                                                <DropShadowEffect Color="White" Direction="0" BlurRadius="2" ShadowDepth="0"/>
+                                            </Image.Effect>
+                                        </Image>
+                                    </Border>
+                                    <Grid Grid.Row="2" Width="{Binding Width, ElementName=faceImageBorder}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <xctk:ByteUpDown Foreground="{DynamicResource ForegroundColor}" Minimum="0" x:Name="faceImageIndex" Value="{Binding FaceID, UpdateSourceTrigger=PropertyChanged}" ParsingNumberStyle="Integer"/>
+                                        <Button 
+                                        Command="{Binding RandomFaceCommand}" 
+                                        Grid.Column="1" 
+                                        Margin="5,0,0,0" 
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Face_Random}"
+                                        Style="{DynamicResource FlatOutlineButtonStyle}">
+                                            <Button.Content>
+                                                <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="DiceMultiple"/>
+                                            </Button.Content>
+                                        </Button>
+                                    </Grid>
                                 </Grid>
-                            </Border>
-                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding BeardID, UpdateSourceTrigger=PropertyChanged}" Minimum="0" x:Name="beardImageIndex" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,8,0" Width="{Binding Width, ElementName=beardImageBorder}"   ParsingNumberStyle="Integer"/>
-                            <Border x:Name="hairImageBorder" BorderBrush="{Binding BorderBrush, ElementName=beardImageBorder}" BorderThickness="{Binding BorderThickness, ElementName=beardImageBorder}" HorizontalAlignment="Right" Height="{Binding Height, ElementName=beardImageBorder}" Width="{Binding Width, ElementName=beardImageBorder}" VerticalAlignment="Top" Margin="0,38,109,0">
-                                <Grid Name="hairRenderGrid" DataContext="{Binding SolidColorBrush}" Background="#EEAAAAAA">
-                                    <Canvas>
-                                        <Line X1="27" Y1="27" X2="70" Y2="70" Stroke="Red" StrokeThickness="2" />
-                                        <Line X1="70" Y1="27" X2="27" Y2="70" Stroke="Red" StrokeThickness="2" />
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="25,85 16,85 16,76 11,76 11,61 6,61 6,41 2,41 2,33 6,33 6,28 16,28 16,23 36,23 36,18 45,18 45,14 74,14 74,9 93,9 93,17 87,17 87,22 82,22 82,56 69,56 69,46 55,46 55,41 49,41 49,46 39,46 39,51 35,51 35,56 30,56 30,61 25,61" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="2,45 8,45 8,39 14,39 14,34 20,34 20,29 39,29 39,23 93,23 93,49 49,49 49,55 38,55 38,59 33,59 33,65 22,65 22,71 2,71" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="2,42 2,52 7,52 7,58 28,58 28,52 34,52 34,58 65,58 65,52 72,52 72,58 93,58 93,48 82,48 82,42 61,42 61,53 55,53 55,42 61,42 61,37 45,37 45,48 38,48 38,37 29,37 29,42 17,42 17,48 12,48 12,42" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="16,90 16,74 22,74 22,62 28,62 28,52 33,52 33,47 38,47 38,41 44,41 44,30 87,30 87,25 93,25 93,10 87,10 87,4 56,4 56,10 34,10 34,15 13,15 13,20 7,20 7,31 2,31 2,62 7,62 7,90" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="2,93 8,93 8,27 14,27 14,93 20,93 20,40 27,40 27,93 33,93 33,54 40,54 40,93 46,93 46,60 53,60 53,93 60,93 60,80 67,80 67,93 79,93 79,47 86,47 86,93 92,93 92,47 86,47 86,40 92,40 92,35 86,35 86,15 79,15 79,9 73,9 73,3 67,3 67,9 60,9 60,15 67,15 67,27 60,27 60,60 53,60 53,27 60,27 60,15 54,15 54,9 34,9 34,15 40,15 40,21 34,21 34,34 40,34 40,40 34,40 34,34 20,34 20,27 27,27 27,21 34,21 34,15 9,15 9,22 2,22" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="33,88 33,78 23,78 23,73 12,73 12,67 2,67 2,72 7,72 7,77 18,77 18,83 29,83 29,88" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                        <Polygon Points="33,66 33,57 28,57 28,51 24,51 24,47 18,47 18,36 13,36 13,31 7,31 7,26 3,26 3,31 7,31 7,36 7,40 13,40 13,47 18,47 18,51 24,51 24,61 29,61 29,66" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                        <Polygon Points="34,8 39,8 39,30 44,30 44,50 34,50" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                        <Polygon Points="51,50 61,50 61,29 66,29 66,8 62,8 62,19 56,19 56,40 51,40" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                        <Polygon Points="67,50 77,50 77,39 82,39 82,29 88,29 88,18 93,18 93,8 89,8 89,13 83,13 83,24 78,24 78,35 72,35 72,46 67,46" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="20,84 20,54 15,54 15,44 10,44 10,39 5,39 5,29 10,29 10,19 15,19 15,14 20,14 20,9 25,9 25,19 35,19 35,24 65,24 65,19 85,19 85,24 90,24 90,39 85,39 85,44 45,44 45,54 40,54 40,59 35,59 35,64 30,64 30,74 25,74 25,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="10,84 10,69 5,69 5,39 10,39 10,29 15,29 15,24 35,24 35,19 55,19 55,14 75,14 75,19 80,19 80,34 85,34 85,59 80,59 80,54 70,54 70,49 50,49 50,54 40,54 40,59 35,59 35,64 25,64 25,74 20,74 20,79 15,79 15,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="15,84 15,69 10,69 10,49 5,49 5,34 15,34 15,29 10,29 10,24 30,24 30,14 25,14 25,19 40,19 40,14 55,14 55,19 65,19 65,14 85,14 85,9 90,9 90,24 85,24 85,29 80,29 80,54 75,54 75,49 70,49 70,44 55,44 55,49 45,49 45,54 35,54 35,59 30,59 30,64 25,64 25,69 20,69 20,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="10,86 10,76 5,76 5,46 10,46 10,31 15,31 15,21 20,21 20,16 25,16 25,11 85,11 85,16 90,16 90,46 85,46 85,56 75,56 75,61 60,61 60,66 50,66 50,71 30,71 30,76 25,76 25,81 20,81 20,86" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="15,84 15,69 10,69 10,59 5,59 5,54 10,54 10,49 5,49 5,39 10,39 10,24 5,24 5,29 25,29 25,19 20,19 20,24 30,24 30,29 40,29 40,24 45,24 45,19 40,19 40,14 50,14 50,19 65,19 65,14 70,14 70,19 80,19 80,14 85,14 85,9 90,9 90,24 85,24 85,29 80,29 80,34 90,34 90,39 85,39 85,44 80,44 80,64 75,64 75,54 60,54 60,49 45,49 45,54 35,54 35,59 30,59 30,64 25,64 25,69 20,69 20,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="4,67 4,47 9,47 9,42 14,42 14,37 19,37 19,42 29,42 29,22 69,22 69,27 79,27 79,37 84,37 84,52 89,52 89,72 84,72 84,67 79,67 79,62 74,62 74,57 54,57 54,52 24,52 24,57 19,57 19,62 9,62 9,67" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="36,87 26,87 26,82 16,82 16,77 6,77 6,52 1,52 1,27 11,27 11,22 21,22 21,17 31,17 31,12 81,12 81,7 91,7 91,22 86,22 86,32 81,32 81,42 76,42 76,52 36,52" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="85,90 75,90 75,85 65,85 65,80 55,80 55,75 45,75 45,70 40,70 40,65 35,65 35,55 25,55 25,60 20,60 20,65 15,65 15,70 10,70 10,55 5,55 5,25 10,25 10,15 15,15 15,10 35,10 35,5 55,5 55,0 75,0 75,5 80,5 80,20 85,20 85,45 80,45 80,40 65,40 65,60 70,60 70,70 75,70 75,75 80,75 80,85 85,85" Canvas.Left="2" Canvas.Top="3" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="10,85 5,85 5,80 0,80 0,60 5,60 5,45 10,45 10,35 20,35 20,15 25,15 25,10 35,10 35,5 50,5 50,0 85,0 85,35 70,35 70,40 65,40 65,45 55,45 55,50 45,50 45,55 35,55 35,60 20,60 20,55 10,55" Canvas.Top="4" Canvas.Left="4" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="15,90 10,90 10,65 5,65 5,40 10,40 10,25 15,25 15,15 20,15 20,10 25,10 25,5 60,5 60,10 70,10 70,15 75,15 75,20 80,20 80,50 75,50 75,35 25,35 25,40 20,40 20,50 15,50" Canvas.Top="2" Canvas.Left="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="5,75 0,75 0,25 5,25 5,20 20,20 20,15 35,15 35,10 50,10 50,15 60,15 60,20 75,20 75,25 85,25 85,45 80,45 80,40 65,40 65,35 45,35 45,40 35,40 35,45 30,45 30,50 20,50 20,55 15,55 15,60 10,60 10,65 5,65" Canvas.Top="4" Canvas.Left="3" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="0,60 0,35 5,35 5,30 15,30 15,25 35,25 35,20 65,20 65,25 75,25 75,30 80,30 80,35 85,35 85,65 80,65 80,70 75,70 75,55 65,55 65,60 55,60 55,50 20,50 20,55 10,55 10,60" Canvas.Top="2" Canvas.Left="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="15,70 15,55 10,55 10,45 5,45 5,35 0,35 0,40 15,40 15,45 25,45 25,30 15,30 15,25 20,25 20,35 35,35 35,40 40,40 40,45 60,45 60,50 75,50 75,60 80,60 80,65 65,65 65,60 35,60 35,65 20,65 20,70" Canvas.Top="3" Canvas.Left="4" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="0,70 0,45 5,45 5,40 25,40 25,30 30,30 30,20 35,20 35,30 40,30 40,35 55,35 55,40 70,40 70,45 80,45 80,55 85,55 85,70 80,70 80,65 75,65 75,60 70,60 70,55 50,55 50,50 30,50 30,55 15,55 15,60 10,60 10,65 5,65 5,70" Canvas.Left="2" Canvas.Top="4" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="25,85 15,85 15,80 10,80 10,75 5,75 5,70 0,70 0,50 5,50 5,35 10,35 10,30 15,30 15,25 20,25 20,20 25,20 25,15 40,15 40,10 55,10 55,15 65,15 65,20 70,20 70,25 75,25 75,30 80,30 80,45 85,45 85,65 80,65 80,75 75,75 75,80 70,80 70,85 60,85 60,55 25,55" Canvas.Left="3" Canvas.Top="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
-                                    <Canvas Visibility="Collapsed">
-                                        <Polygon Points="0,80 0,30 5,30 5,25 20,25 20,20 35,20 35,15 50,15 50,20 60,20 60,25 75,25 75,30 85,30 85,80 80,80 80,50 70,50 70,45 15,45 15,50 5,50 5,80" Canvas.Left="2" Canvas.Top="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
-                                    </Canvas>
+                                <Grid Grid.Column="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label HorizontalContentAlignment="Center" Content="{xaml:Localize Key=CHARACTER_Hair}" Margin="5"/>
+                                    <Border Grid.Row="1" Margin="5" x:Name="hairImageBorder" BorderBrush="{Binding BorderBrush, ElementName=beardImageBorder}" BorderThickness="{Binding BorderThickness, ElementName=beardImageBorder}" Height="{Binding Height, ElementName=beardImageBorder}" Width="{Binding Width, ElementName=beardImageBorder}">
+                                        <Grid Name="hairRenderGrid" DataContext="{Binding SolidColorBrush}" Background="#EEAAAAAA">
+                                            <Canvas>
+                                                <Line X1="27" Y1="27" X2="70" Y2="70" Stroke="Red" StrokeThickness="2" />
+                                                <Line X1="70" Y1="27" X2="27" Y2="70" Stroke="Red" StrokeThickness="2" />
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="25,85 16,85 16,76 11,76 11,61 6,61 6,41 2,41 2,33 6,33 6,28 16,28 16,23 36,23 36,18 45,18 45,14 74,14 74,9 93,9 93,17 87,17 87,22 82,22 82,56 69,56 69,46 55,46 55,41 49,41 49,46 39,46 39,51 35,51 35,56 30,56 30,61 25,61" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="2,45 8,45 8,39 14,39 14,34 20,34 20,29 39,29 39,23 93,23 93,49 49,49 49,55 38,55 38,59 33,59 33,65 22,65 22,71 2,71" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="2,42 2,52 7,52 7,58 28,58 28,52 34,52 34,58 65,58 65,52 72,52 72,58 93,58 93,48 82,48 82,42 61,42 61,53 55,53 55,42 61,42 61,37 45,37 45,48 38,48 38,37 29,37 29,42 17,42 17,48 12,48 12,42" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="16,90 16,74 22,74 22,62 28,62 28,52 33,52 33,47 38,47 38,41 44,41 44,30 87,30 87,25 93,25 93,10 87,10 87,4 56,4 56,10 34,10 34,15 13,15 13,20 7,20 7,31 2,31 2,62 7,62 7,90" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="2,93 8,93 8,27 14,27 14,93 20,93 20,40 27,40 27,93 33,93 33,54 40,54 40,93 46,93 46,60 53,60 53,93 60,93 60,80 67,80 67,93 79,93 79,47 86,47 86,93 92,93 92,47 86,47 86,40 92,40 92,35 86,35 86,15 79,15 79,9 73,9 73,3 67,3 67,9 60,9 60,15 67,15 67,27 60,27 60,60 53,60 53,27 60,27 60,15 54,15 54,9 34,9 34,15 40,15 40,21 34,21 34,34 40,34 40,40 34,40 34,34 20,34 20,27 27,27 27,21 34,21 34,15 9,15 9,22 2,22" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="33,88 33,78 23,78 23,73 12,73 12,67 2,67 2,72 7,72 7,77 18,77 18,83 29,83 29,88" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                                <Polygon Points="33,66 33,57 28,57 28,51 24,51 24,47 18,47 18,36 13,36 13,31 7,31 7,26 3,26 3,31 7,31 7,36 7,40 13,40 13,47 18,47 18,51 24,51 24,61 29,61 29,66" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                                <Polygon Points="34,8 39,8 39,30 44,30 44,50 34,50" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                                <Polygon Points="51,50 61,50 61,29 66,29 66,8 62,8 62,19 56,19 56,40 51,40" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                                <Polygon Points="67,50 77,50 77,39 82,39 82,29 88,29 88,18 93,18 93,8 89,8 89,13 83,13 83,24 78,24 78,35 72,35 72,46 67,46" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="20,84 20,54 15,54 15,44 10,44 10,39 5,39 5,29 10,29 10,19 15,19 15,14 20,14 20,9 25,9 25,19 35,19 35,24 65,24 65,19 85,19 85,24 90,24 90,39 85,39 85,44 45,44 45,54 40,54 40,59 35,59 35,64 30,64 30,74 25,74 25,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="10,84 10,69 5,69 5,39 10,39 10,29 15,29 15,24 35,24 35,19 55,19 55,14 75,14 75,19 80,19 80,34 85,34 85,59 80,59 80,54 70,54 70,49 50,49 50,54 40,54 40,59 35,59 35,64 25,64 25,74 20,74 20,79 15,79 15,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="15,84 15,69 10,69 10,49 5,49 5,34 15,34 15,29 10,29 10,24 30,24 30,14 25,14 25,19 40,19 40,14 55,14 55,19 65,19 65,14 85,14 85,9 90,9 90,24 85,24 85,29 80,29 80,54 75,54 75,49 70,49 70,44 55,44 55,49 45,49 45,54 35,54 35,59 30,59 30,64 25,64 25,69 20,69 20,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="10,86 10,76 5,76 5,46 10,46 10,31 15,31 15,21 20,21 20,16 25,16 25,11 85,11 85,16 90,16 90,46 85,46 85,56 75,56 75,61 60,61 60,66 50,66 50,71 30,71 30,76 25,76 25,81 20,81 20,86" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="15,84 15,69 10,69 10,59 5,59 5,54 10,54 10,49 5,49 5,39 10,39 10,24 5,24 5,29 25,29 25,19 20,19 20,24 30,24 30,29 40,29 40,24 45,24 45,19 40,19 40,14 50,14 50,19 65,19 65,14 70,14 70,19 80,19 80,14 85,14 85,9 90,9 90,24 85,24 85,29 80,29 80,34 90,34 90,39 85,39 85,44 80,44 80,64 75,64 75,54 60,54 60,49 45,49 45,54 35,54 35,59 30,59 30,64 25,64 25,69 20,69 20,84" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="4,67 4,47 9,47 9,42 14,42 14,37 19,37 19,42 29,42 29,22 69,22 69,27 79,27 79,37 84,37 84,52 89,52 89,72 84,72 84,67 79,67 79,62 74,62 74,57 54,57 54,52 24,52 24,57 19,57 19,62 9,62 9,67" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="36,87 26,87 26,82 16,82 16,77 6,77 6,52 1,52 1,27 11,27 11,22 21,22 21,17 31,17 31,12 81,12 81,7 91,7 91,22 86,22 86,32 81,32 81,42 76,42 76,52 36,52" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="85,90 75,90 75,85 65,85 65,80 55,80 55,75 45,75 45,70 40,70 40,65 35,65 35,55 25,55 25,60 20,60 20,65 15,65 15,70 10,70 10,55 5,55 5,25 10,25 10,15 15,15 15,10 35,10 35,5 55,5 55,0 75,0 75,5 80,5 80,20 85,20 85,45 80,45 80,40 65,40 65,60 70,60 70,70 75,70 75,75 80,75 80,85 85,85" Canvas.Left="2" Canvas.Top="3" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="10,85 5,85 5,80 0,80 0,60 5,60 5,45 10,45 10,35 20,35 20,15 25,15 25,10 35,10 35,5 50,5 50,0 85,0 85,35 70,35 70,40 65,40 65,45 55,45 55,50 45,50 45,55 35,55 35,60 20,60 20,55 10,55" Canvas.Top="4" Canvas.Left="4" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="15,90 10,90 10,65 5,65 5,40 10,40 10,25 15,25 15,15 20,15 20,10 25,10 25,5 60,5 60,10 70,10 70,15 75,15 75,20 80,20 80,50 75,50 75,35 25,35 25,40 20,40 20,50 15,50" Canvas.Top="2" Canvas.Left="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="5,75 0,75 0,25 5,25 5,20 20,20 20,15 35,15 35,10 50,10 50,15 60,15 60,20 75,20 75,25 85,25 85,45 80,45 80,40 65,40 65,35 45,35 45,40 35,40 35,45 30,45 30,50 20,50 20,55 15,55 15,60 10,60 10,65 5,65" Canvas.Top="4" Canvas.Left="3" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="0,60 0,35 5,35 5,30 15,30 15,25 35,25 35,20 65,20 65,25 75,25 75,30 80,30 80,35 85,35 85,65 80,65 80,70 75,70 75,55 65,55 65,60 55,60 55,50 20,50 20,55 10,55 10,60" Canvas.Top="2" Canvas.Left="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="15,70 15,55 10,55 10,45 5,45 5,35 0,35 0,40 15,40 15,45 25,45 25,30 15,30 15,25 20,25 20,35 35,35 35,40 40,40 40,45 60,45 60,50 75,50 75,60 80,60 80,65 65,65 65,60 35,60 35,65 20,65 20,70" Canvas.Top="3" Canvas.Left="4" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="0,70 0,45 5,45 5,40 25,40 25,30 30,30 30,20 35,20 35,30 40,30 40,35 55,35 55,40 70,40 70,45 80,45 80,55 85,55 85,70 80,70 80,65 75,65 75,60 70,60 70,55 50,55 50,50 30,50 30,55 15,55 15,60 10,60 10,65 5,65 5,70" Canvas.Left="2" Canvas.Top="4" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="25,85 15,85 15,80 10,80 10,75 5,75 5,70 0,70 0,50 5,50 5,35 10,35 10,30 15,30 15,25 20,25 20,20 25,20 25,15 40,15 40,10 55,10 55,15 65,15 65,20 70,20 70,25 75,25 75,30 80,30 80,45 85,45 85,65 80,65 80,75 75,75 75,80 70,80 70,85 60,85 60,55 25,55" Canvas.Left="3" Canvas.Top="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="0,80 0,30 5,30 5,25 20,25 20,20 35,20 35,15 50,15 50,20 60,20 60,25 75,25 75,30 85,30 85,80 80,80 80,50 70,50 70,45 15,45 15,50 5,50 5,80" Canvas.Left="2" Canvas.Top="2" Fill="{Binding DataContext, ElementName=hairRenderGrid}"/>
+                                            </Canvas>
+                                        </Grid>
+                                    </Border>
+                                    <Grid Grid.Row="2" Width="{Binding Width, ElementName=hairImageBorder}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <xctk:ByteUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding HairID, UpdateSourceTrigger=PropertyChanged}" Minimum="0" x:Name="hairImageIndex" ParsingNumberStyle="Integer"/>
+                                        <Button 
+                                        Command="{Binding RandomHairCommand}" 
+                                        Grid.Column="1" 
+                                        Margin="5,0,0,0" 
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Hair_Random}"
+                                        Style="{DynamicResource FlatOutlineButtonStyle}">
+                                            <Button.Content>
+                                                <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="DiceMultiple"/>
+                                            </Button.Content>
+                                        </Button>
+                                    </Grid>
                                 </Grid>
-                            </Border>
-                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding HairID, UpdateSourceTrigger=PropertyChanged}" Minimum="0" x:Name="hairImageIndex" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,109,0" Width="{Binding Width, ElementName=hairImageBorder}"   ParsingNumberStyle="Integer"/>
-                            <Button Command="{Binding RandomFaceCommand}" Name="apparelFaceRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Face_Random}" Margin="0,171,210,0" Width="98" Height="26"/>
-                            <Button Command="{Binding RandomHairCommand}" Name="apparelHairRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Hair_Random}" Margin="0,171,109,0" Width="98" Height="26"/>
-                            <Button Command="{Binding RandomBeardCommand}" Name="apparelBeardRandomize" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Beard_Random}" Margin="0,171,8,0" Width="98" Height="26"/>
-                            <xctk:ColorPicker SelectedColor="{Binding SkinColor, UpdateSourceTrigger=PropertyChanged}" AdvancedTabHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Advanced_Header}" StandardTabHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Standard_Header}" AvailableColorsHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="skinColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,54,0,0" Width="89" Height="26" Background="{DynamicResource BackgroundColor}" BorderBrush="{DynamicResource AccentColor}" DropDownBackground="{DynamicResource BackgroundColor}" HeaderBackground="{DynamicResource BackgroundColor}" HeaderForeground="{DynamicResource AccentColor}" TabBackground="{DynamicResource BackgroundColor}" TabForeground="{DynamicResource AccentColor}"/>
-                            <Button Command="{Binding SaveColorSkin}" Name="skinColorPicker_SaveButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="26" Margin="93,54,0,0">
-                                <Button.Content>
-                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="ContentSave" Margin="-4"/>
-                                </Button.Content>
-                            </Button>
-                            <Button Command="{Binding SaveColorHair}" Name="hairColorPicker_SaveButton" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="26" Margin="93,110,0,0">
-                                <Button.Content>
-                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="ContentSave" Margin="-4"/>
-                                </Button.Content>
-                            </Button>
-                            <xctk:ColorPicker SelectedColor="{Binding HairColor, UpdateSourceTrigger=PropertyChanged}" AdvancedTabHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Advanced_Header}" StandardTabHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Standard_Header}" AvailableColorsHeader="{xaml:Localize Key=INTERFACE_Color_Picker_Available_Colors_Header}" UsingAlphaChannel="False" Name="hairColorPicker" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1,110,0,0" Width="89" Height="26" Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource AccentColor}" TabBackground="{DynamicResource BackgroundColor}" TabForeground="{DynamicResource AccentColor}" HeaderForeground="{DynamicResource AccentColor}" HeaderBackground="{DynamicResource BackgroundColor}" DropDownBackground="{DynamicResource BackgroundColor}" BorderBrush="{DynamicResource AccentColor}"/>
-                            <CheckBox IsChecked="{Binding IsLeftHanded, UpdateSourceTrigger=PropertyChanged}" Name="apparelLeftHandedCheckbox" HorizontalContentAlignment="Right" Content="{xaml:Localize Key=CHARACTER_LeftHanded}" HorizontalAlignment="Left" Margin="0,140,0,0" VerticalAlignment="Top" Width="120" mah:ToggleButtonHelper.ContentDirection="RightToLeft"/>
-                            <Button Command="{Binding PoseEditorCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="{xaml:Localize Key=CHARACTER_Edit_Pose}" Width="120" Height="26"/>
-                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,155,0,0" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Pose}" VerticalAlignment="Top" Width="120" Height="16"/>
-                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,38,0,0" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Color_Skin}" VerticalAlignment="Top" Width="120" Height="16"/>
-                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" Margin="-1,94,0,0" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Color_Hair}" VerticalAlignment="Top" Width="120"/>
-                            <Label HorizontalContentAlignment="Center" Content="{xaml:Localize Key=CHARACTER_Face}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,210,0" Width="98" Height="28"/>
-                            <Label HorizontalContentAlignment="Center" Content="{xaml:Localize Key=CHARACTER_Hair}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,109,0" Width="98" Height="28"/>
-                            <Label HorizontalContentAlignment="Center" Content="{xaml:Localize Key=CHARACTER_Beard}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,8,0" Width="98" Height="28"/>
+                                <Grid Grid.Column="3">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label HorizontalContentAlignment="Center" Content="{xaml:Localize Key=CHARACTER_Beard}" Margin="5"/>
+                                    <Border Grid.Row="1" x:Name="beardImageBorder" BorderBrush="{Binding BorderBrush, ElementName=faceImageBorder}" BorderThickness="1" Height="{Binding Height, ElementName=faceImageBorder}" Width="{Binding Width, ElementName=faceImageBorder}" Margin="5">
+                                        <Grid Name="beardRenderGrid" DataContext="{Binding SolidColorBrush}" Background="#EEAAAAAA">
+                                            <Canvas>
+                                                <Line X1="27" Y1="27" X2="70" Y2="70" Stroke="Red" StrokeThickness="2" />
+                                                <Line X1="70" Y1="27" X2="27" Y2="70" Stroke="Red" StrokeThickness="2" />
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="7,74 7,22 16,22 16,32 79,32 79,22 88,22 88,74 7,74 25,56 70,56 70,40 25,40 25,56" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="8,63 8,45 20,45 20,39 33,39 33,33 62,33 62,39 75,39 75,45 87,45 87,63 82,63 82,57 69,57 69,51 25,51 25,57 13,57 13,63" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="5,77 90,77 90,19 5,19 5,77 17,52 17,31 78,31 78,52 17,52" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="2,62 2,49 16,49 16,42 30,42 30,35 65,35 65,42 79,42 79,49 93,49 93,62 87,62 87,55 73,55 73,48 59,48 59,35 36,35 36,48 22,48 22,55 8,55 8,62" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="9,42 9,31 14,31 14,42 9,42 4,42 4,54 9,54 9,60 21,60 21,66 26,66 26,60 69,60 69,66 74,66 74,60 86,60 86,49 91,49 91,37 86,37 86,31 81,31 81,42 86,42 86,49 81,49 81,55 62,55 62,49 33,49 33,55 14,55 14,49 9,49" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="5,21 14,21 14,56 81,56 81,21 90,21 90,75 5,75" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="4,37 4,31 17,31 17,25 31,25 31,18 64,18 64,25 77,25 77,31 91,31 91,37 72,37 72,30 57,30 57,71 50,71 50,78 45,78 45,71 38,71 38,59 57,59 57,30 23,30 23,37" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="3,12 13,12 13,17 82,17 82,12 92,12 92,74 81,74 81,80 71,80 71,85 24,85 24,80 14,80 14,74 3,74 3,12 28,32 66,32 66,49 28,49 28,32" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="2,2 12,2 12,13 83,13 83,2 93,2 93,60 82,60 82,87 72,87 72,60 60,60 60,65 55,65 55,93 39,93 39,65 34,65 34,60 22,60 22,87 13,87 13,60 2,60 2,2 22,28 72,28 72,39 22,39 22,28" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="35,2 59,2 59,7 70,7 70,12 80,12 80,52 75,52 75,61 70,61 70,72 64,72 64,82 59,82 59,93 35,93 35,82 30,82 30,72 24,72 24,61 19,61 19,52 14,52 14,12 24,12 24,7 35,7 35,2 29,21 65,21 65,37 29,37 29,21" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="2,7 93,7 93,60 87,60 87,65 82,65 82,76 72,76 72,65 66,65 66,60 55,60 55,71 49,71 49,87 45,87 45,76 39,76 39,65 28,65 28,76 22,76 22,82 16,82 16,87 13,87 13,71 7,71 7,55 2,55 28,39 66,39 66,22 28,22 28,39 2,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="3,55 13,55 13,59 3,59" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                <Polygon Points="13,55 13,50 17,50 17,45 23,45 23,39 34,39 34,34 38,34 38,44 28,44 28,49 22,49 22,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                <Polygon Points="92,59 92,55 82,55 82,59" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                <Polygon Points="82,55 82,50 78,50 78,45 72,45 72,39 61,39 61,34 57,34 57,44 67,44 67,49 73,49 73,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="8,75 2,75 2,26 9,26 9,19 85,19 85,26 93,26 93,75 86,75 86,33 8,33" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="2,7 12,7 12,13 22,13 22,17 28,17 28,34 66,34 66,17 72,17 72,13 83,13 83,7 93,7 93,49 87,49 87,55 76,55 76,60 65,60 65,65 55,65 55,76 49,76 49,87 45,87 45,76 39,76 39,65 29,65 29,60 17,60 17,55 7,55 7,49 2,49" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                            </Canvas>
+                                            <Canvas Visibility="Collapsed">
+                                                <Polygon Points="56,2 56,9 65,9 65,16 73,16 73,25 79,25 79,31 73,31 73,38 65,38 65,54 56,54 56,70 50,70 50,93 43,93 43,70 37,70 37,54 28,54 28,38 20,38 20,31 14,31 14,25 20,25 20,16 28,16 28,9 37,9 37,2" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                            </Canvas>
+                                        </Grid>
+                                    </Border>
+                                    <Grid Grid.Row="2" Width="{Binding Width, ElementName=beardImageBorder}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <xctk:ByteUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding BeardID, UpdateSourceTrigger=PropertyChanged}" Minimum="0" x:Name="beardImageIndex" ParsingNumberStyle="Integer"/>
+                                        <Button 
+                                        Command="{Binding RandomBeardCommand}" 
+                                        Grid.Column="1" 
+                                        Margin="5,0,0,0" 
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Beard_Random}"
+                                        Style="{DynamicResource FlatOutlineButtonStyle}">
+                                            <Button.Content>
+                                                <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="DiceMultiple"/>
+                                            </Button.Content>
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <GroupBox Header="{xaml:Localize Key=CHARACTER_Clothing}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Height="274" Width="300">
+                                <TabControl>
+                                    <TabItem DataContext="{Binding DefaultClothing, UpdateSourceTrigger=PropertyChanged}" Header="{xaml:Localize Key=CHARACTER_Clothing_Default}" mah:ControlsHelper.HeaderFontSize="18">
+                                        <ScrollViewer>
+                                            <StackPanel>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Hat, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_hat.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Mask, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_mask.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Glasses, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Shirt, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Backpack, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Vest, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_vest.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Pants, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}" Margin="5"/>
+                                                </Grid>
+                                            </StackPanel>
+                                        </ScrollViewer>
+                                    </TabItem>
+                                    <TabItem DataContext="{Binding ChristmasClothing, UpdateSourceTrigger=PropertyChanged}" Header="{xaml:Localize Key=CHARACTER_Clothing_Christmas}" mah:ControlsHelper.HeaderFontSize="18">
+                                        <ScrollViewer>
+                                            <StackPanel>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Hat, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_hat.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Mask, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_mask.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Glasses, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Shirt, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Backpack, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Vest, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_vest.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Pants, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}" Margin="5"/>
+                                                </Grid>
+                                            </StackPanel>
+                                        </ScrollViewer>
+                                    </TabItem>
+                                    <TabItem DataContext="{Binding HalloweenClothing, UpdateSourceTrigger=PropertyChanged}" Header="{xaml:Localize Key=CHARACTER_Clothing_Halloween}" mah:ControlsHelper.HeaderFontSize="18">
+                                        <ScrollViewer>
+                                            <StackPanel>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Hat, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_hat.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Mask, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_mask.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Glasses, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Shirt, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Backpack, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Vest, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_vest.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="5"/>
+                                                </Grid>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <xctk:UShortUpDown 
+                                                        Foreground="{DynamicResource ForegroundColor}"
+                                                        Value="{Binding Pants, UpdateSourceTrigger=PropertyChanged}"
+                                                        ParsingNumberStyle="Integer"
+                                                        HorizontalContentAlignment="Left"
+                                                        ShowButtonSpinner="False"
+                                                        Margin="5">
+                                                        <xctk:UShortUpDown.ToolTip>
+                                                            <StackPanel>
+                                                                <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
+                                                            </StackPanel>
+                                                        </xctk:UShortUpDown.ToolTip>
+                                                    </xctk:UShortUpDown>
+                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}" Margin="5"/>
+                                                </Grid>
+                                            </StackPanel>
+                                        </ScrollViewer>
+                                    </TabItem>
+                                </TabControl>
+                            </GroupBox>
+                            <GroupBox Header="{xaml:Localize Key=CHARACTER_Equipment}" HorizontalAlignment="Left" Margin="10,0,0,10" Width="300" Height="Auto" VerticalAlignment="Bottom">
+                                <ScrollViewer>
+                                    <StackPanel>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Margin="5" Value="{Binding EquipmentPrimary,UpdateSourceTrigger=PropertyChanged}" x:Name="primaryIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"   >
+                                                <xctk:UShortUpDown.ToolTip>
+                                                    <StackPanel></StackPanel>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <Label Grid.Column="1" Margin="5">
+                                                <Label.Content>
+                                                    <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Equipment_Primary}" />
+                                                </Label.Content>
+                                            </Label>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Value="{Binding EquipmentSecondary,UpdateSourceTrigger=PropertyChanged}" x:Name="secondaryIdBox"  ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="5">
+                                                <xctk:UShortUpDown.ToolTip>
+                                                    <StackPanel></StackPanel>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <Label Grid.Column="1" Margin="5">
+                                                <Label.Content>
+                                                    <TextBlock Text="{xaml:Localize Key=CHARACTER_Equipment_Secondary}" TextWrapping="Wrap"/>
+                                                </Label.Content>
+                                            </Label>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Value="{Binding EquipmentTertiary,UpdateSourceTrigger=PropertyChanged}" x:Name="tertiaryIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="5">
+                                                <xctk:UShortUpDown.ToolTip>
+                                                    <StackPanel></StackPanel>
+                                                </xctk:UShortUpDown.ToolTip>
+                                            </xctk:UShortUpDown>
+                                            <Label Grid.Column="1" Margin="5">
+                                                <Label.Content>
+                                                    <TextBlock Text="{xaml:Localize Key=CHARACTER_Equipment_Tertiary}" TextWrapping="Wrap"/>
+                                                </Label.Content>
+                                            </Label>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <ComboBox VerticalAlignment="Center" ItemsSource="{StaticResource Character_Equipment_Equipped_Enums}" SelectedValue="{Binding Equipped, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Character_Equipment_Equipped_Enums}}" Name="equipSlotBox" Margin="5"/>
+                                            <Label Grid.Column="1" Margin="5">
+                                                <Label.Content>
+                                                    <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Equipment_Equipped}" />
+                                                </Label.Content>
+                                            </Label>
+                                        </Grid>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </GroupBox>
                         </Grid>
-                        <GroupBox Header="{xaml:Localize Key=CHARACTER_Clothing}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Height="274" Width="300">
-                            <TabControl>
-                                <TabItem DataContext="{Binding DefaultClothing, UpdateSourceTrigger=PropertyChanged}" Header="{xaml:Localize Key=CHARACTER_Clothing_Default}" mah:ControlsHelper.HeaderFontSize="18">
-                                    <ScrollViewer>
-                                        <Grid>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Hat,UpdateSourceTrigger=PropertyChanged}" x:Name="hatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_hat.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Mask,UpdateSourceTrigger=PropertyChanged}" x:Name="maskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_mask.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Glasses,UpdateSourceTrigger=PropertyChanged}" x:Name="glassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Shirt,UpdateSourceTrigger=PropertyChanged}" x:Name="topIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Backpack,UpdateSourceTrigger=PropertyChanged}" x:Name="backpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Vest,UpdateSourceTrigger=PropertyChanged}" x:Name="vestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_vest.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Pants,UpdateSourceTrigger=PropertyChanged}" x:Name="bottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
-                                        </Grid>
-                                    </ScrollViewer>
-                                </TabItem>
-                                <TabItem DataContext="{Binding ChristmasClothing}" Header="{xaml:Localize Key=CHARACTER_Clothing_Christmas}" mah:ControlsHelper.HeaderFontSize="18">
-                                    <ScrollViewer>
-                                        <Grid>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Hat,UpdateSourceTrigger=PropertyChanged}" x:Name="christmashatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_hat.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Mask,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasmaskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_mask.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Glasses,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasglassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Shirt,UpdateSourceTrigger=PropertyChanged}" x:Name="christmastopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Backpack,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Vest,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_vest.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Pants,UpdateSourceTrigger=PropertyChanged}" x:Name="christmasbottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
-                                        </Grid>
-                                    </ScrollViewer>
-                                </TabItem>
-                                <TabItem DataContext="{Binding HalloweenClothing}" Header="{xaml:Localize Key=CHARACTER_Clothing_Halloween}" mah:ControlsHelper.HeaderFontSize="18">
-                                    <ScrollViewer>
-                                        <Grid>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Hat,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenhatIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_hat.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Mask,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenmaskIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_mask.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Glasses,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenglassesIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Shirt,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweentopIdBox"        ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Backpack,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenbackpackIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,134,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Vest,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenvestIdBox"       ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_vest.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding Pants,UpdateSourceTrigger=PropertyChanged}" x:Name="halloweenbottomIdBox"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="10,196,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96">
-                                                <xctk:UShortUpDown.ToolTip>
-                                                    <StackPanel>
-                                                        <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
-                                                    </StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="111,10,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="111,41,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="111,72,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="111,103,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="111,134,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="111,165,10,0" VerticalAlignment="Top" Height="26"/>
-                                            <Label Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}"   Margin="111,196,10,0" VerticalAlignment="Top" Height="26"/>
-                                        </Grid>
-                                    </ScrollViewer>
-                                </TabItem>
-                            </TabControl>
-                        </GroupBox>
-                        <GroupBox Header="{xaml:Localize Key=CHARACTER_Equipment}" HorizontalAlignment="Left" Margin="10,0,0,10" Width="300" Height="Auto" VerticalAlignment="Bottom">
-                            <ScrollViewer>
-                                <StackPanel>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Margin="5" Value="{Binding EquipmentPrimary,UpdateSourceTrigger=PropertyChanged}" x:Name="primaryIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"   >
-                                            <xctk:UShortUpDown.ToolTip>
-                                                <StackPanel></StackPanel>
-                                            </xctk:UShortUpDown.ToolTip>
-                                        </xctk:UShortUpDown>
-                                        <Label Grid.Column="1" Margin="5">
-                                            <Label.Content>
-                                                <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Equipment_Primary}" />
-                                            </Label.Content>
-                                        </Label>
-                                    </Grid>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Value="{Binding EquipmentSecondary,UpdateSourceTrigger=PropertyChanged}" x:Name="secondaryIdBox"  ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="5">
-                                            <xctk:UShortUpDown.ToolTip>
-                                                <StackPanel></StackPanel>
-                                            </xctk:UShortUpDown.ToolTip>
-                                        </xctk:UShortUpDown>
-                                        <Label Grid.Column="1" Margin="5">
-                                            <Label.Content>
-                                                <TextBlock Text="{xaml:Localize Key=CHARACTER_Equipment_Secondary}" TextWrapping="Wrap"/>
-                                            </Label.Content>
-                                        </Label>
-                                    </Grid>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Value="{Binding EquipmentTertiary,UpdateSourceTrigger=PropertyChanged}" x:Name="tertiaryIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="5">
-                                            <xctk:UShortUpDown.ToolTip>
-                                                <StackPanel></StackPanel>
-                                            </xctk:UShortUpDown.ToolTip>
-                                        </xctk:UShortUpDown>
-                                        <Label Grid.Column="1" Margin="5">
-                                            <Label.Content>
-                                                <TextBlock Text="{xaml:Localize Key=CHARACTER_Equipment_Tertiary}" TextWrapping="Wrap"/>
-                                            </Label.Content>
-                                        </Label>
-                                    </Grid>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <ComboBox VerticalAlignment="Center" ItemsSource="{StaticResource Character_Equipment_Equipped_Enums}" SelectedValue="{Binding Equipped, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Character_Equipment_Equipped_Enums}}" Name="equipSlotBox" Margin="5"/>
-                                        <Label Grid.Column="1" Margin="5">
-                                            <Label.Content>
-                                                <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Equipment_Equipped}" />
-                                            </Label.Content>
-                                        </Label>
-                                    </Grid>
-                                </StackPanel>
-                            </ScrollViewer>
-                        </GroupBox>
-                    </Grid>
                     </Grid>
                 </TabItem>
                 <TabItem DataContext="{Binding DialogueTabViewModel}" Name="dialogueTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue}">
@@ -997,8 +1357,24 @@
                     </Trigger>
                 </ControlTemplate.Triggers>
             </ControlTemplate>
+            <ControlTemplate x:Key="FlatOutlineButtonTemplate" TargetType="Button">
+                <Border Name="border" Opacity="0.5" Background="Transparent" BorderBrush="{DynamicResource AccentColor}" BorderThickness="1">
+                    <ContentPresenter Margin="2" Content="{TemplateBinding Content}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="border" Property="Opacity" Value="0.75"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter TargetName="border" Property="Opacity" Value="1"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
             <Style x:Key="FlatButtonStyle" TargetType="Button">
                 <Setter Property="Template" Value="{DynamicResource FlatButtonTemplate}"/>
+            </Style>
+            <Style x:Key="FlatOutlineButtonStyle" TargetType="Button">
+                <Setter Property="Template" Value="{DynamicResource FlatOutlineButtonTemplate}"/>
             </Style>
             <ControlTemplate x:Key="FancyTabItemCloseButtonTemplate" TargetType="Button">
                 <Border Name="border" Opacity="0.5" Background="{DynamicResource BackgroundColor}">

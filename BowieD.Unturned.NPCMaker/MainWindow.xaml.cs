@@ -10,6 +10,7 @@ using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -171,6 +172,18 @@ namespace BowieD.Unturned.NPCMaker
                 guidesMenuItem.IsEnabled = false;
             }
 
+            if (string.IsNullOrEmpty(App.Package.GetTemplatesURL))
+            {
+                getTemplatesMenuItem.IsEnabled = false;
+            }
+            else
+            {
+                getTemplatesMenuItem.Click += (sender, e) =>
+                {
+                    Process.Start(App.Package.GetTemplatesURL);
+                };
+            }
+
             if (App.Package.FeedbackLinks.Length > 0)
             {
                 foreach (Data.AppPackage.FeedbackLink link in App.Package.FeedbackLinks)
@@ -260,7 +273,14 @@ namespace BowieD.Unturned.NPCMaker
         private void AutosaveTimer_Tick(object sender, EventArgs e)
         {
             AutosaveTimer.Stop();
-            if (CurrentProject.file.Length > 0)
+            if (string.IsNullOrEmpty(CurrentProject.file))
+            {
+                var old = CurrentProject.file;
+                CurrentProject.file = "autosave.npcproj";
+                CurrentProject.Save();
+                CurrentProject.file = old;
+            }
+            else
             {
                 CurrentProject.Save();
             }
@@ -269,7 +289,7 @@ namespace BowieD.Unturned.NPCMaker
         }
         private void AppUpdateTimer_Tick(object sender, EventArgs e)
         {
-            if (CurrentProject.file.Length == 0)
+            if (string.IsNullOrEmpty(CurrentProject.file))
             {
                 menuCurrentFileLabel.Content = LocalizationManager.Current.Interface.Translate("Main_Menu_CurrentFile", LocalizationManager.Current.Interface["Main_Menu_CurrentFile_None"]);
             }

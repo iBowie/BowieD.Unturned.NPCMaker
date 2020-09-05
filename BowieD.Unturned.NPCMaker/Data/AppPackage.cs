@@ -60,6 +60,13 @@ namespace BowieD.Unturned.NPCMaker.Data
             get => _notifications ?? new Notification[0];
             set => _notifications = value;
         }
+        private string _getTemplatesURL;
+        [JsonProperty("templatesURL")]
+        public string GetTemplatesURL
+        {
+            get => _getTemplatesURL ?? string.Empty;
+            set => _getTemplatesURL = value;
+        }
 
         [JsonObject(MemberSerialization.OptIn)]
         public sealed class FeedbackLink

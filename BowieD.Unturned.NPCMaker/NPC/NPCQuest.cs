@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
@@ -22,8 +23,19 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
         [XmlAttribute("guid")]
         public string GUID { get; set; }
+        private string _comment;
         [XmlAttribute("comment")]
-        public string Comment { get; set; }
+        public string Comment
+        {
+            get => _comment;
+            set
+            {
+                _comment = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Comment)));
+                if (AppConfig.Instance.useCommentsInsteadOfData)
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
+            }
+        }
 
         private ushort _id;
         [XmlElement("id")]
@@ -48,7 +60,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
             {
                 _title = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Title)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
+                if (!AppConfig.Instance.useCommentsInsteadOfData)
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
             }
         }
         public string description;
@@ -56,6 +69,21 @@ namespace BowieD.Unturned.NPCMaker.NPC
         [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string UIText => $"[{ID}] {Title}";
+        public string UIText
+        {
+            get
+            {
+                if (AppConfig.Instance.useCommentsInsteadOfData)
+                {
+                    if (string.IsNullOrEmpty(Comment))
+                        return $"[{ID}]";
+                    return TextUtil.Shortify($"[{ID}] - {Comment}", 24);
+                }
+                else
+                {
+                    return $"[{ID}] {Title}";
+                }
+            }
+        }
     }
 }

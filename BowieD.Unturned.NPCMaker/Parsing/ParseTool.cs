@@ -97,10 +97,10 @@ namespace BowieD.Unturned.NPCMaker.Parsing
 
                 d.Messages.Add(new NPCMessage()
                 {
-                    conditions = ParseConditions($"Message_{mId}_"),
+                    conditions = ParseConditions($"Message_{mId}_").ToList(),
                     pages = pages.ToList(),
                     prev = asset.ReadUInt16($"Message_{mId}_Prev"),
-                    rewards = ParseRewards($"Message_{mId}_")
+                    rewards = ParseRewards($"Message_{mId}_").ToList()
                 });
             }
             d.Responses = new List<NPCResponse>(asset.ReadByte("Responses"));
@@ -140,8 +140,8 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 d.Responses[rId].openDialogueId = asset.ReadUInt16($"Response_{rId}_Dialogue");
                 d.Responses[rId].openQuestId = asset.ReadUInt16($"Response_{rId}_Quest");
                 d.Responses[rId].openVendorId = asset.ReadUInt16($"Response_{rId}_Vendor");
-                d.Responses[rId].conditions = ParseConditions($"Response_{rId}_");
-                d.Responses[rId].rewards = ParseRewards($"Response_{rId}_");
+                d.Responses[rId].conditions = ParseConditions($"Response_{rId}_").ToList();
+                d.Responses[rId].rewards = ParseRewards($"Response_{rId}_").ToList();
             }
             return d;
         }

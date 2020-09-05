@@ -26,7 +26,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                         sb.Append("- ");
                         break;
                 }
-                sb.Append($"[{Min_Value};{Max_Value})");
+                sb.Append($"[{Min_Value};{Max_Value}]");
                 return sb.ToString();
             }
         }
@@ -37,7 +37,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
         public override void Give(Simulation simulation)
         {
-            simulation.Flags[ID] = SimulationTool.Modify(simulation.Flags[ID], (short)Random.NextInt32(Min_Value, Max_Value), Modification);
+            simulation.Flags[ID] = SimulationTool.Modify(simulation.Flags[ID], (short)Random.NextInt32(Min_Value, Max_Value + 1), Modification);
         }
     }
 }

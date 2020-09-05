@@ -381,6 +381,29 @@
     <Compile Include="Random.cs" />
     <Compile Include="Markup\IMarkup.cs" />
     <Compile Include="ScreenHelper.cs" />
+    <Compile Include="Templating\Conditions\Attributes\TemplateConditionAttribute.cs" />
+    <Compile Include="Templating\Conditions\Converters\TemplateConditionConverter.cs" />
+    <Compile Include="Templating\Conditions\ITemplateCondition.cs" />
+    <Compile Include="Templating\Conditions\TemplateCondition_AlwaysFalse.cs" />
+    <Compile Include="Templating\Conditions\TemplateCondition_AlwaysTrue.cs" />
+    <Compile Include="Templating\Conditions\TemplateCondition_Input.cs" />
+    <Compile Include="Templating\InputField.cs" />
+    <Compile Include="Templating\LogicTool.cs" />
+    <Compile Include="Templating\Modify\Attributes\ModifyValueAttribute.cs" />
+    <Compile Include="Templating\Modify\Converters\ModifyValueConverter.cs" />
+    <Compile Include="Templating\Modify\EModifyEntryOperation.cs" />
+    <Compile Include="Templating\Modify\IModifyValue.cs" />
+    <Compile Include="Templating\Modify\ModifyEntry.cs" />
+    <Compile Include="Templating\Modify\ModifyTool.cs" />
+    <Compile Include="Templating\Modify\ModifyValue_Condition.cs" />
+    <Compile Include="Templating\Modify\ModifyValue_Input.cs" />
+    <Compile Include="Templating\Modify\ModifyValue_Parameterless.cs" />
+    <Compile Include="Templating\Modify\ModifyValue_Reward.cs" />
+    <Compile Include="Templating\Modify\ModifyValue_String.cs" />
+    <Compile Include="Templating\Reflection\FPInfo.cs" />
+    <Compile Include="Templating\Reflection\TypeResolver.cs" />
+    <Compile Include="Templating\Template.cs" />
+    <Compile Include="Templating\TemplateManager.cs" />
     <Compile Include="TextUtil.cs" />
     <Compile Include="Themes\MetroTheme.cs" />
     <Compile Include="Themes\Theme.cs" />
@@ -660,5 +683,6 @@
   <ItemGroup>
     <Resource Include="Resources\Services\GitHub.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

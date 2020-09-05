@@ -1,7 +1,9 @@
 ﻿using BowieD.Unturned.NPCMaker.Coloring;
+using BowieD.Unturned.NPCMaker.Configuration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
 using System.Xml.Serialization;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
@@ -13,6 +15,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public NPCCharacter()
         {
             GUID = Guid.NewGuid().ToString("N");
+            Comment = "";
             EditorName = "";
             DisplayName = "";
             ID = 0;
@@ -45,7 +48,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
             {
                 _editorName = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(EditorName)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
+                if (!AppConfig.Instance.useCommentsInsteadOfData)
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
             }
         }
         private string _displayName;
@@ -57,7 +61,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
             {
                 _displayName = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DisplayName)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
+                if (!AppConfig.Instance.useCommentsInsteadOfData)
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
             }
         }
         private ushort _id;
@@ -91,11 +96,55 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
         [XmlAttribute("guid")]
         public string GUID { get; set; }
+        private string _comment;
+        [XmlAttribute("comment")]
+        public string Comment
+        {
+            get => _comment;
+            set
+            {
+                _comment = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Comment)));
+                if (AppConfig.Instance.useCommentsInsteadOfData)
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
+            }
+        }
         public List<Condition> visibilityConditions;
 
         [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string UIText => $"[{ID}] {EditorName} - {DisplayName}";
+        public string UIText
+        {
+            get
+            {
+                if (AppConfig.Instance.useCommentsInsteadOfData)
+                {
+                    if (string.IsNullOrEmpty(Comment))
+                        return $"[{ID}]";
+                    return TextUtil.Shortify($"[{ID}] - {Comment}", 24);
+                }
+                else
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append($"[{ID}]");
+                    bool flag = false;
+                    if (!string.IsNullOrEmpty(EditorName))
+                    {
+                        sb.Append(" ");
+                        sb.Append(EditorName);
+                        flag = true;
+                    }
+                    if (!string.IsNullOrEmpty(DisplayName))
+                    {
+                        if (flag)
+                            sb.Append(" -");
+                        sb.Append(" ");
+                        sb.Append(DisplayName);
+                    }
+                    return TextUtil.Shortify(sb.ToString(), 24);
+                }
+            }
+        }
     }
 }

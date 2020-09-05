@@ -23,6 +23,41 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             NPCDialogue empty = new NPCDialogue();
             Dialogue = empty;
             UpdateTabs();
+
+            ContextMenu cmenu = new ContextMenu();
+
+            cmenu.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(NPCResponse), (result) =>
+            {
+                if (result is NPCResponse npcr)
+                    AddResponse(new Dialogue_Response(npcr));
+            }));
+
+            MainWindow.Instance.dialogueAddReplyButton.ContextMenu = cmenu;
+
+            ContextMenu cmenu2 = new ContextMenu();
+
+            cmenu2.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(NPCMessage), (result) =>
+            {
+                if (result is NPCMessage npcm)
+                    AddMessage(new Dialogue_Message(npcm));
+            }));
+
+            MainWindow.Instance.dialogueAddMessageButton.ContextMenu = cmenu2;
+
+            ContextMenu cmenu3 = new ContextMenu();
+
+            cmenu3.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(NPCDialogue), (result) =>
+            {
+                if (result is NPCDialogue npcd)
+                {
+                    MainWindow.CurrentProject.data.dialogues.Add(npcd);
+                    MetroTabItem tabItem = CreateTab(npcd);
+                    MainWindow.Instance.dialogueTabSelect.Items.Add(tabItem);
+                    MainWindow.Instance.dialogueTabSelect.SelectedIndex = MainWindow.Instance.dialogueTabSelect.Items.Count - 1;
+                }
+            }));
+
+            MainWindow.Instance.dialogueTabButtonAdd.ContextMenu = cmenu3;
         }
 
         private void DialogueTabButtonAdd_Click(object sender, RoutedEventArgs e)

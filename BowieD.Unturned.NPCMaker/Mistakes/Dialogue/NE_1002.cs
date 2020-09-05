@@ -25,7 +25,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
                 {
                     for (int k = 0; k < _dial.Messages.Count - 1; k++)
                     {
-                        if (_dial.Messages[k].conditions.Length == 0)
+                        if (_dial.Messages[k].conditions.Count == 0)
                         {
                             yield return new NE_1002(_dial.ID);
                         }
