@@ -196,7 +196,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 }
 
                 vi.id = asset.ReadUInt16($"Selling_{i}_ID");
-                vi.cost = asset.ReadUInt16($"Selling_{i}_Cost");
+                vi.cost = asset.ReadUInt32($"Selling_{i}_Cost");
                 vi.conditions = ParseConditions($"Selling_{i}_").ToList();
                 if (text == null || (text.Equals("Item", StringComparison.InvariantCultureIgnoreCase)))
                 {
