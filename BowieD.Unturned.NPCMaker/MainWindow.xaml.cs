@@ -276,7 +276,7 @@ namespace BowieD.Unturned.NPCMaker
             if (string.IsNullOrEmpty(CurrentProject.file))
             {
                 var old = CurrentProject.file;
-                CurrentProject.file = "autosave.npcproj";
+                CurrentProject.file = Path.Combine(AppConfig.ExeDirectory, "autosave.npcproj");
                 CurrentProject.Save();
                 CurrentProject.file = old;
             }

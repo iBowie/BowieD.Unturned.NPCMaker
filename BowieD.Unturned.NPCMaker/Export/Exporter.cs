@@ -25,12 +25,12 @@ namespace BowieD.Unturned.NPCMaker.Export
         {
             try
             {
-                if (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + $@"\results\{save.guid}"))
+                if (Directory.Exists(Path.Combine(AppConfig.ExeDirectory, $@"\results\{save.guid}")))
                 {
-                    Directory.Delete(AppDomain.CurrentDomain.BaseDirectory + $@"\results\{save.guid}", true);
+                    Directory.Delete(Path.Combine(AppConfig.ExeDirectory, $@"\results\{save.guid}"), true);
                 }
 
-                dir = AppDomain.CurrentDomain.BaseDirectory + $@"\results\{save.guid}\";
+                dir = AppConfig.ExeDirectory + $@"\results\{save.guid}\";
                 Export_Characters(save.characters);
                 Export_Dialogues(save.dialogues);
                 Export_Quests(save.quests);
@@ -42,7 +42,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                         Text = LocalizationManager.Current.Notification["Export_Done_Goto"]
                     }
                 };
-                if (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + $@"results\{save.guid}"))
+                if (Directory.Exists(Path.Combine(AppConfig.ExeDirectory, $@"results\{save.guid}")))
                 {
                     Action<object, RoutedEventArgs> action = new Action<object, RoutedEventArgs>((sender, e) => { Process.Start(AppDomain.CurrentDomain.BaseDirectory + $@"results\{save.guid}"); });
                     button.Click += new RoutedEventHandler(action);

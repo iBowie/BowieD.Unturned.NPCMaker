@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Common.Utility;
+using BowieD.Unturned.NPCMaker.Configuration;
 using System;
 using System.IO;
 using System.Security;
@@ -76,7 +77,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             try
             {
-                using (StreamWriter writer = new StreamWriter("crash.txt", true))
+                using (StreamWriter writer = new StreamWriter(Path.Combine(AppConfig.ExeDirectory, "crash.txt"), true))
                 {
                     writer.WriteLine(DebugUtility.GetDebugInformation());
                     writer.WriteLine();
@@ -90,7 +91,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             try
             {
-                using (StreamWriter writer = new StreamWriter("crashSave.npcproj", false, Encoding.UTF8))
+                using (StreamWriter writer = new StreamWriter(Path.Combine(AppConfig.ExeDirectory, "crashSave.npcproj"), false, Encoding.UTF8))
                 using (XmlWriter xmlw = XmlWriter.Create(writer))
                 {
                     var proj = MainWindow.CurrentProject.data;

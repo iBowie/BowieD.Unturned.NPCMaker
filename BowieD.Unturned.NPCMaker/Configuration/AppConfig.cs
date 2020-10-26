@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
 using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -102,6 +103,19 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 return res;
             }
         }
+        public static string ExeDirectory
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(exeDir))
+                {
+                    exeDir = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
+                }
+
+                return exeDir;
+            }
+        }
+        private static string exeDir;
         private static string path => Path.Combine(Directory, "config.json");
     }
 }
