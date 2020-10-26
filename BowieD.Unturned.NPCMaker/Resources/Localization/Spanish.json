@@ -454,7 +454,7 @@
     "Project_UnsavedChanges_Text": "Tienes cambios sin guardar. quieres guardar y continuar?",
     "Main_Menu_CurrentFile": "Archivo actual: {0}",
     "Main_Menu_CurrentFile_None": "ninguno",
-    "Main_Menu_File": "Arcivo",
+    "Main_Menu_File": "Archivo",
     "Main_Menu_File_New": "_Nuevo Proyecto (Ctrl + N)",
     "Main_Menu_File_Open": "Abrir Proyecto (Ctrl + O)",
     "Main_Menu_File_Save": "Guardar Proyecto (Ctrl + S)",
