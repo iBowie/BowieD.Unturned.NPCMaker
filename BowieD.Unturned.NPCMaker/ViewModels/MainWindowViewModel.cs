@@ -114,6 +114,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             DialogueTabViewModel = new DialogueTabViewModel();
             VendorTabViewModel = new VendorTabViewModel();
             QuestTabViewModel = new QuestTabViewModel();
+            CurrencyTabViewModel = new CurrencyTabViewModel();
             MainWindow.mainTabControl.SelectionChanged += TabControl_SelectionChanged;
 
             MainWindow.CurrentProject.OnDataLoaded += () =>
@@ -143,6 +144,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     QuestTabViewModel.Quest = data.quests[data.lastQuest];
                 }
 
+                if (data.lastCurrency > -1)
+                {
+                    CurrencyTabViewModel.Currency = data.currencies[data.lastCurrency];
+                }
+
                 UpdateAllTabs();
             };
         }
@@ -151,6 +157,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public DialogueTabViewModel DialogueTabViewModel { get; set; }
         public VendorTabViewModel VendorTabViewModel { get; set; }
         public QuestTabViewModel QuestTabViewModel { get; set; }
+        public CurrencyTabViewModel CurrencyTabViewModel { get; set; }
         public MistakeTabViewModel MistakeTabViewModel { get; set; }
         public void ResetAll()
         {
@@ -158,6 +165,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             DialogueTabViewModel.Reset();
             VendorTabViewModel.Reset();
             QuestTabViewModel.Reset();
+            CurrencyTabViewModel.Reset();
         }
         public void SaveAll()
         {
@@ -165,6 +173,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             DialogueTabViewModel.Save();
             VendorTabViewModel.Save();
             QuestTabViewModel.Save();
+            CurrencyTabViewModel.Save();
 
             ProjectData proj = MainWindow.CurrentProject;
             NPCProject data = proj.data;
@@ -173,6 +182,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             data.lastDialogue = data.dialogues.IndexOf(DialogueTabViewModel.Dialogue);
             data.lastQuest = data.quests.IndexOf(QuestTabViewModel.Quest);
             data.lastVendor = data.vendors.IndexOf(VendorTabViewModel.Vendor);
+            data.lastCurrency = data.currencies.IndexOf(CurrencyTabViewModel.Currency);
         }
         public void UpdateAllTabs()
         {
@@ -180,6 +190,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             DialogueTabViewModel.UpdateTabs();
             VendorTabViewModel.UpdateTabs();
             QuestTabViewModel.UpdateTabs();
+            CurrencyTabViewModel.UpdateTabs();
         }
         internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -276,6 +287,24 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         }
                         break;
                     case 4:
+                        {
+                            MainWindow.DiscordManager.SendPresence(new RichPresence
+                            {
+                                Timestamps = new Timestamps
+                                {
+                                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                                },
+                                Assets = new Assets
+                                {
+                                    SmallImageKey = "icon_money_outlined",
+                                    SmallImageText = $"Currencies: {MainWindow.CurrentProject.data.currencies.Count}"
+                                },
+                                Details = $"Currencies: {MainWindow.CurrentProject.data.currencies.Count}",
+                                State = $"Editing currencies"
+                            });
+                        }
+                        break;
+                    case 5:
                         {
                             MainWindow.DiscordManager.SendPresence(new RichPresence
                             {

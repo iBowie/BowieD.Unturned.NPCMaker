@@ -14,6 +14,7 @@ namespace BowieD.Unturned.NPCMaker.Localization
             Dialogue = new TranslationDictionary();
             Vendor = new TranslationDictionary();
             Quest = new TranslationDictionary();
+            Currency = new TranslationDictionary();
             Condition = new TranslationDictionary();
             Reward = new TranslationDictionary();
             VendorItem = new TranslationDictionary();
@@ -30,6 +31,7 @@ namespace BowieD.Unturned.NPCMaker.Localization
         public TranslationDictionary Dialogue;
         public TranslationDictionary Vendor;
         public TranslationDictionary Quest;
+        public TranslationDictionary Currency;
         public TranslationDictionary Condition;
         public TranslationDictionary Reward;
         public TranslationDictionary VendorItem;
@@ -53,6 +55,8 @@ namespace BowieD.Unturned.NPCMaker.Localization
                     return Vendor;
                 case "quest":
                     return Quest;
+                case "currency":
+                    return Currency;
                 case "condition":
                     return Condition;
                 case "reward":
@@ -96,6 +100,7 @@ namespace BowieD.Unturned.NPCMaker.Localization
             TranslationDictionary.AddMissingKeys(Dialogue, from.Dialogue);
             TranslationDictionary.AddMissingKeys(Vendor, from.Vendor);
             TranslationDictionary.AddMissingKeys(Quest, from.Quest);
+            TranslationDictionary.AddMissingKeys(Currency, from.Currency);
             TranslationDictionary.AddMissingKeys(Condition, from.Condition);
             TranslationDictionary.AddMissingKeys(Reward, from.Reward);
             TranslationDictionary.AddMissingKeys(VendorItem, from.VendorItem);

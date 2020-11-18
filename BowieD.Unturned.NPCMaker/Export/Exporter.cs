@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.NPC.Conditions;
+using BowieD.Unturned.NPCMaker.NPC.Currency;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
 using System;
@@ -35,6 +36,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                 Export_Dialogues(save.dialogues);
                 Export_Quests(save.quests);
                 Export_Vendors(save.vendors);
+                Export_Currencies(save.currencies);
                 Button button = new Button
                 {
                     Content = new TextBlock
@@ -566,6 +568,54 @@ namespace BowieD.Unturned.NPCMaker.Export
                 {
                     App.Logger.LogException($"Can't export quest {quest.ID}", ex: ex);
                     App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Export_Quest_Error", quest.ID));
+                }
+            }
+        }
+        private static void Export_Currencies(IEnumerable<CurrencyAsset> currencies)
+        {
+            foreach (var cur in currencies)
+            {
+                try
+                {
+                    Directory.CreateDirectory(dir + $@"Currencies");
+                    using (StreamWriter asset = new StreamWriter(dir + $@"Currencies\{cur.GUID}.asset", false, Encoding.UTF8))
+                    {
+                        char q = '\"';
+
+                        asset.WriteLine($"{q}Metadata{q}");
+                        asset.WriteLine("{");
+                        asset.WriteLine($"\t{q}GUID{q} {q}{cur.GUID}{q}");
+                        asset.WriteLine($"\t{q}Type{q} {q}SDG.Unturned.ItemCurrencyAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null{q}");
+                        asset.WriteLine("}");
+                        asset.WriteLine($"{q}Asset{q}");
+                        asset.WriteLine("{");
+                        asset.WriteLine($"\t{q}ValueFormat{q} {q}{cur.ValueFormat}{q}");
+                        asset.WriteLine($"\t{q}Entries{q}");
+                        asset.WriteLine($"\t[");
+
+                        void writeEntry(CurrencyEntry entry)
+                        {
+                            asset.WriteLine("\t\t{");
+
+                            asset.WriteLine($"\t\t\t{q}Item{q}");
+                            asset.WriteLine("\t\t\t{");
+                            asset.WriteLine($"\t\t\t\t{q}GUID{q} {q}{entry.ItemGUID}{q}");
+                            asset.WriteLine("\t\t\t}");
+                            asset.WriteLine($"\t\t\t{q}Value{q} {q}{entry.Value}{q}");
+
+                            asset.WriteLine("\t\t}");
+                        }
+
+                        foreach (var e in cur.Entries)
+                            writeEntry(e);
+
+                        asset.WriteLine($"\t]");
+                        asset.WriteLine("}");
+                    }
+                }
+                catch
+                {
+
                 }
             }
         }

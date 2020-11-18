@@ -151,7 +151,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         public enum ReturnType
         {
-            Reward, Condition, Dialogue, Vendor, Quest, VendorItem, Object, Character
+            Reward, Condition, Dialogue, Vendor, Quest, VendorItem, Object, Character,
+            Currency
         }
     }
 }

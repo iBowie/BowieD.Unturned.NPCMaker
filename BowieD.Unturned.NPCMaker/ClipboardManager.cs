@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC;
+using BowieD.Unturned.NPCMaker.NPC.Currency;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using System;
 using System.IO;
@@ -20,7 +21,8 @@ namespace BowieD.Unturned.NPCMaker
             DialogueFormat = "NPCMaker.Dialogue",
             VendorFormat = "NPCMaker.Vendor",
             VendorItemFormat = "NPCMaker.Vendor.Item",
-            QuestFormat = "NPCMaker.Quest";
+            QuestFormat = "NPCMaker.Quest",
+            CurrencyFormat = "NPCMaker.Currency";
         public static void SetObject(ReturnType returnType, object obj)
         {
             SetObject(GetFormat(returnType), obj);
@@ -93,6 +95,7 @@ namespace BowieD.Unturned.NPCMaker
                 case ReturnType.Reward: return RewardFormat;
                 case ReturnType.Vendor: return VendorFormat;
                 case ReturnType.VendorItem: return VendorItemFormat;
+                case ReturnType.Currency: return CurrencyFormat;
                 default: return null;
             }
         }
@@ -107,6 +110,7 @@ namespace BowieD.Unturned.NPCMaker
                 case RewardFormat: return typeof(Reward);
                 case VendorFormat: return typeof(NPCVendor);
                 case VendorItemFormat: return typeof(VendorItem);
+                case CurrencyFormat: return typeof(CurrencyAsset);
                 default: return null;
             }
         }

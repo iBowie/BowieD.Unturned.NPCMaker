@@ -1268,6 +1268,66 @@
                         </Grid>
                     </Grid>
                 </TabItem>
+                <TabItem DataContext="{Binding CurrencyTabViewModel}" Name="currencyTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Currency}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="currencyTabSelect"/>
+                            </ScrollViewer>
+                            <Button Style="{DynamicResource FlatButtonStyle}" Name="currencyTabButtonAdd" Grid.Column="1" Margin="10">
+                                <Button.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Plus" Foreground="{DynamicResource AccentColor}"/>
+                                </Button.Content>
+                            </Button>
+                            <xctk:DropDownButton Style="{DynamicResource FlatDropDownButtonStyle}" Name="currencyTabButtonSort" Grid.Column="2" Margin="10">
+                                <xctk:DropDownButton.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Sort" Foreground="{DynamicResource AccentColor}"/>
+                                </xctk:DropDownButton.Content>
+                                <xctk:DropDownButton.DropDownContent>
+                                    <StackPanel>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_GUID_Ascending}" Command="{Binding SortGUIDAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_GUID_Descending}" Command="{Binding SortGUIDDescending}"/>
+                                    </StackPanel>
+                                </xctk:DropDownButton.DropDownContent>
+                            </xctk:DropDownButton>
+                        </Grid>
+                        <Grid Grid.Row="1" Name="currencyTabGridNoSelection" Visibility="Collapsed">
+                            <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock TextAlignment="Center" FontSize="36" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Currency_NoSelection}" TextWrapping="Wrap"/>
+                            </Label>
+                        </Grid>
+                        <Grid Grid.Row="1" Name="currencyTabGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0">
+                                <StackPanel Orientation="Horizontal" Margin="10">
+                                    <Label Content="{xaml:Localize CURRENCY_Guid}"/>
+                                    <TextBox MaxLength="32" MaxLines="1" Text="{Binding GUID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="10">
+                                    <Label Content="{xaml:Localize CURRENCY_ValueFormat}"/>
+                                    <TextBox MaxLength="255" MaxLines="1" Text="{Binding ValueFormat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <ScrollViewer Margin="10" Grid.Row="1">
+                                <WrapPanel Name="currencyListEntries"/>
+                            </ScrollViewer>
+                            <Button Command="{Binding AddEntryCommand}" Content="{xaml:Localize Key=CURRENCY_Item_Add}" Grid.Row="2" Name="currencyAddItemButton" Margin="10"/>
+                        </Grid>
+                    </Grid>
+                </TabItem>
                 <TabItem DataContext="{Binding MistakeTabViewModel}" Name="mistakeListTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Errors}">
                     <Grid>
                         <ListView Name="lstMistakes" Margin="10,10,10,60">

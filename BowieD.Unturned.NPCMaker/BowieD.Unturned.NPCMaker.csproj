@@ -166,6 +166,9 @@
     <Compile Include="Common\Utility\DebugUtility.cs" />
     <Compile Include="Common\Utility\NETHelper.cs" />
     <Compile Include="Common\Utility\PathUtility.cs" />
+    <Compile Include="Controls\CurrencyEntryControl.xaml.cs">
+      <DependentUpon>CurrencyEntryControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Dialogue_Response.xaml.cs">
       <DependentUpon>Dialogue_Response.xaml</DependentUpon>
     </Compile>
@@ -206,6 +209,9 @@
     <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Forms\Character_PoseEditor.xaml.cs">
       <DependentUpon>Character_PoseEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CurrencyEntryEditor.xaml.cs">
+      <DependentUpon>CurrencyEntryEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\DialogueView_Window.xaml.cs">
       <DependentUpon>DialogueView_Window.xaml</DependentUpon>
@@ -342,6 +348,8 @@
     <Compile Include="NPC\Conditions\ConditionReputation.cs" />
     <Compile Include="NPC\Conditions\ConditionSkillset.cs" />
     <Compile Include="NPC\Conditions\ConditionTimeOfDay.cs" />
+    <Compile Include="NPC\Currency\CurrencyAsset.cs" />
+    <Compile Include="NPC\Currency\CurrencyEntry.cs" />
     <Compile Include="NPC\IHasUIText.cs" />
     <Compile Include="NPC\NPCCharacter.cs" />
     <Compile Include="NPC\NPCClothing.cs" />
@@ -426,6 +434,7 @@
     <Compile Include="ViewModels\BaseCommand.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CharacterTabViewModel.cs" />
+    <Compile Include="ViewModels\CurrencyTabViewModel.cs" />
     <Compile Include="ViewModels\DialogueTabViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MistakeTabViewModel.cs" />
@@ -434,6 +443,10 @@
     <Compile Include="XAML\EnumItemsSource.cs" />
     <Compile Include="XAML\LocalizationConverter.cs" />
     <Compile Include="XAML\LocalizeExtension.cs" />
+    <Page Include="Controls\CurrencyEntryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Dialogue_Response.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -467,6 +480,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\Character_PoseEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\CurrencyEntryEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
