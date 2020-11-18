@@ -18,7 +18,8 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     "BowieD.Unturned.NPCMaker.Mistakes.Character",
                     "BowieD.Unturned.NPCMaker.Mistakes.Dialogue",
                     "BowieD.Unturned.NPCMaker.Mistakes.Vendor",
-                    "BowieD.Unturned.NPCMaker.Mistakes.Quest"
+                    "BowieD.Unturned.NPCMaker.Mistakes.Quest",
+                    "BowieD.Unturned.NPCMaker.Mistakes.Currencies"
                 };
                 IEnumerable<Type> q = from t in Assembly.GetExecutingAssembly().GetTypes() where t.IsClass && !t.IsAbstract && nspaces.Contains(t.Namespace) select t;
                 foreach (Type t in q)
