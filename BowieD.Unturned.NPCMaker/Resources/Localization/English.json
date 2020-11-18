@@ -144,6 +144,15 @@
 		"Reward_Add": "Add Reward",
 		"Rewards": "Quest Rewards"
 	},
+	"Currency":{
+		"GUID": "Currency GUID",
+		"ValueFormat": "Currency Value Format",
+		"Item_Add": "Add Entry",
+		"Entry_GUID": "Item GUID",
+		"Entry_Value": "Item Value",
+		"Entry_Editor_Title": "Currency Entry Editor",
+		"Entry_Editor_Save": "Save Entry"
+	},
 	"Condition": {
 		"Type_None": "None",
 		"Type_Experience": "Has experience",
@@ -379,6 +388,11 @@
 		"NE_3000_Desc": "Quest {0} [{1}] has zero id.",
 		"NE_3001_Desc": "Quest {0} [{1}] has no conditions.",
 		"NE_3002_Desc": "Quest {0} [{1}] has no rewards.",
+		"NE_4000_Desc": "Currency {0} has invalid GUID - invalid length",
+		"NE_4001_Desc": "Currency {0} has invalid GUID - invalid format",
+		"NE_4002_Desc": "Currency {0} has invalid entry with GUID {1} - zero value",
+		"NE_4003_Desc": "Currency {0} does not have an entry with value of 1",
+		"NE_4004_Desc": "Currency {0} does not have any entries",
 		"NE_0000_Solution": "Change ID to the value that will be bigger than 2000",
 		"NE_0001_Solution": "Change ID to the value that will be bigger than 0",
 		"NE_0002_Solution": "Change ID of the equipped slot to the value that will be bigger than 0",
@@ -396,6 +410,11 @@
 		"NE_3000_Solution": "Change ID to the value that will be bigger than 0",
 		"NE_3001_Solution": "Add conditions to the quest",
 		"NE_3002_Solution": "Either add rewards to the quest, or ignore this message",
+		"NE_4000_Solution": "Change GUID",
+		"NE_4001_Solution": "Change GUID",
+		"NE_4002_Solution": "Increase value of invalid entry",
+		"NE_4003_Solution": "Create an entry with value of 1",
+		"NE_4004_Solution": "Create an entry",
 
 		"deep_char": "[{0}] already used by other character in game.",
 		"deep_dialogue": "[{0}] already used by other dialogue in game.",
