@@ -7,19 +7,27 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
-        Title="{xaml:Localize CURRENCY_Entry_Editor_Title}" SizeToContent="WidthAndHeight">
+        Title="{xaml:Localize CURRENCY_Entry_Editor_Title}" MinWidth="300" SizeToContent="WidthAndHeight">
     <StackPanel>
         <StackPanel.LayoutTransform>
             <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
         </StackPanel.LayoutTransform>
-        <StackPanel Orientation="Horizontal" Margin="10">
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
             <Label Content="{xaml:Localize CURRENCY_Entry_GUID}"/>
-            <TextBox Text="{Binding GUID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="10">
+            <TextBox Grid.Column="1" Text="{Binding GUID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+        </Grid>
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
             <Label Content="{xaml:Localize CURRENCY_Entry_Value}"/>
-            <xctk:UIntegerUpDown Foreground="{DynamicResource ForegroundColor}" ShowButtonSpinner="False" Value="{Binding Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-        </StackPanel>
+            <xctk:UIntegerUpDown Grid.Column="1" HorizontalAlignment="Stretch" Foreground="{DynamicResource ForegroundColor}" ShowButtonSpinner="False" Value="{Binding Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+        </Grid>
         <Button Margin="10" Content="{xaml:Localize CURRENCY_Entry_Editor_Save}" Click="Button_Click"/>
     </StackPanel>
 </Window>
