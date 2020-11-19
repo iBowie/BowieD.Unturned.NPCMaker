@@ -534,6 +534,8 @@
     "Main_Tab_Quest_Preview": "Предпросмотр",
     "Main_Tab_Quest_Preview_Message": "Настройте симуляцию в следующем окне. После закрытия окна откроется задание.",
     "Main_Tab_Quest_NoSelection": "Вкладка не выбрана.\nСоздайте новую или выберите существующую.",
+    "Main_Tab_Currency": "Валюта",
+    "Main_Tab_Currency_NoSelection": "Вкладка не выбрана.\nСоздайте новую или выберите существующую.",
     "Main_Tab_Errors": "Список ошибок",
     "Main_Tab_Errors_DeepAnalysis": "Продвинутый анализ",
     "Main_Tab_Errors_DeepAnalysis_Tooltip": "Сверка ID предметов в игре и в программе.",

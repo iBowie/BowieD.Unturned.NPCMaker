@@ -539,6 +539,8 @@
 		"Main_Tab_Quest_Preview": "Preview Quest",
 		"Main_Tab_Quest_Preview_Message": "Set up simulation in next dialog window. Close to proceed.",
 		"Main_Tab_Quest_NoSelection": "No tab selected.\nAdd new tab or select another one.",
+		"Main_Tab_Currency": "Currency",
+		"Main_Tab_Currency_NoSelection": "No tab selected.\nAdd new tab or select another one.",
 		"Main_Tab_Errors": "Error List",
 		"Main_Tab_Errors_DeepAnalysis": "Deep Analysis",
 		"Main_Tab_Errors_DeepAnalysis_Tooltip": "Checks all game ID's and ID's that you have.",
