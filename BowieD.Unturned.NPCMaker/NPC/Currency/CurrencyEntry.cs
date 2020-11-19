@@ -1,7 +1,9 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Currency
 {
+    [Serializable]
     public sealed class CurrencyEntry
     {
         [XmlAttribute("guid")]
