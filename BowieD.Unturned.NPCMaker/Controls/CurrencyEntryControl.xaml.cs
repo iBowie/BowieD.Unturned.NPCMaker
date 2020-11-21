@@ -26,11 +26,19 @@ namespace BowieD.Unturned.NPCMaker.Controls
             InitializeComponent();
 
             this.Entry = entry;
-
-            header.Text = entry.ItemGUID;
-            footer.Text = entry.Value.ToString();
         }
 
-        public CurrencyEntry Entry { get; set; }
+        private CurrencyEntry _entry;
+        public CurrencyEntry Entry 
+        {
+            get => _entry;
+            set
+            {
+                _entry = value;
+
+                header.Text = value.ItemGUID;
+                footer.Text = value.Value.ToString();
+            }
+        }
     }
 }

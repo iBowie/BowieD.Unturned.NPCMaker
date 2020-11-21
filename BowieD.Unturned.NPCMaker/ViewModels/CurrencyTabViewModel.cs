@@ -155,6 +155,23 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         }
         void AddEntry(CurrencyEntryControl cec)
         {
+            cec.editButton.Click += (sender, e) =>
+            {
+                var current = (sender as UIElement).TryFindParent<CurrencyEntryControl>();
+
+                var old = current.Entry.Clone();
+
+                CurrencyEntryEditor cee = new CurrencyEntryEditor(current.Entry);
+                
+                if (cee.ShowDialog() != true)
+                {
+                    current.Entry = old;
+                }
+                else
+                {
+                    current.Entry = cee.Entry;
+                }
+            };
             cec.deleteButton.Click += (sender, e) =>
             {
                 var current = (sender as UIElement).TryFindParent<CurrencyEntryControl>();

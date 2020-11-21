@@ -18,12 +18,16 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+            <Label Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
                 <TextBlock TextAlignment="Center" TextWrapping="Wrap" Name="header" Text="b6b87dfad5f342dc91bbb2de950f56ee"/>
             </Label>
-            <Button Grid.Column="1" x:Name="deleteButton" Width="31" Height="31" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5">
+            <Button Grid.Column="2" x:Name="deleteButton" Width="31" Height="31" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5">
                 <iconPacks:PackIconMaterial Kind="Delete" Foreground="{DynamicResource AccentColor}"/>
+            </Button>
+            <Button Grid.Column="0" x:Name="editButton" Width="31" Height="31" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5">
+                <iconPacks:PackIconMaterial Kind="Pencil" Foreground="{DynamicResource AccentColor}"/>
             </Button>
         </Grid>
         <Viewbox Width="256" Height="256" RenderOptions.BitmapScalingMode="NearestNeighbor" Name="viewBox" Grid.Row="1">
