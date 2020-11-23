@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Configuration;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.XAML;
 using System;
@@ -91,6 +92,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
                 borderContents.Children.Add(l);
                 ConditionRangeAttribute rangeAttribute = prop.GetCustomAttribute<ConditionRangeAttribute>();
+                ConditionAssetPickerAttribute assetPickerAttribute = prop.GetCustomAttribute<ConditionAssetPickerAttribute>();
                 FrameworkElement valueControl = null;
                 if (propType == typeof(ushort))
                 {
@@ -113,6 +115,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         HideUpDownButtons = true
                     };
                     (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
+
+                    if (assetPickerAttribute != null)
+                    {
+                        var vcMenu = new ContextMenu();
+                        vcMenu.Items.Add(ContextHelper.CreateSelectItemButton(assetPickerAttribute.AssetType, (asset) =>
+                        {
+                            (valueControl as MahApps.Metro.Controls.NumericUpDown).Value = asset.id;
+                        }));
+                        (valueControl as MahApps.Metro.Controls.NumericUpDown).ContextMenu = vcMenu;
+                    }
                 }
                 else if (propType == typeof(byte?))
                 {
@@ -167,6 +179,19 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                     (valueControl as Controls.OptionalUInt16ValueControl).upDown.Maximum = newMax;
                     (valueControl as Controls.OptionalUInt16ValueControl).upDown.Minimum = newMin;
                     (valueControl as Controls.OptionalUInt16ValueControl).upDown.SetBinding(Xceed.Wpf.Toolkit.UShortUpDown.ValueProperty, propName);
+
+                    if (assetPickerAttribute != null)
+                    {
+                        var vcMenu = new ContextMenu();
+                        vcMenu.Items.Add(ContextHelper.CreateSelectItemButton(assetPickerAttribute.AssetType, (asset) =>
+                        {
+                            (valueControl as Controls.OptionalUInt16ValueControl).checkbox.IsChecked = true;
+                            (valueControl as Controls.OptionalUInt16ValueControl).upDown.Value = asset.id;
+                        }));
+                        valueControl.ContextMenu = vcMenu;
+                        (valueControl as Controls.OptionalUInt16ValueControl).upDown.ContextMenu = vcMenu;
+                        (valueControl as Controls.OptionalUInt16ValueControl).checkbox.ContextMenu = vcMenu;
+                    }
                 }
                 else if (propType == typeof(uint))
                 {
