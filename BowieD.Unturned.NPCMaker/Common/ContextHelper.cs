@@ -520,7 +520,7 @@ namespace BowieD.Unturned.NPCMaker.Common
         }
         internal static MenuItem CreateSelectItemButton(Action<GameItemAsset> action)
         {
-            return createSelectAssetButton<GameItemHatAsset>(action, "Control_SelectAsset_Item", PackIconMaterialKind.Archive);
+            return createSelectAssetButton<GameItemAsset>(action, "Control_SelectAsset_Item", PackIconMaterialKind.Archive);
         }
         internal static MenuItem CreateSelectHatButton(Action<GameItemHatAsset> action)
         {
