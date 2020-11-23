@@ -193,9 +193,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
             switch (vt)
             {
-                case "item": case "gun": case "sight":
-                case "tactical": case "grip": case "barrel":
-                case "magazine": case "food":
+                case "item": case "gun": case "food":
                 case "water": case "medical":
                 case "melee": case "fuel":
                 case "tool": case "barricade":
@@ -218,6 +216,16 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                     return new Tuple<bool, GameAsset>(true, new GameItemHatAsset(dr, shortDir, name, id, guid, vt, origin));
                 case "pants":
                     return new Tuple<bool, GameAsset>(true, new GameItemPantsAsset(dr, shortDir, name, id, guid, vt, origin));
+                case "sight":
+                    return new Tuple<bool, GameAsset>(true, new GameItemSightAsset(dr, shortDir, name, id, guid, vt, origin));
+                case "barrel":
+                    return new Tuple<bool, GameAsset>(true, new GameItemBarrelAsset(dr, shortDir, name, id, guid, vt, origin));
+                case "tactical":
+                    return new Tuple<bool, GameAsset>(true, new GameItemTacticalAsset(dr, shortDir, name, id, guid, vt, origin));
+                case "magazine":
+                    return new Tuple<bool, GameAsset>(true, new GameItemMagazineAsset(dr, shortDir, name, id, guid, vt, origin));
+                case "grip":
+                    return new Tuple<bool, GameAsset>(true, new GameItemGripAsset(dr, shortDir, name, id, guid, vt, origin));
                 case "shirt":
                     return new Tuple<bool, GameAsset>(true, new GameItemShirtAsset(dr, shortDir, name, id, guid, vt, origin));
                 case "glasses":

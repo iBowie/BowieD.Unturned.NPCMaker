@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
 using BowieD.Unturned.NPCMaker.XAML;
 using System;
@@ -79,20 +80,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 }
 
                 RewardRangeAttribute rangeAttribute = prop.GetCustomAttribute<RewardRangeAttribute>();
+                RewardAssetPickerAttribute assetPickerAttribute = prop.GetCustomAttribute<RewardAssetPickerAttribute>();
                 borderContents.Children.Add(l);
                 FrameworkElement valueControl = null;
-                if (propType == typeof(ushort))
-                {
-                    valueControl = new MahApps.Metro.Controls.NumericUpDown()
-                    {
-                        Maximum = ushort.MaxValue,
-                        Minimum = ushort.MinValue,
-                        ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
-                        HideUpDownButtons = true
-                    };
-                    (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
-                }
-                else if (propType == typeof(uint))
+                if (propType == typeof(uint))
                 {
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
@@ -156,6 +147,19 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                     (valueControl as Controls.OptionalUInt16ValueControl).upDown.Maximum = newMax;
                     (valueControl as Controls.OptionalUInt16ValueControl).upDown.Minimum = newMin;
                     (valueControl as Controls.OptionalUInt16ValueControl).upDown.SetBinding(Xceed.Wpf.Toolkit.UShortUpDown.ValueProperty, propName);
+                    
+                    if (assetPickerAttribute != null)
+                    {
+                        var vcMenu = new ContextMenu();
+                        vcMenu.Items.Add(ContextHelper.CreateSelectItemButton(assetPickerAttribute.AssetType, (asset) =>
+                        {
+                            (valueControl as Controls.OptionalUInt16ValueControl).checkbox.IsChecked = true;
+                            (valueControl as Controls.OptionalUInt16ValueControl).upDown.Value = asset.id;
+                        }));
+                        valueControl.ContextMenu = vcMenu;
+                        (valueControl as Controls.OptionalUInt16ValueControl).upDown.ContextMenu = vcMenu;
+                        (valueControl as Controls.OptionalUInt16ValueControl).checkbox.ContextMenu = vcMenu;
+                    }
                 }
                 else if (propType == typeof(int))
                 {
@@ -189,6 +193,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                         HideUpDownButtons = true
                     };
                     (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
+
+                    if (assetPickerAttribute != null)
+                    {
+                        var vcMenu = new ContextMenu();
+                        vcMenu.Items.Add(ContextHelper.CreateSelectItemButton(assetPickerAttribute.AssetType, (asset) =>
+                        {
+                            (valueControl as MahApps.Metro.Controls.NumericUpDown).Value = asset.id;
+                        }));
+                        (valueControl as MahApps.Metro.Controls.NumericUpDown).ContextMenu = vcMenu;
+                    }
                 }
                 else if (propType == typeof(float))
                 {

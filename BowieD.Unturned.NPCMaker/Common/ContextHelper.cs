@@ -518,6 +518,31 @@ namespace BowieD.Unturned.NPCMaker.Common
             (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
         }
+        private static MenuItem createSelectAssetButton(Type assetType, Action<GameAsset> action, string key, PackIconMaterialKind icon)
+        {
+            MenuItem b = new MenuItem()
+            {
+                Header = LocalizationManager.Current.Interface[key]
+            };
+            b.Click += (object sender, RoutedEventArgs e) =>
+            {
+                AssetPicker_Window apw = new AssetPicker_Window(assetType);
+                if (apw.ShowDialog() == true)
+                {
+                    action.Invoke(apw.SelectedAsset);
+                }
+            };
+            b.Icon = new PackIconMaterial()
+            {
+                Kind = icon
+            };
+            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
+            return b;
+        }
+        internal static MenuItem CreateSelectItemButton(Type assetType, Action<GameAsset> action)
+        {
+            return createSelectAssetButton(assetType, action, "Control_SelectAsset_Item", PackIconMaterialKind.Archive);
+        }
         internal static MenuItem CreateSelectItemButton(Action<GameItemAsset> action)
         {
             return createSelectAssetButton<GameItemAsset>(action, "Control_SelectAsset_Item", PackIconMaterialKind.Archive);

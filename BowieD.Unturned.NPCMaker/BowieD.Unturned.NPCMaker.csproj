@@ -291,13 +291,19 @@
     <Compile Include="GameIntegration\GameItemAsset.cs" />
     <Compile Include="GameIntegration\GameItemBackpackAsset.cs" />
     <Compile Include="GameIntegration\GameItemBagAsset.cs" />
+    <Compile Include="GameIntegration\GameItemBarrelAsset.cs" />
+    <Compile Include="GameIntegration\GameItemCaliberAsset.cs" />
     <Compile Include="GameIntegration\GameItemClothingAsset.cs" />
     <Compile Include="GameIntegration\GameItemGearAsset.cs" />
     <Compile Include="GameIntegration\GameItemGlassesAsset.cs" />
+    <Compile Include="GameIntegration\GameItemGripAsset.cs" />
     <Compile Include="GameIntegration\GameItemHatAsset.cs" />
+    <Compile Include="GameIntegration\GameItemMagazineAsset.cs" />
     <Compile Include="GameIntegration\GameItemMaskAsset.cs" />
     <Compile Include="GameIntegration\GameItemPantsAsset.cs" />
     <Compile Include="GameIntegration\GameItemShirtAsset.cs" />
+    <Compile Include="GameIntegration\GameItemSightAsset.cs" />
+    <Compile Include="GameIntegration\GameItemTacticalAsset.cs" />
     <Compile Include="GameIntegration\GameItemVestAsset.cs" />
     <Compile Include="GameIntegration\GameNPCAsset.cs" />
     <Compile Include="GameIntegration\GameQuestAsset.cs" />
@@ -352,6 +358,7 @@
     <Compile Include="Mistakes\Vendor\VendorMistake.cs" />
     <Compile Include="Notification\INotificationManager.cs" />
     <Compile Include="Notification\NotificationManager.cs" />
+    <Compile Include="NPC\Conditions\Attributes\ConditionAssetPickerAttribute.cs" />
     <Compile Include="NPC\Conditions\Attributes\ConditionNoValueAttribute.cs" />
     <Compile Include="NPC\Conditions\Attributes\ConditionOptionalAttribute.cs" />
     <Compile Include="NPC\Conditions\Attributes\ConditionRangeAttribute.cs" />
@@ -386,6 +393,7 @@
     <Compile Include="NPC\NPCClothing.cs" />
     <Compile Include="NPC\NPCProject.cs" />
     <Compile Include="NPC\ProjectData.cs" />
+    <Compile Include="NPC\Rewards\Attributes\RewardAssetPickerAttribute.cs" />
     <Compile Include="NPC\Rewards\Attributes\RewardRangeAttribute.cs" />
     <Compile Include="NPC\Rewards\Reward.cs" />
     <Compile Include="NPC\Rewards\RewardAchievement.cs" />

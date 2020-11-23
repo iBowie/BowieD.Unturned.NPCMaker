@@ -29,17 +29,23 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             }
         }
 
+        [RewardAssetPicker(typeof(GameItemAsset))]
         public ushort ID { get; set; }
         public byte Amount { get; set; }
         [RewardOptional(null)]
+        [RewardAssetPicker(typeof(GameItemSightAsset))]
         public ushort? Sight { get; set; }
         [RewardOptional(null)]
+        [RewardAssetPicker(typeof(GameItemTacticalAsset))]
         public ushort? Tactical { get; set; }
         [RewardOptional(null)]
+        [RewardAssetPicker(typeof(GameItemGripAsset))]
         public ushort? Grip { get; set; }
         [RewardOptional(null)]
+        [RewardAssetPicker(typeof(GameItemBarrelAsset))]
         public ushort? Barrel { get; set; }
         [RewardOptional(null)]
+        [RewardAssetPicker(typeof(GameItemMagazineAsset))]
         public ushort? Magazine { get; set; }
         [RewardOptional(null)]
         public byte? Ammo { get; set; }
