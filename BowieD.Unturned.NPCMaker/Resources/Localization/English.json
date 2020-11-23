@@ -463,6 +463,7 @@
 		"StartUp_Patreon_Open": "Go to Patreon"
 	},
 	"Interface": {
+		"AssetPicker_Title": "Asset Picker",
 		"App_About": "Made by BowieD.\nLocalization Author(s): {0}\nVersion: {1}",
 		"App_About_Title": "About",
 		"App_About_Patreon_Title": "Patreon Supporters",

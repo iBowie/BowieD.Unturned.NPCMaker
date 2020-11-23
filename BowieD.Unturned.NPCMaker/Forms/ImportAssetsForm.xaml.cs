@@ -76,7 +76,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             stepText.Text = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Window_Step_Unturned");
 
-            await GameIntegration.GameAssetManager.Import(mainPath, (index, total) =>
+            await GameIntegration.GameAssetManager.Import(mainPath, GameIntegration.EGameAssetOrigin.Unturned, (index, total) =>
             {
                 stepProgress.Value = index;
                 stepProgress.Maximum = total;
@@ -86,7 +86,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             stepText.Text = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Window_Step_Workshop");
 
-            await GameIntegration.GameAssetManager.Import(workshopPath, (index, total) =>
+            await GameIntegration.GameAssetManager.Import(workshopPath, GameIntegration.EGameAssetOrigin.Workshop, (index, total) =>
             {
                 stepProgress.Value = index;
                 stepProgress.Maximum = total;

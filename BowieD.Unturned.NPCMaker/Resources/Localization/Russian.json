@@ -458,6 +458,7 @@
     "StartUp_Patreon_Open": "Открыть Patreon"
   },
   "Interface": {
+        "AssetPicker_Title": "Выбор ассета",
     "App_About": "Автор программы: BowieD.\nПереводчик(и): {0}\nВерсия: {1}",
     "App_About_Title": "О программе",
     "App_About_Patreon_Title": "Поддержавшие на Patreon",

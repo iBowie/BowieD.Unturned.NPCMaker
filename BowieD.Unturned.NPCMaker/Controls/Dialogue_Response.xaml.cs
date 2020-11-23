@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Forms;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using DiscordRPC;
 using System.Linq;
@@ -88,16 +89,10 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         private void QuestSelect_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.CurrentProject.data.quests.Count() == 0)
+            AssetPicker_Window apw = new AssetPicker_Window(typeof(GameQuestAsset));
+            if (apw.ShowDialog() == true)
             {
-                return;
-            }
-
-            Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Quest);
-            select.ShowDialog();
-            if (select.DialogResult == true)
-            {
-                txtBoxQuestID.Value = (select.SelectedValue as NPC.NPCQuest).ID;
+                txtBoxQuestID.Value = apw.SelectedAsset.id;
             }
         }
 

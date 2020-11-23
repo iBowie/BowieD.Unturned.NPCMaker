@@ -9,24 +9,32 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 {
     public class GameAsset
     {
-        public GameAsset(string name, ushort id, Guid guid, string type)
+        public GameAsset(string name, ushort id, Guid guid, string type, EGameAssetOrigin origin)
         {
             this.name = name;
             this.id = id;
             this.guid = guid;
             this.type = type;
+            this.origin = origin;
         }
 
         public string name;
         public ushort id;
         public Guid guid;
         public string type;
+        public EGameAssetOrigin origin;
+    }
+    public enum EGameAssetOrigin
+    {
+        Unturned,
+        Workshop,
+        Project
     }
     public class GameItemAsset : GameAsset
     {
         public static readonly Uri DefaultImagePath = new Uri("pack://application:,,,/Resources/Icons/unknown.png");
 
-        public GameItemAsset(DataReader data, string dirName, string name, ushort id, Guid guid, string type) : base(name, id, guid, type)
+        public GameItemAsset(DataReader data, string dirName, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(name, id, guid, type, origin)
         {
             this.dirName = dirName;
         }
@@ -62,14 +70,18 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
     }
     public class GameVehicleAsset : GameAsset
     {
-        public GameVehicleAsset(DataReader data, string name, ushort id, Guid guid, string type) : base(name, id, guid, type)
+        public GameVehicleAsset(DataReader data, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(name, id, guid, type, origin)
         {
 
         }
     }
     public class GameNPCAsset : GameAsset
     {
-        public GameNPCAsset(DataReader data, DataReader local, string name, ushort id, Guid guid, string type) : base(name, id, guid, type)
+        public GameNPCAsset(NPCCharacter character, EGameAssetOrigin origin) : base(character.EditorName, character.ID, Guid.Parse(character.GUID), "NPC", origin)
+        {
+            this.character = character;
+        }
+        public GameNPCAsset(DataReader data, DataReader local, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(name, id, guid, type, origin)
         {
             character = new Parsing.ParseTool(data, local).ParseCharacter();
         }
@@ -78,7 +90,11 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
     }
     public class GameQuestAsset : GameAsset
     {
-        public GameQuestAsset(DataReader data, DataReader local, string name, ushort id, Guid guid, string type) : base(name, id, guid, type)
+        public GameQuestAsset(NPCQuest quest, EGameAssetOrigin origin) : base(quest.Title, quest.ID, Guid.Parse(quest.GUID), "Quest", origin)
+        {
+            this.quest = quest;
+        }
+        public GameQuestAsset(DataReader data, DataReader local, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(name, id, guid, type, origin)
         {
             quest = new Parsing.ParseTool(data, local).ParseQuest();
         }
@@ -87,7 +103,11 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
     }
     public class GameDialogueAsset : GameAsset
     {
-        public GameDialogueAsset(DataReader data, DataReader local, string name, ushort id, Guid guid, string type) : base(name, id, guid, type)
+        public GameDialogueAsset(NPCDialogue dialogue, EGameAssetOrigin origin) : base($"Asset_{dialogue.ID}", dialogue.ID, Guid.Parse(dialogue.GUID), "Dialogue", origin)
+        {
+            this.dialogue = dialogue;
+        }
+        public GameDialogueAsset(DataReader data, DataReader local, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(name, id, guid, type, origin)
         {
             dialogue = new Parsing.ParseTool(data, local).ParseDialogue();
         }
@@ -96,7 +116,11 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
     }
     public class GameVendorAsset : GameAsset
     {
-        public GameVendorAsset(DataReader data, DataReader local, string name, ushort id, Guid guid, string type) : base(name, id, guid, type)
+        public GameVendorAsset(NPCVendor vendor, EGameAssetOrigin origin) : base(vendor.Title, vendor.ID, Guid.Parse(vendor.GUID), "Vendor", origin)
+        {
+            this.vendor = vendor;
+        }
+        public GameVendorAsset(DataReader data, DataReader local, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(name, id, guid, type, origin)
         {
             vendor = new Parsing.ParseTool(data, local).ParseVendor();
         }

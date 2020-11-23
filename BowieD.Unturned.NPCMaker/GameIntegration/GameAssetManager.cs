@@ -11,13 +11,60 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
     {
         private static readonly List<GameAsset> _assets = new List<GameAsset>();
         
-        public static IEnumerable<T> GetAssets<T>() where T : GameAsset
+        public static IEnumerable<GameAsset> GetAllAssets(Type type)
+        {
+            if (typeof(GameAsset).IsAssignableFrom(type))
+            {
+                foreach (var asset in GetAllAssets<GameAsset>())
+                {
+                    if (type.IsAssignableFrom(asset.GetType()))
+                    {
+                        yield return asset;
+                    }
+                }
+            }
+            else
+                throw new ArgumentException("Expected derived class from GameAsset");
+        }
+        public static IEnumerable<T> GetAllAssets<T>() where T : GameAsset
         {
             foreach (var ga in _assets)
             {
                 if (ga is T gat)
                 {
                     yield return gat;
+                }
+            }
+
+            if (typeof(GameNPCAsset).IsAssignableFrom(typeof(T)))
+            {
+                foreach (var ch in MainWindow.CurrentProject.data.characters)
+                {
+                    yield return new GameNPCAsset(ch, EGameAssetOrigin.Project) as T;
+                }
+            }
+
+            if (typeof(GameDialogueAsset).IsAssignableFrom(typeof(T)))
+            {
+                foreach (var ch in MainWindow.CurrentProject.data.dialogues)
+                {
+                    yield return new GameDialogueAsset(ch, EGameAssetOrigin.Project) as T;
+                }
+            }
+
+            if (typeof(GameVendorAsset).IsAssignableFrom(typeof(T)))
+            {
+                foreach (var ch in MainWindow.CurrentProject.data.vendors)
+                {
+                    yield return new GameVendorAsset(ch, EGameAssetOrigin.Project) as T;
+                }
+            }
+
+            if (typeof(GameQuestAsset).IsAssignableFrom(typeof(T)))
+            {
+                foreach (var ch in MainWindow.CurrentProject.data.quests)
+                {
+                    yield return new GameQuestAsset(ch, EGameAssetOrigin.Project) as T;
                 }
             }
         }
@@ -46,7 +93,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         {
             return TryGetAsset((k) => k.id == id, out result);
         }
-        public static async Task Import(string directory, Action<int, int> fileLoadedCallback = null)
+        public static async Task Import(string directory, EGameAssetOrigin origin, Action<int, int> fileLoadedCallback = null)
         {
             Queue<FileInfo> files = new Queue<FileInfo>();
             HashSet<string> ignoreFileNames = new HashSet<string>();
@@ -72,7 +119,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 index++;
                 try
                 {
-                    var res = await TryReadLegacyAssetFile(fi.FullName);
+                    var res = await TryReadLegacyAssetFile(fi.FullName, origin);
                     if (res.Item1)
                     {
                         _assets.Add(res.Item2);
@@ -90,7 +137,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             _assets.Clear();
         }
 
-        private static async Task<Tuple<bool, GameAsset>> TryReadLegacyAssetFile(string fileName)
+        private static async Task<Tuple<bool, GameAsset>> TryReadLegacyAssetFile(string fileName, EGameAssetOrigin origin)
         {
             string drContent;
 
@@ -167,19 +214,19 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 case "filter": case "sentry":
                 case "vehicle_repair_tool": case "tire":
                 case "compass": case "oil_pump":
-                    return new Tuple<bool, GameAsset>(true, new GameItemAsset(dr, new DirectoryInfo(dir).Name, name, id, guid, vt));
+                    return new Tuple<bool, GameAsset>(true, new GameItemAsset(dr, new DirectoryInfo(dir).Name, name, id, guid, vt, origin));
                 case "npc":
-                    return new Tuple<bool, GameAsset>(true, new GameNPCAsset(dr, local, name, id, guid, vt));
+                    return new Tuple<bool, GameAsset>(true, new GameNPCAsset(dr, local, name, id, guid, vt, origin));
                 case "dialogue":
-                    return new Tuple<bool, GameAsset>(true, new GameDialogueAsset(dr, local, name, id, guid, vt));
+                    return new Tuple<bool, GameAsset>(true, new GameDialogueAsset(dr, local, name, id, guid, vt, origin));
                 case "quest":
-                    return new Tuple<bool, GameAsset>(true, new GameQuestAsset(dr, local, name, id, guid, vt));
+                    return new Tuple<bool, GameAsset>(true, new GameQuestAsset(dr, local, name, id, guid, vt, origin));
                 case "vendor":
-                    return new Tuple<bool, GameAsset>(true, new GameVendorAsset(dr, local, name, id, guid, vt));
+                    return new Tuple<bool, GameAsset>(true, new GameVendorAsset(dr, local, name, id, guid, vt, origin));
                 case "vehicle":
-                    return new Tuple<bool, GameAsset>(true, new GameVehicleAsset(dr, name, id, guid, vt));
+                    return new Tuple<bool, GameAsset>(true, new GameVehicleAsset(dr, name, id, guid, vt, origin));
                 default:
-                    return new Tuple<bool, GameAsset>(true, new GameAsset(name, id, guid, vt));
+                    return new Tuple<bool, GameAsset>(true, new GameAsset(name, id, guid, vt, origin));
             }
         }
     }
