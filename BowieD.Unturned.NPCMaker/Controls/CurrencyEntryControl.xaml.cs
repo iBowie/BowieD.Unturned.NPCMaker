@@ -38,24 +38,29 @@ namespace BowieD.Unturned.NPCMaker.Controls
                 _entry = value;
 
                 string headerText;
+                Uri imagePath;
 
                 if (Guid.TryParse(value.ItemGUID, out var itemG))
                 {
                     if (GameAssetManager.TryGetAsset<GameItemAsset>(itemG, out var asset))
                     {
                         headerText = asset.name;
+                        imagePath = asset.ImagePath;
                     }
                     else
                     {
                         headerText = value.ItemGUID;
+                        imagePath = GameItemAsset.DefaultImagePath;
                     }
                 }
                 else
                 {
                     headerText = value.ItemGUID;
+                    imagePath = GameItemAsset.DefaultImagePath;
                 }
                 header.Text = headerText;
                 footer.Text = value.Value.ToString();
+                img.Source = new BitmapImage(imagePath);
             }
         }
     }

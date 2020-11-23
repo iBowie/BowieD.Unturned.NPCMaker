@@ -157,7 +157,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 case "filter": case "sentry":
                 case "vehicle_repair_tool": case "tire":
                 case "compass": case "oil_pump":
-                    return new Tuple<bool, GameAsset>(true, new GameItemAsset(dr, name, id, guid, vt));
+                    return new Tuple<bool, GameAsset>(true, new GameItemAsset(dr, new DirectoryInfo(dir).Name, name, id, guid, vt));
                 case "npc":
                     return new Tuple<bool, GameAsset>(true, new GameNPCAsset(dr, local, name, id, guid, vt));
                 case "dialogue":

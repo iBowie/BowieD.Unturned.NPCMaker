@@ -31,7 +31,7 @@
             </Button>
         </Grid>
         <Viewbox Width="256" Height="256" RenderOptions.BitmapScalingMode="NearestNeighbor" Name="viewBox" Grid.Row="1">
-            <Image Margin="5" />
+            <Image Name="img" Margin="5" />
         </Viewbox>
         <Label Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
             <TextBlock TextAlignment="Center" Name="footer" Text="10"/>
