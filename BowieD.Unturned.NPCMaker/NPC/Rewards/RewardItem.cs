@@ -62,7 +62,19 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             {
                 text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Reward_Item");
             }
-            return string.Format(text, Amount, ID);
+
+            string itemName;
+
+            if (GameAssetManager.TryGetAsset<GameItemAsset>(ID, out var asset))
+            {
+                itemName = asset.name;
+            }
+            else
+            {
+                itemName = ID.ToString();
+            }
+
+            return string.Format(text, Amount, itemName);
         }
     }
 }
