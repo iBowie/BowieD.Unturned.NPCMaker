@@ -464,6 +464,11 @@
 	},
 	"Interface": {
 		"AssetPicker_Title": "Asset Picker",
+		"AssetPicker_Filter_Header": "Filter",
+		"AssetPicker_Filter_Origin_Unturned": "Unturned",
+		"AssetPicker_Filter_Origin_Workshop": "Workshop",
+		"AssetPicker_Filter_Origin_Project": "Project",
+		"AssetPicker_Filter_Name_Watermark": "Search...",
 		"App_About": "Made by BowieD.\nLocalization Author(s): {0}\nVersion: {1}",
 		"App_About_Title": "About",
 		"App_About_Patreon_Title": "Patreon Supporters",

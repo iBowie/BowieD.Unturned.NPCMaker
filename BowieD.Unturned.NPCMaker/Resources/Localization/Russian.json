@@ -459,6 +459,11 @@
   },
   "Interface": {
         "AssetPicker_Title": "Выбор ассета",
+        "AssetPicker_Filter_Header": "Фильтр",
+        "AssetPicker_Filter_Origin_Unturned": "Unturned",
+        "AssetPicker_Filter_Origin_Workshop": "Мастерская",
+        "AssetPicker_Filter_Origin_Project": "Проект",
+        "AssetPicker_Filter_Name_Watermark": "Поиск по имени...",
     "App_About": "Автор программы: BowieD.\nПереводчик(и): {0}\nВерсия: {1}",
     "App_About_Title": "О программе",
     "App_About_Patreon_Title": "Поддержавшие на Patreon",

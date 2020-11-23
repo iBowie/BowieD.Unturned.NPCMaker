@@ -19,12 +19,12 @@
         <ScrollViewer MinHeight="100" MaxHeight="400" Grid.Row="0" Margin="5">
             <StackPanel Name="stack"/>
         </ScrollViewer>
-        <GroupBox Margin="5" Grid.Row="1" Header="Filter">
+        <GroupBox Margin="5" Grid.Row="1" Header="{xaml:Localize INTERFACE_AssetPicker_Filter_Header}">
             <StackPanel Orientation="Vertical">
-                <TextBox Name="filter_name" Margin="10" mah:TextBoxHelper.Watermark="Search..." />
-                <CheckBox Name="filter_origin_unturned" Margin="10" Content="Unturned" IsChecked="True"/>
-                <CheckBox Name="filter_origin_workshop" Margin="10" Content="Workshop" IsChecked="True"/>
-                <CheckBox Name="filter_origin_project" Margin="10" Content="Project" IsChecked="True"/>
+                <TextBox Name="filter_name" Margin="10" mah:TextBoxHelper.Watermark="{xaml:Localize INTERFACE_AssetPicker_Filter_Name_Watermark}" />
+                <CheckBox Name="filter_origin_unturned" Margin="10" Content="{xaml:Localize INTERFACE_AssetPicker_Filter_Origin_Unturned}" IsChecked="True"/>
+                <CheckBox Name="filter_origin_workshop" Margin="10" Content="{xaml:Localize INTERFACE_AssetPicker_Filter_Origin_Workshop}" IsChecked="True"/>
+                <CheckBox Name="filter_origin_project" Margin="10" Content="{xaml:Localize INTERFACE_AssetPicker_Filter_Origin_Project}" IsChecked="True"/>
             </StackPanel>
         </GroupBox>
     </Grid>
