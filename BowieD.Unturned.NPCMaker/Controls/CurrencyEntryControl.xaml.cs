@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.NPC.Currency;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.NPC.Currency;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,24 @@ namespace BowieD.Unturned.NPCMaker.Controls
             {
                 _entry = value;
 
-                header.Text = value.ItemGUID;
+                string headerText;
+
+                if (Guid.TryParse(value.ItemGUID, out var itemG))
+                {
+                    if (GameAssetManager.TryGetAsset<GameItemAsset>(itemG, out var asset))
+                    {
+                        headerText = asset.name;
+                    }
+                    else
+                    {
+                        headerText = value.ItemGUID;
+                    }
+                }
+                else
+                {
+                    headerText = value.ItemGUID;
+                }
+                header.Text = headerText;
                 footer.Text = value.Value.ToString();
             }
         }

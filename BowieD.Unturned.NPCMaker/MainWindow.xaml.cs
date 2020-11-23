@@ -36,6 +36,27 @@ namespace BowieD.Unturned.NPCMaker
         #endregion
         public new void Show()
         {
+            var res = MessageBox.Show(LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Content"), LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Title"), MessageBoxButton.YesNo);
+
+            if (res == MessageBoxResult.Yes)
+            {
+                System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog
+                {
+                    Description = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_fbd")
+                };
+                switch (fbd.ShowDialog())
+                {
+                    case System.Windows.Forms.DialogResult.Yes:
+                    case System.Windows.Forms.DialogResult.OK:
+                        {
+                            GameIntegration.GameAssetManager.Purge();
+
+                            GameIntegration.GameAssetManager.Import(fbd.SelectedPath);
+                        }
+                        break;
+                }
+            }
+
             DeepAnalysisManager = new Mistakes.DeepAnalysisManager();
             Width *= AppConfig.Instance.scale;
             Height *= AppConfig.Instance.scale;

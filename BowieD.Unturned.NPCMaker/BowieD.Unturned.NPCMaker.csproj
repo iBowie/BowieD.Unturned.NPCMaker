@@ -278,6 +278,8 @@
     <Compile Include="Forms\Form_About.xaml.cs">
       <DependentUpon>Form_About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameIntegration\GameAsset.cs" />
+    <Compile Include="GameIntegration\GameAssetManager.cs" />
     <Compile Include="IHasOrderButtons.cs" />
     <Compile Include="IHasUniqueGUID.cs" />
     <Compile Include="InputTool.cs" />
