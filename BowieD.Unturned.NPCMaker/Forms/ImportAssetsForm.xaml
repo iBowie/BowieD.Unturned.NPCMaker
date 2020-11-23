@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
         mc:Ignorable="d"
-        Title="{xaml:Localize INTERFACE_StartUp_ImportGameAssets_Window_Title}" SizeToContent="WidthAndHeight">
+        Title="{xaml:Localize INTERFACE_StartUp_ImportGameAssets_Window_Title}" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
