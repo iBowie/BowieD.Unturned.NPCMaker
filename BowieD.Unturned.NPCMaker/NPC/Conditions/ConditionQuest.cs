@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using System.Linq;
 
@@ -8,6 +9,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public sealed class ConditionQuest : Condition
     {
         public override Condition_Type Type => Condition_Type.Quest;
+        [ConditionAssetPicker(typeof(GameQuestAsset))]
         public ushort ID { get; set; }
         public Quest_Status Status { get; set; }
         public Logic_Type Logic { get; set; }

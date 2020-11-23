@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
 using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
@@ -30,6 +31,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             }
         }
 
+        [RewardAssetPicker(typeof(GameVehicleAsset))]
         public ushort ID { get; set; }
         public string Spawnpoint { get; set; }
 
