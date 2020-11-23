@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,14 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append(LocalizationManager.Current.Condition[$"Type_Item"] + " ");
-                sb.Append($"{ID} x{Amount}");
+                if (GameAssetManager.TryGetAsset<GameItemAsset>(ID, out var asset))
+                {
+                    sb.Append($"{asset.name} x{Amount}");
+                }
+                else
+                {
+                    sb.Append($"{ID} x{Amount}");
+                }
                 return sb.ToString();
             }
         }
