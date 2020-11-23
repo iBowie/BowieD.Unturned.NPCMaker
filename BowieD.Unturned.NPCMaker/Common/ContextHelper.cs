@@ -522,5 +522,29 @@ namespace BowieD.Unturned.NPCMaker.Common
         {
             return createSelectAssetButton<GameItemHatAsset>(action, "Control_SelectAsset_Hat", PackIconMaterialKind.HatFedora);
         }
+        internal static MenuItem CreateSelectGlassesButton(Action<GameItemGlassesAsset> action)
+        {
+            return createSelectAssetButton<GameItemGlassesAsset>(action, "Control_SelectAsset_Glasses", PackIconMaterialKind.Glasses);
+        }
+        internal static MenuItem CreateSelectBackpackButton(Action<GameItemBackpackAsset> action)
+        {
+            return createSelectAssetButton<GameItemBackpackAsset>(action, "Control_SelectAsset_Backpack", PackIconMaterialKind.BagCarryOn);
+        }
+        internal static MenuItem CreateSelectPantsButton(Action<GameItemPantsAsset> action)
+        {
+            return createSelectAssetButton<GameItemPantsAsset>(action, "Control_SelectAsset_Pants", PackIconMaterialKind.TshirtCrew);
+        }
+        internal static MenuItem CreateSelectShirtButton(Action<GameItemShirtAsset> action)
+        {
+            return createSelectAssetButton<GameItemShirtAsset>(action, "Control_SelectAsset_Shirt", PackIconMaterialKind.TshirtCrew);
+        }
+        internal static MenuItem CreateSelectMaskButton(Action<GameItemMaskAsset> action)
+        {
+            return createSelectAssetButton<GameItemMaskAsset>(action, "Control_SelectAsset_Mask", PackIconMaterialKind.DominoMask);
+        }
+        internal static MenuItem CreateSelectVestButton(Action<GameItemVestAsset> action)
+        {
+            return createSelectAssetButton<GameItemVestAsset>(action, "Control_SelectAsset_Vest", PackIconMaterialKind.TshirtCrew);
+        }
     }
 }

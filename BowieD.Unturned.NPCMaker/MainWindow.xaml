@@ -515,6 +515,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingDefaultMask"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Mask, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -535,6 +536,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingDefaultGlasses"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Glasses, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -555,6 +557,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingDefaultShirt"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Shirt, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -575,6 +578,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingDefaultBackpack"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Backpack, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -595,6 +599,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingDefaultVest"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Vest, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -615,6 +620,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingDefaultPants"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Pants, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -662,6 +668,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingChristmasMask"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Mask, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -682,6 +689,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingChristmasGlasses"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Glasses, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -702,6 +710,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingChristmasShirt"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Shirt, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -722,6 +731,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingChristmasBackpack"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Backpack, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -742,6 +752,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingChristmasVest"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Vest, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -762,6 +773,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingChristmasPants"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Pants, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -809,6 +821,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingHalloweenMask"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Mask, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -829,6 +842,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingHalloweenGlasses"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Glasses, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -849,6 +863,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingHalloweenShirt"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Shirt, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -869,6 +884,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingHalloweenBackpack"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Backpack, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -889,6 +905,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingHalloweenVest"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Vest, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -909,6 +926,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown 
+                                                        Name="controlClothingHalloweenPants"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Pants, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
