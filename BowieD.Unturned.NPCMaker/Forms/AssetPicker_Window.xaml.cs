@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
@@ -31,7 +32,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             filter_name.TextChanged += (sender, e) =>
             {
-                RefreshAssets();
+                _searchTimer.Stop();
+                _searchTimer.Start();
             };
             filter_origin_project.Checked += (sender, e) =>
             {
@@ -59,10 +61,25 @@ namespace BowieD.Unturned.NPCMaker.Forms
             };
 
             RefreshAssets();
+
+            _searchTimer = new DispatcherTimer()
+            {
+                Interval = new TimeSpan(0, 0, 0, 0, 500)
+            };
+            _searchTimer.Tick += _searchTimer_Tick;
+        }
+
+        private void _searchTimer_Tick(object sender, EventArgs e)
+        {
+            _searchTimer.Stop();
+            RefreshAssets();
         }
 
         private Type assetType;
         private IMarkup markup;
+
+        private DispatcherTimer _searchTimer;
+
         public GameAsset SelectedAsset { get; private set; }
 
         void RefreshAssets()
