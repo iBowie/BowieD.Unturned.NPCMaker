@@ -234,6 +234,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                         TextWrapping = TextWrapping.Wrap
                     };
                     (valueControl as TextBox).SetBinding(TextBox.TextProperty, propName);
+
+                    if (assetPickerAttribute != null)
+                    {
+                        var vcMenu = new ContextMenu();
+                        vcMenu.Items.Add(ContextHelper.CreateSelectItemButton(assetPickerAttribute.AssetType, (asset) =>
+                        {
+                            (valueControl as TextBox).Text = asset.guid.ToString("N");
+                        }));
+                        valueControl.ContextMenu = vcMenu;
+                    }
                 }
                 else if (propType.IsEnum)
                 {
