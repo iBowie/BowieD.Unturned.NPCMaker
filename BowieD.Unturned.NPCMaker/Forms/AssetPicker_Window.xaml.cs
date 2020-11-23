@@ -123,7 +123,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 Content = tb
             };
 
-            markup.Markup(tb, asset.name);
+            if (asset is GameDialogueAsset gda)
+            {
+                tb.Text = gda.dialogue.ContentPreview;
+            }
+            else
+            {
+                markup.Markup(tb, asset.name);
+            }
 
             g.Children.Add(l);
 

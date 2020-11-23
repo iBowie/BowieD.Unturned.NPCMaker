@@ -100,20 +100,28 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 }
                 else
                 {
-                    if (Messages == null || Messages.Count < 1 || Messages[0].pages.Count < 1)
-                    {
-                        return $"[{ID}]";
-                    }
-                    else
-                    {
-                        string t = Messages[0].pages[0];
-                        if (!string.IsNullOrEmpty(t))
-                        {
-                            return TextUtil.Shortify($"[{ID}] - {t}", 24);
-                        }
+                    return ContentPreview;
+                }
+            }
+        }
 
-                        return $"[{ID}]";
+        public string ContentPreview
+        {
+            get
+            {
+                if (Messages == null || Messages.Count < 1 || Messages[0].pages.Count < 1)
+                {
+                    return $"[{ID}]";
+                }
+                else
+                {
+                    string t = Messages[0].pages[0];
+                    if (!string.IsNullOrEmpty(t))
+                    {
+                        return TextUtil.Shortify($"[{ID}] - {t}", 24);
                     }
+
+                    return $"[{ID}]";
                 }
             }
         }
