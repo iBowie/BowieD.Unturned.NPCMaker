@@ -11,6 +11,16 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
     {
         private static readonly List<GameAsset> _assets = new List<GameAsset>();
         
+        public static IEnumerable<T> GetAssets<T>() where T : GameAsset
+        {
+            foreach (var ga in _assets)
+            {
+                if (ga is T gat)
+                {
+                    yield return gat;
+                }
+            }
+        }
         public static bool TryGetAsset<T>(Func<T, bool> func, out T result) where T : GameAsset
         {
             foreach (var ga in _assets)
