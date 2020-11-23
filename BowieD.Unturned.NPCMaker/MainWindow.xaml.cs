@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Configuration;
+﻿using BowieD.Unturned.NPCMaker.Common.Utility;
+using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
@@ -36,25 +37,43 @@ namespace BowieD.Unturned.NPCMaker
         #endregion
         public new void Show()
         {
-            var res = MessageBox.Show(LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Content"), LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Title"), MessageBoxButton.YesNo);
-
-            if (res == MessageBoxResult.Yes)
+            if (string.IsNullOrEmpty(AppConfig.Instance.unturnedDir) || !Directory.Exists(AppConfig.Instance.unturnedDir))
             {
-                System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog
-                {
-                    Description = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_fbd")
-                };
-                switch (fbd.ShowDialog())
-                {
-                    case System.Windows.Forms.DialogResult.Yes:
-                    case System.Windows.Forms.DialogResult.OK:
-                        {
-                            GameIntegration.GameAssetManager.Purge();
+                var res = MessageBox.Show(LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Content"), LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Title"), MessageBoxButton.YesNo);
 
-                            GameIntegration.GameAssetManager.Import(fbd.SelectedPath);
+                if (res == MessageBoxResult.Yes)
+                {
+                    ask:
+                    {
+                        System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog
+                        {
+                            Description = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_fbd")
+                        };
+                        switch (fbd.ShowDialog())
+                        {
+                            case System.Windows.Forms.DialogResult.Yes:
+                            case System.Windows.Forms.DialogResult.OK:
+                                {
+                                    if (PathUtility.IsUnturnedPath(fbd.SelectedPath))
+                                    {
+                                        AppConfig.Instance.unturnedDir = fbd.SelectedPath;
+                                        AppConfig.Instance.Save();
+
+                                        ImportGameAssets(fbd.SelectedPath);
+                                    }
+                                    else
+                                    {
+                                        goto ask;
+                                    }
+                                }
+                                break;
                         }
-                        break;
+                    }
                 }
+            }
+            else
+            {
+                ImportGameAssets(AppConfig.Instance.unturnedDir);
             }
 
             DeepAnalysisManager = new Mistakes.DeepAnalysisManager();
@@ -277,6 +296,16 @@ namespace BowieD.Unturned.NPCMaker
             base.Show();
         }
 
+        private void ImportGameAssets(string mainPath)
+        {
+            GameIntegration.GameAssetManager.Purge();
+
+            GameIntegration.GameAssetManager.Import(mainPath);
+
+            string workshopPath = PathUtility.GetUnturnedWorkshopPathFromUnturnedPath(mainPath);
+
+            GameIntegration.GameAssetManager.Import(workshopPath);
+        }
 
         #region CONSTANTS
         public const int

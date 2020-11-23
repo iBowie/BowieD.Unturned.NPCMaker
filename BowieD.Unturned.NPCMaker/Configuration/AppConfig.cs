@@ -27,6 +27,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public bool alternateLogicTranslation;
         public bool replaceMissingKeysWithEnglish;
         public bool useCommentsInsteadOfData;
+        public string unturnedDir;
 
         public void Save()
         {
@@ -76,6 +77,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             alternateLogicTranslation = false;
             replaceMissingKeysWithEnglish = true;
             useCommentsInsteadOfData = false;
+            unturnedDir = null;
             ELanguage c = LocalizationManager.GetLanguageFromCultureInfo(CultureInfo.InstalledUICulture);
             if (LocalizationManager.SupportedLanguages().Contains(c))
             {
