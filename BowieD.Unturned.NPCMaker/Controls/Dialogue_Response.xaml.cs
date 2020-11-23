@@ -98,31 +98,19 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         private void VendorSelect_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.CurrentProject.data.vendors.Count() == 0)
+            AssetPicker_Window apw = new AssetPicker_Window(typeof(GameVendorAsset));
+            if (apw.ShowDialog() == true)
             {
-                return;
-            }
-
-            Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Vendor);
-            select.ShowDialog();
-            if (select.DialogResult == true)
-            {
-                txtBoxVendorID.Value = (select.SelectedValue as NPC.NPCVendor).ID;
+                txtBoxVendorID.Value = apw.SelectedAsset.id;
             }
         }
 
         private void DialogueSelect_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.CurrentProject.data.dialogues.Count() == 0)
+            AssetPicker_Window apw = new AssetPicker_Window(typeof(GameDialogueAsset));
+            if (apw.ShowDialog() == true)
             {
-                return;
-            }
-
-            Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Dialogue);
-            select.ShowDialog();
-            if (select.DialogResult == true)
-            {
-                txtBoxDialogueID.Value = (select.SelectedValue as NPC.NPCDialogue).ID;
+                txtBoxDialogueID.Value = apw.SelectedAsset.id;
             }
         }
 
