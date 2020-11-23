@@ -55,7 +55,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
             foreach (var fi in files)
             {
-                if (TryReadFile(fi.FullName, out var asset))
+                if (TryReadLegacyAssetFile(fi.FullName, out var asset))
                 {
                     _assets.Add(asset);
                 }
@@ -66,9 +66,11 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             _assets.Clear();
         }
 
-        private static bool TryReadFile(string fileName, out GameAsset result)
+        private static bool TryReadLegacyAssetFile(string fileName, out GameAsset result)
         {
             DataReader dr = new DataReader(File.ReadAllText(fileName));
+
+            DataReader local = null;
 
             var t = dr.ReadString("Type");
 
@@ -85,7 +87,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             string localPath = Path.Combine(dir, "English.dat");
             if (File.Exists(localPath))
             {
-                DataReader local = new DataReader(File.ReadAllText(localPath));
+                local = new DataReader(File.ReadAllText(localPath));
 
                 name = local.ReadString("Name", dir);
             }
@@ -132,22 +134,22 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                     result = new GameItemAsset(dr, name, id, guid, vt);
                     return true;
                 case "npc":
-                    result = new GameNPCAsset(dr, name, id, guid, vt);
+                    result = new GameNPCAsset(dr, local, name, id, guid, vt);
                     return true;
                 case "dialogue":
-                    result = new GameDialogueAsset(dr, name, id, guid, vt);
+                    result = new GameDialogueAsset(dr, local, name, id, guid, vt);
                     return true;
                 case "quest":
-                    result = new GameQuestAsset(dr, name, id, guid, vt);
+                    result = new GameQuestAsset(dr, local, name, id, guid, vt);
                     return true;
                 case "vendor":
-                    result = new GameVendorAsset(dr, name, id, guid, vt);
+                    result = new GameVendorAsset(dr, local, name, id, guid, vt);
                     return true;
                 case "vehicle":
                     result = new GameVehicleAsset(dr, name, id, guid, vt);
                     return true;
                 default:
-                    result = new GameAsset(dr, name, id, guid, vt);
+                    result = new GameAsset(name, id, guid, vt);
                     return true;
             }
         }
