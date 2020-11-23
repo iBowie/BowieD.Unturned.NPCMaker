@@ -512,6 +512,7 @@
         "Control_SelectAsset_Glasses": "Выбрать очки",
         "Control_SelectAsset_Backpack": "Выбрать рюкзак",
         "Control_SelectAsset_Vest": "Выбрать жилет",
+        "Control_SelectAsset_Item": "Выбрать предмет",
         "Update_Available_Title": "Доступно обновление",
         "Update_Available_Body": "Доступно обновление программы! Хотите установить его сейчас?",
         "Update_Notes_Title": "Изменения",

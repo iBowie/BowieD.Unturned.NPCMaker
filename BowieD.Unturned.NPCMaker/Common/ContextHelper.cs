@@ -518,6 +518,10 @@ namespace BowieD.Unturned.NPCMaker.Common
             (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
         }
+        internal static MenuItem CreateSelectItemButton(Action<GameItemAsset> action)
+        {
+            return createSelectAssetButton<GameItemHatAsset>(action, "Control_SelectAsset_Item", PackIconMaterialKind.Archive);
+        }
         internal static MenuItem CreateSelectHatButton(Action<GameItemHatAsset> action)
         {
             return createSelectAssetButton<GameItemHatAsset>(action, "Control_SelectAsset_Hat", PackIconMaterialKind.HatFedora);
