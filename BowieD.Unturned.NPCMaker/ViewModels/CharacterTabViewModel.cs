@@ -221,6 +221,31 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             MainWindow.Instance.controlClothingChristmasVest.ContextMenu = cidChristmas_vest;
             #endregion
             #endregion
+            #region Equipment Init
+            ContextMenu cid_primary = new ContextMenu();
+            cid_primary.Items.Add(ContextHelper.CreateSelectItemButton((asset) =>
+            {
+                EquipmentPrimary = asset.id;
+                MainWindow.Instance.primaryIdBox.Value = asset.id;
+            }));
+            MainWindow.Instance.primaryIdBox.ContextMenu = cid_primary;
+
+            ContextMenu cid_secondary = new ContextMenu();
+            cid_secondary.Items.Add(ContextHelper.CreateSelectItemButton((asset) =>
+            {
+                EquipmentSecondary = asset.id;
+                MainWindow.Instance.secondaryIdBox.Value = asset.id;
+            }));
+            MainWindow.Instance.secondaryIdBox.ContextMenu = cid_secondary;
+
+            ContextMenu cid_tertiary = new ContextMenu();
+            cid_tertiary.Items.Add(ContextHelper.CreateSelectItemButton((asset) =>
+            {
+                EquipmentTertiary = asset.id;
+                MainWindow.Instance.tertiaryIdBox.Value = asset.id;
+            }));
+            MainWindow.Instance.tertiaryIdBox.ContextMenu = cid_tertiary;
+            #endregion
         }
 
         private void CharacterTabButtonAdd_Click(object sender, RoutedEventArgs e)
