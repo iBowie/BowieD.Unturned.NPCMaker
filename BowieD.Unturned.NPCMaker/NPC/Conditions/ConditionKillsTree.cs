@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.Localization;
 using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
@@ -8,6 +9,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     {
         public ushort ID { get; set; }
         public short Value { get; set; }
+        [ConditionAssetPicker(typeof(GameResourceAsset))]
         public string Tree { get; set; }
         public override Condition_Type Type => Condition_Type.Kills_Tree;
         public override string UIText

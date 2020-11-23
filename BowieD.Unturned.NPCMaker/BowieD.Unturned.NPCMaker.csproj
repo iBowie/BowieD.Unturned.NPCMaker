@@ -285,6 +285,7 @@
       <DependentUpon>Form_About.xaml</DependentUpon>
     </Compile>
     <Compile Include="GameIntegration\EGameAssetOrigin.cs" />
+    <Compile Include="GameIntegration\GameAnimalAsset.cs" />
     <Compile Include="GameIntegration\GameAsset.cs" />
     <Compile Include="GameIntegration\GameAssetManager.cs" />
     <Compile Include="GameIntegration\GameDialogueAsset.cs" />
@@ -306,7 +307,9 @@
     <Compile Include="GameIntegration\GameItemTacticalAsset.cs" />
     <Compile Include="GameIntegration\GameItemVestAsset.cs" />
     <Compile Include="GameIntegration\GameNPCAsset.cs" />
+    <Compile Include="GameIntegration\GameObjectAsset.cs" />
     <Compile Include="GameIntegration\GameQuestAsset.cs" />
+    <Compile Include="GameIntegration\GameResourceAsset.cs" />
     <Compile Include="GameIntegration\GameVehicleAsset.cs" />
     <Compile Include="GameIntegration\GameVendorAsset.cs" />
     <Compile Include="IHasOrderButtons.cs" />

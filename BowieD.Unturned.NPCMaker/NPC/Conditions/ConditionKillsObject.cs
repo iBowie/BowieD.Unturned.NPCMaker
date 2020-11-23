@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.Localization;
 using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
@@ -8,6 +9,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     {
         public ushort ID { get; set; }
         public short Value { get; set; }
+        [ConditionAssetPicker(typeof(GameObjectAsset))]
         public string Object { get; set; }
         [ConditionOptional(byte.MaxValue)]
         public byte? Nav { get; set; }

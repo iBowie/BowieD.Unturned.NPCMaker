@@ -246,6 +246,14 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                     return new Tuple<bool, GameAsset>(true, new GameVendorAsset(dr, local, name, id, guid, vt, origin));
                 case "vehicle":
                     return new Tuple<bool, GameAsset>(true, new GameVehicleAsset(dr, name, id, guid, vt, origin));
+                case "animal":
+                    return new Tuple<bool, GameAsset>(true, new GameAnimalAsset(dr, name, id, guid, vt, origin));
+                case "large":
+                case "medium":
+                case "small":
+                    return new Tuple<bool, GameAsset>(true, new GameObjectAsset(dr, name, id, guid, vt, origin));
+                case "resource":
+                    return new Tuple<bool, GameAsset>(true, new GameResourceAsset(dr, name, id, guid, vt, origin));
                 default:
                     return new Tuple<bool, GameAsset>(true, new GameAsset(name, id, guid, vt, origin));
             }
