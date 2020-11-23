@@ -7,7 +7,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="BowieD.Unturned.NPCMaker.Forms.AssetPicker_Window"
     xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"    
     mc:Ignorable="d"
-        Title="{xaml:Localize INTERFACE_AssetPicker_Title}" SizeToContent="Height" Height="Auto" Width="400">
+        Title="{xaml:Localize INTERFACE_AssetPicker_Title}" SizeToContent="Height" Width="400">
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
@@ -16,7 +16,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ScrollViewer Height="400" Grid.Row="0" Margin="5">
+        <ScrollViewer MinHeight="400" Grid.Row="0" Margin="5">
             <StackPanel Name="stack"/>
         </ScrollViewer>
         <GroupBox Margin="5" Grid.Row="1" Header="Filter">
