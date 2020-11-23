@@ -158,6 +158,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             }
 
             string dir = Path.GetDirectoryName(fileName);
+            string shortDir = new DirectoryInfo(dir).Name;
 
             string name;
 
@@ -173,11 +174,11 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
                 local = new DataReader(locContent);
 
-                name = local.ReadString("Name", dir);
+                name = local.ReadString("Name", shortDir);
             }
             else
             {
-                name = dir;
+                name = shortDir;
             }
 
             if (!dr.Has("ID") || !dr.Has("GUID"))
@@ -214,9 +215,9 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 case "filter": case "sentry":
                 case "vehicle_repair_tool": case "tire":
                 case "compass": case "oil_pump":
-                    return new Tuple<bool, GameAsset>(true, new GameItemAsset(dr, new DirectoryInfo(dir).Name, name, id, guid, vt, origin));
+                    return new Tuple<bool, GameAsset>(true, new GameItemAsset(dr, shortDir, name, id, guid, vt, origin));
                 case "hat":
-                    return new Tuple<bool, GameAsset>(true, new GameHatAsset(dr, new DirectoryInfo(dir).Name, name, id, guid, vt, origin));
+                    return new Tuple<bool, GameAsset>(true, new GameHatAsset(dr, shortDir, name, id, guid, vt, origin));
                 case "npc":
                     return new Tuple<bool, GameAsset>(true, new GameNPCAsset(dr, local, name, id, guid, vt, origin));
                 case "dialogue":

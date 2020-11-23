@@ -100,7 +100,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 }
                 else
                 {
-                    return ContentPreview;
+                    return $"[{ID}] {ContentPreview}";
                 }
             }
         }
@@ -111,17 +111,17 @@ namespace BowieD.Unturned.NPCMaker.NPC
             {
                 if (Messages == null || Messages.Count < 1 || Messages[0].pages.Count < 1)
                 {
-                    return $"[{ID}]";
+                    return string.Empty;
                 }
                 else
                 {
                     string t = Messages[0].pages[0];
                     if (!string.IsNullOrEmpty(t))
                     {
-                        return TextUtil.Shortify($"[{ID}] - {t}", 24);
+                        return TextUtil.Shortify($"{t}", 24);
                     }
 
-                    return $"[{ID}]";
+                    return string.Empty;
                 }
             }
         }
