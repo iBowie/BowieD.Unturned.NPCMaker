@@ -1,8 +1,10 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Text;
 using System.Xml.Serialization;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
@@ -109,7 +111,43 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             get
             {
-                return $"{(type == ItemType.ITEM ? "Item" : "Vehicle")} [{id}] ({cost}) {(type == ItemType.VEHICLE ? $"({spawnPointID})" : "")}"; ;
+                StringBuilder sb = new StringBuilder();
+                
+                switch (type)
+                {
+                    case ItemType.ITEM:
+                        {
+                            sb.Append("Item");
+
+                            if (GameAssetManager.TryGetAsset<GameItemAsset>(id, out var asset))
+                            {
+                                sb.Append($" [{asset.name}] ({cost})");
+                            }
+                            else
+                            {
+                                sb.Append($" [{id}] ({cost})");
+                            }
+                        }
+                        break;
+                    case ItemType.VEHICLE:
+                        {
+                            sb.Append("Vehicle");
+
+                            if (GameAssetManager.TryGetAsset<GameVehicleAsset>(id, out var asset))
+                            {
+                                sb.Append($" [{asset.name}] ({cost})");
+                            }
+                            else
+                            {
+                                sb.Append($" [{id}] ({cost})");
+                            }
+
+                            sb.Append($" ({spawnPointID})");
+                        }
+                        break;
+                }
+
+                return sb.ToString();
             }
         }
     }
