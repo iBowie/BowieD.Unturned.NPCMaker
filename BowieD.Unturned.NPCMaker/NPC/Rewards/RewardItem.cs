@@ -1,5 +1,7 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
+using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
@@ -7,7 +9,26 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     public sealed class RewardItem : Reward
     {
         public override RewardType Type => RewardType.Item;
-        public override string UIText => $"{LocalizationManager.Current.Reward["Type_Item"]} {ID} x{Amount}";
+        public override string UIText
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(LocalizationManager.Current.Reward["Type_Item"]);
+
+                if (GameAssetManager.TryGetAsset<GameItemAsset>(ID, out var asset))
+                {
+                    sb.Append($" {asset.name} x{Amount}");
+                }
+                else
+                {
+                    sb.Append($" {ID} x{Amount}");
+                }
+
+                return sb.ToString();
+            }
+        }
+
         public ushort ID { get; set; }
         public byte Amount { get; set; }
         [RewardOptional(null)]
