@@ -89,7 +89,13 @@ namespace BowieD.Unturned.NPCMaker.Forms
             var assets = GameAssetManager.GetAllAssets(assetType);
             foreach (var a in assets)
             {
-                if (string.IsNullOrEmpty(filter_name.Text) || a.name.ToLowerInvariant().Contains(filter_name.Text.ToLowerInvariant()))
+                string searchText = filter_name.Text;
+                string searchTextLower = searchText.ToLowerInvariant();
+
+                if (string.IsNullOrEmpty(searchText) || 
+                    a.name.ToLowerInvariant().Contains(searchTextLower) || 
+                    a.id.ToString().Contains(searchText) ||
+                    a.guid.ToString("N").Contains(searchTextLower))
                 {
                     switch (a.origin)
                     {
