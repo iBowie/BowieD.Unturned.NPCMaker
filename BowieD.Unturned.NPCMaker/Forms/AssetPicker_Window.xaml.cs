@@ -118,12 +118,16 @@ namespace BowieD.Unturned.NPCMaker.Forms
             }
 
             TextBlock tb = new TextBlock();
+            Label l = new Label()
+            {
+                Content = tb
+            };
 
             markup.Markup(tb, asset.name);
 
-            g.Children.Add(tb);
+            g.Children.Add(l);
 
-            Grid.SetColumn(tb, cOffset);
+            Grid.SetColumn(l, cOffset);
 
             g.MouseDown += (sender, e) =>
             {
