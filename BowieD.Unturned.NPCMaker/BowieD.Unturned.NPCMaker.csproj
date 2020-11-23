@@ -284,8 +284,25 @@
     <Compile Include="Forms\Form_About.xaml.cs">
       <DependentUpon>Form_About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameIntegration\EGameAssetOrigin.cs" />
     <Compile Include="GameIntegration\GameAsset.cs" />
     <Compile Include="GameIntegration\GameAssetManager.cs" />
+    <Compile Include="GameIntegration\GameDialogueAsset.cs" />
+    <Compile Include="GameIntegration\GameItemAsset.cs" />
+    <Compile Include="GameIntegration\GameItemBackpackAsset.cs" />
+    <Compile Include="GameIntegration\GameItemBagAsset.cs" />
+    <Compile Include="GameIntegration\GameItemClothingAsset.cs" />
+    <Compile Include="GameIntegration\GameItemGearAsset.cs" />
+    <Compile Include="GameIntegration\GameItemGlassesAsset.cs" />
+    <Compile Include="GameIntegration\GameItemHatAsset.cs" />
+    <Compile Include="GameIntegration\GameItemMaskAsset.cs" />
+    <Compile Include="GameIntegration\GameItemPantsAsset.cs" />
+    <Compile Include="GameIntegration\GameItemShirtAsset.cs" />
+    <Compile Include="GameIntegration\GameItemVestAsset.cs" />
+    <Compile Include="GameIntegration\GameNPCAsset.cs" />
+    <Compile Include="GameIntegration\GameQuestAsset.cs" />
+    <Compile Include="GameIntegration\GameVehicleAsset.cs" />
+    <Compile Include="GameIntegration\GameVendorAsset.cs" />
     <Compile Include="IHasOrderButtons.cs" />
     <Compile Include="IHasUniqueGUID.cs" />
     <Compile Include="InputTool.cs" />

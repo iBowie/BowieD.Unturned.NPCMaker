@@ -193,9 +193,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
             switch (vt)
             {
-                case "item": case "pants":
-                case "shirt": case "mask": case "backpack":
-                case "vest": case "glasses": case "gun": case "sight":
+                case "item": case "gun": case "sight":
                 case "tactical": case "grip": case "barrel":
                 case "magazine": case "food":
                 case "water": case "medical":
@@ -217,7 +215,19 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 case "compass": case "oil_pump":
                     return new Tuple<bool, GameAsset>(true, new GameItemAsset(dr, shortDir, name, id, guid, vt, origin));
                 case "hat":
-                    return new Tuple<bool, GameAsset>(true, new GameHatAsset(dr, shortDir, name, id, guid, vt, origin));
+                    return new Tuple<bool, GameAsset>(true, new GameItemHatAsset(dr, shortDir, name, id, guid, vt, origin));
+                case "pants":
+                    return new Tuple<bool, GameAsset>(true, new GameItemPantsAsset(dr, shortDir, name, id, guid, vt, origin));
+                case "shirt":
+                    return new Tuple<bool, GameAsset>(true, new GameItemShirtAsset(dr, shortDir, name, id, guid, vt, origin));
+                case "glasses":
+                    return new Tuple<bool, GameAsset>(true, new GameItemGlassesAsset(dr, shortDir, name, id, guid, vt, origin));
+                case "mask":
+                    return new Tuple<bool, GameAsset>(true, new GameItemMaskAsset(dr, shortDir, name, id, guid, vt, origin));
+                case "backpack":
+                    return new Tuple<bool, GameAsset>(true, new GameItemBackpackAsset(dr, shortDir, name, id, guid, vt, origin));
+                case "vest":
+                    return new Tuple<bool, GameAsset>(true, new GameItemVestAsset(dr, shortDir, name, id, guid, vt, origin));
                 case "npc":
                     return new Tuple<bool, GameAsset>(true, new GameNPCAsset(dr, local, name, id, guid, vt, origin));
                 case "dialogue":
