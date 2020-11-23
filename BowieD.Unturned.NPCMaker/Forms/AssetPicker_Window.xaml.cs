@@ -100,12 +100,20 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 Width = GridLength.Auto
             });
-            int cOffset = 0;
+            g.ColumnDefinitions.Add(new ColumnDefinition()
+            {
+                Width = GridLength.Auto
+            });
 
             TextBlock tb = new TextBlock();
             Label l = new Label()
             {
                 Content = tb
+            };
+            TextBlock tbid = new TextBlock();
+            Label lid = new Label()
+            {
+                Content = tbid
             };
 
             if (asset is GameDialogueAsset gda)
@@ -117,9 +125,13 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 markup.Markup(tb, asset.name);
             }
 
-            g.Children.Add(l);
+            tbid.Text = asset.id.ToString();
 
-            Grid.SetColumn(l, cOffset);
+            g.Children.Add(l);
+            g.Children.Add(lid);
+
+            Grid.SetColumn(lid, 0);
+            Grid.SetColumn(l, 1);
 
             g.MouseDown += (sender, e) =>
             {
