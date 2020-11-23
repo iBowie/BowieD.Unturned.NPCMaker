@@ -68,6 +68,27 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             }
         }
     }
+    public class GameClothingAsset : GameItemAsset
+    {
+        public GameClothingAsset(DataReader data, string dirName, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(data, dirName, name, id, guid, type, origin)
+        {
+
+        }
+    }
+    public class GameGearAsset : GameClothingAsset
+    {
+        public GameGearAsset(DataReader data, string dirName, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(data, dirName, name, id, guid, type, origin)
+        {
+
+        }
+    }
+    public class GameHatAsset : GameGearAsset
+    {
+        public GameHatAsset(DataReader data, string dirName, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(data, dirName, name, id, guid, type, origin)
+        {
+
+        }
+    }
     public class GameVehicleAsset : GameAsset
     {
         public GameVehicleAsset(DataReader data, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(name, id, guid, type, origin)

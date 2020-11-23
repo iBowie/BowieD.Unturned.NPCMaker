@@ -1,4 +1,6 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Forms;
+using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Templating;
 using MahApps.Metro.IconPacks;
 using Microsoft.Win32;
@@ -493,6 +495,32 @@ namespace BowieD.Unturned.NPCMaker.Common
             };
             (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
+        }
+
+        private static MenuItem createSelectAssetButton<T>(Action<T> action, string key, PackIconMaterialKind icon) where T : GameAsset
+        {
+            MenuItem b = new MenuItem()
+            {
+                Header = LocalizationManager.Current.Interface[key]
+            };
+            b.Click += (object sender, RoutedEventArgs e) =>
+            {
+                AssetPicker_Window apw = new AssetPicker_Window(typeof(T));
+                if (apw.ShowDialog() == true && apw.SelectedAsset is T asat)
+                {
+                    action.Invoke(asat);
+                }
+            };
+            b.Icon = new PackIconMaterial()
+            {
+                Kind = icon
+            };
+            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
+            return b;
+        }
+        internal static MenuItem CreateSelectHatButton(Action<GameHatAsset> action)
+        {
+            return createSelectAssetButton<GameHatAsset>(action, "Control_SelectAsset_Hat", PackIconMaterialKind.HatFedora);
         }
     }
 }

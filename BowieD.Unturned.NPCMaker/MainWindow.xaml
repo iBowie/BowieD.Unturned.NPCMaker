@@ -494,6 +494,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown
+                                                        Name="controlClothingDefaultHat"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Hat, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -640,6 +641,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown
+                                                        Name="controlClothingChristmasHat"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Hat, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -786,6 +788,7 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <xctk:UShortUpDown
+                                                        Name="controlClothingHalloweenHat"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Hat, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
@@ -1313,7 +1316,7 @@
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Row="0">
                                 <StackPanel Orientation="Horizontal" Margin="10">
-                                    <Label Content="{xaml:Localize CURRENCY_Guid}"/>
+                                    <Label Content="{xaml:Localize CURRENCY_GUID}"/>
                                     <TextBox MaxLength="32" MaxLines="1" Text="{Binding GUID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="10">

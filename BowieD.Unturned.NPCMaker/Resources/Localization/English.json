@@ -505,6 +505,7 @@
         "Control_PasteText": "Paste Text (Ctrl + V)",
         "Control_CutText": "Cut Text (Ctrl + X)",
         "Control_AddFromTemplate": "Add From Template...",
+        "Control_SelectAsset_Hat": "Select Hat",
         "Update_Available_Title": "An update is available",
         "Update_Available_Body": "An app update available! Do you want to download and install it now?",
         "Update_Notes_Title": "Update Notes",

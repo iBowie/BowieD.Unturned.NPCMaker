@@ -192,7 +192,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
             switch (vt)
             {
-                case "item": case "hat": case "pants":
+                case "item": case "pants":
                 case "shirt": case "mask": case "backpack":
                 case "vest": case "glasses": case "gun": case "sight":
                 case "tactical": case "grip": case "barrel":
@@ -215,6 +215,8 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 case "vehicle_repair_tool": case "tire":
                 case "compass": case "oil_pump":
                     return new Tuple<bool, GameAsset>(true, new GameItemAsset(dr, new DirectoryInfo(dir).Name, name, id, guid, vt, origin));
+                case "hat":
+                    return new Tuple<bool, GameAsset>(true, new GameHatAsset(dr, new DirectoryInfo(dir).Name, name, id, guid, vt, origin));
                 case "npc":
                     return new Tuple<bool, GameAsset>(true, new GameNPCAsset(dr, local, name, id, guid, vt, origin));
                 case "dialogue":

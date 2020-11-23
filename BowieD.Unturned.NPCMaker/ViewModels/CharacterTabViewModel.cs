@@ -47,6 +47,18 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             MainWindow.Instance.characterTabButtonAdd.ContextMenu = cmenu3;
 
             MainWindow.Instance.txtDisplayName.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich | ContextHelper.EContextOption.Group_TextEdit);
+
+            #region Clothing Init
+            #region Default
+            ContextMenu cid_hat = new ContextMenu();
+            cid_hat.Items.Add(ContextHelper.CreateSelectHatButton((asset) =>
+            {
+                this.DefaultClothing.Hat = asset.id;
+                MainWindow.Instance.controlClothingDefaultHat.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingDefaultHat.ContextMenu = cid_hat;
+            #endregion
+            #endregion
         }
 
         private void CharacterTabButtonAdd_Click(object sender, RoutedEventArgs e)

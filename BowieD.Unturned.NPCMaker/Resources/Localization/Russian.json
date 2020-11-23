@@ -505,6 +505,7 @@
         "Control_PasteText": "Вставить текст (Ctrl + V)",
         "Control_CutText": "Вырезать текст (Ctrl + X)",
         "Control_AddFromTemplate": "Создать на основе шаблона...",
+        "Control_SelectAsset_Hat": "Выбрать головной убор",
         "Update_Available_Title": "Доступно обновление",
         "Update_Available_Body": "Доступно обновление программы! Хотите установить его сейчас?",
         "Update_Notes_Title": "Изменения",
