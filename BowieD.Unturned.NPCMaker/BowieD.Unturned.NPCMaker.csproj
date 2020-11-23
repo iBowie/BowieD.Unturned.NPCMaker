@@ -219,6 +219,9 @@
     <Compile Include="Forms\FlagEditorView_Window.xaml.cs">
       <DependentUpon>FlagEditorView_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ImportAssetsForm.xaml.cs">
+      <DependentUpon>ImportAssetsForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InventoryEditorView_Window.xaml.cs">
       <DependentUpon>InventoryEditorView_Window.xaml</DependentUpon>
     </Compile>
@@ -500,6 +503,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\FlagEditorView_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\ImportAssetsForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

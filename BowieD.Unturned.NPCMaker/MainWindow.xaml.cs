@@ -37,44 +37,8 @@ namespace BowieD.Unturned.NPCMaker
         #endregion
         public new void Show()
         {
-            if (string.IsNullOrEmpty(AppConfig.Instance.unturnedDir) || !Directory.Exists(AppConfig.Instance.unturnedDir))
-            {
-                var res = MessageBox.Show(LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Content"), LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Title"), MessageBoxButton.YesNo);
-
-                if (res == MessageBoxResult.Yes)
-                {
-                    ask:
-                    {
-                        System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog
-                        {
-                            Description = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_fbd")
-                        };
-                        switch (fbd.ShowDialog())
-                        {
-                            case System.Windows.Forms.DialogResult.Yes:
-                            case System.Windows.Forms.DialogResult.OK:
-                                {
-                                    if (PathUtility.IsUnturnedPath(fbd.SelectedPath))
-                                    {
-                                        AppConfig.Instance.unturnedDir = fbd.SelectedPath;
-                                        AppConfig.Instance.Save();
-
-                                        ImportGameAssets(fbd.SelectedPath);
-                                    }
-                                    else
-                                    {
-                                        goto ask;
-                                    }
-                                }
-                                break;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                ImportGameAssets(AppConfig.Instance.unturnedDir);
-            }
+            ImportAssetsForm iaf = new ImportAssetsForm();
+            iaf.ShowDialog();
 
             DeepAnalysisManager = new Mistakes.DeepAnalysisManager();
             Width *= AppConfig.Instance.scale;
@@ -294,17 +258,6 @@ namespace BowieD.Unturned.NPCMaker
 
             ConsoleLogger.StartWaitForInput();
             base.Show();
-        }
-
-        private void ImportGameAssets(string mainPath)
-        {
-            GameIntegration.GameAssetManager.Purge();
-
-            GameIntegration.GameAssetManager.Import(mainPath);
-
-            string workshopPath = PathUtility.GetUnturnedWorkshopPathFromUnturnedPath(mainPath);
-
-            GameIntegration.GameAssetManager.Import(workshopPath);
         }
 
         #region CONSTANTS

@@ -1,0 +1,23 @@
+﻿<Window x:Class="BowieD.Unturned.NPCMaker.Forms.ImportAssetsForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
+        mc:Ignorable="d"
+        Title="{xaml:Localize INTERFACE_StartUp_ImportGameAssets_Window_Title}" SizeToContent="WidthAndHeight">
+    <Grid>
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
+        </Grid.LayoutTransform>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Name="stepText" Text="Importing Unturned assets"/>
+        </Label>
+        <ProgressBar Grid.Row="1" Name="stepProgress" Height="32" Width="512" Margin="10"/>
+    </Grid>
+</Window>

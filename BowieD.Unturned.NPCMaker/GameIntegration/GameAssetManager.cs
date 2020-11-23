@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.Parsing;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration
 {
@@ -35,7 +36,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         {
             return TryGetAsset((k) => k.id == id, out result);
         }
-        public static void Import(string directory)
+        public static async Task Import(string directory, Action<int, int> fileLoadedCallback = null)
         {
             Queue<FileInfo> files = new Queue<FileInfo>();
             HashSet<string> ignoreFileNames = new HashSet<string>();
@@ -53,19 +54,25 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 files.Enqueue(file);
             }
 
+            int index = -1;
+            int total = files.Count;
+
             foreach (var fi in files)
             {
+                index++;
                 try
                 {
-                    if (TryReadLegacyAssetFile(fi.FullName, out var asset))
+                    var res = await TryReadLegacyAssetFile(fi.FullName);
+                    if (res.Item1)
                     {
-                        _assets.Add(asset);
+                        _assets.Add(res.Item2);
                     }
                 }
                 catch (Exception ex)
                 {
-                    App.Logger.LogException($"Could not import asset '{fi.FullName}'", ex: ex);
+                    await App.Logger.LogException($"Could not import asset '{fi.FullName}'", ex: ex);
                 }
+                fileLoadedCallback?.Invoke(index, total);
             }
         }
         public static void Purge()
@@ -73,9 +80,16 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             _assets.Clear();
         }
 
-        private static bool TryReadLegacyAssetFile(string fileName, out GameAsset result)
+        private static async Task<Tuple<bool, GameAsset>> TryReadLegacyAssetFile(string fileName)
         {
-            DataReader dr = new DataReader(File.ReadAllText(fileName));
+            string drContent;
+
+            using (StreamReader sr = new StreamReader(fileName))
+            {
+                drContent = await sr.ReadToEndAsync();
+            }
+
+            DataReader dr = new DataReader(drContent);
 
             DataReader local = null;
 
@@ -83,8 +97,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
             if (string.IsNullOrEmpty(t))
             {
-                result = null;
-                return false;
+                return new Tuple<bool, GameAsset>(false, null);
             }
 
             string dir = Path.GetDirectoryName(fileName);
@@ -94,7 +107,14 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             string localPath = Path.Combine(dir, "English.dat");
             if (File.Exists(localPath))
             {
-                local = new DataReader(File.ReadAllText(localPath));
+                string locContent;
+
+                using (StreamReader sr = new StreamReader(localPath))
+                {
+                    locContent = await sr.ReadToEndAsync();
+                }
+
+                local = new DataReader(locContent);
 
                 name = local.ReadString("Name", dir);
             }
@@ -105,8 +125,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
             if (!dr.Has("ID") || !dr.Has("GUID"))
             {
-                result = null;
-                return false;
+                return new Tuple<bool, GameAsset>(false, null);
             }
 
             ushort id = dr.ReadUInt16("ID");
@@ -138,26 +157,19 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 case "filter": case "sentry":
                 case "vehicle_repair_tool": case "tire":
                 case "compass": case "oil_pump":
-                    result = new GameItemAsset(dr, name, id, guid, vt);
-                    return true;
+                    return new Tuple<bool, GameAsset>(true, new GameItemAsset(dr, name, id, guid, vt));
                 case "npc":
-                    result = new GameNPCAsset(dr, local, name, id, guid, vt);
-                    return true;
+                    return new Tuple<bool, GameAsset>(true, new GameNPCAsset(dr, local, name, id, guid, vt));
                 case "dialogue":
-                    result = new GameDialogueAsset(dr, local, name, id, guid, vt);
-                    return true;
+                    return new Tuple<bool, GameAsset>(true, new GameDialogueAsset(dr, local, name, id, guid, vt));
                 case "quest":
-                    result = new GameQuestAsset(dr, local, name, id, guid, vt);
-                    return true;
+                    return new Tuple<bool, GameAsset>(true, new GameQuestAsset(dr, local, name, id, guid, vt));
                 case "vendor":
-                    result = new GameVendorAsset(dr, local, name, id, guid, vt);
-                    return true;
+                    return new Tuple<bool, GameAsset>(true, new GameVendorAsset(dr, local, name, id, guid, vt));
                 case "vehicle":
-                    result = new GameVehicleAsset(dr, name, id, guid, vt);
-                    return true;
+                    return new Tuple<bool, GameAsset>(true, new GameVehicleAsset(dr, name, id, guid, vt));
                 default:
-                    result = new GameAsset(name, id, guid, vt);
-                    return true;
+                    return new Tuple<bool, GameAsset>(true, new GameAsset(name, id, guid, vt));
             }
         }
     }
