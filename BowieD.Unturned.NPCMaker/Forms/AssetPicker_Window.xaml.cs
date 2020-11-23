@@ -102,21 +102,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
             });
             int cOffset = 0;
 
-            if (asset is GameItemAsset gia)
-            {
-                g.ColumnDefinitions.Add(new ColumnDefinition());
-                cOffset = 1;
-
-                Image img = new Image
-                {
-                    Source = new BitmapImage(gia.ImagePath),
-                    Width = 31,
-                    Height = 31,
-                    Margin = new Thickness(1)
-                };
-                g.Children.Add(img);
-            }
-
             TextBlock tb = new TextBlock();
             Label l = new Label()
             {
