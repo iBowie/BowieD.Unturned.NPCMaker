@@ -55,9 +55,16 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
             foreach (var fi in files)
             {
-                if (TryReadLegacyAssetFile(fi.FullName, out var asset))
+                try
                 {
-                    _assets.Add(asset);
+                    if (TryReadLegacyAssetFile(fi.FullName, out var asset))
+                    {
+                        _assets.Add(asset);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    App.Logger.LogException($"Could not import asset '{fi.FullName}'", ex: ex);
                 }
             }
         }
