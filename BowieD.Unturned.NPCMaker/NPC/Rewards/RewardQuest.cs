@@ -9,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     {
         public override RewardType Type => RewardType.Quest;
         public override string UIText => $"{LocalizationManager.Current.Reward["Type_Quest"]} [{ID}]";
-        [RewardAssetPicker(typeof(GameQuestAsset))]
+        [RewardAssetPicker(typeof(GameQuestAsset), "Control_SelectAsset_Quest", MahApps.Metro.IconPacks.PackIconMaterialKind.Exclamation)]
         public ushort ID { get; set; }
 
         public override void Give(Simulation simulation)

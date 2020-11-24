@@ -31,7 +31,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             }
         }
 
-        [RewardAssetPicker(typeof(GameVehicleAsset))]
+        [RewardAssetPicker(typeof(GameVehicleAsset), "Control_SelectAsset_Vehicle", MahApps.Metro.IconPacks.PackIconMaterialKind.Car)]
         public ushort ID { get; set; }
         public string Spawnpoint { get; set; }
 
