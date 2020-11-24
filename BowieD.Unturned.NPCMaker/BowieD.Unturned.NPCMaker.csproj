@@ -288,6 +288,7 @@
     <Compile Include="GameIntegration\GameAnimalAsset.cs" />
     <Compile Include="GameIntegration\GameAsset.cs" />
     <Compile Include="GameIntegration\GameAssetManager.cs" />
+    <Compile Include="GameIntegration\GameAssetReference.cs" />
     <Compile Include="GameIntegration\GameCurrencyAsset.cs" />
     <Compile Include="GameIntegration\GameDialogueAsset.cs" />
     <Compile Include="GameIntegration\GameItemAsset.cs" />
@@ -422,6 +423,25 @@
     <Compile Include="NPC\Simulation.cs" />
     <Compile Include="OrderTool.cs" />
     <Compile Include="Parsing\DataReader.cs" />
+    <Compile Include="Parsing\IFileReadable.cs" />
+    <Compile Include="Parsing\IFileReader.cs" />
+    <Compile Include="Parsing\ITypeReader.cs" />
+    <Compile Include="Parsing\KVTableReader.cs" />
+    <Compile Include="Parsing\KVTableTypeReaderRegistry.cs" />
+    <Compile Include="Parsing\KVTableTypeRedirectorRegistry.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableBoolReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableByteReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableFloatReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableIntReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableLongReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableSByteReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableShortReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableStringReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableUIntReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableULongReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableUShortReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\SystemTypes\KVTableGUIDReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\SystemTypes\KVTableTypeReader.cs" />
     <Compile Include="Parsing\ParseTool.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -754,5 +774,6 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\unknown.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

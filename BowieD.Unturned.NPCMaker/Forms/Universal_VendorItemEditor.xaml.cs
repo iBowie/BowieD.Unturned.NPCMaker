@@ -74,7 +74,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 return Selected_ItemType == ItemType.VEHICLE;
             });
-            
+
             cmenu.Items.Add(selectItem);
             cmenu.Items.Add(selectVehicle);
 

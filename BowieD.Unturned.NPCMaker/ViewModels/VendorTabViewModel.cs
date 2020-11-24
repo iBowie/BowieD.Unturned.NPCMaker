@@ -58,7 +58,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             MainWindow.Instance.vendorDescTxtBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich | ContextHelper.EContextOption.Group_TextEdit);
 
             ContextMenu cmenu4 = new ContextMenu();
-            
+
             cmenu4.Items.Add(ContextHelper.CreateSelectAssetButton(typeof(GameCurrencyAsset), (asset) =>
             {
                 Currency = asset.guid.ToString("N");

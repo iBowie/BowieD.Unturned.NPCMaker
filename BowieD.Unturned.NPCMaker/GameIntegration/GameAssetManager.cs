@@ -103,7 +103,8 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         }
         public static async Task Import(string directory, EGameAssetOrigin origin, Action<int, int> fileLoadedCallback = null)
         {
-            Queue<FileInfo> files = new Queue<FileInfo>();
+            Queue<ScannedFileInfo> files = new Queue<ScannedFileInfo>();
+
             HashSet<string> ignoreFileNames = new HashSet<string>();
             foreach (object langValue in Enum.GetValues(typeof(ELanguage)))
             {
@@ -116,7 +117,12 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 {
                     continue;
                 }
-                files.Enqueue(file);
+                files.Enqueue(new LegacyFileInfo(file));
+            }
+
+            foreach (FileInfo file in new DirectoryInfo(directory).GetFiles("*.asset", SearchOption.AllDirectories))
+            {
+                files.Enqueue(new AssetFileInfo(file));
             }
 
             int index = -1;
@@ -127,24 +133,97 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 index++;
                 try
                 {
-                    var res = await TryReadLegacyAssetFile(fi.FullName, origin);
-                    if (res.Item1)
+                    if (fi is LegacyFileInfo)
                     {
-                        _assets.Add(res.Item2);
+                        var res = await TryReadLegacyAssetFile(fi.Info.FullName, origin);
+                        if (res.Item1)
+                        {
+                            _assets.Add(res.Item2);
+                        }
+                    }
+                    else if (fi is AssetFileInfo)
+                    {
+                        var res = TryReadAssetFile(fi.Info.FullName, origin);
+                        if (res.Item1)
+                        {
+                            _assets.Add(res.Item2);
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
-                    await App.Logger.LogException($"Could not import asset '{fi.FullName}'", ex: ex);
+                    await App.Logger.LogException($"Could not import asset '{fi.Info.FullName}'", ex: ex);
                 }
                 fileLoadedCallback?.Invoke(index, total);
             }
         }
+
+        private abstract class ScannedFileInfo
+        {
+            public ScannedFileInfo(FileInfo info)
+            {
+                this.Info = info;
+            }
+
+            public FileInfo Info { get; }
+        }
+        private class LegacyFileInfo : ScannedFileInfo
+        {
+            public LegacyFileInfo(FileInfo info) : base(info)
+            {
+            }
+        }
+        private class AssetFileInfo : ScannedFileInfo
+        {
+            public AssetFileInfo(FileInfo info) : base(info)
+            {
+            }
+        }
+
         public static void Purge()
         {
             _assets.Clear();
         }
 
+        private static Tuple<bool, GameAsset> TryReadAssetFile(string fileName, EGameAssetOrigin origin)
+        {
+            using (StreamReader sr = new StreamReader(fileName))
+            {
+                IFileReader formattedFileReader = null;
+                try
+                {
+                    formattedFileReader = new KVTableReader(sr);
+                }
+                catch
+                {
+                    return new Tuple<bool, GameAsset>(false, null);
+                }
+                IFileReader formattedFileReader2 = formattedFileReader.readObject("Metadata");
+                Guid gUID = formattedFileReader2.readValue<Guid>("GUID");
+                Type type = formattedFileReader2.readValue<Type>("Type");
+                if (type == null)
+                {
+                    return new Tuple<bool, GameAsset>(false, null);
+                }
+                try
+                {
+                    GameAsset asset = Activator.CreateInstance(type, gUID, origin) as GameAsset;
+                    if (asset != null)
+                    {
+                        asset.guid = gUID;
+                        formattedFileReader.readKey("Asset");
+                        asset.read(formattedFileReader);
+                        return new Tuple<bool, GameAsset>(true, asset);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    App.Logger.LogException($"Could not create instance of {type.Name}", ex: ex);
+                }
+            }
+
+            return new Tuple<bool, GameAsset>(false, null);
+        }
         private static async Task<Tuple<bool, GameAsset>> TryReadLegacyAssetFile(string fileName, EGameAssetOrigin origin)
         {
             string drContent;
