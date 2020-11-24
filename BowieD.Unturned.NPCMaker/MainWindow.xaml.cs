@@ -36,6 +36,11 @@ namespace BowieD.Unturned.NPCMaker
         #endregion
         public new void Show()
         {
+            #region THEME SETUP
+            Themes.Theme theme = ThemeManager.Themes.ContainsKey(AppConfig.Instance.currentTheme ?? "") ? ThemeManager.Themes[AppConfig.Instance.currentTheme] : ThemeManager.Themes["Metro/LightGreen"];
+            ThemeManager.Apply(theme);
+            #endregion
+
             ImportAssetsForm iaf = new ImportAssetsForm();
             iaf.ShowDialog();
 
@@ -44,10 +49,6 @@ namespace BowieD.Unturned.NPCMaker
             Height *= AppConfig.Instance.scale;
             MinWidth *= AppConfig.Instance.scale;
             MinHeight *= AppConfig.Instance.scale;
-            #region THEME SETUP
-            Themes.Theme theme = ThemeManager.Themes.ContainsKey(AppConfig.Instance.currentTheme ?? "") ? ThemeManager.Themes[AppConfig.Instance.currentTheme] : ThemeManager.Themes["Metro/LightGreen"];
-            ThemeManager.Apply(theme);
-            #endregion
             #region OPEN_WITH
             string[] args = Environment.GetCommandLineArgs();
             App.Logger.Log($"Command Line Args: {string.Join(";", args)}");
