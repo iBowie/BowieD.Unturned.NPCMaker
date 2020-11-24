@@ -465,9 +465,10 @@
         "Project_Loaded": "Проект загружен!",
         "Project_NotLoaded_Incompatible": "Файл, который вы пытались загрузить несовместим.",
         "App_GUID_Regenerated": "GUID заново созданы.",
-        "StartUp_Free": "Эта программа бесплатна. Если кто-то взял с неё за вас деньги - обращайтесь к BowieD.",
+        "StartUp_Free": "Эта программа бесплатна. Если кто-то взял с неё за вас деньги - обращайтесь к BowieD. Деньги я вам не верну, но я приложу все силы чтобы прекратить это.",
         "StartUp_Patreon": "Поддержите разработку программы на Patreon",
-        "StartUp_Patreon_Open": "Открыть Patreon"
+        "StartUp_Patreon_Open": "Открыть Patreon",
+        "StartUp_Patreon_Patrons": "Поддержавшие разработку на Patreon: {0}"
     },
     "Interface":
     {

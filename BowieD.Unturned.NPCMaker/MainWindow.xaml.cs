@@ -254,6 +254,15 @@ namespace BowieD.Unturned.NPCMaker
                 App.Logger.LogException("Could not display notification(s)", ex: ex);
             }
 
+            if (App.Package.Patrons.Length > 0)
+            {
+                var pList = App.Package.Patrons.ToList();
+                pList.Shuffle();
+                string pjoined = string.Join(", ", pList.Take(5));
+
+                App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("StartUp_Patreon_Patrons", pjoined));
+            }
+
             ConsoleLogger.StartWaitForInput();
             base.Show();
         }

@@ -465,9 +465,10 @@
         "Project_Loaded": "Project loaded!",
         "Project_NotLoaded_Incompatible": "File not compatible with this version of the app.",
         "App_GUID_Regenerated": "GUIDs regenerated.",
-        "StartUp_Free": "This app is absolutely free. If someone charged you for this app - report to BowieD.",
+        "StartUp_Free": "This app is absolutely free. If someone charged you for this app - report to BowieD. I will not refund you any money for this - but i'll try my best to make it stop.",
         "StartUp_Patreon": "Consider supporting me on Patreon",
-        "StartUp_Patreon_Open": "Go to Patreon"
+        "StartUp_Patreon_Open": "Go to Patreon",
+        "StartUp_Patreon_Patrons": "Honorable patrons: {0}"
     },
     "Interface":
     {
