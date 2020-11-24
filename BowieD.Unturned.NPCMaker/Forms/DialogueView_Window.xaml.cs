@@ -151,7 +151,18 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             {
                                 shouldClose = false;
 
-                                NPCVendor vendorAsset = MainWindow.CurrentProject.data.vendors.Single(d => d.ID == res.openVendorId);
+                                NPCVendor vendorAsset;
+
+                                if (GameAssetManager.TryGetAsset<GameVendorAsset>(res.openVendorId, out var gameVendorAsset))
+                                {
+                                    vendorAsset = gameVendorAsset.vendor;
+                                }
+                                else
+                                {
+                                    MessageBox.Show(LocalizationManager.Current.Simulation["Dialogue"].Translate("Error_VendorNotFound", res.openVendorId));
+                                    Close();
+                                    return;
+                                }
 
                                 VendorView_Window qvw = new VendorView_Window(Character, Simulation, vendorAsset);
 
