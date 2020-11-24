@@ -144,6 +144,14 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 Currency.ValueFormat = value;
 
+                foreach (UIElement elem in MainWindow.Instance.currencyListEntries.Children)
+                {
+                    if (elem is CurrencyEntryControl cec)
+                    {
+                        cec.UpdateFormat(value);
+                    }
+                }
+
                 OnPropertyChange(nameof(ValueFormat));
             }
         }
@@ -195,6 +203,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 }
                 _currency.Entries = newItems;
             };
+
+            cec.UpdateFormat(_currency.ValueFormat);
 
             MainWindow.Instance.currencyListEntries.Children.Add(cec);
         }

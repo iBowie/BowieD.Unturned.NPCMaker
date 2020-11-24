@@ -48,8 +48,19 @@ namespace BowieD.Unturned.NPCMaker.Controls
                     imagePath = GameItemAsset.DefaultImagePath;
                 }
                 header.Text = headerText;
-                footer.Text = value.Value.ToString();
                 img.Source = new BitmapImage(imagePath);
+            }
+        }
+
+        public void UpdateFormat(string newFormat)
+        {
+            try
+            {
+                footer.Text = string.Format(newFormat, Entry.Value);
+            }
+            catch
+            {
+                footer.Text = Entry.Value.ToString();
             }
         }
     }
