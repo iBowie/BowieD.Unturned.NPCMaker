@@ -18,7 +18,17 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             get
             {
-                string outp = LocalizationManager.Current.Condition[$"Type_Quest"] + $" [{ID}] ";
+                string outp;
+
+                if (GameAssetManager.TryGetAsset<GameQuestAsset>(ID, out var asset))
+                {
+                    outp = LocalizationManager.Current.Condition["Type_Quest"] + $" [{ID}] '{asset.name}' ";
+                }
+                else
+                {
+                    outp = LocalizationManager.Current.Condition["Type_Quest"] + $" [{ID}] ";
+                }
+
                 switch (Logic)
                 {
                     case Logic_Type.Equal:
