@@ -31,7 +31,6 @@ namespace BowieD.Unturned.NPCMaker
         }
         public MainWindowViewModel MainWindowViewModel { get; }
         #region MANAGERS
-        public static Mistakes.DeepAnalysisManager DeepAnalysisManager { get; private set; }
         public static DiscordRPC.DiscordManager DiscordManager { get; set; }
         #endregion
         public new void Show()
@@ -44,7 +43,6 @@ namespace BowieD.Unturned.NPCMaker
             ImportAssetsForm iaf = new ImportAssetsForm();
             iaf.ShowDialog();
 
-            DeepAnalysisManager = new Mistakes.DeepAnalysisManager();
             Width *= AppConfig.Instance.scale;
             Height *= AppConfig.Instance.scale;
             MinWidth *= AppConfig.Instance.scale;

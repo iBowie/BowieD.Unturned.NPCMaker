@@ -2,8 +2,10 @@
 {
     public enum EGameAssetOrigin
     {
-        Unturned,
-        Workshop,
-        Project
+        Unturned = 1 << 0,
+        Workshop = 1 << 1,
+        Project = 1 << 2,
+
+        Game = Unturned | Workshop
     }
 }

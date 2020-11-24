@@ -1351,7 +1351,7 @@
                 </TabItem>
                 <TabItem DataContext="{Binding MistakeTabViewModel}" Name="mistakeListTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Errors}">
                     <Grid>
-                        <ListView Name="lstMistakes" Margin="10,10,10,60">
+                        <ListView Name="lstMistakes" Margin="10">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding MistakeImportance}" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_Error_Importance}" Width="100"/>
@@ -1361,7 +1361,6 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                        <Button Name="deepAnalysis_Button" FontSize="16" VerticalAlignment="Bottom" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_DeepAnalysis}" ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_DeepAnalysis_Tooltip}" Margin="10,0,10,10" Height="45"/>
                         <Label Name="noErrorsLabel" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_Error_None}" FontSize="24" Visibility="Collapsed" Margin="0,0,0,100"/>
 
                     </Grid>

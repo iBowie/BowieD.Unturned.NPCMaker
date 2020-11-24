@@ -102,6 +102,14 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         {
             return TryGetAsset((k) => k.id == id, out result);
         }
+        public static bool TryGetAsset<T>(Guid guid, EGameAssetOrigin origin, out T result) where T : GameAsset
+        {
+            return TryGetAsset((k) => k.guid == guid && origin.HasFlag(k.origin), out result);
+        }
+        public static bool TryGetAsset<T>(ushort id, EGameAssetOrigin origin, out T result) where T : GameAsset
+        {
+            return TryGetAsset((k) => k.id == id && origin.HasFlag(k.origin), out result);
+        }
         public static async Task Import(string directory, EGameAssetOrigin origin, Action<int, int> fileLoadedCallback = null, CancellationTokenSource tokenSource = null)
         {
             Queue<ScannedFileInfo> files = new Queue<ScannedFileInfo>();

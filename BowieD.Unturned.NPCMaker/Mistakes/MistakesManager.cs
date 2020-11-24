@@ -1,4 +1,6 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,6 +66,85 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     MainWindow.Instance.lstMistakes.Items.Add(fm);
                 }
             }
+            
+            foreach (NPCDialogue dialogue in MainWindow.CurrentProject.data.dialogues)
+            {
+                if (GameAssetManager.TryGetAsset<GameDialogueAsset>(dialogue.ID, EGameAssetOrigin.Game, out _))
+                {
+                    MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                    {
+                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_dialogue", dialogue.ID),
+                        Importance = IMPORTANCE.WARNING
+                    });
+                }
+            }
+
+            foreach (NPCVendor vendor in MainWindow.CurrentProject.data.vendors)
+            {
+                if (GameAssetManager.TryGetAsset<GameVendorAsset>(vendor.ID, EGameAssetOrigin.Game, out _))
+                {
+                    MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                    {
+                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_vendor", vendor.ID),
+                        Importance = IMPORTANCE.WARNING
+                    });
+                }
+                foreach (VendorItem it in vendor.items)
+                {
+                    if (it.type == ItemType.VEHICLE)
+                    {
+                        if (!GameAssetManager.TryGetAsset<GameVehicleAsset>(it.id, out _))
+                        {
+                            MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                            {
+                                MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_vehicle", it.id),
+                                Importance = IMPORTANCE.WARNING
+                            });
+                            continue;
+                        }
+                    }
+                    if (it.type == ItemType.ITEM)
+                    {
+                        if (!GameAssetManager.TryGetAsset<GameItemAsset>(it.id, out _))
+                        {
+                            MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                            {
+                                MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_item", it.id),
+                                Importance = IMPORTANCE.WARNING
+                            });
+                            continue;
+                        }
+                    }
+                }
+            }
+
+            foreach (NPCQuest quest in MainWindow.CurrentProject.data.quests)
+            {
+                if (GameAssetManager.TryGetAsset<GameQuestAsset>(quest.ID, EGameAssetOrigin.Game, out _))
+                {
+                    MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                    {
+                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_quest", quest.ID),
+                        Importance = IMPORTANCE.WARNING
+                    });
+                }
+            }
+
+            foreach (NPCCharacter character in MainWindow.CurrentProject.data.characters)
+            {
+                if (character.ID > 0)
+                {
+                    if (GameAssetManager.TryGetAsset<GameNPCAsset>(character.ID, EGameAssetOrigin.Game, out _))
+                    {
+                        MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                        {
+                            MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_char", character.ID),
+                            Importance = IMPORTANCE.WARNING
+                        });
+                    }
+                }
+            }
+
             if (MainWindow.Instance.lstMistakes.Items.Count == 0)
             {
                 MainWindow.Instance.lstMistakes.Visibility = Visibility.Collapsed;

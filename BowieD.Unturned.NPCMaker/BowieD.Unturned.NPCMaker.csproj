@@ -343,7 +343,6 @@
     <Compile Include="Mistakes\Currencies\NE_4002.cs" />
     <Compile Include="Mistakes\Currencies\NE_4003.cs" />
     <Compile Include="Mistakes\Currencies\NE_4004.cs" />
-    <Compile Include="Mistakes\DeepAnalysisManager.cs" />
     <Compile Include="Mistakes\Character\NE_0000.cs" />
     <Compile Include="Mistakes\Dialogue\DialogueMistake.cs" />
     <Compile Include="Mistakes\Dialogue\NE_1000.cs" />
