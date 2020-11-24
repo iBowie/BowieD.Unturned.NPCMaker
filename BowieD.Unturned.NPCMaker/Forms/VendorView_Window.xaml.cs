@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Markup;
 using BowieD.Unturned.NPCMaker.NPC;
@@ -6,6 +7,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
@@ -37,6 +39,11 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 };
 
                 Grid g = new Grid();
+                g.ColumnDefinitions.Add(new ColumnDefinition()
+                {
+                    Width = GridLength.Auto
+                });
+                g.ColumnDefinitions.Add(new ColumnDefinition());
 
                 TextBlock tb = new TextBlock();
                 formatter.Markup(tb, LocalizationManager.Current.Simulation["Vendor"].Translate("Item_Cost", item.cost));
@@ -63,7 +70,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 }
 
                 TextBlock tb2 = new TextBlock();
-                formatter.Markup(tb2, LocalizationManager.Current.Simulation["Vendor"].Translate(nameKey, item.id));
 
                 Label l2 = new Label()
                 {
@@ -74,6 +80,26 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                 g.Children.Add(l);
                 g.Children.Add(l2);
+
+                Grid.SetColumn(l, 1);
+                Grid.SetColumn(l2, 1);
+
+                if (item.type == ItemType.ITEM && GameAssetManager.TryGetAsset<GameItemAsset>(item.id, out var asset))
+                {
+                    g.Children.Add(new Image()
+                    {
+                        Source = new BitmapImage(asset.ImagePath),
+                        Width = 48,
+                        Height = 48,
+                        Margin = new Thickness(5)
+                    });
+
+                    formatter.Markup(tb2, asset.name);
+                }
+                else
+                {
+                    formatter.Markup(tb2, LocalizationManager.Current.Simulation["Vendor"].Translate(nameKey, item.id));
+                }
 
                 b.Content = g;
 
