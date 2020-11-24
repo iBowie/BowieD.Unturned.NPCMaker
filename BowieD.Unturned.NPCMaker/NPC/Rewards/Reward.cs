@@ -151,11 +151,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                     if (assetPickerAttribute != null)
                     {
                         var vcMenu = new ContextMenu();
-                        vcMenu.Items.Add(ContextHelper.CreateSelectItemButton(assetPickerAttribute.AssetType, (asset) =>
+                        vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
                         {
                             (valueControl as Controls.OptionalUInt16ValueControl).checkbox.IsChecked = true;
                             (valueControl as Controls.OptionalUInt16ValueControl).upDown.Value = asset.id;
-                        }));
+                        }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
                         valueControl.ContextMenu = vcMenu;
                         (valueControl as Controls.OptionalUInt16ValueControl).upDown.ContextMenu = vcMenu;
                         (valueControl as Controls.OptionalUInt16ValueControl).checkbox.ContextMenu = vcMenu;
@@ -197,10 +197,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                     if (assetPickerAttribute != null)
                     {
                         var vcMenu = new ContextMenu();
-                        vcMenu.Items.Add(ContextHelper.CreateSelectItemButton(assetPickerAttribute.AssetType, (asset) =>
+                        vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
                         {
                             (valueControl as MahApps.Metro.Controls.NumericUpDown).Value = asset.id;
-                        }));
+                        }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
                         (valueControl as MahApps.Metro.Controls.NumericUpDown).ContextMenu = vcMenu;
                     }
                 }
@@ -238,10 +238,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                     if (assetPickerAttribute != null)
                     {
                         var vcMenu = new ContextMenu();
-                        vcMenu.Items.Add(ContextHelper.CreateSelectItemButton(assetPickerAttribute.AssetType, (asset) =>
+                        vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
                         {
                             (valueControl as TextBox).Text = asset.guid.ToString("N");
-                        }));
+                        }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
                         valueControl.ContextMenu = vcMenu;
                     }
                 }

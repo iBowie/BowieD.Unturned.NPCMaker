@@ -518,7 +518,7 @@ namespace BowieD.Unturned.NPCMaker.Common
             (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
         }
-        private static MenuItem createSelectAssetButton(Type assetType, Action<GameAsset> action, string key, PackIconMaterialKind icon)
+        internal static MenuItem CreateSelectAssetButton(Type assetType, Action<GameAsset> action, string key, PackIconMaterialKind icon)
         {
             MenuItem b = new MenuItem()
             {
@@ -541,7 +541,7 @@ namespace BowieD.Unturned.NPCMaker.Common
         }
         internal static MenuItem CreateSelectItemButton(Type assetType, Action<GameAsset> action)
         {
-            return createSelectAssetButton(assetType, action, "Control_SelectAsset_Item", PackIconMaterialKind.Archive);
+            return CreateSelectAssetButton(assetType, action, "Control_SelectAsset_Item", PackIconMaterialKind.Archive);
         }
         internal static MenuItem CreateSelectItemButton(Action<GameItemAsset> action)
         {

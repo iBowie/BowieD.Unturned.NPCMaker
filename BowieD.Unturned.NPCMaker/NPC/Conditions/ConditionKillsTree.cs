@@ -9,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     {
         public ushort ID { get; set; }
         public short Value { get; set; }
-        [ConditionAssetPicker(typeof(GameResourceAsset))]
+        [ConditionAssetPicker(typeof(GameResourceAsset), "Control_SelectAsset_Resource", MahApps.Metro.IconPacks.PackIconMaterialKind.Tree)]
         public string Tree { get; set; }
         public override Condition_Type Type => Condition_Type.Kills_Tree;
         public override string UIText

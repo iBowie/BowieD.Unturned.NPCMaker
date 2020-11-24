@@ -10,7 +10,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public sealed class ConditionItem : Condition
     {
         public override Condition_Type Type => Condition_Type.Item;
-        [ConditionAssetPicker(typeof(GameItemAsset))]
+        [ConditionAssetPicker(typeof(GameItemAsset), "Control_SelectAsset_Item", MahApps.Metro.IconPacks.PackIconMaterialKind.Archive)]
         public ushort ID { get; set; }
         public ushort Amount { get; set; }
         public override string UIText

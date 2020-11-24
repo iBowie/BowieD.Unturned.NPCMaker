@@ -9,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     {
         public ushort ID { get; set; }
         public short Value { get; set; }
-        [ConditionAssetPicker(typeof(GameObjectAsset))]
+        [ConditionAssetPicker(typeof(GameObjectAsset), "Control_SelectAsset_Object", MahApps.Metro.IconPacks.PackIconMaterialKind.Home)]
         public string Object { get; set; }
         [ConditionOptional(byte.MaxValue)]
         public byte? Nav { get; set; }

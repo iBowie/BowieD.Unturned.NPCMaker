@@ -9,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public override Condition_Type Type => Condition_Type.Kills_Animal;
         public override string UIText => $"[{ID}] {LocalizationManager.Current.Condition[$"Type_Kills_Animal"]} ({Animal}) >= {Value}";
         public ushort ID { get; set; }
-        [ConditionAssetPicker(typeof(GameAnimalAsset))]
+        [ConditionAssetPicker(typeof(GameAnimalAsset), "Control_SelectAsset_Animal", MahApps.Metro.IconPacks.PackIconMaterialKind.Bone)]
         public ushort Animal { get; set; }
         public short Value { get; set; }
 
