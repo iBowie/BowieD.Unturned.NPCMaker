@@ -173,6 +173,23 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             }
         }
 
+        public static bool TryFindUnusedID(EGameAssetCategory category, out ushort id)
+        {
+            for (ushort res = 2000; res < ushort.MaxValue; res++)
+            {
+                if (TryGetAsset<GameAsset>((asset) => asset.id == res && asset.Category == category, out _))
+                {
+                    continue;
+                }
+
+                id = res;
+                return true;
+            }
+
+            id = 0;
+            return false;
+        }
+
         private abstract class ScannedFileInfo
         {
             public ScannedFileInfo(FileInfo info)
