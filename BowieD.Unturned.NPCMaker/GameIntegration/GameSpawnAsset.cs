@@ -59,6 +59,8 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         public List<SpawnTable> tables => _tables;
         public bool areTablesDirty { get; protected set; }
 
+        public override EGameAssetCategory Category => EGameAssetCategory.SPAWN;
+
         public void resolve(out ushort id, out bool isSpawn)
         {
             id = 0;

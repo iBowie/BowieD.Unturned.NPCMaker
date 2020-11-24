@@ -28,6 +28,8 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         public string type;
         public EGameAssetOrigin origin;
 
+        public virtual EGameAssetCategory Category => EGameAssetCategory.NONE;
+
         public virtual void read(IFileReader reader)
         {
             if (reader != null)

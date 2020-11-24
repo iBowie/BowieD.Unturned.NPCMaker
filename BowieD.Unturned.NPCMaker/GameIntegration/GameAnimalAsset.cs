@@ -9,5 +9,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         {
 
         }
+
+        public override EGameAssetCategory Category => EGameAssetCategory.ANIMAL;
     }
 }

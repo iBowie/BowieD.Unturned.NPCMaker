@@ -16,5 +16,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         }
 
         public NPCCharacter character;
+
+        public override EGameAssetCategory Category => EGameAssetCategory.OBJECT;
     }
 }

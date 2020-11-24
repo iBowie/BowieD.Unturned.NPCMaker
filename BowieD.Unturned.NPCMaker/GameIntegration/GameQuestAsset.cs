@@ -16,5 +16,6 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         }
 
         public NPCQuest quest;
+        public override EGameAssetCategory Category => EGameAssetCategory.NPC;
     }
 }
