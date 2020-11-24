@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.Parsing;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration
@@ -101,7 +102,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         {
             return TryGetAsset((k) => k.id == id, out result);
         }
-        public static async Task Import(string directory, EGameAssetOrigin origin, Action<int, int> fileLoadedCallback = null)
+        public static async Task Import(string directory, EGameAssetOrigin origin, Action<int, int> fileLoadedCallback = null, CancellationTokenSource tokenSource = null)
         {
             Queue<ScannedFileInfo> files = new Queue<ScannedFileInfo>();
 
@@ -130,6 +131,12 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
             foreach (var fi in files)
             {
+                if (tokenSource != null && tokenSource.IsCancellationRequested)
+                {
+                    await App.Logger.Log("Cancelled import", Logging.ELogLevel.TRACE);
+                    break;
+                }
+
                 index++;
                 try
                 {

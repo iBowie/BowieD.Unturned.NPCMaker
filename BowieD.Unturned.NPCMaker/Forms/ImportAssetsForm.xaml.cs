@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -40,7 +41,16 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                             AppConfig.Instance.unturnedDir = fbd.SelectedPath;
                                             AppConfig.Instance.Save();
 
-                                            await ImportGameAssets(fbd.SelectedPath);
+                                            tokenSource = new CancellationTokenSource();
+
+                                            importTask = new Task(async () =>
+                                            {
+                                                await Dispatcher.Invoke(async () =>
+                                                {
+                                                    await ImportGameAssets(AppConfig.Instance.unturnedDir);
+                                                });
+                                            }, tokenSource.Token);
+                                            importTask.Start();
                                         }
                                         else
                                         {
@@ -54,10 +64,34 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 }
                 else
                 {
-                    await ImportGameAssets(AppConfig.Instance.unturnedDir);
+                    tokenSource = new CancellationTokenSource();
+
+                    importTask = new Task(async () =>
+                    {
+                        await Dispatcher.Invoke(async () =>
+                        {
+                            await ImportGameAssets(AppConfig.Instance.unturnedDir);
+                        });
+                    }, tokenSource.Token);
+                    importTask.Start();
+                }
+            };
+            Closing += (sender, e) =>
+            {
+                if (!hasDone)
+                {
+                    App.Logger.Log("User aborted asset loading");
+
+                    tokenSource.Cancel(true);
+
+                    GameIntegration.GameAssetManager.Purge();
                 }
             };
         }
+
+        CancellationTokenSource tokenSource;
+        Task importTask;
+        bool hasDone = false;
 
         private async Task ImportGameAssets(string mainPath)
         {
@@ -69,7 +103,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 stepProgress.Value = index;
                 stepProgress.Maximum = total;
-            });
+            }, tokenSource);
+
+            if (tokenSource.IsCancellationRequested)
+            {
+                await App.Logger.Log("Cancelled after import", Logging.ELogLevel.TRACE);
+                GameIntegration.GameAssetManager.Purge();
+                return;
+            }
 
             string workshopPath = PathUtility.GetUnturnedWorkshopPathFromUnturnedPath(mainPath);
 
@@ -79,7 +120,16 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 stepProgress.Value = index;
                 stepProgress.Maximum = total;
-            });
+            }, tokenSource);
+
+            if (tokenSource.IsCancellationRequested)
+            {
+                await App.Logger.Log("Cancelled after import", Logging.ELogLevel.TRACE);
+                GameIntegration.GameAssetManager.Purge();
+                return;
+            }
+
+            hasDone = true;
 
             Close();
         }
