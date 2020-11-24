@@ -562,7 +562,7 @@
         "Main_Tab_Character_ID_Tooltip": "ID of the NPC",
         "Main_Tab_Character_Name_Editor_Tooltip": "Name visible in map editor",
         "Main_Tab_Character_Name_Display_Tooltip": "Name visible in dialogues and game",
-        "Main_Tab_Character_Dialogue_Tooltip": "Dialogue that opens when user interact with NPC",
+        "Main_Tab_Character_Dialogue_Tooltip": "Dialogue that opens when user interacts with NPC",
         "Main_Tab_Character_Guid_Generate": "Regenerate GUIDs",
         "Main_Tab_Character_Face_Random": "Random Face",
         "Main_Tab_Character_Hair_Random": "Random Hair",
