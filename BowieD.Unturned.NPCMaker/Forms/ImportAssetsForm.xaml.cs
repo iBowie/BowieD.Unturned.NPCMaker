@@ -58,6 +58,11 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                         }
                                     }
                                     break;
+                                case System.Windows.Forms.DialogResult.No:
+                                    {
+                                        Close();
+                                    }
+                                    break;
                             }
                         }
                     }
@@ -82,7 +87,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 {
                     App.Logger.Log("User aborted asset loading");
 
-                    tokenSource.Cancel(true);
+                    tokenSource?.Cancel(true);
 
                     GameIntegration.GameAssetManager.Purge();
                 }
