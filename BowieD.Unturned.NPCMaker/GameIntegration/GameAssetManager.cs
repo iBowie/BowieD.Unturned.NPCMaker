@@ -358,6 +358,8 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 case "medium":
                 case "small":
                     return new Tuple<bool, GameAsset>(true, new GameObjectAsset(dr, name, id, guid, vt, origin));
+                case "spawn":
+                    return new Tuple<bool, GameAsset>(true, new GameSpawnAsset(dr, name, id, guid, vt, origin));
                 case "resource":
                     return new Tuple<bool, GameAsset>(true, new GameResourceAsset(dr, name, id, guid, vt, origin));
                 default:

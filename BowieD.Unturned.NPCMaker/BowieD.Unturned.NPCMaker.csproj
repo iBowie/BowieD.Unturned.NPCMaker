@@ -312,6 +312,7 @@
     <Compile Include="GameIntegration\GameObjectAsset.cs" />
     <Compile Include="GameIntegration\GameQuestAsset.cs" />
     <Compile Include="GameIntegration\GameResourceAsset.cs" />
+    <Compile Include="GameIntegration\GameSpawnAsset.cs" />
     <Compile Include="GameIntegration\GameVehicleAsset.cs" />
     <Compile Include="GameIntegration\GameVendorAsset.cs" />
     <Compile Include="IHasOrderButtons.cs" />

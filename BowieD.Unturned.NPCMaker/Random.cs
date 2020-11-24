@@ -32,5 +32,7 @@
         {
             return (byte)random.Next(0, 256);
         }
+
+        public static float Value => (float)random.NextDouble();
     }
 }
