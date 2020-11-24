@@ -422,10 +422,10 @@
         "NE_4003_Solution": "Create an entry with value of 1",
         "NE_4004_Solution": "Create an entry",
 
-        "deep_char": "[{0}] already used by other character in game.",
-        "deep_dialogue": "[{0}] already used by other dialogue in game.",
-        "deep_vendor": "[{0}] already used by other vendor in game.",
-        "deep_quest": "[{0}] already used by other quest in game.",
+        "deep_char": "ID [{0}] is already used by other character or object in game.",
+        "deep_dialogue": "ID [{0}] is already used by other dialogue, vendor or quest in game.",
+        "deep_vendor": "ID [{0}] is already used by other dialogue, vendor or quest in game.",
+        "deep_quest": "ID [{0}] is already used by other dialogue, vendor or quest in game.",
         "deep_item": "Item [{0}] not found. If you are using item from a mod - ignore this.",
         "deep_vehicle": "Vehicle [{0}] not found. If you are using vehicle from a mod - ignore this.",
 

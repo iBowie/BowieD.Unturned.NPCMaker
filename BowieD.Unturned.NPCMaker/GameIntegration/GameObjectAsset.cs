@@ -5,6 +5,10 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 {
     public class GameObjectAsset : GameAsset
     {
+        public GameObjectAsset(Guid guid, EGameAssetOrigin origin) : base(guid, origin)
+        {
+        }
+
         public GameObjectAsset(DataReader data, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(name, id, guid, type, origin)
         {
 
