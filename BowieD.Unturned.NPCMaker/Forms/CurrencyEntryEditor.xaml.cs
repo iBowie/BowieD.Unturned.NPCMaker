@@ -1,6 +1,8 @@
-﻿using BowieD.Unturned.NPCMaker.NPC.Currency;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.NPC.Currency;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
@@ -16,6 +18,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
             DataContext = this;
 
             this.Entry = entry;
+
+            var cmenu = new ContextMenu();
+            cmenu.Items.Add(ContextHelper.CreateSelectItemButton((asset) =>
+            {
+                GUID = asset.guid.ToString("N");
+                guidBox.Text = asset.guid.ToString("N");
+            }));
+            guidBox.ContextMenu = cmenu;
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
         }

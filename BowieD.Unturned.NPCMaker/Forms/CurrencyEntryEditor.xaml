@@ -18,7 +18,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Label Content="{xaml:Localize CURRENCY_Entry_GUID}"/>
-            <TextBox Grid.Column="1" Text="{Binding GUID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <TextBox Name="guidBox" Grid.Column="1" Text="{Binding GUID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
         </Grid>
         <Grid Margin="10">
             <Grid.ColumnDefinitions>
