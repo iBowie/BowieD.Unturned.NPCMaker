@@ -1180,7 +1180,7 @@
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox VerticalAlignment="Center" Text="{Binding Currency, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,10,0" />
+                                    <TextBox Name="vendorCurrencyBox" VerticalAlignment="Center" Text="{Binding Currency, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,10,0" />
                                     <TextBlock TextWrapping="Wrap" Grid.Column="1" Text="{xaml:Localize Key=VENDOR_Currency}" Margin="10"/>
                                 </Grid>
                                 <Button Command="{Binding PreviewCommand}" Name="previewVendorButton" Margin="10" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Preview}"/>

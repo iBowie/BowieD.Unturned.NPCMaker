@@ -7,6 +7,7 @@ using Microsoft.Win32;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -532,6 +533,20 @@ namespace BowieD.Unturned.NPCMaker.Common
                     action.Invoke(apw.SelectedAsset);
                 }
             };
+            b.Icon = new PackIconMaterial()
+            {
+                Kind = icon
+            };
+            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
+            return b;
+        }
+        internal static MenuItem CreateGenericButton(ICommand command, string key, PackIconMaterialKind icon)
+        {
+            MenuItem b = new MenuItem()
+            {
+                Header = LocalizationManager.Current.Interface[key]
+            };
+            b.Command = command;
             b.Icon = new PackIconMaterial()
             {
                 Kind = icon

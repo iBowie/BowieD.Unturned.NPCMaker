@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using MahApps.Metro.Controls;
@@ -55,6 +56,24 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
             MainWindow.Instance.vendorTitleTxtBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich | ContextHelper.EContextOption.Group_TextEdit);
             MainWindow.Instance.vendorDescTxtBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich | ContextHelper.EContextOption.Group_TextEdit);
+
+            ContextMenu cmenu4 = new ContextMenu();
+            
+            cmenu4.Items.Add(ContextHelper.CreateSelectAssetButton(typeof(GameCurrencyAsset), (asset) =>
+            {
+                Currency = asset.guid.ToString("N");
+                MainWindow.Instance.vendorCurrencyBox.Text = asset.guid.ToString("N");
+            }, "Control_SelectAsset_Currency", MahApps.Metro.IconPacks.PackIconMaterialKind.CurrencyUsd));
+            cmenu4.Items.Add(ContextHelper.CreateGenericButton(new AdvancedCommand(() =>
+            {
+                Currency = string.Empty;
+                MainWindow.Instance.vendorCurrencyBox.Text = string.Empty;
+            }, (obj) =>
+            {
+                return !string.IsNullOrEmpty(Currency);
+            }), "Control_Vendor_SwitchToExperience", MahApps.Metro.IconPacks.PackIconMaterialKind.Star));
+
+            MainWindow.Instance.vendorCurrencyBox.ContextMenu = cmenu4;
         }
         private void VendorTabButtonAdd_Click(object sender, RoutedEventArgs e)
         {
