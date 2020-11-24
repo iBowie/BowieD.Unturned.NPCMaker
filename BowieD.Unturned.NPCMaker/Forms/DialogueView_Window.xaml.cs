@@ -84,9 +84,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                                 NPCQuest questAsset;
 
-                                if (GameAssetManager.TryGetAsset<GameQuestAsset>(res.openQuestId, out var gameAsset))
+                                if (GameAssetManager.TryGetAsset<GameQuestAsset>(res.openQuestId, out var gameQuestAsset))
                                 {
-                                    questAsset = gameAsset.quest;
+                                    questAsset = gameQuestAsset.quest;
                                 }
                                 else
                                 {
@@ -126,7 +126,18 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                     {
                                         Previous = Start;
 
-                                        NPCDialogue next = MainWindow.CurrentProject.data.dialogues.Single(d => d.ID == res.openDialogueId);
+                                        NPCDialogue next;
+
+                                        if (GameAssetManager.TryGetAsset<GameDialogueAsset>(res.openDialogueId, out var gameDialogueAsset))
+                                        {
+                                            next = gameDialogueAsset.dialogue;
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show(LocalizationManager.Current.Simulation["Dialogue"].Translate("Error_DialogueNotFound", res.openDialogueId));
+                                            Close();
+                                            return;
+                                        }
 
                                         Dialogue = next;
 

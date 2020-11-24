@@ -691,7 +691,8 @@
         "Dialogue":
         {
             "Window_Title": "Dialogue View",
-            "Error_QuestNotFound": "Could not find quest with ID '{0}'. Simulation will now close."
+            "Error_QuestNotFound": "Could not find quest with ID '{0}'. Simulation will now close.",
+            "Error_DialogueNotFound": "Could not find dialogue with ID '{0}'. Simulation will now close."
         },
         "Vendor":
         {
