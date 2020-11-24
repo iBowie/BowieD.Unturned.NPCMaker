@@ -17,19 +17,6 @@
 					"actionArgs": "https://www.patreon.com/bowied"
 				}
 			]
-		},
-		{
-			"text": "Consider supporting me on DonationAlerts",
-			"loc": false,
-			"buttons":
-			[
-				{
-					"text": "Go to DonationAlerts",
-					"loc": false,
-					"actionType": "URL",
-					"actionArgs": "https://www.donationalerts.com/r/ibowie"
-				}
-			]
 		}
 	],
 	"feedback":
