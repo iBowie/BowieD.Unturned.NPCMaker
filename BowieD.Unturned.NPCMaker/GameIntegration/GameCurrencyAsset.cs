@@ -27,6 +27,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         {
             base.readAsset(reader);
             valueFormat = reader.readValue("ValueFormat");
+            name = valueFormat;
             int num = reader.readArrayLength("Entries");
             entries = new CurrencyEntry[num];
             for (int i = 0; i < num; i++)
