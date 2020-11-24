@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Templating;
+using BowieD.Unturned.NPCMaker.ViewModels;
 using MahApps.Metro.IconPacks;
 using Microsoft.Win32;
 using System;
@@ -589,6 +590,21 @@ namespace BowieD.Unturned.NPCMaker.Common
         internal static MenuItem CreateSelectVestButton(Action<GameItemVestAsset> action)
         {
             return createSelectAssetButton<GameItemVestAsset>(action, "Control_SelectAsset_Vest", PackIconMaterialKind.TshirtCrew);
+        }
+
+        internal static MenuItem CreateFindUnusedIDButton(Action<ushort> action, EGameAssetCategory category)
+        {
+            return CreateGenericButton(new BaseCommand(() =>
+            {
+                if (GameAssetManager.TryFindUnusedID(category, out var result))
+                {
+                    action.Invoke(result);
+                }
+                else
+                {
+                    MessageBox.Show(LocalizationManager.Current.Interface["Control_FindUnusedID_Failed"]);
+                }
+            }), "Control_FindUnusedID", PackIconMaterialKind.Magnify);
         }
     }
 }

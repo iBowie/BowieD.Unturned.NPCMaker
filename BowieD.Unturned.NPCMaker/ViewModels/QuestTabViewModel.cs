@@ -68,6 +68,16 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
             MainWindow.Instance.questTitleBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich | ContextHelper.EContextOption.Group_TextEdit);
             MainWindow.Instance.questDescBox.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich | ContextHelper.EContextOption.Group_TextEdit);
+
+            var questIdBoxContext = new ContextMenu();
+
+            questIdBoxContext.Items.Add(ContextHelper.CreateFindUnusedIDButton((id) =>
+            {
+                this.ID = id;
+                MainWindow.Instance.questIdBox.Value = id;
+            }, GameIntegration.EGameAssetCategory.NPC));
+
+            MainWindow.Instance.questIdBox.ContextMenu = questIdBoxContext;
         }
         private void QuestTabButtonAdd_Click(object sender, RoutedEventArgs e)
         {

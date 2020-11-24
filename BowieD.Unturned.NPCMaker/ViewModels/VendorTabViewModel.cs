@@ -74,6 +74,16 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }), "Control_Vendor_SwitchToExperience", MahApps.Metro.IconPacks.PackIconMaterialKind.Star));
 
             MainWindow.Instance.vendorCurrencyBox.ContextMenu = cmenu4;
+
+            var vendorIdTxtBoxContext = new ContextMenu();
+
+            vendorIdTxtBoxContext.Items.Add(ContextHelper.CreateFindUnusedIDButton((id) =>
+            {
+                this.ID = id;
+                MainWindow.Instance.vendorIdTxtBox.Value = id;
+            }, GameIntegration.EGameAssetCategory.NPC));
+
+            MainWindow.Instance.vendorIdTxtBox.ContextMenu = vendorIdTxtBoxContext;
         }
         private void VendorTabButtonAdd_Click(object sender, RoutedEventArgs e)
         {

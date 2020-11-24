@@ -58,6 +58,16 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }));
 
             MainWindow.Instance.dialogueTabButtonAdd.ContextMenu = cmenu3;
+
+            var dialogueInputIdControlContext = new ContextMenu();
+
+            dialogueInputIdControlContext.Items.Add(ContextHelper.CreateFindUnusedIDButton((id) =>
+            {
+                this.ID = id;
+                MainWindow.Instance.dialogueInputIdControl.Value = id;
+            }, GameIntegration.EGameAssetCategory.NPC));
+
+            MainWindow.Instance.dialogueInputIdControl.ContextMenu = dialogueInputIdControlContext;
         }
 
         private void DialogueTabButtonAdd_Click(object sender, RoutedEventArgs e)

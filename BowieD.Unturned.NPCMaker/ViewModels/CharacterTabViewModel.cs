@@ -246,6 +246,16 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }));
             MainWindow.Instance.tertiaryIdBox.ContextMenu = cid_tertiary;
             #endregion
+
+            var txtIDContext = new ContextMenu();
+
+            txtIDContext.Items.Add(ContextHelper.CreateFindUnusedIDButton((id) =>
+            {
+                this.ID = id;
+                MainWindow.Instance.txtID.Value = id;
+            }, GameIntegration.EGameAssetCategory.OBJECT));
+
+            MainWindow.Instance.txtID.ContextMenu = txtIDContext;
         }
 
         private void CharacterTabButtonAdd_Click(object sender, RoutedEventArgs e)
