@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
+using BowieD.Unturned.NPCMaker.NPC.Currency;
 using BowieD.Unturned.NPCMaker.Templating.Conditions;
 using BowieD.Unturned.NPCMaker.Templating.Conditions.Converters;
 using BowieD.Unturned.NPCMaker.Templating.Modify;
@@ -37,6 +38,8 @@ namespace BowieD.Unturned.NPCMaker.Templating
             ModifyValueConverter.Register<ModifyValue_Parameterless>("message", typeof(NPCMessage));
             ModifyValueConverter.Register<ModifyValue_Parameterless>("response", typeof(NPCResponse));
             ModifyValueConverter.Register<ModifyValue_Parameterless>("project", typeof(NPCProject));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("currency", typeof(CurrencyAsset));
+            ModifyValueConverter.Register<ModifyValue_Parameterless>("currencyentry", typeof(CurrencyEntry));
             #endregion
             #region Primitives
             ModifyValueConverter.Register<ModifyValue_Parameterless>("bool", typeof(bool));
