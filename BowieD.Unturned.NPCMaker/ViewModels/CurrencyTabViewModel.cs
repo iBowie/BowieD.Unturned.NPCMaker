@@ -162,7 +162,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 var old = current.Entry.Clone();
 
                 CurrencyEntryEditor cee = new CurrencyEntryEditor(current.Entry);
-                
+
                 if (cee.ShowDialog() != true)
                 {
                     current.Entry = old;

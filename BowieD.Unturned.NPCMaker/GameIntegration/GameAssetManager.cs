@@ -10,7 +10,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
     public static class GameAssetManager
     {
         private static readonly List<GameAsset> _assets = new List<GameAsset>();
-        
+
         public static IEnumerable<GameAsset> GetAllAssets(Type type)
         {
             if (typeof(GameAsset).IsAssignableFrom(type))
@@ -193,24 +193,43 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
             switch (vt)
             {
-                case "item": case "gun": case "food":
-                case "water": case "medical":
-                case "melee": case "fuel":
-                case "tool": case "barricade":
-                case "storage": case "beacon":
-                case "farm": case "trap":
-                case "structure": case "supply":
-                case "throwable": case "grower":
-                case "optic": case "refill":
-                case "fisher": case "cloud":
-                case "map": case "key":
-                case "box": case "arrest_start":
-                case "arrest_end": case "tank":
-                case "generator": case "detonator":
-                case "charge": case "library":
-                case "filter": case "sentry":
-                case "vehicle_repair_tool": case "tire":
-                case "compass": case "oil_pump":
+                case "item":
+                case "gun":
+                case "food":
+                case "water":
+                case "medical":
+                case "melee":
+                case "fuel":
+                case "tool":
+                case "barricade":
+                case "storage":
+                case "beacon":
+                case "farm":
+                case "trap":
+                case "structure":
+                case "supply":
+                case "throwable":
+                case "grower":
+                case "optic":
+                case "refill":
+                case "fisher":
+                case "cloud":
+                case "map":
+                case "key":
+                case "box":
+                case "arrest_start":
+                case "arrest_end":
+                case "tank":
+                case "generator":
+                case "detonator":
+                case "charge":
+                case "library":
+                case "filter":
+                case "sentry":
+                case "vehicle_repair_tool":
+                case "tire":
+                case "compass":
+                case "oil_pump":
                     return new Tuple<bool, GameAsset>(true, new GameItemAsset(dr, shortDir, name, id, guid, vt, origin));
                 case "hat":
                     return new Tuple<bool, GameAsset>(true, new GameItemHatAsset(dr, shortDir, name, id, guid, vt, origin));

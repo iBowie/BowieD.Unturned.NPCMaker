@@ -39,8 +39,8 @@ namespace BowieD.Unturned.NPCMaker.Common
             if (option.HasFlag(EContextOption.NPCName))
                 cmenu.Items.Add(CreatePasteNPCNameButton());
 
-            bool 
-                flag1 = option.HasFlag(EContextOption.Color_Unity), 
+            bool
+                flag1 = option.HasFlag(EContextOption.Color_Unity),
                 flag2 = option.HasFlag(EContextOption.Color_Unturned);
 
             if (flag1 || flag2)

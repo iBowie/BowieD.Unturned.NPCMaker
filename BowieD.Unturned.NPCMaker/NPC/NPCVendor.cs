@@ -112,7 +112,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             get
             {
                 StringBuilder sb = new StringBuilder();
-                
+
                 switch (type)
                 {
                     case ItemType.ITEM:

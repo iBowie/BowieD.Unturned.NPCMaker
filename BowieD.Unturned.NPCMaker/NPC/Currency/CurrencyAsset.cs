@@ -17,7 +17,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Currency
 
         private string _guid;
 
-        [field:NonSerialized]
+        [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
         [XmlAttribute("guid")]

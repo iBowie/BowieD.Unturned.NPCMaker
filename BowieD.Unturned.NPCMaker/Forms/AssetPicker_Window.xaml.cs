@@ -1,18 +1,8 @@
 ﻿using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Markup;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace BowieD.Unturned.NPCMaker.Forms
@@ -92,8 +82,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 string searchText = filter_name.Text;
                 string searchTextLower = searchText.ToLowerInvariant();
 
-                if (string.IsNullOrEmpty(searchText) || 
-                    a.name.ToLowerInvariant().Contains(searchTextLower) || 
+                if (string.IsNullOrEmpty(searchText) ||
+                    a.name.ToLowerInvariant().Contains(searchTextLower) ||
                     a.id.ToString().Contains(searchText) ||
                     a.guid.ToString("N").Contains(searchTextLower))
                 {

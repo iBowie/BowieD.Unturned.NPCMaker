@@ -1,14 +1,8 @@
-﻿using BowieD.Unturned.NPCMaker.Common.Utility;
-using BowieD.Unturned.NPCMaker.GameIntegration;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.Mistakes
 {

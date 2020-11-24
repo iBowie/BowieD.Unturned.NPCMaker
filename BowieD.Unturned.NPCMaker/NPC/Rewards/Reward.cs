@@ -147,7 +147,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                     (valueControl as Controls.OptionalUInt16ValueControl).upDown.Maximum = newMax;
                     (valueControl as Controls.OptionalUInt16ValueControl).upDown.Minimum = newMin;
                     (valueControl as Controls.OptionalUInt16ValueControl).upDown.SetBinding(Xceed.Wpf.Toolkit.UShortUpDown.ValueProperty, propName);
-                    
+
                     if (assetPickerAttribute != null)
                     {
                         var vcMenu = new ContextMenu();
