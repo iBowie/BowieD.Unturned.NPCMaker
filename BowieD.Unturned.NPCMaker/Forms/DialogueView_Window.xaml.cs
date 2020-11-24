@@ -326,7 +326,22 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     lastMessage = msg;
 
                     if (msg.prev != 0)
-                        Previous = MainWindow.CurrentProject.data.dialogues.SingleOrDefault(d => d.ID == msg.prev);
+                    {
+                        NPCDialogue prevNext;
+
+                        if (GameAssetManager.TryGetAsset<GameDialogueAsset>(msg.prev, out var gameDialogueAsset))
+                        {
+                            prevNext = gameDialogueAsset.dialogue;
+                        }
+                        else
+                        {
+                            MessageBox.Show(LocalizationManager.Current.Simulation["Dialogue"].Translate("Error_DialogueNotFound", msg.prev));
+                            Close();
+                            return;
+                        }
+
+                        Previous = prevNext;
+                    }
 
                     DisplayPage(msg, i, 0);
 
