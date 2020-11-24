@@ -67,10 +67,18 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                     yield return new GameQuestAsset(ch, EGameAssetOrigin.Project) as T;
                 }
             }
+
+            if (typeof(GameCurrencyAsset).IsAssignableFrom(typeof(T)))
+            {
+                foreach (var ch in MainWindow.CurrentProject.data.currencies)
+                {
+                    yield return new GameCurrencyAsset(ch, EGameAssetOrigin.Project) as T;
+                }
+            }
         }
         public static bool TryGetAsset<T>(Func<T, bool> func, out T result) where T : GameAsset
         {
-            foreach (var ga in _assets)
+            foreach (var ga in GetAllAssets<T>())
             {
                 if (ga is T gat)
                 {

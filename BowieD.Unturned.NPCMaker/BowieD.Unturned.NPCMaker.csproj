@@ -288,6 +288,7 @@
     <Compile Include="GameIntegration\GameAnimalAsset.cs" />
     <Compile Include="GameIntegration\GameAsset.cs" />
     <Compile Include="GameIntegration\GameAssetManager.cs" />
+    <Compile Include="GameIntegration\GameCurrencyAsset.cs" />
     <Compile Include="GameIntegration\GameDialogueAsset.cs" />
     <Compile Include="GameIntegration\GameItemAsset.cs" />
     <Compile Include="GameIntegration\GameItemBackpackAsset.cs" />

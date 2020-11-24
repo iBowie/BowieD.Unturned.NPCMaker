@@ -209,6 +209,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             string translateKey;
             uint value;
+            bool useCurrency = false;
             if (string.IsNullOrEmpty(Vendor.currency)) // experience
             {
                 translateKey = "Pay_Experience";
@@ -222,8 +223,17 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 }
 
                 translateKey = "Pay_Currency";
+                useCurrency = true;
             }
-            formatter.Markup(currencyText, LocalizationManager.Current.Simulation["Vendor"].Translate(translateKey, value));
+
+            if (useCurrency && GameAssetManager.TryGetAsset<GameCurrencyAsset>(Guid.Parse(Vendor.currency), out var asset))
+            {
+                currencyText.Text = string.Format(asset.valueFormat, value);
+            }
+            else
+            {
+                formatter.Markup(currencyText, LocalizationManager.Current.Simulation["Vendor"].Translate(translateKey, value));
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
