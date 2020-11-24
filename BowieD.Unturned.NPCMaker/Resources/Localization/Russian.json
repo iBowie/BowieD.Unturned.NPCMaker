@@ -690,7 +690,8 @@
     {
         "Dialogue":
         {
-            "Window_Title": "Диалог"
+            "Window_Title": "Диалог",
+            "Error_QuestNotFound": "Не удалось найти задание с ID '{0}'. Симуляция будет закрыта."
         },
         "Vendor":
         {

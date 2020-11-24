@@ -1,4 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Markup;
 using BowieD.Unturned.NPCMaker.NPC;
 using MahApps.Metro.IconPacks;
@@ -80,7 +82,18 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             {
                                 shouldClose = false;
 
-                                NPCQuest questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.ID == res.openQuestId);
+                                NPCQuest questAsset;
+
+                                if (GameAssetManager.TryGetAsset<GameQuestAsset>(res.openQuestId, out var gameAsset))
+                                {
+                                    questAsset = gameAsset.quest;
+                                }
+                                else
+                                {
+                                    MessageBox.Show(LocalizationManager.Current.Simulation["Dialogue"].Translate("Error_QuestNotFound", res.openQuestId));
+                                    Close();
+                                    return;
+                                }
 
                                 Quest_Status questStatus = Simulation.GetQuestStatus(questAsset.ID);
 
