@@ -36,7 +36,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 }
             }
 
-            if (typeof(GameNPCAsset).IsAssignableFrom(typeof(T)))
+            if (typeof(T).IsAssignableFrom(typeof(GameNPCAsset)))
             {
                 foreach (var ch in MainWindow.CurrentProject.data.characters)
                 {
@@ -44,7 +44,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 }
             }
 
-            if (typeof(GameDialogueAsset).IsAssignableFrom(typeof(T)))
+            if (typeof(T).IsAssignableFrom(typeof(GameDialogueAsset)))
             {
                 foreach (var ch in MainWindow.CurrentProject.data.dialogues)
                 {
@@ -52,7 +52,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 }
             }
 
-            if (typeof(GameVendorAsset).IsAssignableFrom(typeof(T)))
+            if (typeof(T).IsAssignableFrom(typeof(GameVendorAsset)))
             {
                 foreach (var ch in MainWindow.CurrentProject.data.vendors)
                 {
@@ -60,7 +60,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 }
             }
 
-            if (typeof(GameQuestAsset).IsAssignableFrom(typeof(T)))
+            if (typeof(T).IsAssignableFrom(typeof(GameQuestAsset)))
             {
                 foreach (var ch in MainWindow.CurrentProject.data.quests)
                 {
@@ -68,7 +68,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 }
             }
 
-            if (typeof(GameCurrencyAsset).IsAssignableFrom(typeof(T)))
+            if (typeof(T).IsAssignableFrom(typeof(GameCurrencyAsset)))
             {
                 foreach (var ch in MainWindow.CurrentProject.data.currencies)
                 {
