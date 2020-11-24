@@ -18,6 +18,7 @@
         <ListView Name="list" Margin="10" IsEnabled="false">
             <ListView.View>
                 <GridView>
+                    <GridViewColumn Header="{xaml:Localize Key=SIMULATION.INVENTORY_Item_Name}" DisplayMemberBinding="{Binding DisplayName}"/>
                     <GridViewColumn Header="{xaml:Localize Key=SIMULATION.INVENTORY_Item_ID}" DisplayMemberBinding="{Binding ID}"/>
                     <GridViewColumn Header="{xaml:Localize Key=SIMULATION.INVENTORY_Item_Amount}" DisplayMemberBinding="{Binding Amount}"/>
                     <GridViewColumn Header="{xaml:Localize Key=SIMULATION.INVENTORY_Item_Quality}" DisplayMemberBinding="{Binding Quality}"/>

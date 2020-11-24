@@ -765,6 +765,7 @@
         "Inventory":
         {
             "Window_Title": "Inventory Editor",
+            "Item_Name": "Item Name",
             "Item_ID": "Item ID",
             "Item_Amount": "Item Amount/Ammo",
             "Item_Quality": "Item Quality",
