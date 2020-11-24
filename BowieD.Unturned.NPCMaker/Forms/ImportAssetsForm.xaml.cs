@@ -59,12 +59,17 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                     }
                                     break;
                                 case System.Windows.Forms.DialogResult.No:
+                                case System.Windows.Forms.DialogResult.Cancel:
                                     {
                                         Close();
                                     }
                                     break;
                             }
                         }
+                    }
+                    else
+                    {
+                        Close();
                     }
                 }
                 else
