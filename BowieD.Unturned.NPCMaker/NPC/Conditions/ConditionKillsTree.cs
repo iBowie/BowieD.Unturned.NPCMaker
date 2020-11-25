@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
+using System;
 using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
@@ -51,7 +52,18 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 value = 0;
             }
 
-            return string.Format(text, value, Value, Tree);
+            string arg;
+
+            if (GameAssetManager.TryGetAsset<GameResourceAsset>(Guid.Parse(Tree), out var treeAsset))
+            {
+                arg = treeAsset.name;
+            }
+            else
+            {
+                arg = "?";
+            }
+
+            return string.Format(text, value, Value, arg);
         }
     }
 }
