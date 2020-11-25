@@ -29,7 +29,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         private void Button_Click(object sender, RoutedEventArgs e)
         {
         ask:
-            MultiFieldInputView_Dialog mfiv = new MultiFieldInputView_Dialog();
+            MultiFieldInputView_Dialog mfiv = new MultiFieldInputView_Dialog(new string[4] { "", "1", "100", "1" });
             if (mfiv.ShowDialog(new string[4] { LocalizationManager.Current.Simulation["Inventory"]["Item_ID"], LocalizationManager.Current.Simulation["Inventory"]["Item_Amount"], LocalizationManager.Current.Simulation["Inventory"]["Item_Quality"], LocalizationManager.Current.Simulation["Inventory"]["Item_Count"] }, LocalizationManager.Current.Simulation["Inventory"]["Item_Add"]) == true)
             {
                 string[] values = mfiv.Values;
