@@ -1,5 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
+using System;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -62,10 +64,19 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public override string FormatCondition(Simulation simulation)
         {
             string text = Localization;
+
             if (string.IsNullOrEmpty(text))
             {
-                text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Condition_Currency");
+                if (GameAssetManager.TryGetAsset<GameCurrencyAsset>(Guid.Parse(GUID), out var asset) && !string.IsNullOrEmpty(asset.valueFormat))
+                {
+                    text = asset.valueFormat;
+                }
+                else
+                {
+                    text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Condition_Currency");
+                }
             }
+
             return string.Format(text, Value);
         }
     }
