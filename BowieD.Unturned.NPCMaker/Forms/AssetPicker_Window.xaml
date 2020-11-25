@@ -7,6 +7,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="BowieD.Unturned.NPCMaker.Forms.AssetPicker_Window"
     xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"    
     mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
         Title="{xaml:Localize INTERFACE_AssetPicker_Title}" ResizeMode="NoResize" SizeToContent="Height" Width="400">
     <Grid>
         <Grid.LayoutTransform>

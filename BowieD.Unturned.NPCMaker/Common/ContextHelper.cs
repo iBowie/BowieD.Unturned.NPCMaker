@@ -508,6 +508,7 @@ namespace BowieD.Unturned.NPCMaker.Common
             b.Click += (object sender, RoutedEventArgs e) =>
             {
                 AssetPicker_Window apw = new AssetPicker_Window(typeof(T));
+                apw.Owner = MainWindow.Instance;
                 if (apw.ShowDialog() == true && apw.SelectedAsset is T asat)
                 {
                     action.Invoke(asat);
@@ -529,6 +530,7 @@ namespace BowieD.Unturned.NPCMaker.Common
             b.Click += (object sender, RoutedEventArgs e) =>
             {
                 AssetPicker_Window apw = new AssetPicker_Window(assetType);
+                apw.Owner = MainWindow.Instance;
                 if (apw.ShowDialog() == true)
                 {
                     action.Invoke(apw.SelectedAsset);

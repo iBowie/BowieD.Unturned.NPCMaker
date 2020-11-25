@@ -118,6 +118,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     addEntryCommand = new BaseCommand(() =>
                     {
                         CurrencyEntryEditor uvie = new CurrencyEntryEditor(new CurrencyEntry());
+                        uvie.Owner = MainWindow.Instance;
                         if (uvie.ShowDialog() == true)
                         {
                             CurrencyEntry resultedCurrencyEntry = uvie.Entry;
@@ -170,7 +171,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 var old = current.Entry.Clone();
 
                 CurrencyEntryEditor cee = new CurrencyEntryEditor(current.Entry);
-
+                cee.Owner = MainWindow.Instance;
                 if (cee.ShowDialog() != true)
                 {
                     current.Entry = old;

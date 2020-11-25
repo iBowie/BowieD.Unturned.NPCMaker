@@ -90,6 +90,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
         private void QuestSelect_Click(object sender, RoutedEventArgs e)
         {
             AssetPicker_Window apw = new AssetPicker_Window(typeof(GameQuestAsset));
+            apw.Owner = MainWindow.Instance;
             if (apw.ShowDialog() == true)
             {
                 txtBoxQuestID.Value = apw.SelectedAsset.id;
@@ -99,6 +100,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
         private void VendorSelect_Click(object sender, RoutedEventArgs e)
         {
             AssetPicker_Window apw = new AssetPicker_Window(typeof(GameVendorAsset));
+            apw.Owner = MainWindow.Instance;
             if (apw.ShowDialog() == true)
             {
                 txtBoxVendorID.Value = apw.SelectedAsset.id;
@@ -108,6 +110,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
         private void DialogueSelect_Click(object sender, RoutedEventArgs e)
         {
             AssetPicker_Window apw = new AssetPicker_Window(typeof(GameDialogueAsset));
+            apw.Owner = MainWindow.Instance;
             if (apw.ShowDialog() == true)
             {
                 txtBoxDialogueID.Value = apw.SelectedAsset.id;

@@ -7,6 +7,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
+        WindowStartupLocation="CenterOwner"
         Title="{xaml:Localize CURRENCY_Entry_Editor_Title}" MinWidth="300" SizeToContent="WidthAndHeight">
     <StackPanel>
         <StackPanel.LayoutTransform>
