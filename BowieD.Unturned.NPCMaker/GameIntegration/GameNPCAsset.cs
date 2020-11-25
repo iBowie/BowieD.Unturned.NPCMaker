@@ -8,6 +8,9 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
     {
         public GameNPCAsset(NPCCharacter character, EGameAssetOrigin origin) : base(Guid.Parse(character.GUID), origin)
         {
+            this.id = character.ID;
+            this.name = character.EditorName;
+
             this.character = character;
         }
         public GameNPCAsset(DataReader data, DataReader local, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(data, name, id, guid, type, origin)
