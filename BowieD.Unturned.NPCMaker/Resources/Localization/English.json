@@ -518,6 +518,7 @@
         "Control_SelectAsset_Object": "Select Object",
         "Control_SelectAsset_Resource": "Select Resource",
         "Control_SelectAsset_Quest": "Select Quest",
+        "Control_SelectAsset_Dialogue": "Select Dialogue",
         "Control_SelectAsset_Sight": "Select Sight",
         "Control_SelectAsset_Tactical": "Select Tactical",
         "Control_SelectAsset_Grip": "Select Grip",

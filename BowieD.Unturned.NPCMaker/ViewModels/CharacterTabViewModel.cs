@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.NPC;
@@ -256,6 +257,16 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }, GameIntegration.EGameAssetCategory.OBJECT));
 
             MainWindow.Instance.txtID.ContextMenu = txtIDContext;
+
+            var dialogueIDContext = new ContextMenu();
+
+            dialogueIDContext.Items.Add(ContextHelper.CreateSelectAssetButton(typeof(GameDialogueAsset), (asset) =>
+            {
+                this.DialogueID = asset.id;
+                MainWindow.Instance.txtStartDialogueID.Value = asset.id;
+            }, "Control_SelectAsset_Dialogue", MahApps.Metro.IconPacks.PackIconMaterialKind.Chat));
+
+            MainWindow.Instance.txtStartDialogueID.ContextMenu = dialogueIDContext;
         }
 
         private void CharacterTabButtonAdd_Click(object sender, RoutedEventArgs e)
