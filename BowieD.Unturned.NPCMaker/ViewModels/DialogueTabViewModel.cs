@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using MahApps.Metro.Controls;
@@ -360,10 +361,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     if (checkResult == null)
                                         MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Dialogue_Preview_Loop"]);
 
-                                    Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Character);
-                                    if (select.ShowDialog() == true)
+                                    AssetPicker_Window apw = new AssetPicker_Window(typeof(GameNPCAsset));
+                                    if (apw.ShowDialog() == true)
                                     {
-                                        NPCCharacter character = select.SelectedValue as NPCCharacter;
+                                        NPCCharacter character = (apw.SelectedAsset as GameNPCAsset).character;
 
                                         DialogueView_Window dvw = new DialogueView_Window(character, Dialogue, new Simulation());
                                         dvw.Owner = MainWindow.Instance;
