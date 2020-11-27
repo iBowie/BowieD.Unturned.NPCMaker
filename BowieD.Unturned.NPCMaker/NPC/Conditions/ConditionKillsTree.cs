@@ -18,7 +18,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append($"[{ID}] {Tree} x{Value}");
+
+                if (Guid.TryParse(Tree, out var treeGuid) && GameAssetManager.TryGetAsset<GameResourceAsset>(treeGuid, out var resourceAsset))
+                {
+                    sb.Append($"[{ID}] {resourceAsset.name} x{Value}");
+                }
+                else
+                {
+                    sb.Append($"[{ID}] {Tree} x{Value}");
+                }
+
                 return sb.ToString();
             }
         }
@@ -54,7 +63,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
             string arg;
 
-            if (GameAssetManager.TryGetAsset<GameResourceAsset>(Guid.Parse(Tree), out var treeAsset))
+            if (Guid.TryParse(Tree, out var treeGUID) && GameAssetManager.TryGetAsset<GameResourceAsset>(treeGUID, out var treeAsset))
             {
                 arg = treeAsset.name;
             }
