@@ -1,9 +1,9 @@
-﻿using System.Windows.Media.Imaging;
+﻿using System.Windows.Media;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails
 {
     public interface IHasThumbnail
     {
-        BitmapImage Thumbnail { get; }
+        ImageSource Thumbnail { get; }
     }
 }

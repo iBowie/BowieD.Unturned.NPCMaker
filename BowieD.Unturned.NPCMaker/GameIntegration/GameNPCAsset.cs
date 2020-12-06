@@ -1,10 +1,14 @@
-﻿using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
+using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Parsing;
 using System;
+using System.Runtime.InteropServices;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration
 {
-    public class GameNPCAsset : GameObjectAsset
+    public class GameNPCAsset : GameObjectAsset, IHasThumbnail
     {
         public GameNPCAsset(NPCCharacter character, EGameAssetOrigin origin) : base(Guid.Parse(character.GUID), origin)
         {
@@ -19,5 +23,13 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         }
 
         public NPCCharacter character;
+
+        public ImageSource Thumbnail
+        {
+            get
+            {
+                return new BitmapImage(new Uri($"pack://application:,,,/Resources/Unturned/Faces/{character.face}.png"));
+            }
+        }
     }
 }

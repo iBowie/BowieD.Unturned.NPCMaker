@@ -111,7 +111,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 Margin = new Thickness(5)
             };
 
-            if (asset is IHasIcon)
+            if (asset is IHasIcon || asset is IHasThumbnail)
             {
                 g.ColumnDefinitions.Add(new ColumnDefinition()
                 {
