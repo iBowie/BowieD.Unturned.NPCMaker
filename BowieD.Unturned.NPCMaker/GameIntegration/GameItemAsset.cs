@@ -1,12 +1,13 @@
 ﻿using BowieD.Unturned.NPCMaker.Common.Utility;
 using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.Parsing;
 using System;
 using System.IO;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration
 {
-    public class GameItemAsset : GameAsset
+    public class GameItemAsset : GameAsset, IHasIcon
     {
         public static readonly Uri DefaultImagePath = new Uri("pack://application:,,,/Resources/Icons/unknown.png");
 

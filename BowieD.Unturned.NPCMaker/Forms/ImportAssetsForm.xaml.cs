@@ -1,7 +1,9 @@
 ﻿using BowieD.Unturned.NPCMaker.Common.Utility;
 using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.Localization;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -131,6 +133,33 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 stepProgress.Value = index;
                 stepProgress.Maximum = total;
             }, tokenSource);
+
+            if (tokenSource.IsCancellationRequested)
+            {
+                await App.Logger.Log("Cancelled after import", Logging.ELogLevel.TRACE);
+                GameIntegration.GameAssetManager.Purge();
+                return;
+            }
+
+            stepText.Text = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Window_Step_Thumbnails");
+
+            IHasIcon[] assetsWithIcons = GameIntegration.GameAssetManager.GetAllAssetsWithIcons().ToArray();
+            for (int i = 0; i < assetsWithIcons.Length; i++)
+            {
+                IHasIcon a = assetsWithIcons[i];
+
+                if (i % 25 == 0)
+                {
+                    stepProgress.Value = i;
+                    stepProgress.Maximum = assetsWithIcons.Length;
+
+                    await Task.Delay(1);
+                }
+                else
+                    await Task.Yield();
+
+                ThumbnailManager.CreateThumbnail(a.ImagePath);
+            }
 
             if (tokenSource.IsCancellationRequested)
             {

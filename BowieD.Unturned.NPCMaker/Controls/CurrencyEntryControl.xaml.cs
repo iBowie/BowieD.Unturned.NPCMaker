@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.NPC.Currency;
 using System;
 using System.Windows.Controls;
@@ -48,7 +49,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
                     imagePath = GameItemAsset.DefaultImagePath;
                 }
                 header.Text = headerText;
-                img.Source = new BitmapImage(imagePath);
+                img.Source = ThumbnailManager.GetThumbnail(imagePath);
             }
         }
 

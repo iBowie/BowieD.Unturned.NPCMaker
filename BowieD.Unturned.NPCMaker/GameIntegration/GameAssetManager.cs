@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
+using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Parsing;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,16 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
     {
         private static readonly List<GameAsset> _assets = new List<GameAsset>();
 
+        public static IEnumerable<IHasIcon> GetAllAssetsWithIcons()
+        {
+            foreach (var asset in GetAllAssets<GameAsset>())
+            {
+                if (asset is IHasIcon hasIcon)
+                {
+                    yield return hasIcon;
+                }
+            }
+        }
         public static IEnumerable<GameAsset> GetAllAssets(Type type)
         {
             if (typeof(GameAsset).IsAssignableFrom(type))

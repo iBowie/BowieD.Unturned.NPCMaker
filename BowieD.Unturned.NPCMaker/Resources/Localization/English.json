@@ -491,6 +491,7 @@
         "StartUp_ImportGameAssets_Window_Title": "Importing assets",
         "StartUp_ImportGameAssets_Window_Step_Unturned": "Importing Unturned assets",
         "StartUp_ImportGameAssets_Window_Step_Workshop": "Importing Workshop assets",
+        "StartUp_ImportGameAssets_Window_Step_Thumbnails": "Generating thumbnails",
         "App_Comment": "Comment",
         "CrashReport_Title": "App has crashed.",
         "CrashReport_Header": "App ran into some problem. Information provided below.",

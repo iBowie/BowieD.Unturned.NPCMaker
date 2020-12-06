@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.Markup;
 using System;
 using System.Windows;
@@ -109,6 +110,15 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 Margin = new Thickness(5)
             };
+
+            if (asset is IHasIcon)
+            {
+                g.ColumnDefinitions.Add(new ColumnDefinition()
+                {
+                    Width = GridLength.Auto
+                });
+            }
+
             g.ColumnDefinitions.Add(new ColumnDefinition()
             {
                 Width = GridLength.Auto
@@ -143,8 +153,27 @@ namespace BowieD.Unturned.NPCMaker.Forms
             g.Children.Add(l);
             g.Children.Add(lid);
 
-            Grid.SetColumn(lid, 0);
-            Grid.SetColumn(l, 1);
+            if (asset is IHasIcon hasIcon)
+            {
+                Image icon = new Image()
+                {
+                    Source = ThumbnailManager.GetThumbnail(hasIcon.ImagePath),
+                    Width = 32,
+                    Height = 32,
+                    Margin = new Thickness(1)
+                };
+
+                g.Children.Add(icon);
+
+                Grid.SetColumn(icon, 0);
+                Grid.SetColumn(lid, 1);
+                Grid.SetColumn(l, 2);
+            }
+            else
+            {
+                Grid.SetColumn(lid, 0);
+                Grid.SetColumn(l, 1);
+            }
 
             g.MouseDown += (sender, e) =>
             {
