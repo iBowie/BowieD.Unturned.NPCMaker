@@ -59,6 +59,21 @@ namespace BowieD.Unturned.NPCMaker.Coloring
                 return Brushes.Transparent;
             }
         }
+        public static string BrushToHEX(Brush brush)
+        {
+            if (brush is SolidColorBrush scb)
+            {
+                var wcl = scb.Color;
+
+                Color cl = new Color(wcl.R, wcl.G, wcl.B);
+
+                return cl.ToHEX();
+            }
+            else
+            {
+                throw new ArgumentException("Expected SolidColorBrush");
+            }
+        }
 
         public static Color HSVtoColor(double H, double S, double V)
         {

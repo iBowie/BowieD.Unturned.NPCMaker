@@ -261,7 +261,7 @@ namespace BowieD.Unturned.NPCMaker.Common
                 TextBox target = context.PlacementTarget as TextBox;
                 int pos = target.SelectionStart;
                 int l = target.SelectionLength;
-                target.Text = target.Text.Insert(pos + l, "</color>").Insert(pos, $"<color={color}>");
+                target.Text = target.Text.Insert(pos + l, "</color>").Insert(pos, $"<color={Coloring.ColorConverter.BrushToHEX(clr)}>");
             });
             return b;
         }
