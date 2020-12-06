@@ -169,6 +169,22 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 Grid.SetColumn(lid, 1);
                 Grid.SetColumn(l, 2);
             }
+            else if (asset is IHasThumbnail hasThumbnail)
+            {
+                Image icon = new Image()
+                {
+                    Source = hasThumbnail.Thumbnail,
+                    Width = 32,
+                    Height = 32,
+                    Margin = new Thickness(1)
+                };
+
+                g.Children.Add(icon);
+
+                Grid.SetColumn(icon, 0);
+                Grid.SetColumn(lid, 1);
+                Grid.SetColumn(l, 2);
+            }
             else
             {
                 Grid.SetColumn(lid, 0);
