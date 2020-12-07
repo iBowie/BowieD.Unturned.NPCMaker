@@ -1,9 +1,13 @@
-﻿using BowieD.Unturned.NPCMaker.Parsing;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
+using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.Parsing;
 using System;
+using System.Collections.Generic;
+using System.Windows;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration
 {
-    public class GameAsset : IFileReadable
+    public class GameAsset : IFileReadable, IHasTextToolTip
     {
         public GameAsset(string name, ushort id, Guid guid, string type, EGameAssetOrigin origin)
         {
@@ -41,6 +45,13 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         protected virtual void readAsset(IFileReader reader)
         {
             id = reader.readValue<ushort>("ID");
+        }
+
+        public virtual IEnumerable<string> GetToolTipLines()
+        {
+            string originLoc = LocalizationManager.Current.Interface[$"AssetPicker_Filter_Origin_{origin}"];
+
+            yield return LocalizationManager.Current.Interface.Translate("AssetPicker_ToolTip_GameAsset_Origin", originLoc);
         }
     }
 }

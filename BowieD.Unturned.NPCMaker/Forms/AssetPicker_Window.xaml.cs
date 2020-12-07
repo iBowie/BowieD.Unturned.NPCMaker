@@ -241,6 +241,37 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 g.ToolTip = hasToolTip.ToolTipContent;
             }
+            else if (asset is IHasTextToolTip hasTextToolTip)
+            {
+                var sp = new StackPanel()
+                {
+                    Orientation = Orientation.Vertical
+                };
+
+                void addLabel(string text)
+                {
+                    sp.Children.Add(new Label()
+                    {
+                        Content = new TextBlock()
+                        {
+                            Text = text,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            HorizontalAlignment = HorizontalAlignment.Left,
+                            TextAlignment = TextAlignment.Left
+                        },
+                        VerticalAlignment = VerticalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Left,
+                        Margin = new Thickness(5)
+                    });
+                }
+
+                foreach (var line in hasTextToolTip.GetToolTipLines())
+                {
+                    addLabel(line);
+                }
+
+                g.ToolTip = sp;
+            }
 
             g.MouseDown += (sender, e) =>
             {
