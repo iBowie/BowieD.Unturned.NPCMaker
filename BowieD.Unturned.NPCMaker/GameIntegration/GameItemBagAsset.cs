@@ -23,8 +23,11 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             foreach (var l in base.GetToolTipLines())
                 yield return l;
 
-            yield return LocalizationManager.Current.Interface.Translate("AssetPicker_ToolTip_GameItemBagAsset_Width", width);
-            yield return LocalizationManager.Current.Interface.Translate("AssetPicker_ToolTip_GameItemBagAsset_Height", height);
+            if (!isPro)
+            {
+                yield return LocalizationManager.Current.Interface.Translate("AssetPicker_ToolTip_GameItemBagAsset_Width", width);
+                yield return LocalizationManager.Current.Interface.Translate("AssetPicker_ToolTip_GameItemBagAsset_Height", height);
+            }
         }
     }
 }

@@ -480,6 +480,7 @@
         "AssetPicker_Filter_Name_Watermark": "Search...",
 
         "AssetPicker_ToolTip_GameAsset_Origin": "Origin: {0}",
+        "AssetPicker_ToolTip_GameItemAsset_Pro": "Skin",
         "AssetPicker_ToolTip_GameItemBagAsset_Width": "Capacity Width: {0}",
         "AssetPicker_ToolTip_GameItemBagAsset_Height": "Capacity Height: {0}",
 

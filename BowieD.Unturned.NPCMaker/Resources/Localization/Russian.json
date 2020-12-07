@@ -480,6 +480,7 @@
         "AssetPicker_Filter_Name_Watermark": "Поиск по имени...",
 
         "AssetPicker_ToolTip_GameAsset_Origin": "Источник: {0}",
+        "AssetPicker_ToolTip_GameItemAsset_Pro": "Скин",
         "AssetPicker_ToolTip_GameItemBagAsset_Width": "Ширина хранилища: {0}",
         "AssetPicker_ToolTip_GameItemBagAsset_Height": "Высота хранилища: {0}",
 
