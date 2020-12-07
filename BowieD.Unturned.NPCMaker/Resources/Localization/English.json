@@ -481,6 +481,15 @@
 
         "AssetPicker_ToolTip_GameAsset_Origin": "Origin: {0}",
         "AssetPicker_ToolTip_GameItemAsset_Pro": "Skin",
+        "AssetPicker_ToolTip_GameItemAsset_Rarity": "Rarity: {0}",
+        "AssetPicker_ToolTip_GameItemAsset_Rarity_Common": "Common",
+        "AssetPicker_ToolTip_GameItemAsset_Rarity_Uncommon": "Uncommon",
+        "AssetPicker_ToolTip_GameItemAsset_Rarity_Rare": "Rare",
+        "AssetPicker_ToolTip_GameItemAsset_Rarity_Epic": "Epic",
+        "AssetPicker_ToolTip_GameItemAsset_Rarity_Legendary": "Legendary",
+        "AssetPicker_ToolTip_GameItemAsset_Rarity_Mythical": "Mythical",
+        "AssetPicker_ToolTip_GameItemAsset_SizeX": "Width: {0}",
+        "AssetPicker_ToolTip_GameItemAsset_SizeY": "Height: {0}",
         "AssetPicker_ToolTip_GameItemBagAsset_Width": "Capacity Width: {0}",
         "AssetPicker_ToolTip_GameItemBagAsset_Height": "Capacity Height: {0}",
 

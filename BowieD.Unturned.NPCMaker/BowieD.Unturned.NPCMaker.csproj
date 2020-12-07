@@ -286,6 +286,7 @@
     </Compile>
     <Compile Include="GameIntegration\EGameAssetCategory.cs" />
     <Compile Include="GameIntegration\EGameAssetOrigin.cs" />
+    <Compile Include="GameIntegration\EGameItemRarity.cs" />
     <Compile Include="GameIntegration\GameAnimalAsset.cs" />
     <Compile Include="GameIntegration\GameAsset.cs" />
     <Compile Include="GameIntegration\GameAssetManager.cs" />

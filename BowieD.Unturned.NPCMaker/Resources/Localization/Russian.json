@@ -481,6 +481,15 @@
 
         "AssetPicker_ToolTip_GameAsset_Origin": "Источник: {0}",
         "AssetPicker_ToolTip_GameItemAsset_Pro": "Скин",
+        "AssetPicker_ToolTip_GameItemAsset_Rarity": "Редкость: {0}",
+        "AssetPicker_ToolTip_GameItemAsset_Rarity_Common": "Обычный",
+        "AssetPicker_ToolTip_GameItemAsset_Rarity_Uncommon": "Необычный",
+        "AssetPicker_ToolTip_GameItemAsset_Rarity_Rare": "Редкий",
+        "AssetPicker_ToolTip_GameItemAsset_Rarity_Epic": "Эпический",
+        "AssetPicker_ToolTip_GameItemAsset_Rarity_Legendary": "Легендарный",
+        "AssetPicker_ToolTip_GameItemAsset_Rarity_Mythical": "Мифический",
+        "AssetPicker_ToolTip_GameItemAsset_SizeX": "Ширина: {0}",
+        "AssetPicker_ToolTip_GameItemAsset_SizeY": "Высота: {0}",
         "AssetPicker_ToolTip_GameItemBagAsset_Width": "Ширина хранилища: {0}",
         "AssetPicker_ToolTip_GameItemBagAsset_Height": "Высота хранилища: {0}",
 

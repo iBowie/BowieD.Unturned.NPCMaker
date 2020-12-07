@@ -18,9 +18,18 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             this.dirName = dirName;
 
             isPro = data.Has("Pro");
+            rarity = data.ReadEnum("Rarity", EGameItemRarity.Common);
+            sizeX = data.ReadByte("Size_X", 0);
+            if (sizeX < 1)
+                sizeX = 1;
+            sizeY = data.ReadByte("Size_Y", 0);
+            if (sizeY < 1)
+                sizeY = 1;
         }
 
         public readonly bool isPro;
+        public readonly EGameItemRarity rarity;
+        public readonly byte sizeX, sizeY;
 
         private string dirName;
 
@@ -60,6 +69,11 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
             if (isPro)
                 yield return LocalizationManager.Current.Interface["AssetPicker_ToolTip_GameItemAsset_Pro"];
+
+            yield return LocalizationManager.Current.Interface.Translate("AssetPicker_ToolTip_GameItemAsset_Rarity", LocalizationManager.Current.Interface[$"AssetPicker_ToolTip_GameItemAsset_Rarity_{rarity}"]);
+
+            yield return LocalizationManager.Current.Interface.Translate("AssetPicker_ToolTip_GameItemAsset_SizeX", sizeX);
+            yield return LocalizationManager.Current.Interface.Translate("AssetPicker_ToolTip_GameItemAsset_SizeY", sizeY);
         }
     }
 }
