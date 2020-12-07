@@ -237,6 +237,11 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 Grid.SetColumn(l, 1);
             }
 
+            if (asset is IHasToolTip hasToolTip)
+            {
+                g.ToolTip = hasToolTip.ToolTipContent;
+            }
+
             g.MouseDown += (sender, e) =>
             {
                 DialogResult = true;

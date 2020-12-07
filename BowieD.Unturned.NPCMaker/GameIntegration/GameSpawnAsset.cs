@@ -2,11 +2,14 @@
 using BowieD.Unturned.NPCMaker.Parsing;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration
 {
-    public class GameSpawnAsset : GameAsset, IHasAnimatedThumbnail
+    public class GameSpawnAsset : GameAsset, IHasAnimatedThumbnail, IHasToolTip
     {
         public class SpawnTable
         {
@@ -77,6 +80,29 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                         yield return ThumbnailManager.CreateThumbnail(itemAsset.ImagePath);
                     }
                 }
+            }
+        }
+
+        public UIElement ToolTipContent
+        {
+            get
+            {
+                var thumbs = Thumbnails;
+
+                WrapPanel wp = new WrapPanel();
+
+                foreach (var t in thumbs)
+                {
+                    wp.Children.Add(new Image()
+                    {
+                        Source = t,
+                        Width = 32,
+                        Height = 32,
+                        Margin = new Thickness(1)
+                    });
+                }
+
+                return wp;
             }
         }
 

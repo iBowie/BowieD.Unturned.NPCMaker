@@ -319,6 +319,7 @@
     <Compile Include="GameIntegration\Thumbnails\IHasAnimatedThumbnail.cs" />
     <Compile Include="GameIntegration\Thumbnails\IHasIcon.cs" />
     <Compile Include="GameIntegration\Thumbnails\IHasThumbnail.cs" />
+    <Compile Include="GameIntegration\Thumbnails\IHasToolTip.cs" />
     <Compile Include="GameIntegration\Thumbnails\ThumbnailManager.cs" />
     <Compile Include="IHasOrderButtons.cs" />
     <Compile Include="IHasUniqueGUID.cs" />
