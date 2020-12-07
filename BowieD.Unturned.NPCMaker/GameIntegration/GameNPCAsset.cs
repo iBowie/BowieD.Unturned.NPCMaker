@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Parsing;
 using System;
 using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -24,11 +25,20 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
         public NPCCharacter character;
 
+        private readonly Size size = new Size(32, 32);
+
         public ImageSource Thumbnail
         {
             get
             {
-                return new BitmapImage(new Uri($"pack://application:,,,/Resources/Unturned/Faces/{character.face}.png"));
+                Rect rect = new Rect(size);
+
+                DrawingGroup group = new DrawingGroup();
+
+                group.Children.Add(new GeometryDrawing(character.skinColor, new Pen(character.skinColor, 1), new RectangleGeometry(rect)));
+                group.Children.Add(new ImageDrawing(new BitmapImage(new Uri($"pack://application:,,,/Resources/Unturned/Faces/{character.face}.png")), rect));
+
+                return new DrawingImage(group);
             }
         }
     }

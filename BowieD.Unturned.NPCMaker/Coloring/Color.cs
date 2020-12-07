@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows.Media;
 
 namespace BowieD.Unturned.NPCMaker.Coloring
 {
@@ -46,6 +47,10 @@ namespace BowieD.Unturned.NPCMaker.Coloring
         public static implicit operator Coloring.Color(System.Windows.Media.Color a)
         {
             return new Color(a.R, a.G, a.B);
+        }
+        public static implicit operator System.Windows.Media.Brush(Coloring.Color a)
+        {
+            return new SolidColorBrush(a);
         }
         public override string ToString()
         {
