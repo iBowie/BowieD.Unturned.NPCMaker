@@ -33,8 +33,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
             if (mfiv.ShowDialog(new string[4] { LocalizationManager.Current.Simulation["Inventory"]["Item_ID"], LocalizationManager.Current.Simulation["Inventory"]["Item_Amount"], LocalizationManager.Current.Simulation["Inventory"]["Item_Quality"], LocalizationManager.Current.Simulation["Inventory"]["Item_Count"] }, LocalizationManager.Current.Simulation["Inventory"]["Item_Add"]) == true)
             {
                 string[] values = mfiv.Values;
-                if (ushort.TryParse(values[0], out ushort itemID) && 
-                    byte.TryParse(values[1], out byte itemAmount) && 
+                if (ushort.TryParse(values[0], out ushort itemID) &&
+                    byte.TryParse(values[1], out byte itemAmount) &&
                     byte.TryParse(values[2], out byte itemQuality) &&
                     byte.TryParse(values[3], out byte itemCount))
                 {

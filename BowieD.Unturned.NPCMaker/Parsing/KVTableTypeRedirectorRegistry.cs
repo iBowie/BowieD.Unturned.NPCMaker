@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker.GameIntegration;
-using BowieD.Unturned.NPCMaker.NPC.Currency;
 using System.Collections.Generic;
 
 namespace BowieD.Unturned.NPCMaker.Parsing

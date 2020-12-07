@@ -362,7 +362,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                         MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Dialogue_Preview_Loop"]);
 
                                     AssetPicker_Window apw = new AssetPicker_Window(typeof(GameNPCAsset));
-                                    apw.Owner = MainWindow.Instance; 
+                                    apw.Owner = MainWindow.Instance;
                                     if (apw.ShowDialog() == true)
                                     {
                                         NPCCharacter character = (apw.SelectedAsset as GameNPCAsset).character;

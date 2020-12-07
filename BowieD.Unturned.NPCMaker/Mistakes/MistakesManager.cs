@@ -66,7 +66,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     MainWindow.Instance.lstMistakes.Items.Add(fm);
                 }
             }
-            
+
             foreach (NPCDialogue dialogue in MainWindow.CurrentProject.data.dialogues)
             {
                 if (GameAssetManager.TryGetAsset<GameAsset>((asset) =>

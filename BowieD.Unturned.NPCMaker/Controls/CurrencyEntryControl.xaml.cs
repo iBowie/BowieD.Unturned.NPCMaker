@@ -3,7 +3,6 @@ using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.NPC.Currency;
 using System;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 
 namespace BowieD.Unturned.NPCMaker.Controls
 {

@@ -1,5 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.NPC.Currency;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
