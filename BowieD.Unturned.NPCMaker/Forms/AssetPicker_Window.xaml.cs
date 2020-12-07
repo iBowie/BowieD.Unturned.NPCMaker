@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.Markup;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -111,14 +112,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 Margin = new Thickness(5)
             };
 
-            if (asset is IHasIcon || asset is IHasThumbnail)
-            {
-                g.ColumnDefinitions.Add(new ColumnDefinition()
-                {
-                    Width = GridLength.Auto
-                });
-            }
-
             g.ColumnDefinitions.Add(new ColumnDefinition()
             {
                 Width = GridLength.Auto
@@ -163,6 +156,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     Margin = new Thickness(1)
                 };
 
+                g.ColumnDefinitions.Add(new ColumnDefinition()
+                {
+                    Width = GridLength.Auto
+                });
                 g.Children.Add(icon);
 
                 Grid.SetColumn(icon, 0);
@@ -179,11 +176,60 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     Margin = new Thickness(1)
                 };
 
+                g.ColumnDefinitions.Add(new ColumnDefinition()
+                {
+                    Width = GridLength.Auto
+                });
                 g.Children.Add(icon);
 
                 Grid.SetColumn(icon, 0);
                 Grid.SetColumn(lid, 1);
                 Grid.SetColumn(l, 2);
+            }
+            else if (asset is IHasAnimatedThumbnail hasAnimatedThumbnail)
+            {
+                var thumbs = hasAnimatedThumbnail.Thumbnails.ToList();
+
+                if (thumbs.Count > 0)
+                {
+                    Image icon = new Image()
+                    {
+                        Source = thumbs.First(),
+                        Width = 32,
+                        Height = 32,
+                        Margin = new Thickness(1)
+                    };
+
+                    DispatcherTimer dt = new DispatcherTimer()
+                    {
+                        Interval = new TimeSpan(0, 0, 3)
+                    };
+                    int last = 0;
+                    dt.Tick += (sender, e) =>
+                    {
+                        last++;
+                        if (last >= thumbs.Count)
+                            last = 0;
+
+                        icon.Source = thumbs[last];
+                    };
+                    dt.Start();
+
+                    g.ColumnDefinitions.Add(new ColumnDefinition()
+                    {
+                        Width = GridLength.Auto
+                    });
+                    g.Children.Add(icon);
+
+                    Grid.SetColumn(icon, 0);
+                    Grid.SetColumn(lid, 1);
+                    Grid.SetColumn(l, 2);
+                }
+                else
+                {
+                    Grid.SetColumn(lid, 0);
+                    Grid.SetColumn(l, 1);
+                }
             }
             else
             {

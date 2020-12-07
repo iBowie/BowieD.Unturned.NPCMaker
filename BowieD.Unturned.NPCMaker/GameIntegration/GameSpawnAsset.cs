@@ -1,10 +1,12 @@
-﻿using BowieD.Unturned.NPCMaker.Parsing;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
+using BowieD.Unturned.NPCMaker.Parsing;
 using System;
 using System.Collections.Generic;
+using System.Windows.Media;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration
 {
-    public class GameSpawnAsset : GameAsset
+    public class GameSpawnAsset : GameAsset, IHasAnimatedThumbnail
     {
         public class SpawnTable
         {
@@ -61,6 +63,23 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
         public override EGameAssetCategory Category => EGameAssetCategory.SPAWN;
 
+        public IEnumerable<ImageSource> Thumbnails
+        {
+            get
+            {
+                HashSet<ushort> poss = new HashSet<ushort>();
+                resolveAllPossibilites<GameItemAsset>(poss);
+
+                foreach (var p in poss)
+                {
+                    if (GameAssetManager.TryGetAsset<GameItemAsset>(p, out var itemAsset))
+                    {
+                        yield return ThumbnailManager.CreateThumbnail(itemAsset.ImagePath);
+                    }
+                }
+            }
+        }
+
         public void resolve(out ushort id, out bool isSpawn)
         {
             id = 0;
@@ -115,6 +134,23 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 {
                     num2 += table2.weight;
                     table2.chance = num2 / num;
+                }
+            }
+        }
+
+        public void resolveAllPossibilites<T>(HashSet<ushort> possibilites) where T : GameAsset
+        {
+            foreach (var t in tables)
+            {
+                if (t.spawnID > 0 && GameAssetManager.TryGetAsset<GameSpawnAsset>(t.spawnID, out var gameSpawnAsset))
+                {
+                    gameSpawnAsset.sortAndNormalizeWeights();
+
+                    gameSpawnAsset.resolveAllPossibilites<T>(possibilites);
+                }
+                else if (t.assetID > 0 && GameAssetManager.TryGetAsset<T>(t.assetID, out var gameAsset))
+                {
+                    possibilites.Add(gameAsset.id);
                 }
             }
         }
