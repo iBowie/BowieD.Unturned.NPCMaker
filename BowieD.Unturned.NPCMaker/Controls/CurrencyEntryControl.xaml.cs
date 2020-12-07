@@ -48,7 +48,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
                     imagePath = GameItemAsset.DefaultImagePath;
                 }
                 header.Text = headerText;
-                img.Source = ThumbnailManager.GetThumbnail(imagePath);
+                img.Source = ThumbnailManager.CreateThumbnail(imagePath);
             }
         }
 

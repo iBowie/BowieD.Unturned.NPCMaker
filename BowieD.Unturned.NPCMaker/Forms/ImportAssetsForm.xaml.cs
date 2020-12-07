@@ -97,6 +97,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     tokenSource?.Cancel(true);
 
                     GameIntegration.GameAssetManager.Purge();
+                    ThumbnailManager.Purge();
                 }
             };
         }
@@ -121,6 +122,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 await App.Logger.Log("Cancelled after import", Logging.ELogLevel.TRACE);
                 GameIntegration.GameAssetManager.Purge();
+                ThumbnailManager.Purge();
                 return;
             }
 
@@ -138,6 +140,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 await App.Logger.Log("Cancelled after import", Logging.ELogLevel.TRACE);
                 GameIntegration.GameAssetManager.Purge();
+                ThumbnailManager.Purge();
                 return;
             }
 
@@ -165,6 +168,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 await App.Logger.Log("Cancelled after import", Logging.ELogLevel.TRACE);
                 GameIntegration.GameAssetManager.Purge();
+                ThumbnailManager.Purge();
                 return;
             }
 

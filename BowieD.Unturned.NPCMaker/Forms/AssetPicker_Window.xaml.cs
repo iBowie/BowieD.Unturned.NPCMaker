@@ -157,7 +157,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 Image icon = new Image()
                 {
-                    Source = ThumbnailManager.GetThumbnail(hasIcon.ImagePath),
+                    Source = ThumbnailManager.CreateThumbnail(hasIcon.ImagePath),
                     Width = 32,
                     Height = 32,
                     Margin = new Thickness(1)
