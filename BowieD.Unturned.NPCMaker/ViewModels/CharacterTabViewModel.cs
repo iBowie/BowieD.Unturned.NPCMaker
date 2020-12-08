@@ -58,6 +58,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingDefaultHat.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingDefaultHat.ContextMenu = cidDefault_hat;
+            MainWindow.Instance.controlClothingDefaultHat.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidDefault_glasses = new ContextMenu();
             cidDefault_glasses.Items.Add(ContextHelper.CreateSelectGlassesButton((asset) =>
@@ -66,6 +67,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingDefaultGlasses.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingDefaultGlasses.ContextMenu = cidDefault_glasses;
+            MainWindow.Instance.controlClothingDefaultGlasses.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidDefault_backpack = new ContextMenu();
             cidDefault_backpack.Items.Add(ContextHelper.CreateSelectBackpackButton((asset) =>
@@ -74,6 +76,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingDefaultBackpack.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingDefaultBackpack.ContextMenu = cidDefault_backpack;
+            MainWindow.Instance.controlClothingDefaultBackpack.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidDefault_shirt = new ContextMenu();
             cidDefault_shirt.Items.Add(ContextHelper.CreateSelectShirtButton((asset) =>
@@ -82,6 +85,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingDefaultShirt.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingDefaultShirt.ContextMenu = cidDefault_shirt;
+            MainWindow.Instance.controlClothingDefaultShirt.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidDefault_pants = new ContextMenu();
             cidDefault_pants.Items.Add(ContextHelper.CreateSelectPantsButton((asset) =>
@@ -90,6 +94,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingDefaultPants.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingDefaultPants.ContextMenu = cidDefault_pants;
+            MainWindow.Instance.controlClothingDefaultPants.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidDefault_mask = new ContextMenu();
             cidDefault_mask.Items.Add(ContextHelper.CreateSelectMaskButton((asset) =>
@@ -98,6 +103,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingDefaultMask.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingDefaultMask.ContextMenu = cidDefault_mask;
+            MainWindow.Instance.controlClothingDefaultMask.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidDefault_vest = new ContextMenu();
             cidDefault_vest.Items.Add(ContextHelper.CreateSelectVestButton((asset) =>
@@ -106,6 +112,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingDefaultVest.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingDefaultVest.ContextMenu = cidDefault_vest;
+            MainWindow.Instance.controlClothingDefaultVest.ValueChanged += (sender, e) => UpdateClothing();
             #endregion
             #region Halloween
             ContextMenu cidHalloween_hat = new ContextMenu();
@@ -115,6 +122,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingHalloweenHat.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingHalloweenHat.ContextMenu = cidHalloween_hat;
+            MainWindow.Instance.controlClothingHalloweenHat.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidHalloween_glasses = new ContextMenu();
             cidHalloween_glasses.Items.Add(ContextHelper.CreateSelectGlassesButton((asset) =>
@@ -123,6 +131,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingHalloweenGlasses.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingHalloweenGlasses.ContextMenu = cidHalloween_glasses;
+            MainWindow.Instance.controlClothingHalloweenGlasses.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidHalloween_backpack = new ContextMenu();
             cidHalloween_backpack.Items.Add(ContextHelper.CreateSelectBackpackButton((asset) =>
@@ -131,6 +140,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingHalloweenBackpack.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingHalloweenBackpack.ContextMenu = cidHalloween_backpack;
+            MainWindow.Instance.controlClothingHalloweenBackpack.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidHalloween_shirt = new ContextMenu();
             cidHalloween_shirt.Items.Add(ContextHelper.CreateSelectShirtButton((asset) =>
@@ -139,6 +149,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingHalloweenShirt.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingHalloweenShirt.ContextMenu = cidHalloween_shirt;
+            MainWindow.Instance.controlClothingHalloweenShirt.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidHalloween_pants = new ContextMenu();
             cidHalloween_pants.Items.Add(ContextHelper.CreateSelectPantsButton((asset) =>
@@ -147,6 +158,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingHalloweenPants.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingHalloweenPants.ContextMenu = cidHalloween_pants;
+            MainWindow.Instance.controlClothingHalloweenPants.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidHalloween_mask = new ContextMenu();
             cidHalloween_mask.Items.Add(ContextHelper.CreateSelectMaskButton((asset) =>
@@ -155,6 +167,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingHalloweenMask.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingHalloweenMask.ContextMenu = cidHalloween_mask;
+            MainWindow.Instance.controlClothingHalloweenMask.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidHalloween_vest = new ContextMenu();
             cidHalloween_vest.Items.Add(ContextHelper.CreateSelectVestButton((asset) =>
@@ -163,6 +176,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingHalloweenVest.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingHalloweenVest.ContextMenu = cidHalloween_vest;
+            MainWindow.Instance.controlClothingHalloweenVest.ValueChanged += (sender, e) => UpdateClothing();
             #endregion
             #region Christmas
             ContextMenu cidChristmas_hat = new ContextMenu();
@@ -172,6 +186,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingChristmasHat.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingChristmasHat.ContextMenu = cidChristmas_hat;
+            MainWindow.Instance.controlClothingChristmasHat.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidChristmas_glasses = new ContextMenu();
             cidChristmas_glasses.Items.Add(ContextHelper.CreateSelectGlassesButton((asset) =>
@@ -180,6 +195,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingChristmasGlasses.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingChristmasGlasses.ContextMenu = cidChristmas_glasses;
+            MainWindow.Instance.controlClothingChristmasGlasses.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidChristmas_backpack = new ContextMenu();
             cidChristmas_backpack.Items.Add(ContextHelper.CreateSelectBackpackButton((asset) =>
@@ -188,6 +204,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingChristmasBackpack.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingChristmasBackpack.ContextMenu = cidChristmas_backpack;
+            MainWindow.Instance.controlClothingChristmasBackpack.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidChristmas_shirt = new ContextMenu();
             cidChristmas_shirt.Items.Add(ContextHelper.CreateSelectShirtButton((asset) =>
@@ -196,6 +213,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingChristmasShirt.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingChristmasShirt.ContextMenu = cidChristmas_shirt;
+            MainWindow.Instance.controlClothingChristmasShirt.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidChristmas_pants = new ContextMenu();
             cidChristmas_pants.Items.Add(ContextHelper.CreateSelectPantsButton((asset) =>
@@ -204,6 +222,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingChristmasPants.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingChristmasPants.ContextMenu = cidChristmas_pants;
+            MainWindow.Instance.controlClothingChristmasPants.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidChristmas_mask = new ContextMenu();
             cidChristmas_mask.Items.Add(ContextHelper.CreateSelectMaskButton((asset) =>
@@ -212,6 +231,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingChristmasMask.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingChristmasMask.ContextMenu = cidChristmas_mask;
+            MainWindow.Instance.controlClothingChristmasMask.ValueChanged += (sender, e) => UpdateClothing();
 
             ContextMenu cidChristmas_vest = new ContextMenu();
             cidChristmas_vest.Items.Add(ContextHelper.CreateSelectVestButton((asset) =>
@@ -220,8 +240,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 MainWindow.Instance.controlClothingChristmasVest.Value = asset.id;
             }));
             MainWindow.Instance.controlClothingChristmasVest.ContextMenu = cidChristmas_vest;
+            MainWindow.Instance.controlClothingChristmasVest.ValueChanged += (sender, e) => UpdateClothing();
             #endregion
             #endregion
+            MainWindow.Instance.clothingTabControl.SelectionChanged += (sender, e) => UpdateClothing();
             #region Equipment Init
             ContextMenu cid_primary = new ContextMenu();
             cid_primary.Items.Add(ContextHelper.CreateSelectItemButton((asset) =>
@@ -870,6 +892,44 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             yield return new Coloring.Color("#352C22");
             yield return new Coloring.Color("#373737");
             yield return new Coloring.Color("#191919");
+        }
+
+        private void UpdateClothing()
+        {
+            NPCClothing clothing;
+
+            switch (MainWindow.Instance.clothingTabControl.SelectedIndex)
+            {
+                case 0:
+                    clothing = DefaultClothing;
+                    break;
+                case 1:
+                    clothing = ChristmasClothing;
+                    break;
+                case 2:
+                    clothing = HalloweenClothing;
+                    break;
+                default:
+                    return;
+            }
+
+            if (clothing.IsHairVisible)
+            {
+                MainWindow.Instance.hairInvisibleIcon.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                MainWindow.Instance.hairInvisibleIcon.Visibility = Visibility.Visible;
+            }
+
+            if (clothing.IsBeardVisible)
+            {
+                MainWindow.Instance.beardInvisibleIcon.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                MainWindow.Instance.beardInvisibleIcon.Visibility = Visibility.Visible;
+            }
         }
     }
 }
