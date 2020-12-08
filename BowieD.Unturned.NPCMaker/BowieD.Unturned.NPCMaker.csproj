@@ -302,6 +302,7 @@
     <Compile Include="GameIntegration\GameItemGearAsset.cs" />
     <Compile Include="GameIntegration\GameItemGlassesAsset.cs" />
     <Compile Include="GameIntegration\GameItemGripAsset.cs" />
+    <Compile Include="GameIntegration\GameItemGunAsset.cs" />
     <Compile Include="GameIntegration\GameItemHatAsset.cs" />
     <Compile Include="GameIntegration\GameItemMagazineAsset.cs" />
     <Compile Include="GameIntegration\GameItemMaskAsset.cs" />
@@ -310,6 +311,7 @@
     <Compile Include="GameIntegration\GameItemSightAsset.cs" />
     <Compile Include="GameIntegration\GameItemTacticalAsset.cs" />
     <Compile Include="GameIntegration\GameItemVestAsset.cs" />
+    <Compile Include="GameIntegration\GameItemWeaponAsset.cs" />
     <Compile Include="GameIntegration\GameNPCAsset.cs" />
     <Compile Include="GameIntegration\GameObjectAsset.cs" />
     <Compile Include="GameIntegration\GameQuestAsset.cs" />

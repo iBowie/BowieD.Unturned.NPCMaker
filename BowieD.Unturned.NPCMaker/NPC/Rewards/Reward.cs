@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
 using BowieD.Unturned.NPCMaker.XAML;
@@ -298,6 +299,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 }
             }
         }
+        public virtual void PostLoad(Universal_RewardEditor editor) { }
+
         public static string GetLocalizationKey(string typeName)
         {
             string s1 = typeName.Substring(6);

@@ -324,7 +324,6 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             switch (vt)
             {
                 case "item":
-                case "gun":
                 case "food":
                 case "water":
                 case "medical":
@@ -405,6 +404,8 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                     return new Tuple<bool, GameAsset>(true, new GameSpawnAsset(dr, name, id, guid, vt, origin));
                 case "resource":
                     return new Tuple<bool, GameAsset>(true, new GameResourceAsset(dr, name, id, guid, vt, origin));
+                case "gun":
+                    return new Tuple<bool, GameAsset>(true, new GameItemGunAsset(dr, shortDir, name, id, guid, vt, origin));
                 default:
                     return new Tuple<bool, GameAsset>(true, new GameAsset(name, id, guid, vt, origin));
             }

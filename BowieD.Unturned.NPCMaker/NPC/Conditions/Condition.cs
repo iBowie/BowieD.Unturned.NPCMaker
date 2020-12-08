@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.XAML;
 using System;
@@ -396,6 +397,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             }
             return sb.ToString();
         }
+
+        public virtual void PostLoad(Universal_ConditionEditor editor) { }
 
         public abstract bool Check(Simulation simulation);
         public abstract void Apply(Simulation simulation);
