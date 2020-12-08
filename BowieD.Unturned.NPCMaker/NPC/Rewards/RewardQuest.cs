@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
+using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
@@ -9,7 +10,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     {
         public override RewardType Type => RewardType.Quest;
         public override string UIText => $"{LocalizationManager.Current.Reward["Type_Quest"]} [{ID}]";
-        [RewardAssetPicker(typeof(GameQuestAsset), "Control_SelectAsset_Quest", MahApps.Metro.IconPacks.PackIconMaterialKind.Exclamation)]
+        [AssetPicker(typeof(GameQuestAsset), "Control_SelectAsset_Quest", MahApps.Metro.IconPacks.PackIconMaterialKind.Exclamation)]
         public ushort ID { get; set; }
 
         public override void Give(Simulation simulation)

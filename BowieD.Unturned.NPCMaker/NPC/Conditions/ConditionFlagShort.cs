@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
@@ -9,7 +10,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     {
         public ushort ID { get; set; }
         public short Value { get; set; }
-        [ConditionNoValue]
+        [NoValue]
         public bool Allow_Unset { get; set; }
         public Logic_Type Logic { get; set; }
         public override Condition_Type Type => Condition_Type.Flag_Short;

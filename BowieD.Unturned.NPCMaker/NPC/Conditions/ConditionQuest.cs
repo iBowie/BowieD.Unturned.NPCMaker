@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System.Linq;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
@@ -9,7 +10,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public sealed class ConditionQuest : Condition
     {
         public override Condition_Type Type => Condition_Type.Quest;
-        [ConditionAssetPicker(typeof(GameQuestAsset), "Control_SelectAsset_Quest", MahApps.Metro.IconPacks.PackIconMaterialKind.Exclamation)]
+        [AssetPicker(typeof(GameQuestAsset), "Control_SelectAsset_Quest", MahApps.Metro.IconPacks.PackIconMaterialKind.Exclamation)]
         public ushort ID { get; set; }
         public Quest_Status Status { get; set; }
         public Logic_Type Logic { get; set; }

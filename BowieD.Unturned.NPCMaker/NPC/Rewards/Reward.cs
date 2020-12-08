@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
+using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using BowieD.Unturned.NPCMaker.XAML;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     [System.Serializable]
     public abstract class Reward : IHasUIText
     {
-        [RewardSkipField]
+        [SkipField]
         public string Localization { get; set; }
         public abstract RewardType Type { get; }
         public abstract string UIText { get; }
@@ -80,8 +81,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                     l.ToolTip = LocalizationManager.Current.Reward[$"{key2}_Tooltip"];
                 }
 
-                RewardRangeAttribute rangeAttribute = prop.GetCustomAttribute<RewardRangeAttribute>();
-                RewardAssetPickerAttribute assetPickerAttribute = prop.GetCustomAttribute<RewardAssetPickerAttribute>();
+                RangeAttribute rangeAttribute = prop.GetCustomAttribute<RangeAttribute>();
+                AssetPickerAttribute assetPickerAttribute = prop.GetCustomAttribute<AssetPickerAttribute>();
                 borderContents.Children.Add(l);
                 FrameworkElement valueControl = null;
                 if (propType == typeof(uint))

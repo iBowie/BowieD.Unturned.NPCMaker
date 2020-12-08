@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
@@ -9,9 +10,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     {
         public ushort ID { get; set; }
         public short Value { get; set; }
-        [ConditionAssetPicker(typeof(GameObjectAsset), "Control_SelectAsset_Object", MahApps.Metro.IconPacks.PackIconMaterialKind.Home)]
+        [AssetPicker(typeof(GameObjectAsset), "Control_SelectAsset_Object", MahApps.Metro.IconPacks.PackIconMaterialKind.Home)]
         public string Object { get; set; }
-        [ConditionOptional(byte.MaxValue)]
+        [Optional(byte.MaxValue)]
         public byte? Nav { get; set; }
         public override Condition_Type Type => Condition_Type.Kills_Object;
         public override string UIText

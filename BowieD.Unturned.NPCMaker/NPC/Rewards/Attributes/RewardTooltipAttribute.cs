@@ -1,14 +1,12 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
-using System;
+﻿using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes
 {
-    public class RewardTooltipAttribute : Attribute
+    public class RewardTooltipAttribute : TooltipAttribute
     {
-        public readonly string Text;
-        public RewardTooltipAttribute(string key)
+        public RewardTooltipAttribute(string key) : base(key, "Reward")
         {
-            Text = LocalizationManager.Current.Reward[key];
+
         }
     }
 }

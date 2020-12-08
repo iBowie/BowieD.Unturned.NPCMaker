@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using BowieD.Unturned.NPCMaker.XAML;
 using System;
 using System.Collections.Generic;
@@ -38,13 +39,13 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [Serializable]
     public abstract class Condition : IHasUIText
     {
-        [ConditionSkipField]
+        [SkipField]
         public string Localization { get; set; }
         [XmlIgnore]
         public abstract Condition_Type Type { get; }
         [XmlIgnore]
         public abstract string UIText { get; }
-        [ConditionNoValue]
+        [NoValue]
         public bool Reset { get; set; }
 
         public IEnumerable<FrameworkElement> GetControls()
@@ -92,8 +93,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 }
 
                 borderContents.Children.Add(l);
-                ConditionRangeAttribute rangeAttribute = prop.GetCustomAttribute<ConditionRangeAttribute>();
-                ConditionAssetPickerAttribute assetPickerAttribute = prop.GetCustomAttribute<ConditionAssetPickerAttribute>();
+                RangeAttribute rangeAttribute = prop.GetCustomAttribute<RangeAttribute>();
+                AssetPickerAttribute assetPickerAttribute = prop.GetCustomAttribute<AssetPickerAttribute>();
                 FrameworkElement valueControl = null;
                 if (propType == typeof(ushort))
                 {

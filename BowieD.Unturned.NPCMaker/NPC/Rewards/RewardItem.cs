@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
+using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
@@ -30,25 +31,25 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             }
         }
 
-        [RewardAssetPicker(typeof(GameItemAsset), "Control_SelectAsset_Item", MahApps.Metro.IconPacks.PackIconMaterialKind.Archive)]
+        [AssetPicker(typeof(GameItemAsset), "Control_SelectAsset_Item", MahApps.Metro.IconPacks.PackIconMaterialKind.Archive)]
         public ushort ID { get; set; }
         public byte Amount { get; set; }
-        [RewardOptional(null)]
-        [RewardAssetPicker(typeof(GameItemSightAsset), "Control_SelectAsset_Sight", MahApps.Metro.IconPacks.PackIconMaterialKind.Crosshairs)]
+        [Optional(null)]
+        [AssetPicker(typeof(GameItemSightAsset), "Control_SelectAsset_Sight", MahApps.Metro.IconPacks.PackIconMaterialKind.Crosshairs)]
         public ushort? Sight { get; set; }
-        [RewardOptional(null)]
-        [RewardAssetPicker(typeof(GameItemTacticalAsset), "Control_SelectAsset_Tactical", MahApps.Metro.IconPacks.PackIconMaterialKind.KnifeMilitary)]
+        [Optional(null)]
+        [AssetPicker(typeof(GameItemTacticalAsset), "Control_SelectAsset_Tactical", MahApps.Metro.IconPacks.PackIconMaterialKind.KnifeMilitary)]
         public ushort? Tactical { get; set; }
-        [RewardOptional(null)]
-        [RewardAssetPicker(typeof(GameItemGripAsset), "Control_SelectAsset_Grip", MahApps.Metro.IconPacks.PackIconMaterialKind.Hand)]
+        [Optional(null)]
+        [AssetPicker(typeof(GameItemGripAsset), "Control_SelectAsset_Grip", MahApps.Metro.IconPacks.PackIconMaterialKind.Hand)]
         public ushort? Grip { get; set; }
-        [RewardOptional(null)]
-        [RewardAssetPicker(typeof(GameItemBarrelAsset), "Control_SelectAsset_Barrel", MahApps.Metro.IconPacks.PackIconMaterialKind.Pistol)]
+        [Optional(null)]
+        [AssetPicker(typeof(GameItemBarrelAsset), "Control_SelectAsset_Barrel", MahApps.Metro.IconPacks.PackIconMaterialKind.Pistol)]
         public ushort? Barrel { get; set; }
-        [RewardOptional(null)]
-        [RewardAssetPicker(typeof(GameItemMagazineAsset), "Control_SelectAsset_Magazine", MahApps.Metro.IconPacks.PackIconMaterialKind.Ammunition)]
+        [Optional(null)]
+        [AssetPicker(typeof(GameItemMagazineAsset), "Control_SelectAsset_Magazine", MahApps.Metro.IconPacks.PackIconMaterialKind.Ammunition)]
         public ushort? Magazine { get; set; }
-        [RewardOptional(null)]
+        [Optional(null)]
         public byte? Ammo { get; set; }
         public bool Auto_Equip { get; set; }
 

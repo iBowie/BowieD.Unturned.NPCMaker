@@ -5,6 +5,7 @@ using BowieD.Unturned.NPCMaker.NPC.Conditions;
 using BowieD.Unturned.NPCMaker.NPC.Currency;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
+using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -631,15 +632,15 @@ namespace BowieD.Unturned.NPCMaker.Export
                 }
 
                 string propName = prop.Name;
-                ConditionSkipFieldAttribute skipPropA = prop.GetCustomAttribute<ConditionSkipFieldAttribute>();
+                SkipFieldAttribute skipPropA = prop.GetCustomAttribute<SkipFieldAttribute>();
                 if ((skipLocalization && propName == "Localization") || skipPropA != null)
                 {
                     continue;
                 }
 
                 object propValue = prop.GetValue(condition);
-                ConditionNoValueAttribute noValueA = prop.GetCustomAttribute<ConditionNoValueAttribute>();
-                ConditionOptionalAttribute optionalA = prop.GetCustomAttribute<ConditionOptionalAttribute>();
+                NoValueAttribute noValueA = prop.GetCustomAttribute<NoValueAttribute>();
+                OptionalAttribute optionalA = prop.GetCustomAttribute<OptionalAttribute>();
                 if (skipPropA != null)
                 {
                     continue;
@@ -663,10 +664,10 @@ namespace BowieD.Unturned.NPCMaker.Export
                     {
                         if (optionalA != null)
                         {
-                            if (optionalA.defaultValue == null)
+                            if (optionalA.DefaultValue == null)
                                 continue;
 
-                            propValue = optionalA.defaultValue;
+                            propValue = optionalA.DefaultValue;
                         }
                     }
                 }
@@ -687,15 +688,15 @@ namespace BowieD.Unturned.NPCMaker.Export
                 }
 
                 string propName = prop.Name;
-                RewardSkipFieldAttribute skipPropA = prop.GetCustomAttribute<RewardSkipFieldAttribute>();
+                SkipFieldAttribute skipPropA = prop.GetCustomAttribute<SkipFieldAttribute>();
                 if ((skipLocalization && propName == "Localization") || skipPropA != null)
                 {
                     continue;
                 }
 
                 object propValue = prop.GetValue(reward);
-                RewardNoValueAttribute noValueA = prop.GetCustomAttribute<RewardNoValueAttribute>();
-                RewardOptionalAttribute optionalA = prop.GetCustomAttribute<RewardOptionalAttribute>();
+                NoValueAttribute noValueA = prop.GetCustomAttribute<NoValueAttribute>();
+                OptionalAttribute optionalA = prop.GetCustomAttribute<OptionalAttribute>();
                 if (skipPropA != null)
                 {
                     continue;

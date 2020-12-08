@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System;
 using System.Text;
 
@@ -10,7 +11,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     {
         public ushort ID { get; set; }
         public short Value { get; set; }
-        [ConditionAssetPicker(typeof(GameResourceAsset), "Control_SelectAsset_Resource", MahApps.Metro.IconPacks.PackIconMaterialKind.Tree)]
+        [AssetPicker(typeof(GameResourceAsset), "Control_SelectAsset_Resource", MahApps.Metro.IconPacks.PackIconMaterialKind.Tree)]
         public string Tree { get; set; }
         public override Condition_Type Type => Condition_Type.Kills_Tree;
         public override string UIText
