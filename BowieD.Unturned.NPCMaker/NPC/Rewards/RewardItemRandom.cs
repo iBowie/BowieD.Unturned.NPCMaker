@@ -12,6 +12,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public override string UIText => $"{LocalizationManager.Current.Reward["Type_Item_Random"]} [{ID}] x{Amount}";
         [AssetPicker(typeof(GameSpawnAsset), "Control_SelectAsset_Spawn", MahApps.Metro.IconPacks.PackIconMaterialKind.Dice6)]
         public ushort ID { get; set; }
+        [Range((byte)1, byte.MaxValue)]
         public byte Amount { get; set; }
 
         public override void Give(Simulation simulation)

@@ -67,7 +67,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 {
                     Content = localizedName
                 };
-                RewardTooltipAttribute rewardTooltip = prop.GetCustomAttribute<RewardTooltipAttribute>();
+                TooltipAttribute rewardTooltip = prop.GetCustomAttribute<TooltipAttribute>();
                 if (rewardTooltip != null)
                 {
                     l.ToolTip = rewardTooltip.Text;
@@ -219,10 +219,21 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 }
                 else if (propType == typeof(byte))
                 {
+                    byte newMax, newMin;
+                    if (rangeAttribute != null && rangeAttribute.Maximum is byte rMax && rangeAttribute.Minimum is byte rMin)
+                    {
+                        newMax = rMax;
+                        newMin = rMin;
+                    }
+                    else
+                    {
+                        newMax = byte.MaxValue;
+                        newMin = byte.MinValue;
+                    }
                     valueControl = new MahApps.Metro.Controls.NumericUpDown()
                     {
-                        Maximum = byte.MaxValue,
-                        Minimum = byte.MinValue,
+                        Maximum = newMax,
+                        Minimum = newMin,
                         ParsingNumberStyle = System.Globalization.NumberStyles.Integer,
                         HideUpDownButtons = true
                     };

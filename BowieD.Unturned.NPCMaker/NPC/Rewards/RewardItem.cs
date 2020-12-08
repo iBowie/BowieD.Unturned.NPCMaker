@@ -33,6 +33,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
         [AssetPicker(typeof(GameItemAsset), "Control_SelectAsset_Item", MahApps.Metro.IconPacks.PackIconMaterialKind.Archive)]
         public ushort ID { get; set; }
+        [Range((byte)1, byte.MaxValue)]
         public byte Amount { get; set; }
         [Optional(null)]
         [AssetPicker(typeof(GameItemSightAsset), "Control_SelectAsset_Sight", MahApps.Metro.IconPacks.PackIconMaterialKind.Crosshairs)]

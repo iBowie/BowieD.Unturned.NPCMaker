@@ -78,7 +78,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 {
                     Content = localizedName
                 };
-                ConditionTooltipAttribute conditionTooltip = prop.GetCustomAttribute<ConditionTooltipAttribute>();
+                TooltipAttribute conditionTooltip = prop.GetCustomAttribute<TooltipAttribute>();
                 if (conditionTooltip != null)
                 {
                     l.ToolTip = conditionTooltip.Text;
