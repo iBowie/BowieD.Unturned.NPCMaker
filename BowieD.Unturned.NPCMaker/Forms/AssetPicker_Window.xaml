@@ -21,7 +21,7 @@
             <StackPanel Name="stack"/>
         </ScrollViewer>
         <GroupBox Margin="5" Grid.Row="1" Header="{xaml:Localize INTERFACE_AssetPicker_Filter_Header}">
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical" Name="filterGrid">
                 <TextBox Name="filter_name" Margin="10" mah:TextBoxHelper.Watermark="{xaml:Localize INTERFACE_AssetPicker_Filter_Name_Watermark}" />
                 <CheckBox Name="filter_origin_unturned" Margin="10" Content="{xaml:Localize INTERFACE_AssetPicker_Filter_Origin_Unturned}" IsChecked="True"/>
                 <CheckBox Name="filter_origin_workshop" Margin="10" Content="{xaml:Localize INTERFACE_AssetPicker_Filter_Origin_Workshop}" IsChecked="True"/>

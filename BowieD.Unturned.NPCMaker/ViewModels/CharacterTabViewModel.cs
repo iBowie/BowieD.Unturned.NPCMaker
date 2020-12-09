@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.GameIntegration.Filtering;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.NPC;
@@ -250,7 +251,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 EquipmentPrimary = asset.id;
                 MainWindow.Instance.primaryIdBox.Value = asset.id;
-            }));
+            }, new AssetFilter_Equippable("Interface", "AssetPicker_Filter_Equippable", Equip_Type.Primary)));
             MainWindow.Instance.primaryIdBox.ContextMenu = cid_primary;
 
             ContextMenu cid_secondary = new ContextMenu();
@@ -258,7 +259,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 EquipmentSecondary = asset.id;
                 MainWindow.Instance.secondaryIdBox.Value = asset.id;
-            }));
+            }, new AssetFilter_Equippable("Interface", "AssetPicker_Filter_Equippable", Equip_Type.Secondary)));
             MainWindow.Instance.secondaryIdBox.ContextMenu = cid_secondary;
 
             ContextMenu cid_tertiary = new ContextMenu();
@@ -266,7 +267,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 EquipmentTertiary = asset.id;
                 MainWindow.Instance.tertiaryIdBox.Value = asset.id;
-            }));
+            }, new AssetFilter_Equippable("Interface", "AssetPicker_Filter_Equippable", Equip_Type.Tertiary)));
             MainWindow.Instance.tertiaryIdBox.ContextMenu = cid_tertiary;
             #endregion
 

@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.GameIntegration.Filtering;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Templating;
 using BowieD.Unturned.NPCMaker.ViewModels;
@@ -499,7 +500,7 @@ namespace BowieD.Unturned.NPCMaker.Common
             return b;
         }
 
-        private static MenuItem createSelectAssetButton<T>(Action<T> action, string key, PackIconMaterialKind icon) where T : GameAsset
+        private static MenuItem createSelectAssetButton<T>(Action<T> action, string key, PackIconMaterialKind icon, params AssetFilter[] filters) where T : GameAsset
         {
             MenuItem b = new MenuItem()
             {
@@ -507,7 +508,7 @@ namespace BowieD.Unturned.NPCMaker.Common
             };
             b.Click += (object sender, RoutedEventArgs e) =>
             {
-                AssetPicker_Window apw = new AssetPicker_Window(typeof(T));
+                AssetPicker_Window apw = new AssetPicker_Window(typeof(T), filters);
                 apw.Owner = MainWindow.Instance;
                 if (apw.ShowDialog() == true && apw.SelectedAsset is T asat)
                 {
@@ -521,7 +522,7 @@ namespace BowieD.Unturned.NPCMaker.Common
             (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;
         }
-        internal static MenuItem CreateSelectAssetButton(Type assetType, Action<GameAsset> action, string key, PackIconMaterialKind icon)
+        internal static MenuItem CreateSelectAssetButton(Type assetType, Action<GameAsset> action, string key, PackIconMaterialKind icon, params AssetFilter[] filters)
         {
             MenuItem b = new MenuItem()
             {
@@ -529,7 +530,7 @@ namespace BowieD.Unturned.NPCMaker.Common
             };
             b.Click += (object sender, RoutedEventArgs e) =>
             {
-                AssetPicker_Window apw = new AssetPicker_Window(assetType);
+                AssetPicker_Window apw = new AssetPicker_Window(assetType, filters);
                 apw.Owner = MainWindow.Instance;
                 if (apw.ShowDialog() == true)
                 {
@@ -561,9 +562,9 @@ namespace BowieD.Unturned.NPCMaker.Common
         {
             return CreateSelectAssetButton(assetType, action, "Control_SelectAsset_Item", PackIconMaterialKind.Archive);
         }
-        internal static MenuItem CreateSelectItemButton(Action<GameItemAsset> action)
+        internal static MenuItem CreateSelectItemButton(Action<GameItemAsset> action, params AssetFilter[] filters)
         {
-            return createSelectAssetButton<GameItemAsset>(action, "Control_SelectAsset_Item", PackIconMaterialKind.Archive);
+            return createSelectAssetButton<GameItemAsset>(action, "Control_SelectAsset_Item", PackIconMaterialKind.Archive, filters);
         }
         internal static MenuItem CreateSelectHatButton(Action<GameItemHatAsset> action)
         {

@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Parsing;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,19 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             sizeY = data.ReadByte("Size_Y", 0);
             if (sizeY < 1)
                 sizeY = 1;
+
+            useable = data.ReadString("Useable");
+            canPlayerEquip = data.ReadBoolean("Can_Player_Equip", !string.IsNullOrEmpty(useable));
+
+            slot = data.ReadEnum("Slot", Equip_Type.None);
         }
 
         public readonly bool isPro;
         public readonly EGameItemRarity rarity;
         public readonly byte sizeX, sizeY;
+        public readonly bool canPlayerEquip;
+        public readonly string useable;
+        public readonly Equip_Type slot;
 
         private string dirName;
 

@@ -95,7 +95,8 @@
         "Equipment_Equipped_None": "None",
         "Equipment_Equipped_Primary": "Primary",
         "Equipment_Equipped_Secondary": "Secondary",
-        "Equipment_Equipped_Tertiary": "Tertiary"
+        "Equipment_Equipped_Tertiary": "Tertiary",
+        "Equipment_Equipped_Any": "Any"
     },
     "Dialogue":
     {
@@ -500,6 +501,8 @@
         "AssetPicker_ToolTip_GameItemClothingAsset_Beard_Invisible": "Hides beard",
         "AssetPicker_ToolTip_GameItemBagAsset_Width": "Capacity Width: {0}",
         "AssetPicker_ToolTip_GameItemBagAsset_Height": "Capacity Height: {0}",
+
+        "AssetPicker_Filter_Equippable": "Show Only Equippable",
 
         "App_About": "Made by BowieD.\nLocalization Author(s): {0}\nVersion: {1}",
         "App_About_Title": "About",

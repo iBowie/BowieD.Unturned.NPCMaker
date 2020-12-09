@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.GameIntegration.Filtering;
 using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.Markup;
 using System;
@@ -14,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// </summary>
     public partial class AssetPicker_Window : Window
     {
-        public AssetPicker_Window(Type assetType)
+        public AssetPicker_Window(Type assetType, params AssetFilter[] filters)
         {
             markup = new RichText();
 
@@ -52,6 +53,31 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 RefreshAssets();
             };
 
+            assetFilters = filters ?? new AssetFilter[0];
+
+            foreach (var af in assetFilters)
+            {
+                CheckBox cb = new CheckBox()
+                {
+                    Content = af.Name,
+                    IsChecked = af.IsEnabled,
+                    Margin = new Thickness(10)
+                };
+
+                cb.Checked += (sender, e) =>
+                {
+                    af.IsEnabled = true;
+                    RefreshAssets();
+                };
+                cb.Unchecked += (sender, e) =>
+                {
+                    af.IsEnabled = false;
+                    RefreshAssets();
+                };
+
+                filterGrid.Children.Add(cb);
+            }
+
             RefreshAssets();
 
             _searchTimer = new DispatcherTimer()
@@ -69,6 +95,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
         private Type assetType;
         private IMarkup markup;
+        private AssetFilter[] assetFilters;
 
         private DispatcherTimer _searchTimer;
 
@@ -97,7 +124,25 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             continue;
                     }
 
-                    AddAssetToList(a);
+                    bool flag = true;
+
+                    if (assetFilters.Length > 0)
+                    {
+                        foreach (var af in assetFilters)
+                        {
+                            if (af.IsEnabled)
+                            {
+                                if (!af.ShouldDisplay(a))
+                                {
+                                    flag = false;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (flag)
+                        AddAssetToList(a);
                 }
             }
         }
