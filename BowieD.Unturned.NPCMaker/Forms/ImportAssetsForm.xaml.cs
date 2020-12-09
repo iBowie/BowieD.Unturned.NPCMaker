@@ -172,6 +172,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 return;
             }
 
+            GameIntegration.GameAssetManager.HasImportedAssets = true;
             hasDone = true;
 
             Close();

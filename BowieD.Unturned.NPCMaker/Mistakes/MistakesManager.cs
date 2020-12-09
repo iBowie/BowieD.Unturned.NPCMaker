@@ -119,7 +119,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 {
                     if (it.type == ItemType.VEHICLE)
                     {
-                        if (!GameAssetManager.TryGetAsset<GameVehicleAsset>(it.id, out _))
+                        if (GameAssetManager.HasImportedAssets && !GameAssetManager.TryGetAsset<GameVehicleAsset>(it.id, out _))
                         {
                             MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                             {
@@ -131,7 +131,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     }
                     if (it.type == ItemType.ITEM)
                     {
-                        if (!GameAssetManager.TryGetAsset<GameItemAsset>(it.id, out _))
+                        if (GameAssetManager.HasImportedAssets && !GameAssetManager.TryGetAsset<GameItemAsset>(it.id, out _))
                         {
                             MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
                             {

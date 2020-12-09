@@ -23,6 +23,15 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             InitializeComponent();
 
+            if (!GameAssetManager.HasImportedAssets)
+            {
+                filter_origin_unturned.IsChecked = false;
+                filter_origin_workshop.IsChecked = false;
+
+                filter_origin_unturned.IsEnabled = false;
+                filter_origin_workshop.IsEnabled = false;
+            }
+
             filter_name.TextChanged += (sender, e) =>
             {
                 _searchTimer.Stop();

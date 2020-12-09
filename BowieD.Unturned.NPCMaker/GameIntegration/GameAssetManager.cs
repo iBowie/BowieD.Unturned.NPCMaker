@@ -13,6 +13,8 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
     {
         private static readonly List<GameAsset> _assets = new List<GameAsset>();
 
+        public static bool HasImportedAssets { get; set; }
+
         public static IEnumerable<IHasIcon> GetAllAssetsWithIcons()
         {
             foreach (var asset in GetAllAssets<GameAsset>())
@@ -226,6 +228,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         public static void Purge()
         {
             _assets.Clear();
+            HasImportedAssets = false;
         }
 
         private static Tuple<bool, GameAsset> TryReadAssetFile(string fileName, EGameAssetOrigin origin)
