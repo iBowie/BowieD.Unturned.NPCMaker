@@ -1,4 +1,7 @@
-﻿using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
+using BowieD.Unturned.NPCMaker.NPC;
+using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using MahApps.Metro.Controls;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,7 +41,66 @@ namespace BowieD.Unturned.NPCMaker.Controls
             ShowMoveButtons = showMoveButtons;
         }
 
-        public object Value { get; private set; }
+        void updateIcon()
+        {
+            bool flag = true;
+            switch (Value)
+            {
+                case RewardItem itemReward:
+                    {
+                        if (itemReward.ID > 0 && GameAssetManager.TryGetAsset<GameItemAsset>(itemReward.ID, out var asset))
+                        {
+                            icon.Source = ThumbnailManager.CreateThumbnail(asset.ImagePath);
+                        }
+                        else
+                        {
+                            flag = false;
+                        }
+                    }
+                    break;
+                case VendorItem vendorItem:
+                    {
+                        if (vendorItem.type == ItemType.ITEM)
+                        {
+                            if (vendorItem.id > 0 && GameAssetManager.TryGetAsset<GameItemAsset>(vendorItem.id, out var asset))
+                            {
+                                icon.Source = ThumbnailManager.CreateThumbnail(asset.ImagePath);
+                            }
+                            else
+                            {
+                                flag = false;
+                            }
+                        }
+                        else
+                        {
+                            flag = false;
+                        }
+                    }
+                    break;
+                default:
+                    {
+                        flag = false;
+                    }
+                    break;
+            }
+
+            if (flag)
+                icon.Visibility = Visibility.Visible;
+            else
+                icon.Visibility = Visibility.Collapsed;
+        }
+
+        private object _value;
+        public object Value 
+        { 
+            get => _value;
+            private set
+            {
+                _value = value;
+
+                updateIcon();
+            }
+        }
         public ReturnType Type { get; }
         public bool ShowMoveButtons { get; internal set; }
 

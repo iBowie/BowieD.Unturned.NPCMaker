@@ -1542,6 +1542,9 @@
                     <Trigger Property="IsPressed" Value="True">
                         <Setter TargetName="border" Property="Opacity" Value="1"/>
                     </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource ForegroundColor}"/>
+                    </Trigger>
                 </ControlTemplate.Triggers>
             </ControlTemplate>
             <Style x:Key="FlatButtonStyle" TargetType="Button">

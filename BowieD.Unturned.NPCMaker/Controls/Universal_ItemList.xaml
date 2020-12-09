@@ -10,6 +10,7 @@
              Height="40" MinHeight="40" Width="Auto" MinWidth="250" VerticalAlignment="Top" Margin="5,5">
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
@@ -18,31 +19,59 @@
                 <TranslateTransform x:Name="animateTransform"/>
             </TransformGroup>
         </Grid.RenderTransform>
-        <Label Name="mainLabel" Margin="0,0,4,0" HorizontalAlignment="Left" MinWidth="100" Width="Auto" VerticalAlignment="Center" Height="32" VerticalContentAlignment="Center"/>
-        <StackPanel Grid.Column="1" Name="buttons" Orientation="Horizontal" HorizontalAlignment="Right" Margin="4,0,0,0">
-            <Button Click="CopyButton_Click" Name="copyButton" Width="31" HorizontalAlignment="Left" VerticalAlignment="Center" Height="31" Margin="0,4,4,4">
+        <Image Name="icon" Width="26" Height="26" Margin="5"/>
+        <Label Grid.Column="1" Name="mainLabel" Margin="5" HorizontalAlignment="Left" MinWidth="100" Width="Auto" VerticalAlignment="Center" Height="32" VerticalContentAlignment="Center"/>
+        <StackPanel Grid.Column="2" Name="buttons" Orientation="Horizontal" HorizontalAlignment="Right" Margin="4,0,0,0">
+            <Button Style="{DynamicResource FlatOutlineButtonStyle}" Click="CopyButton_Click" Name="copyButton" Width="31" HorizontalAlignment="Left" VerticalAlignment="Center" Height="31" Margin="0,4,4,4">
                 <Button.Content>
                     <iconPacks:PackIconMaterial Kind="ContentCopy" Foreground="{DynamicResource AccentColor}"/>
                 </Button.Content>
             </Button>
-            <Button Click="EditButton_Click" Name="editButton" Width="31" HorizontalAlignment="Left" VerticalAlignment="Center" Height="31" Margin="0,4,4,4">
+            <Button Style="{DynamicResource FlatOutlineButtonStyle}" Click="EditButton_Click" Name="editButton" Width="31" HorizontalAlignment="Left" VerticalAlignment="Center" Height="31" Margin="0,4,4,4">
                 <Button.Content>
                     <iconPacks:PackIconMaterial Kind="Pencil" Foreground="{DynamicResource AccentColor}"/>
                 </Button.Content>
             </Button>
-            <Button x:Name="deleteButton" Width="31" Height="31" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,4,4,4">
+            <Button Style="{DynamicResource FlatOutlineButtonStyle}" x:Name="deleteButton" Width="31" Height="31" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,4,4,4">
                 <iconPacks:PackIconMaterial Kind="Delete" Foreground="{DynamicResource AccentColor}"/>
             </Button>
-            <Button Name="moveUpButton" Width="31" Height="31" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,4,4,4">
-                <Button.Content>
-                    <iconPacks:PackIconMaterial Kind="ArrowUp" Foreground="{DynamicResource AccentColor}"/>
-                </Button.Content>
-            </Button>
-            <Button Name="moveDownButton" Width="31" Height="31" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,4,4,4">
-                <Button.Content>
-                    <iconPacks:PackIconMaterial Kind="ArrowDown" Foreground="{DynamicResource AccentColor}"/>
-                </Button.Content>
-            </Button>
+            <Grid Margin="0,4,4,4">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Style="{DynamicResource FlatOutlineButtonStyle}" Grid.Row="0" Name="moveUpButton" Margin="1,0,1,1">
+                    <Button.Content>
+                        <iconPacks:PackIconMaterial Height="8" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Kind="ArrowUp" Foreground="{Binding BorderBrush, ElementName=moveUpButton}"/>
+                    </Button.Content>
+                </Button>
+                <Button Style="{DynamicResource FlatOutlineButtonStyle}" Grid.Row="1" Name="moveDownButton" Margin="1">
+                    <Button.Content>
+                        <iconPacks:PackIconMaterial Height="8" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Kind="ArrowDown" Foreground="{Binding BorderBrush, ElementName=moveDownButton}"/>
+                    </Button.Content>
+                </Button>
+            </Grid>
         </StackPanel>
     </Grid>
+    <UserControl.Resources>
+        <Style x:Key="FlatOutlineButtonStyle" TargetType="Button">
+            <Setter Property="Template" Value="{DynamicResource FlatOutlineButtonTemplate}"/>
+        </Style>
+        <ControlTemplate x:Key="FlatOutlineButtonTemplate" TargetType="Button">
+            <Border Name="border" Opacity="0.5" Background="Transparent" BorderBrush="{DynamicResource AccentColor}" BorderThickness="1">
+                <ContentPresenter Margin="2" Content="{TemplateBinding Content}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="border" Property="Opacity" Value="0.75"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="border" Property="Opacity" Value="1"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource ForegroundColor}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
 </UserControl>
