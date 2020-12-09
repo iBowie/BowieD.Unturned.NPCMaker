@@ -1041,20 +1041,22 @@
                                     </TabItem>
                                 </TabControl>
                             </GroupBox>
-                            <GroupBox Header="{xaml:Localize Key=CHARACTER_Equipment}" HorizontalAlignment="Left" Margin="10,0,0,10" Width="300" Height="Auto" VerticalAlignment="Bottom">
+                            <GroupBox Header="{xaml:Localize Key=CHARACTER_Equipment}" HorizontalAlignment="Left" Margin="10,240,0,10" Width="300" MaxHeight="231" VerticalAlignment="Bottom">
                                 <ScrollViewer>
                                     <StackPanel>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Margin="5" Value="{Binding EquipmentPrimary,UpdateSourceTrigger=PropertyChanged}" x:Name="primaryIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"   >
+                                            <Image Name="controlEquipmentPrimaryIcon" Width="26" Height="26" Margin="5"/>
+                                            <xctk:UShortUpDown Grid.Column="1" Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Margin="5" Value="{Binding EquipmentPrimary,UpdateSourceTrigger=PropertyChanged}" x:Name="primaryIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" MinWidth="40" Maximum="65535" Minimum="0"   >
                                                 <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel></StackPanel>
                                                 </xctk:UShortUpDown.ToolTip>
                                             </xctk:UShortUpDown>
-                                            <Label Grid.Column="1" Margin="5">
+                                            <Label Grid.Column="2" Margin="5">
                                                 <Label.Content>
                                                     <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Equipment_Primary}" />
                                                 </Label.Content>
@@ -1062,15 +1064,17 @@
                                         </Grid>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Value="{Binding EquipmentSecondary,UpdateSourceTrigger=PropertyChanged}" x:Name="secondaryIdBox"  ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="5">
+                                            <Image Name="controlEquipmentSecondaryIcon" Width="26" Height="26" Margin="5"/>
+                                            <xctk:UShortUpDown Grid.Column="1" Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Value="{Binding EquipmentSecondary,UpdateSourceTrigger=PropertyChanged}" x:Name="secondaryIdBox"  ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0" MinWidth="40" Margin="5">
                                                 <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel></StackPanel>
                                                 </xctk:UShortUpDown.ToolTip>
                                             </xctk:UShortUpDown>
-                                            <Label Grid.Column="1" Margin="5">
+                                            <Label Grid.Column="2" Margin="5">
                                                 <Label.Content>
                                                     <TextBlock Text="{xaml:Localize Key=CHARACTER_Equipment_Secondary}" TextWrapping="Wrap"/>
                                                 </Label.Content>
@@ -1078,15 +1082,17 @@
                                         </Grid>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
-                                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Value="{Binding EquipmentTertiary,UpdateSourceTrigger=PropertyChanged}" x:Name="tertiaryIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="5">
+                                            <Image Name="controlEquipmentTertiaryIcon" Width="26" Height="26" Margin="5"/>
+                                            <xctk:UShortUpDown Grid.Column="1" MinWidth="40" Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Value="{Binding EquipmentTertiary,UpdateSourceTrigger=PropertyChanged}" x:Name="tertiaryIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="5">
                                                 <xctk:UShortUpDown.ToolTip>
                                                     <StackPanel></StackPanel>
                                                 </xctk:UShortUpDown.ToolTip>
                                             </xctk:UShortUpDown>
-                                            <Label Grid.Column="1" Margin="5">
+                                            <Label Grid.Column="2" Margin="5">
                                                 <Label.Content>
                                                     <TextBlock Text="{xaml:Localize Key=CHARACTER_Equipment_Tertiary}" TextWrapping="Wrap"/>
                                                 </Label.Content>
