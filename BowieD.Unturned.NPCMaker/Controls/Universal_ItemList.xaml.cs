@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.NPC;
+using BowieD.Unturned.NPCMaker.NPC.Conditions;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using MahApps.Metro.Controls;
 using System.Windows;
@@ -49,6 +50,18 @@ namespace BowieD.Unturned.NPCMaker.Controls
                 case RewardItem itemReward:
                     {
                         if (itemReward.ID > 0 && GameAssetManager.TryGetAsset<GameItemAsset>(itemReward.ID, out var asset))
+                        {
+                            icon.Source = ThumbnailManager.CreateThumbnail(asset.ImagePath);
+                        }
+                        else
+                        {
+                            flag = false;
+                        }
+                    }
+                    break;
+                case ConditionItem itemCondition:
+                    {
+                        if (itemCondition.ID > 0 && GameAssetManager.TryGetAsset<GameItemAsset>(itemCondition.ID, out var asset))
                         {
                             icon.Source = ThumbnailManager.CreateThumbnail(asset.ImagePath);
                         }
