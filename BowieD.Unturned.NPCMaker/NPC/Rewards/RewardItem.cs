@@ -145,12 +145,26 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
             idControl.ValueChanged += (sender, e) =>
             {
-                check((ushort)e.NewValue);
+                if (e.NewValue.HasValue)
+                {
+                    check((ushort)e.NewValue);
+                }
+                else
+                {
+                    check(0);
+                }
             };
 
             editor.Loaded += (sender, e) =>
             {
-                check((ushort)idControl.Value);
+                if (idControl.Value.HasValue)
+                {
+                    check((ushort)idControl.Value);
+                }
+                else
+                {
+                    check(0);
+                }
             };
         }
 
