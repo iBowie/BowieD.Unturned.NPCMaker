@@ -682,16 +682,20 @@
                                             <StackPanel>
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
+                                                    <Image Name="controlClothingChristmasHatIcon" Width="26" Height="26" Margin="5"/>
                                                     <xctk:UShortUpDown
+                                                        Grid.Column="1"
                                                         Name="controlClothingChristmasHat"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Hat, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
                                                         HorizontalContentAlignment="Left"
                                                         ShowButtonSpinner="False"
+                                                        MinWidth="40"
                                                         Margin="5">
                                                         <xctk:UShortUpDown.ToolTip>
                                                             <StackPanel>
@@ -699,20 +703,24 @@
                                                             </StackPanel>
                                                         </xctk:UShortUpDown.ToolTip>
                                                     </xctk:UShortUpDown>
-                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="5"/>
+                                                    <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
+                                                    <Image Name="controlClothingChristmasMaskIcon" Width="26" Height="26" Margin="5"/>
                                                     <xctk:UShortUpDown 
+                                                        Grid.Column="1"
                                                         Name="controlClothingChristmasMask"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Mask, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
                                                         HorizontalContentAlignment="Left"
                                                         ShowButtonSpinner="False"
+                                                        MinWidth="40"
                                                         Margin="5">
                                                         <xctk:UShortUpDown.ToolTip>
                                                             <StackPanel>
@@ -720,20 +728,24 @@
                                                             </StackPanel>
                                                         </xctk:UShortUpDown.ToolTip>
                                                     </xctk:UShortUpDown>
-                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="5"/>
+                                                    <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
+                                                    <Image Name="controlClothingChristmasGlassesIcon" Width="26" Height="26" Margin="5"/>
                                                     <xctk:UShortUpDown 
+                                                        Grid.Column="1"
                                                         Name="controlClothingChristmasGlasses"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Glasses, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
                                                         HorizontalContentAlignment="Left"
                                                         ShowButtonSpinner="False"
+                                                        MinWidth="40"
                                                         Margin="5">
                                                         <xctk:UShortUpDown.ToolTip>
                                                             <StackPanel>
@@ -741,20 +753,24 @@
                                                             </StackPanel>
                                                         </xctk:UShortUpDown.ToolTip>
                                                     </xctk:UShortUpDown>
-                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="5"/>
+                                                    <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
+                                                    <Image Name="controlClothingChristmasShirtIcon" Width="26" Height="26" Margin="5"/>
                                                     <xctk:UShortUpDown 
+                                                        Grid.Column="1"
                                                         Name="controlClothingChristmasShirt"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Shirt, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
                                                         HorizontalContentAlignment="Left"
                                                         ShowButtonSpinner="False"
+                                                        MinWidth="40"
                                                         Margin="5">
                                                         <xctk:UShortUpDown.ToolTip>
                                                             <StackPanel>
@@ -762,20 +778,24 @@
                                                             </StackPanel>
                                                         </xctk:UShortUpDown.ToolTip>
                                                     </xctk:UShortUpDown>
-                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="5"/>
+                                                    <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
+                                                    <Image Name="controlClothingChristmasBackpackIcon" Width="26" Height="26" Margin="5"/>
                                                     <xctk:UShortUpDown 
+                                                        Grid.Column="1"
                                                         Name="controlClothingChristmasBackpack"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Backpack, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
                                                         HorizontalContentAlignment="Left"
                                                         ShowButtonSpinner="False"
+                                                        MinWidth="40"
                                                         Margin="5">
                                                         <xctk:UShortUpDown.ToolTip>
                                                             <StackPanel>
@@ -783,14 +803,18 @@
                                                             </StackPanel>
                                                         </xctk:UShortUpDown.ToolTip>
                                                     </xctk:UShortUpDown>
-                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="5"/>
+                                                    <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <xctk:UShortUpDown 
+                                                    <Image Name="controlClothingChristmasVestIcon" Width="26" Height="26" Margin="5"/>
+                                                    <xctk:UShortUpDown
+                                                        Grid.Column="1"
+                                                        MinWidth="40"
                                                         Name="controlClothingChristmasVest"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Vest, UpdateSourceTrigger=PropertyChanged}"
@@ -804,14 +828,18 @@
                                                             </StackPanel>
                                                         </xctk:UShortUpDown.ToolTip>
                                                     </xctk:UShortUpDown>
-                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="5"/>
+                                                    <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
+                                                    <Image Name="controlClothingChristmasPantsIcon" Width="26" Height="26" Margin="5"/>
                                                     <xctk:UShortUpDown 
+                                                        MinWidth="40"
+                                                        Grid.Column="1"
                                                         Name="controlClothingChristmasPants"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Pants, UpdateSourceTrigger=PropertyChanged}"
@@ -825,7 +853,7 @@
                                                             </StackPanel>
                                                         </xctk:UShortUpDown.ToolTip>
                                                     </xctk:UShortUpDown>
-                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}" Margin="5"/>
+                                                    <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}" Margin="5"/>
                                                 </Grid>
                                             </StackPanel>
                                         </ScrollViewer>

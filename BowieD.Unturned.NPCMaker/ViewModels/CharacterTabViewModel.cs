@@ -930,13 +930,13 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 case 1:
                     clothing = ChristmasClothing;
                     {
-                        // updateIcon<GameItemHatAsset>(clothing.Hat, MainWindow.Instance.controlClothingChristmasHatIcon);
-                        // updateIcon<GameItemMaskAsset>(clothing.Mask, MainWindow.Instance.controlClothingChristmasMaskIcon);
-                        // updateIcon<GameItemShirtAsset>(clothing.Shirt, MainWindow.Instance.controlClothingChristmasShirtIcon);
-                        // updateIcon<GameItemGlassesAsset>(clothing.Glasses, MainWindow.Instance.controlClothingChristmasGlassesIcon);
-                        // updateIcon<GameItemVestAsset>(clothing.Vest, MainWindow.Instance.controlClothingChristmasVestIcon);
-                        // updateIcon<GameItemPantsAsset>(clothing.Pants, MainWindow.Instance.controlClothingChristmasPantsIcon);
-                        // updateIcon<GameItemBackpackAsset>(clothing.Backpack, MainWindow.Instance.controlClothingChristmasBackpackIcon);
+                        updateIcon<GameItemHatAsset>(clothing.Hat, MainWindow.Instance.controlClothingChristmasHatIcon);
+                        updateIcon<GameItemMaskAsset>(clothing.Mask, MainWindow.Instance.controlClothingChristmasMaskIcon);
+                        updateIcon<GameItemShirtAsset>(clothing.Shirt, MainWindow.Instance.controlClothingChristmasShirtIcon);
+                        updateIcon<GameItemGlassesAsset>(clothing.Glasses, MainWindow.Instance.controlClothingChristmasGlassesIcon);
+                        updateIcon<GameItemVestAsset>(clothing.Vest, MainWindow.Instance.controlClothingChristmasVestIcon);
+                        updateIcon<GameItemPantsAsset>(clothing.Pants, MainWindow.Instance.controlClothingChristmasPantsIcon);
+                        updateIcon<GameItemBackpackAsset>(clothing.Backpack, MainWindow.Instance.controlClothingChristmasBackpackIcon);
                     }
                     break;
                 case 2:
