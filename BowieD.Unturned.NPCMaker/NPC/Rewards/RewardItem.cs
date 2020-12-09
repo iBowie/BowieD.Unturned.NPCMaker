@@ -1,14 +1,17 @@
-﻿using BowieD.Unturned.NPCMaker.Forms;
+﻿using BowieD.Unturned.NPCMaker.Controls;
+using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System.Text;
+using System.Windows.Media.Imaging;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
     [System.Serializable]
-    public sealed class RewardItem : Reward
+    public sealed class RewardItem : Reward, IUIL_Icon
     {
         public override RewardType Type => RewardType.Item;
         public override string UIText
@@ -198,6 +201,20 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             }
 
             return string.Format(text, Amount, itemName);
+        }
+
+        public bool UpdateIcon(out BitmapImage image)
+        {
+            if (ID > 0 && GameAssetManager.TryGetAsset<GameItemAsset>(ID, out var asset))
+            {
+                image = ThumbnailManager.CreateThumbnail(asset.ImagePath);
+                return true;
+            }
+            else
+            {
+                image = default;
+                return false;
+            }
         }
     }
 }

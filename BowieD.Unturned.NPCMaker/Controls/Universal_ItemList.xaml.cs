@@ -44,63 +44,22 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         void updateIcon()
         {
-            bool flag = true;
-            switch (Value)
+            if (Value is IUIL_Icon uilIcon)
             {
-                case RewardItem itemReward:
-                    {
-                        if (itemReward.ID > 0 && GameAssetManager.TryGetAsset<GameItemAsset>(itemReward.ID, out var asset))
-                        {
-                            icon.Source = ThumbnailManager.CreateThumbnail(asset.ImagePath);
-                        }
-                        else
-                        {
-                            flag = false;
-                        }
-                    }
-                    break;
-                case ConditionItem itemCondition:
-                    {
-                        if (itemCondition.ID > 0 && GameAssetManager.TryGetAsset<GameItemAsset>(itemCondition.ID, out var asset))
-                        {
-                            icon.Source = ThumbnailManager.CreateThumbnail(asset.ImagePath);
-                        }
-                        else
-                        {
-                            flag = false;
-                        }
-                    }
-                    break;
-                case VendorItem vendorItem:
-                    {
-                        if (vendorItem.type == ItemType.ITEM)
-                        {
-                            if (vendorItem.id > 0 && GameAssetManager.TryGetAsset<GameItemAsset>(vendorItem.id, out var asset))
-                            {
-                                icon.Source = ThumbnailManager.CreateThumbnail(asset.ImagePath);
-                            }
-                            else
-                            {
-                                flag = false;
-                            }
-                        }
-                        else
-                        {
-                            flag = false;
-                        }
-                    }
-                    break;
-                default:
-                    {
-                        flag = false;
-                    }
-                    break;
+                if (uilIcon.UpdateIcon(out var img))
+                {
+                    icon.Visibility = Visibility.Visible;
+                    icon.Source = img;
+                }
+                else
+                {
+                    icon.Visibility = Visibility.Collapsed;
+                }
             }
-
-            if (flag)
-                icon.Visibility = Visibility.Visible;
             else
+            {
                 icon.Visibility = Visibility.Collapsed;
+            }
         }
 
         private object _value;

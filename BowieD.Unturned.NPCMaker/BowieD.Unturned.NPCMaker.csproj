@@ -172,6 +172,7 @@
     <Compile Include="Controls\Dialogue_Response.xaml.cs">
       <DependentUpon>Dialogue_Response.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\IUIL_Icon.cs" />
     <Compile Include="Controls\OptionalByteValueControl.xaml.cs">
       <DependentUpon>OptionalByteValueControl.xaml</DependentUpon>
     </Compile>

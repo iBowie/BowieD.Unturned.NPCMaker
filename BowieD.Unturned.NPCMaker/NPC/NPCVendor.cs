@@ -1,10 +1,13 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Media.Imaging;
 using System.Xml.Serialization;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
@@ -93,7 +96,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         }
     }
     [Serializable]
-    public class VendorItem : IHasUIText
+    public class VendorItem : IHasUIText, IUIL_Icon
     {
         public VendorItem()
         {
@@ -148,6 +151,28 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 }
 
                 return sb.ToString();
+            }
+        }
+
+        public bool UpdateIcon(out BitmapImage image)
+        {
+            if (type == ItemType.ITEM)
+            {
+                if (id > 0 && GameAssetManager.TryGetAsset<GameItemAsset>(id, out var asset))
+                {
+                    image = ThumbnailManager.CreateThumbnail(asset.ImagePath);
+                    return true;
+                }
+                else
+                {
+                    image = default;
+                    return false;
+                }
+            }
+            else
+            {
+                image = default;
+                return false;
             }
         }
     }
