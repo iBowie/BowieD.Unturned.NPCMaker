@@ -835,16 +835,20 @@
                                             <StackPanel>
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
+                                                    <Image Name="controlClothingHalloweenHatIcon" Width="26" Height="26" Margin="5"/>
                                                     <xctk:UShortUpDown
+                                                        Grid.Column="1"
                                                         Name="controlClothingHalloweenHat"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Hat, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
                                                         HorizontalContentAlignment="Left"
                                                         ShowButtonSpinner="False"
+                                                        MinWidth="40"
                                                         Margin="5">
                                                         <xctk:UShortUpDown.ToolTip>
                                                             <StackPanel>
@@ -852,20 +856,24 @@
                                                             </StackPanel>
                                                         </xctk:UShortUpDown.ToolTip>
                                                     </xctk:UShortUpDown>
-                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="5"/>
+                                                    <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
+                                                    <Image Name="controlClothingHalloweenMaskIcon" Width="26" Height="26" Margin="5"/>
                                                     <xctk:UShortUpDown 
+                                                        Grid.Column="1"
                                                         Name="controlClothingHalloweenMask"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Mask, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
                                                         HorizontalContentAlignment="Left"
                                                         ShowButtonSpinner="False"
+                                                        MinWidth="40"
                                                         Margin="5">
                                                         <xctk:UShortUpDown.ToolTip>
                                                             <StackPanel>
@@ -873,20 +881,24 @@
                                                             </StackPanel>
                                                         </xctk:UShortUpDown.ToolTip>
                                                     </xctk:UShortUpDown>
-                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="5"/>
+                                                    <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
+                                                    <Image Name="controlClothingHalloweenGlassesIcon" Width="26" Height="26" Margin="5"/>
                                                     <xctk:UShortUpDown 
+                                                        Grid.Column="1"
                                                         Name="controlClothingHalloweenGlasses"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Glasses, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
                                                         HorizontalContentAlignment="Left"
                                                         ShowButtonSpinner="False"
+                                                        MinWidth="40"
                                                         Margin="5">
                                                         <xctk:UShortUpDown.ToolTip>
                                                             <StackPanel>
@@ -894,20 +906,24 @@
                                                             </StackPanel>
                                                         </xctk:UShortUpDown.ToolTip>
                                                     </xctk:UShortUpDown>
-                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="5"/>
+                                                    <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <xctk:UShortUpDown 
+                                                    <Image Name="controlClothingHalloweenShirtIcon" Width="26" Height="26" Margin="5"/>
+                                                    <xctk:UShortUpDown
+                                                        Grid.Column="1"
                                                         Name="controlClothingHalloweenShirt"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Shirt, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
                                                         HorizontalContentAlignment="Left"
                                                         ShowButtonSpinner="False"
+                                                        MinWidth="40"
                                                         Margin="5">
                                                         <xctk:UShortUpDown.ToolTip>
                                                             <StackPanel>
@@ -915,20 +931,24 @@
                                                             </StackPanel>
                                                         </xctk:UShortUpDown.ToolTip>
                                                     </xctk:UShortUpDown>
-                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="5"/>
+                                                    <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
+                                                    <Image Name="controlClothingHalloweenBackpackIcon" Width="26" Height="26" Margin="5"/>
                                                     <xctk:UShortUpDown 
+                                                        Grid.Column="1"
                                                         Name="controlClothingHalloweenBackpack"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Backpack, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
                                                         HorizontalContentAlignment="Left"
                                                         ShowButtonSpinner="False"
+                                                        MinWidth="40"
                                                         Margin="5">
                                                         <xctk:UShortUpDown.ToolTip>
                                                             <StackPanel>
@@ -936,20 +956,24 @@
                                                             </StackPanel>
                                                         </xctk:UShortUpDown.ToolTip>
                                                     </xctk:UShortUpDown>
-                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="5"/>
+                                                    <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
+                                                    <Image Name="controlClothingHalloweenVestIcon" Width="26" Height="26" Margin="5"/>
                                                     <xctk:UShortUpDown 
+                                                        Grid.Column="1"
                                                         Name="controlClothingHalloweenVest"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Vest, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
                                                         HorizontalContentAlignment="Left"
                                                         ShowButtonSpinner="False"
+                                                        MinWidth="40"
                                                         Margin="5">
                                                         <xctk:UShortUpDown.ToolTip>
                                                             <StackPanel>
@@ -957,20 +981,24 @@
                                                             </StackPanel>
                                                         </xctk:UShortUpDown.ToolTip>
                                                     </xctk:UShortUpDown>
-                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="5"/>
+                                                    <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="5*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
+                                                    <Image Name="controlClothingHalloweenPantsIcon" Width="26" Height="26" Margin="5"/>
                                                     <xctk:UShortUpDown 
+                                                        Grid.Column="1"
                                                         Name="controlClothingHalloweenPants"
                                                         Foreground="{DynamicResource ForegroundColor}"
                                                         Value="{Binding Pants, UpdateSourceTrigger=PropertyChanged}"
                                                         ParsingNumberStyle="Integer"
                                                         HorizontalContentAlignment="Left"
                                                         ShowButtonSpinner="False"
+                                                        MinWidth="40"
                                                         Margin="5">
                                                         <xctk:UShortUpDown.ToolTip>
                                                             <StackPanel>
@@ -978,7 +1006,7 @@
                                                             </StackPanel>
                                                         </xctk:UShortUpDown.ToolTip>
                                                     </xctk:UShortUpDown>
-                                                    <Label Grid.Column="1" Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}" Margin="5"/>
+                                                    <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}" Margin="5"/>
                                                 </Grid>
                                             </StackPanel>
                                         </ScrollViewer>

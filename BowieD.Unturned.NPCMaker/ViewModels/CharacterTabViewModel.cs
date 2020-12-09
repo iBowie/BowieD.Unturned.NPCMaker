@@ -942,13 +942,13 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 case 2:
                     clothing = HalloweenClothing;
                     {
-                        // updateIcon<GameItemHatAsset>(clothing.Hat, MainWindow.Instance.controlClothingHalloweenHatIcon);
-                        // updateIcon<GameItemMaskAsset>(clothing.Mask, MainWindow.Instance.controlClothingHalloweenMaskIcon);
-                        // updateIcon<GameItemShirtAsset>(clothing.Shirt, MainWindow.Instance.controlClothingHalloweenShirtIcon);
-                        // updateIcon<GameItemGlassesAsset>(clothing.Glasses, MainWindow.Instance.controlClothingHalloweenGlassesIcon);
-                        // updateIcon<GameItemVestAsset>(clothing.Vest, MainWindow.Instance.controlClothingHalloweenVestIcon);
-                        // updateIcon<GameItemPantsAsset>(clothing.Pants, MainWindow.Instance.controlClothingHalloweenPantsIcon);
-                        // updateIcon<GameItemBackpackAsset>(clothing.Backpack, MainWindow.Instance.controlClothingHalloweenBackpackIcon);
+                        updateIcon<GameItemHatAsset>(clothing.Hat, MainWindow.Instance.controlClothingHalloweenHatIcon);
+                        updateIcon<GameItemMaskAsset>(clothing.Mask, MainWindow.Instance.controlClothingHalloweenMaskIcon);
+                        updateIcon<GameItemShirtAsset>(clothing.Shirt, MainWindow.Instance.controlClothingHalloweenShirtIcon);
+                        updateIcon<GameItemGlassesAsset>(clothing.Glasses, MainWindow.Instance.controlClothingHalloweenGlassesIcon);
+                        updateIcon<GameItemVestAsset>(clothing.Vest, MainWindow.Instance.controlClothingHalloweenVestIcon);
+                        updateIcon<GameItemPantsAsset>(clothing.Pants, MainWindow.Instance.controlClothingHalloweenPantsIcon);
+                        updateIcon<GameItemBackpackAsset>(clothing.Backpack, MainWindow.Instance.controlClothingHalloweenBackpackIcon);
                     }
                     break;
                 default:
