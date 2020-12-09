@@ -4,6 +4,7 @@ using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.GameIntegration.Filtering;
+using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.NPC;
@@ -899,16 +900,56 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         {
             NPCClothing clothing;
 
+            void updateIcon<T>(ushort id, Image control) where T : GameItemAsset
+            {
+                if (id > 0 && GameAssetManager.TryGetAsset<T>(id, out var asset))
+                {
+                    control.Visibility = Visibility.Visible;
+                    control.Source = ThumbnailManager.CreateThumbnail(asset.ImagePath);
+                }
+                else
+                {
+                    control.Visibility = Visibility.Collapsed;
+                }
+            }
+
             switch (MainWindow.Instance.clothingTabControl.SelectedIndex)
             {
                 case 0:
                     clothing = DefaultClothing;
+                    {
+                        updateIcon<GameItemHatAsset>(clothing.Hat, MainWindow.Instance.controlClothingDefaultHatIcon);
+                        updateIcon<GameItemMaskAsset>(clothing.Mask, MainWindow.Instance.controlClothingDefaultMaskIcon);
+                        updateIcon<GameItemShirtAsset>(clothing.Shirt, MainWindow.Instance.controlClothingDefaultShirtIcon);
+                        updateIcon<GameItemGlassesAsset>(clothing.Glasses, MainWindow.Instance.controlClothingDefaultGlassesIcon);
+                        updateIcon<GameItemVestAsset>(clothing.Vest, MainWindow.Instance.controlClothingDefaultVestIcon);
+                        updateIcon<GameItemPantsAsset>(clothing.Pants, MainWindow.Instance.controlClothingDefaultPantsIcon);
+                        updateIcon<GameItemBackpackAsset>(clothing.Backpack, MainWindow.Instance.controlClothingDefaultBackpackIcon);
+                    }
                     break;
                 case 1:
                     clothing = ChristmasClothing;
+                    {
+                        // updateIcon<GameItemHatAsset>(clothing.Hat, MainWindow.Instance.controlClothingChristmasHatIcon);
+                        // updateIcon<GameItemMaskAsset>(clothing.Mask, MainWindow.Instance.controlClothingChristmasMaskIcon);
+                        // updateIcon<GameItemShirtAsset>(clothing.Shirt, MainWindow.Instance.controlClothingChristmasShirtIcon);
+                        // updateIcon<GameItemGlassesAsset>(clothing.Glasses, MainWindow.Instance.controlClothingChristmasGlassesIcon);
+                        // updateIcon<GameItemVestAsset>(clothing.Vest, MainWindow.Instance.controlClothingChristmasVestIcon);
+                        // updateIcon<GameItemPantsAsset>(clothing.Pants, MainWindow.Instance.controlClothingChristmasPantsIcon);
+                        // updateIcon<GameItemBackpackAsset>(clothing.Backpack, MainWindow.Instance.controlClothingChristmasBackpackIcon);
+                    }
                     break;
                 case 2:
                     clothing = HalloweenClothing;
+                    {
+                        // updateIcon<GameItemHatAsset>(clothing.Hat, MainWindow.Instance.controlClothingHalloweenHatIcon);
+                        // updateIcon<GameItemMaskAsset>(clothing.Mask, MainWindow.Instance.controlClothingHalloweenMaskIcon);
+                        // updateIcon<GameItemShirtAsset>(clothing.Shirt, MainWindow.Instance.controlClothingHalloweenShirtIcon);
+                        // updateIcon<GameItemGlassesAsset>(clothing.Glasses, MainWindow.Instance.controlClothingHalloweenGlassesIcon);
+                        // updateIcon<GameItemVestAsset>(clothing.Vest, MainWindow.Instance.controlClothingHalloweenVestIcon);
+                        // updateIcon<GameItemPantsAsset>(clothing.Pants, MainWindow.Instance.controlClothingHalloweenPantsIcon);
+                        // updateIcon<GameItemBackpackAsset>(clothing.Backpack, MainWindow.Instance.controlClothingHalloweenBackpackIcon);
+                    }
                     break;
                 default:
                     return;
