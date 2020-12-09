@@ -37,6 +37,19 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 _searchTimer.Stop();
                 _searchTimer.Start();
             };
+            filter_name.PreviewKeyDown += (sender, e) =>
+            {
+                switch (e.Key)
+                {
+                    case System.Windows.Input.Key.Enter:
+                        {
+                            e.Handled = true;
+                            _searchTimer.Stop();
+                            _searchTimer_Tick(this, new EventArgs());
+                        }
+                        break;
+                }
+            };
             filter_origin_project.Checked += (sender, e) =>
             {
                 RefreshAssets();
