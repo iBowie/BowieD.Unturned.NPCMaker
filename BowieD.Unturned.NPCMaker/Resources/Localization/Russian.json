@@ -576,6 +576,7 @@
         "Main_Menu_File_Import_File": "Файл",
         "Main_Menu_File_Import_Directory": "Папка",
         "Main_Menu_File_Export": "_Экспортировать NPC (Ctrl + E)",
+        "Main_Menu_File_ExportToUnturned": "Экспортировать NPC в Unturned",
         "Main_Menu_File_Exit": "Выход",
         "Main_Menu_Options": "Настройки",
         "Main_Menu_Communication": "Связаться или задонатить",

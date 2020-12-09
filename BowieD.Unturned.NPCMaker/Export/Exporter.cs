@@ -23,16 +23,16 @@ namespace BowieD.Unturned.NPCMaker.Export
     {
         private const string WaterText = "// Made in NPC Maker by BowieD";
 
-        public static void ExportNPC(NPCProject save)
+        public static void ExportNPC(NPCProject save, string directory)
         {
             try
             {
-                if (Directory.Exists(Path.Combine(AppConfig.ExeDirectory, $@"\results\{save.guid}")))
+                if (Directory.Exists(Path.Combine(directory, $"{save.guid}")))
                 {
-                    Directory.Delete(Path.Combine(AppConfig.ExeDirectory, $@"\results\{save.guid}"), true);
+                    Directory.Delete(Path.Combine(directory, $"{save.guid}"), true);
                 }
 
-                dir = AppConfig.ExeDirectory + $@"\results\{save.guid}\";
+                dir = Path.Combine(directory, $"{save.guid}");
                 Export_Characters(save.characters);
                 Export_Dialogues(save.dialogues);
                 Export_Quests(save.quests);
@@ -45,10 +45,12 @@ namespace BowieD.Unturned.NPCMaker.Export
                         Text = LocalizationManager.Current.Notification["Export_Done_Goto"]
                     }
                 };
-                if (Directory.Exists(Path.Combine(AppConfig.ExeDirectory, $@"results\{save.guid}")))
+                if (Directory.Exists(dir))
                 {
-                    Action<object, RoutedEventArgs> action = new Action<object, RoutedEventArgs>((sender, e) => { Process.Start(AppDomain.CurrentDomain.BaseDirectory + $@"results\{save.guid}"); });
-                    button.Click += new RoutedEventHandler(action);
+                    button.Click += (sender, e) =>
+                    {
+                        Process.Start(dir);
+                    };
                     App.NotificationManager.Notify(LocalizationManager.Current.Notification["Export_Done"], buttons: button);
                 }
             }
@@ -77,9 +79,9 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Characters\{character.EditorName}_{character.ID}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Characters\{character.EditorName}_{character.ID}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Characters\{character.EditorName}_{character.ID}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(Path.Combine(dir, "Characters", $"{character.EditorName}_{character.ID}"));
+                    using (StreamWriter asset = new StreamWriter(Path.Combine(dir, "Characters", $"{character.EditorName}_{character.ID}", "Asset.dat"), false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(Path.Combine(dir, "Characters", $"{character.EditorName}_{character.ID}", "English.dat"), false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -278,9 +280,9 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Dialogues\{dialogue.GUID}_{dialogue.ID}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Dialogues\{dialogue.GUID}_{dialogue.ID}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Dialogues\{dialogue.GUID}_{dialogue.ID}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(Path.Combine(dir, "Dialogues", $"{dialogue.GUID}_{dialogue.ID}"));
+                    using (StreamWriter asset = new StreamWriter(Path.Combine(dir, "Dialogues", $"{dialogue.GUID}_{dialogue.ID}", "Asset.dat"), false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(Path.Combine(dir, "Dialogues", $"{dialogue.GUID}_{dialogue.ID}", "English.dat"), false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -433,9 +435,9 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Vendors\{vendor.GUID}_{vendor.ID}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Vendors\{vendor.GUID}_{vendor.ID}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Vendors\{vendor.GUID}_{vendor.ID}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(Path.Combine(dir, "Vendors", $"{vendor.GUID}_{vendor.ID}"));
+                    using (StreamWriter asset = new StreamWriter(Path.Combine(dir, "Vendors", $"{vendor.GUID}_{vendor.ID}", "Asset.dat"), false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(Path.Combine(dir, "Vendors", $"{vendor.GUID}_{vendor.ID}", "English.dat"), false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -515,9 +517,9 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Quests\{quest.GUID}_{quest.ID}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Quests\{quest.GUID}_{quest.ID}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Quests\{quest.GUID}_{quest.ID}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(Path.Combine(dir, "Quests", $"{quest.GUID}_{quest.ID}"));
+                    using (StreamWriter asset = new StreamWriter(Path.Combine(dir, $"Quests", $"{quest.GUID}_{quest.ID}", "Asset.dat"), false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(Path.Combine(dir, $"Quests", $"{quest.GUID}_{quest.ID}", "English.dat"), false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -578,8 +580,8 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Currencies");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Currencies\{cur.GUID}.asset", false, Encoding.UTF8))
+                    Directory.CreateDirectory(Path.Combine(dir, "Currencies"));
+                    using (StreamWriter asset = new StreamWriter(Path.Combine(dir, "Currencies", $"{cur.GUID}.asset"), false, Encoding.UTF8))
                     {
                         char q = '\"';
 

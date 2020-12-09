@@ -79,6 +79,11 @@
                             <iconPacks:PackIconMaterial Kind="Export" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Command="{Binding ExportProjectToUnturnedCommand}" Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_ExportToUnturned}" Name="exportToUnturnedButton">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="Export" Foreground="{DynamicResource AccentColor}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <Separator/>
                     <MenuItem Command="{Binding ExitCommand}" Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_Exit}" Name="exitButton">
                         <MenuItem.Icon>

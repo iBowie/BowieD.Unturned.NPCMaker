@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Commands;
+using BowieD.Unturned.NPCMaker.Common.Utility;
 using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
@@ -349,6 +350,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             saveProjectCommand,
             saveAsProjectCommand,
             exportProjectCommand,
+            exportProjectToUnturnedCommand,
             exitCommand,
             optionsCommand,
             aboutCommand,
@@ -556,10 +558,56 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Saved"]);
                         }
 
-                        Export.Exporter.ExportNPC(MainWindow.CurrentProject.data);
+                        Export.Exporter.ExportNPC(MainWindow.CurrentProject.data, Path.Combine(AppConfig.ExeDirectory, "results"));
                     });
                 }
                 return exportProjectCommand;
+            }
+        }
+        public ICommand ExportProjectToUnturnedCommand
+        {
+            get
+            {
+                if (exportProjectToUnturnedCommand == null)
+                {
+                    exportProjectToUnturnedCommand = new AdvancedCommand(() =>
+                    {
+                        Mistakes.MistakesManager.FindMistakes();
+                        if (Mistakes.MistakesManager.Criticals_Count > 0)
+                        {
+                            SystemSounds.Hand.Play();
+                            MainWindow.mainTabControl.SelectedIndex = MainWindow.mainTabControl.Items.Count - 1;
+                            return;
+                        }
+                        if (Mistakes.MistakesManager.Warnings_Count > 0)
+                        {
+                            MessageBoxResult res = MessageBox.Show(LocalizationManager.Current.Interface["Export_Warnings_Text"], LocalizationManager.Current.Interface["Export_Warnings_Caption"], MessageBoxButton.YesNo);
+                            if (!(res == MessageBoxResult.OK || res == MessageBoxResult.Yes))
+                            {
+                                return;
+                            }
+                        }
+                        SaveAll();
+                        if (MainWindow.CurrentProject.Save())
+                        {
+                            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Saved"]);
+                        }
+
+                        Export.Exporter.ExportNPC(MainWindow.CurrentProject.data, Path.Combine(AppConfig.Instance.unturnedDir, "Sandbox"));
+                    }, (arg) =>
+                    {
+                        if (!string.IsNullOrEmpty(AppConfig.Instance.unturnedDir) && PathUtility.IsUnturnedPath(AppConfig.Instance.unturnedDir))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    });
+                }
+
+                return exportProjectToUnturnedCommand;
             }
         }
         public ICommand ExitCommand
