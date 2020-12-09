@@ -1069,14 +1069,7 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="dialogue_commentbox" Grid.Column="2" VerticalAlignment="Top" Margin="10,10,10,10" Height="26"/>
-                            <Button Command="{Binding SetAsStartCommand}" Name="setAsStartButton" Grid.Column="1" Margin="10,10,10,0" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_SetAsStart}">
-                                <Button.ToolTip>
-                                    <StackPanel>
-                                        <Image Source="Resources/Help/img_help_startDialogue.png"/>
-                                    </StackPanel>
-                                </Button.ToolTip>
-                            </Button>
-                            <Button Command="{Binding PreviewCommand}" Name="previewDialogueButton" Grid.Column="1" Margin="10,10,10,10" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Preview}"/>
+                            <Button Command="{Binding PreviewCommand}" Name="previewDialogueButton" Grid.Column="1" Margin="10,10,10,10" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Preview}"/>
                             <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="dialogueInputIdControl" Width="62" Height="26" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"   />
                             <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
                                 <TextBlock TextAlignment="Center" Text="{xaml:Localize Key=DIALOGUE_ID}" VerticalAlignment="Center"/>
