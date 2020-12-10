@@ -1,10 +1,7 @@
-﻿using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
-using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Parsing;
 using System;
 using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration
 {

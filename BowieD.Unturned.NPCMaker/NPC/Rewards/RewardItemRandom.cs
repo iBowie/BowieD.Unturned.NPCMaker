@@ -1,6 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
-using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards

@@ -1,10 +1,8 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
-using BowieD.Unturned.NPCMaker.NPC.Conditions;
 using BowieD.Unturned.NPCMaker.NPC.Currency;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
-using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System;
 using System.Collections.Generic;
@@ -14,7 +12,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace BowieD.Unturned.NPCMaker.Export

@@ -3,7 +3,6 @@ using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Parsing;
 using System;
 using System.Collections.Generic;
-using System.Windows;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration
 {

@@ -1,7 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
-using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using BowieD.Unturned.NPCMaker.XAML;
 using System;

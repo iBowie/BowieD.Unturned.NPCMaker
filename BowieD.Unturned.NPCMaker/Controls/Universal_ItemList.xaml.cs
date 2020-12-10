@@ -1,8 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.GameIntegration;
-using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
-using BowieD.Unturned.NPCMaker.NPC;
-using BowieD.Unturned.NPCMaker.NPC.Conditions;
-using BowieD.Unturned.NPCMaker.NPC.Rewards;
+﻿using BowieD.Unturned.NPCMaker.NPC;
 using MahApps.Metro.Controls;
 using System.Windows;
 using System.Windows.Controls;
@@ -63,8 +59,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
         }
 
         private object _value;
-        public object Value 
-        { 
+        public object Value
+        {
             get => _value;
             private set
             {
