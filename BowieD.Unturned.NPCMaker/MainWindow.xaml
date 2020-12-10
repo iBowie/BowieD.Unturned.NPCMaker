@@ -139,6 +139,9 @@
                             <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <TextBlock TextAlignment="Center" FontSize="36" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Character_NoSelection}" TextWrapping="Wrap"/>
                             </Label>
+                            <Label Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                <TextBlock TextAlignment="Center" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Character_NoSelection_Hint}" TextWrapping="Wrap" MaxWidth="100"/>
+                            </Label>
                         </Grid>
                         <Grid Grid.Row="1" Name="characterTabGrid" Visibility="Visible">
                             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Width="300" Margin="10">
@@ -1152,6 +1155,9 @@
                             <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <TextBlock TextAlignment="Center" FontSize="36" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_NoSelection}" TextWrapping="Wrap"/>
                             </Label>
+                            <Label Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                <TextBlock TextAlignment="Center" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_NoSelection_Hint}" TextWrapping="Wrap" MaxWidth="100"/>
+                            </Label>
                         </Grid>
                         <Grid Grid.Row="1" Name="dialogueTabGrid" Visibility="Visible">
                             <Grid.ColumnDefinitions>
@@ -1247,6 +1253,9 @@
                             <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <TextBlock TextAlignment="Center" FontSize="36" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_NoSelection}" TextWrapping="Wrap"/>
                             </Label>
+                            <Label Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                <TextBlock TextAlignment="Center" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_NoSelection_Hint}" TextWrapping="Wrap" MaxWidth="100"/>
+                            </Label>
                         </Grid>
                         <Grid Grid.Row="1" Name="vendorTabGrid">
                             <Grid.RowDefinitions>
@@ -1335,6 +1344,9 @@
                             <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <TextBlock TextAlignment="Center" FontSize="36" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_NoSelection}" TextWrapping="Wrap"/>
                             </Label>
+                            <Label Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                <TextBlock TextAlignment="Center" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_NoSelection_Hint}" TextWrapping="Wrap" MaxWidth="100"/>
+                            </Label>
                         </Grid>
                         <Grid Grid.Row="1" Name="questTabGrid">
                             <Grid.RowDefinitions>
@@ -1418,6 +1430,9 @@
                         <Grid Grid.Row="1" Name="currencyTabGridNoSelection" Visibility="Collapsed">
                             <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <TextBlock TextAlignment="Center" FontSize="36" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Currency_NoSelection}" TextWrapping="Wrap"/>
+                            </Label>
+                            <Label Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                <TextBlock TextAlignment="Center" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Currency_NoSelection_Hint}" TextWrapping="Wrap" MaxWidth="100"/>
                             </Label>
                         </Grid>
                         <Grid Grid.Row="1" Name="currencyTabGrid">
