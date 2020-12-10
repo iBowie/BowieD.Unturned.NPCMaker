@@ -514,62 +514,47 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 if (r.openDialogueId != 0)
                 {
-                    var nextD = MainWindow.CurrentProject.data.dialogues.SingleOrDefault(d => d.ID == r.openDialogueId);
-
-                    if (nextD is null)
+                    if (GameAssetManager.TryGetAsset<GameDialogueAsset>(r.openDialogueId, out var nextD))
                     {
-                        results[dialogue.ID] = false;
-                        return false;
+                        bool? nextDres = CheckDialogue(nextD.dialogue, results);
+
+                        if (nextDres == false)
+                        {
+                            results[dialogue.ID] = false;
+                            return false;
+                        }
+                        else if (nextDres == null)
+                        {
+                            results[dialogue.ID] = null;
+                            return null;
+                        }
                     }
-
-                    bool? nextDres = CheckDialogue(nextD, results);
-
-                    if (nextDres == false)
-                    {
-                        results[dialogue.ID] = false;
-                        return false;
-                    }
-                    else if (nextDres == null)
-                    {
-                        results[dialogue.ID] = null;
-                        return null;
-                    }
-                }
-
-                if (r.openQuestId != 0)
-                {
-                    var nextQ = MainWindow.CurrentProject.data.quests.SingleOrDefault(d => d.ID == r.openQuestId);
-
-                    if (nextQ is null)
+                    else
                     {
                         results[dialogue.ID] = false;
                         return false;
                     }
                 }
 
-                if (r.openVendorId != 0)
+                if (r.openQuestId != 0 && !GameAssetManager.TryGetAsset<GameQuestAsset>(r.openQuestId, out var nextQ))
                 {
-                    var nextV = MainWindow.CurrentProject.data.vendors.SingleOrDefault(d => d.ID == r.openVendorId);
+                    results[dialogue.ID] = false;
+                    return false;
+                }
 
-                    if (nextV is null)
-                    {
-                        results[dialogue.ID] = false;
-                        return false;
-                    }
+                if (r.openVendorId != 0 && !GameAssetManager.TryGetAsset<GameVendorAsset>(r.openVendorId, out var nextV))
+                {
+                    results[dialogue.ID] = false;
+                    return false;
                 }
             }
 
             foreach (var m in dialogue.Messages)
             {
-                if (m.prev != 0)
+                if (m.prev != 0 && !GameAssetManager.TryGetAsset<GameDialogueAsset>(m.prev, out var prevD))
                 {
-                    var prevD = MainWindow.CurrentProject.data.dialogues.SingleOrDefault(d => d.ID == m.prev);
-
-                    if (prevD is null)
-                    {
-                        results[dialogue.ID] = false;
-                        return false;
-                    }
+                    results[dialogue.ID] = false;
+                    return false;
                 }
             }
 
