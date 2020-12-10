@@ -5,7 +5,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 {
     public class GameItemGunAsset : GameItemWeaponAsset
     {
-        public GameItemGunAsset(DataReader data, string dirName, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(data, dirName, name, id, guid, type, origin)
+        public GameItemGunAsset(DataReader data, DataReader local, string dirName, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(data, local, dirName, name, id, guid, type, origin)
         {
             hasSight = data.Has("Hook_Sight");
             hasTactical = data.Has("Hook_Tactical");

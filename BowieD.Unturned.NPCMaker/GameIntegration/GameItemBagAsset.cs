@@ -7,7 +7,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 {
     public class GameItemBagAsset : GameItemClothingAsset
     {
-        public GameItemBagAsset(DataReader data, string dirName, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(data, dirName, name, id, guid, type, origin)
+        public GameItemBagAsset(DataReader data, DataReader local, string dirName, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(data, local, dirName, name, id, guid, type, origin)
         {
             width = data.ReadByte("Width", 0);
             height = data.ReadByte("Height", 0);

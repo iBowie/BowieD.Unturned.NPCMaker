@@ -14,9 +14,14 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
     {
         public static readonly Uri DefaultImagePath = new Uri("pack://application:,,,/Resources/Icons/unknown.png");
 
-        public GameItemAsset(DataReader data, string dirName, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(name, id, guid, type, origin)
+        public GameItemAsset(DataReader data, DataReader local, string dirName, string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(name, id, guid, type, origin)
         {
             this.dirName = dirName;
+
+            if (local != null)
+                itemDescription = local.ReadString("Description", string.Empty);
+            else
+                itemDescription = string.Empty;
 
             isPro = data.Has("Pro");
             rarity = data.ReadEnum("Rarity", EGameItemRarity.Common);
@@ -32,6 +37,8 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
             slot = data.ReadEnum("Slot", Equip_Type.None);
         }
+
+        public readonly string itemDescription;
 
         public readonly bool isPro;
         public readonly EGameItemRarity rarity;

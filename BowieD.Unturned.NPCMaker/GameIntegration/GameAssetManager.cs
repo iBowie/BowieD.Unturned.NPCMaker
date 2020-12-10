@@ -379,31 +379,31 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 case "tire":
                 case "compass":
                 case "oil_pump":
-                    return new Tuple<bool, GameAsset>(true, new GameItemAsset(dr, shortDir, name, id, guid, vt, origin));
+                    return new Tuple<bool, GameAsset>(true, new GameItemAsset(dr, local, shortDir, name, id, guid, vt, origin));
                 case "hat":
-                    return new Tuple<bool, GameAsset>(true, new GameItemHatAsset(dr, shortDir, name, id, guid, vt, origin));
+                    return new Tuple<bool, GameAsset>(true, new GameItemHatAsset(dr, local, shortDir, name, id, guid, vt, origin));
                 case "pants":
-                    return new Tuple<bool, GameAsset>(true, new GameItemPantsAsset(dr, shortDir, name, id, guid, vt, origin));
+                    return new Tuple<bool, GameAsset>(true, new GameItemPantsAsset(dr, local, shortDir, name, id, guid, vt, origin));
                 case "sight":
-                    return new Tuple<bool, GameAsset>(true, new GameItemSightAsset(dr, shortDir, name, id, guid, vt, origin));
+                    return new Tuple<bool, GameAsset>(true, new GameItemSightAsset(dr, local, shortDir, name, id, guid, vt, origin));
                 case "barrel":
-                    return new Tuple<bool, GameAsset>(true, new GameItemBarrelAsset(dr, shortDir, name, id, guid, vt, origin));
+                    return new Tuple<bool, GameAsset>(true, new GameItemBarrelAsset(dr, local, shortDir, name, id, guid, vt, origin));
                 case "tactical":
-                    return new Tuple<bool, GameAsset>(true, new GameItemTacticalAsset(dr, shortDir, name, id, guid, vt, origin));
+                    return new Tuple<bool, GameAsset>(true, new GameItemTacticalAsset(dr, local, shortDir, name, id, guid, vt, origin));
                 case "magazine":
-                    return new Tuple<bool, GameAsset>(true, new GameItemMagazineAsset(dr, shortDir, name, id, guid, vt, origin));
+                    return new Tuple<bool, GameAsset>(true, new GameItemMagazineAsset(dr, local, shortDir, name, id, guid, vt, origin));
                 case "grip":
-                    return new Tuple<bool, GameAsset>(true, new GameItemGripAsset(dr, shortDir, name, id, guid, vt, origin));
+                    return new Tuple<bool, GameAsset>(true, new GameItemGripAsset(dr, local, shortDir, name, id, guid, vt, origin));
                 case "shirt":
-                    return new Tuple<bool, GameAsset>(true, new GameItemShirtAsset(dr, shortDir, name, id, guid, vt, origin));
+                    return new Tuple<bool, GameAsset>(true, new GameItemShirtAsset(dr, local, shortDir, name, id, guid, vt, origin));
                 case "glasses":
-                    return new Tuple<bool, GameAsset>(true, new GameItemGlassesAsset(dr, shortDir, name, id, guid, vt, origin));
+                    return new Tuple<bool, GameAsset>(true, new GameItemGlassesAsset(dr, local, shortDir, name, id, guid, vt, origin));
                 case "mask":
-                    return new Tuple<bool, GameAsset>(true, new GameItemMaskAsset(dr, shortDir, name, id, guid, vt, origin));
+                    return new Tuple<bool, GameAsset>(true, new GameItemMaskAsset(dr, local, shortDir, name, id, guid, vt, origin));
                 case "backpack":
-                    return new Tuple<bool, GameAsset>(true, new GameItemBackpackAsset(dr, shortDir, name, id, guid, vt, origin));
+                    return new Tuple<bool, GameAsset>(true, new GameItemBackpackAsset(dr, local, shortDir, name, id, guid, vt, origin));
                 case "vest":
-                    return new Tuple<bool, GameAsset>(true, new GameItemVestAsset(dr, shortDir, name, id, guid, vt, origin));
+                    return new Tuple<bool, GameAsset>(true, new GameItemVestAsset(dr, local, shortDir, name, id, guid, vt, origin));
                 case "npc":
                     return new Tuple<bool, GameAsset>(true, new GameNPCAsset(dr, local, name, id, guid, vt, origin));
                 case "dialogue":
@@ -425,7 +425,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 case "resource":
                     return new Tuple<bool, GameAsset>(true, new GameResourceAsset(dr, name, id, guid, vt, origin));
                 case "gun":
-                    return new Tuple<bool, GameAsset>(true, new GameItemGunAsset(dr, shortDir, name, id, guid, vt, origin));
+                    return new Tuple<bool, GameAsset>(true, new GameItemGunAsset(dr, local, shortDir, name, id, guid, vt, origin));
                 default:
                     return new Tuple<bool, GameAsset>(true, new GameAsset(name, id, guid, vt, origin));
             }

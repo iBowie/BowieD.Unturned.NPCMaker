@@ -36,7 +36,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 Button b = new Button()
                 {
                     Margin = new Thickness(2.5),
-                    Height = 64,
+                    MinHeight = 64,
                     HorizontalContentAlignment = HorizontalAlignment.Stretch,
                     VerticalContentAlignment = VerticalAlignment.Stretch
                 };
@@ -81,11 +81,34 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     Content = tb2
                 };
 
-                g.Children.Add(l);
-                g.Children.Add(l2);
+                TextBlock tb3 = new TextBlock()
+                {
+                    FontSize = 9
+                };
 
-                Grid.SetColumn(l, 1);
-                Grid.SetColumn(l2, 1);
+                Label l3 = new Label()
+                {
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    VerticalAlignment = VerticalAlignment.Top,
+                    Content = tb3
+                };
+
+                Grid g2 = new Grid();
+                g2.RowDefinitions.Add(new RowDefinition());
+                g2.RowDefinitions.Add(new RowDefinition());
+                g2.RowDefinitions.Add(new RowDefinition());
+
+                g2.Children.Add(l);
+                g2.Children.Add(l2);
+                g2.Children.Add(l3);
+
+                Grid.SetRow(l2, 0);
+                Grid.SetRow(l3, 1);
+                Grid.SetRow(l, 2);
+
+                g.Children.Add(g2);
+
+                Grid.SetColumn(g2, 1);
 
                 if (item.type == ItemType.ITEM && GameAssetManager.TryGetAsset<GameItemAsset>(item.id, out var asset))
                 {
@@ -98,10 +121,12 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     });
 
                     formatter.Markup(tb2, asset.name);
+                    formatter.Markup(tb3, asset.itemDescription);
                 }
                 else
                 {
                     formatter.Markup(tb2, LocalizationManager.Current.Simulation["Vendor"].Translate(nameKey, item.id));
+                    tb3.Text = string.Empty;
                 }
 
                 b.Content = g;
