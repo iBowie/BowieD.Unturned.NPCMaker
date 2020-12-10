@@ -31,7 +31,7 @@
                             <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{xaml:Localize Key=DIALOGUE_Message_Prev}" ToolTip="{xaml:Localize Key=DIALOGUE_Message_Prev_Tooltip}"/>
                         </Label.Content>
                     </Label>
-                    <xceed:UShortUpDown VerticalAlignment="Center" Grid.Column="1" Foreground="{DynamicResource ForegroundColor}" Margin="5" ShowButtonSpinner="False" Value="{Binding Prev, UpdateSourceTrigger=PropertyChanged}"/>
+                    <xceed:UShortUpDown Name="prevBox" VerticalAlignment="Center" Grid.Column="1" Foreground="{DynamicResource ForegroundColor}" Margin="5" ShowButtonSpinner="False" Value="{Binding Prev, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>

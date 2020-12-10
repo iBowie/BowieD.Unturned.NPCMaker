@@ -1,4 +1,6 @@
-﻿using BowieD.Unturned.NPCMaker.NPC.Rewards;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -18,6 +20,16 @@ namespace BowieD.Unturned.NPCMaker.Controls
         {
             InitializeComponent();
             Message = message;
+
+            ContextMenu pbmenu = new ContextMenu();
+            pbmenu.Items.Add(ContextHelper.CreateSelectAssetButton(typeof(GameDialogueAsset), (asset) =>
+            {
+                Prev = asset.id;
+                prevBox.Value = asset.id;
+            }, "Control_SelectAsset_Dialogue", MahApps.Metro.IconPacks.PackIconMaterialKind.Chat));
+
+            prevBox.ContextMenu = pbmenu;
+
             DataContext = this;
         }
 
