@@ -504,6 +504,8 @@
 
         "AssetPicker_Filter_Equippable": "Show Only Equippable",
 
+        "Warning_Scale": "Looks like you've set UI Scale to values that exceed your screen.\nDo you want to reset scale to default?",
+
         "App_About": "Made by BowieD.\nLocalization Author(s): {0}\nVersion: {1}",
         "App_About_Title": "About",
         "App_About_Patreon_Title": "Patreon Supporters",

@@ -264,6 +264,36 @@ namespace BowieD.Unturned.NPCMaker
             }
 
             ConsoleLogger.StartWaitForInput();
+            
+            Loaded += (sender, e) =>
+            {
+                var scr = ScreenHelper.GetCurrentScreen(this);
+
+                var sz = scr.Size;
+
+                if (sz.Width < MinWidth || sz.Height < MinHeight)
+                {
+                    var res = MessageBox.Show(LocalizationManager.Current.Interface["Warning_Scale"], Title, MessageBoxButton.YesNo);
+
+                    if (res == MessageBoxResult.Yes)
+                    {
+                        MinWidth /= AppConfig.Instance.scale;
+                        MinHeight /= AppConfig.Instance.scale;
+                        Width /= AppConfig.Instance.scale;
+                        Height /= AppConfig.Instance.scale;
+
+                        this.Left = (sz.Width - Width) / 2 + sz.Left;
+                        this.Top = (sz.Height - Height) / 2 + sz.Top;
+
+                        Application.Current.Resources["Scale"] = 1.0;
+
+                        AppConfig.Instance.scale = 1.0;
+
+                        AppConfig.Instance.Save();
+                    }
+                }
+            };
+
             base.Show();
         }
 
