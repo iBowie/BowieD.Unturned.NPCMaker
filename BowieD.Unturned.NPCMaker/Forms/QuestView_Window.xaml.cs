@@ -106,6 +106,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     continue;
                 }
 
+                Grid g = new Grid();
+
                 Border b = new Border()
                 {
                     BorderBrush = App.Current.Resources["AccentColor"] as Brush,
@@ -121,7 +123,31 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     Content = tb
                 };
 
-                b.Child = l;
+                Image i = new Image()
+                {
+                    Width = 26,
+                    Height = 26,
+                    Margin = new Thickness(5)
+                };
+
+                g.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+                g.ColumnDefinitions.Add(new ColumnDefinition());
+
+                g.Children.Add(i);
+                g.Children.Add(l);
+                Grid.SetColumn(l, 1);
+
+                if (r is IUIL_Icon uIL && uIL.UpdateIcon(out var img))
+                {
+                    i.Visibility = Visibility.Visible;
+                    i.Source = img;
+                }
+                else
+                {
+                    i.Visibility = Visibility.Collapsed;
+                }
+
+                b.Child = g;
 
                 rewardsPanel.Children.Add(b);
             }
