@@ -62,7 +62,18 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
             System.Collections.Generic.IEnumerable<Simulation.Item> found = simulation.Items.Where(d => d.ID == ID);
 
-            return string.Format(text, found.Count(), Amount, ID);
+            string idOrName;
+
+            if (GameAssetManager.TryGetAsset<GameItemAsset>(ID, out var gameAsset))
+            {
+                idOrName = gameAsset.name;
+            }
+            else
+            {
+                idOrName = ID.ToString();
+            }
+
+            return string.Format(text, found.Count(), Amount, idOrName);
         }
 
         public bool UpdateIcon(out BitmapImage image)
