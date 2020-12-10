@@ -13,7 +13,24 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
     {
         private static readonly List<GameAsset> _assets = new List<GameAsset>();
 
-        public static bool HasImportedAssets { get; set; }
+        public static bool HasImportedAssets
+        {
+            get
+            {
+                return HasImportedVanilla || HasImportedWorkshop;
+            }
+            set
+            {
+                if (value)
+                    throw new InvalidOperationException("Not expected to do this");
+
+                HasImportedVanilla = false;
+                HasImportedWorkshop = false;
+            }
+        }
+
+        public static bool HasImportedVanilla { get; set; }
+        public static bool HasImportedWorkshop { get; set; }
 
         public static IEnumerable<IHasIcon> GetAllAssetsWithIcons()
         {

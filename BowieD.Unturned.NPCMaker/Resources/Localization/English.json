@@ -29,6 +29,8 @@
         "alternateLogicTranslation": "Use alternative logic translation",
         "replaceMissingKeysWithEnglish": "Replace missing keys with English",
         "useCommentsInsteadOfData": "Use comments instead of data",
+        "importImportVanilla": "Import Vanilla assets",
+        "importImportWorkshop": "Import Workshop assets",
 
         "experimentalFeatures_Tooltip": "Something experimental, maybe unstable",
         "scale_Tooltip": "Adjust scale of the app on your screen",
@@ -42,7 +44,9 @@
         "downloadPrerelease_Tooltip": "Also known as download unstable versions",
         "alternateLogicTranslation_Tooltip": "Replaces mathematical symbols with words",
         "replaceMissingKeysWithEnglish_Tooltip": "Replaces missing keys from English dictionary",
-        "useCommentsInsteadOfData_Tooltip": "In tabs uses comments defined by you instead of data contained in the tab"
+        "useCommentsInsteadOfData_Tooltip": "In tabs uses comments defined by you instead of data contained in the tab",
+        "importImportVanilla_Tooltip": "Whether or not this app should import assets from base game",
+        "importImportWorkshop_Tooltip": "Whether or not this app should import assets of downloaded mods from Steam Workshop"
     },
     "Character":
     {
@@ -674,6 +678,9 @@
         "Configuration_Tab_General": "General",
         "Configuration_Tab_Interface": "Interface",
         "Configuration_Tab_Misc": "Miscellaneous",
+        "Configuration_Tab_Import": "Import",
+        "Configuration_Tab_Import_ChangeFolder": "Locate Unturned",
+        "Configuration_Tab_Import_ResetFolder": "Reset",
         "Configuration_Menu_Default": "Default Settings",
         "Configuration_Menu_Default_Confirm": "Are you sure you want to reset settings to defaults?",
         "Configuration_Menu_Save": "Save",

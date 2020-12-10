@@ -1,9 +1,11 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Themes;
+using BowieD.Unturned.NPCMaker.ViewModels;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace BowieD.Unturned.NPCMaker.Configuration
 {
@@ -18,6 +20,8 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             Width *= AppConfig.Instance.scale;
             Height *= AppConfig.Instance.scale;
             CurrentConfig = AppConfig.Instance;
+
+            DataContext = this;
         }
 
         public AppConfig CurrentConfig
@@ -36,7 +40,10 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 downloadPrerelease = DownloadPrerelease_Box.IsChecked.Value,
                 alternateLogicTranslation = AlternateLogicTranslation_Box.IsChecked.Value,
                 replaceMissingKeysWithEnglish = ReplaceMissingKeysWithEnglish_Box.IsChecked.Value,
-                useCommentsInsteadOfData = UseCommentsInsteadOfData_Box.IsChecked.Value
+                useCommentsInsteadOfData = UseCommentsInsteadOfData_Box.IsChecked.Value,
+                importVanilla = Import_Vanilla_Box.IsChecked.Value,
+                importWorkshop = Import_Workshop_Box.IsChecked.Value,
+                unturnedDir = curUntDir
             };
             set
             {
@@ -84,8 +91,13 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 AlternateLogicTranslation_Box.IsChecked = value.alternateLogicTranslation;
                 ReplaceMissingKeysWithEnglish_Box.IsChecked = value.replaceMissingKeysWithEnglish;
                 UseCommentsInsteadOfData_Box.IsChecked = value.useCommentsInsteadOfData;
+                Import_Vanilla_Box.IsChecked = value.importVanilla;
+                Import_Workshop_Box.IsChecked = value.importWorkshop;
+                curUntDir = value.unturnedDir;
             }
         }
+
+        private string curUntDir;
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -106,6 +118,55 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             {
                 AppConfig.Instance.LoadDefaults();
                 Close();
+            }
+        }
+
+        private ICommand importChangeFolderCommand, importResetFolderCommand;
+
+        public ICommand ImportChangeFolderCommand
+        {
+            get
+            {
+                if (importChangeFolderCommand == null)
+                {
+                    importChangeFolderCommand = new BaseCommand(() =>
+                    {
+                        System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog
+                        {
+                            Description = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_fbd")
+                        };
+
+                        switch (fbd.ShowDialog())
+                        {
+                            case System.Windows.Forms.DialogResult.Yes:
+                            case System.Windows.Forms.DialogResult.OK:
+                                {
+                                    curUntDir = fbd.SelectedPath;
+                                }
+                                break;
+                        }
+                    });
+                }
+
+                return importChangeFolderCommand;
+            }
+        }
+        public ICommand ImportResetFolderCommand
+        {
+            get
+            {
+                if (importResetFolderCommand == null)
+                {
+                    importResetFolderCommand = new AdvancedCommand(() =>
+                    {
+                        curUntDir = null;
+                    }, (arg) =>
+                    {
+                        return !string.IsNullOrEmpty(curUntDir);
+                    });
+                }
+
+                return importResetFolderCommand;
             }
         }
     }

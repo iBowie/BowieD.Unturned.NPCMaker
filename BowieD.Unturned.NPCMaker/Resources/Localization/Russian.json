@@ -29,6 +29,8 @@
         "alternateLogicTranslation": "Альтернативный перевод логики",
         "replaceMissingKeysWithEnglish": "Замена недост. перевода английским",
         "useCommentsInsteadOfData": "Комментарии вместо данных",
+        "importImportVanilla": "Импорт оригинальных ассетов",
+        "importImportWorkshop": "Импорт ассетов мастерской",
 
         "experimentalFeatures_Tooltip": "ЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭксперименты",
         "scale_Tooltip": "Изменить размер программы на экране",
@@ -42,7 +44,9 @@
         "downloadPrerelease_Tooltip": "Также известно как: \"Загружать нестабильные версии\"",
         "alternateLogicTranslation_Tooltip": "Заменяет математические символы словами",
         "replaceMissingKeysWithEnglish_Tooltip": "Заменяет недостающий перевод английским вариантом",
-        "useCommentsInsteadOfData_Tooltip": "Во вкладках использует введённый Вами комментарий вместо части данных из непосредственно вкладки"
+        "useCommentsInsteadOfData_Tooltip": "Во вкладках использует введённый Вами комментарий вместо части данных из непосредственно вкладки",
+        "importImportVanilla_Tooltip": "Должна ли программа импортировать ассеты из оригинальной игры",
+        "importImportWorkshop_Tooltip": "Должна ли программа импортировать ассеты из модов, загруженных через Steam Workshop"
     },
     "Character":
     {
@@ -674,6 +678,9 @@
         "Configuration_Tab_General": "Общее",
         "Configuration_Tab_Interface": "Интерфейс",
         "Configuration_Tab_Misc": "Разное",
+        "Configuration_Tab_Import": "Импорт",
+        "Configuration_Tab_Import_ChangeFolder": "Указать расположение Unturned",
+        "Configuration_Tab_Import_ResetFolder": "Сброс",
         "Configuration_Menu_Default": "По умолчанию",
         "Configuration_Menu_Default_Confirm": "Вы уверены что хотите сбросить настройки до исходных?",
         "Configuration_Menu_Save": "Сохранить",

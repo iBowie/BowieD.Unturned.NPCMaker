@@ -28,6 +28,8 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public bool replaceMissingKeysWithEnglish;
         public bool useCommentsInsteadOfData;
         public string unturnedDir;
+        public bool importVanilla = true;
+        public bool importWorkshop = true;
 
         public void Save()
         {
@@ -78,6 +80,8 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             replaceMissingKeysWithEnglish = true;
             useCommentsInsteadOfData = false;
             unturnedDir = null;
+            importVanilla = true;
+            importWorkshop = true;
             ELanguage c = LocalizationManager.GetLanguageFromCultureInfo(CultureInfo.InstalledUICulture);
             if (LocalizationManager.SupportedLanguages().Contains(c))
             {

@@ -73,6 +73,20 @@
                     <CheckBox Name="Experimental_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_experimentalFeatures}" ToolTip="{xaml:Localize Key=OPTIONS_experimentalFeatures_Tooltip}"/>
                 </StackPanel>
             </TabItem>
+            <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Import}">
+                <StackPanel Margin="5" CanVerticallyScroll="True">
+                    <CheckBox Name="Import_Vanilla_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_importImportVanilla}" ToolTip="{xaml:Localize Key=OPTIONS_importImportVanilla_Tooltip}"/>
+                    <CheckBox Name="Import_Workshop_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_importImportWorkshop}" ToolTip="{xaml:Localize Key=OPTIONS_importImportWorkshop_Tooltip}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Command="{Binding ImportChangeFolderCommand}" Grid.Column="0" Content="{xaml:Localize INTERFACE_Configuration_Tab_Import_ChangeFolder}" Name="Import_SelectFolder_Button" Margin="2.5"/>
+                        <Button Command="{Binding ImportResetFolderCommand}" Grid.Column="1" Content="{xaml:Localize INTERFACE_Configuration_Tab_Import_ResetFolder}" Name="Import_ResetFolder_Button" Margin="2.5"/>
+                    </Grid>
+                </StackPanel>
+            </TabItem>
         </TabControl>
         <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Click="ResetButton_Click" HorizontalAlignment="Right" Margin="0,0,10,0" Content="{xaml:Localize Key=INTERFACE_Configuration_Menu_Default}"/>

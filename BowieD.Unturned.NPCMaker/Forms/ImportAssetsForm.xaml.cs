@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Common.Utility;
 using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.Localization;
 using System.IO;
@@ -110,69 +111,81 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             GameIntegration.GameAssetManager.Purge();
 
-            stepText.Text = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Window_Step_Unturned");
-
-            await GameIntegration.GameAssetManager.Import(mainPath, GameIntegration.EGameAssetOrigin.Unturned, (index, total) =>
+            if (AppConfig.Instance.importVanilla)
             {
-                stepProgress.Value = index;
-                stepProgress.Maximum = total;
-            }, tokenSource);
+                stepText.Text = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Window_Step_Unturned");
 
-            if (tokenSource.IsCancellationRequested)
-            {
-                await App.Logger.Log("Cancelled after import", Logging.ELogLevel.TRACE);
-                GameIntegration.GameAssetManager.Purge();
-                ThumbnailManager.Purge();
-                return;
-            }
-
-            string workshopPath = PathUtility.GetUnturnedWorkshopPathFromUnturnedPath(mainPath);
-
-            stepText.Text = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Window_Step_Workshop");
-
-            await GameIntegration.GameAssetManager.Import(workshopPath, GameIntegration.EGameAssetOrigin.Workshop, (index, total) =>
-            {
-                stepProgress.Value = index;
-                stepProgress.Maximum = total;
-            }, tokenSource);
-
-            if (tokenSource.IsCancellationRequested)
-            {
-                await App.Logger.Log("Cancelled after import", Logging.ELogLevel.TRACE);
-                GameIntegration.GameAssetManager.Purge();
-                ThumbnailManager.Purge();
-                return;
-            }
-
-            stepText.Text = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Window_Step_Thumbnails");
-
-            IHasIcon[] assetsWithIcons = GameIntegration.GameAssetManager.GetAllAssetsWithIcons().ToArray();
-            for (int i = 0; i < assetsWithIcons.Length; i++)
-            {
-                IHasIcon a = assetsWithIcons[i];
-
-                if (i % 25 == 0)
+                await GameIntegration.GameAssetManager.Import(mainPath, GameIntegration.EGameAssetOrigin.Unturned, (index, total) =>
                 {
-                    stepProgress.Value = i;
-                    stepProgress.Maximum = assetsWithIcons.Length;
+                    stepProgress.Value = index;
+                    stepProgress.Maximum = total;
+                }, tokenSource);
 
-                    await Task.Delay(1);
+                if (tokenSource.IsCancellationRequested)
+                {
+                    await App.Logger.Log("Cancelled after import", Logging.ELogLevel.TRACE);
+                    GameIntegration.GameAssetManager.Purge();
+                    ThumbnailManager.Purge();
+                    return;
                 }
-                else
-                    await Task.Yield();
 
-                ThumbnailManager.CreateThumbnail(a.ImagePath);
+                GameAssetManager.HasImportedVanilla = true;
             }
 
-            if (tokenSource.IsCancellationRequested)
+            if (AppConfig.Instance.importWorkshop)
             {
-                await App.Logger.Log("Cancelled after import", Logging.ELogLevel.TRACE);
-                GameIntegration.GameAssetManager.Purge();
-                ThumbnailManager.Purge();
-                return;
+                string workshopPath = PathUtility.GetUnturnedWorkshopPathFromUnturnedPath(mainPath);
+
+                stepText.Text = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Window_Step_Workshop");
+
+                await GameIntegration.GameAssetManager.Import(workshopPath, GameIntegration.EGameAssetOrigin.Workshop, (index, total) =>
+                {
+                    stepProgress.Value = index;
+                    stepProgress.Maximum = total;
+                }, tokenSource);
+
+                if (tokenSource.IsCancellationRequested)
+                {
+                    await App.Logger.Log("Cancelled after import", Logging.ELogLevel.TRACE);
+                    GameIntegration.GameAssetManager.Purge();
+                    ThumbnailManager.Purge();
+                    return;
+                }
+
+                GameAssetManager.HasImportedWorkshop = true;
             }
 
-            GameIntegration.GameAssetManager.HasImportedAssets = true;
+            if (GameAssetManager.HasImportedAssets)
+            {
+                stepText.Text = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Window_Step_Thumbnails");
+
+                IHasIcon[] assetsWithIcons = GameIntegration.GameAssetManager.GetAllAssetsWithIcons().ToArray();
+                for (int i = 0; i < assetsWithIcons.Length; i++)
+                {
+                    IHasIcon a = assetsWithIcons[i];
+
+                    if (i % 25 == 0)
+                    {
+                        stepProgress.Value = i;
+                        stepProgress.Maximum = assetsWithIcons.Length;
+
+                        await Task.Delay(1);
+                    }
+                    else
+                        await Task.Yield();
+
+                    ThumbnailManager.CreateThumbnail(a.ImagePath);
+                }
+
+                if (tokenSource.IsCancellationRequested)
+                {
+                    await App.Logger.Log("Cancelled after import", Logging.ELogLevel.TRACE);
+                    GameIntegration.GameAssetManager.Purge();
+                    ThumbnailManager.Purge();
+                    return;
+                }
+            }
+
             hasDone = true;
 
             Close();

@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.GameIntegration.Filtering;
 using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.Markup;
@@ -23,12 +24,15 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             InitializeComponent();
 
-            if (!GameAssetManager.HasImportedAssets)
+            if (!GameAssetManager.HasImportedVanilla)
             {
                 filter_origin_unturned.IsChecked = false;
-                filter_origin_workshop.IsChecked = false;
-
                 filter_origin_unturned.IsEnabled = false;
+            }
+
+            if (!GameAssetManager.HasImportedWorkshop)
+            {
+                filter_origin_workshop.IsChecked = false;
                 filter_origin_workshop.IsEnabled = false;
             }
 
