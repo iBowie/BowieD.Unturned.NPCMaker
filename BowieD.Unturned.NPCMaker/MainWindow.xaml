@@ -1160,7 +1160,7 @@
                                 <ColumnDefinition MinWidth="128" Width="33*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="80"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="dialogue_commentbox" Grid.Column="2" VerticalAlignment="Top" Margin="10,10,10,10" Height="26"/>
