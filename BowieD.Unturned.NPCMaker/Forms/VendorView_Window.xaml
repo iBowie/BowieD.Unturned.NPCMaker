@@ -52,9 +52,13 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Border BorderBrush="{DynamicResource AccentColor}" BorderThickness="1" CornerRadius="4" Margin="10">
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Name="currencyText" Text="Experience: 0" />
-                </Label>
+                <Grid>
+                    <StackPanel Name="currencyIcons" Orientation="Horizontal">
+                    </StackPanel>
+                    <Label Name="currencyTextLabel" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Name="currencyText" Text="Experience: 0" />
+                    </Label>
+                </Grid>
             </Border>
             <Button Click="Button_Click" Margin="10" Grid.Column="1" Content="{xaml:Localize Key=SIMULATION.VENDOR_Button_Close}"/>
         </Grid>

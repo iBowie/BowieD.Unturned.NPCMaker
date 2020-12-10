@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Markup;
 using BowieD.Unturned.NPCMaker.NPC;
@@ -17,6 +18,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
     public partial class VendorView_Window : Window
     {
         static IMarkup formatter = new RichText();
+
+        private bool isCurrency;
 
         public VendorView_Window(NPCCharacter character, Simulation simulation, NPCVendor vendor)
         {
@@ -164,6 +167,13 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 sellingPanel.Children.Add(elem);
             }
 
+            if (string.IsNullOrEmpty(vendor.currency))
+                isCurrency = false;
+            else
+                isCurrency = true;
+
+            setupCurrency();
+
             updateCurrency();
         }
 
@@ -172,11 +182,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
         private uint getCurrency()
         {
-            if (string.IsNullOrEmpty(Vendor.currency)) // experience
-            {
-                return Simulation.Experience;
-            }
-            else // currency
+            if (isCurrency)
             {
                 if (!Simulation.Currencies.TryGetValue(Vendor.currency, out uint value))
                 {
@@ -185,11 +191,15 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                 return value;
             }
+            else
+            {
+                return Simulation.Experience;
+            }
         }
 
         private void changeCurrency(uint delta, bool spend)
         {
-            if (string.IsNullOrEmpty(Vendor.currency)) // experience
+            if (!isCurrency) // experience
             {
                 Simulation.Experience = spend ? Simulation.Experience - delta : Simulation.Experience + delta;
             }
@@ -205,12 +215,65 @@ namespace BowieD.Unturned.NPCMaker.Forms
             updateCurrency();
         }
 
+        private void setupCurrency()
+        {
+            if (isCurrency)
+            {
+                currencyTextLabel.HorizontalAlignment = HorizontalAlignment.Right;
+
+                if (Guid.TryParse(Vendor.currency, out var curGuid) && GameAssetManager.TryGetAsset<GameCurrencyAsset>(curGuid, out var asset))
+                {
+                    currencyIcons.Visibility = Visibility.Visible;
+
+                    foreach (var entry in asset.entries.OrderBy(d => d.Value))
+                    {
+                        Grid eG = new Grid();
+
+                        Image eIcon = new Image()
+                        {
+                            Width = 32,
+                            Height = 32,
+                            Margin = new Thickness(2.5)
+                        };
+
+                        if (Guid.TryParse(entry.ItemGUID, out var itemGuid) && GameAssetManager.TryGetAsset<GameItemAsset>(itemGuid, out var itemAsset))
+                        {
+                            eIcon.Source = ThumbnailManager.CreateThumbnail(itemAsset.ImagePath);
+                        }
+
+                        Label eL = new Label()
+                        {
+                            VerticalAlignment = VerticalAlignment.Bottom,
+                            HorizontalAlignment = HorizontalAlignment.Center
+                        };
+
+                        TextBlock eT = new TextBlock()
+                        {
+                            TextAlignment = TextAlignment.Center,
+                            Text = entry.Value.ToString()
+                        };
+
+                        eL.Content = eT;
+
+                        eG.Children.Add(eIcon);
+                        eG.Children.Add(eL);
+
+                        currencyIcons.Children.Add(eG);
+                    }
+                }
+            }
+            else
+            {
+                currencyIcons.Visibility = Visibility.Collapsed;
+                currencyTextLabel.HorizontalAlignment = HorizontalAlignment.Center;
+            }
+        }
+
         private void updateCurrency()
         {
             string translateKey;
             uint value;
-            bool useCurrency = false;
-            if (string.IsNullOrEmpty(Vendor.currency)) // experience
+            if (!isCurrency) // experience
             {
                 translateKey = "Pay_Experience";
                 value = Simulation.Experience;
@@ -223,10 +286,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 }
 
                 translateKey = "Pay_Currency";
-                useCurrency = true;
             }
 
-            if (useCurrency && GameAssetManager.TryGetAsset<GameCurrencyAsset>(Guid.Parse(Vendor.currency), out var asset))
+            if (isCurrency && GameAssetManager.TryGetAsset<GameCurrencyAsset>(Guid.Parse(Vendor.currency), out var asset))
             {
                 currencyText.Text = string.Format(asset.valueFormat, value);
             }
