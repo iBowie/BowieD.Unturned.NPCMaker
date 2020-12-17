@@ -117,9 +117,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                 await GameIntegration.GameAssetManager.Import(mainPath, GameIntegration.EGameAssetOrigin.Unturned, (index, total) =>
                 {
-                    stepProgress.Value = index;
-                    stepProgress.Maximum = total;
+                    updateProgress(index, total);
                 }, tokenSource);
+
+                clearProgress();
 
                 if (tokenSource.IsCancellationRequested)
                 {
@@ -140,9 +141,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                 await GameIntegration.GameAssetManager.Import(workshopPath, GameIntegration.EGameAssetOrigin.Workshop, (index, total) =>
                 {
-                    stepProgress.Value = index;
-                    stepProgress.Maximum = total;
+                    updateProgress(index, total);
                 }, tokenSource);
+
+                clearProgress();
 
                 if (tokenSource.IsCancellationRequested)
                 {
@@ -160,14 +162,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 stepText.Text = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Window_Step_Thumbnails");
 
                 IHasIcon[] assetsWithIcons = GameIntegration.GameAssetManager.GetAllAssetsWithIcons().ToArray();
+
                 for (int i = 0; i < assetsWithIcons.Length; i++)
                 {
                     IHasIcon a = assetsWithIcons[i];
 
                     if (i % 25 == 0)
                     {
-                        stepProgress.Value = i;
-                        stepProgress.Maximum = assetsWithIcons.Length;
+                        updateProgress(i, assetsWithIcons.Length);
 
                         await Task.Delay(1);
                     }
@@ -176,6 +178,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                     ThumbnailManager.CreateThumbnail(a.ImagePath);
                 }
+
+                clearProgress();
 
                 if (tokenSource.IsCancellationRequested)
                 {
@@ -189,6 +193,33 @@ namespace BowieD.Unturned.NPCMaker.Forms
             hasDone = true;
 
             Close();
+        }
+
+        private void updateProgress(double value, double total)
+        {
+            stepProgress.Value = value;
+            stepProgress.Maximum = total;
+
+            try
+            {
+                if (TaskbarItemInfo == null)
+                    TaskbarItemInfo = new System.Windows.Shell.TaskbarItemInfo();
+
+                TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
+                TaskbarItemInfo.ProgressValue = value / total;
+            }
+            catch { }
+        }
+        private void clearProgress()
+        {
+            stepProgress.Value = 0;
+            stepProgress.Maximum = 1;
+
+            try
+            {
+                TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.None;
+            }
+            catch { }
         }
     }
 }
