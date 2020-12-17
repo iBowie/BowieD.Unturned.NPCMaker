@@ -41,6 +41,9 @@ namespace BowieD.Unturned.NPCMaker.Coloring
         };
         public static Brush ParseColor(string code)
         {
+            if (code == null)
+                return Brushes.Black;
+
             string parse;
 
             if (UnturnedColors.TryGetValue(code, out string ucolor))
