@@ -12,6 +12,10 @@ namespace BowieD.Unturned.NPCMaker.Parsing.KVTable.TReaders.SystemTypes
                 return null;
             }
             text = KVTableTypeRedirectorRegistry.chase(text);
+
+            if (text.StartsWith("SDG.Unturned.") || text.StartsWith("SDG.Framework."))
+                return null;
+
             return Type.GetType(text);
         }
     }
