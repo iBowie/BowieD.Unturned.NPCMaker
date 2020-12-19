@@ -104,6 +104,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 filterGrid.Children.Add(cb);
             }
 
+            SetupAssets();
             RefreshAssets();
 
             _searchTimer = new DispatcherTimer()
@@ -129,162 +130,119 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
         void RefreshAssets()
         {
-            ClearList();
+            string searchText = filter_name.Text;
+            string searchTextLower = searchText.ToLowerInvariant();
 
-            var assets = GameAssetManager.GetAllAssets(assetType);
-            foreach (var a in assets)
+            foreach (Grid g in stack.Children)
             {
-                string searchText = filter_name.Text;
-                string searchTextLower = searchText.ToLowerInvariant();
-
-                if (string.IsNullOrEmpty(searchText) ||
-                    a.name.ToLowerInvariant().Contains(searchTextLower) ||
-                    a.id.ToString().Contains(searchText) ||
-                    a.guid.ToString("N").Contains(searchTextLower))
+                if (g.Tag is GameAsset asset)
                 {
-                    switch (a.origin)
+                    bool shouldDisplay;
+
+                    if (string.IsNullOrEmpty(searchText) ||
+                        asset.name.ToLowerInvariant().Contains(searchTextLower) ||
+                        asset.id.ToString().Contains(searchText) ||
+                        asset.guid.ToString("N").Contains(searchTextLower))
                     {
-                        case EGameAssetOrigin.Project when filter_origin_project.IsChecked == false:
-                        case EGameAssetOrigin.Unturned when filter_origin_unturned.IsChecked == false:
-                        case EGameAssetOrigin.Workshop when filter_origin_workshop.IsChecked == false:
-                            continue;
+                        shouldDisplay = true;
+                    }
+                    else
+                    {
+                        shouldDisplay = false;
                     }
 
-                    bool flag = true;
+                    if (shouldDisplay)
+                    {
+                        switch (asset.origin)
+                        {
+                            case EGameAssetOrigin.Project when filter_origin_project.IsChecked == false:
+                            case EGameAssetOrigin.Unturned when filter_origin_unturned.IsChecked == false:
+                            case EGameAssetOrigin.Workshop when filter_origin_workshop.IsChecked == false:
+                                shouldDisplay = false;
+                                break;
+                            default:
+                                shouldDisplay = true;
+                                break;
+                        }
+                    }
 
-                    if (assetFilters.Length > 0)
+                    if (shouldDisplay && assetFilters.Length > 0)
                     {
                         foreach (var af in assetFilters)
                         {
                             if (af.IsEnabled)
                             {
-                                if (!af.ShouldDisplay(a))
+                                if (!af.ShouldDisplay(asset))
                                 {
-                                    flag = false;
+                                    shouldDisplay = false;
                                     break;
                                 }
                             }
                         }
                     }
 
-                    if (flag)
-                        AddAssetToList(a);
+                    if (shouldDisplay)
+                        g.Visibility = Visibility.Visible;
+                    else
+                        g.Visibility = Visibility.Collapsed;
                 }
             }
         }
-        void ClearList()
+        void SetupAssets()
         {
-            stack.Children.Clear();
-        }
-        void AddAssetToList(GameAsset asset)
-        {
-            Grid g = new Grid()
-            {
-                Margin = new Thickness(5)
-            };
+            ClearList();
 
-            g.ColumnDefinitions.Add(new ColumnDefinition()
+            foreach (var asset in GameAssetManager.GetAllAssets(assetType))
             {
-                Width = GridLength.Auto
-            });
-            g.ColumnDefinitions.Add(new ColumnDefinition()
-            {
-                Width = GridLength.Auto
-            });
-
-            TextBlock tb = new TextBlock();
-            Label l = new Label()
-            {
-                Content = tb
-            };
-            TextBlock tbid = new TextBlock();
-            Label lid = new Label()
-            {
-                Content = tbid
-            };
-
-            if (asset is GameDialogueAsset gda)
-            {
-                tb.Text = gda.dialogue.ContentPreview;
-            }
-            else
-            {
-                markup.Markup(tb, asset.name);
-            }
-
-            tbid.Text = asset.id.ToString();
-
-            g.Children.Add(l);
-            g.Children.Add(lid);
-
-            if (asset is IHasIcon hasIcon)
-            {
-                Image icon = new Image()
+                Grid g = new Grid()
                 {
-                    Source = ThumbnailManager.CreateThumbnail(hasIcon.ImagePath),
-                    Width = 32,
-                    Height = 32,
-                    Margin = new Thickness(1)
+                    Margin = new Thickness(5),
+                    Tag = asset
                 };
 
                 g.ColumnDefinitions.Add(new ColumnDefinition()
                 {
                     Width = GridLength.Auto
                 });
-                g.Children.Add(icon);
-
-                Grid.SetColumn(icon, 0);
-                Grid.SetColumn(lid, 1);
-                Grid.SetColumn(l, 2);
-            }
-            else if (asset is IHasThumbnail hasThumbnail)
-            {
-                Image icon = new Image()
-                {
-                    Source = hasThumbnail.Thumbnail,
-                    Width = 32,
-                    Height = 32,
-                    Margin = new Thickness(1)
-                };
-
                 g.ColumnDefinitions.Add(new ColumnDefinition()
                 {
                     Width = GridLength.Auto
                 });
-                g.Children.Add(icon);
 
-                Grid.SetColumn(icon, 0);
-                Grid.SetColumn(lid, 1);
-                Grid.SetColumn(l, 2);
-            }
-            else if (asset is IHasAnimatedThumbnail hasAnimatedThumbnail)
-            {
-                var thumbs = hasAnimatedThumbnail.Thumbnails.ToList();
+                TextBlock tb = new TextBlock();
+                Label l = new Label()
+                {
+                    Content = tb
+                };
+                TextBlock tbid = new TextBlock();
+                Label lid = new Label()
+                {
+                    Content = tbid
+                };
 
-                if (thumbs.Count > 0)
+                if (asset is GameDialogueAsset gda)
+                {
+                    tb.Text = gda.dialogue.ContentPreview;
+                }
+                else
+                {
+                    markup.Markup(tb, asset.name);
+                }
+
+                tbid.Text = asset.id.ToString();
+
+                g.Children.Add(l);
+                g.Children.Add(lid);
+
+                if (asset is IHasIcon hasIcon)
                 {
                     Image icon = new Image()
                     {
-                        Source = thumbs.First(),
+                        Source = ThumbnailManager.CreateThumbnail(hasIcon.ImagePath),
                         Width = 32,
                         Height = 32,
                         Margin = new Thickness(1)
                     };
-
-                    DispatcherTimer dt = new DispatcherTimer()
-                    {
-                        Interval = new TimeSpan(0, 0, 3)
-                    };
-                    int last = 0;
-                    dt.Tick += (sender, e) =>
-                    {
-                        last++;
-                        if (last >= thumbs.Count)
-                            last = 0;
-
-                        icon.Source = thumbs[last];
-                    };
-                    dt.Start();
 
                     g.ColumnDefinitions.Add(new ColumnDefinition()
                     {
@@ -296,61 +254,125 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     Grid.SetColumn(lid, 1);
                     Grid.SetColumn(l, 2);
                 }
+                else if (asset is IHasThumbnail hasThumbnail)
+                {
+                    Image icon = new Image()
+                    {
+                        Source = hasThumbnail.Thumbnail,
+                        Width = 32,
+                        Height = 32,
+                        Margin = new Thickness(1)
+                    };
+
+                    g.ColumnDefinitions.Add(new ColumnDefinition()
+                    {
+                        Width = GridLength.Auto
+                    });
+                    g.Children.Add(icon);
+
+                    Grid.SetColumn(icon, 0);
+                    Grid.SetColumn(lid, 1);
+                    Grid.SetColumn(l, 2);
+                }
+                else if (asset is IHasAnimatedThumbnail hasAnimatedThumbnail)
+                {
+                    var thumbs = hasAnimatedThumbnail.Thumbnails.ToList();
+
+                    if (thumbs.Count > 0)
+                    {
+                        Image icon = new Image()
+                        {
+                            Source = thumbs.First(),
+                            Width = 32,
+                            Height = 32,
+                            Margin = new Thickness(1)
+                        };
+
+                        DispatcherTimer dt = new DispatcherTimer()
+                        {
+                            Interval = new TimeSpan(0, 0, 3)
+                        };
+                        int last = 0;
+                        dt.Tick += (sender, e) =>
+                        {
+                            last++;
+                            if (last >= thumbs.Count)
+                                last = 0;
+
+                            icon.Source = thumbs[last];
+                        };
+                        dt.Start();
+
+                        g.ColumnDefinitions.Add(new ColumnDefinition()
+                        {
+                            Width = GridLength.Auto
+                        });
+                        g.Children.Add(icon);
+
+                        Grid.SetColumn(icon, 0);
+                        Grid.SetColumn(lid, 1);
+                        Grid.SetColumn(l, 2);
+                    }
+                    else
+                    {
+                        Grid.SetColumn(lid, 0);
+                        Grid.SetColumn(l, 1);
+                    }
+                }
                 else
                 {
                     Grid.SetColumn(lid, 0);
                     Grid.SetColumn(l, 1);
                 }
-            }
-            else
-            {
-                Grid.SetColumn(lid, 0);
-                Grid.SetColumn(l, 1);
-            }
 
-            if (asset is IHasToolTip hasToolTip)
-            {
-                g.ToolTip = hasToolTip.ToolTipContent;
-            }
-            else if (asset is IHasTextToolTip hasTextToolTip)
-            {
-                var sp = new StackPanel()
+                if (asset is IHasToolTip hasToolTip)
                 {
-                    Orientation = Orientation.Vertical
-                };
-
-                void addLabel(string text)
+                    g.ToolTip = hasToolTip.ToolTipContent;
+                }
+                else if (asset is IHasTextToolTip hasTextToolTip)
                 {
-                    sp.Children.Add(new Label()
+                    var sp = new StackPanel()
                     {
-                        Content = new TextBlock()
+                        Orientation = Orientation.Vertical
+                    };
+
+                    void addLabel(string text)
+                    {
+                        sp.Children.Add(new Label()
                         {
-                            Text = text,
+                            Content = new TextBlock()
+                            {
+                                Text = text,
+                                VerticalAlignment = VerticalAlignment.Center,
+                                HorizontalAlignment = HorizontalAlignment.Left,
+                                TextAlignment = TextAlignment.Left
+                            },
                             VerticalAlignment = VerticalAlignment.Center,
                             HorizontalAlignment = HorizontalAlignment.Left,
-                            TextAlignment = TextAlignment.Left
-                        },
-                        VerticalAlignment = VerticalAlignment.Center,
-                        HorizontalAlignment = HorizontalAlignment.Left,
-                        Margin = new Thickness(5)
-                    });
+                            Margin = new Thickness(5)
+                        });
+                    }
+
+                    foreach (var line in hasTextToolTip.GetToolTipLines())
+                    {
+                        addLabel(line);
+                    }
+
+                    g.ToolTip = sp;
                 }
 
-                foreach (var line in hasTextToolTip.GetToolTipLines())
+                g.MouseDown += (sender, e) =>
                 {
-                    addLabel(line);
-                }
-
-                g.ToolTip = sp;
+                    DialogResult = true;
+                    SelectedAsset = asset;
+                    Close();
+                };
+                stack.Children.Add(g);
             }
-
-            g.MouseDown += (sender, e) =>
-            {
-                DialogResult = true;
-                SelectedAsset = asset;
-                Close();
-            };
-            stack.Children.Add(g);
+        }
+        void ClearList()
+        {
+            stack.Children.Clear();
         }
     }
 }
