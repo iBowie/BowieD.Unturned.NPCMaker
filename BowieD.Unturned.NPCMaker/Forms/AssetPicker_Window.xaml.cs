@@ -137,10 +137,19 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 if (g.Tag is GameAsset asset)
                 {
+                    string aName;
+
+                    if (asset is ISearchNameOverride searchNameOverride)
+                        aName = searchNameOverride.SearchNameOverride.ToLowerInvariant();
+                    else if (asset is IHasNameOverride nameOverride)
+                        aName = nameOverride.NameOverride.ToLowerInvariant();
+                    else
+                        aName = asset.name.ToLowerInvariant();
+
                     bool shouldDisplay;
 
                     if (string.IsNullOrEmpty(searchText) ||
-                        asset.name.ToLowerInvariant().Contains(searchTextLower) ||
+                        aName.ToLowerInvariant().Contains(searchTextLower) ||
                         asset.id.ToString().Contains(searchText) ||
                         asset.guid.ToString("N").Contains(searchTextLower))
                     {
@@ -220,9 +229,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     Content = tbid
                 };
 
-                if (asset is GameDialogueAsset gda)
+                if (asset is IHasNameOverride gda)
                 {
-                    tb.Text = gda.dialogue.ContentPreview;
+                    tb.Text = gda.NameOverride;
                 }
                 else
                 {

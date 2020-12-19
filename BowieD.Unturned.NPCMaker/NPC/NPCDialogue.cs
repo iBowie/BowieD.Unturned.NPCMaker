@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Text;
 using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
@@ -123,6 +124,28 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
                     return string.Empty;
                 }
+            }
+        }
+        public string FullText
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+
+                foreach (var msg in Messages)
+                {
+                    foreach (var page in msg.pages)
+                    {
+                        sb.AppendLine(page);
+                    }
+                }
+
+                foreach (var r in Responses)
+                {
+                    sb.AppendLine(r.mainText);
+                }
+
+                return sb.ToString();
             }
         }
     }
