@@ -36,6 +36,12 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 filter_origin_workshop.IsEnabled = false;
             }
 
+            _searchTimer = new DispatcherTimer()
+            {
+                Interval = new TimeSpan(0, 0, 0, 0, 500)
+            };
+            _searchTimer.Tick += _searchTimer_Tick;
+
             filter_name.TextChanged += (sender, e) =>
             {
                 _searchTimer.Stop();
@@ -106,12 +112,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             SetupAssets();
             RefreshAssets();
-
-            _searchTimer = new DispatcherTimer()
-            {
-                Interval = new TimeSpan(0, 0, 0, 0, 500)
-            };
-            _searchTimer.Tick += _searchTimer_Tick;
         }
 
         private void _searchTimer_Tick(object sender, EventArgs e)
@@ -121,7 +121,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         }
 
         private Type assetType;
-        private IMarkup markup;
+        private IMarkup markup, searchMarkup;
         private AssetFilter[] assetFilters;
 
         private DispatcherTimer _searchTimer;
@@ -133,11 +133,19 @@ namespace BowieD.Unturned.NPCMaker.Forms
             string searchText = filter_name.Text;
             string searchTextLower = searchText.ToLowerInvariant();
 
+            searchMarkup = new SearchRichText(searchTextLower);
+
             foreach (Grid g in stack.Children)
             {
                 if (g.Tag is GameAsset asset)
                 {
                     string aName;
+                    string vName;
+
+                    if (asset is IHasNameOverride no)
+                        vName = no.NameOverride;
+                    else
+                        vName = asset.name;
 
                     if (asset is ISearchNameOverride searchNameOverride)
                         aName = searchNameOverride.SearchNameOverride.ToLowerInvariant();
@@ -151,7 +159,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     if (string.IsNullOrEmpty(searchText) ||
                         aName.ToLowerInvariant().Contains(searchTextLower) ||
                         asset.id.ToString().Contains(searchText) ||
-                        asset.guid.ToString("N").Contains(searchTextLower))
+                        Guid.TryParse(searchTextLower, out var searchGuid) && asset.guid == searchGuid)
                     {
                         shouldDisplay = true;
                     }
@@ -191,7 +199,21 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     }
 
                     if (shouldDisplay)
+                    {
                         g.Visibility = Visibility.Visible;
+
+                        Label l = g.Children[0] as Label;
+                        TextBlock tb = l.Content as TextBlock;
+
+                        if (string.IsNullOrEmpty(searchText))
+                        {
+                            markup.Markup(tb, vName);
+                        }
+                        else
+                        {
+                            searchMarkup.Markup(tb, vName);
+                        }
+                    }
                     else
                         g.Visibility = Visibility.Collapsed;
                 }
@@ -231,7 +253,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                 if (asset is IHasNameOverride gda)
                 {
-                    tb.Text = gda.NameOverride;
+                    markup.Markup(tb, gda.NameOverride);
                 }
                 else
                 {

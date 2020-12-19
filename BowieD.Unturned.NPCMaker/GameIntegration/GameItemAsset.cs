@@ -10,7 +10,7 @@ using System.IO;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration
 {
-    public class GameItemAsset : GameAsset, IHasIcon
+    public class GameItemAsset : GameAsset, IHasIcon, IHasNameOverride
     {
         public static readonly Uri DefaultImagePath = new Uri("pack://application:,,,/Resources/Icons/unknown.png");
 
@@ -77,6 +77,8 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         }
 
         public override EGameAssetCategory Category => EGameAssetCategory.ITEM;
+
+        public string NameOverride => $"<color={rarity.ToString().ToLowerInvariant()}>{name}</color>";
 
         public override IEnumerable<string> GetToolTipLines()
         {
