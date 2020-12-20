@@ -77,6 +77,7 @@
                 <StackPanel Margin="5" CanVerticallyScroll="True">
                     <CheckBox Name="Import_Vanilla_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_importImportVanilla}" ToolTip="{xaml:Localize Key=OPTIONS_importImportVanilla_Tooltip}"/>
                     <CheckBox Name="Import_Workshop_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_importImportWorkshop}" ToolTip="{xaml:Localize Key=OPTIONS_importImportWorkshop_Tooltip}"/>
+                    <CheckBox Name="Generate_Thumbnails_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_generateThumbnailsBeforehand}" ToolTip="{xaml:Localize Key=OPTIONS_generateThumbnailsBeforehand_Tooltip}"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>

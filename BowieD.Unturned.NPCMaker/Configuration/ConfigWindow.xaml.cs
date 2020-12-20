@@ -43,6 +43,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 useCommentsInsteadOfData = UseCommentsInsteadOfData_Box.IsChecked.Value,
                 importVanilla = Import_Vanilla_Box.IsChecked.Value,
                 importWorkshop = Import_Workshop_Box.IsChecked.Value,
+                generateThumbnailsBeforehand = Generate_Thumbnails_Box.IsChecked.Value,
                 unturnedDir = curUntDir
             };
             set
@@ -93,6 +94,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 UseCommentsInsteadOfData_Box.IsChecked = value.useCommentsInsteadOfData;
                 Import_Vanilla_Box.IsChecked = value.importVanilla;
                 Import_Workshop_Box.IsChecked = value.importWorkshop;
+                Generate_Thumbnails_Box.IsChecked = value.generateThumbnailsBeforehand;
                 curUntDir = value.unturnedDir;
             }
         }

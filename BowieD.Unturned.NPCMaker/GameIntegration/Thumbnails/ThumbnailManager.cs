@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 
@@ -19,7 +20,11 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails
 
             bmp.UriSource = uri;
             bmp.DecodePixelHeight = 32;
-            bmp.CacheOption = BitmapCacheOption.OnLoad;
+
+            if (AppConfig.Instance.generateThumbnailsBeforehand)
+                bmp.CacheOption = BitmapCacheOption.OnLoad;
+            else
+                bmp.CacheOption = BitmapCacheOption.OnDemand;
 
             bmp.EndInit();
 

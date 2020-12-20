@@ -31,6 +31,7 @@
         "useCommentsInsteadOfData": "Use comments instead of data",
         "importImportVanilla": "Import Vanilla assets",
         "importImportWorkshop": "Import Workshop assets",
+        "generateThumbnailsBeforehand": "Generate thumbnails beforehand",
 
         "experimentalFeatures_Tooltip": "Something experimental, maybe unstable",
         "scale_Tooltip": "Adjust scale of the app on your screen",
@@ -46,7 +47,8 @@
         "replaceMissingKeysWithEnglish_Tooltip": "Replaces missing keys from English dictionary",
         "useCommentsInsteadOfData_Tooltip": "In tabs uses comments defined by you instead of data contained in the tab",
         "importImportVanilla_Tooltip": "Whether or not this app should import assets from base game",
-        "importImportWorkshop_Tooltip": "Whether or not this app should import assets of downloaded mods from Steam Workshop"
+        "importImportWorkshop_Tooltip": "Whether or not this app should import assets of downloaded mods from Steam Workshop",
+        "generateThumbnailsBeforehand_Tooltip": "Increases startup time, but decreases time of creating thumbnails after launch"
     },
     "Character":
     {

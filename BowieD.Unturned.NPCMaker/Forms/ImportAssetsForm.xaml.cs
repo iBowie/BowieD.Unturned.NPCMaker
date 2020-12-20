@@ -157,7 +157,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 GameAssetManager.HasImportedWorkshop = true;
             }
 
-            if (GameAssetManager.HasImportedAssets)
+            if (AppConfig.Instance.generateThumbnailsBeforehand && GameAssetManager.HasImportedAssets)
             {
                 stepText.Text = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Window_Step_Thumbnails");
 

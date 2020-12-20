@@ -219,6 +219,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     }
                     else
                         g.Visibility = Visibility.Collapsed;
+
                 }
             }
         }

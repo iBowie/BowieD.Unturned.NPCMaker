@@ -31,6 +31,7 @@
         "useCommentsInsteadOfData": "Комментарии вместо данных",
         "importImportVanilla": "Импорт оригинальных ассетов",
         "importImportWorkshop": "Импорт ассетов мастерской",
+        "generateThumbnailsBeforehand": "Заранее создать иконки",
 
         "experimentalFeatures_Tooltip": "ЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭксперименты",
         "scale_Tooltip": "Изменить размер программы на экране",
@@ -46,7 +47,8 @@
         "replaceMissingKeysWithEnglish_Tooltip": "Заменяет недостающий перевод английским вариантом",
         "useCommentsInsteadOfData_Tooltip": "Во вкладках использует введённый Вами комментарий вместо части данных из непосредственно вкладки",
         "importImportVanilla_Tooltip": "Должна ли программа импортировать ассеты из оригинальной игры",
-        "importImportWorkshop_Tooltip": "Должна ли программа импортировать ассеты из модов, загруженных через Steam Workshop"
+        "importImportWorkshop_Tooltip": "Должна ли программа импортировать ассеты из модов, загруженных через Steam Workshop",
+        "generateThumbnailsBeforehand_Tooltip": "Увеличивает время запуска программы, но ускоряет последующую работу в ней"
     },
     "Character":
     {

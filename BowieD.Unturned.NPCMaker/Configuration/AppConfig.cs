@@ -30,6 +30,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public string unturnedDir;
         public bool importVanilla = true;
         public bool importWorkshop = true;
+        public bool generateThumbnailsBeforehand = true;
 
         public void Save()
         {
@@ -82,6 +83,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             unturnedDir = null;
             importVanilla = true;
             importWorkshop = true;
+            generateThumbnailsBeforehand = true;
             ELanguage c = LocalizationManager.GetLanguageFromCultureInfo(CultureInfo.InstalledUICulture);
             if (LocalizationManager.SupportedLanguages().Contains(c))
             {
