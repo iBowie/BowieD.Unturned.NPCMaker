@@ -169,6 +169,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                     if (i % 25 == 0)
                     {
+                        if (tokenSource.IsCancellationRequested)
+                        {
+                            await App.Logger.Log("Cancelled after import", Logging.ELogLevel.TRACE);
+                            GameIntegration.GameAssetManager.Purge();
+                            ThumbnailManager.Purge();
+                            return;
+                        }
+
                         updateProgress(i, assetsWithIcons.Length);
 
                         await Task.Delay(1);
