@@ -486,6 +486,9 @@
         "AssetPicker_Filter_Origin_Project": "Project",
         "AssetPicker_Filter_Name_Watermark": "Search...",
 
+        "AssetPicker_OrderBy_ID": "ID",
+        "AssetPicker_OrderBy_Name": "Name",
+
         "AssetPicker_ToolTip_GameAsset_Origin": "Origin: {0}",
         "AssetPicker_ToolTip_GameItemAsset_Pro": "Skin",
         "AssetPicker_ToolTip_GameItemAsset_Rarity": "Rarity: {0}",

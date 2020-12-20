@@ -486,6 +486,9 @@
         "AssetPicker_Filter_Origin_Project": "Проект",
         "AssetPicker_Filter_Name_Watermark": "Поиск по имени...",
 
+        "AssetPicker_OrderBy_ID": "ID",
+        "AssetPicker_OrderBy_Name": "Имя",
+
         "AssetPicker_ToolTip_GameAsset_Origin": "Источник: {0}",
         "AssetPicker_ToolTip_GameItemAsset_Pro": "Скин",
         "AssetPicker_ToolTip_GameItemAsset_Rarity": "Редкость: {0}",

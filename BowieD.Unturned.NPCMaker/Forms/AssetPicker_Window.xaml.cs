@@ -4,6 +4,8 @@ using BowieD.Unturned.NPCMaker.GameIntegration.Filtering;
 using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.Markup;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -110,6 +112,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 filterGrid.Children.Add(cb);
             }
 
+            SetupTopBar();
             SetupAssets();
             RefreshAssets();
         }
@@ -223,7 +226,42 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             ClearList();
 
-            foreach (var asset in GameAssetManager.GetAllAssets(assetType))
+            IEnumerable<GameAsset> assets = GameAssetManager.GetAllAssets(assetType);
+
+            IEnumerable<GameAsset> orderedAssets;
+
+            switch (orderMode)
+            {
+                case EOrderByMode.ID_A:
+                    orderedAssets = assets.OrderBy(d => d.origin).ThenBy(d => d.id);
+                    break;
+                case EOrderByMode.ID_D:
+                    orderedAssets = assets.OrderBy(d => d.origin).ThenByDescending(d => d.id);
+                    break;
+                case EOrderByMode.Name_A:
+                    orderedAssets = assets.OrderBy(d => d.origin).ThenBy(d =>
+                    {
+                        if (d is IHasNameOverride nameOverride)
+                            return nameOverride.NameOverride;
+                        else
+                            return d.name;
+                    });
+                    break;
+                case EOrderByMode.Name_D:
+                    orderedAssets = assets.OrderBy(d => d.origin).ThenByDescending(d =>
+                    {
+                        if (d is IHasNameOverride nameOverride)
+                            return nameOverride.NameOverride;
+                        else
+                            return d.name;
+                    });
+                    break;
+                default:
+                    orderedAssets = assets;
+                    break;
+            }
+
+            foreach (var asset in orderedAssets)
             {
                 Grid g = new Grid()
                 {
@@ -352,6 +390,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 }
                 else
                 {
+                    tpbarGrid.ColumnDefinitions[0].Width = new GridLength(0);
                     Grid.SetColumn(lid, 0);
                     Grid.SetColumn(l, 1);
                 }
@@ -404,6 +443,110 @@ namespace BowieD.Unturned.NPCMaker.Forms
         void ClearList()
         {
             stack.Children.Clear();
+        }
+
+        void Reorder()
+        {
+            ClearList();
+            SetupAssets();
+            RefreshAssets();
+        }
+
+        EOrderByMode orderMode;
+        void SetupTopBar()
+        {
+            orderMode = EOrderByMode.ID_A;
+
+            ordByIDIcon.Visibility = Visibility.Visible;
+            ordByIDIcon.Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.ChevronUp;
+
+            ordByNameIcon.Visibility = Visibility.Collapsed;
+
+            ordByID.MouseLeftButtonDown += (sender, e) =>
+            {
+                ordByNameIcon.Visibility = Visibility.Collapsed;
+
+                EOrderByMode nextMode;
+
+                switch (orderMode)
+                {
+                    case EOrderByMode.ID_A:
+                        nextMode = EOrderByMode.ID_D;
+                        break;
+                    case EOrderByMode.ID_D:
+                        nextMode = EOrderByMode.Default;
+                        break;
+                    default:
+                        nextMode = EOrderByMode.ID_A;
+                        break;
+                }
+
+                switch (nextMode)
+                {
+                    case EOrderByMode.ID_A:
+                        ordByIDIcon.Visibility = Visibility.Visible;
+                        ordByIDIcon.Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.ChevronUp;
+                        break;
+                    case EOrderByMode.ID_D:
+                        ordByIDIcon.Visibility = Visibility.Visible;
+                        ordByIDIcon.Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.ChevronDown;
+                        break;
+                    default:
+                        ordByIDIcon.Visibility = Visibility.Collapsed;
+                        break;
+                }
+
+                orderMode = nextMode;
+
+                Reorder();
+            };
+            ordByName.MouseLeftButtonDown += (sender, e) =>
+            {
+                ordByIDIcon.Visibility = Visibility.Collapsed;
+
+                EOrderByMode nextMode;
+
+                switch (orderMode)
+                {
+                    case EOrderByMode.Name_A:
+                        nextMode = EOrderByMode.Name_D;
+                        break;
+                    case EOrderByMode.Name_D:
+                        nextMode = EOrderByMode.Default;
+                        break;
+                    default:
+                        nextMode = EOrderByMode.Name_A;
+                        break;
+                }
+
+                switch (nextMode)
+                {
+                    case EOrderByMode.Name_A:
+                        ordByNameIcon.Visibility = Visibility.Visible;
+                        ordByNameIcon.Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.ChevronUp;
+                        break;
+                    case EOrderByMode.Name_D:
+                        ordByNameIcon.Visibility = Visibility.Visible;
+                        ordByNameIcon.Kind = MahApps.Metro.IconPacks.PackIconMaterialKind.ChevronDown;
+                        break;
+                    default:
+                        ordByNameIcon.Visibility = Visibility.Collapsed;
+                        break;
+                }
+
+                orderMode = nextMode;
+
+                Reorder();
+            };
+        }
+
+        public enum EOrderByMode
+        {
+            Default,
+            ID_A,
+            ID_D,
+            Name_A,
+            Name_D
         }
     }
 }
