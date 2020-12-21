@@ -154,13 +154,15 @@ namespace BowieD.Unturned.NPCMaker.Forms
                         aName = searchNameOverride.SearchNameOverride.ToLowerInvariant();
                     else if (asset is IHasNameOverride nameOverride)
                         aName = nameOverride.NameOverride.ToLowerInvariant();
+                    else if (string.IsNullOrEmpty(asset.name))
+                        aName = string.Empty;
                     else
                         aName = asset.name.ToLowerInvariant();
 
                     bool shouldDisplay;
 
                     if (string.IsNullOrEmpty(searchText) ||
-                        aName.ToLowerInvariant().Contains(searchTextLower) ||
+                        aName.Contains(searchTextLower) ||
                         asset.id.ToString().Contains(searchText) ||
                         Guid.TryParse(searchTextLower, out var searchGuid) && asset.guid == searchGuid)
                     {
