@@ -32,6 +32,7 @@
         "importImportVanilla": "Импорт оригинальных ассетов",
         "importImportWorkshop": "Импорт ассетов мастерской",
         "generateThumbnailsBeforehand": "Заранее создать иконки",
+        "highlightSearch": "Подсветка поиска",
 
         "experimentalFeatures_Tooltip": "ЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭксперименты",
         "scale_Tooltip": "Изменить размер программы на экране",
@@ -48,7 +49,8 @@
         "useCommentsInsteadOfData_Tooltip": "Во вкладках использует введённый Вами комментарий вместо части данных из непосредственно вкладки",
         "importImportVanilla_Tooltip": "Должна ли программа импортировать ассеты из оригинальной игры",
         "importImportWorkshop_Tooltip": "Должна ли программа импортировать ассеты из модов, загруженных через Steam Workshop",
-        "generateThumbnailsBeforehand_Tooltip": "Увеличивает время запуска программы, но ускоряет последующую работу в ней"
+        "generateThumbnailsBeforehand_Tooltip": "Увеличивает время запуска программы, но ускоряет последующую работу в ней",
+        "highlightSearch_Tooltip": "Подкрашивает совпадающую часть текста с запросом. Очень требовательная функция в данный момент."
     },
     "Character":
     {

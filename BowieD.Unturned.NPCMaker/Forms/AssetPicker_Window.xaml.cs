@@ -207,16 +207,19 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     {
                         g.Visibility = Visibility.Visible;
 
-                        Label l = g.Children[0] as Label;
-                        TextBlock tb = l.Content as TextBlock;
+                        if (AppConfig.Instance.highlightSearch)
+                        {
+                            Label l = g.Children[0] as Label;
+                            TextBlock tb = l.Content as TextBlock;
 
-                        if (string.IsNullOrEmpty(searchText))
-                        {
-                            markup.Markup(tb, vName);
-                        }
-                        else
-                        {
-                            searchMarkup.Markup(tb, vName);
+                            if (string.IsNullOrEmpty(searchText))
+                            {
+                                markup.Markup(tb, vName);
+                            }
+                            else
+                            {
+                                searchMarkup.Markup(tb, vName);
+                            }
                         }
                     }
                     else
