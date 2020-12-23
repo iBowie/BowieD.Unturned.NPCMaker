@@ -32,6 +32,8 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         public static bool HasImportedVanilla { get; set; }
         public static bool HasImportedWorkshop { get; set; }
 
+        internal static int ImportedAssetCount { get; set; }
+
         public static IEnumerable<IHasIcon> GetAllAssetsWithIcons()
         {
             foreach (var asset in GetAllAssets<GameAsset>())
@@ -184,6 +186,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                         if (res.Item1)
                         {
                             _assets.Add(res.Item2);
+                            ImportedAssetCount++;
                         }
                     }
                     else if (fi is AssetFileInfo)
@@ -192,6 +195,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                         if (res.Item1)
                         {
                             _assets.Add(res.Item2);
+                            ImportedAssetCount++;
                         }
                     }
                 }
@@ -246,6 +250,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         {
             _assets.Clear();
             HasImportedAssets = false;
+            ImportedAssetCount = 0;
         }
 
         private static Tuple<bool, GameAsset> TryReadAssetFile(string fileName, EGameAssetOrigin origin)

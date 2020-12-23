@@ -1,4 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using System;
 using System.Text;
 
@@ -10,6 +12,7 @@ namespace BowieD.Unturned.NPCMaker.Common.Utility
         internal static string GetDebugInformation()
         {
             StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"NPC Maker {App.Version}");
             sb.AppendLine($".NET Version: {NETHelper.GetVersionString()}");
             sb.Append("Platform: ");
             try
@@ -45,6 +48,30 @@ namespace BowieD.Unturned.NPCMaker.Common.Utility
                 sb.AppendLine($".language: {cfg.language}");
                 sb.AppendLine($".scale: {cfg.scale}");
                 sb.AppendLine($".downloadPrerelease: {cfg.downloadPrerelease}");
+                sb.AppendLine($".alternateLogicTranslation: {cfg.alternateLogicTranslation}");
+                sb.AppendLine($".replaceMissingKeysWithEnglish: {cfg.replaceMissingKeysWithEnglish}");
+                sb.AppendLine($".useCommentsInsteadOfData: {cfg.useCommentsInsteadOfData}");
+                sb.AppendLine($".unturnedDir: {cfg.unturnedDir ?? "NULL"}");
+                sb.AppendLine($".importVanilla: {cfg.importVanilla}");
+                sb.AppendLine($".importWorkshop: {cfg.importWorkshop}");
+                sb.AppendLine($".generateThumbnailsBeforehand: {cfg.generateThumbnailsBeforehand}");
+                sb.AppendLine($".highlightSearch: {cfg.highlightSearch}");
+
+                try
+                {
+                    if (GameAssetManager.HasImportedAssets)
+                    {
+                        sb.AppendLine($"+Imported {GameAssetManager.ImportedAssetCount} assets");
+                    }
+                    if (cfg.generateThumbnailsBeforehand)
+                    {
+                        sb.AppendLine($"+Generated {ThumbnailManager.GeneratedThumbnailCount} thumbnails");
+                    }
+                }
+                catch
+                {
+                    sb.AppendLine("-Could not get asset info");
+                }
             }
             catch
             {

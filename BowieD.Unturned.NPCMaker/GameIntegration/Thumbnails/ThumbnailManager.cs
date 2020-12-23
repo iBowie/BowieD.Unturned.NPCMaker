@@ -9,6 +9,8 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails
     {
         private static readonly Dictionary<string, BitmapImage> _results = new Dictionary<string, BitmapImage>();
 
+        internal static int GeneratedThumbnailCount { get; set; }
+
         public static BitmapImage CreateThumbnail(Uri uri)
         {
             if (_results.TryGetValue(uri.AbsoluteUri, out var pre))
@@ -29,6 +31,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails
             bmp.EndInit();
 
             _results[uri.AbsoluteUri] = bmp;
+            GeneratedThumbnailCount++;
 
             return bmp;
         }
@@ -36,6 +39,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails
         public static void Purge()
         {
             _results.Clear();
+            GeneratedThumbnailCount = 0;
         }
     }
 }
