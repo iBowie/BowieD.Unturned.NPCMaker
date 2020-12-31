@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using MahApps.Metro.Controls;
@@ -58,6 +59,16 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }));
 
             MainWindow.Instance.dialogueTabButtonAdd.ContextMenu = cmenu3;
+
+            var dialogueInputIdControlContext = new ContextMenu();
+
+            dialogueInputIdControlContext.Items.Add(ContextHelper.CreateFindUnusedIDButton((id) =>
+            {
+                this.ID = id;
+                MainWindow.Instance.dialogueInputIdControl.Value = id;
+            }, GameIntegration.EGameAssetCategory.NPC));
+
+            MainWindow.Instance.dialogueInputIdControl.ContextMenu = dialogueInputIdControlContext;
         }
 
         private void DialogueTabButtonAdd_Click(object sender, RoutedEventArgs e)
@@ -350,10 +361,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     if (checkResult == null)
                                         MessageBox.Show(LocalizationManager.Current.Interface["Main_Tab_Dialogue_Preview_Loop"]);
 
-                                    Universal_Select select = new Universal_Select(Universal_ItemList.ReturnType.Character);
-                                    if (select.ShowDialog() == true)
+                                    AssetPicker_Window apw = new AssetPicker_Window(typeof(GameNPCAsset));
+                                    apw.Owner = MainWindow.Instance;
+                                    if (apw.ShowDialog() == true)
                                     {
-                                        NPCCharacter character = select.SelectedValue as NPCCharacter;
+                                        NPCCharacter character = (apw.SelectedAsset as GameNPCAsset).character;
 
                                         DialogueView_Window dvw = new DialogueView_Window(character, Dialogue, new Simulation());
                                         dvw.Owner = MainWindow.Instance;
@@ -502,62 +514,47 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 if (r.openDialogueId != 0)
                 {
-                    var nextD = MainWindow.CurrentProject.data.dialogues.SingleOrDefault(d => d.ID == r.openDialogueId);
-
-                    if (nextD is null)
+                    if (GameAssetManager.TryGetAsset<GameDialogueAsset>(r.openDialogueId, out var nextD))
                     {
-                        results[dialogue.ID] = false;
-                        return false;
+                        bool? nextDres = CheckDialogue(nextD.dialogue, results);
+
+                        if (nextDres == false)
+                        {
+                            results[dialogue.ID] = false;
+                            return false;
+                        }
+                        else if (nextDres == null)
+                        {
+                            results[dialogue.ID] = null;
+                            return null;
+                        }
                     }
-
-                    bool? nextDres = CheckDialogue(nextD, results);
-
-                    if (nextDres == false)
-                    {
-                        results[dialogue.ID] = false;
-                        return false;
-                    }
-                    else if (nextDres == null)
-                    {
-                        results[dialogue.ID] = null;
-                        return null;
-                    }
-                }
-
-                if (r.openQuestId != 0)
-                {
-                    var nextQ = MainWindow.CurrentProject.data.quests.SingleOrDefault(d => d.ID == r.openQuestId);
-
-                    if (nextQ is null)
+                    else
                     {
                         results[dialogue.ID] = false;
                         return false;
                     }
                 }
 
-                if (r.openVendorId != 0)
+                if (r.openQuestId != 0 && !GameAssetManager.TryGetAsset<GameQuestAsset>(r.openQuestId, out var nextQ))
                 {
-                    var nextV = MainWindow.CurrentProject.data.vendors.SingleOrDefault(d => d.ID == r.openVendorId);
+                    results[dialogue.ID] = false;
+                    return false;
+                }
 
-                    if (nextV is null)
-                    {
-                        results[dialogue.ID] = false;
-                        return false;
-                    }
+                if (r.openVendorId != 0 && !GameAssetManager.TryGetAsset<GameVendorAsset>(r.openVendorId, out var nextV))
+                {
+                    results[dialogue.ID] = false;
+                    return false;
                 }
             }
 
             foreach (var m in dialogue.Messages)
             {
-                if (m.prev != 0)
+                if (m.prev != 0 && !GameAssetManager.TryGetAsset<GameDialogueAsset>(m.prev, out var prevD))
                 {
-                    var prevD = MainWindow.CurrentProject.data.dialogues.SingleOrDefault(d => d.ID == m.prev);
-
-                    if (prevD is null)
-                    {
-                        results[dialogue.ID] = false;
-                        return false;
-                    }
+                    results[dialogue.ID] = false;
+                    return false;
                 }
             }
 

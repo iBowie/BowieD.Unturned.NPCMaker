@@ -12,10 +12,9 @@ namespace BowieD.Unturned.NPCMaker.Parsing
     {
         private readonly DataReader local;
         private readonly DataReader asset;
-        private readonly string dir;
         public ParseTool(string fileName)
         {
-            dir = Path.GetDirectoryName(fileName) + Path.DirectorySeparatorChar;
+            string dir = Path.GetDirectoryName(fileName) + Path.DirectorySeparatorChar;
             asset = new DataReader(File.ReadAllText(fileName));
             if (File.Exists(dir + "English.dat"))
             {
@@ -37,6 +36,11 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                     }
                 }
             }
+        }
+        public ParseTool(DataReader asset, DataReader local)
+        {
+            this.asset = asset;
+            this.local = local;
         }
         public NPCCharacter ParseCharacter()
         {

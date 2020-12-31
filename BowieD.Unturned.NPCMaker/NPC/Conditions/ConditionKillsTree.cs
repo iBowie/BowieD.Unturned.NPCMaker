@@ -1,4 +1,7 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
+using System;
 using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
@@ -8,6 +11,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     {
         public ushort ID { get; set; }
         public short Value { get; set; }
+        [AssetPicker(typeof(GameResourceAsset), "Control_SelectAsset_Resource", MahApps.Metro.IconPacks.PackIconMaterialKind.Tree)]
         public string Tree { get; set; }
         public override Condition_Type Type => Condition_Type.Kills_Tree;
         public override string UIText
@@ -15,7 +19,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append($"[{ID}] {Tree} x{Value}");
+
+                if (Guid.TryParse(Tree, out var treeGuid) && GameAssetManager.TryGetAsset<GameResourceAsset>(treeGuid, out var resourceAsset))
+                {
+                    sb.Append($"[{ID}] {resourceAsset.name} x{Value}");
+                }
+                else
+                {
+                    sb.Append($"[{ID}] {Tree} x{Value}");
+                }
+
                 return sb.ToString();
             }
         }
@@ -49,7 +62,18 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 value = 0;
             }
 
-            return string.Format(text, value, Value, Tree);
+            string arg;
+
+            if (Guid.TryParse(Tree, out var treeGUID) && GameAssetManager.TryGetAsset<GameResourceAsset>(treeGUID, out var treeAsset))
+            {
+                arg = treeAsset.name;
+            }
+            else
+            {
+                arg = "?";
+            }
+
+            return string.Format(text, value, Value, arg);
         }
     }
 }

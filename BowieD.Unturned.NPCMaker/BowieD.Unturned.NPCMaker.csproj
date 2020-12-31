@@ -166,9 +166,13 @@
     <Compile Include="Common\Utility\DebugUtility.cs" />
     <Compile Include="Common\Utility\NETHelper.cs" />
     <Compile Include="Common\Utility\PathUtility.cs" />
+    <Compile Include="Controls\CurrencyEntryControl.xaml.cs">
+      <DependentUpon>CurrencyEntryControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Dialogue_Response.xaml.cs">
       <DependentUpon>Dialogue_Response.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\IUIL_Icon.cs" />
     <Compile Include="Controls\OptionalByteValueControl.xaml.cs">
       <DependentUpon>OptionalByteValueControl.xaml</DependentUpon>
     </Compile>
@@ -204,14 +208,23 @@
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\GCCommand.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
+    <Compile Include="Forms\AssetPicker_Window.xaml.cs">
+      <DependentUpon>AssetPicker_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Character_PoseEditor.xaml.cs">
       <DependentUpon>Character_PoseEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CurrencyEntryEditor.xaml.cs">
+      <DependentUpon>CurrencyEntryEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\DialogueView_Window.xaml.cs">
       <DependentUpon>DialogueView_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\FlagEditorView_Window.xaml.cs">
       <DependentUpon>FlagEditorView_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ImportAssetsForm.xaml.cs">
+      <DependentUpon>ImportAssetsForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\InventoryEditorView_Window.xaml.cs">
       <DependentUpon>InventoryEditorView_Window.xaml</DependentUpon>
@@ -272,6 +285,51 @@
     <Compile Include="Forms\Form_About.xaml.cs">
       <DependentUpon>Form_About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameIntegration\EGameAssetCategory.cs" />
+    <Compile Include="GameIntegration\EGameAssetOrigin.cs" />
+    <Compile Include="GameIntegration\EGameItemRarity.cs" />
+    <Compile Include="GameIntegration\Filtering\AssetFilter.cs" />
+    <Compile Include="GameIntegration\Filtering\AssetFilter_Equippable.cs" />
+    <Compile Include="GameIntegration\GameAnimalAsset.cs" />
+    <Compile Include="GameIntegration\GameAsset.cs" />
+    <Compile Include="GameIntegration\GameAssetManager.cs" />
+    <Compile Include="GameIntegration\GameAssetReference.cs" />
+    <Compile Include="GameIntegration\GameCurrencyAsset.cs" />
+    <Compile Include="GameIntegration\GameDialogueAsset.cs" />
+    <Compile Include="GameIntegration\GameItemAsset.cs" />
+    <Compile Include="GameIntegration\GameItemBackpackAsset.cs" />
+    <Compile Include="GameIntegration\GameItemBagAsset.cs" />
+    <Compile Include="GameIntegration\GameItemBarrelAsset.cs" />
+    <Compile Include="GameIntegration\GameItemCaliberAsset.cs" />
+    <Compile Include="GameIntegration\GameItemClothingAsset.cs" />
+    <Compile Include="GameIntegration\GameItemGearAsset.cs" />
+    <Compile Include="GameIntegration\GameItemGlassesAsset.cs" />
+    <Compile Include="GameIntegration\GameItemGripAsset.cs" />
+    <Compile Include="GameIntegration\GameItemGunAsset.cs" />
+    <Compile Include="GameIntegration\GameItemHatAsset.cs" />
+    <Compile Include="GameIntegration\GameItemMagazineAsset.cs" />
+    <Compile Include="GameIntegration\GameItemMaskAsset.cs" />
+    <Compile Include="GameIntegration\GameItemPantsAsset.cs" />
+    <Compile Include="GameIntegration\GameItemShirtAsset.cs" />
+    <Compile Include="GameIntegration\GameItemSightAsset.cs" />
+    <Compile Include="GameIntegration\GameItemTacticalAsset.cs" />
+    <Compile Include="GameIntegration\GameItemVestAsset.cs" />
+    <Compile Include="GameIntegration\GameItemWeaponAsset.cs" />
+    <Compile Include="GameIntegration\GameNPCAsset.cs" />
+    <Compile Include="GameIntegration\GameObjectAsset.cs" />
+    <Compile Include="GameIntegration\GameQuestAsset.cs" />
+    <Compile Include="GameIntegration\GameResourceAsset.cs" />
+    <Compile Include="GameIntegration\GameSpawnAsset.cs" />
+    <Compile Include="GameIntegration\GameVehicleAsset.cs" />
+    <Compile Include="GameIntegration\GameVendorAsset.cs" />
+    <Compile Include="GameIntegration\Thumbnails\IHasAnimatedThumbnail.cs" />
+    <Compile Include="GameIntegration\Thumbnails\IHasIcon.cs" />
+    <Compile Include="GameIntegration\Thumbnails\IHasNameOverride.cs" />
+    <Compile Include="GameIntegration\Thumbnails\IHasTextToolTip.cs" />
+    <Compile Include="GameIntegration\Thumbnails\IHasThumbnail.cs" />
+    <Compile Include="GameIntegration\Thumbnails\IHasToolTip.cs" />
+    <Compile Include="GameIntegration\Thumbnails\ISearchNameOverride.cs" />
+    <Compile Include="GameIntegration\Thumbnails\ThumbnailManager.cs" />
     <Compile Include="IHasOrderButtons.cs" />
     <Compile Include="IHasUniqueGUID.cs" />
     <Compile Include="InputTool.cs" />
@@ -294,7 +352,12 @@
     <Compile Include="Mistakes\Character\NE_0001.cs" />
     <Compile Include="Mistakes\Character\NE_0002.cs" />
     <Compile Include="Mistakes\Character\NE_0003.cs" />
-    <Compile Include="Mistakes\DeepAnalysisManager.cs" />
+    <Compile Include="Mistakes\Currencies\CurrencyMistake.cs" />
+    <Compile Include="Mistakes\Currencies\NE_4000.cs" />
+    <Compile Include="Mistakes\Currencies\NE_4001.cs" />
+    <Compile Include="Mistakes\Currencies\NE_4002.cs" />
+    <Compile Include="Mistakes\Currencies\NE_4003.cs" />
+    <Compile Include="Mistakes\Currencies\NE_4004.cs" />
     <Compile Include="Mistakes\Character\NE_0000.cs" />
     <Compile Include="Mistakes\Dialogue\DialogueMistake.cs" />
     <Compile Include="Mistakes\Dialogue\NE_1000.cs" />
@@ -315,10 +378,6 @@
     <Compile Include="Mistakes\Vendor\VendorMistake.cs" />
     <Compile Include="Notification\INotificationManager.cs" />
     <Compile Include="Notification\NotificationManager.cs" />
-    <Compile Include="NPC\Conditions\Attributes\ConditionNoValueAttribute.cs" />
-    <Compile Include="NPC\Conditions\Attributes\ConditionOptionalAttribute.cs" />
-    <Compile Include="NPC\Conditions\Attributes\ConditionRangeAttribute.cs" />
-    <Compile Include="NPC\Conditions\Attributes\ConditionSkipFieldAttribute.cs" />
     <Compile Include="NPC\Conditions\Attributes\ConditionTooltipAttribute.cs" />
     <Compile Include="NPC\Conditions\Condition.cs" />
     <Compile Include="NPC\Conditions\ConditionCompareFlags.cs" />
@@ -342,12 +401,13 @@
     <Compile Include="NPC\Conditions\ConditionReputation.cs" />
     <Compile Include="NPC\Conditions\ConditionSkillset.cs" />
     <Compile Include="NPC\Conditions\ConditionTimeOfDay.cs" />
+    <Compile Include="NPC\Currency\CurrencyAsset.cs" />
+    <Compile Include="NPC\Currency\CurrencyEntry.cs" />
     <Compile Include="NPC\IHasUIText.cs" />
     <Compile Include="NPC\NPCCharacter.cs" />
     <Compile Include="NPC\NPCClothing.cs" />
     <Compile Include="NPC\NPCProject.cs" />
     <Compile Include="NPC\ProjectData.cs" />
-    <Compile Include="NPC\Rewards\Attributes\RewardRangeAttribute.cs" />
     <Compile Include="NPC\Rewards\Reward.cs" />
     <Compile Include="NPC\Rewards\RewardAchievement.cs" />
     <Compile Include="NPC\Rewards\RewardCurrency.cs" />
@@ -360,17 +420,39 @@
     <Compile Include="NPC\Rewards\RewardHint.cs" />
     <Compile Include="NPC\Rewards\RewardItem.cs" />
     <Compile Include="NPC\Rewards\RewardItemRandom.cs" />
-    <Compile Include="NPC\Rewards\Attributes\RewardNoValueAttribute.cs" />
-    <Compile Include="NPC\Rewards\Attributes\RewardOptionalAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardQuest.cs" />
     <Compile Include="NPC\Rewards\RewardReputation.cs" />
-    <Compile Include="NPC\Rewards\Attributes\RewardSkipFieldAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardTeleport.cs" />
     <Compile Include="NPC\Rewards\Attributes\RewardTooltipAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardVehicle.cs" />
+    <Compile Include="NPC\Shared\Attributes\AssetPickerAttribute.cs" />
+    <Compile Include="NPC\Shared\Attributes\NoValueAttribute.cs" />
+    <Compile Include="NPC\Shared\Attributes\OptionalAttribute.cs" />
+    <Compile Include="NPC\Shared\Attributes\RangeAttribute.cs" />
+    <Compile Include="NPC\Shared\Attributes\SkipFieldAttribute.cs" />
+    <Compile Include="NPC\Shared\Attributes\TooltipAttribute.cs" />
     <Compile Include="NPC\Simulation.cs" />
     <Compile Include="OrderTool.cs" />
     <Compile Include="Parsing\DataReader.cs" />
+    <Compile Include="Parsing\IFileReadable.cs" />
+    <Compile Include="Parsing\IFileReader.cs" />
+    <Compile Include="Parsing\ITypeReader.cs" />
+    <Compile Include="Parsing\KVTableReader.cs" />
+    <Compile Include="Parsing\KVTableTypeReaderRegistry.cs" />
+    <Compile Include="Parsing\KVTableTypeRedirectorRegistry.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableBoolReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableByteReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableFloatReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableIntReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableLongReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableSByteReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableShortReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableStringReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableUIntReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableULongReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableUShortReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\SystemTypes\KVTableGUIDReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\SystemTypes\KVTableTypeReader.cs" />
     <Compile Include="Parsing\ParseTool.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -426,6 +508,7 @@
     <Compile Include="ViewModels\BaseCommand.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CharacterTabViewModel.cs" />
+    <Compile Include="ViewModels\CurrencyTabViewModel.cs" />
     <Compile Include="ViewModels\DialogueTabViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MistakeTabViewModel.cs" />
@@ -434,6 +517,10 @@
     <Compile Include="XAML\EnumItemsSource.cs" />
     <Compile Include="XAML\LocalizationConverter.cs" />
     <Compile Include="XAML\LocalizeExtension.cs" />
+    <Page Include="Controls\CurrencyEntryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Dialogue_Response.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -466,7 +553,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\AssetPicker_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\Character_PoseEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\CurrencyEntryEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -475,6 +570,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\FlagEditorView_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\ImportAssetsForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -682,6 +781,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Services\GitHub.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\unknown.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

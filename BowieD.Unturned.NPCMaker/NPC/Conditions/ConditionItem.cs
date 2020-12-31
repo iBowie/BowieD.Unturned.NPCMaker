@@ -1,14 +1,20 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Controls;
+using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System.Linq;
 using System.Text;
+using System.Windows.Media.Imaging;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
     [System.Serializable]
-    public sealed class ConditionItem : Condition
+    public sealed class ConditionItem : Condition, IUIL_Icon
     {
         public override Condition_Type Type => Condition_Type.Item;
+        [AssetPicker(typeof(GameItemAsset), "Control_SelectAsset_Item", MahApps.Metro.IconPacks.PackIconMaterialKind.Archive)]
         public ushort ID { get; set; }
         public ushort Amount { get; set; }
         public override string UIText
@@ -17,7 +23,14 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append(LocalizationManager.Current.Condition[$"Type_Item"] + " ");
-                sb.Append($"{ID} x{Amount}");
+                if (GameAssetManager.TryGetAsset<GameItemAsset>(ID, out var asset))
+                {
+                    sb.Append($"{asset.name} x{Amount}");
+                }
+                else
+                {
+                    sb.Append($"{ID} x{Amount}");
+                }
                 return sb.ToString();
             }
         }
@@ -49,7 +62,32 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
             System.Collections.Generic.IEnumerable<Simulation.Item> found = simulation.Items.Where(d => d.ID == ID);
 
-            return string.Format(text, found.Count(), Amount, ID);
+            string idOrName;
+
+            if (GameAssetManager.TryGetAsset<GameItemAsset>(ID, out var gameAsset))
+            {
+                idOrName = gameAsset.name;
+            }
+            else
+            {
+                idOrName = ID.ToString();
+            }
+
+            return string.Format(text, found.Count(), Amount, idOrName);
+        }
+
+        public bool UpdateIcon(out BitmapImage image)
+        {
+            if (ID > 0 && GameAssetManager.TryGetAsset<GameItemAsset>(ID, out var asset))
+            {
+                image = ThumbnailManager.CreateThumbnail(asset.ImagePath);
+                return true;
+            }
+            else
+            {
+                image = default;
+                return false;
+            }
         }
     }
 }

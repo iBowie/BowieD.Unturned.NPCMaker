@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Commands;
+using BowieD.Unturned.NPCMaker.Common.Utility;
 using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
@@ -114,6 +115,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             DialogueTabViewModel = new DialogueTabViewModel();
             VendorTabViewModel = new VendorTabViewModel();
             QuestTabViewModel = new QuestTabViewModel();
+            CurrencyTabViewModel = new CurrencyTabViewModel();
             MainWindow.mainTabControl.SelectionChanged += TabControl_SelectionChanged;
 
             MainWindow.CurrentProject.OnDataLoaded += () =>
@@ -143,6 +145,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     QuestTabViewModel.Quest = data.quests[data.lastQuest];
                 }
 
+                if (data.lastCurrency > -1)
+                {
+                    CurrencyTabViewModel.Currency = data.currencies[data.lastCurrency];
+                }
+
                 UpdateAllTabs();
             };
         }
@@ -151,6 +158,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public DialogueTabViewModel DialogueTabViewModel { get; set; }
         public VendorTabViewModel VendorTabViewModel { get; set; }
         public QuestTabViewModel QuestTabViewModel { get; set; }
+        public CurrencyTabViewModel CurrencyTabViewModel { get; set; }
         public MistakeTabViewModel MistakeTabViewModel { get; set; }
         public void ResetAll()
         {
@@ -158,6 +166,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             DialogueTabViewModel.Reset();
             VendorTabViewModel.Reset();
             QuestTabViewModel.Reset();
+            CurrencyTabViewModel.Reset();
         }
         public void SaveAll()
         {
@@ -165,6 +174,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             DialogueTabViewModel.Save();
             VendorTabViewModel.Save();
             QuestTabViewModel.Save();
+            CurrencyTabViewModel.Save();
 
             ProjectData proj = MainWindow.CurrentProject;
             NPCProject data = proj.data;
@@ -173,6 +183,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             data.lastDialogue = data.dialogues.IndexOf(DialogueTabViewModel.Dialogue);
             data.lastQuest = data.quests.IndexOf(QuestTabViewModel.Quest);
             data.lastVendor = data.vendors.IndexOf(VendorTabViewModel.Vendor);
+            data.lastCurrency = data.currencies.IndexOf(CurrencyTabViewModel.Currency);
         }
         public void UpdateAllTabs()
         {
@@ -180,6 +191,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             DialogueTabViewModel.UpdateTabs();
             VendorTabViewModel.UpdateTabs();
             QuestTabViewModel.UpdateTabs();
+            CurrencyTabViewModel.UpdateTabs();
         }
         internal void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -283,6 +295,24 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 {
                                     StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
                                 },
+                                Assets = new Assets
+                                {
+                                    SmallImageKey = "icon_money_outlined",
+                                    SmallImageText = $"Currencies: {MainWindow.CurrentProject.data.currencies.Count}"
+                                },
+                                Details = $"Currencies: {MainWindow.CurrentProject.data.currencies.Count}",
+                                State = $"Editing currencies"
+                            });
+                        }
+                        break;
+                    case 5:
+                        {
+                            MainWindow.DiscordManager.SendPresence(new RichPresence
+                            {
+                                Timestamps = new Timestamps
+                                {
+                                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                                },
                                 Assets = new Assets()
                                 {
                                     SmallImageKey = "icon_warning_outlined",
@@ -320,6 +350,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             saveProjectCommand,
             saveAsProjectCommand,
             exportProjectCommand,
+            exportProjectToUnturnedCommand,
             exitCommand,
             optionsCommand,
             aboutCommand,
@@ -527,10 +558,56 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Saved"]);
                         }
 
-                        Export.Exporter.ExportNPC(MainWindow.CurrentProject.data);
+                        Export.Exporter.ExportNPC(MainWindow.CurrentProject.data, Path.Combine(AppConfig.ExeDirectory, "results"));
                     });
                 }
                 return exportProjectCommand;
+            }
+        }
+        public ICommand ExportProjectToUnturnedCommand
+        {
+            get
+            {
+                if (exportProjectToUnturnedCommand == null)
+                {
+                    exportProjectToUnturnedCommand = new AdvancedCommand(() =>
+                    {
+                        Mistakes.MistakesManager.FindMistakes();
+                        if (Mistakes.MistakesManager.Criticals_Count > 0)
+                        {
+                            SystemSounds.Hand.Play();
+                            MainWindow.mainTabControl.SelectedIndex = MainWindow.mainTabControl.Items.Count - 1;
+                            return;
+                        }
+                        if (Mistakes.MistakesManager.Warnings_Count > 0)
+                        {
+                            MessageBoxResult res = MessageBox.Show(LocalizationManager.Current.Interface["Export_Warnings_Text"], LocalizationManager.Current.Interface["Export_Warnings_Caption"], MessageBoxButton.YesNo);
+                            if (!(res == MessageBoxResult.OK || res == MessageBoxResult.Yes))
+                            {
+                                return;
+                            }
+                        }
+                        SaveAll();
+                        if (MainWindow.CurrentProject.Save())
+                        {
+                            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Saved"]);
+                        }
+
+                        Export.Exporter.ExportNPC(MainWindow.CurrentProject.data, Path.Combine(AppConfig.Instance.unturnedDir, "Sandbox"));
+                    }, (arg) =>
+                    {
+                        if (!string.IsNullOrEmpty(AppConfig.Instance.unturnedDir) && PathUtility.IsUnturnedPath(AppConfig.Instance.unturnedDir))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    });
+                }
+
+                return exportProjectToUnturnedCommand;
             }
         }
         public ICommand ExitCommand

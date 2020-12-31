@@ -1,14 +1,12 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
-using System;
+﻿using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    public class ConditionTooltipAttribute : Attribute
+    public class ConditionTooltipAttribute : TooltipAttribute
     {
-        public string Text { get; private set; }
-        public ConditionTooltipAttribute(string translationKey)
+        public ConditionTooltipAttribute(string translationKey) : base(translationKey, "Condition")
         {
-            Text = LocalizationManager.Current.Condition[translationKey];
+
         }
     }
 }

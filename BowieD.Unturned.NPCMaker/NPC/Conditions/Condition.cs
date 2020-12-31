@@ -1,5 +1,8 @@
-﻿using BowieD.Unturned.NPCMaker.Configuration;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using BowieD.Unturned.NPCMaker.XAML;
 using System;
 using System.Collections.Generic;
@@ -36,13 +39,13 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [Serializable]
     public abstract class Condition : IHasUIText
     {
-        [ConditionSkipField]
+        [SkipField]
         public string Localization { get; set; }
         [XmlIgnore]
         public abstract Condition_Type Type { get; }
         [XmlIgnore]
         public abstract string UIText { get; }
-        [ConditionNoValue]
+        [NoValue]
         public bool Reset { get; set; }
 
         public IEnumerable<FrameworkElement> GetControls()
@@ -75,7 +78,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 {
                     Content = localizedName
                 };
-                ConditionTooltipAttribute conditionTooltip = prop.GetCustomAttribute<ConditionTooltipAttribute>();
+                TooltipAttribute conditionTooltip = prop.GetCustomAttribute<TooltipAttribute>();
                 if (conditionTooltip != null)
                 {
                     l.ToolTip = conditionTooltip.Text;
@@ -90,7 +93,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 }
 
                 borderContents.Children.Add(l);
-                ConditionRangeAttribute rangeAttribute = prop.GetCustomAttribute<ConditionRangeAttribute>();
+                RangeAttribute rangeAttribute = prop.GetCustomAttribute<RangeAttribute>();
+                AssetPickerAttribute assetPickerAttribute = prop.GetCustomAttribute<AssetPickerAttribute>();
                 FrameworkElement valueControl = null;
                 if (propType == typeof(ushort))
                 {
@@ -113,6 +117,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         HideUpDownButtons = true
                     };
                     (valueControl as MahApps.Metro.Controls.NumericUpDown).SetBinding(MahApps.Metro.Controls.NumericUpDown.ValueProperty, propName);
+
+                    if (assetPickerAttribute != null)
+                    {
+                        var vcMenu = new ContextMenu();
+                        vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
+                        {
+                            (valueControl as MahApps.Metro.Controls.NumericUpDown).Value = asset.id;
+                        }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
+                        (valueControl as MahApps.Metro.Controls.NumericUpDown).ContextMenu = vcMenu;
+                    }
                 }
                 else if (propType == typeof(byte?))
                 {
@@ -167,6 +181,19 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                     (valueControl as Controls.OptionalUInt16ValueControl).upDown.Maximum = newMax;
                     (valueControl as Controls.OptionalUInt16ValueControl).upDown.Minimum = newMin;
                     (valueControl as Controls.OptionalUInt16ValueControl).upDown.SetBinding(Xceed.Wpf.Toolkit.UShortUpDown.ValueProperty, propName);
+
+                    if (assetPickerAttribute != null)
+                    {
+                        var vcMenu = new ContextMenu();
+                        vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
+                        {
+                            (valueControl as Controls.OptionalUInt16ValueControl).checkbox.IsChecked = true;
+                            (valueControl as Controls.OptionalUInt16ValueControl).upDown.Value = asset.id;
+                        }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
+                        valueControl.ContextMenu = vcMenu;
+                        (valueControl as Controls.OptionalUInt16ValueControl).upDown.ContextMenu = vcMenu;
+                        (valueControl as Controls.OptionalUInt16ValueControl).checkbox.ContextMenu = vcMenu;
+                    }
                 }
                 else if (propType == typeof(uint))
                 {
@@ -286,6 +313,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         TextWrapping = TextWrapping.Wrap
                     };
                     (valueControl as TextBox).SetBinding(TextBox.TextProperty, propName);
+
+                    if (assetPickerAttribute != null)
+                    {
+                        var vcMenu = new ContextMenu();
+                        vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
+                        {
+                            (valueControl as TextBox).Text = asset.guid.ToString("N");
+                        }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
+                        (valueControl as TextBox).ContextMenu = vcMenu;
+                    }
                 }
                 else if (propType.IsEnum)
                 {
@@ -361,6 +398,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             }
             return sb.ToString();
         }
+
+        public virtual void PostLoad(Universal_ConditionEditor editor) { }
 
         public abstract bool Check(Simulation simulation);
         public abstract void Apply(Simulation simulation);

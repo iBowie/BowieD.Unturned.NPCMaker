@@ -1,4 +1,5 @@
 ﻿using DiscordRPC;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BowieD.Unturned.NPCMaker.DiscordRPC
@@ -41,7 +42,18 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
                 rich.Assets = new Assets();
             }
 
-            rich.Assets.LargeImageText = $"NPC Maker for Unturned by BowieD. Version: {App.Version}";
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append($"NPC Maker for Unturned by BowieD. Version: {App.Version}");
+
+#if DEBUG
+            sb.Append(" DEBUG");
+#elif PREVIEW
+            sb.Append(" PREVIEW");
+#else
+#endif
+            rich.Assets.LargeImageText = sb.ToString();
+
             rich.Assets.LargeImageKey = "mainimage_outline";
             if (client.IsInitialized)
             {

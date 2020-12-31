@@ -1,9 +1,9 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
-using BowieD.Unturned.NPCMaker.NPC.Conditions;
+using BowieD.Unturned.NPCMaker.NPC.Currency;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
-using BowieD.Unturned.NPCMaker.NPC.Rewards.Attributes;
+using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,7 +12,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace BowieD.Unturned.NPCMaker.Export
@@ -21,20 +20,21 @@ namespace BowieD.Unturned.NPCMaker.Export
     {
         private const string WaterText = "// Made in NPC Maker by BowieD";
 
-        public static void ExportNPC(NPCProject save)
+        public static void ExportNPC(NPCProject save, string directory)
         {
             try
             {
-                if (Directory.Exists(Path.Combine(AppConfig.ExeDirectory, $@"\results\{save.guid}")))
+                if (Directory.Exists(Path.Combine(directory, $"{save.guid}")))
                 {
-                    Directory.Delete(Path.Combine(AppConfig.ExeDirectory, $@"\results\{save.guid}"), true);
+                    Directory.Delete(Path.Combine(directory, $"{save.guid}"), true);
                 }
 
-                dir = AppConfig.ExeDirectory + $@"\results\{save.guid}\";
+                dir = Path.Combine(directory, $"{save.guid}");
                 Export_Characters(save.characters);
                 Export_Dialogues(save.dialogues);
                 Export_Quests(save.quests);
                 Export_Vendors(save.vendors);
+                Export_Currencies(save.currencies);
                 Button button = new Button
                 {
                     Content = new TextBlock
@@ -42,10 +42,12 @@ namespace BowieD.Unturned.NPCMaker.Export
                         Text = LocalizationManager.Current.Notification["Export_Done_Goto"]
                     }
                 };
-                if (Directory.Exists(Path.Combine(AppConfig.ExeDirectory, $@"results\{save.guid}")))
+                if (Directory.Exists(dir))
                 {
-                    Action<object, RoutedEventArgs> action = new Action<object, RoutedEventArgs>((sender, e) => { Process.Start(AppDomain.CurrentDomain.BaseDirectory + $@"results\{save.guid}"); });
-                    button.Click += new RoutedEventHandler(action);
+                    button.Click += (sender, e) =>
+                    {
+                        Process.Start(dir);
+                    };
                     App.NotificationManager.Notify(LocalizationManager.Current.Notification["Export_Done"], buttons: button);
                 }
             }
@@ -74,9 +76,9 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Characters\{character.EditorName}_{character.ID}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Characters\{character.EditorName}_{character.ID}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Characters\{character.EditorName}_{character.ID}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(Path.Combine(dir, "Characters", $"{character.EditorName}_{character.ID}"));
+                    using (StreamWriter asset = new StreamWriter(Path.Combine(dir, "Characters", $"{character.EditorName}_{character.ID}", "Asset.dat"), false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(Path.Combine(dir, "Characters", $"{character.EditorName}_{character.ID}", "English.dat"), false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -275,9 +277,9 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Dialogues\{dialogue.GUID}_{dialogue.ID}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Dialogues\{dialogue.GUID}_{dialogue.ID}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Dialogues\{dialogue.GUID}_{dialogue.ID}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(Path.Combine(dir, "Dialogues", $"{dialogue.GUID}_{dialogue.ID}"));
+                    using (StreamWriter asset = new StreamWriter(Path.Combine(dir, "Dialogues", $"{dialogue.GUID}_{dialogue.ID}", "Asset.dat"), false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(Path.Combine(dir, "Dialogues", $"{dialogue.GUID}_{dialogue.ID}", "English.dat"), false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -430,9 +432,9 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Vendors\{vendor.GUID}_{vendor.ID}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Vendors\{vendor.GUID}_{vendor.ID}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Vendors\{vendor.GUID}_{vendor.ID}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(Path.Combine(dir, "Vendors", $"{vendor.GUID}_{vendor.ID}"));
+                    using (StreamWriter asset = new StreamWriter(Path.Combine(dir, "Vendors", $"{vendor.GUID}_{vendor.ID}", "Asset.dat"), false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(Path.Combine(dir, "Vendors", $"{vendor.GUID}_{vendor.ID}", "English.dat"), false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -512,9 +514,9 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(dir + $@"Quests\{quest.GUID}_{quest.ID}");
-                    using (StreamWriter asset = new StreamWriter(dir + $@"Quests\{quest.GUID}_{quest.ID}\Asset.dat", false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(dir + $@"Quests\{quest.GUID}_{quest.ID}\English.dat", false, Encoding.UTF8))
+                    Directory.CreateDirectory(Path.Combine(dir, "Quests", $"{quest.GUID}_{quest.ID}"));
+                    using (StreamWriter asset = new StreamWriter(Path.Combine(dir, $"Quests", $"{quest.GUID}_{quest.ID}", "Asset.dat"), false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(Path.Combine(dir, $"Quests", $"{quest.GUID}_{quest.ID}", "English.dat"), false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -569,6 +571,54 @@ namespace BowieD.Unturned.NPCMaker.Export
                 }
             }
         }
+        private static void Export_Currencies(IEnumerable<CurrencyAsset> currencies)
+        {
+            foreach (var cur in currencies)
+            {
+                try
+                {
+                    Directory.CreateDirectory(Path.Combine(dir, "Currencies"));
+                    using (StreamWriter asset = new StreamWriter(Path.Combine(dir, "Currencies", $"{cur.GUID}.asset"), false, Encoding.UTF8))
+                    {
+                        char q = '\"';
+
+                        asset.WriteLine($"{q}Metadata{q}");
+                        asset.WriteLine("{");
+                        asset.WriteLine($"\t{q}GUID{q} {q}{cur.GUID}{q}");
+                        asset.WriteLine($"\t{q}Type{q} {q}SDG.Unturned.ItemCurrencyAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null{q}");
+                        asset.WriteLine("}");
+                        asset.WriteLine($"{q}Asset{q}");
+                        asset.WriteLine("{");
+                        asset.WriteLine($"\t{q}ValueFormat{q} {q}{cur.ValueFormat}{q}");
+                        asset.WriteLine($"\t{q}Entries{q}");
+                        asset.WriteLine($"\t[");
+
+                        void writeEntry(CurrencyEntry entry)
+                        {
+                            asset.WriteLine("\t\t{");
+
+                            asset.WriteLine($"\t\t\t{q}Item{q}");
+                            asset.WriteLine("\t\t\t{");
+                            asset.WriteLine($"\t\t\t\t{q}GUID{q} {q}{entry.ItemGUID}{q}");
+                            asset.WriteLine("\t\t\t}");
+                            asset.WriteLine($"\t\t\t{q}Value{q} {q}{entry.Value}{q}");
+
+                            asset.WriteLine("\t\t}");
+                        }
+
+                        foreach (var e in cur.Entries)
+                            writeEntry(e);
+
+                        asset.WriteLine($"\t]");
+                        asset.WriteLine("}");
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+        }
         internal static string ExportCondition(NPC.Conditions.Condition condition, string prefix, int conditionIndex, bool skipLocalization = true)
         {
             StringBuilder result = new StringBuilder();
@@ -581,15 +631,15 @@ namespace BowieD.Unturned.NPCMaker.Export
                 }
 
                 string propName = prop.Name;
-                ConditionSkipFieldAttribute skipPropA = prop.GetCustomAttribute<ConditionSkipFieldAttribute>();
+                SkipFieldAttribute skipPropA = prop.GetCustomAttribute<SkipFieldAttribute>();
                 if ((skipLocalization && propName == "Localization") || skipPropA != null)
                 {
                     continue;
                 }
 
                 object propValue = prop.GetValue(condition);
-                ConditionNoValueAttribute noValueA = prop.GetCustomAttribute<ConditionNoValueAttribute>();
-                ConditionOptionalAttribute optionalA = prop.GetCustomAttribute<ConditionOptionalAttribute>();
+                NoValueAttribute noValueA = prop.GetCustomAttribute<NoValueAttribute>();
+                OptionalAttribute optionalA = prop.GetCustomAttribute<OptionalAttribute>();
                 if (skipPropA != null)
                 {
                     continue;
@@ -613,10 +663,10 @@ namespace BowieD.Unturned.NPCMaker.Export
                     {
                         if (optionalA != null)
                         {
-                            if (optionalA.defaultValue == null)
+                            if (optionalA.DefaultValue == null)
                                 continue;
 
-                            propValue = optionalA.defaultValue;
+                            propValue = optionalA.DefaultValue;
                         }
                     }
                 }
@@ -637,15 +687,15 @@ namespace BowieD.Unturned.NPCMaker.Export
                 }
 
                 string propName = prop.Name;
-                RewardSkipFieldAttribute skipPropA = prop.GetCustomAttribute<RewardSkipFieldAttribute>();
+                SkipFieldAttribute skipPropA = prop.GetCustomAttribute<SkipFieldAttribute>();
                 if ((skipLocalization && propName == "Localization") || skipPropA != null)
                 {
                     continue;
                 }
 
                 object propValue = prop.GetValue(reward);
-                RewardNoValueAttribute noValueA = prop.GetCustomAttribute<RewardNoValueAttribute>();
-                RewardOptionalAttribute optionalA = prop.GetCustomAttribute<RewardOptionalAttribute>();
+                NoValueAttribute noValueA = prop.GetCustomAttribute<NoValueAttribute>();
+                OptionalAttribute optionalA = prop.GetCustomAttribute<OptionalAttribute>();
                 if (skipPropA != null)
                 {
                     continue;

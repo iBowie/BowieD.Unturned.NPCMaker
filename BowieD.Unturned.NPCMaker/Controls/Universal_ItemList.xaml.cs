@@ -38,7 +38,37 @@ namespace BowieD.Unturned.NPCMaker.Controls
             ShowMoveButtons = showMoveButtons;
         }
 
-        public object Value { get; private set; }
+        void updateIcon()
+        {
+            if (Value is IUIL_Icon uilIcon)
+            {
+                if (uilIcon.UpdateIcon(out var img))
+                {
+                    icon.Visibility = Visibility.Visible;
+                    icon.Source = img;
+                }
+                else
+                {
+                    icon.Visibility = Visibility.Collapsed;
+                }
+            }
+            else
+            {
+                icon.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private object _value;
+        public object Value
+        {
+            get => _value;
+            private set
+            {
+                _value = value;
+
+                updateIcon();
+            }
+        }
         public ReturnType Type { get; }
         public bool ShowMoveButtons { get; internal set; }
 
@@ -151,7 +181,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         public enum ReturnType
         {
-            Reward, Condition, Dialogue, Vendor, Quest, VendorItem, Object, Character
+            Reward, Condition, Dialogue, Vendor, Quest, VendorItem, Object, Character,
+            Currency
         }
     }
 }

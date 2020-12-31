@@ -31,20 +31,22 @@ namespace BowieD.Unturned.NPCMaker
         }
         public MainWindowViewModel MainWindowViewModel { get; }
         #region MANAGERS
-        public static Mistakes.DeepAnalysisManager DeepAnalysisManager { get; private set; }
         public static DiscordRPC.DiscordManager DiscordManager { get; set; }
         #endregion
         public new void Show()
         {
-            DeepAnalysisManager = new Mistakes.DeepAnalysisManager();
-            Width *= AppConfig.Instance.scale;
-            Height *= AppConfig.Instance.scale;
-            MinWidth *= AppConfig.Instance.scale;
-            MinHeight *= AppConfig.Instance.scale;
             #region THEME SETUP
             Themes.Theme theme = ThemeManager.Themes.ContainsKey(AppConfig.Instance.currentTheme ?? "") ? ThemeManager.Themes[AppConfig.Instance.currentTheme] : ThemeManager.Themes["Metro/LightGreen"];
             ThemeManager.Apply(theme);
             #endregion
+
+            ImportAssetsForm iaf = new ImportAssetsForm();
+            iaf.ShowDialog();
+
+            Width *= AppConfig.Instance.scale;
+            Height *= AppConfig.Instance.scale;
+            MinWidth *= AppConfig.Instance.scale;
+            MinHeight *= AppConfig.Instance.scale;
             #region OPEN_WITH
             string[] args = Environment.GetCommandLineArgs();
             App.Logger.Log($"Command Line Args: {string.Join(";", args)}");
@@ -252,10 +254,48 @@ namespace BowieD.Unturned.NPCMaker
                 App.Logger.LogException("Could not display notification(s)", ex: ex);
             }
 
+            if (App.Package.Patrons.Length > 0)
+            {
+                var pList = App.Package.Patrons.ToList();
+                pList.Shuffle();
+                string pjoined = string.Join(", ", pList.Take(5));
+
+                App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("StartUp_Patreon_Patrons", pjoined));
+            }
+
             ConsoleLogger.StartWaitForInput();
+            
+            Loaded += (sender, e) =>
+            {
+                var scr = ScreenHelper.GetCurrentScreen(this);
+
+                var sz = scr.Size;
+
+                if (sz.Width < MinWidth || sz.Height < MinHeight)
+                {
+                    var res = MessageBox.Show(LocalizationManager.Current.Interface["Warning_Scale"], Title, MessageBoxButton.YesNo);
+
+                    if (res == MessageBoxResult.Yes)
+                    {
+                        MinWidth /= AppConfig.Instance.scale;
+                        MinHeight /= AppConfig.Instance.scale;
+                        Width /= AppConfig.Instance.scale;
+                        Height /= AppConfig.Instance.scale;
+
+                        this.Left = (sz.Width - Width) / 2 + sz.Left;
+                        this.Top = (sz.Height - Height) / 2 + sz.Top;
+
+                        Application.Current.Resources["Scale"] = 1.0;
+
+                        AppConfig.Instance.scale = 1.0;
+
+                        AppConfig.Instance.Save();
+                    }
+                }
+            };
+
             base.Show();
         }
-
 
         #region CONSTANTS
         public const int

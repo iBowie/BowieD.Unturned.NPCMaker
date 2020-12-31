@@ -36,10 +36,9 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         }
                         if (data.ContainsKey(text))
                         {
-                            App.Logger.Log("Multiple instances of '" + text + "'");
                             if (overrideOldData)
                             {
-                                App.Logger.Log($"Overriding {text}...");
+                                data[text] = value;
                             }
                         }
                         else

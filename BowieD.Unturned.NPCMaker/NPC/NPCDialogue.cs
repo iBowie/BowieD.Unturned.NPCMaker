@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Text;
 using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
@@ -100,21 +101,51 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 }
                 else
                 {
-                    if (Messages == null || Messages.Count < 1 || Messages[0].pages.Count < 1)
-                    {
-                        return $"[{ID}]";
-                    }
-                    else
-                    {
-                        string t = Messages[0].pages[0];
-                        if (!string.IsNullOrEmpty(t))
-                        {
-                            return TextUtil.Shortify($"[{ID}] - {t}", 24);
-                        }
+                    return $"[{ID}] {ContentPreview}";
+                }
+            }
+        }
 
-                        return $"[{ID}]";
+        public string ContentPreview
+        {
+            get
+            {
+                if (Messages == null || Messages.Count < 1 || Messages[0].pages.Count < 1)
+                {
+                    return string.Empty;
+                }
+                else
+                {
+                    string t = Messages[0].pages[0];
+                    if (!string.IsNullOrEmpty(t))
+                    {
+                        return TextUtil.Shortify($"{t}", 24);
+                    }
+
+                    return string.Empty;
+                }
+            }
+        }
+        public string FullText
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+
+                foreach (var msg in Messages)
+                {
+                    foreach (var page in msg.pages)
+                    {
+                        sb.AppendLine(page);
                     }
                 }
+
+                foreach (var r in Responses)
+                {
+                    sb.AppendLine(r.mainText);
+                }
+
+                return sb.ToString();
             }
         }
     }

@@ -1,10 +1,14 @@
-﻿using BowieD.Unturned.NPCMaker.Configuration;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.NPC;
+using BowieD.Unturned.NPCMaker.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Animation;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
@@ -51,6 +55,30 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     break;
                 }
             }
+
+            ContextMenu cmenu = new ContextMenu();
+            MenuItem selectItem = ContextHelper.CreateSelectAssetButton(typeof(GameItemAsset), (asset) =>
+            {
+                txtBoxID.Value = asset.id;
+            }, "Control_SelectAsset_Item", MahApps.Metro.IconPacks.PackIconMaterialKind.Archive);
+            MenuItem selectVehicle = ContextHelper.CreateSelectAssetButton(typeof(GameVehicleAsset), (asset) =>
+            {
+                txtBoxID.Value = asset.id;
+            }, "Control_SelectAsset_Vehicle", MahApps.Metro.IconPacks.PackIconMaterialKind.Car);
+
+            selectItem.Command = new AdvancedCommand(() => { }, (obj) =>
+            {
+                return Selected_ItemType == ItemType.ITEM;
+            });
+            selectVehicle.Command = new AdvancedCommand(() => { }, (obj) =>
+            {
+                return Selected_ItemType == ItemType.VEHICLE;
+            });
+
+            cmenu.Items.Add(selectItem);
+            cmenu.Items.Add(selectVehicle);
+
+            txtBoxID.ContextMenu = cmenu;
         }
         public VendorItem Result { get; private set; }
 
@@ -65,6 +93,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
         private void TypeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            CommandManager.InvalidateRequerySuggested();
+
             if (e.AddedItems.Count == 0)
             {
                 return;

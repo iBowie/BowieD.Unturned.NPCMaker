@@ -1,4 +1,6 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.Localization;
+using System;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
@@ -27,8 +29,16 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
             if (string.IsNullOrEmpty(text))
             {
-                text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Reward_Currency");
+                if (GameAssetManager.TryGetAsset<GameCurrencyAsset>(Guid.Parse(GUID), out var asset) && !string.IsNullOrEmpty(asset.valueFormat))
+                {
+                    text = asset.valueFormat;
+                }
+                else
+                {
+                    text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Reward_Currency");
+                }
             }
+
             return string.Format(text, Value);
         }
     }

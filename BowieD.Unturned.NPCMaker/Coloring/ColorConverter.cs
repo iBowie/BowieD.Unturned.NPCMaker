@@ -41,6 +41,9 @@ namespace BowieD.Unturned.NPCMaker.Coloring
         };
         public static Brush ParseColor(string code)
         {
+            if (code == null)
+                return Brushes.Black;
+
             string parse;
 
             if (UnturnedColors.TryGetValue(code, out string ucolor))
@@ -57,6 +60,21 @@ namespace BowieD.Unturned.NPCMaker.Coloring
             catch
             {
                 return Brushes.Transparent;
+            }
+        }
+        public static string BrushToHEX(Brush brush)
+        {
+            if (brush is SolidColorBrush scb)
+            {
+                var wcl = scb.Color;
+
+                Color cl = new Color(wcl.R, wcl.G, wcl.B);
+
+                return cl.ToHEX();
+            }
+            else
+            {
+                throw new ArgumentException("Expected SolidColorBrush");
             }
         }
 

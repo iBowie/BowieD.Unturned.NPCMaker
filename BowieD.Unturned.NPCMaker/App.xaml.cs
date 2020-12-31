@@ -27,6 +27,17 @@ namespace BowieD.Unturned.NPCMaker
 #else
         internal static ELogLevel LogLevel => ELogLevel.CRITICAL;
 #endif
+        internal static bool IsPreviewVersion
+        {
+            get
+            {
+#if PREVIEW
+                return true;
+#else
+                return false;
+#endif
+            }
+        }
         public static IUpdateManager UpdateManager { get; private set; }
         public static INotificationManager NotificationManager { get; private set; }
         public static ILoggingManager Logger { get; private set; }
@@ -77,7 +88,7 @@ namespace BowieD.Unturned.NPCMaker
                 Logger.Log("under certain conditions; type `license c' for details.");
                 Logger.Log("This programs uses 3rd party apps, type `license l' for details.");
                 Logger.Log("[EXTRCT] - Extracting libraries...", ELogLevel.DEBUG);
-                #region COPY LIBS
+#region COPY LIBS
                 CopyResource(NPCMaker.Properties.Resources.DiscordRPC, Path.Combine(AppConfig.Directory, "DiscordRPC.dll"));
                 CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, Path.Combine(AppConfig.Directory, "Newtonsoft.Json.dll"));
                 CopyResource(NPCMaker.Properties.Resources.ControlzEx, Path.Combine(AppConfig.Directory, "ControlzEx.dll"));
@@ -90,15 +101,15 @@ namespace BowieD.Unturned.NPCMaker
                 CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_Metro, Path.Combine(AppConfig.Directory, "Xceed.Wpf.AvalonDock.Themes.Metro.dll"));
                 CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_VS2010, Path.Combine(AppConfig.Directory, "Xceed.Wpf.AvalonDock.Themes.VS2010.dll"));
                 CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_Toolkit, Path.Combine(AppConfig.Directory, "Xceed.Wpf.Toolkit.dll"));
-                #endregion
+#endregion
                 Logger.Log("[EXTRCT] - Extraction complete!", ELogLevel.DEBUG);
                 AppConfig.Instance.Load();
-                #region SCALE
+#region SCALE
                 Resources["Scale"] = AppConfig.Instance.scale;
-                #endregion
+#endregion
 #if !FAST
                 App.UpdateManager = new GitHubUpdateManager();
-                var result = App.UpdateManager.CheckForUpdates(AppConfig.Instance.downloadPrerelease).GetAwaiter().GetResult();
+                var result = App.UpdateManager.CheckForUpdates(IsPreviewVersion || AppConfig.Instance.downloadPrerelease).GetAwaiter().GetResult();
                 if (result == UpdateAvailability.AVAILABLE)
                 {
                     if (AppConfig.Instance.autoUpdate)

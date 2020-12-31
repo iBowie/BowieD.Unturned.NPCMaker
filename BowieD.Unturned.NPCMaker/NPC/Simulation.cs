@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
@@ -48,6 +49,21 @@ namespace BowieD.Unturned.NPCMaker.NPC
             public ushort ID { get; set; }
             public byte Quality { get; set; }
             public byte Amount { get; set; }
+
+            public string DisplayName
+            {
+                get
+                {
+                    if (GameAssetManager.TryGetAsset<GameItemAsset>(ID, out var asset))
+                    {
+                        return asset.name;
+                    }
+                    else
+                    {
+                        return ID.ToString();
+                    }
+                }
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

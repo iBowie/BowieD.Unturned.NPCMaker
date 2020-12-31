@@ -1,4 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Markup;
 using BowieD.Unturned.NPCMaker.NPC;
 using MahApps.Metro.IconPacks;
@@ -80,7 +82,18 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             {
                                 shouldClose = false;
 
-                                NPCQuest questAsset = MainWindow.CurrentProject.data.quests.Single(d => d.ID == res.openQuestId);
+                                NPCQuest questAsset;
+
+                                if (GameAssetManager.TryGetAsset<GameQuestAsset>(res.openQuestId, out var gameQuestAsset))
+                                {
+                                    questAsset = gameQuestAsset.quest;
+                                }
+                                else
+                                {
+                                    MessageBox.Show(LocalizationManager.Current.Simulation["Dialogue"].Translate("Error_QuestNotFound", res.openQuestId));
+                                    Close();
+                                    return;
+                                }
 
                                 Quest_Status questStatus = Simulation.GetQuestStatus(questAsset.ID);
 
@@ -113,7 +126,18 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                     {
                                         Previous = Start;
 
-                                        NPCDialogue next = MainWindow.CurrentProject.data.dialogues.Single(d => d.ID == res.openDialogueId);
+                                        NPCDialogue next;
+
+                                        if (GameAssetManager.TryGetAsset<GameDialogueAsset>(res.openDialogueId, out var gameDialogueAsset))
+                                        {
+                                            next = gameDialogueAsset.dialogue;
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show(LocalizationManager.Current.Simulation["Dialogue"].Translate("Error_DialogueNotFound", res.openDialogueId));
+                                            Close();
+                                            return;
+                                        }
 
                                         Dialogue = next;
 
@@ -127,7 +151,18 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             {
                                 shouldClose = false;
 
-                                NPCVendor vendorAsset = MainWindow.CurrentProject.data.vendors.Single(d => d.ID == res.openVendorId);
+                                NPCVendor vendorAsset;
+
+                                if (GameAssetManager.TryGetAsset<GameVendorAsset>(res.openVendorId, out var gameVendorAsset))
+                                {
+                                    vendorAsset = gameVendorAsset.vendor;
+                                }
+                                else
+                                {
+                                    MessageBox.Show(LocalizationManager.Current.Simulation["Dialogue"].Translate("Error_VendorNotFound", res.openVendorId));
+                                    Close();
+                                    return;
+                                }
 
                                 VendorView_Window qvw = new VendorView_Window(Character, Simulation, vendorAsset);
 
@@ -147,7 +182,18 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                 {
                                     Previous = Start;
 
-                                    NPCDialogue next = MainWindow.CurrentProject.data.dialogues.Single(d => d.ID == res.openDialogueId);
+                                    NPCDialogue next;
+
+                                    if (GameAssetManager.TryGetAsset<GameDialogueAsset>(res.openDialogueId, out var gameDialogueAsset))
+                                    {
+                                        next = gameDialogueAsset.dialogue;
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show(LocalizationManager.Current.Simulation["Dialogue"].Translate("Error_DialogueNotFound", res.openDialogueId));
+                                        Close();
+                                        return;
+                                    }
 
                                     Dialogue = next;
 
@@ -171,9 +217,18 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             {
                                 Previous = Dialogue;
 
-                                NPCDialogue next = MainWindow.CurrentProject.data.dialogues.Single(d => d.ID == res.openDialogueId);
+                                NPCDialogue next;
 
-                                Dialogue = next;
+                                if (GameAssetManager.TryGetAsset<GameDialogueAsset>(res.openDialogueId, out var gameDialogueAsset))
+                                {
+                                    next = gameDialogueAsset.dialogue;
+                                }
+                                else
+                                {
+                                    MessageBox.Show(LocalizationManager.Current.Simulation["Dialogue"].Translate("Error_DialogueNotFound", res.openDialogueId));
+                                    Close();
+                                    return;
+                                }
 
                                 Display();
                             }
@@ -271,7 +326,22 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     lastMessage = msg;
 
                     if (msg.prev != 0)
-                        Previous = MainWindow.CurrentProject.data.dialogues.SingleOrDefault(d => d.ID == msg.prev);
+                    {
+                        NPCDialogue prevNext;
+
+                        if (GameAssetManager.TryGetAsset<GameDialogueAsset>(msg.prev, out var gameDialogueAsset))
+                        {
+                            prevNext = gameDialogueAsset.dialogue;
+                        }
+                        else
+                        {
+                            MessageBox.Show(LocalizationManager.Current.Simulation["Dialogue"].Translate("Error_DialogueNotFound", msg.prev));
+                            Close();
+                            return;
+                        }
+
+                        Previous = prevNext;
+                    }
 
                     DisplayPage(msg, i, 0);
 

@@ -29,20 +29,26 @@ namespace BowieD.Unturned.NPCMaker.Forms
         private void Button_Click(object sender, RoutedEventArgs e)
         {
         ask:
-            MultiFieldInputView_Dialog mfiv = new MultiFieldInputView_Dialog();
-            if (mfiv.ShowDialog(new string[3] { LocalizationManager.Current.Simulation["Inventory"]["Item_ID"], LocalizationManager.Current.Simulation["Inventory"]["Item_Amount"], LocalizationManager.Current.Simulation["Inventory"]["Item_Quality"] }, LocalizationManager.Current.Simulation["Inventory"]["Item_Add"]) == true)
+            MultiFieldInputView_Dialog mfiv = new MultiFieldInputView_Dialog(new string[4] { "", "1", "100", "1" });
+            if (mfiv.ShowDialog(new string[4] { LocalizationManager.Current.Simulation["Inventory"]["Item_ID"], LocalizationManager.Current.Simulation["Inventory"]["Item_Amount"], LocalizationManager.Current.Simulation["Inventory"]["Item_Quality"], LocalizationManager.Current.Simulation["Inventory"]["Item_Count"] }, LocalizationManager.Current.Simulation["Inventory"]["Item_Add"]) == true)
             {
                 string[] values = mfiv.Values;
-                if (ushort.TryParse(values[0], out ushort itemID) && byte.TryParse(values[1], out byte itemAmount) && byte.TryParse(values[2], out byte itemQuality))
+                if (ushort.TryParse(values[0], out ushort itemID) &&
+                    byte.TryParse(values[1], out byte itemAmount) &&
+                    byte.TryParse(values[2], out byte itemQuality) &&
+                    byte.TryParse(values[3], out byte itemCount))
                 {
-                    Simulation.Item i = new Simulation.Item()
+                    for (int k = 0; k < itemCount; k++)
                     {
-                        ID = itemID,
-                        Amount = itemAmount,
-                        Quality = itemQuality
-                    };
-                    Items.Add(i);
-                    list.Items.Add(i);
+                        Simulation.Item i = new Simulation.Item()
+                        {
+                            ID = itemID,
+                            Amount = itemAmount,
+                            Quality = itemQuality
+                        };
+                        Items.Add(i);
+                        list.Items.Add(i);
+                    }
                 }
                 else
                 {

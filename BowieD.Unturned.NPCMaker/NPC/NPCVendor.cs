@@ -1,8 +1,13 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Controls;
+using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Text;
+using System.Windows.Media.Imaging;
 using System.Xml.Serialization;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
@@ -91,7 +96,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         }
     }
     [Serializable]
-    public class VendorItem : IHasUIText
+    public class VendorItem : IHasUIText, IUIL_Icon
     {
         public VendorItem()
         {
@@ -109,7 +114,65 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             get
             {
-                return $"{(type == ItemType.ITEM ? "Item" : "Vehicle")} [{id}] ({cost}) {(type == ItemType.VEHICLE ? $"({spawnPointID})" : "")}"; ;
+                StringBuilder sb = new StringBuilder();
+
+                switch (type)
+                {
+                    case ItemType.ITEM:
+                        {
+                            sb.Append("Item");
+
+                            if (GameAssetManager.TryGetAsset<GameItemAsset>(id, out var asset))
+                            {
+                                sb.Append($" [{asset.name}] ({cost})");
+                            }
+                            else
+                            {
+                                sb.Append($" [{id}] ({cost})");
+                            }
+                        }
+                        break;
+                    case ItemType.VEHICLE:
+                        {
+                            sb.Append("Vehicle");
+
+                            if (GameAssetManager.TryGetAsset<GameVehicleAsset>(id, out var asset))
+                            {
+                                sb.Append($" [{asset.name}] ({cost})");
+                            }
+                            else
+                            {
+                                sb.Append($" [{id}] ({cost})");
+                            }
+
+                            sb.Append($" ({spawnPointID})");
+                        }
+                        break;
+                }
+
+                return sb.ToString();
+            }
+        }
+
+        public bool UpdateIcon(out BitmapImage image)
+        {
+            if (type == ItemType.ITEM)
+            {
+                if (id > 0 && GameAssetManager.TryGetAsset<GameItemAsset>(id, out var asset))
+                {
+                    image = ThumbnailManager.CreateThumbnail(asset.ImagePath);
+                    return true;
+                }
+                else
+                {
+                    image = default;
+                    return false;
+                }
+            }
+            else
+            {
+                image = default;
+                return false;
             }
         }
     }

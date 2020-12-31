@@ -1,4 +1,6 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +20,8 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     "BowieD.Unturned.NPCMaker.Mistakes.Character",
                     "BowieD.Unturned.NPCMaker.Mistakes.Dialogue",
                     "BowieD.Unturned.NPCMaker.Mistakes.Vendor",
-                    "BowieD.Unturned.NPCMaker.Mistakes.Quest"
+                    "BowieD.Unturned.NPCMaker.Mistakes.Quest",
+                    "BowieD.Unturned.NPCMaker.Mistakes.Currencies"
                 };
                 IEnumerable<Type> q = from t in Assembly.GetExecutingAssembly().GetTypes() where t.IsClass && !t.IsAbstract && nspaces.Contains(t.Namespace) select t;
                 foreach (Type t in q)
@@ -63,6 +66,137 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     MainWindow.Instance.lstMistakes.Items.Add(fm);
                 }
             }
+
+            foreach (NPCDialogue dialogue in MainWindow.CurrentProject.data.dialogues)
+            {
+                if (GameAssetManager.TryGetAsset<GameAsset>((asset) =>
+                {
+                    if (asset is GameDialogueAsset gda)
+                    {
+                        if (gda.dialogue != null && gda.dialogue == dialogue)
+                            return false;
+
+                        return gda.id == dialogue.ID;
+                    }
+                    else
+                    {
+                        return asset.Category == EGameAssetCategory.NPC && asset.id == dialogue.ID;
+                    }
+                }, out _))
+                {
+                    MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                    {
+                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_dialogue", dialogue.ID),
+                        Importance = IMPORTANCE.WARNING
+                    });
+                }
+            }
+
+            foreach (NPCVendor vendor in MainWindow.CurrentProject.data.vendors)
+            {
+                if (GameAssetManager.TryGetAsset<GameAsset>((asset) =>
+                {
+                    if (asset is GameVendorAsset gva)
+                    {
+                        if (gva.vendor != null && gva.vendor == vendor)
+                            return false;
+
+                        return gva.id == vendor.ID;
+                    }
+                    else
+                    {
+                        return asset.Category == EGameAssetCategory.NPC && asset.id == vendor.ID;
+                    }
+                }, out _))
+                {
+                    MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                    {
+                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_vendor", vendor.ID),
+                        Importance = IMPORTANCE.WARNING
+                    });
+                }
+                foreach (VendorItem it in vendor.items)
+                {
+                    if (it.type == ItemType.VEHICLE)
+                    {
+                        if (GameAssetManager.HasImportedAssets && !GameAssetManager.TryGetAsset<GameVehicleAsset>(it.id, out _))
+                        {
+                            MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                            {
+                                MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_vehicle", it.id),
+                                Importance = IMPORTANCE.WARNING
+                            });
+                            continue;
+                        }
+                    }
+                    if (it.type == ItemType.ITEM)
+                    {
+                        if (GameAssetManager.HasImportedAssets && !GameAssetManager.TryGetAsset<GameItemAsset>(it.id, out _))
+                        {
+                            MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                            {
+                                MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_item", it.id),
+                                Importance = IMPORTANCE.WARNING
+                            });
+                            continue;
+                        }
+                    }
+                }
+            }
+
+            foreach (NPCQuest quest in MainWindow.CurrentProject.data.quests)
+            {
+                if (GameAssetManager.TryGetAsset<GameAsset>((asset) =>
+                {
+                    if (asset is GameQuestAsset gqa)
+                    {
+                        if (gqa.quest != null && gqa.quest == quest)
+                            return false;
+
+                        return gqa.id == quest.ID;
+                    }
+                    else
+                    {
+                        return asset.Category == EGameAssetCategory.NPC && asset.id == quest.ID;
+                    }
+                }, out _))
+                {
+                    MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                    {
+                        MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_quest", quest.ID),
+                        Importance = IMPORTANCE.WARNING
+                    });
+                }
+            }
+
+            foreach (NPCCharacter character in MainWindow.CurrentProject.data.characters)
+            {
+                if (character.ID > 0)
+                {
+                    if (GameAssetManager.TryGetAsset<GameAsset>((asset) =>
+                    {
+                        if (asset is GameNPCAsset gva)
+                        {
+                            if (gva.character != null && gva.character == character)
+                                return false;
+
+                            return gva.id == character.ID;
+                        }
+                        else
+                        {
+                            return asset.Category == EGameAssetCategory.OBJECT && asset.id == character.ID;
+                        }
+                    }, out _))
+                    {
+                        MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                        {
+                            MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_char", character.ID),
+                            Importance = IMPORTANCE.WARNING
+                        });
+                    }
+                }
+            }
+
             if (MainWindow.Instance.lstMistakes.Items.Count == 0)
             {
                 MainWindow.Instance.lstMistakes.Visibility = Visibility.Collapsed;

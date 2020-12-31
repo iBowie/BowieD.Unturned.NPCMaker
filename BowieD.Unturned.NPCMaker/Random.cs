@@ -1,4 +1,6 @@
-﻿namespace BowieD.Unturned.NPCMaker
+﻿using System.Collections.Generic;
+
+namespace BowieD.Unturned.NPCMaker
 {
     public static class Random
     {
@@ -31,6 +33,22 @@
         public static byte NextByte()
         {
             return (byte)random.Next(0, 256);
+        }
+
+        public static float Value => (float)random.NextDouble();
+    }
+    public static class RandomExtensions
+    {
+        public static void Shuffle<T>(this IList<T> list)
+        {
+            int n = list.Count;
+            while (n > 1)
+            {
+                int k = Random.NextInt32(n--);
+                T temp = list[n];
+                list[n] = list[k];
+                list[k] = temp;
+            }
         }
     }
 }

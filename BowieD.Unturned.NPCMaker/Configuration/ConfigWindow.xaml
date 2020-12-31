@@ -62,6 +62,7 @@
                         </ComboBox>
                     </Grid>
                     <CheckBox Content="{xaml:Localize Key=OPTIONS_animateControls}" ToolTip="{xaml:Localize Key=OPTIONS_animateControls_Tooltip}" Name="Animation_Enabled_Box" VerticalAlignment="Top" Margin="2.5"/>
+                    <CheckBox Content="{xaml:Localize Key=OPTIONS_highlightSearch}" ToolTip="{xaml:Localize Key=OPTIONS_highlightSearch_Tooltip}" Name="Highlight_Search_Box" VerticalAlignment="Top" Margin="2.5"/>
                 </StackPanel>
             </TabItem>
             <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Misc}">
@@ -71,6 +72,21 @@
                     <CheckBox Name="ReplaceMissingKeysWithEnglish_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_replaceMissingKeysWithEnglish}" ToolTip="{xaml:Localize Key=OPTIONS_replaceMissingKeysWithEnglish_Tooltip}"/>
                     <CheckBox Name="UseCommentsInsteadOfData_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_useCommentsInsteadOfData}" ToolTip="{xaml:Localize Key=OPTIONS_useCommentsInsteadOfData_Tooltip}"/>
                     <CheckBox Name="Experimental_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_experimentalFeatures}" ToolTip="{xaml:Localize Key=OPTIONS_experimentalFeatures_Tooltip}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Import}">
+                <StackPanel Margin="5" CanVerticallyScroll="True">
+                    <CheckBox Name="Import_Vanilla_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_importImportVanilla}" ToolTip="{xaml:Localize Key=OPTIONS_importImportVanilla_Tooltip}"/>
+                    <CheckBox Name="Import_Workshop_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_importImportWorkshop}" ToolTip="{xaml:Localize Key=OPTIONS_importImportWorkshop_Tooltip}"/>
+                    <CheckBox Name="Generate_Thumbnails_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_generateThumbnailsBeforehand}" ToolTip="{xaml:Localize Key=OPTIONS_generateThumbnailsBeforehand_Tooltip}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Command="{Binding ImportChangeFolderCommand}" Grid.Column="0" Content="{xaml:Localize INTERFACE_Configuration_Tab_Import_ChangeFolder}" Name="Import_SelectFolder_Button" Margin="2.5"/>
+                        <Button Command="{Binding ImportResetFolderCommand}" Grid.Column="1" Content="{xaml:Localize INTERFACE_Configuration_Tab_Import_ResetFolder}" Name="Import_ResetFolder_Button" Margin="2.5"/>
+                    </Grid>
                 </StackPanel>
             </TabItem>
         </TabControl>

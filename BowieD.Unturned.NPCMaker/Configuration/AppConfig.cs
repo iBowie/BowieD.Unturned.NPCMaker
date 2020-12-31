@@ -27,6 +27,11 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public bool alternateLogicTranslation;
         public bool replaceMissingKeysWithEnglish;
         public bool useCommentsInsteadOfData;
+        public string unturnedDir;
+        public bool importVanilla = true;
+        public bool importWorkshop = true;
+        public bool generateThumbnailsBeforehand = true;
+        public bool highlightSearch;
 
         public void Save()
         {
@@ -76,6 +81,11 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             alternateLogicTranslation = false;
             replaceMissingKeysWithEnglish = true;
             useCommentsInsteadOfData = false;
+            unturnedDir = null;
+            importVanilla = true;
+            importWorkshop = true;
+            generateThumbnailsBeforehand = true;
+            highlightSearch = false;
             ELanguage c = LocalizationManager.GetLanguageFromCultureInfo(CultureInfo.InstalledUICulture);
             if (LocalizationManager.SupportedLanguages().Contains(c))
             {

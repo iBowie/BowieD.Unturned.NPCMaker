@@ -76,6 +76,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 variablesGrid.Children.Add(c);
             }
 
+            newCondition.PostLoad(this);
+
             double newHeight = (baseHeight + (heightDelta * (mult + (mult > 1 ? 1 : 0))));
             if (AppConfig.Instance.animateControls)
             {
@@ -121,6 +123,63 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             FrameworkElement control = Util.FindVisualChildren<FrameworkElement>(variablesGrid).First(d => d.Tag != null && d.Tag.ToString() == "variable::Localization");
             return Util.FindParent<Border>(control);
+        }
+
+        public T GetAssociatedControl<T>(string propName) where T : FrameworkElement
+        {
+            string n = $"variable::{propName}";
+
+            bool searchThrough(UIElement fe, out T result)
+            {
+                if (fe is T fet)
+                {
+                    if (fet.Tag.ToString() == n)
+                    {
+                        result = fet;
+                        return true;
+                    }
+                }
+
+                if (fe is Decorator decorator)
+                {
+                    if (searchThrough(decorator.Child, out var res))
+                    {
+                        result = res;
+                        return true;
+                    }
+                    else
+                    {
+                        result = default;
+                        return false;
+                    }
+                }
+                else if (fe is Panel panel)
+                {
+                    foreach (UIElement e in panel.Children)
+                    {
+                        if (searchThrough(e, out var res))
+                        {
+                            result = res;
+                            return true;
+                        }
+                    }
+
+                    result = default;
+                    return false;
+                }
+                else
+                {
+                    result = default;
+                    return false;
+                }
+            }
+
+            if (searchThrough(variablesGrid, out var ress))
+            {
+                return ress;
+            }
+
+            return default;
         }
     }
 }

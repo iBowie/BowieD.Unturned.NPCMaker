@@ -2,6 +2,9 @@
 using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
+using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.GameIntegration.Filtering;
+using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.NPC;
@@ -47,6 +50,250 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             MainWindow.Instance.characterTabButtonAdd.ContextMenu = cmenu3;
 
             MainWindow.Instance.txtDisplayName.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich | ContextHelper.EContextOption.Group_TextEdit);
+
+            #region Clothing Init
+            #region Default
+            ContextMenu cidDefault_hat = new ContextMenu();
+            cidDefault_hat.Items.Add(ContextHelper.CreateSelectHatButton((asset) =>
+            {
+                this.DefaultClothing.Hat = asset.id;
+                MainWindow.Instance.controlClothingDefaultHat.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingDefaultHat.ContextMenu = cidDefault_hat;
+            MainWindow.Instance.controlClothingDefaultHat.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidDefault_glasses = new ContextMenu();
+            cidDefault_glasses.Items.Add(ContextHelper.CreateSelectGlassesButton((asset) =>
+            {
+                this.DefaultClothing.Glasses = asset.id;
+                MainWindow.Instance.controlClothingDefaultGlasses.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingDefaultGlasses.ContextMenu = cidDefault_glasses;
+            MainWindow.Instance.controlClothingDefaultGlasses.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidDefault_backpack = new ContextMenu();
+            cidDefault_backpack.Items.Add(ContextHelper.CreateSelectBackpackButton((asset) =>
+            {
+                this.DefaultClothing.Backpack = asset.id;
+                MainWindow.Instance.controlClothingDefaultBackpack.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingDefaultBackpack.ContextMenu = cidDefault_backpack;
+            MainWindow.Instance.controlClothingDefaultBackpack.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidDefault_shirt = new ContextMenu();
+            cidDefault_shirt.Items.Add(ContextHelper.CreateSelectShirtButton((asset) =>
+            {
+                this.DefaultClothing.Shirt = asset.id;
+                MainWindow.Instance.controlClothingDefaultShirt.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingDefaultShirt.ContextMenu = cidDefault_shirt;
+            MainWindow.Instance.controlClothingDefaultShirt.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidDefault_pants = new ContextMenu();
+            cidDefault_pants.Items.Add(ContextHelper.CreateSelectPantsButton((asset) =>
+            {
+                this.DefaultClothing.Pants = asset.id;
+                MainWindow.Instance.controlClothingDefaultPants.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingDefaultPants.ContextMenu = cidDefault_pants;
+            MainWindow.Instance.controlClothingDefaultPants.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidDefault_mask = new ContextMenu();
+            cidDefault_mask.Items.Add(ContextHelper.CreateSelectMaskButton((asset) =>
+            {
+                this.DefaultClothing.Mask = asset.id;
+                MainWindow.Instance.controlClothingDefaultMask.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingDefaultMask.ContextMenu = cidDefault_mask;
+            MainWindow.Instance.controlClothingDefaultMask.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidDefault_vest = new ContextMenu();
+            cidDefault_vest.Items.Add(ContextHelper.CreateSelectVestButton((asset) =>
+            {
+                this.DefaultClothing.Vest = asset.id;
+                MainWindow.Instance.controlClothingDefaultVest.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingDefaultVest.ContextMenu = cidDefault_vest;
+            MainWindow.Instance.controlClothingDefaultVest.ValueChanged += (sender, e) => UpdateClothing();
+            #endregion
+            #region Halloween
+            ContextMenu cidHalloween_hat = new ContextMenu();
+            cidHalloween_hat.Items.Add(ContextHelper.CreateSelectHatButton((asset) =>
+            {
+                this.HalloweenClothing.Hat = asset.id;
+                MainWindow.Instance.controlClothingHalloweenHat.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingHalloweenHat.ContextMenu = cidHalloween_hat;
+            MainWindow.Instance.controlClothingHalloweenHat.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidHalloween_glasses = new ContextMenu();
+            cidHalloween_glasses.Items.Add(ContextHelper.CreateSelectGlassesButton((asset) =>
+            {
+                this.HalloweenClothing.Glasses = asset.id;
+                MainWindow.Instance.controlClothingHalloweenGlasses.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingHalloweenGlasses.ContextMenu = cidHalloween_glasses;
+            MainWindow.Instance.controlClothingHalloweenGlasses.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidHalloween_backpack = new ContextMenu();
+            cidHalloween_backpack.Items.Add(ContextHelper.CreateSelectBackpackButton((asset) =>
+            {
+                this.HalloweenClothing.Backpack = asset.id;
+                MainWindow.Instance.controlClothingHalloweenBackpack.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingHalloweenBackpack.ContextMenu = cidHalloween_backpack;
+            MainWindow.Instance.controlClothingHalloweenBackpack.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidHalloween_shirt = new ContextMenu();
+            cidHalloween_shirt.Items.Add(ContextHelper.CreateSelectShirtButton((asset) =>
+            {
+                this.HalloweenClothing.Shirt = asset.id;
+                MainWindow.Instance.controlClothingHalloweenShirt.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingHalloweenShirt.ContextMenu = cidHalloween_shirt;
+            MainWindow.Instance.controlClothingHalloweenShirt.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidHalloween_pants = new ContextMenu();
+            cidHalloween_pants.Items.Add(ContextHelper.CreateSelectPantsButton((asset) =>
+            {
+                this.HalloweenClothing.Pants = asset.id;
+                MainWindow.Instance.controlClothingHalloweenPants.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingHalloweenPants.ContextMenu = cidHalloween_pants;
+            MainWindow.Instance.controlClothingHalloweenPants.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidHalloween_mask = new ContextMenu();
+            cidHalloween_mask.Items.Add(ContextHelper.CreateSelectMaskButton((asset) =>
+            {
+                this.HalloweenClothing.Mask = asset.id;
+                MainWindow.Instance.controlClothingHalloweenMask.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingHalloweenMask.ContextMenu = cidHalloween_mask;
+            MainWindow.Instance.controlClothingHalloweenMask.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidHalloween_vest = new ContextMenu();
+            cidHalloween_vest.Items.Add(ContextHelper.CreateSelectVestButton((asset) =>
+            {
+                this.HalloweenClothing.Vest = asset.id;
+                MainWindow.Instance.controlClothingHalloweenVest.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingHalloweenVest.ContextMenu = cidHalloween_vest;
+            MainWindow.Instance.controlClothingHalloweenVest.ValueChanged += (sender, e) => UpdateClothing();
+            #endregion
+            #region Christmas
+            ContextMenu cidChristmas_hat = new ContextMenu();
+            cidChristmas_hat.Items.Add(ContextHelper.CreateSelectHatButton((asset) =>
+            {
+                this.ChristmasClothing.Hat = asset.id;
+                MainWindow.Instance.controlClothingChristmasHat.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingChristmasHat.ContextMenu = cidChristmas_hat;
+            MainWindow.Instance.controlClothingChristmasHat.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidChristmas_glasses = new ContextMenu();
+            cidChristmas_glasses.Items.Add(ContextHelper.CreateSelectGlassesButton((asset) =>
+            {
+                this.ChristmasClothing.Glasses = asset.id;
+                MainWindow.Instance.controlClothingChristmasGlasses.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingChristmasGlasses.ContextMenu = cidChristmas_glasses;
+            MainWindow.Instance.controlClothingChristmasGlasses.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidChristmas_backpack = new ContextMenu();
+            cidChristmas_backpack.Items.Add(ContextHelper.CreateSelectBackpackButton((asset) =>
+            {
+                this.ChristmasClothing.Backpack = asset.id;
+                MainWindow.Instance.controlClothingChristmasBackpack.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingChristmasBackpack.ContextMenu = cidChristmas_backpack;
+            MainWindow.Instance.controlClothingChristmasBackpack.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidChristmas_shirt = new ContextMenu();
+            cidChristmas_shirt.Items.Add(ContextHelper.CreateSelectShirtButton((asset) =>
+            {
+                this.ChristmasClothing.Shirt = asset.id;
+                MainWindow.Instance.controlClothingChristmasShirt.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingChristmasShirt.ContextMenu = cidChristmas_shirt;
+            MainWindow.Instance.controlClothingChristmasShirt.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidChristmas_pants = new ContextMenu();
+            cidChristmas_pants.Items.Add(ContextHelper.CreateSelectPantsButton((asset) =>
+            {
+                this.ChristmasClothing.Pants = asset.id;
+                MainWindow.Instance.controlClothingChristmasPants.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingChristmasPants.ContextMenu = cidChristmas_pants;
+            MainWindow.Instance.controlClothingChristmasPants.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidChristmas_mask = new ContextMenu();
+            cidChristmas_mask.Items.Add(ContextHelper.CreateSelectMaskButton((asset) =>
+            {
+                this.ChristmasClothing.Mask = asset.id;
+                MainWindow.Instance.controlClothingChristmasMask.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingChristmasMask.ContextMenu = cidChristmas_mask;
+            MainWindow.Instance.controlClothingChristmasMask.ValueChanged += (sender, e) => UpdateClothing();
+
+            ContextMenu cidChristmas_vest = new ContextMenu();
+            cidChristmas_vest.Items.Add(ContextHelper.CreateSelectVestButton((asset) =>
+            {
+                this.ChristmasClothing.Vest = asset.id;
+                MainWindow.Instance.controlClothingChristmasVest.Value = asset.id;
+            }));
+            MainWindow.Instance.controlClothingChristmasVest.ContextMenu = cidChristmas_vest;
+            MainWindow.Instance.controlClothingChristmasVest.ValueChanged += (sender, e) => UpdateClothing();
+            #endregion
+            #endregion
+            MainWindow.Instance.clothingTabControl.SelectionChanged += (sender, e) => UpdateClothing();
+            #region Equipment Init
+            ContextMenu cid_primary = new ContextMenu();
+            cid_primary.Items.Add(ContextHelper.CreateSelectItemButton((asset) =>
+            {
+                EquipmentPrimary = asset.id;
+                MainWindow.Instance.primaryIdBox.Value = asset.id;
+            }, new AssetFilter_Equippable("Interface", "AssetPicker_Filter_Equippable", Equip_Type.Primary)));
+            MainWindow.Instance.primaryIdBox.ContextMenu = cid_primary;
+            MainWindow.Instance.primaryIdBox.ValueChanged += (sender, e) => UpdateEquipment();
+
+            ContextMenu cid_secondary = new ContextMenu();
+            cid_secondary.Items.Add(ContextHelper.CreateSelectItemButton((asset) =>
+            {
+                EquipmentSecondary = asset.id;
+                MainWindow.Instance.secondaryIdBox.Value = asset.id;
+            }, new AssetFilter_Equippable("Interface", "AssetPicker_Filter_Equippable", Equip_Type.Secondary)));
+            MainWindow.Instance.secondaryIdBox.ContextMenu = cid_secondary;
+            MainWindow.Instance.secondaryIdBox.ValueChanged += (sender, e) => UpdateEquipment();
+
+            ContextMenu cid_tertiary = new ContextMenu();
+            cid_tertiary.Items.Add(ContextHelper.CreateSelectItemButton((asset) =>
+            {
+                EquipmentTertiary = asset.id;
+                MainWindow.Instance.tertiaryIdBox.Value = asset.id;
+            }, new AssetFilter_Equippable("Interface", "AssetPicker_Filter_Equippable", Equip_Type.Tertiary)));
+            MainWindow.Instance.tertiaryIdBox.ContextMenu = cid_tertiary;
+            MainWindow.Instance.tertiaryIdBox.ValueChanged += (sender, e) => UpdateEquipment();
+            #endregion
+
+            var txtIDContext = new ContextMenu();
+
+            txtIDContext.Items.Add(ContextHelper.CreateFindUnusedIDButton((id) =>
+            {
+                this.ID = id;
+                MainWindow.Instance.txtID.Value = id;
+            }, GameIntegration.EGameAssetCategory.OBJECT));
+
+            MainWindow.Instance.txtID.ContextMenu = txtIDContext;
+
+            var dialogueIDContext = new ContextMenu();
+
+            dialogueIDContext.Items.Add(ContextHelper.CreateSelectAssetButton(typeof(GameDialogueAsset), (asset) =>
+            {
+                this.DialogueID = asset.id;
+                MainWindow.Instance.txtStartDialogueID.Value = asset.id;
+            }, "Control_SelectAsset_Dialogue", MahApps.Metro.IconPacks.PackIconMaterialKind.Chat));
+
+            MainWindow.Instance.txtStartDialogueID.ContextMenu = dialogueIDContext;
         }
 
         private void CharacterTabButtonAdd_Click(object sender, RoutedEventArgs e)
@@ -650,6 +897,91 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             yield return new Coloring.Color("#352C22");
             yield return new Coloring.Color("#373737");
             yield return new Coloring.Color("#191919");
+        }
+
+        private void UpdateEquipment()
+        {
+            updateItemIcon<GameItemAsset>(EquipmentPrimary, MainWindow.Instance.controlEquipmentPrimaryIcon);
+            updateItemIcon<GameItemAsset>(EquipmentSecondary, MainWindow.Instance.controlEquipmentSecondaryIcon);
+            updateItemIcon<GameItemAsset>(EquipmentTertiary, MainWindow.Instance.controlEquipmentTertiaryIcon);
+        }
+
+        private void UpdateClothing()
+        {
+            NPCClothing clothing;
+
+            switch (MainWindow.Instance.clothingTabControl.SelectedIndex)
+            {
+                case 0:
+                    clothing = DefaultClothing;
+                    {
+                        updateItemIcon<GameItemHatAsset>(clothing.Hat, MainWindow.Instance.controlClothingDefaultHatIcon);
+                        updateItemIcon<GameItemMaskAsset>(clothing.Mask, MainWindow.Instance.controlClothingDefaultMaskIcon);
+                        updateItemIcon<GameItemShirtAsset>(clothing.Shirt, MainWindow.Instance.controlClothingDefaultShirtIcon);
+                        updateItemIcon<GameItemGlassesAsset>(clothing.Glasses, MainWindow.Instance.controlClothingDefaultGlassesIcon);
+                        updateItemIcon<GameItemVestAsset>(clothing.Vest, MainWindow.Instance.controlClothingDefaultVestIcon);
+                        updateItemIcon<GameItemPantsAsset>(clothing.Pants, MainWindow.Instance.controlClothingDefaultPantsIcon);
+                        updateItemIcon<GameItemBackpackAsset>(clothing.Backpack, MainWindow.Instance.controlClothingDefaultBackpackIcon);
+                    }
+                    break;
+                case 1:
+                    clothing = ChristmasClothing;
+                    {
+                        updateItemIcon<GameItemHatAsset>(clothing.Hat, MainWindow.Instance.controlClothingChristmasHatIcon);
+                        updateItemIcon<GameItemMaskAsset>(clothing.Mask, MainWindow.Instance.controlClothingChristmasMaskIcon);
+                        updateItemIcon<GameItemShirtAsset>(clothing.Shirt, MainWindow.Instance.controlClothingChristmasShirtIcon);
+                        updateItemIcon<GameItemGlassesAsset>(clothing.Glasses, MainWindow.Instance.controlClothingChristmasGlassesIcon);
+                        updateItemIcon<GameItemVestAsset>(clothing.Vest, MainWindow.Instance.controlClothingChristmasVestIcon);
+                        updateItemIcon<GameItemPantsAsset>(clothing.Pants, MainWindow.Instance.controlClothingChristmasPantsIcon);
+                        updateItemIcon<GameItemBackpackAsset>(clothing.Backpack, MainWindow.Instance.controlClothingChristmasBackpackIcon);
+                    }
+                    break;
+                case 2:
+                    clothing = HalloweenClothing;
+                    {
+                        updateItemIcon<GameItemHatAsset>(clothing.Hat, MainWindow.Instance.controlClothingHalloweenHatIcon);
+                        updateItemIcon<GameItemMaskAsset>(clothing.Mask, MainWindow.Instance.controlClothingHalloweenMaskIcon);
+                        updateItemIcon<GameItemShirtAsset>(clothing.Shirt, MainWindow.Instance.controlClothingHalloweenShirtIcon);
+                        updateItemIcon<GameItemGlassesAsset>(clothing.Glasses, MainWindow.Instance.controlClothingHalloweenGlassesIcon);
+                        updateItemIcon<GameItemVestAsset>(clothing.Vest, MainWindow.Instance.controlClothingHalloweenVestIcon);
+                        updateItemIcon<GameItemPantsAsset>(clothing.Pants, MainWindow.Instance.controlClothingHalloweenPantsIcon);
+                        updateItemIcon<GameItemBackpackAsset>(clothing.Backpack, MainWindow.Instance.controlClothingHalloweenBackpackIcon);
+                    }
+                    break;
+                default:
+                    return;
+            }
+
+            if (clothing.IsHairVisible)
+            {
+                MainWindow.Instance.hairInvisibleIcon.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                MainWindow.Instance.hairInvisibleIcon.Visibility = Visibility.Visible;
+            }
+
+            if (clothing.IsBeardVisible)
+            {
+                MainWindow.Instance.beardInvisibleIcon.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                MainWindow.Instance.beardInvisibleIcon.Visibility = Visibility.Visible;
+            }
+        }
+
+        private static void updateItemIcon<T>(ushort id, Image control) where T : GameItemAsset
+        {
+            if (id > 0 && GameAssetManager.TryGetAsset<T>(id, out var asset))
+            {
+                control.Visibility = Visibility.Visible;
+                control.Source = ThumbnailManager.CreateThumbnail(asset.ImagePath);
+            }
+            else
+            {
+                control.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }
