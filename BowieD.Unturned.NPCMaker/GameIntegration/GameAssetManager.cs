@@ -144,6 +144,12 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         }
         public static async Task Import(string directory, EGameAssetOrigin origin, Action<int, int> fileLoadedCallback = null, CancellationTokenSource tokenSource = null)
         {
+            if (!Directory.Exists(directory))
+            {
+                await App.Logger.Log($"Cancelled import from '{directory}'. Directory does not exist.", Logging.ELogLevel.WARNING);
+                return;
+            }
+
             Queue<ScannedFileInfo> files = new Queue<ScannedFileInfo>();
 
             HashSet<string> ignoreFileNames = new HashSet<string>();
