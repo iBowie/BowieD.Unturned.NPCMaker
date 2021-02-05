@@ -31,6 +31,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
             redirects = new Dictionary<string, string>();
 
             add("SDG.Unturned.ItemCurrencyAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", typeof(GameCurrencyAsset).AssemblyQualifiedName);
+            add("SDG.Unturned.WeatherAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", typeof(GameWeatherAsset).AssemblyQualifiedName);
         }
     }
 }

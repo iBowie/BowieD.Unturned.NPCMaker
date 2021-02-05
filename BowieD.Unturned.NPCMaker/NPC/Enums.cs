@@ -2,6 +2,15 @@
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
+    public enum ENPCWeatherStatus
+    {
+        Active = 0,
+        Transitioning_In = 1,
+        Fully_Transitioned_In = 2,
+        Transitioning_Out = 3,
+        Fully_Transitioned_Out = 4,
+        Transitioning = 5
+    }
     public enum Condition_Type
     {
         None,
@@ -25,7 +34,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
         Holiday,
         Compare_Flags,
         Currency,
-        Kills_Tree
+        Kills_Tree,
+        Weather_Status,
+        Weather_Blend_Alpha
     }
     public enum Logic_Type
     {
