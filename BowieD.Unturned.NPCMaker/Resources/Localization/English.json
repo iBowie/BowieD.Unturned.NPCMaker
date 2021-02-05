@@ -491,7 +491,8 @@
         "StartUp_Free": "This app is absolutely free. If someone charged you for this app - report to BowieD. I will not refund you any money for this - but i'll try my best to make it stop.",
         "StartUp_Patreon": "Consider supporting me on Patreon",
         "StartUp_Patreon_Open": "Go to Patreon",
-        "StartUp_Patreon_Patrons": "Honorable patrons: {0}"
+        "StartUp_Patreon_Patrons": "Honorable patrons: {0}",
+        "StartUp_IconsNotGenerated": "During startup app couldn't find some icons for items. If you want to see all item icons in the app follow these steps\n\n1. Open Unturned\n2. Go to Main Menu\n3.Open Workshop menu\n4. Hit F1 on your keyboard\n5. Click 'All Item Icons' in the top left corner\n6. Wait until the game stops lagging\n\nAfter all these steps icons will hopefully appear in the app."
     },
     "Interface":
     {

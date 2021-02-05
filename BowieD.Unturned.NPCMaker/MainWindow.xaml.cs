@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Forms;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.Managers;
@@ -290,6 +291,14 @@ namespace BowieD.Unturned.NPCMaker
                         AppConfig.Instance.scale = 1.0;
 
                         AppConfig.Instance.Save();
+                    }
+                }
+
+                if (GameAssetManager.HasImportedAssets)
+                {
+                    if (!File.Exists(Path.Combine(AppConfig.Instance.unturnedDir, "Extras", "Icons", "Bag_MRE_81.png")))
+                    {
+                        MessageBox.Show(LocalizationManager.Current.Notification["StartUp_IconsNotGenerated"], Title, MessageBoxButton.OK);
                     }
                 }
             };
