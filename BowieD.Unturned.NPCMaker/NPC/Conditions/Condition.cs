@@ -36,6 +36,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [XmlInclude(typeof(ConditionHoliday))]
     [XmlInclude(typeof(ConditionKillsTree))]
     [XmlInclude(typeof(ConditionCurrency))]
+    [XmlInclude(typeof(ConditionWeatherStatus))]
+    [XmlInclude(typeof(ConditionWeatherBlendAlpha))]
     [Serializable]
     public abstract class Condition : IHasUIText
     {

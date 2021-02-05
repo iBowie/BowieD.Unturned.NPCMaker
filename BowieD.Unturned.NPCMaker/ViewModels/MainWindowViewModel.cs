@@ -125,27 +125,27 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 ProjectData proj = MainWindow.CurrentProject;
                 NPCProject data = proj.data;
 
-                if (data.lastCharacter > -1)
+                if (data.lastCharacter > -1 && data.lastCharacter < data.characters.Count)
                 {
                     CharacterTabViewModel.Character = data.characters[data.lastCharacter];
                 }
 
-                if (data.lastDialogue > -1)
+                if (data.lastDialogue > -1 && data.lastDialogue < data.dialogues.Count)
                 {
                     DialogueTabViewModel.Dialogue = data.dialogues[data.lastDialogue];
                 }
 
-                if (data.lastVendor > -1)
+                if (data.lastVendor > -1 && data.lastVendor < data.vendors.Count)
                 {
                     VendorTabViewModel.Vendor = data.vendors[data.lastVendor];
                 }
 
-                if (data.lastQuest > -1)
+                if (data.lastQuest > -1 && data.lastQuest < data.quests.Count)
                 {
                     QuestTabViewModel.Quest = data.quests[data.lastQuest];
                 }
 
-                if (data.lastCurrency > -1)
+                if (data.lastCurrency > -1 && data.lastCurrency < data.currencies.Count)
                 {
                     CurrencyTabViewModel.Currency = data.currencies[data.lastCurrency];
                 }
