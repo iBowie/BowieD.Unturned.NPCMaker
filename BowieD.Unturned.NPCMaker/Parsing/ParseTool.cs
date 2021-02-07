@@ -448,6 +448,20 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                             Value = asset.ReadInt16(tp + "Value")
                         };
                         break;
+                    case Condition_Type.Weather_Blend_Alpha:
+                        c[num] = new ConditionWeatherBlendAlpha()
+                        {
+                            GUID = asset.ReadString(tp + "GUID"),
+                            Value = asset.ReadSingle(tp + "Value")
+                        };
+                        break;
+                    case Condition_Type.Weather_Status:
+                        c[num] = new ConditionWeatherStatus()
+                        {
+                            GUID = asset.ReadString(tp + "GUID"),
+                            Value = asset.ReadEnum(tp + "Value", ENPCWeatherStatus.Active)
+                        };
+                        break;
                 }
                 c[num].Localization = desc ?? "";
                 c[num].Reset = needToReset;
