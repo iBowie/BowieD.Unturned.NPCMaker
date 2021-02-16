@@ -267,7 +267,7 @@ namespace BowieD.Unturned.NPCMaker
             ConsoleLogger.StartWaitForInput();
 
             App.Achievements.Load();
-            
+
             Loaded += (sender, e) =>
             {
                 var scr = ScreenHelper.GetCurrentScreen(this);
@@ -338,7 +338,7 @@ namespace BowieD.Unturned.NPCMaker
                             if (utrick.Count == trick.Length)
                             {
                                 App.Achievements.TryGiveAchievement("trick");
-                                
+
                                 utrick.Clear();
                             }
                         }

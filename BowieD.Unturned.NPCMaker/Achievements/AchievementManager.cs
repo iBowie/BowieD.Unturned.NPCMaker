@@ -122,7 +122,7 @@ namespace BowieD.Unturned.NPCMaker.Achievements
         public void SetStat(string name, double data)
         {
             _stats[name] = data;
-            
+
             Save();
         }
 
@@ -144,7 +144,7 @@ namespace BowieD.Unturned.NPCMaker.Achievements
             "ohno",
             "sus"
         };
-        
+
         public IEnumerable<string> HiddenAchievements => _hidden;
 
         void rebuildTab()
@@ -211,7 +211,7 @@ namespace BowieD.Unturned.NPCMaker.Achievements
                     else
                     {
                         g.Opacity = 0.5;
-                        
+
                         order = 0;
                     }
                 }
