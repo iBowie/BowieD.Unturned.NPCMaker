@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker;
+using BowieD.Unturned.NPCMaker.Achievements;
 using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
@@ -457,6 +458,13 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     case "sans":
                         App.Achievements.TryGiveAchievement("ohno");
+                        break;
+                    case "jerma":
+                    case "sus":
+                    case "amongus":
+                    case "amogus":
+                        if (App.Achievements.TryGiveAchievement("sus"))
+                            ImposterClass.Play();
                         break;
                 }
             }

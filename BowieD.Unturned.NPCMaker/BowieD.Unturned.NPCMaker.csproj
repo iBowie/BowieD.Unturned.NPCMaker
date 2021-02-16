@@ -153,6 +153,7 @@
     </ApplicationDefinition>
     <Compile Include="Achievements\AchievementManager.cs" />
     <Compile Include="Achievements\IAchievementManager.cs" />
+    <Compile Include="Achievements\SuspiciousClass.cs" />
     <Compile Include="ClipboardManager.cs" />
     <Compile Include="Coloring\ColorConverter.cs" />
     <Compile Include="Commands\CheckSyncCommand.cs" />
