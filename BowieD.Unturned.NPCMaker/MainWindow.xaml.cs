@@ -348,10 +348,38 @@ namespace BowieD.Unturned.NPCMaker
                         }
                     }
                 };
+
+                lastLeft = Left;
+                lastTop = Top;
+
+                LocationChanged += (sender2, e2) =>
+                {
+                    double curLeft = Left;
+                    double curTop = Top;
+
+                    double lDelta = (curLeft - lastLeft);
+                    double tDelta = (curTop - lastTop);
+
+                    double distance = Math.Sqrt(lDelta * lDelta + tDelta * tDelta);
+
+                    double movedStat = App.Achievements.GetStat("moved");
+                    movedStat += distance;
+                    App.Achievements.SetStat("moved", movedStat, false);
+
+                    var mscr = ScreenHelper.GetCurrentScreen();
+
+                    if (movedStat >= mscr.Size.Width * 3)
+                        App.Achievements.TryGiveAchievement("sweep");
+
+                    lastLeft = curLeft;
+                    lastTop = curTop;
+                };
             };
 
             base.Show();
         }
+
+        double lastLeft, lastTop;
 
         readonly int[] trick = new int[]
         {
@@ -413,6 +441,7 @@ namespace BowieD.Unturned.NPCMaker
         bool stop8 = false;
         protected override void OnClosing(CancelEventArgs e)
         {
+            App.Achievements.Save();
             e.Cancel = true;
             PerformExit();
             base.OnClosing(e);

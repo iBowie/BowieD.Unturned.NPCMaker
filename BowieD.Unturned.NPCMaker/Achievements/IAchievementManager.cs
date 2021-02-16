@@ -7,7 +7,7 @@ namespace BowieD.Unturned.NPCMaker.Achievements
         void Load();
         void Save();
 
-        void SetStat(string name, double data);
+        void SetStat(string name, double data, bool immediateSave = true);
         double GetStat(string name);
         bool TryGiveAchievement(string name);
         bool HasAchievement(string name);

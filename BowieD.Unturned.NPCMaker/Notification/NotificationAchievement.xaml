@@ -18,10 +18,10 @@
                 <TextBlock FontSize="20" Text="{xamle:Localize Achievements_notificationTitle}"/>
             </Label>
             <Label Grid.Row="1" FontSize="18">
-                <TextBlock Name="title"/>
+                <TextBlock TextWrapping="Wrap" Name="title"/>
             </Label>
             <Label Grid.Row="2">
-                <TextBlock Name="desc"/>
+                <TextBlock TextWrapping="Wrap" Name="desc"/>
             </Label>
         </Grid>
     </Border>

@@ -115,15 +115,16 @@ namespace BowieD.Unturned.NPCMaker.Achievements
             using (StreamWriter sw = new StreamWriter(pathStats))
             {
                 foreach (var s in _stats)
-                    sw.WriteLine($"{s.Key}\t{s.Value}");
+                    sw.WriteLine($"{s.Key}\t{s.Value.ToString(CultureInfo.InvariantCulture)}");
             }
         }
 
-        public void SetStat(string name, double data)
+        public void SetStat(string name, double data, bool immediateSave = true)
         {
             _stats[name] = data;
 
-            Save();
+            if (immediateSave)
+                Save();
         }
 
         private readonly string[] _visible = new string[]
@@ -133,6 +134,7 @@ namespace BowieD.Unturned.NPCMaker.Achievements
             "srsded",
             "justputit",
             "console",
+            "sweep",
             "trick"
         };
 
@@ -179,6 +181,9 @@ namespace BowieD.Unturned.NPCMaker.Achievements
 
                 string locName = LocalizationManager.Current.Achievements[$"{name}_Name"];
                 string locDesc = LocalizationManager.Current.Achievements[$"{name}_Desc"];
+
+                if (locDesc.StartsWith("<nowrap>"))
+                    locDesc = locDesc.Substring(8);
 
                 if (isHidden)
                 {

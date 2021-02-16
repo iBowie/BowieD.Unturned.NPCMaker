@@ -19,7 +19,16 @@ namespace BowieD.Unturned.NPCMaker.Notification
 
             mainBorder.Background = background;
             this.title.Text = name;
-            this.desc.Text = desc;
+
+            if (desc.StartsWith("<nowrap>"))
+            {
+                this.desc.Text = desc.Substring(8);
+                this.desc.TextWrapping = TextWrapping.NoWrap;
+            }
+            else
+            {
+                this.desc.Text = desc;
+            }
 
             animationStoryboard = new Storyboard();
             DoubleAnimation anim = new DoubleAnimation()
