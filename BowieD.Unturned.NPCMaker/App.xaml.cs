@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Common.Utility;
+﻿using BowieD.Unturned.NPCMaker.Achievements;
+using BowieD.Unturned.NPCMaker.Common.Utility;
 using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Data;
 using BowieD.Unturned.NPCMaker.Localization;
@@ -38,6 +39,7 @@ namespace BowieD.Unturned.NPCMaker
 #endif
             }
         }
+        public static IAchievementManager Achievements { get; private set; }
         public static IUpdateManager UpdateManager { get; private set; }
         public static INotificationManager NotificationManager { get; private set; }
         public static ILoggingManager Logger { get; private set; }
@@ -218,6 +220,9 @@ namespace BowieD.Unturned.NPCMaker
         public static void InitManagers()
         {
             NotificationManager = new NotificationManager();
+
+            Achievements = new AchievementManager(NotificationManager);
+            Achievements.Load();
         }
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {

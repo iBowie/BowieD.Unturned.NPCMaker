@@ -19,6 +19,9 @@
         <TabControl TabStripPlacement="Left" Margin="10,10,10,10">
             <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_General}">
                 <StackPanel Margin="5" CanVerticallyScroll="True">
+                    <Grid Margin="2.5">
+                        <CheckBox IsChecked="True" Name="Achievements_Box" Content="{xaml:Localize Key=OPTIONS_achievements}"/>
+                    </Grid>
                     <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_autosaveOption_Tooltip}">
                         <Label Content="{xaml:Localize Key=OPTIONS_autosaveOption}"/>
                         <ComboBox SelectedIndex="1" Name="Autosave_Box" HorizontalAlignment="Right">

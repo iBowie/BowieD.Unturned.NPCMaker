@@ -301,10 +301,59 @@ namespace BowieD.Unturned.NPCMaker
                         MessageBox.Show(LocalizationManager.Current.Notification["StartUp_IconsNotGenerated"], Title, MessageBoxButton.OK);
                     }
                 }
+
+                App.Achievements.TryGiveAchievement("startup");
+                var startups = App.Achievements.GetStat("startups");
+                startups += 1;
+                App.Achievements.SetStat("startups", startups);
+
+                PreviewKeyDown += (sender1, e1) =>
+                {
+                    if (utrick.Count == 0)
+                    {
+                        if (e1.Key == System.Windows.Input.Key.Up)
+                        {
+                            utrick.Add((int)System.Windows.Input.Key.Up);
+                            e1.Handled = true;
+                        }
+                    }
+                    else
+                    {
+                        utrick.Add((int)e1.Key);
+                        bool isGood = true;
+                        for (int i = 0; i < utrick.Count; i++)
+                        {
+                            if (utrick[i] != trick[i])
+                            {
+                                isGood = false;
+                            }
+                        }
+
+                        if (isGood)
+                        {
+                            e1.Handled = true;
+
+                            if (utrick.Count == trick.Length)
+                            {
+                                App.Achievements.TryGiveAchievement("trick");
+                            }
+                        }
+                        else
+                        {
+                            utrick.Clear();
+                        }
+                    }
+                };
             };
 
             base.Show();
         }
+
+        readonly int[] trick = new int[]
+        {
+            24, 24, 26, 26, 23, 25, 23, 25, 45, 44
+        };
+        List<int> utrick = new List<int>();
 
         #region CONSTANTS
         public const int
@@ -336,6 +385,7 @@ namespace BowieD.Unturned.NPCMaker
 
             AutosaveTimer.Start();
         }
+
         private void AppUpdateTimer_Tick(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(CurrentProject.file))
@@ -348,7 +398,15 @@ namespace BowieD.Unturned.NPCMaker
             }
 
             menuCurrentFileLabel.ToolTip = CurrentProject.file;
+
+            if (!stop8 && (DateTime.UtcNow - Started).TotalHours >= 8)
+            {
+                stop8 = true;
+
+                App.Achievements.TryGiveAchievement("srsded");
+            }
         }
+        bool stop8 = false;
         protected override void OnClosing(CancelEventArgs e)
         {
             e.Cancel = true;
@@ -382,6 +440,8 @@ namespace BowieD.Unturned.NPCMaker
         }
         private void Window_Drop(object sender, DragEventArgs e)
         {
+            App.Achievements.TryGiveAchievement("justputit");
+
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 e.Effects = DragDropEffects.Copy;

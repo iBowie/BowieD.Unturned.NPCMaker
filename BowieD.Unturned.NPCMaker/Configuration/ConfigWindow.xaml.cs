@@ -22,6 +22,14 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             CurrentConfig = AppConfig.Instance;
 
             DataContext = this;
+
+            Achievements_Box.Unchecked += (sender, e) =>
+            {
+                MessageBox.Show(LocalizationManager.Current.Options["achievements_Message"]);
+                App.Achievements.TryGiveAchievement("noescape");
+                Achievements_Box.IsChecked = true;
+                Achievements_Box.IsEnabled = false;
+            };
         }
 
         public AppConfig CurrentConfig

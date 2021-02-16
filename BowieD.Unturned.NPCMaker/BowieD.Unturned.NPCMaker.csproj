@@ -151,6 +151,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Achievements\AchievementManager.cs" />
+    <Compile Include="Achievements\IAchievementManager.cs" />
     <Compile Include="ClipboardManager.cs" />
     <Compile Include="Coloring\ColorConverter.cs" />
     <Compile Include="Commands\CheckSyncCommand.cs" />
@@ -159,6 +161,7 @@
     <Compile Include="Commands\HideCommand.cs" />
     <Compile Include="Commands\LicenseCommand.cs" />
     <Compile Include="Commands\ParseCommand.cs" />
+    <Compile Include="Commands\SecretCommand.cs" />
     <Compile Include="Commands\ShutdownCommand.cs" />
     <Compile Include="Common\CloneHelper.cs" />
     <Compile Include="Common\ContextHelper.cs" />
@@ -378,6 +381,9 @@
     <Compile Include="Mistakes\Vendor\NE_2001.cs" />
     <Compile Include="Mistakes\Vendor\VendorMistake.cs" />
     <Compile Include="Notification\INotificationManager.cs" />
+    <Compile Include="Notification\NotificationAchievement.xaml.cs">
+      <DependentUpon>NotificationAchievement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Notification\NotificationManager.cs" />
     <Compile Include="NPC\Conditions\Attributes\ConditionTooltipAttribute.cs" />
     <Compile Include="NPC\Conditions\Condition.cs" />
@@ -660,6 +666,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Notification\NotificationAchievement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Notification\NotificationBase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

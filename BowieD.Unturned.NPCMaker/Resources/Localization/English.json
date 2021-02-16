@@ -1,6 +1,24 @@
 {
     "Author": "BowieD, TheCubicNoobik",
     "Name": "English (US)",
+    "Achievements":
+    {
+        "notificationTitle": "Achievement Unlocked!",
+        "startup_Name": "Here We Go!!!",
+        "startup_Desc": "Start NPC Maker for the first time!",
+        "srsded_Name": "Serious Dedication",
+        "srsded_Desc": "Use NPC Maker for more than 8 hours in one go",
+        "noescape_Name": "There is no escape...",
+        "noescape_Desc": "You can't turn it off",
+        "justputit_Name": "Just Put It Here!",
+        "justputit_Desc": "Use Drag&Drop!",
+        "trick_Name": "Bending the laws of NPC Making",
+        "trick_Desc": "Oldest trick in the book",
+        "console_Name": "Executable",
+        "console_Desc": "Something is hiding behind black box...",
+        "startup10_Name": "Yeah yeah, let's just start it one more time",
+        "startup10_Desc": "Start NPC Maker 10 times"
+    },
     "General":
     {
         "Project_SaveFilter": "NPC Project (*.npcproj)",
@@ -10,6 +28,8 @@
     },
     "Options":
     {
+        "achievements": "Achievements",
+        "achievements_Message": "You can't turn them off, deal with it",
         "experimentalFeatures": "Experimental Features",
         "scale": "GUI Scale",
         "language": "Language",

@@ -43,5 +43,14 @@ namespace BowieD.Unturned.NPCMaker.Notification
         {
             panel.Children.Clear();
         }
+
+        public void NotifyAchievement(string title, string desc)
+        {
+            NotificationAchievement na = new NotificationAchievement(panel, MainWindow.Instance.Background, title, desc)
+            {
+                Opacity = 0.8
+            };
+            panel.Children.Add(na);
+        }
     }
 }
