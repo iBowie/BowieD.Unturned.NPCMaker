@@ -338,9 +338,9 @@ namespace BowieD.Unturned.NPCMaker
                             if (utrick.Count == trick.Length)
                             {
                                 App.Achievements.TryGiveAchievement("trick");
+                                
+                                utrick.Clear();
                             }
-
-                            utrick.Clear();
                         }
                         else
                         {
