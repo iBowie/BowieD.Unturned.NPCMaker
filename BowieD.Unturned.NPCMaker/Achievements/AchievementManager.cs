@@ -131,6 +131,7 @@ namespace BowieD.Unturned.NPCMaker.Achievements
         {
             "startup",
             "startup10",
+            "speedrun",
             "srsded",
             "justputit",
             "console",

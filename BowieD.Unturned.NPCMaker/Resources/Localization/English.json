@@ -21,6 +21,8 @@
         "startup10_Desc": "Start NPC Maker 10 times",
         "sus_Name": "A M O G U S",
         "sus_Desc": "When the imposter is sus",
+        "speedrun_Name": "NPC Maker Any%",
+        "speedrun_Desc": "Export 10 characters in single batch in under 1 minute from since the app started",
         "sweep_Name": "Sweep Swoop",
         "sweep_Desc": "Move NPC Maker across the screen the distance three times the width of your screen",
         "ohno_Name": "Whomst summoned the mighty one?",

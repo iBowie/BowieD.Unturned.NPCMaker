@@ -50,6 +50,11 @@ namespace BowieD.Unturned.NPCMaker.Export
                     };
                     App.NotificationManager.Notify(LocalizationManager.Current.Notification["Export_Done"], buttons: button);
                 }
+
+                if (save.characters.Count >= 10 && (DateTime.UtcNow - MainWindow.Started).TotalMinutes <= 1)
+                {
+                    App.Achievements.TryGiveAchievement("speedrun");
+                }
             }
             catch (Exception ex)
             {
