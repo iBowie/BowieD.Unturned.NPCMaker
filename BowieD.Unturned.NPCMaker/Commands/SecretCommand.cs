@@ -7,7 +7,10 @@
         public override string Syntax => "???";
         public override void Execute(string[] args)
         {
-            App.Achievements.TryGiveAchievement("console");
+            MainWindow.Instance.Dispatcher.Invoke(() =>
+            {
+                App.Achievements.TryGiveAchievement("console");
+            });
         }
     }
 }
