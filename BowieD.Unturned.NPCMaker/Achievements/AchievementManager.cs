@@ -140,7 +140,8 @@ namespace BowieD.Unturned.NPCMaker.Achievements
 
         private readonly string[] _hidden = new string[]
         {
-            "noescape"
+            "noescape",
+            "ohno"
         };
         
         public IEnumerable<string> HiddenAchievements => _hidden;

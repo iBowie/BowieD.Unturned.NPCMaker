@@ -446,7 +446,21 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 OnPropertyChange("");
             }
         }
-        public string DisplayName { get => Character.DisplayName; set => Character.DisplayName = value; }
+        public string DisplayName
+        {
+            get => Character.DisplayName;
+            set
+            {
+                Character.DisplayName = value;
+
+                switch (value.ToLowerInvariant())
+                {
+                    case "sans":
+                        App.Achievements.TryGiveAchievement("ohno");
+                        break;
+                }
+            }
+        }
         public string EditorName { get => Character.EditorName; set => Character.EditorName = value; }
         public ushort ID { get => Character.ID; set => Character.ID = value; }
         public string Comment
