@@ -339,6 +339,8 @@ namespace BowieD.Unturned.NPCMaker
                             {
                                 App.Achievements.TryGiveAchievement("trick");
                             }
+
+                            utrick.Clear();
                         }
                         else
                         {
