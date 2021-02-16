@@ -222,7 +222,6 @@ namespace BowieD.Unturned.NPCMaker
             NotificationManager = new NotificationManager();
 
             Achievements = new AchievementManager(NotificationManager);
-            Achievements.Load();
         }
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {

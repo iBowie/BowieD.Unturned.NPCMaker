@@ -4,6 +4,7 @@
     "Achievements":
     {
         "notificationTitle": "Achievement Unlocked!",
+        "tab": "Achievements",
         "startup_Name": "Here We Go!!!",
         "startup_Desc": "Start NPC Maker for the first time!",
         "srsded_Name": "Serious Dedication",

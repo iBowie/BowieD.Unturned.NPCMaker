@@ -265,6 +265,8 @@ namespace BowieD.Unturned.NPCMaker
             }
 
             ConsoleLogger.StartWaitForInput();
+
+            App.Achievements.Load();
             
             Loaded += (sender, e) =>
             {

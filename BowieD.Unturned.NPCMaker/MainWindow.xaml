@@ -1474,6 +1474,13 @@
 
                     </Grid>
                 </TabItem>
+                <TabItem Name="achTab" Header="{xaml:Localize Achievements_tab}">
+                    <Grid>
+                        <ScrollViewer Margin="10">
+                            <StackPanel Orientation="Vertical" Name="achStackPanel"/>
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
                 <TabControl.ItemTemplate>
                     <DataTemplate>
                         <TabItem Content="{Binding Content}" Background="Transparent"/>
