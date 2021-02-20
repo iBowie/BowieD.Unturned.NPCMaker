@@ -84,6 +84,11 @@
                             <iconPacks:PackIconMaterial Kind="Export" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Command="{Binding ExportProjectToWorkshopCommand}" Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_ExportToWorkshop}" Name="exportToWorkshopButton">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="Export" Foreground="{DynamicResource AccentColor}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <Separator/>
                     <MenuItem Command="{Binding ExitCommand}" Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_Exit}" Name="exitButton">
                         <MenuItem.Icon>

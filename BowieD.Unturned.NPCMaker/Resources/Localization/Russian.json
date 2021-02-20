@@ -6,7 +6,8 @@
         "Project_SaveFilter": "Файл проекта NPC (*.npcproj)",
         "Project_TemplateFilter": "Файл шаблона NPC (*.npctemplate)",
         "Title": "Unturned 3.0 NPC Maker by BowieD",
-        "Configuration_Title": "Настройки"
+        "Configuration_Title": "Настройки",
+        "UGC_ImageFilter": "Поддерживаемые изображения ({0})"
     },
     "Options":
     {
@@ -477,6 +478,9 @@
         "Export_Done": "Экспорт завершён!",
         "Export_Done_Goto": "Открыть результат",
         "Export_Error": "Что-то пошло не так. Смотрите логи для подробностей.",
+        "Upload_Done": "Загрузка завершена!",
+        "Upload_Done_Goto": "Открыть страницу мода в Steam",
+        "Upload_Error": "Не удалось загрузить мод в Workshop: {0}",
         "Export_Character_Error": "Не удалось экспортировать персонажа {0}. Смотрите логи для подробностей.",
         "Export_Dialogue_Error": "Не удалось экспортировать диалог {0}. Смотрите логи для подробностей.",
         "Export_Vendor_Error": "Не удалось экспортировать магазин {0}. Смотрите логи для подробностей.",
@@ -525,6 +529,21 @@
         "AssetPicker_ToolTip_GameItemClothingAsset_Beard_Invisible": "Скрывает бороду",
         "AssetPicker_ToolTip_GameItemBagAsset_Width": "Ширина хранилища: {0}",
         "AssetPicker_ToolTip_GameItemBagAsset_Height": "Высота хранилища: {0}",
+
+        "UGC_Title": "Загрузчик мода",
+        "UGC_Preview": "Обложка мода",
+        "UGC_Preview_Select": "Выбрать обложку",
+        "UGC_Preview_Select_TooLarge": "Выбранная обложка слишком большого размера",
+        "UGC_Name": "Название мода",
+        "UGC_Desc": "Описание мода",
+        "UGC_AllowedIPs": "Разрешённые IP",
+        "UGC_Change": "Список изменений",
+        "UGC_Visibility": "Видимость",
+        "UGC_Visibility_Public": "Общедоступный",
+        "UGC_Visibility_Friends": "Только друзья",
+        "UGC_Visibility_Private": "Приватный",
+        "UGC_Confirm": "Загрузить",
+        "UGC_Cancel": "Отмена",
 
         "AssetPicker_Filter_Equippable": "Отображать только экипируемое",
 
@@ -604,6 +623,7 @@
         "Main_Menu_File_Import_Directory": "Папка",
         "Main_Menu_File_Export": "_Экспортировать NPC (Ctrl + E)",
         "Main_Menu_File_ExportToUnturned": "Экспортировать NPC в Unturned",
+        "Main_Menu_File_ExportToWorkshop": "Загрузить NPC в Workshop",
         "Main_Menu_File_Exit": "Выход",
         "Main_Menu_Options": "Настройки",
         "Main_Menu_Communication": "Связаться или задонатить",

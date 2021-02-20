@@ -6,7 +6,8 @@
         "Project_SaveFilter": "NPC Project (*.npcproj)",
         "Project_TemplateFilter": "NPC Template (*.npctemplate)",
         "Title": "Unturned 3.0 NPC Maker by BowieD",
-        "Configuration_Title": "App Settings"
+        "Configuration_Title": "App Settings",
+        "UGC_ImageFilter": "Supported Images ({0})"
     },
     "Options":
     {
@@ -477,6 +478,9 @@
         "Export_Done": "Export done!",
         "Export_Done_Goto": "Open result folder",
         "Export_Error": "Something gone wrong. See logs for details.",
+        "Upload_Done": "Upload done!",
+        "Upload_Done_Goto": "Open mod page on Steam",
+        "Upload_Error": "Could not upload mod to Workshop: {0}",
         "Export_Character_Error": "Can't export character {0}. See logs for details.",
         "Export_Dialogue_Error": "Can't export dialogue {0}. See logs for details.",
         "Export_Vendor_Error": "Can't export vendor {0}. See logs for details.",
@@ -525,6 +529,21 @@
         "AssetPicker_ToolTip_GameItemClothingAsset_Beard_Invisible": "Hides beard",
         "AssetPicker_ToolTip_GameItemBagAsset_Width": "Capacity Width: {0}",
         "AssetPicker_ToolTip_GameItemBagAsset_Height": "Capacity Height: {0}",
+
+        "UGC_Title": "Mod Uploader",
+        "UGC_Preview": "Preview Icon",
+        "UGC_Preview_Select": "Select Icon",
+        "UGC_Preview_Select_TooLarge": "Selected icon is too large",
+        "UGC_Name": "Mod Name",
+        "UGC_Desc": "Mod Description",
+        "UGC_AllowedIPs": "Allowed IPs",
+        "UGC_Change": "Changes",
+        "UGC_Visibility": "Visibility",
+        "UGC_Visibility_Public": "Public",
+        "UGC_Visibility_Friends": "Friends only",
+        "UGC_Visibility_Private": "Private",
+        "UGC_Confirm": "Upload",
+        "UGC_Cancel": "Cancel",
 
         "AssetPicker_Filter_Equippable": "Show Only Equippable",
 
@@ -604,6 +623,7 @@
         "Main_Menu_File_Import_Directory": "Directory",
         "Main_Menu_File_Export": "_Export NPC (Ctrl + E)",
         "Main_Menu_File_ExportToUnturned": "Export NPC to Unturned",
+        "Main_Menu_File_ExportToWorkshop": "Upload NPC to Workshop",
         "Main_Menu_File_Exit": "Exit",
         "Main_Menu_Options": "Options",
         "Main_Menu_Communication": "Contact or Donate",

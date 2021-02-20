@@ -1,13 +1,18 @@
 ﻿using BowieD.Unturned.NPCMaker.Commands;
 using BowieD.Unturned.NPCMaker.Common.Utility;
 using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
+using BowieD.Unturned.NPCMaker.Workshop;
 using DiscordRPC;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Media;
@@ -351,6 +356,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             saveAsProjectCommand,
             exportProjectCommand,
             exportProjectToUnturnedCommand,
+            exportProjectToWorkshopCommand,
             exitCommand,
             optionsCommand,
             aboutCommand,
@@ -608,6 +614,97 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 }
 
                 return exportProjectToUnturnedCommand;
+            }
+        }
+        public ICommand ExportProjectToWorkshopCommand
+        {
+            get
+            {
+                if (exportProjectToWorkshopCommand == null)
+                {
+                    exportProjectToWorkshopCommand = new AdvancedCommand(() =>
+                    {
+                        Mistakes.MistakesManager.FindMistakes();
+                        if (Mistakes.MistakesManager.Criticals_Count > 0)
+                        {
+                            SystemSounds.Hand.Play();
+                            MainWindow.mainTabControl.SelectedIndex = MainWindow.mainTabControl.Items.Count - 1;
+                            return;
+                        }
+                        if (Mistakes.MistakesManager.Warnings_Count > 0)
+                        {
+                            MessageBoxResult res = MessageBox.Show(LocalizationManager.Current.Interface["Export_Warnings_Text"], LocalizationManager.Current.Interface["Export_Warnings_Caption"], MessageBoxButton.YesNo);
+                            if (!(res == MessageBoxResult.OK || res == MessageBoxResult.Yes))
+                            {
+                                return;
+                            }
+                        }
+                        SaveAll();
+                        if (MainWindow.CurrentProject.Save())
+                        {
+                            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Saved"]);
+                        }
+
+                        Export.Exporter.ExportNPC(MainWindow.CurrentProject.data, Path.Combine(AppConfig.ExeDirectory, "wshop_results"), true);
+
+                        string resDir = Path.Combine(AppConfig.ExeDirectory, "wshop_results", $"{MainWindow.CurrentProject.data.guid}");
+
+                        try
+                        {
+                            UGC_SelectorView usv = new UGC_SelectorView(resDir)
+                            {
+                                Owner = MainWindow
+                            };
+
+                            if (usv.ShowDialog() == true)
+                            {
+                                var mod = usv.FinalizedUGC;
+
+                                int eCode = App.SteamManager.CreateUGC(mod, out ulong fileID);
+
+                                switch (eCode)
+                                {
+                                    case 0:
+                                        {
+                                            if (fileID > 0)
+                                            {
+                                                Button button = new Button
+                                                {
+                                                    Content = new TextBlock
+                                                    {
+                                                        Text = LocalizationManager.Current.Notification["Upload_Done_Goto"]
+                                                    }
+                                                };
+
+                                                button.Click += (sender, e) =>
+                                                {
+                                                    Process.Start($"https://steamcommunity.com/sharedfiles/filedetails/?id={fileID}");
+                                                };
+
+                                                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Upload_Done"], buttons: button);
+                                            }
+                                            else
+                                            {
+                                                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Upload_Done"]);
+                                            }
+                                        }
+                                        break;
+                                    default:
+                                        {
+                                            App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Upload_Error", eCode));
+                                        }
+                                        break;
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            App.Logger.LogException("Could not upload mod", ex: ex);
+                        }
+                    });
+                }
+
+                return exportProjectToWorkshopCommand;
             }
         }
         public ICommand ExitCommand

@@ -139,6 +139,18 @@
   <data name="Newtonsoft_Json" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\libs\newtonsoft.json.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Steamworks_NET" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Libs\Steamworks.NET.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="steam_api" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Libs\steam_api.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="steam_appid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\libs\steam_appid.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
+  <data name="UnturnedWorkshopCLI" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Libs\UnturnedWorkshopCLI.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Xceed_Wpf_AvalonDock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Libs\Xceed.Wpf.AvalonDock.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
