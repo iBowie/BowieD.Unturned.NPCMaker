@@ -545,6 +545,7 @@
         "UGC_Visibility_Private": "Private",
         "UGC_Confirm": "Upload",
         "UGC_Cancel": "Cancel",
+        "UGC_AsUploaded": "Leave empty to keep old value",
 
         "UGC_CreateUpdate_Title": "Upload Type",
         "UGC_CreateUpdate_Create": "Create new mod",

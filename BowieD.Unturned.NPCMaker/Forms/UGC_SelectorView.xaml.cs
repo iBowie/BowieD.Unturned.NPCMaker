@@ -16,6 +16,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     public partial class UGC_SelectorView : Window
     {
         private bool allowNullImagePath = false;
+        private bool allowNullName = false;
         private ulong fileID;
 
         private UGC_SelectorView(UGC ugc, string modPath)
@@ -26,11 +27,15 @@ namespace BowieD.Unturned.NPCMaker.Forms
             this.fileID = ugc.FileID;
 
             allowNullImagePath = true;
+            allowNullName = true;
 
-            nameTextBox.Text = ugc.Name;
-            descTextBox.Text = ugc.Description;
-            allowedIPsTextBox.Text = ugc.AllowedIPs;
             visibilityComboBox.SelectedIndex = ugc.Visibility;
+
+            string keepAsBeen = LocalizationManager.Current.Interface["UGC_AsUploaded"];
+
+            MahApps.Metro.Controls.TextBoxHelper.SetWatermark(nameTextBox, keepAsBeen);
+            MahApps.Metro.Controls.TextBoxHelper.SetWatermark(descTextBox, keepAsBeen);
+            MahApps.Metro.Controls.TextBoxHelper.SetWatermark(allowedIPsTextBox, keepAsBeen);
             
             CommonCtor();
         }
@@ -89,7 +94,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 Close();
             }, (param) =>
             {
-                if (string.IsNullOrEmpty(nameTextBox.Text))
+                if (!allowNullName && string.IsNullOrEmpty(nameTextBox.Text))
                     return false;
 
                 if (allowNullImagePath)
@@ -145,6 +150,18 @@ namespace BowieD.Unturned.NPCMaker.Forms
         public static UGC_SelectorView SV_Update(UGC currentUgc, string modPath)
         {
             UGC_SelectorView usv = new UGC_SelectorView(currentUgc, modPath);
+
+            var bi = new BitmapImage();
+
+            bi.BeginInit();
+
+            bi.UriSource = new Uri(currentUgc.Preview);
+            bi.DecodePixelHeight = 180;
+            bi.CacheOption = BitmapCacheOption.OnLoad;
+
+            bi.EndInit();
+
+            usv.iconImage.Source = bi;
 
             return usv;
         }

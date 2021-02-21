@@ -545,6 +545,7 @@
         "UGC_Visibility_Private": "Скрыто",
         "UGC_Confirm": "Загрузить",
         "UGC_Cancel": "Отмена",
+        "UGC_AsUploaded": "Оставьте пустым чтобы не изменять значение",
 
         "UGC_CreateUpdate_Title": "Тип загрузки",
         "UGC_CreateUpdate_Create": "Создать новый мод",

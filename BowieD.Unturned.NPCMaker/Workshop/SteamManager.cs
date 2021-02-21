@@ -79,8 +79,6 @@ namespace BowieD.Unturned.NPCMaker.Workshop
             {
                 string pOut = p.StandardOutput.ReadToEnd();
 
-                App.Logger.Log($"pOut\n{pOut}");
-
                 using (TextReader tr = new StringReader(pOut))
                 {
                     while (true)
@@ -113,7 +111,8 @@ namespace BowieD.Unturned.NPCMaker.Workshop
                         }
 
                         res.Name = tr.ReadLine().Replace("<br>", Environment.NewLine);
-                        
+                        res.Preview = tr.ReadLine();
+
                         yield return res;
                     }
                 }
