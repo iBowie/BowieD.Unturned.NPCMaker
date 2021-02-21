@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Parsing;
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration
 {
@@ -28,7 +29,9 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         public string name;
         public ushort id;
         public Guid guid;
+        [XmlIgnore]
         public string type;
+        [XmlIgnore]
         public EGameAssetOrigin origin;
 
         public virtual EGameAssetCategory Category => EGameAssetCategory.NONE;

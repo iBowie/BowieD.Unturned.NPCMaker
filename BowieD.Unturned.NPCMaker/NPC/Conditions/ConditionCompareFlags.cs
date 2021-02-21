@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System.Text;
@@ -9,7 +10,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public sealed class ConditionCompareFlags : Condition
     {
         public override Condition_Type Type => Condition_Type.Compare_Flags;
+        [AssetPicker(typeof(FlagDescriptionProjectAsset), "Control_SelectAsset_Project_Flag", MahApps.Metro.IconPacks.PackIconMaterialKind.Flag)]
         public ushort A_ID { get; set; }
+        [AssetPicker(typeof(FlagDescriptionProjectAsset), "Control_SelectAsset_Project_Flag", MahApps.Metro.IconPacks.PackIconMaterialKind.Flag)]
         public ushort B_ID { get; set; }
         [NoValue]
         public bool Allow_A_Unset { get; set; }

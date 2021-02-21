@@ -299,6 +299,7 @@
     <Compile Include="GameIntegration\EGameItemRarity.cs" />
     <Compile Include="GameIntegration\Filtering\AssetFilter.cs" />
     <Compile Include="GameIntegration\Filtering\AssetFilter_Equippable.cs" />
+    <Compile Include="GameIntegration\FlagDescriptionProjectAsset.cs" />
     <Compile Include="GameIntegration\GameAnimalAsset.cs" />
     <Compile Include="GameIntegration\GameAsset.cs" />
     <Compile Include="GameIntegration\GameAssetManager.cs" />
@@ -332,6 +333,8 @@
     <Compile Include="GameIntegration\GameVehicleAsset.cs" />
     <Compile Include="GameIntegration\GameVendorAsset.cs" />
     <Compile Include="GameIntegration\GameWeatherAsset.cs" />
+    <Compile Include="GameIntegration\IEditable.cs" />
+    <Compile Include="GameIntegration\ProjectAsset.cs" />
     <Compile Include="GameIntegration\Thumbnails\IHasAnimatedThumbnail.cs" />
     <Compile Include="GameIntegration\Thumbnails\IHasIcon.cs" />
     <Compile Include="GameIntegration\Thumbnails\IHasNameOverride.cs" />
