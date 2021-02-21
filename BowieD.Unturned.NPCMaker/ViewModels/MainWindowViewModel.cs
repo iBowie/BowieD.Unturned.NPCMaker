@@ -13,10 +13,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.ViewModels
@@ -619,7 +621,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 if (exportProjectToWorkshopCommand == null)
                 {
-                    exportProjectToWorkshopCommand = new AdvancedCommand(() =>
+                    exportProjectToWorkshopCommand = new AdvancedCommand(async () =>
                     {
                         Mistakes.MistakesManager.FindMistakes();
                         if (Mistakes.MistakesManager.Criticals_Count > 0)
@@ -663,7 +665,15 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                             {
                                                 var mod = ugc_sv.FinalizedUGC;
 
-                                                int eCode = App.SteamManager.CreateUGC(mod, out ulong fileID);
+                                                MainWindow.ugcOverlayText.Text = LocalizationManager.Current.Interface["UGC_Steps_Uploading"];
+                                                MainWindow.ugcOverlay.Visibility = Visibility.Visible;
+
+                                                var t1 = await App.SteamManager.CreateUGC(mod);
+
+                                                int eCode = t1.Item1;
+                                                ulong fileID = t1.Item2;
+
+                                                MainWindow.ugcOverlay.Visibility = Visibility.Collapsed;
 
                                                 switch (eCode)
                                                 {
@@ -703,7 +713,12 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                         break;
                                     case UGC_CreateUpdateView.EResult.Update:
                                         {
-                                            var ugcs = App.SteamManager.QueryUGC();
+                                            MainWindow.ugcOverlayText.Text = LocalizationManager.Current.Interface["UGC_Steps_Query"];
+                                            MainWindow.ugcOverlay.Visibility = Visibility.Visible;
+
+                                            var ugcs = await App.SteamManager.QueryUGC();
+
+                                            MainWindow.ugcOverlay.Visibility = Visibility.Collapsed;
 
                                             UGC_QueryListView ugc_qlv = new UGC_QueryListView(ugcs)
                                             { Owner = MainWindow };
@@ -716,7 +731,15 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                                 {
                                                     var mod = ugc_sv.FinalizedUGC;
 
-                                                    int eCode = App.SteamManager.UpdateUGC(mod, out ulong fileID);
+                                                    MainWindow.ugcOverlayText.Text = LocalizationManager.Current.Interface["UGC_Steps_Uploading"];
+                                                    MainWindow.ugcOverlay.Visibility = Visibility.Visible;
+
+                                                    var t1 = await App.SteamManager.UpdateUGC(mod);
+
+                                                    int eCode = t1.Item1;
+                                                    ulong fileID = t1.Item2;
+
+                                                    MainWindow.ugcOverlay.Visibility = Visibility.Collapsed;
 
                                                     switch (eCode)
                                                     {
@@ -760,7 +783,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         }
                         catch (Exception ex)
                         {
-                            App.Logger.LogException("Could not upload mod", ex: ex);
+                            await App.Logger.LogException("Could not upload mod", ex: ex);
                         }
                     });
                 }

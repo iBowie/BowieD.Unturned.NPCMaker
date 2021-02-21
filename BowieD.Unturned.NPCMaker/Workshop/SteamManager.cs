@@ -5,18 +5,19 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BowieD.Unturned.NPCMaker.Workshop
 {
     public interface ISteamManager
     {
-        int CreateUGC(UGC mod, out ulong fileID);
-        int UpdateUGC(UGC mod, out ulong fileID);
-        IEnumerable<UGC> QueryUGC();
+        Task<Tuple<int, ulong>> CreateUGC(UGC mod);
+        Task<Tuple<int, ulong>> UpdateUGC(UGC mod);
+        Task<IEnumerable<UGC>> QueryUGC();
     }
     public sealed class SteamManager : ISteamManager
     {
-        public int CreateUGC(UGC mod, out ulong fileID)
+        public async Task<Tuple<int, ulong>> CreateUGC(UGC mod)
         {
             List<string> psiArgs = new List<string>
             {
@@ -36,24 +37,19 @@ namespace BowieD.Unturned.NPCMaker.Workshop
                 RedirectStandardOutput = true
             };
 
-            var p = Process.Start(psi);
+            var p = await RunProcessAsync(psi);
 
-            try
-            {
-                p.WaitForInputIdle();
-            }
-            catch { }
-            p.WaitForExit();
+            string pOut = p.Item2;
 
-            string pOut = p.StandardOutput.ReadToEnd();
-
-            if (!ulong.TryParse(pOut, out fileID))
+            if (!ulong.TryParse(pOut, out ulong fileID))
                 fileID = 0;
 
-            return p.ExitCode;
+            Tuple<int, ulong> tuple = new Tuple<int, ulong>(p.Item1, fileID);
+
+            return tuple;
         }
 
-        public IEnumerable<UGC> QueryUGC()
+        public async Task<IEnumerable<UGC>> QueryUGC()
         {
             List<string> psiArgs = new List<string>
             {
@@ -66,18 +62,13 @@ namespace BowieD.Unturned.NPCMaker.Workshop
                 RedirectStandardOutput = true
             };
 
-            var p = Process.Start(psi);
+            var p = await RunProcessAsync(psi);
 
-            try
-            {
-                p.WaitForInputIdle();
-            }
-            catch { }
-            p.WaitForExit();
+            List<UGC> result = new List<UGC>();
 
-            if (p.ExitCode == 0)
+            if (p.Item1 == 0)
             {
-                string pOut = p.StandardOutput.ReadToEnd();
+                string pOut = p.Item2;
 
                 using (TextReader tr = new StringReader(pOut))
                 {
@@ -113,13 +104,15 @@ namespace BowieD.Unturned.NPCMaker.Workshop
                         res.Name = tr.ReadLine().Replace("<br>", Environment.NewLine);
                         res.Preview = tr.ReadLine();
 
-                        yield return res;
+                        result.Add(res);
                     }
                 }
             }
+
+            return result;
         }
 
-        public int UpdateUGC(UGC mod, out ulong fileID)
+        public async Task<Tuple<int, ulong>> UpdateUGC(UGC mod)
         {
             List<string> psiArgs = new List<string>
             {
@@ -140,21 +133,37 @@ namespace BowieD.Unturned.NPCMaker.Workshop
                 RedirectStandardOutput = true
             };
 
-            var p = Process.Start(psi);
+            var p = await RunProcessAsync(psi);
 
-            try
-            {
-                p.WaitForInputIdle();
-            }
-            catch { }
-            p.WaitForExit();
+            string pOut = p.Item2;
 
-            string pOut = p.StandardOutput.ReadToEnd();
-
-            if (!ulong.TryParse(pOut, out fileID))
+            if (!ulong.TryParse(pOut, out var fileID))
                 fileID = 0;
 
-            return p.ExitCode;
+            Tuple<int, ulong> tuple = new Tuple<int, ulong>(p.Item1, fileID);
+
+            return tuple;
+        }
+
+        static Task<Tuple<int, string>> RunProcessAsync(ProcessStartInfo psi)
+        {
+            var tcs = new TaskCompletionSource<Tuple<int, string>>();
+
+            var process = new Process()
+            {
+                StartInfo = psi,
+                EnableRaisingEvents = true
+            };
+
+            process.Exited += (sender, e) =>
+            {
+                tcs.SetResult(new Tuple<int, string>(process.ExitCode, process.StandardOutput.ReadToEnd()));
+                process.Dispose();
+            };
+
+            process.Start();
+
+            return tcs.Task;
         }
     }
 
