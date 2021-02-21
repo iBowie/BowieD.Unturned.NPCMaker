@@ -6,7 +6,6 @@ using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using MahApps.Metro;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
@@ -36,7 +35,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
             MahApps.Metro.Controls.TextBoxHelper.SetWatermark(nameTextBox, keepAsBeen);
             MahApps.Metro.Controls.TextBoxHelper.SetWatermark(descTextBox, keepAsBeen);
             MahApps.Metro.Controls.TextBoxHelper.SetWatermark(allowedIPsTextBox, keepAsBeen);
-            
+
             CommonCtor();
         }
         private UGC_SelectorView(string modPath)

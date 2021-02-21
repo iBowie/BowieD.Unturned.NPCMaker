@@ -1,5 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Coloring;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -65,7 +64,7 @@ namespace BowieD.Unturned.NPCMaker.Markup
                 }
                 else
                 {
-                    def:
+                def:
                     sb.Append(current);
                 }
             }

@@ -90,7 +90,7 @@ namespace BowieD.Unturned.NPCMaker
                 Logger.Log("under certain conditions; type `license c' for details.");
                 Logger.Log("This programs uses 3rd party apps, type `license l' for details.");
                 Logger.Log("[EXTRCT] - Extracting libraries...", ELogLevel.DEBUG);
-#region COPY LIBS
+                #region COPY LIBS
                 CopyResource(NPCMaker.Properties.Resources.DiscordRPC, Path.Combine(AppConfig.Directory, "DiscordRPC.dll"));
                 CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, Path.Combine(AppConfig.Directory, "Newtonsoft.Json.dll"));
                 CopyResource(NPCMaker.Properties.Resources.ControlzEx, Path.Combine(AppConfig.Directory, "ControlzEx.dll"));
@@ -107,12 +107,12 @@ namespace BowieD.Unturned.NPCMaker
                 CopyResource(NPCMaker.Properties.Resources.steam_api, Path.Combine(AppConfig.Directory, "steam_api.dll"));
                 CopyResource(NPCMaker.Properties.Resources.UnturnedWorkshopCLI, Path.Combine(AppConfig.Directory, "UnturnedWorkshopCLI.exe"));
                 File.WriteAllText(Path.Combine(AppConfig.Directory, "steam_appid.txt"), NPCMaker.Properties.Resources.steam_appid);
-#endregion
+                #endregion
                 Logger.Log("[EXTRCT] - Extraction complete!", ELogLevel.DEBUG);
                 AppConfig.Instance.Load();
-#region SCALE
+                #region SCALE
                 Resources["Scale"] = AppConfig.Instance.scale;
-#endregion
+                #endregion
 #if !FAST
                 App.UpdateManager = new GitHubUpdateManager();
                 var result = App.UpdateManager.CheckForUpdates(IsPreviewVersion || AppConfig.Instance.downloadPrerelease).GetAwaiter().GetResult();

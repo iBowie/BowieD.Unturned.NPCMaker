@@ -33,7 +33,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 Close();
             });
         }
-        
+
         public EResult Result { get; private set; }
 
         public enum EResult

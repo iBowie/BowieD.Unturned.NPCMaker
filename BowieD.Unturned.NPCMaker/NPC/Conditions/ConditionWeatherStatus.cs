@@ -47,7 +47,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
         public override void Apply(Simulation simulation)
         {
-            
+
         }
 
         public override bool Check(Simulation simulation)
