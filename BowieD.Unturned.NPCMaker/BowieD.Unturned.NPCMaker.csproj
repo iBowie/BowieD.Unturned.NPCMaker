@@ -254,6 +254,12 @@
     <Compile Include="Forms\SimulationView_Window.xaml.cs">
       <DependentUpon>SimulationView_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UGC_CreateUpdateView.xaml.cs">
+      <DependentUpon>UGC_CreateUpdateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UGC_QueryListView.xaml.cs">
+      <DependentUpon>UGC_QueryListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UGC_SelectorView.xaml.cs">
       <DependentUpon>UGC_SelectorView.xaml</DependentUpon>
     </Compile>
@@ -613,6 +619,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\SimulationView_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\UGC_CreateUpdateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\UGC_QueryListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -541,9 +541,18 @@
         "UGC_Visibility": "Visibility",
         "UGC_Visibility_Public": "Public",
         "UGC_Visibility_Friends": "Friends only",
+        "UGC_Visibility_Unlisted": "Unlisted",
         "UGC_Visibility_Private": "Private",
         "UGC_Confirm": "Upload",
         "UGC_Cancel": "Cancel",
+
+        "UGC_CreateUpdate_Title": "Upload Type",
+        "UGC_CreateUpdate_Create": "Create new mod",
+        "UGC_CreateUpdate_Update": "Update existing",
+        "UGC_CreateUpdate_Cancel": "Cancel",
+
+        "UGC_QueryList_Title": "Select existing mod to update",
+        "UGC_QueryList_Cancel": "Cancel",
 
         "AssetPicker_Filter_Equippable": "Show Only Equippable",
 

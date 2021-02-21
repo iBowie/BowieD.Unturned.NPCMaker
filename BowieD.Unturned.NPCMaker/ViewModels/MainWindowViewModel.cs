@@ -651,47 +651,111 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
                         try
                         {
-                            UGC_SelectorView usv = new UGC_SelectorView(resDir)
+                            UGC_CreateUpdateView ugc_cuv = new UGC_CreateUpdateView()
+                            { Owner = MainWindow };
+
+                            if (ugc_cuv.ShowDialog() == true)
                             {
-                                Owner = MainWindow
-                            };
-
-                            if (usv.ShowDialog() == true)
-                            {
-                                var mod = usv.FinalizedUGC;
-
-                                int eCode = App.SteamManager.CreateUGC(mod, out ulong fileID);
-
-                                switch (eCode)
+                                switch (ugc_cuv.Result)
                                 {
-                                    case 0:
+                                    case UGC_CreateUpdateView.EResult.Create:
                                         {
-                                            if (fileID > 0)
+                                            UGC_SelectorView ugc_sv = UGC_SelectorView.SV_Create(resDir);
+                                            ugc_sv.Owner = MainWindow;
+                                            if (ugc_sv.ShowDialog() == true)
                                             {
-                                                Button button = new Button
-                                                {
-                                                    Content = new TextBlock
-                                                    {
-                                                        Text = LocalizationManager.Current.Notification["Upload_Done_Goto"]
-                                                    }
-                                                };
+                                                var mod = ugc_sv.FinalizedUGC;
 
-                                                button.Click += (sender, e) =>
-                                                {
-                                                    Process.Start($"https://steamcommunity.com/sharedfiles/filedetails/?id={fileID}");
-                                                };
+                                                int eCode = App.SteamManager.CreateUGC(mod, out ulong fileID);
 
-                                                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Upload_Done"], buttons: button);
-                                            }
-                                            else
-                                            {
-                                                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Upload_Done"]);
+                                                switch (eCode)
+                                                {
+                                                    case 0:
+                                                        {
+                                                            if (fileID > 0)
+                                                            {
+                                                                Button button = new Button
+                                                                {
+                                                                    Content = new TextBlock
+                                                                    {
+                                                                        Text = LocalizationManager.Current.Notification["Upload_Done_Goto"]
+                                                                    }
+                                                                };
+
+                                                                button.Click += (sender, e) =>
+                                                                {
+                                                                    Process.Start($"https://steamcommunity.com/sharedfiles/filedetails/?id={fileID}");
+                                                                };
+
+                                                                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Upload_Done"], buttons: button);
+                                                            }
+                                                            else
+                                                            {
+                                                                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Upload_Done"]);
+                                                            }
+                                                        }
+                                                        break;
+                                                    default:
+                                                        {
+                                                            App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Upload_Error", eCode));
+                                                        }
+                                                        break;
+                                                }
                                             }
                                         }
                                         break;
-                                    default:
+                                    case UGC_CreateUpdateView.EResult.Update:
                                         {
-                                            App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Upload_Error", eCode));
+                                            var ugcs = App.SteamManager.QueryUGC();
+
+                                            UGC_QueryListView ugc_qlv = new UGC_QueryListView(ugcs)
+                                            { Owner = MainWindow };
+
+                                            if (ugc_qlv.ShowDialog() == true)
+                                            {
+                                                UGC_SelectorView ugc_sv = UGC_SelectorView.SV_Update(ugc_qlv.Result, resDir);
+                                                ugc_sv.Owner = MainWindow;
+                                                if (ugc_sv.ShowDialog() == true)
+                                                {
+                                                    var mod = ugc_sv.FinalizedUGC;
+
+                                                    int eCode = App.SteamManager.UpdateUGC(mod, out ulong fileID);
+
+                                                    switch (eCode)
+                                                    {
+                                                        case 0:
+                                                            {
+                                                                if (fileID > 0)
+                                                                {
+                                                                    Button button = new Button
+                                                                    {
+                                                                        Content = new TextBlock
+                                                                        {
+                                                                            Text = LocalizationManager.Current.Notification["Upload_Done_Goto"]
+                                                                        }
+                                                                    };
+
+                                                                    button.Click += (sender, e) =>
+                                                                    {
+                                                                        Process.Start($"https://steamcommunity.com/sharedfiles/filedetails/?id={fileID}");
+                                                                    };
+
+                                                                    App.NotificationManager.Notify(LocalizationManager.Current.Notification["Upload_Done"], buttons: button);
+                                                                }
+                                                                else
+                                                                {
+                                                                    App.NotificationManager.Notify(LocalizationManager.Current.Notification["Upload_Done"]);
+                                                                }
+                                                            }
+                                                            break;
+                                                        default:
+                                                            {
+                                                                App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Upload_Error", eCode));
+                                                            }
+                                                            break;
+                                                    }
+                                                }
+                                            }
                                         }
                                         break;
                                 }

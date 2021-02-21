@@ -539,11 +539,20 @@
         "UGC_AllowedIPs": "Разрешённые IP",
         "UGC_Change": "Список изменений",
         "UGC_Visibility": "Видимость",
-        "UGC_Visibility_Public": "Общедоступный",
-        "UGC_Visibility_Friends": "Только друзья",
-        "UGC_Visibility_Private": "Приватный",
+        "UGC_Visibility_Public": "Открытый",
+        "UGC_Visibility_Friends": "Только для друзей",
+        "UGC_Visibility_Unlisted": "Доступ по ссылке",
+        "UGC_Visibility_Private": "Скрыто",
         "UGC_Confirm": "Загрузить",
         "UGC_Cancel": "Отмена",
+
+        "UGC_CreateUpdate_Title": "Тип загрузки",
+        "UGC_CreateUpdate_Create": "Создать новый мод",
+        "UGC_CreateUpdate_Update": "Обновить существующий мод",
+        "UGC_CreateUpdate_Cancel": "Отмена",
+
+        "UGC_QueryList_Title": "Выбрать мод для обновления",
+        "UGC_QueryList_Cancel": "Отмена",
 
         "AssetPicker_Filter_Equippable": "Отображать только экипируемое",
 

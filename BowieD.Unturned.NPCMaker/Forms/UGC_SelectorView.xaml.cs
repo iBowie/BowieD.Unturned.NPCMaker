@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using MahApps.Metro;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
@@ -14,12 +15,36 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// </summary>
     public partial class UGC_SelectorView : Window
     {
-        public UGC_SelectorView(string modPath)
+        private bool allowNullImagePath = false;
+        private ulong fileID;
+
+        private UGC_SelectorView(UGC ugc, string modPath)
+        {
+            InitializeComponent();
+
+            this.modPath = modPath;
+            this.fileID = ugc.FileID;
+
+            allowNullImagePath = true;
+
+            nameTextBox.Text = ugc.Name;
+            descTextBox.Text = ugc.Description;
+            allowedIPsTextBox.Text = ugc.AllowedIPs;
+            visibilityComboBox.SelectedIndex = ugc.Visibility;
+            
+            CommonCtor();
+        }
+        private UGC_SelectorView(string modPath)
         {
             InitializeComponent();
 
             this.modPath = modPath;
 
+            CommonCtor();
+        }
+
+        void CommonCtor()
+        {
             selectIconButton.Command = new BaseCommand(() =>
             {
                 const string formats = "*.png;*.jpg";
@@ -67,8 +92,16 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 if (string.IsNullOrEmpty(nameTextBox.Text))
                     return false;
 
-                if (string.IsNullOrEmpty(imagePath) || !File.Exists(imagePath))
-                    return false;
+                if (allowNullImagePath)
+                {
+                    if (!string.IsNullOrEmpty(imagePath) && !File.Exists(imagePath))
+                        return false;
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(imagePath) || !File.Exists(imagePath))
+                        return false;
+                }
 
                 if (!Directory.Exists(modPath))
                     return false;
@@ -90,6 +123,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             return new UGC()
             {
+                FileID = fileID,
                 Name = nameTextBox.Text,
                 Description = descTextBox.Text,
                 Path = modPath,
@@ -101,5 +135,18 @@ namespace BowieD.Unturned.NPCMaker.Forms
         }
 
         public UGC FinalizedUGC { get; private set; }
+
+        public static UGC_SelectorView SV_Create(string modPath)
+        {
+            UGC_SelectorView usv = new UGC_SelectorView(modPath);
+
+            return usv;
+        }
+        public static UGC_SelectorView SV_Update(UGC currentUgc, string modPath)
+        {
+            UGC_SelectorView usv = new UGC_SelectorView(currentUgc, modPath);
+
+            return usv;
+        }
     }
 }

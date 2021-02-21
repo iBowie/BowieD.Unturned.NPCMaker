@@ -89,6 +89,7 @@
                 <ComboBox SelectedIndex="0" Name="visibilityComboBox" Grid.Column="1" Margin="10">
                     <ComboBoxItem Content="{xamle:Localize INTERFACE_UGC_Visibility_Public}"/>
                     <ComboBoxItem Content="{xamle:Localize INTERFACE_UGC_Visibility_Friends}"/>
+                    <ComboBoxItem Content="{xamle:Localize INTERFACE_UGC_Visibility_Unlisted}"/>
                     <ComboBoxItem Content="{xamle:Localize INTERFACE_UGC_Visibility_Private}"/>
                 </ComboBox>
             </Grid>
