@@ -34,7 +34,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             MahApps.Metro.Controls.TextBoxHelper.SetWatermark(nameTextBox, keepAsBeen);
             MahApps.Metro.Controls.TextBoxHelper.SetWatermark(descTextBox, keepAsBeen);
-            MahApps.Metro.Controls.TextBoxHelper.SetWatermark(allowedIPsTextBox, keepAsBeen);
 
             CommonCtor();
         }
