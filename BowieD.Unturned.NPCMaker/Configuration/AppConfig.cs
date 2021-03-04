@@ -32,6 +32,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public bool importWorkshop = true;
         public bool generateThumbnailsBeforehand = true;
         public bool highlightSearch;
+        public bool useOldStyleMoveUpDown;
 
         public void Save()
         {
@@ -86,6 +87,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             importWorkshop = true;
             generateThumbnailsBeforehand = true;
             highlightSearch = false;
+            useOldStyleMoveUpDown = false;
             ELanguage c = LocalizationManager.GetLanguageFromCultureInfo(CultureInfo.InstalledUICulture);
             if (LocalizationManager.SupportedLanguages().Contains(c))
             {

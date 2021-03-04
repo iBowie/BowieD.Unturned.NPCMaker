@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="BowieD.Unturned.NPCMaker.Controls.Dialogue_Message"
+﻿<local:DraggableUserControl x:Class="BowieD.Unturned.NPCMaker.Controls.Dialogue_Message"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -50,6 +50,9 @@
                             <iconPacks:PackIconMaterial Kind="ArrowUp" Foreground="{DynamicResource AccentColor}"/>
                         </Button.Content>
                     </Button>
+                    <Grid Grid.Column="1" Name="dragRectGrid" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Bottom" Width="35" Height="35">
+                        <iconPacks:PackIconMaterial Name="dragRect" Kind="Menu" Background="Transparent" Foreground="{DynamicResource AccentColor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -84,4 +87,4 @@
             </StackPanel>
         </Border>
     </Grid>
-</UserControl>
+</local:DraggableUserControl>

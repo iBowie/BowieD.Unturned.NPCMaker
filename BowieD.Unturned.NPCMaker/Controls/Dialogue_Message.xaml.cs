@@ -14,7 +14,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
     /// <summary>
     /// Логика взаимодействия для Dialogue_Message.xaml
     /// </summary>
-    public partial class Dialogue_Message : UserControl, INotifyPropertyChanged, IHasOrderButtons
+    public partial class Dialogue_Message : DraggableUserControl, INotifyPropertyChanged, IHasOrderButtons
     {
         public Dialogue_Message(NPC.NPCMessage message)
         {
@@ -29,6 +29,20 @@ namespace BowieD.Unturned.NPCMaker.Controls
             }, "Control_SelectAsset_Dialogue", MahApps.Metro.IconPacks.PackIconMaterialKind.Chat));
 
             prevBox.ContextMenu = pbmenu;
+
+            if (Configuration.AppConfig.Instance.useOldStyleMoveUpDown)
+            {
+                dragRectGrid.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                dragRect.MouseLeftButtonDown += DragControl_LMB_Down;
+                dragRect.MouseLeftButtonUp += DragControl_LMB_Up;
+                dragRect.MouseMove += DragControl_MouseMove;
+
+                UpButton.Visibility = Visibility.Collapsed;
+                DownButton.Visibility = Visibility.Collapsed;
+            }
 
             DataContext = this;
         }
@@ -79,6 +93,9 @@ namespace BowieD.Unturned.NPCMaker.Controls
         public UIElement UpButton => moveUpButton;
         public UIElement DownButton => moveDownButton;
         public Transform Transform => animateTransform;
+
+        public override TranslateTransform DragRenderTransform => animateTransform;
+        public override FrameworkElement DragControl => dragRect;
 
         private void AddPageButton_Click(object sender, RoutedEventArgs e)
         {

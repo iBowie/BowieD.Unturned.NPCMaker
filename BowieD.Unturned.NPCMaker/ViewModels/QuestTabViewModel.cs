@@ -437,6 +437,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
                 panel.UpdateOrderButtons();
             };
+            uil.OnStoppedDrag += () =>
+            {
+                UpdateConditions();
+            };
             uil.moveUpButton.Click += (sender, e) =>
             {
                 MainWindow.Instance.listQuestConditions.MoveUp((sender as UIElement).TryFindParent<Universal_ItemList>());
@@ -517,6 +521,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 _quest.rewards = newRewards;
 
                 panel.UpdateOrderButtons();
+            };
+            uil.OnStoppedDrag += () =>
+            {
+                UpdateRewards();
             };
             uil.moveUpButton.Click += (sender, e) =>
             {

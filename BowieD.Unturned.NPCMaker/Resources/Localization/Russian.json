@@ -34,6 +34,7 @@
         "importImportWorkshop": "Импорт ассетов мастерской",
         "generateThumbnailsBeforehand": "Заранее создать иконки",
         "highlightSearch": "Подсветка поиска",
+        "useOldStyleMoveUpDown": "Использовать классическую систему перемещения",
 
         "experimentalFeatures_Tooltip": "ЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭксперименты",
         "scale_Tooltip": "Изменить размер программы на экране",
@@ -51,7 +52,8 @@
         "importImportVanilla_Tooltip": "Должна ли программа импортировать ассеты из оригинальной игры",
         "importImportWorkshop_Tooltip": "Должна ли программа импортировать ассеты из модов, загруженных через Steam Workshop",
         "generateThumbnailsBeforehand_Tooltip": "Увеличивает время запуска программы, но ускоряет последующую работу в ней",
-        "highlightSearch_Tooltip": "Подкрашивает совпадающую часть текста с запросом. Очень требовательная функция в данный момент."
+        "highlightSearch_Tooltip": "Подкрашивает совпадающую часть текста с запросом. Очень требовательная функция в данный момент.",
+        "useOldStyleMoveUpDown_Tooltip": "Отключает новую систему перетаскивания"
     },
     "Character":
     {

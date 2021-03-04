@@ -34,6 +34,7 @@
         "importImportWorkshop": "Import Workshop assets",
         "generateThumbnailsBeforehand": "Generate thumbnails beforehand",
         "highlightSearch": "Highlight search",
+        "useOldStyleMoveUpDown": "Use classic move up/down",
 
         "experimentalFeatures_Tooltip": "Something experimental, maybe unstable",
         "scale_Tooltip": "Adjust scale of the app on your screen",
@@ -51,7 +52,8 @@
         "importImportVanilla_Tooltip": "Whether or not this app should import assets from base game",
         "importImportWorkshop_Tooltip": "Whether or not this app should import assets of downloaded mods from Steam Workshop",
         "generateThumbnailsBeforehand_Tooltip": "Increases startup time, but decreases time of creating thumbnails after launch",
-        "highlightSearch_Tooltip": "Colors matching part of a search query. Very perfomance expensive feature at this moment."
+        "highlightSearch_Tooltip": "Colors matching part of a search query. Very perfomance expensive feature at this moment.",
+        "useOldStyleMoveUpDown_Tooltip": "Disables new drag"
     },
     "Character":
     {

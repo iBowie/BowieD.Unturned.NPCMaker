@@ -15,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
     /// <summary>
     /// Логика взаимодействия для Dialogue_Response.xaml
     /// </summary>
-    public partial class Dialogue_Response : UserControl, IHasOrderButtons
+    public partial class Dialogue_Response : DraggableUserControl, IHasOrderButtons
     {
         public Dialogue_Response(NPC.NPCResponse startResponse = null)
         {
@@ -25,6 +25,21 @@ namespace BowieD.Unturned.NPCMaker.Controls
             txtBoxDialogueID.Value = Response.openDialogueId;
             txtBoxQuestID.Value = Response.openQuestId;
             txtBoxVendorID.Value = Response.openVendorId;
+
+            if (Configuration.AppConfig.Instance.useOldStyleMoveUpDown)
+            {
+                dragRectGrid.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                dragRect.MouseLeftButtonDown += DragControl_LMB_Down;
+                dragRect.MouseLeftButtonUp += DragControl_LMB_Up;
+                dragRect.MouseMove += DragControl_MouseMove;
+
+                UpButton.Visibility = Visibility.Collapsed;
+                DownButton.Visibility = Visibility.Collapsed;
+                collapseButton.Visibility = Visibility.Collapsed;
+            }
 
             mainText.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Dialogue | ContextHelper.EContextOption.Group_TextEdit);
         }
@@ -163,6 +178,9 @@ namespace BowieD.Unturned.NPCMaker.Controls
         public UIElement UpButton => orderButtonUp;
         public UIElement DownButton => orderButtonDown;
         public Transform Transform => animateTransform;
+
+        public override TranslateTransform DragRenderTransform => animateTransform;
+        public override FrameworkElement DragControl => dragRect;
 
         private void Collapse_Button_Click(object sender, RoutedEventArgs e)
         {
