@@ -88,7 +88,36 @@ namespace BowieD.Unturned.NPCMaker.Controls
                 if (deltaX > 0 && index == _parent.Children.Count - 1)
                     return;
 
-                int count = (int)(deltaX / ActualWidth);
+                if (deltaX == 0)
+                    return;
+
+                double tw = System.Math.Abs(deltaX);
+                int ch = deltaX > 0 ? 1 : -1;
+
+                int ti = index + ch;
+                int count = 0;
+                double m = ch == 1 ? Margin.Right : Margin.Left;
+
+                while (tw > 0)
+                {
+                    FrameworkElement child = _parent.Children[ti] as FrameworkElement;
+
+                    m += ch == 1 ? child.Margin.Left : child.Margin.Right;
+
+                    m += child.ActualWidth;
+
+                    if (tw >= m)
+                    {
+                        count += ch;
+                        tw -= m;
+
+                        m = ch == 1 ? child.Margin.Right : child.Margin.Left;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
 
                 if (count != 0)
                 {
@@ -98,7 +127,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
                     _parent.Children.Insert(newIndex, this);
 
-                    DragRenderTransform.X = deltaX % ActualWidth;
+                    DragRenderTransform.X = tw;
                 }
                 else
                 {
@@ -117,7 +146,36 @@ namespace BowieD.Unturned.NPCMaker.Controls
                 if (deltaY > 0 && index == _parent.Children.Count - 1)
                     return;
 
-                int count = (int)(deltaY / ActualHeight);
+                if (deltaY == 0)
+                    return;
+
+                double tw = System.Math.Abs(deltaY);
+                int ch = deltaY > 0 ? 1 : -1;
+
+                int ti = index + ch;
+                int count = 0;
+                double m = ch == 1 ? Margin.Bottom : Margin.Top;
+
+                while (tw > 0)
+                {
+                    FrameworkElement child = _parent.Children[ti] as FrameworkElement;
+
+                    m += ch == 1 ? child.Margin.Top : child.Margin.Bottom;
+
+                    m += child.ActualHeight;
+
+                    if (tw >= m)
+                    {
+                        count += ch;
+                        tw -= m;
+
+                        m = ch == 1 ? child.Margin.Bottom : child.Margin.Top;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
 
                 if (count != 0)
                 {
@@ -127,7 +185,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
                     _parent.Children.Insert(newIndex, this);
 
-                    DragRenderTransform.Y = deltaY % ActualHeight;
+                    DragRenderTransform.Y = tw;
                 }
                 else
                 {

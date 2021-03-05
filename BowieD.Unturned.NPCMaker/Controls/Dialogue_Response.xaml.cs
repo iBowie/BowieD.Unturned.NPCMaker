@@ -38,7 +38,6 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
                 UpButton.Visibility = Visibility.Collapsed;
                 DownButton.Visibility = Visibility.Collapsed;
-                collapseButton.Visibility = Visibility.Collapsed;
             }
 
             mainText.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Dialogue | ContextHelper.EContextOption.Group_TextEdit);
