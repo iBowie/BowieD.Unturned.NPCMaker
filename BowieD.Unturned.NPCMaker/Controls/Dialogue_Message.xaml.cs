@@ -124,6 +124,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
         {
             Dialogue_Message_Page parent = Util.FindParent<Dialogue_Message_Page>(sender as Button);
             pagesGrid.Children.Remove(parent);
+
+            OrderTool.UpdateOrderButtons(pagesGrid);
         }
 
         private void TextField_TextChanged(object sender, TextChangedEventArgs e)
