@@ -413,6 +413,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
                 panel.UpdateOrderButtons<Dialogue_Message>();
             };
+            message.OnStoppedDrag += () =>
+            {
+                UpdateMessages();
+            };
             message.moveUpButton.Click += (sender, e) =>
             {
                 MainWindow.Instance.messagePagesGrid.MoveUp((sender as UIElement).TryFindParent<Dialogue_Message>());
@@ -453,6 +457,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 _dialogue.Responses = newResponses;
 
                 panel.UpdateOrderButtons<Dialogue_Response>();
+            };
+            response.OnStoppedDrag += () =>
+            {
+                UpdateResponses();
             };
             response.orderButtonUp.Click += (sender, e) =>
             {

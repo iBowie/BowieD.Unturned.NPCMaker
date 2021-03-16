@@ -14,7 +14,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
     /// <summary>
     /// Логика взаимодействия для Dialogue_Message.xaml
     /// </summary>
-    public partial class Dialogue_Message : UserControl, INotifyPropertyChanged, IHasOrderButtons
+    public partial class Dialogue_Message : DraggableUserControl, INotifyPropertyChanged, IHasOrderButtons
     {
         public Dialogue_Message(NPC.NPCMessage message)
         {
@@ -30,7 +30,61 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
             prevBox.ContextMenu = pbmenu;
 
+            if (Configuration.AppConfig.Instance.useOldStyleMoveUpDown)
+            {
+                dragRectGrid.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                dragRect.MouseLeftButtonDown += DragControl_LMB_Down;
+                dragRect.MouseLeftButtonUp += DragControl_LMB_Up;
+                dragRect.MouseMove += DragControl_MouseMove;
+
+                UpButton.Visibility = Visibility.Collapsed;
+                DownButton.Visibility = Visibility.Collapsed;
+            }
+
             DataContext = this;
+
+            resizeRect.MouseLeftButtonDown += ResizeRect_MouseLeftButtonDown;
+            resizeRect.MouseLeftButtonUp += ResizeRect_MouseLeftButtonUp;
+            resizeRect.MouseMove += ResizeRect_MouseMove;
+        }
+
+        private Point resizeStart;
+        private bool _isResizing;
+        private double _startSize;
+
+        private void ResizeRect_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (_isResizing)
+            {
+                var delta = e.GetPosition(this) - resizeStart;
+
+                if (delta.Y != 0)
+                {
+                    double newSize = MathUtil.Clamp(_startSize + delta.Y, pagesBorder.MinHeight, pagesBorder.MaxHeight);
+
+                    pagesBorder.Height = newSize;
+                }
+            }
+        }
+
+        private void ResizeRect_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            resizeRect.ReleaseMouseCapture();
+
+            _isResizing = false;
+        }
+
+        private void ResizeRect_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            resizeStart = e.GetPosition(this);
+            _startSize = pagesBorder.ActualHeight;
+
+            resizeRect.CaptureMouse();
+
+            _isResizing = true;
         }
 
         public NPC.NPCMessage Message
@@ -80,6 +134,9 @@ namespace BowieD.Unturned.NPCMaker.Controls
         public UIElement DownButton => moveDownButton;
         public Transform Transform => animateTransform;
 
+        public override TranslateTransform DragRenderTransform => animateTransform;
+        public override FrameworkElement DragControl => dragRect;
+
         private void AddPageButton_Click(object sender, RoutedEventArgs e)
         {
             AddPage();
@@ -107,6 +164,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
         {
             Dialogue_Message_Page parent = Util.FindParent<Dialogue_Message_Page>(sender as Button);
             pagesGrid.Children.Remove(parent);
+
+            OrderTool.UpdateOrderButtons(pagesGrid);
         }
 
         private void TextField_TextChanged(object sender, TextChangedEventArgs e)

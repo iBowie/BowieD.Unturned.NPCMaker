@@ -1,5 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System.Text;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
@@ -30,6 +32,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 return sb.ToString();
             }
         }
+        [AssetPicker(typeof(FlagDescriptionProjectAsset), "Control_SelectAsset_Project_Flag", MahApps.Metro.IconPacks.PackIconMaterialKind.Flag)]
         public ushort ID { get; set; }
         public short Value { get; set; }
         public Modification_Type Modification { get; set; }

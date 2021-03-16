@@ -20,16 +20,22 @@ namespace BowieD.Unturned.NPCMaker.Export
     {
         private const string WaterText = "// Made in NPC Maker by BowieD";
 
-        public static void ExportNPC(NPCProject save, string directory)
+        public static void ExportNPC(NPCProject save, string directory, bool bundlify = false)
         {
             try
             {
-                if (Directory.Exists(Path.Combine(directory, $"{save.guid}")))
+                dir = Path.Combine(directory, $"{save.guid}");
+
+                if (Directory.Exists(dir))
                 {
-                    Directory.Delete(Path.Combine(directory, $"{save.guid}"), true);
+                    Directory.Delete(dir, true);
                 }
 
-                dir = Path.Combine(directory, $"{save.guid}");
+                if (bundlify)
+                {
+                    dir = Path.Combine(dir, "Bundles", "NPCs");
+                }
+
                 Export_Characters(save.characters);
                 Export_Dialogues(save.dialogues);
                 Export_Quests(save.quests);

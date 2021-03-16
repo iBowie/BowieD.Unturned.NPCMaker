@@ -84,6 +84,11 @@
                             <iconPacks:PackIconMaterial Kind="Export" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Command="{Binding ExportProjectToWorkshopCommand}" Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_ExportToWorkshop}" Name="exportToWorkshopButton">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="Export" Foreground="{DynamicResource AccentColor}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <Separator/>
                     <MenuItem Command="{Binding ExitCommand}" Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_Exit}" Name="exitButton">
                         <MenuItem.Icon>
@@ -1497,6 +1502,10 @@
             <Rectangle Fill="Black" Opacity="0.8"/>
             <TextBlock Name="textBlockActions" TextAlignment="Center" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_DeepAnalysis_Progress}" FontSize="18" Foreground="White" Opacity="0.8" VerticalAlignment="Center"/>
             <ProgressBar Name="progrBar" VerticalAlignment="Bottom" Margin="10" Height="32" Opacity="0.8"/>
+        </Grid>
+        <Grid Name="ugcOverlay" Visibility="Collapsed" IsHitTestVisible="True">
+            <Rectangle Fill="Black" Opacity="0.8"/>
+            <TextBlock Name="ugcOverlayText" TextAlignment="Center" Text="what" FontSize="18" VerticalAlignment="Center" Foreground="White" Opacity="0.8"/>
         </Grid>
         <Grid Name="notClickableOverlay" IsHitTestVisible="False">
             <Grid Name="debugOverlayText" HorizontalAlignment="Right" Opacity="0.15" VerticalAlignment="Top" Margin="5">

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="BowieD.Unturned.NPCMaker.Controls.Dialogue_Response"
+﻿<local:DraggableUserControl x:Class="BowieD.Unturned.NPCMaker.Controls.Dialogue_Response"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -73,7 +73,10 @@
                         <iconPacks:PackIconMaterial Kind="ArrowUp" Foreground="{DynamicResource AccentColor}"/>
                     </Button.Content>
                 </Button>
-                <Button Click="Collapse_Button_Click" ToolTip="{xaml:Localize Key=INTERFACE_Control_Collapse}" HorizontalAlignment="Right" Margin="0,46,10,0" VerticalAlignment="Top" Height="31" Width="31">
+                <Grid Name="dragRectGrid" HorizontalAlignment="Right" Margin="0,10,10.25,10" VerticalAlignment="Top" Height="31" Width="31">
+                    <iconPacks:PackIconMaterial Name="dragRect" Kind="Menu" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource AccentColor}" Background="Transparent"/>
+                </Grid>
+                <Button Name="collapseButton" Click="Collapse_Button_Click" ToolTip="{xaml:Localize Key=INTERFACE_Control_Collapse}" HorizontalAlignment="Right" Margin="0,46,10,0" VerticalAlignment="Top" Height="31" Width="31">
                     <Button.Content>
                         <iconPacks:PackIconMaterial Kind="ArrowCollapse" Foreground="{DynamicResource AccentColor}"/>
                     </Button.Content>
@@ -86,4 +89,4 @@
             </Grid>
         </Grid>
     </Border>
-</UserControl>
+</local:DraggableUserControl>

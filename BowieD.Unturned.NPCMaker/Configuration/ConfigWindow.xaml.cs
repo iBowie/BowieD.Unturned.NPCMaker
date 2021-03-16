@@ -53,6 +53,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 importWorkshop = Import_Workshop_Box.IsChecked.Value,
                 generateThumbnailsBeforehand = Generate_Thumbnails_Box.IsChecked.Value,
                 highlightSearch = Highlight_Search_Box.IsChecked.Value,
+                useOldStyleMoveUpDown = Use_Old_Style_Move_Up_Down_Box.IsChecked.Value,
                 unturnedDir = curUntDir
             };
             set
@@ -105,6 +106,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 Import_Workshop_Box.IsChecked = value.importWorkshop;
                 Generate_Thumbnails_Box.IsChecked = value.generateThumbnailsBeforehand;
                 Highlight_Search_Box.IsChecked = value.highlightSearch;
+                Use_Old_Style_Move_Up_Down_Box.IsChecked = value.useOldStyleMoveUpDown;
                 curUntDir = value.unturnedDir;
             }
         }

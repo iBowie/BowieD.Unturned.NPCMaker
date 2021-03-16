@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Commands;
 using BowieD.Unturned.NPCMaker.Common.Utility;
 using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
@@ -8,13 +9,16 @@ using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using DiscordRPC;
 using Microsoft.Win32;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.ViewModels
@@ -351,6 +355,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             saveAsProjectCommand,
             exportProjectCommand,
             exportProjectToUnturnedCommand,
+            exportProjectToWorkshopCommand,
             exitCommand,
             optionsCommand,
             aboutCommand,
@@ -608,6 +613,182 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 }
 
                 return exportProjectToUnturnedCommand;
+            }
+        }
+        public ICommand ExportProjectToWorkshopCommand
+        {
+            get
+            {
+                if (exportProjectToWorkshopCommand == null)
+                {
+                    exportProjectToWorkshopCommand = new AdvancedCommand(async () =>
+                    {
+                        Mistakes.MistakesManager.FindMistakes();
+                        if (Mistakes.MistakesManager.Criticals_Count > 0)
+                        {
+                            SystemSounds.Hand.Play();
+                            MainWindow.mainTabControl.SelectedIndex = MainWindow.mainTabControl.Items.Count - 1;
+                            return;
+                        }
+                        if (Mistakes.MistakesManager.Warnings_Count > 0)
+                        {
+                            MessageBoxResult res = MessageBox.Show(LocalizationManager.Current.Interface["Export_Warnings_Text"], LocalizationManager.Current.Interface["Export_Warnings_Caption"], MessageBoxButton.YesNo);
+                            if (!(res == MessageBoxResult.OK || res == MessageBoxResult.Yes))
+                            {
+                                return;
+                            }
+                        }
+                        SaveAll();
+                        if (MainWindow.CurrentProject.Save())
+                        {
+                            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Saved"]);
+                        }
+
+                        Export.Exporter.ExportNPC(MainWindow.CurrentProject.data, Path.Combine(AppConfig.ExeDirectory, "wshop_results"), true);
+
+                        string resDir = Path.Combine(AppConfig.ExeDirectory, "wshop_results", $"{MainWindow.CurrentProject.data.guid}");
+
+                        try
+                        {
+                            UGC_CreateUpdateView ugc_cuv = new UGC_CreateUpdateView()
+                            { Owner = MainWindow };
+
+                            if (ugc_cuv.ShowDialog() == true)
+                            {
+                                switch (ugc_cuv.Result)
+                                {
+                                    case UGC_CreateUpdateView.EResult.Create:
+                                        {
+                                            UGC_SelectorView ugc_sv = UGC_SelectorView.SV_Create(resDir);
+                                            ugc_sv.Owner = MainWindow;
+                                            if (ugc_sv.ShowDialog() == true)
+                                            {
+                                                var mod = ugc_sv.FinalizedUGC;
+
+                                                MainWindow.ugcOverlayText.Text = LocalizationManager.Current.Interface["UGC_Steps_Uploading"];
+                                                MainWindow.ugcOverlay.Visibility = Visibility.Visible;
+
+                                                var t1 = await App.SteamManager.CreateUGC(mod);
+
+                                                int eCode = t1.Item1;
+                                                ulong fileID = t1.Item2;
+
+                                                MainWindow.ugcOverlay.Visibility = Visibility.Collapsed;
+
+                                                switch (eCode)
+                                                {
+                                                    case 0:
+                                                        {
+                                                            if (fileID > 0)
+                                                            {
+                                                                Button button = new Button
+                                                                {
+                                                                    Content = new TextBlock
+                                                                    {
+                                                                        Text = LocalizationManager.Current.Notification["Upload_Done_Goto"]
+                                                                    }
+                                                                };
+
+                                                                button.Click += (sender, e) =>
+                                                                {
+                                                                    Process.Start($"https://steamcommunity.com/sharedfiles/filedetails/?id={fileID}");
+                                                                };
+
+                                                                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Upload_Done"], buttons: button);
+                                                            }
+                                                            else
+                                                            {
+                                                                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Upload_Done"]);
+                                                            }
+                                                        }
+                                                        break;
+                                                    default:
+                                                        {
+                                                            App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Upload_Error", eCode));
+                                                        }
+                                                        break;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case UGC_CreateUpdateView.EResult.Update:
+                                        {
+                                            MainWindow.ugcOverlayText.Text = LocalizationManager.Current.Interface["UGC_Steps_Query"];
+                                            MainWindow.ugcOverlay.Visibility = Visibility.Visible;
+
+                                            var ugcs = await App.SteamManager.QueryUGC();
+
+                                            MainWindow.ugcOverlay.Visibility = Visibility.Collapsed;
+
+                                            UGC_QueryListView ugc_qlv = new UGC_QueryListView(ugcs)
+                                            { Owner = MainWindow };
+
+                                            if (ugc_qlv.ShowDialog() == true)
+                                            {
+                                                UGC_SelectorView ugc_sv = UGC_SelectorView.SV_Update(ugc_qlv.Result, resDir);
+                                                ugc_sv.Owner = MainWindow;
+                                                if (ugc_sv.ShowDialog() == true)
+                                                {
+                                                    var mod = ugc_sv.FinalizedUGC;
+
+                                                    MainWindow.ugcOverlayText.Text = LocalizationManager.Current.Interface["UGC_Steps_Uploading"];
+                                                    MainWindow.ugcOverlay.Visibility = Visibility.Visible;
+
+                                                    var t1 = await App.SteamManager.UpdateUGC(mod);
+
+                                                    int eCode = t1.Item1;
+                                                    ulong fileID = t1.Item2;
+
+                                                    MainWindow.ugcOverlay.Visibility = Visibility.Collapsed;
+
+                                                    switch (eCode)
+                                                    {
+                                                        case 0:
+                                                            {
+                                                                if (fileID > 0)
+                                                                {
+                                                                    Button button = new Button
+                                                                    {
+                                                                        Content = new TextBlock
+                                                                        {
+                                                                            Text = LocalizationManager.Current.Notification["Upload_Done_Goto"]
+                                                                        }
+                                                                    };
+
+                                                                    button.Click += (sender, e) =>
+                                                                    {
+                                                                        Process.Start($"https://steamcommunity.com/sharedfiles/filedetails/?id={fileID}");
+                                                                    };
+
+                                                                    App.NotificationManager.Notify(LocalizationManager.Current.Notification["Upload_Done"], buttons: button);
+                                                                }
+                                                                else
+                                                                {
+                                                                    App.NotificationManager.Notify(LocalizationManager.Current.Notification["Upload_Done"]);
+                                                                }
+                                                            }
+                                                            break;
+                                                        default:
+                                                            {
+                                                                App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Upload_Error", eCode));
+                                                            }
+                                                            break;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        break;
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            await App.Logger.LogException("Could not upload mod", ex: ex);
+                        }
+                    });
+                }
+
+                return exportProjectToWorkshopCommand;
             }
         }
         public ICommand ExitCommand

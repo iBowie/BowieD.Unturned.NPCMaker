@@ -11,7 +11,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
     /// <summary>
     /// Логика взаимодействия для Condition_ItemList.xaml
     /// </summary>
-    public partial class Universal_ItemList : UserControl, IHasOrderButtons
+    public partial class Universal_ItemList : DraggableUserControl, IHasOrderButtons
     {
         public Universal_ItemList(object input, ReturnType type, bool showMoveButtons = false)
         {
@@ -20,8 +20,28 @@ namespace BowieD.Unturned.NPCMaker.Controls
             mainLabel.Content = Value is IHasUIText ? (Value as IHasUIText).UIText : Value.ToString();
             mainLabel.ToolTip = mainLabel.Content;
             Type = type;
-            moveUpButton.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
-            moveDownButton.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
+
+            if (Configuration.AppConfig.Instance.useOldStyleMoveUpDown)
+            {
+                moveUpButton.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
+                moveDownButton.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
+
+                newStyleMove.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                dragRect.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
+
+                dragRect.MouseLeftButtonDown += DragControl_LMB_Down;
+                dragRect.MouseLeftButtonUp += DragControl_LMB_Up;
+                dragRect.MouseMove += DragControl_MouseMove;
+
+                moveUpButton.Visibility = Visibility.Collapsed;
+                moveDownButton.Visibility = Visibility.Collapsed;
+
+                oldStyleMove.Visibility = Visibility.Collapsed;
+            }
+
             ShowMoveButtons = showMoveButtons;
         }
         public Universal_ItemList(object input, bool showMoveButtons = false)
@@ -33,8 +53,27 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
             Type = AutoDetectType(input);
 
-            moveUpButton.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
-            moveDownButton.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
+            if (Configuration.AppConfig.Instance.useOldStyleMoveUpDown)
+            {
+                moveUpButton.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
+                moveDownButton.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
+
+                newStyleMove.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                dragRect.Visibility = showMoveButtons ? Visibility.Visible : Visibility.Collapsed;
+
+                dragRect.MouseLeftButtonDown += DragControl_LMB_Down;
+                dragRect.MouseLeftButtonUp += DragControl_LMB_Up;
+                dragRect.MouseMove += DragControl_MouseMove;
+
+                moveUpButton.Visibility = Visibility.Collapsed;
+                moveDownButton.Visibility = Visibility.Collapsed;
+
+                oldStyleMove.Visibility = Visibility.Collapsed;
+            }
+
             ShowMoveButtons = showMoveButtons;
         }
 
@@ -75,6 +114,9 @@ namespace BowieD.Unturned.NPCMaker.Controls
         public UIElement UpButton => moveUpButton;
         public UIElement DownButton => moveDownButton;
         public Transform Transform => animateTransform;
+
+        public override TranslateTransform DragRenderTransform => animateTransform;
+        public override FrameworkElement DragControl => dragRect;
 
         private void CopyButton_Click(object sender, RoutedEventArgs e)
         {
