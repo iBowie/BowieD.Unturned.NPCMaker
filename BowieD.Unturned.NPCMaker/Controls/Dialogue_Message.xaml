@@ -14,13 +14,18 @@
                 <TranslateTransform x:Name="animateTransform"/>
             </TransformGroup>
         </Grid.RenderTransform>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <Border BorderBrush="{StaticResource AccentColor}" BorderThickness="2" CornerRadius="4">
             <StackPanel Orientation="Vertical">
-                <Border Margin="5" BorderBrush="{StaticResource AccentColor}" BorderThickness="2" CornerRadius="4">
-                    <ScrollViewer Margin="5" MinHeight="60" MaxHeight="120" VerticalScrollBarVisibility="Visible">
+                <Border Name="pagesBorder" Margin="5" MinHeight="100" Height="120" BorderBrush="{StaticResource AccentColor}" BorderThickness="2" CornerRadius="4">
+                    <ScrollViewer Margin="5" VerticalScrollBarVisibility="Visible">
                         <StackPanel Name="pagesGrid" />
                     </ScrollViewer>
                 </Border>
+                <Rectangle Height="5" Cursor="SizeNS" Fill="Transparent" Name="resizeRect" Margin="0,-5,0,-5"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>

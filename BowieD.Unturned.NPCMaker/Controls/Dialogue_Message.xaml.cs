@@ -45,6 +45,46 @@ namespace BowieD.Unturned.NPCMaker.Controls
             }
 
             DataContext = this;
+
+            resizeRect.MouseLeftButtonDown += ResizeRect_MouseLeftButtonDown;
+            resizeRect.MouseLeftButtonUp += ResizeRect_MouseLeftButtonUp;
+            resizeRect.MouseMove += ResizeRect_MouseMove;
+        }
+
+        private Point resizeStart;
+        private bool _isResizing;
+        private double _startSize;
+
+        private void ResizeRect_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (_isResizing)
+            {
+                var delta = e.GetPosition(this) - resizeStart;
+
+                if (delta.Y != 0)
+                {
+                    double newSize = MathUtil.Clamp(_startSize + delta.Y, pagesBorder.MinHeight, pagesBorder.MaxHeight);
+
+                    pagesBorder.Height = newSize;
+                }
+            }
+        }
+
+        private void ResizeRect_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            resizeRect.ReleaseMouseCapture();
+
+            _isResizing = false;
+        }
+
+        private void ResizeRect_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            resizeStart = e.GetPosition(this);
+            _startSize = pagesBorder.ActualHeight;
+
+            resizeRect.CaptureMouse();
+
+            _isResizing = true;
         }
 
         public NPC.NPCMessage Message
