@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.NPC.Currency;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.NPC.Currency;
 using System;
 using System.Collections.Generic;
 using System.Xml;
@@ -8,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
 {
     public class NPCProject
     {
-        public const int CURRENT_SAVEDATA_VERSION = 4;
+        public const int CURRENT_SAVEDATA_VERSION = 5;
 
         public NPCProject()
         {
@@ -19,6 +20,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             vendors = new List<NPCVendor>();
             quests = new List<NPCQuest>();
             currencies = new List<CurrencyAsset>();
+            flags = new List<FlagDescriptionProjectAsset>();
             lastCharacter = -1;
             lastDialogue = -1;
             lastVendor = -1;
@@ -34,6 +36,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public List<NPCVendor> vendors;
         public List<NPCQuest> quests;
         public List<CurrencyAsset> currencies;
+        public List<FlagDescriptionProjectAsset> flags;
         public int
             lastCharacter = -1,
             lastDialogue = -1,

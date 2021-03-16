@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
@@ -9,6 +10,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     {
         public override RewardType Type => RewardType.Currency;
         public override string UIText => $"{LocalizationManager.Current.Reward["Type_Currency"]} x{Value}";
+        [AssetPicker(typeof(GameCurrencyAsset), "Control_SelectAsset_Currency", MahApps.Metro.IconPacks.PackIconMaterialKind.CurrencyUsd)]
         public string GUID { get; set; }
         public uint Value { get; set; }
 

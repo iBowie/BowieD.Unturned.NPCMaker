@@ -428,6 +428,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
                 panel.UpdateOrderButtons();
             };
+            item.OnStoppedDrag += () =>
+            {
+                UpdateItems();
+            };
             item.moveUpButton.Click += (sender, e) =>
             {
                 MainWindow.Instance.vendorListBuyItems.MoveUp((sender as UIElement).TryFindParent<Universal_ItemList>());
@@ -525,6 +529,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 _vendor.items = newItems;
 
                 panel.UpdateOrderButtons();
+            };
+            item.OnStoppedDrag += () =>
+            {
+                UpdateItems();
             };
             item.moveUpButton.Click += (sender, e) =>
             {

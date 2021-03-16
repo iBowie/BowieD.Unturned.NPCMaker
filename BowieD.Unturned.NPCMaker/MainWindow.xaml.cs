@@ -265,7 +265,7 @@ namespace BowieD.Unturned.NPCMaker
             }
 
             ConsoleLogger.StartWaitForInput();
-            
+
             Loaded += (sender, e) =>
             {
                 var scr = ScreenHelper.GetCurrentScreen(this);

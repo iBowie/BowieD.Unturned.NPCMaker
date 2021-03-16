@@ -2,9 +2,11 @@
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.GameIntegration.Filtering;
 using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Markup;
+using BowieD.Unturned.NPCMaker.ViewModels;
+using MahApps.Metro.IconPacks;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -267,6 +269,25 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     break;
             }
 
+            if (typeof(ICreatable).IsAssignableFrom(assetType))
+            {
+                addEntryButton.Visibility = Visibility.Visible;
+
+                addEntryButton.Command = new BaseCommand(() =>
+                {
+                    GameAsset createdA = (GameAsset)Activator.CreateInstance(assetType);
+
+                    if (createdA is ICreatable createable)
+                        createable.OnCreate();
+
+                    Reorder();
+                });
+            }
+            else
+            {
+                addEntryButton.Visibility = Visibility.Collapsed;
+            }
+
             foreach (var asset in orderedAssets)
             {
                 Grid g = new Grid()
@@ -283,16 +304,26 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 {
                     Width = GridLength.Auto
                 });
+                g.ColumnDefinitions.Add(new ColumnDefinition()
+                {
+                    Width = GridLength.Auto
+                });
+                g.ColumnDefinitions.Add(new ColumnDefinition()
+                {
+                    Width = GridLength.Auto
+                });
 
                 TextBlock tb = new TextBlock();
                 Label l = new Label()
                 {
-                    Content = tb
+                    Content = tb,
+                    VerticalAlignment = VerticalAlignment.Center
                 };
                 TextBlock tbid = new TextBlock();
                 Label lid = new Label()
                 {
-                    Content = tbid
+                    Content = tbid,
+                    VerticalAlignment = VerticalAlignment.Center
                 };
 
                 if (asset is IHasNameOverride gda)
@@ -309,6 +340,71 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 g.Children.Add(l);
                 g.Children.Add(lid);
 
+                Grid editableGrid = new Grid() { HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(5) };
+                Grid deletableGrid = new Grid() { HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(5) };
+
+                g.Children.Add(editableGrid);
+                g.Children.Add(deletableGrid);
+
+                if (asset is IEditable editable)
+                {
+                    Button editButton = new Button()
+                    {
+                        ToolTip = LocalizationManager.Current.Interface["AssetPicker_Editable_Edit_ToolTip"]
+                    };
+
+                    editButton.Content = new PackIconMaterial()
+                    {
+                        Kind = PackIconMaterialKind.Pencil,
+                        Foreground = Application.Current.Resources["AccentColor"] as System.Windows.Media.Brush,
+                        Width = 16,
+                        Height = 16
+                    };
+
+                    editButton.Command = new BaseCommand(() =>
+                    {
+                        editable.Edit(this);
+
+                        if (asset is IHasNameOverride gda1)
+                        {
+                            markup.Markup(tb, gda1.NameOverride);
+                        }
+                        else
+                        {
+                            markup.Markup(tb, asset.name);
+                        }
+
+                        tbid.Text = asset.id.ToString();
+                    });
+
+                    editableGrid.Children.Add(editButton);
+                }
+
+                if (asset is IDeletable deletable)
+                {
+                    Button deleteButton = new Button()
+                    {
+                        ToolTip = LocalizationManager.Current.Interface["AssetPicker_Deletable_Delete_ToolTip"]
+                    };
+
+                    deleteButton.Content = new PackIconMaterial()
+                    {
+                        Kind = PackIconMaterialKind.TrashCan,
+                        Foreground = Application.Current.Resources["AccentColor"] as System.Windows.Media.Brush,
+                        Width = 16,
+                        Height = 16
+                    };
+
+                    deleteButton.Command = new BaseCommand(() =>
+                    {
+                        deletable.OnDelete();
+
+                        Reorder();
+                    });
+
+                    deletableGrid.Children.Add(deleteButton);
+                }
+
                 if (asset is IHasIcon hasIcon)
                 {
                     Image icon = new Image()
@@ -316,7 +412,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                         Source = ThumbnailManager.CreateThumbnail(hasIcon.ImagePath),
                         Width = 32,
                         Height = 32,
-                        Margin = new Thickness(1)
+                        Margin = new Thickness(1),
+                        VerticalAlignment = VerticalAlignment.Center
                     };
 
                     g.ColumnDefinitions.Add(new ColumnDefinition()
@@ -328,6 +425,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     Grid.SetColumn(icon, 0);
                     Grid.SetColumn(lid, 1);
                     Grid.SetColumn(l, 2);
+                    Grid.SetColumn(editableGrid, 3);
+                    Grid.SetColumn(deletableGrid, 4);
                 }
                 else if (asset is IHasThumbnail hasThumbnail)
                 {
@@ -336,7 +435,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                         Source = hasThumbnail.Thumbnail,
                         Width = 32,
                         Height = 32,
-                        Margin = new Thickness(1)
+                        Margin = new Thickness(1),
+                        VerticalAlignment = VerticalAlignment.Center
                     };
 
                     g.ColumnDefinitions.Add(new ColumnDefinition()
@@ -348,6 +448,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     Grid.SetColumn(icon, 0);
                     Grid.SetColumn(lid, 1);
                     Grid.SetColumn(l, 2);
+                    Grid.SetColumn(editableGrid, 3);
+                    Grid.SetColumn(deletableGrid, 4);
                 }
                 else if (asset is IHasAnimatedThumbnail hasAnimatedThumbnail)
                 {
@@ -360,7 +462,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             Source = thumbs.First(),
                             Width = 32,
                             Height = 32,
-                            Margin = new Thickness(1)
+                            Margin = new Thickness(1),
+                            VerticalAlignment = VerticalAlignment.Center
                         };
 
                         DispatcherTimer dt = new DispatcherTimer()
@@ -387,11 +490,15 @@ namespace BowieD.Unturned.NPCMaker.Forms
                         Grid.SetColumn(icon, 0);
                         Grid.SetColumn(lid, 1);
                         Grid.SetColumn(l, 2);
+                        Grid.SetColumn(editableGrid, 3);
+                        Grid.SetColumn(deletableGrid, 4);
                     }
                     else
                     {
                         Grid.SetColumn(lid, 0);
                         Grid.SetColumn(l, 1);
+                        Grid.SetColumn(editableGrid, 2);
+                        Grid.SetColumn(deletableGrid, 3);
                     }
                 }
                 else
@@ -399,6 +506,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     tpbarGrid.ColumnDefinitions[0].Width = new GridLength(0);
                     Grid.SetColumn(lid, 0);
                     Grid.SetColumn(l, 1);
+                    Grid.SetColumn(editableGrid, 2);
+                    Grid.SetColumn(deletableGrid, 3);
                 }
 
                 if (asset is IHasToolTip hasToolTip)

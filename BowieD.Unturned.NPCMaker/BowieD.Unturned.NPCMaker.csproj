@@ -172,6 +172,7 @@
     <Compile Include="Controls\Dialogue_Response.xaml.cs">
       <DependentUpon>Dialogue_Response.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DraggableUserControl.cs" />
     <Compile Include="Controls\IUIL_Icon.cs" />
     <Compile Include="Controls\OptionalByteValueControl.xaml.cs">
       <DependentUpon>OptionalByteValueControl.xaml</DependentUpon>
@@ -254,6 +255,15 @@
     <Compile Include="Forms\SimulationView_Window.xaml.cs">
       <DependentUpon>SimulationView_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UGC_CreateUpdateView.xaml.cs">
+      <DependentUpon>UGC_CreateUpdateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UGC_QueryListView.xaml.cs">
+      <DependentUpon>UGC_QueryListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UGC_SelectorView.xaml.cs">
+      <DependentUpon>UGC_SelectorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Universal_ConditionEditor.xaml.cs">
       <DependentUpon>Universal_ConditionEditor.xaml</DependentUpon>
     </Compile>
@@ -290,6 +300,7 @@
     <Compile Include="GameIntegration\EGameItemRarity.cs" />
     <Compile Include="GameIntegration\Filtering\AssetFilter.cs" />
     <Compile Include="GameIntegration\Filtering\AssetFilter_Equippable.cs" />
+    <Compile Include="GameIntegration\FlagDescriptionProjectAsset.cs" />
     <Compile Include="GameIntegration\GameAnimalAsset.cs" />
     <Compile Include="GameIntegration\GameAsset.cs" />
     <Compile Include="GameIntegration\GameAssetManager.cs" />
@@ -323,6 +334,8 @@
     <Compile Include="GameIntegration\GameVehicleAsset.cs" />
     <Compile Include="GameIntegration\GameVendorAsset.cs" />
     <Compile Include="GameIntegration\GameWeatherAsset.cs" />
+    <Compile Include="GameIntegration\IEditable.cs" />
+    <Compile Include="GameIntegration\ProjectAsset.cs" />
     <Compile Include="GameIntegration\Thumbnails\IHasAnimatedThumbnail.cs" />
     <Compile Include="GameIntegration\Thumbnails\IHasIcon.cs" />
     <Compile Include="GameIntegration\Thumbnails\IHasNameOverride.cs" />
@@ -517,6 +530,7 @@
     <Compile Include="ViewModels\MistakeTabViewModel.cs" />
     <Compile Include="ViewModels\QuestTabViewModel.cs" />
     <Compile Include="ViewModels\VendorTabViewModel.cs" />
+    <Compile Include="Workshop\SteamManager.cs" />
     <Compile Include="XAML\EnumItemsSource.cs" />
     <Compile Include="XAML\LocalizationConverter.cs" />
     <Compile Include="XAML\LocalizeExtension.cs" />
@@ -609,6 +623,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\SimulationView_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\UGC_CreateUpdateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\UGC_QueryListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\UGC_SelectorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -788,6 +814,17 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\unknown.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Libs\Steamworks.NET.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Libs\steam_api.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Libs\steam_appid.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Libs\UnturnedWorkshopCLI.exe" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

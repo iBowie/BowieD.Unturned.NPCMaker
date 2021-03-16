@@ -6,7 +6,8 @@
         "Project_SaveFilter": "Файл проекта NPC (*.npcproj)",
         "Project_TemplateFilter": "Файл шаблона NPC (*.npctemplate)",
         "Title": "Unturned 3.0 NPC Maker by BowieD",
-        "Configuration_Title": "Настройки"
+        "Configuration_Title": "Настройки",
+        "UGC_ImageFilter": "Поддерживаемые изображения ({0})"
     },
     "Options":
     {
@@ -33,6 +34,7 @@
         "importImportWorkshop": "Импорт ассетов мастерской",
         "generateThumbnailsBeforehand": "Заранее создать иконки",
         "highlightSearch": "Подсветка поиска",
+        "useOldStyleMoveUpDown": "Использовать классическую систему перемещения",
 
         "experimentalFeatures_Tooltip": "ЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭксперименты",
         "scale_Tooltip": "Изменить размер программы на экране",
@@ -50,7 +52,8 @@
         "importImportVanilla_Tooltip": "Должна ли программа импортировать ассеты из оригинальной игры",
         "importImportWorkshop_Tooltip": "Должна ли программа импортировать ассеты из модов, загруженных через Steam Workshop",
         "generateThumbnailsBeforehand_Tooltip": "Увеличивает время запуска программы, но ускоряет последующую работу в ней",
-        "highlightSearch_Tooltip": "Подкрашивает совпадающую часть текста с запросом. Очень требовательная функция в данный момент."
+        "highlightSearch_Tooltip": "Подкрашивает совпадающую часть текста с запросом. Очень требовательная функция в данный момент.",
+        "useOldStyleMoveUpDown_Tooltip": "Отключает новую систему перетаскивания"
     },
     "Character":
     {
@@ -477,6 +480,9 @@
         "Export_Done": "Экспорт завершён!",
         "Export_Done_Goto": "Открыть результат",
         "Export_Error": "Что-то пошло не так. Смотрите логи для подробностей.",
+        "Upload_Done": "Загрузка завершена!",
+        "Upload_Done_Goto": "Открыть страницу мода в Steam",
+        "Upload_Error": "Не удалось загрузить мод в Workshop: {0}",
         "Export_Character_Error": "Не удалось экспортировать персонажа {0}. Смотрите логи для подробностей.",
         "Export_Dialogue_Error": "Не удалось экспортировать диалог {0}. Смотрите логи для подробностей.",
         "Export_Vendor_Error": "Не удалось экспортировать магазин {0}. Смотрите логи для подробностей.",
@@ -503,6 +509,12 @@
         "AssetPicker_Filter_Origin_Project": "Проект",
         "AssetPicker_Filter_Name_Watermark": "Поиск по имени...",
 
+        "AssetPicker_Editable_Edit_ToolTip": "Редактировать",
+
+        "AssetPicker_Deletable_Delete_ToolTip": "Удалить",
+
+        "AssetPicker_Createable_AddEntry": "Создать ассет",
+
         "AssetPicker_OrderBy_ID": "ID",
         "AssetPicker_OrderBy_Name": "Имя",
 
@@ -525,6 +537,34 @@
         "AssetPicker_ToolTip_GameItemClothingAsset_Beard_Invisible": "Скрывает бороду",
         "AssetPicker_ToolTip_GameItemBagAsset_Width": "Ширина хранилища: {0}",
         "AssetPicker_ToolTip_GameItemBagAsset_Height": "Высота хранилища: {0}",
+
+        "UGC_Title": "Загрузчик мода",
+        "UGC_Preview": "Обложка мода",
+        "UGC_Preview_Select": "Выбрать обложку",
+        "UGC_Preview_Select_TooLarge": "Выбранная обложка слишком большого размера",
+        "UGC_Name": "Название мода",
+        "UGC_Desc": "Описание мода",
+        "UGC_AllowedIPs": "Разрешённые IP",
+        "UGC_Change": "Список изменений",
+        "UGC_Visibility": "Видимость",
+        "UGC_Visibility_Public": "Открытый",
+        "UGC_Visibility_Friends": "Только для друзей",
+        "UGC_Visibility_Unlisted": "Доступ по ссылке",
+        "UGC_Visibility_Private": "Скрыто",
+        "UGC_Confirm": "Загрузить",
+        "UGC_Cancel": "Отмена",
+        "UGC_AsUploaded": "Оставьте пустым чтобы не изменять значение",
+
+        "UGC_CreateUpdate_Title": "Тип загрузки",
+        "UGC_CreateUpdate_Create": "Создать новый мод",
+        "UGC_CreateUpdate_Update": "Обновить существующий мод",
+        "UGC_CreateUpdate_Cancel": "Отмена",
+
+        "UGC_QueryList_Title": "Выбрать мод для обновления",
+        "UGC_QueryList_Cancel": "Отмена",
+
+        "UGC_Steps_Uploading": "Загрузка мода...",
+        "UGC_Steps_Query": "Получение списка модов...",
 
         "AssetPicker_Filter_Equippable": "Отображать только экипируемое",
 
@@ -581,6 +621,7 @@
         "Control_SelectAsset_Currency": "Выбрать валюту",
         "Control_SelectAsset_Spawn": "Выбрать таблицу",
         "Control_SelectAsset_Weather": "Выбрать погоду",
+        "Control_SelectAsset_Project_Flag": "Выбрать флаг",
         "Control_Vendor_SwitchToExperience": "Переключиться на опыт",
         "Control_FindUnusedID": "Найти свободный ID",
         "Control_FindUnusedID_Failed": "Не удалось найти свободный ID",
@@ -604,6 +645,7 @@
         "Main_Menu_File_Import_Directory": "Папка",
         "Main_Menu_File_Export": "_Экспортировать NPC (Ctrl + E)",
         "Main_Menu_File_ExportToUnturned": "Экспортировать NPC в Unturned",
+        "Main_Menu_File_ExportToWorkshop": "Загрузить NPC в Workshop",
         "Main_Menu_File_Exit": "Выход",
         "Main_Menu_Options": "Настройки",
         "Main_Menu_Communication": "Связаться или задонатить",
@@ -822,6 +864,7 @@
         {
             "Window_Title": "Редактор флагов",
             "Flag_ID": "ID флага",
+            "Flag_Name": "Имя флага",
             "Flag_Value": "Значение флага",
             "Flag_Set": "Установить флаг",
             "Flag_Remove": "Удалить флаг"

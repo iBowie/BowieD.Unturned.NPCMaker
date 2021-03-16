@@ -19,6 +19,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Margin="5" Name="tpbarGrid">
             <Grid.ColumnDefinitions>
@@ -50,7 +51,10 @@
         <ScrollViewer MinHeight="100" MaxHeight="400" Grid.Row="1" Margin="5">
             <StackPanel Name="stack"/>
         </ScrollViewer>
-        <GroupBox Margin="5" Grid.Row="2" Header="{xaml:Localize INTERFACE_AssetPicker_Filter_Header}">
+        <Grid Grid.Row="2">
+            <Button Name="addEntryButton" Margin="5" Content="{xaml:Localize INTERFACE_AssetPicker_Createable_AddEntry}"/>
+        </Grid>
+        <GroupBox Margin="5" Grid.Row="3" Header="{xaml:Localize INTERFACE_AssetPicker_Filter_Header}">
             <StackPanel Orientation="Vertical" Name="filterGrid">
                 <TextBox Name="filter_name" Margin="10" mah:TextBoxHelper.Watermark="{xaml:Localize INTERFACE_AssetPicker_Filter_Name_Watermark}" />
                 <CheckBox Name="filter_origin_unturned" Margin="10" Content="{xaml:Localize INTERFACE_AssetPicker_Filter_Origin_Unturned}" IsChecked="True"/>

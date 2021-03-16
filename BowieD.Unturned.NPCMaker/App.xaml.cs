@@ -5,6 +5,7 @@ using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.Notification;
 using BowieD.Unturned.NPCMaker.Updating;
+using BowieD.Unturned.NPCMaker.Workshop;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
@@ -38,6 +39,7 @@ namespace BowieD.Unturned.NPCMaker
 #endif
             }
         }
+        public static ISteamManager SteamManager { get; private set; }
         public static IUpdateManager UpdateManager { get; private set; }
         public static INotificationManager NotificationManager { get; private set; }
         public static ILoggingManager Logger { get; private set; }
@@ -88,7 +90,7 @@ namespace BowieD.Unturned.NPCMaker
                 Logger.Log("under certain conditions; type `license c' for details.");
                 Logger.Log("This programs uses 3rd party apps, type `license l' for details.");
                 Logger.Log("[EXTRCT] - Extracting libraries...", ELogLevel.DEBUG);
-#region COPY LIBS
+                #region COPY LIBS
                 CopyResource(NPCMaker.Properties.Resources.DiscordRPC, Path.Combine(AppConfig.Directory, "DiscordRPC.dll"));
                 CopyResource(NPCMaker.Properties.Resources.Newtonsoft_Json, Path.Combine(AppConfig.Directory, "Newtonsoft.Json.dll"));
                 CopyResource(NPCMaker.Properties.Resources.ControlzEx, Path.Combine(AppConfig.Directory, "ControlzEx.dll"));
@@ -101,12 +103,16 @@ namespace BowieD.Unturned.NPCMaker
                 CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_Metro, Path.Combine(AppConfig.Directory, "Xceed.Wpf.AvalonDock.Themes.Metro.dll"));
                 CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_AvalonDock_Themes_VS2010, Path.Combine(AppConfig.Directory, "Xceed.Wpf.AvalonDock.Themes.VS2010.dll"));
                 CopyResource(NPCMaker.Properties.Resources.Xceed_Wpf_Toolkit, Path.Combine(AppConfig.Directory, "Xceed.Wpf.Toolkit.dll"));
-#endregion
+                CopyResource(NPCMaker.Properties.Resources.Steamworks_NET, Path.Combine(AppConfig.Directory, "Steamworks.NET.dll"));
+                CopyResource(NPCMaker.Properties.Resources.steam_api, Path.Combine(AppConfig.Directory, "steam_api.dll"));
+                CopyResource(NPCMaker.Properties.Resources.UnturnedWorkshopCLI, Path.Combine(AppConfig.Directory, "UnturnedWorkshopCLI.exe"));
+                File.WriteAllText(Path.Combine(AppConfig.Directory, "steam_appid.txt"), NPCMaker.Properties.Resources.steam_appid);
+                #endregion
                 Logger.Log("[EXTRCT] - Extraction complete!", ELogLevel.DEBUG);
                 AppConfig.Instance.Load();
-#region SCALE
+                #region SCALE
                 Resources["Scale"] = AppConfig.Instance.scale;
-#endregion
+                #endregion
 #if !FAST
                 App.UpdateManager = new GitHubUpdateManager();
                 var result = App.UpdateManager.CheckForUpdates(IsPreviewVersion || AppConfig.Instance.downloadPrerelease).GetAwaiter().GetResult();
@@ -218,6 +224,8 @@ namespace BowieD.Unturned.NPCMaker
         public static void InitManagers()
         {
             NotificationManager = new NotificationManager();
+
+            SteamManager = new SteamManager();
         }
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {

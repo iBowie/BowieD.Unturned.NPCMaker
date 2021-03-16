@@ -6,7 +6,8 @@
         "Project_SaveFilter": "NPC Project (*.npcproj)",
         "Project_TemplateFilter": "NPC Template (*.npctemplate)",
         "Title": "Unturned 3.0 NPC Maker by BowieD",
-        "Configuration_Title": "App Settings"
+        "Configuration_Title": "App Settings",
+        "UGC_ImageFilter": "Supported Images ({0})"
     },
     "Options":
     {
@@ -33,6 +34,7 @@
         "importImportWorkshop": "Import Workshop assets",
         "generateThumbnailsBeforehand": "Generate thumbnails beforehand",
         "highlightSearch": "Highlight search",
+        "useOldStyleMoveUpDown": "Use classic move up/down",
 
         "experimentalFeatures_Tooltip": "Something experimental, maybe unstable",
         "scale_Tooltip": "Adjust scale of the app on your screen",
@@ -50,7 +52,8 @@
         "importImportVanilla_Tooltip": "Whether or not this app should import assets from base game",
         "importImportWorkshop_Tooltip": "Whether or not this app should import assets of downloaded mods from Steam Workshop",
         "generateThumbnailsBeforehand_Tooltip": "Increases startup time, but decreases time of creating thumbnails after launch",
-        "highlightSearch_Tooltip": "Colors matching part of a search query. Very perfomance expensive feature at this moment."
+        "highlightSearch_Tooltip": "Colors matching part of a search query. Very perfomance expensive feature at this moment.",
+        "useOldStyleMoveUpDown_Tooltip": "Disables new drag"
     },
     "Character":
     {
@@ -477,6 +480,9 @@
         "Export_Done": "Export done!",
         "Export_Done_Goto": "Open result folder",
         "Export_Error": "Something gone wrong. See logs for details.",
+        "Upload_Done": "Upload done!",
+        "Upload_Done_Goto": "Open mod page on Steam",
+        "Upload_Error": "Could not upload mod to Workshop: {0}",
         "Export_Character_Error": "Can't export character {0}. See logs for details.",
         "Export_Dialogue_Error": "Can't export dialogue {0}. See logs for details.",
         "Export_Vendor_Error": "Can't export vendor {0}. See logs for details.",
@@ -503,6 +509,12 @@
         "AssetPicker_Filter_Origin_Project": "Project",
         "AssetPicker_Filter_Name_Watermark": "Search...",
 
+        "AssetPicker_Editable_Edit_ToolTip": "Edit",
+
+        "AssetPicker_Deletable_Delete_ToolTip": "Delete",
+        
+        "AssetPicker_Createable_AddEntry": "Add Entry",
+
         "AssetPicker_OrderBy_ID": "ID",
         "AssetPicker_OrderBy_Name": "Name",
 
@@ -525,6 +537,34 @@
         "AssetPicker_ToolTip_GameItemClothingAsset_Beard_Invisible": "Hides beard",
         "AssetPicker_ToolTip_GameItemBagAsset_Width": "Capacity Width: {0}",
         "AssetPicker_ToolTip_GameItemBagAsset_Height": "Capacity Height: {0}",
+
+        "UGC_Title": "Mod Uploader",
+        "UGC_Preview": "Preview Icon",
+        "UGC_Preview_Select": "Select Icon",
+        "UGC_Preview_Select_TooLarge": "Selected icon is too large",
+        "UGC_Name": "Mod Name",
+        "UGC_Desc": "Mod Description",
+        "UGC_AllowedIPs": "Allowed IPs",
+        "UGC_Change": "Changes",
+        "UGC_Visibility": "Visibility",
+        "UGC_Visibility_Public": "Public",
+        "UGC_Visibility_Friends": "Friends only",
+        "UGC_Visibility_Unlisted": "Unlisted",
+        "UGC_Visibility_Private": "Private",
+        "UGC_Confirm": "Upload",
+        "UGC_Cancel": "Cancel",
+        "UGC_AsUploaded": "Leave empty to keep old value",
+
+        "UGC_CreateUpdate_Title": "Upload Type",
+        "UGC_CreateUpdate_Create": "Create new mod",
+        "UGC_CreateUpdate_Update": "Update existing",
+        "UGC_CreateUpdate_Cancel": "Cancel",
+
+        "UGC_QueryList_Title": "Select existing mod to update",
+        "UGC_QueryList_Cancel": "Cancel",
+
+        "UGC_Steps_Uploading": "Uploading...",
+        "UGC_Steps_Query": "Requesting mod list...",
 
         "AssetPicker_Filter_Equippable": "Show Only Equippable",
 
@@ -581,6 +621,7 @@
         "Control_SelectAsset_Currency": "Select Currency",
         "Control_SelectAsset_Spawn": "Select Spawn",
         "Control_SelectAsset_Weather": "Select Weather",
+        "Control_SelectAsset_Project_Flag": "Select Flag",
         "Control_Vendor_SwitchToExperience": "Switch to experience",
         "Control_FindUnusedID": "Find unused ID",
         "Control_FindUnusedID_Failed": "Could not find unused ID",
@@ -604,6 +645,7 @@
         "Main_Menu_File_Import_Directory": "Directory",
         "Main_Menu_File_Export": "_Export NPC (Ctrl + E)",
         "Main_Menu_File_ExportToUnturned": "Export NPC to Unturned",
+        "Main_Menu_File_ExportToWorkshop": "Upload NPC to Workshop",
         "Main_Menu_File_Exit": "Exit",
         "Main_Menu_Options": "Options",
         "Main_Menu_Communication": "Contact or Donate",
@@ -822,6 +864,7 @@
         {
             "Window_Title": "Flag Editor",
             "Flag_ID": "Flag ID",
+            "Flag_Name": "Flag Name",
             "Flag_Value": "Flag Value",
             "Flag_Set": "Set Flag",
             "Flag_Remove": "Remove Flag"
