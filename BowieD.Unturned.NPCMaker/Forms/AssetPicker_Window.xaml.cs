@@ -300,7 +300,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 {
                     Width = GridLength.Auto
                 });
-                g.ColumnDefinitions.Add(new ColumnDefinition());
+                g.ColumnDefinitions.Add(new ColumnDefinition()
+                {
+                    Width = GridLength.Auto
+                });
                 g.ColumnDefinitions.Add(new ColumnDefinition()
                 {
                     Width = GridLength.Auto
