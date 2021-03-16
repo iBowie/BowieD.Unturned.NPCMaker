@@ -374,6 +374,11 @@ namespace BowieD.Unturned.NPCMaker
                     lastLeft = curLeft;
                     lastTop = curTop;
                 };
+
+                if (AppConfig.Instance.useOldStyleMoveUpDown)
+                {
+                    App.Achievements.TryGiveAchievement("monke");
+                }
             };
 
             base.Show();

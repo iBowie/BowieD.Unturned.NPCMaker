@@ -136,7 +136,8 @@ namespace BowieD.Unturned.NPCMaker.Achievements
             "justputit",
             "console",
             "sweep",
-            "trick"
+            "trick",
+            "monke"
         };
 
         public IEnumerable<string> VisibleAchievements => _visible;
