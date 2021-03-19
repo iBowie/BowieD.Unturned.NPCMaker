@@ -1,7 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace BowieD.Unturned.NPCMaker.Controls
 {
@@ -45,6 +47,17 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
             DragControl.ReleaseMouseCapture();
 
+            if (Configuration.AppConfig.Instance.animateControls)
+            {
+                DoubleAnimation da = new DoubleAnimation(Opacity, 1, TimeSpan.FromSeconds(0.5));
+
+                this.BeginAnimation(OpacityProperty, da);
+            }
+            else
+            {
+                Opacity = 1;
+            }
+
             OnStoppedDrag?.Invoke();
         }
 
@@ -63,6 +76,16 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
             DragControl.CaptureMouse();
 
+            if (Configuration.AppConfig.Instance.animateControls)
+            {
+                DoubleAnimation da = new DoubleAnimation(Opacity, 0.5, TimeSpan.FromSeconds(0.5));
+
+                this.BeginAnimation(OpacityProperty, da);
+            }
+            else
+            {
+                Opacity = 0.5;
+            }
 
             OnStartedDrag?.Invoke();
         }
