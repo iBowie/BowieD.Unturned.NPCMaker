@@ -295,6 +295,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                         asset.guid = gUID;
                         formattedFileReader.readKey("Asset");
                         asset.read(formattedFileReader);
+                        asset.name = Path.GetFileNameWithoutExtension(fileName);
                         return new Tuple<bool, GameAsset>(true, asset);
                     }
                 }

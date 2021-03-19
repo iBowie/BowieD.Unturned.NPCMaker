@@ -12,5 +12,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         {
 
         }
+
+        public override bool GUIDOverID => true;
     }
 }
