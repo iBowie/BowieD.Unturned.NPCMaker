@@ -36,6 +36,8 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
         public virtual EGameAssetCategory Category => EGameAssetCategory.NONE;
 
+        public virtual bool GUIDOverID => false;
+
         public virtual void read(IFileReader reader)
         {
             if (reader != null)

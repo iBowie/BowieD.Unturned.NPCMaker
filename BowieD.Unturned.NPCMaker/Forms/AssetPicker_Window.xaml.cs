@@ -241,10 +241,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
             switch (orderMode)
             {
                 case EOrderByMode.ID_A:
-                    orderedAssets = assets.OrderBy(d => d.origin).ThenBy(d => d.id);
+                    orderedAssets = assets.OrderBy(d => d.origin).ThenBy(d => d.GUIDOverID ? (object)d.guid : (object)d.id);
                     break;
                 case EOrderByMode.ID_D:
-                    orderedAssets = assets.OrderBy(d => d.origin).ThenByDescending(d => d.id);
+                    orderedAssets = assets.OrderBy(d => d.origin).ThenByDescending(d => d.GUIDOverID ? (object)d.guid : (object)d.id);
                     break;
                 case EOrderByMode.Name_A:
                     orderedAssets = assets.OrderBy(d => d.origin).ThenBy(d =>
@@ -323,7 +323,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 Label lid = new Label()
                 {
                     Content = tbid,
-                    VerticalAlignment = VerticalAlignment.Center
+                    VerticalAlignment = VerticalAlignment.Center,
+                    MaxWidth = 69
                 };
 
                 if (asset is IHasNameOverride gda)
@@ -335,7 +336,15 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     markup.Markup(tb, asset.name);
                 }
 
-                tbid.Text = asset.id.ToString();
+                if (asset.GUIDOverID)
+                {
+                    tbid.Text = asset.guid.ToString("N");
+                    tbid.ToolTip = tbid.Text;
+                }
+                else
+                {
+                    tbid.Text = asset.id.ToString();
+                }
 
                 g.Children.Add(l);
                 g.Children.Add(lid);
@@ -374,7 +383,15 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             markup.Markup(tb, asset.name);
                         }
 
-                        tbid.Text = asset.id.ToString();
+                        if (asset.GUIDOverID)
+                        {
+                            tbid.Text = asset.guid.ToString("N");
+                            tbid.ToolTip = tbid.Text;
+                        }
+                        else
+                        {
+                            tbid.Text = asset.id.ToString();
+                        }
                     });
 
                     editableGrid.Children.Add(editButton);
