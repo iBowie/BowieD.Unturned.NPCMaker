@@ -309,6 +309,9 @@ namespace BowieD.Unturned.NPCMaker
                 startups += 1;
                 App.Achievements.SetStat("startups", startups);
 
+                if (startups >= 10)
+                    App.Achievements.TryGiveAchievement("startups");
+
                 PreviewKeyDown += (sender1, e1) =>
                 {
                     if (utrick.Count == 0)
