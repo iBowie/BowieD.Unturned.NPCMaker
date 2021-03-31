@@ -310,7 +310,7 @@ namespace BowieD.Unturned.NPCMaker
                 App.Achievements.SetStat("startups", startups);
 
                 if (startups >= 10)
-                    App.Achievements.TryGiveAchievement("startups");
+                    App.Achievements.TryGiveAchievement("startup10");
 
                 PreviewKeyDown += (sender1, e1) =>
                 {
