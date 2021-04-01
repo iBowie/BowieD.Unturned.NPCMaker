@@ -120,20 +120,12 @@ namespace BowieD.Unturned.NPCMaker
                 var result = App.UpdateManager.CheckForUpdates(IsPreviewVersion || AppConfig.Instance.downloadPrerelease).GetAwaiter().GetResult();
                 if (result == UpdateAvailability.AVAILABLE)
                 {
-                    if (AppConfig.Instance.autoUpdate)
+                    LocalizationManager.LoadLanguage(AppConfig.Instance.language);
+                    var dlg = System.Windows.MessageBox.Show(LocalizationManager.Current.Interface["Update_Available_Body"], LocalizationManager.Current.Interface["Update_Available_Title"], System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (dlg == MessageBoxResult.Yes)
                     {
                         App.UpdateManager.StartUpdate();
                         return;
-                    }
-                    else
-                    {
-                        LocalizationManager.LoadLanguage(AppConfig.Instance.language);
-                        var dlg = System.Windows.MessageBox.Show(LocalizationManager.Current.Interface["Update_Available_Body"], LocalizationManager.Current.Interface["Update_Available_Title"], System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Question);
-                        if (dlg == MessageBoxResult.Yes)
-                        {
-                            App.UpdateManager.StartUpdate();
-                            return;
-                        }
                     }
                 }
 #else
