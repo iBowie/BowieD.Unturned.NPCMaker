@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Windows;
@@ -10,7 +11,38 @@ namespace BowieD.Unturned.NPCMaker.Localization
 {
     public static class LocalizationManager
     {
-        public static Localization Current { get; private set; } = new Localization();
+        private const string SRC_PATH = @"K:\Visual Studio C# Projects\BowieD.Unturned.NPCMaker\BowieD.Unturned.NPCMaker";
+
+        private static Localization _designLoc;
+        private static Localization _curLoc = new Localization();
+
+        public static Localization Current
+        {
+            get
+            {
+                if ((bool)DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue)
+                {
+                    if (_designLoc == null)
+                    {
+                        using (StreamReader sr = new StreamReader(Path.Combine(SRC_PATH, "Resources", "Localization", "English.json")))
+                        {
+                            string text = sr.ReadToEnd();
+                            _designLoc = Newtonsoft.Json.JsonConvert.DeserializeObject<Localization>(text);
+                        }
+                    }
+
+                    return _designLoc;
+                }
+
+                return _curLoc;
+            }
+            private set
+            {
+                _curLoc = value;
+            }
+
+        }
+
         public static bool IsLoaded { get; private set; } = false;
         public static IEnumerable<ELanguage> SupportedLanguages()
         {

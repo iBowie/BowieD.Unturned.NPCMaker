@@ -246,6 +246,9 @@
     <Compile Include="Forms\OneFieldInputView_Dialog.xaml.cs">
       <DependentUpon>OneFieldInputView_Dialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ProjectSettingsView.xaml.cs">
+      <DependentUpon>ProjectSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\QuestEditorView_Window.xaml.cs">
       <DependentUpon>QuestEditorView_Window.xaml</DependentUpon>
     </Compile>
@@ -611,6 +614,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\OneFieldInputView_Dialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\ProjectSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

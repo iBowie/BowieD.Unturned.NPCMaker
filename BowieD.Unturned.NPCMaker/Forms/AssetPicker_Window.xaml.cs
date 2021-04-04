@@ -88,6 +88,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 RefreshAssets();
             };
+            filter_origin_hooked.Checked += (sender, e) =>
+            {
+                RefreshAssets();
+            };
+            filter_origin_hooked.Unchecked += (sender, e) =>
+            {
+                RefreshAssets();
+            };
 
             assetFilters = filters ?? new AssetFilter[0];
 
@@ -182,6 +190,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             case EGameAssetOrigin.Project when filter_origin_project.IsChecked == false:
                             case EGameAssetOrigin.Unturned when filter_origin_unturned.IsChecked == false:
                             case EGameAssetOrigin.Workshop when filter_origin_workshop.IsChecked == false:
+                            case EGameAssetOrigin.Hooked when filter_origin_hooked.IsChecked == false:
                                 shouldDisplay = false;
                                 break;
                             default:

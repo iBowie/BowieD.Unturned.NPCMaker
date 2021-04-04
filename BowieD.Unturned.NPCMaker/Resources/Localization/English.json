@@ -32,6 +32,7 @@
         "useCommentsInsteadOfData": "Use comments instead of data",
         "importImportVanilla": "Import Vanilla assets",
         "importImportWorkshop": "Import Workshop assets",
+        "importImportHooked": "Import Hooked assets",
         "generateThumbnailsBeforehand": "Generate thumbnails beforehand",
         "highlightSearch": "Highlight search",
         "useOldStyleMoveUpDown": "Use classic move up/down",
@@ -51,6 +52,7 @@
         "useCommentsInsteadOfData_Tooltip": "In tabs uses comments defined by you instead of data contained in the tab",
         "importImportVanilla_Tooltip": "Whether or not this app should import assets from base game",
         "importImportWorkshop_Tooltip": "Whether or not this app should import assets of downloaded mods from Steam Workshop",
+        "importImportHooked_Tooltip": "Whether or not this app should import assets hooked to a project",
         "generateThumbnailsBeforehand_Tooltip": "Increases startup time, but decreases time of creating thumbnails after launch",
         "highlightSearch_Tooltip": "Colors matching part of a search query. Very perfomance expensive feature at this moment.",
         "useOldStyleMoveUpDown_Tooltip": "Disables new drag"
@@ -507,6 +509,7 @@
         "AssetPicker_Filter_Origin_Unturned": "Unturned",
         "AssetPicker_Filter_Origin_Workshop": "Workshop",
         "AssetPicker_Filter_Origin_Project": "Project",
+        "AssetPicker_Filter_Origin_Hooked": "Hooked",
         "AssetPicker_Filter_Name_Watermark": "Search...",
 
         "AssetPicker_Editable_Edit_ToolTip": "Edit",
@@ -570,6 +573,12 @@
 
         "Warning_Scale": "Looks like you've set UI Scale to values that exceed your screen.\nDo you want to reset scale to default?",
 
+        "ProjectSettings_Title": "Project Settings",
+        "ProjectSettings_HookedAssetsFolders_Title": "Hooked Asset Folders",
+        "ProjectSettings_HookedAssetsFolders_Add": "Add directory",
+        "ProjectSettings_Save": "Save",
+        "ProjectSettings_Cancel": "Cancel",
+
         "App_About": "Made by BowieD.\nLocalization Author(s): {0}\nVersion: {1}",
         "App_About_Title": "About",
         "App_About_Patreon_Title": "Patreon Supporters",
@@ -583,6 +592,7 @@
         "StartUp_ImportGameAssets_Window_Title": "Importing assets",
         "StartUp_ImportGameAssets_Window_Step_Unturned": "Importing Unturned assets",
         "StartUp_ImportGameAssets_Window_Step_Workshop": "Importing Workshop assets",
+        "StartUp_ImportGameAssets_Window_Step_Hooked": "Importing Hooked to project assets from '{0}'",
         "StartUp_ImportGameAssets_Window_Step_Thumbnails": "Generating thumbnails",
         "App_Comment": "Comment",
         "CrashReport_Title": "App has crashed.",
@@ -648,6 +658,7 @@
         "Main_Menu_File_ExportToWorkshop": "Upload NPC to Workshop",
         "Main_Menu_File_Exit": "Exit",
         "Main_Menu_Options": "Options",
+        "Main_Menu_ProjectSettings": "Project Settings",
         "Main_Menu_Communication": "Contact or Donate",
         "Main_Menu_Communication_GitHub": "GitHub Repository (Click)",
         "Main_Menu_Communication_Patreon": "Patreon (Click)",

@@ -267,6 +267,11 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             ImportedAssetCount = 0;
         }
 
+        public static void Purge(EGameAssetOrigin origin)
+        {
+            _assets.RemoveAll(d => d.origin == origin);
+        }
+
         private static Tuple<bool, GameAsset> TryReadAssetFile(string fileName, EGameAssetOrigin origin)
         {
             using (StreamReader sr = new StreamReader(fileName))

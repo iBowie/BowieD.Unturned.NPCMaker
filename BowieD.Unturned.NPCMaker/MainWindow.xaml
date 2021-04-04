@@ -97,6 +97,7 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Command="{Binding OptionsCommand}" Name="optionsMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Options}"/>
+                <MenuItem Command="{Binding ProjectSettingsCommand}" Name="projectSettingsMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_ProjectSettings}"/>
                 <MenuItem Name="commMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Communication}"/>
                 <MenuItem Name="guidesMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Guides}"/>
                 <MenuItem Name="getTemplatesMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Templates}"/>

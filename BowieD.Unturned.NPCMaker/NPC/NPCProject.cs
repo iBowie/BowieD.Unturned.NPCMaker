@@ -9,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
 {
     public class NPCProject
     {
-        public const int CURRENT_SAVEDATA_VERSION = 5;
+        public const int CURRENT_SAVEDATA_VERSION = 6;
 
         public NPCProject()
         {
@@ -26,6 +26,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             lastVendor = -1;
             lastQuest = -1;
             lastCurrency = -1;
+            settings = new NPCProjectSettings();
         }
 
         [XmlAttribute]
@@ -43,5 +44,15 @@ namespace BowieD.Unturned.NPCMaker.NPC
             lastVendor = -1,
             lastQuest = -1,
             lastCurrency = -1;
+        public NPCProjectSettings settings;
+    }
+    public class NPCProjectSettings
+    {
+        public NPCProjectSettings()
+        {
+            assetDirs = new List<string>();
+        }
+
+        public List<string> assetDirs;
     }
 }

@@ -30,6 +30,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public string unturnedDir;
         public bool importVanilla = true;
         public bool importWorkshop = true;
+        public bool importHooked = true;
         public bool generateThumbnailsBeforehand = true;
         public bool highlightSearch;
         public bool useOldStyleMoveUpDown;
@@ -85,6 +86,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             unturnedDir = null;
             importVanilla = true;
             importWorkshop = true;
+            importHooked = true;
             generateThumbnailsBeforehand = true;
             highlightSearch = false;
             useOldStyleMoveUpDown = false;

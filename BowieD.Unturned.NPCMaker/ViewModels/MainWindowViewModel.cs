@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.Common.Utility;
 using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Forms;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
@@ -13,12 +14,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Media;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using System.Windows.Threading;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.ViewModels
@@ -122,7 +121,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             CurrencyTabViewModel = new CurrencyTabViewModel();
             MainWindow.mainTabControl.SelectionChanged += TabControl_SelectionChanged;
 
-            MainWindow.CurrentProject.OnDataLoaded += () =>
+            MainWindow.CurrentProject.OnDataLoaded += async () =>
             {
                 ResetAll();
 
@@ -152,6 +151,38 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 if (data.lastCurrency > -1 && data.lastCurrency < data.currencies.Count)
                 {
                     CurrencyTabViewModel.Currency = data.currencies[data.lastCurrency];
+                }
+
+                GameAssetManager.Purge(EGameAssetOrigin.Hooked);
+
+                if (data.settings.assetDirs != null && data.settings.assetDirs.Count > 0)
+                {
+                    MainWindow.blockActionsOverlay.Dispatcher.Invoke(() =>
+                    {
+                        MainWindow.blockActionsOverlay.Visibility = Visibility.Visible;
+                    });
+
+                    foreach (var ad in data.settings.assetDirs)
+                    {
+                        MainWindow.textBlockActions.Dispatcher.Invoke(() =>
+                        {
+                            MainWindow.textBlockActions.Text = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Window_Step_Hooked", ad);
+                        });
+
+                        await GameAssetManager.Import(ad, EGameAssetOrigin.Hooked, (cur, total) =>
+                        {
+                            MainWindow.progrBar.Dispatcher.Invoke(() =>
+                            {
+                                MainWindow.progrBar.Value = cur;
+                                MainWindow.progrBar.Maximum = total;
+                            });
+                        });
+                    }
+
+                    MainWindow.blockActionsOverlay.Dispatcher.Invoke(() =>
+                    {
+                        MainWindow.blockActionsOverlay.Visibility = Visibility.Collapsed;
+                    });
                 }
 
                 UpdateAllTabs();
@@ -358,6 +389,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             exportProjectToWorkshopCommand,
             exitCommand,
             optionsCommand,
+            projectSettingsCommand,
             aboutCommand,
             importFileCommand,
             importDirectoryCommand;
@@ -835,6 +867,22 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     });
                 }
                 return optionsCommand;
+            }
+        }
+        public ICommand ProjectSettingsCommand
+        {
+            get
+            {
+                if (projectSettingsCommand == null)
+                {
+                    projectSettingsCommand = new BaseCommand(() =>
+                    {
+                        ProjectSettingsView psv = new ProjectSettingsView(MainWindow.CurrentProject.data);
+                        psv.Owner = MainWindow;
+                        psv.ShowDialog();
+                    });
+                }
+                return projectSettingsCommand;
             }
         }
     }
