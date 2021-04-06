@@ -153,6 +153,9 @@ namespace BowieD.Unturned.NPCMaker.Common
             {
                 var cNode = doc.CreateNodeC(itemName, node);
 
+                if (elem is IAXDataDerived<T> axdd)
+                    doc.CreateAttributeC("xsi:type", cNode).WriteString(axdd.TypeName);
+
                 elem.Save(doc, cNode);
             }
 

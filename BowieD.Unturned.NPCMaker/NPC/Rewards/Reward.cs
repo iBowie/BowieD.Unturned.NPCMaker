@@ -26,44 +26,79 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         {
             var typeAt = node.Attributes["xsi:type"];
 
-            switch (typeAt.Value)
+            if (version == -1)
             {
-                case "RewardAchievement":
-                    return new RewardAchievement();
-                case "RewardCurrency":
-                    return new RewardCurrency();
-                case "RewardEvent":
-                    return new RewardEvent();
-                case "RewardExperience":
-                    return new RewardExperience();
-                case "RewardFlagBool":
-                    return new RewardFlagBool();
-                case "RewardFlagMath":
-                    return new RewardFlagMath();
-                case "RewardFlagShort":
-                    return new RewardFlagShort();
-                case "RewardFlagShortRandom":
-                    return new RewardFlagShortRandom();
-                case "RewardHint":
-                    return new RewardHint();
-                case "RewardItem":
-                    return new RewardItem();
-                case "RewardItemRandom":
-                    return new RewardItemRandom();
-                case "RewardQuest":
-                    return new RewardQuest();
-                case "RewardReputation":
-                    return new RewardReputation();
-                case "RewardTeleport":
-                    return new RewardTeleport();
-                case "RewardVehicle":
-                    return new RewardVehicle();
-                default:
-                    throw new Exception("Unknown type");
+                switch (typeAt.Value)
+                {
+                    case "Experience":
+                        return new RewardExperience();
+                    case "Flag_Bool":
+                        return new RewardFlagBool();
+                    case "Flag_Math":
+                        return new RewardFlagMath();
+                    case "Flag_Short":
+                        return new RewardFlagShort();
+                    case "Flag_Short_Random":
+                        return new RewardFlagShortRandom();
+                    case "Item":
+                        return new RewardItem();
+                    case "Item_Random":
+                        return new RewardItemRandom();
+                    case "Quest":
+                        return new RewardQuest();
+                    case "Reputation":
+                        return new RewardReputation();
+                    case "Teleport":
+                        return new RewardTeleport();
+                    case "Vehicle":
+                        return new RewardVehicle();
+                    default:
+                        throw new Exception("Unknown type");
+                }
+            }
+            else
+            {
+                switch (typeAt.Value)
+                {
+                    case "RewardAchievement":
+                        return new RewardAchievement();
+                    case "RewardCurrency":
+                        return new RewardCurrency();
+                    case "RewardEvent":
+                        return new RewardEvent();
+                    case "RewardExperience":
+                        return new RewardExperience();
+                    case "RewardFlagBool":
+                        return new RewardFlagBool();
+                    case "RewardFlagMath":
+                        return new RewardFlagMath();
+                    case "RewardFlagShort":
+                        return new RewardFlagShort();
+                    case "RewardFlagShortRandom":
+                        return new RewardFlagShortRandom();
+                    case "RewardHint":
+                        return new RewardHint();
+                    case "RewardItem":
+                        return new RewardItem();
+                    case "RewardItemRandom":
+                        return new RewardItemRandom();
+                    case "RewardQuest":
+                        return new RewardQuest();
+                    case "RewardReputation":
+                        return new RewardReputation();
+                    case "RewardTeleport":
+                        return new RewardTeleport();
+                    case "RewardVehicle":
+                        return new RewardVehicle();
+                    default:
+                        throw new Exception("Unknown type");
+                }
             }
         });
 
         public Func<XmlNode, int, Reward> CreateFromNodeFunction => _createFunc;
+
+        public virtual string TypeName => GetType().Name;
 
         public IEnumerable<FrameworkElement> GetControls()
         {

@@ -52,18 +52,91 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             guid = node.Attributes["guid"].Value;
 
-            characters = node["characters"].ParseAXDataCollection<NPCCharacter>(version).ToList();
+            if (version == -1)
+            {
+                NPCCharacter mainCharacter = new NPCCharacter()
+                {
+                    EditorName = node["editorName"].InnerText,
+                    DisplayName = node["displayName"].InnerText,
+                    ID = node["id"].ToUInt16(),
+                    face = node["face"].ToByte(),
+                    beard = node["beard"].ToByte(),
+                    haircut = node["haircut"].ToByte(),
+                    hairColor = node["hairColor"].ToColor(version),
+                    skinColor = node["skinColor"].ToColor(version),
+                    clothing = new NPCClothing()
+                    {
+                        Backpack = node["backpack"].ToUInt16(),
+                        Hat = node["hat"].ToUInt16(),
+                        Mask = node["mask"].ToUInt16(),
+                        Shirt = node["top"].ToUInt16(),
+                        Pants = node["bottom"].ToUInt16(),
+                        Vest = node["vest"].ToUInt16()
+                    },
+                    startDialogueId = node["startDialogueId"].ToUInt16(),
+                    pose = node["pose"].ToEnum<NPC_Pose>(),
+                    equipped = node["equipped"].ToEnum<Equip_Type>(),
+                    equipPrimary = node["equipPrimary"].ToUInt16(),
+                    equipSecondary = node["equipSecondary"].ToUInt16(),
+                    equipTertiary = node["equipTertiary"].ToUInt16(),
+                    leftHanded = node["leftHanded"].ToBoolean()
+                };
+
+                characters = new List<NPCCharacter>()
+                {
+                    mainCharacter
+                };
+            }
+            else
+            {
+                characters = node["characters"].ParseAXDataCollection<NPCCharacter>(version).ToList();
+            }
             dialogues = node["dialogues"].ParseAXDataCollection<NPCDialogue>(version).ToList();
             vendors = node["vendors"].ParseAXDataCollection<NPCVendor>(version).ToList();
             quests = node["quests"].ParseAXDataCollection<NPCQuest>(version).ToList();
-            currencies = node["currencies"].ParseAXDataCollection<CurrencyAsset>(version).ToList();
-            flags = node["flags"].ParseAXDataCollection<FlagDescriptionProjectAsset>(version).ToList();
+            
+            if (version >= 4)
+            {
+                currencies = node["currencies"].ParseAXDataCollection<CurrencyAsset>(version).ToList();
+            }
+            else
+            {
+                currencies = new List<CurrencyAsset>();
+            }
 
-            lastCharacter = node["lastCharacter"].ToInt32();
-            lastDialogue = node["lastDialogue"].ToInt32();
-            lastVendor = node["lastVendor"].ToInt32();
-            lastQuest = node["lastQuest"].ToInt32();
-            lastCurrency = node["lastCurrency"].ToInt32();
+            if (version >= 5)
+            {
+                flags = node["flags"].ParseAXDataCollection<FlagDescriptionProjectAsset>(version).ToList();
+            }
+            else
+            {
+                flags = new List<FlagDescriptionProjectAsset>();
+            }
+
+            if (version >= 3)
+            {
+                lastCharacter = node["lastCharacter"].ToInt32();
+                lastDialogue = node["lastDialogue"].ToInt32();
+                lastVendor = node["lastVendor"].ToInt32();
+                lastQuest = node["lastQuest"].ToInt32();
+                
+                if (version >= 4)
+                {
+                    lastCurrency = node["lastCurrency"].ToInt32();
+                }
+                else
+                {
+                    lastCurrency = -1;
+                }
+            }
+            else
+            {
+                lastCharacter = -1;
+                lastDialogue = -1;
+                lastVendor = -1;
+                lastQuest = -1;
+                lastCurrency = -1;
+            }
 
             if (version >= 6)
                 settings.Load(node["settings"], version);

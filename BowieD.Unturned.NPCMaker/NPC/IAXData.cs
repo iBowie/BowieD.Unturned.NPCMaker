@@ -11,5 +11,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
     public interface IAXDataDerived<out T> : IAXData
     {
         Func<XmlNode, int, T> CreateFromNodeFunction { get; }
+        string TypeName { get; }
     }
 }

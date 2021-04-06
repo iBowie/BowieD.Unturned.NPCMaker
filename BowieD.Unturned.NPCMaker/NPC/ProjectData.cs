@@ -121,23 +121,41 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 {
                     NPCProject project = new NPCProject();
 
-                    var root = doc["NPCProject"];
+                    var oldRoot = doc["NPCSave"];
 
-                    int ver = root["SAVEDATA_VERSION"].ToInt32();
-
-                    if (ver <= NPCProject.CURRENT_SAVEDATA_VERSION)
+                    if (oldRoot != null)
                     {
+                        var root = oldRoot;
+
+                        int ver = -1;
+
                         project.Load(root, ver);
 
                         data = project;
-                        App.Logger.Log($"[AXDATA] - Loaded");
+                        App.Logger.Log($"[AXDATA] - Loaded legacy project");
                         OnDataLoaded?.Invoke();
                         return true;
                     }
                     else
                     {
-                        App.Logger.Log($"[AXDATA] - Tried to load newer project file");
-                        return false;
+                        var root = doc["NPCProject"];
+
+                        int ver = root["SAVEDATA_VERSION"].ToInt32();
+
+                        if (ver <= NPCProject.CURRENT_SAVEDATA_VERSION)
+                        {
+                            project.Load(root, ver);
+
+                            data = project;
+                            App.Logger.Log($"[AXDATA] - Loaded");
+                            OnDataLoaded?.Invoke();
+                            return true;
+                        }
+                        else
+                        {
+                            App.Logger.Log($"[AXDATA] - Tried to load newer project file");
+                            return false;
+                        }
                     }
                 }
                 catch (Exception ex)

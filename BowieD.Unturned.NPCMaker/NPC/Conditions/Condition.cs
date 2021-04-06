@@ -32,59 +32,106 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             var typeAt = node.Attributes["xsi:type"];
 
-            switch (typeAt.Value)
+            if (version == -1)
             {
-                case "ConditionCompareFlags":
-                    return new ConditionCompareFlags();
-                case "ConditionCurrency":
-                    return new ConditionCurrency();
-                case "ConditionExperience":
-                    return new ConditionExperience();
-                case "ConditionFlagBool":
-                    return new ConditionFlagBool();
-                case "ConditionFlagShort":
-                    return new ConditionFlagShort();
-                case "ConditionHoliday":
-                    return new ConditionHoliday();
-                case "ConditionItem":
-                    return new ConditionItem();
-                case "ConditionKillsAnimal":
-                    return new ConditionKillsAnimal();
-                case "ConditionKillsHorde":
-                    return new ConditionKillsHorde();
-                case "ConditionKillsObject":
-                    return new ConditionKillsObject();
-                case "ConditionKillsPlayer":
-                    return new ConditionKillsPlayer();
-                case "ConditionKillsTree":
-                    return new ConditionKillsTree();
-                case "ConditionKillsZombie":
-                    return new ConditionKillsZombie();
-                case "ConditionPlayerLifeFood":
-                    return new ConditionPlayerLifeFood();
-                case "ConditionPlayerLifeHealth":
-                    return new ConditionPlayerLifeHealth();
-                case "ConditionPlayerLifeVirus":
-                    return new ConditionPlayerLifeVirus();
-                case "ConditionPlayerLifeWater":
-                    return new ConditionPlayerLifeWater();
-                case "ConditionQuest":
-                    return new ConditionQuest();
-                case "ConditionReputation":
-                    return new ConditionReputation();
-                case "ConditionSkillset":
-                    return new ConditionSkillset();
-                case "ConditionTimeOfDay":
-                    return new ConditionTimeOfDay();
-                case "ConditionWeatherBlendAlpha":
-                    return new ConditionWeatherBlendAlpha();
-                case "ConditionWeatherStatus":
-                    return new ConditionWeatherStatus();
-                default:
-                    throw new Exception("Unknown type");
+                switch (typeAt.Value)
+                {
+                    case "Experience_Cond":
+                        return new ConditionExperience();
+                    case "Flag_Bool_Cond":
+                        return new ConditionFlagBool();
+                    case "Flag_Short_Cond":
+                        return new ConditionFlagShort();
+                    case "Item_Cond":
+                        return new ConditionItem();
+                    case "Kills_Animal_Cond":
+                        return new ConditionKillsAnimal();
+                    case "Kills_Horde_Cond":
+                        return new ConditionKillsHorde();
+                    case "Kills_Object_Cond":
+                        return new ConditionKillsObject();
+                    case "Kills_Players_Cond":
+                        return new ConditionKillsPlayer();
+                    case "Kills_Zombie_Cond":
+                        return new ConditionKillsZombie();
+                    case "Player_Life_Food_Cond":
+                        return new ConditionPlayerLifeFood();
+                    case "Player_Life_Health_Cond":
+                        return new ConditionPlayerLifeHealth();
+                    case "Player_Life_Virus_Cond":
+                        return new ConditionPlayerLifeVirus();
+                    case "Player_Life_Water_Cond":
+                        return new ConditionPlayerLifeWater();
+                    case "Quest_Cond":
+                        return new ConditionQuest();
+                    case "Reputation_Cond":
+                        return new ConditionReputation();
+                    case "Skillset_Cond":
+                        return new ConditionSkillset();
+                    case "Time_Of_Day_Cond":
+                        return new ConditionTimeOfDay();
+                    default:
+                        throw new Exception("Unknown type");
+                }
+            }
+            else
+            {
+                switch (typeAt.Value)
+                {
+                    case "ConditionCompareFlags":
+                        return new ConditionCompareFlags();
+                    case "ConditionCurrency":
+                        return new ConditionCurrency();
+                    case "ConditionExperience":
+                        return new ConditionExperience();
+                    case "ConditionFlagBool":
+                        return new ConditionFlagBool();
+                    case "ConditionFlagShort":
+                        return new ConditionFlagShort();
+                    case "ConditionHoliday":
+                        return new ConditionHoliday();
+                    case "ConditionItem":
+                        return new ConditionItem();
+                    case "ConditionKillsAnimal":
+                        return new ConditionKillsAnimal();
+                    case "ConditionKillsHorde":
+                        return new ConditionKillsHorde();
+                    case "ConditionKillsObject":
+                        return new ConditionKillsObject();
+                    case "ConditionKillsPlayer":
+                        return new ConditionKillsPlayer();
+                    case "ConditionKillsTree":
+                        return new ConditionKillsTree();
+                    case "ConditionKillsZombie":
+                        return new ConditionKillsZombie();
+                    case "ConditionPlayerLifeFood":
+                        return new ConditionPlayerLifeFood();
+                    case "ConditionPlayerLifeHealth":
+                        return new ConditionPlayerLifeHealth();
+                    case "ConditionPlayerLifeVirus":
+                        return new ConditionPlayerLifeVirus();
+                    case "ConditionPlayerLifeWater":
+                        return new ConditionPlayerLifeWater();
+                    case "ConditionQuest":
+                        return new ConditionQuest();
+                    case "ConditionReputation":
+                        return new ConditionReputation();
+                    case "ConditionSkillset":
+                        return new ConditionSkillset();
+                    case "ConditionTimeOfDay":
+                        return new ConditionTimeOfDay();
+                    case "ConditionWeatherBlendAlpha":
+                        return new ConditionWeatherBlendAlpha();
+                    case "ConditionWeatherStatus":
+                        return new ConditionWeatherStatus();
+                    default:
+                        throw new Exception("Unknown type");
+                }
             }
         });
         public Func<XmlNode, int, Condition> CreateFromNodeFunction => _createFunc;
+
+        public virtual string TypeName => GetType().Name;
 
         public IEnumerable<FrameworkElement> GetControls()
         {
