@@ -32,6 +32,7 @@
         "useCommentsInsteadOfData": "Комментарии вместо данных",
         "importImportVanilla": "Импорт оригинальных ассетов",
         "importImportWorkshop": "Импорт ассетов мастерской",
+        "importImportHooked": "Импорт ассетов проекта",
         "generateThumbnailsBeforehand": "Заранее создать иконки",
         "highlightSearch": "Подсветка поиска",
         "useOldStyleMoveUpDown": "Использовать классическую систему перемещения",
@@ -51,6 +52,7 @@
         "useCommentsInsteadOfData_Tooltip": "Во вкладках использует введённый Вами комментарий вместо части данных из непосредственно вкладки",
         "importImportVanilla_Tooltip": "Должна ли программа импортировать ассеты из оригинальной игры",
         "importImportWorkshop_Tooltip": "Должна ли программа импортировать ассеты из модов, загруженных через Steam Workshop",
+        "importImportHooked_Tooltip": "Должна ли программа импортировать ассеты, привязанные к определённым проектам",
         "generateThumbnailsBeforehand_Tooltip": "Увеличивает время запуска программы, но ускоряет последующую работу в ней",
         "highlightSearch_Tooltip": "Подкрашивает совпадающую часть текста с запросом. Очень требовательная функция в данный момент.",
         "useOldStyleMoveUpDown_Tooltip": "Отключает новую систему перетаскивания"
@@ -507,6 +509,7 @@
         "AssetPicker_Filter_Origin_Unturned": "Unturned",
         "AssetPicker_Filter_Origin_Workshop": "Мастерская",
         "AssetPicker_Filter_Origin_Project": "Проект",
+        "AssetPicker_Filter_Origin_Hooked": "Привязанные",
         "AssetPicker_Filter_Name_Watermark": "Поиск по имени...",
 
         "AssetPicker_Editable_Edit_ToolTip": "Редактировать",
@@ -570,6 +573,15 @@
 
         "Warning_Scale": "Кажется, Вы установили слишком высокое значение масштабирования интерфейса.\nХотите сбросить его до значения по умолчанию?",
 
+        "ProjectSettings_Title": "Настройки проекта",
+        "ProjectSettings_HookedAssetsFolders_Title": "Привязанные директории ассетов",
+        "ProjectSettings_HookedAssetsFolders_Add": "Добавить директорию",
+        "ProjectSettings_ProjectIDRange_Title": "Диапазон ID проекта",
+        "ProjectSettings_ProjectIDRange_Minimum": "Минимум",
+        "ProjectSettings_ProjectIDRange_Maximum": "Максимум",
+        "ProjectSettings_Save": "Сохранить",
+        "ProjectSettings_Cancel": "Отмена",
+
         "App_About": "Автор программы: BowieD.\nПереводчик(и): {0}\nВерсия: {1}",
         "App_About_Title": "О программе",
         "App_About_Patreon_Title": "Поддержавшие на Patreon",
@@ -583,6 +595,7 @@
         "StartUp_ImportGameAssets_Window_Title": "Импорт ассетов",
         "StartUp_ImportGameAssets_Window_Step_Unturned": "Импортирование ассетов Unturned",
         "StartUp_ImportGameAssets_Window_Step_Workshop": "Импортирование установленных модов из мастерской Steam",
+        "StartUp_ImportGameAssets_Window_Step_Hooked": "Импортирование привязанных ассетов из '{0}'",
         "StartUp_ImportGameAssets_Window_Step_Thumbnails": "Генерация иконок предметов",
         "App_Comment": "Комментарий",
         "CrashReport_Title": "Приложение остановлено.",
@@ -648,6 +661,7 @@
         "Main_Menu_File_ExportToWorkshop": "Загрузить NPC в Workshop",
         "Main_Menu_File_Exit": "Выход",
         "Main_Menu_Options": "Настройки",
+        "Main_Menu_ProjectSettings": "Настройки проекта",
         "Main_Menu_Communication": "Связаться или задонатить",
         "Main_Menu_Communication_GitHub": "Репозиторий GitHub (Нажмите)",
         "Main_Menu_Communication_Patreon": "Patreon (Нажмите)",
