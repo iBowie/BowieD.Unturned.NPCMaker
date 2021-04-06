@@ -16,6 +16,10 @@ namespace BowieD.Unturned.NPCMaker.Managers
                     recentFile = new RecentFileList();
                     recentFile.Load(new string[0]);
                 }
+
+                if (recentFile.data == null)
+                    recentFile.data = new string[0];
+                
                 return recentFile;
             }
         }
@@ -28,6 +32,10 @@ namespace BowieD.Unturned.NPCMaker.Managers
                     userColors = new UserColorsList();
                     userColors.Load(new string[0]);
                 }
+
+                if (userColors.data == null)
+                    userColors.data = new string[0];
+
                 return userColors;
             }
         }
