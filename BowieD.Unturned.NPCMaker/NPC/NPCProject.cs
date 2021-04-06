@@ -1,13 +1,15 @@
-﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.NPC.Currency;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
-    public class NPCProject
+    public class NPCProject : IAXData
     {
         public const int CURRENT_SAVEDATA_VERSION = 6;
 
@@ -45,8 +47,51 @@ namespace BowieD.Unturned.NPCMaker.NPC
             lastQuest = -1,
             lastCurrency = -1;
         public NPCProjectSettings settings;
+
+        public void Load(XmlNode node, int version)
+        {
+            guid = node.Attributes["guid"].Value;
+
+            characters = node["characters"].ParseAXDataCollection<NPCCharacter>(version).ToList();
+            dialogues = node["dialogues"].ParseAXDataCollection<NPCDialogue>(version).ToList();
+            vendors = node["vendors"].ParseAXDataCollection<NPCVendor>(version).ToList();
+            quests = node["quests"].ParseAXDataCollection<NPCQuest>(version).ToList();
+            currencies = node["currencies"].ParseAXDataCollection<CurrencyAsset>(version).ToList();
+            flags = node["flags"].ParseAXDataCollection<FlagDescriptionProjectAsset>(version).ToList();
+
+            lastCharacter = node["lastCharacter"].ToInt32();
+            lastDialogue = node["lastDialogue"].ToInt32();
+            lastVendor = node["lastVendor"].ToInt32();
+            lastQuest = node["lastQuest"].ToInt32();
+            lastCurrency = node["lastCurrency"].ToInt32();
+
+            if (version >= 6)
+                settings.Load(node["settings"], version);
+            else
+                settings = new NPCProjectSettings();
+        }
+
+        public void Save(XmlDocument document, XmlNode node)
+        {
+            document.CreateAttributeC("guid", node).WriteString(guid);
+
+            document.CreateNodeC("characters", node).WriteAXDataCollection(document, "NPCCharacter", characters);
+            document.CreateNodeC("dialogues", node).WriteAXDataCollection(document, "NPCDialogue", dialogues);
+            document.CreateNodeC("vendors", node).WriteAXDataCollection(document, "NPCVendor", vendors);
+            document.CreateNodeC("quests", node).WriteAXDataCollection(document, "NPCQuest", quests);
+            document.CreateNodeC("currencies", node).WriteAXDataCollection(document, "CurrencyAsset", currencies);
+            document.CreateNodeC("flags", node).WriteAXDataCollection(document, "FlagDescriptionProjectAsset", flags);
+
+            document.CreateNodeC("lastCharacter", node).WriteInt32(lastCharacter);
+            document.CreateNodeC("lastDialogue", node).WriteInt32(lastDialogue);
+            document.CreateNodeC("lastVendor", node).WriteInt32(lastVendor);
+            document.CreateNodeC("lastQuest", node).WriteInt32(lastQuest);
+            document.CreateNodeC("lastCurrency", node).WriteInt32(lastCurrency);
+
+            settings.Save(document, document.CreateNodeC("settings", node));
+        }
     }
-    public class NPCProjectSettings
+    public class NPCProjectSettings : IAXData
     {
         public NPCProjectSettings()
         {
@@ -54,5 +99,15 @@ namespace BowieD.Unturned.NPCMaker.NPC
         }
 
         public List<string> assetDirs;
+
+        public void Load(XmlNode node, int version)
+        {
+            assetDirs = node["assetDirs"].ParseStringCollection().ToList();
+        }
+
+        public void Save(XmlDocument document, XmlNode node)
+        {
+            document.CreateNodeC("assetDirs", node).WriteStringCollection(document, assetDirs);
+        }
     }
 }

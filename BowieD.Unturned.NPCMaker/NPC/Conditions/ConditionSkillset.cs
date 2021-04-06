@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Localization;
 using System.Text;
+using System.Xml;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -45,6 +46,22 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public override bool Check(Simulation simulation)
         {
             return SimulationTool.Compare(simulation.Skillset, Value, Logic);
+        }
+
+        public override void Load(XmlNode node, int version)
+        {
+            base.Load(node, version);
+
+            Logic = node["Logic"].ToEnum<Logic_Type>();
+            Value = node["Value"].ToEnum<ESkillset>();
+        }
+
+        public override void Save(XmlDocument document, XmlNode node)
+        {
+            base.Save(document, node);
+
+            document.CreateNodeC("Logic", node).WriteEnum(Logic);
+            document.CreateNodeC("Value", node).WriteEnum(Value);
         }
     }
 }

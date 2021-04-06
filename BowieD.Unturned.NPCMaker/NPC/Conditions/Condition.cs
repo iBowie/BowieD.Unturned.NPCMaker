@@ -11,44 +11,80 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    [XmlInclude(typeof(ConditionExperience))]
-    [XmlInclude(typeof(ConditionReputation))]
-    [XmlInclude(typeof(ConditionFlagBool))]
-    [XmlInclude(typeof(ConditionFlagShort))]
-    [XmlInclude(typeof(ConditionItem))]
-    [XmlInclude(typeof(ConditionKillsAnimal))]
-    [XmlInclude(typeof(ConditionKillsHorde))]
-    [XmlInclude(typeof(ConditionKillsObject))]
-    [XmlInclude(typeof(ConditionKillsPlayer))]
-    [XmlInclude(typeof(ConditionKillsZombie))]
-    [XmlInclude(typeof(ConditionPlayerLifeFood))]
-    [XmlInclude(typeof(ConditionPlayerLifeHealth))]
-    [XmlInclude(typeof(ConditionPlayerLifeVirus))]
-    [XmlInclude(typeof(ConditionPlayerLifeWater))]
-    [XmlInclude(typeof(ConditionSkillset))]
-    [XmlInclude(typeof(ConditionTimeOfDay))]
-    [XmlInclude(typeof(ConditionQuest))]
-    [XmlInclude(typeof(ConditionCompareFlags))]
-    [XmlInclude(typeof(ConditionHoliday))]
-    [XmlInclude(typeof(ConditionKillsTree))]
-    [XmlInclude(typeof(ConditionCurrency))]
-    [XmlInclude(typeof(ConditionWeatherStatus))]
-    [XmlInclude(typeof(ConditionWeatherBlendAlpha))]
     [Serializable]
-    public abstract class Condition : IHasUIText
+    public class Condition : IHasUIText, IAXDataDerived<Condition>
     {
         [SkipField]
         public string Localization { get; set; }
         [XmlIgnore]
-        public abstract Condition_Type Type { get; }
+        public virtual Condition_Type Type => throw new NotImplementedException();
         [XmlIgnore]
-        public abstract string UIText { get; }
+        public virtual string UIText => throw new NotImplementedException();
         [NoValue]
         public bool Reset { get; set; }
+
+        private static Func<XmlNode, int, Condition> _createFunc = new Func<XmlNode, int, Condition>((node, version) =>
+        {
+            var typeAt = node.Attributes["xsi:type"];
+
+            switch (typeAt.Value)
+            {
+                case "ConditionCompareFlags":
+                    return new ConditionCompareFlags();
+                case "ConditionCurrency":
+                    return new ConditionCurrency();
+                case "ConditionExperience":
+                    return new ConditionExperience();
+                case "ConditionFlagBool":
+                    return new ConditionFlagBool();
+                case "ConditionFlagShort":
+                    return new ConditionFlagShort();
+                case "ConditionHoliday":
+                    return new ConditionHoliday();
+                case "ConditionItem":
+                    return new ConditionItem();
+                case "ConditionKillsAnimal":
+                    return new ConditionKillsAnimal();
+                case "ConditionKillsHorde":
+                    return new ConditionKillsHorde();
+                case "ConditionKillsObject":
+                    return new ConditionKillsObject();
+                case "ConditionKillsPlayer":
+                    return new ConditionKillsPlayer();
+                case "ConditionKillsTree":
+                    return new ConditionKillsTree();
+                case "ConditionKillsZombie":
+                    return new ConditionKillsZombie();
+                case "ConditionPlayerLifeFood":
+                    return new ConditionPlayerLifeFood();
+                case "ConditionPlayerLifeHealth":
+                    return new ConditionPlayerLifeHealth();
+                case "ConditionPlayerLifeVirus":
+                    return new ConditionPlayerLifeVirus();
+                case "ConditionPlayerLifeWater":
+                    return new ConditionPlayerLifeWater();
+                case "ConditionQuest":
+                    return new ConditionQuest();
+                case "ConditionReputation":
+                    return new ConditionReputation();
+                case "ConditionSkillset":
+                    return new ConditionSkillset();
+                case "ConditionTimeOfDay":
+                    return new ConditionTimeOfDay();
+                case "ConditionWeatherBlendAlpha":
+                    return new ConditionWeatherBlendAlpha();
+                case "ConditionWeatherStatus":
+                    return new ConditionWeatherStatus();
+                default:
+                    throw new Exception("Unknown type");
+            }
+        });
+        public Func<XmlNode, int, Condition> CreateFromNodeFunction => _createFunc;
 
         public IEnumerable<FrameworkElement> GetControls()
         {
@@ -403,8 +439,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
         public virtual void PostLoad(Universal_ConditionEditor editor) { }
 
-        public abstract bool Check(Simulation simulation);
-        public abstract void Apply(Simulation simulation);
+        public virtual bool Check(Simulation simulation) => throw new Exception();
+        public virtual void Apply(Simulation simulation) => throw new Exception();
         public virtual string FormatCondition(Simulation simulation)
         {
             if (!string.IsNullOrEmpty(Localization))
@@ -413,6 +449,18 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             }
 
             return null;
+        }
+
+        public virtual void Load(XmlNode node, int version)
+        {
+            Localization = node["Localization"].InnerText;
+            Reset = node["Reset"].ToBoolean();
+        }
+
+        public virtual void Save(XmlDocument document, XmlNode node)
+        {
+            document.CreateNodeC("Localization", node).WriteString(Localization);
+            document.CreateNodeC("Reset", node).WriteBoolean(Reset);
         }
     }
 }

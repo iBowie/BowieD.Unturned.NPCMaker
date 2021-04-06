@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System.Text;
+using System.Xml;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
@@ -41,6 +42,26 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public override void Give(Simulation simulation)
         {
             simulation.Flags[ID] = SimulationTool.Modify(simulation.Flags[ID], (short)Random.NextInt32(Min_Value, Max_Value + 1), Modification);
+        }
+
+        public override void Load(XmlNode node, int version)
+        {
+            base.Load(node, version);
+
+            ID = node["ID"].ToUInt16();
+            Min_Value = node["Min_Value"].ToInt16();
+            Max_Value = node["Max_Value"].ToInt16();
+            Modification = node["Modification"].ToEnum<Modification_Type>();
+        }
+
+        public override void Save(XmlDocument document, XmlNode node)
+        {
+            base.Save(document, node);
+
+            document.CreateNodeC("ID", node).WriteUInt16(ID);
+            document.CreateNodeC("Min_Value", node).WriteInt16(Min_Value);
+            document.CreateNodeC("Max_Value", node).WriteInt16(Max_Value);
+            document.CreateNodeC("Modification", node).WriteEnum(Modification);
         }
     }
 }

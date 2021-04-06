@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Localization;
 using System.Text;
+using System.Xml;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -65,6 +66,22 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             int num3 = second - num * 3600 - num2 * 60;
 
             return $"{num:D2}:{num2:D2}:{num3:D2}";
+        }
+
+        public override void Load(XmlNode node, int version)
+        {
+            base.Load(node, version);
+
+            Second = node["Second"].ToInt32();
+            Logic = node["Logic"].ToEnum<Logic_Type>();
+        }
+
+        public override void Save(XmlDocument document, XmlNode node)
+        {
+            base.Save(document, node);
+
+            document.CreateNodeC("Second", node).WriteInt32(Second);
+            document.CreateNodeC("Logic", node).WriteEnum(Logic);
         }
     }
 }

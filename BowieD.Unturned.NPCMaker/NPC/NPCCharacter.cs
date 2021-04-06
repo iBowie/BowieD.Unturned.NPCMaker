@@ -1,16 +1,19 @@
 ﻿using BowieD.Unturned.NPCMaker.Coloring;
+using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Configuration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
+using System.Xml;
 using System.Xml.Serialization;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
     [System.Serializable]
-    public class NPCCharacter : IHasUIText, INotifyPropertyChanged, IHasUniqueGUID
+    public class NPCCharacter : IHasUIText, INotifyPropertyChanged, IHasUniqueGUID, IAXData
     {
         public NPCCharacter()
         {
@@ -145,6 +148,78 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     return TextUtil.Shortify(sb.ToString(), 24);
                 }
             }
+        }
+
+        public void Load(XmlNode node, int version)
+        {
+            GUID = node.Attributes["guid"].InnerText;
+            Comment = node.Attributes["comment"].InnerText;
+
+            EditorName = node["editorName"].InnerText;
+            DisplayName = node["displayName"].InnerText;
+            ID = node["id"].ToUInt16();
+            startDialogueId = node["startDialogueId"].ToUInt16();
+            face = node["face"].ToByte();
+            beard = node["beard"].ToByte();
+            haircut = node["haircut"].ToByte();
+            hairColor = node["hairColor"].ToColor(version);
+            skinColor = node["skinColor"].ToColor(version);
+
+            clothing.Load(node["clothing"], version);
+            christmasClothing.Load(node["christmasClothing"], version);
+            halloweenClothing.Load(node["halloweenClothing"], version);
+
+            pose = node["pose"].ToEnum<NPC_Pose>();
+
+            leftHanded = node["leftHanded"].ToBoolean();
+
+            equipPrimary = node["equipPrimary"].ToUInt16();
+            equipSecondary = node["equipSecondary"].ToUInt16();
+            equipTertiary = node["equipTertiary"].ToUInt16();
+
+            equipped = node["equipped"].ToEnum<Equip_Type>();
+
+            poseLean = node["poseLean"].ToSingle();
+            posePitch = node["posePitch"].ToSingle();
+            poseHeadOffset = node["poseHeadOffset"].ToSingle();
+
+            visibilityConditions = node["visibilityConditions"].ParseAXDataCollection<Condition>(version).ToList();
+        }
+
+        public void Save(XmlDocument document, XmlNode node)
+        {
+            document.CreateAttributeC("guid", node).WriteString(GUID);
+            document.CreateAttributeC("comment", node).WriteString(Comment);
+
+            document.CreateNodeC("editorName", node).WriteString(EditorName);
+            document.CreateNodeC("displayName", node).WriteString(DisplayName);
+            document.CreateNodeC("id", node).WriteUInt16(ID);
+            document.CreateNodeC("startDialogueId", node).WriteUInt16(startDialogueId);
+            document.CreateNodeC("face", node).WriteByte(face);
+            document.CreateNodeC("beard", node).WriteByte(beard);
+            document.CreateNodeC("haircut", node).WriteByte(haircut);
+            document.CreateNodeC("hairColor", node).WriteColor(hairColor);
+            document.CreateNodeC("skinColor", node).WriteColor(skinColor);
+
+            clothing.Save(document, document.CreateNodeC("clothing", node));
+            christmasClothing.Save(document, document.CreateNodeC("christmasClothing", node));
+            halloweenClothing.Save(document, document.CreateNodeC("halloweenClothing", node));
+
+            document.CreateNodeC("pose", node).WriteEnum(pose);
+
+            document.CreateNodeC("leftHanded", node).WriteBoolean(leftHanded);
+
+            document.CreateNodeC("equipPrimary", node).WriteUInt16(equipPrimary);
+            document.CreateNodeC("equipSecondary", node).WriteUInt16(equipSecondary);
+            document.CreateNodeC("equipTertiary", node).WriteUInt16(equipTertiary);
+
+            document.CreateNodeC("equipped", node).WriteEnum(equipped);
+
+            document.CreateNodeC("poseLean", node).WriteSingle(poseLean);
+            document.CreateNodeC("posePitch", node).WriteSingle(posePitch);
+            document.CreateNodeC("poseHeadOffset", node).WriteSingle(poseHeadOffset);
+
+            document.CreateNodeC("visibilityConditions", node).WriteAXDataCollection(document, "Condition", visibilityConditions);
         }
     }
 }

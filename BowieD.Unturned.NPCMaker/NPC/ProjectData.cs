@@ -1,7 +1,10 @@
-﻿using BowieD.Unturned.NPCMaker.Data;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Data;
 using BowieD.Unturned.NPCMaker.Localization;
 using Microsoft.Win32;
+using System;
 using System.IO;
+using System.Text;
 using System.Windows;
 using System.Xml;
 
@@ -61,8 +64,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 if (sfd.ShowDialog() == true)
                 {
                     file = sfd.FileName;
-                    data.SAVEDATA_VERSION = NPCProject.CURRENT_SAVEDATA_VERSION;
-                    isSaved = base.Save();
+
+                    DoSave();
                 }
                 else
                 {
@@ -71,37 +74,81 @@ namespace BowieD.Unturned.NPCMaker.NPC
             }
             else
             {
-                data.SAVEDATA_VERSION = NPCProject.CURRENT_SAVEDATA_VERSION;
-                isSaved = base.Save();
+                DoSave();
             }
             return isSaved;
         }
+        internal void DoSave()
+        {
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+
+                doc.AppendChild(doc.CreateXmlDeclaration("1.0", "utf-8", string.Empty));
+
+                XmlNode root = doc.CreateNodeC("NPCProject", doc);
+
+                doc.CreateNodeC("SAVEDATA_VERSION", root).WriteInt32(NPCProject.CURRENT_SAVEDATA_VERSION);
+
+                data.Save(doc, root);
+
+                using (XmlTextWriter xtw = new XmlTextWriter(FileName, Encoding.UTF8))
+                {
+                    xtw.Formatting = Formatting.None;
+
+                    doc.Save(xtw);
+                }
+
+                isSaved = true;
+            }
+            catch (Exception ex)
+            {
+                App.Logger.LogException($"[AXDATA] - Could not save to {FileName}", ex: ex);
+            }
+        }
         public override bool Load(NPCProject defaultValue)
         {
-            App.Logger.Log($"[XDATA] - Loading {FileName}!");
+            App.Logger.Log($"[AXDATA] - Loading {FileName}");
+
             if (File.Exists(FileName))
             {
-                App.Logger.Log($"[XDATA] - Converting from XML...");
-                using (FileStream fs = new FileStream(FileName, FileMode.Open))
-                using (XmlReader reader = XmlReader.Create(fs))
+                App.Logger.Log($"[AXDATA] - Parsing XML...");
+
+                XmlDocument doc = new XmlDocument();
+                doc.Load(FileName);
+
+                try
                 {
-                    if (_serializer.CanDeserialize(reader))
+                    NPCProject project = new NPCProject();
+
+                    var root = doc["NPCProject"];
+
+                    int ver = root["SAVEDATA_VERSION"].ToInt32();
+
+                    if (ver <= NPCProject.CURRENT_SAVEDATA_VERSION)
                     {
-                        data = (NPCProject)_serializer.Deserialize(reader);
-                        App.Logger.Log($"[XDATA] - Loaded");
+                        project.Load(root, ver);
+
+                        data = project;
+                        App.Logger.Log($"[AXDATA] - Loaded");
                         OnDataLoaded?.Invoke();
                         return true;
                     }
                     else
                     {
-                        App.Logger.Log($"[XDATA] - Could not load {FileName}. Ignoring...");
+                        App.Logger.Log($"[AXDATA] - Tried to load newer project file");
                         return false;
                     }
+                }
+                catch (Exception ex)
+                {
+                    App.Logger.LogException($"[AXDATA] - Could not load project from {FileName}", ex: ex);
+                    return false;
                 }
             }
             else
             {
-                App.Logger.Log($"[XDATA] - {FileName} does not exist. Ignoring...");
+                App.Logger.Log($"[AXDATA] - {FileName} does not exist. Ignoring...");
                 return false;
             }
         }

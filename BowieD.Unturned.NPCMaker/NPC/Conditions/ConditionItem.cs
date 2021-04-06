@@ -7,6 +7,7 @@ using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System.Linq;
 using System.Text;
 using System.Windows.Media.Imaging;
+using System.Xml;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -88,6 +89,22 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 image = default;
                 return false;
             }
+        }
+
+        public override void Load(XmlNode node, int version)
+        {
+            base.Load(node, version);
+
+            ID = node["ID"].ToUInt16();
+            Amount = node["Amount"].ToUInt16();
+        }
+
+        public override void Save(XmlDocument document, XmlNode node)
+        {
+            base.Save(document, node);
+
+            document.CreateNodeC("ID", node).WriteUInt16(ID);
+            document.CreateNodeC("Amount", node).WriteUInt16(Amount);
         }
     }
 }

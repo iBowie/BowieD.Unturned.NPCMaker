@@ -1,10 +1,12 @@
-﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.GameIntegration;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
     [System.Serializable]
-    public class NPCClothing
+    public class NPCClothing : IAXData
     {
         [XmlElement("hat")]
         public ushort Hat
@@ -188,6 +190,28 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
                 return true;
             }
+        }
+
+        public void Load(XmlNode node, int version)
+        {
+            hat = node["hat"].ToUInt16();
+            mask = node["mask"].ToUInt16();
+            top = node["top"].ToUInt16();
+            bottom = node["bottom"].ToUInt16();
+            backpack = node["backpack"].ToUInt16();
+            vest = node["vest"].ToUInt16();
+            glasses = node["glasses"].ToUInt16();
+        }
+
+        public void Save(XmlDocument document, XmlNode node)
+        {
+            document.CreateNodeC("hat", node).WriteUInt16(hat);
+            document.CreateNodeC("mask", node).WriteUInt16(mask);
+            document.CreateNodeC("top", node).WriteUInt16(top);
+            document.CreateNodeC("bottom", node).WriteUInt16(bottom);
+            document.CreateNodeC("backpack", node).WriteUInt16(backpack);
+            document.CreateNodeC("vest", node).WriteUInt16(vest);
+            document.CreateNodeC("glasses", node).WriteUInt16(glasses);
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System.Text;
+using System.Xml;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -53,6 +55,24 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public override bool Check(Simulation simulation)
         {
             return true;
+        }
+
+        public override void Load(XmlNode node, int version)
+        {
+            base.Load(node, version);
+
+            GUID = node["GUID"].InnerText;
+            Value = node["Value"].ToEnum<ENPCWeatherStatus>();
+            Logic = node["Logic"].ToEnum<Logic_Type>();
+        }
+
+        public override void Save(XmlDocument document, XmlNode node)
+        {
+            base.Save(document, node);
+
+            document.CreateNodeC("GUID", node).WriteString(GUID);
+            document.CreateNodeC("Value", node).WriteEnum(Value);
+            document.CreateNodeC("Logic", node).WriteEnum(Logic);
         }
     }
 }

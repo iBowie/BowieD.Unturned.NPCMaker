@@ -1,6 +1,8 @@
-﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
+using System.Xml;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
@@ -51,6 +53,22 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Reward_Item_Random");
             }
             return string.Format(text, Amount);
+        }
+
+        public override void Load(XmlNode node, int version)
+        {
+            base.Load(node, version);
+
+            ID = node["ID"].ToUInt16();
+            Amount = node["Amount"].ToByte();
+        }
+
+        public override void Save(XmlDocument document, XmlNode node)
+        {
+            base.Save(document, node);
+
+            document.CreateNodeC("ID", node).WriteUInt16(ID);
+            document.CreateNodeC("Amount", node).WriteByte(Amount);
         }
     }
 }

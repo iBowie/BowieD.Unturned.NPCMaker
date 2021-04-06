@@ -1,7 +1,9 @@
-﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System.Text;
+using System.Xml;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
@@ -45,6 +47,22 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Reward_Vehicle");
             }
             return string.Format(text, ID);
+        }
+
+        public override void Load(XmlNode node, int version)
+        {
+            base.Load(node, version);
+
+            ID = node["ID"].ToUInt16();
+            Spawnpoint = node["Spawnpoint"].InnerText;
+        }
+
+        public override void Save(XmlDocument document, XmlNode node)
+        {
+            base.Save(document, node);
+
+            document.CreateNodeC("ID", node).WriteUInt16(ID);
+            document.CreateNodeC("Spawnpoint", node).WriteString(Spawnpoint);
         }
     }
 }

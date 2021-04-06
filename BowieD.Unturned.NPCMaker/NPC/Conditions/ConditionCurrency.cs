@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System;
+using System.Xml;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -80,6 +81,24 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             }
 
             return string.Format(text, Value);
+        }
+
+        public override void Load(XmlNode node, int version)
+        {
+            base.Load(node, version);
+
+            GUID = node["GUID"].InnerText;
+            Logic = node["Logic"].ToEnum<Logic_Type>();
+            Value = node["Value"].ToUInt32();
+        }
+
+        public override void Save(XmlDocument document, XmlNode node)
+        {
+            base.Save(document, node);
+
+            document.CreateNodeC("GUID", node).WriteString(GUID);
+            document.CreateNodeC("Logic", node).WriteEnum(Logic);
+            document.CreateNodeC("Value", node).WriteUInt32(Value);
         }
     }
 }

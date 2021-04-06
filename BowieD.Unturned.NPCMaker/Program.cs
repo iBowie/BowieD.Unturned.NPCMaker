@@ -3,10 +3,7 @@ using BowieD.Unturned.NPCMaker.Configuration;
 using System;
 using System.IO;
 using System.Security;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker
 {
@@ -91,13 +88,9 @@ namespace BowieD.Unturned.NPCMaker
         {
             try
             {
-                using (StreamWriter writer = new StreamWriter(Path.Combine(AppConfig.ExeDirectory, "crashSave.npcproj"), false, Encoding.UTF8))
-                using (XmlWriter xmlw = XmlWriter.Create(writer))
-                {
-                    var proj = MainWindow.CurrentProject.data;
-                    XmlSerializer xmls = new XmlSerializer(proj.GetType());
-                    xmls.Serialize(xmlw, proj);
-                }
+                MainWindow.CurrentProject.file = Path.Combine(AppConfig.ExeDirectory, "crashSave.npcproj");
+
+                MainWindow.CurrentProject.DoSave();
             }
             catch { }
         }

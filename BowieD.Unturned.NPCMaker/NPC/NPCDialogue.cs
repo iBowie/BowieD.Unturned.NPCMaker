@@ -1,15 +1,17 @@
-﻿using BowieD.Unturned.NPCMaker.Configuration;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Configuration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
     [System.Serializable]
-    public class NPCDialogue : IHasUIText, INotifyPropertyChanged, IHasUniqueGUID
+    public class NPCDialogue : IHasUIText, INotifyPropertyChanged, IHasUniqueGUID, IAXData
     {
         public NPCDialogue()
         {
@@ -87,6 +89,27 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
             return Responses.Where(d => d.VisibleInAll || d.visibleIn[messageIndex] == 1).ToList();
         }
+
+        public void Load(XmlNode node, int version)
+        {
+            GUID = node.Attributes["guid"].Value;
+            Comment = node.Attributes["comment"].Value;
+            ID = node.Attributes["id"].ToUInt16();
+
+            Messages = node["messages"].ParseAXDataCollection<NPCMessage>(version).ToList();
+            Responses = node["responses"].ParseAXDataCollection<NPCResponse>(version).ToList();
+        }
+
+        public void Save(XmlDocument document, XmlNode node)
+        {
+            document.CreateAttributeC("guid", node).WriteString(GUID);
+            document.CreateAttributeC("comment", node).WriteString(Comment);
+            document.CreateAttributeC("id", node).WriteUInt16(ID);
+
+            document.CreateNodeC("messages", node).WriteAXDataCollection(document, "NPCMessage", Messages);
+            document.CreateNodeC("responses", node).WriteAXDataCollection(document, "NPCResponse", Responses);
+        }
+
         public string UIText
         {
             get

@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
@@ -52,6 +53,32 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             }
 
             return string.Format(text, value, Value);
+        }
+
+        public override void Load(System.Xml.XmlNode node, int version)
+        {
+            base.Load(node, version);
+
+            ID = node["ID"].ToUInt16();
+            Value = node["Value"].ToInt16();
+            Spawn_Quantity = node["Spawn_Quantity"].ToNullableInt32();
+            Spawn = node["Spawn"].ToBoolean();
+            Nav = node["Nav"].ToNullableByte();
+            Radius = node["Radius"].ToSingle();
+            Zombie = node["Zombie"].ToEnum<Zombie_Type>();
+        }
+
+        public override void Save(System.Xml.XmlDocument document, System.Xml.XmlNode node)
+        {
+            base.Save(document, node);
+
+            document.CreateNodeC("ID", node).WriteUInt16(ID);
+            document.CreateNodeC("Value", node).WriteInt16(Value);
+            document.CreateNodeC("Spawn_Quantity", node).WriteNullableInt32(Spawn_Quantity);
+            document.CreateNodeC("Spawn", node).WriteBoolean(Spawn);
+            document.CreateNodeC("Nav", node).WriteNullableByte(Nav);
+            document.CreateNodeC("Radius", node).WriteSingle(Radius);
+            document.CreateNodeC("Zombie", node).WriteEnum(Zombie);
         }
     }
 }

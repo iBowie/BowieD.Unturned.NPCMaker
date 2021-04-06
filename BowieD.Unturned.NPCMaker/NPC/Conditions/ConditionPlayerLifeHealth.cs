@@ -56,5 +56,21 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
             return string.Format(Localization, simulation.Health, Value);
         }
+
+        public override void Load(System.Xml.XmlNode node, int version)
+        {
+            base.Load(node, version);
+
+            Value = node["Value"].ToInt32();
+            Logic = node["Logic"].ToEnum<Logic_Type>();
+        }
+
+        public override void Save(System.Xml.XmlDocument document, System.Xml.XmlNode node)
+        {
+            base.Save(document, node);
+
+            document.CreateNodeC("Value", node).WriteInt32(Value);
+            document.CreateNodeC("Logic", node).WriteEnum(Logic);
+        }
     }
 }

@@ -10,32 +10,61 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Xml.Serialization;
+using System.Xml;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
-    [XmlInclude(typeof(RewardExperience))]
-    [XmlInclude(typeof(RewardReputation))]
-    [XmlInclude(typeof(RewardFlagBool))]
-    [XmlInclude(typeof(RewardFlagShort))]
-    [XmlInclude(typeof(RewardFlagShortRandom))]
-    [XmlInclude(typeof(RewardQuest))]
-    [XmlInclude(typeof(RewardItem))]
-    [XmlInclude(typeof(RewardItemRandom))]
-    [XmlInclude(typeof(RewardAchievement))]
-    [XmlInclude(typeof(RewardVehicle))]
-    [XmlInclude(typeof(RewardTeleport))]
-    [XmlInclude(typeof(RewardEvent))]
-    [XmlInclude(typeof(RewardFlagMath))]
-    [XmlInclude(typeof(RewardCurrency))]
-    [XmlInclude(typeof(RewardHint))]
     [System.Serializable]
-    public abstract class Reward : IHasUIText
+    public class Reward : IHasUIText, IAXDataDerived<Reward>
     {
         [SkipField]
         public string Localization { get; set; }
-        public abstract RewardType Type { get; }
-        public abstract string UIText { get; }
+        public virtual RewardType Type => throw new NotImplementedException();
+        public virtual string UIText => throw new NotImplementedException();
+
+        private static Func<XmlNode, int, Reward> _createFunc = new Func<XmlNode, int, Reward>((node, version) =>
+        {
+            var typeAt = node.Attributes["xsi:type"];
+
+            switch (typeAt.Value)
+            {
+                case "RewardAchievement":
+                    return new RewardAchievement();
+                case "RewardCurrency":
+                    return new RewardCurrency();
+                case "RewardEvent":
+                    return new RewardEvent();
+                case "RewardExperience":
+                    return new RewardExperience();
+                case "RewardFlagBool":
+                    return new RewardFlagBool();
+                case "RewardFlagMath":
+                    return new RewardFlagMath();
+                case "RewardFlagShort":
+                    return new RewardFlagShort();
+                case "RewardFlagShortRandom":
+                    return new RewardFlagShortRandom();
+                case "RewardHint":
+                    return new RewardHint();
+                case "RewardItem":
+                    return new RewardItem();
+                case "RewardItemRandom":
+                    return new RewardItemRandom();
+                case "RewardQuest":
+                    return new RewardQuest();
+                case "RewardReputation":
+                    return new RewardReputation();
+                case "RewardTeleport":
+                    return new RewardTeleport();
+                case "RewardVehicle":
+                    return new RewardVehicle();
+                default:
+                    throw new Exception("Unknown type");
+            }
+        });
+
+        public Func<XmlNode, int, Reward> CreateFromNodeFunction => _createFunc;
+
         public IEnumerable<FrameworkElement> GetControls()
         {
             PropertyInfo[] props = GetType().GetProperties();
@@ -327,10 +356,20 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             return sb.ToString();
         }
 
-        public abstract void Give(Simulation simulation);
+        public virtual void Give(Simulation simulation) => throw new NotImplementedException();
         public virtual string FormatReward(Simulation simulation)
         {
             return null;
+        }
+
+        public virtual void Load(XmlNode node, int version)
+        {
+            Localization = node["Localization"].InnerText;
+        }
+
+        public virtual void Save(XmlDocument document, XmlNode node)
+        {
+            document.CreateNodeC("Localization", node).WriteString(Localization);
         }
     }
 }

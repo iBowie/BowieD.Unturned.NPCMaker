@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Localization;
+using System.Xml;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -56,6 +57,22 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             return string.Format(text,
                 simulation.Reputation > 0 ? $"+{simulation.Reputation}" : $"{simulation.Reputation}",
                 Value > 0 ? $"+{Value}" : $"{Value}");
+        }
+
+        public override void Load(XmlNode node, int version)
+        {
+            base.Load(node, version);
+
+            Logic = node["Logic"].ToEnum<Logic_Type>();
+            Value = node["Value"].ToInt32();
+        }
+
+        public override void Save(XmlDocument document, XmlNode node)
+        {
+            base.Save(document, node);
+
+            document.CreateNodeC("Logic", node).WriteEnum(Logic);
+            document.CreateNodeC("Value", node).WriteInt32(Value);
         }
     }
 }

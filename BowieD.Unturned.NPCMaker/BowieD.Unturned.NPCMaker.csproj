@@ -166,6 +166,7 @@
     <Compile Include="Common\Utility\DebugUtility.cs" />
     <Compile Include="Common\Utility\NETHelper.cs" />
     <Compile Include="Common\Utility\PathUtility.cs" />
+    <Compile Include="Common\XmlNodeExtension.cs" />
     <Compile Include="Controls\CurrencyEntryControl.xaml.cs">
       <DependentUpon>CurrencyEntryControl.xaml</DependentUpon>
     </Compile>
@@ -422,6 +423,7 @@
     <Compile Include="NPC\Conditions\ConditionWeatherStatus.cs" />
     <Compile Include="NPC\Currency\CurrencyAsset.cs" />
     <Compile Include="NPC\Currency\CurrencyEntry.cs" />
+    <Compile Include="NPC\IAXData.cs" />
     <Compile Include="NPC\IHasUIText.cs" />
     <Compile Include="NPC\NPCCharacter.cs" />
     <Compile Include="NPC\NPCClothing.cs" />

@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System.Text;
+using System.Xml;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
@@ -40,6 +41,24 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 b = simulation.Flags[B_ID];
 
             simulation.Flags[A_ID] = SimulationTool.Operate(a, b, Operation);
+        }
+
+        public override void Load(XmlNode node, int version)
+        {
+            base.Load(node, version);
+
+            A_ID = node["A_ID"].ToUInt16();
+            B_ID = node["B_ID"].ToUInt16();
+            Operation = node["Operation"].ToEnum<Operation_Type>();
+        }
+
+        public override void Save(XmlDocument document, XmlNode node)
+        {
+            base.Save(document, node);
+
+            document.CreateNodeC("A_ID", node).WriteUInt16(A_ID);
+            document.CreateNodeC("B_ID", node).WriteUInt16(B_ID);
+            document.CreateNodeC("Operation", node).WriteEnum(Operation);
         }
     }
 }
