@@ -370,6 +370,7 @@
     <Compile Include="Mistakes\Character\NE_0001.cs" />
     <Compile Include="Mistakes\Character\NE_0002.cs" />
     <Compile Include="Mistakes\Character\NE_0003.cs" />
+    <Compile Include="Mistakes\Character\NE_0004.cs" />
     <Compile Include="Mistakes\Currencies\CurrencyMistake.cs" />
     <Compile Include="Mistakes\Currencies\NE_4000.cs" />
     <Compile Include="Mistakes\Currencies\NE_4001.cs" />
@@ -386,13 +387,16 @@
     <Compile Include="Mistakes\Dialogue\NE_1005.cs" />
     <Compile Include="Mistakes\Dialogue\NE_1006.cs" />
     <Compile Include="Mistakes\Dialogue\NE_1007.cs" />
+    <Compile Include="Mistakes\Dialogue\NE_1008.cs" />
     <Compile Include="Mistakes\MistakesManager.cs" />
     <Compile Include="Mistakes\Quest\NE_3000.cs" />
     <Compile Include="Mistakes\Quest\NE_3001.cs" />
     <Compile Include="Mistakes\Quest\NE_3002.cs" />
+    <Compile Include="Mistakes\Quest\NE_3003.cs" />
     <Compile Include="Mistakes\Quest\QuestMistake.cs" />
     <Compile Include="Mistakes\Vendor\NE_2000.cs" />
     <Compile Include="Mistakes\Vendor\NE_2001.cs" />
+    <Compile Include="Mistakes\Vendor\NE_2002.cs" />
     <Compile Include="Mistakes\Vendor\VendorMistake.cs" />
     <Compile Include="Notification\INotificationManager.cs" />
     <Compile Include="Notification\NotificationManager.cs" />
