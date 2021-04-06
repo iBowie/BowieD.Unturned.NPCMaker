@@ -20,6 +20,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     public class Condition : IHasUIText, IAXDataDerived<Condition>
     {
         [SkipField]
+        [Context(ContextHelper.EContextOption.Group_TextEdit | ContextHelper.EContextOption.Group_Rich)]
         public string Localization { get; set; }
         [XmlIgnore]
         public virtual Condition_Type Type => throw new NotImplementedException();
@@ -180,6 +181,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 borderContents.Children.Add(l);
                 RangeAttribute rangeAttribute = prop.GetCustomAttribute<RangeAttribute>();
                 AssetPickerAttribute assetPickerAttribute = prop.GetCustomAttribute<AssetPickerAttribute>();
+                ContextAttribute contextAttribute = prop.GetCustomAttribute<ContextAttribute>();
                 FrameworkElement valueControl = null;
                 if (propType == typeof(ushort))
                 {
@@ -448,6 +450,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 }
                 valueControl.HorizontalAlignment = HorizontalAlignment.Right;
                 valueControl.VerticalAlignment = VerticalAlignment.Center;
+                if (contextAttribute != null)
+                    valueControl.ContextMenu = ContextHelper.CreateContextMenu(contextAttribute.Options);
                 borderContents.Children.Add(valueControl);
                 valueControl.Tag = "variable::" + propName;
                 Border b = new Border

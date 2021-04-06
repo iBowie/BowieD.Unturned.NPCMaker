@@ -18,6 +18,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     public class Reward : IHasUIText, IAXDataDerived<Reward>
     {
         [SkipField]
+        [Context(ContextHelper.EContextOption.Group_TextEdit | ContextHelper.EContextOption.Group_Rich)]
         public string Localization { get; set; }
         public virtual RewardType Type => throw new NotImplementedException();
         public virtual string UIText => throw new NotImplementedException();
@@ -146,6 +147,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
                 RangeAttribute rangeAttribute = prop.GetCustomAttribute<RangeAttribute>();
                 AssetPickerAttribute assetPickerAttribute = prop.GetCustomAttribute<AssetPickerAttribute>();
+                ContextAttribute contextAttribute = prop.GetCustomAttribute<ContextAttribute>();
                 borderContents.Children.Add(l);
                 FrameworkElement valueControl = null;
                 if (propType == typeof(uint))
@@ -353,6 +355,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 }
                 valueControl.HorizontalAlignment = HorizontalAlignment.Right;
                 valueControl.VerticalAlignment = VerticalAlignment.Center;
+                if (contextAttribute != null)
+                    valueControl.ContextMenu = ContextHelper.CreateContextMenu(contextAttribute.Options);
                 borderContents.Children.Add(valueControl);
                 valueControl.Tag = "variable::" + propName;
                 Border b = new Border

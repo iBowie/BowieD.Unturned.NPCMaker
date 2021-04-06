@@ -451,6 +451,7 @@
     <Compile Include="NPC\Rewards\Attributes\RewardTooltipAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardVehicle.cs" />
     <Compile Include="NPC\Shared\Attributes\AssetPickerAttribute.cs" />
+    <Compile Include="NPC\Shared\Attributes\ContextAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\NoValueAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\OptionalAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\RangeAttribute.cs" />
