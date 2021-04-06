@@ -169,18 +169,25 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public NPCProjectSettings()
         {
             assetDirs = new List<string>();
+            idRangeMin = ushort.MinValue;
+            idRangeMax = ushort.MaxValue;
         }
 
         public List<string> assetDirs;
+        public ushort idRangeMin, idRangeMax;
 
         public void Load(XmlNode node, int version)
         {
             assetDirs = node["assetDirs"].ParseStringCollection().ToList();
+            idRangeMin = node["idRangeMin"].ToUInt16(ushort.MinValue);
+            idRangeMax = node["idRangeMax"].ToUInt16(ushort.MaxValue);
         }
 
         public void Save(XmlDocument document, XmlNode node)
         {
             document.CreateNodeC("assetDirs", node).WriteStringCollection(document, assetDirs);
+            document.CreateNodeC("idRangeMin", node).WriteUInt16(idRangeMin);
+            document.CreateNodeC("idRangeMax", node).WriteUInt16(idRangeMax);
         }
     }
 }

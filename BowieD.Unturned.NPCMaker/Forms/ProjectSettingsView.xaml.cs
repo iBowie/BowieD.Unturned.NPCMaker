@@ -24,6 +24,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             this.project = contextProject;
 
+            idRangeMinUpDown.Value = project.settings.idRangeMin;
+            idRangeMaxUpDown.Value = project.settings.idRangeMax;
+
             foreach (var dir in project.settings.assetDirs)
             {
                 DirectoryInfo di = new DirectoryInfo(dir);
@@ -69,6 +72,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                 project.settings.assetDirs.Clear();
 
+                project.settings.idRangeMin = idRangeMinUpDown.Value.Value;
+                project.settings.idRangeMax = idRangeMaxUpDown.Value.Value;
+
                 foreach (Universal_ItemList uil in hookedStackPanel.Children)
                 {
                     project.settings.assetDirs.Add((uil.Value as DirectoryInfo).FullName);
@@ -94,6 +100,12 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 Close();
             }, (p) =>
             {
+                if (!idRangeMinUpDown.Value.HasValue || !idRangeMaxUpDown.Value.HasValue)
+                    return false;
+
+                if (idRangeMinUpDown.Value >= idRangeMaxUpDown.Value)
+                    return false;
+
                 return !_isSaving;
             });
 

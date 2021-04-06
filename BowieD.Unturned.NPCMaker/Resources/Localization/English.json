@@ -576,6 +576,9 @@
         "ProjectSettings_Title": "Project Settings",
         "ProjectSettings_HookedAssetsFolders_Title": "Hooked Asset Folders",
         "ProjectSettings_HookedAssetsFolders_Add": "Add directory",
+        "ProjectSettings_ProjectIDRange_Title": "Project ID range",
+        "ProjectSettings_ProjectIDRange_Minimum": "Minimum",
+        "ProjectSettings_ProjectIDRange_Maximum": "Maximum",
         "ProjectSettings_Save": "Save",
         "ProjectSettings_Cancel": "Cancel",
 

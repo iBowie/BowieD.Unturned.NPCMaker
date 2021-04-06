@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
-        xmlns:xamle="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
+        xmlns:xamle="clr-namespace:BowieD.Unturned.NPCMaker.XAML" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         Title="{xamle:Localize Key=INTERFACE_ProjectSettings_Title}" SizeToContent="Height" Width="450">
@@ -18,22 +18,42 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Name="paramsPanel" Orientation="Vertical">
-            <Grid>
-                <GroupBox Margin="5" Header="{xamle:Localize Key=INTERFACE_ProjectSettings_HookedAssetsFolders_Title}">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <ScrollViewer MaxHeight="180" Margin="5">
-                            <StackPanel Name="hookedStackPanel"/>
-                        </ScrollViewer>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal">
-                            <Button Name="hookedAddDirButton" Margin="5" Content="{xamle:Localize Key=INTERFACE_ProjectSettings_HookedAssetsFolders_Add}"/>
-                        </StackPanel>
-                    </Grid>
-                </GroupBox>
-            </Grid>
+            <GroupBox Margin="5" Header="{xamle:Localize Key=INTERFACE_ProjectSettings_HookedAssetsFolders_Title}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer MaxHeight="180" Margin="5">
+                        <StackPanel Name="hookedStackPanel"/>
+                    </ScrollViewer>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Button Name="hookedAddDirButton" Margin="5" Content="{xamle:Localize Key=INTERFACE_ProjectSettings_HookedAssetsFolders_Add}"/>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+            <GroupBox Margin="5" Header="{xamle:Localize Key=INTERFACE_ProjectSettings_ProjectIDRange_Title}">
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Margin="5" Content="{xamle:Localize Key=INTERFACE_ProjectSettings_ProjectIDRange_Minimum}"/>
+                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Name="idRangeMinUpDown" Grid.Column="1" Margin="5" ShowButtonSpinner="False" MinWidth="40" Value="0"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Margin="5" Content="{xamle:Localize Key=INTERFACE_ProjectSettings_ProjectIDRange_Maximum}"/>
+                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Name="idRangeMaxUpDown" Grid.Column="1" Margin="5" ShowButtonSpinner="False" MinWidth="40" Value="65535"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
         </StackPanel>
         <StackPanel Name="buttonsPanel" Grid.Row="1" Orientation="Horizontal">
             <Button Name="saveButton" Content="{xamle:Localize Key=INTERFACE_ProjectSettings_Save}" Margin="5"/>
