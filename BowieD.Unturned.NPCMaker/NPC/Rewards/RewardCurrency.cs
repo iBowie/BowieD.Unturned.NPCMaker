@@ -50,7 +50,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         {
             base.Load(node, version);
 
-            GUID = node["GUID"].InnerText;
+            GUID = node["GUID"].ToText();
             Value = node["Value"].ToUInt32();
         }
 

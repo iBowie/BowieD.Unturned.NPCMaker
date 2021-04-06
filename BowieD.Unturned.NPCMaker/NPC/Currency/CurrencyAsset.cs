@@ -43,8 +43,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Currency
 
         public void Load(XmlNode node, int version)
         {
-            GUID = node.Attributes["guid"].InnerText;
-            ValueFormat = node.Attributes["valueFormat"].InnerText;
+            GUID = node.Attributes["guid"].ToText();
+            ValueFormat = node.Attributes["valueFormat"].ToText();
             Entries = node["Entries"].ParseAXDataCollection<CurrencyEntry>(version).ToList();
         }
 

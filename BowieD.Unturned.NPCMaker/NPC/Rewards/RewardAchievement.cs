@@ -17,7 +17,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         {
             base.Load(node, version);
 
-            ID = node["ID"].InnerText;
+            ID = node["ID"].ToText();
         }
 
         public override void Save(XmlDocument document, XmlNode node)

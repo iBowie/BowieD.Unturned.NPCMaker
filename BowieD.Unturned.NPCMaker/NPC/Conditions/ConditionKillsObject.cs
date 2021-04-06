@@ -64,7 +64,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
             ID = node["ID"].ToUInt16();
             Value = node["Value"].ToInt16();
-            Object = node["Object"].InnerText;
+            Object = node["Object"].ToText();
             Nav = node["Nav"].ToNullableByte();
         }
 

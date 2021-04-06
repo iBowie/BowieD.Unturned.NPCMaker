@@ -15,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Currency
 
         public void Load(XmlNode node, int version)
         {
-            ItemGUID = node.Attributes["guid"].InnerText;
+            ItemGUID = node.Attributes["guid"].ToText();
             Value = node.Attributes["value"].ToUInt32();
         }
 

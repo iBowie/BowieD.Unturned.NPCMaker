@@ -12,53 +12,89 @@ namespace BowieD.Unturned.NPCMaker.Common
         private static CultureInfo cltr = CultureInfo.InvariantCulture;
 
         #region Read
-        public static sbyte ToSByte(this XmlNode node)
+        public static sbyte ToSByte(this XmlNode node, sbyte defaultValue = 0)
         {
-            return sbyte.Parse(node.InnerText, cltr);
+            if (node == null)
+                return defaultValue;
+
+            return sbyte.Parse(node.ToText(), cltr);
         }
-        public static byte ToByte(this XmlNode node)
+        public static byte ToByte(this XmlNode node, byte defaultValue = 0)
         {
-            return byte.Parse(node.InnerText, cltr);
+            if (node == null)
+                return defaultValue;
+
+            return byte.Parse(node.ToText(), cltr);
         }
-        public static short ToInt16(this XmlNode node)
+        public static short ToInt16(this XmlNode node, short defaultValue = 0)
         {
-            return short.Parse(node.InnerText, cltr);
+            if (node == null)
+                return defaultValue;
+
+            return short.Parse(node.ToText(), cltr);
         }
-        public static ushort ToUInt16(this XmlNode node)
+        public static ushort ToUInt16(this XmlNode node, ushort defaultValue = 0)
         {
-            return ushort.Parse(node.InnerText, cltr);
+            if (node == null)
+                return defaultValue;
+
+            return ushort.Parse(node.ToText(), cltr);
         }
-        public static int ToInt32(this XmlNode node)
+        public static int ToInt32(this XmlNode node, int defaultValue = 0)
         {
-            return int.Parse(node.InnerText, cltr);
+            if (node == null)
+                return defaultValue;
+
+            return int.Parse(node.ToText(), cltr);
         }
-        public static uint ToUInt32(this XmlNode node)
+        public static uint ToUInt32(this XmlNode node, uint defaultValue = 0)
         {
-            return uint.Parse(node.InnerText, cltr);
+            if (node == null)
+                return defaultValue;
+
+            return uint.Parse(node.ToText(), cltr);
         }
-        public static long ToInt64(this XmlNode node)
+        public static long ToInt64(this XmlNode node, long defaultValue = 0)
         {
-            return long.Parse(node.InnerText, cltr);
+            if (node == null)
+                return defaultValue;
+
+            return long.Parse(node.ToText(), cltr);
         }
-        public static ulong ToUInt64(this XmlNode node)
+        public static ulong ToUInt64(this XmlNode node, ulong defaultValue = 0)
         {
-            return ulong.Parse(node.InnerText, cltr);
+            if (node == null)
+                return defaultValue;
+
+            return ulong.Parse(node.ToText(), cltr);
         }
-        public static float ToSingle(this XmlNode node)
+        public static float ToSingle(this XmlNode node, float defaultValue = 0f)
         {
-            return float.Parse(node.InnerText, cltr);
+            if (node == null)
+                return defaultValue;
+
+            return float.Parse(node.ToText(), cltr);
         }
-        public static double ToDouble(this XmlNode node)
+        public static double ToDouble(this XmlNode node, double defaultValue = 0.0)
         {
-            return double.Parse(node.InnerText, cltr);
+            if (node == null)
+                return defaultValue;
+
+            return double.Parse(node.ToText(), cltr);
         }
-        public static T ToEnum<T>(this XmlNode node)
+        public static T ToEnum<T>(this XmlNode node, T defaultValue = default)
         {
-            return (T)Enum.Parse(typeof(T), node.InnerText);
+            if (node == null)
+                return defaultValue;
+
+            return (T)Enum.Parse(typeof(T), node.ToText());
         }
-        public static bool ToBoolean(this XmlNode node)
+        public static bool ToBoolean(this XmlNode node, bool defaultValue = false)
         {
-            return bool.Parse(node.InnerText);
+            if (node == null)
+                return defaultValue;
+
+            return bool.Parse(node.ToText());
         }
         public static Color ToColor(this XmlNode node, int version)
         {
@@ -70,26 +106,42 @@ namespace BowieD.Unturned.NPCMaker.Common
 
             return clr;
         }
+        public static string ToText(this XmlNode node, string defaultValue = "")
+        {
+            if (node == null)
+                return defaultValue;
+
+            return node.InnerText;
+        }
 
         #region Nullables
-        public static byte? ToNullableByte(this XmlNode node)
+        public static byte? ToNullableByte(this XmlNode node, byte? defaultValue = null)
         {
+            if (node == null)
+                return defaultValue;
+
             var a = node.Attributes["xsi:nil"];
             if (a != null && a.Value == "true")
                 return null;
 
             return node.ToByte();
         }
-        public static ushort? ToNullableUInt16(this XmlNode node)
+        public static ushort? ToNullableUInt16(this XmlNode node, ushort? defaultValue = null)
         {
+            if (node == null)
+                return defaultValue;
+
             var a = node.Attributes["xsi:nil"];
             if (a != null && a.Value == "true")
                 return null;
 
             return node.ToUInt16();
         }
-        public static int? ToNullableInt32(this XmlNode node)
+        public static int? ToNullableInt32(this XmlNode node, int? defaultValue = null)
         {
+            if (node == null)
+                return defaultValue;
+
             var a = node.Attributes["xsi:nil"];
             if (a != null && a.Value == "true")
                 return null;
@@ -101,50 +153,57 @@ namespace BowieD.Unturned.NPCMaker.Common
         #region Collections
         public static IEnumerable<T> ParseAXDataCollection<T>(this XmlNode node, int version, Func<XmlNode, int, T> factory = null) where T : IAXData, new()
         {
-            Func<XmlNode, int, T> create;
-
-            if (factory == null)
+            if (node != null)
             {
-                create = new Func<XmlNode, int, T>((pn, vers) =>
-                {
-                    return new T();
-                });
-            }
-            else
-            {
+                Func<XmlNode, int, T> create;
                 var dtype = typeof(IAXDataDerived<T>);
 
-                if (dtype.IsAssignableFrom(typeof(T)))
+                if (factory != null)
+                {
+                    create = factory;
+                }
+                else if (dtype.IsAssignableFrom(typeof(T)))
                 {
                     var inst = new T();
 
                     create = (inst as IAXDataDerived<T>).CreateFromNodeFunction;
                 }
+                else
+                {
+                    create = new Func<XmlNode, int, T>((pn, vers) =>
+                    {
+                        return new T();
+                    });
+                }
 
-                create = factory;
-            }
+                foreach (XmlNode cNode in node.ChildNodes)
+                {
+                    var el = create(cNode, version);
 
-            foreach (XmlNode cNode in node.ChildNodes)
-            {
-                var el = create(cNode, version);
+                    el.Load(cNode, version);
 
-                el.Load(cNode, version);
-
-                yield return el;
+                    yield return el;
+                }
             }
         }
         public static IEnumerable<string> ParseStringCollection(this XmlNode node)
         {
-            foreach (XmlNode cNode in node.ChildNodes)
+            if (node != null)
             {
-                yield return cNode.InnerText;
+                foreach (XmlNode cNode in node.ChildNodes)
+                {
+                    yield return cNode.ToText();
+                }
             }
         }
         public static IEnumerable<int> ParseInt32Collection(this XmlNode node)
         {
-            foreach (XmlNode cNode in node.ChildNodes)
+            if (node != null)
             {
-                yield return cNode.ToInt32();
+                foreach (XmlNode cNode in node.ChildNodes)
+                {
+                    yield return cNode.ToInt32();
+                }
             }
         }
         public static XmlNode WriteAXDataCollection<T>(this XmlNode node, XmlDocument doc, string itemName, IEnumerable<T> ts) where T : IAXData
@@ -183,62 +242,62 @@ namespace BowieD.Unturned.NPCMaker.Common
         #region Write
         public static XmlNode WriteByte(this XmlNode node, byte value)
         {
-            node.InnerText = value.ToString(cltr);
+            node.WriteString(value.ToString(cltr));
 
             return node;
         }
         public static XmlNode WriteInt16(this XmlNode node, short value)
         {
-            node.InnerText = value.ToString(cltr);
+            node.WriteString(value.ToString(cltr));
 
             return node;
         }
 
         public static XmlNode WriteInt32(this XmlNode node, int value)
         {
-            node.InnerText = value.ToString(cltr);
+            node.WriteString(value.ToString(cltr));
 
             return node;
         }
         public static XmlNode WriteInt64(this XmlNode node, long value)
         {
-            node.InnerText = value.ToString(cltr);
+            node.WriteString(value.ToString(cltr));
 
             return node;
         }
         public static XmlNode WriteUInt16(this XmlNode node, ushort value)
         {
-            node.InnerText = value.ToString(cltr);
+            node.WriteString(value.ToString(cltr));
 
             return node;
         }
         public static XmlNode WriteUInt32(this XmlNode node, uint value)
         {
-            node.InnerText = value.ToString(cltr);
+            node.WriteString(value.ToString(cltr));
 
             return node;
         }
         public static XmlNode WriteUInt64(this XmlNode node, ulong value)
         {
-            node.InnerText = value.ToString(cltr);
+            node.WriteString(value.ToString(cltr));
 
             return node;
         }
         public static XmlNode WriteSingle(this XmlNode node, float value)
         {
-            node.InnerText = value.ToString(cltr);
+            node.WriteString(value.ToString(cltr));
 
             return node;
         }
         public static XmlNode WriteDouble(this XmlNode node, double value)
         {
-            node.InnerText = value.ToString(cltr);
+            node.WriteString(value.ToString(cltr));
 
             return node;
         }
         public static XmlNode WriteBoolean(this XmlNode node, bool value)
         {
-            node.InnerText = value.ToString(cltr);
+            node.WriteString(value.ToString(cltr));
 
             return node;
         }
@@ -250,7 +309,7 @@ namespace BowieD.Unturned.NPCMaker.Common
         }
         public static XmlNode WriteEnum<T>(this XmlNode node, T value) where T : Enum
         {
-            node.InnerText = Enum.GetName(typeof(T), value);
+            node.WriteString(Enum.GetName(typeof(T), value));
 
             return node;
         }

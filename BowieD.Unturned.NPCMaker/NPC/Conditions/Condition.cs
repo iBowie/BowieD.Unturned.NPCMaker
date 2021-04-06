@@ -500,7 +500,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
         public virtual void Load(XmlNode node, int version)
         {
-            Localization = node["Localization"].InnerText;
+            Localization = node["Localization"].ToText();
             Reset = node["Reset"].ToBoolean();
         }
 

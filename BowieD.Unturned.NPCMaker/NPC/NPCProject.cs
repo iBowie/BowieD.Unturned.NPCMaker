@@ -56,8 +56,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
             {
                 NPCCharacter mainCharacter = new NPCCharacter()
                 {
-                    EditorName = node["editorName"].InnerText,
-                    DisplayName = node["displayName"].InnerText,
+                    EditorName = node["editorName"].ToText(),
+                    DisplayName = node["displayName"].ToText(),
                     ID = node["id"].ToUInt16(),
                     face = node["face"].ToByte(),
                     beard = node["beard"].ToByte(),

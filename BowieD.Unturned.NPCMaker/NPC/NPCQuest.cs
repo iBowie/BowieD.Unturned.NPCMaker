@@ -95,8 +95,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
             Comment = node.Attributes["comment"].Value;
 
             ID = node["id"].ToUInt16();
-            Title = node["title"].InnerText;
-            description = node["description"].InnerText;
+            Title = node["title"].ToText();
+            description = node["description"].ToText();
 
             conditions = node["conditions"].ParseAXDataCollection<Condition>(version).ToList();
             rewards = node["rewards"].ParseAXDataCollection<Reward>(version).ToList();

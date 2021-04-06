@@ -18,7 +18,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         {
             base.Load(node, version);
 
-            Spawnpoint = node["Spawnpoint"].InnerText;
+            Spawnpoint = node["Spawnpoint"].ToText();
         }
 
         public override void Save(XmlDocument document, XmlNode node)

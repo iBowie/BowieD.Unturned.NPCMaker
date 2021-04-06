@@ -99,16 +99,16 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
         public void Load(XmlNode node, int version)
         {
-            GUID = node.Attributes["guid"].Value;
-            Comment = node.Attributes["comment"].Value;
+            GUID = node.Attributes["guid"].ToText();
+            Comment = node.Attributes["comment"].ToText();
 
             ID = node["ID"].ToUInt16();
-            Title = node["vendorTitle"].InnerText;
-            vendorDescription = node["vendorDescription"].InnerText;
+            Title = node["vendorTitle"].ToText();
+            vendorDescription = node["vendorDescription"].ToText();
 
             items = node["items"].ParseAXDataCollection<VendorItem>(version).ToList();
             disableSorting = node["disableSorting"].ToBoolean();
-            currency = node["currency"].InnerText;
+            currency = node["currency"].ToText();
         }
 
         public void Save(XmlDocument document, XmlNode node)
@@ -213,7 +213,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             type = node["type"].ToEnum<ItemType>();
             isBuy = node["isBuy"].ToBoolean();
             conditions = node["conditions"].ParseAXDataCollection<Condition>(version).ToList();
-            spawnPointID = node["spawnPointID"].InnerText;
+            spawnPointID = node["spawnPointID"].ToText();
         }
 
         public void Save(XmlDocument document, XmlNode node)

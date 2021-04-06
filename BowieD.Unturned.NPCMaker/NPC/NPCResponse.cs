@@ -31,7 +31,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
         public void Load(XmlNode node, int version)
         {
-            mainText = node["mainText"].InnerText;
+            mainText = node["mainText"].ToText();
             openDialogueId = node["openDialogueId"].ToUInt16();
             openVendorId = node["openVendorId"].ToUInt16();
             openQuestId = node["openQuestId"].ToUInt16();

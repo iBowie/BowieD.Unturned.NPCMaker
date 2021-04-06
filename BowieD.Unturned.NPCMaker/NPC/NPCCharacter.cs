@@ -152,11 +152,11 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
         public void Load(XmlNode node, int version)
         {
-            GUID = node.Attributes["guid"].InnerText;
-            Comment = node.Attributes["comment"].InnerText;
+            GUID = node.Attributes["guid"].ToText();
+            Comment = node.Attributes["comment"].ToText();
 
-            EditorName = node["editorName"].InnerText;
-            DisplayName = node["displayName"].InnerText;
+            EditorName = node["editorName"].ToText();
+            DisplayName = node["displayName"].ToText();
             ID = node["id"].ToUInt16();
             startDialogueId = node["startDialogueId"].ToUInt16();
             face = node["face"].ToByte();

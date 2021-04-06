@@ -62,7 +62,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             base.Load(node, version);
 
-            GUID = node["GUID"].InnerText;
+            GUID = node["GUID"].ToText();
             Value = node["Value"].ToSingle();
             Logic = node["Logic"].ToEnum<Logic_Type>();
         }

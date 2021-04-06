@@ -37,7 +37,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
         public void Load(XmlNode node, int version)
         {
-            name = node["name"].InnerText;
+            name = node["name"].ToText();
             id = node["id"].ToUInt16();
         }
 

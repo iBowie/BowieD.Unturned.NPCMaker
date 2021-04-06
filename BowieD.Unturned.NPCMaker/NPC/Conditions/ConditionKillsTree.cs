@@ -83,7 +83,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
             ID = node["ID"].ToUInt16();
             Value = node["Value"].ToInt16();
-            Tree = node["Tree"].InnerText;
+            Tree = node["Tree"].ToText();
         }
 
         public override void Save(System.Xml.XmlDocument document, System.Xml.XmlNode node)

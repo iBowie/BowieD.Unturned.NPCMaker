@@ -399,7 +399,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
         public virtual void Load(XmlNode node, int version)
         {
-            Localization = node["Localization"].InnerText;
+            Localization = node["Localization"].ToText();
         }
 
         public virtual void Save(XmlDocument document, XmlNode node)
