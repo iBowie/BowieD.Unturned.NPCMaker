@@ -24,8 +24,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
             ContextMenu pbmenu = new ContextMenu();
             pbmenu.Items.Add(ContextHelper.CreateSelectAssetButton(typeof(GameDialogueAsset), (asset) =>
             {
-                Prev = asset.id;
-                prevBox.Value = asset.id;
+                Prev = asset.ID;
+                prevBox.Value = asset.ID;
             }, "Control_SelectAsset_Dialogue", MahApps.Metro.IconPacks.PackIconMaterialKind.Chat));
 
             prevBox.ContextMenu = pbmenu;

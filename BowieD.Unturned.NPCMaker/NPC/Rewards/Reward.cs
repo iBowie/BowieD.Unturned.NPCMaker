@@ -221,7 +221,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                         vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
                         {
                             (valueControl as Controls.OptionalUInt16ValueControl).checkbox.IsChecked = true;
-                            (valueControl as Controls.OptionalUInt16ValueControl).upDown.Value = asset.id;
+                            (valueControl as Controls.OptionalUInt16ValueControl).upDown.Value = asset.ID;
                         }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
                         valueControl.ContextMenu = vcMenu;
                         (valueControl as Controls.OptionalUInt16ValueControl).upDown.ContextMenu = vcMenu;
@@ -266,7 +266,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                         var vcMenu = new ContextMenu();
                         vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
                         {
-                            (valueControl as MahApps.Metro.Controls.NumericUpDown).Value = asset.id;
+                            (valueControl as MahApps.Metro.Controls.NumericUpDown).Value = asset.ID;
                         }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
                         (valueControl as MahApps.Metro.Controls.NumericUpDown).ContextMenu = vcMenu;
                     }
@@ -318,7 +318,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                         var vcMenu = new ContextMenu();
                         vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
                         {
-                            (valueControl as TextBox).Text = asset.guid.ToString("N");
+                            (valueControl as TextBox).Text = asset.GUID.ToString("N");
                         }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
                         valueControl.ContextMenu = vcMenu;
                     }

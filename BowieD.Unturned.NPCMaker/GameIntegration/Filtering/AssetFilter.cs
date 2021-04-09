@@ -14,6 +14,6 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration.Filtering
         public string Name { get; }
 
         public bool IsEnabled { get; set; }
-        public abstract bool ShouldDisplay(GameAsset asset);
+        public abstract bool ShouldDisplay(IAssetPickable asset);
     }
 }

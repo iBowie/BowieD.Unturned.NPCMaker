@@ -23,7 +23,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         public string valueFormat;
         public CurrencyEntry[] entries;
 
-        public override bool GUIDOverID => true;
+        public override EIDDef IDDef => EIDDef.GUID;
 
         protected override void readAsset(IFileReader reader)
         {

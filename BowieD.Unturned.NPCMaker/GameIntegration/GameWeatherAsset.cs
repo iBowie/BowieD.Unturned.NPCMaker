@@ -13,6 +13,6 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
         }
 
-        public override bool GUIDOverID => true;
+        public override EIDDef IDDef => EIDDef.GUID;
     }
 }

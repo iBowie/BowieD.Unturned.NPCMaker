@@ -289,8 +289,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
             dialogueIDContext.Items.Add(ContextHelper.CreateSelectAssetButton(typeof(GameDialogueAsset), (asset) =>
             {
-                this.DialogueID = asset.id;
-                MainWindow.Instance.txtStartDialogueID.Value = asset.id;
+                this.DialogueID = asset.ID;
+                MainWindow.Instance.txtStartDialogueID.Value = asset.ID;
             }, "Control_SelectAsset_Dialogue", MahApps.Metro.IconPacks.PackIconMaterialKind.Chat));
 
             MainWindow.Instance.txtStartDialogueID.ContextMenu = dialogueIDContext;

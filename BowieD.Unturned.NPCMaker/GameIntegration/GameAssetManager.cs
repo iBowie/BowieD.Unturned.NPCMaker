@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration.Devkit;
+using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Parsing;
 using System;
@@ -12,6 +13,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
     public static class GameAssetManager
     {
         private static readonly List<GameAsset> _assets = new List<GameAsset>();
+        private static readonly Dictionary<string, IList<IDevkitHierarchyItem>> _devkitItems = new Dictionary<string, IList<IDevkitHierarchyItem>>();
 
         public static bool HasImportedAssets
         {
@@ -44,7 +46,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 }
             }
         }
-        public static IEnumerable<GameAsset> GetAllAssets(Type type)
+        public static IEnumerable<IAssetPickable> GetAllAssets(Type type)
         {
             if (typeof(GameAsset).IsAssignableFrom(type))
             {
@@ -56,8 +58,21 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                     }
                 }
             }
+            else if (typeof(IDevkitHierarchyItem).IsAssignableFrom(type))
+            {
+                foreach (var dhiList in _devkitItems.Values)
+                {
+                    foreach (var dhi in dhiList)
+                    {
+                        if (type.IsAssignableFrom(dhi.GetType()))
+                        {
+                            yield return dhi;
+                        }
+                    }
+                }
+            }
             else
-                throw new ArgumentException("Expected derived class from GameAsset");
+                throw new ArgumentException($"Expected derived class from {nameof(GameAsset)} or {nameof(IDevkitHierarchyItem)}");
         }
         public static IEnumerable<T> GetAllAssets<T>() where T : GameAsset
         {
@@ -166,7 +181,9 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 ignoreFileNames.Add(langValue + ".dat");
             }
 
-            foreach (FileInfo file in new DirectoryInfo(directory).GetFiles("*.dat", SearchOption.AllDirectories))
+            DirectoryInfo curDirInfo = new DirectoryInfo(directory);
+
+            foreach (FileInfo file in curDirInfo.GetFiles("*.dat", SearchOption.AllDirectories))
             {
                 if (ignoreFileNames.Contains(file.Name))
                 {
@@ -175,9 +192,14 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 files.Enqueue(new LegacyFileInfo(file));
             }
 
-            foreach (FileInfo file in new DirectoryInfo(directory).GetFiles("*.asset", SearchOption.AllDirectories))
+            foreach (FileInfo file in curDirInfo.GetFiles("*.asset", SearchOption.AllDirectories))
             {
                 files.Enqueue(new AssetFileInfo(file));
+            }
+
+            foreach (FileInfo file in curDirInfo.GetFiles("Level.hierarchy", SearchOption.AllDirectories))
+            {
+                files.Enqueue(new LevelHierarchyInfo(file));
             }
 
             int index = -1;
@@ -210,6 +232,14 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                         {
                             _assets.Add(res.Item2);
                             ImportedAssetCount++;
+                        }
+                    }
+                    else if (fi is LevelHierarchyInfo)
+                    {
+                        var res = ReadHierarchy(fi.Info.FullName, origin);
+                        if (res.Count > 0)
+                        {
+                            _devkitItems[fi.Info.FullName] = res;
                         }
                     }
                 }
@@ -258,6 +288,10 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             public AssetFileInfo(FileInfo info) : base(info)
             {
             }
+        }
+        private class LevelHierarchyInfo : ScannedFileInfo
+        {
+            public LevelHierarchyInfo(FileInfo info) : base(info) { }
         }
 
         public static void Purge()
@@ -454,6 +488,44 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 default:
                     return new Tuple<bool, GameAsset>(true, new GameAsset(name, id, guid, vt, origin));
             }
+        }
+        private static IList<IDevkitHierarchyItem> ReadHierarchy(string fileName, EGameAssetOrigin origin)
+        {
+            List<IDevkitHierarchyItem> res = new List<IDevkitHierarchyItem>();
+
+            using (StreamReader sr = new StreamReader(fileName))
+            {
+                IFileReader reader;
+                try
+                {
+                    reader = new KVTableReader(sr);
+
+                    int itemCount = reader.readArrayLength("Items");
+                    
+                    for (int i = 0; i < itemCount; i++)
+                    {
+                        IFileReader itemReader = reader.readObject(i);
+                        Type type = itemReader.readValue<Type>("Type");
+                        if (type == null)
+                            continue;
+
+                        IDevkitHierarchyItem devkitHierarchyItem = (IDevkitHierarchyItem)Activator.CreateInstance(type, fileName, origin);
+                        if (devkitHierarchyItem != null)
+                        {
+                            itemReader.readKey("Item");
+                            devkitHierarchyItem.read(itemReader);
+
+                            res.Add(devkitHierarchyItem);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    App.Logger.LogException($"Could not parse level hierarchy of '{fileName}'", ex: ex);
+                }
+            }
+
+            return res;
         }
     }
 }

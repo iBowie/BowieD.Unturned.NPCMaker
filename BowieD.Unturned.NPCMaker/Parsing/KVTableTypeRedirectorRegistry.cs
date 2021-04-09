@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.GameIntegration.Devkit;
 using System.Collections.Generic;
 
 namespace BowieD.Unturned.NPCMaker.Parsing
@@ -32,6 +33,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
 
             add("SDG.Unturned.ItemCurrencyAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", typeof(GameCurrencyAsset).AssemblyQualifiedName);
             add("SDG.Unturned.WeatherAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", typeof(GameWeatherAsset).AssemblyQualifiedName);
+            add("SDG.Framework.Devkit.Spawnpoint, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", typeof(Spawnpoint).AssemblyQualifiedName);
         }
     }
 }

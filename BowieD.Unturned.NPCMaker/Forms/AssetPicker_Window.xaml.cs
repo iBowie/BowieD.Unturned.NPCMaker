@@ -8,6 +8,7 @@ using BowieD.Unturned.NPCMaker.ViewModels;
 using MahApps.Metro.IconPacks;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -139,7 +140,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
         private DispatcherTimer _searchTimer;
 
-        public GameAsset SelectedAsset { get; private set; }
+        public IAssetPickable SelectedAsset { get; private set; }
 
         void RefreshAssets()
         {
@@ -150,7 +151,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             foreach (Grid g in stack.Children)
             {
-                if (g.Tag is GameAsset asset)
+                if (g.Tag is IAssetPickable asset)
                 {
                     string aName;
                     string vName;
@@ -158,23 +159,23 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     if (asset is IHasNameOverride no)
                         vName = no.NameOverride;
                     else
-                        vName = asset.name;
+                        vName = asset.Name;
 
                     if (asset is ISearchNameOverride searchNameOverride)
                         aName = searchNameOverride.SearchNameOverride.ToLowerInvariant();
                     else if (asset is IHasNameOverride nameOverride)
                         aName = nameOverride.NameOverride.ToLowerInvariant();
-                    else if (string.IsNullOrEmpty(asset.name))
+                    else if (string.IsNullOrEmpty(asset.Name))
                         aName = string.Empty;
                     else
-                        aName = asset.name.ToLowerInvariant();
+                        aName = asset.Name.ToLowerInvariant();
 
                     bool shouldDisplay;
 
                     if (string.IsNullOrEmpty(searchText) ||
                         aName.Contains(searchTextLower) ||
-                        asset.id.ToString().Contains(searchText) ||
-                        Guid.TryParse(searchTextLower, out var searchGuid) && asset.guid == searchGuid)
+                        asset.ID.ToString().Contains(searchText) ||
+                        Guid.TryParse(searchTextLower, out var searchGuid) && asset.GUID == searchGuid)
                     {
                         shouldDisplay = true;
                     }
@@ -185,7 +186,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                     if (shouldDisplay)
                     {
-                        switch (asset.origin)
+                        switch (asset.Origin)
                         {
                             case EGameAssetOrigin.Project when filter_origin_project.IsChecked == false:
                             case EGameAssetOrigin.Unturned when filter_origin_unturned.IsChecked == false:
@@ -239,38 +240,76 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 }
             }
         }
+
+        object getOrderByItem(IAssetPickable pickable)
+        {
+            switch (pickable.IDDef)
+            {
+                case EIDDef.ID:
+                    return pickable.ID;
+                case EIDDef.GUID:
+                    return pickable.GUID;
+                case EIDDef.FILEORIGIN when pickable is IHasOriginFile hof:
+                    return hof.OriginFileName;
+                case EIDDef.FILEORIGIN_DIR when pickable is IHasOriginFile hof:
+                    return Path.GetDirectoryName(hof.OriginFileName);
+                case EIDDef.FILEORIGIN_DIR_SHORT when pickable is IHasOriginFile hof:
+                    return Path.GetDirectoryName(hof.OriginFileName);
+                default:
+                    return pickable;
+            }
+        }
+        string getDisplayID(IAssetPickable pickable)
+        {
+            switch (pickable.IDDef)
+            {
+                case EIDDef.ID:
+                    return pickable.ID.ToString();
+                case EIDDef.GUID:
+                    return pickable.GUID.ToString("N");
+                case EIDDef.FILEORIGIN when pickable is IHasOriginFile hof:
+                    return hof.OriginFileName;
+                case EIDDef.FILEORIGIN_DIR when pickable is IHasOriginFile hof:
+                    return Path.GetDirectoryName(hof.OriginFileName);
+                case EIDDef.FILEORIGIN_DIR_SHORT when pickable is IHasOriginFile hof:
+                    return new DirectoryInfo(Path.GetDirectoryName(hof.OriginFileName)).Name;
+                default:
+                    return pickable.ToString();
+            }
+        }
+
         void SetupAssets()
         {
             ClearList();
 
-            IEnumerable<GameAsset> assets = GameAssetManager.GetAllAssets(assetType);
+            IEnumerable<IAssetPickable> assets = GameAssetManager.GetAllAssets(assetType);
 
-            IEnumerable<GameAsset> orderedAssets;
+            IEnumerable<IAssetPickable> orderedAssets;
 
             switch (orderMode)
             {
                 case EOrderByMode.ID_A:
-                    orderedAssets = assets.OrderBy(d => d.origin).ThenBy(d => d.GUIDOverID ? (object)d.guid : (object)d.id);
+                    orderedAssets = assets.OrderBy(d => d.Origin).ThenBy(d => getOrderByItem(d).ToString());
                     break;
                 case EOrderByMode.ID_D:
-                    orderedAssets = assets.OrderBy(d => d.origin).ThenByDescending(d => d.GUIDOverID ? (object)d.guid : (object)d.id);
+                    orderedAssets = assets.OrderBy(d => d.Origin).ThenByDescending(d => getOrderByItem(d).ToString());
                     break;
                 case EOrderByMode.Name_A:
-                    orderedAssets = assets.OrderBy(d => d.origin).ThenBy(d =>
+                    orderedAssets = assets.OrderBy(d => d.Origin).ThenBy(d =>
                     {
                         if (d is IHasNameOverride nameOverride)
                             return nameOverride.NameOverride;
                         else
-                            return d.name;
+                            return d.Name;
                     });
                     break;
                 case EOrderByMode.Name_D:
-                    orderedAssets = assets.OrderBy(d => d.origin).ThenByDescending(d =>
+                    orderedAssets = assets.OrderBy(d => d.Origin).ThenByDescending(d =>
                     {
                         if (d is IHasNameOverride nameOverride)
                             return nameOverride.NameOverride;
                         else
-                            return d.name;
+                            return d.Name;
                     });
                     break;
                 default:
@@ -284,7 +323,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                 addEntryButton.Command = new BaseCommand(() =>
                 {
-                    GameAsset createdA = (GameAsset)Activator.CreateInstance(assetType);
+                    IAssetPickable createdA = (IAssetPickable)Activator.CreateInstance(assetType, EGameAssetOrigin.Project);
 
                     if (createdA is ICreatable createable)
                         createable.OnCreate();
@@ -342,18 +381,11 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 }
                 else
                 {
-                    markup.Markup(tb, asset.name);
+                    markup.Markup(tb, asset.Name);
                 }
 
-                if (asset.GUIDOverID)
-                {
-                    tbid.Text = asset.guid.ToString("N");
-                    tbid.ToolTip = tbid.Text;
-                }
-                else
-                {
-                    tbid.Text = asset.id.ToString();
-                }
+                tbid.Text = getDisplayID(asset);
+                tbid.ToolTip = tbid.Text;
 
                 g.Children.Add(l);
                 g.Children.Add(lid);
@@ -389,18 +421,11 @@ namespace BowieD.Unturned.NPCMaker.Forms
                         }
                         else
                         {
-                            markup.Markup(tb, asset.name);
+                            markup.Markup(tb, asset.Name);
                         }
 
-                        if (asset.GUIDOverID)
-                        {
-                            tbid.Text = asset.guid.ToString("N");
-                            tbid.ToolTip = tbid.Text;
-                        }
-                        else
-                        {
-                            tbid.Text = asset.id.ToString();
-                        }
+                        tbid.Text = getDisplayID(asset);
+                        tbid.ToolTip = tbid.Text;
                     });
 
                     editableGrid.Children.Add(editButton);

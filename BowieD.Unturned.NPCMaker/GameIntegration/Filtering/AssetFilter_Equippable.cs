@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration.Filtering
 
         private readonly Equip_Type slot;
 
-        public override bool ShouldDisplay(GameAsset asset)
+        public override bool ShouldDisplay(IAssetPickable asset)
         {
             if (asset is GameItemAsset gia)
             {

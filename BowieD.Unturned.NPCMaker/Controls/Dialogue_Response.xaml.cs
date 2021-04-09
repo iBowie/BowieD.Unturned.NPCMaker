@@ -107,7 +107,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             apw.Owner = MainWindow.Instance;
             if (apw.ShowDialog() == true)
             {
-                txtBoxQuestID.Value = apw.SelectedAsset.id;
+                txtBoxQuestID.Value = apw.SelectedAsset.ID;
             }
         }
 
@@ -117,7 +117,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             apw.Owner = MainWindow.Instance;
             if (apw.ShowDialog() == true)
             {
-                txtBoxVendorID.Value = apw.SelectedAsset.id;
+                txtBoxVendorID.Value = apw.SelectedAsset.ID;
             }
         }
 
@@ -127,7 +127,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             apw.Owner = MainWindow.Instance;
             if (apw.ShowDialog() == true)
             {
-                txtBoxDialogueID.Value = apw.SelectedAsset.id;
+                txtBoxDialogueID.Value = apw.SelectedAsset.ID;
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.GameIntegration.Devkit;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.ViewModels;
 using System;
@@ -59,11 +60,11 @@ namespace BowieD.Unturned.NPCMaker.Forms
             ContextMenu cmenu = new ContextMenu();
             MenuItem selectItem = ContextHelper.CreateSelectAssetButton(typeof(GameItemAsset), (asset) =>
             {
-                txtBoxID.Value = asset.id;
+                txtBoxID.Value = asset.ID;
             }, "Control_SelectAsset_Item", MahApps.Metro.IconPacks.PackIconMaterialKind.Archive);
             MenuItem selectVehicle = ContextHelper.CreateSelectAssetButton(typeof(GameVehicleAsset), (asset) =>
             {
-                txtBoxID.Value = asset.id;
+                txtBoxID.Value = asset.ID;
             }, "Control_SelectAsset_Vehicle", MahApps.Metro.IconPacks.PackIconMaterialKind.Car);
 
             selectItem.Command = new AdvancedCommand(() => { }, (obj) =>
@@ -79,6 +80,15 @@ namespace BowieD.Unturned.NPCMaker.Forms
             cmenu.Items.Add(selectVehicle);
 
             txtBoxID.ContextMenu = cmenu;
+
+            ContextMenu cmenuSpawnpoint = new ContextMenu();
+
+            cmenuSpawnpoint.Items.Add(ContextHelper.CreateSelectAssetButton(typeof(Spawnpoint), (iap) =>
+            {
+                txtBoxSpawnpoint.Text = iap.Name;
+            }, "Control_SelectAsset_DKSpawnpoint", MahApps.Metro.IconPacks.PackIconMaterialKind.MapMarker));
+
+            txtBoxSpawnpoint.ContextMenu = cmenuSpawnpoint;
         }
         public VendorItem Result { get; private set; }
 

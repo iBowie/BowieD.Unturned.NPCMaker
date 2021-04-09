@@ -61,8 +61,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
             cmenu4.Items.Add(ContextHelper.CreateSelectAssetButton(typeof(GameCurrencyAsset), (asset) =>
             {
-                Currency = asset.guid.ToString("N");
-                MainWindow.Instance.vendorCurrencyBox.Text = asset.guid.ToString("N");
+                Currency = asset.GUID.ToString("N");
+                MainWindow.Instance.vendorCurrencyBox.Text = asset.GUID.ToString("N");
             }, "Control_SelectAsset_Currency", MahApps.Metro.IconPacks.PackIconMaterialKind.CurrencyUsd));
             cmenu4.Items.Add(ContextHelper.CreateGenericButton(new AdvancedCommand(() =>
             {

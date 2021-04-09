@@ -299,6 +299,7 @@
     <Compile Include="Forms\Form_About.xaml.cs">
       <DependentUpon>Form_About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameIntegration\Devkit\Spawnpoint.cs" />
     <Compile Include="GameIntegration\EGameAssetCategory.cs" />
     <Compile Include="GameIntegration\EGameAssetOrigin.cs" />
     <Compile Include="GameIntegration\EGameItemRarity.cs" />
