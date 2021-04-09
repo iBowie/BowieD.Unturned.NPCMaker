@@ -340,6 +340,7 @@
     <Compile Include="GameIntegration\GameVendorAsset.cs" />
     <Compile Include="GameIntegration\GameWeatherAsset.cs" />
     <Compile Include="GameIntegration\IEditable.cs" />
+    <Compile Include="GameIntegration\Level\LevelDatManager.cs" />
     <Compile Include="GameIntegration\ProjectAsset.cs" />
     <Compile Include="GameIntegration\Thumbnails\IHasAnimatedThumbnail.cs" />
     <Compile Include="GameIntegration\Thumbnails\IHasIcon.cs" />
@@ -480,6 +481,7 @@
     <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableUShortReader.cs" />
     <Compile Include="Parsing\KVTable\TReaders\SystemTypes\KVTableGUIDReader.cs" />
     <Compile Include="Parsing\KVTable\TReaders\SystemTypes\KVTableTypeReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\UnityTypes\KVTableVector3Reader.cs" />
     <Compile Include="Parsing\ParseTool.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
