@@ -643,6 +643,7 @@
         "Control_SelectAsset_Spawn": "Выбрать таблицу",
         "Control_SelectAsset_Weather": "Выбрать погоду",
         "Control_SelectAsset_Project_Flag": "Выбрать флаг",
+        "Control_SelectAsset_DKSpawnpoint": "Выбрать точку появления",
         "Control_Vendor_SwitchToExperience": "Переключиться на опыт",
         "Control_FindUnusedID": "Найти свободный ID",
         "Control_FindUnusedID_Failed": "Не удалось найти свободный ID",

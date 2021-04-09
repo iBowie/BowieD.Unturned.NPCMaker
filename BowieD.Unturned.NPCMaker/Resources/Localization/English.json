@@ -643,6 +643,7 @@
         "Control_SelectAsset_Spawn": "Select Spawn",
         "Control_SelectAsset_Weather": "Select Weather",
         "Control_SelectAsset_Project_Flag": "Select Flag",
+        "Control_SelectAsset_DKSpawnpoint": "Select Spawnpoint",
         "Control_Vendor_SwitchToExperience": "Switch to experience",
         "Control_FindUnusedID": "Find unused ID",
         "Control_FindUnusedID_Failed": "Could not find unused ID",
