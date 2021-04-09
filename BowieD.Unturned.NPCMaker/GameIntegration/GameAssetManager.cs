@@ -254,7 +254,12 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
         public static bool TryFindUnusedID(EGameAssetCategory category, out ushort id)
         {
-            for (ushort res = 2000; res < ushort.MaxValue; res++)
+            var proj = MainWindow.CurrentProject.data.settings;
+
+            ushort bottomLimit = Math.Max((ushort)2000, proj.idRangeMin);
+            ushort upLimit = Math.Min(ushort.MaxValue, proj.idRangeMax);
+
+            for (ushort res = bottomLimit; res < upLimit; res++)
             {
                 if (TryGetAsset<GameAsset>((asset) => asset.id == res && asset.Category == category, out _))
                 {
