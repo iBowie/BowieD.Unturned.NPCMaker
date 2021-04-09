@@ -5,6 +5,7 @@ using BowieD.Unturned.NPCMaker.Parsing;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,7 +14,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
     public static class GameAssetManager
     {
         private static readonly List<GameAsset> _assets = new List<GameAsset>();
-        private static readonly Dictionary<string, IList<IDevkitHierarchyItem>> _devkitItems = new Dictionary<string, IList<IDevkitHierarchyItem>>();
+        private static readonly Dictionary<string, List<IDevkitHierarchyItem>> _devkitItems = new Dictionary<string, List<IDevkitHierarchyItem>>();
 
         public static bool HasImportedAssets
         {
@@ -297,6 +298,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         public static void Purge()
         {
             _assets.Clear();
+            _devkitItems.Clear();
             HasImportedAssets = false;
             ImportedAssetCount = 0;
         }
@@ -304,6 +306,13 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         public static void Purge(EGameAssetOrigin origin)
         {
             _assets.RemoveAll(d => d.origin == origin);
+            
+            foreach (var kv in _devkitItems.ToList())
+            {
+                kv.Value.RemoveAll(d => d.Origin == origin);
+                if (kv.Value.Count == 0)
+                    _devkitItems.Remove(kv.Key);
+            }
         }
 
         private static Tuple<bool, GameAsset> TryReadAssetFile(string fileName, EGameAssetOrigin origin)
@@ -489,7 +498,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                     return new Tuple<bool, GameAsset>(true, new GameAsset(name, id, guid, vt, origin));
             }
         }
-        private static IList<IDevkitHierarchyItem> ReadHierarchy(string fileName, EGameAssetOrigin origin)
+        private static List<IDevkitHierarchyItem> ReadHierarchy(string fileName, EGameAssetOrigin origin)
         {
             List<IDevkitHierarchyItem> res = new List<IDevkitHierarchyItem>();
 
