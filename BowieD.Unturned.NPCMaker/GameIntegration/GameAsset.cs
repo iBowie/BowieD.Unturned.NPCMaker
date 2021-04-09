@@ -7,28 +7,6 @@ using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration
 {
-    public interface IAssetPickable
-    {
-        ushort ID { get; }
-        Guid GUID { get; }
-        string Name { get; }
-        EGameAssetOrigin Origin { get; }
-
-        EIDDef IDDef {get;}
-    }
-    public interface IHasOriginFile : IAssetPickable
-    {
-        string OriginFileName { get; }
-    }
-    public enum EIDDef
-    {
-        NONE = 0,
-        ID = 1 << 0,
-        GUID = 1 << 1,
-        FILEORIGIN = 1 << 2,
-        FILEORIGIN_DIR = 1 << 3,
-        FILEORIGIN_DIR_SHORT = 1 << 4
-    }
     public class GameAsset : IFileReadable, IHasTextToolTip, IAssetPickable
     {
         public GameAsset(string name, ushort id, Guid guid, string type, EGameAssetOrigin origin)
