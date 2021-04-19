@@ -4,6 +4,7 @@
     "General":
     {
         "Project_SaveFilter": "Файл проекта NPC (*.npcproj)",
+        "Project_SaveFilter_Legacy": "Файл старого проекта NPC (*.npc)",
         "Project_TemplateFilter": "Файл шаблона NPC (*.npctemplate)",
         "Title": "Unturned 3.0 NPC Maker by BowieD",
         "Configuration_Title": "Настройки",
