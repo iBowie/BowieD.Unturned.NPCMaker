@@ -1,12 +1,13 @@
 {
-    "Author": "Alvaro Manchino, DavidNew",
+    "Author": "Alvaro Manchino, DavidNew, Erwin",
     "Name": "Español (ES)",
     "General":
     {
         "Project_SaveFilter": "Proyecto NPC (*.npcproj)",
         "Project_TemplateFilter": "Plantilla NPC (*.npctemplate)",
         "Title": "Creador NPC para Unturned 3.0 por BowieD",
-        "Configuration_Title": "Ajustes"
+        "Configuration_Title": "Ajustes",
+        "UGC_ImageFilter": "Imagenes soportadas ({0})"
     },
     "Options":
     {
@@ -29,6 +30,12 @@
         "alternateLogicTranslation": "Usa logicas alternativas para cada caso",
         "replaceMissingKeysWithEnglish": "Remplace las Keys faltantes con Ingles",
         "useCommentsInsteadOfData": "Usa comentarios en vez de data",
+        "importImportVanilla": "Importar archivos vanilla",
+        "importImportWorkshop": "Importar archivos de la workshop",
+        "importImportHooked": "Importar archivos anclados",
+        "generateThumbnailsBeforehand": "Generar miniaturas de antemano",
+        "highlightSearch": "Busqueda destacada",
+        "useOldStyleMoveUpDown": "Usar moviento clasico Arriba/Abajo",
 
         "alternateLogicTranslation_Tooltip": "Remplaza los simbolos matematicos con letras",
         "animateControls_Tooltip": "Añade unos toques agradables a los controles",
@@ -42,7 +49,13 @@
         "language_Tooltip": "Lenguaje, es el, lenguaje",
         "scale_Tooltip": "Ajusta la escala de la APP en tu pantalla",
         "replaceMissingKeysWithEnglish_Tooltip": "Remplace las Keys faltantes desde el Diccionario Ingles",
-        "useCommentsInsteadOfData_Tooltip": "En las pestañas utiliza comentarios definidos por ti en lugar de los datos contenidos en la pestaña"
+        "useCommentsInsteadOfData_Tooltip": "En las pestañas utiliza comentarios definidos por ti en lugar de los datos contenidos en la pestaña",
+        "importImportVanilla_Tooltip": "Si esta aplicación debe importar archivos del juego base o no",
+        "importImportWorkshop_Tooltip": "Si esta aplicacion debe importar archivos descargados de la workshop o no",
+        "importImportHooked_Tooltip": "Si está aplicacion debe importar archivos anclados al proyecto o no",
+        "generateThumbnailsBeforehand_Tooltip": "Incrementar el tiempo de inicio, pero reduce el tiempo de creacion de miniaturas una ves iniciada",
+        "highlightSearch_Tooltip": "Colores que coinciden con parte de una consulta de búsqueda. Característica muy cara de rendimiento en este momento.",
+        "useOldStyleMoveUpDown_Tooltip": "Desabilitar el nuevo arrastre"
     },
     "Character":
     {
@@ -296,7 +309,19 @@
         "Shared_Logic_Greater_Than_Or_Equal_To": ">=",
         "Shared_Logic_Less_Than": "<",
         "Shared_Logic_Less_Than_Or_Equal_To": "<=",
-        "Shared_Logic_Not_Equal": "!="
+        "Shared_Logic_Not_Equal": "!=",
+        "Type_Weather_Status": "Estado del tiempo",
+        "Type_Weather_Blend_Alpha": "Mezcla del tiempo Alpha",
+        "Weather_Status_GUID": "GUID tiempo",
+        "Weather_Status_Value": "Estado",
+        "Weather_Status_Value_Active": "Activo",
+        "Weather_Status_Value_Transitioning_In": "Transición en",
+        "Weather_Status_Value_Fully_Transitioned_In": "Transición completa en",
+        "Weather_Status_Value_Transitioning_Out": "Transición fuerá",
+        "Weather_Status_Value_Fully_Transitioned_Out": "Transición completa fuera en",
+        "Weather_Status_Value_Transitioning": "Transición",
+        "Weather_Blend_Alpha_GUID": "GUID tiempo",
+        "Weather_Blend_Alpha_Value": "Valor de mezcla"
     },
     "Reward":
     {
@@ -425,6 +450,14 @@
         "NE_4002_Solution": "Incrementar valor de la Entrada Invalida",
         "NE_4003_Solution": "Crear una entrada con valor de 1",
         "NE_4004_Solution": "Crear una entrada",
+        "NE_0004_Desc": "El personaje {0} [{1}] esta fuera del rango de IDs [{2};{3}].",
+        "NE_1008_Desc": "El dialogo {0} esta fuera del rango de IDs [{1};{2}].",
+        "NE_2002_Desc": "La tienda {0} [{1}] esta fuera del rango de IDs [{2};{3}].",
+        "NE_3003_Desc": "La mision {0} [{1}] esta fuera del rango de IDs [{2};{3}].",
+        "NE_0004_Solution": "Cambia la ID para que se encuentre en el rango establecido",
+        "NE_1008_Solution": "Cambia la ID para que se encuentre en el rango establecido",
+        "NE_2002_Solution": "Cambia la ID para que se encuentre en el rango establecido",
+        "NE_3003_Solution": "Cambia la ID para que se encuentre en el rango establecido",
 
         "deep_char": "[{0}] ya es usado por otro personaje In-Game.",
         "deep_dialogue": "[{0}] ya es usado por otro dialogo In-Game.",
@@ -472,7 +505,11 @@
         "StartUp_Free": "Esta app es absolutamente gratuita. Si alguien te ha cobrado por esta - reportalo a BowieD.",
         "StartUp_Patreon": "Considera apoyarme en Patreon",
         "StartUp_Patreon_Open": "Ir a Patreon",
-        "StartUp_Patreon_Patrons": "Patreons honorables: {0}"
+        "StartUp_Patreon_Patrons": "Patreons honorables: {0}",
+        "Upload_Done": "¡Subida terminada!",
+        "Upload_Done_Goto": "Abrir la pagina del mod en Steam",
+        "Upload_Error": "No se pudo subir el mod a la workshop: {0}",
+        "StartUp_IconsNotGenerated": "Durante el inicio la app no pudo encontrar algunos iconos de los objetos. Si quieres ver todos los iconos de los objetos en la app sigue estos pasos\n\n1. Abre unturned\n2. Ve al menu principal\n3.Abre la pestaña workshop\n4. Apreta F1 en tu teclado\n5. Clickea en  'All Item Icons' en la esquina superior izquierda\n6. Espere a que el juego responda\n\nDespués de todos estos pasos, es de esperar que los iconos aparezcan en la aplicación."
     },
     "Interface":
     {
@@ -501,6 +538,60 @@
         "AssetPicker_ToolTip_GameItemClothingAsset_Beard_Invisible": "Esconde la Barba",
         "AssetPicker_ToolTip_GameItemBagAsset_Width": "Capacidad Ancho: {0}",
         "AssetPicker_ToolTip_GameItemBagAsset_Height": "Capacidad Altura: {0}",
+
+        "AssetPicker_Filter_Origin_Hooked": "Anclados",
+        "AssetPicker_Editable_Edit_ToolTip": "Editar",
+        "AssetPicker_Deletable_Delete_ToolTip": "Borrar",
+        "AssetPicker_Createable_AddEntry": "Añadir entrada",
+        "AssetPicker_OrderBy_ID": "ID",
+        "AssetPicker_OrderBy_Name": "Nombre",
+        "UGC_Title": "Subir mod",
+        "UGC_Preview": "Miniatura",
+        "UGC_Preview_Select": "Seleccionar miniatura",
+        "UGC_Preview_Select_TooLarge": "La miniatura seleccionada es muy larga",
+        "UGC_Name": "Nombre del mod",
+        "UGC_Desc": "Descripcion del mod",
+        "UGC_AllowedIPs": "IPs permitidas",
+        "UGC_Change": "Cambios",
+        "UGC_Visibility": "Visibilidad",
+        "UGC_Visibility_Public": "Publico",
+        "UGC_Visibility_Friends": "Soló amigos",
+        "UGC_Visibility_Unlisted": "No listar",
+        "UGC_Visibility_Private": "Privado",
+        "UGC_Confirm": "Subir",
+        "UGC_Cancel": "Cancelar",
+        "UGC_AsUploaded": "Dejar vacio para mantener el valor antiguo",
+        "UGC_CreateUpdate_Title": "Tipo de carga",
+        "UGC_CreateUpdate_Create": "Crear nuevo mod",
+        "UGC_CreateUpdate_Update": "Actualiar existente",
+        "UGC_CreateUpdate_Cancel": "Cancelar",
+        "UGC_QueryList_Title": "Seleciona un mod existente para actualizar",
+        "UGC_QueryList_Cancel": "Cancelar",
+        "UGC_Steps_Uploading": "Subiendo...",
+        "UGC_Steps_Query": "Solicitando lista de mods...",
+        "Warning_Scale": "Parece que ha configurado la escala de la interfaz de usuario en valores que superan su pantalla.\n¿Quieres restablecer la escala a los valores predeterminados?",
+        "ProjectSettings_Title": "Configuracion del proyecto",
+        "ProjectSettings_HookedAssetsFolders_Title": "Carpeta de archivos anclados",
+        "ProjectSettings_HookedAssetsFolders_Add": "Añadir directorio",
+        "ProjectSettings_ProjectIDRange_Title": "Rango ID del proyecto",
+        "ProjectSettings_ProjectIDRange_Minimum": "Maximó",
+        "ProjectSettings_ProjectIDRange_Maximum": "Maximó",
+        "ProjectSettings_Save": "Guardar",
+        "ProjectSettings_Cancel": "Cancelar",
+        "StartUp_ImportGameAssets_Window_Step_Hooked": "Importando archivos anclados al proyecto desde '{0}'",
+        "Control_SelectAsset_Weather": "Selecionar",
+        "Control_SelectAsset_Project_Flag": "Select Flag",
+        "Control_SelectAsset_DKSpawnpoint": "Select Spawnpoint",
+        "Main_Menu_File_ExportToWorkshop": "Upload NPC to Workshop",
+        "Main_Menu_ProjectSettings": "Configuracion del proyecto",
+        "Main_Tab_Character_NoSelection_Hint": "Clickea aqui para añadir un nuevo personaje al proyecto.",
+        "Main_Tab_Dialogue_NoSelection_Hint": "Clickea aqui para añadir un nuevo dialogo al proyecto.",
+        "Main_Tab_Vendor_NoSelection_Hint": "Clickea aqui para añadir una nueva tienda al proyecto.",
+        "Main_Tab_Quest_NoSelection_Hint": "Clickea aqui para añadir una nueva misión al proyecto.",
+        "Main_Tab_Currency_NoSelection_Hint": "Clickea aqui para añadir una nueva moneda al proyecto.",
+        "Configuration_Tab_Import": "Importar",
+        "Configuration_Tab_Import_ChangeFolder": "Encontrar Unturned",
+        "Configuration_Tab_Import_ResetFolder": "Reiniciar",
         "AssetPicker_Filter_Equippable": "Enseñar Solo lo Equipable",
         "StartUp_ImportGameAssets_Title": "Mostrar Assets del Juego",
         "StartUp_ImportGameAssets_Content": "Quieres importar los assets de Unturned a la aplicación para una mejor experiencia?\nLos beneficios incluyen:\n- Seleccionar los assets existentes con el Clic Izquierdo en vez de hacerlo manualmente\n- Comprobación de errores mas precisa\n- Simulacion mas precisa\n- Mejor exhibicion de Items\n- Exportar directamente a Unturned\n\nNota: la importación de assets puede llevar algún tiempo",
@@ -715,7 +806,10 @@
     {
         "Dialogue":
         {
-            "Window_Title": "Vista del dialogo"
+            "Window_Title": "Vista del dialogo",
+            "Error_QuestNotFound": "No se encuentra la mision con la ID '{0}'. Se va a cerrar la simulacion.",
+            "Error_VendorNotFound": "No se encuentra la tienda con la ID '{0}'. Se va a cerrar la simulacion.",
+            "Error_DialogueNotFound": "No se encuentra la dialogo con la ID '{0}'. Se va a cerrar la simulacion."
         },
         "Vendor":
         {
@@ -782,7 +876,8 @@
             "Flag_ID": "Flag ID",
             "Flag_Value": " Valor Flag",
             "Flag_Set": "Añadir Flag",
-            "Flag_Remove": "Quitar Flag"
+            "Flag_Remove": "Quitar Flag",
+            "Flag_Name": "Nombre Bandera"
         },
         "Quests":
         {
@@ -799,7 +894,9 @@
             "Item_Quality": "Calidad Objeto",
             "Item_Add": "Añaar Item",
             "Item_Remove": "Quitar Item",
-            "Item_Remove_Count": "Cantidad"
+            "Item_Remove_Count": "Cantidad",
+            "Item_Name": "Nombre objecto",
+            "Item_Count": "Cuenta"
         }
     }
 }
