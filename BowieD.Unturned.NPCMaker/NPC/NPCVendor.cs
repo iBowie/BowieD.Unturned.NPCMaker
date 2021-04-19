@@ -102,7 +102,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             GUID = node.Attributes["guid"].ToText();
             Comment = node.Attributes["comment"].ToText();
 
-            ID = node["ID"].ToUInt16();
+            ID = node["id"].ToUInt16();
             Title = node["vendorTitle"].ToText();
             vendorDescription = node["vendorDescription"].ToText();
 
