@@ -73,7 +73,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             Forms.Universal_ListView ulv = new Forms.Universal_ListView(Response.rewards.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Reward, true)).ToList(), Universal_ItemList.ReturnType.Reward);
             RichPresence presence = new RichPresence
             {
-                Details = $"Editing NPC {MainWindow.Instance.txtEditorName.Text ?? "without name"}",
+                Details = $"Editing NPC {MainWindow.Instance.txtEditorName.Text ?? "without name"}".Shortify(125),
                 State = "Creating reward for a dialogue response"
             };
             (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
@@ -87,7 +87,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             Forms.Universal_ListView ulv = new Forms.Universal_ListView(Response.conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, true)).ToList(), Universal_ItemList.ReturnType.Condition);
             RichPresence presence = new RichPresence
             {
-                Details = $"Editing NPC {MainWindow.Instance.txtEditorName.Text ?? "without name"}",
+                Details = $"Editing NPC {MainWindow.Instance.txtEditorName.Text ?? "without name"}".Shortify(125),
                 State = "Creating condition for a dialogue response"
             };
             (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);

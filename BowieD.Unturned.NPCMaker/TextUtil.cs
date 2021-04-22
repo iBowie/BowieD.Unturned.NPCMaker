@@ -2,7 +2,7 @@
 {
     public static class TextUtil
     {
-        public static string Shortify(string original, int maxLength = 40)
+        public static string Shortify(this string original, int maxLength = 40)
         {
             if (string.IsNullOrEmpty(original))
                 return original ?? string.Empty;

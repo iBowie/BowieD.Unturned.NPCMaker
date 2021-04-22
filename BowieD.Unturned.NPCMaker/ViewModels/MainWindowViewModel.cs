@@ -261,10 +261,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 Assets = new Assets
                                 {
                                     SmallImageKey = "icon_info_outlined",
-                                    SmallImageText = $"Characters: {MainWindow.CurrentProject.data.characters.Count}"
+                                    SmallImageText = $"Characters: {MainWindow.CurrentProject.data.characters.Count}".Shortify(125)
                                 },
-                                Details = $"Current NPC: {CharacterTabViewModel.EditorName}",
-                                State = $"Display Name: {CharacterTabViewModel.DisplayName}"
+                                Details = $"Current NPC: {CharacterTabViewModel.EditorName}".Shortify(125),
+                                State = $"Display Name: {CharacterTabViewModel.DisplayName}".Shortify(125)
                             });
                         }
                         break;
@@ -279,10 +279,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 Assets = new Assets
                                 {
                                     SmallImageKey = "icon_chat_outlined",
-                                    SmallImageText = $"Dialogues: {MainWindow.CurrentProject.data.dialogues.Count}"
+                                    SmallImageText = $"Dialogues: {MainWindow.CurrentProject.data.dialogues.Count}".Shortify(125)
                                 },
-                                Details = $"Messages: {DialogueTabViewModel.Dialogue.Messages.Count}",
-                                State = $"Responses: {DialogueTabViewModel.Dialogue.Responses.Count}"
+                                Details = $"Messages: {DialogueTabViewModel.Dialogue.Messages.Count}".Shortify(125),
+                                State = $"Responses: {DialogueTabViewModel.Dialogue.Responses.Count}".Shortify(125)
                             });
                         }
                         break;
@@ -297,10 +297,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 Assets = new Assets
                                 {
                                     SmallImageKey = "icon_money_outlined",
-                                    SmallImageText = $"Vendors: {MainWindow.CurrentProject.data.vendors.Count}"
+                                    SmallImageText = $"Vendors: {MainWindow.CurrentProject.data.vendors.Count}".Shortify(125)
                                 },
-                                Details = $"Vendor Name: {VendorTabViewModel.Title}",
-                                State = $"Buy: {VendorTabViewModel.Vendor.items.Count(d => d.isBuy)} / Sell: {VendorTabViewModel.Vendor.items.Count(d => !d.isBuy)}"
+                                Details = $"Vendor Name: {VendorTabViewModel.Title}".Shortify(125),
+                                State = $"Buy: {VendorTabViewModel.Vendor.items.Count(d => d.isBuy)} / Sell: {VendorTabViewModel.Vendor.items.Count(d => !d.isBuy)}".Shortify(125)
                             });
                         }
                         break;
@@ -315,10 +315,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 Assets = new Assets
                                 {
                                     SmallImageKey = "icon_exclamation_outlined",
-                                    SmallImageText = $"Quests: {MainWindow.CurrentProject.data.quests.Count}"
+                                    SmallImageText = $"Quests: {MainWindow.CurrentProject.data.quests.Count}".Shortify(125)
                                 },
-                                Details = $"Quest Name: {QuestTabViewModel.Title}",
-                                State = $"Rewards: {QuestTabViewModel.Quest.rewards.Count} | Conds: {QuestTabViewModel.Quest.conditions.Count}"
+                                Details = $"Quest Name: {QuestTabViewModel.Title}".Shortify(125),
+                                State = $"Rewards: {QuestTabViewModel.Quest.rewards.Count} | Conds: {QuestTabViewModel.Quest.conditions.Count}".Shortify(125)
                             });
                         }
                         break;
@@ -333,10 +333,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 Assets = new Assets
                                 {
                                     SmallImageKey = "icon_money_outlined",
-                                    SmallImageText = $"Currencies: {MainWindow.CurrentProject.data.currencies.Count}"
+                                    SmallImageText = $"Currencies: {MainWindow.CurrentProject.data.currencies.Count}".Shortify(125)
                                 },
-                                Details = $"Currencies: {MainWindow.CurrentProject.data.currencies.Count}",
-                                State = $"Editing currencies"
+                                Details = $"Currencies: {MainWindow.CurrentProject.data.currencies.Count}".Shortify(125),
+                                State = $"Editing currencies".Shortify(125)
                             });
                         }
                         break;
@@ -351,10 +351,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 Assets = new Assets()
                                 {
                                     SmallImageKey = "icon_warning_outlined",
-                                    SmallImageText = $"Mistakes: {MainWindow.Instance.lstMistakes.Items.Count}"
+                                    SmallImageText = $"Mistakes: {MainWindow.Instance.lstMistakes.Items.Count}".Shortify(125)
                                 },
-                                Details = $"Critical errors: {Mistakes.MistakesManager.Criticals_Count}",
-                                State = $"Warnings: {Mistakes.MistakesManager.Warnings_Count}"
+                                Details = $"Critical errors: {Mistakes.MistakesManager.Criticals_Count}".Shortify(125),
+                                State = $"Warnings: {Mistakes.MistakesManager.Warnings_Count}".Shortify(125)
                             });
                             break;
                         }
@@ -371,8 +371,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     SmallImageKey = "icon_question_outlined",
                                     SmallImageText = "Chilling in another dimension"
                                 },
-                                Details = $"If you can see this message",
-                                State = $"It means that this user went across dimensions."
+                                Details = $"If you can see this message".Shortify(125),
+                                State = $"It means that this user went across dimensions.".Shortify(125)
                             });
                             break;
                         }
