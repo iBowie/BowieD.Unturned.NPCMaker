@@ -352,9 +352,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 if (addItemCommand == null)
                 {
-                    addItemCommand = new BaseCommand(() =>
+                    addItemCommand = new AdvancedCommand(() =>
                     {
-                        Universal_VendorItemEditor uvie = new Universal_VendorItemEditor();
+                        Universal_VendorItemEditor uvie = new Universal_VendorItemEditor(Vendor);
                         if (uvie.ShowDialog() == true)
                         {
                             VendorItem resultedVendorItem = uvie.Result;
@@ -364,6 +364,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             else
                                 AddItemSell(uil);
                         }
+                    }, (p) =>
+                    {
+                        return Vendor.items.Count < byte.MaxValue * 2;
                     });
                 }
                 return addItemCommand;

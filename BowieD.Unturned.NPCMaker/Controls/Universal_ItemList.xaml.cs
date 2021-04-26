@@ -169,7 +169,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
                     {
                         VendorItem Item = Value as VendorItem;
                         bool old = Item.isBuy;
-                        Forms.Universal_VendorItemEditor uvie = new Forms.Universal_VendorItemEditor(Item);
+                        Forms.Universal_VendorItemEditor uvie = new Forms.Universal_VendorItemEditor(MainWindow.Instance.MainWindowViewModel.VendorTabViewModel.Vendor, Item);
                         uvie.Owner = this.TryFindParent<Window>();
                         if (uvie.ShowDialog() == true)
                         {

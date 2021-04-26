@@ -21,9 +21,17 @@ namespace BowieD.Unturned.NPCMaker.Forms
     public partial class Universal_VendorItemEditor : Window
     {
         private bool ignoreAnimation = true;
-        public Universal_VendorItemEditor(VendorItem startItem = null)
+        private readonly NPCVendor _vendor;
+
+        public Universal_VendorItemEditor(NPCVendor vendor, VendorItem startItem = null)
         {
             InitializeComponent();
+
+            _vendor = vendor;
+
+            bool 
+                allowBuy = vendor.BuyItems.Count < byte.MaxValue, 
+                allowSell = vendor.SellItems.Count < byte.MaxValue;
 
             ignoreAnimation = true;
 
@@ -76,6 +84,60 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 return Selected_ItemType == ItemType.VEHICLE;
             });
 
+            saveButton.Command = new AdvancedCommand(() =>
+            {
+                try
+                {
+                    Result.id = (ushort)txtBoxID.Value;
+                    Result.type = Selected_ItemType;
+                    if (Result.type == ItemType.VEHICLE)
+                    {
+                        Result.spawnPointID = txtBoxSpawnpoint.Text;
+                    }
+
+                    Result.isBuy = IsBuy;
+                    Result.cost = (uint)txtBoxCost.Value;
+                    if (Result.conditions == null)
+                    {
+                        Result.conditions = new List<Condition>();
+                    }
+
+                    isSellSelected = !IsBuy;
+                    lastType = Selected_ItemType;
+                    DialogResult = true;
+                    Close();
+                }
+                catch { }
+            }, (p) => 
+            {
+                if (IsBuy)
+                {
+                    if (allowBuy)
+                    {
+                        tooManyItemsLabel.Visibility = Visibility.Collapsed;
+                        return true;
+                    }
+                    else
+                    {
+                        tooManyItemsLabel.Visibility = Visibility.Visible;
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (allowSell)
+                    {
+                        tooManyItemsLabel.Visibility = Visibility.Collapsed;
+                        return true;
+                    }
+                    else
+                    {
+                        tooManyItemsLabel.Visibility = Visibility.Visible;
+                        return false;
+                    }
+                }
+            });
+
             cmenu.Items.Add(selectItem);
             cmenu.Items.Add(selectVehicle);
 
@@ -92,13 +154,20 @@ namespace BowieD.Unturned.NPCMaker.Forms
         }
         public VendorItem Result { get; private set; }
 
-        public DoubleAnimation DisappearAnimation(double current)
+        public AnimationTimeline DisappearAnimation(FrameworkElement element, double current)
         {
-            return new DoubleAnimation(current, 0, new Duration(new TimeSpan(0, 0, 1)));
+            var da = new DoubleAnimation(current, 0, new Duration(new TimeSpan(0, 0, 1)));
+            da.Completed += (sender, e) =>
+            {
+                element.Visibility = Visibility.Collapsed;
+            };
+            return da;
         }
-        public DoubleAnimation AppearAnimation(double current)
+        public AnimationTimeline AppearAnimation(FrameworkElement element, double current)
         {
-            return new DoubleAnimation(current, 1, new Duration(new TimeSpan(0, 0, 1)));
+            element.Visibility = Visibility.Visible;
+            var da = new DoubleAnimation(current, 1, new Duration(new TimeSpan(0, 0, 1)));
+            return da;
         }
 
         private void TypeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -114,15 +183,18 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 if (AppConfig.Instance.animateControls && !ignoreAnimation)
                 {
-                    txtBoxSpawnpoint.BeginAnimation(OpacityProperty, DisappearAnimation(txtBoxSpawnpoint.Opacity));
-                    labelSpawnpoint.BeginAnimation(OpacityProperty, DisappearAnimation(labelSpawnpoint.Opacity));
+                    txtBoxSpawnpoint.BeginAnimation(OpacityProperty, DisappearAnimation(txtBoxSpawnpoint, txtBoxSpawnpoint.Opacity));
+                    labelSpawnpoint.BeginAnimation(OpacityProperty, DisappearAnimation(labelSpawnpoint, labelSpawnpoint.Opacity));
                 }
                 else
                 {
                     ignoreAnimation = false;
 
                     labelSpawnpoint.Opacity = 0;
+                    labelSpawnpoint.Visibility = Visibility.Collapsed;
+
                     txtBoxSpawnpoint.Opacity = 0;
+                    txtBoxSpawnpoint.Visibility = Visibility.Collapsed;
                 }
                 txtBoxSpawnpoint.IsHitTestVisible = false;
                 sellBox.IsEnabled = true;
@@ -132,15 +204,18 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 if (AppConfig.Instance.animateControls && !ignoreAnimation)
                 {
-                    txtBoxSpawnpoint.BeginAnimation(OpacityProperty, AppearAnimation(txtBoxSpawnpoint.Opacity));
-                    labelSpawnpoint.BeginAnimation(OpacityProperty, AppearAnimation(labelSpawnpoint.Opacity));
+                    txtBoxSpawnpoint.BeginAnimation(OpacityProperty, AppearAnimation(txtBoxSpawnpoint, txtBoxSpawnpoint.Opacity));
+                    labelSpawnpoint.BeginAnimation(OpacityProperty, AppearAnimation(labelSpawnpoint, labelSpawnpoint.Opacity));
                 }
                 else
                 {
                     ignoreAnimation = false;
 
                     labelSpawnpoint.Opacity = 1;
+                    labelSpawnpoint.Visibility = Visibility.Visible;
+
                     txtBoxSpawnpoint.Opacity = 1;
+                    txtBoxSpawnpoint.Visibility = Visibility.Visible;
                 }
                 txtBoxSpawnpoint.IsHitTestVisible = true;
                 sellBox.IsEnabled = false;
@@ -159,31 +234,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
             Result.conditions = ulv.Values.Cast<Condition>().ToList();
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Result.id = (ushort)txtBoxID.Value;
-                Result.type = Selected_ItemType;
-                if (Result.type == ItemType.VEHICLE)
-                {
-                    Result.spawnPointID = txtBoxSpawnpoint.Text;
-                }
-
-                Result.isBuy = IsBuy;
-                Result.cost = (uint)txtBoxCost.Value;
-                if (Result.conditions == null)
-                {
-                    Result.conditions = new List<Condition>();
-                }
-
-                isSellSelected = !IsBuy;
-                lastType = Selected_ItemType;
-                DialogResult = true;
-                Close();
-            }
-            catch { }
-        }
         private static bool isSellSelected = false;
         private static ItemType lastType = ItemType.ITEM;
     }
