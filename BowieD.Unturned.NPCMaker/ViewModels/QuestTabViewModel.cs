@@ -337,7 +337,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 if (addConditionCommand == null)
                 {
-                    addConditionCommand = new BaseCommand(() =>
+                    addConditionCommand = new AdvancedCommand(() =>
                     {
                         Universal_ConditionEditor uce = new Universal_ConditionEditor(null);
                         if (uce.ShowDialog() == true)
@@ -345,6 +345,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             Condition cond = uce.Result;
                             AddCondition(new Universal_ItemList(cond, true));
                         }
+                    }, (p) =>
+                    {
+                        return _quest.conditions.CanAdd;
                     });
                 }
                 return addConditionCommand;
@@ -356,7 +359,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 if (addRewardCommand == null)
                 {
-                    addRewardCommand = new BaseCommand(() =>
+                    addRewardCommand = new AdvancedCommand(() =>
                     {
                         Universal_RewardEditor ure = new Universal_RewardEditor(null);
                         if (ure.ShowDialog() == true)
@@ -364,6 +367,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             Reward rew = ure.Result;
                             AddReward(new Universal_ItemList(rew, true));
                         }
+                    }, (p) =>
+                    {
+                        return Quest.rewards.CanAdd;
                     });
                 }
                 return addRewardCommand;
@@ -485,7 +491,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         newConditions.Add(dr.Value as Condition);
                     }
                 }
-                _quest.conditions = newConditions;
+                _quest.conditions = newConditions.ToLimitedList(byte.MaxValue);
 
                 panel.UpdateOrderButtons();
             };
@@ -570,7 +576,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         newRewards.Add(dr.Value as Reward);
                     }
                 }
-                _quest.rewards = newRewards;
+                _quest.rewards = newRewards.ToLimitedList(byte.MaxValue);
 
                 panel.UpdateOrderButtons();
             };

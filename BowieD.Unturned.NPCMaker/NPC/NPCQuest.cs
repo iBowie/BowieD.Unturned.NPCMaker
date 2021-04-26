@@ -16,8 +16,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
     {
         public NPCQuest()
         {
-            conditions = new List<Condition>();
-            rewards = new List<Reward>();
+            conditions = new LimitedList<Condition>(byte.MaxValue);
+            rewards = new LimitedList<Reward>(byte.MaxValue);
             Title = "";
             description = "";
             GUID = Guid.NewGuid().ToString("N");
@@ -52,8 +52,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
             }
         }
-        public List<Condition> conditions;
-        public List<Reward> rewards;
+        public LimitedList<Condition> conditions;
+        public LimitedList<Reward> rewards;
         private string _title;
         [XmlElement("title")]
         public string Title
@@ -98,8 +98,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
             Title = node["title"].ToText();
             description = node["description"].ToText();
 
-            conditions = node["conditions"].ParseAXDataCollection<Condition>(version).ToList();
-            rewards = node["rewards"].ParseAXDataCollection<Reward>(version).ToList();
+            conditions = node["conditions"].ParseAXDataCollection<Condition>(version).ToLimitedList(byte.MaxValue);
+            rewards = node["rewards"].ParseAXDataCollection<Reward>(version).ToLimitedList(byte.MaxValue);
         }
 
         public void Save(XmlDocument document, XmlNode node)

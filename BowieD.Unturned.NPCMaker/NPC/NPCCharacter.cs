@@ -23,7 +23,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             DisplayName = "";
             ID = 0;
             startDialogueId = 0;
-            visibilityConditions = new List<Condition>();
+            visibilityConditions = new LimitedList<Condition>(byte.MaxValue);
             face = 0;
             beard = 0;
             haircut = 0;
@@ -122,7 +122,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UIText)));
             }
         }
-        public List<Condition> visibilityConditions;
+        public LimitedList<Condition> visibilityConditions;
 
         [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
@@ -193,7 +193,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             posePitch = node["posePitch"].ToSingle();
             poseHeadOffset = node["poseHeadOffset"].ToSingle();
 
-            visibilityConditions = node["visibilityConditions"].ParseAXDataCollection<Condition>(version).ToList();
+            visibilityConditions = new LimitedList<Condition>(node["visibilityConditions"].ParseAXDataCollection<Condition>(version), byte.MaxValue);
         }
 
         public void Save(XmlDocument document, XmlNode node)

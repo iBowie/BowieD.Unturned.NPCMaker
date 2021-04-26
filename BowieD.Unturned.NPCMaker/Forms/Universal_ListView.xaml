@@ -25,7 +25,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Click="AddButton_Click" Name="addButton" Height="34" Margin="10,10,5,10"/>
+            <Button Grid.Column="0" Name="addButton" Height="34" Margin="10,10,5,10"/>
             <Button Grid.Column="1" Click="PasteButton_Click" Name="pasteButton" Width="34" Height="34" Margin="5,10,10,10">
                 <Button.Content>
                     <iconpack:PackIconMaterial Kind="ContentPaste" Foreground="{DynamicResource AccentColor}"/>

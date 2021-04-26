@@ -12,26 +12,26 @@ namespace BowieD.Unturned.NPCMaker.NPC
     {
         public NPCMessage()
         {
-            pages = new List<string>();
-            conditions = new List<Condition>();
-            rewards = new List<Reward>();
+            pages = new LimitedList<string>(byte.MaxValue);
+            conditions = new LimitedList<Condition>(byte.MaxValue);
+            rewards = new LimitedList<Reward>(byte.MaxValue);
             prev = 0;
         }
 
         public ushort prev;
 
-        public List<string> pages;
+        public LimitedList<string> pages;
 
-        public List<Reward> rewards;
+        public LimitedList<Reward> rewards;
 
-        public List<Condition> conditions;
+        public LimitedList<Condition> conditions;
 
         public void Load(XmlNode node, int version)
         {
             prev = node["prev"].ToUInt16();
-            pages = node["pages"].ParseStringCollection().ToList();
-            rewards = node["rewards"].ParseAXDataCollection<Reward>(version).ToList();
-            conditions = node["conditions"].ParseAXDataCollection<Condition>(version).ToList();
+            pages = new LimitedList<string>(node["pages"].ParseStringCollection(), byte.MaxValue);
+            rewards = new LimitedList<Reward>(node["rewards"].ParseAXDataCollection<Reward>(version), byte.MaxValue);
+            conditions = new LimitedList<Condition>(node["conditions"].ParseAXDataCollection<Condition>(version), byte.MaxValue);
         }
 
         public void Save(XmlDocument document, XmlNode node)

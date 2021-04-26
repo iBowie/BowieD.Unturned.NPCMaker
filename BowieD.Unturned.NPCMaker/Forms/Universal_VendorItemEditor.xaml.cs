@@ -228,7 +228,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
         private void EditConditions_Click(object sender, RoutedEventArgs e)
         {
-            Universal_ListView ulv = new Universal_ListView(Result.conditions.Select(d => new Controls.Universal_ItemList(d, Controls.Universal_ItemList.ReturnType.Condition, true)).ToList(), Controls.Universal_ItemList.ReturnType.Condition);
+            Universal_ListView ulv = new Universal_ListView(Result.conditions.Select(d => new Controls.Universal_ItemList(d, Controls.Universal_ItemList.ReturnType.Condition, true)).ToLimitedList(byte.MaxValue), Controls.Universal_ItemList.ReturnType.Condition);
             ulv.Owner = this;
             ulv.ShowDialog();
             Result.conditions = ulv.Values.Cast<Condition>().ToList();

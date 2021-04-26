@@ -15,8 +15,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
     {
         public NPCDialogue()
         {
-            Messages = new List<NPCMessage>();
-            Responses = new List<NPCResponse>();
+            Messages = new LimitedList<NPCMessage>(byte.MaxValue);
+            Responses = new LimitedList<NPCResponse>(byte.MaxValue);
             GUID = Guid.NewGuid().ToString("N");
             Comment = "";
         }
@@ -50,9 +50,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
             }
         }
 
-        private List<NPCMessage> _messages;
+        private LimitedList<NPCMessage> _messages;
         [XmlArray("messages")]
-        public List<NPCMessage> Messages
+        public LimitedList<NPCMessage> Messages
         {
             get => _messages;
             set
@@ -64,9 +64,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
             }
         }
 
-        private List<NPCResponse> _responses;
+        private LimitedList<NPCResponse> _responses;
         [XmlArray("responses")]
-        public List<NPCResponse> Responses
+        public LimitedList<NPCResponse> Responses
         {
             get => _responses;
             set
@@ -79,25 +79,14 @@ namespace BowieD.Unturned.NPCMaker.NPC
         [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public List<NPCResponse> GetVisibleResponses(NPCMessage message)
-        {
-            int messageIndex = Messages.IndexOf(message);
-            if (messageIndex == -1)
-            {
-                return null;
-            }
-
-            return Responses.Where(d => d.VisibleInAll || d.visibleIn[messageIndex] == 1).ToList();
-        }
-
         public void Load(XmlNode node, int version)
         {
             GUID = node.Attributes["guid"].Value;
             Comment = node.Attributes["comment"].Value;
             ID = node.Attributes["id"].ToUInt16();
 
-            Messages = node["messages"].ParseAXDataCollection<NPCMessage>(version).ToList();
-            Responses = node["responses"].ParseAXDataCollection<NPCResponse>(version).ToList();
+            Messages = new LimitedList<NPCMessage>(node["messages"].ParseAXDataCollection<NPCMessage>(version), byte.MaxValue);
+            Responses = new LimitedList<NPCResponse>(node["responses"].ParseAXDataCollection<NPCResponse>(version), byte.MaxValue);
         }
 
         public void Save(XmlDocument document, XmlNode node)

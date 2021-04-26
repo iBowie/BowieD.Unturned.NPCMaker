@@ -694,12 +694,12 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     editVisibilityConditionsCommand = new BaseCommand(() =>
                     {
-                        Universal_ListView ulv = new Universal_ListView(Character.visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, true)).ToList(), Universal_ItemList.ReturnType.Condition)
+                        Universal_ListView ulv = new Universal_ListView(Character.visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, true)).ToLimitedList(byte.MaxValue), Universal_ItemList.ReturnType.Condition)
                         {
                             Owner = MainWindow.Instance
                         };
                         ulv.ShowDialog();
-                        Character.visibilityConditions = ulv.Values.Cast<Condition>().ToList();
+                        Character.visibilityConditions = new LimitedList<Condition>(ulv.Values.Cast<Condition>(), byte.MaxValue);
                         MainWindow.CurrentProject.isSaved = false;
                     });
                 }

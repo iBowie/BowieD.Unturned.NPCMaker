@@ -70,7 +70,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
         #region EVENTS
         private void EditRewardsButton_Click(object sender, RoutedEventArgs e)
         {
-            Forms.Universal_ListView ulv = new Forms.Universal_ListView(Response.rewards.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Reward, true)).ToList(), Universal_ItemList.ReturnType.Reward);
+            Forms.Universal_ListView ulv = new Forms.Universal_ListView(Response.rewards.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Reward, true)).ToLimitedList(byte.MaxValue), Universal_ItemList.ReturnType.Reward);
             RichPresence presence = new RichPresence
             {
                 Details = $"Editing NPC {MainWindow.Instance.txtEditorName.Text ?? "without name"}".Shortify(125),
@@ -79,12 +79,12 @@ namespace BowieD.Unturned.NPCMaker.Controls
             (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
             ulv.Owner = MainWindow.Instance;
             ulv.ShowDialog();
-            Response.rewards = ulv.Values.Cast<Reward>().ToList();
+            Response.rewards = ulv.Values.Cast<Reward>().ToLimitedList(byte.MaxValue);
             MainWindow.Instance.MainWindowViewModel.TabControl_SelectionChanged(MainWindow.Instance.mainTabControl, null);
         }
         private void EditConditionsButton_Click(object sender, RoutedEventArgs e)
         {
-            Forms.Universal_ListView ulv = new Forms.Universal_ListView(Response.conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, true)).ToList(), Universal_ItemList.ReturnType.Condition);
+            Forms.Universal_ListView ulv = new Forms.Universal_ListView(Response.conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, true)).ToLimitedList(byte.MaxValue), Universal_ItemList.ReturnType.Condition);
             RichPresence presence = new RichPresence
             {
                 Details = $"Editing NPC {MainWindow.Instance.txtEditorName.Text ?? "without name"}".Shortify(125),
@@ -93,7 +93,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
             ulv.Owner = MainWindow.Instance;
             ulv.ShowDialog();
-            Response.conditions = ulv.Values.Cast<Condition>().ToList();
+            Response.conditions = ulv.Values.Cast<Condition>().ToLimitedList(byte.MaxValue);
             MainWindow.Instance.MainWindowViewModel.TabControl_SelectionChanged(MainWindow.Instance.mainTabControl, null);
         }
         private void MainText_TextChanged(object sender, TextChangedEventArgs e)

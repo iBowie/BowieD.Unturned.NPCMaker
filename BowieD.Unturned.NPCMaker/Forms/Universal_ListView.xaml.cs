@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.ViewModels;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -15,13 +16,13 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// </summary>
     public partial class Universal_ListView : Window
     {
-        public Universal_ListView(List<Controls.Universal_ItemList> listUil, Controls.Universal_ItemList.ReturnType returnType)
+        public Universal_ListView(LimitedList<Controls.Universal_ItemList> listUil, Controls.Universal_ItemList.ReturnType returnType)
         {
             InitializeComponent();
             addButton.Content = LocalizationManager.Current.Interface[$"ListView_{returnType}_Add"];
             Title = LocalizationManager.Current.Interface[$"ListView_{returnType}_Title"];
             ReturnType = returnType;
-            Values = new List<object>();
+            Values = new LimitedList<object>(listUil.MaxItems);
             foreach (Controls.Universal_ItemList uil in listUil)
             {
                 Add(uil);
@@ -70,7 +71,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     break;
                 }
             }
-            List<object> newValues = new List<object>();
+            LimitedList<object> newValues = new LimitedList<object>(Values.MaxItems);
             foreach (UIElement ui in mainGrid.Children)
             {
                 if (ui is Controls.Universal_ItemList uil)
@@ -81,57 +82,60 @@ namespace BowieD.Unturned.NPCMaker.Forms
             Values = newValues;
 
             mainGrid.UpdateOrderButtons<Universal_ItemList>();
+
+            addButton.Command = new AdvancedCommand(() =>
+            {
+                switch (ReturnType)
+                {
+                    case Controls.Universal_ItemList.ReturnType.Condition:
+                        Universal_ConditionEditor uce = new Universal_ConditionEditor();
+                        uce.Owner = this;
+                        if (uce.ShowDialog() == true)
+                        {
+                            Universal_ItemList a = new Controls.Universal_ItemList(uce.Result, Controls.Universal_ItemList.ReturnType.Condition, true);
+                            Add(a);
+                        }
+                        break;
+                    case Controls.Universal_ItemList.ReturnType.Dialogue:
+                        SelectedValue = new NPC.NPCDialogue();
+                        DialogResult = true;
+                        Close();
+                        break;
+                    case Controls.Universal_ItemList.ReturnType.Vendor:
+                        SelectedValue = new NPC.NPCVendor();
+                        DialogResult = true;
+                        Close();
+                        break;
+                    case Controls.Universal_ItemList.ReturnType.Reward:
+                        Universal_RewardEditor ure = new Universal_RewardEditor();
+                        ure.Owner = this;
+                        if (ure.ShowDialog() == true)
+                        {
+                            Universal_ItemList aa = new Controls.Universal_ItemList(ure.Result, Controls.Universal_ItemList.ReturnType.Reward, true);
+                            Add(aa);
+                        }
+                        break;
+                    case Controls.Universal_ItemList.ReturnType.Quest:
+                        SelectedValue = new NPC.NPCQuest();
+                        DialogResult = true;
+                        Close();
+                        break;
+                    case Universal_ItemList.ReturnType.Character:
+                        SelectedValue = new NPC.NPCCharacter();
+                        DialogResult = true;
+                        Close();
+                        break;
+                }
+            }, (p) =>
+            {
+                return Values.CanAdd;
+            });
         }
 
-        public List<object> Values { get; private set; }
+        public LimitedList<object> Values { get; private set; }
         public Controls.Universal_ItemList.ReturnType ReturnType { get; private set; }
 
         public object SelectedValue { get; private set; }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            switch (ReturnType)
-            {
-                case Controls.Universal_ItemList.ReturnType.Condition:
-                    Universal_ConditionEditor uce = new Universal_ConditionEditor();
-                    uce.Owner = this;
-                    if (uce.ShowDialog() == true)
-                    {
-                        Universal_ItemList a = new Controls.Universal_ItemList(uce.Result, Controls.Universal_ItemList.ReturnType.Condition, true);
-                        Add(a);
-                    }
-                    break;
-                case Controls.Universal_ItemList.ReturnType.Dialogue:
-                    SelectedValue = new NPC.NPCDialogue();
-                    DialogResult = true;
-                    Close();
-                    break;
-                case Controls.Universal_ItemList.ReturnType.Vendor:
-                    SelectedValue = new NPC.NPCVendor();
-                    DialogResult = true;
-                    Close();
-                    break;
-                case Controls.Universal_ItemList.ReturnType.Reward:
-                    Universal_RewardEditor ure = new Universal_RewardEditor();
-                    ure.Owner = this;
-                    if (ure.ShowDialog() == true)
-                    {
-                        Universal_ItemList aa = new Controls.Universal_ItemList(ure.Result, Controls.Universal_ItemList.ReturnType.Reward, true);
-                        Add(aa);
-                    }
-                    break;
-                case Controls.Universal_ItemList.ReturnType.Quest:
-                    SelectedValue = new NPC.NPCQuest();
-                    DialogResult = true;
-                    Close();
-                    break;
-                case Universal_ItemList.ReturnType.Character:
-                    SelectedValue = new NPC.NPCCharacter();
-                    DialogResult = true;
-                    Close();
-                    break;
-            }
-        }
 
         public void UpdateValues()
         {

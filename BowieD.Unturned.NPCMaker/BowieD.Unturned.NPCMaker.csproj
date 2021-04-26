@@ -359,6 +359,7 @@
     <Compile Include="IHasOrderButtons.cs" />
     <Compile Include="IHasUniqueGUID.cs" />
     <Compile Include="InputTool.cs" />
+    <Compile Include="LimitedList.cs" />
     <Compile Include="Localization\Localization.cs" />
     <Compile Include="Localization\LocalizationManager.cs" />
     <Compile Include="Localization\TranslationDictionary.cs" />

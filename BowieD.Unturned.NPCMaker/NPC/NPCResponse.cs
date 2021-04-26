@@ -14,8 +14,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public NPCResponse()
         {
             mainText = "";
-            conditions = new List<Condition>();
-            rewards = new List<Reward>();
+            conditions = new LimitedList<Condition>(byte.MaxValue);
+            rewards = new LimitedList<Reward>(byte.MaxValue);
             visibleIn = new int[0];
         }
 
@@ -23,8 +23,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public ushort openDialogueId;
         public ushort openVendorId;
         public ushort openQuestId;
-        public List<Condition> conditions;
-        public List<Reward> rewards;
+        public LimitedList<Condition> conditions;
+        public LimitedList<Reward> rewards;
         public int[] visibleIn;
         [XmlIgnore]
         public bool VisibleInAll => visibleIn == null || visibleIn.All(d => d == 1) || visibleIn.All(d => d == 0); // last condition may cause invalid logic, but it works for now
@@ -36,8 +36,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
             openVendorId = node["openVendorId"].ToUInt16();
             openQuestId = node["openQuestId"].ToUInt16();
 
-            conditions = node["conditions"].ParseAXDataCollection<Condition>(version).ToList();
-            rewards = node["rewards"].ParseAXDataCollection<Reward>(version).ToList();
+            conditions = node["conditions"].ParseAXDataCollection<Condition>(version).ToLimitedList(byte.MaxValue);
+            rewards = node["rewards"].ParseAXDataCollection<Reward>(version).ToLimitedList(byte.MaxValue);
 
             visibleIn = node["visibleIn"].ParseInt32Collection().ToArray();
         }

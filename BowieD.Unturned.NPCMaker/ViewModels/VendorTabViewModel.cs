@@ -366,7 +366,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         }
                     }, (p) =>
                     {
-                        return Vendor.items.Count < byte.MaxValue * 2;
+                        return _vendor.items.Count < byte.MaxValue * 2;
                     });
                 }
                 return addItemCommand;

@@ -315,9 +315,12 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 if (addReplyCommand == null)
                 {
-                    addReplyCommand = new BaseCommand(() =>
+                    addReplyCommand = new AdvancedCommand(() =>
                     {
                         AddResponse(new Dialogue_Response(new NPCResponse()));
+                    }, (p) =>
+                    {
+                        return _dialogue.Responses.CanAdd;
                     });
                 }
                 return addReplyCommand;
@@ -329,9 +332,12 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 if (addMessageCommand == null)
                 {
-                    addMessageCommand = new BaseCommand(() =>
+                    addMessageCommand = new AdvancedCommand(() =>
                     {
                         AddMessage(new Dialogue_Message(new NPCMessage()));
+                    }, (p) =>
+                    {
+                        return _dialogue.Messages.CanAdd;
                     });
                 }
                 return addMessageCommand;
@@ -462,7 +468,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         newMessages.Add(dr.Message);
                     }
                 }
-                _dialogue.Messages = newMessages;
+                _dialogue.Messages = newMessages.ToLimitedList(byte.MaxValue);
 
                 panel.UpdateOrderButtons<Dialogue_Message>();
             };
@@ -507,7 +513,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         newResponses.Add(dr.Response);
                     }
                 }
-                _dialogue.Responses = newResponses;
+                _dialogue.Responses = newResponses.ToLimitedList(byte.MaxValue);
 
                 panel.UpdateOrderButtons<Dialogue_Response>();
             };
