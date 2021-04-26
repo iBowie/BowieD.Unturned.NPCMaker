@@ -97,8 +97,18 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public Equip_Type equipped;
         public float poseLean, posePitch, poseHeadOffset;
 
+        private string _guid;
         [XmlAttribute("guid")]
-        public string GUID { get; set; }
+        public string GUID 
+        {
+            get => _guid;
+            set
+            {
+                _guid = value;
+
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GUID)));
+            }
+        }
         private string _comment;
         [XmlAttribute("comment")]
         public string Comment

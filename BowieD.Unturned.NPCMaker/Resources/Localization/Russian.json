@@ -60,6 +60,8 @@
     },
     "Character":
     {
+    	"Guid": "GUID",
+        "Guid_Invalid": "Вы ввели невалидный GUID. Изменения не сохранены.",
         "Name_Editor": "Имя в редакторе",
         "Name_Display": "Отображаемое имя",
         "ID": "ID персонажа",
@@ -114,6 +116,8 @@
     },
     "Dialogue":
     {
+    	"Guid": "GUID",
+        "Guid_Invalid": "Вы ввели невалидный GUID. Изменения не сохранены.",
         "ID": "ID диалога",
         "Message_Add": "Добавить сообщение",
         "Message_Remove": "Удалить сообщение",
@@ -139,10 +143,13 @@
         "Reply_Move_Up": "Переместить вверх",
         "Reply_Move_Down": "Переместить вниз",
         "Replies": "Ответы игрока",
-        "Tips": "Советы:\nИспользуйте <pause> для создания паузы в 0.5 сек.\nИспользуйте <br> для перехода на новую строку\nИспользуйте <name_npc> чтобы поместить имя NPC в текст\nИспользуйте <name_char> чтобы поместить имя игрока в текст\nИспользуйте <color=редкость>ТЕКСТ</color> для создания цветного текста"
+        "Tips": "Используйте <pause> для создания паузы в 0.5 сек.\nИспользуйте <br> для перехода на новую строку\nИспользуйте <name_npc> чтобы поместить имя NPC в текст\nИспользуйте <name_char> чтобы поместить имя игрока в текст\nИспользуйте <color=редкость>ТЕКСТ</color> для создания цветного текста",
+        "Tips_Header": "Советы"
     },
     "Vendor":
     {
+    	"Guid": "GUID",
+        "Guid_Invalid": "Вы ввели невалидный GUID. Изменения не сохранены.",
         "ID": "ID магазина",
         "Title": "Название магазина",
         "Description": "Описание магазина",
@@ -156,6 +163,8 @@
     },
     "Quest":
     {
+    	"Guid": "GUID",
+        "Guid_Invalid": "Вы ввели невалидный GUID. Изменения не сохранены.",
         "ID": "ID задания",
         "Title": "Название задания",
         "Description": "Описание задания",
@@ -687,6 +696,8 @@
         "Main_Tab_Character_Name_Display_Tooltip": "Имя, видимое в диалоге",
         "Main_Tab_Character_Dialogue_Tooltip": "Диалог, который открывается при разговоре с NPC",
         "Main_Tab_Character_Guid_Generate": "Повторная генерация GUID",
+        "Main_Tab_Character_Guid_Set": "Указать новый GUID для этого персонажа",
+        "Main_Tab_Character_Guid_Random": "Сгенерировать новый GUID для этого персонажа",
         "Main_Tab_Character_Face_Random": "Случ. Лицо",
         "Main_Tab_Character_Hair_Random": "Случ. Причёска",
         "Main_Tab_Character_Beard_Random": "Случ. Борода",
@@ -694,17 +705,23 @@
         "Main_Tab_Character_NoSelection_Hint": "Нажмите здесь чтобы добавить нового персонажа в проект.",
         "Main_Tab_Dialogue": "Диалог",
         "Main_Tab_Dialogue_SetAsStart": "Установить текущий диалог как начальный",
+        "Main_Tab_Dialogue_Guid_Set": "Указать новый GUID для этого диалога",
+        "Main_Tab_Dialogue_Guid_Random": "Сгенерировать новый GUID для этого диалога",
         "Main_Tab_Dialogue_Preview": "Предпросмотр",
         "Main_Tab_Dialogue_Preview_Invalid": "Этот диалог содержит ошибки и вызовет краш программы при предпросмотре.\nПричиной этому могут быть перенаправления на диалоги, которых нет в этом проекте.",
         "Main_Tab_Dialogue_Preview_Loop": "Не удалось проверить диалог на ошибки.\nЭто вызвано рекурсией (диалог #1 вызывает #2 который вызывает #1 и т.д.).\nПрограмма может крашнуться при продолжении.",
         "Main_Tab_Dialogue_NoSelection": "Вкладка не выбрана.\nСоздайте новую или выберите существующую.",
         "Main_Tab_Dialogue_NoSelection_Hint": "Нажмите здесь чтобы добавить новый диалог в проект.",
         "Main_Tab_Vendor": "Магазин",
+        "Main_Tab_Vendor_Guid_Set": "Указать новый GUID для этого магазина",
+        "Main_Tab_Vendor_Guid_Random": "Сгенерировать новый GUID для этого магазина",
         "Main_Tab_Vendor_Preview": "Предпросмотр",
         "Main_Tab_Vendor_Preview_Message": "Настройте симуляцию в следующем окне. После закрытия окна откроется магазин.",
         "Main_Tab_Vendor_NoSelection": "Вкладка не выбрана.\nСоздайте новую или выберите существующую.",
         "Main_Tab_Vendor_NoSelection_Hint": "Нажмите здесь чтобы добавить новый магазин в проект.",
         "Main_Tab_Quest": "Задание",
+        "Main_Tab_Quest_Guid_Set": "Указать новый GUID для этого задания",
+        "Main_Tab_Quest_Guid_Random": "Сгенерировать новый GUID для этого задания",
         "Main_Tab_Quest_Preview": "Предпросмотр",
         "Main_Tab_Quest_Preview_Message": "Настройте симуляцию в следующем окне. После закрытия окна откроется задание.",
         "Main_Tab_Quest_NoSelection": "Вкладка не выбрана.\nСоздайте новую или выберите существующую.",

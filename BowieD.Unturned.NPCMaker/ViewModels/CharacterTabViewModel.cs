@@ -449,6 +449,15 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public string DisplayName { get => Character.DisplayName; set => Character.DisplayName = value; }
         public string EditorName { get => Character.EditorName; set => Character.EditorName = value; }
         public ushort ID { get => Character.ID; set => Character.ID = value; }
+        public string GUID
+        {
+            get => Character.GUID;
+            set
+            {
+                Character.GUID = value;
+                OnPropertyChange("GUID");
+            }
+        }
         public string Comment
         {
             get => Character.Comment;
@@ -568,6 +577,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         private ICommand poseEditorCommand;
         private ICommand closeTabCommand;
         private ICommand sortEditorNameA, sortEditorNameD, sortDisplayNameA, sortDisplayNameD, sortIDA, sortIDD;
+        private ICommand randomGuidCommand;
+        private ICommand setGuidCommand;
+
         public ICommand SortEditorNameAscending
         {
             get
@@ -737,6 +749,46 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     });
                 }
                 return randomBeardCommand;
+            }
+        }
+        public ICommand RandomGuidCommand
+        {
+            get
+            {
+                if (randomGuidCommand == null)
+                {
+                    randomGuidCommand = new BaseCommand(() =>
+                    {
+                        GUID = Guid.NewGuid().ToString("N");
+                    });
+                }
+                return randomGuidCommand;
+            }
+        }
+        public ICommand SetGuidCommand
+        {
+            get
+            {
+                if (setGuidCommand == null)
+                {
+                    setGuidCommand = new BaseCommand(() =>
+                    {
+                        MultiFieldInputView_Dialog mfiv = new MultiFieldInputView_Dialog(new string[1] { GUID });
+                        if (mfiv.ShowDialog(new string[1] { LocalizationManager.Current.Character["Guid"] }, "") == true)
+                        {
+                            string res = mfiv.Values[0];
+                            if (Guid.TryParse(res, out var newGuid))
+                            {
+                                GUID = newGuid.ToString("N");
+                            }
+                            else
+                            {
+                                MessageBox.Show(LocalizationManager.Current.Character["Guid_Invalid"]);
+                            }
+                        }
+                    });
+                }
+                return setGuidCommand;
             }
         }
         public ICommand SaveColorSkin

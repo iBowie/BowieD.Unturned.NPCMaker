@@ -60,6 +60,8 @@
     },
     "Character":
     {
+    	"Guid": "GUID",
+        "Guid_Invalid": "You've entered invalid GUID. Changes are not made.",
         "Name_Editor": "Editor Name",
         "Name_Display": "Display Name",
         "ID": "Character ID",
@@ -114,6 +116,8 @@
     },
     "Dialogue":
     {
+    	"Guid": "GUID",
+        "Guid_Invalid": "You've entered invalid GUID. Changes are not made.",
         "ID": "Dialogue ID",
         "Message_Add": "Add Message",
         "Message_Remove": "Remove Message",
@@ -139,10 +143,13 @@
         "Reply_Move_Up": "Move up",
         "Reply_Move_Down": "Move down",
         "Replies": "Player Replies",
-        "Tips": "Tips for dialogues:\nUse <pause> to make 0.5 delay\nUse <br> for new line\nUse <name_npc> to place NPC name in dialogue\nUse <name_char> to place player name in dialogue\nUse <color=rarity>TEXT</color> to make text colored"
+        "Tips": "Use <pause> to make 0.5 delay\nUse <br> for new line\nUse <name_npc> to place NPC name in dialogue\nUse <name_char> to place player name in dialogue\nUse <color=rarity>TEXT</color> to make text colored",
+        "Tips_Header": "Tips"
     },
     "Vendor":
     {
+    	"Guid": "GUID",
+        "Guid_Invalid": "You've entered invalid GUID. Changes are not made.",
         "ID": "Vendor ID",
         "Title": "Vendor Name",
         "Description": "Vendor Description",
@@ -156,6 +163,8 @@
     },
     "Quest":
     {
+    	"Guid": "GUID",
+        "Guid_Invalid": "You've entered invalid GUID. Changes are not made.",
         "ID": "Quest ID",
         "Title": "Quest Name",
         "Description": "Quest Description",
@@ -687,6 +696,8 @@
         "Main_Tab_Character_Name_Display_Tooltip": "Name visible in dialogues and game",
         "Main_Tab_Character_Dialogue_Tooltip": "Dialogue that opens when user interacts with NPC",
         "Main_Tab_Character_Guid_Generate": "Regenerate GUIDs",
+        "Main_Tab_Character_Guid_Set": "Set new GUID for this character",
+        "Main_Tab_Character_Guid_Random": "Generate new GUID for this character",
         "Main_Tab_Character_Face_Random": "Random Face",
         "Main_Tab_Character_Hair_Random": "Random Hair",
         "Main_Tab_Character_Beard_Random": "Random Beard",
@@ -694,17 +705,23 @@
         "Main_Tab_Character_NoSelection_Hint": "Click here to add new character to the project.",
         "Main_Tab_Dialogue": "Dialogue",
         "Main_Tab_Dialogue_SetAsStart": "Set Current Dialogue as start for Current NPC",
+        "Main_Tab_Dialogue_Guid_Set": "Set new GUID for this dialogue",
+        "Main_Tab_Dialogue_Guid_Random": "Generate new GUID for this dialogue",
         "Main_Tab_Dialogue_Preview": "Preview Dialogue",
         "Main_Tab_Dialogue_Preview_Invalid": "This dialogue is invalid and will crash the app on preview.\nIt might be caused by redirects to dialogues that aren't in this project.",
         "Main_Tab_Dialogue_Preview_Loop": "Could not check this dialogue for errors.\nIt's caused by looping (dialogue #1 calls #2 that calls #1 and so on).\nProceed with caution.",
         "Main_Tab_Dialogue_NoSelection": "No tab selected.\nAdd new tab or select another one.",
         "Main_Tab_Dialogue_NoSelection_Hint": "Click here to add new dialogue to the project.",
         "Main_Tab_Vendor": "Vendor",
+        "Main_Tab_Vendor_Guid_Set": "Set new GUID for this vendor",
+        "Main_Tab_Vendor_Guid_Random": "Generate new GUID for this vendor",
         "Main_Tab_Vendor_Preview": "Preview Vendor",
         "Main_Tab_Vendor_Preview_Message": "Set up simulation in next dialog window. Close to proceed.",
         "Main_Tab_Vendor_NoSelection": "No tab selected.\nAdd new tab or select another one.",
         "Main_Tab_Vendor_NoSelection_Hint": "Click here to add new vendor to the project.",
         "Main_Tab_Quest": "Quest",
+        "Main_Tab_Quest_Guid_Set": "Set new GUID for this quest",
+        "Main_Tab_Quest_Guid_Random": "Generate new GUID for this quest",
         "Main_Tab_Quest_Preview": "Preview Quest",
         "Main_Tab_Quest_Preview_Message": "Set up simulation in next dialog window. Close to proceed.",
         "Main_Tab_Quest_NoSelection": "No tab selected.\nAdd new tab or select another one.",

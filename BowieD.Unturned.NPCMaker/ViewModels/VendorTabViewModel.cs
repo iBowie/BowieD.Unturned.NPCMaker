@@ -247,6 +247,15 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         }
         public string Comment { get => Vendor.Comment; set => Vendor.Comment = value; }
         public ushort ID { get => Vendor.ID; set => Vendor.ID = value; }
+        public string GUID
+        {
+            get => Vendor.GUID;
+            set
+            {
+                Vendor.GUID = value;
+                OnPropertyChange("GUID");
+            }
+        }
         public string Title { get => Vendor.Title; set => Vendor.Title = value; }
         public string Description { get => Vendor.vendorDescription; set => Vendor.vendorDescription = value; }
         public bool DisableSorting { get => Vendor.disableSorting; set => Vendor.disableSorting = value; }
@@ -258,6 +267,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         private ICommand addItemCommand, previewCommand;
         private ICommand closeTabCommand;
         private ICommand sortIDA, sortIDD, sortTitleA, sortTitleD;
+        private ICommand randomGuidCommand;
+        private ICommand setGuidCommand;
+
         public ICommand SortIDAscending
         {
             get
@@ -379,6 +391,46 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     });
                 }
                 return previewCommand;
+            }
+        }
+        public ICommand RandomGuidCommand
+        {
+            get
+            {
+                if (randomGuidCommand == null)
+                {
+                    randomGuidCommand = new BaseCommand(() =>
+                    {
+                        GUID = Guid.NewGuid().ToString("N");
+                    });
+                }
+                return randomGuidCommand;
+            }
+        }
+        public ICommand SetGuidCommand
+        {
+            get
+            {
+                if (setGuidCommand == null)
+                {
+                    setGuidCommand = new BaseCommand(() =>
+                    {
+                        MultiFieldInputView_Dialog mfiv = new MultiFieldInputView_Dialog(new string[1] { GUID });
+                        if (mfiv.ShowDialog(new string[1] { LocalizationManager.Current.Vendor["Guid"] }, "") == true)
+                        {
+                            string res = mfiv.Values[0];
+                            if (Guid.TryParse(res, out var newGuid))
+                            {
+                                GUID = newGuid.ToString("N");
+                            }
+                            else
+                            {
+                                MessageBox.Show(LocalizationManager.Current.Vendor["Guid_Invalid"]);
+                            }
+                        }
+                    });
+                }
+                return setGuidCommand;
             }
         }
 
