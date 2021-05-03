@@ -20,9 +20,11 @@ namespace BowieD.Unturned.NPCMaker
             CharacterFormat = "NPCMaker.Character",
             DialogueFormat = "NPCMaker.Dialogue",
             VendorFormat = "NPCMaker.Vendor",
+            DialogueVendorFormat = "NPCMaker.DialogueVendor",
             VendorItemFormat = "NPCMaker.Vendor.Item",
             QuestFormat = "NPCMaker.Quest",
-            CurrencyFormat = "NPCMaker.Currency";
+            CurrencyFormat = "NPCMaker.Currency",
+            GenericStringFormat = "NPCMaker.Generic.String";
         public static void SetObject(ReturnType returnType, object obj)
         {
             SetObject(GetFormat(returnType), obj);
@@ -96,6 +98,8 @@ namespace BowieD.Unturned.NPCMaker
                 case ReturnType.Vendor: return VendorFormat;
                 case ReturnType.VendorItem: return VendorItemFormat;
                 case ReturnType.Currency: return CurrencyFormat;
+                case ReturnType.DialogueVendor: return DialogueVendorFormat;
+                case ReturnType.GenericString: return GenericStringFormat;
                 default: return null;
             }
         }
@@ -111,6 +115,8 @@ namespace BowieD.Unturned.NPCMaker
                 case VendorFormat: return typeof(NPCVendor);
                 case VendorItemFormat: return typeof(VendorItem);
                 case CurrencyFormat: return typeof(CurrencyAsset);
+                case DialogueVendorFormat: return typeof(VirtualDialogueVendor);
+                case GenericStringFormat: return typeof(string);
                 default: return null;
             }
         }

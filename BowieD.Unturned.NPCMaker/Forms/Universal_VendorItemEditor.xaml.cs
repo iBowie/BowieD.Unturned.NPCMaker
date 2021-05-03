@@ -21,17 +21,10 @@ namespace BowieD.Unturned.NPCMaker.Forms
     public partial class Universal_VendorItemEditor : Window
     {
         private bool ignoreAnimation = true;
-        private readonly NPCVendor _vendor;
 
-        public Universal_VendorItemEditor(NPCVendor vendor, VendorItem startItem = null)
+        public Universal_VendorItemEditor(bool allowBuy, bool allowSell, VendorItem startItem = null)
         {
             InitializeComponent();
-
-            _vendor = vendor;
-
-            bool 
-                allowBuy = vendor.BuyItems.Count < byte.MaxValue, 
-                allowSell = vendor.SellItems.Count < byte.MaxValue;
 
             ignoreAnimation = true;
 
@@ -108,7 +101,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     Close();
                 }
                 catch { }
-            }, (p) => 
+            }, (p) =>
             {
                 if (IsBuy)
                 {
@@ -152,6 +145,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             txtBoxSpawnpoint.ContextMenu = cmenuSpawnpoint;
         }
+        public Universal_VendorItemEditor(NPCVendor vendor, VendorItem startItem = null) : this(vendor.BuyItems.Count < byte.MaxValue, vendor.SellItems.Count < byte.MaxValue, startItem) { }
+        public Universal_VendorItemEditor(VirtualDialogueVendor vendor, VendorItem startItem = null) : this(true, true, startItem) { }
         public VendorItem Result { get; private set; }
 
         public AnimationTimeline DisappearAnimation(FrameworkElement element, double current)

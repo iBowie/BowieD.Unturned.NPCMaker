@@ -161,6 +161,24 @@
         "DisableSorting": "Disable Sorting",
         "Currency": "Currency GUID (empty if XP)"
     },
+    "DialogueVendor":
+    {
+    	"Guid": "GUID",
+        "Guid_Invalid": "You've entered invalid GUID. Changes are not made.",
+        "ID": "Dialogue ID",
+        "Pages": "Pages",
+        "Page_Add": "Add Page",
+        "Item_Add": "Add Item",
+        "Items_Buy": "NPC will buy these items",
+        "Items_Sell": "NPC will sell these items",
+        "Currency": "Currency GUID (empty if XP)",
+        "SellingFormat": "Buy item text format",
+        "BuyingFormat": "Sell item text format",
+        "GoodbyeText": "Exit text",
+        "SoldDialogueID": "Sell item Dialogue ID",
+        "BoughtDialogueID": "Buy item Dialogue ID",
+        "GoodbyeDialogueID": "Exit Dialogue ID"
+    },
     "Quest":
     {
     	"Guid": "GUID",
@@ -719,6 +737,13 @@
         "Main_Tab_Vendor_Preview_Message": "Set up simulation in next dialog window. Close to proceed.",
         "Main_Tab_Vendor_NoSelection": "No tab selected.\nAdd new tab or select another one.",
         "Main_Tab_Vendor_NoSelection_Hint": "Click here to add new vendor to the project.",
+        "Main_Tab_DialogueVendor": "Dialogue Vendor",
+        "Main_Tab_DialogueVendor_Guid_Set": "Set new GUID for this dialogue vendor.",
+        "Main_Tab_DialogueVendor_Guid_Random": "Generate new GUID for this dialogue vendor.",
+        "Main_Tab_DialogueVendor_NoSelection": "No tab selected.\nAdd new tab or select another one.",
+        "Main_Tab_DialogueVendor_NoSelection_Hint": "Click here to add new dialogue vendor to the project.",
+        "Main_Tab_DialogueVendor_ConvertToDialogue": "Convert to dialogue",
+        "Main_Tab_DialogueVendor_ConvertToDialogue_Confirm": "Are you sure you want to convert this dialogue vendor to normal dialogue?\nDialogue vendor will be removed from the project, converted dialogue will appear.",
         "Main_Tab_Quest": "Quest",
         "Main_Tab_Quest_Guid_Set": "Set new GUID for this quest",
         "Main_Tab_Quest_Guid_Random": "Generate new GUID for this quest",

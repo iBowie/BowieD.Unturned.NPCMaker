@@ -11,7 +11,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
 {
     public class NPCProject : IAXData
     {
-        public const int CURRENT_SAVEDATA_VERSION = 6;
+        public const int CURRENT_SAVEDATA_VERSION = 7;
 
         public NPCProject()
         {
@@ -20,12 +20,14 @@ namespace BowieD.Unturned.NPCMaker.NPC
             characters = new List<NPCCharacter>();
             dialogues = new List<NPCDialogue>();
             vendors = new List<NPCVendor>();
+            dialogueVendors = new List<VirtualDialogueVendor>();
             quests = new List<NPCQuest>();
             currencies = new List<CurrencyAsset>();
             flags = new List<FlagDescriptionProjectAsset>();
             lastCharacter = -1;
             lastDialogue = -1;
             lastVendor = -1;
+            lastDialogueVendor = -1;
             lastQuest = -1;
             lastCurrency = -1;
             settings = new NPCProjectSettings();
@@ -37,6 +39,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public List<NPCCharacter> characters;
         public List<NPCDialogue> dialogues;
         public List<NPCVendor> vendors;
+        public List<VirtualDialogueVendor> dialogueVendors;
         public List<NPCQuest> quests;
         public List<CurrencyAsset> currencies;
         public List<FlagDescriptionProjectAsset> flags;
@@ -44,6 +47,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             lastCharacter = -1,
             lastDialogue = -1,
             lastVendor = -1,
+            lastDialogueVendor = -1,
             lastQuest = -1,
             lastCurrency = -1;
         public NPCProjectSettings settings;
@@ -113,6 +117,15 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 flags = new List<FlagDescriptionProjectAsset>();
             }
 
+            if (version >= 7)
+            {
+                dialogueVendors = node["dialogueVendors"].ParseAXDataCollection<VirtualDialogueVendor>(version).ToList();
+            }
+            else
+            {
+                dialogueVendors = new List<VirtualDialogueVendor>();
+            }
+
             if (version >= 3)
             {
                 lastCharacter = node["lastCharacter"].ToInt32();
@@ -128,12 +141,22 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 {
                     lastCurrency = -1;
                 }
+
+                if (version >= 7)
+                {
+                    lastDialogueVendor = node["lastDialogueVendor"].ToInt32();
+                }
+                else
+                {
+                    lastDialogueVendor = -1;
+                }
             }
             else
             {
                 lastCharacter = -1;
                 lastDialogue = -1;
                 lastVendor = -1;
+                lastDialogueVendor = -1;
                 lastQuest = -1;
                 lastCurrency = -1;
             }
@@ -151,6 +174,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             document.CreateNodeC("characters", node).WriteAXDataCollection(document, "NPCCharacter", characters);
             document.CreateNodeC("dialogues", node).WriteAXDataCollection(document, "NPCDialogue", dialogues);
             document.CreateNodeC("vendors", node).WriteAXDataCollection(document, "NPCVendor", vendors);
+            document.CreateNodeC("dialogueVendors", node).WriteAXDataCollection(document, "VirtualDialogueVendor", dialogueVendors);
             document.CreateNodeC("quests", node).WriteAXDataCollection(document, "NPCQuest", quests);
             document.CreateNodeC("currencies", node).WriteAXDataCollection(document, "CurrencyAsset", currencies);
             document.CreateNodeC("flags", node).WriteAXDataCollection(document, "FlagDescriptionProjectAsset", flags);
@@ -158,6 +182,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             document.CreateNodeC("lastCharacter", node).WriteInt32(lastCharacter);
             document.CreateNodeC("lastDialogue", node).WriteInt32(lastDialogue);
             document.CreateNodeC("lastVendor", node).WriteInt32(lastVendor);
+            document.CreateNodeC("lastDialogueVendor", node).WriteInt32(lastDialogueVendor);
             document.CreateNodeC("lastQuest", node).WriteInt32(lastQuest);
             document.CreateNodeC("lastCurrency", node).WriteInt32(lastCurrency);
 

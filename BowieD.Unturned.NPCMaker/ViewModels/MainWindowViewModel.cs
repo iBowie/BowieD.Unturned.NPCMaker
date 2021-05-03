@@ -100,7 +100,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 }
                             }
                             break;
-                        case 3 when QuestTabViewModel.Quest != null: // quest (condition, reward)
+                        case 4 when QuestTabViewModel.Quest != null: // quest (condition, reward)
                             {
                                 if (ClipboardManager.TryGetObject(ClipboardManager.ConditionFormat, out var obj) && obj is Condition cond)
                                 {
@@ -117,6 +117,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             CharacterTabViewModel = new CharacterTabViewModel();
             DialogueTabViewModel = new DialogueTabViewModel();
             VendorTabViewModel = new VendorTabViewModel();
+            DialogueVendorTabViewModel = new VirtualDialogueVendorTabViewModel();
             QuestTabViewModel = new QuestTabViewModel();
             CurrencyTabViewModel = new CurrencyTabViewModel();
             MainWindow.mainTabControl.SelectionChanged += TabControl_SelectionChanged;
@@ -141,6 +142,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 if (data.lastVendor > -1 && data.lastVendor < data.vendors.Count)
                 {
                     VendorTabViewModel.Vendor = data.vendors[data.lastVendor];
+                }
+
+                if (data.lastDialogueVendor > -1 && data.lastDialogueVendor < data.dialogueVendors.Count)
+                {
+                    DialogueVendorTabViewModel.DialogueVendor = data.dialogueVendors[data.lastDialogueVendor];
                 }
 
                 if (data.lastQuest > -1 && data.lastQuest < data.quests.Count)
@@ -192,6 +198,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public CharacterTabViewModel CharacterTabViewModel { get; set; }
         public DialogueTabViewModel DialogueTabViewModel { get; set; }
         public VendorTabViewModel VendorTabViewModel { get; set; }
+        public VirtualDialogueVendorTabViewModel DialogueVendorTabViewModel { get; set; }
         public QuestTabViewModel QuestTabViewModel { get; set; }
         public CurrencyTabViewModel CurrencyTabViewModel { get; set; }
         public MistakeTabViewModel MistakeTabViewModel { get; set; }
@@ -200,6 +207,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             CharacterTabViewModel.Reset();
             DialogueTabViewModel.Reset();
             VendorTabViewModel.Reset();
+            DialogueVendorTabViewModel.Reset();
             QuestTabViewModel.Reset();
             CurrencyTabViewModel.Reset();
         }
@@ -208,6 +216,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             CharacterTabViewModel.Save();
             DialogueTabViewModel.Save();
             VendorTabViewModel.Save();
+            DialogueVendorTabViewModel.Save();
             QuestTabViewModel.Save();
             CurrencyTabViewModel.Save();
 
@@ -218,6 +227,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             data.lastDialogue = data.dialogues.IndexOf(DialogueTabViewModel.Dialogue);
             data.lastQuest = data.quests.IndexOf(QuestTabViewModel.Quest);
             data.lastVendor = data.vendors.IndexOf(VendorTabViewModel.Vendor);
+            data.lastDialogueVendor = data.dialogueVendors.IndexOf(DialogueVendorTabViewModel.DialogueVendor);
             data.lastCurrency = data.currencies.IndexOf(CurrencyTabViewModel.Currency);
         }
         public void UpdateAllTabs()
@@ -225,6 +235,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             CharacterTabViewModel.UpdateTabs();
             DialogueTabViewModel.UpdateTabs();
             VendorTabViewModel.UpdateTabs();
+            DialogueVendorTabViewModel.UpdateTabs();
             QuestTabViewModel.UpdateTabs();
             CurrencyTabViewModel.UpdateTabs();
         }
@@ -314,6 +325,24 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 },
                                 Assets = new Assets
                                 {
+                                    SmallImageKey = "icon_money_outlined",
+                                    SmallImageText = $"Dialogue Vendors: {MainWindow.CurrentProject.data.dialogueVendors.Count}".Shortify(125)
+                                },
+                                Details = $"Dialogue Vendor ID: {DialogueVendorTabViewModel.ID}".Shortify(125),
+                                State = $"Items: {DialogueVendorTabViewModel.DialogueVendor.Items.Count}".Shortify(125)
+                            });
+                        }
+                        break;
+                    case 4:
+                        {
+                            MainWindow.DiscordManager.SendPresence(new RichPresence
+                            {
+                                Timestamps = new Timestamps
+                                {
+                                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                                },
+                                Assets = new Assets
+                                {
                                     SmallImageKey = "icon_exclamation_outlined",
                                     SmallImageText = $"Quests: {MainWindow.CurrentProject.data.quests.Count}".Shortify(125)
                                 },
@@ -322,7 +351,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             });
                         }
                         break;
-                    case 4:
+                    case 5:
                         {
                             MainWindow.DiscordManager.SendPresence(new RichPresence
                             {
@@ -340,7 +369,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             });
                         }
                         break;
-                    case 5:
+                    case 6:
                         {
                             MainWindow.DiscordManager.SendPresence(new RichPresence
                             {

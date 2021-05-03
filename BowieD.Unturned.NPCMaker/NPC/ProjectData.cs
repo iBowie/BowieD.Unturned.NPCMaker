@@ -88,6 +88,14 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
                 XmlNode root = doc.CreateNodeC("NPCProject", doc);
 
+                var xsiA = doc.CreateAttribute("xmlns:xsi", "http://www.w3.org/2000/xmlns/");
+                xsiA.Value = "http://www.w3.org/2001/XMLSchema-instance";
+                doc.DocumentElement.Attributes.Append(xsiA);
+
+                var xsdA = doc.CreateAttribute("xmlns:xsd", "http://www.w3.org/2000/xmlns/");
+                xsdA.Value = "http://www.w3.org/2001/XMLSchema";
+                doc.DocumentElement.Attributes.Append(xsdA);
+
                 doc.CreateNodeC("SAVEDATA_VERSION", root).WriteInt32(NPCProject.CURRENT_SAVEDATA_VERSION);
 
                 data.Save(doc, root);

@@ -330,7 +330,7 @@ namespace BowieD.Unturned.NPCMaker.Common
             if (value.HasValue)
                 return node.WriteByte(value.Value);
 
-            var a = node.OwnerDocument.CreateAttribute("xsi:nil");
+            var a = node.OwnerDocument.CreateAttributeC("xsi:nil", null);
             a.Value = "true";
 
             node.Attributes.Append(a);
@@ -342,7 +342,7 @@ namespace BowieD.Unturned.NPCMaker.Common
             if (value.HasValue)
                 return node.WriteUInt16(value.Value);
 
-            var a = node.OwnerDocument.CreateAttribute("xsi:nil");
+            var a = node.OwnerDocument.CreateAttributeC("xsi:nil", null);
             a.Value = "true";
 
             node.Attributes.Append(a);
@@ -354,7 +354,7 @@ namespace BowieD.Unturned.NPCMaker.Common
             if (value.HasValue)
                 return node.WriteInt32(value.Value);
 
-            var a = node.OwnerDocument.CreateAttribute("xsi:nil");
+            var a = node.OwnerDocument.CreateAttributeC("xsi:nil", null);
             a.Value = "true";
 
             node.Attributes.Append(a);
@@ -375,7 +375,30 @@ namespace BowieD.Unturned.NPCMaker.Common
         }
         public static XmlAttribute CreateAttributeC(this XmlDocument doc, string name, XmlNode parent)
         {
-            var a = doc.CreateAttribute(name);
+            string[] vs = name.Split(':');
+
+            XmlAttribute a;
+
+            switch (vs.Length)
+            {
+                case 2:
+                    switch (vs[0])
+                    {
+                        case "xsi":
+                            a = doc.CreateAttribute(vs[0], vs[1], "http://www.w3.org/2001/XMLSchema-instance");
+                            break;
+                        case "xsd":
+                            a = doc.CreateAttribute(vs[0], vs[1], "http://www.w3.org/2001/XMLSchema");
+                            break;
+                        default:
+                            a = doc.CreateAttribute(vs[0], vs[1], string.Empty);
+                            break;
+                    }
+                    break;
+                default:
+                    a = doc.CreateAttribute(name);
+                    break;
+            }
 
             if (parent != null)
                 parent.Attributes.Append(a);

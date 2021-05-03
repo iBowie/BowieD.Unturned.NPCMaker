@@ -260,7 +260,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
         public enum ReturnType
         {
             Reward, Condition, Dialogue, Vendor, Quest, VendorItem, Object, Character,
-            Currency, GenericString, GenericDirectory
+            Currency, GenericString, GenericDirectory,
+            DialogueVendor
         }
     }
 }
