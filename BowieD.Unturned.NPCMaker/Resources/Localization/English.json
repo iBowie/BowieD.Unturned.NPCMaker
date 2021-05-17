@@ -737,7 +737,7 @@
         "Main_Tab_Vendor_Preview_Message": "Set up simulation in next dialog window. Close to proceed.",
         "Main_Tab_Vendor_NoSelection": "No tab selected.\nAdd new tab or select another one.",
         "Main_Tab_Vendor_NoSelection_Hint": "Click here to add new vendor to the project.",
-        "Main_Tab_DialogueVendor": "Dialogue Vendor",
+        "Main_Tab_DialogueVendor": "[Dialogue Vendor]",
         "Main_Tab_DialogueVendor_Guid_Set": "Set new GUID for this dialogue vendor.",
         "Main_Tab_DialogueVendor_Guid_Random": "Generate new GUID for this dialogue vendor.",
         "Main_Tab_DialogueVendor_NoSelection": "No tab selected.\nAdd new tab or select another one.",

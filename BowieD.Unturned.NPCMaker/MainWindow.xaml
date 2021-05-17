@@ -1260,7 +1260,7 @@
                             </Grid>
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition MinWidth="256"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition MinWidth="371"/>
                                     <ColumnDefinition Width="Auto"/>
