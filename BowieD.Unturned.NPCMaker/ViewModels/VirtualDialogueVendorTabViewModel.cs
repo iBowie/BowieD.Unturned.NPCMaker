@@ -232,7 +232,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 UpdateItems();
 
-                var tab = MainWindow.Instance.vendorTabSelect;
+                var tab = MainWindow.Instance.dialogueVendorTabSelect;
                 if (tab.SelectedItem != null && tab.SelectedItem is TabItem tabItem && tabItem.DataContext != null)
                 {
                     tabItem.DataContext = _dialogueVendor;
