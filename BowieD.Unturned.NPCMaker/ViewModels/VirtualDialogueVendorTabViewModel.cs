@@ -132,6 +132,25 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 Save();
 
                 _dialogueVendor = value;
+
+                MainWindow.Instance.dialogueVendorListBuyItems.Children.Clear();
+                MainWindow.Instance.dialogueVendorListSellItems.Children.Clear();
+                MainWindow.Instance.dialogueVendorPagesGrid.Children.Clear();
+
+                foreach (var c in value.Items)
+                {
+                    if (c.isBuy)
+                        AddItemBuy(new Universal_ItemList(c, true));
+                    else
+                        AddItemSell(new Universal_ItemList(c, true));
+                }
+
+                foreach (var c in value.Pages)
+                {
+                    AddPage(c);
+                }
+
+                OnPropertyChange("");
             }
         }
 
