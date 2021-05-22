@@ -161,6 +161,24 @@
         "DisableSorting": "Отключить сортировку",
         "Currency": "GUID валюты (пусто - опыт)"
     },
+    "DialogueVendor":
+    {
+    	"Guid": "GUID",
+        "Guid_Invalid": "Вы ввели невалидный GUID. Изменения не сохранены.",
+        "ID": "ID диалога",
+        "Pages": "Страницы",
+        "Page_Add": "Добавить страницу",
+        "Item_Add": "Добавить предмет",
+        "Items_Buy": "NPC скупает эти предметы",
+        "Items_Sell": "NPC продаёт эти предметы",
+        "Currency": "GUID валюты (пусто - опыт)",
+        "SellingFormat": "Формат текста покупки предмета",
+        "BuyingFormat": "Формат текста продажи предмета",
+        "GoodbyeText": "Текст закрытия диалога",
+        "SoldDialogueID": "ID диалога при продаже предмета",
+        "BoughtDialogueID": "ID диалога при покупке предмета",
+        "GoodbyeDialogueID": "ID закрытия диалога"
+    },
     "Quest":
     {
     	"Guid": "GUID",
@@ -719,6 +737,13 @@
         "Main_Tab_Vendor_Preview_Message": "Настройте симуляцию в следующем окне. После закрытия окна откроется магазин.",
         "Main_Tab_Vendor_NoSelection": "Вкладка не выбрана.\nСоздайте новую или выберите существующую.",
         "Main_Tab_Vendor_NoSelection_Hint": "Нажмите здесь чтобы добавить новый магазин в проект.",
+        "Main_Tab_DialogueVendor": "Диалог-магазин",
+        "Main_Tab_DialogueVendor_Guid_Set": "Указать новый GUID для этого диалога-магазина.",
+        "Main_Tab_DialogueVendor_Guid_Random": "Сгенерировать новый GUID для этого диалога-магазина.",
+        "Main_Tab_DialogueVendor_NoSelection": "Вкладка не выбрана.\nСоздайте новую или выберите существующую.",
+        "Main_Tab_DialogueVendor_NoSelection_Hint": "Нажмите здесь чтобы добавить новый диалог-магазин в проект.",
+        "Main_Tab_DialogueVendor_ConvertToDialogue": "Конвертировать в диалог",
+        "Main_Tab_DialogueVendor_ConvertToDialogue_Confirm": "Вы уверены что хотите конвертировать этот диалог-магазин в обычный диалог?\nДиалог-магазин будет удалён из проекта, преобразованный диалог появится в проекте.",
         "Main_Tab_Quest": "Задание",
         "Main_Tab_Quest_Guid_Set": "Указать новый GUID для этого задания",
         "Main_Tab_Quest_Guid_Random": "Сгенерировать новый GUID для этого задания",
