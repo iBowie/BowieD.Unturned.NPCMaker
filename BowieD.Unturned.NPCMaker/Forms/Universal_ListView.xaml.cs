@@ -42,46 +42,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
             }));
 
             addButton.ContextMenu = cmenu;
-        }
-
-        public bool ShowMoveButtons
-        {
-            get
-            {
-                switch (ReturnType)
-                {
-                    case Universal_ItemList.ReturnType.Condition:
-                    case Universal_ItemList.ReturnType.VendorItem:
-                    case Universal_ItemList.ReturnType.Reward:
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        }
-
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (UIElement ui in mainGrid.Children)
-            {
-                Universal_ItemList ll = ui as Controls.Universal_ItemList;
-                if (ll.Equals(Util.FindParent<Controls.Universal_ItemList>(sender as UIElement)))
-                {
-                    mainGrid.Children.Remove(ll);
-                    break;
-                }
-            }
-            LimitedList<object> newValues = new LimitedList<object>(Values.MaxItems);
-            foreach (UIElement ui in mainGrid.Children)
-            {
-                if (ui is Controls.Universal_ItemList uil)
-                {
-                    newValues.Add(uil.Value);
-                }
-            }
-            Values = newValues;
-
-            mainGrid.UpdateOrderButtons<Universal_ItemList>();
 
             addButton.Command = new AdvancedCommand(() =>
             {
@@ -130,6 +90,46 @@ namespace BowieD.Unturned.NPCMaker.Forms
             {
                 return Values.CanAdd;
             });
+        }
+
+        public bool ShowMoveButtons
+        {
+            get
+            {
+                switch (ReturnType)
+                {
+                    case Universal_ItemList.ReturnType.Condition:
+                    case Universal_ItemList.ReturnType.VendorItem:
+                    case Universal_ItemList.ReturnType.Reward:
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement ui in mainGrid.Children)
+            {
+                Universal_ItemList ll = ui as Controls.Universal_ItemList;
+                if (ll.Equals(Util.FindParent<Controls.Universal_ItemList>(sender as UIElement)))
+                {
+                    mainGrid.Children.Remove(ll);
+                    break;
+                }
+            }
+            LimitedList<object> newValues = new LimitedList<object>(Values.MaxItems);
+            foreach (UIElement ui in mainGrid.Children)
+            {
+                if (ui is Controls.Universal_ItemList uil)
+                {
+                    newValues.Add(uil.Value);
+                }
+            }
+            Values = newValues;
+
+            mainGrid.UpdateOrderButtons<Universal_ItemList>();
         }
 
         public LimitedList<object> Values { get; private set; }
