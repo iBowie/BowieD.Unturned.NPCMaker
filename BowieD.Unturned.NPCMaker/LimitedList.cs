@@ -9,6 +9,7 @@ namespace BowieD.Unturned.NPCMaker
             return new LimitedList<T>(ts, maxItems);
         }
     }
+    [System.Serializable]
     public class LimitedList<T> : List<T>
     {
         public LimitedList(IEnumerable<T> collection, int maxItems) : base(maxItems)
