@@ -685,6 +685,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         }
 
         private ICommand _addItemCommand, _addPageCommand, closeTabCommand, _convertToDialogueCommand;
+        private ICommand setGuidCommand;
+        private ICommand randomGuidCommand;
+
         public ICommand AddItemCommand
         {
             get
@@ -778,6 +781,46 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 }
 
                 return _convertToDialogueCommand;
+            }
+        }
+        public ICommand RandomGuidCommand
+        {
+            get
+            {
+                if (randomGuidCommand == null)
+                {
+                    randomGuidCommand = new BaseCommand(() =>
+                    {
+                        GUID = Guid.NewGuid().ToString("N");
+                    });
+                }
+                return randomGuidCommand;
+            }
+        }
+        public ICommand SetGuidCommand
+        {
+            get
+            {
+                if (setGuidCommand == null)
+                {
+                    setGuidCommand = new BaseCommand(() =>
+                    {
+                        MultiFieldInputView_Dialog mfiv = new MultiFieldInputView_Dialog(new string[1] { GUID });
+                        if (mfiv.ShowDialog(new string[1] { LocalizationManager.Current.DialogueVendor["Guid"] }, "") == true)
+                        {
+                            string res = mfiv.Values[0];
+                            if (Guid.TryParse(res, out var newGuid))
+                            {
+                                GUID = newGuid.ToString("N");
+                            }
+                            else
+                            {
+                                MessageBox.Show(LocalizationManager.Current.DialogueVendor["Guid_Invalid"]);
+                            }
+                        }
+                    });
+                }
+                return setGuidCommand;
             }
         }
     }

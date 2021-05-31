@@ -1867,8 +1867,39 @@
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Row="0">
                                 <StackPanel Orientation="Horizontal" Margin="10">
-                                    <Label Content="{xaml:Localize CURRENCY_GUID}"/>
-                                    <TextBox MaxLength="32" MaxLines="1" Text="{Binding GUID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <Label VerticalAlignment="Center" Content="{xaml:Localize CURRENCY_GUID}"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock MinWidth="195" VerticalAlignment="Center" IsEnabled="False" Margin="5" TextWrapping="NoWrap" Text="{Binding GUID}"/>
+                                        <Grid Grid.Column="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Button Command="{Binding SetGuidCommand}"
+                                                Margin="5"
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Currency_Guid_Set}"
+                                                Style="{DynamicResource FlatOutlineButtonStyle}">
+                                                <Button.Content>
+                                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="Pencil"/>
+                                                </Button.Content>
+                                            </Button>
+                                            <Button 
+                                        Command="{Binding RandomGuidCommand}" 
+                                        Grid.Column="1" 
+                                        Margin="5" 
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Currency_Guid_Random}"
+                                        Style="{DynamicResource FlatOutlineButtonStyle}">
+                                                <Button.Content>
+                                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="DiceMultiple"/>
+                                                </Button.Content>
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="10">
                                     <Label Content="{xaml:Localize CURRENCY_ValueFormat}"/>

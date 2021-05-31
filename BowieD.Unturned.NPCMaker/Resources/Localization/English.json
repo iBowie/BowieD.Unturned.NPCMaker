@@ -194,6 +194,7 @@
     "Currency":
     {
         "GUID": "Currency GUID",
+        "Guid_Invalid": "You've entered invalid GUID. Changes are not made.",
         "ValueFormat": "Currency Value Format",
         "Item_Add": "Add Entry",
         "Entry_GUID": "Item GUID",
@@ -752,6 +753,8 @@
         "Main_Tab_Quest_NoSelection": "No tab selected.\nAdd new tab or select another one.",
         "Main_Tab_Quest_NoSelection_Hint": "Click here to add new quest to the project.",
         "Main_Tab_Currency": "Currency",
+        "Main_Tab_Currency_Guid_Set": "Set new GUID for this currency.",
+        "Main_Tab_Currency_Guid_Random": "Generate new GUID for this currency.",
         "Main_Tab_Currency_NoSelection": "No tab selected.\nAdd new tab or select another one.",
         "Main_Tab_Currency_NoSelection_Hint": "Click here to add new currency to the project.",
         "Main_Tab_Errors": "Error List",
