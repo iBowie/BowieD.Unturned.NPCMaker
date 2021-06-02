@@ -190,6 +190,7 @@
     "Currency":
     {
         "GUID": "货币系统的GUID",
+		"Guid_Invalid": "输入的GUID无效. 更改将不会生效.",
         "ValueFormat": "货币系统显示样式",
         "Item_Add": "添加条目",
         "Entry_GUID": "链接的货币GUID",
@@ -661,6 +662,8 @@
         "Main_Tab_Quest_Guid_Random": "为该任务生成新的GUID",
         "Main_Tab_Quest_NoSelection_Hint": "点击此处以在项目中添加任务文件.",
         "Main_Tab_Currency": "货币系统",
+        "Main_Tab_Currency_Guid_Set": "为该货币系统配置GUID",
+		"Main_Tab_Currency_Guid_Random": "为该货币系统生成新的GUID",
         "Main_Tab_Currency_NoSelection": "当前没有货币系统文件.\n在项目中添加新的货币系统或选择一个货币系统文件.",
         "Main_Tab_Currency_NoSelection_Hint": "点击此处以在项目中添加货币系统文件.",
         "Configuration_Tab_Import": "导入设置",
