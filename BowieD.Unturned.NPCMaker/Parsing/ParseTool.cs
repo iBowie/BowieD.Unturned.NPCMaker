@@ -58,7 +58,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 startDialogueId = asset.ReadUInt16("Dialogue"),
                 DisplayName = local?.ReadString("Character"),
                 EditorName = local?.ReadString("Name"),
-                GUID = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
+                GUID = asset.ReadGUID("GUID", Guid.NewGuid()).ToString("N"),
                 leftHanded = asset.Has("Backward"),
                 clothing = ParseClothing(Clothing_Type.Default),
                 christmasClothing = ParseClothing(Clothing_Type.Christmas),
@@ -75,7 +75,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
         {
             NPCDialogue d = new NPCDialogue()
             {
-                GUID = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
+                GUID = asset.ReadGUID("GUID", Guid.NewGuid()).ToString("N"),
                 ID = asset.ReadUInt16("ID")
             };
             byte msgCount = asset.ReadByte("Messages");
@@ -157,7 +157,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
             {
                 ID = asset.ReadUInt16("ID"),
                 disableSorting = asset.Has("Disable_Sorting"),
-                GUID = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
+                GUID = asset.ReadGUID("GUID", Guid.NewGuid()).ToString("N"),
                 Title = local?.ReadString("Name") ?? "",
                 vendorDescription = local?.ReadString("Description") ?? "",
                 items = ParseVendorItems().ToList(),
@@ -171,7 +171,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 ID = asset.ReadUInt16("ID"),
                 Title = local?.ReadString("Name") ?? "",
                 description = local?.ReadString("Description") ?? "",
-                GUID = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
+                GUID = asset.ReadGUID("GUID", Guid.NewGuid()).ToString("N"),
                 conditions = ParseConditions("").ToLimitedList(byte.MaxValue),
                 rewards = ParseRewards("").ToLimitedList(byte.MaxValue)
             };
