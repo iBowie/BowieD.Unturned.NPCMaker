@@ -842,6 +842,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     c.GUID = Guid.NewGuid().ToString("N");
                                 }
                             }
+                            MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.OnPropertyChange(nameof(CharacterTabViewModel.GUID));
                         }
                         if (MainWindow.CurrentProject.data.dialogues != null)
                         {
@@ -852,6 +853,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     d.GUID = Guid.NewGuid().ToString("N");
                                 }
                             }
+                            MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.RelayChange(nameof(DialogueTabViewModel.GUID));
                         }
                         if (MainWindow.CurrentProject.data.vendors != null)
                         {
@@ -862,6 +864,18 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     v.GUID = Guid.NewGuid().ToString("N");
                                 }
                             }
+                            MainWindow.Instance.MainWindowViewModel.VendorTabViewModel.RelayChange(nameof(VendorTabViewModel.GUID));
+                        }
+                        if (MainWindow.CurrentProject.data.dialogueVendors != null)
+                        {
+                            foreach (VirtualDialogueVendor v in MainWindow.CurrentProject.data.dialogueVendors)
+                            {
+                                if (v != null)
+                                {
+                                    v.GUID = Guid.NewGuid().ToString("N");
+                                }
+                            }
+                            MainWindow.Instance.MainWindowViewModel.DialogueVendorTabViewModel.RelayChange(nameof(VirtualDialogueVendorTabViewModel.GUID));
                         }
                         if (MainWindow.CurrentProject.data.quests != null)
                         {
@@ -872,6 +886,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     q.GUID = Guid.NewGuid().ToString("N");
                                 }
                             }
+                            MainWindow.Instance.MainWindowViewModel.QuestTabViewModel.RelayChange(nameof(QuestTabViewModel.GUID));
                         }
                         MainWindow.CurrentProject.data.guid = Guid.NewGuid().ToString("N");
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["App_GUID_Regenerated"]);
