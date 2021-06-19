@@ -112,7 +112,8 @@
         "Equipment_Equipped_Primary": "Основной слот",
         "Equipment_Equipped_Secondary": "Вторичный слот",
         "Equipment_Equipped_Tertiary": "Третичный слот",
-        "Equipment_Equipped_Any": "Любой слот"
+        "Equipment_Equipped_Any": "Любой слот",
+        "HolidayRestriction": "Праздничное ограничение"
     },
     "Dialogue":
     {

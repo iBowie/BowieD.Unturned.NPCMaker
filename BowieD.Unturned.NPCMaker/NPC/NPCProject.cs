@@ -11,7 +11,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
 {
     public class NPCProject : IAXData
     {
-        public const int CURRENT_SAVEDATA_VERSION = 7;
+        // REALLY IMPORTANT
+        // ADAPT THIS CODE TO .NET REWRITE VERSION
+        public const int CURRENT_SAVEDATA_VERSION = 8;
 
         public NPCProject()
         {

@@ -96,6 +96,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public ushort equipTertiary;
         public Equip_Type equipped;
         public float poseLean, posePitch, poseHeadOffset;
+        public ENPCHoliday holidayRestriction;
 
         private string _guid;
         [XmlAttribute("guid")]
@@ -194,6 +195,15 @@ namespace BowieD.Unturned.NPCMaker.NPC
             poseHeadOffset = node["poseHeadOffset"].ToSingle();
 
             visibilityConditions = new LimitedList<Condition>(node["visibilityConditions"].ParseAXDataCollection<Condition>(version), byte.MaxValue);
+
+            if (version >= 8)
+            {
+                holidayRestriction = node["holidayRestriction"].ToEnum(ENPCHoliday.None);
+            }
+            else
+            {
+                holidayRestriction = ENPCHoliday.None;
+            }
         }
 
         public void Save(XmlDocument document, XmlNode node)
@@ -230,6 +240,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
             document.CreateNodeC("poseHeadOffset", node).WriteSingle(poseHeadOffset);
 
             document.CreateNodeC("visibilityConditions", node).WriteAXDataCollection(document, "Condition", visibilityConditions);
+
+            document.CreateNodeC("holidayRestriction", node).WriteEnum(holidayRestriction);
         }
     }
 }

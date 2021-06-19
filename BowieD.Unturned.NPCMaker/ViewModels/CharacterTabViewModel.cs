@@ -566,6 +566,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public ushort EquipmentSecondary { get => Character.equipSecondary; set => Character.equipSecondary = value; }
         public ushort EquipmentTertiary { get => Character.equipTertiary; set => Character.equipTertiary = value; }
         public Equip_Type Equipped { get => Character.equipped; set => Character.equipped = value; }
+        public ENPCHoliday HolidayRestriction { get => Character.holidayRestriction; set => Character.holidayRestriction = value; }
 
         private ICommand editVisibilityConditionsCommand;
         private ICommand randomFaceCommand;

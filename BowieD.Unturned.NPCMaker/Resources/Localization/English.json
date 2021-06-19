@@ -112,7 +112,8 @@
         "Equipment_Equipped_Primary": "Primary",
         "Equipment_Equipped_Secondary": "Secondary",
         "Equipment_Equipped_Tertiary": "Tertiary",
-        "Equipment_Equipped_Any": "Any"
+        "Equipment_Equipped_Any": "Any",
+        "HolidayRestriction": "Holiday Restriction"
     },
     "Dialogue":
     {

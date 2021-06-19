@@ -246,6 +246,14 @@
                                     <TextBlock VerticalAlignment="Center" Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Dialogue}"/>
                                 </Grid>
                                 <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="character_commentbox" Margin="5" Height="26"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <ComboBox ItemsSource="{StaticResource Character_Holidays_Enums}" SelectedValue="{Binding HolidayRestriction, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Character_Holidays_Enums}}" Margin="5"/>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_HolidayRestriction}"/>
+                                </Grid>
                                 <Button Command="{Binding EditVisibilityConditionsCommand}" Name="visibilityCondsButton" Content="{xaml:Localize Key=CHARACTER_Conditions}" Margin="5">
                                     <Button.ToolTip>
                                         <StackPanel>
@@ -1083,7 +1091,7 @@
                                     </TabItem>
                                 </TabControl>
                             </GroupBox>
-                            <GroupBox Header="{xaml:Localize Key=CHARACTER_Equipment}" HorizontalAlignment="Left" Margin="10,240,0,10" Width="300" MaxHeight="231" VerticalAlignment="Bottom">
+                            <GroupBox Header="{xaml:Localize Key=CHARACTER_Equipment}" HorizontalAlignment="Left" Margin="10,316,0,10" Width="300" MaxHeight="231" VerticalAlignment="Bottom">
                                 <ScrollViewer>
                                     <StackPanel>
                                         <Grid>
