@@ -68,7 +68,8 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 poseLean = asset.ReadSingle("Pose_Lean"),
                 posePitch = asset.ReadSingle("Pose_Pitch", 90f),
                 equipped = asset.ReadEnum("Equipped", Equip_Type.None),
-                visibilityConditions = ParseConditions("").ToLimitedList(byte.MaxValue)
+                visibilityConditions = ParseConditions("").ToLimitedList(byte.MaxValue),
+                holidayRestriction = asset.ReadEnum("Holiday_Restriction", ENPCHoliday.None)
             };
         }
         public NPCDialogue ParseDialogue()
