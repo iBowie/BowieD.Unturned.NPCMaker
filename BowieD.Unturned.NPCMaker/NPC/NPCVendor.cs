@@ -106,7 +106,18 @@ namespace BowieD.Unturned.NPCMaker.NPC
             Title = node["vendorTitle"].ToText();
             vendorDescription = node["vendorDescription"].ToText();
 
-            items = node["items"].ParseAXDataCollection<VendorItem>(version).ToList();
+            if (version < 8)
+            {
+                items = node["items"].ParseAXDataCollection<VendorItem>(version).ToList();
+            }
+            else
+            {
+                var buyItems = node["buyingItems"].ParseVendorItemsNew(version, true);
+                var sellItems = node["sellingItems"].ParseVendorItemsNew(version, false);
+
+                items = buyItems.Concat(sellItems).ToList();
+            }
+
             disableSorting = node["disableSorting"].ToBoolean();
             currency = node["currency"].ToText();
         }
@@ -120,7 +131,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
             document.CreateNodeC("vendorTitle", node).WriteString(Title);
             document.CreateNodeC("vendorDescription", node).WriteString(vendorDescription);
 
-            document.CreateNodeC("items", node).WriteAXDataCollection(document, "VendorItem", items);
+            document.CreateNodeC("buyingItems", node).WriteVendorItemsNew(document, BuyItems, true);
+            document.CreateNodeC("sellingItems", node).WriteVendorItemsNew(document, SellItems, false);
+            
             document.CreateNodeC("disableSorting", node).WriteBoolean(disableSorting);
             document.CreateNodeC("currency", node).WriteString(currency);
         }

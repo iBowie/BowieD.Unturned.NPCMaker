@@ -1,8 +1,10 @@
 ﻿using BowieD.Unturned.NPCMaker.Coloring;
 using BowieD.Unturned.NPCMaker.NPC;
+using BowieD.Unturned.NPCMaker.NPC.Conditions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Xml;
 
 namespace BowieD.Unturned.NPCMaker.Common
@@ -206,6 +208,77 @@ namespace BowieD.Unturned.NPCMaker.Common
                 }
             }
         }
+        public static IEnumerable<VendorItem> ParseVendorItemsNew(this XmlNode node, int version, bool isBuy)
+        {
+            if (version < 8)
+                throw new InvalidOperationException("This is not supported");
+
+            if (isBuy)
+            {
+                foreach (XmlNode cNode in node.ChildNodes)
+                {
+                    var typeAt = cNode.Attributes["xsi:type"].Value;
+
+                    switch (typeAt)
+                    {
+                        case "BuyingItem":
+                            {
+                                yield return new VendorItem()
+                                {
+                                    spawnPointID = string.Empty,
+                                    conditions = cNode["Conditions"].ParseAXDataCollection<Condition>(version).ToList(),
+                                    cost = cNode["Cost"].ToUInt32(),
+                                    id = cNode["ID"].ToUInt16(),
+                                    isBuy = true,
+                                    type = ItemType.ITEM
+                                };
+                            }
+                            break;
+                        default:
+                            throw new InvalidOperationException("Not supported buying item");
+                    }
+                }
+            }
+            else
+            {
+                foreach (XmlNode cNode in node.ChildNodes)
+                {
+                    var typeAt = cNode.Attributes["xsi:type"].Value;
+
+                    switch (typeAt)
+                    {
+                        case "SellingItem":
+                            {
+                                yield return new VendorItem()
+                                {
+                                    spawnPointID = string.Empty,
+                                    conditions = cNode["Conditions"].ParseAXDataCollection<Condition>(version).ToList(),
+                                    cost = cNode["Cost"].ToUInt32(),
+                                    id = cNode["ID"].ToUInt16(),
+                                    isBuy = false,
+                                    type = ItemType.ITEM
+                                };
+                            }
+                            break;
+                        case "SellingVehicle":
+                            {
+                                yield return new VendorItem()
+                                {
+                                    spawnPointID = cNode["spawnpoint"].ToText(),
+                                    conditions = cNode["Conditions"].ParseAXDataCollection<Condition>(version).ToList(),
+                                    cost = cNode["Cost"].ToUInt32(),
+                                    id = cNode["ID"].ToUInt16(),
+                                    isBuy = false,
+                                    type = ItemType.VEHICLE
+                                };
+                            }
+                            break;
+                        default:
+                            throw new InvalidOperationException("Not supported selling item");
+                    }
+                }
+            }
+        }
         public static XmlNode WriteAXDataCollection<T>(this XmlNode node, XmlDocument doc, string itemName, IEnumerable<T> ts) where T : IAXData
         {
             foreach (var elem in ts)
@@ -234,6 +307,63 @@ namespace BowieD.Unturned.NPCMaker.Common
             foreach (var elem in ts)
             {
                 doc.CreateNodeC(itemName, node).WriteInt32(elem);
+            }
+
+            return node;
+        }
+        public static XmlNode WriteVendorItemsNew(this XmlNode node, XmlDocument doc, IEnumerable<VendorItem> ts, bool isBuy)
+        {
+            foreach (var elem in ts)
+            {
+                if (elem.isBuy != isBuy)
+                    throw new InvalidOperationException("unexpected item in bagging area");
+
+                XmlNode cNode;
+
+                if (isBuy)
+                {
+                    cNode = doc.CreateNodeC("VendorBuyingBase", node);
+                }
+                else
+                {
+                    cNode = doc.CreateNodeC("VendorSellingBase", node);
+                }
+
+                doc.CreateNodeC("ID", cNode).WriteUInt16(elem.id);
+                doc.CreateNodeC("Cost", cNode).WriteUInt32(elem.cost);
+                doc.CreateNodeC("Conditions", cNode).WriteAXDataCollection(doc, "Condition", elem.conditions);
+
+                switch (elem.type)
+                {
+                    case ItemType.ITEM:
+                        {
+                            if (isBuy)
+                            {
+                                doc.CreateAttributeC("xsi:type", cNode).WriteString("BuyingItem");
+                            }
+                            else
+                            {
+                                doc.CreateAttributeC("xsi:type", cNode).WriteString("SellingItem");
+                            }
+                        }
+                        break;
+                    case ItemType.VEHICLE:
+                        {
+                            doc.CreateNodeC("spawnpoint", node).WriteString(elem.spawnPointID);
+
+                            if (isBuy)
+                            {
+                                throw new InvalidOperationException("buying a vehicle, eh?");
+                            }
+                            else
+                            {
+                                doc.CreateAttributeC("xsi:type", cNode).WriteString("SellingVehicle");
+                            }
+                        }
+                        break;
+                    default:
+                        throw new NotImplementedException("ItemType not implemented");
+                }
             }
 
             return node;
