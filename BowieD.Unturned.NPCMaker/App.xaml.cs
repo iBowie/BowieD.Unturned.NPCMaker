@@ -213,6 +213,8 @@ namespace BowieD.Unturned.NPCMaker
 #else
             ConsoleLogger.HideConsoleWindow();
 #endif
+            Application.Current.MainWindow = mw;
+            Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
             mw.Show();
         }
         public static void InitLoggers()
