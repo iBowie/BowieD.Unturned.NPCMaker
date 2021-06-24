@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Xml;
 
 namespace BowieD.Unturned.NPCMaker.NPC
@@ -263,7 +264,17 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public void Load(XmlNode node, int version)
         {
             ID = node["id"].ToUInt16();
-            Items = new LimitedList<VendorItem>(node["items"].ParseAXDataCollection<VendorItem>(version), byte.MaxValue - 1);
+            if (version < 8)
+            {
+                Items = new LimitedList<VendorItem>(node["items"].ParseAXDataCollection<VendorItem>(version), byte.MaxValue - 1);
+            }
+            else
+            {
+                var buyingItems = node["buyingItems"].ParseVendorItemsNew(version, true);
+                var sellingItems = node["sellingItems"].ParseVendorItemsNew(version, false);
+
+                Items = new LimitedList<VendorItem>(buyingItems.Concat(sellingItems), byte.MaxValue);
+            }
             Pages = new LimitedList<string>(node["pages"].ParseStringCollection(), byte.MaxValue);
             Comment = node["comment"].ToText();
             GoodbyeText = node["goodbyeText"].ToText();
@@ -279,7 +290,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public void Save(XmlDocument document, XmlNode node)
         {
             document.CreateNodeC("id", node).WriteUInt16(ID);
-            document.CreateNodeC("items", node).WriteAXDataCollection(document, "VendorItem", Items);
+            document.CreateNodeC("buyingItems", node).WriteAXDataCollection(document, "VendorBuyingBase", Items.Where(d => d.isBuy));
+            document.CreateNodeC("sellingItems", node).WriteAXDataCollection(document, "VendorSellingBase", Items.Where(d => !d.isBuy));
             document.CreateNodeC("pages", node).WriteStringCollection(document, Pages);
             document.CreateNodeC("comment", node).WriteString(Comment);
             document.CreateNodeC("goodbyeText", node).WriteString(GoodbyeText);
