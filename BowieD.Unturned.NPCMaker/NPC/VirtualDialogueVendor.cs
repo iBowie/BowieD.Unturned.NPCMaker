@@ -290,8 +290,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public void Save(XmlDocument document, XmlNode node)
         {
             document.CreateNodeC("id", node).WriteUInt16(ID);
-            document.CreateNodeC("buyingItems", node).WriteAXDataCollection(document, "VendorBuyingBase", Items.Where(d => d.isBuy));
-            document.CreateNodeC("sellingItems", node).WriteAXDataCollection(document, "VendorSellingBase", Items.Where(d => !d.isBuy));
+            document.CreateNodeC("buyingItems", node).WriteVendorItemsNew(document, Items.Where(d => d.isBuy), true);
+            document.CreateNodeC("sellingItems", node).WriteVendorItemsNew(document, Items.Where(d => !d.isBuy), false);
             document.CreateNodeC("pages", node).WriteStringCollection(document, Pages);
             document.CreateNodeC("comment", node).WriteString(Comment);
             document.CreateNodeC("goodbyeText", node).WriteString(GoodbyeText);
