@@ -1,10 +1,13 @@
-﻿using BowieD.Unturned.NPCMaker.NPC.Currency;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
+using BowieD.Unturned.NPCMaker.NPC.Currency;
 using BowieD.Unturned.NPCMaker.Parsing;
 using System;
+using System.Collections.Generic;
+using System.Windows.Media;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration
 {
-    public class GameCurrencyAsset : GameAsset
+    public class GameCurrencyAsset : GameAsset, IHasAnimatedThumbnail
     {
         public GameCurrencyAsset(string name, ushort id, Guid guid, string type, EGameAssetOrigin origin) : base(name, id, guid, type, origin)
         {
@@ -23,7 +26,21 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         public string valueFormat;
         public CurrencyEntry[] entries;
 
-        public override bool GUIDOverID => true;
+        public override EIDDef IDDef => EIDDef.GUID;
+
+        public IEnumerable<ImageSource> Thumbnails
+        {
+            get
+            {
+                foreach (var p in entries)
+                {
+                    if (GameAssetManager.TryGetAsset<GameItemAsset>(new Guid(p.ItemGUID), out var itemAsset))
+                    {
+                        yield return ThumbnailManager.CreateThumbnail(itemAsset.ImagePath);
+                    }
+                }
+            }
+        }
 
         protected override void readAsset(IFileReader reader)
         {
@@ -45,6 +62,36 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             {
                 return x.Value.CompareTo(y.Value);
             }));
+        }
+
+        public override IEnumerable<string> GetToolTipLines()
+        {
+            foreach (var b in base.GetToolTipLines())
+                yield return b;
+
+            string format;
+
+            try
+            {
+                string.Format(valueFormat, uint.MaxValue);
+                format = valueFormat;
+            }
+            catch (FormatException)
+            {
+                format = "{0:N0}";
+            }
+
+            foreach (var e in entries)
+            {
+                if (GameAssetManager.TryGetAsset<GameItemAsset>(new Guid(e.ItemGUID), out var asset) && !string.IsNullOrEmpty(asset.Name))
+                {
+                    yield return $"[{asset.id}] {asset.Name} - {string.Format(format, e.Value)}";
+                }
+                else
+                {
+                    yield return $"{e.ItemGUID} - {string.Format(format, e.Value)}";
+                }
+            }
         }
     }
 }

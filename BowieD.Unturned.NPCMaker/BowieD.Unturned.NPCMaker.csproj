@@ -166,6 +166,7 @@
     <Compile Include="Common\Utility\DebugUtility.cs" />
     <Compile Include="Common\Utility\NETHelper.cs" />
     <Compile Include="Common\Utility\PathUtility.cs" />
+    <Compile Include="Common\XmlNodeExtension.cs" />
     <Compile Include="Controls\CurrencyEntryControl.xaml.cs">
       <DependentUpon>CurrencyEntryControl.xaml</DependentUpon>
     </Compile>
@@ -246,6 +247,9 @@
     <Compile Include="Forms\OneFieldInputView_Dialog.xaml.cs">
       <DependentUpon>OneFieldInputView_Dialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ProjectSettingsView.xaml.cs">
+      <DependentUpon>ProjectSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\QuestEditorView_Window.xaml.cs">
       <DependentUpon>QuestEditorView_Window.xaml</DependentUpon>
     </Compile>
@@ -295,9 +299,14 @@
     <Compile Include="Forms\Form_About.xaml.cs">
       <DependentUpon>Form_About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameIntegration\Devkit\DevkitHierarchyItemBase.cs" />
+    <Compile Include="GameIntegration\Devkit\DevkitHierarchyWorldItem.cs" />
+    <Compile Include="GameIntegration\Devkit\IDevkitHierarchyItem.cs" />
+    <Compile Include="GameIntegration\Devkit\Spawnpoint.cs" />
     <Compile Include="GameIntegration\EGameAssetCategory.cs" />
     <Compile Include="GameIntegration\EGameAssetOrigin.cs" />
     <Compile Include="GameIntegration\EGameItemRarity.cs" />
+    <Compile Include="GameIntegration\EIDDef.cs" />
     <Compile Include="GameIntegration\Filtering\AssetFilter.cs" />
     <Compile Include="GameIntegration\Filtering\AssetFilter_Equippable.cs" />
     <Compile Include="GameIntegration\FlagDescriptionProjectAsset.cs" />
@@ -334,7 +343,10 @@
     <Compile Include="GameIntegration\GameVehicleAsset.cs" />
     <Compile Include="GameIntegration\GameVendorAsset.cs" />
     <Compile Include="GameIntegration\GameWeatherAsset.cs" />
+    <Compile Include="GameIntegration\IAssetPickable.cs" />
     <Compile Include="GameIntegration\IEditable.cs" />
+    <Compile Include="GameIntegration\IHasOriginFile.cs" />
+    <Compile Include="GameIntegration\Level\LevelDatManager.cs" />
     <Compile Include="GameIntegration\ProjectAsset.cs" />
     <Compile Include="GameIntegration\Thumbnails\IHasAnimatedThumbnail.cs" />
     <Compile Include="GameIntegration\Thumbnails\IHasIcon.cs" />
@@ -347,6 +359,7 @@
     <Compile Include="IHasOrderButtons.cs" />
     <Compile Include="IHasUniqueGUID.cs" />
     <Compile Include="InputTool.cs" />
+    <Compile Include="LimitedList.cs" />
     <Compile Include="Localization\Localization.cs" />
     <Compile Include="Localization\LocalizationManager.cs" />
     <Compile Include="Localization\TranslationDictionary.cs" />
@@ -366,6 +379,7 @@
     <Compile Include="Mistakes\Character\NE_0001.cs" />
     <Compile Include="Mistakes\Character\NE_0002.cs" />
     <Compile Include="Mistakes\Character\NE_0003.cs" />
+    <Compile Include="Mistakes\Character\NE_0004.cs" />
     <Compile Include="Mistakes\Currencies\CurrencyMistake.cs" />
     <Compile Include="Mistakes\Currencies\NE_4000.cs" />
     <Compile Include="Mistakes\Currencies\NE_4001.cs" />
@@ -382,13 +396,16 @@
     <Compile Include="Mistakes\Dialogue\NE_1005.cs" />
     <Compile Include="Mistakes\Dialogue\NE_1006.cs" />
     <Compile Include="Mistakes\Dialogue\NE_1007.cs" />
+    <Compile Include="Mistakes\Dialogue\NE_1008.cs" />
     <Compile Include="Mistakes\MistakesManager.cs" />
     <Compile Include="Mistakes\Quest\NE_3000.cs" />
     <Compile Include="Mistakes\Quest\NE_3001.cs" />
     <Compile Include="Mistakes\Quest\NE_3002.cs" />
+    <Compile Include="Mistakes\Quest\NE_3003.cs" />
     <Compile Include="Mistakes\Quest\QuestMistake.cs" />
     <Compile Include="Mistakes\Vendor\NE_2000.cs" />
     <Compile Include="Mistakes\Vendor\NE_2001.cs" />
+    <Compile Include="Mistakes\Vendor\NE_2002.cs" />
     <Compile Include="Mistakes\Vendor\VendorMistake.cs" />
     <Compile Include="Notification\INotificationManager.cs" />
     <Compile Include="Notification\NotificationManager.cs" />
@@ -419,6 +436,7 @@
     <Compile Include="NPC\Conditions\ConditionWeatherStatus.cs" />
     <Compile Include="NPC\Currency\CurrencyAsset.cs" />
     <Compile Include="NPC\Currency\CurrencyEntry.cs" />
+    <Compile Include="NPC\IAXData.cs" />
     <Compile Include="NPC\IHasUIText.cs" />
     <Compile Include="NPC\NPCCharacter.cs" />
     <Compile Include="NPC\NPCClothing.cs" />
@@ -442,12 +460,14 @@
     <Compile Include="NPC\Rewards\Attributes\RewardTooltipAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardVehicle.cs" />
     <Compile Include="NPC\Shared\Attributes\AssetPickerAttribute.cs" />
+    <Compile Include="NPC\Shared\Attributes\ContextAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\NoValueAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\OptionalAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\RangeAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\SkipFieldAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\TooltipAttribute.cs" />
     <Compile Include="NPC\Simulation.cs" />
+    <Compile Include="NPC\VirtualDialogueVendor.cs" />
     <Compile Include="OrderTool.cs" />
     <Compile Include="Parsing\DataReader.cs" />
     <Compile Include="Parsing\IFileReadable.cs" />
@@ -469,6 +489,7 @@
     <Compile Include="Parsing\KVTable\TReaders\CoreTypes\KVTableUShortReader.cs" />
     <Compile Include="Parsing\KVTable\TReaders\SystemTypes\KVTableGUIDReader.cs" />
     <Compile Include="Parsing\KVTable\TReaders\SystemTypes\KVTableTypeReader.cs" />
+    <Compile Include="Parsing\KVTable\TReaders\UnityTypes\KVTableVector3Reader.cs" />
     <Compile Include="Parsing\ParseTool.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -530,6 +551,7 @@
     <Compile Include="ViewModels\MistakeTabViewModel.cs" />
     <Compile Include="ViewModels\QuestTabViewModel.cs" />
     <Compile Include="ViewModels\VendorTabViewModel.cs" />
+    <Compile Include="ViewModels\VirtualDialogueVendorTabViewModel.cs" />
     <Compile Include="Workshop\SteamManager.cs" />
     <Compile Include="XAML\EnumItemsSource.cs" />
     <Compile Include="XAML\LocalizationConverter.cs" />
@@ -611,6 +633,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\OneFieldInputView_Dialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\ProjectSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

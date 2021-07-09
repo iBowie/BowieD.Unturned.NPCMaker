@@ -160,10 +160,15 @@ namespace BowieD.Unturned.NPCMaker.NPC
     }
     public enum ENPCHoliday
     {
+        [Description("Condition.Holiday_Value_None")]
         None,
+        [Description("Condition.Holiday_Value_Halloween")]
         Halloween,
+        [Description("Condition.Holiday_Value_Christmas")]
         Christmas,
+        [Description("Condition.Holiday_Value_April_Fools")]
         April_Fools,
+        [Description("Condition.Holiday_Value_Max")]
         Max
     }
     public enum ELanguage

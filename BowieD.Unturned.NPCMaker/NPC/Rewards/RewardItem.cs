@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Controls;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
@@ -6,6 +7,7 @@ using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System.Text;
 using System.Windows.Media.Imaging;
+using System.Xml;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
@@ -35,8 +37,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
         [AssetPicker(typeof(GameItemAsset), "Control_SelectAsset_Item", MahApps.Metro.IconPacks.PackIconMaterialKind.Archive)]
         public ushort ID { get; set; }
-        [Range((byte)1, byte.MaxValue)]
-        public byte Amount { get; set; }
+        [Range(byte.MinValue, byte.MaxValue)]
+        public byte Amount { get; set; } = 1;
         [Optional(null)]
         [AssetPicker(typeof(GameItemSightAsset), "Control_SelectAsset_Sight", MahApps.Metro.IconPacks.PackIconMaterialKind.Crosshairs)]
         public ushort? Sight { get; set; }
@@ -214,6 +216,36 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 image = default;
                 return false;
             }
+        }
+
+        public override void Load(XmlNode node, int version)
+        {
+            base.Load(node, version);
+
+            ID = node["ID"].ToUInt16();
+            Amount = node["Amount"].ToByte();
+            Sight = node["Sight"].ToNullableUInt16();
+            Tactical = node["Tactical"].ToNullableUInt16();
+            Grip = node["Grip"].ToNullableUInt16();
+            Barrel = node["Barrel"].ToNullableUInt16();
+            Magazine = node["Magazine"].ToNullableUInt16();
+            Ammo = node["Ammo"].ToNullableByte();
+            Auto_Equip = node["Auto_Equip"].ToBoolean();
+        }
+
+        public override void Save(XmlDocument document, XmlNode node)
+        {
+            base.Save(document, node);
+
+            document.CreateNodeC("ID", node).WriteUInt16(ID);
+            document.CreateNodeC("Amount", node).WriteByte(Amount);
+            document.CreateNodeC("Sight", node).WriteNullableUInt16(Sight);
+            document.CreateNodeC("Tactical", node).WriteNullableUInt16(Tactical);
+            document.CreateNodeC("Grip", node).WriteNullableUInt16(Grip);
+            document.CreateNodeC("Barrel", node).WriteNullableUInt16(Barrel);
+            document.CreateNodeC("Magazine", node).WriteNullableUInt16(Magazine);
+            document.CreateNodeC("Ammo", node).WriteNullableByte(Ammo);
+            document.CreateNodeC("Auto_Equip", node).WriteBoolean(Auto_Equip);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Localization;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -40,6 +41,22 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             }
 
             return string.Format(text, value, Value);
+        }
+
+        public override void Load(System.Xml.XmlNode node, int version)
+        {
+            base.Load(node, version);
+
+            ID = node["ID"].ToUInt16();
+            Value = node["Value"].ToInt16();
+        }
+
+        public override void Save(System.Xml.XmlDocument document, System.Xml.XmlNode node)
+        {
+            base.Save(document, node);
+
+            document.CreateNodeC("ID", node).WriteUInt16(ID);
+            document.CreateNodeC("Value", node).WriteInt16(Value);
         }
     }
 }

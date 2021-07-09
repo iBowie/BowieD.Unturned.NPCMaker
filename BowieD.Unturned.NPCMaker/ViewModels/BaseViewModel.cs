@@ -10,6 +10,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        internal void RelayChange(string propertyName)
+        {
+            OnPropertyChange(propertyName);
+        }
     }
     public interface INPCTab
     {

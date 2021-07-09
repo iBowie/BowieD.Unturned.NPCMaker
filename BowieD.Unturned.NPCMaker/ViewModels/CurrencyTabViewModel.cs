@@ -1,8 +1,10 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Currency;
 using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -63,6 +65,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         private ICommand addEntryCommand;
         private ICommand closeTabCommand;
         private ICommand sortGUIDA, sortGUIDD;
+        private ICommand setGuidCommand;
+        private ICommand randomGuidCommand;
+
         public ICommand SortGUIDAscending
         {
             get
@@ -128,6 +133,46 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     });
                 }
                 return addEntryCommand;
+            }
+        }
+        public ICommand RandomGuidCommand
+        {
+            get
+            {
+                if (randomGuidCommand == null)
+                {
+                    randomGuidCommand = new BaseCommand(() =>
+                    {
+                        GUID = Guid.NewGuid().ToString("N");
+                    });
+                }
+                return randomGuidCommand;
+            }
+        }
+        public ICommand SetGuidCommand
+        {
+            get
+            {
+                if (setGuidCommand == null)
+                {
+                    setGuidCommand = new BaseCommand(() =>
+                    {
+                        MultiFieldInputView_Dialog mfiv = new MultiFieldInputView_Dialog(new string[1] { GUID });
+                        if (mfiv.ShowDialog(new string[1] { LocalizationManager.Current.Currency["GUID"] }, "") == true)
+                        {
+                            string res = mfiv.Values[0];
+                            if (Guid.TryParse(res, out var newGuid))
+                            {
+                                GUID = newGuid.ToString("N");
+                            }
+                            else
+                            {
+                                MessageBox.Show(LocalizationManager.Current.Currency["Guid_Invalid"]);
+                            }
+                        }
+                    });
+                }
+                return setGuidCommand;
             }
         }
         public string GUID

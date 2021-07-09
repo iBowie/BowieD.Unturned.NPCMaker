@@ -37,6 +37,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     catch { }
                 }
             }
+            MainWindow.Instance.MainWindowViewModel.SaveAll();
             MainWindow.Instance.lstMistakes.Items.Clear();
             FoundMistakes.Clear();
             foreach (Mistake m in CheckMistakes)

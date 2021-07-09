@@ -192,5 +192,13 @@ namespace BowieD.Unturned.NPCMaker.Parsing
         {
             return new Guid(ReadString(key));
         }
+        public Guid ReadGUID(string key, Guid defaultValue)
+        {
+            if (Guid.TryParse(ReadString(key), out var _guid))
+            {
+                return _guid;
+            }
+            return defaultValue;
+        }
     }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.Parsing.KVTable.TReaders.CoreTypes;
+using BowieD.Unturned.NPCMaker.Parsing.KVTable.TReaders.UnityTypes;
+using BowieD.Unturned.NPCMaker.Parsing.KVTable.TReaders.SystemTypes;
+using System;
 using System.Collections.Generic;
 
 namespace BowieD.Unturned.NPCMaker.Parsing
@@ -7,20 +10,24 @@ namespace BowieD.Unturned.NPCMaker.Parsing
     {
         static KVTableTypeReaderRegistry()
         {
-            add<bool>(new KVTable.TReaders.CoreTypes.KVTableBoolReader());
-            add<sbyte>(new KVTable.TReaders.CoreTypes.KVTableSByteReader());
-            add<byte>(new KVTable.TReaders.CoreTypes.KVTableByteReader());
-            add<short>(new KVTable.TReaders.CoreTypes.KVTableShortReader());
-            add<int>(new KVTable.TReaders.CoreTypes.KVTableIntReader());
-            add<long>(new KVTable.TReaders.CoreTypes.KVTableLongReader());
-            add<ushort>(new KVTable.TReaders.CoreTypes.KVTableUShortReader());
-            add<uint>(new KVTable.TReaders.CoreTypes.KVTableUIntReader());
-            add<ulong>(new KVTable.TReaders.CoreTypes.KVTableULongReader());
-            add<float>(new KVTable.TReaders.CoreTypes.KVTableFloatReader());
-            add<string>(new KVTable.TReaders.CoreTypes.KVTableStringReader());
-
-            add<Guid>(new KVTable.TReaders.SystemTypes.KVTableGUIDReader());
-            add<Type>(new KVTable.TReaders.SystemTypes.KVTableTypeReader());
+            // Core
+            add<bool>(new KVTableBoolReader());
+            add<sbyte>(new KVTableSByteReader());
+            add<byte>(new KVTableByteReader());
+            add<short>(new KVTableShortReader());
+            add<int>(new KVTableIntReader());
+            add<long>(new KVTableLongReader());
+            add<ushort>(new KVTableUShortReader());
+            add<uint>(new KVTableUIntReader());
+            add<ulong>(new KVTableULongReader());
+            add<float>(new KVTableFloatReader());
+            add<string>(new KVTableStringReader());
+            // System
+            add<Guid>(new KVTableGUIDReader());
+            add<Type>(new KVTableTypeReader());
+            // Unity
+            add<Vector2>(new KVTableVector2Reader());
+            add<Vector3>(new KVTableVector3Reader());
         }
         private static Dictionary<Type, ITypeReader> readers = new Dictionary<Type, ITypeReader>();
 

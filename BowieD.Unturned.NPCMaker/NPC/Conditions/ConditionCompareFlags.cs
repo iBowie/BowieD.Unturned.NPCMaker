@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System.Text;
+using System.Xml;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
@@ -73,6 +74,28 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 simulation.Flags.Remove(A_ID);
                 simulation.Flags.Remove(B_ID);
             }
+        }
+
+        public override void Load(XmlNode node, int version)
+        {
+            base.Load(node, version);
+
+            A_ID = node["A_ID"].ToUInt16();
+            B_ID = node["B_ID"].ToUInt16();
+            Allow_A_Unset = node["Allow_A_Unset"].ToBoolean();
+            Allow_B_Unset = node["Allow_B_Unset"].ToBoolean();
+            Logic = node["Logic"].ToEnum<Logic_Type>();
+        }
+
+        public override void Save(XmlDocument document, XmlNode node)
+        {
+            base.Save(document, node);
+
+            document.CreateNodeC("A_ID", node).WriteUInt16(A_ID);
+            document.CreateNodeC("B_ID", node).WriteUInt16(B_ID);
+            document.CreateNodeC("Allow_A_Unset", node).WriteBoolean(Allow_A_Unset);
+            document.CreateNodeC("Allow_B_Unset", node).WriteBoolean(Allow_B_Unset);
+            document.CreateNodeC("Logic", node).WriteEnum(Logic);
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.Forms;
+using BowieD.Unturned.NPCMaker.NPC;
 using MahApps.Metro.Controls;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -167,7 +169,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
                     {
                         VendorItem Item = Value as VendorItem;
                         bool old = Item.isBuy;
-                        Forms.Universal_VendorItemEditor uvie = new Forms.Universal_VendorItemEditor(Item);
+                        Forms.Universal_VendorItemEditor uvie = new Forms.Universal_VendorItemEditor(MainWindow.Instance.MainWindowViewModel.VendorTabViewModel.Vendor, Item);
                         uvie.Owner = this.TryFindParent<Window>();
                         if (uvie.ShowDialog() == true)
                         {
@@ -195,6 +197,36 @@ namespace BowieD.Unturned.NPCMaker.Controls
                     return;
                 case ReturnType.Object:
                     return;
+                case ReturnType.GenericString:
+                    {
+                        MultiFieldInputView_Dialog mfiv = new MultiFieldInputView_Dialog(new string[1] { Value as string });
+                        if (mfiv.ShowDialog(new string[1] { "" }, "") == true)
+                        {
+                            Value = mfiv.Values[0];
+
+                            mainLabel.Content = Value.ToString();
+                            mainLabel.ToolTip = mainLabel.Content;
+                        }
+                    }
+                    break;
+                case ReturnType.GenericDirectory:
+                    {
+                        var di = Value as DirectoryInfo;
+
+                        System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog()
+                        {
+                            SelectedPath = di.FullName
+                        };
+
+                        if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        {
+                            Value = new DirectoryInfo(fbd.SelectedPath);
+
+                            mainLabel.Content = (Value as DirectoryInfo).FullName;
+                            mainLabel.ToolTip = mainLabel.Content;
+                        }
+                    }
+                    break;
             }
         }
 
@@ -216,6 +248,10 @@ namespace BowieD.Unturned.NPCMaker.Controls
                     return ReturnType.VendorItem;
                 case NPCCharacter _:
                     return ReturnType.Character;
+                case string _:
+                    return ReturnType.GenericString;
+                case DirectoryInfo _:
+                    return ReturnType.GenericDirectory;
                 default:
                     return ReturnType.Object;
             }
@@ -224,7 +260,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
         public enum ReturnType
         {
             Reward, Condition, Dialogue, Vendor, Quest, VendorItem, Object, Character,
-            Currency
+            Currency, GenericString, GenericDirectory,
+            DialogueVendor
         }
     }
 }

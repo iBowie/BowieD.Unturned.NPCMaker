@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.Configuration;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
@@ -8,13 +9,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Media.Imaging;
+using System.Xml;
 using System.Xml.Serialization;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
     [System.Serializable]
-    public class NPCVendor : IHasUIText, INotifyPropertyChanged, IHasUniqueGUID
+    public class NPCVendor : IHasUIText, INotifyPropertyChanged, IHasUniqueGUID, IAXData
     {
         public NPCVendor()
         {
@@ -94,9 +96,50 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 }
             }
         }
+
+        public void Load(XmlNode node, int version)
+        {
+            GUID = node.Attributes["guid"].ToText();
+            Comment = node.Attributes["comment"].ToText();
+
+            ID = node["id"].ToUInt16();
+            Title = node["vendorTitle"].ToText();
+            vendorDescription = node["vendorDescription"].ToText();
+
+            if (version < 8)
+            {
+                items = node["items"].ParseAXDataCollection<VendorItem>(version).ToList();
+            }
+            else
+            {
+                var buyItems = node["buyingItems"].ParseVendorItemsNew(version, true);
+                var sellItems = node["sellingItems"].ParseVendorItemsNew(version, false);
+
+                items = buyItems.Concat(sellItems).ToList();
+            }
+
+            disableSorting = node["disableSorting"].ToBoolean();
+            currency = node["currency"].ToText();
+        }
+
+        public void Save(XmlDocument document, XmlNode node)
+        {
+            document.CreateAttributeC("guid", node).WriteString(GUID);
+            document.CreateAttributeC("comment", node).WriteString(Comment);
+
+            document.CreateNodeC("id", node).WriteUInt16(ID);
+            document.CreateNodeC("vendorTitle", node).WriteString(Title);
+            document.CreateNodeC("vendorDescription", node).WriteString(vendorDescription);
+
+            document.CreateNodeC("buyingItems", node).WriteVendorItemsNew(document, BuyItems, true);
+            document.CreateNodeC("sellingItems", node).WriteVendorItemsNew(document, SellItems, false);
+            
+            document.CreateNodeC("disableSorting", node).WriteBoolean(disableSorting);
+            document.CreateNodeC("currency", node).WriteString(currency);
+        }
     }
     [Serializable]
-    public class VendorItem : IHasUIText, IUIL_Icon
+    public class VendorItem : IHasUIText, IUIL_Icon, IAXData
     {
         public VendorItem()
         {
@@ -174,6 +217,26 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 image = default;
                 return false;
             }
+        }
+
+        public void Load(XmlNode node, int version)
+        {
+            id = node["id"].ToUInt16();
+            cost = node["cost"].ToUInt32();
+            type = node["type"].ToEnum<ItemType>();
+            isBuy = node["isBuy"].ToBoolean();
+            conditions = node["conditions"].ParseAXDataCollection<Condition>(version).ToList();
+            spawnPointID = node["spawnPointID"].ToText();
+        }
+
+        public void Save(XmlDocument document, XmlNode node)
+        {
+            document.CreateNodeC("id", node).WriteUInt16(id);
+            document.CreateNodeC("cost", node).WriteUInt32(cost);
+            document.CreateNodeC("type", node).WriteEnum(type);
+            document.CreateNodeC("isBuy", node).WriteBoolean(isBuy);
+            document.CreateNodeC("conditions", node).WriteAXDataCollection(document, "Condition", conditions);
+            document.CreateNodeC("spawnPointID", node).WriteString(spawnPointID);
         }
     }
 }

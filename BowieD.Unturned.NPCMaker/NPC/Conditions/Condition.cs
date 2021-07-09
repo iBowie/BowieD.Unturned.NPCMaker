@@ -11,44 +11,128 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
-    [XmlInclude(typeof(ConditionExperience))]
-    [XmlInclude(typeof(ConditionReputation))]
-    [XmlInclude(typeof(ConditionFlagBool))]
-    [XmlInclude(typeof(ConditionFlagShort))]
-    [XmlInclude(typeof(ConditionItem))]
-    [XmlInclude(typeof(ConditionKillsAnimal))]
-    [XmlInclude(typeof(ConditionKillsHorde))]
-    [XmlInclude(typeof(ConditionKillsObject))]
-    [XmlInclude(typeof(ConditionKillsPlayer))]
-    [XmlInclude(typeof(ConditionKillsZombie))]
-    [XmlInclude(typeof(ConditionPlayerLifeFood))]
-    [XmlInclude(typeof(ConditionPlayerLifeHealth))]
-    [XmlInclude(typeof(ConditionPlayerLifeVirus))]
-    [XmlInclude(typeof(ConditionPlayerLifeWater))]
-    [XmlInclude(typeof(ConditionSkillset))]
-    [XmlInclude(typeof(ConditionTimeOfDay))]
-    [XmlInclude(typeof(ConditionQuest))]
-    [XmlInclude(typeof(ConditionCompareFlags))]
-    [XmlInclude(typeof(ConditionHoliday))]
-    [XmlInclude(typeof(ConditionKillsTree))]
-    [XmlInclude(typeof(ConditionCurrency))]
-    [XmlInclude(typeof(ConditionWeatherStatus))]
-    [XmlInclude(typeof(ConditionWeatherBlendAlpha))]
     [Serializable]
-    public abstract class Condition : IHasUIText
+    public class Condition : IHasUIText, IAXDataDerived<Condition>
     {
         [SkipField]
+        [Context(ContextHelper.EContextOption.Group_TextEdit | ContextHelper.EContextOption.Group_Rich)]
         public string Localization { get; set; }
         [XmlIgnore]
-        public abstract Condition_Type Type { get; }
+        public virtual Condition_Type Type => throw new NotImplementedException();
         [XmlIgnore]
-        public abstract string UIText { get; }
+        public virtual string UIText => throw new NotImplementedException();
         [NoValue]
         public bool Reset { get; set; }
+
+        private static Func<XmlNode, int, Condition> _createFunc = new Func<XmlNode, int, Condition>((node, version) =>
+        {
+            var typeAt = node.Attributes["xsi:type"];
+
+            if (version == -1)
+            {
+                switch (typeAt.Value)
+                {
+                    case "Experience_Cond":
+                        return new ConditionExperience();
+                    case "Flag_Bool_Cond":
+                        return new ConditionFlagBool();
+                    case "Flag_Short_Cond":
+                        return new ConditionFlagShort();
+                    case "Item_Cond":
+                        return new ConditionItem();
+                    case "Kills_Animal_Cond":
+                        return new ConditionKillsAnimal();
+                    case "Kills_Horde_Cond":
+                        return new ConditionKillsHorde();
+                    case "Kills_Object_Cond":
+                        return new ConditionKillsObject();
+                    case "Kills_Players_Cond":
+                        return new ConditionKillsPlayer();
+                    case "Kills_Zombie_Cond":
+                        return new ConditionKillsZombie();
+                    case "Player_Life_Food_Cond":
+                        return new ConditionPlayerLifeFood();
+                    case "Player_Life_Health_Cond":
+                        return new ConditionPlayerLifeHealth();
+                    case "Player_Life_Virus_Cond":
+                        return new ConditionPlayerLifeVirus();
+                    case "Player_Life_Water_Cond":
+                        return new ConditionPlayerLifeWater();
+                    case "Quest_Cond":
+                        return new ConditionQuest();
+                    case "Reputation_Cond":
+                        return new ConditionReputation();
+                    case "Skillset_Cond":
+                        return new ConditionSkillset();
+                    case "Time_Of_Day_Cond":
+                        return new ConditionTimeOfDay();
+                    default:
+                        throw new Exception("Unknown type");
+                }
+            }
+            else
+            {
+                switch (typeAt.Value)
+                {
+                    case "ConditionCompareFlags":
+                        return new ConditionCompareFlags();
+                    case "ConditionCurrency":
+                        return new ConditionCurrency();
+                    case "ConditionExperience":
+                        return new ConditionExperience();
+                    case "ConditionFlagBool":
+                        return new ConditionFlagBool();
+                    case "ConditionFlagShort":
+                        return new ConditionFlagShort();
+                    case "ConditionHoliday":
+                        return new ConditionHoliday();
+                    case "ConditionItem":
+                        return new ConditionItem();
+                    case "ConditionKillsAnimal":
+                        return new ConditionKillsAnimal();
+                    case "ConditionKillsHorde":
+                        return new ConditionKillsHorde();
+                    case "ConditionKillsObject":
+                        return new ConditionKillsObject();
+                    case "ConditionKillsPlayer":
+                        return new ConditionKillsPlayer();
+                    case "ConditionKillsTree":
+                        return new ConditionKillsTree();
+                    case "ConditionKillsZombie":
+                        return new ConditionKillsZombie();
+                    case "ConditionPlayerLifeFood":
+                        return new ConditionPlayerLifeFood();
+                    case "ConditionPlayerLifeHealth":
+                        return new ConditionPlayerLifeHealth();
+                    case "ConditionPlayerLifeVirus":
+                        return new ConditionPlayerLifeVirus();
+                    case "ConditionPlayerLifeWater":
+                        return new ConditionPlayerLifeWater();
+                    case "ConditionQuest":
+                        return new ConditionQuest();
+                    case "ConditionReputation":
+                        return new ConditionReputation();
+                    case "ConditionSkillset":
+                        return new ConditionSkillset();
+                    case "ConditionTimeOfDay":
+                        return new ConditionTimeOfDay();
+                    case "ConditionWeatherBlendAlpha":
+                        return new ConditionWeatherBlendAlpha();
+                    case "ConditionWeatherStatus":
+                        return new ConditionWeatherStatus();
+                    default:
+                        throw new Exception("Unknown type");
+                }
+            }
+        });
+        public Func<XmlNode, int, Condition> CreateFromNodeFunction => _createFunc;
+
+        public virtual string TypeName => GetType().Name;
 
         public IEnumerable<FrameworkElement> GetControls()
         {
@@ -97,6 +181,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 borderContents.Children.Add(l);
                 RangeAttribute rangeAttribute = prop.GetCustomAttribute<RangeAttribute>();
                 AssetPickerAttribute assetPickerAttribute = prop.GetCustomAttribute<AssetPickerAttribute>();
+                ContextAttribute contextAttribute = prop.GetCustomAttribute<ContextAttribute>();
                 FrameworkElement valueControl = null;
                 if (propType == typeof(ushort))
                 {
@@ -125,7 +210,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         var vcMenu = new ContextMenu();
                         vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
                         {
-                            (valueControl as MahApps.Metro.Controls.NumericUpDown).Value = asset.id;
+                            (valueControl as MahApps.Metro.Controls.NumericUpDown).Value = asset.ID;
                         }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
                         (valueControl as MahApps.Metro.Controls.NumericUpDown).ContextMenu = vcMenu;
                     }
@@ -190,7 +275,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
                         {
                             (valueControl as Controls.OptionalUInt16ValueControl).checkbox.IsChecked = true;
-                            (valueControl as Controls.OptionalUInt16ValueControl).upDown.Value = asset.id;
+                            (valueControl as Controls.OptionalUInt16ValueControl).upDown.Value = asset.ID;
                         }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
                         valueControl.ContextMenu = vcMenu;
                         (valueControl as Controls.OptionalUInt16ValueControl).upDown.ContextMenu = vcMenu;
@@ -321,7 +406,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         var vcMenu = new ContextMenu();
                         vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
                         {
-                            (valueControl as TextBox).Text = asset.guid.ToString("N");
+                            (valueControl as TextBox).Text = asset.GUID.ToString("N");
                         }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
                         (valueControl as TextBox).ContextMenu = vcMenu;
                     }
@@ -365,6 +450,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 }
                 valueControl.HorizontalAlignment = HorizontalAlignment.Right;
                 valueControl.VerticalAlignment = VerticalAlignment.Center;
+                if (contextAttribute != null)
+                    valueControl.ContextMenu = ContextHelper.CreateContextMenu(contextAttribute.Options);
                 borderContents.Children.Add(valueControl);
                 valueControl.Tag = "variable::" + propName;
                 Border b = new Border
@@ -403,8 +490,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
         public virtual void PostLoad(Universal_ConditionEditor editor) { }
 
-        public abstract bool Check(Simulation simulation);
-        public abstract void Apply(Simulation simulation);
+        public virtual bool Check(Simulation simulation) => throw new Exception();
+        public virtual void Apply(Simulation simulation) => throw new Exception();
         public virtual string FormatCondition(Simulation simulation)
         {
             if (!string.IsNullOrEmpty(Localization))
@@ -413,6 +500,18 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             }
 
             return null;
+        }
+
+        public virtual void Load(XmlNode node, int version)
+        {
+            Localization = node["Localization"].ToText();
+            Reset = node["Reset"].ToBoolean();
+        }
+
+        public virtual void Save(XmlDocument document, XmlNode node)
+        {
+            document.CreateNodeC("Localization", node).WriteString(Localization);
+            document.CreateNodeC("Reset", node).WriteBoolean(Reset);
         }
     }
 }

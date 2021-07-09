@@ -9,7 +9,6 @@ using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Managers;
 using BowieD.Unturned.NPCMaker.NPC;
 using MahApps.Metro.Controls;
-using MahApps.Metro.IconPacks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -290,8 +289,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
             dialogueIDContext.Items.Add(ContextHelper.CreateSelectAssetButton(typeof(GameDialogueAsset), (asset) =>
             {
-                this.DialogueID = asset.id;
-                MainWindow.Instance.txtStartDialogueID.Value = asset.id;
+                this.DialogueID = asset.ID;
+                MainWindow.Instance.txtStartDialogueID.Value = asset.ID;
             }, "Control_SelectAsset_Dialogue", MahApps.Metro.IconPacks.PackIconMaterialKind.Chat));
 
             MainWindow.Instance.txtStartDialogueID.ContextMenu = dialogueIDContext;
@@ -450,6 +449,15 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public string DisplayName { get => Character.DisplayName; set => Character.DisplayName = value; }
         public string EditorName { get => Character.EditorName; set => Character.EditorName = value; }
         public ushort ID { get => Character.ID; set => Character.ID = value; }
+        public string GUID
+        {
+            get => Character.GUID;
+            set
+            {
+                Character.GUID = value;
+                OnPropertyChange("GUID");
+            }
+        }
         public string Comment
         {
             get => Character.Comment;
@@ -558,6 +566,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public ushort EquipmentSecondary { get => Character.equipSecondary; set => Character.equipSecondary = value; }
         public ushort EquipmentTertiary { get => Character.equipTertiary; set => Character.equipTertiary = value; }
         public Equip_Type Equipped { get => Character.equipped; set => Character.equipped = value; }
+        public ENPCHoliday HolidayRestriction { get => Character.holidayRestriction; set => Character.holidayRestriction = value; }
 
         private ICommand editVisibilityConditionsCommand;
         private ICommand randomFaceCommand;
@@ -569,6 +578,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         private ICommand poseEditorCommand;
         private ICommand closeTabCommand;
         private ICommand sortEditorNameA, sortEditorNameD, sortDisplayNameA, sortDisplayNameD, sortIDA, sortIDD;
+        private ICommand randomGuidCommand;
+        private ICommand setGuidCommand;
+
         public ICommand SortEditorNameAscending
         {
             get
@@ -683,12 +695,12 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     editVisibilityConditionsCommand = new BaseCommand(() =>
                     {
-                        Universal_ListView ulv = new Universal_ListView(Character.visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, true)).ToList(), Universal_ItemList.ReturnType.Condition)
+                        Universal_ListView ulv = new Universal_ListView(Character.visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, true)).ToLimitedList(byte.MaxValue), Universal_ItemList.ReturnType.Condition)
                         {
                             Owner = MainWindow.Instance
                         };
                         ulv.ShowDialog();
-                        Character.visibilityConditions = ulv.Values.Cast<Condition>().ToList();
+                        Character.visibilityConditions = new LimitedList<Condition>(ulv.Values.Cast<Condition>(), byte.MaxValue);
                         MainWindow.CurrentProject.isSaved = false;
                     });
                 }
@@ -738,6 +750,46 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     });
                 }
                 return randomBeardCommand;
+            }
+        }
+        public ICommand RandomGuidCommand
+        {
+            get
+            {
+                if (randomGuidCommand == null)
+                {
+                    randomGuidCommand = new BaseCommand(() =>
+                    {
+                        GUID = Guid.NewGuid().ToString("N");
+                    });
+                }
+                return randomGuidCommand;
+            }
+        }
+        public ICommand SetGuidCommand
+        {
+            get
+            {
+                if (setGuidCommand == null)
+                {
+                    setGuidCommand = new BaseCommand(() =>
+                    {
+                        MultiFieldInputView_Dialog mfiv = new MultiFieldInputView_Dialog(new string[1] { GUID });
+                        if (mfiv.ShowDialog(new string[1] { LocalizationManager.Current.Character["Guid"] }, "") == true)
+                        {
+                            string res = mfiv.Values[0];
+                            if (Guid.TryParse(res, out var newGuid))
+                            {
+                                GUID = newGuid.ToString("N");
+                            }
+                            else
+                            {
+                                MessageBox.Show(LocalizationManager.Current.Character["Guid_Invalid"]);
+                            }
+                        }
+                    });
+                }
+                return setGuidCommand;
             }
         }
         public ICommand SaveColorSkin
@@ -791,6 +843,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     c.GUID = Guid.NewGuid().ToString("N");
                                 }
                             }
+                            MainWindow.Instance.MainWindowViewModel.CharacterTabViewModel.OnPropertyChange(nameof(CharacterTabViewModel.GUID));
                         }
                         if (MainWindow.CurrentProject.data.dialogues != null)
                         {
@@ -801,6 +854,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     d.GUID = Guid.NewGuid().ToString("N");
                                 }
                             }
+                            MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.RelayChange(nameof(DialogueTabViewModel.GUID));
                         }
                         if (MainWindow.CurrentProject.data.vendors != null)
                         {
@@ -811,6 +865,18 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     v.GUID = Guid.NewGuid().ToString("N");
                                 }
                             }
+                            MainWindow.Instance.MainWindowViewModel.VendorTabViewModel.RelayChange(nameof(VendorTabViewModel.GUID));
+                        }
+                        if (MainWindow.CurrentProject.data.dialogueVendors != null)
+                        {
+                            foreach (VirtualDialogueVendor v in MainWindow.CurrentProject.data.dialogueVendors)
+                            {
+                                if (v != null)
+                                {
+                                    v.GUID = Guid.NewGuid().ToString("N");
+                                }
+                            }
+                            MainWindow.Instance.MainWindowViewModel.DialogueVendorTabViewModel.RelayChange(nameof(VirtualDialogueVendorTabViewModel.GUID));
                         }
                         if (MainWindow.CurrentProject.data.quests != null)
                         {
@@ -821,6 +887,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     q.GUID = Guid.NewGuid().ToString("N");
                                 }
                             }
+                            MainWindow.Instance.MainWindowViewModel.QuestTabViewModel.RelayChange(nameof(QuestTabViewModel.GUID));
                         }
                         MainWindow.CurrentProject.data.guid = Guid.NewGuid().ToString("N");
                         App.NotificationManager.Notify(LocalizationManager.Current.Notification["App_GUID_Regenerated"]);

@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration
 {
-    public class GameAsset : IFileReadable, IHasTextToolTip
+    public class GameAsset : IFileReadable, IHasTextToolTip, IAssetPickable
     {
         public GameAsset(string name, ushort id, Guid guid, string type, EGameAssetOrigin origin)
         {
@@ -25,6 +25,14 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             this.guid = guid;
             this.origin = origin;
         }
+        public GameAsset(EGameAssetOrigin origin)
+        {
+            this.name = guid.ToString("N");
+            this.id = 0;
+            this.type = string.Empty;
+            this.guid = Guid.NewGuid();
+            this.origin = origin;
+        }
 
         public string name;
         public ushort id;
@@ -34,9 +42,13 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         [XmlIgnore]
         public EGameAssetOrigin origin;
 
-        public virtual EGameAssetCategory Category => EGameAssetCategory.NONE;
+        public virtual ushort ID => id;
+        public virtual Guid GUID => guid;
+        public virtual string Name => name;
+        public virtual EIDDef IDDef => EIDDef.ID;
+        public virtual EGameAssetOrigin Origin => origin;
 
-        public virtual bool GUIDOverID => false;
+        public virtual EGameAssetCategory Category => EGameAssetCategory.NONE;
 
         public virtual void read(IFileReader reader)
         {

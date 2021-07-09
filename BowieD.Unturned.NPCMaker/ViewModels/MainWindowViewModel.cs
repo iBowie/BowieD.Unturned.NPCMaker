@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.Common.Utility;
 using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Forms;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
@@ -13,12 +14,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Media;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using System.Windows.Threading;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.ViewModels
@@ -101,7 +100,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 }
                             }
                             break;
-                        case 3 when QuestTabViewModel.Quest != null: // quest (condition, reward)
+                        case 4 when QuestTabViewModel.Quest != null: // quest (condition, reward)
                             {
                                 if (ClipboardManager.TryGetObject(ClipboardManager.ConditionFormat, out var obj) && obj is Condition cond)
                                 {
@@ -118,11 +117,12 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             CharacterTabViewModel = new CharacterTabViewModel();
             DialogueTabViewModel = new DialogueTabViewModel();
             VendorTabViewModel = new VendorTabViewModel();
+            DialogueVendorTabViewModel = new VirtualDialogueVendorTabViewModel();
             QuestTabViewModel = new QuestTabViewModel();
             CurrencyTabViewModel = new CurrencyTabViewModel();
             MainWindow.mainTabControl.SelectionChanged += TabControl_SelectionChanged;
 
-            MainWindow.CurrentProject.OnDataLoaded += () =>
+            MainWindow.CurrentProject.OnDataLoaded += async () =>
             {
                 ResetAll();
 
@@ -144,6 +144,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     VendorTabViewModel.Vendor = data.vendors[data.lastVendor];
                 }
 
+                if (data.lastDialogueVendor > -1 && data.lastDialogueVendor < data.dialogueVendors.Count)
+                {
+                    DialogueVendorTabViewModel.DialogueVendor = data.dialogueVendors[data.lastDialogueVendor];
+                }
+
                 if (data.lastQuest > -1 && data.lastQuest < data.quests.Count)
                 {
                     QuestTabViewModel.Quest = data.quests[data.lastQuest];
@@ -154,6 +159,38 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     CurrencyTabViewModel.Currency = data.currencies[data.lastCurrency];
                 }
 
+                GameAssetManager.Purge(EGameAssetOrigin.Hooked);
+
+                if (data.settings.assetDirs != null && data.settings.assetDirs.Count > 0)
+                {
+                    MainWindow.blockActionsOverlay.Dispatcher.Invoke(() =>
+                    {
+                        MainWindow.blockActionsOverlay.Visibility = Visibility.Visible;
+                    });
+
+                    foreach (var ad in data.settings.assetDirs)
+                    {
+                        MainWindow.textBlockActions.Dispatcher.Invoke(() =>
+                        {
+                            MainWindow.textBlockActions.Text = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Window_Step_Hooked", ad);
+                        });
+
+                        await GameAssetManager.Import(ad, EGameAssetOrigin.Hooked, (cur, total) =>
+                        {
+                            MainWindow.progrBar.Dispatcher.Invoke(() =>
+                            {
+                                MainWindow.progrBar.Value = cur;
+                                MainWindow.progrBar.Maximum = total;
+                            });
+                        });
+                    }
+
+                    MainWindow.blockActionsOverlay.Dispatcher.Invoke(() =>
+                    {
+                        MainWindow.blockActionsOverlay.Visibility = Visibility.Collapsed;
+                    });
+                }
+
                 UpdateAllTabs();
             };
         }
@@ -161,6 +198,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public CharacterTabViewModel CharacterTabViewModel { get; set; }
         public DialogueTabViewModel DialogueTabViewModel { get; set; }
         public VendorTabViewModel VendorTabViewModel { get; set; }
+        public VirtualDialogueVendorTabViewModel DialogueVendorTabViewModel { get; set; }
         public QuestTabViewModel QuestTabViewModel { get; set; }
         public CurrencyTabViewModel CurrencyTabViewModel { get; set; }
         public MistakeTabViewModel MistakeTabViewModel { get; set; }
@@ -169,6 +207,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             CharacterTabViewModel.Reset();
             DialogueTabViewModel.Reset();
             VendorTabViewModel.Reset();
+            DialogueVendorTabViewModel.Reset();
             QuestTabViewModel.Reset();
             CurrencyTabViewModel.Reset();
         }
@@ -177,6 +216,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             CharacterTabViewModel.Save();
             DialogueTabViewModel.Save();
             VendorTabViewModel.Save();
+            DialogueVendorTabViewModel.Save();
             QuestTabViewModel.Save();
             CurrencyTabViewModel.Save();
 
@@ -187,6 +227,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             data.lastDialogue = data.dialogues.IndexOf(DialogueTabViewModel.Dialogue);
             data.lastQuest = data.quests.IndexOf(QuestTabViewModel.Quest);
             data.lastVendor = data.vendors.IndexOf(VendorTabViewModel.Vendor);
+            data.lastDialogueVendor = data.dialogueVendors.IndexOf(DialogueVendorTabViewModel.DialogueVendor);
             data.lastCurrency = data.currencies.IndexOf(CurrencyTabViewModel.Currency);
         }
         public void UpdateAllTabs()
@@ -194,6 +235,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             CharacterTabViewModel.UpdateTabs();
             DialogueTabViewModel.UpdateTabs();
             VendorTabViewModel.UpdateTabs();
+            DialogueVendorTabViewModel.UpdateTabs();
             QuestTabViewModel.UpdateTabs();
             CurrencyTabViewModel.UpdateTabs();
         }
@@ -230,10 +272,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 Assets = new Assets
                                 {
                                     SmallImageKey = "icon_info_outlined",
-                                    SmallImageText = $"Characters: {MainWindow.CurrentProject.data.characters.Count}"
+                                    SmallImageText = $"Characters: {MainWindow.CurrentProject.data.characters.Count}".Shortify(125)
                                 },
-                                Details = $"Current NPC: {CharacterTabViewModel.EditorName}",
-                                State = $"Display Name: {CharacterTabViewModel.DisplayName}"
+                                Details = $"Current NPC: {CharacterTabViewModel.EditorName}".Shortify(125),
+                                State = $"Display Name: {CharacterTabViewModel.DisplayName}".Shortify(125)
                             });
                         }
                         break;
@@ -248,10 +290,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 Assets = new Assets
                                 {
                                     SmallImageKey = "icon_chat_outlined",
-                                    SmallImageText = $"Dialogues: {MainWindow.CurrentProject.data.dialogues.Count}"
+                                    SmallImageText = $"Dialogues: {MainWindow.CurrentProject.data.dialogues.Count}".Shortify(125)
                                 },
-                                Details = $"Messages: {DialogueTabViewModel.Dialogue.Messages.Count}",
-                                State = $"Responses: {DialogueTabViewModel.Dialogue.Responses.Count}"
+                                Details = $"Messages: {DialogueTabViewModel.Dialogue.Messages.Count}".Shortify(125),
+                                State = $"Responses: {DialogueTabViewModel.Dialogue.Responses.Count}".Shortify(125)
                             });
                         }
                         break;
@@ -266,10 +308,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 Assets = new Assets
                                 {
                                     SmallImageKey = "icon_money_outlined",
-                                    SmallImageText = $"Vendors: {MainWindow.CurrentProject.data.vendors.Count}"
+                                    SmallImageText = $"Vendors: {MainWindow.CurrentProject.data.vendors.Count}".Shortify(125)
                                 },
-                                Details = $"Vendor Name: {VendorTabViewModel.Title}",
-                                State = $"Buy: {VendorTabViewModel.Vendor.items.Count(d => d.isBuy)} / Sell: {VendorTabViewModel.Vendor.items.Count(d => !d.isBuy)}"
+                                Details = $"Vendor Name: {VendorTabViewModel.Title}".Shortify(125),
+                                State = $"Buy: {VendorTabViewModel.Vendor.items.Count(d => d.isBuy)} / Sell: {VendorTabViewModel.Vendor.items.Count(d => !d.isBuy)}".Shortify(125)
                             });
                         }
                         break;
@@ -283,11 +325,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 },
                                 Assets = new Assets
                                 {
-                                    SmallImageKey = "icon_exclamation_outlined",
-                                    SmallImageText = $"Quests: {MainWindow.CurrentProject.data.quests.Count}"
+                                    SmallImageKey = "icon_money_outlined",
+                                    SmallImageText = $"Dialogue Vendors: {MainWindow.CurrentProject.data.dialogueVendors.Count}".Shortify(125)
                                 },
-                                Details = $"Quest Name: {QuestTabViewModel.Title}",
-                                State = $"Rewards: {QuestTabViewModel.Quest.rewards.Count} | Conds: {QuestTabViewModel.Quest.conditions.Count}"
+                                Details = $"Dialogue Vendor ID: {DialogueVendorTabViewModel.ID}".Shortify(125),
+                                State = $"Items: {DialogueVendorTabViewModel.DialogueVendor.Items.Count}".Shortify(125)
                             });
                         }
                         break;
@@ -301,11 +343,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 },
                                 Assets = new Assets
                                 {
-                                    SmallImageKey = "icon_money_outlined",
-                                    SmallImageText = $"Currencies: {MainWindow.CurrentProject.data.currencies.Count}"
+                                    SmallImageKey = "icon_exclamation_outlined",
+                                    SmallImageText = $"Quests: {MainWindow.CurrentProject.data.quests.Count}".Shortify(125)
                                 },
-                                Details = $"Currencies: {MainWindow.CurrentProject.data.currencies.Count}",
-                                State = $"Editing currencies"
+                                Details = $"Quest Name: {QuestTabViewModel.Title}".Shortify(125),
+                                State = $"Rewards: {QuestTabViewModel.Quest.rewards.Count} | Conds: {QuestTabViewModel.Quest.conditions.Count}".Shortify(125)
                             });
                         }
                         break;
@@ -317,13 +359,31 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 {
                                     StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
                                 },
+                                Assets = new Assets
+                                {
+                                    SmallImageKey = "icon_money_outlined",
+                                    SmallImageText = $"Currencies: {MainWindow.CurrentProject.data.currencies.Count}".Shortify(125)
+                                },
+                                Details = $"Currencies: {MainWindow.CurrentProject.data.currencies.Count}".Shortify(125),
+                                State = $"Editing currencies".Shortify(125)
+                            });
+                        }
+                        break;
+                    case 6:
+                        {
+                            MainWindow.DiscordManager.SendPresence(new RichPresence
+                            {
+                                Timestamps = new Timestamps
+                                {
+                                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                                },
                                 Assets = new Assets()
                                 {
                                     SmallImageKey = "icon_warning_outlined",
-                                    SmallImageText = $"Mistakes: {MainWindow.Instance.lstMistakes.Items.Count}"
+                                    SmallImageText = $"Mistakes: {MainWindow.Instance.lstMistakes.Items.Count}".Shortify(125)
                                 },
-                                Details = $"Critical errors: {Mistakes.MistakesManager.Criticals_Count}",
-                                State = $"Warnings: {Mistakes.MistakesManager.Warnings_Count}"
+                                Details = $"Critical errors: {Mistakes.MistakesManager.Criticals_Count}".Shortify(125),
+                                State = $"Warnings: {Mistakes.MistakesManager.Warnings_Count}".Shortify(125)
                             });
                             break;
                         }
@@ -340,8 +400,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     SmallImageKey = "icon_question_outlined",
                                     SmallImageText = "Chilling in another dimension"
                                 },
-                                Details = $"If you can see this message",
-                                State = $"It means that this user went across dimensions."
+                                Details = $"If you can see this message".Shortify(125),
+                                State = $"It means that this user went across dimensions.".Shortify(125)
                             });
                             break;
                         }
@@ -358,6 +418,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             exportProjectToWorkshopCommand,
             exitCommand,
             optionsCommand,
+            projectSettingsCommand,
             aboutCommand,
             importFileCommand,
             importDirectoryCommand;
@@ -503,7 +564,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         string path;
                         OpenFileDialog ofd = new OpenFileDialog()
                         {
-                            Filter = $"{LocalizationManager.Current.General["Project_SaveFilter"]}|*.npcproj",
+                            Filter = 
+                            $"{LocalizationManager.Current.General["Project_SaveFilter"]}|*.npcproj" + "|" +
+                            $"{LocalizationManager.Current.General["Project_SaveFilter_Legacy"]}|*.npc",
                             Multiselect = false
                         };
                         bool? res = ofd.ShowDialog();
@@ -835,6 +898,22 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     });
                 }
                 return optionsCommand;
+            }
+        }
+        public ICommand ProjectSettingsCommand
+        {
+            get
+            {
+                if (projectSettingsCommand == null)
+                {
+                    projectSettingsCommand = new BaseCommand(() =>
+                    {
+                        ProjectSettingsView psv = new ProjectSettingsView(MainWindow.CurrentProject.data);
+                        psv.Owner = MainWindow;
+                        psv.ShowDialog();
+                    });
+                }
+                return projectSettingsCommand;
             }
         }
     }

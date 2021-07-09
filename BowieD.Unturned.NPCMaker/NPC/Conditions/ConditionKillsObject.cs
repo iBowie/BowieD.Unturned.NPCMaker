@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System.Text;
@@ -55,6 +56,26 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             }
 
             return string.Format(text, value, Value);
+        }
+
+        public override void Load(System.Xml.XmlNode node, int version)
+        {
+            base.Load(node, version);
+
+            ID = node["ID"].ToUInt16();
+            Value = node["Value"].ToInt16();
+            Object = node["Object"].ToText();
+            Nav = node["Nav"].ToNullableByte();
+        }
+
+        public override void Save(System.Xml.XmlDocument document, System.Xml.XmlNode node)
+        {
+            base.Save(document, node);
+
+            document.CreateNodeC("ID", node).WriteUInt16(ID);
+            document.CreateNodeC("Value", node).WriteInt16(Value);
+            document.CreateNodeC("Object", node).WriteString(Object);
+            document.CreateNodeC("Nav", node).WriteNullableByte(Nav);
         }
     }
 }

@@ -84,7 +84,7 @@ namespace BowieD.Unturned.NPCMaker
                     Logger.Log($"You have .NET Framework that does meet minimal requirement, but does not meet recommended. Crashes may occur.", ELogLevel.WARNING);
 
                 Logger.Log($"User has required .NET Framework version. Launching...", ELogLevel.POSITIVE);
-                Logger.Log($"BowieD.Unturned.NPCMaker {Version}. Copyright (C) 2020 Anton 'BowieD' Galakhov");
+                Logger.Log($"BowieD.Unturned.NPCMaker {Version}. Copyright (C) 2021 Anton 'BowieD' Galakhov");
                 Logger.Log("This program comes with ABSOLUTELY NO WARRANTY; for details type `license w'.");
                 Logger.Log("This is free software, and you are welcome to redistribute it");
                 Logger.Log("under certain conditions; type `license c' for details.");
@@ -213,6 +213,8 @@ namespace BowieD.Unturned.NPCMaker
 #else
             ConsoleLogger.HideConsoleWindow();
 #endif
+            Application.Current.MainWindow = mw;
+            Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
             mw.Show();
         }
         public static void InitLoggers()

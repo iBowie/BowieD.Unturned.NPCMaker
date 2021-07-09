@@ -10,8 +10,8 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
-        mc:Ignorable="d"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML" xmlns:viewmodels="clr-namespace:BowieD.Unturned.NPCMaker.ViewModels"
+                 mc:Ignorable="d"
         Title="{xaml:Localize Key=GENERAL_Title}"
         MinHeight="623" Height="623"
         MinWidth="1000" Width="1000"
@@ -97,6 +97,7 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Command="{Binding OptionsCommand}" Name="optionsMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Options}"/>
+                <MenuItem Command="{Binding ProjectSettingsCommand}" Name="projectSettingsMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_ProjectSettings}"/>
                 <MenuItem Name="commMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Communication}"/>
                 <MenuItem Name="guidesMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Guides}"/>
                 <MenuItem Name="getTemplatesMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Templates}"/>
@@ -149,7 +150,40 @@
                             </Label>
                         </Grid>
                         <Grid Grid.Row="1" Name="characterTabGrid" Visibility="Visible">
-                            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Width="300" Margin="10">
+                            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Width="410" Margin="10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock MinWidth="195" VerticalAlignment="Center" IsEnabled="False" Margin="5" TextWrapping="NoWrap" Text="{Binding GUID}"/>
+                                    <Grid Grid.Column="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Command="{Binding SetGuidCommand}"
+                                                Margin="5"
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Guid_Set}"
+                                                Style="{DynamicResource FlatOutlineButtonStyle}">
+                                            <Button.Content>
+                                                <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="Pencil"/>
+                                            </Button.Content>
+                                        </Button>
+                                        <Button 
+                                        Command="{Binding RandomGuidCommand}" 
+                                        Grid.Column="1" 
+                                        Margin="5" 
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Guid_Random}"
+                                        Style="{DynamicResource FlatOutlineButtonStyle}">
+                                            <Button.Content>
+                                                <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="DiceMultiple"/>
+                                            </Button.Content>
+                                        </Button>
+                                    </Grid>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="2" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Guid}"/>
+                                </Grid>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -163,7 +197,7 @@
                                             </StackPanel>
                                         </TextBox.ToolTip>
                                     </TextBox>
-                                    <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Editor}"/>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Editor}"/>
                                 </Grid>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -178,7 +212,7 @@
                                             </StackPanel>
                                         </TextBox.ToolTip>
                                     </TextBox>
-                                    <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Display}" VerticalAlignment="Top"/>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Display}"/>
                                 </Grid>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -192,7 +226,7 @@
                                             </StackPanel>
                                         </xctk:UShortUpDown.ToolTip>
                                     </xctk:UShortUpDown>
-                                    <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_ID}" />
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_ID}" />
                                 </Grid>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -209,9 +243,17 @@
                                             </ToolTip>
                                         </xctk:UShortUpDown.ToolTip>
                                     </xctk:UShortUpDown>
-                                    <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Dialogue}"/>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Dialogue}"/>
                                 </Grid>
                                 <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="character_commentbox" Margin="5" Height="26"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <ComboBox ItemsSource="{StaticResource Character_Holidays_Enums}" SelectedValue="{Binding HolidayRestriction, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Character_Holidays_Enums}}" Margin="5"/>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_HolidayRestriction}"/>
+                                </Grid>
                                 <Button Command="{Binding EditVisibilityConditionsCommand}" Name="visibilityCondsButton" Content="{xaml:Localize Key=CHARACTER_Conditions}" Margin="5">
                                     <Button.ToolTip>
                                         <StackPanel>
@@ -427,59 +469,59 @@
                                     <Border Grid.Row="1" x:Name="beardImageBorder" BorderBrush="{Binding BorderBrush, ElementName=faceImageBorder}" BorderThickness="1" Height="{Binding Height, ElementName=faceImageBorder}" Width="{Binding Width, ElementName=faceImageBorder}" Margin="5">
                                         <Grid>
                                             <Grid Name="beardRenderGrid" DataContext="{Binding SolidColorBrush}" Background="#EEAAAAAA">
-                                            <Canvas>
-                                                <Line X1="27" Y1="27" X2="70" Y2="70" Stroke="Red" StrokeThickness="2" />
-                                                <Line X1="70" Y1="27" X2="27" Y2="70" Stroke="Red" StrokeThickness="2" />
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="7,74 7,22 16,22 16,32 79,32 79,22 88,22 88,74 7,74 25,56 70,56 70,40 25,40 25,56" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="8,63 8,45 20,45 20,39 33,39 33,33 62,33 62,39 75,39 75,45 87,45 87,63 82,63 82,57 69,57 69,51 25,51 25,57 13,57 13,63" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="5,77 90,77 90,19 5,19 5,77 17,52 17,31 78,31 78,52 17,52" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="2,62 2,49 16,49 16,42 30,42 30,35 65,35 65,42 79,42 79,49 93,49 93,62 87,62 87,55 73,55 73,48 59,48 59,35 36,35 36,48 22,48 22,55 8,55 8,62" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="9,42 9,31 14,31 14,42 9,42 4,42 4,54 9,54 9,60 21,60 21,66 26,66 26,60 69,60 69,66 74,66 74,60 86,60 86,49 91,49 91,37 86,37 86,31 81,31 81,42 86,42 86,49 81,49 81,55 62,55 62,49 33,49 33,55 14,55 14,49 9,49" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="5,21 14,21 14,56 81,56 81,21 90,21 90,75 5,75" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="4,37 4,31 17,31 17,25 31,25 31,18 64,18 64,25 77,25 77,31 91,31 91,37 72,37 72,30 57,30 57,71 50,71 50,78 45,78 45,71 38,71 38,59 57,59 57,30 23,30 23,37" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="3,12 13,12 13,17 82,17 82,12 92,12 92,74 81,74 81,80 71,80 71,85 24,85 24,80 14,80 14,74 3,74 3,12 28,32 66,32 66,49 28,49 28,32" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="2,2 12,2 12,13 83,13 83,2 93,2 93,60 82,60 82,87 72,87 72,60 60,60 60,65 55,65 55,93 39,93 39,65 34,65 34,60 22,60 22,87 13,87 13,60 2,60 2,2 22,28 72,28 72,39 22,39 22,28" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="35,2 59,2 59,7 70,7 70,12 80,12 80,52 75,52 75,61 70,61 70,72 64,72 64,82 59,82 59,93 35,93 35,82 30,82 30,72 24,72 24,61 19,61 19,52 14,52 14,12 24,12 24,7 35,7 35,2 29,21 65,21 65,37 29,37 29,21" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="2,7 93,7 93,60 87,60 87,65 82,65 82,76 72,76 72,65 66,65 66,60 55,60 55,71 49,71 49,87 45,87 45,76 39,76 39,65 28,65 28,76 22,76 22,82 16,82 16,87 13,87 13,71 7,71 7,55 2,55 28,39 66,39 66,22 28,22 28,39 2,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="3,55 13,55 13,59 3,59" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                                <Polygon Points="13,55 13,50 17,50 17,45 23,45 23,39 34,39 34,34 38,34 38,44 28,44 28,49 22,49 22,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                                <Polygon Points="92,59 92,55 82,55 82,59" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                                <Polygon Points="82,55 82,50 78,50 78,45 72,45 72,39 61,39 61,34 57,34 57,44 67,44 67,49 73,49 73,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="8,75 2,75 2,26 9,26 9,19 85,19 85,26 93,26 93,75 86,75 86,33 8,33" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="2,7 12,7 12,13 22,13 22,17 28,17 28,34 66,34 66,17 72,17 72,13 83,13 83,7 93,7 93,49 87,49 87,55 76,55 76,60 65,60 65,65 55,65 55,76 49,76 49,87 45,87 45,76 39,76 39,65 29,65 29,60 17,60 17,55 7,55 7,49 2,49" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                            <Canvas Visibility="Collapsed">
-                                                <Polygon Points="56,2 56,9 65,9 65,16 73,16 73,25 79,25 79,31 73,31 73,38 65,38 65,54 56,54 56,70 50,70 50,93 43,93 43,70 37,70 37,54 28,54 28,38 20,38 20,31 14,31 14,25 20,25 20,16 28,16 28,9 37,9 37,2" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
-                                            </Canvas>
-                                        </Grid>
+                                                <Canvas>
+                                                    <Line X1="27" Y1="27" X2="70" Y2="70" Stroke="Red" StrokeThickness="2" />
+                                                    <Line X1="70" Y1="27" X2="27" Y2="70" Stroke="Red" StrokeThickness="2" />
+                                                </Canvas>
+                                                <Canvas Visibility="Collapsed">
+                                                    <Polygon Points="7,74 7,22 16,22 16,32 79,32 79,22 88,22 88,74 7,74 25,56 70,56 70,40 25,40 25,56" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                </Canvas>
+                                                <Canvas Visibility="Collapsed">
+                                                    <Polygon Points="8,63 8,45 20,45 20,39 33,39 33,33 62,33 62,39 75,39 75,45 87,45 87,63 82,63 82,57 69,57 69,51 25,51 25,57 13,57 13,63" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                </Canvas>
+                                                <Canvas Visibility="Collapsed">
+                                                    <Polygon Points="5,77 90,77 90,19 5,19 5,77 17,52 17,31 78,31 78,52 17,52" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                </Canvas>
+                                                <Canvas Visibility="Collapsed">
+                                                    <Polygon Points="2,62 2,49 16,49 16,42 30,42 30,35 65,35 65,42 79,42 79,49 93,49 93,62 87,62 87,55 73,55 73,48 59,48 59,35 36,35 36,48 22,48 22,55 8,55 8,62" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                </Canvas>
+                                                <Canvas Visibility="Collapsed">
+                                                    <Polygon Points="9,42 9,31 14,31 14,42 9,42 4,42 4,54 9,54 9,60 21,60 21,66 26,66 26,60 69,60 69,66 74,66 74,60 86,60 86,49 91,49 91,37 86,37 86,31 81,31 81,42 86,42 86,49 81,49 81,55 62,55 62,49 33,49 33,55 14,55 14,49 9,49" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                </Canvas>
+                                                <Canvas Visibility="Collapsed">
+                                                    <Polygon Points="5,21 14,21 14,56 81,56 81,21 90,21 90,75 5,75" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                </Canvas>
+                                                <Canvas Visibility="Collapsed">
+                                                    <Polygon Points="4,37 4,31 17,31 17,25 31,25 31,18 64,18 64,25 77,25 77,31 91,31 91,37 72,37 72,30 57,30 57,71 50,71 50,78 45,78 45,71 38,71 38,59 57,59 57,30 23,30 23,37" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                </Canvas>
+                                                <Canvas Visibility="Collapsed">
+                                                    <Polygon Points="3,12 13,12 13,17 82,17 82,12 92,12 92,74 81,74 81,80 71,80 71,85 24,85 24,80 14,80 14,74 3,74 3,12 28,32 66,32 66,49 28,49 28,32" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                </Canvas>
+                                                <Canvas Visibility="Collapsed">
+                                                    <Polygon Points="2,2 12,2 12,13 83,13 83,2 93,2 93,60 82,60 82,87 72,87 72,60 60,60 60,65 55,65 55,93 39,93 39,65 34,65 34,60 22,60 22,87 13,87 13,60 2,60 2,2 22,28 72,28 72,39 22,39 22,28" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                </Canvas>
+                                                <Canvas Visibility="Collapsed">
+                                                    <Polygon Points="35,2 59,2 59,7 70,7 70,12 80,12 80,52 75,52 75,61 70,61 70,72 64,72 64,82 59,82 59,93 35,93 35,82 30,82 30,72 24,72 24,61 19,61 19,52 14,52 14,12 24,12 24,7 35,7 35,2 29,21 65,21 65,37 29,37 29,21" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                </Canvas>
+                                                <Canvas Visibility="Collapsed">
+                                                    <Polygon Points="2,7 93,7 93,60 87,60 87,65 82,65 82,76 72,76 72,65 66,65 66,60 55,60 55,71 49,71 49,87 45,87 45,76 39,76 39,65 28,65 28,76 22,76 22,82 16,82 16,87 13,87 13,71 7,71 7,55 2,55 28,39 66,39 66,22 28,22 28,39 2,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                </Canvas>
+                                                <Canvas Visibility="Collapsed">
+                                                    <Polygon Points="3,55 13,55 13,59 3,59" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                    <Polygon Points="13,55 13,50 17,50 17,45 23,45 23,39 34,39 34,34 38,34 38,44 28,44 28,49 22,49 22,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                    <Polygon Points="92,59 92,55 82,55 82,59" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                    <Polygon Points="82,55 82,50 78,50 78,45 72,45 72,39 61,39 61,34 57,34 57,44 67,44 67,49 73,49 73,55" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                </Canvas>
+                                                <Canvas Visibility="Collapsed">
+                                                    <Polygon Points="8,75 2,75 2,26 9,26 9,19 85,19 85,26 93,26 93,75 86,75 86,33 8,33" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                </Canvas>
+                                                <Canvas Visibility="Collapsed">
+                                                    <Polygon Points="2,7 12,7 12,13 22,13 22,17 28,17 28,34 66,34 66,17 72,17 72,13 83,13 83,7 93,7 93,49 87,49 87,55 76,55 76,60 65,60 65,65 55,65 55,76 49,76 49,87 45,87 45,76 39,76 39,65 29,65 29,60 17,60 17,55 7,55 7,49 2,49" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                </Canvas>
+                                                <Canvas Visibility="Collapsed">
+                                                    <Polygon Points="56,2 56,9 65,9 65,16 73,16 73,25 79,25 79,31 73,31 73,38 65,38 65,54 56,54 56,70 50,70 50,93 43,93 43,70 37,70 37,54 28,54 28,38 20,38 20,31 14,31 14,25 20,25 20,16 28,16 28,9 37,9 37,2" Fill="{Binding DataContext, ElementName=beardRenderGrid}"/>
+                                                </Canvas>
+                                            </Grid>
                                             <iconPacks:PackIconMaterial Visibility="Collapsed" Name="beardInvisibleIcon" ToolTip="{xaml:Localize Key=CHARACTER_Beard_Invisible}" Foreground="{Binding Foreground, ElementName=hairInvisibleIcon}" Margin="{Binding Margin, ElementName=hairInvisibleIcon}" Width="{Binding Width, ElementName=hairInvisibleIcon}" Height="{Binding Height, ElementName=hairInvisibleIcon}" Opacity="{Binding Opacity, ElementName=hairInvisibleIcon}" HorizontalAlignment="{Binding HorizontalAlignment, ElementName=hairInvisibleIcon}" VerticalAlignment="{Binding VerticalAlignment, ElementName=hairInvisibleIcon}" Kind="{Binding Kind, ElementName=hairInvisibleIcon}"/>
                                         </Grid>
                                     </Border>
@@ -1049,7 +1091,7 @@
                                     </TabItem>
                                 </TabControl>
                             </GroupBox>
-                            <GroupBox Header="{xaml:Localize Key=CHARACTER_Equipment}" HorizontalAlignment="Left" Margin="10,240,0,10" Width="300" MaxHeight="231" VerticalAlignment="Bottom">
+                            <GroupBox Header="{xaml:Localize Key=CHARACTER_Equipment}" HorizontalAlignment="Left" Margin="10,316,0,10" Width="300" MaxHeight="231" VerticalAlignment="Bottom">
                                 <ScrollViewer>
                                     <StackPanel>
                                         <Grid>
@@ -1165,58 +1207,120 @@
                             </Label>
                         </Grid>
                         <Grid Grid.Row="1" Name="dialogueTabGrid" Visibility="Visible">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="33*"/>
-                                <ColumnDefinition MinWidth="381" Width="33*"/>
-                                <ColumnDefinition MinWidth="128" Width="33*"/>
-                            </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="dialogue_commentbox" Grid.Column="2" VerticalAlignment="Top" Margin="10,10,10,10" Height="26"/>
-                            <Button Command="{Binding PreviewCommand}" Name="previewDialogueButton" Grid.Column="1" Margin="10,10,10,10" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Preview}"/>
-                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="dialogueInputIdControl" Width="62" Height="26" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"   />
-                            <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
-                                <TextBlock TextAlignment="Center" Text="{xaml:Localize Key=DIALOGUE_ID}" VerticalAlignment="Center"/>
-                            </Border>
-                            <GroupBox Grid.Row="1" Header="{xaml:Localize Key=DIALOGUE_Pages}" Margin="10,10,5,10">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <ScrollViewer Margin="10">
-                                        <StackPanel Name="messagePagesGrid" VerticalAlignment="Top"/>
-                                    </ScrollViewer>
-                                    <Button Grid.Row="1" Command="{Binding AddMessageCommand}" Name="dialogueAddMessageButton" Margin="10" Content="{xaml:Localize Key=DIALOGUE_Message_Add}">
-                                        <Button.ToolTip>
-                                            <StackPanel>
-                                                <Image Source="Resources/Help/img_help_dialogueMessage.png"/>
-                                            </StackPanel>
-                                        </Button.ToolTip>
-                                    </Button>
-                                </Grid>
-                            </GroupBox>
-                            <GroupBox Grid.Column="1" Grid.Row="1" Header="{xaml:Localize Key=DIALOGUE_Replies}" Margin="5,10,5,10" MinWidth="361">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <ScrollViewer Margin="10">
-                                        <StackPanel x:Name="dialoguePlayerRepliesGrid"/>
-                                    </ScrollViewer>
-                                    <Button Grid.Row="1" Command="{Binding AddReplyCommand}" Name="dialogueAddReplyButton" Margin="10" Content="{xaml:Localize Key=DIALOGUE_Reply_Add}">
-                                        <Button.ToolTip>
-                                            <StackPanel>
-                                                <Image Source="Resources/Help/img_help_dialogueReply.png"/>
-                                            </StackPanel>
-                                        </Button.ToolTip>
-                                    </Button>
-                                </Grid>
-                            </GroupBox>
-                            <TextBlock Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,0,10" Text="{xaml:Localize Key=DIALOGUE_Tips}" TextWrapping="Wrap" Width="254"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="dialogue_commentbox" Grid.Column="2" VerticalAlignment="Top" Margin="5" Height="26"/>
+                                <Button Command="{Binding PreviewCommand}" Name="previewDialogueButton" Grid.Column="1" Margin="5" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Preview}"/>
+                                <StackPanel>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock MinWidth="195" VerticalAlignment="Center" IsEnabled="False" Margin="5" TextWrapping="NoWrap" Text="{Binding GUID}"/>
+                                        <Grid Grid.Column="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Button Command="{Binding SetGuidCommand}"
+                                                Margin="5"
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Guid_Set}"
+                                                Style="{DynamicResource FlatOutlineButtonStyle}">
+                                                <Button.Content>
+                                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="Pencil"/>
+                                                </Button.Content>
+                                            </Button>
+                                            <Button 
+                                        Command="{Binding RandomGuidCommand}" 
+                                        Grid.Column="1" 
+                                        Margin="5" 
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Guid_Random}"
+                                        Style="{DynamicResource FlatOutlineButtonStyle}">
+                                                <Button.Content>
+                                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="DiceMultiple"/>
+                                                </Button.Content>
+                                            </Button>
+                                        </Grid>
+                                        <TextBlock VerticalAlignment="Center" Grid.Column="2" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=DIALOGUE_Guid}"/>
+                                    </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="dialogueInputIdControl" MinWidth="62" MinHeight="26" Margin="5" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"   />
+                                        <Border Margin="5" Grid.Column="1">
+                                            <TextBlock TextAlignment="Center" Text="{xaml:Localize Key=DIALOGUE_ID}" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition MinWidth="256"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition MinWidth="371"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <GroupBox Header="{xaml:Localize Key=DIALOGUE_Pages}" Margin="5">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <ScrollViewer Margin="10">
+                                            <StackPanel Name="messagePagesGrid" VerticalAlignment="Top"/>
+                                        </ScrollViewer>
+                                        <Button Grid.Row="1" Command="{Binding AddMessageCommand}" Name="dialogueAddMessageButton" Margin="10" Content="{xaml:Localize Key=DIALOGUE_Message_Add}">
+                                            <Button.ToolTip>
+                                                <StackPanel>
+                                                    <Image Source="Resources/Help/img_help_dialogueMessage.png"/>
+                                                </StackPanel>
+                                            </Button.ToolTip>
+                                        </Button>
+                                    </Grid>
+                                </GroupBox>
+                                <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" Width="5"/>
+                                <GroupBox Grid.Column="2" Header="{xaml:Localize Key=DIALOGUE_Replies}" Margin="5" MinWidth="361">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <ScrollViewer Margin="10">
+                                            <StackPanel x:Name="dialoguePlayerRepliesGrid"/>
+                                        </ScrollViewer>
+                                        <Button Grid.Row="1" Command="{Binding AddReplyCommand}" Name="dialogueAddReplyButton" Margin="10" Content="{xaml:Localize Key=DIALOGUE_Reply_Add}">
+                                            <Button.ToolTip>
+                                                <StackPanel>
+                                                    <Image Source="Resources/Help/img_help_dialogueReply.png"/>
+                                                </StackPanel>
+                                            </Button.ToolTip>
+                                        </Button>
+                                    </Grid>
+                                </GroupBox>
+                                <Expander Margin="5" IsExpanded="True" ExpandDirection="Left" Grid.Column="4">
+                                    <Expander.Header>
+                                        <TextBlock Text="{xaml:Localize Key=DIALOGUE_Tips_Header}">
+                                            <TextBlock.LayoutTransform>
+                                                <RotateTransform Angle="90"/>
+                                            </TextBlock.LayoutTransform>
+                                        </TextBlock>
+                                    </Expander.Header>
+                                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="5" Text="{xaml:Localize Key=DIALOGUE_Tips}" TextWrapping="Wrap" Width="254"/>
+                                </Expander>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </TabItem>
@@ -1264,50 +1368,331 @@
                         </Grid>
                         <Grid Grid.Row="1" Name="vendorTabGrid">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="80"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="33*"/>
-                                <ColumnDefinition MinWidth="296" Width="33*"/>
-                                <ColumnDefinition Width="33*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="vendor_commentbox" Grid.Column="2" VerticalAlignment="Top" Margin="10" Height="26"/>
-                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="vendorIdTxtBox" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"   />
-                            <Border HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Height="26">
-                                <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_ID}" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Name="vendorTitleTxtBox" Height="26" VerticalAlignment="Top" Margin="10,10,146,0"/>
-                            <TextBlock  Grid.Column="1" HorizontalAlignment="Right" Margin="0,14,10,0" TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_Title}" VerticalAlignment="Top" Width="128" Height="16"/>
-                            <TextBox  Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Name="vendorDescTxtBox" Height="26" VerticalAlignment="Bottom" Margin="10,0,146,10"/>
-                            <TextBlock  Grid.Column="1" Width="128" HorizontalAlignment="Right" Margin="0,0,10,14" TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_Description}" VerticalAlignment="Bottom" Height="16"/>
-                            <StackPanel Grid.Row="1" Grid.Column="2">
-                                <CheckBox IsChecked="{Binding DisableSorting, UpdateSourceTrigger=PropertyChanged}" Name="vendorDisableSortingBox" Content="{xaml:Localize Key=VENDOR_DisableSorting}" Margin="10" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="vendor_commentbox" Grid.Column="2" VerticalAlignment="Top" Margin="10" Height="26"/>
+                                <StackPanel>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock MinWidth="195" VerticalAlignment="Center" IsEnabled="False" Margin="5" TextWrapping="NoWrap" Text="{Binding GUID}"/>
+                                        <Grid Grid.Column="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Button Command="{Binding SetGuidCommand}"
+                                                Margin="5"
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Guid_Set}"
+                                                Style="{DynamicResource FlatOutlineButtonStyle}">
+                                                <Button.Content>
+                                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="Pencil"/>
+                                                </Button.Content>
+                                            </Button>
+                                            <Button 
+                                        Command="{Binding RandomGuidCommand}" 
+                                        Grid.Column="1" 
+                                        Margin="5" 
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Guid_Random}"
+                                        Style="{DynamicResource FlatOutlineButtonStyle}">
+                                                <Button.Content>
+                                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="DiceMultiple"/>
+                                                </Button.Content>
+                                            </Button>
+                                        </Grid>
+                                        <TextBlock VerticalAlignment="Center" Grid.Column="2" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_Guid}"/>
+                                    </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="vendorIdTxtBox" HorizontalAlignment="Left" Height="26" Margin="5" VerticalAlignment="Top" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"   />
+                                        <Border HorizontalAlignment="Left" Grid.Column="1" Margin="5" VerticalAlignment="Center">
+                                            <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_ID}"/>
+                                        </Border>
+                                    </Grid>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Name="vendorTitleTxtBox" Height="26" Margin="5"/>
+                                        <TextBlock VerticalAlignment="Center" Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_Title}"/>
+                                    </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Name="vendorDescTxtBox" Height="26" Margin="5"/>
+                                        <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_Description}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="2">
+                                    <CheckBox IsChecked="{Binding DisableSorting, UpdateSourceTrigger=PropertyChanged}" Name="vendorDisableSortingBox" Content="{xaml:Localize Key=VENDOR_DisableSorting}" Margin="5" />
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <TextBox Name="vendorCurrencyBox" Grid.Row="1" VerticalAlignment="Center" Text="{Binding Currency, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+                                        <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=VENDOR_Currency}" Margin="5"/>
+                                    </Grid>
+                                    <Button Command="{Binding PreviewCommand}" Name="previewVendorButton" Margin="5" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Preview}"/>
+                                </StackPanel>
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox Name="vendorCurrencyBox" VerticalAlignment="Center" Text="{Binding Currency, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,10,0" />
-                                    <TextBlock TextWrapping="Wrap" Grid.Column="1" Text="{xaml:Localize Key=VENDOR_Currency}" Margin="10"/>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <GroupBox Margin="5" Header="{xaml:Localize Key=VENDOR_Items_Buy}">
+                                            <ScrollViewer>
+                                                <StackPanel Name="vendorListBuyItems"/>
+                                            </ScrollViewer>
+                                        </GroupBox>
+                                        <GroupBox Grid.Column="1" Margin="5" Header="{xaml:Localize Key=VENDOR_Items_Sell}">
+                                            <ScrollViewer>
+                                                <StackPanel Name="vendorListSellItems"/>
+                                            </ScrollViewer>
+                                        </GroupBox>
+                                    </Grid>
+                                    <Button Grid.Row="1" Command="{Binding AddItemCommand}" Name="vendorAddItemButton" Content="{xaml:Localize Key=VENDOR_Item_Add}" Margin="5" Height="25"/>
                                 </Grid>
-                                <Button Command="{Binding PreviewCommand}" Name="previewVendorButton" Margin="10" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Preview}"/>
-                            </StackPanel>
-                            <GroupBox Grid.Row="1" Margin="10,5,5,10" Header="{xaml:Localize Key=VENDOR_Items_Buy}">
-                                <ScrollViewer>
-                                    <StackPanel Name="vendorListBuyItems">
-
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem DataContext="{Binding DialogueVendorTabViewModel}" Name="dialogueVendorTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_DialogueVendor}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="dialogueVendorTabSelect"/>
+                            </ScrollViewer>
+                            <Button Style="{DynamicResource FlatButtonStyle}" Name="dialogueVendorTabButtonAdd" Grid.Column="1" Margin="10">
+                                <Button.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Plus" Foreground="{DynamicResource AccentColor}"/>
+                                </Button.Content>
+                            </Button>
+                            <xctk:DropDownButton Style="{DynamicResource FlatDropDownButtonStyle}" Name="dialogueVendorTabButtonSort" Grid.Column="2" Margin="10">
+                                <xctk:DropDownButton.Content>
+                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Sort" Foreground="{DynamicResource AccentColor}"/>
+                                </xctk:DropDownButton.Content>
+                                <xctk:DropDownButton.DropDownContent>
+                                    <StackPanel>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_Title_Ascending}" Command="{Binding SortTitleAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_Title_Descending}" Command="{Binding SortTitleDescending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Ascending}" Command="{Binding SortIDAscending}"/>
+                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Descending}" Command="{Binding SortIDDescending}"/>
+                                    </StackPanel>
+                                </xctk:DropDownButton.DropDownContent>
+                            </xctk:DropDownButton>
+                        </Grid>
+                        <Grid Grid.Row="1" Name="dialogueVendorTabGridNoSelection" Visibility="Collapsed">
+                            <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock TextAlignment="Center" FontSize="36" Text="{xaml:Localize Key=INTERFACE_Main_Tab_DialogueVendor_NoSelection}" TextWrapping="Wrap"/>
+                            </Label>
+                            <Label Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                <TextBlock TextAlignment="Center" Text="{xaml:Localize Key=INTERFACE_Main_Tab_DialogueVendor_NoSelection_Hint}" TextWrapping="Wrap" MaxWidth="100"/>
+                            </Label>
+                        </Grid>
+                        <Grid Grid.Row="1" Name="dialogueVendorTabGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="dialogueVendor_commentbox" Grid.Column="2" VerticalAlignment="Top" Margin="5" Height="26"/>
+                                <StackPanel>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock MinWidth="195" VerticalAlignment="Center" IsEnabled="False" Margin="5" TextWrapping="NoWrap" Text="{Binding GUID}"/>
+                                        <Grid Grid.Column="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Button Command="{Binding SetGuidCommand}"
+                                                Margin="5"
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_DialogueVendor_Guid_Set}"
+                                                Style="{DynamicResource FlatOutlineButtonStyle}">
+                                                <Button.Content>
+                                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="Pencil"/>
+                                                </Button.Content>
+                                            </Button>
+                                            <Button 
+                                        Command="{Binding RandomGuidCommand}" 
+                                        Grid.Column="1" 
+                                        Margin="5" 
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_DialogueVendor_Guid_Random}"
+                                        Style="{DynamicResource FlatOutlineButtonStyle}">
+                                                <Button.Content>
+                                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="DiceMultiple"/>
+                                                </Button.Content>
+                                            </Button>
+                                        </Grid>
+                                        <TextBlock VerticalAlignment="Center" Grid.Column="2" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=DIALOGUEVENDOR_Guid}"/>
+                                    </Grid>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="dialogueVendorIdTxtBox" HorizontalAlignment="Left" Height="26" Margin="5" VerticalAlignment="Top" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"   />
+                                        <Border HorizontalAlignment="Left" Grid.Column="1" Margin="5" VerticalAlignment="Center">
+                                            <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=DIALOGUEVENDOR_ID}"/>
+                                        </Border>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ScrollViewer Grid.Column="2">
+                                    <StackPanel>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <TextBox Name="dialogueVendorCurrencyBox" Grid.Row="1" VerticalAlignment="Center" Text="{Binding Currency, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+                                            <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=DIALOGUEVENDOR_Currency}" Margin="5"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <TextBox Name="dialogueVendorSellingFormatBox" Grid.Row="1" VerticalAlignment="Center" Text="{Binding SellingFormatText, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+                                            <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=DIALOGUEVENDOR_SellingFormat}" Margin="5"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <TextBox Name="dialogueVendorBuyingFormatBox" Grid.Row="1" VerticalAlignment="Center" Text="{Binding BuyingFormatText, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+                                            <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=DIALOGUEVENDOR_BuyingFormat}" Margin="5"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <TextBox Name="dialogueVendorGoodbyeTextBox" Grid.Row="1" VerticalAlignment="Center" Text="{Binding GoodbyeText, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+                                            <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=DIALOGUEVENDOR_GoodbyeText}" Margin="5"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <xctk:UShortUpDown Name="dialogueVendorSellingDialogueBox" Grid.Row="1" VerticalAlignment="Center" Value="{Binding SoldDialogueID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ShowButtonSpinner="False" Foreground="{DynamicResource ForegroundColor}" Margin="5" />
+                                            <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=DIALOGUEVENDOR_SoldDialogueID}" Margin="5"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <xctk:UShortUpDown Name="dialogueVendorBuyingDialogueBox" Grid.Row="1" VerticalAlignment="Center" Value="{Binding BoughtDialogueID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ShowButtonSpinner="False" Foreground="{DynamicResource ForegroundColor}" Margin="5" />
+                                            <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=DIALOGUEVENDOR_BoughtDialogueID}" Margin="5"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <xctk:UShortUpDown Name="dialogueVendorGoodbyeDialogueBox" Grid.Row="1" VerticalAlignment="Center" Value="{Binding GoodbyeDialogueID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ShowButtonSpinner="False" Foreground="{DynamicResource ForegroundColor}" Margin="5" />
+                                            <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=DIALOGUEVENDOR_GoodbyeDialogueID}" Margin="5"/>
+                                        </Grid>
+                                        <Button Command="{Binding ConvertToDialogueCommand}" Name="convertToDialogueDialogueVendorButton" Margin="5" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_DialogueVendor_ConvertToDialogue}"/>
                                     </StackPanel>
                                 </ScrollViewer>
-                            </GroupBox>
-                            <GroupBox Grid.Row="1" Grid.Column="1" Margin="5,5,5,10" Header="{xaml:Localize Key=VENDOR_Items_Sell}">
-                                <ScrollViewer>
-                                    <StackPanel Name="vendorListSellItems">
-
-                                    </StackPanel>
-                                </ScrollViewer>
-                            </GroupBox>
-                            <Button Command="{Binding AddItemCommand}" Name="vendorAddItemButton" Content="{xaml:Localize Key=VENDOR_Item_Add}" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="25"/>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <GroupBox Grid.Column="0" Margin="5" Header="{xaml:Localize Key=DIALOGUEVENDOR_Pages}">
+                                            <ScrollViewer>
+                                                <StackPanel Name="dialogueVendorPagesGrid" />
+                                            </ScrollViewer>
+                                        </GroupBox>
+                                        <GroupBox Grid.Column="1" Margin="5" Header="{xaml:Localize Key=DIALOGUEVENDOR_Items_Buy}">
+                                            <ScrollViewer>
+                                                <StackPanel Name="dialogueVendorListBuyItems"/>
+                                            </ScrollViewer>
+                                        </GroupBox>
+                                        <GroupBox Grid.Column="2" Margin="5" Header="{xaml:Localize Key=DIALOGUEVENDOR_Items_Sell}">
+                                            <ScrollViewer>
+                                                <StackPanel Name="dialogueVendorListSellItems"/>
+                                            </ScrollViewer>
+                                        </GroupBox>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="33*"/>
+                                            <ColumnDefinition Width="66*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Command="{Binding AddPageCommand}" Name="dialogueVendorAddPageButton" Content="{xaml:Localize Key=DIALOGUEVENDOR_Page_Add}" Margin="5" Height="25"/>
+                                        <Button Grid.Column="1" Command="{Binding AddItemCommand}" Name="dialogueVendorAddItemButton" Content="{xaml:Localize Key=DIALOGUEVENDOR_Item_Add}" Margin="5" Height="25"/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </TabItem>
@@ -1365,10 +1750,52 @@
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="1" Command="{Binding PreviewCommand}" Name="previewQuestButton" Margin="10" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_Preview}"/>
                             <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="quest_commentbox" Grid.Column="2" VerticalAlignment="Top" Margin="10" Height="26"/>
-                            <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="questIdBox" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"   />
-                            <Border VerticalAlignment="Top" HorizontalAlignment="Left" Margin="77,10,0,0" Height="26" Grid.ColumnSpan="2">
-                                <TextBlock Text="{xaml:Localize Key=QUEST_ID}" VerticalAlignment="Center"/>
-                            </Border>
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock MinWidth="195" VerticalAlignment="Center" IsEnabled="False" Margin="5" TextWrapping="NoWrap" Text="{Binding GUID}"/>
+                                    <Grid Grid.Column="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Command="{Binding SetGuidCommand}"
+                                                Margin="5"
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_Guid_Set}"
+                                                Style="{DynamicResource FlatOutlineButtonStyle}">
+                                            <Button.Content>
+                                                <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="Pencil"/>
+                                            </Button.Content>
+                                        </Button>
+                                        <Button 
+                                        Command="{Binding RandomGuidCommand}" 
+                                        Grid.Column="1" 
+                                        Margin="5" 
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_Guid_Random}"
+                                        Style="{DynamicResource FlatOutlineButtonStyle}">
+                                            <Button.Content>
+                                                <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="DiceMultiple"/>
+                                            </Button.Content>
+                                        </Button>
+                                    </Grid>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="2" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=QUEST_Guid}"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="questIdBox" Height="26" Margin="5" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"   />
+                                    <Border Margin="5" Grid.Column="1">
+                                        <TextBlock Text="{xaml:Localize Key=QUEST_ID}" VerticalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                            </StackPanel>
                             <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Name="questTitleBox" Height="26" VerticalAlignment="Top" Margin="10,38,10,0"/>
                             <TextBlock Grid.Row="1" Text="{xaml:Localize Key=QUEST_Title}" TextAlignment="Center" Height="23" VerticalAlignment="Top" Margin="10,10,10,0"/>
                             <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" TextWrapping="Wrap" Name="questDescBox" Margin="10,94,10,10"/>
@@ -1448,8 +1875,39 @@
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Row="0">
                                 <StackPanel Orientation="Horizontal" Margin="10">
-                                    <Label Content="{xaml:Localize CURRENCY_GUID}"/>
-                                    <TextBox MaxLength="32" MaxLines="1" Text="{Binding GUID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <Label VerticalAlignment="Center" Content="{xaml:Localize CURRENCY_GUID}"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock MinWidth="195" VerticalAlignment="Center" IsEnabled="False" Margin="5" TextWrapping="NoWrap" Text="{Binding GUID}"/>
+                                        <Grid Grid.Column="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Button Command="{Binding SetGuidCommand}"
+                                                Margin="5"
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Currency_Guid_Set}"
+                                                Style="{DynamicResource FlatOutlineButtonStyle}">
+                                                <Button.Content>
+                                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="Pencil"/>
+                                                </Button.Content>
+                                            </Button>
+                                            <Button 
+                                        Command="{Binding RandomGuidCommand}" 
+                                        Grid.Column="1" 
+                                        Margin="5" 
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Currency_Guid_Random}"
+                                        Style="{DynamicResource FlatOutlineButtonStyle}">
+                                                <Button.Content>
+                                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="DiceMultiple"/>
+                                                </Button.Content>
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="10">
                                     <Label Content="{xaml:Localize CURRENCY_ValueFormat}"/>

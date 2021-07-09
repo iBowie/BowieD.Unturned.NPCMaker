@@ -1,10 +1,13 @@
-﻿using BowieD.Unturned.NPCMaker.Forms;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC;
 using System.Windows;
+using System.Xml;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration
 {
-    public class FlagDescriptionProjectAsset : ProjectAsset, IEditable, ICreatable, IDeletable
+    public class FlagDescriptionProjectAsset : ProjectAsset, IEditable, ICreatable, IDeletable, IAXData
     {
         public FlagDescriptionProjectAsset() : base("Unnamed", 0, "PROJ_FLAG")
         {
@@ -32,6 +35,12 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             }
         }
 
+        public void Load(XmlNode node, int version)
+        {
+            name = node["name"].ToText();
+            id = node["id"].ToUInt16();
+        }
+
         public void OnCreate()
         {
             MainWindow.CurrentProject.data.flags.Add(this);
@@ -40,6 +49,12 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         public void OnDelete()
         {
             MainWindow.CurrentProject.data.flags.Remove(this);
+        }
+
+        public void Save(XmlDocument document, XmlNode node)
+        {
+            document.CreateNodeC("name", node).WriteString(name);
+            document.CreateNodeC("id", node).WriteUInt16(id);
         }
     }
 }

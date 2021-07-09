@@ -24,8 +24,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
             ContextMenu pbmenu = new ContextMenu();
             pbmenu.Items.Add(ContextHelper.CreateSelectAssetButton(typeof(GameDialogueAsset), (asset) =>
             {
-                Prev = asset.id;
-                prevBox.Value = asset.id;
+                Prev = asset.ID;
+                prevBox.Value = asset.ID;
             }, "Control_SelectAsset_Dialogue", MahApps.Metro.IconPacks.PackIconMaterialKind.Chat));
 
             prevBox.ContextMenu = pbmenu;
@@ -91,9 +91,9 @@ namespace BowieD.Unturned.NPCMaker.Controls
         {
             get => new NPC.NPCMessage
             {
-                pages = Pages,
-                conditions = Conditions.ToList(),
-                rewards = Rewards.ToList(),
+                pages = Pages.ToLimitedList(byte.MaxValue),
+                conditions = Conditions.ToLimitedList(byte.MaxValue),
+                rewards = Rewards.ToLimitedList(byte.MaxValue),
                 prev = Prev
             };
             set
@@ -175,14 +175,14 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Forms.Universal_ListView ulv = new Forms.Universal_ListView(Conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, true)).ToList(), Universal_ItemList.ReturnType.Condition);
+            Forms.Universal_ListView ulv = new Forms.Universal_ListView(Conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, true)).ToLimitedList(byte.MaxValue), Universal_ItemList.ReturnType.Condition);
             ulv.Owner = MainWindow.Instance;
             ulv.ShowDialog();
             Conditions = ulv.Values.Cast<Condition>().ToArray();
         }
         private void EditRewardsButton_Click(object sender, RoutedEventArgs e)
         {
-            Forms.Universal_ListView ulv = new Forms.Universal_ListView(Rewards.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Reward, true)).ToList(), Universal_ItemList.ReturnType.Reward);
+            Forms.Universal_ListView ulv = new Forms.Universal_ListView(Rewards.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Reward, true)).ToLimitedList(byte.MaxValue), Universal_ItemList.ReturnType.Reward);
             ulv.Owner = MainWindow.Instance;
             ulv.ShowDialog();
             Rewards = ulv.Values.Cast<Reward>().ToArray();

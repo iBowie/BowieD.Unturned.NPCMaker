@@ -60,6 +60,7 @@
                 <CheckBox Name="filter_origin_unturned" Margin="10" Content="{xaml:Localize INTERFACE_AssetPicker_Filter_Origin_Unturned}" IsChecked="True"/>
                 <CheckBox Name="filter_origin_workshop" Margin="10" Content="{xaml:Localize INTERFACE_AssetPicker_Filter_Origin_Workshop}" IsChecked="True"/>
                 <CheckBox Name="filter_origin_project" Margin="10" Content="{xaml:Localize INTERFACE_AssetPicker_Filter_Origin_Project}" IsChecked="True"/>
+                <CheckBox Name="filter_origin_hooked" Margin="10" Content="{xaml:Localize INTERFACE_AssetPicker_Filter_Origin_Hooked}" IsChecked="True"/>
             </StackPanel>
         </GroupBox>
     </Grid>

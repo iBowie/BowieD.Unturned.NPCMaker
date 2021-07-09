@@ -5,6 +5,7 @@ using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -236,6 +237,15 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 OnPropertyChange("ID");
             }
         }
+        public string GUID
+        {
+            get => Dialogue.GUID;
+            set
+            {
+                Dialogue.GUID = value;
+                OnPropertyChange("GUID");
+            }
+        }
         public string Comment
         {
             get => Dialogue.Comment;
@@ -250,6 +260,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
         private ICommand closeTabCommand;
         private ICommand sortIDA, sortIDD;
+        private ICommand randomGuidCommand;
+        private ICommand setGuidCommand;
+
         public ICommand SortIDAscending
         {
             get
@@ -302,9 +315,12 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 if (addReplyCommand == null)
                 {
-                    addReplyCommand = new BaseCommand(() =>
+                    addReplyCommand = new AdvancedCommand(() =>
                     {
                         AddResponse(new Dialogue_Response(new NPCResponse()));
+                    }, (p) =>
+                    {
+                        return _dialogue.Responses.CanAdd;
                     });
                 }
                 return addReplyCommand;
@@ -316,9 +332,12 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 if (addMessageCommand == null)
                 {
-                    addMessageCommand = new BaseCommand(() =>
+                    addMessageCommand = new AdvancedCommand(() =>
                     {
                         AddMessage(new Dialogue_Message(new NPCMessage()));
+                    }, (p) =>
+                    {
+                        return _dialogue.Messages.CanAdd;
                     });
                 }
                 return addMessageCommand;
@@ -384,6 +403,46 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 return previewCommand;
             }
         }
+        public ICommand RandomGuidCommand
+        {
+            get
+            {
+                if (randomGuidCommand == null)
+                {
+                    randomGuidCommand = new BaseCommand(() =>
+                    {
+                        GUID = Guid.NewGuid().ToString("N");
+                    });
+                }
+                return randomGuidCommand;
+            }
+        }
+        public ICommand SetGuidCommand
+        {
+            get
+            {
+                if (setGuidCommand == null)
+                {
+                    setGuidCommand = new BaseCommand(() =>
+                    {
+                        MultiFieldInputView_Dialog mfiv = new MultiFieldInputView_Dialog(new string[1] { GUID });
+                        if (mfiv.ShowDialog(new string[1] { LocalizationManager.Current.Dialogue["Guid"] }, "") == true)
+                        {
+                            string res = mfiv.Values[0];
+                            if (Guid.TryParse(res, out var newGuid))
+                            {
+                                GUID = newGuid.ToString("N");
+                            }
+                            else
+                            {
+                                MessageBox.Show(LocalizationManager.Current.Dialogue["Guid_Invalid"]);
+                            }
+                        }
+                    });
+                }
+                return setGuidCommand;
+            }
+        }
 
         void AddMessage(Dialogue_Message message)
         {
@@ -409,7 +468,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         newMessages.Add(dr.Message);
                     }
                 }
-                _dialogue.Messages = newMessages;
+                _dialogue.Messages = newMessages.ToLimitedList(byte.MaxValue);
 
                 panel.UpdateOrderButtons<Dialogue_Message>();
             };
@@ -454,7 +513,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         newResponses.Add(dr.Response);
                     }
                 }
-                _dialogue.Responses = newResponses;
+                _dialogue.Responses = newResponses.ToLimitedList(byte.MaxValue);
 
                 panel.UpdateOrderButtons<Dialogue_Response>();
             };

@@ -100,5 +100,25 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             return SimulationTool.Compare(simulation.GetQuestStatus(ID), Status, Logic);
         }
+
+        public override void Load(System.Xml.XmlNode node, int version)
+        {
+            base.Load(node, version);
+
+            ID = node["ID"].ToUInt16();
+            Status = node["Status"].ToEnum<Quest_Status>();
+            Logic = node["Logic"].ToEnum<Logic_Type>();
+            Ignore_NPC = node["Ignore_NPC"].ToBoolean();
+        }
+
+        public override void Save(System.Xml.XmlDocument document, System.Xml.XmlNode node)
+        {
+            base.Save(document, node);
+
+            document.CreateNodeC("ID", node).WriteUInt16(ID);
+            document.CreateNodeC("Status", node).WriteEnum(Status);
+            document.CreateNodeC("Logic", node).WriteEnum(Logic);
+            document.CreateNodeC("Ignore_NPC", node).WriteBoolean(Ignore_NPC);
+        }
     }
 }

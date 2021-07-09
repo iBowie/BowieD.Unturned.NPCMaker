@@ -38,6 +38,7 @@ namespace BowieD.Unturned.NPCMaker.Export
 
                 Export_Characters(save.characters);
                 Export_Dialogues(save.dialogues);
+                Export_Dialogues(save.dialogueVendors.Select(d => d.CreateDialogue()));
                 Export_Quests(save.quests);
                 Export_Vendors(save.vendors);
                 Export_Currencies(save.currencies);

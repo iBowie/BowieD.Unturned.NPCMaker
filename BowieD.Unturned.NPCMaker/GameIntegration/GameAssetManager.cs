@@ -1,9 +1,11 @@
-﻿using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
+﻿using BowieD.Unturned.NPCMaker.GameIntegration.Devkit;
+using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Parsing;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,6 +14,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
     public static class GameAssetManager
     {
         private static readonly List<GameAsset> _assets = new List<GameAsset>();
+        private static readonly Dictionary<string, List<IDevkitHierarchyItem>> _devkitItems = new Dictionary<string, List<IDevkitHierarchyItem>>();
 
         public static bool HasImportedAssets
         {
@@ -44,7 +47,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 }
             }
         }
-        public static IEnumerable<GameAsset> GetAllAssets(Type type)
+        public static IEnumerable<IAssetPickable> GetAllAssets(Type type)
         {
             if (typeof(GameAsset).IsAssignableFrom(type))
             {
@@ -56,8 +59,21 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                     }
                 }
             }
+            else if (typeof(IDevkitHierarchyItem).IsAssignableFrom(type))
+            {
+                foreach (var dhiList in _devkitItems.Values)
+                {
+                    foreach (var dhi in dhiList)
+                    {
+                        if (type.IsAssignableFrom(dhi.GetType()))
+                        {
+                            yield return dhi;
+                        }
+                    }
+                }
+            }
             else
-                throw new ArgumentException("Expected derived class from GameAsset");
+                throw new ArgumentException($"Expected derived class from {nameof(GameAsset)} or {nameof(IDevkitHierarchyItem)}");
         }
         public static IEnumerable<T> GetAllAssets<T>() where T : GameAsset
         {
@@ -82,6 +98,11 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 foreach (var ch in MainWindow.CurrentProject.data.dialogues)
                 {
                     yield return new GameDialogueAsset(ch, EGameAssetOrigin.Project) as T;
+                }
+
+                foreach (var ch in MainWindow.CurrentProject.data.dialogueVendors)
+                {
+                    yield return new GameDialogueAsset(ch.CreateDialogue(), EGameAssetOrigin.Project) as T;
                 }
             }
 
@@ -166,7 +187,9 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 ignoreFileNames.Add(langValue + ".dat");
             }
 
-            foreach (FileInfo file in new DirectoryInfo(directory).GetFiles("*.dat", SearchOption.AllDirectories))
+            DirectoryInfo curDirInfo = new DirectoryInfo(directory);
+
+            foreach (FileInfo file in curDirInfo.GetFiles("*.dat", SearchOption.AllDirectories))
             {
                 if (ignoreFileNames.Contains(file.Name))
                 {
@@ -175,9 +198,14 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 files.Enqueue(new LegacyFileInfo(file));
             }
 
-            foreach (FileInfo file in new DirectoryInfo(directory).GetFiles("*.asset", SearchOption.AllDirectories))
+            foreach (FileInfo file in curDirInfo.GetFiles("*.asset", SearchOption.AllDirectories))
             {
                 files.Enqueue(new AssetFileInfo(file));
+            }
+
+            foreach (FileInfo file in curDirInfo.GetFiles("Level.hierarchy", SearchOption.AllDirectories))
+            {
+                files.Enqueue(new LevelHierarchyInfo(file));
             }
 
             int index = -1;
@@ -212,6 +240,14 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                             ImportedAssetCount++;
                         }
                     }
+                    else if (fi is LevelHierarchyInfo)
+                    {
+                        var res = ReadHierarchy(fi.Info.FullName, origin);
+                        if (res.Count > 0)
+                        {
+                            _devkitItems[fi.Info.FullName] = res;
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -223,7 +259,12 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
 
         public static bool TryFindUnusedID(EGameAssetCategory category, out ushort id)
         {
-            for (ushort res = 2000; res < ushort.MaxValue; res++)
+            var proj = MainWindow.CurrentProject.data.settings;
+
+            ushort bottomLimit = Math.Max((ushort)2000, proj.idRangeMin);
+            ushort upLimit = Math.Min(ushort.MaxValue, proj.idRangeMax);
+
+            for (ushort res = bottomLimit; res < upLimit; res++)
             {
                 if (TryGetAsset<GameAsset>((asset) => asset.id == res && asset.Category == category, out _))
                 {
@@ -259,12 +300,29 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             {
             }
         }
+        private class LevelHierarchyInfo : ScannedFileInfo
+        {
+            public LevelHierarchyInfo(FileInfo info) : base(info) { }
+        }
 
         public static void Purge()
         {
             _assets.Clear();
+            _devkitItems.Clear();
             HasImportedAssets = false;
             ImportedAssetCount = 0;
+        }
+
+        public static void Purge(EGameAssetOrigin origin)
+        {
+            _assets.RemoveAll(d => d.origin == origin);
+            
+            foreach (var kv in _devkitItems.ToList())
+            {
+                kv.Value.RemoveAll(d => d.Origin == origin);
+                if (kv.Value.Count == 0)
+                    _devkitItems.Remove(kv.Key);
+            }
         }
 
         private static Tuple<bool, GameAsset> TryReadAssetFile(string fileName, EGameAssetOrigin origin)
@@ -449,6 +507,44 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 default:
                     return new Tuple<bool, GameAsset>(true, new GameAsset(name, id, guid, vt, origin));
             }
+        }
+        private static List<IDevkitHierarchyItem> ReadHierarchy(string fileName, EGameAssetOrigin origin)
+        {
+            List<IDevkitHierarchyItem> res = new List<IDevkitHierarchyItem>();
+
+            using (StreamReader sr = new StreamReader(fileName))
+            {
+                IFileReader reader;
+                try
+                {
+                    reader = new KVTableReader(sr);
+
+                    int itemCount = reader.readArrayLength("Items");
+                    
+                    for (int i = 0; i < itemCount; i++)
+                    {
+                        IFileReader itemReader = reader.readObject(i);
+                        Type type = itemReader.readValue<Type>("Type");
+                        if (type == null)
+                            continue;
+
+                        IDevkitHierarchyItem devkitHierarchyItem = (IDevkitHierarchyItem)Activator.CreateInstance(type, fileName, origin);
+                        if (devkitHierarchyItem != null)
+                        {
+                            itemReader.readKey("Item");
+                            devkitHierarchyItem.read(itemReader);
+
+                            res.Add(devkitHierarchyItem);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    App.Logger.LogException($"Could not parse level hierarchy of '{fileName}'", ex: ex);
+                }
+            }
+
+            return res;
         }
     }
 }

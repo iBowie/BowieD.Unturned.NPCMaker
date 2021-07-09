@@ -235,6 +235,15 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         }
         public string Comment { get => Quest.Comment; set => Quest.Comment = value; }
         public ushort ID { get => Quest.ID; set => Quest.ID = value; }
+        public string GUID
+        {
+            get => Quest.GUID;
+            set
+            {
+                Quest.GUID = value;
+                OnPropertyChange("GUID");
+            }
+        }
         public string Title { get => Quest.Title; set => Quest.Title = value; }
         public string Description { get => Quest.description; set => Quest.description = value; }
         private ICommand
@@ -243,6 +252,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             previewCommand;
         private ICommand closeTabCommand;
         private ICommand sortIDA, sortIDD, sortTitleA, sortTitleD;
+        private ICommand setGuidCommand;
+        private ICommand randomGuidCommand;
+
         public ICommand SortIDAscending
         {
             get
@@ -325,7 +337,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 if (addConditionCommand == null)
                 {
-                    addConditionCommand = new BaseCommand(() =>
+                    addConditionCommand = new AdvancedCommand(() =>
                     {
                         Universal_ConditionEditor uce = new Universal_ConditionEditor(null);
                         if (uce.ShowDialog() == true)
@@ -333,6 +345,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             Condition cond = uce.Result;
                             AddCondition(new Universal_ItemList(cond, true));
                         }
+                    }, (p) =>
+                    {
+                        return _quest.conditions.CanAdd;
                     });
                 }
                 return addConditionCommand;
@@ -344,7 +359,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 if (addRewardCommand == null)
                 {
-                    addRewardCommand = new BaseCommand(() =>
+                    addRewardCommand = new AdvancedCommand(() =>
                     {
                         Universal_RewardEditor ure = new Universal_RewardEditor(null);
                         if (ure.ShowDialog() == true)
@@ -352,6 +367,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             Reward rew = ure.Result;
                             AddReward(new Universal_ItemList(rew, true));
                         }
+                    }, (p) =>
+                    {
+                        return Quest.rewards.CanAdd;
                     });
                 }
                 return addRewardCommand;
@@ -379,6 +397,46 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     });
                 }
                 return previewCommand;
+            }
+        }
+        public ICommand RandomGuidCommand
+        {
+            get
+            {
+                if (randomGuidCommand == null)
+                {
+                    randomGuidCommand = new BaseCommand(() =>
+                    {
+                        GUID = Guid.NewGuid().ToString("N");
+                    });
+                }
+                return randomGuidCommand;
+            }
+        }
+        public ICommand SetGuidCommand
+        {
+            get
+            {
+                if (setGuidCommand == null)
+                {
+                    setGuidCommand = new BaseCommand(() =>
+                    {
+                        MultiFieldInputView_Dialog mfiv = new MultiFieldInputView_Dialog(new string[1] { GUID });
+                        if (mfiv.ShowDialog(new string[1] { LocalizationManager.Current.Quest["Guid"] }, "") == true)
+                        {
+                            string res = mfiv.Values[0];
+                            if (Guid.TryParse(res, out var newGuid))
+                            {
+                                GUID = newGuid.ToString("N");
+                            }
+                            else
+                            {
+                                MessageBox.Show(LocalizationManager.Current.Quest["Guid_Invalid"]);
+                            }
+                        }
+                    });
+                }
+                return setGuidCommand;
             }
         }
 
@@ -433,7 +491,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         newConditions.Add(dr.Value as Condition);
                     }
                 }
-                _quest.conditions = newConditions;
+                _quest.conditions = newConditions.ToLimitedList(byte.MaxValue);
 
                 panel.UpdateOrderButtons();
             };
@@ -518,7 +576,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         newRewards.Add(dr.Value as Reward);
                     }
                 }
-                _quest.rewards = newRewards;
+                _quest.rewards = newRewards.ToLimitedList(byte.MaxValue);
 
                 panel.UpdateOrderButtons();
             };

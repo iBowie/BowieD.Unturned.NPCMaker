@@ -1,26 +1,45 @@
-﻿using BowieD.Unturned.NPCMaker.NPC.Rewards;
+﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
     [System.Serializable]
-    public class NPCMessage
+    public class NPCMessage : IAXData
     {
         public NPCMessage()
         {
-            pages = new List<string>();
-            conditions = new List<Condition>();
-            rewards = new List<Reward>();
+            pages = new LimitedList<string>(byte.MaxValue);
+            conditions = new LimitedList<Condition>(byte.MaxValue);
+            rewards = new LimitedList<Reward>(byte.MaxValue);
             prev = 0;
         }
 
         public ushort prev;
 
-        public List<string> pages;
+        public LimitedList<string> pages;
 
-        public List<Reward> rewards;
+        public LimitedList<Reward> rewards;
 
-        public List<Condition> conditions;
+        public LimitedList<Condition> conditions;
+
+        public void Load(XmlNode node, int version)
+        {
+            prev = node["prev"].ToUInt16();
+            pages = new LimitedList<string>(node["pages"].ParseStringCollection(), byte.MaxValue);
+            rewards = new LimitedList<Reward>(node["rewards"].ParseAXDataCollection<Reward>(version), byte.MaxValue);
+            conditions = new LimitedList<Condition>(node["conditions"].ParseAXDataCollection<Condition>(version), byte.MaxValue);
+        }
+
+        public void Save(XmlDocument document, XmlNode node)
+        {
+            document.CreateNodeC("prev", node).WriteUInt16(prev);
+            document.CreateNodeC("pages", node).WriteStringCollection(document, pages);
+            document.CreateNodeC("rewards", node).WriteAXDataCollection(document, "Reward", rewards);
+            document.CreateNodeC("conditions", node).WriteAXDataCollection(document, "Condition", conditions);
+        }
     }
 }

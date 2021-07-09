@@ -58,7 +58,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 startDialogueId = asset.ReadUInt16("Dialogue"),
                 DisplayName = local?.ReadString("Character"),
                 EditorName = local?.ReadString("Name"),
-                GUID = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
+                GUID = asset.ReadGUID("GUID", Guid.NewGuid()).ToString("N"),
                 leftHanded = asset.Has("Backward"),
                 clothing = ParseClothing(Clothing_Type.Default),
                 christmasClothing = ParseClothing(Clothing_Type.Christmas),
@@ -68,19 +68,21 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 poseLean = asset.ReadSingle("Pose_Lean"),
                 posePitch = asset.ReadSingle("Pose_Pitch", 90f),
                 equipped = asset.ReadEnum("Equipped", Equip_Type.None),
-                visibilityConditions = ParseConditions("").ToList()
+                visibilityConditions = ParseConditions("").ToLimitedList(byte.MaxValue),
+                holidayRestriction = asset.ReadEnum("Holiday_Restriction", ENPCHoliday.None)
             };
         }
         public NPCDialogue ParseDialogue()
         {
             NPCDialogue d = new NPCDialogue()
             {
-                GUID = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
+                GUID = asset.ReadGUID("GUID", Guid.NewGuid()).ToString("N"),
                 ID = asset.ReadUInt16("ID")
             };
-            d.Messages = new List<NPCMessage>(asset.ReadByte("Messages"));
+            byte msgCount = asset.ReadByte("Messages");
+            d.Messages = new LimitedList<NPCMessage>(byte.MaxValue);
             Dictionary<ushort, byte[]> m_visible = new Dictionary<ushort, byte[]>();
-            for (byte mId = 0; mId < d.Messages.Capacity; mId++)
+            for (byte mId = 0; mId < msgCount; mId++)
             {
                 string[] pages = new string[asset.ReadByte($"Message_{mId}_Pages")];
                 for (byte pId = 0; pId < pages.Length; pId++)
@@ -101,14 +103,15 @@ namespace BowieD.Unturned.NPCMaker.Parsing
 
                 d.Messages.Add(new NPCMessage()
                 {
-                    conditions = ParseConditions($"Message_{mId}_").ToList(),
-                    pages = pages.ToList(),
+                    conditions = ParseConditions($"Message_{mId}_").ToLimitedList(byte.MaxValue),
+                    pages = pages.ToLimitedList(byte.MaxValue),
                     prev = asset.ReadUInt16($"Message_{mId}_Prev"),
-                    rewards = ParseRewards($"Message_{mId}_").ToList()
+                    rewards = ParseRewards($"Message_{mId}_").ToLimitedList(byte.MaxValue)
                 });
             }
-            d.Responses = new List<NPCResponse>(asset.ReadByte("Responses"));
-            for (byte rId = 0; rId < d.Responses.Capacity; rId++)
+            byte rspCount = asset.ReadByte("Responses");
+            d.Responses = new LimitedList<NPCResponse>(byte.MaxValue);
+            for (byte rId = 0; rId < rspCount; rId++)
             {
                 d.Responses.Add(new NPCResponse());
                 byte b = asset.ReadByte($"Response_{rId}_Messages");
@@ -144,8 +147,8 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 d.Responses[rId].openDialogueId = asset.ReadUInt16($"Response_{rId}_Dialogue");
                 d.Responses[rId].openQuestId = asset.ReadUInt16($"Response_{rId}_Quest");
                 d.Responses[rId].openVendorId = asset.ReadUInt16($"Response_{rId}_Vendor");
-                d.Responses[rId].conditions = ParseConditions($"Response_{rId}_").ToList();
-                d.Responses[rId].rewards = ParseRewards($"Response_{rId}_").ToList();
+                d.Responses[rId].conditions = ParseConditions($"Response_{rId}_").ToLimitedList(byte.MaxValue);
+                d.Responses[rId].rewards = ParseRewards($"Response_{rId}_").ToLimitedList(byte.MaxValue);
             }
             return d;
         }
@@ -155,7 +158,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
             {
                 ID = asset.ReadUInt16("ID"),
                 disableSorting = asset.Has("Disable_Sorting"),
-                GUID = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
+                GUID = asset.ReadGUID("GUID", Guid.NewGuid()).ToString("N"),
                 Title = local?.ReadString("Name") ?? "",
                 vendorDescription = local?.ReadString("Description") ?? "",
                 items = ParseVendorItems().ToList(),
@@ -169,9 +172,9 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 ID = asset.ReadUInt16("ID"),
                 Title = local?.ReadString("Name") ?? "",
                 description = local?.ReadString("Description") ?? "",
-                GUID = asset.Has("GUID") ? asset.ReadString("GUID") : Guid.NewGuid().ToString("N"),
-                conditions = ParseConditions("").ToList(),
-                rewards = ParseRewards("").ToList()
+                GUID = asset.ReadGUID("GUID", Guid.NewGuid()).ToString("N"),
+                conditions = ParseConditions("").ToLimitedList(byte.MaxValue),
+                rewards = ParseRewards("").ToLimitedList(byte.MaxValue)
             };
             return q;
         }
@@ -185,7 +188,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 items.Add(new VendorItem()
                 {
                     id = asset.ReadUInt16($"Buying_{i}_ID"),
-                    cost = asset.ReadUInt16($"Buying_{i}_Cost"),
+                    cost = asset.ReadUInt32($"Buying_{i}_Cost"),
                     conditions = ParseConditions($"Buying_{i}_").ToList(),
                     isBuy = true
                 });

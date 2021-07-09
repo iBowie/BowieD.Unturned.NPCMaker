@@ -14,6 +14,7 @@
             <system:Double x:Key="Scale">1</system:Double>
             <xaml:EnumItemsSource x:Key="Character_Pose_Enums" Type="{x:Type npc:NPC_Pose}"/>
             <xaml:EnumItemsSource x:Key="Character_Equipment_Equipped_Enums" Type="{x:Type npc:Equip_Type}"/>
+            <xaml:EnumItemsSource x:Key="Character_Holidays_Enums" Type="{x:Type npc:ENPCHoliday}"/>
             <xaml:EnumItemsSource x:Key="Simulation_Holidays_Enums" Type="{x:Type npc:ENPCHoliday}"/>
             <xaml:EnumItemsSource x:Key="Simulation_Skillsets_Enums" Type="{x:Type npc:ESkillset}"/>
             <ResourceDictionary.MergedDictionaries>
