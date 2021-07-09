@@ -188,7 +188,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 items.Add(new VendorItem()
                 {
                     id = asset.ReadUInt16($"Buying_{i}_ID"),
-                    cost = asset.ReadUInt16($"Buying_{i}_Cost"),
+                    cost = asset.ReadUInt32($"Buying_{i}_Cost"),
                     conditions = ParseConditions($"Buying_{i}_").ToList(),
                     isBuy = true
                 });
