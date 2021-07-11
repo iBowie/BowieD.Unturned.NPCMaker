@@ -349,7 +349,7 @@ namespace BowieD.Unturned.NPCMaker.Common
                         break;
                     case ItemType.VEHICLE:
                         {
-                            doc.CreateNodeC("spawnpoint", node).WriteString(elem.spawnPointID);
+                            doc.CreateNodeC("spawnpoint", cNode).WriteString(elem.spawnPointID);
 
                             if (isBuy)
                             {
