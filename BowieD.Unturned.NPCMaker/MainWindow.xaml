@@ -1224,7 +1224,7 @@
                             </Grid.RowDefinitions>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
@@ -1395,7 +1395,7 @@
                             </Grid.RowDefinitions>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
@@ -1569,7 +1569,7 @@
                             </Grid.RowDefinitions>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
@@ -1788,7 +1788,7 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="33*"/>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="33*"/>
                                 <ColumnDefinition Width="33*"/>
                             </Grid.ColumnDefinitions>
