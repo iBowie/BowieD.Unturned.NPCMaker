@@ -27,7 +27,14 @@ namespace BowieD.Unturned.NPCMaker
             GenericStringFormat = "NPCMaker.Generic.String";
         public static void SetObject(ReturnType returnType, object obj)
         {
-            SetObject(GetFormat(returnType), obj);
+            if (returnType == ReturnType.GenericString)
+            {
+                Clipboard.SetText(obj.ToString(), TextDataFormat.UnicodeText);
+            }
+            else
+            {
+                SetObject(GetFormat(returnType), obj);
+            }
         }
         public static void SetObject<T>(string format, T obj)
         {

@@ -162,6 +162,7 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
+                                            <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
                                         <Button Command="{Binding SetGuidCommand}"
                                                 Margin="5"
@@ -179,6 +180,16 @@
                                         Style="{DynamicResource FlatOutlineButtonStyle}">
                                             <Button.Content>
                                                 <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="DiceMultiple"/>
+                                            </Button.Content>
+                                        </Button>
+                                        <Button 
+                                        Command="{Binding CopyGuidCommand}" 
+                                        Grid.Column="2" 
+                                        Margin="5" 
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Character_Guid_Copy}"
+                                        Style="{DynamicResource FlatOutlineButtonStyle}">
+                                            <Button.Content>
+                                                <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="ContentCopy"/>
                                             </Button.Content>
                                         </Button>
                                     </Grid>
@@ -1231,6 +1242,7 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition/>
                                                 <ColumnDefinition/>
+                                                <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
                                             <Button Command="{Binding SetGuidCommand}"
                                                 Margin="5"
@@ -1248,6 +1260,16 @@
                                         Style="{DynamicResource FlatOutlineButtonStyle}">
                                                 <Button.Content>
                                                     <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="DiceMultiple"/>
+                                                </Button.Content>
+                                            </Button>
+                                            <Button 
+                                        Command="{Binding CopyGuidCommand}" 
+                                        Grid.Column="2" 
+                                        Margin="5" 
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Dialogue_Guid_Copy}"
+                                        Style="{DynamicResource FlatOutlineButtonStyle}">
+                                                <Button.Content>
+                                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="ContentCopy"/>
                                                 </Button.Content>
                                             </Button>
                                         </Grid>
@@ -1390,6 +1412,7 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition/>
                                                 <ColumnDefinition/>
+                                                <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
                                             <Button Command="{Binding SetGuidCommand}"
                                                 Margin="5"
@@ -1407,6 +1430,16 @@
                                         Style="{DynamicResource FlatOutlineButtonStyle}">
                                                 <Button.Content>
                                                     <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="DiceMultiple"/>
+                                                </Button.Content>
+                                            </Button>
+                                            <Button 
+                                        Command="{Binding CopyGuidCommand}" 
+                                        Grid.Column="2" 
+                                        Margin="5" 
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Vendor_Guid_Copy}"
+                                        Style="{DynamicResource FlatOutlineButtonStyle}">
+                                                <Button.Content>
+                                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="ContentCopy"/>
                                                 </Button.Content>
                                             </Button>
                                         </Grid>
@@ -1553,6 +1586,7 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition/>
                                                 <ColumnDefinition/>
+                                                <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
                                             <Button Command="{Binding SetGuidCommand}"
                                                 Margin="5"
@@ -1570,6 +1604,16 @@
                                         Style="{DynamicResource FlatOutlineButtonStyle}">
                                                 <Button.Content>
                                                     <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="DiceMultiple"/>
+                                                </Button.Content>
+                                            </Button>
+                                            <Button 
+                                        Command="{Binding CopyGuidCommand}" 
+                                        Grid.Column="2" 
+                                        Margin="5" 
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_DialogueVendor_Guid_Copy}"
+                                        Style="{DynamicResource FlatOutlineButtonStyle}">
+                                                <Button.Content>
+                                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="ContentCopy"/>
                                                 </Button.Content>
                                             </Button>
                                         </Grid>
@@ -1762,6 +1806,7 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
+                                            <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
                                         <Button Command="{Binding SetGuidCommand}"
                                                 Margin="5"
@@ -1779,6 +1824,16 @@
                                         Style="{DynamicResource FlatOutlineButtonStyle}">
                                             <Button.Content>
                                                 <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="DiceMultiple"/>
+                                            </Button.Content>
+                                        </Button>
+                                        <Button 
+                                        Command="{Binding CopyGuidCommand}" 
+                                        Grid.Column="2" 
+                                        Margin="5" 
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Quest_Guid_Copy}"
+                                        Style="{DynamicResource FlatOutlineButtonStyle}">
+                                            <Button.Content>
+                                                <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="ContentCopy"/>
                                             </Button.Content>
                                         </Button>
                                     </Grid>
@@ -1887,6 +1942,7 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition/>
                                                 <ColumnDefinition/>
+                                                <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
                                             <Button Command="{Binding SetGuidCommand}"
                                                 Margin="5"
@@ -1904,6 +1960,16 @@
                                         Style="{DynamicResource FlatOutlineButtonStyle}">
                                                 <Button.Content>
                                                     <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="DiceMultiple"/>
+                                                </Button.Content>
+                                            </Button>
+                                            <Button 
+                                        Command="{Binding CopyGuidCommand}" 
+                                        Grid.Column="2" 
+                                        Margin="5" 
+                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_Currency_Guid_Copy}"
+                                        Style="{DynamicResource FlatOutlineButtonStyle}">
+                                                <Button.Content>
+                                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="ContentCopy"/>
                                                 </Button.Content>
                                             </Button>
                                         </Grid>

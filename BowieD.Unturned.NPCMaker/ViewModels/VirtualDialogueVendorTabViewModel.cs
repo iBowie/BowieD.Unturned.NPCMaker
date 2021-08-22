@@ -823,5 +823,21 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 return setGuidCommand;
             }
         }
+        private ICommand copyGuidCommand;
+        public ICommand CopyGuidCommand
+        {
+            get
+            {
+                if (copyGuidCommand == null)
+                {
+                    copyGuidCommand = new BaseCommand(() =>
+                    {
+                        ClipboardManager.SetObject(Universal_ItemList.ReturnType.GenericString, GUID);
+                    });
+                }
+
+                return copyGuidCommand;
+            }
+        }
     }
 }
