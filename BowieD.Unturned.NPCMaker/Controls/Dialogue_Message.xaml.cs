@@ -1,6 +1,8 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
+using BowieD.Unturned.NPCMaker.ViewModels;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,7 +18,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
     /// </summary>
     public partial class Dialogue_Message : DraggableUserControl, INotifyPropertyChanged, IHasOrderButtons, IHasDisplayedIndex
     {
-        public Dialogue_Message(NPC.NPCMessage message)
+        public Dialogue_Message(NPC.NPCMessage message, DialogueTabViewModel parent)
         {
             InitializeComponent();
             Message = message;
@@ -29,6 +31,36 @@ namespace BowieD.Unturned.NPCMaker.Controls
             }, "Control_SelectAsset_Dialogue", MahApps.Metro.IconPacks.PackIconMaterialKind.Chat));
 
             prevBox.ContextMenu = pbmenu;
+
+            ContextMenu mMenu = new ContextMenu();
+
+            mMenu.Items.Add(ContextHelper.CreateCopyButton((sender, e) =>
+            {
+                parent.Save();
+
+                ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                Dialogue_Message target = context.PlacementTarget as Dialogue_Message;
+                ClipboardManager.SetObject(ClipboardManager.DialogueMessageFormat, target.Message);
+            }));
+            mMenu.Items.Add(ContextHelper.CreateDuplicateButton((sender, e) =>
+            {
+                parent.Save();
+
+                ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                Dialogue_Message target = context.PlacementTarget as Dialogue_Message;
+                var cloned = target.Message.Clone();
+
+                parent.AddMessage(new Dialogue_Message(cloned, parent));
+            }));
+            mMenu.Items.Add(ContextHelper.CreatePasteButton((sender, e) =>
+            {
+                if (ClipboardManager.TryGetObject(ClipboardManager.DialogueMessageFormat, out var obj) && obj is NPCMessage newMessage)
+                {
+                    parent.AddMessage(new Dialogue_Message(newMessage, parent));
+                }
+            }));
+
+            this.ContextMenu = mMenu;
 
             if (Configuration.AppConfig.Instance.useOldStyleMoveUpDown)
             {

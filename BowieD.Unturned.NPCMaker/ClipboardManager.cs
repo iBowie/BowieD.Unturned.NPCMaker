@@ -19,6 +19,8 @@ namespace BowieD.Unturned.NPCMaker
             RewardFormat = "NPCMaker.Reward",
             CharacterFormat = "NPCMaker.Character",
             DialogueFormat = "NPCMaker.Dialogue",
+            DialogueMessageFormat = "NPCMaker.Dialogue.Message",
+            DialogueReplyFormat = "NPCMaker.Dialogue.Reply",
             VendorFormat = "NPCMaker.Vendor",
             DialogueVendorFormat = "NPCMaker.DialogueVendor",
             VendorItemFormat = "NPCMaker.Vendor.Item",

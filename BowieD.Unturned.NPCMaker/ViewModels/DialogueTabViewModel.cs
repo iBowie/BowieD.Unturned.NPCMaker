@@ -41,7 +41,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             cmenu2.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(NPCMessage), (result) =>
             {
                 if (result is NPCMessage npcm)
-                    AddMessage(new Dialogue_Message(npcm));
+                    AddMessage(new Dialogue_Message(npcm, this));
             }));
 
             MainWindow.Instance.dialogueAddMessageButton.ContextMenu = cmenu2;
@@ -223,7 +223,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
                 MainWindow.Instance.messagePagesGrid.Children.Clear();
                 foreach (var m in value.Messages)
-                    AddMessage(new Dialogue_Message(m));
+                    AddMessage(new Dialogue_Message(m, this));
 
                 OnPropertyChange("");
             }
@@ -334,7 +334,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     addMessageCommand = new AdvancedCommand(() =>
                     {
-                        AddMessage(new Dialogue_Message(new NPCMessage()));
+                        AddMessage(new Dialogue_Message(new NPCMessage(), this));
                     }, (p) =>
                     {
                         return _dialogue.Messages.CanAdd;
@@ -460,7 +460,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }
         }
 
-        void AddMessage(Dialogue_Message message)
+        internal void AddMessage(Dialogue_Message message)
         {
             message.deletePageButton.Click += (sender, e) =>
             {
@@ -505,7 +505,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             MainWindow.Instance.messagePagesGrid.Children.Add(message);
             MainWindow.Instance.messagePagesGrid.UpdateOrderButtons<Dialogue_Message>();
         }
-        void AddResponse(Dialogue_Response response)
+        internal void AddResponse(Dialogue_Response response)
         {
             response.deleteButton.Click += (sender, e) =>
             {
