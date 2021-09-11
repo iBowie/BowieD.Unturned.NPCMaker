@@ -21,6 +21,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public byte? Nav { get; set; }
         [Range(0f, float.MaxValue)]
         public float Radius { get; set; } = 512f;
+        [Range(0f, float.MaxValue)]
+        public float MinRadius { get; set; }
         public Zombie_Type Zombie { get; set; }
 
         public override bool Check(Simulation simulation)
@@ -66,6 +68,15 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             Nav = node["Nav"].ToNullableByte();
             Radius = node["Radius"].ToSingle();
             Zombie = node["Zombie"].ToEnum<Zombie_Type>();
+
+            if (version >= 9)
+            {
+                MinRadius = node["MinRadius"].ToSingle();
+            }
+            else
+            {
+                MinRadius = 0f;
+            }
         }
 
         public override void Save(System.Xml.XmlDocument document, System.Xml.XmlNode node)
@@ -79,6 +90,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             document.CreateNodeC("Nav", node).WriteNullableByte(Nav);
             document.CreateNodeC("Radius", node).WriteSingle(Radius);
             document.CreateNodeC("Zombie", node).WriteEnum(Zombie);
+            document.CreateNodeC("MinRadius", node).WriteSingle(MinRadius);
         }
     }
 }

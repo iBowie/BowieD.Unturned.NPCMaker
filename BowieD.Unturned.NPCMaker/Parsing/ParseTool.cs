@@ -365,7 +365,8 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                             Spawn_Quantity = asset.Has(tp + "Spawn_Quantity") ? asset.ReadInt32(tp + "Spawn_Quantity") : 1,
                             Value = asset.ReadInt16(tp + "Value"),
                             Radius = asset.ReadSingle(tp + "Radius", 512f),
-                            Zombie = asset.ReadEnum<Zombie_Type>(tp + "Zombie")
+                            Zombie = asset.ReadEnum<Zombie_Type>(tp + "Zombie"),
+                            MinRadius = asset.ReadSingle(tp + "MinRadius", 0f)
                         };
                         break;
                     case Condition_Type.Kills_Horde:

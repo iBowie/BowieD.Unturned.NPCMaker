@@ -257,6 +257,8 @@
         "Kills_Zombie_Spawn": "Spawn Zombies on Approach",
         "Kills_Zombie_Nav": "Navigation ID",
         "Kills_Zombie_Radius": "Radius",
+        "Kills_Zombie_MinRadius": "Minimal Radius",
+        "Kills_Zombie_MinRadius_Tooltip": "Radius from which player must stand from a zombie for this kill to be tracked",
         "Kills_Zombie_Reset": "Reset flag value",
         "Kills_Zombie_Zombie": "Zombie Type",
         "Kills_Zombie_Zombie_None": "Any",

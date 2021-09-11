@@ -257,6 +257,8 @@
         "Kills_Zombie_Spawn": "Спавнить при приближении",
         "Kills_Zombie_Nav": "ID навигации",
         "Kills_Zombie_Radius": "Радиус",
+        "Kills_Zombie_MinRadius": "Минимальный радиус",
+        "Kills_Zombie_MinRadius_Tooltip": "Расстояние, на котором должен стоять игрок чтобы убийство зомби было засчитано.",
         "Kills_Zombie_Reset": "Сбросить значение при выполнении",
         "Kills_Zombie_Zombie": "Тип зомби",
         "Kills_Zombie_Zombie_None": "Любой",
