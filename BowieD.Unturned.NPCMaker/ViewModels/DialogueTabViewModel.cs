@@ -31,7 +31,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             cmenu.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(NPCResponse), (result) =>
             {
                 if (result is NPCResponse npcr)
-                    AddResponse(new Dialogue_Response(npcr));
+                    AddResponse(new Dialogue_Response(npcr, this));
             }));
 
             MainWindow.Instance.dialogueAddReplyButton.ContextMenu = cmenu;
@@ -219,7 +219,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
                 MainWindow.Instance.dialoguePlayerRepliesGrid.Children.Clear();
                 foreach (var r in value.Responses)
-                    AddResponse(new Dialogue_Response(r));
+                    AddResponse(new Dialogue_Response(r, this));
 
                 MainWindow.Instance.messagePagesGrid.Children.Clear();
                 foreach (var m in value.Messages)
@@ -317,7 +317,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     addReplyCommand = new AdvancedCommand(() =>
                     {
-                        AddResponse(new Dialogue_Response(new NPCResponse()));
+                        AddResponse(new Dialogue_Response(new NPCResponse(), this));
                     }, (p) =>
                     {
                         return _dialogue.Responses.CanAdd;

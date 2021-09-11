@@ -2,6 +2,8 @@
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC;
+using BowieD.Unturned.NPCMaker.ViewModels;
 using DiscordRPC;
 using System.Linq;
 using System.Windows;
@@ -17,7 +19,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
     /// </summary>
     public partial class Dialogue_Response : DraggableUserControl, IHasOrderButtons
     {
-        public Dialogue_Response(NPC.NPCResponse startResponse = null)
+        public Dialogue_Response(NPC.NPCResponse startResponse, DialogueTabViewModel parent)
         {
             InitializeComponent();
             Response = startResponse ?? new NPC.NPCResponse();
@@ -25,6 +27,36 @@ namespace BowieD.Unturned.NPCMaker.Controls
             txtBoxDialogueID.Value = Response.openDialogueId;
             txtBoxQuestID.Value = Response.openQuestId;
             txtBoxVendorID.Value = Response.openVendorId;
+
+            ContextMenu mMenu = new ContextMenu();
+
+            mMenu.Items.Add(ContextHelper.CreateCopyButton((sender, e) =>
+            {
+                parent.Save();
+
+                ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                Dialogue_Response target = context.PlacementTarget as Dialogue_Response;
+                ClipboardManager.SetObject(ClipboardManager.DialogueReplyFormat, target.Response);
+            }));
+            mMenu.Items.Add(ContextHelper.CreateDuplicateButton((sender, e) =>
+            {
+                parent.Save();
+
+                ContextMenu context = (sender as MenuItem).Parent as ContextMenu;
+                Dialogue_Response target = context.PlacementTarget as Dialogue_Response;
+                var cloned = target.Response.Clone();
+
+                parent.AddResponse(new Dialogue_Response(cloned, parent));
+            }));
+            mMenu.Items.Add(ContextHelper.CreatePasteButton((sender, e) =>
+            {
+                if (ClipboardManager.TryGetObject(ClipboardManager.DialogueReplyFormat, out var obj) && obj is NPCResponse newReply)
+                {
+                    parent.AddResponse(new Dialogue_Response(newReply, parent));
+                }
+            }));
+
+            this.ContextMenu = mMenu;
 
             if (Configuration.AppConfig.Instance.useOldStyleMoveUpDown)
             {
