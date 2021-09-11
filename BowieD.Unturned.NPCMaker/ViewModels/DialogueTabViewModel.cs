@@ -573,7 +573,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     _dialogue.Messages.Add(dm.Message);
                 }
             }
-            MainWindow.Instance.dialoguePlayerRepliesGrid.UpdateOrderButtons<Dialogue_Message>();
+            MainWindow.Instance.messagePagesGrid.UpdateOrderButtons<Dialogue_Message>();
         }
 
         /// <summary>
