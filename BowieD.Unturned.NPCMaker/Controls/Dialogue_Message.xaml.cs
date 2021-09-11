@@ -14,7 +14,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
     /// <summary>
     /// Логика взаимодействия для Dialogue_Message.xaml
     /// </summary>
-    public partial class Dialogue_Message : DraggableUserControl, INotifyPropertyChanged, IHasOrderButtons
+    public partial class Dialogue_Message : DraggableUserControl, INotifyPropertyChanged, IHasOrderButtons, IHasDisplayedIndex
     {
         public Dialogue_Message(NPC.NPCMessage message)
         {
@@ -136,6 +136,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         public override TranslateTransform DragRenderTransform => animateTransform;
         public override FrameworkElement DragControl => dragRect;
+
+        public TextBlock IndexTextBlock => indexTextBlock;
 
         private void AddPageButton_Click(object sender, RoutedEventArgs e)
         {

@@ -356,9 +356,11 @@
     <Compile Include="GameIntegration\Thumbnails\IHasToolTip.cs" />
     <Compile Include="GameIntegration\Thumbnails\ISearchNameOverride.cs" />
     <Compile Include="GameIntegration\Thumbnails\ThumbnailManager.cs" />
+    <Compile Include="IHasDisplayedIndex.cs" />
     <Compile Include="IHasOrderButtons.cs" />
     <Compile Include="IHasUniqueGUID.cs" />
     <Compile Include="InputTool.cs" />
+    <Compile Include="IOrderElement.cs" />
     <Compile Include="LimitedList.cs" />
     <Compile Include="Localization\Localization.cs" />
     <Compile Include="Localization\LocalizationManager.cs" />

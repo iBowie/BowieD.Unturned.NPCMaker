@@ -12,7 +12,7 @@ namespace BowieD.Unturned.NPCMaker
     {
         #region UI
         #region Generics
-        public static void UpdateOrderButtons<T>(this Panel container) where T : UIElement, IHasOrderButtons
+        public static void UpdateOrderButtons<T>(this Panel container) where T : UIElement, IOrderElement
         {
             foreach (var c in container.Children)
             {
@@ -22,31 +22,9 @@ namespace BowieD.Unturned.NPCMaker
                 }
             }
         }
-        public static void UpdateOrderButtons<T>(this Panel container, T element, UIElement upButton, UIElement downButton) where T : UIElement
+        public static void UpdateOrderButtons<T>(this Panel container, T element) where T : UIElement, IOrderElement
         {
-            int index = container.IndexOf(element);
-
-            if (index >= 1)
-            {
-                upButton.IsEnabled = true;
-            }
-            else
-            {
-                upButton.IsEnabled = false;
-            }
-
-            if (index < container.Children.Count - 1)
-            {
-                downButton.IsEnabled = true;
-            }
-            else
-            {
-                downButton.IsEnabled = false;
-            }
-        }
-        public static void UpdateOrderButtons<T>(this Panel container, T element) where T : UIElement, IHasOrderButtons
-        {
-            container.UpdateOrderButtons(element, element.UpButton, element.DownButton);
+            container.UpdateOrderButtons((IOrderElement)element);
         }
         public static void MoveUp<T>(this Panel container, T element) where T : UIElement, IHasOrderButtons
         {
@@ -187,37 +165,44 @@ namespace BowieD.Unturned.NPCMaker
         {
             foreach (var c in container.Children)
             {
-                if (c is IHasOrderButtons ct)
+                if (c is IOrderElement ct)
                 {
                     UpdateOrderButtons(container, ct);
                 }
             }
         }
-        public static void UpdateOrderButtons(this Panel container, IHasOrderButtons element, UIElement upButton, UIElement downButton)
+        public static void UpdateOrderButtons(this Panel container, IOrderElement element)
         {
             int index = container.IndexOf(element);
 
-            if (index >= 1)
+            if (Configuration.AppConfig.Instance.useOldStyleMoveUpDown)
             {
-                upButton.IsEnabled = true;
-            }
-            else
-            {
-                upButton.IsEnabled = false;
+                if (element is IHasOrderButtons orderButtons)
+                {
+                    if (index >= 1)
+                    {
+                        orderButtons.UpButton.IsEnabled = true;
+                    }
+                    else
+                    {
+                        orderButtons.UpButton.IsEnabled = false;
+                    }
+
+                    if (index < container.Children.Count - 1)
+                    {
+                        orderButtons.DownButton.IsEnabled = true;
+                    }
+                    else
+                    {
+                        orderButtons.DownButton.IsEnabled = false;
+                    }
+                }
             }
 
-            if (index < container.Children.Count - 1)
+            if (element is IHasDisplayedIndex displayedIndex)
             {
-                downButton.IsEnabled = true;
+                displayedIndex.IndexTextBlock.Text = (index + 1).ToString();
             }
-            else
-            {
-                downButton.IsEnabled = false;
-            }
-        }
-        public static void UpdateOrderButtons(this Panel container, IHasOrderButtons element)
-        {
-            container.UpdateOrderButtons(element, element.UpButton, element.DownButton);
         }
         #endregion
     }
