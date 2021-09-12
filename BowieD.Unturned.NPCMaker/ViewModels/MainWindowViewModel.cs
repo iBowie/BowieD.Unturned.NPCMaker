@@ -564,7 +564,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         string path;
                         OpenFileDialog ofd = new OpenFileDialog()
                         {
-                            Filter = 
+                            Filter =
                             $"{LocalizationManager.Current.General["Project_SaveFilter"]}|*.npcproj" + "|" +
                             $"{LocalizationManager.Current.General["Project_SaveFilter_Legacy"]}|*.npc",
                             Multiselect = false

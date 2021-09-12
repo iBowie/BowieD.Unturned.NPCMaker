@@ -100,7 +100,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             dialogues = node["dialogues"].ParseAXDataCollection<NPCDialogue>(version).ToList();
             vendors = node["vendors"].ParseAXDataCollection<NPCVendor>(version).ToList();
             quests = node["quests"].ParseAXDataCollection<NPCQuest>(version).ToList();
-            
+
             if (version >= 4)
             {
                 currencies = node["currencies"].ParseAXDataCollection<CurrencyAsset>(version).ToList();
@@ -134,7 +134,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 lastDialogue = node["lastDialogue"].ToInt32();
                 lastVendor = node["lastVendor"].ToInt32();
                 lastQuest = node["lastQuest"].ToInt32();
-                
+
                 if (version >= 4)
                 {
                     lastCurrency = node["lastCurrency"].ToInt32();

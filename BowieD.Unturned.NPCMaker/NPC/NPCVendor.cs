@@ -133,7 +133,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
             document.CreateNodeC("buyingItems", node).WriteVendorItemsNew(document, BuyItems, true);
             document.CreateNodeC("sellingItems", node).WriteVendorItemsNew(document, SellItems, false);
-            
+
             document.CreateNodeC("disableSorting", node).WriteBoolean(disableSorting);
             document.CreateNodeC("currency", node).WriteString(currency);
         }

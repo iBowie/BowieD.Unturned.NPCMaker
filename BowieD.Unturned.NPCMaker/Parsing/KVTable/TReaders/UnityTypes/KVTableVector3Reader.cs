@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BowieD.Unturned.NPCMaker.Parsing.KVTable.TReaders.UnityTypes
+﻿namespace BowieD.Unturned.NPCMaker.Parsing.KVTable.TReaders.UnityTypes
 {
     public struct Vector2
     {

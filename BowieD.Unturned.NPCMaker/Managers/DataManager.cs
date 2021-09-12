@@ -19,7 +19,7 @@ namespace BowieD.Unturned.NPCMaker.Managers
 
                 if (recentFile.data == null)
                     recentFile.data = new string[0];
-                
+
                 return recentFile;
             }
         }

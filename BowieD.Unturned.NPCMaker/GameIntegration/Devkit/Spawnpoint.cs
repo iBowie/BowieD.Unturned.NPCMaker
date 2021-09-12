@@ -91,9 +91,9 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration.Devkit
             else if (File.Exists(chartPng))
             {
                 bi = new BitmapImage();
-                
+
                 bi.BeginInit();
-                
+
                 bi.UriSource = new Uri(chartPng);
                 bi.DecodePixelWidth = 32;
                 bi.DecodePixelHeight = 32;

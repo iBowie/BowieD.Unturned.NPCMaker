@@ -316,7 +316,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         public static void Purge(EGameAssetOrigin origin)
         {
             _assets.RemoveAll(d => d.origin == origin);
-            
+
             foreach (var kv in _devkitItems.ToList())
             {
                 kv.Value.RemoveAll(d => d.Origin == origin);
@@ -520,7 +520,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                     reader = new KVTableReader(sr);
 
                     int itemCount = reader.readArrayLength("Items");
-                    
+
                     for (int i = 0; i < itemCount; i++)
                     {
                         IFileReader itemReader = reader.readObject(i);

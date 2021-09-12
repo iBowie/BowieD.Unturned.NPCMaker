@@ -9,6 +9,6 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         string Name { get; }
         EGameAssetOrigin Origin { get; }
 
-        EIDDef IDDef {get;}
+        EIDDef IDDef { get; }
     }
 }

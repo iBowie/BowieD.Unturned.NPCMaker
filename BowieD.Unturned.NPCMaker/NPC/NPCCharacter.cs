@@ -2,9 +2,7 @@
 using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Configuration;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
@@ -100,7 +98,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
         private string _guid;
         [XmlAttribute("guid")]
-        public string GUID 
+        public string GUID
         {
             get => _guid;
             set

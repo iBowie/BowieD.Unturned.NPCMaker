@@ -17,7 +17,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration.Devkit
             if (reader != null)
                 readHierarchyItem(reader);
         }
-        protected virtual void readHierarchyItem(IFileReader reader) 
+        protected virtual void readHierarchyItem(IFileReader reader)
         {
             Position = reader.readValue<Vector3>("Position");
         }

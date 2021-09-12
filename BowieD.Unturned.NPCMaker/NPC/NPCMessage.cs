@@ -1,7 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
-using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
 using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 

@@ -1,6 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Parsing.KVTable.TReaders.CoreTypes;
-using BowieD.Unturned.NPCMaker.Parsing.KVTable.TReaders.UnityTypes;
 using BowieD.Unturned.NPCMaker.Parsing.KVTable.TReaders.SystemTypes;
+using BowieD.Unturned.NPCMaker.Parsing.KVTable.TReaders.UnityTypes;
 using System;
 using System.Collections.Generic;
 
