@@ -4,6 +4,7 @@
     "General":
     {
         "Project_SaveFilter": "Proyecto NPC (*.npcproj)",
+        "Project_SaveFilter_Legacy": "Legacy NPC Project (*.npc)",
         "Project_TemplateFilter": "Plantilla NPC (*.npctemplate)",
         "Title": "Creador NPC para Unturned 3.0 por BowieD",
         "Configuration_Title": "Ajustes",
@@ -110,7 +111,11 @@
         "Edit_Pose_Head_Offset": "Head Offset",
         "Edit_Pose_Lean": "Hacia la izquierda",
         "Edit_Pose_Pitch": "Hacia la derecha",
-        "Edit_Pose_Title": "Pose Editor"
+        "Edit_Pose_Title": "Pose Editor",
+
+        "Guid": "GUID",
+        "Guid_Invalid": "Ingresó una GUID invalida. No se realizaran cambios.",
+        "HolidayRestriction": "Restricción de dia festivos"
     },
     "Dialogue":
     {
@@ -139,7 +144,11 @@
         "Reply_Move_Up": "Mover Arriba",
         "Reply_Move_Down": "Mover Abajo",
         "Replies": "Respuestas Jugador",
-        "Tips": "Consejos para dialogos:\nUsa <pause> para hacer una pausa de 0.5 s\nUsa <br> para añadir una linea\nUsa <name_npc> Para colocar el nombre del NPC en el dialogo\nUsa <name_char> para poner el nombredel jugador en el dialogo\nUsa <color=rarity>TEXT</color> para hacer el texto de colores"
+        "Tips": "Consejos para dialogos:\nUsa <pause> para hacer una pausa de 0.5 s\nUsa <br> para añadir una linea\nUsa <name_npc> Para colocar el nombre del NPC en el dialogo\nUsa <name_char> para poner el nombredel jugador en el dialogo\nUsa <color=rarity>TEXT</color> para hacer el texto de colores",
+
+        "Guid": "GUID",
+        "Guid_Invalid": "Ingresó una GUID invalida. No se realizaran cambios.",
+        "Tips_Header": "Consejos"
     },
     "Vendor":
     {
@@ -152,7 +161,28 @@
         "Item_Sell": "Type: {0} | ID: {1} | Precio: {2}",
         "Items_Sell": "El NPC venderá estos items",
         "DisableSorting": "Desactivar ordenado",
-        "Currency": "GUID dinero (vacio si hay XP)"
+        "Currency": "GUID dinero (vacio si hay XP)",
+
+        "Guid": "GUID",
+        "Guid_Invalid": "Ingresó una GUID invalida. No se realizaran cambios."
+    },
+    "DialogueVendor":
+    {
+        "Guid": "GUID",
+        "Guid_Invalid": "Ingresó una GUID invalida. No se realizaran cambios.",
+        "ID": "ID del dialogo",
+        "Pages": "Paginas",
+        "Page_Add": "Añadir pagina.",
+        "Item_Add": "Añadir objeto.",
+        "Items_Buy": "El NPC va a comprar estos objetos.",
+        "Items_Sell": "El NPC va a vender estos objetos.",
+        "Currency": "GUID de moneda (Deja vacio para XP)",
+        "SellingFormat": "Texto formato de compra de objeto.",
+        "BuyingFormat": "Texto formato de venta de objeto.",
+        "GoodbyeText": "Texto de salida.",
+        "SoldDialogueID": "ID del dialogo de venta de objeto.",
+        "BoughtDialogueID": "ID del dialogo de compra de objeto.",
+        "GoodbyeDialogueID": "ID del dialogo de salida."
     },
     "Quest":
     {
@@ -162,11 +192,15 @@
         "Condition_Add": "Añadir Condición",
         "Conditions": "Condiciones de la Quest",
         "Reward_Add": "Añadir Recompensa",
-        "Rewards": "Recompensa Quest"
+        "Rewards": "Recompensa Quest",
+
+        "Guid": "GUID",
+        "Guid_Invalid": "Ingresó una GUID invalida. No se realizaran cambios."
     },
     "Currency":
     {
         "GUID": "GUID Moneda",
+        "Guid_Invalid": "Ingresó una GUID invalida. No se realizaran cambios.",
         "ValueFormat": "Formato del valor de la Moneda",
         "Item_Add": "Añadir Entrada",
         "Entry_GUID": "GUID del Objeto",
@@ -723,6 +757,23 @@
         "Main_Tab_Errors_Error_Solution": "Solución",
         "Main_Tab_Errors_Error_Importance": "Importancia",
         "Main_Tab_Errors_Error_None": "No hay errores! Lo haces genial!",
+        "Main_Tab_Character_Guid_Set": "Establecer nueva GUID para este personaje.",
+        "Main_Tab_Character_Guid_Random": "Generar nueva GUID para este personaje.",
+        "Main_Tab_Dialogue_Guid_Set": "Establecer nueva GUID para este dialogo.",
+        "Main_Tab_Dialogue_Guid_Random": "Generar nueva GUID para este dialogo.",
+        "Main_Tab_Vendor_Guid_Set": "Establecer nueva GUID para esta tienda.",
+        "Main_Tab_Vendor_Guid_Random": "Generar nueva GUID para esta tienda.",
+        "Main_Tab_DialogueVendor": "[Dialogo de tienda]",
+        "Main_Tab_DialogueVendor_Guid_Set": "Establecer nueva GUID para este dialogo de tienda.",
+        "Main_Tab_DialogueVendor_Guid_Random": "Generar nueva GUID para este dialogo de tienda.",
+        "Main_Tab_DialogueVendor_NoSelection": "Sin pestaña\nCrea una nueva pestaña o selecciona alguna.",
+        "Main_Tab_DialogueVendor_NoSelection_Hint": "Haga clic aquí para agregar un nuevo diálogo de tienda al proyecto.",
+        "Main_Tab_DialogueVendor_ConvertToDialogue": "Convertir a dialogo.",
+        "Main_Tab_DialogueVendor_ConvertToDialogue_Confirm": "¿Estas seguro que quieres convertir este dialogo de tienda a dialogo normal?\nEl dialogo de tienda vá a ser removido del proyecto, Aparecera el dialogo convertido.",
+        "Main_Tab_Quest_Guid_Set": "Establecer nueva GUID para esta mision.",
+        "Main_Tab_Quest_Guid_Random": "Generar nueva GUID para esta mision.",
+        "Main_Tab_Currency_Guid_Set": "Establecer nueva GUID para esta moneda.",
+        "Main_Tab_Currency_Guid_Random": "Generar nueva GUID para esta moneda.",
         "Editor_Condition_Fail": "Todos los campos han de tener los datos correctos.",
         "Editor_Condition_Save": "Guardar Condicion",
         "Editor_Condition_Title": "Editor de Condiciones",
