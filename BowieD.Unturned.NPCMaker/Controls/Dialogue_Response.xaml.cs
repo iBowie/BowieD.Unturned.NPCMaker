@@ -17,7 +17,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
     /// <summary>
     /// Логика взаимодействия для Dialogue_Response.xaml
     /// </summary>
-    public partial class Dialogue_Response : DraggableUserControl, IHasOrderButtons
+    public partial class Dialogue_Response : DraggableUserControl, IHasOrderButtons, IHasDisplayedIndex
     {
         public Dialogue_Response(NPC.NPCResponse startResponse, DialogueTabViewModel parent)
         {
@@ -212,6 +212,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
 
         public override TranslateTransform DragRenderTransform => animateTransform;
         public override FrameworkElement DragControl => dragRect;
+
+        public TextBlock IndexTextBlock => indexTextBlock;
 
         private void Collapse_Button_Click(object sender, RoutedEventArgs e)
         {

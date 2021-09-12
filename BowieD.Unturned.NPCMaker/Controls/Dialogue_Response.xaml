@@ -31,61 +31,102 @@
                 </Button>
             </Grid>
             <Grid Name="expandedGrid" Visibility="Visible">
-                <Label HorizontalContentAlignment="Center" Content="{xaml:Localize Key=DIALOGUE_Reply}" Margin="46,10,168.25,0" Height="31" VerticalAlignment="Top"/>
-                <Button Click="EditConditionsButton_Click" Name="editConditionsButton" Content="{xaml:Localize Key=DIALOGUE_Reply_Conditions}" HorizontalAlignment="Right" Margin="0,10,46.25,0" Height="31" Width="117" VerticalAlignment="Top"/>
-                <Button Click="EditRewardsButton_Click" Name="editRewardsButton" Content="{xaml:Localize Key=DIALOGUE_Reply_Rewards}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,46,46.25,0" Height="31" Width="117"/>
-                <Button ToolTip="{xaml:Localize Key=DIALOGUE_Reply_Remove}" Name="deleteButton" Height="31" Width="31" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
-                    <Button.Content>
-                        <iconPacks:PackIconMaterial Kind="Delete" Foreground="{DynamicResource AccentColor}"/>
-                    </Button.Content>
-                </Button>
-                <Border Height="32" Margin="113,82,10.25,0" VerticalAlignment="Top">
-                    <TextBlock Text="{xaml:Localize Key=DIALOGUE_Reply_Redirects_Dialogue}" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="11" TextAlignment="Left" Margin="0,4,0,4"/>
-                </Border>
-                <Border Height="31" Margin="113,118,10.25,0" VerticalAlignment="Top">
-                    <TextBlock Text="{xaml:Localize Key=DIALOGUE_Reply_Redirects_Vendor}" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="11" TextAlignment="Left" Margin="0,4,0,4"/>
-                </Border>
-                <Border Margin="113,154,10.25,0" Height="31" VerticalAlignment="Top">
-                    <TextBlock Text="{xaml:Localize Key=DIALOGUE_Reply_Redirects_Quest}" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="11" TextAlignment="Left" Margin="0,4,0,4"/>
-                </Border>
-                <Button Click="DialogueSelect_Click" Width="31" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="77,82,0,0" Height="31">
-                    <Button.Content>
-                        <iconPacks:PackIconMaterial Kind="MessageOutline" Foreground="{DynamicResource AccentColor}"/>
-                    </Button.Content>
-                </Button>
-                <Button Click="VendorSelect_Click" Width="31" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="77,118,0,0" Height="31">
-                    <Button.Content>
-                        <iconPacks:PackIconMaterial Kind="CurrencyUsd" Foreground="{DynamicResource AccentColor}"/>
-                    </Button.Content>
-                </Button>
-                <Button Click="QuestSelect_Click" Width="31" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="77,154,0,0" Height="31">
-                    <Button.Content>
-                        <iconPacks:PackIconMaterial Kind="Exclamation" Foreground="{DynamicResource AccentColor}"/>
-                    </Button.Content>
-                </Button>
-                <TextBox TextChanged="MainText_TextChanged" Name="mainText" Margin="10,46,168.25,0" TextWrapping="NoWrap" Height="31" VerticalAlignment="Top"/>
-                <mah:NumericUpDown ValueChanged="TxtBoxDialogueID_ValueChanged"  ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Width="50" Margin="10,82,0,0" x:Name="txtBoxDialogueID" HorizontalAlignment="Left" Height="31" VerticalAlignment="Top"/>
-                <mah:NumericUpDown ValueChanged="TxtBoxVendorID_ValueChanged"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Width="50" Height="31" Margin="10,118,0,0" HorizontalAlignment="Left" x:Name="txtBoxVendorID" VerticalAlignment="Top"/>
-                <mah:NumericUpDown ValueChanged="TxtBoxQuestID_ValueChanged"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Width="50" Height="31" Margin="10,154,0,0" x:Name="txtBoxQuestID" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                <Button Click="ChangeVisibilityButton_Click" Content="{xaml:Localize Key=DIALOGUE_Reply_Visibility}" Margin="10,190,46.25,10" Height="31" VerticalAlignment="Top"/>
-                <Button ToolTip="{xaml:Localize Key=DIALOGUE_Reply_Move_Up}" Name="orderButtonUp" HorizontalAlignment="Right" Margin="0,10,10.25,10" VerticalAlignment="Top" Height="31" Width="31">
-                    <Button.Content>
-                        <iconPacks:PackIconMaterial Kind="ArrowUp" Foreground="{DynamicResource AccentColor}"/>
-                    </Button.Content>
-                </Button>
-                <Grid Name="dragRectGrid" HorizontalAlignment="Right" Margin="0,10,10.25,10" VerticalAlignment="Top" Height="31" Width="31">
-                    <iconPacks:PackIconMaterial Name="dragRect" Kind="Menu" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource AccentColor}" Background="Transparent"/>
-                </Grid>
-                <Button Name="collapseButton" Click="Collapse_Button_Click" ToolTip="{xaml:Localize Key=INTERFACE_Control_Collapse}" HorizontalAlignment="Right" Margin="0,46,10,0" VerticalAlignment="Top" Height="31" Width="31">
-                    <Button.Content>
-                        <iconPacks:PackIconMaterial Kind="ArrowCollapse" Foreground="{DynamicResource AccentColor}"/>
-                    </Button.Content>
-                </Button>
-                <Button ToolTip="{xaml:Localize Key=DIALOGUE_Reply_Move_Down}" Name="orderButtonDown" HorizontalAlignment="Right" Margin="0,190,10.25,10" VerticalAlignment="Top" Height="31" Width="31">
-                    <Button.Content>
-                        <iconPacks:PackIconMaterial Kind="ArrowDown" Foreground="{DynamicResource AccentColor}"/>
-                    </Button.Content>
-                </Button>
+                <StackPanel Orientation="Vertical">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="42"/>
+                            <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="6*"/>
+                            <ColumnDefinition Width="42"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" ToolTip="{xaml:Localize Key=DIALOGUE_Reply_Remove}" Name="deleteButton" Height="32" Width="32" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Left">
+                            <Button.Content>
+                                <iconPacks:PackIconMaterial Kind="Delete" Foreground="{DynamicResource AccentColor}"/>
+                            </Button.Content>
+                        </Button>
+                        <Label Grid.Column="1" HorizontalContentAlignment="Center" Margin="5" Height="32" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center">
+                            <Label.Content>
+                                <TextBlock Text="{xaml:Localize Key=DIALOGUE_Reply}" TextWrapping="Wrap"/>
+                            </Label.Content>
+                        </Label>
+                        <Button Grid.Column="2" Click="EditConditionsButton_Click" Name="editConditionsButton" Content="{xaml:Localize Key=DIALOGUE_Reply_Conditions}" HorizontalAlignment="Stretch" Margin="5" Height="32" VerticalAlignment="Top"/>
+                        <Button Grid.Column="3" ToolTip="{xaml:Localize Key=DIALOGUE_Reply_Move_Up}" Name="orderButtonUp" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Top" Height="32" Width="32">
+                            <Button.Content>
+                                <iconPacks:PackIconMaterial Kind="ArrowUp" Foreground="{DynamicResource AccentColor}"/>
+                            </Button.Content>
+                        </Button>
+                        <Grid Grid.Column="3" Name="dragRectGrid" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Top" Height="32" Width="32">
+                            <iconPacks:PackIconMaterial Name="dragRect" Kind="Menu" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource AccentColor}" Background="Transparent"/>
+                        </Grid>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="42"/>
+                            <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="6*"/>
+                            <ColumnDefinition Width="42"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Name="indexTextBlock" Text="255" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Margin="5" Width="32"/>
+                        <Button Grid.Column="2" Click="EditRewardsButton_Click" Name="editRewardsButton" Content="{xaml:Localize Key=DIALOGUE_Reply_Rewards}" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="5" Height="32"/>
+                        <TextBox Grid.Column="1" TextChanged="MainText_TextChanged" Name="mainText" Margin="5" TextWrapping="NoWrap" Height="32" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+                        <Button Grid.Column="3" Name="collapseButton" Click="Collapse_Button_Click" ToolTip="{xaml:Localize Key=INTERFACE_Control_Collapse}" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Top" Height="32" Width="32">
+                            <Button.Content>
+                                <iconPacks:PackIconMaterial Kind="ArrowCollapse" Foreground="{DynamicResource AccentColor}"/>
+                            </Button.Content>
+                        </Button>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="42"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="42"/>
+                            <RowDefinition Height="42"/>
+                            <RowDefinition Height="42"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Grid.Column="2" Margin="5">
+                            <TextBlock Text="{xaml:Localize Key=DIALOGUE_Reply_Redirects_Dialogue}" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="11" TextAlignment="Left"/>
+                        </Border>
+                        <Border Grid.Row="1" Grid.Column="2" Margin="5">
+                            <TextBlock Text="{xaml:Localize Key=DIALOGUE_Reply_Redirects_Vendor}" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="11" TextAlignment="Left"/>
+                        </Border>
+                        <Border Grid.Row="2" Grid.Column="2" Margin="5">
+                            <TextBlock Text="{xaml:Localize Key=DIALOGUE_Reply_Redirects_Quest}" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="11" TextAlignment="Left"/>
+                        </Border>
+                        <Button Grid.Row="0" Grid.Column="1" Click="DialogueSelect_Click" Margin="5">
+                            <Button.Content>
+                                <iconPacks:PackIconMaterial Kind="MessageOutline" Foreground="{DynamicResource AccentColor}"/>
+                            </Button.Content>
+                        </Button>
+                        <Button Grid.Row="1" Grid.Column="1" Click="VendorSelect_Click" Margin="5">
+                            <Button.Content>
+                                <iconPacks:PackIconMaterial Kind="CurrencyUsd" Foreground="{DynamicResource AccentColor}"/>
+                            </Button.Content>
+                        </Button>
+                        <Button Grid.Row="2" Grid.Column="1" Click="QuestSelect_Click" Margin="5">
+                            <Button.Content>
+                                <iconPacks:PackIconMaterial Kind="Exclamation" Foreground="{DynamicResource AccentColor}"/>
+                            </Button.Content>
+                        </Button>
+                        <mah:NumericUpDown Grid.Row="0" ValueChanged="TxtBoxDialogueID_ValueChanged"  ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Width="50" Height="32" Margin="5" x:Name="txtBoxDialogueID"/>
+                        <mah:NumericUpDown Grid.Row="1" ValueChanged="TxtBoxVendorID_ValueChanged"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Width="50" Height="32" Margin="5" x:Name="txtBoxVendorID"/>
+                        <mah:NumericUpDown Grid.Row="2" ValueChanged="TxtBoxQuestID_ValueChanged"     ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" HideUpDownButtons="True" Maximum="65535" Minimum="0" NumericInputMode="Decimal" InterceptMouseWheel="False" InterceptArrowKeys="False" Width="50" Height="32" Margin="5" x:Name="txtBoxQuestID"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="42"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Click="ChangeVisibilityButton_Click" Content="{xaml:Localize Key=DIALOGUE_Reply_Visibility}" Margin="5" Height="32" VerticalAlignment="Top"/>
+                        <Button Grid.Column="1" ToolTip="{xaml:Localize Key=DIALOGUE_Reply_Move_Down}" Name="orderButtonDown" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Top" Height="31" Width="31">
+                            <Button.Content>
+                                <iconPacks:PackIconMaterial Kind="ArrowDown" Foreground="{DynamicResource AccentColor}"/>
+                            </Button.Content>
+                        </Button>
+                    </Grid>
+                </StackPanel>
             </Grid>
         </Grid>
     </Border>
