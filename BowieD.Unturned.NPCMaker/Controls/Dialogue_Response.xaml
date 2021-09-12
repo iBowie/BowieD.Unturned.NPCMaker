@@ -16,15 +16,17 @@
             </TransformGroup>
         </Border.RenderTransform>
         <Grid>
-            <Grid Name="collapsedGrid" Visibility="Collapsed">
+            <Grid Name="collapsedGrid" Visibility="Collapsed" Height="42">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="42"/>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="42"/>
                 </Grid.ColumnDefinitions>
-                <Label Margin="10" Width="240">
-                    <TextBlock FontStyle="Italic" Name="collapsedText"/>
+                <TextBlock Text="{Binding Text, ElementName=indexTextBlock}" Margin="5" TextAlignment="Center" VerticalAlignment="Center"/>
+                <Label Margin="5" Grid.Column="1" VerticalContentAlignment="Center">
+                    <TextBlock FontStyle="Italic" Name="collapsedText" TextAlignment="Left"/>
                 </Label>
-                <Button Grid.Column="1" Click="Expand_Button_Click" ToolTip="{xaml:Localize Key=INTERFACE_Control_Expand}" HorizontalAlignment="Right" Margin="10,10,10,10" VerticalAlignment="Top" Height="31" Width="31">
+                <Button Grid.Column="2" Click="Expand_Button_Click" ToolTip="{xaml:Localize Key=INTERFACE_Control_Expand}" Margin="5">
                     <Button.Content>
                         <iconPacks:PackIconMaterial Kind="ArrowExpand" Foreground="{DynamicResource AccentColor}"/>
                     </Button.Content>
