@@ -1788,7 +1788,7 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="339"/>
                                 <ColumnDefinition Width="33*"/>
                                 <ColumnDefinition Width="33*"/>
                             </Grid.ColumnDefinitions>
