@@ -6,6 +6,10 @@ namespace BowieD.Unturned.NPCMaker.Logging
     {
         void Open();
         void Close();
-        Task Log(string message, ELogLevel level);
+        void Log(string message, ELogLevel level);
+    }
+    public interface IAsyncLogger : ILogger
+    {
+        Task LogAsync(string message, ELogLevel level);
     }
 }

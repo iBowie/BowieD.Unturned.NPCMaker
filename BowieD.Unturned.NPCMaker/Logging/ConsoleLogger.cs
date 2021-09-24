@@ -56,7 +56,7 @@ namespace BowieD.Unturned.NPCMaker.Logging
         }
         public static bool IsOpened { get; private set; } = true;
         public void Close() { }
-        public Task Log(string message, ELogLevel level = ELogLevel.INFO)
+        public void Log(string message, ELogLevel level = ELogLevel.INFO)
         {
             ConsoleColor color;
             switch (level)
@@ -84,7 +84,6 @@ namespace BowieD.Unturned.NPCMaker.Logging
             Console.ForegroundColor = color;
             Console.WriteLine(message);
             Console.ForegroundColor = oldColor;
-            return Task.Delay(0);
         }
         public static void StartWaitForInput()
         {

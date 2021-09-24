@@ -11,18 +11,36 @@ namespace BowieD.Unturned.NPCMaker.Logging
         public LoggingManager()
         {
             loggers = new List<ILogger>();
+            asyncLoggers = new List<IAsyncLogger>();
         }
         private readonly List<ILogger> loggers;
+        private readonly List<IAsyncLogger> asyncLoggers;
         public void ConnectLogger(ILogger logger)
         {
-            loggers.Add(logger);
+            if (logger is IAsyncLogger al)
+            {
+                asyncLoggers.Add(al);
+            }
+            else
+            {
+                loggers.Add(logger);
+            }
+
             logger.Open();
             Log($"Connected new Logger of type {logger.GetType().FullName}", ELogLevel.DEBUG).ConfigureAwait(false).GetAwaiter().GetResult();
         }
         public void CloseLogger(ILogger logger)
         {
             logger.Close();
-            loggers.Remove(logger);
+
+            if (logger is IAsyncLogger al)
+            {
+                asyncLoggers.Remove(al);
+            }
+            else
+            {
+                loggers.Remove(logger);
+            }
         }
         public async Task Log(string message, ELogLevel level = ELogLevel.INFO)
         {
@@ -33,13 +51,33 @@ namespace BowieD.Unturned.NPCMaker.Logging
                 {
                     try
                     {
-                        await l.Log(logMessage, level);
+                        l.Log(logMessage, level);
+                        if (l is IAsyncLogger al)
+                        {
+                            await al.LogAsync(logMessage, level);
+                        }
                     }
                     catch (Exception ex)
                     {
                         try
                         {
                             Debug.WriteLine("Can't log in {0}. Exception: \n{1}\n{2}", l.GetType().FullName, ex.Message, ex.StackTrace);
+                        }
+                        finally { }
+                    }
+                }
+
+                foreach (IAsyncLogger al in asyncLoggers)
+                {
+                    try
+                    {
+                        await al.LogAsync(logMessage, level);
+                    }
+                    catch (Exception ex)
+                    {
+                        try
+                        {
+                            Debug.WriteLine("Can't log in {0}. Exception: \n{1}\n{2}", al.GetType().FullName, ex.Message, ex.StackTrace);
                         }
                         finally { }
                     }

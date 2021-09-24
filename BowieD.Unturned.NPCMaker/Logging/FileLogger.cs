@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace BowieD.Unturned.NPCMaker.Logging
 {
-    public sealed class FileLogger : ILogger
+    public sealed class FileLogger : ILogger, IDisposable
     {
         public static readonly string Dir = AppConfig.ExeDirectory;
-        public static string GetContents()
-        {
-            return File.ReadAllText(Path.Combine(Dir, "npcmaker.log"));
-        }
         private StreamWriter stream;
         public void Close()
         {
@@ -21,24 +17,31 @@ namespace BowieD.Unturned.NPCMaker.Logging
         }
         public void Open()
         {
-            if (File.Exists(Path.Combine(Dir, "npcmaker.old.log")))
+            string oldLogPath = Path.Combine(Dir, "npcmaker.old.log");
+            string logPath = Path.Combine(Dir, "npcmaker.log");
+
+            if (File.Exists(oldLogPath))
             {
-                File.Delete(Path.Combine(Dir, "npcmaker.old.log"));
+                File.Delete(oldLogPath);
             }
 
-            if (File.Exists(Path.Combine(Dir, "npcmaker.log")))
+            if (File.Exists(logPath))
             {
-                File.Move(Path.Combine(Dir, "npcmaker.log"), Path.Combine(Dir, "npcmaker.old.log"));
+                File.Move(logPath, oldLogPath);
             }
 
-            stream = new StreamWriter(Path.Combine(Dir, "npcmaker.log"), false, Encoding.UTF8);
+            var fs = new FileStream(logPath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
+            stream = new StreamWriter(fs)
+            {
+                AutoFlush = true
+            };
         }
 
-        public async Task Log(string message, ELogLevel level)
+        public void Log(string message, ELogLevel level)
         {
             try
             {
-                await stream.WriteLineAsync(message);
+                stream.WriteLine(message);
             }
             catch (Exception ex)
             {
@@ -49,6 +52,11 @@ namespace BowieD.Unturned.NPCMaker.Logging
                 Console.WriteLine($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 Console.ForegroundColor = old;
             }
+        }
+
+        public void Dispose()
+        {
+            ((IDisposable)stream).Dispose();
         }
     }
 }
