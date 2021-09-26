@@ -83,9 +83,13 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(Path.Combine(dir, "Characters", $"{character.EditorName}_{character.ID}"));
-                    using (StreamWriter asset = new StreamWriter(Path.Combine(dir, "Characters", $"{character.EditorName}_{character.ID}", "Asset.dat"), false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(Path.Combine(dir, "Characters", $"{character.EditorName}_{character.ID}", "English.dat"), false, Encoding.UTF8))
+                    string aPath = Path.Combine(dir, "Characters", GetCharacterFolderName(character));
+                    
+                    if (!Directory.Exists(aPath))
+                        Directory.CreateDirectory(aPath);
+                    
+                    using (StreamWriter asset = new StreamWriter(Path.Combine(aPath, "Asset.dat"), false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(Path.Combine(aPath, "English.dat"), false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -284,9 +288,13 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(Path.Combine(dir, "Dialogues", $"{dialogue.GUID}_{dialogue.ID}"));
-                    using (StreamWriter asset = new StreamWriter(Path.Combine(dir, "Dialogues", $"{dialogue.GUID}_{dialogue.ID}", "Asset.dat"), false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(Path.Combine(dir, "Dialogues", $"{dialogue.GUID}_{dialogue.ID}", "English.dat"), false, Encoding.UTF8))
+                    string aPath = Path.Combine(dir, "Dialogues", GetDialogueFolderName(dialogue));
+
+                    if (!Directory.Exists(aPath))
+                        Directory.CreateDirectory(aPath);
+                    
+                    using (StreamWriter asset = new StreamWriter(Path.Combine(aPath, "Asset.dat"), false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(Path.Combine(aPath, "English.dat"), false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -439,9 +447,13 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(Path.Combine(dir, "Vendors", $"{vendor.GUID}_{vendor.ID}"));
-                    using (StreamWriter asset = new StreamWriter(Path.Combine(dir, "Vendors", $"{vendor.GUID}_{vendor.ID}", "Asset.dat"), false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(Path.Combine(dir, "Vendors", $"{vendor.GUID}_{vendor.ID}", "English.dat"), false, Encoding.UTF8))
+                    string aPath = Path.Combine(dir, "Vendors", GetVendorFolderName(vendor));
+
+                    if (!Directory.Exists(aPath))
+                        Directory.CreateDirectory(aPath);
+
+                    using (StreamWriter asset = new StreamWriter(Path.Combine(aPath, "Asset.dat"), false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(Path.Combine(aPath, "English.dat"), false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -521,9 +533,13 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(Path.Combine(dir, "Quests", $"{quest.GUID}_{quest.ID}"));
-                    using (StreamWriter asset = new StreamWriter(Path.Combine(dir, $"Quests", $"{quest.GUID}_{quest.ID}", "Asset.dat"), false, Encoding.UTF8))
-                    using (StreamWriter local = new StreamWriter(Path.Combine(dir, $"Quests", $"{quest.GUID}_{quest.ID}", "English.dat"), false, Encoding.UTF8))
+                    string aPath = Path.Combine(dir, "Quests", GetQuestFolderName(quest));
+
+                    if (!Directory.Exists(aPath))
+                        Directory.CreateDirectory(aPath);
+
+                    using (StreamWriter asset = new StreamWriter(Path.Combine(aPath, "Asset.dat"), false, Encoding.UTF8))
+                    using (StreamWriter local = new StreamWriter(Path.Combine(aPath, "English.dat"), false, Encoding.UTF8))
                     {
                         asset.WriteLine(WaterText);
                         local.WriteLine(WaterText);
@@ -584,8 +600,12 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 try
                 {
-                    Directory.CreateDirectory(Path.Combine(dir, "Currencies"));
-                    using (StreamWriter asset = new StreamWriter(Path.Combine(dir, "Currencies", $"{cur.GUID}.asset"), false, Encoding.UTF8))
+                    string aPath = Path.Combine(dir, "Currencies");
+
+                    if (!Directory.Exists(aPath))
+                        Directory.CreateDirectory(aPath);
+                    
+                    using (StreamWriter asset = new StreamWriter(Path.Combine(aPath, GetCurrencyFileName(cur)), false, Encoding.UTF8))
                     {
                         char q = '\"';
 
@@ -737,6 +757,105 @@ namespace BowieD.Unturned.NPCMaker.Export
                 result.AppendLine($"{prefix}Reward_{rewardIndex}_{propName} {propValue}");
             }
             return result.ToString();
+        }
+
+        private static EExportSchema ExportSchema => Configuration.AppConfig.Instance.exportSchema;
+        private static string GetCharacterFolderName(NPCCharacter character)
+        {
+            switch (ExportSchema)
+            {
+                case EExportSchema.GUID_All_The_Way:
+                    return $"{ps(character.GUID)}_{character.ID}";
+                
+                case EExportSchema.Verbose_Comment:
+                    return $"{ps(character.Comment, character.EditorName, character.GUID)}_{character.ID}";
+                
+                case EExportSchema.Verbose_No_Comment:
+                    return $"{ps(character.EditorName, character.GUID)}_{character.ID}";
+
+                case EExportSchema.Default:
+                default:
+                    return $"{ps(character.EditorName)}_{character.ID}";
+            }
+        }
+        private static string GetDialogueFolderName(NPCDialogue dialogue)
+        {
+            switch (ExportSchema)
+            {
+                case EExportSchema.Verbose_Comment:
+                    return $"{ps(dialogue.Comment, dialogue.GUID)}_{dialogue.ID}";
+
+                case EExportSchema.Verbose_No_Comment:
+                case EExportSchema.GUID_All_The_Way:
+                case EExportSchema.Default:
+                default:
+                    return $"{ps(dialogue.GUID)}_{dialogue.ID}";
+            }
+        }
+        private static string GetVendorFolderName(NPCVendor vendor)
+        {
+            switch (ExportSchema)
+            {
+                case EExportSchema.Verbose_Comment:
+                    return $"{ps(vendor.Comment, vendor.Title, vendor.GUID)}_{vendor.ID}";
+
+                case EExportSchema.Verbose_No_Comment:
+                    return $"{ps(vendor.Title, vendor.GUID)}_{vendor.ID}";
+
+                case EExportSchema.GUID_All_The_Way:
+                case EExportSchema.Default:
+                default:
+                    return $"{ps(vendor.GUID)}_{vendor.ID}";
+            }
+        }
+        private static string GetQuestFolderName(NPCQuest quest)
+        {
+            switch (ExportSchema)
+            {
+                case EExportSchema.Verbose_Comment:
+                    return $"{ps(quest.Comment, quest.Title, quest.GUID)}_{quest.ID}";
+
+                case EExportSchema.Verbose_No_Comment:
+                    return $"{ps(quest.Title, quest.GUID)}_{quest.ID}";
+
+                case EExportSchema.GUID_All_The_Way:
+                case EExportSchema.Default:
+                default:
+                    return $"{ps(quest.GUID)}_{quest.ID}";
+            }
+        }
+        private static string GetCurrencyFileName(CurrencyAsset currency)
+        {
+            switch (ExportSchema)
+            {
+                default:
+                    return $"{ps(currency.GUID)}.asset";
+            }
+        }
+
+        private static string ps(params string[] options)
+        {
+            if (!(options is null))
+            {
+                for (int i = 0; i < options.Length; i++)
+                {
+                    var option = options[i];
+
+                    if (string.IsNullOrWhiteSpace(option))
+                        continue;
+
+                    return MakeValidFileName(option);
+                }
+            }
+
+            return Guid.NewGuid().ToString("N");
+        }
+        private static string MakeValidFileName(string fileName)
+        {
+            var invalids = System.IO.Path.GetInvalidFileNameChars();
+            var newName = string.Join("_", fileName.Split(invalids, StringSplitOptions.RemoveEmptyEntries)).TrimEnd('.');
+
+            return newName;
         }
     }
 }

@@ -4,7 +4,8 @@
              xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
-             xmlns:npc="clr-namespace:BowieD.Unturned.NPCMaker.NPC">
+             xmlns:npc="clr-namespace:BowieD.Unturned.NPCMaker.NPC"
+             xmlns:cfg="clr-namespace:BowieD.Unturned.NPCMaker.Configuration">
     <Application.Resources>
         <ResourceDictionary>
             <BitmapImage x:Key="app_Icon" UriSource="pack://application:,,,/Resources/Icons/app.ico"/>
@@ -17,6 +18,7 @@
             <xaml:EnumItemsSource x:Key="Character_Holidays_Enums" Type="{x:Type npc:ENPCHoliday}"/>
             <xaml:EnumItemsSource x:Key="Simulation_Holidays_Enums" Type="{x:Type npc:ENPCHoliday}"/>
             <xaml:EnumItemsSource x:Key="Simulation_Skillsets_Enums" Type="{x:Type npc:ESkillset}"/>
+            <xaml:EnumItemsSource x:Key="ExportSchema_Enums" Type="{x:Type cfg:EExportSchema}"/>
             <ResourceDictionary.MergedDictionaries>
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Green.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>

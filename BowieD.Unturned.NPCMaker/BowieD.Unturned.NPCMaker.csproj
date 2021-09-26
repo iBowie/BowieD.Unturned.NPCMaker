@@ -167,6 +167,8 @@
     <Compile Include="Common\Utility\NETHelper.cs" />
     <Compile Include="Common\Utility\PathUtility.cs" />
     <Compile Include="Common\XmlNodeExtension.cs" />
+    <Compile Include="Configuration\EExportSchema.cs" />
+    <Compile Include="Configuration\ExportSchemaStrings.cs" />
     <Compile Include="Controls\CurrencyEntryControl.xaml.cs">
       <DependentUpon>CurrencyEntryControl.xaml</DependentUpon>
     </Compile>

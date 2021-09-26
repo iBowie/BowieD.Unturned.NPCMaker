@@ -2,6 +2,8 @@
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Themes;
 using BowieD.Unturned.NPCMaker.ViewModels;
+using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,16 +14,52 @@ namespace BowieD.Unturned.NPCMaker.Configuration
     /// <summary>
     /// Логика взаимодействия для ConfigWindow.xaml
     /// </summary>
-    public partial class ConfigWindow : Window
+    public partial class ConfigWindow : Window, INotifyPropertyChanged
     {
         public ConfigWindow()
         {
             InitializeComponent();
             Width *= AppConfig.Instance.scale;
             Height *= AppConfig.Instance.scale;
-            CurrentConfig = AppConfig.Instance;
-
+            
             DataContext = this;
+
+            CurrentConfig = AppConfig.Instance;
+        }
+
+        private EExportSchema _currentExportSchema;
+        public EExportSchema CurrentExportSchema
+        {
+            get => _currentExportSchema;
+            set
+            {
+                _currentExportSchema = value;
+
+                string disp;
+
+                switch (value)
+                {
+                    case EExportSchema.Default:
+                        disp = ExportSchemaStrings.SCHEMA_DEFAULT;
+                        break;
+                    case EExportSchema.GUID_All_The_Way:
+                        disp = ExportSchemaStrings.SCHEMA_GUID_ALL_THE_WAY;
+                        break;
+                    case EExportSchema.Verbose_Comment:
+                        disp = ExportSchemaStrings.SCHEMA_VERBOSE_COMMENT;
+                        break;
+                    case EExportSchema.Verbose_No_Comment:
+                        disp = ExportSchemaStrings.SCHEMA_VERBOSE_NO_COMMENT;
+                        break;
+                    default:
+                        disp = "what";
+                        break;
+                }
+
+                ExportSchema_Structure_Preview_TextBlock.Text = disp;
+
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentExportSchema)));
+            }
         }
 
         public AppConfig CurrentConfig
@@ -31,6 +69,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 currentTheme = ((Selected_Theme_Box.SelectedItem as ComboBoxItem).Tag as Theme).Name,
                 autosaveOption = (byte)Autosave_Box.SelectedIndex,
                 language = (ELanguage)(Languages_Box.SelectedItem as ComboBoxItem).Tag,
+                exportSchema = CurrentExportSchema,
                 scale = double.Parse((Scale_Box.SelectedItem as ComboBoxItem).Tag.ToString(), CultureInfo.InvariantCulture),
                 enableDiscord = Discord_Enabled_Box.IsChecked.Value,
                 generateGuids = Generate_GUIDS_Box.IsChecked.Value,
@@ -85,6 +124,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                         break;
                     }
                 }
+                CurrentExportSchema = value.exportSchema;
                 Experimental_Box.IsChecked = value.experimentalFeatures;
                 Discord_Enabled_Box.IsChecked = value.enableDiscord;
                 Generate_GUIDS_Box.IsChecked = value.generateGuids;
@@ -128,6 +168,8 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         }
 
         private ICommand importChangeFolderCommand, importResetFolderCommand;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand ImportChangeFolderCommand
         {

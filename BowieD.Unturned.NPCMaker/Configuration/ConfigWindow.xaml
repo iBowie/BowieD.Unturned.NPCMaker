@@ -7,7 +7,7 @@
         xmlns:npcmaker="clr-namespace:BowieD.Unturned.NPCMaker"
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML" WindowStartupLocation="CenterOwner"
         mc:Ignorable="d"
-        Title="{xaml:Localize Key=GENERAL_Configuration_Title}" Icon="{DynamicResource app_Icon}" Height="240" Width="480">
+        Title="{xaml:Localize Key=GENERAL_Configuration_Title}" Icon="{DynamicResource app_Icon}" Height="360" Width="600">
     <Grid>
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
@@ -18,77 +18,114 @@
         </Grid.RowDefinitions>
         <TabControl TabStripPlacement="Left" Margin="10,10,10,10">
             <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_General}">
-                <StackPanel Margin="5" CanVerticallyScroll="True">
-                    <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_autosaveOption_Tooltip}">
-                        <Label Content="{xaml:Localize Key=OPTIONS_autosaveOption}"/>
-                        <ComboBox SelectedIndex="1" Name="Autosave_Box" HorizontalAlignment="Right">
-                            <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_0}"/>
-                            <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_1}"/>
-                            <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_2}"/>
-                            <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_3}"/>
-                            <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_4}"/>
-                            <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_5}"/>
-                        </ComboBox>
-                    </Grid>
-                    <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_language_Tooltip}">
-                        <Label Content="{xaml:Localize Key=OPTIONS_language}"/>
-                        <ComboBox Name="Languages_Box" HorizontalAlignment="Right"/>
-                    </Grid>
-                    <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_generateGuids_Tooltip}">
-                        <CheckBox Name="Generate_GUIDS_Box" Content="{xaml:Localize Key=OPTIONS_generateGuids}"/>
-                    </Grid>
-                    <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_autoUpdate_Tooltip}">
-                        <CheckBox Name="Autoupdate_Box" Content="{xaml:Localize Key=OPTIONS_autoUpdate}"/>
-                    </Grid>
-                    <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_downloadPrerelease_Tooltip}">
-                        <CheckBox Name="DownloadPrerelease_Box" Content="{xaml:Localize Key=OPTIONS_downloadPrerelease}"/>
-                    </Grid>
-                </StackPanel>
+                <ScrollViewer Margin="5">
+                    <StackPanel>
+                        <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_autosaveOption_Tooltip}">
+                            <Label Content="{xaml:Localize Key=OPTIONS_autosaveOption}"/>
+                            <ComboBox SelectedIndex="1" Name="Autosave_Box" HorizontalAlignment="Right">
+                                <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_0}"/>
+                                <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_1}"/>
+                                <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_2}"/>
+                                <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_3}"/>
+                                <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_4}"/>
+                                <ComboBoxItem Content="{xaml:Localize Key=OPTIONS_autosaveOption_5}"/>
+                            </ComboBox>
+                        </Grid>
+                        <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_language_Tooltip}">
+                            <Label Content="{xaml:Localize Key=OPTIONS_language}"/>
+                            <ComboBox Name="Languages_Box" HorizontalAlignment="Right"/>
+                        </Grid>
+                        <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_autoUpdate_Tooltip}">
+                            <CheckBox Name="Autoupdate_Box" Content="{xaml:Localize Key=OPTIONS_autoUpdate}"/>
+                        </Grid>
+                        <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_downloadPrerelease_Tooltip}">
+                            <CheckBox Name="DownloadPrerelease_Box" Content="{xaml:Localize Key=OPTIONS_downloadPrerelease}"/>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Interface}">
-                <StackPanel Margin="5" CanVerticallyScroll="True">
-                    <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_currentTheme_Tooltip}">
-                        <Label Content="{xaml:Localize Key=OPTIONS_currentTheme}"/>
-                        <ComboBox SelectedIndex="0" HorizontalAlignment="Right" Name="Selected_Theme_Box"/>
-                    </Grid>
-                    <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_scale_Tooltip}">
-                        <Label Content="{xaml:Localize Key=OPTIONS_scale}"/>
-                        <ComboBox SelectedIndex="1" Name="Scale_Box" HorizontalAlignment="Right">
-                            <ComboBoxItem Tag="0.75" Content="75%"/>
-                            <ComboBoxItem Tag="1" Content="100%"/>
-                            <ComboBoxItem Tag="1.25" Content="125%"/>
-                            <ComboBoxItem Tag="1.5" Content="150%"/>
-                            <ComboBoxItem Tag="2" Content="200%"/>
-                        </ComboBox>
-                    </Grid>
-                    <CheckBox Content="{xaml:Localize Key=OPTIONS_animateControls}" ToolTip="{xaml:Localize Key=OPTIONS_animateControls_Tooltip}" Name="Animation_Enabled_Box" VerticalAlignment="Top" Margin="2.5"/>
-                    <CheckBox Content="{xaml:Localize Key=OPTIONS_highlightSearch}" ToolTip="{xaml:Localize Key=OPTIONS_highlightSearch_Tooltip}" Name="Highlight_Search_Box" VerticalAlignment="Top" Margin="2.5"/>
-                    <CheckBox Content="{xaml:Localize Key=OPTIONS_useOldStyleMoveUpDown}" ToolTip="{xaml:Localize Key=OPTIONS_useOldStyleMoveUpDown_Tooltip}" Name="Use_Old_Style_Move_Up_Down_Box" VerticalAlignment="Top" Margin="2.5"/>
-                </StackPanel>
+                <ScrollViewer Margin="5">
+                    <StackPanel>
+                        <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_currentTheme_Tooltip}">
+                            <Label Content="{xaml:Localize Key=OPTIONS_currentTheme}"/>
+                            <ComboBox SelectedIndex="0" HorizontalAlignment="Right" Name="Selected_Theme_Box"/>
+                        </Grid>
+                        <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_scale_Tooltip}">
+                            <Label Content="{xaml:Localize Key=OPTIONS_scale}"/>
+                            <ComboBox SelectedIndex="1" Name="Scale_Box" HorizontalAlignment="Right">
+                                <ComboBoxItem Tag="0.75" Content="75%"/>
+                                <ComboBoxItem Tag="1" Content="100%"/>
+                                <ComboBoxItem Tag="1.25" Content="125%"/>
+                                <ComboBoxItem Tag="1.5" Content="150%"/>
+                                <ComboBoxItem Tag="2" Content="200%"/>
+                            </ComboBox>
+                        </Grid>
+                        <CheckBox Content="{xaml:Localize Key=OPTIONS_animateControls}" ToolTip="{xaml:Localize Key=OPTIONS_animateControls_Tooltip}" Name="Animation_Enabled_Box" VerticalAlignment="Top" Margin="2.5"/>
+                        <CheckBox Content="{xaml:Localize Key=OPTIONS_highlightSearch}" ToolTip="{xaml:Localize Key=OPTIONS_highlightSearch_Tooltip}" Name="Highlight_Search_Box" VerticalAlignment="Top" Margin="2.5"/>
+                        <CheckBox Content="{xaml:Localize Key=OPTIONS_useOldStyleMoveUpDown}" ToolTip="{xaml:Localize Key=OPTIONS_useOldStyleMoveUpDown_Tooltip}" Name="Use_Old_Style_Move_Up_Down_Box" VerticalAlignment="Top" Margin="2.5"/>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Misc}">
-                <StackPanel Margin="5" CanVerticallyScroll="True">
-                    <CheckBox Name="Discord_Enabled_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_enableDiscord}" ToolTip="{xaml:Localize Key=OPTIONS_enableDiscord_Tooltip}"/>
-                    <CheckBox Name="AlternateLogicTranslation_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_alternateLogicTranslation}" ToolTip="{xaml:Localize Key=OPTIONS_alternateLogicTranslation_Tooltip}"/>
-                    <CheckBox Name="ReplaceMissingKeysWithEnglish_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_replaceMissingKeysWithEnglish}" ToolTip="{xaml:Localize Key=OPTIONS_replaceMissingKeysWithEnglish_Tooltip}"/>
-                    <CheckBox Name="UseCommentsInsteadOfData_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_useCommentsInsteadOfData}" ToolTip="{xaml:Localize Key=OPTIONS_useCommentsInsteadOfData_Tooltip}"/>
-                    <CheckBox Name="Experimental_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_experimentalFeatures}" ToolTip="{xaml:Localize Key=OPTIONS_experimentalFeatures_Tooltip}"/>
-                </StackPanel>
+                <ScrollViewer Margin="5">
+                    <StackPanel>
+                        <CheckBox Name="Discord_Enabled_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_enableDiscord}" ToolTip="{xaml:Localize Key=OPTIONS_enableDiscord_Tooltip}"/>
+                        <CheckBox Name="AlternateLogicTranslation_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_alternateLogicTranslation}" ToolTip="{xaml:Localize Key=OPTIONS_alternateLogicTranslation_Tooltip}"/>
+                        <CheckBox Name="ReplaceMissingKeysWithEnglish_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_replaceMissingKeysWithEnglish}" ToolTip="{xaml:Localize Key=OPTIONS_replaceMissingKeysWithEnglish_Tooltip}"/>
+                        <CheckBox Name="UseCommentsInsteadOfData_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_useCommentsInsteadOfData}" ToolTip="{xaml:Localize Key=OPTIONS_useCommentsInsteadOfData_Tooltip}"/>
+                        <CheckBox Name="Experimental_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_experimentalFeatures}" ToolTip="{xaml:Localize Key=OPTIONS_experimentalFeatures_Tooltip}"/>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Import}">
-                <StackPanel Margin="5" CanVerticallyScroll="True">
-                    <CheckBox Name="Import_Vanilla_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_importImportVanilla}" ToolTip="{xaml:Localize Key=OPTIONS_importImportVanilla_Tooltip}"/>
-                    <CheckBox Name="Import_Workshop_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_importImportWorkshop}" ToolTip="{xaml:Localize Key=OPTIONS_importImportWorkshop_Tooltip}"/>
-                    <CheckBox Name="Generate_Thumbnails_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_generateThumbnailsBeforehand}" ToolTip="{xaml:Localize Key=OPTIONS_generateThumbnailsBeforehand_Tooltip}"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Button Command="{Binding ImportChangeFolderCommand}" Grid.Column="0" Content="{xaml:Localize INTERFACE_Configuration_Tab_Import_ChangeFolder}" Name="Import_SelectFolder_Button" Margin="2.5"/>
-                        <Button Command="{Binding ImportResetFolderCommand}" Grid.Column="1" Content="{xaml:Localize INTERFACE_Configuration_Tab_Import_ResetFolder}" Name="Import_ResetFolder_Button" Margin="2.5"/>
-                    </Grid>
-                </StackPanel>
+                <ScrollViewer Margin="5">
+                    <StackPanel>
+                        <CheckBox Name="Import_Vanilla_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_importImportVanilla}" ToolTip="{xaml:Localize Key=OPTIONS_importImportVanilla_Tooltip}"/>
+                        <CheckBox Name="Import_Workshop_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_importImportWorkshop}" ToolTip="{xaml:Localize Key=OPTIONS_importImportWorkshop_Tooltip}"/>
+                        <CheckBox Name="Generate_Thumbnails_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_generateThumbnailsBeforehand}" ToolTip="{xaml:Localize Key=OPTIONS_generateThumbnailsBeforehand_Tooltip}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Command="{Binding ImportChangeFolderCommand}" Grid.Column="0" Content="{xaml:Localize INTERFACE_Configuration_Tab_Import_ChangeFolder}" Name="Import_SelectFolder_Button" Margin="2.5"/>
+                            <Button Command="{Binding ImportResetFolderCommand}" Grid.Column="1" Content="{xaml:Localize INTERFACE_Configuration_Tab_Import_ResetFolder}" Name="Import_ResetFolder_Button" Margin="2.5"/>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Export">
+                <ScrollViewer Margin="5">
+                    <StackPanel>
+                        <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_generateGuids_Tooltip}">
+                            <CheckBox Name="Generate_GUIDS_Box" Content="{xaml:Localize Key=OPTIONS_generateGuids}"/>
+                        </Grid>
+                        <Grid Margin="2.5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="{xaml:Localize OPTIONS_exportSchema}" ToolTip="{xaml:Localize OPTIONS_exportSchema_Tooltip}"/>
+                                <ComboBox Grid.Column="1" x:Name="ExportSchema_Box" HorizontalAlignment="Right" ItemsSource="{StaticResource ExportSchema_Enums}" SelectedValue="{Binding CurrentExportSchema, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ExportSchema_Enums}}"/>
+                            </Grid>
+                            <Label Grid.Row="1" Content="{xaml:Localize OPTIONS_exportSchema_Warning}"/>
+                            <GroupBox Grid.Row="2" Header="{xaml:Localize OPTIONS_exportSchema_Structure}">
+                                <TextBlock Name="ExportSchema_Structure_Preview_TextBlock" Text=""/>
+                            </GroupBox>
+                            <Label Grid.Row="3">
+                                <TextBlock Text="{xaml:Localize OPTIONS_exportSchema_Structure_Hint}" TextWrapping="Wrap"/>
+                            </Label>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
         <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">

@@ -37,6 +37,7 @@
         "generateThumbnailsBeforehand": "Generate thumbnails beforehand",
         "highlightSearch": "Highlight search",
         "useOldStyleMoveUpDown": "Use classic move up/down",
+        "exportSchema": "Export Schema",
 
         "experimentalFeatures_Tooltip": "Something experimental, maybe unstable",
         "scale_Tooltip": "Adjust scale of the app on your screen",
@@ -56,7 +57,18 @@
         "importImportHooked_Tooltip": "Whether or not this app should import assets hooked to a project",
         "generateThumbnailsBeforehand_Tooltip": "Increases startup time, but decreases time of creating thumbnails after launch",
         "highlightSearch_Tooltip": "Colors matching part of a search query. Very perfomance expensive feature at this moment.",
-        "useOldStyleMoveUpDown_Tooltip": "Disables new drag"
+        "useOldStyleMoveUpDown_Tooltip": "Disables new drag",
+        "exportSchema_Tooltip": "Manage export structure of your projects",
+
+        "exportSchema_Warning": "Warning! This setting is only for advanced users!",
+
+        "exportSchema_Structure": "Structure",
+        "exportSchema_Structure_Hint": "{PARAMETER} - Text with specified parameter will be placed in place of this\n{PARAMETER > OTHER_PARAMETER} - If first parameter is empty second one will be selected",
+
+        "exportSchema_Option_Default": "Default",
+        "exportSchema_Option_Verbose_Comment": "Verbose (Comments override)",
+        "exportSchema_Option_Verbose_No_Comment": "Verbose",
+        "exportSchema_Option_GUID_All_The_Way": "GUIDs Everywhere"
     },
     "Character":
     {

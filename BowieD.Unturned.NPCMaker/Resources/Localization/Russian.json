@@ -37,6 +37,7 @@
         "generateThumbnailsBeforehand": "Заранее создать иконки",
         "highlightSearch": "Подсветка поиска",
         "useOldStyleMoveUpDown": "Использовать классическую систему перемещения",
+        "exportSchema": "Структура экспорта",
 
         "experimentalFeatures_Tooltip": "ЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭксперименты",
         "scale_Tooltip": "Изменить размер программы на экране",
@@ -56,7 +57,18 @@
         "importImportHooked_Tooltip": "Должна ли программа импортировать ассеты, привязанные к определённым проектам",
         "generateThumbnailsBeforehand_Tooltip": "Увеличивает время запуска программы, но ускоряет последующую работу в ней",
         "highlightSearch_Tooltip": "Подкрашивает совпадающую часть текста с запросом. Очень требовательная функция в данный момент.",
-        "useOldStyleMoveUpDown_Tooltip": "Отключает новую систему перетаскивания"
+        "useOldStyleMoveUpDown_Tooltip": "Отключает новую систему перетаскивания",
+        "exportSchema_Tooltip": "Как именно программа должна экспортировать проект",
+
+        "exportSchema_Warning": "Внимание! Эта настройка предназначена для продвинутых пользователей!",
+
+        "exportSchema_Structure": "Структура",
+        "exportSchema_Structure_Hint": "{ПАРАМЕТР} - Текст с указанным параметром будет подставлен на место этого\n{ПАРАМЕТР > ДРУГОЙ_ПАРАМЕТР} - Если первый параметр пустой то будет использован второй",
+
+        "exportSchema_Option_Default": "По умолчанию",
+        "exportSchema_Option_Verbose_Comment": "Словесный (Комментарии)",
+        "exportSchema_Option_Verbose_No_Comment": "Словесный",
+        "exportSchema_Option_GUID_All_The_Way": "GUIDы повсюду"
     },
     "Character":
     {

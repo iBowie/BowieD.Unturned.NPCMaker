@@ -17,6 +17,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public bool experimentalFeatures;
         public double scale;
         public ELanguage language;
+        public EExportSchema exportSchema;
         public bool enableDiscord;
         public string currentTheme;
         public bool generateGuids;
@@ -99,6 +100,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             {
                 language = ELanguage.English;
             }
+            exportSchema = EExportSchema.Default;
 
             App.Logger.Log($"[CFG] - Default configuration loaded!");
         }
