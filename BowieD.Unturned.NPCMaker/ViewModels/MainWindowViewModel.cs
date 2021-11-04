@@ -523,6 +523,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         if (MainWindow.CurrentProject.Save())
                         {
                             App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Saved"]);
+
+                            MainWindow.AddToRecentList(MainWindow.CurrentProject.file);
                         }
                     });
                 }
@@ -547,6 +549,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         else
                         {
                             App.NotificationManager.Notify(LocalizationManager.Current.Notification["Project_Saved"]);
+
+                            MainWindow.AddToRecentList(MainWindow.CurrentProject.file);
                         }
                     });
                 }
