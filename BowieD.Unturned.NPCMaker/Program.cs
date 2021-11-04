@@ -9,6 +9,8 @@ namespace BowieD.Unturned.NPCMaker
 {
     public sealed class Program
     {
+        internal const string CRASH_SAVE_FILENAME = "crashSave.npcproj";
+
         [STAThread]
         private static void Main()
         {
@@ -88,7 +90,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             try
             {
-                MainWindow.CurrentProject.file = Path.Combine(AppConfig.ExeDirectory, "crashSave.npcproj");
+                MainWindow.CurrentProject.file = Path.Combine(AppConfig.ExeDirectory, CRASH_SAVE_FILENAME);
 
                 MainWindow.CurrentProject.DoSave();
             }

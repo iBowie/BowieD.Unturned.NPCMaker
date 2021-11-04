@@ -515,6 +515,8 @@
     },
     "Notification":
     {
+        "RecoverOnStart": "Looks like app has crashed last time.\nDo not worry - your work has been saved.\nCrash save was created at '{0}'\n\nDo you want to load this project?",
+        "RecoverOnStart_Title": "Project Recovery",
     	"Simulation_Crashed": "Current simulation has crashed. More details in logs.\nDo not panic, it doesn't mean that you're doing something wrong.\nJust check your project in-game, it will most probably work just fine there!",
         "Template_InvalidContext": "This template is not valid for this context. It must be for something else.",
         "Template_InvalidFile": "This template file is not valid.",

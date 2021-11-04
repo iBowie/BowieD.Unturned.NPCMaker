@@ -20,6 +20,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public string file;
         public override string FileName => file;
         public bool isSaved = false;
+        public bool hasLoadedAtLeastOnce = false;
 
         public new event DataLoaded<NPCProject> OnDataLoaded;
 
@@ -142,6 +143,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                         data = project;
                         App.Logger.Log($"[AXDATA] - Loaded legacy project");
                         OnDataLoaded?.Invoke();
+                        hasLoadedAtLeastOnce = true;
                         return true;
                     }
                     else
@@ -157,6 +159,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                             data = project;
                             App.Logger.Log($"[AXDATA] - Loaded");
                             OnDataLoaded?.Invoke();
+                            hasLoadedAtLeastOnce = true;
                             return true;
                         }
                         else

@@ -301,6 +301,40 @@ namespace BowieD.Unturned.NPCMaker
                         MessageBox.Show(LocalizationManager.Current.Notification["StartUp_IconsNotGenerated"], Title, MessageBoxButton.OK);
                     }
                 }
+
+                if (!CurrentProject.hasLoadedAtLeastOnce)
+                {
+                    string crashSavePath = Path.Combine(AppConfig.ExeDirectory, Program.CRASH_SAVE_FILENAME);
+
+                    if (File.Exists(crashSavePath))
+                    {
+                        try
+                        {
+                            FileInfo fi = new FileInfo(crashSavePath);
+
+                            var lastWrite = fi.LastWriteTime;
+                            var creationTime = fi.CreationTime;
+
+                            DateTime latestTime = lastWrite > creationTime ? lastWrite : creationTime;
+
+                            var res = MessageBox.Show(LocalizationManager.Current.Notification.Translate("RecoverOnStart", latestTime), LocalizationManager.Current.Notification["RecoverOnStart_Title"], MessageBoxButton.YesNo);
+
+                            if (res == MessageBoxResult.Yes)
+                            {
+                                CurrentProject.file = crashSavePath;
+                                CurrentProject.Load(null);
+                                CurrentProject.file = string.Empty;
+
+                            }
+
+                            File.Delete(crashSavePath);
+                        }
+                        catch (Exception ex)
+                        {
+                            App.Logger.LogException("Could not load crash save.", ex: ex);
+                        }
+                    }
+                }
             };
 
             base.Show();
