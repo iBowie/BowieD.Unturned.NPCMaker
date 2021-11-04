@@ -384,12 +384,21 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     apw.Owner = MainWindow.Instance;
                                     if (apw.ShowDialog() == true)
                                     {
-                                        NPCCharacter character = (apw.SelectedAsset as GameNPCAsset).character;
+                                        try
+                                        {
+                                            NPCCharacter character = (apw.SelectedAsset as GameNPCAsset).character;
 
-                                        DialogueView_Window dvw = new DialogueView_Window(character, Dialogue, new Simulation());
-                                        dvw.Owner = MainWindow.Instance;
-                                        dvw.Display();
-                                        dvw.ShowDialog();
+                                            DialogueView_Window dvw = new DialogueView_Window(character, Dialogue, new Simulation());
+                                            dvw.Owner = MainWindow.Instance;
+                                            dvw.Display();
+                                            dvw.ShowDialog();
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            App.Logger.LogException("Simulation has crashed!", ex: ex);
+
+                                            MessageBox.Show(LocalizationManager.Current.Notification["Simulation_Crashed"]);
+                                        }
                                     }
 
                                     break;
