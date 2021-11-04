@@ -68,6 +68,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     {
                         Border border = new Border()
                         {
+                            Background = App.Current.Resources["BackgroundColor"] as Brush,
                             BorderBrush = App.Current.Resources["AccentColor"] as Brush,
                             BorderThickness = new Thickness(1),
                             CornerRadius = new CornerRadius(4),
@@ -222,6 +223,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                 if (GameAssetManager.TryGetAsset<GameDialogueAsset>(res.openDialogueId, out var gameDialogueAsset))
                                 {
                                     next = gameDialogueAsset.dialogue;
+
+                                    Dialogue = next;
                                 }
                                 else
                                 {
