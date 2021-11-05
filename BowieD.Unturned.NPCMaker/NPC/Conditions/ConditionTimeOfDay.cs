@@ -1,5 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
+using System;
 using System.Text;
 using System.Xml;
 
@@ -8,6 +10,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [System.Serializable]
     public sealed class ConditionTimeOfDay : Condition
     {
+        [Range((uint)0, (uint)86400)]
         public int Second { get; set; }
         public Logic_Type Logic { get; set; }
         public override Condition_Type Type => Condition_Type.Time_Of_Day;
@@ -61,11 +64,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
         public static string SecondToTime(int second)
         {
-            int num = second / 3600;
-            int num2 = second / 60 - num * 60;
-            int num3 = second - num * 3600 - num2 * 60;
+            TimeSpan span = TimeSpan.FromSeconds(second);
 
-            return $"{num:D2}:{num2:D2}:{num3:D2}";
+            return span.ToString("hh':'mm':'ss");
         }
 
         public override void Load(XmlNode node, int version)
