@@ -10,7 +10,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [System.Serializable]
     public sealed class ConditionTimeOfDay : Condition
     {
-        [Range((uint)0, (uint)86400)]
+        [Range((int)0, (int)86400)]
         public int Second { get; set; }
         public Logic_Type Logic { get; set; }
         public override Condition_Type Type => Condition_Type.Time_Of_Day;
