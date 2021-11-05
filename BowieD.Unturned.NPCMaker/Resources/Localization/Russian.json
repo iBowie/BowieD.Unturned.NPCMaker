@@ -302,6 +302,7 @@
         "Kills_Player_Value": "Количество игроков",
         "Kills_Player_Reset": "Сбросить значение флага",
         "Time_Of_Day_Second": "Игровая секунда",
+        "Time_Of_Day_DisplaySecond": "Часы",
         "Player_Life_Health_Value": "Значение здоровья",
         "Player_Life_Food_Value": "Значение сытости",
         "Player_Life_Water_Value": "Значение жажды",

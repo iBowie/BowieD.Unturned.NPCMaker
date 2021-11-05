@@ -169,6 +169,9 @@
     <Compile Include="Common\XmlNodeExtension.cs" />
     <Compile Include="Configuration\EExportSchema.cs" />
     <Compile Include="Configuration\ExportSchemaStrings.cs" />
+    <Compile Include="Controls\ClockControl.xaml.cs">
+      <DependentUpon>ClockControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CurrencyEntryControl.xaml.cs">
       <DependentUpon>CurrencyEntryControl.xaml</DependentUpon>
     </Compile>
@@ -186,6 +189,7 @@
     <Compile Include="Controls\OptionalUInt16ValueControl.xaml.cs">
       <DependentUpon>OptionalUInt16ValueControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RadialPanel.cs" />
     <Compile Include="Controls\Universal_ItemList.xaml.cs">
       <DependentUpon>Universal_ItemList.xaml</DependentUpon>
     </Compile>
@@ -560,6 +564,10 @@
     <Compile Include="XAML\EnumItemsSource.cs" />
     <Compile Include="XAML\LocalizationConverter.cs" />
     <Compile Include="XAML\LocalizeExtension.cs" />
+    <Page Include="Controls\ClockControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CurrencyEntryControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

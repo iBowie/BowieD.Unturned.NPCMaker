@@ -302,6 +302,7 @@
         "Kills_Player_Value": "Amount of players",
         "Kills_Player_Reset": "Reset flag value",
         "Time_Of_Day_Second": "In-game Second",
+        "Time_Of_Day_DisplaySecond": "Clock Time",
         "Player_Life_Health_Value": "Amount of health",
         "Player_Life_Food_Value": "Amount of food",
         "Player_Life_Water_Value": "Amount of water",

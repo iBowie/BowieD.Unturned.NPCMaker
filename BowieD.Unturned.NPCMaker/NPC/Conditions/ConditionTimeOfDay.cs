@@ -2,16 +2,42 @@
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using System;
+using System.ComponentModel;
 using System.Text;
 using System.Xml;
 
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
     [System.Serializable]
-    public sealed class ConditionTimeOfDay : Condition
+    public sealed class ConditionTimeOfDay : Condition, INotifyPropertyChanged
     {
+        private int _second;
+
+        [SkipField]
+        public TimeSpan DisplaySecond
+        {
+            get
+            {
+                return TimeSpan.FromSeconds(Second);
+            }
+            set
+            {
+                Second = (int)(value.TotalSeconds % 86400);
+            }
+        }
+
         [Range((int)0, (int)86400)]
-        public int Second { get; set; }
+        public int Second
+        {
+            get => _second;
+            set
+            {
+                _second = value;
+
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Second)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DisplaySecond)));
+            }
+        }
         public Logic_Type Logic { get; set; }
         public override Condition_Type Type => Condition_Type.Time_Of_Day;
         public override string UIText
@@ -46,6 +72,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             }
         }
 
+        [field: NonSerialized]
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public override void Apply(Simulation simulation) { }
         public override bool Check(Simulation simulation)

@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
@@ -444,6 +445,12 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                     valueControl = new CheckBox() { };
                     (valueControl as CheckBox).SetBinding(CheckBox.IsCheckedProperty, propName);
                 }
+                else if (propType == typeof(TimeSpan))
+                {
+                    valueControl = new ClockControl();
+
+                    (valueControl as ClockControl).SetBinding(ClockControl.DisplayTimeProperty, new Binding(propName) { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
+                }
                 else
                 {
                     App.Logger.Log($"{propName} does not have required type '{propType.FullName}'");
@@ -453,6 +460,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 if (contextAttribute != null)
                     valueControl.ContextMenu = ContextHelper.CreateContextMenu(contextAttribute.Options);
                 borderContents.Children.Add(valueControl);
+
+                borderContents.ColumnDefinitions.Add(new ColumnDefinition());
+                borderContents.ColumnDefinitions.Add(new ColumnDefinition());
+                Grid.SetColumn(valueControl, 1);
+                
                 valueControl.Tag = "variable::" + propName;
                 Border b = new Border
                 {
