@@ -9,7 +9,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <BitmapImage x:Key="app_Icon" UriSource="pack://application:,,,/Resources/Icons/app.ico"/>
-            <SolidColorBrush x:Key="AccentColor" Color="Black"/>
+            <SolidColorBrush x:Key="AccentColor" Color="Green"/>
             <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
             <SolidColorBrush x:Key="ForegroundColor" Color="Black"/>
             <system:Double x:Key="Scale">1</system:Double>
