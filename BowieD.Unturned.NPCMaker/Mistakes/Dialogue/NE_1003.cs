@@ -8,7 +8,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         public NE_1003() : base()
         {
             MistakeName = "NE_1003";
-            Importance = IMPORTANCE.WARNING;
+            Importance = IMPORTANCE.CRITICAL;
         }
         public NE_1003(int pageId, int messageId, ushort id) : this()
         {
@@ -18,14 +18,17 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
         {
             foreach (NPC.NPCDialogue dial in MainWindow.CurrentProject.data.dialogues)
             {
-                for (int mId = 0; mId < dial.Messages.Count; mId++)
+                for (int i = 0; i < dial.Messages.Count; i++)
                 {
-                    for (int pId = 0; pId < dial.Messages[mId].pages.Count; pId++)
+                    var message = dial.Messages[i];
+
+                    for (int j = 0; j < message.pages.Count; j++)
                     {
-                        string page = dial.Messages[mId].pages[pId];
-                        if (page == null || page.Length == 0)
+                        var page = message.pages[j];
+
+                        if (string.IsNullOrEmpty(page))
                         {
-                            yield return new NE_1003(pId + 1, mId + 1, dial.ID);
+                            yield return new NE_1003(j + 1, i + 1, dial.ID);
                         }
                     }
                 }
