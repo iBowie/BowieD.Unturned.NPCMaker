@@ -3,8 +3,10 @@ using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Themes;
 using BowieD.Unturned.NPCMaker.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -61,6 +63,76 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentExportSchema)));
             }
         }
+        public string[] CurrentDisabledErrors
+        {
+            get
+            {
+                IEnumerable<string> iterate(FrameworkElement element)
+                {
+                    if (element is Panel panel)
+                    {
+                        foreach (var e in panel.Children)
+                        {
+                            if (e is FrameworkElement fe)
+                            {
+                                foreach (var r in iterate(fe))
+                                    yield return r;
+                            }
+                        }
+                    }
+
+                    if (element is ContentControl contentControl)
+                    {
+                        if (contentControl.Content is FrameworkElement fe)
+                        {
+                            foreach (var r in iterate(fe))
+                                yield return r;
+                        }
+                    }
+
+                    if (element is CheckBox cbox)
+                    {
+                        if (cbox.IsChecked == true)
+                        {
+                            yield return cbox.Tag.ToString();
+                        }
+                    }
+                }
+
+                return iterate(disabledErrorsPanel).ToArray();
+            }
+            set
+            {
+                void iterate(FrameworkElement element)
+                {
+                    if (element is Panel panel)
+                    {
+                        foreach (var e in panel.Children)
+                        {
+                            if (e is FrameworkElement fe)
+                            {
+                                iterate(fe);
+                            }
+                        }
+                    }
+
+                    if (element is ContentControl contentControl)
+                    {
+                        if (contentControl.Content is FrameworkElement fe)
+                        {
+                            iterate(fe);
+                        }
+                    }
+
+                    if (element is CheckBox cbox)
+                    {
+                        cbox.IsChecked = value.Contains(cbox.Tag.ToString());
+                    }
+                }
+
+                iterate(disabledErrorsPanel);
+            }
+        }
 
         public AppConfig CurrentConfig
         {
@@ -86,6 +158,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 highlightSearch = Highlight_Search_Box.IsChecked.Value,
                 useOldStyleMoveUpDown = Use_Old_Style_Move_Up_Down_Box.IsChecked.Value,
                 automaticallyCheckForErrors = AutomaticallyCheckForErrors_Box.IsChecked.Value,
+                disabledErrors = CurrentDisabledErrors,
                 unturnedDir = curUntDir
             };
             set
@@ -141,6 +214,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 Highlight_Search_Box.IsChecked = value.highlightSearch;
                 Use_Old_Style_Move_Up_Down_Box.IsChecked = value.useOldStyleMoveUpDown;
                 AutomaticallyCheckForErrors_Box.IsChecked = value.automaticallyCheckForErrors;
+                CurrentDisabledErrors = value.disabledErrors;
                 curUntDir = value.unturnedDir;
             }
         }

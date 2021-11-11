@@ -130,6 +130,64 @@
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
+            <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Advanced}">
+                <ScrollViewer Margin="5">
+                    <StackPanel>
+                        <GroupBox Header="{xaml:Localize Key=OPTIONS_disabledErrors_Header}">
+                            <StackPanel Name="disabledErrorsPanel">
+                                <Expander Header="{xaml:Localize Key=OPTIONS_disabledErrors_Character_Header}" Margin="5">
+                                    <StackPanel>
+                                        <CheckBox Margin="5" Content="NE__0000" Tag="NE_0000"/>
+                                        <CheckBox Margin="5" Content="NE__0001" Tag="NE_0001" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__0002" Tag="NE_0002" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__0003" Tag="NE_0003" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__0004" Tag="NE_0004"/>
+                                    </StackPanel>
+                                </Expander>
+                                <Expander Header="{xaml:Localize Key=OPTIONS_disabledErrors_Dialogue_Header}" Margin="5">
+                                    <StackPanel>
+                                        <CheckBox Margin="5" Content="NE__1000" Tag="NE_1000" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__1001" Tag="NE_1001" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__1002" Tag="NE_1002"/>
+                                        <CheckBox Margin="5" Content="NE__1003" Tag="NE_1003" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__1004" Tag="NE_1004"/>
+                                        <CheckBox Margin="5" Content="NE__1005" Tag="NE_1005"/>
+                                        <CheckBox Margin="5" Content="NE__1006" Tag="NE_1006"/>
+                                        <CheckBox Margin="5" Content="NE__1007" Tag="NE_1007"/>
+                                        <CheckBox Margin="5" Content="NE__1008" Tag="NE_1008"/>
+                                        <CheckBox Margin="5" Content="NE__1009" Tag="NE_1009" IsEnabled="False"/>
+                                    </StackPanel>
+                                </Expander>
+                                <Expander Header="{xaml:Localize Key=OPTIONS_disabledErrors_Vendor_Header}" Margin="5">
+                                    <StackPanel>
+                                        <CheckBox Margin="5" Content="NE__2000" Tag="NE_2000" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__2001" Tag="NE_2001"/>
+                                        <CheckBox Margin="5" Content="NE__2002" Tag="NE_2002"/>
+                                        <CheckBox Margin="5" Content="NE__2003" Tag="NE_2003"/>
+                                    </StackPanel>
+                                </Expander>
+                                <Expander Header="{xaml:Localize Key=OPTIONS_disabledErrors_Quest_Header}" Margin="5">
+                                    <StackPanel>
+                                        <CheckBox Margin="5" Content="NE__3000" Tag="NE_3000" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__3001" Tag="NE_3001"/>
+                                        <CheckBox Margin="5" Content="NE__3002" Tag="NE_3002"/>
+                                        <CheckBox Margin="5" Content="NE__3003" Tag="NE_3003"/>
+                                    </StackPanel>
+                                </Expander>
+                                <Expander Header="{xaml:Localize Key=OPTIONS_disabledErrors_Currency_Header}" Margin="5">
+                                    <StackPanel>
+                                        <CheckBox Margin="5" Content="NE__4000" Tag="NE_4000" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__4001" Tag="NE_4001" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__4002" Tag="NE_4002" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__4003" Tag="NE_4003"/>
+                                        <CheckBox Margin="5" Content="NE__4004" Tag="NE_4004" IsEnabled="False"/>
+                                    </StackPanel>
+                                </Expander>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
         </TabControl>
         <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Click="ResetButton_Click" HorizontalAlignment="Right" Margin="0,0,10,0" Content="{xaml:Localize Key=INTERFACE_Configuration_Menu_Default}"/>

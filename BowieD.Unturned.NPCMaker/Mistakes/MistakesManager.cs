@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using System;
@@ -202,6 +203,17 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     }
                 }
             }
+
+            FoundMistakes.RemoveWhere(d =>
+            {
+                if (d.Importance == IMPORTANCE.CRITICAL)
+                    return false;
+
+                if (AppConfig.Instance.disabledErrors.Contains(d.MistakeName))
+                    return true;
+
+                return false;
+            });
 
             foreach (var fm in FoundMistakes)
             {

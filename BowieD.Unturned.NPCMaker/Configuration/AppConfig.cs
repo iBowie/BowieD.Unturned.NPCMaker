@@ -36,6 +36,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public bool highlightSearch;
         public bool useOldStyleMoveUpDown;
         public bool automaticallyCheckForErrors = false;
+        public string[] disabledErrors;
 
         public void Save()
         {
@@ -51,6 +52,9 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             {
                 App.Logger.Log($"[CFG] - File not found. Creating one...");
                 LoadDefaults();
+                
+                PostLoad();
+                
                 Save();
             }
             else
@@ -60,12 +64,18 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                     App.Logger.Log($"[CFG] - File found. Loading configuration...");
                     string content = File.ReadAllText(path);
                     JsonConvert.PopulateObject(content, this);
+                    
+                    PostLoad();
+                    
                     App.Logger.Log($"[CFG] - Configuration loaded from {path}");
                 }
                 catch
                 {
                     App.Logger.Log($"[CFG] - Could not load configuration from file. Reverting to default...", ELogLevel.WARNING);
                     LoadDefaults();
+                    
+                    PostLoad();
+
                     Save();
                 }
             }
@@ -103,8 +113,14 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             }
             exportSchema = EExportSchema.Default;
             automaticallyCheckForErrors = false;
+            disabledErrors = System.Array.Empty<string>();
 
             App.Logger.Log($"[CFG] - Default configuration loaded!");
+        }
+        public void PostLoad()
+        {
+            if (disabledErrors is null)
+                disabledErrors = System.Array.Empty<string>();
         }
         private static readonly string defaultDir = Path.Combine($@"{Environment.SystemDirectory[0]}{Path.VolumeSeparatorChar}{Path.DirectorySeparatorChar}", "Users", Environment.UserName, "AppData", "Local", "BowieD", "NPCMaker");
         public static string Directory

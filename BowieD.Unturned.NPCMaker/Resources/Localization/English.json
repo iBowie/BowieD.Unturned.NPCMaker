@@ -70,7 +70,14 @@
         "exportSchema_Option_Default": "Default",
         "exportSchema_Option_Verbose_Comment": "Verbose (Comments override)",
         "exportSchema_Option_Verbose_No_Comment": "Verbose",
-        "exportSchema_Option_GUID_All_The_Way": "GUIDs Everywhere"
+        "exportSchema_Option_GUID_All_The_Way": "GUIDs Everywhere",
+
+        "disabledErrors_Header": "Disabled Errors",
+        "disabledErrors_Character_Header": "Character",
+        "disabledErrors_Dialogue_Header": "Dialogue",
+        "disabledErrors_Vendor_Header": "Vendor",
+        "disabledErrors_Quest_Header": "Quest",
+        "disabledErrors_Currency_Header": "Currency"
     },
     "Character":
     {
@@ -849,6 +856,7 @@
         "Configuration_Tab_Import_ChangeFolder": "Locate Unturned",
         "Configuration_Tab_Import_ResetFolder": "Reset",
         "Configuration_Tab_Export": "Export",
+        "Configuration_Tab_Advanced": "Advanced",
         "Configuration_Menu_Default": "Default Settings",
         "Configuration_Menu_Default_Confirm": "Are you sure you want to reset settings to defaults?",
         "Configuration_Menu_Save": "Save",

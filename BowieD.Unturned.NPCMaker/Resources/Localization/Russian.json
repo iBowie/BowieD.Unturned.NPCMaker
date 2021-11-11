@@ -70,7 +70,14 @@
         "exportSchema_Option_Default": "По умолчанию",
         "exportSchema_Option_Verbose_Comment": "Словесный (Комментарии)",
         "exportSchema_Option_Verbose_No_Comment": "Словесный",
-        "exportSchema_Option_GUID_All_The_Way": "GUIDы повсюду"
+        "exportSchema_Option_GUID_All_The_Way": "GUIDы повсюду",
+
+        "disabledErrors_Header": "Отключенные ошибки",
+        "disabledErrors_Character_Header": "Персонаж",
+        "disabledErrors_Dialogue_Header": "Диалог",
+        "disabledErrors_Vendor_Header": "Магазин",
+        "disabledErrors_Quest_Header": "Задание",
+        "disabledErrors_Currency_Header": "Валюта"
     },
     "Character":
     {
@@ -843,6 +850,7 @@
         "Configuration_Tab_Import_ChangeFolder": "Указать расположение Unturned",
         "Configuration_Tab_Import_ResetFolder": "Сброс",
         "Configuration_Tab_Export": "Экспорт",
+        "Configuration_Tab_Advanced": "Продвинутые",
         "Configuration_Menu_Default": "По умолчанию",
         "Configuration_Menu_Default_Confirm": "Вы уверены что хотите сбросить настройки до исходных?",
         "Configuration_Menu_Save": "Сохранить",
