@@ -77,7 +77,6 @@
                         <CheckBox Name="AlternateLogicTranslation_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_alternateLogicTranslation}" ToolTip="{xaml:Localize Key=OPTIONS_alternateLogicTranslation_Tooltip}"/>
                         <CheckBox Name="ReplaceMissingKeysWithEnglish_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_replaceMissingKeysWithEnglish}" ToolTip="{xaml:Localize Key=OPTIONS_replaceMissingKeysWithEnglish_Tooltip}"/>
                         <CheckBox Name="UseCommentsInsteadOfData_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_useCommentsInsteadOfData}" ToolTip="{xaml:Localize Key=OPTIONS_useCommentsInsteadOfData_Tooltip}"/>
-                        <CheckBox Name="Experimental_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_experimentalFeatures}" ToolTip="{xaml:Localize Key=OPTIONS_experimentalFeatures_Tooltip}"/>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
@@ -133,7 +132,8 @@
             <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Advanced}">
                 <ScrollViewer Margin="5">
                     <StackPanel>
-                        <GroupBox Header="{xaml:Localize Key=OPTIONS_disabledErrors_Header}">
+                        <CheckBox Name="Experimental_Box" VerticalAlignment="Top" Margin="5" Content="{xaml:Localize Key=OPTIONS_experimentalFeatures}" ToolTip="{xaml:Localize Key=OPTIONS_experimentalFeatures_Tooltip}"/>
+                        <GroupBox Header="{xaml:Localize Key=OPTIONS_disabledErrors_Header}" Margin="5">
                             <StackPanel Name="disabledErrorsPanel">
                                 <Expander Header="{xaml:Localize Key=OPTIONS_disabledErrors_Character_Header}" Margin="5">
                                     <StackPanel>
