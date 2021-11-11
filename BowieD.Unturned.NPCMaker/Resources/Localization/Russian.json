@@ -842,6 +842,7 @@
         "Configuration_Tab_Import": "Импорт",
         "Configuration_Tab_Import_ChangeFolder": "Указать расположение Unturned",
         "Configuration_Tab_Import_ResetFolder": "Сброс",
+        "Configuration_Tab_Export": "Экспорт",
         "Configuration_Menu_Default": "По умолчанию",
         "Configuration_Menu_Default_Confirm": "Вы уверены что хотите сбросить настройки до исходных?",
         "Configuration_Menu_Save": "Сохранить",

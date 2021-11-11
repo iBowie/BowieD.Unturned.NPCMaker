@@ -848,6 +848,7 @@
         "Configuration_Tab_Import": "Import",
         "Configuration_Tab_Import_ChangeFolder": "Locate Unturned",
         "Configuration_Tab_Import_ResetFolder": "Reset",
+        "Configuration_Tab_Export": "Export",
         "Configuration_Menu_Default": "Default Settings",
         "Configuration_Menu_Default_Confirm": "Are you sure you want to reset settings to defaults?",
         "Configuration_Menu_Save": "Save",

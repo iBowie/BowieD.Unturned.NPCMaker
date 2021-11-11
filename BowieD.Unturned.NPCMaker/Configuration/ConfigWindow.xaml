@@ -98,7 +98,7 @@
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Export">
+            <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Export}">
                 <ScrollViewer Margin="5">
                     <StackPanel>
                         <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_generateGuids_Tooltip}">
