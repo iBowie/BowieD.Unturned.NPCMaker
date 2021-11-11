@@ -38,6 +38,7 @@
         "highlightSearch": "Подсветка поиска",
         "useOldStyleMoveUpDown": "Использовать классическую систему перемещения",
         "exportSchema": "Структура экспорта",
+        "automaticallyCheckForErrors": "Счётчик ошибок",
 
         "experimentalFeatures_Tooltip": "ЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭксперименты",
         "scale_Tooltip": "Изменить размер программы на экране",
@@ -59,6 +60,7 @@
         "highlightSearch_Tooltip": "Подкрашивает совпадающую часть текста с запросом. Очень требовательная функция в данный момент.",
         "useOldStyleMoveUpDown_Tooltip": "Отключает новую систему перетаскивания",
         "exportSchema_Tooltip": "Как именно программа должна экспортировать проект",
+        "automaticallyCheckForErrors_Tooltip": "Показывает текущее количество ошибок в нижней части программы.\nВнимание: это не оптимизировано и может быть причиной лагов.\nЕсли у Вас слабый компьютер - лучше оставьте это выключенным.",
 
         "exportSchema_Warning": "Внимание! Эта настройка предназначена для продвинутых пользователей!",
 
@@ -735,6 +737,9 @@
         "Main_Menu_Guides": "Руководства",
         "Main_Menu_Templates": "Получить шаблоны",
         "Main_Menu_About": "О программе",
+        "Main_Status_Errors_None": "Ошибок нет",
+        "Main_Status_Errors_Errors": "{0} ошибок",
+        "Main_Status_Errors_Warnings": "{0} предупреждений",
         "Main_Tab_Character": "Персонаж",
         "Main_Tab_Character_ID_Tooltip": "ID NPC",
         "Main_Tab_Character_Name_Editor_Tooltip": "Имя, видимое в редакторе карт",

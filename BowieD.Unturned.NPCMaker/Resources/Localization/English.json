@@ -38,6 +38,7 @@
         "highlightSearch": "Highlight search",
         "useOldStyleMoveUpDown": "Use classic move up/down",
         "exportSchema": "Export Schema",
+        "automaticallyCheckForErrors": "Error Counter",
 
         "experimentalFeatures_Tooltip": "Something experimental, maybe unstable",
         "scale_Tooltip": "Adjust scale of the app on your screen",
@@ -59,6 +60,7 @@
         "highlightSearch_Tooltip": "Colors matching part of a search query. Very perfomance expensive feature at this moment.",
         "useOldStyleMoveUpDown_Tooltip": "Disables new drag",
         "exportSchema_Tooltip": "Manage export structure of your projects",
+        "automaticallyCheckForErrors_Tooltip": "Will show current error count on the bottom of the app.\nNote: this is not optimized and in some cases may be the cause of lags.\nIf you have a slow PC better keep it disabled.",
 
         "exportSchema_Warning": "Warning! This setting is only for advanced users!",
 
@@ -735,6 +737,9 @@
         "Main_Menu_Guides": "Guides",
         "Main_Menu_Templates": "Get Templates",
         "Main_Menu_About": "About",
+        "Main_Status_Errors_None": "Everything is fine",
+        "Main_Status_Errors_Errors": "{0} errors",
+        "Main_Status_Errors_Warnings": "{0} warnings",
         "Main_Tab_Character": "Character",
         "Main_Tab_Character_ID_Tooltip": "ID of the NPC",
         "Main_Tab_Character_Name_Editor_Tooltip": "Name visible in map editor",

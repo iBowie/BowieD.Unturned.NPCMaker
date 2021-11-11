@@ -4,6 +4,7 @@ using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.Managers;
+using BowieD.Unturned.NPCMaker.Mistakes;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Themes;
 using BowieD.Unturned.NPCMaker.ViewModels;
@@ -129,6 +130,19 @@ namespace BowieD.Unturned.NPCMaker
             };
             AppUpdateTimer.Tick += AppUpdateTimer_Tick;
             AppUpdateTimer.Start();
+            #endregion
+            #region ErrorCheck
+            if (AppConfig.Instance.automaticallyCheckForErrors)
+            {
+                statusNoErrorsItem.Visibility = Visibility.Visible;
+
+                ErrorCheckTimer = new DispatcherTimer()
+                {
+                    Interval = TimeSpan.FromSeconds(3)
+                };
+                ErrorCheckTimer.Tick += ErrorCheckTimer_Tick;
+                ErrorCheckTimer.Start();
+            }
             #endregion
             #region VERSION SPECIFIC CODE
 #if !DEBUG
@@ -351,6 +365,7 @@ namespace BowieD.Unturned.NPCMaker
         public static ProjectData CurrentProject { get; } = new ProjectData();
         public static DispatcherTimer AutosaveTimer { get; set; }
         public static DispatcherTimer AppUpdateTimer { get; set; }
+        public static DispatcherTimer ErrorCheckTimer { get; set; }
         public static DateTime Started { get; set; } = DateTime.UtcNow;
         #endregion
         private void AutosaveTimer_Tick(object sender, EventArgs e)
@@ -382,6 +397,44 @@ namespace BowieD.Unturned.NPCMaker
             }
 
             menuCurrentFileLabel.ToolTip = CurrentProject.file;
+        }
+        private void ErrorCheckTimer_Tick(object sender, EventArgs e)
+        {
+            MistakesManager.FindMistakes();
+
+            var errorCount = MistakesManager.Criticals_Count;
+            var warnCount = MistakesManager.Warnings_Count;
+
+            if (errorCount > 0)
+            {
+                statusErrorsItem.Visibility = Visibility.Visible;
+
+                statusErrorsItemText.Text = LocalizationManager.Current.Interface.Translate("Main_Status_Errors_Errors", errorCount);
+            }
+            else
+            {
+                statusErrorsItem.Visibility = Visibility.Collapsed;
+            }
+
+            if (warnCount > 0)
+            {
+                statusWarningsItem.Visibility = Visibility.Visible;
+
+                statusWarningsItemText.Text = LocalizationManager.Current.Interface.Translate("Main_Status_Errors_Warnings", warnCount);
+            }
+            else
+            {
+                statusWarningsItem.Visibility = Visibility.Collapsed;
+            }
+
+            if (errorCount == 0 && warnCount == 0)
+            {
+                statusNoErrorsItem.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                statusNoErrorsItem.Visibility = Visibility.Collapsed;
+            }
         }
         protected override void OnClosing(CancelEventArgs e)
         {

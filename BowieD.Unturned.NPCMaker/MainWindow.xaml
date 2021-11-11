@@ -30,6 +30,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Menu VerticalAlignment="Top">
                 <MenuItem Header="{xaml:Localize Key=INTERFACE_Main_Menu_File}">
@@ -2010,11 +2011,43 @@
                 </TabControl.ItemTemplate>
             </TabControl>
             <TextBlock Name="genericTextBlock" Visibility="Collapsed"/>
+            <StatusBar Grid.Row="2">
+                <StatusBarItem Name="statusNoErrorsItem" Visibility="Collapsed" d:Visibility="Visible">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <iconPacks:PackIconMaterial Kind="CheckCircle" Foreground="{DynamicResource ForegroundColor}"/>
+                        <TextBlock Grid.Column="1" Margin="5,0,0,0" Text="{xaml:Localize Key=INTERFACE_Main_Status_Errors_None}" Foreground="{DynamicResource ForegroundColor}"/>
+                    </Grid>
+                </StatusBarItem>
+                <StatusBarItem Name="statusErrorsItem" Visibility="Collapsed" d:Visibility="Visible">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <iconPacks:PackIconMaterial Kind="CloseCircle" Foreground="{DynamicResource ForegroundColor}"/>
+                        <TextBlock Name="statusErrorsItemText" Grid.Column="1" Margin="5,0,0,0" Text="0 errors" Foreground="{DynamicResource ForegroundColor}"/>
+                    </Grid>
+                </StatusBarItem>
+                <StatusBarItem Name="statusWarningsItem" Visibility="Collapsed" d:Visibility="Visible">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <iconPacks:PackIconMaterial Kind="Alert" Foreground="{DynamicResource ForegroundColor}"/>
+                        <TextBlock Name="statusWarningsItemText" Grid.Column="1" Margin="5,0,0,0" Text="0 warnings" Foreground="{DynamicResource ForegroundColor}"/>
+                    </Grid>
+                </StatusBarItem>
+            </StatusBar>
         </Grid>
         <Grid Name="dropOverlay" Background="#99000000" Visibility="Hidden">
             <iconPacks:PackIconMaterial Kind="FolderUploadOutline" VerticalAlignment="Center" HorizontalAlignment="Center" Width="256" Height="256"/>
         </Grid>
-        <Grid Name="notificationOverlay" Visibility="Visible"/>
+        <Grid Name="notificationOverlay" d:Visibility="Collapsed" Visibility="Visible"/>
         <Grid Name="blockActionsOverlay" Visibility="Collapsed" IsHitTestVisible="True">
             <Rectangle Fill="Black" Opacity="0.8"/>
             <TextBlock Name="textBlockActions" TextAlignment="Center" Text="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_DeepAnalysis_Progress}" FontSize="18" Foreground="White" Opacity="0.8" VerticalAlignment="Center"/>
@@ -2024,7 +2057,7 @@
             <Rectangle Fill="Black" Opacity="0.8"/>
             <TextBlock Name="ugcOverlayText" TextAlignment="Center" Text="what" FontSize="18" VerticalAlignment="Center" Foreground="White" Opacity="0.8"/>
         </Grid>
-        <Grid Name="notClickableOverlay" IsHitTestVisible="False">
+        <Grid Name="notClickableOverlay" d:Visibility="Collapsed" IsHitTestVisible="False">
             <Grid Name="debugOverlayText" HorizontalAlignment="Right" Opacity="0.15" VerticalAlignment="Top" Margin="5">
                 <iconPacks:PackIconMaterial Kind="BugOutline" Width="36" Height="36" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Margin="36,0,0,0" Content="DEBUG" HorizontalAlignment="Right" FontSize="36"/>

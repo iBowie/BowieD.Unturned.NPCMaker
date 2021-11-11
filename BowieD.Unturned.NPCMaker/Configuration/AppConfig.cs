@@ -35,6 +35,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public bool generateThumbnailsBeforehand = true;
         public bool highlightSearch;
         public bool useOldStyleMoveUpDown;
+        public bool automaticallyCheckForErrors = false;
 
         public void Save()
         {
@@ -101,6 +102,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 language = ELanguage.English;
             }
             exportSchema = EExportSchema.Default;
+            automaticallyCheckForErrors = false;
 
             App.Logger.Log($"[CFG] - Default configuration loaded!");
         }
