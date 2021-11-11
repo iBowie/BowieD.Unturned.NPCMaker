@@ -234,6 +234,7 @@
     <Compile Include="Coloring\Color.cs" />
     <Compile Include="Configuration\IConfig.cs" />
     <Compile Include="Data\AppPackage.cs" />
+    <Compile Include="Data\AXData.cs" />
     <Compile Include="Data\DateTimeRange.cs" />
     <Compile Include="Data\IData.cs" />
     <Compile Include="Data\JsonData.cs" />
@@ -504,6 +505,7 @@
     <Compile Include="NPC\Shared\Attributes\SkipFieldAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\TooltipAttribute.cs" />
     <Compile Include="NPC\Simulation.cs" />
+    <Compile Include="NPC\SimulationSaveData.cs" />
     <Compile Include="NPC\VirtualDialogueVendor.cs" />
     <Compile Include="OrderTool.cs" />
     <Compile Include="Parsing\DataReader.cs" />
