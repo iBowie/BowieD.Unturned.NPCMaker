@@ -354,7 +354,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     addItemCommand = new AdvancedCommand(() =>
                     {
-                        Universal_VendorItemEditor uvie = new Universal_VendorItemEditor(Vendor);
+                        Universal_VendorItemEditor uvie = new Universal_VendorItemEditor(Vendor)
+                        {
+                            Owner = MainWindow.Instance
+                        };
                         if (uvie.ShowDialog() == true)
                         {
                             VendorItem resultedVendorItem = uvie.Result;
