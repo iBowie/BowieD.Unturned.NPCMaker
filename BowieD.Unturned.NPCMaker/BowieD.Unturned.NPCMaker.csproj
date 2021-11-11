@@ -436,7 +436,6 @@
     <Compile Include="Mistakes\Dialogue\NE_1007.cs" />
     <Compile Include="Mistakes\Dialogue\NE_1008.cs" />
     <Compile Include="Mistakes\Dialogue\NE_1009.cs" />
-    <Compile Include="Mistakes\Dialogue\NE_1010.cs" />
     <Compile Include="Mistakes\MistakesManager.cs" />
     <Compile Include="Mistakes\Quest\NE_3000.cs" />
     <Compile Include="Mistakes\Quest\NE_3001.cs" />
