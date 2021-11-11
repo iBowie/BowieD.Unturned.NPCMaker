@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.GameIntegration;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -29,8 +30,25 @@ namespace BowieD.Unturned.NPCMaker.NPC
             Items = new List<Item>();
         }
 
+        private int _time;
+
         public string Name { get; set; }
-        public int Time { get; set; }
+        public int Time
+        {
+            get => _time;
+            set
+            {
+                _time = value;
+
+                OnPropertyChanged(nameof(Time));
+                OnPropertyChanged(nameof(DisplayTime));
+            }
+        }
+        public TimeSpan DisplayTime
+        {
+            get => TimeSpan.FromSeconds(Time);
+            set => Time = (int)value.TotalSeconds;
+        }
         public ESkillset Skillset { get; set; }
         public uint Experience { get; set; }
         public int Reputation { get; set; }

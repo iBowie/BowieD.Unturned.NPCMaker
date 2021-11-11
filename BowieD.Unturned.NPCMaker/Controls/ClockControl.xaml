@@ -65,7 +65,7 @@
                     <Grid.RenderTransform>
                         <RotateTransform Angle="90" CenterX="27" CenterY="27"/>
                     </Grid.RenderTransform>
-                    <TextBlock Name="pmAmSwitch" Text="AM" FontSize="8" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Foreground="{DynamicResource ForegroundColor}" Name="pmAmSwitch" Text="AM" FontSize="8" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock.RenderTransform>
                             <TranslateTransform X="11"/>
                         </TextBlock.RenderTransform>
