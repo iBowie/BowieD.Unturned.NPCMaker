@@ -190,7 +190,8 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                     id = asset.ReadUInt16($"Buying_{i}_ID"),
                     cost = asset.ReadUInt32($"Buying_{i}_Cost"),
                     conditions = ParseConditions($"Buying_{i}_").ToList(),
-                    isBuy = true
+                    isBuy = true,
+                    rewards = ParseRewards($"Buying_{i}_").ToList()
                 });
             }
             for (byte i = 0; i < sellAmount; i++)
@@ -205,6 +206,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 vi.id = asset.ReadUInt16($"Selling_{i}_ID");
                 vi.cost = asset.ReadUInt32($"Selling_{i}_Cost");
                 vi.conditions = ParseConditions($"Selling_{i}_").ToList();
+                vi.rewards = ParseRewards($"Buying_{i}_").ToList();
                 if (text == null || (text.Equals("Item", StringComparison.InvariantCultureIgnoreCase)))
                 {
                     vi.type = ItemType.ITEM;

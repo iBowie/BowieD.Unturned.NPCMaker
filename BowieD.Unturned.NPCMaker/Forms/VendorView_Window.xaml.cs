@@ -149,6 +149,11 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                 elem.PreviewMouseLeftButtonDown += (sender, e) =>
                 {
+                    b.rewards.ForEach((r) =>
+                    {
+                        r.Give(Simulation);
+                    });
+
                     if (Simulation.Items.Any(d => d.ID == b.id))
                     {
                         Simulation.Items.Remove(Simulation.Items.First(d => d.ID == b.id));
@@ -167,6 +172,11 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 {
                     if (getCurrency() >= s.cost)
                     {
+                        s.rewards.ForEach((r) =>
+                        {
+                            r.Give(Simulation);
+                        });
+
                         changeCurrency(s.cost, true);
                         switch (s.type)
                         {

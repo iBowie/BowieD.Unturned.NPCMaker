@@ -445,7 +445,8 @@
         "SellType_Buy": "NPC will buy this",
         "SellType_Sell": "NPC will sell this",
         "Save": "Save Item",
-        "Conditions": "Edit Conditions"
+        "Conditions": "Edit Conditions",
+        "Rewards": "Edit Rewards"
     },
     "Mistakes":
     {

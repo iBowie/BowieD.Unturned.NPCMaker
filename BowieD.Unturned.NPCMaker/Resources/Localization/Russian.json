@@ -445,7 +445,8 @@
         "SellType_Buy": "NPC покупает это",
         "SellType_Sell": "NPC продаёт это",
         "Save": "Сохранить предмет",
-        "Conditions": "Условия"
+        "Conditions": "Условия",
+        "Rewards": "Награды"
     },
     "Mistakes":
     {

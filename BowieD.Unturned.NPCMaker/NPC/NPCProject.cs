@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
     {
         // REALLY IMPORTANT
         // ADAPT THIS CODE TO .NET REWRITE VERSION
-        public const int CURRENT_SAVEDATA_VERSION = 9;
+        public const int CURRENT_SAVEDATA_VERSION = 10;
 
         public NPCProject()
         {
