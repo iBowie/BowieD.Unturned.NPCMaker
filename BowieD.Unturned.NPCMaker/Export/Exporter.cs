@@ -481,6 +481,15 @@ namespace BowieD.Unturned.NPCMaker.Export
                                         asset.WriteLine(ExportCondition(buy[k].conditions[c], $"Buying_{k}_", c));
                                     }
                                 }
+
+                                if (buy[k].rewards?.Count > 0)
+                                {
+                                    asset.WriteLine($"Buying_{k}_Rewards {buy[k].rewards.Count}");
+                                    for (int c = 0; c < buy[k].rewards.Count; c++)
+                                    {
+                                        asset.WriteLine(ExportReward(buy[k].rewards[c], $"Buying_{k}_", c));
+                                    }
+                                }
                             }
                         }
                         if (vendor.SellItems.Count > 0)
@@ -502,6 +511,15 @@ namespace BowieD.Unturned.NPCMaker.Export
                                     for (int c = 0; c < sell[k].conditions.Count; c++)
                                     {
                                         asset.WriteLine(ExportCondition(sell[k].conditions[c], $"Selling_{k}_", c));
+                                    }
+                                }
+
+                                if (sell[k].rewards?.Count > 0)
+                                {
+                                    asset.WriteLine($"Selling_{k}_Rewards {sell[k].rewards.Count}");
+                                    for (int c = 0; c < sell[k].rewards.Count; c++)
+                                    {
+                                        asset.WriteLine(ExportReward(sell[k].rewards[c], $"Selling_{k}_", c));
                                     }
                                 }
                             }

@@ -190,6 +190,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
                             Value = item.cost
                         });
                     }
+
+                    response.rewards.AddRange(item.rewards);
                 }
                 else
                 {
@@ -236,6 +238,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
                             });
                             break;
                     }
+
+                    response.rewards.AddRange(item.rewards);
                 }
 
                 if (GameAssetManager.TryGetAsset<GameItemAsset>(item.id, out var asset))

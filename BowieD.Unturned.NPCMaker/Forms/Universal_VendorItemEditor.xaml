@@ -35,6 +35,7 @@
                 <ComboBoxItem Content="{xaml:Localize Key=VENDORITEM_SellType_Sell}" Tag="SELL"/>
             </ComboBox>
             <Button Click="EditConditions_Click" Height="28" Content="{xaml:Localize Key=VENDORITEM_Conditions}" Margin="5"/>
+            <Button Click="EditRewards_Click" Height="28" Content="{xaml:Localize Key=VENDORITEM_Rewards}" Margin="5"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
+using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -144,6 +145,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public VendorItem()
         {
             conditions = new List<Condition>();
+            rewards = new List<Reward>();
         }
 
         public bool isBuy;
@@ -152,6 +154,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public ushort id;
         public List<Condition> conditions;
         public string spawnPointID;
+        public List<Reward> rewards;
 
         public string UIText
         {
@@ -227,6 +230,15 @@ namespace BowieD.Unturned.NPCMaker.NPC
             isBuy = node["isBuy"].ToBoolean();
             conditions = node["conditions"].ParseAXDataCollection<Condition>(version).ToList();
             spawnPointID = node["spawnPointID"].ToText();
+
+            if (version >= 10)
+            {
+                rewards = node["rewards"].ParseAXDataCollection<Reward>(version).ToList();
+            }
+            else
+            {
+                rewards = new List<Reward>();
+            }
         }
 
         public void Save(XmlDocument document, XmlNode node)
@@ -237,6 +249,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             document.CreateNodeC("isBuy", node).WriteBoolean(isBuy);
             document.CreateNodeC("conditions", node).WriteAXDataCollection(document, "Condition", conditions);
             document.CreateNodeC("spawnPointID", node).WriteString(spawnPointID);
+            document.CreateNodeC("rewards", node).WriteAXDataCollection(document, "Reward", rewards);
         }
     }
 }

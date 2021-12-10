@@ -17,6 +17,17 @@ namespace BowieD.Unturned.NPCMaker
             try
             {
                 SetupExceptionHandling();
+
+                try
+                {
+                    Directory.SetCurrentDirectory(AppConfig.ExeDirectory);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("could not set current directory");
+                    Console.WriteLine(ex);
+                }
+
                 App app = new App();
                 app.InitializeComponent();
                 app.Run();

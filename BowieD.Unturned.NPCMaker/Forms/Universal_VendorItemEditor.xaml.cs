@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.GameIntegration.Devkit;
 using BowieD.Unturned.NPCMaker.NPC;
+using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using BowieD.Unturned.NPCMaker.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -227,6 +228,14 @@ namespace BowieD.Unturned.NPCMaker.Forms
             ulv.Owner = this;
             ulv.ShowDialog();
             Result.conditions = ulv.Values.Cast<Condition>().ToList();
+        }
+
+        private void EditRewards_Click(object sender, RoutedEventArgs e)
+        {
+            Universal_ListView ulv = new Universal_ListView(Result.rewards.Select(d => new Controls.Universal_ItemList(d, Controls.Universal_ItemList.ReturnType.Reward, true)).ToLimitedList(byte.MaxValue), Controls.Universal_ItemList.ReturnType.Reward);
+            ulv.Owner = this;
+            ulv.ShowDialog();
+            Result.rewards = ulv.Values.Cast<Reward>().ToList();
         }
 
         private static bool isSellSelected = false;
