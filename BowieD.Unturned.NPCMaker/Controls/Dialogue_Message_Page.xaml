@@ -17,7 +17,9 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBox TextChanged="TextField_TextChanged" TextWrapping="Wrap" Name="textField" Margin="5,5,5,2.5">
-            
+            <xaml:Extensions.OCBoomerangsAttach>
+                <xaml:OCBoomerangsAttach/>
+            </xaml:Extensions.OCBoomerangsAttach>
         </TextBox>
         <StackPanel Grid.Row="1" Margin="2.5,2.5,2.5,5" Orientation="Horizontal" FlowDirection="RightToLeft">
             <Button Margin="2.5,0" Width="31" Height="31" Name="deleteButton">

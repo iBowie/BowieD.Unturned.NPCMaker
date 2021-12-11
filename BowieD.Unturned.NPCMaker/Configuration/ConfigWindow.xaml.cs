@@ -160,6 +160,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 automaticallyCheckForErrors = AutomaticallyCheckForErrors_Box.IsChecked.Value,
                 disabledErrors = CurrentDisabledErrors,
                 preferLegacyIDsOverGUIDs = PreferLegacyIDsOverGUIDs_Box.IsChecked.Value,
+                autoCloseOpenBoomerangs = Auto_Close_Open_Boomerangs_Box.IsChecked.Value,
                 unturnedDir = curUntDir
             };
             set
@@ -217,6 +218,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 AutomaticallyCheckForErrors_Box.IsChecked = value.automaticallyCheckForErrors;
                 CurrentDisabledErrors = value.disabledErrors;
                 PreferLegacyIDsOverGUIDs_Box.IsChecked = value.preferLegacyIDsOverGUIDs;
+                Auto_Close_Open_Boomerangs_Box.IsChecked = value.autoCloseOpenBoomerangs;
                 curUntDir = value.unturnedDir;
             }
         }

@@ -67,6 +67,7 @@
                         <CheckBox Content="{xaml:Localize Key=OPTIONS_animateControls}" ToolTip="{xaml:Localize Key=OPTIONS_animateControls_Tooltip}" Name="Animation_Enabled_Box" VerticalAlignment="Top" Margin="2.5"/>
                         <CheckBox Content="{xaml:Localize Key=OPTIONS_highlightSearch}" ToolTip="{xaml:Localize Key=OPTIONS_highlightSearch_Tooltip}" Name="Highlight_Search_Box" VerticalAlignment="Top" Margin="2.5"/>
                         <CheckBox Content="{xaml:Localize Key=OPTIONS_useOldStyleMoveUpDown}" ToolTip="{xaml:Localize Key=OPTIONS_useOldStyleMoveUpDown_Tooltip}" Name="Use_Old_Style_Move_Up_Down_Box" VerticalAlignment="Top" Margin="2.5"/>
+                        <CheckBox Content="{xaml:Localize Key=OPTIONS_autoCloseOpenBoomerangs}" ToolTip="{xaml:Localize Key=OPTIONS_autoCloseOpenBoomerangs_Tooltip}" Name="Auto_Close_Open_Boomerangs_Box" VerticalAlignment="Top" Margin="2.5"/>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>

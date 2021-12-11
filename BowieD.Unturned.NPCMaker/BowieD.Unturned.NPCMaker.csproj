@@ -395,6 +395,7 @@
     <Compile Include="GameIntegration\Thumbnails\IHasToolTip.cs" />
     <Compile Include="GameIntegration\Thumbnails\ISearchNameOverride.cs" />
     <Compile Include="GameIntegration\Thumbnails\ThumbnailManager.cs" />
+    <Compile Include="IDELikeTool.cs" />
     <Compile Include="IHasDisplayedIndex.cs" />
     <Compile Include="IHasOrderButtons.cs" />
     <Compile Include="IHasUniqueGUID.cs" />
@@ -503,6 +504,7 @@
     <Compile Include="NPC\Rewards\RewardTeleport.cs" />
     <Compile Include="NPC\Rewards\Attributes\RewardTooltipAttribute.cs" />
     <Compile Include="NPC\Rewards\RewardVehicle.cs" />
+    <Compile Include="NPC\Shared\Attributes\ApplicableToOpenCloseBoomerangsAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\AssetPickerAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\ContextAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\NoValueAttribute.cs" />
@@ -599,6 +601,7 @@
     <Compile Include="ViewModels\VirtualDialogueVendorTabViewModel.cs" />
     <Compile Include="Workshop\SteamManager.cs" />
     <Compile Include="XAML\EnumItemsSource.cs" />
+    <Compile Include="XAML\Extensions.cs" />
     <Compile Include="XAML\LocalizationConverter.cs" />
     <Compile Include="XAML\LocalizeExtension.cs" />
     <Page Include="Controls\ClockControl.xaml">

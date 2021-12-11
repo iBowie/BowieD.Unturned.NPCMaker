@@ -70,7 +70,11 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Name="indexTextBlock" Text="255" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Margin="5" Width="32"/>
                         <Button Grid.Column="2" Click="EditRewardsButton_Click" Name="editRewardsButton" Content="{xaml:Localize Key=DIALOGUE_Reply_Rewards}" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="5" Height="32"/>
-                        <TextBox Grid.Column="1" TextChanged="MainText_TextChanged" Name="mainText" Margin="5" TextWrapping="NoWrap" Height="32" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+                        <TextBox Grid.Column="1" TextChanged="MainText_TextChanged" Name="mainText" Margin="5" TextWrapping="NoWrap" Height="32" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                            <xaml:Extensions.OCBoomerangsAttach>
+                                <xaml:OCBoomerangsAttach/>
+                            </xaml:Extensions.OCBoomerangsAttach>
+                        </TextBox>
                         <Button Grid.Column="3" Name="collapseButton" Click="Collapse_Button_Click" ToolTip="{xaml:Localize Key=INTERFACE_Control_Collapse}" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Top" Height="32" Width="32">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ArrowCollapse" Foreground="{DynamicResource AccentColor}"/>

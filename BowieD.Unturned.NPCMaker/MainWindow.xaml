@@ -223,6 +223,9 @@
                                                 <Image Source="Resources/Help/img_help_displayName.png"/>
                                             </StackPanel>
                                         </TextBox.ToolTip>
+                                        <xaml:Extensions.OCBoomerangsAttach>
+                                            <xaml:OCBoomerangsAttach/>
+                                        </xaml:Extensions.OCBoomerangsAttach>
                                     </TextBox>
                                     <TextBlock VerticalAlignment="Center" Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Name_Display}"/>
                                 </Grid>
@@ -1400,7 +1403,11 @@
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Name="vendorTitleTxtBox" Height="26" Margin="5"/>
+                                        <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Name="vendorTitleTxtBox" Height="26" Margin="5">
+                                            <xaml:Extensions.OCBoomerangsAttach>
+                                                <xaml:OCBoomerangsAttach/>
+                                            </xaml:Extensions.OCBoomerangsAttach>
+                                        </TextBox>
                                         <TextBlock VerticalAlignment="Center" Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_Title}"/>
                                     </Grid>
                                     <Grid>
@@ -1408,7 +1415,11 @@
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Name="vendorDescTxtBox" Height="26" Margin="5"/>
+                                        <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Name="vendorDescTxtBox" Height="26" Margin="5">
+                                            <xaml:Extensions.OCBoomerangsAttach>
+                                                <xaml:OCBoomerangsAttach/>
+                                            </xaml:Extensions.OCBoomerangsAttach>
+                                        </TextBox>
                                         <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=VENDOR_Description}" VerticalAlignment="Center"/>
                                     </Grid>
                                 </StackPanel>
@@ -1591,7 +1602,11 @@
                                                 <RowDefinition/>
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
-                                            <TextBox Name="dialogueVendorSellingFormatBox" Grid.Row="1" VerticalAlignment="Center" Text="{Binding SellingFormatText, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+                                            <TextBox Name="dialogueVendorSellingFormatBox" Grid.Row="1" VerticalAlignment="Center" Text="{Binding SellingFormatText, UpdateSourceTrigger=PropertyChanged}" Margin="5">
+                                                <xaml:Extensions.OCBoomerangsAttach>
+                                                    <xaml:OCBoomerangsAttach/>
+                                                </xaml:Extensions.OCBoomerangsAttach>
+                                            </TextBox>
                                             <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=DIALOGUEVENDOR_SellingFormat}" Margin="5"/>
                                         </Grid>
                                         <Grid>
@@ -1599,7 +1614,11 @@
                                                 <RowDefinition/>
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
-                                            <TextBox Name="dialogueVendorBuyingFormatBox" Grid.Row="1" VerticalAlignment="Center" Text="{Binding BuyingFormatText, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+                                            <TextBox Name="dialogueVendorBuyingFormatBox" Grid.Row="1" VerticalAlignment="Center" Text="{Binding BuyingFormatText, UpdateSourceTrigger=PropertyChanged}" Margin="5">
+                                                <xaml:Extensions.OCBoomerangsAttach>
+                                                    <xaml:OCBoomerangsAttach/>
+                                                </xaml:Extensions.OCBoomerangsAttach>
+                                            </TextBox>
                                             <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=DIALOGUEVENDOR_BuyingFormat}" Margin="5"/>
                                         </Grid>
                                         <Grid>
@@ -1607,7 +1626,11 @@
                                                 <RowDefinition/>
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
-                                            <TextBox Name="dialogueVendorGoodbyeTextBox" Grid.Row="1" VerticalAlignment="Center" Text="{Binding GoodbyeText, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+                                            <TextBox Name="dialogueVendorGoodbyeTextBox" Grid.Row="1" VerticalAlignment="Center" Text="{Binding GoodbyeText, UpdateSourceTrigger=PropertyChanged}" Margin="5">
+                                                <xaml:Extensions.OCBoomerangsAttach>
+                                                    <xaml:OCBoomerangsAttach/>
+                                                </xaml:Extensions.OCBoomerangsAttach>
+                                            </TextBox>
                                             <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=DIALOGUEVENDOR_GoodbyeText}" Margin="5"/>
                                         </Grid>
                                         <Grid>
@@ -1788,9 +1811,17 @@
                                     </Border>
                                 </Grid>
                             </StackPanel>
-                            <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Name="questTitleBox" Height="26" VerticalAlignment="Top" Margin="10,38,10,0"/>
+                            <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Name="questTitleBox" Height="26" VerticalAlignment="Top" Margin="10,38,10,0">
+                                <xaml:Extensions.OCBoomerangsAttach>
+                                    <xaml:OCBoomerangsAttach/>
+                                </xaml:Extensions.OCBoomerangsAttach>
+                            </TextBox>
                             <TextBlock Grid.Row="1" Text="{xaml:Localize Key=QUEST_Title}" TextAlignment="Center" Height="23" VerticalAlignment="Top" Margin="10,10,10,0"/>
-                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" TextWrapping="Wrap" Name="questDescBox" Margin="10,94,10,10"/>
+                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" TextWrapping="Wrap" Name="questDescBox" Margin="10,94,10,10">
+                                <xaml:Extensions.OCBoomerangsAttach>
+                                    <xaml:OCBoomerangsAttach/>
+                                </xaml:Extensions.OCBoomerangsAttach>
+                            </TextBox>
                             <TextBlock Grid.Row="1" TextAlignment="Center" Text="{xaml:Localize Key=QUEST_Description}" Height="23" VerticalAlignment="Top" Margin="10,66,10,0"/>
                             <Grid Grid.Column="1" Grid.Row="1">
                                 <Grid.RowDefinitions>

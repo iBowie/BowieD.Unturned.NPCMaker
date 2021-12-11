@@ -21,6 +21,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     {
         [SkipField]
         [Context(ContextHelper.EContextOption.Group_TextEdit | ContextHelper.EContextOption.Group_Rich)]
+        [ApplicableToOpenCloseBoomerangs]
         public string Localization { get; set; }
         public virtual RewardType Type => throw new NotImplementedException();
         public virtual string UIText => throw new NotImplementedException();
@@ -149,6 +150,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
                 RangeAttribute rangeAttribute = prop.GetCustomAttribute<RangeAttribute>();
                 AssetPickerAttribute assetPickerAttribute = prop.GetCustomAttribute<AssetPickerAttribute>();
+                ApplicableToOpenCloseBoomerangsAttribute openCloseBoomerangsAttribute = prop.GetCustomAttribute<ApplicableToOpenCloseBoomerangsAttribute>();
                 ContextAttribute contextAttribute = prop.GetCustomAttribute<ContextAttribute>();
                 borderContents.Children.Add(l);
                 FrameworkElement valueControl = null;
@@ -323,6 +325,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                             (valueControl as TextBox).Text = asset.GUID.ToString("N");
                         }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
                         valueControl.ContextMenu = vcMenu;
+                    }
+
+                    if (openCloseBoomerangsAttribute != null)
+                    {
+                        IDELikeTool.RegisterOpenCloseBoomerangs(valueControl as TextBox);
                     }
                 }
                 else if (propType.IsEnum)

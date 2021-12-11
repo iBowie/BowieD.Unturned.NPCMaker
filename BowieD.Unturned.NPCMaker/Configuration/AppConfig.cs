@@ -38,6 +38,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public bool automaticallyCheckForErrors = false;
         public string[] disabledErrors;
         public bool preferLegacyIDsOverGUIDs = false;
+        public bool autoCloseOpenBoomerangs = true;
 
         public void Save()
         {
@@ -116,6 +117,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             automaticallyCheckForErrors = false;
             disabledErrors = System.Array.Empty<string>();
             preferLegacyIDsOverGUIDs = false;
+            autoCloseOpenBoomerangs = true;
 
             App.Logger.Log($"[CFG] - Default configuration loaded!");
         }

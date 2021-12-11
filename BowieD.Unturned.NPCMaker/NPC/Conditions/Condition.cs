@@ -22,6 +22,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     {
         [SkipField]
         [Context(ContextHelper.EContextOption.Group_TextEdit | ContextHelper.EContextOption.Group_Rich)]
+        [ApplicableToOpenCloseBoomerangs]
         public string Localization { get; set; }
         [XmlIgnore]
         public virtual Condition_Type Type => throw new NotImplementedException();
@@ -182,6 +183,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 borderContents.Children.Add(l);
                 RangeAttribute rangeAttribute = prop.GetCustomAttribute<RangeAttribute>();
                 AssetPickerAttribute assetPickerAttribute = prop.GetCustomAttribute<AssetPickerAttribute>();
+                ApplicableToOpenCloseBoomerangsAttribute openCloseBoomerangsAttribute = prop.GetCustomAttribute<ApplicableToOpenCloseBoomerangsAttribute>();
                 ContextAttribute contextAttribute = prop.GetCustomAttribute<ContextAttribute>();
                 FrameworkElement valueControl = null;
                 if (propType == typeof(ushort))
@@ -410,6 +412,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                             (valueControl as TextBox).Text = asset.GUID.ToString("N");
                         }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
                         (valueControl as TextBox).ContextMenu = vcMenu;
+                    }
+
+                    if (openCloseBoomerangsAttribute != null)
+                    {
+                        IDELikeTool.RegisterOpenCloseBoomerangs(valueControl as TextBox);
                     }
                 }
                 else if (propType.IsEnum)
