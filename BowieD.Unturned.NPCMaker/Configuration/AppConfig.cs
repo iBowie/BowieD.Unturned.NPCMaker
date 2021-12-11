@@ -70,6 +70,22 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 ThemeManager.Apply(theme);
             }
 
+            if (automaticallyCheckForErrors != from.automaticallyCheckForErrors)
+            {
+                automaticallyCheckForErrors = from.automaticallyCheckForErrors;
+
+                if (automaticallyCheckForErrors)
+                {
+                    MainWindow.Instance.statusNoErrorsItem.Visibility = System.Windows.Visibility.Visible;
+                    MainWindow.ErrorCheckTimer.Start();
+                }
+                else
+                {
+                    MainWindow.Instance.statusNoErrorsItem.Visibility = System.Windows.Visibility.Collapsed;
+                    MainWindow.ErrorCheckTimer.Stop();
+                }
+            }
+
             // it's enough to just change value to apply it
             useCommentsInsteadOfData = from.useCommentsInsteadOfData;
             exportSchema = from.exportSchema;

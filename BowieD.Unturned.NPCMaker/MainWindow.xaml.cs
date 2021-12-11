@@ -132,16 +132,21 @@ namespace BowieD.Unturned.NPCMaker
             AppUpdateTimer.Start();
             #endregion
             #region ErrorCheck
+            ErrorCheckTimer = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromSeconds(3)
+            };
+            ErrorCheckTimer.Tick += ErrorCheckTimer_Tick;
+
             if (AppConfig.Instance.automaticallyCheckForErrors)
             {
                 statusNoErrorsItem.Visibility = Visibility.Visible;
-
-                ErrorCheckTimer = new DispatcherTimer()
-                {
-                    Interval = TimeSpan.FromSeconds(3)
-                };
-                ErrorCheckTimer.Tick += ErrorCheckTimer_Tick;
                 ErrorCheckTimer.Start();
+            }
+            else
+            {
+                statusNoErrorsItem.Visibility = Visibility.Collapsed;
+                ErrorCheckTimer.Stop();
             }
             #endregion
             #region VERSION SPECIFIC CODE
