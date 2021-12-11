@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Logging;
 using BowieD.Unturned.NPCMaker.NPC;
+using BowieD.Unturned.NPCMaker.Themes;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
@@ -51,7 +52,6 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             hasToRestart |= (autosaveOption != from.autosaveOption);
             hasToRestart |= (autoUpdate != from.autoUpdate);
             hasToRestart |= (downloadPrerelease != from.downloadPrerelease);
-            hasToRestart |= (currentTheme != from.currentTheme);
             hasToRestart |= (enableDiscord != from.enableDiscord);
             hasToRestart |= (unturnedDir != from.unturnedDir);
             hasToRestart |= (importVanilla != from.importVanilla);
@@ -60,6 +60,15 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             hasToRestart |= (generateThumbnailsBeforehand != from.generateThumbnailsBeforehand);
             hasToRestart |= (useOldStyleMoveUpDown != from.useOldStyleMoveUpDown);
             hasToRestart |= (replaceMissingKeysWithEnglish != from.replaceMissingKeysWithEnglish);
+
+            // it has to do some work before it can be applied
+            if (currentTheme != from.currentTheme)
+            {
+                currentTheme = from.currentTheme;
+
+                Theme theme = ThemeManager.Themes.ContainsKey(currentTheme ?? "") ? ThemeManager.Themes[currentTheme] : ThemeManager.Themes["Metro/LightGreen"];
+                ThemeManager.Apply(theme);
+            }
 
             // it's enough to just change value to apply it
             useCommentsInsteadOfData = from.useCommentsInsteadOfData;
