@@ -556,7 +556,7 @@
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <GroupBox Header="{xaml:Localize Key=CHARACTER_Clothing}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,185,10,10" MinHeight="274" MaxHeight="343" Width="300">
+                            <GroupBox Header="{xaml:Localize Key=CHARACTER_Clothing}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,207,10,10" MaxHeight="343" Width="400">
                                 <TabControl Name="clothingTabControl">
                                     <TabItem DataContext="{Binding DefaultClothing, UpdateSourceTrigger=PropertyChanged}" Header="{xaml:Localize Key=CHARACTER_Clothing_Default}" mah:ControlsHelper.HeaderFontSize="18">
                                         <ScrollViewer>
@@ -568,22 +568,18 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingDefaultHatIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown
-                                                        Name="controlClothingDefaultHat"
-                                                        Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Hat, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                    <bettercontrols:GUIDIDControl
+                                                        x:Name="controlClothingDefaultHat"
+                                                        Value="{Binding Hat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Margin="5"
                                                         MinWidth="40"
                                                         Grid.Column="1">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_hat.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -593,22 +589,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingDefaultMaskIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown
+                                                    <bettercontrols:GUIDIDControl
                                                         Grid.Column="1"
-                                                        Name="controlClothingDefaultMask"
+                                                        x:Name="controlClothingDefaultMask"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Mask, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Mask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         MinWidth="40"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_mask.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -618,22 +611,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingDefaultGlassesIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown 
+                                                    <bettercontrols:GUIDIDControl 
                                                         Grid.Column="1"
-                                                        Name="controlClothingDefaultGlasses"
+                                                        x:Name="controlClothingDefaultGlasses"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Glasses, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Glasses, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         MinWidth="40"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -643,22 +633,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingDefaultShirtIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown 
+                                                    <bettercontrols:GUIDIDControl 
                                                         Grid.Column="1"
-                                                        Name="controlClothingDefaultShirt"
+                                                        x:Name="controlClothingDefaultShirt"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Shirt, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Shirt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         MinWidth="40"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -668,22 +655,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingDefaultBackpackIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown 
+                                                    <bettercontrols:GUIDIDControl 
                                                         Grid.Column="1"
-                                                        Name="controlClothingDefaultBackpack"
+                                                        x:Name="controlClothingDefaultBackpack"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Backpack, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Backpack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Margin="5"
                                                         MinWidth="40">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -693,22 +677,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingDefaultVestIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown 
+                                                    <bettercontrols:GUIDIDControl 
                                                         Grid.Column="1"
-                                                        Name="controlClothingDefaultVest"
+                                                        x:Name="controlClothingDefaultVest"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Vest, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Vest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         MinWidth="40"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_vest.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -718,22 +699,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingDefaultPantsIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown 
+                                                    <bettercontrols:GUIDIDControl 
                                                         Grid.Column="1"
-                                                        Name="controlClothingDefaultPants"
+                                                        x:Name="controlClothingDefaultPants"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Pants, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Pants, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         MinWidth="40"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}" Margin="5"/>
                                                 </Grid>
                                             </StackPanel>
@@ -749,22 +727,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingChristmasHatIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown
+                                                    <bettercontrols:GUIDIDControl
                                                         Grid.Column="1"
-                                                        Name="controlClothingChristmasHat"
+                                                        x:Name="controlClothingChristmasHat"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Hat, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Hat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         MinWidth="40"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_hat.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -774,22 +749,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingChristmasMaskIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown 
+                                                    <bettercontrols:GUIDIDControl 
                                                         Grid.Column="1"
-                                                        Name="controlClothingChristmasMask"
+                                                        x:Name="controlClothingChristmasMask"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Mask, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Mask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         MinWidth="40"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_mask.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -799,22 +771,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingChristmasGlassesIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown 
+                                                    <bettercontrols:GUIDIDControl 
                                                         Grid.Column="1"
-                                                        Name="controlClothingChristmasGlasses"
+                                                        x:Name="controlClothingChristmasGlasses"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Glasses, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Glasses, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         MinWidth="40"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -824,22 +793,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingChristmasShirtIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown 
+                                                    <bettercontrols:GUIDIDControl 
                                                         Grid.Column="1"
-                                                        Name="controlClothingChristmasShirt"
+                                                        x:Name="controlClothingChristmasShirt"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Shirt, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Shirt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         MinWidth="40"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -849,22 +815,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingChristmasBackpackIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown 
+                                                    <bettercontrols:GUIDIDControl 
                                                         Grid.Column="1"
-                                                        Name="controlClothingChristmasBackpack"
+                                                        x:Name="controlClothingChristmasBackpack"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Backpack, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Backpack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         MinWidth="40"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -874,22 +837,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingChristmasVestIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown
+                                                    <bettercontrols:GUIDIDControl
                                                         Grid.Column="1"
                                                         MinWidth="40"
-                                                        Name="controlClothingChristmasVest"
+                                                        x:Name="controlClothingChristmasVest"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Vest, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Vest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_vest.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -899,22 +859,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingChristmasPantsIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown 
+                                                    <bettercontrols:GUIDIDControl 
                                                         MinWidth="40"
                                                         Grid.Column="1"
-                                                        Name="controlClothingChristmasPants"
+                                                        x:Name="controlClothingChristmasPants"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Pants, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Pants, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}" Margin="5"/>
                                                 </Grid>
                                             </StackPanel>
@@ -930,22 +887,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingHalloweenHatIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown
+                                                    <bettercontrols:GUIDIDControl
                                                         Grid.Column="1"
-                                                        Name="controlClothingHalloweenHat"
+                                                        x:Name="controlClothingHalloweenHat"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Hat, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Hat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         MinWidth="40"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_hat.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -955,22 +909,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingHalloweenMaskIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown 
+                                                    <bettercontrols:GUIDIDControl 
                                                         Grid.Column="1"
-                                                        Name="controlClothingHalloweenMask"
+                                                        x:Name="controlClothingHalloweenMask"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Mask, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Mask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         MinWidth="40"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_mask.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -980,22 +931,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingHalloweenGlassesIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown 
+                                                    <bettercontrols:GUIDIDControl 
                                                         Grid.Column="1"
-                                                        Name="controlClothingHalloweenGlasses"
+                                                        x:Name="controlClothingHalloweenGlasses"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Glasses, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Glasses, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         MinWidth="40"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -1005,22 +953,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingHalloweenShirtIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown
+                                                    <bettercontrols:GUIDIDControl
                                                         Grid.Column="1"
-                                                        Name="controlClothingHalloweenShirt"
+                                                        x:Name="controlClothingHalloweenShirt"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Shirt, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Shirt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         MinWidth="40"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -1030,22 +975,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingHalloweenBackpackIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown 
+                                                    <bettercontrols:GUIDIDControl 
                                                         Grid.Column="1"
-                                                        Name="controlClothingHalloweenBackpack"
+                                                        x:Name="controlClothingHalloweenBackpack"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Backpack, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Backpack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         MinWidth="40"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -1055,22 +997,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingHalloweenVestIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown 
+                                                    <bettercontrols:GUIDIDControl 
                                                         Grid.Column="1"
-                                                        Name="controlClothingHalloweenVest"
+                                                        x:Name="controlClothingHalloweenVest"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Vest, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Vest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         MinWidth="40"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_vest.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="5"/>
                                                 </Grid>
                                                 <Grid>
@@ -1080,22 +1019,19 @@
                                                         <ColumnDefinition Width="5*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Image Name="controlClothingHalloweenPantsIcon" Width="26" Height="26" Margin="5"/>
-                                                    <xctk:UShortUpDown 
+                                                    <bettercontrols:GUIDIDControl 
                                                         Grid.Column="1"
-                                                        Name="controlClothingHalloweenPants"
+                                                        x:Name="controlClothingHalloweenPants"
                                                         Foreground="{DynamicResource ForegroundColor}"
-                                                        Value="{Binding Pants, UpdateSourceTrigger=PropertyChanged}"
-                                                        ParsingNumberStyle="Integer"
-                                                        HorizontalContentAlignment="Left"
-                                                        ShowButtonSpinner="False"
+                                                        Value="{Binding Pants, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         MinWidth="40"
                                                         Margin="5">
-                                                        <xctk:UShortUpDown.ToolTip>
+                                                        <bettercontrols:GUIDIDControl.ToolTip>
                                                             <StackPanel>
                                                                 <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
                                                             </StackPanel>
-                                                        </xctk:UShortUpDown.ToolTip>
-                                                    </xctk:UShortUpDown>
+                                                        </bettercontrols:GUIDIDControl.ToolTip>
+                                                    </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}" Margin="5"/>
                                                 </Grid>
                                             </StackPanel>
@@ -1103,7 +1039,7 @@
                                     </TabItem>
                                 </TabControl>
                             </GroupBox>
-                            <GroupBox Header="{xaml:Localize Key=CHARACTER_Equipment}" HorizontalAlignment="Left" Margin="10,316,0,10" Width="300" MaxHeight="231" VerticalAlignment="Bottom">
+                            <GroupBox Header="{xaml:Localize Key=CHARACTER_Equipment}" HorizontalAlignment="Left" Margin="10,338,0,10" Width="500" MaxHeight="231" VerticalAlignment="Bottom">
                                 <ScrollViewer>
                                     <StackPanel>
                                         <Grid>
@@ -1113,11 +1049,11 @@
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
                                             <Image Name="controlEquipmentPrimaryIcon" Width="26" Height="26" Margin="5"/>
-                                            <xctk:UShortUpDown Grid.Column="1" Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Margin="5" Value="{Binding EquipmentPrimary,UpdateSourceTrigger=PropertyChanged}" x:Name="primaryIdBox"    ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" MinWidth="40" Maximum="65535" Minimum="0"   >
-                                                <xctk:UShortUpDown.ToolTip>
+                                            <bettercontrols:GUIDIDControl Grid.Column="1" Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Margin="5" Value="{Binding EquipmentPrimary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="primaryIdBox" MinWidth="40">
+                                                <bettercontrols:GUIDIDControl.ToolTip>
                                                     <StackPanel></StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
+                                                </bettercontrols:GUIDIDControl.ToolTip>
+                                            </bettercontrols:GUIDIDControl>
                                             <Label Grid.Column="2" Margin="5">
                                                 <Label.Content>
                                                     <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=CHARACTER_Equipment_Primary}" />
@@ -1131,11 +1067,11 @@
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
                                             <Image Name="controlEquipmentSecondaryIcon" Width="26" Height="26" Margin="5"/>
-                                            <xctk:UShortUpDown Grid.Column="1" Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Value="{Binding EquipmentSecondary,UpdateSourceTrigger=PropertyChanged}" x:Name="secondaryIdBox"  ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0" MinWidth="40" Margin="5">
-                                                <xctk:UShortUpDown.ToolTip>
+                                            <bettercontrols:GUIDIDControl Grid.Column="1" Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Value="{Binding EquipmentSecondary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="secondaryIdBox" MinWidth="40" Margin="5">
+                                                <bettercontrols:GUIDIDControl.ToolTip>
                                                     <StackPanel></StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
+                                                </bettercontrols:GUIDIDControl.ToolTip>
+                                            </bettercontrols:GUIDIDControl>
                                             <Label Grid.Column="2" Margin="5">
                                                 <Label.Content>
                                                     <TextBlock Text="{xaml:Localize Key=CHARACTER_Equipment_Secondary}" TextWrapping="Wrap"/>
@@ -1149,11 +1085,11 @@
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
                                             <Image Name="controlEquipmentTertiaryIcon" Width="26" Height="26" Margin="5"/>
-                                            <xctk:UShortUpDown Grid.Column="1" MinWidth="40" Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Value="{Binding EquipmentTertiary,UpdateSourceTrigger=PropertyChanged}" x:Name="tertiaryIdBox"   ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"    Margin="5">
-                                                <xctk:UShortUpDown.ToolTip>
+                                            <bettercontrols:GUIDIDControl Grid.Column="1" MinWidth="40" Foreground="{DynamicResource ForegroundColor}" VerticalAlignment="Center" Value="{Binding EquipmentTertiary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="tertiaryIdBox" Margin="5">
+                                                <bettercontrols:GUIDIDControl.ToolTip>
                                                     <StackPanel></StackPanel>
-                                                </xctk:UShortUpDown.ToolTip>
-                                            </xctk:UShortUpDown>
+                                                </bettercontrols:GUIDIDControl.ToolTip>
+                                            </bettercontrols:GUIDIDControl>
                                             <Label Grid.Column="2" Margin="5">
                                                 <Label.Content>
                                                     <TextBlock Text="{xaml:Localize Key=CHARACTER_Equipment_Tertiary}" TextWrapping="Wrap"/>

@@ -208,6 +208,9 @@
       <DependentUpon>Dialogue_Response.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\DraggableUserControl.cs" />
+    <Compile Include="Controls\GUIDIDControl.xaml.cs">
+      <DependentUpon>GUIDIDControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\IUIL_Icon.cs" />
     <Compile Include="Controls\OptionalByteValueControl.xaml.cs">
       <DependentUpon>OptionalByteValueControl.xaml</DependentUpon>
@@ -476,6 +479,7 @@
     <Compile Include="NPC\Conditions\ConditionWeatherStatus.cs" />
     <Compile Include="NPC\Currency\CurrencyAsset.cs" />
     <Compile Include="NPC\Currency\CurrencyEntry.cs" />
+    <Compile Include="NPC\GUIDIDBridge.cs" />
     <Compile Include="NPC\IAXData.cs" />
     <Compile Include="NPC\IHasUIText.cs" />
     <Compile Include="NPC\NPCCharacter.cs" />
@@ -606,6 +610,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Dialogue_Response.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GUIDIDControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -115,6 +115,29 @@ namespace BowieD.Unturned.NPCMaker.Common
 
             return node.InnerText;
         }
+        public static GUIDIDBridge ToGuidIDBridge(this XmlNode node)
+        {
+            if (node == null)
+                return new GUIDIDBridge();
+
+            GUIDIDBridge bridge = new GUIDIDBridge();
+
+            ushort id = node["id"].ToUInt16();
+
+            if (id == 0)
+                bridge.ID = null;
+            else
+                bridge.ID = id;
+
+            string guid = node["guid"].ToText(null);
+
+            if (string.IsNullOrEmpty(guid))
+                bridge.Guid = null;
+            else
+                bridge.Guid = Guid.Parse(guid);
+
+            return bridge;
+        }
 
         #region Nullables
         public static byte? ToNullableByte(this XmlNode node, byte? defaultValue = null)
@@ -450,6 +473,19 @@ namespace BowieD.Unturned.NPCMaker.Common
             doc.CreateNodeC("R", node).WriteByte(value.R);
             doc.CreateNodeC("G", node).WriteByte(value.G);
             doc.CreateNodeC("B", node).WriteByte(value.B);
+
+            return node;
+        }
+
+        public static XmlNode WriteGuidIDBridge(this XmlNode node, GUIDIDBridge bridge)
+        {
+            var doc = node.OwnerDocument;
+
+            if (bridge.ID.HasValue)
+                doc.CreateNodeC("id", node).WriteUInt16(bridge.ID.Value);
+
+            if (bridge.Guid.HasValue)
+                doc.CreateNodeC("guid", node).WriteString(bridge.Guid.Value.ToString("N"));
 
             return node;
         }

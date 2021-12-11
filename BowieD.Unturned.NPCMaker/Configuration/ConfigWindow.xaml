@@ -133,6 +133,7 @@
                 <ScrollViewer Margin="5">
                     <StackPanel>
                         <CheckBox Name="Experimental_Box" VerticalAlignment="Top" Margin="5" Content="{xaml:Localize Key=OPTIONS_experimentalFeatures}" ToolTip="{xaml:Localize Key=OPTIONS_experimentalFeatures_Tooltip}"/>
+                        <CheckBox Name="PreferLegacyIDsOverGUIDs_Box" VerticalAlignment="Top" Margin="5" Content="{xaml:Localize Key=OPTIONS_preferLegacyIDsOverGUIDs}" ToolTip="{xaml:Localize Key=OPTIONS_preferLegacyIDsOverGUIDs_Tooltip}"/>
                         <GroupBox Header="{xaml:Localize Key=OPTIONS_disabledErrors_Header}" Margin="5">
                             <StackPanel Name="disabledErrorsPanel">
                                 <Expander Header="{xaml:Localize Key=OPTIONS_disabledErrors_Character_Header}" Margin="5">

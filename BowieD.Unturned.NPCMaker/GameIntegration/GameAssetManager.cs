@@ -163,6 +163,21 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         {
             return TryGetAsset((k) => k.id == id, out result);
         }
+        public static bool TryGetAsset<T>(GUIDIDBridge bridge, out T result) where T : GameAsset
+        {
+            if (bridge.ID.HasValue && TryGetAsset(bridge.ID.Value, out result))
+            {
+                return true;
+            }
+
+            if (bridge.Guid.HasValue && TryGetAsset(bridge.Guid.Value, out result))
+            {
+                return true;
+            }
+
+            result = default;
+            return false;
+        }
         public static bool TryGetAsset<T>(Guid guid, EGameAssetOrigin origin, out T result) where T : GameAsset
         {
             return TryGetAsset((k) => k.guid == guid && origin.HasFlag(k.origin), out result);
@@ -170,6 +185,21 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
         public static bool TryGetAsset<T>(ushort id, EGameAssetOrigin origin, out T result) where T : GameAsset
         {
             return TryGetAsset((k) => k.id == id && origin.HasFlag(k.origin), out result);
+        }
+        public static bool TryGetAsset<T>(GUIDIDBridge bridge, EGameAssetOrigin origin, out T result) where T : GameAsset
+        {
+            if (bridge.ID.HasValue && TryGetAsset(bridge.ID.Value, origin, out result))
+            {
+                return true;
+            }
+
+            if (bridge.Guid.HasValue && TryGetAsset(bridge.Guid.Value, origin, out result))
+            {
+                return true;
+            }
+
+            result = default;
+            return false;
         }
         public static async Task Import(string directory, EGameAssetOrigin origin, Action<int, int> fileLoadedCallback = null, CancellationTokenSource tokenSource = null)
         {

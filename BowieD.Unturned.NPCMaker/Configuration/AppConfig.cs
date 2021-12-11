@@ -37,6 +37,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public bool useOldStyleMoveUpDown;
         public bool automaticallyCheckForErrors = false;
         public string[] disabledErrors;
+        public bool preferLegacyIDsOverGUIDs = false;
 
         public void Save()
         {
@@ -114,6 +115,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             exportSchema = EExportSchema.Default;
             automaticallyCheckForErrors = false;
             disabledErrors = System.Array.Empty<string>();
+            preferLegacyIDsOverGUIDs = false;
 
             App.Logger.Log($"[CFG] - Default configuration loaded!");
         }

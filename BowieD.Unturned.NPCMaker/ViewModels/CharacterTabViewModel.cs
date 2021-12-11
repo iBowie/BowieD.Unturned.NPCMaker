@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker;
 using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.GameIntegration;
@@ -56,8 +57,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidDefault_hat = new ContextMenu();
             cidDefault_hat.Items.Add(ContextHelper.CreateSelectHatButton((asset) =>
             {
-                this.DefaultClothing.Hat = asset.id;
-                MainWindow.Instance.controlClothingDefaultHat.Value = asset.id;
+                this.DefaultClothing.Hat = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+
+                MainWindow.Instance.controlClothingDefaultHat.Value = this.DefaultClothing.Hat;
             }));
             MainWindow.Instance.controlClothingDefaultHat.ContextMenu = cidDefault_hat;
             MainWindow.Instance.controlClothingDefaultHat.ValueChanged += (sender, e) => UpdateClothing();
@@ -65,8 +67,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidDefault_glasses = new ContextMenu();
             cidDefault_glasses.Items.Add(ContextHelper.CreateSelectGlassesButton((asset) =>
             {
-                this.DefaultClothing.Glasses = asset.id;
-                MainWindow.Instance.controlClothingDefaultGlasses.Value = asset.id;
+                this.DefaultClothing.Glasses = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingDefaultGlasses.Value = this.DefaultClothing.Glasses;
             }));
             MainWindow.Instance.controlClothingDefaultGlasses.ContextMenu = cidDefault_glasses;
             MainWindow.Instance.controlClothingDefaultGlasses.ValueChanged += (sender, e) => UpdateClothing();
@@ -74,8 +76,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidDefault_backpack = new ContextMenu();
             cidDefault_backpack.Items.Add(ContextHelper.CreateSelectBackpackButton((asset) =>
             {
-                this.DefaultClothing.Backpack = asset.id;
-                MainWindow.Instance.controlClothingDefaultBackpack.Value = asset.id;
+                this.DefaultClothing.Backpack = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingDefaultBackpack.Value = this.DefaultClothing.Backpack;
             }));
             MainWindow.Instance.controlClothingDefaultBackpack.ContextMenu = cidDefault_backpack;
             MainWindow.Instance.controlClothingDefaultBackpack.ValueChanged += (sender, e) => UpdateClothing();
@@ -83,8 +85,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidDefault_shirt = new ContextMenu();
             cidDefault_shirt.Items.Add(ContextHelper.CreateSelectShirtButton((asset) =>
             {
-                this.DefaultClothing.Shirt = asset.id;
-                MainWindow.Instance.controlClothingDefaultShirt.Value = asset.id;
+                this.DefaultClothing.Shirt = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingDefaultShirt.Value = this.DefaultClothing.Shirt;
             }));
             MainWindow.Instance.controlClothingDefaultShirt.ContextMenu = cidDefault_shirt;
             MainWindow.Instance.controlClothingDefaultShirt.ValueChanged += (sender, e) => UpdateClothing();
@@ -92,8 +94,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidDefault_pants = new ContextMenu();
             cidDefault_pants.Items.Add(ContextHelper.CreateSelectPantsButton((asset) =>
             {
-                this.DefaultClothing.Pants = asset.id;
-                MainWindow.Instance.controlClothingDefaultPants.Value = asset.id;
+                this.DefaultClothing.Pants = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingDefaultPants.Value = this.DefaultClothing.Pants;
             }));
             MainWindow.Instance.controlClothingDefaultPants.ContextMenu = cidDefault_pants;
             MainWindow.Instance.controlClothingDefaultPants.ValueChanged += (sender, e) => UpdateClothing();
@@ -101,8 +103,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidDefault_mask = new ContextMenu();
             cidDefault_mask.Items.Add(ContextHelper.CreateSelectMaskButton((asset) =>
             {
-                this.DefaultClothing.Mask = asset.id;
-                MainWindow.Instance.controlClothingDefaultMask.Value = asset.id;
+                this.DefaultClothing.Mask = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingDefaultMask.Value = this.DefaultClothing.Mask;
             }));
             MainWindow.Instance.controlClothingDefaultMask.ContextMenu = cidDefault_mask;
             MainWindow.Instance.controlClothingDefaultMask.ValueChanged += (sender, e) => UpdateClothing();
@@ -110,8 +112,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidDefault_vest = new ContextMenu();
             cidDefault_vest.Items.Add(ContextHelper.CreateSelectVestButton((asset) =>
             {
-                this.DefaultClothing.Vest = asset.id;
-                MainWindow.Instance.controlClothingDefaultVest.Value = asset.id;
+                this.DefaultClothing.Vest = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingDefaultVest.Value = this.DefaultClothing.Vest;
             }));
             MainWindow.Instance.controlClothingDefaultVest.ContextMenu = cidDefault_vest;
             MainWindow.Instance.controlClothingDefaultVest.ValueChanged += (sender, e) => UpdateClothing();
@@ -120,8 +122,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidHalloween_hat = new ContextMenu();
             cidHalloween_hat.Items.Add(ContextHelper.CreateSelectHatButton((asset) =>
             {
-                this.HalloweenClothing.Hat = asset.id;
-                MainWindow.Instance.controlClothingHalloweenHat.Value = asset.id;
+                this.HalloweenClothing.Hat = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingHalloweenHat.Value = this.HalloweenClothing.Hat;
             }));
             MainWindow.Instance.controlClothingHalloweenHat.ContextMenu = cidHalloween_hat;
             MainWindow.Instance.controlClothingHalloweenHat.ValueChanged += (sender, e) => UpdateClothing();
@@ -129,8 +131,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidHalloween_glasses = new ContextMenu();
             cidHalloween_glasses.Items.Add(ContextHelper.CreateSelectGlassesButton((asset) =>
             {
-                this.HalloweenClothing.Glasses = asset.id;
-                MainWindow.Instance.controlClothingHalloweenGlasses.Value = asset.id;
+                this.HalloweenClothing.Glasses = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingHalloweenGlasses.Value = this.HalloweenClothing.Glasses;
             }));
             MainWindow.Instance.controlClothingHalloweenGlasses.ContextMenu = cidHalloween_glasses;
             MainWindow.Instance.controlClothingHalloweenGlasses.ValueChanged += (sender, e) => UpdateClothing();
@@ -138,8 +140,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidHalloween_backpack = new ContextMenu();
             cidHalloween_backpack.Items.Add(ContextHelper.CreateSelectBackpackButton((asset) =>
             {
-                this.HalloweenClothing.Backpack = asset.id;
-                MainWindow.Instance.controlClothingHalloweenBackpack.Value = asset.id;
+                this.HalloweenClothing.Backpack = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingHalloweenBackpack.Value = this.HalloweenClothing.Backpack;
             }));
             MainWindow.Instance.controlClothingHalloweenBackpack.ContextMenu = cidHalloween_backpack;
             MainWindow.Instance.controlClothingHalloweenBackpack.ValueChanged += (sender, e) => UpdateClothing();
@@ -147,8 +149,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidHalloween_shirt = new ContextMenu();
             cidHalloween_shirt.Items.Add(ContextHelper.CreateSelectShirtButton((asset) =>
             {
-                this.HalloweenClothing.Shirt = asset.id;
-                MainWindow.Instance.controlClothingHalloweenShirt.Value = asset.id;
+                this.HalloweenClothing.Shirt = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingHalloweenShirt.Value = this.HalloweenClothing.Shirt;
             }));
             MainWindow.Instance.controlClothingHalloweenShirt.ContextMenu = cidHalloween_shirt;
             MainWindow.Instance.controlClothingHalloweenShirt.ValueChanged += (sender, e) => UpdateClothing();
@@ -156,8 +158,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidHalloween_pants = new ContextMenu();
             cidHalloween_pants.Items.Add(ContextHelper.CreateSelectPantsButton((asset) =>
             {
-                this.HalloweenClothing.Pants = asset.id;
-                MainWindow.Instance.controlClothingHalloweenPants.Value = asset.id;
+                this.HalloweenClothing.Pants = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingHalloweenPants.Value = this.HalloweenClothing.Pants;
             }));
             MainWindow.Instance.controlClothingHalloweenPants.ContextMenu = cidHalloween_pants;
             MainWindow.Instance.controlClothingHalloweenPants.ValueChanged += (sender, e) => UpdateClothing();
@@ -165,8 +167,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidHalloween_mask = new ContextMenu();
             cidHalloween_mask.Items.Add(ContextHelper.CreateSelectMaskButton((asset) =>
             {
-                this.HalloweenClothing.Mask = asset.id;
-                MainWindow.Instance.controlClothingHalloweenMask.Value = asset.id;
+                this.HalloweenClothing.Mask = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingHalloweenMask.Value = this.HalloweenClothing.Mask;
             }));
             MainWindow.Instance.controlClothingHalloweenMask.ContextMenu = cidHalloween_mask;
             MainWindow.Instance.controlClothingHalloweenMask.ValueChanged += (sender, e) => UpdateClothing();
@@ -174,8 +176,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidHalloween_vest = new ContextMenu();
             cidHalloween_vest.Items.Add(ContextHelper.CreateSelectVestButton((asset) =>
             {
-                this.HalloweenClothing.Vest = asset.id;
-                MainWindow.Instance.controlClothingHalloweenVest.Value = asset.id;
+                this.HalloweenClothing.Vest = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingHalloweenVest.Value = this.HalloweenClothing.Vest;
             }));
             MainWindow.Instance.controlClothingHalloweenVest.ContextMenu = cidHalloween_vest;
             MainWindow.Instance.controlClothingHalloweenVest.ValueChanged += (sender, e) => UpdateClothing();
@@ -184,8 +186,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidChristmas_hat = new ContextMenu();
             cidChristmas_hat.Items.Add(ContextHelper.CreateSelectHatButton((asset) =>
             {
-                this.ChristmasClothing.Hat = asset.id;
-                MainWindow.Instance.controlClothingChristmasHat.Value = asset.id;
+                this.ChristmasClothing.Hat = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingChristmasHat.Value = this.ChristmasClothing.Hat;
             }));
             MainWindow.Instance.controlClothingChristmasHat.ContextMenu = cidChristmas_hat;
             MainWindow.Instance.controlClothingChristmasHat.ValueChanged += (sender, e) => UpdateClothing();
@@ -193,8 +195,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidChristmas_glasses = new ContextMenu();
             cidChristmas_glasses.Items.Add(ContextHelper.CreateSelectGlassesButton((asset) =>
             {
-                this.ChristmasClothing.Glasses = asset.id;
-                MainWindow.Instance.controlClothingChristmasGlasses.Value = asset.id;
+                this.ChristmasClothing.Glasses = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingChristmasGlasses.Value = this.ChristmasClothing.Glasses;
             }));
             MainWindow.Instance.controlClothingChristmasGlasses.ContextMenu = cidChristmas_glasses;
             MainWindow.Instance.controlClothingChristmasGlasses.ValueChanged += (sender, e) => UpdateClothing();
@@ -202,8 +204,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidChristmas_backpack = new ContextMenu();
             cidChristmas_backpack.Items.Add(ContextHelper.CreateSelectBackpackButton((asset) =>
             {
-                this.ChristmasClothing.Backpack = asset.id;
-                MainWindow.Instance.controlClothingChristmasBackpack.Value = asset.id;
+                this.ChristmasClothing.Backpack = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingChristmasBackpack.Value = this.ChristmasClothing.Backpack;
             }));
             MainWindow.Instance.controlClothingChristmasBackpack.ContextMenu = cidChristmas_backpack;
             MainWindow.Instance.controlClothingChristmasBackpack.ValueChanged += (sender, e) => UpdateClothing();
@@ -211,8 +213,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidChristmas_shirt = new ContextMenu();
             cidChristmas_shirt.Items.Add(ContextHelper.CreateSelectShirtButton((asset) =>
             {
-                this.ChristmasClothing.Shirt = asset.id;
-                MainWindow.Instance.controlClothingChristmasShirt.Value = asset.id;
+                this.ChristmasClothing.Shirt = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingChristmasShirt.Value = this.ChristmasClothing.Shirt;
             }));
             MainWindow.Instance.controlClothingChristmasShirt.ContextMenu = cidChristmas_shirt;
             MainWindow.Instance.controlClothingChristmasShirt.ValueChanged += (sender, e) => UpdateClothing();
@@ -220,8 +222,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidChristmas_pants = new ContextMenu();
             cidChristmas_pants.Items.Add(ContextHelper.CreateSelectPantsButton((asset) =>
             {
-                this.ChristmasClothing.Pants = asset.id;
-                MainWindow.Instance.controlClothingChristmasPants.Value = asset.id;
+                this.ChristmasClothing.Pants = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingChristmasPants.Value = this.ChristmasClothing.Pants;
             }));
             MainWindow.Instance.controlClothingChristmasPants.ContextMenu = cidChristmas_pants;
             MainWindow.Instance.controlClothingChristmasPants.ValueChanged += (sender, e) => UpdateClothing();
@@ -229,8 +231,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidChristmas_mask = new ContextMenu();
             cidChristmas_mask.Items.Add(ContextHelper.CreateSelectMaskButton((asset) =>
             {
-                this.ChristmasClothing.Mask = asset.id;
-                MainWindow.Instance.controlClothingChristmasMask.Value = asset.id;
+                this.ChristmasClothing.Mask = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingChristmasMask.Value = this.ChristmasClothing.Mask;
             }));
             MainWindow.Instance.controlClothingChristmasMask.ContextMenu = cidChristmas_mask;
             MainWindow.Instance.controlClothingChristmasMask.ValueChanged += (sender, e) => UpdateClothing();
@@ -238,8 +240,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cidChristmas_vest = new ContextMenu();
             cidChristmas_vest.Items.Add(ContextHelper.CreateSelectVestButton((asset) =>
             {
-                this.ChristmasClothing.Vest = asset.id;
-                MainWindow.Instance.controlClothingChristmasVest.Value = asset.id;
+                this.ChristmasClothing.Vest = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.controlClothingChristmasVest.Value = this.ChristmasClothing.Vest;
             }));
             MainWindow.Instance.controlClothingChristmasVest.ContextMenu = cidChristmas_vest;
             MainWindow.Instance.controlClothingChristmasVest.ValueChanged += (sender, e) => UpdateClothing();
@@ -250,8 +252,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cid_primary = new ContextMenu();
             cid_primary.Items.Add(ContextHelper.CreateSelectItemButton((asset) =>
             {
-                EquipmentPrimary = asset.id;
-                MainWindow.Instance.primaryIdBox.Value = asset.id;
+                EquipmentPrimary = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.primaryIdBox.Value = EquipmentPrimary;
             }, new AssetFilter_Equippable("Interface", "AssetPicker_Filter_Equippable", Equip_Type.Primary)));
             MainWindow.Instance.primaryIdBox.ContextMenu = cid_primary;
             MainWindow.Instance.primaryIdBox.ValueChanged += (sender, e) => UpdateEquipment();
@@ -259,8 +261,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cid_secondary = new ContextMenu();
             cid_secondary.Items.Add(ContextHelper.CreateSelectItemButton((asset) =>
             {
-                EquipmentSecondary = asset.id;
-                MainWindow.Instance.secondaryIdBox.Value = asset.id;
+                EquipmentSecondary = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.secondaryIdBox.Value = EquipmentSecondary;
             }, new AssetFilter_Equippable("Interface", "AssetPicker_Filter_Equippable", Equip_Type.Secondary)));
             MainWindow.Instance.secondaryIdBox.ContextMenu = cid_secondary;
             MainWindow.Instance.secondaryIdBox.ValueChanged += (sender, e) => UpdateEquipment();
@@ -268,8 +270,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             ContextMenu cid_tertiary = new ContextMenu();
             cid_tertiary.Items.Add(ContextHelper.CreateSelectItemButton((asset) =>
             {
-                EquipmentTertiary = asset.id;
-                MainWindow.Instance.tertiaryIdBox.Value = asset.id;
+                EquipmentTertiary = AppConfig.Instance.preferLegacyIDsOverGUIDs ? new GUIDIDBridge(asset.id) : new GUIDIDBridge(asset.guid);
+                MainWindow.Instance.tertiaryIdBox.Value = EquipmentTertiary;
             }, new AssetFilter_Equippable("Interface", "AssetPicker_Filter_Equippable", Equip_Type.Tertiary)));
             MainWindow.Instance.tertiaryIdBox.ContextMenu = cid_tertiary;
             MainWindow.Instance.tertiaryIdBox.ValueChanged += (sender, e) => UpdateEquipment();
@@ -562,9 +564,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public NPCClothing DefaultClothing { get => Character.clothing; set => Character.clothing = value; }
         public NPCClothing ChristmasClothing { get => Character.christmasClothing; set => Character.christmasClothing = value; }
         public NPCClothing HalloweenClothing { get => Character.halloweenClothing; set => Character.halloweenClothing = value; }
-        public ushort EquipmentPrimary { get => Character.equipPrimary; set => Character.equipPrimary = value; }
-        public ushort EquipmentSecondary { get => Character.equipSecondary; set => Character.equipSecondary = value; }
-        public ushort EquipmentTertiary { get => Character.equipTertiary; set => Character.equipTertiary = value; }
+        public GUIDIDBridge EquipmentPrimary { get => Character.equipPrimary; set => Character.equipPrimary = value; }
+        public GUIDIDBridge EquipmentSecondary { get => Character.equipSecondary; set => Character.equipSecondary = value; }
+        public GUIDIDBridge EquipmentTertiary { get => Character.equipTertiary; set => Character.equipTertiary = value; }
         public Equip_Type Equipped { get => Character.equipped; set => Character.equipped = value; }
         public ENPCHoliday HolidayRestriction { get => Character.holidayRestriction; set => Character.holidayRestriction = value; }
 
@@ -1058,6 +1060,19 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         private static void updateItemIcon<T>(ushort id, Image control) where T : GameItemAsset
         {
             if (id > 0 && GameAssetManager.TryGetAsset<T>(id, out var asset))
+            {
+                control.Visibility = Visibility.Visible;
+                control.Source = ThumbnailManager.CreateThumbnail(asset.ImagePath);
+            }
+            else
+            {
+                control.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private static void updateItemIcon<T>(GUIDIDBridge bridge, Image control) where T : GameItemAsset
+        {
+            if (!bridge.IsEmpty && GameAssetManager.TryGetAsset<T>(bridge, out var asset))
             {
                 control.Visibility = Visibility.Visible;
                 control.Source = ThumbnailManager.CreateThumbnail(asset.ImagePath);

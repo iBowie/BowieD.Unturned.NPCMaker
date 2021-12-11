@@ -451,6 +451,25 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
                     (valueControl as ClockControl).SetBinding(ClockControl.DisplayTimeProperty, new Binding(propName) { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
                 }
+                else if (propType == typeof(GUIDIDBridge))
+                {
+                    valueControl = new GUIDIDControl();
+                    (valueControl as GUIDIDControl).SetBinding(GUIDIDControl.ValueProperty, propName);
+
+                    if (assetPickerAttribute != null)
+                    {
+                        var vcMenu = new ContextMenu();
+                        vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
+                        {
+                            if (AppConfig.Instance.preferLegacyIDsOverGUIDs)
+                                (valueControl as GUIDIDControl).Value = new GUIDIDBridge(asset.ID);
+                            else
+                                (valueControl as GUIDIDControl).Value = new GUIDIDBridge(asset.GUID);
+                        }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
+
+                        (valueControl as GUIDIDControl).ContextMenu = vcMenu;
+                    }
+                }
                 else
                 {
                     App.Logger.Log($"{propName} does not have required type '{propType.FullName}'");

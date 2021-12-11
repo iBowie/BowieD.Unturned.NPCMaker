@@ -159,6 +159,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 useOldStyleMoveUpDown = Use_Old_Style_Move_Up_Down_Box.IsChecked.Value,
                 automaticallyCheckForErrors = AutomaticallyCheckForErrors_Box.IsChecked.Value,
                 disabledErrors = CurrentDisabledErrors,
+                preferLegacyIDsOverGUIDs = PreferLegacyIDsOverGUIDs_Box.IsChecked.Value,
                 unturnedDir = curUntDir
             };
             set
@@ -215,6 +216,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 Use_Old_Style_Move_Up_Down_Box.IsChecked = value.useOldStyleMoveUpDown;
                 AutomaticallyCheckForErrors_Box.IsChecked = value.automaticallyCheckForErrors;
                 CurrentDisabledErrors = value.disabledErrors;
+                PreferLegacyIDsOverGUIDs_Box.IsChecked = value.preferLegacyIDsOverGUIDs;
                 curUntDir = value.unturnedDir;
             }
         }

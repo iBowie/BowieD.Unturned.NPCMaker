@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.NPC;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -199,6 +200,18 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 return _guid;
             }
             return defaultValue;
+        }
+
+        public GUIDIDBridge ReadGUIDIDBridge(string key)
+        {
+            GUIDIDBridge bridge = new GUIDIDBridge();
+
+            if (data.TryGetValue(key, out var value))
+            {
+                bridge = GUIDIDBridge.Parse(value);
+            }
+
+            return bridge;
         }
     }
 }

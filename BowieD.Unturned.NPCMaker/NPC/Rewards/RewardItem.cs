@@ -36,7 +36,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         }
 
         [AssetPicker(typeof(GameItemAsset), "Control_SelectAsset_Item", MahApps.Metro.IconPacks.PackIconMaterialKind.Archive)]
-        public ushort ID { get; set; }
+        public GUIDIDBridge ID { get; set; }
         [Range(byte.MinValue, byte.MaxValue)]
         public byte Amount { get; set; } = 1;
         [Optional(null)]
@@ -177,7 +177,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             simulation.Items.Add(new Simulation.Item()
             {
                 Amount = (byte)(Ammo == 0 ? 1 : Ammo),
-                ID = ID,
+                ID = ID.ResolveLegacyID<GameItemAsset>(),
                 Quality = 100
             });
         }
@@ -198,7 +198,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             }
             else
             {
-                itemName = ID.ToString();
+                itemName = ID.ExportValue;
             }
 
             return string.Format(text, Amount, itemName);
@@ -206,7 +206,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
         public bool UpdateIcon(out BitmapImage image)
         {
-            if (ID > 0 && GameAssetManager.TryGetAsset<GameItemAsset>(ID, out var asset))
+            if (!ID.IsEmpty && GameAssetManager.TryGetAsset<GameItemAsset>(ID, out var asset))
             {
                 image = ThumbnailManager.CreateThumbnail(asset.ImagePath);
                 return true;
@@ -222,7 +222,14 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         {
             base.Load(node, version);
 
-            ID = node["ID"].ToUInt16();
+            if (version >= 11)
+            {
+                ID = node["ID"].ToGuidIDBridge();
+            }
+            else
+            {
+                ID = (GUIDIDBridge)node["ID"].ToUInt16();
+            }
             Amount = node["Amount"].ToByte();
             Sight = node["Sight"].ToNullableUInt16();
             Tactical = node["Tactical"].ToNullableUInt16();
@@ -237,7 +244,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         {
             base.Save(document, node);
 
-            document.CreateNodeC("ID", node).WriteUInt16(ID);
+            document.CreateNodeC("ID", node).WriteGuidIDBridge(ID);
             document.CreateNodeC("Amount", node).WriteByte(Amount);
             document.CreateNodeC("Sight", node).WriteNullableUInt16(Sight);
             document.CreateNodeC("Tactical", node).WriteNullableUInt16(Tactical);

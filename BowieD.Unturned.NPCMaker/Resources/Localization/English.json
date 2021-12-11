@@ -39,6 +39,7 @@
         "useOldStyleMoveUpDown": "Use classic move up/down",
         "exportSchema": "Export Schema",
         "automaticallyCheckForErrors": "Error Counter",
+        "preferLegacyIDsOverGUIDs": "Prefer Legacy IDs over GUIDs",
 
         "experimentalFeatures_Tooltip": "Something experimental, maybe unstable",
         "scale_Tooltip": "Adjust scale of the app on your screen",
@@ -61,6 +62,7 @@
         "useOldStyleMoveUpDown_Tooltip": "Disables new drag",
         "exportSchema_Tooltip": "Manage export structure of your projects",
         "automaticallyCheckForErrors_Tooltip": "Will show current error count on the bottom of the app.\nNote: this is not optimized and in some cases may be the cause of lags.\nIf you have a slow PC better keep it disabled.",
+        "preferLegacyIDsOverGUIDs_Tooltip": "Prefers legacy IDs (0-65535) instead of GUIDs\nNot recommended as game developer gradually switches to GUIDs",
 
         "exportSchema_Warning": "Warning! This setting is only for advanced users!",
 

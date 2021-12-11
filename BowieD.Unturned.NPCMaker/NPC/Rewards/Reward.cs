@@ -1,4 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
+using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
@@ -348,6 +350,25 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 {
                     valueControl = new CheckBox() { };
                     (valueControl as CheckBox).SetBinding(CheckBox.IsCheckedProperty, propName);
+                }
+                else if (propType == typeof(GUIDIDBridge))
+                {
+                    valueControl = new GUIDIDControl();
+                    (valueControl as GUIDIDControl).SetBinding(GUIDIDControl.ValueProperty, propName);
+
+                    if (assetPickerAttribute != null)
+                    {
+                        var vcMenu = new ContextMenu();
+                        vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
+                        {
+                            if (AppConfig.Instance.preferLegacyIDsOverGUIDs)
+                                (valueControl as GUIDIDControl).Value = new GUIDIDBridge(asset.ID);
+                            else
+                                (valueControl as GUIDIDControl).Value = new GUIDIDBridge(asset.GUID);
+                        }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
+
+                        (valueControl as GUIDIDControl).ContextMenu = vcMenu;
+                    }
                 }
                 else
                 {

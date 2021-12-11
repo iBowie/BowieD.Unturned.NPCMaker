@@ -166,7 +166,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                         case ItemType.ITEM:
                             response.conditions.Add(new Conditions.ConditionItem()
                             {
-                                ID = item.id,
+                                ID = (GUIDIDBridge)item.id,
                                 Amount = 1,
                                 Reset = true
                             });
@@ -225,7 +225,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                         case ItemType.ITEM:
                             response.rewards.Add(new Rewards.RewardItem()
                             {
-                                ID = item.id,
+                                ID = (GUIDIDBridge)item.id,
                                 Amount = 1,
                                 Auto_Equip = false
                             });

@@ -52,9 +52,9 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 haircut = asset.ReadByte("Hair"),
                 hairColor = asset.ReadColor("Color_Hair"),
                 skinColor = asset.ReadColor("Color_Skin"),
-                equipPrimary = asset.ReadUInt16("Primary"),
-                equipSecondary = asset.ReadUInt16("Secondary"),
-                equipTertiary = asset.ReadUInt16("Tertiary"),
+                equipPrimary = asset.ReadGUIDIDBridge("Primary"),
+                equipSecondary = asset.ReadGUIDIDBridge("Secondary"),
+                equipTertiary = asset.ReadGUIDIDBridge("Tertiary"),
                 startDialogueId = asset.ReadUInt16("Dialogue"),
                 DisplayName = local?.ReadString("Character"),
                 EditorName = local?.ReadString("Name"),
@@ -252,13 +252,13 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                     prefix = "Halloween_";
                     break;
             }
-            c.Backpack = asset.ReadUInt16(prefix + "Backpack");
-            c.Glasses = asset.ReadUInt16(prefix + "Glasses");
-            c.Hat = asset.ReadUInt16(prefix + "Hat");
-            c.Mask = asset.ReadUInt16(prefix + "Mask");
-            c.Pants = asset.ReadUInt16(prefix + "Pants");
-            c.Shirt = asset.ReadUInt16(prefix + "Shirt");
-            c.Vest = asset.ReadUInt16(prefix + "Vest");
+            c.Backpack = asset.ReadGUIDIDBridge(prefix + "Backpack");
+            c.Glasses = asset.ReadGUIDIDBridge(prefix + "Glasses");
+            c.Hat = asset.ReadGUIDIDBridge(prefix + "Hat");
+            c.Mask = asset.ReadGUIDIDBridge(prefix + "Mask");
+            c.Pants = asset.ReadGUIDIDBridge(prefix + "Pants");
+            c.Shirt = asset.ReadGUIDIDBridge(prefix + "Shirt");
+            c.Vest = asset.ReadGUIDIDBridge(prefix + "Vest");
             return c;
         }
         private Condition[] ParseConditions(string prefix, string postfix = "Condition_")
@@ -354,7 +354,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                     case Condition_Type.Item:
                         c[num] = new ConditionItem()
                         {
-                            ID = asset.ReadUInt16(tp + "ID"),
+                            ID = asset.ReadGUIDIDBridge(tp + "ID"),
                             Amount = asset.ReadUInt16(tp + "Amount")
                         };
                         break;
@@ -559,7 +559,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                             Magazine = asset.ReadUInt16(tp + "Magazine"),
                             Sight = asset.ReadUInt16(tp + "Sight"),
                             Tactical = asset.ReadUInt16(tp + "Tactical"),
-                            ID = asset.ReadUInt16(tp + "ID")
+                            ID = asset.ReadGUIDIDBridge(tp + "ID")
                         };
                         break;
                     case RewardType.Item_Random:

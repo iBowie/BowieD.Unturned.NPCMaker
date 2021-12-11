@@ -13,7 +13,23 @@ namespace BowieD.Unturned.NPCMaker.NPC
     {
         // REALLY IMPORTANT
         // ADAPT THIS CODE TO .NET REWRITE VERSION
-        public const int CURRENT_SAVEDATA_VERSION = 10;
+        public const int CURRENT_SAVEDATA_VERSION = 11;
+        /*
+         * SAVEDATA_VERSION information
+         * 
+         * -1  - legacy NPC Maker versions
+         *  1  - initial new project format
+         *  2  - 
+         *  3  - added last selected tabs
+         *  4  - added currencies
+         *  5  - added flag descriptions
+         *  6  - added project settings
+         *  7  - added dialogue vendors
+         *  8  - 
+         *  9  - split buying and selling items in to separate collections, added MinRadius to ZombieKills
+         *  10 - added rewards to vendor items
+         *  11 - added GUID/ID bridge
+         */
 
         public NPCProject()
         {
@@ -72,19 +88,19 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     skinColor = node["skinColor"].ToColor(version),
                     clothing = new NPCClothing()
                     {
-                        Backpack = node["backpack"].ToUInt16(),
-                        Hat = node["hat"].ToUInt16(),
-                        Mask = node["mask"].ToUInt16(),
-                        Shirt = node["top"].ToUInt16(),
-                        Pants = node["bottom"].ToUInt16(),
-                        Vest = node["vest"].ToUInt16()
+                        Backpack = (GUIDIDBridge)node["backpack"].ToUInt16(),
+                        Hat = (GUIDIDBridge)node["hat"].ToUInt16(),
+                        Mask = (GUIDIDBridge)node["mask"].ToUInt16(),
+                        Shirt = (GUIDIDBridge)node["top"].ToUInt16(),
+                        Pants = (GUIDIDBridge)node["bottom"].ToUInt16(),
+                        Vest = (GUIDIDBridge)node["vest"].ToUInt16()
                     },
                     startDialogueId = node["startDialogueId"].ToUInt16(),
                     pose = node["pose"].ToEnum<NPC_Pose>(),
                     equipped = node["equipped"].ToEnum<Equip_Type>(),
-                    equipPrimary = node["equipPrimary"].ToUInt16(),
-                    equipSecondary = node["equipSecondary"].ToUInt16(),
-                    equipTertiary = node["equipTertiary"].ToUInt16(),
+                    equipPrimary = (GUIDIDBridge)node["equipPrimary"].ToUInt16(),
+                    equipSecondary = (GUIDIDBridge)node["equipSecondary"].ToUInt16(),
+                    equipTertiary = (GUIDIDBridge)node["equipTertiary"].ToUInt16(),
                     leftHanded = node["leftHanded"].ToBoolean()
                 };
 

@@ -107,7 +107,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             Title = node["vendorTitle"].ToText();
             vendorDescription = node["vendorDescription"].ToText();
 
-            if (version < 8)
+            if (version >= 9)
             {
                 items = node["items"].ParseAXDataCollection<VendorItem>(version).ToList();
             }
