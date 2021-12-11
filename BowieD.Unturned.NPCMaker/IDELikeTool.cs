@@ -7,9 +7,9 @@ namespace BowieD.Unturned.NPCMaker
     {
         public static void RegisterOpenCloseBoomerangs(TextBox textBox)
         {
-            if (AppConfig.Instance.autoCloseOpenBoomerangs)
+            textBox.PreviewTextInput += (sender, e) =>
             {
-                textBox.PreviewTextInput += (sender, e) =>
+                if (AppConfig.Instance.autoCloseOpenBoomerangs)
                 {
                     if (e.Text == "<")
                     {
@@ -29,8 +29,8 @@ namespace BowieD.Unturned.NPCMaker
                             textBox.CaretIndex++;
                         }
                     }
-                };
-            }
+                }
+            };
         }
     }
 }

@@ -40,6 +40,38 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public bool preferLegacyIDsOverGUIDs = false;
         public bool autoCloseOpenBoomerangs = true;
 
+        public void Apply(AppConfig from, out bool hasToRestart)
+        {
+            hasToRestart = false;
+
+            // these cannot be changed that easily
+            hasToRestart |= (experimentalFeatures != from.experimentalFeatures);
+            hasToRestart |= (scale != from.scale);
+            hasToRestart |= (language != from.language);
+            hasToRestart |= (autosaveOption != from.autosaveOption);
+            hasToRestart |= (autoUpdate != from.autoUpdate);
+            hasToRestart |= (downloadPrerelease != from.downloadPrerelease);
+            hasToRestart |= (currentTheme != from.currentTheme);
+            hasToRestart |= (enableDiscord != from.enableDiscord);
+            hasToRestart |= (unturnedDir != from.unturnedDir);
+            hasToRestart |= (importVanilla != from.importVanilla);
+            hasToRestart |= (importWorkshop != from.importWorkshop);
+            hasToRestart |= (importHooked != from.importHooked);
+            hasToRestart |= (generateThumbnailsBeforehand != from.generateThumbnailsBeforehand);
+            hasToRestart |= (useOldStyleMoveUpDown != from.useOldStyleMoveUpDown);
+            hasToRestart |= (replaceMissingKeysWithEnglish != from.replaceMissingKeysWithEnglish);
+
+            // it's enough to just change value to apply it
+            useCommentsInsteadOfData = from.useCommentsInsteadOfData;
+            exportSchema = from.exportSchema;
+            generateGuids = from.generateGuids;
+            animateControls = from.animateControls;
+            highlightSearch = from.highlightSearch;
+            disabledErrors = from.disabledErrors;
+            preferLegacyIDsOverGUIDs = from.preferLegacyIDsOverGUIDs;
+            autoCloseOpenBoomerangs = from.autoCloseOpenBoomerangs;
+            alternateLogicTranslation = from.alternateLogicTranslation;
+        }
         public void Save()
         {
             App.Logger.Log($"[CFG] - Saving configuration to {path}");

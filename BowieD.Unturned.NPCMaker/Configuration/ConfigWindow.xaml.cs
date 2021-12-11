@@ -232,8 +232,20 @@ namespace BowieD.Unturned.NPCMaker.Configuration
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            CurrentConfig.Save();
-            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Configuration_OnExit"]);
+            AppConfig currentConfig = CurrentConfig;
+
+            currentConfig.Save();
+            AppConfig.Instance.Apply(currentConfig, out var hasToRestart);
+
+            if (hasToRestart)
+            {
+                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Configuration_OnExit"]);
+            }
+            else
+            {
+                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Configuration_OnExit_NoRestart"]);
+            }
+
             Close();
         }
 
