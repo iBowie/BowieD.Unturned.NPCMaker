@@ -61,11 +61,6 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
             }
         }
 
-        public void SendPresence(string details, string state)
-        {
-            SendPresence(new RichPresence() { Details = details, State = state });
-        }
-
         public async void Update()
         {
             client.Invoke();

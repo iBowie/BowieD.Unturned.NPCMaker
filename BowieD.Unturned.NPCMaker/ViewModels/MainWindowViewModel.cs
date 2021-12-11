@@ -259,152 +259,159 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }
             if (MainWindow.DiscordManager != null)
             {
-                switch (selectedIndex)
+                try
                 {
-                    case 0:
-                        {
-                            MainWindow.DiscordManager.SendPresence(new RichPresence
+                    switch (selectedIndex)
+                    {
+                        case 0:
                             {
-                                Timestamps = new Timestamps
+                                MainWindow.DiscordManager.SendPresence(new RichPresence
                                 {
-                                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
-                                },
-                                Assets = new Assets
-                                {
-                                    SmallImageKey = "icon_info_outlined",
-                                    SmallImageText = $"Characters: {MainWindow.CurrentProject.data.characters.Count}".Shortify(125)
-                                },
-                                Details = $"Current NPC: {CharacterTabViewModel.EditorName}".Shortify(125),
-                                State = $"Display Name: {CharacterTabViewModel.DisplayName}".Shortify(125)
-                            });
-                        }
-                        break;
-                    case 1:
-                        {
-                            MainWindow.DiscordManager.SendPresence(new RichPresence
-                            {
-                                Timestamps = new Timestamps
-                                {
-                                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
-                                },
-                                Assets = new Assets
-                                {
-                                    SmallImageKey = "icon_chat_outlined",
-                                    SmallImageText = $"Dialogues: {MainWindow.CurrentProject.data.dialogues.Count}".Shortify(125)
-                                },
-                                Details = $"Messages: {DialogueTabViewModel.Dialogue.Messages.Count}".Shortify(125),
-                                State = $"Responses: {DialogueTabViewModel.Dialogue.Responses.Count}".Shortify(125)
-                            });
-                        }
-                        break;
-                    case 2:
-                        {
-                            MainWindow.DiscordManager.SendPresence(new RichPresence
-                            {
-                                Timestamps = new Timestamps
-                                {
-                                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
-                                },
-                                Assets = new Assets
-                                {
-                                    SmallImageKey = "icon_money_outlined",
-                                    SmallImageText = $"Vendors: {MainWindow.CurrentProject.data.vendors.Count}".Shortify(125)
-                                },
-                                Details = $"Vendor Name: {VendorTabViewModel.Title}".Shortify(125),
-                                State = $"Buy: {VendorTabViewModel.Vendor.items.Count(d => d.isBuy)} / Sell: {VendorTabViewModel.Vendor.items.Count(d => !d.isBuy)}".Shortify(125)
-                            });
-                        }
-                        break;
-                    case 3:
-                        {
-                            MainWindow.DiscordManager.SendPresence(new RichPresence
-                            {
-                                Timestamps = new Timestamps
-                                {
-                                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
-                                },
-                                Assets = new Assets
-                                {
-                                    SmallImageKey = "icon_money_outlined",
-                                    SmallImageText = $"Dialogue Vendors: {MainWindow.CurrentProject.data.dialogueVendors.Count}".Shortify(125)
-                                },
-                                Details = $"Dialogue Vendor ID: {DialogueVendorTabViewModel.ID}".Shortify(125),
-                                State = $"Items: {DialogueVendorTabViewModel.DialogueVendor.Items.Count}".Shortify(125)
-                            });
-                        }
-                        break;
-                    case 4:
-                        {
-                            MainWindow.DiscordManager.SendPresence(new RichPresence
-                            {
-                                Timestamps = new Timestamps
-                                {
-                                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
-                                },
-                                Assets = new Assets
-                                {
-                                    SmallImageKey = "icon_exclamation_outlined",
-                                    SmallImageText = $"Quests: {MainWindow.CurrentProject.data.quests.Count}".Shortify(125)
-                                },
-                                Details = $"Quest Name: {QuestTabViewModel.Title}".Shortify(125),
-                                State = $"Rewards: {QuestTabViewModel.Quest.rewards.Count} | Conds: {QuestTabViewModel.Quest.conditions.Count}".Shortify(125)
-                            });
-                        }
-                        break;
-                    case 5:
-                        {
-                            MainWindow.DiscordManager.SendPresence(new RichPresence
-                            {
-                                Timestamps = new Timestamps
-                                {
-                                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
-                                },
-                                Assets = new Assets
-                                {
-                                    SmallImageKey = "icon_money_outlined",
-                                    SmallImageText = $"Currencies: {MainWindow.CurrentProject.data.currencies.Count}".Shortify(125)
-                                },
-                                Details = $"Currencies: {MainWindow.CurrentProject.data.currencies.Count}".Shortify(125),
-                                State = $"Editing currencies".Shortify(125)
-                            });
-                        }
-                        break;
-                    case 6:
-                        {
-                            MainWindow.DiscordManager.SendPresence(new RichPresence
-                            {
-                                Timestamps = new Timestamps
-                                {
-                                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
-                                },
-                                Assets = new Assets()
-                                {
-                                    SmallImageKey = "icon_warning_outlined",
-                                    SmallImageText = $"Mistakes: {MainWindow.Instance.lstMistakes.Items.Count}".Shortify(125)
-                                },
-                                Details = $"Critical errors: {Mistakes.MistakesManager.Criticals_Count}".Shortify(125),
-                                State = $"Warnings: {Mistakes.MistakesManager.Warnings_Count}".Shortify(125)
-                            });
+                                    Timestamps = new Timestamps
+                                    {
+                                        StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                                    },
+                                    Assets = new Assets
+                                    {
+                                        SmallImageKey = "icon_info_outlined",
+                                        SmallImageText = $"Characters: {MainWindow.CurrentProject.data.characters.Count}".Shortify(125)
+                                    },
+                                    Details = $"Current NPC: {CharacterTabViewModel.EditorName}".Shortify(125),
+                                    State = $"Display Name: {CharacterTabViewModel.DisplayName}".Shortify(125)
+                                });
+                            }
                             break;
-                        }
-                    default:
-                        {
-                            MainWindow.DiscordManager.SendPresence(new RichPresence
+                        case 1:
                             {
-                                Timestamps = new Timestamps
+                                MainWindow.DiscordManager.SendPresence(new RichPresence
                                 {
-                                    StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
-                                },
-                                Assets = new Assets()
-                                {
-                                    SmallImageKey = "icon_question_outlined",
-                                    SmallImageText = "Chilling in another dimension"
-                                },
-                                Details = $"If you can see this message".Shortify(125),
-                                State = $"It means that this user went across dimensions.".Shortify(125)
-                            });
+                                    Timestamps = new Timestamps
+                                    {
+                                        StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                                    },
+                                    Assets = new Assets
+                                    {
+                                        SmallImageKey = "icon_chat_outlined",
+                                        SmallImageText = $"Dialogues: {MainWindow.CurrentProject.data.dialogues.Count}".Shortify(125)
+                                    },
+                                    Details = $"Messages: {DialogueTabViewModel.Dialogue.Messages.Count}".Shortify(125),
+                                    State = $"Responses: {DialogueTabViewModel.Dialogue.Responses.Count}".Shortify(125)
+                                });
+                            }
                             break;
-                        }
+                        case 2:
+                            {
+                                MainWindow.DiscordManager.SendPresence(new RichPresence
+                                {
+                                    Timestamps = new Timestamps
+                                    {
+                                        StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                                    },
+                                    Assets = new Assets
+                                    {
+                                        SmallImageKey = "icon_money_outlined",
+                                        SmallImageText = $"Vendors: {MainWindow.CurrentProject.data.vendors.Count}".Shortify(125)
+                                    },
+                                    Details = $"Vendor Name: {VendorTabViewModel.Title}".Shortify(125),
+                                    State = $"Buy: {VendorTabViewModel.Vendor.items.Count(d => d.isBuy)} / Sell: {VendorTabViewModel.Vendor.items.Count(d => !d.isBuy)}".Shortify(125)
+                                });
+                            }
+                            break;
+                        case 3:
+                            {
+                                MainWindow.DiscordManager.SendPresence(new RichPresence
+                                {
+                                    Timestamps = new Timestamps
+                                    {
+                                        StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                                    },
+                                    Assets = new Assets
+                                    {
+                                        SmallImageKey = "icon_money_outlined",
+                                        SmallImageText = $"Dialogue Vendors: {MainWindow.CurrentProject.data.dialogueVendors.Count}".Shortify(125)
+                                    },
+                                    Details = $"Dialogue Vendor ID: {DialogueVendorTabViewModel.ID}".Shortify(125),
+                                    State = $"Items: {DialogueVendorTabViewModel.DialogueVendor.Items.Count}".Shortify(125)
+                                });
+                            }
+                            break;
+                        case 4:
+                            {
+                                MainWindow.DiscordManager.SendPresence(new RichPresence
+                                {
+                                    Timestamps = new Timestamps
+                                    {
+                                        StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                                    },
+                                    Assets = new Assets
+                                    {
+                                        SmallImageKey = "icon_exclamation_outlined",
+                                        SmallImageText = $"Quests: {MainWindow.CurrentProject.data.quests.Count}".Shortify(125)
+                                    },
+                                    Details = $"Quest Name: {QuestTabViewModel.Title}".Shortify(125),
+                                    State = $"Rewards: {QuestTabViewModel.Quest.rewards.Count} | Conds: {QuestTabViewModel.Quest.conditions.Count}".Shortify(125)
+                                });
+                            }
+                            break;
+                        case 5:
+                            {
+                                MainWindow.DiscordManager.SendPresence(new RichPresence
+                                {
+                                    Timestamps = new Timestamps
+                                    {
+                                        StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                                    },
+                                    Assets = new Assets
+                                    {
+                                        SmallImageKey = "icon_money_outlined",
+                                        SmallImageText = $"Currencies: {MainWindow.CurrentProject.data.currencies.Count}".Shortify(125)
+                                    },
+                                    Details = $"Currencies: {MainWindow.CurrentProject.data.currencies.Count}".Shortify(125),
+                                    State = $"Editing currencies".Shortify(125)
+                                });
+                            }
+                            break;
+                        case 6:
+                            {
+                                MainWindow.DiscordManager.SendPresence(new RichPresence
+                                {
+                                    Timestamps = new Timestamps
+                                    {
+                                        StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                                    },
+                                    Assets = new Assets()
+                                    {
+                                        SmallImageKey = "icon_warning_outlined",
+                                        SmallImageText = $"Mistakes: {MainWindow.Instance.lstMistakes.Items.Count}".Shortify(125)
+                                    },
+                                    Details = $"Critical errors: {Mistakes.MistakesManager.Criticals_Count}".Shortify(125),
+                                    State = $"Warnings: {Mistakes.MistakesManager.Warnings_Count}".Shortify(125)
+                                });
+                                break;
+                            }
+                        default:
+                            {
+                                MainWindow.DiscordManager.SendPresence(new RichPresence
+                                {
+                                    Timestamps = new Timestamps
+                                    {
+                                        StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                                    },
+                                    Assets = new Assets()
+                                    {
+                                        SmallImageKey = "icon_question_outlined",
+                                        SmallImageText = "Chilling in another dimension"
+                                    },
+                                    Details = $"If you can see this message".Shortify(125),
+                                    State = $"It means that this user went across dimensions.".Shortify(125)
+                                });
+                                break;
+                            }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    App.Logger.LogException("Could not update Rich Presence", ex: ex);
                 }
             }
         }
