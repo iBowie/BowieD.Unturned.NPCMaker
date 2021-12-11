@@ -27,11 +27,6 @@ namespace BowieD.Unturned.NPCMaker.XAML
                 Converter = new LocalizationConverter(Key),
                 NotifyOnSourceUpdated = true
             };
-            multiBinding.Bindings.Add(new Binding
-            {
-                Source = LocalizationManager.Current,
-                Path = new PropertyPath("CurrentCulture")
-            });
             if (KeySource != null)
             {
                 multiBinding.Bindings.Add(KeySource);
