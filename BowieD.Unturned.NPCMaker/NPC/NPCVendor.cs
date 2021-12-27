@@ -107,7 +107,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
             Title = node["vendorTitle"].ToText();
             vendorDescription = node["vendorDescription"].ToText();
 
-            if (version >= 9)
+            if (version >= 8)
             {
                 var buyItems = node["buyingItems"].ParseVendorItemsNew(version, true);
                 var sellItems = node["sellingItems"].ParseVendorItemsNew(version, false);
