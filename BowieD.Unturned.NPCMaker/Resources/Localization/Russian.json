@@ -431,6 +431,7 @@
         "Item_Auto_Equip": "Взять в руки при выдаче",
         "Item_Random_ID": "ID таблицы лута",
         "Item_Random_Amount": "Количество предмета",
+        "Item_Random_Auto_Equip": "Взять в руки при выдаче",
         "Achievement_ID": "ID достижения",
         "Vehicle_ID": "ID транспорта",
         "Vehicle_Spawnpoint": "Точка появления (Установите в DevKit)",

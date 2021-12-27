@@ -431,6 +431,7 @@
         "Item_Auto_Equip": "Equip Item on Give",
         "Item_Random_ID": "Loot Table ID",
         "Item_Random_Amount": "Amount of Item",
+        "Item_Random_Auto_Equip": "Equip Item on Give",
         "Achievement_ID": "Achievement ID",
         "Vehicle_ID": "Vehicle ID",
         "Vehicle_Spawnpoint": "Vehicle Spawnpoint (Set in Devkit)",

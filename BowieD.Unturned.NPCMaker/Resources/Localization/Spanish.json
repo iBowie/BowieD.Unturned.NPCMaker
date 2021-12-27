@@ -408,6 +408,7 @@
         "Item_Auto_Equip": "Equipar el objeto cuando te lo dan",
         "Item_Random_ID": "ID Mesa de Loot",
         "Item_Random_Amount": "Cantidad del Objeto",
+        "Item_Random_Auto_Equip": "Equipar el objeto cuando te lo dan",
         "Achievement_ID": "ID Logro",
         "Vehicle_ID": "ID Vehiculo",
         "Vehicle_Spawnpoint": "Spawnpoint Vehiculo (Añadir en la Devkit)",

@@ -396,6 +396,7 @@
 		"Item_Auto_Equip": "在领取时自动装备",
 		"Item_Random_ID": "物品表的ID",
 		"Item_Random_Amount": "物品数量",
+		"Item_Random_Auto_Equip": "在领取时自动装备",
 		"Achievement_ID": "成就的ID",
 		"Vehicle_ID": "车辆的ID",
 		"Vehicle_Spawnpoint": "车辆刷新点 (请在地图Devkit编辑模式下进行)",
