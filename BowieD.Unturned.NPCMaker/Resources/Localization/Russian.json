@@ -41,6 +41,7 @@
         "automaticallyCheckForErrors": "Счётчик ошибок",
         "preferLegacyIDsOverGUIDs": "Предпочитать старые ID вместо новых GUIDов",
         "autoCloseOpenBoomerangs": "Автоматически закрывать Rich Text тэги",
+        "mainWindowBackgroundBlurRadius": "Радиус размытия заднего фона",
 
         "experimentalFeatures_Tooltip": "ЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭксперименты",
         "scale_Tooltip": "Изменить размер программы на экране",
@@ -65,6 +66,7 @@
         "automaticallyCheckForErrors_Tooltip": "Показывает текущее количество ошибок в нижней части программы.\nВнимание: это не оптимизировано и может быть причиной лагов.\nЕсли у Вас слабый компьютер - лучше оставьте это выключенным.",
         "preferLegacyIDsOverGUIDs_Tooltip": "При выборе ассета предпочитает ID (0-65535) вместо GUIDов\nНе рекомендуется, так как разработчик игры постепенно отказывается от старых ID в пользу GUID",
         "autoCloseOpenBoomerangs_Tooltip": "Автоматически ставит '>' на конце выделенного региона в полях для ввода Rich текста когда введён символ '<'",
+        "mainWindowBackgroundBlurRadius_Tooltip": "Насколько сильно должен размываться задний фон главного окна. 0 полностью отключает это.",
 
         "exportSchema_Warning": "Внимание! Эта настройка предназначена для продвинутых пользователей!",
 
@@ -852,6 +854,10 @@
         "Color_Picker_Available_Colors_Header": "Сохранённые цвета",
         "Configuration_Tab_General": "Общее",
         "Configuration_Tab_Interface": "Интерфейс",
+        "Configuration_Tab_Interface_MainWindowBackground_Header": "Свой фон главного окна",
+        "Configuration_Tab_Interface_ChangeMainWindowBackground": "Установить свой фон",
+        "Configuration_Tab_Interface_ResetMainWindowBackground": "Сброс",
+        "Configuration_Tab_Interface_Hint": "Задний фон главного окна работает лучше всего с тёмным режимом!",
         "Configuration_Tab_Misc": "Разное",
         "Configuration_Tab_Import": "Импорт",
         "Configuration_Tab_Import_ChangeFolder": "Указать расположение Unturned",

@@ -26,6 +26,13 @@
         <Grid.LayoutTransform>
             <ScaleTransform ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
         </Grid.LayoutTransform>
+        <Grid IsHitTestVisible="False">
+            <Image Stretch="UniformToFill" x:Name="mainWindowBackgroundImage">
+                <Image.Effect>
+                    <BlurEffect KernelType="Gaussian" x:Name="mainWindowBackgroundImageBlurEffect" Radius="0"/>
+                </Image.Effect>
+            </Image>
+        </Grid>
         <Grid Name="mainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -119,7 +126,8 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
-                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="characterTabSelect"/>
+                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="characterTabSelect"
+                                            Background="Transparent"/>
                             </ScrollViewer>
                             <Button Style="{DynamicResource FlatButtonStyle}" Name="characterTabButtonAdd" Grid.Column="1" Margin="10">
                                 <Button.Content>
@@ -560,7 +568,7 @@
                                 </Grid>
                             </Grid>
                             <GroupBox Header="{xaml:Localize Key=CHARACTER_Clothing}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,207,10,10" MaxHeight="343" Width="400">
-                                <TabControl Name="clothingTabControl">
+                                <TabControl Name="clothingTabControl" Background="Transparent">
                                     <TabItem DataContext="{Binding DefaultClothing, UpdateSourceTrigger=PropertyChanged}" Header="{xaml:Localize Key=CHARACTER_Clothing_Default}" mah:ControlsHelper.HeaderFontSize="18">
                                         <ScrollViewer>
                                             <StackPanel>
@@ -1130,7 +1138,8 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
-                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="dialogueTabSelect"/>
+                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="dialogueTabSelect"
+                                            Background="Transparent"/>
                             </ScrollViewer>
                             <Button Style="{DynamicResource FlatButtonStyle}" Name="dialogueTabButtonAdd" Grid.Column="1" Margin="10">
                                 <Button.Content>
@@ -1299,7 +1308,8 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
-                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="vendorTabSelect"/>
+                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="vendorTabSelect"
+                                            Background="Transparent"/>
                             </ScrollViewer>
                             <Button Style="{DynamicResource FlatButtonStyle}" Name="vendorTabButtonAdd" Grid.Column="1" Margin="10">
                                 <Button.Content>
@@ -1481,7 +1491,8 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
-                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="dialogueVendorTabSelect"/>
+                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="dialogueVendorTabSelect"
+                                            Background="Transparent"/>
                             </ScrollViewer>
                             <Button Style="{DynamicResource FlatButtonStyle}" Name="dialogueVendorTabButtonAdd" Grid.Column="1" Margin="10">
                                 <Button.Content>
@@ -1713,7 +1724,8 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
-                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="questTabSelect"/>
+                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="questTabSelect"
+                                            Background="Transparent"/>
                             </ScrollViewer>
                             <Button Style="{DynamicResource FlatButtonStyle}" Name="questTabButtonAdd" Grid.Column="1" Margin="10">
                                 <Button.Content>
@@ -1863,7 +1875,8 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
-                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="currencyTabSelect"/>
+                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="currencyTabSelect"
+                                            Background="Transparent"/>
                             </ScrollViewer>
                             <Button Style="{DynamicResource FlatButtonStyle}" Name="currencyTabButtonAdd" Grid.Column="1" Margin="10">
                                 <Button.Content>
@@ -1957,7 +1970,7 @@
                 </TabItem>
                 <TabItem DataContext="{Binding MistakeTabViewModel}" Name="mistakeListTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Errors}">
                     <Grid>
-                        <ListView Name="lstMistakes" Margin="10">
+                        <ListView Name="lstMistakes" Margin="10" Background="Transparent">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding MistakeImportance}" Header="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_Error_Importance}" Width="100"/>
@@ -2102,7 +2115,7 @@
                 <Setter Property="Template" Value="{DynamicResource FlatOutlineButtonTemplate}"/>
             </Style>
             <ControlTemplate x:Key="FancyTabItemCloseButtonTemplate" TargetType="Button">
-                <Border Name="border" Opacity="0.5" Background="{DynamicResource BackgroundColor}">
+                <Border Name="border" Opacity="0.5" Background="Transparent">
                     <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                 </Border>
                 <ControlTemplate.Triggers>

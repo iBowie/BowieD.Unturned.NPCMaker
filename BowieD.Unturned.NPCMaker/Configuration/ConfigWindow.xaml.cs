@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Themes;
 using BowieD.Unturned.NPCMaker.ViewModels;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -161,7 +162,9 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 disabledErrors = CurrentDisabledErrors,
                 preferLegacyIDsOverGUIDs = PreferLegacyIDsOverGUIDs_Box.IsChecked.Value,
                 autoCloseOpenBoomerangs = Auto_Close_Open_Boomerangs_Box.IsChecked.Value,
-                unturnedDir = curUntDir
+                unturnedDir = curUntDir,
+                mainWindowBackgroundImage = curMainWindowBackgroundPath,
+                mainWindowBackgroundImageBlurRadius = MainWindowBackgroundBlurRadius_Slider.Value,
             };
             set
             {
@@ -220,10 +223,13 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 PreferLegacyIDsOverGUIDs_Box.IsChecked = value.preferLegacyIDsOverGUIDs;
                 Auto_Close_Open_Boomerangs_Box.IsChecked = value.autoCloseOpenBoomerangs;
                 curUntDir = value.unturnedDir;
+                curMainWindowBackgroundPath = value.mainWindowBackgroundImage;
+                MainWindowBackgroundBlurRadius_Slider.Value = value.mainWindowBackgroundImageBlurRadius;
             }
         }
 
         private string curUntDir;
+        private string curMainWindowBackgroundPath;
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -260,6 +266,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         }
 
         private ICommand importChangeFolderCommand, importResetFolderCommand;
+        private ICommand changeMainWindowBackgroundImageCommand, resetMainWindowBackgroundImageCommand;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -307,6 +314,49 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 }
 
                 return importResetFolderCommand;
+            }
+        }
+        public ICommand ChangeMainWindowBackgroundImageCommand
+        {
+            get
+            {
+                if (changeMainWindowBackgroundImageCommand is null)
+                {
+                    changeMainWindowBackgroundImageCommand = new BaseCommand(() =>
+                    {
+                        OpenFileDialog ofd = new OpenFileDialog()
+                        {
+                            Filter = "Supported image formats|*.bmp;*.jpeg;*.jpg;*.png;*.tiff;*.tif",
+                            Multiselect = false,
+                            CheckFileExists = true,
+                        };
+
+                        if (ofd.ShowDialog() == true)
+                        {
+                            curMainWindowBackgroundPath = ofd.FileName;
+                        }
+                    });
+                }
+
+                return changeMainWindowBackgroundImageCommand;
+            }
+        }
+        public ICommand ResetMainWindowBackgroundImageCommand
+        {
+            get
+            {
+                if (resetMainWindowBackgroundImageCommand is null)
+                {
+                    resetMainWindowBackgroundImageCommand = new AdvancedCommand(() =>
+                    {
+                        curMainWindowBackgroundPath = string.Empty;
+                    }, (p) =>
+                    {
+                        return !string.IsNullOrEmpty(curMainWindowBackgroundPath);
+                    });
+                }
+
+                return resetMainWindowBackgroundImageCommand;
             }
         }
     }

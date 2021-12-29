@@ -40,6 +40,8 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public string[] disabledErrors;
         public bool preferLegacyIDsOverGUIDs = false;
         public bool autoCloseOpenBoomerangs = true;
+        public string mainWindowBackgroundImage;
+        public double mainWindowBackgroundImageBlurRadius;
 
         public void Apply(AppConfig from, out bool hasToRestart)
         {
@@ -84,6 +86,14 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                     MainWindow.Instance.statusNoErrorsItem.Visibility = System.Windows.Visibility.Collapsed;
                     MainWindow.ErrorCheckTimer.Stop();
                 }
+            }
+
+            if (mainWindowBackgroundImage != from.mainWindowBackgroundImage || mainWindowBackgroundImageBlurRadius != from.mainWindowBackgroundImageBlurRadius)
+            {
+                mainWindowBackgroundImage = from.mainWindowBackgroundImage;
+                mainWindowBackgroundImageBlurRadius = from.mainWindowBackgroundImageBlurRadius;
+
+                MainWindow.Instance.SetBackground(mainWindowBackgroundImage, currentTheme.Substring("Metro/".Length).StartsWith("Dark"));
             }
 
             // it's enough to just change value to apply it

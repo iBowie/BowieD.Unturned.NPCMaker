@@ -68,6 +68,22 @@
                         <CheckBox Content="{xaml:Localize Key=OPTIONS_highlightSearch}" ToolTip="{xaml:Localize Key=OPTIONS_highlightSearch_Tooltip}" Name="Highlight_Search_Box" VerticalAlignment="Top" Margin="2.5"/>
                         <CheckBox Content="{xaml:Localize Key=OPTIONS_useOldStyleMoveUpDown}" ToolTip="{xaml:Localize Key=OPTIONS_useOldStyleMoveUpDown_Tooltip}" Name="Use_Old_Style_Move_Up_Down_Box" VerticalAlignment="Top" Margin="2.5"/>
                         <CheckBox Content="{xaml:Localize Key=OPTIONS_autoCloseOpenBoomerangs}" ToolTip="{xaml:Localize Key=OPTIONS_autoCloseOpenBoomerangs_Tooltip}" Name="Auto_Close_Open_Boomerangs_Box" VerticalAlignment="Top" Margin="2.5"/>
+                        <GroupBox Margin="5" Header="{xaml:Localize INTERFACE_Configuration_Tab_Interface_MainWindowBackground_Header}">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Command="{Binding ChangeMainWindowBackgroundImageCommand}" Grid.Column="0" Content="{xaml:Localize INTERFACE_Configuration_Tab_Interface_ChangeMainWindowBackground}" Margin="2.5"/>
+                                    <Button Command="{Binding ResetMainWindowBackgroundImageCommand}" Grid.Column="1" Content="{xaml:Localize INTERFACE_Configuration_Tab_Interface_ResetMainWindowBackground}" Margin="2.5"/>
+                                </Grid>
+                                <TextBlock Text="{xaml:Localize OPTIONS_mainWindowBackgroundBlurRadius}"
+                                           ToolTip="{xaml:Localize OPTIONS_mainWindowBackgroundBlurRadius_Tooltip}" Margin="5"/>
+                                <Slider Margin="5" Minimum="0" Maximum="50" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1" Name="MainWindowBackgroundBlurRadius_Slider"/>
+                                <TextBlock Text="{xaml:Localize INTERFACE_Configuration_Tab_Interface_Hint}" Margin="5"/>
+                            </StackPanel>
+                        </GroupBox>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>

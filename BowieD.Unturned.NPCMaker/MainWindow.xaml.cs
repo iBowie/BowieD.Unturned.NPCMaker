@@ -17,6 +17,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
@@ -40,6 +41,8 @@ namespace BowieD.Unturned.NPCMaker
             #region THEME SETUP
             Themes.Theme theme = ThemeManager.Themes.ContainsKey(AppConfig.Instance.currentTheme ?? "") ? ThemeManager.Themes[AppConfig.Instance.currentTheme] : ThemeManager.Themes["Metro/LightGreen"];
             ThemeManager.Apply(theme);
+
+            SetBackground(AppConfig.Instance.mainWindowBackgroundImage, theme.Name.Substring("Metro/".Length).StartsWith("Dark"));
             #endregion
 
             ImportAssetsForm iaf = new ImportAssetsForm();
@@ -457,6 +460,40 @@ namespace BowieD.Unturned.NPCMaker
                 DataManager.RecentFileData.Save();
             }
             Instance.RefreshRecentList();
+        }
+
+        public void SetBackground(string imagePath, bool darkMode)
+        {
+            try
+            {
+                BitmapImage bmp = new BitmapImage();
+
+                bmp.BeginInit();
+
+                bmp.CacheOption = BitmapCacheOption.OnLoad;
+                bmp.UriSource = new Uri(imagePath);
+
+                bmp.EndInit();
+
+                bmp.Freeze();
+
+                mainWindowBackgroundImage.Source = bmp;
+            }
+            catch
+            {
+                mainWindowBackgroundImage.Source = null;
+            }
+
+            if (darkMode)
+            {
+                mainWindowBackgroundImage.Opacity = 0.25;
+            }
+            else
+            {
+                mainWindowBackgroundImage.Opacity = 0.75;
+            }
+
+            mainWindowBackgroundImageBlurEffect.Radius = MathUtil.Clamp(AppConfig.Instance.mainWindowBackgroundImageBlurRadius, 0, 50);
         }
 
         #region DRAG AND DROP
