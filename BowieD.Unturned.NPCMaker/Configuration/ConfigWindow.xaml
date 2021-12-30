@@ -81,7 +81,8 @@
                                 <TextBlock Text="{xaml:Localize OPTIONS_mainWindowBackgroundBlurRadius}"
                                            ToolTip="{xaml:Localize OPTIONS_mainWindowBackgroundBlurRadius_Tooltip}" Margin="5"/>
                                 <Slider Margin="5" Minimum="0" Maximum="50" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1" Name="MainWindowBackgroundBlurRadius_Slider"/>
-                                <TextBlock Text="{xaml:Localize INTERFACE_Configuration_Tab_Interface_Hint}" Margin="5"/>
+                                <TextBlock Text="{xaml:Localize INTERFACE_Configuration_Tab_Interface_Hint}" Margin="5"
+                                           TextWrapping="Wrap"/>
                             </StackPanel>
                         </GroupBox>
                     </StackPanel>
