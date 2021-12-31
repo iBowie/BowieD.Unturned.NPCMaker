@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Controls;
+using BowieD.Unturned.NPCMaker.FindReplace;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.GameIntegration.Filtering;
@@ -284,6 +285,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 this.ID = id;
                 MainWindow.Instance.txtID.Value = id;
             }, GameIntegration.EGameAssetCategory.OBJECT));
+            txtIDContext.Items.Add(ContextHelper.CreateFindReplaceButton(FindReplaceFormats.CHARACTER_ID));
 
             MainWindow.Instance.txtID.ContextMenu = txtIDContext;
 
@@ -294,6 +296,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 this.DialogueID = asset.ID;
                 MainWindow.Instance.txtStartDialogueID.Value = asset.ID;
             }, "Control_SelectAsset_Dialogue", MahApps.Metro.IconPacks.PackIconMaterialKind.Chat));
+            dialogueIDContext.Items.Add(ContextHelper.CreateFindReplaceButton(FindReplaceFormats.DIALOGUE_ID));
 
             MainWindow.Instance.txtStartDialogueID.ContextMenu = dialogueIDContext;
         }

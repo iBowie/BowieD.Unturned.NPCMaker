@@ -1,6 +1,8 @@
 ﻿using BowieD.Unturned.NPCMaker.Commands;
+using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Common.Utility;
 using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.FindReplace;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
@@ -114,6 +116,13 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             break;
                     }
                 })));
+
+            MainWindow.txtID.BindFindReplace(FindReplaceFormats.CHARACTER_ID);
+            MainWindow.txtStartDialogueID.BindFindReplace(FindReplaceFormats.DIALOGUE_ID);
+            MainWindow.dialogueInputIdControl.BindFindReplace(FindReplaceFormats.DIALOGUE_ID);
+            MainWindow.vendorIdTxtBox.BindFindReplace(FindReplaceFormats.VENDOR_ID);
+            MainWindow.questIdBox.BindFindReplace(FindReplaceFormats.QUEST_ID);
+
             CharacterTabViewModel = new CharacterTabViewModel();
             DialogueTabViewModel = new DialogueTabViewModel();
             VendorTabViewModel = new VendorTabViewModel();
