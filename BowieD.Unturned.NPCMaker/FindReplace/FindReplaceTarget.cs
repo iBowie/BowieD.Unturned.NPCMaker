@@ -17,12 +17,14 @@
         {
             get
             {
+                string typePrefix = Target.GetType().Name;
+
                 if (Target is NPC.IHasUIText hasUiText)
                 {
-                    return hasUiText.UIText;
+                    return $"{typePrefix} - {hasUiText.UIText}";
                 }
 
-                return Target.ToString();
+                return $"{typePrefix} - {Target}";
             }
         }
     }
