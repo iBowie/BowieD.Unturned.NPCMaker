@@ -27,6 +27,18 @@ namespace BowieD.Unturned.NPCMaker.FindReplace
             yield return new ReplaceableProperty(nameof(RewardItem.Tactical), typeof(RewardItem), FindReplaceFormats.ITEM_OPTIONAL_ID);
 
             yield return new ReplaceableProperty(nameof(RewardVehicle.ID), typeof(RewardVehicle), FindReplaceFormats.VEHICLE_ID);
+
+            yield return new ReplaceableProperty(nameof(RewardQuest.ID), typeof(RewardQuest), FindReplaceFormats.QUEST_ID);
+
+            yield return new ReplaceableProperty(nameof(RewardVehicle.Spawnpoint), typeof(RewardVehicle), FindReplaceFormats.VEHICLE_SPAWNPOINT);
+
+            yield return new ReplaceableProperty(nameof(RewardFlagBool.ID), typeof(RewardFlagBool), FindReplaceFormats.FLAG_ID);
+            yield return new ReplaceableProperty(nameof(RewardFlagMath.A_ID), typeof(RewardFlagMath), FindReplaceFormats.FLAG_ID);
+            yield return new ReplaceableProperty(nameof(RewardFlagMath.B_ID), typeof(RewardFlagMath), FindReplaceFormats.FLAG_ID);
+            yield return new ReplaceableProperty(nameof(RewardFlagShort.ID), typeof(RewardFlagShort), FindReplaceFormats.FLAG_ID);
+            yield return new ReplaceableProperty(nameof(RewardFlagShortRandom.ID), typeof(RewardFlagShortRandom), FindReplaceFormats.FLAG_ID);
+
+            yield return new ReplaceableProperty(nameof(RewardCurrency.GUID), typeof(RewardCurrency), FindReplaceFormats.CURRENCY_GUID);
         }
     }
 }

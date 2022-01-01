@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BowieD.Unturned.NPCMaker.NPC.Conditions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,7 +21,20 @@ namespace BowieD.Unturned.NPCMaker.FindReplace
 
         protected override IEnumerable<ReplaceableProperty> CreateReplaceableProperties()
         {
-            return Array.Empty<ReplaceableProperty>();
+            yield return new ReplaceableProperty(nameof(ConditionQuest.ID), typeof(ConditionQuest), FindReplaceFormats.QUEST_ID);
+
+            yield return new ReplaceableProperty(nameof(ConditionCompareFlags.A_ID), typeof(ConditionCompareFlags), FindReplaceFormats.FLAG_ID);
+            yield return new ReplaceableProperty(nameof(ConditionCompareFlags.B_ID), typeof(ConditionCompareFlags), FindReplaceFormats.FLAG_ID);
+            yield return new ReplaceableProperty(nameof(ConditionFlagBool.ID), typeof(ConditionFlagBool), FindReplaceFormats.FLAG_ID);
+            yield return new ReplaceableProperty(nameof(ConditionFlagShort.ID), typeof(ConditionFlagShort), FindReplaceFormats.FLAG_ID);
+            yield return new ReplaceableProperty(nameof(ConditionKillsAnimal.ID), typeof(ConditionKillsAnimal), FindReplaceFormats.FLAG_ID);
+            yield return new ReplaceableProperty(nameof(ConditionKillsHorde.ID), typeof(ConditionKillsHorde), FindReplaceFormats.FLAG_ID);
+            yield return new ReplaceableProperty(nameof(ConditionKillsObject.ID), typeof(ConditionKillsObject), FindReplaceFormats.FLAG_ID);
+            yield return new ReplaceableProperty(nameof(ConditionKillsPlayer.ID), typeof(ConditionKillsPlayer), FindReplaceFormats.FLAG_ID);
+            yield return new ReplaceableProperty(nameof(ConditionKillsTree.ID), typeof(ConditionKillsTree), FindReplaceFormats.FLAG_ID);
+            yield return new ReplaceableProperty(nameof(ConditionKillsZombie.ID), typeof(ConditionKillsZombie), FindReplaceFormats.FLAG_ID);
+            
+            yield return new ReplaceableProperty(nameof(ConditionCurrency.GUID), typeof(ConditionCurrency), FindReplaceFormats.CURRENCY_GUID);
         }
     }
 }

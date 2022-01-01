@@ -17,6 +17,8 @@ namespace BowieD.Unturned.NPCMaker.FindReplace
             Type type = typeof(NPCResponse);
 
             yield return new ReplaceableProperty(nameof(NPCResponse.openDialogueId), type, FindReplaceFormats.DIALOGUE_ID);
+            yield return new ReplaceableProperty(nameof(NPCResponse.openVendorId), type, FindReplaceFormats.VENDOR_ID);
+            yield return new ReplaceableProperty(nameof(NPCResponse.openQuestId), type, FindReplaceFormats.QUEST_ID);
         }
     }
 }

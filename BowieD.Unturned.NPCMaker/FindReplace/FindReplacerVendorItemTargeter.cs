@@ -26,6 +26,10 @@ namespace BowieD.Unturned.NPCMaker.FindReplace
             {
                 return t is NPC.VendorItem vi && vi.type == NPC.ItemType.VEHICLE;
             });
+            yield return new ReplaceableProperty(nameof(NPC.VendorItem.spawnPointID), type, FindReplaceFormats.VEHICLE_SPAWNPOINT, (t) =>
+            {
+                return t is NPC.VendorItem vi && vi.type == NPC.ItemType.VEHICLE;
+            });
         }
     }
 }

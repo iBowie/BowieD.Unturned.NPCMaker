@@ -40,8 +40,6 @@ namespace BowieD.Unturned.NPCMaker.FindReplace
 
             yield return new ReplaceableProperty(nameof(NPCCharacter.ID), type, FindReplaceFormats.CHARACTER_ID);
             yield return new ReplaceableProperty(nameof(NPCCharacter.GUID), type, FindReplaceFormats.CHARACTER_GUID);
-            yield return new ReplaceableProperty(nameof(NPCCharacter.EditorName), type, FindReplaceFormats.CHARACTER_EditorName);
-            yield return new ReplaceableProperty(nameof(NPCCharacter.DisplayName), type, FindReplaceFormats.CHARACTER_DisplayName);
             yield return new ReplaceableProperty(nameof(NPCCharacter.startDialogueId), type, FindReplaceFormats.DIALOGUE_ID);
         }
     }
