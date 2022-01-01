@@ -936,5 +936,23 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 return projectSettingsCommand;
             }
         }
+        private ICommand _openFindReplaceCommand;
+        public ICommand OpenFindReplaceCommand
+        {
+            get
+            {
+                if (_openFindReplaceCommand is null)
+                {
+                    _openFindReplaceCommand = new BaseCommand(() =>
+                    {
+                        FindReplaceDialog frd = new FindReplaceDialog();
+
+                        frd.ShowDialog();
+                    });
+                }
+
+                return _openFindReplaceCommand;
+            }
+        }
     }
 }

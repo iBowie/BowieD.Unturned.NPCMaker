@@ -766,6 +766,8 @@
         "Main_Menu_File_ExportToUnturned": "Export NPC to Unturned",
         "Main_Menu_File_ExportToWorkshop": "Upload NPC to Workshop",
         "Main_Menu_File_Exit": "Exit",
+        "Main_Menu_Edit": "Edit",
+        "Main_Menu_Edit_FindReplace": "Find/Replace...",
         "Main_Menu_Options": "Options",
         "Main_Menu_ProjectSettings": "Project Settings",
         "Main_Menu_Communication": "Contact or Donate",

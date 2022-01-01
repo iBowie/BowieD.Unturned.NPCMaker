@@ -766,6 +766,8 @@
         "Main_Menu_File_ExportToUnturned": "Экспортировать NPC в Unturned",
         "Main_Menu_File_ExportToWorkshop": "Загрузить NPC в Workshop",
         "Main_Menu_File_Exit": "Выход",
+        "Main_Menu_Edit": "Редактировать",
+        "Main_Menu_Edit_FindReplace": "Найти/Заменить...",
         "Main_Menu_Options": "Настройки",
         "Main_Menu_ProjectSettings": "Настройки проекта",
         "Main_Menu_Communication": "Связаться или задонатить",

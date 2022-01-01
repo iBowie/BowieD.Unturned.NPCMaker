@@ -104,6 +104,13 @@
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
+                <MenuItem Header="{xaml:Localize INTERFACE_Main_Menu_Edit}">
+                    <MenuItem Command="{Binding OpenFindReplaceCommand}" Header="{xaml:Localize INTERFACE_Main_Menu_Edit_FindReplace}">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="FindReplace" Foreground="{DynamicResource AccentColor}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
                 <MenuItem Command="{Binding OptionsCommand}" Name="optionsMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Options}"/>
                 <MenuItem Command="{Binding ProjectSettingsCommand}" Name="projectSettingsMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_ProjectSettings}"/>
                 <MenuItem Name="commMenuItem" Header="{xaml:Localize Key=INTERFACE_Main_Menu_Communication}"/>
