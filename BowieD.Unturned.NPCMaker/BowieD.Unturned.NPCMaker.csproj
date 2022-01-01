@@ -257,6 +257,7 @@
     <Compile Include="FindReplace\FindReplacerDialogueResponseTargeter.cs" />
     <Compile Include="FindReplace\FindReplacerDialogueTargeter.cs" />
     <Compile Include="FindReplace\FindReplaceFormats.cs" />
+    <Compile Include="FindReplace\FindReplacerDialogueVendorTargeter.cs" />
     <Compile Include="FindReplace\FindReplacerQuestTargeter.cs" />
     <Compile Include="FindReplace\FindReplacerRewardTargeter.cs" />
     <Compile Include="FindReplace\FindReplacerVendorItemTargeter.cs" />
