@@ -1288,7 +1288,7 @@
                                         </Button>
                                     </Grid>
                                 </GroupBox>
-                                <Expander Margin="5" IsExpanded="True" ExpandDirection="Left" Grid.Column="4">
+                                <Expander Margin="5" ExpandDirection="Left" Grid.Column="4">
                                     <Expander.Header>
                                         <TextBlock Text="{xaml:Localize Key=DIALOGUE_Tips_Header}">
                                             <TextBlock.LayoutTransform>
