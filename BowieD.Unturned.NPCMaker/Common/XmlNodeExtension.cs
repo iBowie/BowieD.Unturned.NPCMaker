@@ -122,12 +122,7 @@ namespace BowieD.Unturned.NPCMaker.Common
 
             GUIDIDBridge bridge = new GUIDIDBridge();
 
-            ushort id = node["id"].ToUInt16();
-
-            if (id == 0)
-                bridge.ID = null;
-            else
-                bridge.ID = id;
+            bridge.ID = node["id"]?.ToUInt16();
 
             string guid = node["guid"].ToText(null);
 

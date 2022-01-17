@@ -34,19 +34,20 @@ namespace BowieD.Unturned.NPCMaker.Controls
             if (sender is GUIDIDControl control && e.NewValue is GUIDIDBridge bridge)
             {
                 control.txt.TextChanged -= control.txt_TextChanged;
-
-                if (bridge.ID.HasValue)
-                {
-                    control.txt.Text = bridge.ID.Value.ToString();
-                    control.mainGrid.BorderBrush = Brushes.Transparent;
-                }
-                else if (bridge.Guid.HasValue)
+                
+                if (bridge.Guid.HasValue)
                 {
                     control.txt.Text = bridge.Guid.Value.ToString("N");
                     control.mainGrid.BorderBrush = Brushes.Transparent;
                 }
+                else if (bridge.ID.HasValue)
+                {
+                    control.txt.Text = bridge.ID.Value.ToString();
+                    control.mainGrid.BorderBrush = Brushes.Transparent;
+                }
                 else
                 {
+                    control.txt.Text = string.Empty;
                     control.mainGrid.BorderBrush = Brushes.Red;
                 }
                 
