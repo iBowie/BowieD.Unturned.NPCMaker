@@ -42,11 +42,11 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 if (!Guid.HasValue && !ID.HasValue)
                     return true;
 
-                if (Guid.HasValue)
-                    return Guid.Value == System.Guid.Empty;
+                if (Guid.HasValue && Guid.Value == System.Guid.Empty)
+                    return true;
 
-                if (ID.HasValue)
-                    return ID.Value == 0;
+                if (ID.HasValue && ID.Value == 0)
+                    return true;
 
                 return false;
             }
@@ -65,11 +65,11 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             get
             {
-                if (ID.HasValue && ID.Value > 0)
-                    return ID.Value.ToString();
-
                 if (Guid.HasValue && Guid.Value != System.Guid.Empty)
                     return Guid.Value.ToString("N");
+
+                if (ID.HasValue && ID.Value > 0)
+                    return ID.Value.ToString();
 
                 return "0";
             }
