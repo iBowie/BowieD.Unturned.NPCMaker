@@ -576,7 +576,7 @@
                             </Grid>
                             <GroupBox Header="{xaml:Localize Key=CHARACTER_Clothing}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,207,10,10" MaxHeight="343" Width="400">
                                 <TabControl Name="clothingTabControl" Background="Transparent">
-                                    <TabItem DataContext="{Binding DefaultClothing, UpdateSourceTrigger=PropertyChanged}" Header="{xaml:Localize Key=CHARACTER_Clothing_Default}" mah:ControlsHelper.HeaderFontSize="18">
+                                    <TabItem DataContext="{Binding DefaultClothing, UpdateSourceTrigger=PropertyChanged}" Header="{xaml:Localize Key=CHARACTER_Clothing_Default}" mah:HeaderedControlHelper.HeaderFontSize="18">
                                         <ScrollViewer>
                                             <StackPanel>
                                                 <Grid>
@@ -735,7 +735,7 @@
                                             </StackPanel>
                                         </ScrollViewer>
                                     </TabItem>
-                                    <TabItem DataContext="{Binding ChristmasClothing, UpdateSourceTrigger=PropertyChanged}" Header="{xaml:Localize Key=CHARACTER_Clothing_Christmas}" mah:ControlsHelper.HeaderFontSize="18">
+                                    <TabItem DataContext="{Binding ChristmasClothing, UpdateSourceTrigger=PropertyChanged}" Header="{xaml:Localize Key=CHARACTER_Clothing_Christmas}" mah:HeaderedControlHelper.HeaderFontSize="18">
                                         <ScrollViewer>
                                             <StackPanel>
                                                 <Grid>
@@ -895,7 +895,7 @@
                                             </StackPanel>
                                         </ScrollViewer>
                                     </TabItem>
-                                    <TabItem DataContext="{Binding HalloweenClothing, UpdateSourceTrigger=PropertyChanged}" Header="{xaml:Localize Key=CHARACTER_Clothing_Halloween}" mah:ControlsHelper.HeaderFontSize="18">
+                                    <TabItem DataContext="{Binding HalloweenClothing, UpdateSourceTrigger=PropertyChanged}" Header="{xaml:Localize Key=CHARACTER_Clothing_Halloween}" mah:HeaderedControlHelper.HeaderFontSize="18">
                                         <ScrollViewer>
                                             <StackPanel>
                                                 <Grid>

@@ -46,7 +46,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         [AssetPicker(typeof(GameItemTacticalAsset), "Control_SelectAsset_Tactical", MahApps.Metro.IconPacks.PackIconMaterialKind.KnifeMilitary)]
         public ushort? Tactical { get; set; }
         [Optional(null)]
-        [AssetPicker(typeof(GameItemGripAsset), "Control_SelectAsset_Grip", MahApps.Metro.IconPacks.PackIconMaterialKind.Hand)]
+        [AssetPicker(typeof(GameItemGripAsset), "Control_SelectAsset_Grip", MahApps.Metro.IconPacks.PackIconMaterialKind.HandBackLeft)]
         public ushort? Grip { get; set; }
         [Optional(null)]
         [AssetPicker(typeof(GameItemBarrelAsset), "Control_SelectAsset_Barrel", MahApps.Metro.IconPacks.PackIconMaterialKind.Pistol)]
