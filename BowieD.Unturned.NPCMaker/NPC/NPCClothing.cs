@@ -8,6 +8,17 @@ namespace BowieD.Unturned.NPCMaker.NPC
     [System.Serializable]
     public class NPCClothing : IAXData
     {
+        public NPCClothing()
+        {
+            Hat = new GUIDIDBridge(0);
+            Mask = new GUIDIDBridge(0);
+            Shirt = new GUIDIDBridge(0);
+            Pants = new GUIDIDBridge(0);
+            Vest = new GUIDIDBridge(0);
+            Glasses = new GUIDIDBridge(0);
+            Backpack = new GUIDIDBridge(0);
+        }
+
         [XmlElement("hat")]
         public GUIDIDBridge Hat
         {
@@ -59,10 +70,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
             vest,
             glasses;
 
-        public NPCClothing()
-        {
-
-        }
         public bool IsEmpty => Hat.IsEmpty && Backpack.IsEmpty && Mask.IsEmpty && Vest.IsEmpty && Shirt.IsEmpty && Glasses.IsEmpty && Pants.IsEmpty;
 
         public bool IsHairVisible
