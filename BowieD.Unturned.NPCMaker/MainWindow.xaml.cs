@@ -370,7 +370,7 @@ namespace BowieD.Unturned.NPCMaker
         #endregion
         #region STATIC
         public static MainWindow Instance;
-        public static ProjectData CurrentProject { get; } = new ProjectData();
+        public static ProjectData CurrentProject => ProjectData.CurrentProject;
         public static DispatcherTimer AutosaveTimer { get; set; }
         public static DispatcherTimer AppUpdateTimer { get; set; }
         public static DispatcherTimer ErrorCheckTimer { get; set; }
