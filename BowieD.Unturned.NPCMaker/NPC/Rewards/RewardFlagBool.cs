@@ -13,6 +13,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public override string UIText => $"{LocalizationManager.Current.Reward["Type_Flag_Bool"]} [{ID}] -> {Value}";
         [AssetPicker(typeof(FlagDescriptionProjectAsset), "Control_SelectAsset_Project_Flag", MahApps.Metro.IconPacks.PackIconMaterialKind.Flag)]
         public ushort ID { get; set; }
+        [CanUseAlternateBool]
         public bool Value { get; set; }
 
         public override void Give(Simulation simulation)

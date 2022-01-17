@@ -42,6 +42,7 @@
         "preferLegacyIDsOverGUIDs": "Предпочитать старые ID вместо новых GUIDов",
         "autoCloseOpenBoomerangs": "Автоматически закрывать Rich Text тэги",
         "mainWindowBackgroundBlurRadius": "Радиус размытия заднего фона",
+        "alternateBoolValue": "Альтернативный выбор булевого значения",
 
         "experimentalFeatures_Tooltip": "ЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭксперименты",
         "scale_Tooltip": "Изменить размер программы на экране",
@@ -67,6 +68,7 @@
         "preferLegacyIDsOverGUIDs_Tooltip": "При выборе ассета предпочитает ID (0-65535) вместо GUIDов\nНе рекомендуется, так как разработчик игры постепенно отказывается от старых ID в пользу GUID",
         "autoCloseOpenBoomerangs_Tooltip": "Автоматически ставит '>' на конце выделенного региона в полях для ввода Rich текста когда введён символ '<'",
         "mainWindowBackgroundBlurRadius_Tooltip": "Насколько сильно должен размываться задний фон главного окна. 0 полностью отключает это.",
+        "alternateBoolValue_Tooltip": "Использовать выпадающий список с двумя опциями 'Ложь' и 'Истина' вместо галочки в некоторых местах.",
 
         "exportSchema_Warning": "Внимание! Эта настройка предназначена для продвинутых пользователей!",
 
@@ -324,6 +326,8 @@
         "Player_Life_Virus_Value": "Значение заражения",
         "Flag_Bool_ID": "ID флага",
         "Flag_Bool_Value": "Значение флага",
+        "Flag_Bool_Value_True": "Истина",
+        "Flag_Bool_Value_False": "Ложь",
         "Flag_Bool_Reset": "Сбросить при выполнении",
         "Flag_Bool_Allow_Unset": "Разрешить неустановленное значение",
         "Flag_Short_ID": "ID флага",
@@ -408,6 +412,8 @@
         "Reputation_Value": "Количество репутации",
         "Flag_Bool_ID": "ID флага",
         "Flag_Bool_Value": "Новое значение",
+        "Flag_Bool_Value_True": "Истина",
+        "Flag_Bool_Value_False": "Ложь",
         "Flag_Short_ID": "ID флага",
         "Flag_Short_Value": "Значение",
         "Flag_Short_Modification": "Изменение значения",

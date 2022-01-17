@@ -42,6 +42,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public bool autoCloseOpenBoomerangs = true;
         public string mainWindowBackgroundImage;
         public double mainWindowBackgroundImageBlurRadius;
+        public bool alternateBoolValue;
 
         public void Apply(AppConfig from, out bool hasToRestart)
         {
@@ -106,6 +107,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             preferLegacyIDsOverGUIDs = from.preferLegacyIDsOverGUIDs;
             autoCloseOpenBoomerangs = from.autoCloseOpenBoomerangs;
             alternateLogicTranslation = from.alternateLogicTranslation;
+            alternateBoolValue = from.alternateBoolValue;
         }
         public void Save()
         {
@@ -185,6 +187,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             disabledErrors = System.Array.Empty<string>();
             preferLegacyIDsOverGUIDs = false;
             autoCloseOpenBoomerangs = true;
+            alternateBoolValue = true;
 
             App.Logger.Log($"[CFG] - Default configuration loaded!");
         }

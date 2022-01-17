@@ -165,6 +165,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 unturnedDir = curUntDir,
                 mainWindowBackgroundImage = curMainWindowBackgroundPath,
                 mainWindowBackgroundImageBlurRadius = MainWindowBackgroundBlurRadius_Slider.Value,
+                alternateBoolValue = AlternateBoolValue_Box.IsChecked.Value,
             };
             set
             {
@@ -225,6 +226,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 curUntDir = value.unturnedDir;
                 curMainWindowBackgroundPath = value.mainWindowBackgroundImage;
                 MainWindowBackgroundBlurRadius_Slider.Value = value.mainWindowBackgroundImageBlurRadius;
+                AlternateBoolValue_Box.IsChecked = value.alternateBoolValue;
             }
         }
 

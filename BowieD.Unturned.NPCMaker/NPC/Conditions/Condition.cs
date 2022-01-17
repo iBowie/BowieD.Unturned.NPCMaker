@@ -185,6 +185,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 AssetPickerAttribute assetPickerAttribute = prop.GetCustomAttribute<AssetPickerAttribute>();
                 ApplicableToOpenCloseBoomerangsAttribute openCloseBoomerangsAttribute = prop.GetCustomAttribute<ApplicableToOpenCloseBoomerangsAttribute>();
                 ContextAttribute contextAttribute = prop.GetCustomAttribute<ContextAttribute>();
+                CanUseAlternateBoolAttribute canUseAlternateBoolAttribute = prop.GetCustomAttribute<CanUseAlternateBoolAttribute>();
                 FrameworkElement valueControl = null;
                 if (propType == typeof(ushort))
                 {
@@ -449,8 +450,30 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 }
                 else if (propType == typeof(bool))
                 {
-                    valueControl = new CheckBox() { };
-                    (valueControl as CheckBox).SetBinding(CheckBox.IsCheckedProperty, propName);
+                    if (AppConfig.Instance.alternateBoolValue && canUseAlternateBoolAttribute != null)
+                    {
+                        ComboBox cbox = new ComboBox();
+
+                        BoolItemsSource bis = new BoolItemsSource()
+                        {
+                            Dictionary = LocalizationManager.Current.Condition,
+                            LocalizationPrefix = $"{Type}_{prop.Name}_",
+                        };
+
+                        cbox.ItemsSource = bis;
+                        cbox.SetBinding(ComboBox.SelectedItemProperty, new Binding(propName)
+                        {
+                            Converter = bis,
+                            UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                        });
+
+                        valueControl = cbox;
+                    }
+                    else
+                    {
+                        valueControl = new CheckBox() { };
+                        (valueControl as CheckBox).SetBinding(CheckBox.IsCheckedProperty, propName);
+                    }
                 }
                 else if (propType == typeof(TimeSpan))
                 {

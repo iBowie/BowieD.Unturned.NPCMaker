@@ -525,6 +525,7 @@
     <Compile Include="NPC\Rewards\RewardVehicle.cs" />
     <Compile Include="NPC\Shared\Attributes\ApplicableToOpenCloseBoomerangsAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\AssetPickerAttribute.cs" />
+    <Compile Include="NPC\Shared\Attributes\CanUseAlternateBoolAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\ContextAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\NoValueAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\OptionalAttribute.cs" />
@@ -619,6 +620,7 @@
     <Compile Include="ViewModels\VendorTabViewModel.cs" />
     <Compile Include="ViewModels\VirtualDialogueVendorTabViewModel.cs" />
     <Compile Include="Workshop\SteamManager.cs" />
+    <Compile Include="XAML\BoolItemsSource.cs" />
     <Compile Include="XAML\EnumItemsSource.cs" />
     <Compile Include="XAML\Extensions.cs" />
     <Compile Include="XAML\LocalizationConverter.cs" />
