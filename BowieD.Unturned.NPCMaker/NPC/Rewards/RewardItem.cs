@@ -60,7 +60,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
         public override void PostLoad(Universal_RewardEditor editor)
         {
-            var idControl = editor.GetAssociatedControl<MahApps.Metro.Controls.NumericUpDown>("ID");
+            var idControl = editor.GetAssociatedControl<GUIDIDControl>("ID");
             var sightControl = editor.GetAssociatedControl<Controls.OptionalUInt16ValueControl>("Sight");
             var barrelControl = editor.GetAssociatedControl<Controls.OptionalUInt16ValueControl>("Barrel");
             var magazineControl = editor.GetAssociatedControl<Controls.OptionalUInt16ValueControl>("Magazine");
@@ -68,11 +68,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             var tacticalControl = editor.GetAssociatedControl<Controls.OptionalUInt16ValueControl>("Tactical");
             var ammoControl = editor.GetAssociatedControl<Controls.OptionalByteValueControl>("Ammo");
 
-            void check(ushort ID)
+            void check(GUIDIDBridge bridge)
             {
-                if (ID > 0)
+                if (!bridge.IsEmpty)
                 {
-                    if (GameAssetManager.TryGetAsset<GameItemGunAsset>(ID, out var gunAsset))
+                    if (GameAssetManager.TryGetAsset<GameItemGunAsset>(bridge, out var gunAsset))
                     {
                         if (gunAsset.hasSight)
                             sightControl.Visibility = System.Windows.Visibility.Visible;
@@ -110,7 +110,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
                         ammoControl.Visibility = System.Windows.Visibility.Visible;
                     }
-                    else if (GameAssetManager.TryGetAsset<GameItemAsset>(ID, out var itemAsset))
+                    else if (GameAssetManager.TryGetAsset<GameItemAsset>(bridge, out var itemAsset))
                     {
                         sightControl.Visibility = System.Windows.Visibility.Collapsed;
                         barrelControl.Visibility = System.Windows.Visibility.Collapsed;
@@ -149,26 +149,12 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
             idControl.ValueChanged += (sender, e) =>
             {
-                if (e.NewValue.HasValue)
-                {
-                    check((ushort)e.NewValue);
-                }
-                else
-                {
-                    check(0);
-                }
+                check(e);
             };
 
             editor.Loaded += (sender, e) =>
             {
-                if (idControl.Value.HasValue)
-                {
-                    check((ushort)idControl.Value);
-                }
-                else
-                {
-                    check(0);
-                }
+                check(idControl.Value);
             };
         }
 

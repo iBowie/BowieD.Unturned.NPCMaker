@@ -27,7 +27,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             set => SetValue(ValueProperty, value);
         }
 
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(GUIDIDBridge), typeof(GUIDIDControl), new PropertyMetadata(default(GUIDIDBridge), ValuePropertyChangedCallback));
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(GUIDIDBridge), typeof(GUIDIDControl), new FrameworkPropertyMetadata(default(GUIDIDBridge), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, ValuePropertyChangedCallback));
 
         private static void ValuePropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
