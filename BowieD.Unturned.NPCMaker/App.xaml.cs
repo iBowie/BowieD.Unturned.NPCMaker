@@ -207,6 +207,13 @@ namespace BowieD.Unturned.NPCMaker
 #else
             Logger.Log("[APP] - Closing console and opening app...");
 #endif
+
+            if (AppConfig.Instance.forceSoftwareRendering)
+            {
+                Logger.Log("[APP] - Software rendering only mode is enabled!");
+                System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
+            }
+
             MainWindow mw = new MainWindow();
             InitManagers();
 #if DEBUG

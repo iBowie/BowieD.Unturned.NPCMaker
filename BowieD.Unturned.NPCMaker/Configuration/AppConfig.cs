@@ -43,6 +43,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public string mainWindowBackgroundImage;
         public double mainWindowBackgroundImageBlurRadius;
         public bool alternateBoolValue;
+        public bool forceSoftwareRendering;
 
         public void Apply(AppConfig from, out bool hasToRestart)
         {
@@ -63,6 +64,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             hasToRestart |= (generateThumbnailsBeforehand != from.generateThumbnailsBeforehand);
             hasToRestart |= (useOldStyleMoveUpDown != from.useOldStyleMoveUpDown);
             hasToRestart |= (replaceMissingKeysWithEnglish != from.replaceMissingKeysWithEnglish);
+            hasToRestart |= (forceSoftwareRendering != from.forceSoftwareRendering);
 
             // it has to do some work before it can be applied
             if (currentTheme != from.currentTheme)
@@ -188,6 +190,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             preferLegacyIDsOverGUIDs = false;
             autoCloseOpenBoomerangs = true;
             alternateBoolValue = true;
+            forceSoftwareRendering = false;
 
             App.Logger.Log($"[CFG] - Default configuration loaded!");
         }

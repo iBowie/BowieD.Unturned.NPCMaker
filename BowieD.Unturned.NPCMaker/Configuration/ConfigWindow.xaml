@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Configuration"
         xmlns:npcmaker="clr-namespace:BowieD.Unturned.NPCMaker"
-        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML" WindowStartupLocation="CenterOwner"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" WindowStartupLocation="CenterOwner"
         mc:Ignorable="d"
         Title="{xaml:Localize Key=GENERAL_Configuration_Title}" Icon="{DynamicResource app_Icon}" Height="360" Width="600">
     <Grid>
@@ -153,6 +153,15 @@
                     <StackPanel>
                         <CheckBox Name="Experimental_Box" VerticalAlignment="Top" Margin="5" Content="{xaml:Localize Key=OPTIONS_experimentalFeatures}" ToolTip="{xaml:Localize Key=OPTIONS_experimentalFeatures_Tooltip}"/>
                         <CheckBox Name="PreferLegacyIDsOverGUIDs_Box" VerticalAlignment="Top" Margin="5" Content="{xaml:Localize Key=OPTIONS_preferLegacyIDsOverGUIDs}" ToolTip="{xaml:Localize Key=OPTIONS_preferLegacyIDsOverGUIDs_Tooltip}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox Grid.Column="1" Name="ForceSoftwareRendering_Box" VerticalAlignment="Top" Margin="5" Content="{xaml:Localize Key=OPTIONS_forceSoftwareRendering}" ToolTip="{xaml:Localize Key=OPTIONS_forceSoftwareRendering_Tooltip}"/>
+                            <iconPacks:PackIconMaterial Kind="Alert" Margin="5"
+                                                        Visibility="{Binding IsChecked, ElementName=ForceSoftwareRendering_Box, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        </Grid>
                         <GroupBox Header="{xaml:Localize Key=OPTIONS_disabledErrors_Header}" Margin="5">
                             <StackPanel Name="disabledErrorsPanel">
                                 <Expander Header="{xaml:Localize Key=OPTIONS_disabledErrors_Character_Header}" Margin="5">

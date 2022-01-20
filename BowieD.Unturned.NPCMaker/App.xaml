@@ -19,6 +19,7 @@
             <xaml:EnumItemsSource x:Key="Simulation_Holidays_Enums" Type="{x:Type npc:ENPCHoliday}"/>
             <xaml:EnumItemsSource x:Key="Simulation_Skillsets_Enums" Type="{x:Type npc:ESkillset}"/>
             <xaml:EnumItemsSource x:Key="ExportSchema_Enums" Type="{x:Type cfg:EExportSchema}"/>
+            <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Green.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
