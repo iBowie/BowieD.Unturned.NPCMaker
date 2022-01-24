@@ -277,7 +277,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 text = $"{prefix}{postfix}{num}_Type";
                 if (!asset.Has(text))
                 {
-                    break;
+                    throw new InvalidDataException("Parsed condition is invalid");
                 }
 
                 Condition_Type type = asset.ReadEnum(text, Condition_Type.None);
@@ -468,6 +468,8 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                             Value = asset.ReadEnum(tp + "Value", ENPCWeatherStatus.Active)
                         };
                         break;
+                    default:
+                        throw new InvalidDataException("Parsed condition is invalid");
                 }
                 c[num].Localization = desc ?? "";
                 c[num].Reset = needToReset;
@@ -490,7 +492,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 text = $"{prefix}{postfix}{num}_Type";
                 if (!asset.Has(text))
                 {
-                    break;
+                    throw new InvalidDataException("Parsed reward is invalid");
                 }
 
                 RewardType type = asset.ReadEnum<RewardType>(text);
@@ -607,6 +609,8 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                             Duration = asset.ReadSingle(tp + "Duration", 2f)
                         };
                         break;
+                    default:
+                        throw new InvalidDataException("Parsed condition is invalid");
                 }
                 r[num].Localization = desc ?? "";
                 num++;
