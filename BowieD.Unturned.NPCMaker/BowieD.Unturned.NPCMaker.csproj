@@ -533,6 +533,7 @@
     <Compile Include="NPC\Shared\Attributes\OptionalAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\RangeAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\SkipFieldAttribute.cs" />
+    <Compile Include="NPC\Shared\Attributes\TextBoxOptionsAttribute.cs" />
     <Compile Include="NPC\Shared\Attributes\TooltipAttribute.cs" />
     <Compile Include="NPC\Simulation.cs" />
     <Compile Include="NPC\SimulationSaveData.cs" />

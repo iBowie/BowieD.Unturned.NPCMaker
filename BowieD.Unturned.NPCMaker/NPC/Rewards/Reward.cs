@@ -148,6 +148,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                     l.ToolTip = LocalizationManager.Current.Reward[$"{key2}_Tooltip"];
                 }
 
+                TextBoxOptionsAttribute textBoxOptionsAttribute = prop.GetCustomAttribute<TextBoxOptionsAttribute>();
                 RangeAttribute rangeAttribute = prop.GetCustomAttribute<RangeAttribute>();
                 AssetPickerAttribute assetPickerAttribute = prop.GetCustomAttribute<AssetPickerAttribute>();
                 ApplicableToOpenCloseBoomerangsAttribute openCloseBoomerangsAttribute = prop.GetCustomAttribute<ApplicableToOpenCloseBoomerangsAttribute>();
@@ -311,26 +312,49 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                 }
                 else if (propType == typeof(string))
                 {
-                    valueControl = new TextBox()
+                    if (textBoxOptionsAttribute is null)
                     {
-                        MaxWidth = 100,
-                        TextWrapping = TextWrapping.Wrap
-                    };
-                    (valueControl as TextBox).SetBinding(TextBox.TextProperty, propName);
-
-                    if (assetPickerAttribute != null)
-                    {
-                        var vcMenu = new ContextMenu();
-                        vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
+                        valueControl = new TextBox()
                         {
-                            (valueControl as TextBox).Text = asset.GUID.ToString("N");
-                        }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
-                        valueControl.ContextMenu = vcMenu;
-                    }
+                            MaxWidth = 100,
+                            TextWrapping = TextWrapping.Wrap
+                        };
+                        (valueControl as TextBox).SetBinding(TextBox.TextProperty, propName);
 
-                    if (openCloseBoomerangsAttribute != null)
+                        if (assetPickerAttribute != null)
+                        {
+                            var vcMenu = new ContextMenu();
+                            vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
+                            {
+                                (valueControl as TextBox).Text = asset.GUID.ToString("N");
+                            }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
+                            valueControl.ContextMenu = vcMenu;
+                        }
+
+                        if (openCloseBoomerangsAttribute != null)
+                        {
+                            IDELikeTool.RegisterOpenCloseBoomerangs(valueControl as TextBox);
+                        }
+                    }
+                    else
                     {
-                        IDELikeTool.RegisterOpenCloseBoomerangs(valueControl as TextBox);
+                        valueControl = new ComboBox()
+                        {
+                            IsEditable = true,
+                            ItemsSource = textBoxOptionsAttribute.Options,
+                            MaxWidth = 100,
+                        };
+                        (valueControl as ComboBox).SetBinding(ComboBox.TextProperty, propName);
+
+                        if (assetPickerAttribute != null)
+                        {
+                            var vcMenu = new ContextMenu();
+                            vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
+                            {
+                                (valueControl as ComboBox).Text = asset.GUID.ToString("N");
+                            }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
+                            valueControl.ContextMenu = vcMenu;
+                        }
                     }
                 }
                 else if (propType.IsEnum)
