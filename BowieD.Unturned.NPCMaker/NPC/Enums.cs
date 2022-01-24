@@ -129,7 +129,10 @@ namespace BowieD.Unturned.NPCMaker.NPC
         Boss_Magma,
         Spirit,
         Boss_Spirit,
-        Boss_Nuclear
+        Boss_Nuclear,
+        DL_Red_Volatile,
+        DL_Blue_Volatile,
+        Boss_Elver_Stomper,
     }
     public enum ESkillset
     {
