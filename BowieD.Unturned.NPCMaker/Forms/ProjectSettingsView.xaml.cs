@@ -1,9 +1,10 @@
-﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.ViewModels;
 using MahApps.Metro.Controls;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using System.IO;
 using System.Windows;
 
@@ -38,14 +39,16 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
             hookedAddDirButton.Command = new AdvancedCommand(() =>
             {
-                System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog()
+                CommonOpenFileDialog cofd = new CommonOpenFileDialog
                 {
-
+                    IsFolderPicker = true,
+                    Multiselect = false,
+                    RestoreDirectory = true
                 };
-
-                if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                System.Windows.Forms.DialogResult result = (System.Windows.Forms.DialogResult)cofd.ShowDialog();
+                if (result == System.Windows.Forms.DialogResult.OK)
                 {
-                    DirectoryInfo di = new DirectoryInfo(fbd.SelectedPath);
+                    DirectoryInfo di = new DirectoryInfo(cofd.FileName);
 
                     Universal_ItemList uil = new Universal_ItemList(di, true);
 
