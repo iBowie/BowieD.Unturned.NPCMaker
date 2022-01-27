@@ -1,4 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Commands;
+using BowieD.Unturned.NPCMaker.Commands;
 using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Common.Utility;
 using BowieD.Unturned.NPCMaker.Configuration;
@@ -11,6 +11,7 @@ using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using DiscordRPC;
 using Microsoft.Win32;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -446,16 +447,20 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     importDirectoryCommand = new BaseCommand(() =>
                     {
-                        SaveFileDialog sfd = new SaveFileDialog()
+                        CommonOpenFileDialog ofd = new CommonOpenFileDialog
                         {
-                            OverwritePrompt = false,
-                            CreatePrompt = false,
-                            FileName = "Select This Folder"
+                            IsFolderPicker = true,
+                            Multiselect = false,
+                            RestoreDirectory = true
+                            //      Title = LocalizationManager.Current.Notification.Translate("Main_Menu_File_Import_Directories")
+                            //      Tried to add localization in English for this
+                            //      can't figure it out why i everytime got Warning about Missing translation key 'Main_Menu_File_Import_Directories' in English (US) even when it was there....
                         };
-                        if (sfd.ShowDialog() == true)
+                        System.Windows.Forms.DialogResult result = (System.Windows.Forms.DialogResult)ofd.ShowDialog();
+                        if (result == System.Windows.Forms.DialogResult.OK)
                         {
                             ParseDirCommand pCommand = Command.GetCommand<ParseDirCommand>() as ParseDirCommand;
-                            pCommand.Execute(new string[] { Path.GetDirectoryName(sfd.FileName) });
+                            pCommand.Execute(new string[] { Path.GetDirectoryName(ofd.FileName) });
                             if (pCommand.LastResult)
                             {
                                 App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Import_Directory_Done", pCommand.LastImported, pCommand.LastSkipped));
