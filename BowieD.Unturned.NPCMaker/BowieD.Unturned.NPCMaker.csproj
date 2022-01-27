@@ -942,5 +942,9 @@
   <ItemGroup>
     <Resource Include="Libs\UnturnedWorkshopCLI.exe" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Libs\Microsoft.WindowsAPICodePack.dll" />
+    <Resource Include="Libs\Microsoft.WindowsAPICodePack.Shell.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
