@@ -451,13 +451,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         {
                             IsFolderPicker = true,
                             Multiselect = false,
-                            RestoreDirectory = true
-                            //      Title = LocalizationManager.Current.Notification.Translate("Main_Menu_File_Import_Directories")
-                            //      Tried to add localization in English for this
-                            //      can't figure it out why i everytime got Warning about Missing translation key 'Main_Menu_File_Import_Directories' in English (US) even when it was there....
+                            RestoreDirectory = true,
+                            Title = LocalizationManager.Current.Interface.Translate("Main_Menu_File_Import_Directory_Title"),
                         };
-                        System.Windows.Forms.DialogResult result = (System.Windows.Forms.DialogResult)ofd.ShowDialog();
-                        if (result == System.Windows.Forms.DialogResult.OK)
+                        CommonFileDialogResult result = ofd.ShowDialog();
+                        if (result == CommonFileDialogResult.Ok)
                         {
                             ParseDirCommand pCommand = Command.GetCommand<ParseDirCommand>() as ParseDirCommand;
                             pCommand.Execute(new string[] { Path.GetDirectoryName(ofd.FileName) });

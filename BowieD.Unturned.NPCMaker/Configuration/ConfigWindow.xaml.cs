@@ -294,8 +294,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
 
                         switch (ofd.ShowDialog())
                         {
-                            case (CommonFileDialogResult)System.Windows.Forms.DialogResult.Yes:
-                            case (CommonFileDialogResult)System.Windows.Forms.DialogResult.OK:
+                            case CommonFileDialogResult.Ok:
                                 {
                                     curUntDir = Path.GetDirectoryName(ofd.FileName);
                                 }

@@ -773,6 +773,7 @@
         "Main_Menu_File_Import": "Импорт...",
         "Main_Menu_File_Import_File": "Файл",
         "Main_Menu_File_Import_Directory": "Папка",
+        "Main_Menu_File_Import_Directory_Title": "Выберите директорию с файлами ассетов",
         "Main_Menu_File_Export": "_Экспортировать NPC (Ctrl + E)",
         "Main_Menu_File_ExportToUnturned": "Экспортировать NPC в Unturned",
         "Main_Menu_File_ExportToWorkshop": "Загрузить NPC в Workshop",

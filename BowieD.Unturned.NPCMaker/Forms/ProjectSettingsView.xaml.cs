@@ -45,8 +45,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     Multiselect = false,
                     RestoreDirectory = true
                 };
-                System.Windows.Forms.DialogResult result = (System.Windows.Forms.DialogResult)cofd.ShowDialog();
-                if (result == System.Windows.Forms.DialogResult.OK)
+                CommonFileDialogResult result = cofd.ShowDialog();
+                if (result == CommonFileDialogResult.Ok)
                 {
                     DirectoryInfo di = new DirectoryInfo(cofd.FileName);
 
