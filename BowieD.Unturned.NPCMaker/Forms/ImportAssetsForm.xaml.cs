@@ -31,21 +31,21 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     {
                     ask:
                         {
-                            CommonOpenFileDialog fbd = new CommonOpenFileDialog
+                            CommonOpenFileDialog cofd = new CommonOpenFileDialog
                             {
                                 IsFolderPicker = true,
                                 Multiselect = false,
                                 RestoreDirectory = false,
-                                InitialDirectory = "C:\\Steam\\steamapps\\common\\Unturned"
+                                InitialDirectory = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Unturned"
                             };
-                            switch (fbd.ShowDialog())
+                            switch (cofd.ShowDialog())
                             {
                                 case (CommonFileDialogResult)System.Windows.Forms.DialogResult.Yes:
                                 case (CommonFileDialogResult)System.Windows.Forms.DialogResult.OK:
                                     {
-                                        if (PathUtility.IsUnturnedPath(fbd.FileName))
+                                        if (PathUtility.IsUnturnedPath(cofd.FileName))
                                         {
-                                            AppConfig.Instance.unturnedDir = fbd.FileName;
+                                            AppConfig.Instance.unturnedDir = cofd.FileName;
                                             AppConfig.Instance.Save();
 
                                             tokenSource = new CancellationTokenSource();
