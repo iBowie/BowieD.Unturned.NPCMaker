@@ -284,19 +284,19 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 {
                     importChangeFolderCommand = new BaseCommand(() =>
                     {
-                        CommonOpenFileDialog ofd = new CommonOpenFileDialog
+                        CommonOpenFileDialog cofd = new CommonOpenFileDialog
                         {
                             IsFolderPicker = true,
                             Multiselect = false,
                             RestoreDirectory = false,
-                            InitialDirectory = "C:\\Steam\\steamapps\\common\\Unturned"
+                            InitialDirectory = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Unturned"
                         };
 
-                        switch (ofd.ShowDialog())
+                        switch (cofd.ShowDialog())
                         {
                             case CommonFileDialogResult.Ok:
                                 {
-                                    curUntDir = Path.GetDirectoryName(ofd.FileName);
+                                    curUntDir = Path.GetDirectoryName(cofd.FileName);
                                 }
                                 break;
                         }
