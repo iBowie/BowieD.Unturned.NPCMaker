@@ -447,18 +447,18 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     importDirectoryCommand = new BaseCommand(() =>
                     {
-                        CommonOpenFileDialog ofd = new CommonOpenFileDialog
+                        CommonOpenFileDialog cofd = new CommonOpenFileDialog
                         {
                             IsFolderPicker = true,
                             Multiselect = false,
                             RestoreDirectory = true,
                             Title = LocalizationManager.Current.Interface.Translate("Main_Menu_File_Import_Directory_Title"),
                         };
-                        CommonFileDialogResult result = ofd.ShowDialog();
+                        CommonFileDialogResult result = cofd.ShowDialog();
                         if (result == CommonFileDialogResult.Ok)
                         {
                             ParseDirCommand pCommand = Command.GetCommand<ParseDirCommand>() as ParseDirCommand;
-                            pCommand.Execute(new string[] { Path.GetDirectoryName(ofd.FileName) });
+                            pCommand.Execute(new string[] { Path.GetDirectoryName(cofd.FileName) });
                             if (pCommand.LastResult)
                             {
                                 App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Import_Directory_Done", pCommand.LastImported, pCommand.LastSkipped));
