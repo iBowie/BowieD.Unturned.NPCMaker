@@ -1,6 +1,7 @@
 using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.GameIntegration;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.ViewModels;
 using MahApps.Metro.Controls;
@@ -43,7 +44,8 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 {
                     IsFolderPicker = true,
                     Multiselect = false,
-                    RestoreDirectory = true
+                    RestoreDirectory = true,
+                    Title = LocalizationManager.Current.Interface.Translate("ProjectSettings_HookedAssetsFolders_Add_Title"),
                 };
                 CommonFileDialogResult result = cofd.ShowDialog();
                 if (result == CommonFileDialogResult.Ok)
