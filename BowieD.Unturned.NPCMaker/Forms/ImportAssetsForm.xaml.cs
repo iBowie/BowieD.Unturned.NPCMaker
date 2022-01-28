@@ -41,8 +41,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                             };
                             switch (cofd.ShowDialog())
                             {
-                                case (CommonFileDialogResult)System.Windows.Forms.DialogResult.Yes:
-                                case (CommonFileDialogResult)System.Windows.Forms.DialogResult.OK:
+                                case CommonFileDialogResult.Ok:
                                     {
                                         if (PathUtility.IsUnturnedPath(cofd.FileName))
                                         {
@@ -66,8 +65,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                         }
                                     }
                                     break;
-                                case (CommonFileDialogResult)System.Windows.Forms.DialogResult.No:
-                                case (CommonFileDialogResult)System.Windows.Forms.DialogResult.Cancel:
+                                case CommonFileDialogResult.Cancel:
                                     {
                                         Close();
                                     }
