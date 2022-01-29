@@ -107,6 +107,8 @@ namespace BowieD.Unturned.NPCMaker
                 CopyResource(NPCMaker.Properties.Resources.steam_api, Path.Combine(AppConfig.Directory, "steam_api.dll"));
                 CopyResource(NPCMaker.Properties.Resources.UnturnedWorkshopCLI, Path.Combine(AppConfig.Directory, "UnturnedWorkshopCLI.exe"));
                 File.WriteAllText(Path.Combine(AppConfig.Directory, "steam_appid.txt"), NPCMaker.Properties.Resources.steam_appid);
+                CopyResource(NPCMaker.Properties.Resources.Microsoft_WindowsAPICodePack, Path.Combine(AppConfig.Directory, "Microsoft.WindowsAPICodePack.dll"));
+                CopyResource(NPCMaker.Properties.Resources.Microsoft_WindowsAPICodePack_Shell, Path.Combine(AppConfig.Directory, "Microsoft.WindowsAPICodePack.Shell.dll"));
                 #endregion
                 Logger.Log("[EXTRCT] - Extraction complete!", ELogLevel.DEBUG);
                 AppConfig.Instance.Load();

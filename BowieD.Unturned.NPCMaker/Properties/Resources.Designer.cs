@@ -218,5 +218,25 @@ namespace BowieD.Unturned.NPCMaker.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] Microsoft_WindowsAPICodePack {
+            get {
+                object obj = ResourceManager.GetObject("Microsoft_WindowsAPICodePack", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] Microsoft_WindowsAPICodePack_Shell {
+            get {
+                object obj = ResourceManager.GetObject("Microsoft_WindowsAPICodePack_Shell", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

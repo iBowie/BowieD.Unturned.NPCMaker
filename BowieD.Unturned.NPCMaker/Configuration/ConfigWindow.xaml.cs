@@ -1,9 +1,10 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Themes;
 using BowieD.Unturned.NPCMaker.ViewModels;
 using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace BowieD.Unturned.NPCMaker.Configuration
 {
@@ -282,17 +284,20 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 {
                     importChangeFolderCommand = new BaseCommand(() =>
                     {
-                        System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog
+                        CommonOpenFileDialog cofd = new CommonOpenFileDialog
                         {
-                            Description = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_fbd")
+                            IsFolderPicker = true,
+                            Multiselect = false,
+                            RestoreDirectory = false,
+                            InitialDirectory = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Unturned",
+                            Title = LocalizationManager.Current.Interface.Translate("ImportGameAssets_Directory_Title"),
                         };
 
-                        switch (fbd.ShowDialog())
+                        switch (cofd.ShowDialog())
                         {
-                            case System.Windows.Forms.DialogResult.Yes:
-                            case System.Windows.Forms.DialogResult.OK:
+                            case CommonFileDialogResult.Ok:
                                 {
-                                    curUntDir = fbd.SelectedPath;
+                                    curUntDir = Path.GetDirectoryName(cofd.FileName);
                                 }
                                 break;
                         }

@@ -99,6 +99,14 @@
       <HintPath>Libs\MahApps.Metro.IconPacks.Material.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>Libs\Microsoft.WindowsAPICodePack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>Libs\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>Libs\Microsoft.Xaml.Behaviors.dll</HintPath>
       <Private>True</Private>
@@ -935,6 +943,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Libs\UnturnedWorkshopCLI.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Libs\Microsoft.WindowsAPICodePack.dll" />
+    <Resource Include="Libs\Microsoft.WindowsAPICodePack.Shell.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
