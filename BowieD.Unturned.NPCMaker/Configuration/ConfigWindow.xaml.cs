@@ -297,7 +297,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                         {
                             case CommonFileDialogResult.Ok:
                                 {
-                                    curUntDir = Path.GetDirectoryName(cofd.FileName);
+                                    curUntDir = cofd.FileName;
                                 }
                                 break;
                         }
