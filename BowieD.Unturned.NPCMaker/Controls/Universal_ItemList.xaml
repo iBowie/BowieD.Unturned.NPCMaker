@@ -20,7 +20,7 @@
             </TransformGroup>
         </Grid.RenderTransform>
         <Image Name="icon" Width="26" Height="26" Margin="5"/>
-        <TextBlock Grid.Column="1" Name="mainLabel" Margin="5" HorizontalAlignment="Left" MinWidth="100" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+        <TextBlock Grid.Column="1" Name="mainLabel" Margin="5" HorizontalAlignment="Left" MinWidth="100" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource ForegroundColor}"/>
         <StackPanel Grid.Column="2" Name="buttons" Orientation="Horizontal" HorizontalAlignment="Right" Margin="4,0,0,0">
             <Button Style="{DynamicResource FlatOutlineButtonStyle}" Click="CopyButton_Click" Name="copyButton" Width="31" HorizontalAlignment="Left" VerticalAlignment="Center" Height="31" Margin="0,4,4,4">
                 <Button.Content>
