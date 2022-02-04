@@ -705,6 +705,7 @@
         "App_About_Credits_Title": "Credits",
         "App_About_Credits_List_Key": "Contribution",
         "App_About_Credits_List_Value": "Author(s)",
+        "StartUp_ImportGameAssets_Directory_Title": "Select Unturned directory",
         "StartUp_ImportGameAssets_Title": "Import Game Assets",
         "StartUp_ImportGameAssets_Content": "Do you want to import Unturned assets in the app for better experience?\nBenefits include:\n- Select existing assets with Right Mouse Button instead of manually entering IDs\n- More accurate error check\n- More accurate simulation\n- Better display of items\n- Export directly to Unturned\n\nNote: importing assets may take some time",
         "StartUp_ImportGameAssets_Window_Title": "Importing assets",

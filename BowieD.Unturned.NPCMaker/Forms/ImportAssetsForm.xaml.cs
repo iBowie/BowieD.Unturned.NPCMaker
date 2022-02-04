@@ -37,7 +37,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                 Multiselect = false,
                                 RestoreDirectory = false,
                                 InitialDirectory = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Unturned",
-                                Title = LocalizationManager.Current.Interface.Translate("ImportGameAssets_Directory_Title"),
+                                Title = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Directory_Title"),
                             };
                             switch (cofd.ShowDialog())
                             {
