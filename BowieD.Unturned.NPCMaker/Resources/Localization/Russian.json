@@ -6,6 +6,7 @@
         "Project_SaveFilter": "Файл проекта NPC (*.npcproj)",
         "Project_SaveFilter_Legacy": "Файл старого проекта NPC (*.npc)",
         "Project_TemplateFilter": "Файл шаблона NPC (*.npctemplate)",
+        "ImportGameAssets_Directory_Title": "Выберите директорию с Unturned",
         "Title": "Unturned 3.0 NPC Maker by BowieD",
         "Configuration_Title": "Настройки",
         "UGC_ImageFilter": "Поддерживаемые изображения ({0})"
@@ -705,7 +706,6 @@
         "App_About_Credits_Title": "Благодарности",
         "App_About_Credits_List_Key": "Вклад",
         "App_About_Credits_List_Value": "Автор(ы)",
-        "StartUp_ImportGameAssets_Directory_Title": "Выберите директорию с Unturned",
         "StartUp_ImportGameAssets_Title": "Импорт игровых ассетов",
         "StartUp_ImportGameAssets_Content": "Хотите импортировать ассеты Unturned для лучшего опыта использования программы?\nПлюсы:\n- Выбирайте ассеты из существующих при помощи правой кнопки мыши вместо ручного вписывания ID\n- Более точная проверка на ошибки\n- Более точная симуляция\n- Лучшее отображение предметов в программе\n- Экспорт напрямую в Unturned\n\nОбратите внимание: импорт ассетов может занять некоторое время",
         "StartUp_ImportGameAssets_Window_Title": "Импорт ассетов",
