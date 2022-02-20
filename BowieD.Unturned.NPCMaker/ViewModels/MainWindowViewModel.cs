@@ -458,7 +458,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         if (result == CommonFileDialogResult.Ok)
                         {
                             ParseDirCommand pCommand = Command.GetCommand<ParseDirCommand>() as ParseDirCommand;
-                            pCommand.Execute(new string[] { Path.GetDirectoryName(cofd.FileName) });
+                            pCommand.Execute(new string[] { cofd.FileName });
                             if (pCommand.LastResult)
                             {
                                 App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Import_Directory_Done", pCommand.LastImported, pCommand.LastSkipped));
