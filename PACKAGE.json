@@ -2,10 +2,6 @@
 	"notifications":
 	[
 		{
-			"text": "StartUp_Free",
-			"loc": true
-		},
-		{
 			"text": "StartUp_Patreon",
 			"loc": true,
 			"buttons":
