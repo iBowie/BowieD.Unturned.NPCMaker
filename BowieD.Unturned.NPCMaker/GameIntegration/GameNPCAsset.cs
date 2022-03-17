@@ -35,7 +35,9 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 DrawingGroup group = new DrawingGroup();
 
                 group.Children.Add(new GeometryDrawing(character.skinColor, new Pen(character.skinColor, 1), new RectangleGeometry(rect)));
-                group.Children.Add(new ImageDrawing(new BitmapImage(new Uri($"pack://application:,,,/Resources/Unturned/Faces/{character.face}.png")), rect));
+                
+                if (character.face < 32)
+                    group.Children.Add(new ImageDrawing(new BitmapImage(new Uri($"pack://application:,,,/Resources/Unturned/Faces/{character.face}.png")), rect));
 
                 return new DrawingImage(group);
             }
