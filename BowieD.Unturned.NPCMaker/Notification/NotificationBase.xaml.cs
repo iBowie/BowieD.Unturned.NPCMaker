@@ -13,10 +13,9 @@ namespace BowieD.Unturned.NPCMaker.Notification
     /// </summary>
     public partial class NotificationBase : UserControl
     {
-        public NotificationBase(StackPanel parent, Brush background, params UIElement[] children)
+        public NotificationBase(StackPanel parent, params UIElement[] children)
         {
             InitializeComponent();
-            mainBorder.Background = background;
             foreach (UIElement uie in children)
             {
                 Label l = new Label
