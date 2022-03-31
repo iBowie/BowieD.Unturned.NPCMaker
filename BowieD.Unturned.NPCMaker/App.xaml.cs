@@ -81,7 +81,7 @@ namespace BowieD.Unturned.NPCMaker
 
             if (checkVersion > netVersion)
                 Logger.Log("You have to install .NET Framework 4.7.2 to run this app properly.", ELogLevel.CRITICAL);
-            
+
             Logger.Log($"BowieD.Unturned.NPCMaker {Version}. Copyright (C) 2018 - 2022 Anton 'BowieD' Galakhov");
             Logger.Log("This program comes with ABSOLUTELY NO WARRANTY; for details type `license w'.");
             Logger.Log("This is free software, and you are welcome to redistribute it");

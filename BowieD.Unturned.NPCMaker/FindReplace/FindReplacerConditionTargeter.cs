@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC.Conditions;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,7 +32,7 @@ namespace BowieD.Unturned.NPCMaker.FindReplace
             yield return new ReplaceableProperty(nameof(ConditionKillsPlayer.ID), typeof(ConditionKillsPlayer), FindReplaceFormats.FLAG_ID);
             yield return new ReplaceableProperty(nameof(ConditionKillsTree.ID), typeof(ConditionKillsTree), FindReplaceFormats.FLAG_ID);
             yield return new ReplaceableProperty(nameof(ConditionKillsZombie.ID), typeof(ConditionKillsZombie), FindReplaceFormats.FLAG_ID);
-            
+
             yield return new ReplaceableProperty(nameof(ConditionCurrency.GUID), typeof(ConditionCurrency), FindReplaceFormats.CURRENCY_GUID);
         }
     }

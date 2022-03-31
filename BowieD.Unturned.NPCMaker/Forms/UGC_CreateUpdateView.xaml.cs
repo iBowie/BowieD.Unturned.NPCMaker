@@ -1,6 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.ViewModels;
 using MahApps.Metro.Controls;
-using System.Windows;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {

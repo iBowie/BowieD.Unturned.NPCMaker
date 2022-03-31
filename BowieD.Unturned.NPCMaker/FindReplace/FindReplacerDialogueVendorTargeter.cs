@@ -41,7 +41,7 @@ namespace BowieD.Unturned.NPCMaker.FindReplace
             yield return new ReplaceableProperty(nameof(VirtualDialogueVendor.GoodbyeDialogueID), type, FindReplaceFormats.DIALOGUE_ID);
             yield return new ReplaceableProperty(nameof(VirtualDialogueVendor.BoughtDialogueID), type, FindReplaceFormats.DIALOGUE_ID);
             yield return new ReplaceableProperty(nameof(VirtualDialogueVendor.SoldDialogueID), type, FindReplaceFormats.DIALOGUE_ID);
-            
+
             yield return new ReplaceableProperty(nameof(VirtualDialogueVendor.ID), type, FindReplaceFormats.DIALOGUE_ID);
             yield return new ReplaceableProperty(nameof(VirtualDialogueVendor.GUID), type, FindReplaceFormats.DIALOGUE_GUID);
 

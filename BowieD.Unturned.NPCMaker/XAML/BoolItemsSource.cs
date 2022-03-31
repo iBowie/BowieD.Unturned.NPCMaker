@@ -51,7 +51,7 @@ namespace BowieD.Unturned.NPCMaker.XAML
               .ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
 
             Clear();
-            
+
             foreach (string name in nameToValueMap.Keys)
             {
                 Add(name);

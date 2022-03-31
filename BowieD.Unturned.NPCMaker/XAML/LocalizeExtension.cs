@@ -1,6 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
-using System;
-using System.Windows;
+﻿using System;
 using System.Windows.Data;
 using System.Windows.Markup;
 

@@ -5,7 +5,6 @@ using MahApps.Metro.Controls;
 using Microsoft.Win32;
 using System;
 using System.IO;
-using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace BowieD.Unturned.NPCMaker.Forms

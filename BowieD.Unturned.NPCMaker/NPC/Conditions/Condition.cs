@@ -537,7 +537,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 borderContents.ColumnDefinitions.Add(new ColumnDefinition());
                 borderContents.ColumnDefinitions.Add(new ColumnDefinition());
                 Grid.SetColumn(valueControl, 1);
-                
+
                 valueControl.Tag = "variable::" + propName;
                 Border b = new Border
                 {

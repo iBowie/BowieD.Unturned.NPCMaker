@@ -18,7 +18,7 @@ namespace BowieD.Unturned.NPCMaker.FindReplace
             if (target is NPCQuest quest)
             {
                 MainWindow.Instance.mainTabControl.SelectedValue = MainWindow.Instance.questTab;
-                
+
                 var tabber = MainWindow.Instance.questTabSelect;
 
                 for (int i = 0; i < tabber.Items.Count; i++)

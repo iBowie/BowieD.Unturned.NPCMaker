@@ -83,7 +83,7 @@ namespace BowieD.Unturned.NPCMaker.Themes
             var accent3Brush = CreateRainbowVariant(0x66);
             var accent4Brush = CreateRainbowVariant(0x33);
             var highlightBrush = CreateRainbowVariant(byte.MaxValue);
-            
+
             UpdateBrushResourceDictionary(accentBaseBrush, accentBrush, accent2Brush, accent3Brush, accent4Brush, highlightBrush, isDarkMode);
 
             LinearGradientBrush progr = new LinearGradientBrush()

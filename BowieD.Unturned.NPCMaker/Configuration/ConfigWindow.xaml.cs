@@ -2,9 +2,9 @@ using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Themes;
 using BowieD.Unturned.NPCMaker.ViewModels;
+using MahApps.Metro.Controls;
 using Microsoft.Win32;
-using System;
-using System.IO;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -12,8 +12,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using MahApps.Metro.Controls;
 
 namespace BowieD.Unturned.NPCMaker.Configuration
 {
@@ -27,7 +25,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             InitializeComponent();
             Width *= AppConfig.Instance.scale;
             Height *= AppConfig.Instance.scale;
-            
+
             DataContext = this;
 
             CurrentConfig = AppConfig.Instance;

@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace BowieD.Unturned.NPCMaker.Common
 {
-    internal static class KeyBindHelper 
+    internal static class KeyBindHelper
     {
         public static void BindFindReplace(this UIElement element, FindReplace.FindReplaceFormat? format = null)
         {

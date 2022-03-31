@@ -27,7 +27,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Vendor
                 for (int i = 0; i < buyItems.Count; i++)
                 {
                     NPC.VendorItem _vendorItem = buyItems[i];
-                    
+
                     if (_vendorItem.id == 0)
                     {
                         yield return new NE_2003(_vendor.Title, _vendor.ID, i + 1, _vendorItem.isBuy);
@@ -39,7 +39,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Vendor
                 for (int i = 0; i < sellItems.Count; i++)
                 {
                     NPC.VendorItem _vendorItem = sellItems[i];
-                    
+
                     if (_vendorItem.id == 0)
                     {
                         yield return new NE_2003(_vendor.Title, _vendor.ID, i + 1, _vendorItem.isBuy);

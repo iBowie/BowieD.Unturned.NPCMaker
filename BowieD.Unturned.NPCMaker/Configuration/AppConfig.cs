@@ -128,9 +128,9 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             {
                 App.Logger.Log($"[CFG] - File not found. Creating one...");
                 LoadDefaults();
-                
+
                 PostLoad();
-                
+
                 Save();
             }
             else
@@ -140,16 +140,16 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                     App.Logger.Log($"[CFG] - File found. Loading configuration...");
                     string content = File.ReadAllText(path);
                     JsonConvert.PopulateObject(content, this);
-                    
+
                     PostLoad();
-                    
+
                     App.Logger.Log($"[CFG] - Configuration loaded from {path}");
                 }
                 catch
                 {
                     App.Logger.Log($"[CFG] - Could not load configuration from file. Reverting to default...", ELogLevel.WARNING);
                     LoadDefaults();
-                    
+
                     PostLoad();
 
                     Save();
