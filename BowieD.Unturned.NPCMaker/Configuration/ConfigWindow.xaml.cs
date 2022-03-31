@@ -1,13 +1,18 @@
-﻿using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Themes;
 using BowieD.Unturned.NPCMaker.ViewModels;
+using Microsoft.Win32;
 using System;
+using System.IO;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace BowieD.Unturned.NPCMaker.Configuration
 {
@@ -61,6 +66,76 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentExportSchema)));
             }
         }
+        public string[] CurrentDisabledErrors
+        {
+            get
+            {
+                IEnumerable<string> iterate(FrameworkElement element)
+                {
+                    if (element is Panel panel)
+                    {
+                        foreach (var e in panel.Children)
+                        {
+                            if (e is FrameworkElement fe)
+                            {
+                                foreach (var r in iterate(fe))
+                                    yield return r;
+                            }
+                        }
+                    }
+
+                    if (element is ContentControl contentControl)
+                    {
+                        if (contentControl.Content is FrameworkElement fe)
+                        {
+                            foreach (var r in iterate(fe))
+                                yield return r;
+                        }
+                    }
+
+                    if (element is CheckBox cbox)
+                    {
+                        if (cbox.IsChecked == true)
+                        {
+                            yield return cbox.Tag.ToString();
+                        }
+                    }
+                }
+
+                return iterate(disabledErrorsPanel).ToArray();
+            }
+            set
+            {
+                void iterate(FrameworkElement element)
+                {
+                    if (element is Panel panel)
+                    {
+                        foreach (var e in panel.Children)
+                        {
+                            if (e is FrameworkElement fe)
+                            {
+                                iterate(fe);
+                            }
+                        }
+                    }
+
+                    if (element is ContentControl contentControl)
+                    {
+                        if (contentControl.Content is FrameworkElement fe)
+                        {
+                            iterate(fe);
+                        }
+                    }
+
+                    if (element is CheckBox cbox)
+                    {
+                        cbox.IsChecked = value.Contains(cbox.Tag.ToString());
+                    }
+                }
+
+                iterate(disabledErrorsPanel);
+            }
+        }
 
         public AppConfig CurrentConfig
         {
@@ -85,7 +160,15 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 generateThumbnailsBeforehand = Generate_Thumbnails_Box.IsChecked.Value,
                 highlightSearch = Highlight_Search_Box.IsChecked.Value,
                 useOldStyleMoveUpDown = Use_Old_Style_Move_Up_Down_Box.IsChecked.Value,
-                unturnedDir = curUntDir
+                automaticallyCheckForErrors = AutomaticallyCheckForErrors_Box.IsChecked.Value,
+                disabledErrors = CurrentDisabledErrors,
+                preferLegacyIDsOverGUIDs = PreferLegacyIDsOverGUIDs_Box.IsChecked.Value,
+                autoCloseOpenBoomerangs = Auto_Close_Open_Boomerangs_Box.IsChecked.Value,
+                unturnedDir = curUntDir,
+                mainWindowBackgroundImage = curMainWindowBackgroundPath,
+                mainWindowBackgroundImageBlurRadius = MainWindowBackgroundBlurRadius_Slider.Value,
+                alternateBoolValue = AlternateBoolValue_Box.IsChecked.Value,
+                forceSoftwareRendering = ForceSoftwareRendering_Box.IsChecked.Value,
             };
             set
             {
@@ -139,11 +222,20 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 Generate_Thumbnails_Box.IsChecked = value.generateThumbnailsBeforehand;
                 Highlight_Search_Box.IsChecked = value.highlightSearch;
                 Use_Old_Style_Move_Up_Down_Box.IsChecked = value.useOldStyleMoveUpDown;
+                AutomaticallyCheckForErrors_Box.IsChecked = value.automaticallyCheckForErrors;
+                CurrentDisabledErrors = value.disabledErrors;
+                PreferLegacyIDsOverGUIDs_Box.IsChecked = value.preferLegacyIDsOverGUIDs;
+                Auto_Close_Open_Boomerangs_Box.IsChecked = value.autoCloseOpenBoomerangs;
                 curUntDir = value.unturnedDir;
+                curMainWindowBackgroundPath = value.mainWindowBackgroundImage;
+                MainWindowBackgroundBlurRadius_Slider.Value = value.mainWindowBackgroundImageBlurRadius;
+                AlternateBoolValue_Box.IsChecked = value.alternateBoolValue;
+                ForceSoftwareRendering_Box.IsChecked = value.forceSoftwareRendering;
             }
         }
 
         private string curUntDir;
+        private string curMainWindowBackgroundPath;
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -152,8 +244,20 @@ namespace BowieD.Unturned.NPCMaker.Configuration
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            CurrentConfig.Save();
-            App.NotificationManager.Notify(LocalizationManager.Current.Notification["Configuration_OnExit"]);
+            AppConfig currentConfig = CurrentConfig;
+
+            currentConfig.Save();
+            AppConfig.Instance.Apply(currentConfig, out var hasToRestart);
+
+            if (hasToRestart)
+            {
+                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Configuration_OnExit"]);
+            }
+            else
+            {
+                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Configuration_OnExit_NoRestart"]);
+            }
+
             Close();
         }
 
@@ -168,6 +272,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         }
 
         private ICommand importChangeFolderCommand, importResetFolderCommand;
+        private ICommand changeMainWindowBackgroundImageCommand, resetMainWindowBackgroundImageCommand;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -179,17 +284,20 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 {
                     importChangeFolderCommand = new BaseCommand(() =>
                     {
-                        System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog
+                        CommonOpenFileDialog cofd = new CommonOpenFileDialog
                         {
-                            Description = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_fbd")
+                            IsFolderPicker = true,
+                            Multiselect = false,
+                            RestoreDirectory = false,
+                            InitialDirectory = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Unturned",
+                            Title = LocalizationManager.Current.General.Translate("ImportGameAssets_Directory_Title"),
                         };
 
-                        switch (fbd.ShowDialog())
+                        switch (cofd.ShowDialog())
                         {
-                            case System.Windows.Forms.DialogResult.Yes:
-                            case System.Windows.Forms.DialogResult.OK:
+                            case CommonFileDialogResult.Ok:
                                 {
-                                    curUntDir = fbd.SelectedPath;
+                                    curUntDir = cofd.FileName;
                                 }
                                 break;
                         }
@@ -215,6 +323,49 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 }
 
                 return importResetFolderCommand;
+            }
+        }
+        public ICommand ChangeMainWindowBackgroundImageCommand
+        {
+            get
+            {
+                if (changeMainWindowBackgroundImageCommand is null)
+                {
+                    changeMainWindowBackgroundImageCommand = new BaseCommand(() =>
+                    {
+                        OpenFileDialog ofd = new OpenFileDialog()
+                        {
+                            Filter = "Supported image formats|*.bmp;*.jpeg;*.jpg;*.png;*.tiff;*.tif",
+                            Multiselect = false,
+                            CheckFileExists = true,
+                        };
+
+                        if (ofd.ShowDialog() == true)
+                        {
+                            curMainWindowBackgroundPath = ofd.FileName;
+                        }
+                    });
+                }
+
+                return changeMainWindowBackgroundImageCommand;
+            }
+        }
+        public ICommand ResetMainWindowBackgroundImageCommand
+        {
+            get
+            {
+                if (resetMainWindowBackgroundImageCommand is null)
+                {
+                    resetMainWindowBackgroundImageCommand = new AdvancedCommand(() =>
+                    {
+                        curMainWindowBackgroundPath = string.Empty;
+                    }, (p) =>
+                    {
+                        return !string.IsNullOrEmpty(curMainWindowBackgroundPath);
+                    });
+                }
+
+                return resetMainWindowBackgroundImageCommand;
             }
         }
     }

@@ -98,7 +98,9 @@ namespace BowieD.Unturned.NPCMaker.Common
             PasteText = 1 << 13,
             CutText = 1 << 14,
 
-            Group_TextEdit = CopyText | PasteText | CutText
+            Group_TextEdit = CopyText | PasteText | CutText,
+
+            FindReplace = 1 << 15,
         }
 
         internal static MenuItem CreatePasteNewLineButton()
@@ -608,6 +610,16 @@ namespace BowieD.Unturned.NPCMaker.Common
                     MessageBox.Show(LocalizationManager.Current.Interface["Control_FindUnusedID_Failed"]);
                 }
             }), "Control_FindUnusedID", PackIconMaterialKind.Magnify);
+        }
+
+        internal static MenuItem CreateFindReplaceButton(FindReplace.FindReplaceFormat format)
+        {
+            return CreateGenericButton(new BaseCommand(() =>
+            {
+                FindReplaceDialog frd = new FindReplaceDialog(format);
+
+                frd.ShowDialog();
+            }), "Control_FindReplace", PackIconMaterialKind.FindReplace);
         }
     }
 }

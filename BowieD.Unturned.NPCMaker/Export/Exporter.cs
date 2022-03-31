@@ -100,132 +100,132 @@ namespace BowieD.Unturned.NPCMaker.Export
 
                         asset.WriteLine($"ID {character.ID}");
                         asset.WriteLine($"Type NPC");
-                        if (character.clothing.Shirt > 0)
+                        if (!character.clothing.Shirt.IsEmpty)
                         {
-                            asset.WriteLine($"Shirt {character.clothing.Shirt}");
+                            asset.WriteLine($"Shirt {character.clothing.Shirt.ExportValue}");
                         }
 
-                        if (character.clothing.Pants > 0)
+                        if (!character.clothing.Pants.IsEmpty)
                         {
-                            asset.WriteLine($"Pants {character.clothing.Pants}");
+                            asset.WriteLine($"Pants {character.clothing.Pants.ExportValue}");
                         }
 
-                        if (character.clothing.Mask > 0)
+                        if (!character.clothing.Mask.IsEmpty)
                         {
-                            asset.WriteLine($"Mask {character.clothing.Mask}");
+                            asset.WriteLine($"Mask {character.clothing.Mask.ExportValue}");
                         }
 
-                        if (character.clothing.Vest > 0)
+                        if (!character.clothing.Vest.IsEmpty)
                         {
-                            asset.WriteLine($"Vest {character.clothing.Vest}");
+                            asset.WriteLine($"Vest {character.clothing.Vest.ExportValue}");
                         }
 
-                        if (character.clothing.Backpack > 0)
+                        if (!character.clothing.Backpack.IsEmpty)
                         {
-                            asset.WriteLine($"Backpack {character.clothing.Backpack}");
+                            asset.WriteLine($"Backpack {character.clothing.Backpack.ExportValue}");
                         }
 
-                        if (character.clothing.Hat > 0)
+                        if (!character.clothing.Hat.IsEmpty)
                         {
-                            asset.WriteLine($"Hat {character.clothing.Hat}");
+                            asset.WriteLine($"Hat {character.clothing.Hat.ExportValue}");
                         }
 
-                        if (character.clothing.Glasses > 0)
+                        if (!character.clothing.Glasses.IsEmpty)
                         {
-                            asset.WriteLine($"Glasses {character.clothing.Glasses}");
+                            asset.WriteLine($"Glasses {character.clothing.Glasses.ExportValue}");
                         }
 
                         if (!character.christmasClothing.IsEmpty)
                         {
                             asset.WriteLine("Has_Christmas_Outfit True");
-                            if (character.christmasClothing.Shirt > 0)
+                            if (!character.christmasClothing.Shirt.IsEmpty)
                             {
-                                asset.WriteLine($"Christmas_Shirt {character.christmasClothing.Shirt}");
+                                asset.WriteLine($"Christmas_Shirt {character.christmasClothing.Shirt.ExportValue}");
                             }
 
-                            if (character.christmasClothing.Pants > 0)
+                            if (!character.christmasClothing.Pants.IsEmpty)
                             {
-                                asset.WriteLine($"Christmas_Pants {character.christmasClothing.Pants}");
+                                asset.WriteLine($"Christmas_Pants {character.christmasClothing.Pants.ExportValue}");
                             }
 
-                            if (character.christmasClothing.Mask > 0)
+                            if (!character.christmasClothing.Mask.IsEmpty)
                             {
-                                asset.WriteLine($"Christmas_Mask {character.christmasClothing.Mask}");
+                                asset.WriteLine($"Christmas_Mask {character.christmasClothing.Mask.ExportValue}");
                             }
 
-                            if (character.christmasClothing.Vest > 0)
+                            if (!character.christmasClothing.Vest.IsEmpty)
                             {
-                                asset.WriteLine($"Christmas_Vest {character.christmasClothing.Vest}");
+                                asset.WriteLine($"Christmas_Vest {character.christmasClothing.Vest.ExportValue}");
                             }
 
-                            if (character.christmasClothing.Backpack > 0)
+                            if (!character.christmasClothing.Backpack.IsEmpty)
                             {
-                                asset.WriteLine($"Christmas_Backpack {character.christmasClothing.Backpack}");
+                                asset.WriteLine($"Christmas_Backpack {character.christmasClothing.Backpack.ExportValue}");
                             }
 
-                            if (character.christmasClothing.Hat > 0)
+                            if (!character.christmasClothing.Hat.IsEmpty)
                             {
-                                asset.WriteLine($"Christmas_Hat {character.christmasClothing.Hat}");
+                                asset.WriteLine($"Christmas_Hat {character.christmasClothing.Hat.ExportValue}");
                             }
 
-                            if (character.christmasClothing.Glasses > 0)
+                            if (!character.christmasClothing.Glasses.IsEmpty)
                             {
-                                asset.WriteLine($"Christmas_Glasses {character.christmasClothing.Glasses}");
+                                asset.WriteLine($"Christmas_Glasses {character.christmasClothing.Glasses.ExportValue}");
                             }
                         }
 
                         if (!character.halloweenClothing.IsEmpty)
                         {
                             asset.WriteLine("Has_Halloween_Outfit True");
-                            if (character.halloweenClothing.Shirt > 0)
+                            if (!character.halloweenClothing.Shirt.IsEmpty)
                             {
-                                asset.WriteLine($"Halloween_Shirt {character.halloweenClothing.Shirt}");
+                                asset.WriteLine($"Halloween_Shirt {character.halloweenClothing.Shirt.ExportValue}");
                             }
 
-                            if (character.halloweenClothing.Pants > 0)
+                            if (!character.halloweenClothing.Pants.IsEmpty)
                             {
-                                asset.WriteLine($"Halloween_Pants {character.halloweenClothing.Pants}");
+                                asset.WriteLine($"Halloween_Pants {character.halloweenClothing.Pants.ExportValue}");
                             }
 
-                            if (character.halloweenClothing.Mask > 0)
+                            if (!character.halloweenClothing.Mask.IsEmpty)
                             {
-                                asset.WriteLine($"Halloween_Mask {character.halloweenClothing.Mask}");
+                                asset.WriteLine($"Halloween_Mask {character.halloweenClothing.Mask.ExportValue}");
                             }
 
-                            if (character.halloweenClothing.Vest > 0)
+                            if (!character.halloweenClothing.Vest.IsEmpty)
                             {
-                                asset.WriteLine($"Halloween_Vest {character.halloweenClothing.Vest}");
+                                asset.WriteLine($"Halloween_Vest {character.halloweenClothing.Vest.ExportValue}");
                             }
 
-                            if (character.halloweenClothing.Backpack > 0)
+                            if (!character.halloweenClothing.Backpack.IsEmpty)
                             {
-                                asset.WriteLine($"Halloween_Backpack {character.halloweenClothing.Backpack}");
+                                asset.WriteLine($"Halloween_Backpack {character.halloweenClothing.Backpack.ExportValue}");
                             }
 
-                            if (character.halloweenClothing.Hat > 0)
+                            if (!character.halloweenClothing.Hat.IsEmpty)
                             {
-                                asset.WriteLine($"Halloween_Hat {character.halloweenClothing.Hat}");
+                                asset.WriteLine($"Halloween_Hat {character.halloweenClothing.Hat.ExportValue}");
                             }
 
-                            if (character.halloweenClothing.Glasses > 0)
+                            if (!character.halloweenClothing.Glasses.IsEmpty)
                             {
-                                asset.WriteLine($"Halloween_Glasses {character.halloweenClothing.Glasses}");
+                                asset.WriteLine($"Halloween_Glasses {character.halloweenClothing.Glasses.ExportValue}");
                             }
                         }
 
-                        if (character.equipPrimary > 0)
+                        if (!character.equipPrimary.IsEmpty)
                         {
-                            asset.WriteLine($"Primary {character.equipPrimary}");
+                            asset.WriteLine($"Primary {character.equipPrimary.ExportValue}");
                         }
 
-                        if (character.equipSecondary > 0)
+                        if (!character.equipSecondary.IsEmpty)
                         {
-                            asset.WriteLine($"Secondary {character.equipSecondary}");
+                            asset.WriteLine($"Secondary {character.equipSecondary.ExportValue}");
                         }
 
-                        if (character.equipTertiary > 0)
+                        if (!character.equipTertiary.IsEmpty)
                         {
-                            asset.WriteLine($"Tertiary {character.equipTertiary}");
+                            asset.WriteLine($"Tertiary {character.equipTertiary.ExportValue}");
                         }
 
                         if (character.equipped != Equip_Type.None)

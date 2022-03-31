@@ -15,6 +15,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public ushort ID { get; set; }
         [Range((byte)1, byte.MaxValue)]
         public byte Amount { get; set; }
+        public bool Auto_Equip { get; set; }
 
         public override void Give(Simulation simulation)
         {
@@ -61,6 +62,15 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
             ID = node["ID"].ToUInt16();
             Amount = node["Amount"].ToByte();
+
+            if (version >= 11)
+            {
+                Auto_Equip = node["AutoEquip"].ToBoolean();
+            }
+            else
+            {
+                Auto_Equip = false;
+            }
         }
 
         public override void Save(XmlDocument document, XmlNode node)
@@ -69,6 +79,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
             document.CreateNodeC("ID", node).WriteUInt16(ID);
             document.CreateNodeC("Amount", node).WriteByte(Amount);
+            document.CreateNodeC("AutoEquip", node).WriteBoolean(Auto_Equip);
         }
     }
 }

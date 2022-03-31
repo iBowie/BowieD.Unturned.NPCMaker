@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Common.Utility;
 using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.IO;
 using System.Security;
@@ -101,9 +102,9 @@ namespace BowieD.Unturned.NPCMaker
         {
             try
             {
-                MainWindow.CurrentProject.file = Path.Combine(AppConfig.ExeDirectory, CRASH_SAVE_FILENAME);
+                ProjectData.CurrentProject.file = Path.Combine(AppConfig.ExeDirectory, CRASH_SAVE_FILENAME);
 
-                MainWindow.CurrentProject.DoSave();
+                ProjectData.CurrentProject.DoSave();
             }
             catch { }
         }

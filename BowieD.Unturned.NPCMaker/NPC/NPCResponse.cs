@@ -8,7 +8,7 @@ using Reward = BowieD.Unturned.NPCMaker.NPC.Rewards.Reward;
 namespace BowieD.Unturned.NPCMaker.NPC
 {
     [System.Serializable]
-    public class NPCResponse : IAXData
+    public class NPCResponse : IAXData, IHasUIText
     {
         public NPCResponse()
         {
@@ -27,6 +27,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public int[] visibleIn;
         [XmlIgnore]
         public bool VisibleInAll => visibleIn == null || visibleIn.All(d => d == 1) || visibleIn.All(d => d == 0); // last condition may cause invalid logic, but it works for now
+
+        public string UIText => TextUtil.Shortify(mainText);
 
         public void Load(XmlNode node, int version)
         {

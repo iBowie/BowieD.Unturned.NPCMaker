@@ -1,4 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Common.Utility;
+using BowieD.Unturned.NPCMaker.Common.Utility;
 using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
@@ -30,18 +31,21 @@ namespace BowieD.Unturned.NPCMaker.Forms
                     {
                     ask:
                         {
-                            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog
+                            CommonOpenFileDialog cofd = new CommonOpenFileDialog
                             {
-                                Description = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_fbd")
+                                IsFolderPicker = true,
+                                Multiselect = false,
+                                RestoreDirectory = false,
+                                InitialDirectory = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Unturned",
+                                Title = LocalizationManager.Current.General.Translate("ImportGameAssets_Directory_Title"),
                             };
-                            switch (fbd.ShowDialog())
+                            switch (cofd.ShowDialog())
                             {
-                                case System.Windows.Forms.DialogResult.Yes:
-                                case System.Windows.Forms.DialogResult.OK:
+                                case CommonFileDialogResult.Ok:
                                     {
-                                        if (PathUtility.IsUnturnedPath(fbd.SelectedPath))
+                                        if (PathUtility.IsUnturnedPath(cofd.FileName))
                                         {
-                                            AppConfig.Instance.unturnedDir = fbd.SelectedPath;
+                                            AppConfig.Instance.unturnedDir = cofd.FileName;
                                             AppConfig.Instance.Save();
 
                                             tokenSource = new CancellationTokenSource();
@@ -61,8 +65,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                         }
                                     }
                                     break;
-                                case System.Windows.Forms.DialogResult.No:
-                                case System.Windows.Forms.DialogResult.Cancel:
+                                case CommonFileDialogResult.Cancel:
                                     {
                                         Close();
                                     }

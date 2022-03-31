@@ -23,9 +23,9 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Character
             {
                 switch (_char.equipped)
                 {
-                    case NPC.Equip_Type.Primary when _char.equipPrimary == 0:
-                    case NPC.Equip_Type.Secondary when _char.equipSecondary == 0:
-                    case NPC.Equip_Type.Tertiary when _char.equipTertiary == 0:
+                    case NPC.Equip_Type.Primary when _char.equipPrimary.IsEmpty:
+                    case NPC.Equip_Type.Secondary when _char.equipSecondary.IsEmpty:
+                    case NPC.Equip_Type.Tertiary when _char.equipTertiary.IsEmpty:
                         yield return new NE_0002(_char.DisplayName, _char.ID);
                         break;
                 }

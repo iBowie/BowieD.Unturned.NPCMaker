@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Configuration"
         xmlns:npcmaker="clr-namespace:BowieD.Unturned.NPCMaker"
-        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML" WindowStartupLocation="CenterOwner"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" WindowStartupLocation="CenterOwner"
         mc:Ignorable="d"
         Title="{xaml:Localize Key=GENERAL_Configuration_Title}" Icon="{DynamicResource app_Icon}" Height="360" Width="600">
     <Grid>
@@ -41,6 +41,9 @@
                         <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_downloadPrerelease_Tooltip}">
                             <CheckBox Name="DownloadPrerelease_Box" Content="{xaml:Localize Key=OPTIONS_downloadPrerelease}"/>
                         </Grid>
+                        <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_automaticallyCheckForErrors_Tooltip}">
+                            <CheckBox Name="AutomaticallyCheckForErrors_Box" Content="{xaml:Localize Key=OPTIONS_automaticallyCheckForErrors}"/>
+                        </Grid>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
@@ -64,6 +67,24 @@
                         <CheckBox Content="{xaml:Localize Key=OPTIONS_animateControls}" ToolTip="{xaml:Localize Key=OPTIONS_animateControls_Tooltip}" Name="Animation_Enabled_Box" VerticalAlignment="Top" Margin="2.5"/>
                         <CheckBox Content="{xaml:Localize Key=OPTIONS_highlightSearch}" ToolTip="{xaml:Localize Key=OPTIONS_highlightSearch_Tooltip}" Name="Highlight_Search_Box" VerticalAlignment="Top" Margin="2.5"/>
                         <CheckBox Content="{xaml:Localize Key=OPTIONS_useOldStyleMoveUpDown}" ToolTip="{xaml:Localize Key=OPTIONS_useOldStyleMoveUpDown_Tooltip}" Name="Use_Old_Style_Move_Up_Down_Box" VerticalAlignment="Top" Margin="2.5"/>
+                        <CheckBox Content="{xaml:Localize Key=OPTIONS_autoCloseOpenBoomerangs}" ToolTip="{xaml:Localize Key=OPTIONS_autoCloseOpenBoomerangs_Tooltip}" Name="Auto_Close_Open_Boomerangs_Box" VerticalAlignment="Top" Margin="2.5"/>
+                        <GroupBox Margin="5" Header="{xaml:Localize INTERFACE_Configuration_Tab_Interface_MainWindowBackground_Header}">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Command="{Binding ChangeMainWindowBackgroundImageCommand}" Grid.Column="0" Content="{xaml:Localize INTERFACE_Configuration_Tab_Interface_ChangeMainWindowBackground}" Margin="2.5"/>
+                                    <Button Command="{Binding ResetMainWindowBackgroundImageCommand}" Grid.Column="1" Content="{xaml:Localize INTERFACE_Configuration_Tab_Interface_ResetMainWindowBackground}" Margin="2.5"/>
+                                </Grid>
+                                <TextBlock Text="{xaml:Localize OPTIONS_mainWindowBackgroundBlurRadius}"
+                                           ToolTip="{xaml:Localize OPTIONS_mainWindowBackgroundBlurRadius_Tooltip}" Margin="5"/>
+                                <Slider Margin="5" Minimum="0" Maximum="50" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1" Name="MainWindowBackgroundBlurRadius_Slider"/>
+                                <TextBlock Text="{xaml:Localize INTERFACE_Configuration_Tab_Interface_Hint}" Margin="5"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </GroupBox>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
@@ -72,9 +93,9 @@
                     <StackPanel>
                         <CheckBox Name="Discord_Enabled_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_enableDiscord}" ToolTip="{xaml:Localize Key=OPTIONS_enableDiscord_Tooltip}"/>
                         <CheckBox Name="AlternateLogicTranslation_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_alternateLogicTranslation}" ToolTip="{xaml:Localize Key=OPTIONS_alternateLogicTranslation_Tooltip}"/>
+                        <CheckBox Name="AlternateBoolValue_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_alternateBoolValue}" ToolTip="{xaml:Localize Key=OPTIONS_alternateBoolValue_Tooltip}"/>
                         <CheckBox Name="ReplaceMissingKeysWithEnglish_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_replaceMissingKeysWithEnglish}" ToolTip="{xaml:Localize Key=OPTIONS_replaceMissingKeysWithEnglish_Tooltip}"/>
                         <CheckBox Name="UseCommentsInsteadOfData_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_useCommentsInsteadOfData}" ToolTip="{xaml:Localize Key=OPTIONS_useCommentsInsteadOfData_Tooltip}"/>
-                        <CheckBox Name="Experimental_Box" VerticalAlignment="Top" Margin="2.5" Content="{xaml:Localize Key=OPTIONS_experimentalFeatures}" ToolTip="{xaml:Localize Key=OPTIONS_experimentalFeatures_Tooltip}"/>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
@@ -95,7 +116,7 @@
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Export">
+            <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Export}">
                 <ScrollViewer Margin="5">
                     <StackPanel>
                         <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_generateGuids_Tooltip}">
@@ -124,6 +145,75 @@
                                 <TextBlock Text="{xaml:Localize OPTIONS_exportSchema_Structure_Hint}" TextWrapping="Wrap"/>
                             </Label>
                         </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Advanced}">
+                <ScrollViewer Margin="5">
+                    <StackPanel>
+                        <CheckBox Name="Experimental_Box" VerticalAlignment="Top" Margin="5" Content="{xaml:Localize Key=OPTIONS_experimentalFeatures}" ToolTip="{xaml:Localize Key=OPTIONS_experimentalFeatures_Tooltip}"/>
+                        <CheckBox Name="PreferLegacyIDsOverGUIDs_Box" VerticalAlignment="Top" Margin="5" Content="{xaml:Localize Key=OPTIONS_preferLegacyIDsOverGUIDs}" ToolTip="{xaml:Localize Key=OPTIONS_preferLegacyIDsOverGUIDs_Tooltip}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox Grid.Column="1" Name="ForceSoftwareRendering_Box" VerticalAlignment="Top" Margin="5" Content="{xaml:Localize Key=OPTIONS_forceSoftwareRendering}" ToolTip="{xaml:Localize Key=OPTIONS_forceSoftwareRendering_Tooltip}"/>
+                            <iconPacks:PackIconMaterial Kind="Alert" Margin="5"
+                                                        Visibility="{Binding IsChecked, ElementName=ForceSoftwareRendering_Box, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        </Grid>
+                        <GroupBox Header="{xaml:Localize Key=OPTIONS_disabledErrors_Header}" Margin="5">
+                            <StackPanel Name="disabledErrorsPanel">
+                                <Expander Header="{xaml:Localize Key=OPTIONS_disabledErrors_Character_Header}" Margin="5">
+                                    <StackPanel>
+                                        <CheckBox Margin="5" Content="NE__0000" Tag="NE_0000"/>
+                                        <CheckBox Margin="5" Content="NE__0001" Tag="NE_0001" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__0002" Tag="NE_0002" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__0003" Tag="NE_0003" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__0004" Tag="NE_0004"/>
+                                    </StackPanel>
+                                </Expander>
+                                <Expander Header="{xaml:Localize Key=OPTIONS_disabledErrors_Dialogue_Header}" Margin="5">
+                                    <StackPanel>
+                                        <CheckBox Margin="5" Content="NE__1000" Tag="NE_1000" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__1001" Tag="NE_1001" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__1002" Tag="NE_1002"/>
+                                        <CheckBox Margin="5" Content="NE__1003" Tag="NE_1003" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__1004" Tag="NE_1004"/>
+                                        <CheckBox Margin="5" Content="NE__1005" Tag="NE_1005"/>
+                                        <CheckBox Margin="5" Content="NE__1006" Tag="NE_1006"/>
+                                        <CheckBox Margin="5" Content="NE__1007" Tag="NE_1007"/>
+                                        <CheckBox Margin="5" Content="NE__1008" Tag="NE_1008"/>
+                                        <CheckBox Margin="5" Content="NE__1009" Tag="NE_1009" IsEnabled="False"/>
+                                    </StackPanel>
+                                </Expander>
+                                <Expander Header="{xaml:Localize Key=OPTIONS_disabledErrors_Vendor_Header}" Margin="5">
+                                    <StackPanel>
+                                        <CheckBox Margin="5" Content="NE__2000" Tag="NE_2000" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__2001" Tag="NE_2001"/>
+                                        <CheckBox Margin="5" Content="NE__2002" Tag="NE_2002"/>
+                                        <CheckBox Margin="5" Content="NE__2003" Tag="NE_2003"/>
+                                    </StackPanel>
+                                </Expander>
+                                <Expander Header="{xaml:Localize Key=OPTIONS_disabledErrors_Quest_Header}" Margin="5">
+                                    <StackPanel>
+                                        <CheckBox Margin="5" Content="NE__3000" Tag="NE_3000" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__3001" Tag="NE_3001"/>
+                                        <CheckBox Margin="5" Content="NE__3002" Tag="NE_3002"/>
+                                        <CheckBox Margin="5" Content="NE__3003" Tag="NE_3003"/>
+                                    </StackPanel>
+                                </Expander>
+                                <Expander Header="{xaml:Localize Key=OPTIONS_disabledErrors_Currency_Header}" Margin="5">
+                                    <StackPanel>
+                                        <CheckBox Margin="5" Content="NE__4000" Tag="NE_4000" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__4001" Tag="NE_4001" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__4002" Tag="NE_4002" IsEnabled="False"/>
+                                        <CheckBox Margin="5" Content="NE__4003" Tag="NE_4003"/>
+                                        <CheckBox Margin="5" Content="NE__4004" Tag="NE_4004" IsEnabled="False"/>
+                                    </StackPanel>
+                                </Expander>
+                            </StackPanel>
+                        </GroupBox>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>

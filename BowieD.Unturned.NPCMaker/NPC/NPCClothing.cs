@@ -8,49 +8,60 @@ namespace BowieD.Unturned.NPCMaker.NPC
     [System.Serializable]
     public class NPCClothing : IAXData
     {
+        public NPCClothing()
+        {
+            Hat = new GUIDIDBridge(0);
+            Mask = new GUIDIDBridge(0);
+            Shirt = new GUIDIDBridge(0);
+            Pants = new GUIDIDBridge(0);
+            Vest = new GUIDIDBridge(0);
+            Glasses = new GUIDIDBridge(0);
+            Backpack = new GUIDIDBridge(0);
+        }
+
         [XmlElement("hat")]
-        public ushort Hat
+        public GUIDIDBridge Hat
         {
             get => hat;
             set => hat = value;
         }
         [XmlElement("mask")]
-        public ushort Mask
+        public GUIDIDBridge Mask
         {
             get => mask;
             set => mask = value;
         }
         [XmlElement("top")]
-        public ushort Shirt
+        public GUIDIDBridge Shirt
         {
             get => top;
             set => top = value;
         }
         [XmlElement("bottom")]
-        public ushort Pants
+        public GUIDIDBridge Pants
         {
             get => bottom;
             set => bottom = value;
         }
         [XmlElement("backpack")]
-        public ushort Backpack
+        public GUIDIDBridge Backpack
         {
             get => backpack;
             set => backpack = value;
         }
         [XmlElement("vest")]
-        public ushort Vest
+        public GUIDIDBridge Vest
         {
             get => vest;
             set => vest = value;
         }
         [XmlElement("glasses")]
-        public ushort Glasses
+        public GUIDIDBridge Glasses
         {
             get => glasses;
             set => glasses = value;
         }
-        private ushort
+        private GUIDIDBridge
             hat,
             mask,
             top,
@@ -59,17 +70,13 @@ namespace BowieD.Unturned.NPCMaker.NPC
             vest,
             glasses;
 
-        public NPCClothing()
-        {
-
-        }
-        public bool IsEmpty => Hat == 0 && Backpack == 0 && Mask == 0 && Vest == 0 && Shirt == 0 && Glasses == 0 && Pants == 0;
+        public bool IsEmpty => Hat.IsEmpty && Backpack.IsEmpty && Mask.IsEmpty && Vest.IsEmpty && Shirt.IsEmpty && Glasses.IsEmpty && Pants.IsEmpty;
 
         public bool IsHairVisible
         {
             get
             {
-                if (Hat > 0 && GameAssetManager.TryGetAsset<GameItemHatAsset>(Hat, out var hasset))
+                if (!Hat.IsEmpty && GameAssetManager.TryGetAsset<GameItemHatAsset>(Hat, out var hasset))
                 {
                     if (!hasset.hairVisible)
                     {
@@ -77,7 +84,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     }
                 }
 
-                if (Backpack > 0 && GameAssetManager.TryGetAsset<GameItemBackpackAsset>(Backpack, out var basset))
+                if (!Backpack.IsEmpty && GameAssetManager.TryGetAsset<GameItemBackpackAsset>(Backpack, out var basset))
                 {
                     if (!basset.hairVisible)
                     {
@@ -85,7 +92,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     }
                 }
 
-                if (Mask > 0 && GameAssetManager.TryGetAsset<GameItemMaskAsset>(Mask, out var masset))
+                if (!Mask.IsEmpty && GameAssetManager.TryGetAsset<GameItemMaskAsset>(Mask, out var masset))
                 {
                     if (!masset.hairVisible)
                     {
@@ -93,7 +100,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     }
                 }
 
-                if (Vest > 0 && GameAssetManager.TryGetAsset<GameItemVestAsset>(Vest, out var vasset))
+                if (!Vest.IsEmpty && GameAssetManager.TryGetAsset<GameItemVestAsset>(Vest, out var vasset))
                 {
                     if (!vasset.hairVisible)
                     {
@@ -101,7 +108,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     }
                 }
 
-                if (Shirt > 0 && GameAssetManager.TryGetAsset<GameItemShirtAsset>(Shirt, out var sasset))
+                if (!Shirt.IsEmpty && GameAssetManager.TryGetAsset<GameItemShirtAsset>(Shirt, out var sasset))
                 {
                     if (!sasset.hairVisible)
                     {
@@ -109,7 +116,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     }
                 }
 
-                if (Glasses > 0 && GameAssetManager.TryGetAsset<GameItemGlassesAsset>(Glasses, out var gasset))
+                if (!Glasses.IsEmpty && GameAssetManager.TryGetAsset<GameItemGlassesAsset>(Glasses, out var gasset))
                 {
                     if (!gasset.hairVisible)
                     {
@@ -117,7 +124,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     }
                 }
 
-                if (Pants > 0 && GameAssetManager.TryGetAsset<GameItemPantsAsset>(Pants, out var passet))
+                if (!Pants.IsEmpty && GameAssetManager.TryGetAsset<GameItemPantsAsset>(Pants, out var passet))
                 {
                     if (!passet.hairVisible)
                     {
@@ -132,7 +139,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             get
             {
-                if (Hat > 0 && GameAssetManager.TryGetAsset<GameItemHatAsset>(Hat, out var hasset))
+                if (!Hat.IsEmpty && GameAssetManager.TryGetAsset<GameItemHatAsset>(Hat, out var hasset))
                 {
                     if (!hasset.beardVisible)
                     {
@@ -140,7 +147,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     }
                 }
 
-                if (Backpack > 0 && GameAssetManager.TryGetAsset<GameItemBackpackAsset>(Backpack, out var basset))
+                if (!Backpack.IsEmpty && GameAssetManager.TryGetAsset<GameItemBackpackAsset>(Backpack, out var basset))
                 {
                     if (!basset.beardVisible)
                     {
@@ -148,7 +155,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     }
                 }
 
-                if (Mask > 0 && GameAssetManager.TryGetAsset<GameItemMaskAsset>(Mask, out var masset))
+                if (!Mask.IsEmpty && GameAssetManager.TryGetAsset<GameItemMaskAsset>(Mask, out var masset))
                 {
                     if (!masset.beardVisible)
                     {
@@ -156,7 +163,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     }
                 }
 
-                if (Vest > 0 && GameAssetManager.TryGetAsset<GameItemVestAsset>(Vest, out var vasset))
+                if (!Vest.IsEmpty && GameAssetManager.TryGetAsset<GameItemVestAsset>(Vest, out var vasset))
                 {
                     if (!vasset.beardVisible)
                     {
@@ -164,7 +171,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     }
                 }
 
-                if (Shirt > 0 && GameAssetManager.TryGetAsset<GameItemShirtAsset>(Shirt, out var sasset))
+                if (!Shirt.IsEmpty && GameAssetManager.TryGetAsset<GameItemShirtAsset>(Shirt, out var sasset))
                 {
                     if (!sasset.beardVisible)
                     {
@@ -172,7 +179,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     }
                 }
 
-                if (Glasses > 0 && GameAssetManager.TryGetAsset<GameItemGlassesAsset>(Glasses, out var gasset))
+                if (!Glasses.IsEmpty && GameAssetManager.TryGetAsset<GameItemGlassesAsset>(Glasses, out var gasset))
                 {
                     if (!gasset.beardVisible)
                     {
@@ -180,7 +187,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     }
                 }
 
-                if (Pants > 0 && GameAssetManager.TryGetAsset<GameItemPantsAsset>(Pants, out var passet))
+                if (!Pants.IsEmpty && GameAssetManager.TryGetAsset<GameItemPantsAsset>(Pants, out var passet))
                 {
                     if (!passet.beardVisible)
                     {
@@ -194,24 +201,37 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
         public void Load(XmlNode node, int version)
         {
-            hat = node["hat"].ToUInt16();
-            mask = node["mask"].ToUInt16();
-            top = node["top"].ToUInt16();
-            bottom = node["bottom"].ToUInt16();
-            backpack = node["backpack"].ToUInt16();
-            vest = node["vest"].ToUInt16();
-            glasses = node["glasses"].ToUInt16();
+            if (version >= 11)
+            {
+                hat = node["hat"].ToGuidIDBridge();
+                mask = node["mask"].ToGuidIDBridge();
+                top = node["top"].ToGuidIDBridge();
+                bottom = node["bottom"].ToGuidIDBridge();
+                backpack = node["backpack"].ToGuidIDBridge();
+                vest = node["vest"].ToGuidIDBridge();
+                glasses = node["glasses"].ToGuidIDBridge();
+            }
+            else
+            {
+                hat = (GUIDIDBridge)node["hat"].ToUInt16();
+                mask = (GUIDIDBridge)node["mask"].ToUInt16();
+                top = (GUIDIDBridge)node["top"].ToUInt16();
+                bottom = (GUIDIDBridge)node["bottom"].ToUInt16();
+                backpack = (GUIDIDBridge)node["backpack"].ToUInt16();
+                vest = (GUIDIDBridge)node["vest"].ToUInt16();
+                glasses = (GUIDIDBridge)node["glasses"].ToUInt16();
+            }
         }
 
         public void Save(XmlDocument document, XmlNode node)
         {
-            document.CreateNodeC("hat", node).WriteUInt16(hat);
-            document.CreateNodeC("mask", node).WriteUInt16(mask);
-            document.CreateNodeC("top", node).WriteUInt16(top);
-            document.CreateNodeC("bottom", node).WriteUInt16(bottom);
-            document.CreateNodeC("backpack", node).WriteUInt16(backpack);
-            document.CreateNodeC("vest", node).WriteUInt16(vest);
-            document.CreateNodeC("glasses", node).WriteUInt16(glasses);
+            document.CreateNodeC("hat", node).WriteGuidIDBridge(hat);
+            document.CreateNodeC("mask", node).WriteGuidIDBridge(mask);
+            document.CreateNodeC("top", node).WriteGuidIDBridge(top);
+            document.CreateNodeC("bottom", node).WriteGuidIDBridge(bottom);
+            document.CreateNodeC("backpack", node).WriteGuidIDBridge(backpack);
+            document.CreateNodeC("vest", node).WriteGuidIDBridge(vest);
+            document.CreateNodeC("glasses", node).WriteGuidIDBridge(glasses);
         }
     }
 }

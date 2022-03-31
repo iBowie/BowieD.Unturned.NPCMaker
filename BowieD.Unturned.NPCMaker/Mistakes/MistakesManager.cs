@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.GameIntegration;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using System;
@@ -64,7 +65,6 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     }
 
                     FoundMistakes.Add(fm);
-                    MainWindow.Instance.lstMistakes.Items.Add(fm);
                 }
             }
 
@@ -85,11 +85,12 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     }
                 }, out _))
                 {
-                    MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                    Mistake newMistake = new Mistake()
                     {
                         MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_dialogue", dialogue.ID),
                         Importance = IMPORTANCE.WARNING
-                    });
+                    };
+                    FoundMistakes.Add(newMistake);
                 }
             }
 
@@ -110,11 +111,12 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     }
                 }, out _))
                 {
-                    MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                    Mistake newMistake = new Mistake()
                     {
                         MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_vendor", vendor.ID),
                         Importance = IMPORTANCE.WARNING
-                    });
+                    };
+                    FoundMistakes.Add(newMistake);
                 }
                 foreach (VendorItem it in vendor.items)
                 {
@@ -122,11 +124,12 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     {
                         if (GameAssetManager.HasImportedAssets && !GameAssetManager.TryGetAsset<GameVehicleAsset>(it.id, out _))
                         {
-                            MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                            Mistake newMistake = new Mistake()
                             {
                                 MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_vehicle", it.id),
                                 Importance = IMPORTANCE.WARNING
-                            });
+                            };
+                            FoundMistakes.Add(newMistake);
                             continue;
                         }
                     }
@@ -134,11 +137,12 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     {
                         if (GameAssetManager.HasImportedAssets && !GameAssetManager.TryGetAsset<GameItemAsset>(it.id, out _))
                         {
-                            MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                            Mistake newMistake = new Mistake()
                             {
                                 MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_item", it.id),
                                 Importance = IMPORTANCE.WARNING
-                            });
+                            };
+                            FoundMistakes.Add(newMistake);
                             continue;
                         }
                     }
@@ -162,11 +166,12 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                     }
                 }, out _))
                 {
-                    MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                    Mistake newMistake = new Mistake()
                     {
                         MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_quest", quest.ID),
                         Importance = IMPORTANCE.WARNING
-                    });
+                    };
+                    FoundMistakes.Add(newMistake);
                 }
             }
 
@@ -189,13 +194,30 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                         }
                     }, out _))
                     {
-                        MainWindow.Instance.lstMistakes.Items.Add(new Mistake()
+                        Mistake newMistake = new Mistake()
                         {
                             MistakeDesc = LocalizationManager.Current.Mistakes.Translate("deep_char", character.ID),
                             Importance = IMPORTANCE.WARNING
-                        });
+                        };
+                        FoundMistakes.Add(newMistake);
                     }
                 }
+            }
+
+            FoundMistakes.RemoveWhere(d =>
+            {
+                if (d.Importance == IMPORTANCE.CRITICAL)
+                    return false;
+
+                if (AppConfig.Instance.disabledErrors.Contains(d.MistakeName))
+                    return true;
+
+                return false;
+            });
+
+            foreach (var fm in FoundMistakes)
+            {
+                MainWindow.Instance.lstMistakes.Items.Add(fm);
             }
 
             if (MainWindow.Instance.lstMistakes.Items.Count == 0)

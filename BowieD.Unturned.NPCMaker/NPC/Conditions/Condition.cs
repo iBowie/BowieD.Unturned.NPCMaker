@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
@@ -21,6 +22,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     {
         [SkipField]
         [Context(ContextHelper.EContextOption.Group_TextEdit | ContextHelper.EContextOption.Group_Rich)]
+        [ApplicableToOpenCloseBoomerangs]
         public string Localization { get; set; }
         [XmlIgnore]
         public virtual Condition_Type Type => throw new NotImplementedException();
@@ -179,9 +181,12 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 }
 
                 borderContents.Children.Add(l);
+                TextBoxOptionsAttribute textBoxOptionsAttribute = prop.GetCustomAttribute<TextBoxOptionsAttribute>();
                 RangeAttribute rangeAttribute = prop.GetCustomAttribute<RangeAttribute>();
                 AssetPickerAttribute assetPickerAttribute = prop.GetCustomAttribute<AssetPickerAttribute>();
+                ApplicableToOpenCloseBoomerangsAttribute openCloseBoomerangsAttribute = prop.GetCustomAttribute<ApplicableToOpenCloseBoomerangsAttribute>();
                 ContextAttribute contextAttribute = prop.GetCustomAttribute<ContextAttribute>();
+                CanUseAlternateBoolAttribute canUseAlternateBoolAttribute = prop.GetCustomAttribute<CanUseAlternateBoolAttribute>();
                 FrameworkElement valueControl = null;
                 if (propType == typeof(ushort))
                 {
@@ -394,21 +399,49 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 }
                 else if (propType == typeof(string))
                 {
-                    valueControl = new TextBox()
+                    if (textBoxOptionsAttribute is null)
                     {
-                        MaxWidth = 100,
-                        TextWrapping = TextWrapping.Wrap
-                    };
-                    (valueControl as TextBox).SetBinding(TextBox.TextProperty, propName);
-
-                    if (assetPickerAttribute != null)
-                    {
-                        var vcMenu = new ContextMenu();
-                        vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
+                        valueControl = new TextBox()
                         {
-                            (valueControl as TextBox).Text = asset.GUID.ToString("N");
-                        }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
-                        (valueControl as TextBox).ContextMenu = vcMenu;
+                            MaxWidth = 100,
+                            TextWrapping = TextWrapping.Wrap
+                        };
+                        (valueControl as TextBox).SetBinding(TextBox.TextProperty, propName);
+
+                        if (assetPickerAttribute != null)
+                        {
+                            var vcMenu = new ContextMenu();
+                            vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
+                            {
+                                (valueControl as TextBox).Text = asset.GUID.ToString("N");
+                            }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
+                            valueControl.ContextMenu = vcMenu;
+                        }
+
+                        if (openCloseBoomerangsAttribute != null)
+                        {
+                            IDELikeTool.RegisterOpenCloseBoomerangs(valueControl as TextBox);
+                        }
+                    }
+                    else
+                    {
+                        valueControl = new ComboBox()
+                        {
+                            IsEditable = true,
+                            ItemsSource = textBoxOptionsAttribute.Options,
+                            MaxWidth = 100,
+                        };
+                        (valueControl as ComboBox).SetBinding(ComboBox.TextProperty, propName);
+
+                        if (assetPickerAttribute != null)
+                        {
+                            var vcMenu = new ContextMenu();
+                            vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
+                            {
+                                (valueControl as ComboBox).Text = asset.GUID.ToString("N");
+                            }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
+                            valueControl.ContextMenu = vcMenu;
+                        }
                     }
                 }
                 else if (propType.IsEnum)
@@ -441,8 +474,55 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 }
                 else if (propType == typeof(bool))
                 {
-                    valueControl = new CheckBox() { };
-                    (valueControl as CheckBox).SetBinding(CheckBox.IsCheckedProperty, propName);
+                    if (AppConfig.Instance.alternateBoolValue && canUseAlternateBoolAttribute != null)
+                    {
+                        ComboBox cbox = new ComboBox();
+
+                        BoolItemsSource bis = new BoolItemsSource()
+                        {
+                            Dictionary = LocalizationManager.Current.Condition,
+                            LocalizationPrefix = $"{Type}_{prop.Name}_",
+                        };
+
+                        cbox.ItemsSource = bis;
+                        cbox.SetBinding(ComboBox.SelectedItemProperty, new Binding(propName)
+                        {
+                            Converter = bis,
+                            UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                        });
+
+                        valueControl = cbox;
+                    }
+                    else
+                    {
+                        valueControl = new CheckBox() { };
+                        (valueControl as CheckBox).SetBinding(CheckBox.IsCheckedProperty, propName);
+                    }
+                }
+                else if (propType == typeof(TimeSpan))
+                {
+                    valueControl = new ClockControl();
+
+                    (valueControl as ClockControl).SetBinding(ClockControl.DisplayTimeProperty, new Binding(propName) { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
+                }
+                else if (propType == typeof(GUIDIDBridge))
+                {
+                    valueControl = new GUIDIDControl();
+                    (valueControl as GUIDIDControl).SetBinding(GUIDIDControl.ValueProperty, propName);
+
+                    if (assetPickerAttribute != null)
+                    {
+                        var vcMenu = new ContextMenu();
+                        vcMenu.Items.Add(ContextHelper.CreateSelectAssetButton(assetPickerAttribute.AssetType, (asset) =>
+                        {
+                            if (AppConfig.Instance.preferLegacyIDsOverGUIDs)
+                                (valueControl as GUIDIDControl).Value = new GUIDIDBridge(asset.ID);
+                            else
+                                (valueControl as GUIDIDControl).Value = new GUIDIDBridge(asset.GUID);
+                        }, assetPickerAttribute.Key, assetPickerAttribute.Icon));
+
+                        (valueControl as GUIDIDControl).ContextMenu = vcMenu;
+                    }
                 }
                 else
                 {
@@ -453,6 +533,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 if (contextAttribute != null)
                     valueControl.ContextMenu = ContextHelper.CreateContextMenu(contextAttribute.Options);
                 borderContents.Children.Add(valueControl);
+
+                borderContents.ColumnDefinitions.Add(new ColumnDefinition());
+                borderContents.ColumnDefinitions.Add(new ColumnDefinition());
+                Grid.SetColumn(valueControl, 1);
+                
                 valueControl.Tag = "variable::" + propName;
                 Border b = new Border
                 {

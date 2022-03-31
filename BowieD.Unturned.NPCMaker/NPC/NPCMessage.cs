@@ -6,7 +6,7 @@ using Condition = BowieD.Unturned.NPCMaker.NPC.Conditions.Condition;
 namespace BowieD.Unturned.NPCMaker.NPC
 {
     [System.Serializable]
-    public class NPCMessage : IAXData
+    public class NPCMessage : IAXData, IHasUIText
     {
         public NPCMessage()
         {
@@ -23,6 +23,16 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public LimitedList<Reward> rewards;
 
         public LimitedList<Condition> conditions;
+
+        public string UIText
+        {
+            get
+            {
+                var pagesContent = string.Join("|", pages);
+
+                return TextUtil.Shortify(pagesContent);
+            }
+        }
 
         public void Load(XmlNode node, int version)
         {

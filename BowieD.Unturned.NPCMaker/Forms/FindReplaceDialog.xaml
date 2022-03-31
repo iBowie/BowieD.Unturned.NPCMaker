@@ -1,0 +1,77 @@
+﻿<Window x:Class="BowieD.Unturned.NPCMaker.Forms.FindReplaceDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
+        xmlns:findReplace="clr-namespace:BowieD.Unturned.NPCMaker.FindReplace"
+        mc:Ignorable="d" xmlns:xamle="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
+        Title="{xamle:Localize INTERFACE_FindReplace_Title}" Height="450" Width="450">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="5" Text="{xamle:Localize INTERFACE_FindReplace_Format}" VerticalAlignment="Center"
+                       Foreground="{DynamicResource ForegroundColor}"/>
+            <ComboBox x:Name="formatsBox" Margin="5" SelectedIndex="0" Grid.Column="1">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type findReplace:FindReplaceFormat}">
+                        <TextBlock Text="{Binding DisplayFormatName}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="{xamle:Localize INTERFACE_FindReplace_FindWith}" Margin="5" HorizontalAlignment="Center"
+                       Foreground="{DynamicResource ForegroundColor}"/>
+            <TextBox Grid.Row="1" Margin="5" x:Name="findValueBox"/>
+            <TextBlock Text="{xamle:Localize INTERFACE_FindReplace_ReplaceWith}" Margin="5" Grid.Column="1" HorizontalAlignment="Center"
+                       Foreground="{DynamicResource ForegroundColor}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="5" x:Name="replaceWithValueBox"/>
+        </Grid>
+        <GroupBox Grid.Row="2" Margin="5" Header="{xamle:Localize INTERFACE_FindReplace_SearchResultHeader}">
+            <ListBox x:Name="searchResultBox">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="{Binding TargetDisplayName}" TextWrapping="Wrap"
+                                       VerticalAlignment="Center" HorizontalAlignment="Left"
+                                       Margin="5"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Margin="5" Content="{xamle:Localize INTERFACE_FindReplace_FindButton}" Command="{Binding FindCommand}"/>
+            <Button Margin="5" Grid.Column="1" Content="{xamle:Localize INTERFACE_FindReplace_ReplaceButton}"
+                    Command="{Binding ReplaceCommand}"/>
+            <Button Margin="5" Grid.Column="2" Content="{xamle:Localize INTERFACE_FindReplace_GoToTargetButton}"
+                    Command="{Binding GoToTargetCommand}"/>
+            <Button Margin="5" Grid.Column="3" Content="{xamle:Localize INTERFACE_FindReplace_CloseButton}"
+                    Command="{Binding CloseCommand}"/>
+        </Grid>
+    </Grid>
+</Window>

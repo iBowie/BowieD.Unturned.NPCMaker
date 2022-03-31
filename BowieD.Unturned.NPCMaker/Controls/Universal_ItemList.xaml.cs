@@ -19,8 +19,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
         {
             InitializeComponent();
             Value = input;
-            mainLabel.Content = Value is IHasUIText ? (Value as IHasUIText).UIText : Value.ToString();
-            mainLabel.ToolTip = mainLabel.Content;
+            mainLabel.Text = Value is IHasUIText ? (Value as IHasUIText).UIText : Value.ToString();
+            mainLabel.ToolTip = mainLabel.Text;
             Type = type;
 
             if (Configuration.AppConfig.Instance.useOldStyleMoveUpDown)
@@ -50,8 +50,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
         {
             InitializeComponent();
             Value = input;
-            mainLabel.Content = Value is IHasUIText ? (Value as IHasUIText).UIText : Value.ToString();
-            mainLabel.ToolTip = mainLabel.Content;
+            mainLabel.Text = Value is IHasUIText ? (Value as IHasUIText).UIText : Value.ToString();
+            mainLabel.ToolTip = mainLabel.Text;
 
             Type = AutoDetectType(input);
 
@@ -138,8 +138,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
                         if (uce.DialogResult == true)
                         {
                             Value = uce.Result;
-                            mainLabel.Content = Value is IHasUIText ? (Value as IHasUIText).UIText : Value.ToString();
-                            mainLabel.ToolTip = mainLabel.Content;
+                            mainLabel.Text = Value is IHasUIText ? (Value as IHasUIText).UIText : Value.ToString();
+                            mainLabel.ToolTip = mainLabel.Text;
                         }
 
                         break;
@@ -157,8 +157,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
                         if (ure.DialogResult == true)
                         {
                             Value = ure.Result;
-                            mainLabel.Content = Value is IHasUIText ? (Value as IHasUIText).UIText : Value.ToString();
-                            mainLabel.ToolTip = mainLabel.Content;
+                            mainLabel.Text = Value is IHasUIText ? (Value as IHasUIText).UIText : Value.ToString();
+                            mainLabel.ToolTip = mainLabel.Text;
                         }
 
                         break;
@@ -189,8 +189,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
                             }
                             Value = NewItem;
                         }
-                        mainLabel.Content = Value is IHasUIText ? (Value as IHasUIText).UIText : Value.ToString();
-                        mainLabel.ToolTip = mainLabel.Content;
+                        mainLabel.Text = Value is IHasUIText ? (Value as IHasUIText).UIText : Value.ToString();
+                        mainLabel.ToolTip = mainLabel.Text;
                         break;
                     }
                 case ReturnType.Character:
@@ -204,8 +204,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
                         {
                             Value = mfiv.Values[0];
 
-                            mainLabel.Content = Value.ToString();
-                            mainLabel.ToolTip = mainLabel.Content;
+                            mainLabel.Text = Value.ToString();
+                            mainLabel.ToolTip = mainLabel.Text;
                         }
                     }
                     break;
@@ -222,8 +222,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
                         {
                             Value = new DirectoryInfo(fbd.SelectedPath);
 
-                            mainLabel.Content = (Value as DirectoryInfo).FullName;
-                            mainLabel.ToolTip = mainLabel.Content;
+                            mainLabel.Text = (Value as DirectoryInfo).FullName;
+                            mainLabel.ToolTip = mainLabel.Text;
                         }
                     }
                     break;

@@ -52,9 +52,9 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 haircut = asset.ReadByte("Hair"),
                 hairColor = asset.ReadColor("Color_Hair"),
                 skinColor = asset.ReadColor("Color_Skin"),
-                equipPrimary = asset.ReadUInt16("Primary"),
-                equipSecondary = asset.ReadUInt16("Secondary"),
-                equipTertiary = asset.ReadUInt16("Tertiary"),
+                equipPrimary = asset.ReadGUIDIDBridge("Primary"),
+                equipSecondary = asset.ReadGUIDIDBridge("Secondary"),
+                equipTertiary = asset.ReadGUIDIDBridge("Tertiary"),
                 startDialogueId = asset.ReadUInt16("Dialogue"),
                 DisplayName = local?.ReadString("Character"),
                 EditorName = local?.ReadString("Name"),
@@ -252,32 +252,26 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                     prefix = "Halloween_";
                     break;
             }
-            c.Backpack = asset.ReadUInt16(prefix + "Backpack");
-            c.Glasses = asset.ReadUInt16(prefix + "Glasses");
-            c.Hat = asset.ReadUInt16(prefix + "Hat");
-            c.Mask = asset.ReadUInt16(prefix + "Mask");
-            c.Pants = asset.ReadUInt16(prefix + "Pants");
-            c.Shirt = asset.ReadUInt16(prefix + "Shirt");
-            c.Vest = asset.ReadUInt16(prefix + "Vest");
+            c.Backpack = asset.ReadGUIDIDBridge(prefix + "Backpack");
+            c.Glasses = asset.ReadGUIDIDBridge(prefix + "Glasses");
+            c.Hat = asset.ReadGUIDIDBridge(prefix + "Hat");
+            c.Mask = asset.ReadGUIDIDBridge(prefix + "Mask");
+            c.Pants = asset.ReadGUIDIDBridge(prefix + "Pants");
+            c.Shirt = asset.ReadGUIDIDBridge(prefix + "Shirt");
+            c.Vest = asset.ReadGUIDIDBridge(prefix + "Vest");
             return c;
         }
         private Condition[] ParseConditions(string prefix, string postfix = "Condition_")
         {
             Condition[] c = new Condition[asset.ReadByte(prefix + "Conditions")];
 
-            int num = 0;
-            string text;
-            while (true)
+            for (int num = 0; num < c.Length; num++)
             {
-                if (num >= c.Length)
-                {
-                    return c;
-                }
-
-                text = $"{prefix}{postfix}{num}_Type";
+                string text = $"{prefix}{postfix}{num}_Type";
+                
                 if (!asset.Has(text))
                 {
-                    break;
+                    throw new InvalidDataException("Parsed condition is invalid");
                 }
 
                 Condition_Type type = asset.ReadEnum(text, Condition_Type.None);
@@ -285,6 +279,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 bool needToReset = asset.Has($"{prefix}{postfix}{num}_Reset");
                 Logic_Type logic = asset.ReadEnum($"{prefix}{postfix}{num}_Logic", Logic_Type.Equal);
                 string tp = $"{prefix}{postfix}{num}_";
+
                 switch (type)
                 {
                     case Condition_Type.Kills_Tree:
@@ -354,7 +349,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                     case Condition_Type.Item:
                         c[num] = new ConditionItem()
                         {
-                            ID = asset.ReadUInt16(tp + "ID"),
+                            ID = asset.ReadGUIDIDBridge(tp + "ID"),
                             Amount = asset.ReadUInt16(tp + "Amount")
                         };
                         break;
@@ -468,34 +463,33 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                             Value = asset.ReadEnum(tp + "Value", ENPCWeatherStatus.Active)
                         };
                         break;
+                    default:
+                        throw new InvalidDataException("Parsed condition is invalid");
                 }
+                
                 c[num].Localization = desc ?? "";
                 c[num].Reset = needToReset;
-                num++;
             }
+
             return c;
         }
         private Reward[] ParseRewards(string prefix, string postfix = "Reward_")
         {
             Reward[] r = new Reward[asset.ReadByte($"{prefix}Rewards")];
-            int num = 0;
-            string text;
-            while (true)
-            {
-                if (num >= r.Length)
-                {
-                    return r;
-                }
 
-                text = $"{prefix}{postfix}{num}_Type";
+            for (int num = 0; num < r.Length; num++)
+            {
+                string text = $"{prefix}{postfix}{num}_Type";
+
                 if (!asset.Has(text))
                 {
-                    break;
+                    throw new InvalidDataException("Parsed reward is invalid");
                 }
 
                 RewardType type = asset.ReadEnum<RewardType>(text);
                 string desc = local?.ReadString($"{prefix}{postfix}{num}");
                 string tp = $"{prefix}{postfix}{num}_";
+
                 switch (type)
                 {
                     case RewardType.Achievement:
@@ -559,7 +553,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                             Magazine = asset.ReadUInt16(tp + "Magazine"),
                             Sight = asset.ReadUInt16(tp + "Sight"),
                             Tactical = asset.ReadUInt16(tp + "Tactical"),
-                            ID = asset.ReadUInt16(tp + "ID")
+                            ID = asset.ReadGUIDIDBridge(tp + "ID")
                         };
                         break;
                     case RewardType.Item_Random:
@@ -607,10 +601,13 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                             Duration = asset.ReadSingle(tp + "Duration", 2f)
                         };
                         break;
+                    default:
+                        throw new InvalidDataException("Parsed reward is invalid");
                 }
+
                 r[num].Localization = desc ?? "";
-                num++;
             }
+
             return r;
         }
         public ParseType GetParseType()

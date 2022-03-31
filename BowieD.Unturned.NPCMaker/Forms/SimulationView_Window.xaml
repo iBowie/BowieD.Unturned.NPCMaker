@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML" xmlns:controls="clr-namespace:BowieD.Unturned.NPCMaker.Controls"
         mc:Ignorable="d"
         Title="{xaml:Localize Key=SIMULATION.SIMULATION_Window_Title}" WindowStartupLocation="CenterOwner" Height="Auto" Width="800">
     <Grid>
@@ -30,9 +30,11 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Margin="10" Content="{xaml:Localize Key=SIMULATION.SIMULATION_Time}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <Slider AutoToolTipPlacement="BottomRight" Name="gameTimeSlider" Grid.Column="1" Margin="10" Minimum="0" Maximum="3600" Value="{Binding Time, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Slider AutoToolTipPlacement="BottomRight" Name="gameTimeSlider" Grid.Column="1" Margin="10" Minimum="0" Maximum="86400" Value="{Binding Time, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <controls:ClockControl Grid.Column="2" DisplayTime="{Binding DisplayTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>

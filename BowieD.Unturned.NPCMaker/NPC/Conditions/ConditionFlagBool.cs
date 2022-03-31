@@ -13,6 +13,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public override Condition_Type Type => Condition_Type.Flag_Bool;
         [AssetPicker(typeof(FlagDescriptionProjectAsset), "Control_SelectAsset_Project_Flag", MahApps.Metro.IconPacks.PackIconMaterialKind.Flag)]
         public ushort ID { get; set; }
+        [CanUseAlternateBool]
         public bool Value { get; set; }
         [NoValue]
         public bool Allow_Unset { get; set; }

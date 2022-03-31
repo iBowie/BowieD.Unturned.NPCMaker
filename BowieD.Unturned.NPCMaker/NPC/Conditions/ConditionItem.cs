@@ -16,7 +16,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     {
         public override Condition_Type Type => Condition_Type.Item;
         [AssetPicker(typeof(GameItemAsset), "Control_SelectAsset_Item", MahApps.Metro.IconPacks.PackIconMaterialKind.Archive)]
-        public ushort ID { get; set; }
+        public GUIDIDBridge ID { get; set; }
         public ushort Amount { get; set; }
         public override string UIText
         {
@@ -38,7 +38,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
         public override bool Check(Simulation simulation)
         {
-            System.Collections.Generic.List<Simulation.Item> items = simulation.Items.Where(d => d.ID == ID).ToList();
+            System.Collections.Generic.List<Simulation.Item> items = simulation.Items.Where(d => d.ID == ID.ResolveLegacyID<GameItemAsset>()).ToList();
 
             return SimulationTool.Compare(items.Count, Amount, Logic_Type.Greater_Than_Or_Equal_To);
         }
@@ -46,7 +46,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             if (Reset)
             {
-                foreach (Simulation.Item i in simulation.Items.Where(d => d.ID == ID).Take(Amount).ToList())
+                foreach (Simulation.Item i in simulation.Items.Where(d => d.ID == ID.ResolveLegacyID<GameItemAsset>()).Take(Amount).ToList())
                 {
                     simulation.Items.Remove(i);
                 }
@@ -61,7 +61,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                 text = LocalizationManager.Current.Simulation["Quest"].Translate("Default_Condition_Item");
             }
 
-            System.Collections.Generic.IEnumerable<Simulation.Item> found = simulation.Items.Where(d => d.ID == ID);
+            System.Collections.Generic.IEnumerable<Simulation.Item> found = simulation.Items.Where(d => d.ID == ID.ResolveLegacyID<GameItemAsset>());
 
             string idOrName;
 
@@ -71,7 +71,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             }
             else
             {
-                idOrName = ID.ToString();
+                idOrName = ID.ExportValue;
             }
 
             return string.Format(text, found.Count(), Amount, idOrName);
@@ -79,7 +79,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
         public bool UpdateIcon(out BitmapImage image)
         {
-            if (ID > 0 && GameAssetManager.TryGetAsset<GameItemAsset>(ID, out var asset))
+            if (!ID.IsEmpty && GameAssetManager.TryGetAsset<GameItemAsset>(ID, out var asset))
             {
                 image = ThumbnailManager.CreateThumbnail(asset.ImagePath);
                 return true;
@@ -95,7 +95,15 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             base.Load(node, version);
 
-            ID = node["ID"].ToUInt16();
+            if (version >= 11)
+            {
+                ID = node["ID"].ToGuidIDBridge();
+            }
+            else
+            {
+                ID = (GUIDIDBridge)node["ID"].ToUInt16();
+            }
+
             Amount = node["Amount"].ToUInt16();
         }
 
@@ -103,7 +111,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         {
             base.Save(document, node);
 
-            document.CreateNodeC("ID", node).WriteUInt16(ID);
+            document.CreateNodeC("ID", node).WriteGuidIDBridge(ID);
             document.CreateNodeC("Amount", node).WriteUInt16(Amount);
         }
     }

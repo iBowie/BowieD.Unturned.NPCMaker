@@ -107,16 +107,16 @@ namespace BowieD.Unturned.NPCMaker.NPC
             Title = node["vendorTitle"].ToText();
             vendorDescription = node["vendorDescription"].ToText();
 
-            if (version < 8)
-            {
-                items = node["items"].ParseAXDataCollection<VendorItem>(version).ToList();
-            }
-            else
+            if (version >= 8)
             {
                 var buyItems = node["buyingItems"].ParseVendorItemsNew(version, true);
                 var sellItems = node["sellingItems"].ParseVendorItemsNew(version, false);
 
                 items = buyItems.Concat(sellItems).ToList();
+            }
+            else
+            {
+                items = node["items"].ParseAXDataCollection<VendorItem>(version).ToList();
             }
 
             disableSorting = node["disableSorting"].ToBoolean();

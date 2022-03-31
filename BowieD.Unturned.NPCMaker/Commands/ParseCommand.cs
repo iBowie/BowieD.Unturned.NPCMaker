@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.Parsing;
+using System;
 using System.IO;
 
 namespace BowieD.Unturned.NPCMaker.Commands
@@ -20,38 +21,46 @@ namespace BowieD.Unturned.NPCMaker.Commands
                 if (File.Exists(joined))
                 {
                     App.Logger.Log("[ParseCommand] - File found. Checking...");
-                    ParseTool pTool = new ParseTool(joined);
-                    NPC.ParseType type = pTool.GetParseType();
-                    switch (type)
+                    try
                     {
-                        case NPC.ParseType.NPC:
-                            App.Logger.Log("[ParseCommand] - Started parsing 'NPC'.");
-                            MainWindow.CurrentProject.data.characters.Add(pTool.ParseCharacter());
-                            App.Logger.Log("[ParseCommand] - 'NPC' parsed and imported into project.");
-                            LastResult = true;
-                            break;
-                        case NPC.ParseType.Dialogue:
-                            App.Logger.Log("[ParseCommand] - Started parsing 'Dialogue'.");
-                            MainWindow.CurrentProject.data.dialogues.Add(pTool.ParseDialogue());
-                            App.Logger.Log("[ParseCommand] - 'Dialogue' parsed and imported into project.");
-                            LastResult = true;
-                            break;
-                        case NPC.ParseType.Vendor:
-                            App.Logger.Log("[ParseCommand] - Started parsing 'Vendor'.");
-                            MainWindow.CurrentProject.data.vendors.Add(pTool.ParseVendor());
-                            App.Logger.Log("[ParseCommand] - 'Vendor' parsed and imported into project.");
-                            LastResult = true;
-                            break;
-                        case NPC.ParseType.Quest:
-                            App.Logger.Log("[ParseCommand] - Started parsing 'Quest'.");
-                            MainWindow.CurrentProject.data.quests.Add(pTool.ParseQuest());
-                            App.Logger.Log("[ParseCommand] - 'Quest' parsed and imported into project.");
-                            LastResult = true;
-                            break;
-                        default:
-                            LastResult = false;
-                            App.Logger.Log("[ParseCommand] - Invalid file.");
-                            break;
+                        ParseTool pTool = new ParseTool(joined);
+                        NPC.ParseType type = pTool.GetParseType();
+                        switch (type)
+                        {
+                            case NPC.ParseType.NPC:
+                                App.Logger.Log("[ParseCommand] - Started parsing 'NPC'.");
+                                MainWindow.CurrentProject.data.characters.Add(pTool.ParseCharacter());
+                                App.Logger.Log("[ParseCommand] - 'NPC' parsed and imported into project.");
+                                LastResult = true;
+                                break;
+                            case NPC.ParseType.Dialogue:
+                                App.Logger.Log("[ParseCommand] - Started parsing 'Dialogue'.");
+                                MainWindow.CurrentProject.data.dialogues.Add(pTool.ParseDialogue());
+                                App.Logger.Log("[ParseCommand] - 'Dialogue' parsed and imported into project.");
+                                LastResult = true;
+                                break;
+                            case NPC.ParseType.Vendor:
+                                App.Logger.Log("[ParseCommand] - Started parsing 'Vendor'.");
+                                MainWindow.CurrentProject.data.vendors.Add(pTool.ParseVendor());
+                                App.Logger.Log("[ParseCommand] - 'Vendor' parsed and imported into project.");
+                                LastResult = true;
+                                break;
+                            case NPC.ParseType.Quest:
+                                App.Logger.Log("[ParseCommand] - Started parsing 'Quest'.");
+                                MainWindow.CurrentProject.data.quests.Add(pTool.ParseQuest());
+                                App.Logger.Log("[ParseCommand] - 'Quest' parsed and imported into project.");
+                                LastResult = true;
+                                break;
+                            default:
+                                LastResult = false;
+                                App.Logger.Log("[ParseCommand] - Invalid file.");
+                                break;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        LastResult = false;
+                        App.Logger.LogException("[ParseCommand] - Invalid asset file.", ex: ex);
                     }
                 }
                 else

@@ -12,6 +12,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
 {
     public class ProjectData : XmlData<NPCProject>
     {
+        public static ProjectData CurrentProject { get; } = new ProjectData();
+
         public ProjectData()
         {
             file = "";

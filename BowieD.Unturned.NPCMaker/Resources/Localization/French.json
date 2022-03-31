@@ -320,6 +320,7 @@
 		"Item_Auto_Equip": "Equiper l'objet lors du don",
 		"Item_Random_ID": "ID de table de butin",
 		"Item_Random_Amount": "Montant de l'article",
+		"Item_Random_Auto_Equip": "Equiper l'objet lors du don",
 		"Achievement_ID": "Achievement ID",
 		"Vehicle_ID": "Vehicle ID",
 		"Vehicle_Spawnpoint": "Apparition du vehicule (défini dans Devkit)",

@@ -33,7 +33,7 @@ namespace BowieD.Unturned.NPCMaker.Notification
                 TextAlignment = TextAlignment.Center,
                 TextWrapping = TextWrapping.Wrap
             };
-            NotificationBase notificationBase = new NotificationBase(panel, MainWindow.Instance.Background, new UIElement[] { textBlock }.Concat(buttons).ToArray())
+            NotificationBase notificationBase = new NotificationBase(panel, new UIElement[] { textBlock }.Concat(buttons).ToArray())
             {
                 Opacity = 0.8
             };

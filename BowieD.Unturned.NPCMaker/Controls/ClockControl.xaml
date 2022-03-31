@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="BowieD.Unturned.NPCMaker.Controls.ClockControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Controls"
+             mc:Ignorable="d">
+    <Grid Name="mainGrid" MinWidth="32" MinHeight="32" MaxWidth="96" MaxHeight="96">
+        <Viewbox>
+            <Grid Width="64" Height="64" Name="clockGrid">
+                <Grid.RenderTransform>
+                    <RotateTransform Angle="-90" CenterX="32" CenterY="32"/>
+                </Grid.RenderTransform>
+                <Ellipse StrokeThickness="4" Stroke="{DynamicResource ForegroundColor}"/>
+                <Rectangle Name="hourHand" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="{DynamicResource AccentColor}" Width="20" Height="4">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="10"/>
+                            <RotateTransform x:Name="rotHour" Angle="0" CenterX="10" CenterY="2"/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Name="minuteHand" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="{DynamicResource AccentColor}" Width="24" Height="2">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="12"/>
+                            <RotateTransform x:Name="rotMin" Angle="0" CenterX="12" CenterY="1"/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Grid Name="digitsGrid" Margin="5" IsHitTestVisible="False">
+                    <Grid.RenderTransform>
+                        <RotateTransform Angle="90" CenterX="27" CenterY="27"/>
+                    </Grid.RenderTransform>
+                    <local:RadialPanel x:Name="amDigitsHours" Visibility="Visible">
+                        <Label Content="3"  FontSize="7"/>
+                        <Label Content="2"  FontSize="7"/>
+                        <Label Content="1"  FontSize="7"/>
+                        <Label Content="0"  FontSize="7"/>
+                        <Label Content="11" FontSize="7"/>
+                        <Label Content="10" FontSize="7"/>
+                        <Label Content="9"  FontSize="7"/>
+                        <Label Content="8"  FontSize="7"/>
+                        <Label Content="7"  FontSize="7"/>
+                        <Label Content="6"  FontSize="7"/>
+                        <Label Content="5"  FontSize="7"/>
+                        <Label Content="4"  FontSize="7"/>
+                    </local:RadialPanel>
+                    <local:RadialPanel x:Name="pmDigitsHours" Visibility="Collapsed">
+                        <Label Content="15"  FontSize="7"/>
+                        <Label Content="14"  FontSize="7"/>
+                        <Label Content="13"  FontSize="7"/>
+                        <Label Content="12"  FontSize="7"/>
+                        <Label Content="23"  FontSize="7"/>
+                        <Label Content="22"  FontSize="7"/>
+                        <Label Content="21"  FontSize="7"/>
+                        <Label Content="20"  FontSize="7"/>
+                        <Label Content="19"  FontSize="7"/>
+                        <Label Content="18"  FontSize="7"/>
+                        <Label Content="17"  FontSize="7"/>
+                        <Label Content="16"  FontSize="7"/>
+                    </local:RadialPanel>
+                </Grid>
+                <Grid Margin="5">
+                    <Grid.RenderTransform>
+                        <RotateTransform Angle="90" CenterX="27" CenterY="27"/>
+                    </Grid.RenderTransform>
+                    <TextBlock Foreground="{DynamicResource ForegroundColor}" Name="pmAmSwitch" Text="AM" FontSize="8" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform X="11"/>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                </Grid>
+            </Grid>
+        </Viewbox>
+    </Grid>
+</UserControl>

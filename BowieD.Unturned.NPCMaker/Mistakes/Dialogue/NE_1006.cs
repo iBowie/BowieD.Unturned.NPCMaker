@@ -25,12 +25,9 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Dialogue
                 {
                     NPC.NPCResponse response = dial.Responses[i];
 
-                    if (response.openQuestId > 0 || response.openVendorId > 0)
+                    if (response.openQuestId > 0 && response.openDialogueId == 0)
                     {
-                        if (response.openDialogueId == 0)
-                        {
-                            yield return new NE_1006(i + 1, dial.ID);
-                        }
+                        yield return new NE_1006(i + 1, dial.ID);
                     }
                 }
             }

@@ -32,9 +32,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
             christmasClothing = new NPCClothing();
             pose = NPC_Pose.Stand;
             leftHanded = false;
-            equipPrimary = 0;
-            equipSecondary = 0;
-            equipTertiary = 0;
+            equipPrimary = new GUIDIDBridge(0);
+            equipSecondary = new GUIDIDBridge(0);
+            equipTertiary = new GUIDIDBridge(0);
             equipped = Equip_Type.None;
             poseLean = 0f;
             posePitch = 90f;
@@ -89,9 +89,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public NPCClothing halloweenClothing;
         public NPC_Pose pose;
         public bool leftHanded;
-        public ushort equipPrimary;
-        public ushort equipSecondary;
-        public ushort equipTertiary;
+        public GUIDIDBridge equipPrimary;
+        public GUIDIDBridge equipSecondary;
+        public GUIDIDBridge equipTertiary;
         public Equip_Type equipped;
         public float poseLean, posePitch, poseHeadOffset;
         public ENPCHoliday holidayRestriction;
@@ -182,9 +182,18 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
             leftHanded = node["leftHanded"].ToBoolean();
 
-            equipPrimary = node["equipPrimary"].ToUInt16();
-            equipSecondary = node["equipSecondary"].ToUInt16();
-            equipTertiary = node["equipTertiary"].ToUInt16();
+            if (version >= 11)
+            {
+                equipPrimary = node["equipPrimary"].ToGuidIDBridge();
+                equipSecondary = node["equipSecondary"].ToGuidIDBridge();
+                equipTertiary = node["equipTertiary"].ToGuidIDBridge();
+            }
+            else
+            {
+                equipPrimary = (GUIDIDBridge)node["equipPrimary"].ToUInt16();
+                equipSecondary = (GUIDIDBridge)node["equipSecondary"].ToUInt16();
+                equipTertiary = (GUIDIDBridge)node["equipTertiary"].ToUInt16();
+            }
 
             equipped = node["equipped"].ToEnum<Equip_Type>();
 
@@ -227,9 +236,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
 
             document.CreateNodeC("leftHanded", node).WriteBoolean(leftHanded);
 
-            document.CreateNodeC("equipPrimary", node).WriteUInt16(equipPrimary);
-            document.CreateNodeC("equipSecondary", node).WriteUInt16(equipSecondary);
-            document.CreateNodeC("equipTertiary", node).WriteUInt16(equipTertiary);
+            document.CreateNodeC("equipPrimary", node).WriteGuidIDBridge(equipPrimary);
+            document.CreateNodeC("equipSecondary", node).WriteGuidIDBridge(equipSecondary);
+            document.CreateNodeC("equipTertiary", node).WriteGuidIDBridge(equipTertiary);
 
             document.CreateNodeC("equipped", node).WriteEnum(equipped);
 

@@ -36,7 +36,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         }
 
         [AssetPicker(typeof(GameItemAsset), "Control_SelectAsset_Item", MahApps.Metro.IconPacks.PackIconMaterialKind.Archive)]
-        public ushort ID { get; set; }
+        public GUIDIDBridge ID { get; set; }
         [Range(byte.MinValue, byte.MaxValue)]
         public byte Amount { get; set; } = 1;
         [Optional(null)]
@@ -46,7 +46,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         [AssetPicker(typeof(GameItemTacticalAsset), "Control_SelectAsset_Tactical", MahApps.Metro.IconPacks.PackIconMaterialKind.KnifeMilitary)]
         public ushort? Tactical { get; set; }
         [Optional(null)]
-        [AssetPicker(typeof(GameItemGripAsset), "Control_SelectAsset_Grip", MahApps.Metro.IconPacks.PackIconMaterialKind.Hand)]
+        [AssetPicker(typeof(GameItemGripAsset), "Control_SelectAsset_Grip", MahApps.Metro.IconPacks.PackIconMaterialKind.HandBackLeft)]
         public ushort? Grip { get; set; }
         [Optional(null)]
         [AssetPicker(typeof(GameItemBarrelAsset), "Control_SelectAsset_Barrel", MahApps.Metro.IconPacks.PackIconMaterialKind.Pistol)]
@@ -60,7 +60,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
         public override void PostLoad(Universal_RewardEditor editor)
         {
-            var idControl = editor.GetAssociatedControl<MahApps.Metro.Controls.NumericUpDown>("ID");
+            var idControl = editor.GetAssociatedControl<GUIDIDControl>("ID");
             var sightControl = editor.GetAssociatedControl<Controls.OptionalUInt16ValueControl>("Sight");
             var barrelControl = editor.GetAssociatedControl<Controls.OptionalUInt16ValueControl>("Barrel");
             var magazineControl = editor.GetAssociatedControl<Controls.OptionalUInt16ValueControl>("Magazine");
@@ -68,11 +68,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             var tacticalControl = editor.GetAssociatedControl<Controls.OptionalUInt16ValueControl>("Tactical");
             var ammoControl = editor.GetAssociatedControl<Controls.OptionalByteValueControl>("Ammo");
 
-            void check(ushort ID)
+            void check(GUIDIDBridge bridge)
             {
-                if (ID > 0)
+                if (!bridge.IsEmpty)
                 {
-                    if (GameAssetManager.TryGetAsset<GameItemGunAsset>(ID, out var gunAsset))
+                    if (GameAssetManager.TryGetAsset<GameItemGunAsset>(bridge, out var gunAsset))
                     {
                         if (gunAsset.hasSight)
                             sightControl.Visibility = System.Windows.Visibility.Visible;
@@ -110,7 +110,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
                         ammoControl.Visibility = System.Windows.Visibility.Visible;
                     }
-                    else if (GameAssetManager.TryGetAsset<GameItemAsset>(ID, out var itemAsset))
+                    else if (GameAssetManager.TryGetAsset<GameItemAsset>(bridge, out var itemAsset))
                     {
                         sightControl.Visibility = System.Windows.Visibility.Collapsed;
                         barrelControl.Visibility = System.Windows.Visibility.Collapsed;
@@ -149,26 +149,12 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
             idControl.ValueChanged += (sender, e) =>
             {
-                if (e.NewValue.HasValue)
-                {
-                    check((ushort)e.NewValue);
-                }
-                else
-                {
-                    check(0);
-                }
+                check(e);
             };
 
             editor.Loaded += (sender, e) =>
             {
-                if (idControl.Value.HasValue)
-                {
-                    check((ushort)idControl.Value);
-                }
-                else
-                {
-                    check(0);
-                }
+                check(idControl.Value);
             };
         }
 
@@ -177,7 +163,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             simulation.Items.Add(new Simulation.Item()
             {
                 Amount = (byte)(Ammo == 0 ? 1 : Ammo),
-                ID = ID,
+                ID = ID.ResolveLegacyID<GameItemAsset>(),
                 Quality = 100
             });
         }
@@ -198,7 +184,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             }
             else
             {
-                itemName = ID.ToString();
+                itemName = ID.ExportValue;
             }
 
             return string.Format(text, Amount, itemName);
@@ -206,7 +192,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
         public bool UpdateIcon(out BitmapImage image)
         {
-            if (ID > 0 && GameAssetManager.TryGetAsset<GameItemAsset>(ID, out var asset))
+            if (!ID.IsEmpty && GameAssetManager.TryGetAsset<GameItemAsset>(ID, out var asset))
             {
                 image = ThumbnailManager.CreateThumbnail(asset.ImagePath);
                 return true;
@@ -222,7 +208,14 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         {
             base.Load(node, version);
 
-            ID = node["ID"].ToUInt16();
+            if (version >= 11)
+            {
+                ID = node["ID"].ToGuidIDBridge();
+            }
+            else
+            {
+                ID = (GUIDIDBridge)node["ID"].ToUInt16();
+            }
             Amount = node["Amount"].ToByte();
             Sight = node["Sight"].ToNullableUInt16();
             Tactical = node["Tactical"].ToNullableUInt16();
@@ -237,7 +230,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         {
             base.Save(document, node);
 
-            document.CreateNodeC("ID", node).WriteUInt16(ID);
+            document.CreateNodeC("ID", node).WriteGuidIDBridge(ID);
             document.CreateNodeC("Amount", node).WriteByte(Amount);
             document.CreateNodeC("Sight", node).WriteNullableUInt16(Sight);
             document.CreateNodeC("Tactical", node).WriteNullableUInt16(Tactical);

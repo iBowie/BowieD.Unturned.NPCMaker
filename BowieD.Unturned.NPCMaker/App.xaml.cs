@@ -84,7 +84,7 @@ namespace BowieD.Unturned.NPCMaker
                     Logger.Log($"You have .NET Framework that does meet minimal requirement, but does not meet recommended. Crashes may occur.", ELogLevel.WARNING);
 
                 Logger.Log($"User has required .NET Framework version. Launching...", ELogLevel.POSITIVE);
-                Logger.Log($"BowieD.Unturned.NPCMaker {Version}. Copyright (C) 2021 Anton 'BowieD' Galakhov");
+                Logger.Log($"BowieD.Unturned.NPCMaker {Version}. Copyright (C) 2018 - 2022 Anton 'BowieD' Galakhov");
                 Logger.Log("This program comes with ABSOLUTELY NO WARRANTY; for details type `license w'.");
                 Logger.Log("This is free software, and you are welcome to redistribute it");
                 Logger.Log("under certain conditions; type `license c' for details.");
@@ -107,6 +107,8 @@ namespace BowieD.Unturned.NPCMaker
                 CopyResource(NPCMaker.Properties.Resources.steam_api, Path.Combine(AppConfig.Directory, "steam_api.dll"));
                 CopyResource(NPCMaker.Properties.Resources.UnturnedWorkshopCLI, Path.Combine(AppConfig.Directory, "UnturnedWorkshopCLI.exe"));
                 File.WriteAllText(Path.Combine(AppConfig.Directory, "steam_appid.txt"), NPCMaker.Properties.Resources.steam_appid);
+                CopyResource(NPCMaker.Properties.Resources.Microsoft_WindowsAPICodePack, Path.Combine(AppConfig.Directory, "Microsoft.WindowsAPICodePack.dll"));
+                CopyResource(NPCMaker.Properties.Resources.Microsoft_WindowsAPICodePack_Shell, Path.Combine(AppConfig.Directory, "Microsoft.WindowsAPICodePack.Shell.dll"));
                 #endregion
                 Logger.Log("[EXTRCT] - Extraction complete!", ELogLevel.DEBUG);
                 AppConfig.Instance.Load();
@@ -207,6 +209,13 @@ namespace BowieD.Unturned.NPCMaker
 #else
             Logger.Log("[APP] - Closing console and opening app...");
 #endif
+
+            if (AppConfig.Instance.forceSoftwareRendering)
+            {
+                Logger.Log("[APP] - Software rendering only mode is enabled!");
+                System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
+            }
+
             MainWindow mw = new MainWindow();
             InitManagers();
 #if DEBUG

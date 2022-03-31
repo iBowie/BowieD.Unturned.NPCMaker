@@ -5,6 +5,7 @@ using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.ViewModels;
 using DiscordRPC;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -103,12 +104,19 @@ namespace BowieD.Unturned.NPCMaker.Controls
         private void EditRewardsButton_Click(object sender, RoutedEventArgs e)
         {
             Forms.Universal_ListView ulv = new Forms.Universal_ListView(Response.rewards.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Reward, true)).ToLimitedList(byte.MaxValue), Universal_ItemList.ReturnType.Reward);
-            RichPresence presence = new RichPresence
+            try
             {
-                Details = $"Editing NPC {MainWindow.Instance.txtEditorName.Text ?? "without name"}".Shortify(125),
-                State = "Creating reward for a dialogue response"
-            };
-            (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
+                RichPresence presence = new RichPresence
+                {
+                    Details = $"Editing NPC {MainWindow.Instance.txtEditorName.Text ?? "without name"}".Shortify(125),
+                    State = "Creating reward for a dialogue response"
+                };
+                (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
+            }
+            catch (Exception ex)
+            {
+                App.Logger.LogException("Could not update Rich Presence", ex: ex);
+            }
             ulv.Owner = MainWindow.Instance;
             ulv.ShowDialog();
             Response.rewards = ulv.Values.Cast<Reward>().ToLimitedList(byte.MaxValue);
@@ -117,12 +125,19 @@ namespace BowieD.Unturned.NPCMaker.Controls
         private void EditConditionsButton_Click(object sender, RoutedEventArgs e)
         {
             Forms.Universal_ListView ulv = new Forms.Universal_ListView(Response.conditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, true)).ToLimitedList(byte.MaxValue), Universal_ItemList.ReturnType.Condition);
-            RichPresence presence = new RichPresence
+            try
             {
-                Details = $"Editing NPC {MainWindow.Instance.txtEditorName.Text ?? "without name"}".Shortify(125),
-                State = "Creating condition for a dialogue response"
-            };
-            (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
+                RichPresence presence = new RichPresence
+                {
+                    Details = $"Editing NPC {MainWindow.Instance.txtEditorName.Text ?? "without name"}".Shortify(125),
+                    State = "Creating condition for a dialogue response"
+                };
+                (MainWindow.DiscordManager as DiscordRPC.DiscordManager)?.SendPresence(presence);
+            }
+            catch (Exception ex)
+            {
+                App.Logger.LogException("Could not update Rich Presence", ex: ex);
+            }
             ulv.Owner = MainWindow.Instance;
             ulv.ShowDialog();
             Response.conditions = ulv.Values.Cast<Condition>().ToLimitedList(byte.MaxValue);
