@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.NPC.Currency;
+using MahApps.Metro.Controls;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +10,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Логика взаимодействия для CurrencyEntryEditor.xaml
     /// </summary>
-    public partial class CurrencyEntryEditor : Window, INotifyPropertyChanged
+    public partial class CurrencyEntryEditor : MetroWindow, INotifyPropertyChanged
     {
         public CurrencyEntryEditor(CurrencyEntry entry)
         {

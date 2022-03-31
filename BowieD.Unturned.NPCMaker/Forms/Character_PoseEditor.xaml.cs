@@ -1,4 +1,5 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC;
+using MahApps.Metro.Controls;
 using System.Windows;
 
 namespace BowieD.Unturned.NPCMaker.Forms
@@ -6,7 +7,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Interaction logic for Character_PoseEditor.xaml
     /// </summary>
-    public partial class Character_PoseEditor : Window
+    public partial class Character_PoseEditor : MetroWindow
     {
         public Character_PoseEditor(NPCCharacter character)
         {

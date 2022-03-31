@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.ViewModels;
 using BowieD.Unturned.NPCMaker.Workshop;
+using MahApps.Metro.Controls;
 using Microsoft.Win32;
 using System;
 using System.IO;
@@ -12,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Логика взаимодействия для UGC_SelectorView.xaml
     /// </summary>
-    public partial class UGC_SelectorView : Window
+    public partial class UGC_SelectorView : MetroWindow
     {
         private bool allowNullImagePath = false;
         private bool allowNullName = false;

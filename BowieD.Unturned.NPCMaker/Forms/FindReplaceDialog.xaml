@@ -1,4 +1,4 @@
-﻿<Window x:Class="BowieD.Unturned.NPCMaker.Forms.FindReplaceDialog"
+﻿<mah:MetroWindow  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="BowieD.Unturned.NPCMaker.Forms.FindReplaceDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -74,4 +74,4 @@
                     Command="{Binding CloseCommand}"/>
         </Grid>
     </Grid>
-</Window>
+</mah:MetroWindow>

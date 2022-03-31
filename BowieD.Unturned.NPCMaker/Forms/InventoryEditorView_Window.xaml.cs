@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
+using MahApps.Metro.Controls;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -9,7 +10,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Interaction logic for InventoryEditorView_Window.xaml
     /// </summary>
-    public partial class InventoryEditorView_Window : Window
+    public partial class InventoryEditorView_Window : MetroWindow
     {
         public InventoryEditorView_Window(Simulation simulation)
         {

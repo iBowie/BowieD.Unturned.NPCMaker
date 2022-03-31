@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
+using MahApps.Metro.Controls;
 using System;
 using System.Linq;
 using System.Windows;
@@ -12,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Логика взаимодействия для Universal_ConditionEditor.xaml
     /// </summary>
-    public partial class Universal_ConditionEditor : Window
+    public partial class Universal_ConditionEditor : MetroWindow
     {
         public Universal_ConditionEditor(Condition condition = null)
         {

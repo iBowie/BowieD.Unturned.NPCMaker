@@ -9,13 +9,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using MahApps.Metro.Controls;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
     /// <summary>
     /// Логика взаимодействия для ImportAssetsForm.xaml
     /// </summary>
-    public partial class ImportAssetsForm : Window
+    public partial class ImportAssetsForm : MetroWindow
     {
         public ImportAssetsForm()
         {

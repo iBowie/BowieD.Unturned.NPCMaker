@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
+using MahApps.Metro.Controls;
 using System.Windows;
 using System.Windows.Media.Animation;
 
@@ -8,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Логика взаимодействия для Form_About.xaml
     /// </summary>
-    public partial class Form_About : Window
+    public partial class Form_About : MetroWindow
     {
         public Form_About()
         {

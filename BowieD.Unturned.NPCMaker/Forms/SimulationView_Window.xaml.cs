@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.NPC.Conditions;
+using MahApps.Metro.Controls;
 using System.Windows;
 
 namespace BowieD.Unturned.NPCMaker.Forms
@@ -7,7 +8,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Interaction logic for SimulationView_Window.xaml
     /// </summary>
-    public partial class SimulationView_Window : Window
+    public partial class SimulationView_Window : MetroWindow
     {
         public SimulationView_Window(DialogueView_Window dialogueView, Simulation simulation)
         {

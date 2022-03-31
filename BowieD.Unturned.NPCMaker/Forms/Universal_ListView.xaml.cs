@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Логика взаимодействия для Universal_ListView.xaml
     /// </summary>
-    public partial class Universal_ListView : Window
+    public partial class Universal_ListView : MetroWindow
     {
         public Universal_ListView(LimitedList<Controls.Universal_ItemList> listUil, Controls.Universal_ItemList.ReturnType returnType)
         {

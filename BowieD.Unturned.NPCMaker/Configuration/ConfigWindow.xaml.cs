@@ -13,13 +13,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using MahApps.Metro.Controls;
 
 namespace BowieD.Unturned.NPCMaker.Configuration
 {
     /// <summary>
     /// Логика взаимодействия для ConfigWindow.xaml
     /// </summary>
-    public partial class ConfigWindow : Window, INotifyPropertyChanged
+    public partial class ConfigWindow : MetroWindow, INotifyPropertyChanged
     {
         public ConfigWindow()
         {

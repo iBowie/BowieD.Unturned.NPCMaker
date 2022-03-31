@@ -5,6 +5,7 @@ using BowieD.Unturned.NPCMaker.GameIntegration.Devkit;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using BowieD.Unturned.NPCMaker.ViewModels;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Логика взаимодействия для Universal_VendorItemEditor.xaml
     /// </summary>
-    public partial class Universal_VendorItemEditor : Window
+    public partial class Universal_VendorItemEditor : MetroWindow
     {
         private bool ignoreAnimation = true;
 

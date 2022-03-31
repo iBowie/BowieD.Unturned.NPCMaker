@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -7,7 +8,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Interaction logic for MultiFieldInputView_Dialog.xaml
     /// </summary>
-    public partial class MultiFieldInputView_Dialog : Window
+    public partial class MultiFieldInputView_Dialog : MetroWindow
     {
         public MultiFieldInputView_Dialog()
         {

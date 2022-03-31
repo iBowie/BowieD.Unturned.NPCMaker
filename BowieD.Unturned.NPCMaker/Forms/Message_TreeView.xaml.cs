@@ -1,11 +1,12 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
+using MahApps.Metro.Controls;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
-    public partial class Message_TreeView : Window
+    public partial class Message_TreeView : MetroWindow
     {
         private readonly int _count;
         public Message_TreeView(int[] arr, int count)

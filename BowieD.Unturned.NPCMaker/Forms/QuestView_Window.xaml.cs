@@ -2,6 +2,7 @@
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Markup;
 using BowieD.Unturned.NPCMaker.NPC;
+using MahApps.Metro.Controls;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -11,7 +12,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Interaction logic for QuestView_Window.xaml
     /// </summary>
-    public partial class QuestView_Window : Window
+    public partial class QuestView_Window : MetroWindow
     {
         static IMarkup formatter = new RichText();
 
