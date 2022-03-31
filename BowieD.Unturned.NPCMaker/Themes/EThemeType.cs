@@ -3,6 +3,7 @@
     public enum EThemeType
     {
         Normal,
-        Rainbow
+        Rainbow,
+        ExtraDark,
     }
 }

@@ -41,6 +41,9 @@ namespace BowieD.Unturned.NPCMaker.Themes
                 case EThemeType.Rainbow:
                     ApplyRainbow(isDarkMode);
                     break;
+                case EThemeType.ExtraDark:
+                    ApplyExtraDarkMode(newColor);
+                    break;
                 default:
                     ApplyNormalAccentColorToUI(newColor, isDarkMode);
                     break;
@@ -93,6 +96,31 @@ namespace BowieD.Unturned.NPCMaker.Themes
             progr.GradientStops.Add(CreateRainbowGradientStop(0x66, 1));
 
             App.Current.Resources["MahApps.Brushes.Progress"] = progr;
+        }
+        private static void ApplyExtraDarkMode(Coloring.Color color)
+        {
+            ApplyNormalAccentColorToUI(color, true);
+
+            // const string hex = "#121212";
+            const string hex = "#000000";
+
+            Brush back = (Brush)_converter.ConvertFromString(hex);
+
+            back.Freeze();
+
+            App.Current.Resources["BackgroundColor"] = back;
+
+            App.Current.Resources["MahApps.Colors.ThemeBackground"] = CreateColor(hex, 0xFF);
+            App.Current.Resources["MahApps.Brushes.ThemeBackground"] = back;
+            App.Current.Resources["MahApps.Brushes.Control.Background"] = back;
+            App.Current.Resources["MahApps.Brushes.Dialog.Background"] = back;
+            App.Current.Resources["MahApps.Brushes.Window.Background"] = back;
+            App.Current.Resources["MahApps.Brushes.Menu.Background"] = back;
+            App.Current.Resources["MahApps.Brushes.ContextMenu.Background"] = back;
+            App.Current.Resources["MahApps.Brushes.SubMenu.Background"] = back;
+            App.Current.Resources[SystemColors.WindowBrushKey] = back;
+            App.Current.Resources["MahApps.Brushes.MenuItem.Background"] = back;
+            App.Current.Resources["MahApps.Brushes.DataGridColumnHeader.Background"] = back;
         }
 
         #region Util
