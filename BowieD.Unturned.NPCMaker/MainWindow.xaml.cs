@@ -284,8 +284,6 @@ namespace BowieD.Unturned.NPCMaker
                 App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("StartUp_Patreon_Patrons", pjoined));
             }
 
-            ConsoleLogger.StartWaitForInput();
-
             Loaded += (sender, e) =>
             {
                 var scr = ScreenHelper.GetCurrentScreen(this);
@@ -324,7 +322,7 @@ namespace BowieD.Unturned.NPCMaker
 
                 if (!CurrentProject.hasLoadedAtLeastOnce)
                 {
-                    string crashSavePath = Path.Combine(AppConfig.ExeDirectory, Program.CRASH_SAVE_FILENAME);
+                    string crashSavePath = Path.Combine(AppConfig.ExeDirectory, App.CRASH_SAVE_FILENAME);
 
                     if (File.Exists(crashSavePath))
                     {

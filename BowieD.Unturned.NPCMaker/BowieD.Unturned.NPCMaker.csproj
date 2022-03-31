@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{76722CC9-A215-414E-8DFF-938AD2834D74}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>BowieD.Unturned.NPCMaker</RootNamespace>
     <AssemblyName>BowieD.Unturned.NPCMaker</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -53,7 +53,7 @@
     <ApplicationIcon>Resources\Icons\app.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>BowieD.Unturned.NPCMaker.Program</StartupObject>
+    <StartupObject>BowieD.Unturned.NPCMaker.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugFast|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -195,7 +195,6 @@
     <Compile Include="Commands\CheckSyncCommand.cs" />
     <Compile Include="Commands\ColorCommand.cs" />
     <Compile Include="Commands\ConfigCommand.cs" />
-    <Compile Include="Commands\HideCommand.cs" />
     <Compile Include="Commands\LicenseCommand.cs" />
     <Compile Include="Commands\ParseCommand.cs" />
     <Compile Include="Commands\ShutdownCommand.cs" />
@@ -436,7 +435,6 @@
     <Compile Include="Localization\TranslationDictionary.cs" />
     <Compile Include="Logging\FileLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
-    <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\ILoggingManager.cs" />
     <Compile Include="Logging\LogLevel.cs" />
     <Compile Include="Managers\DataManager.cs" />
@@ -569,7 +567,6 @@
     <Compile Include="Parsing\KVTable\TReaders\SystemTypes\KVTableTypeReader.cs" />
     <Compile Include="Parsing\KVTable\TReaders\UnityTypes\KVTableVector3Reader.cs" />
     <Compile Include="Parsing\ParseTool.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

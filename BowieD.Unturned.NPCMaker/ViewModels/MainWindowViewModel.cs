@@ -58,20 +58,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     NewProjectCommand.Execute(null);
                 })));
-            RoutedCommand logWindow = new RoutedCommand();
-            logWindow.InputGestures.Add(new KeyGesture(Key.F1, ModifierKeys.Control));
-            MainWindow.CommandBindings.Add(new CommandBinding(logWindow,
-                new ExecutedRoutedEventHandler((object sender, ExecutedRoutedEventArgs e) =>
-                {
-                    if (ConsoleLogger.IsOpened)
-                    {
-                        ConsoleLogger.HideConsoleWindow();
-                    }
-                    else
-                    {
-                        ConsoleLogger.ShowConsoleWindow();
-                    }
-                })));
             RoutedCommand pasteCommand = new RoutedCommand();
             pasteCommand.InputGestures.Add(new KeyGesture(Key.V, ModifierKeys.Control));
             MainWindow.CommandBindings.Add(new CommandBinding(pasteCommand,
