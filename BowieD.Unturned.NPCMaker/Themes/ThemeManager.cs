@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace BowieD.Unturned.NPCMaker.Themes
 {
@@ -17,7 +18,6 @@ namespace BowieD.Unturned.NPCMaker.Themes
 
             Apply(newColor, isDarkMode);
         }
-
         public static void Apply(Coloring.Color newColor, bool isDarkMode)
         {
             List<ResourceDictionary> metroThemes = (from d in Application.Current.Resources.MergedDictionaries
@@ -36,10 +36,18 @@ namespace BowieD.Unturned.NPCMaker.Themes
 
             Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
 
-            ApplyAccentColorToUI(newColor, isDarkMode);
+            switch (Configuration.AppConfig.Instance.themeType)
+            {
+                case EThemeType.Rainbow:
+                    ApplyRainbow(isDarkMode);
+                    break;
+                default:
+                    ApplyNormalAccentColorToUI(newColor, isDarkMode);
+                    break;
+            }
         }
 
-        private static void ApplyAccentColorToUI(Coloring.Color color, bool isDarkMode)
+        private static void ApplyNormalAccentColorToUI(Coloring.Color color, bool isDarkMode)
         {
             CreateVariant(byte.MaxValue, color, out var accentBaseBrush, out var accentBaseColor);
             CreateVariant(0xCC, color, out var accentBrush, out var accentColor);
@@ -48,48 +56,8 @@ namespace BowieD.Unturned.NPCMaker.Themes
             CreateVariant(0x33, color, out var accent4Brush, out var accent4Color);
             CreateVariant(byte.MaxValue, Color.Multiply(color, 0.75f), out var highlightBrush, out var highlightColor);
 
-            App.Current.Resources["AccentColor"] = accentBaseBrush;
-
-            if (isDarkMode)
-            {
-                App.Current.Resources["ForegroundColor"] = _converter.ConvertFromString("#FFFFFF");
-                App.Current.Resources["BackgroundColor"] = _converter.ConvertFromString("#252525");
-            }
-            else
-            {
-                App.Current.Resources["ForegroundColor"] = _converter.ConvertFromString("#000000");
-                App.Current.Resources["BackgroundColor"] = _converter.ConvertFromString("#FFFFFF");
-            }
-
-            App.Current.Resources["MahApps.Colors.AccentBase"] = accentBaseColor;
-            App.Current.Resources["MahApps.Colors.Accent"] = accentColor;
-            App.Current.Resources["MahApps.Colors.Accent2"] = accent2Color;
-            App.Current.Resources["MahApps.Colors.Accent3"] = accent3Color;
-            App.Current.Resources["MahApps.Colors.Accent4"] = accent4Color;
-            App.Current.Resources["MahApps.Colors.Highlight"] = highlightColor;
-
-            App.Current.Resources["MahApps.Brushes.AccentBase"] = accentBaseBrush;
-            App.Current.Resources["MahApps.Brushes.Accent"] = accentBrush;
-            App.Current.Resources["MahApps.Brushes.Accent2"] = accent2Brush;
-            App.Current.Resources["MahApps.Brushes.Accent3"] = accent3Brush;
-            App.Current.Resources["MahApps.Brushes.Accent4"] = accent4Brush;
-            App.Current.Resources["MahApps.Brushes.Highlight"] = highlightBrush;
-
-            App.Current.Resources["MahApps.Brushes.WindowTitle"] = accentBrush;
-            App.Current.Resources["MahApps.Brushes.TextBlock.FloatingMessage"] = accentBaseBrush;
-            App.Current.Resources["MahApps.Brushes.Badged.Background"] = accentBaseBrush;
-            App.Current.Resources["MahApps.Brushes.Dialog.Background.Accent"] = highlightBrush;
-            App.Current.Resources["MahApps.Brushes.Dialog.Glow"] = accentBrush;
-            App.Current.Resources["MahApps.Brushes.CheckmarkFill"] = accentBrush;
-            App.Current.Resources["MahApps.Brushes.RightArrowFill"] = accentBrush;
-
-            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.Background"] = accentBrush;
-            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.Background.Inactive"] = accent3Brush;
-            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.Background.MouseOver"] = accent2Brush;
-            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.BorderBrush"] = accentBrush;
-            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.BorderBrush.Focus"] = accentBrush;
-            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.BorderBrush.Inactive"] = accent3Brush;
-            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.BorderBrush.MouseOver"] = accent2Brush;
+            UpdateBrushResourceDictionary(accentBaseBrush, accentBrush, accent2Brush, accent3Brush, accent4Brush, highlightBrush, isDarkMode);
+            UpdateColorResourceDictionary(accentBaseColor, accentColor, accent2Color, accent3Color, accent4Color, highlightColor);
 
             LinearGradientBrush progr = new LinearGradientBrush()
             {
@@ -104,13 +72,144 @@ namespace BowieD.Unturned.NPCMaker.Themes
 
             App.Current.Resources["MahApps.Brushes.Progress"] = progr;
         }
+        private static void ApplyRainbow(bool isDarkMode)
+        {
+            var accentBaseBrush = CreateRainbowVariant(byte.MaxValue);
+            var accentBrush = CreateRainbowVariant(0xCC);
+            var accent2Brush = CreateRainbowVariant(0x99);
+            var accent3Brush = CreateRainbowVariant(0x66);
+            var accent4Brush = CreateRainbowVariant(0x33);
+            var highlightBrush = CreateRainbowVariant(byte.MaxValue);
+            
+            UpdateBrushResourceDictionary(accentBaseBrush, accentBrush, accent2Brush, accent3Brush, accent4Brush, highlightBrush, isDarkMode);
 
+            LinearGradientBrush progr = new LinearGradientBrush()
+            {
+                StartPoint = new Point(1.002, 0.5),
+                EndPoint = new Point(0.001, 0.5),
+            };
+
+            progr.GradientStops.Add(CreateRainbowGradientStop(0xFF, 0));
+            progr.GradientStops.Add(CreateRainbowGradientStop(0x66, 1));
+
+            App.Current.Resources["MahApps.Brushes.Progress"] = progr;
+        }
+
+        #region Util
         private static void CreateVariant(byte opacity, Coloring.Color color, out SolidColorBrush scb, out Color resultColor)
         {
             resultColor = Color.FromArgb(opacity, color.R, color.G, color.B);
             scb = new SolidColorBrush(resultColor);
 
             scb.Freeze();
+        }
+        private static Brush CreateRainbowVariant(byte opacity)
+        {
+            var anim = CreateRainbowAnimation(opacity);
+
+            SolidColorBrush scb = new SolidColorBrush
+            {
+                Color = CreateColor("#E51400", opacity),
+            };
+
+            scb.BeginAnimation(SolidColorBrush.ColorProperty, anim);
+
+            return scb;
+        }
+        private static GradientStop CreateRainbowGradientStop(byte opacity, double offset)
+        {
+            var anim = CreateRainbowAnimation(opacity);
+
+            GradientStop gs = new GradientStop
+            {
+                Color = CreateColor("#E51400", opacity),
+                Offset = offset,
+            };
+
+            gs.BeginAnimation(GradientStop.ColorProperty, anim);
+
+            return gs;
+        }
+        private static ColorAnimationBase CreateRainbowAnimation(byte opacity)
+        {
+            ColorAnimationUsingKeyFrames caukf = new ColorAnimationUsingKeyFrames();
+
+            caukf.KeyFrames.Add(new LinearColorKeyFrame(CreateColor("#E51400", opacity), KeyTime.Uniform));
+            caukf.KeyFrames.Add(new LinearColorKeyFrame(CreateColor("#FA6800", opacity), KeyTime.Uniform));
+            caukf.KeyFrames.Add(new LinearColorKeyFrame(CreateColor("#FEDE06", opacity), KeyTime.Uniform));
+            caukf.KeyFrames.Add(new LinearColorKeyFrame(CreateColor("#60A917", opacity), KeyTime.Uniform));
+            caukf.KeyFrames.Add(new LinearColorKeyFrame(CreateColor("#1BA1E2", opacity), KeyTime.Uniform));
+            caukf.KeyFrames.Add(new LinearColorKeyFrame(CreateColor("#119EDA", opacity), KeyTime.Uniform));
+            caukf.KeyFrames.Add(new LinearColorKeyFrame(CreateColor("#6459DF", opacity), KeyTime.Uniform));
+
+            caukf.AutoReverse = true;
+            caukf.RepeatBehavior = RepeatBehavior.Forever;
+            caukf.Duration = new Duration(TimeSpan.FromSeconds(7));
+
+            return caukf;
+        }
+        private static Color CreateColor(string hex, byte opacity)
+        {
+            var color = new Coloring.Color(hex);
+
+            return Color.FromArgb(opacity, color.R, color.G, color.B);
+        }
+        #endregion
+
+        private static void UpdateBrushResourceDictionary(Brush accentBase, Brush accent, Brush accent2, Brush accent3, Brush accent4, Brush highlight, bool isDarkMode)
+        {
+            App.Current.Resources["AccentColor"] = accentBase;
+
+            if (isDarkMode)
+            {
+                App.Current.Resources["ForegroundColor"] = _converter.ConvertFromString("#FFFFFF");
+                App.Current.Resources["BackgroundColor"] = _converter.ConvertFromString("#252525");
+            }
+            else
+            {
+                App.Current.Resources["ForegroundColor"] = _converter.ConvertFromString("#000000");
+                App.Current.Resources["BackgroundColor"] = _converter.ConvertFromString("#FFFFFF");
+            }
+
+            App.Current.Resources["MahApps.Brushes.AccentBase"] = accentBase;
+            App.Current.Resources["MahApps.Brushes.Accent"] = accent;
+            App.Current.Resources["MahApps.Brushes.Accent2"] = accent2;
+            App.Current.Resources["MahApps.Brushes.Accent3"] = accent3;
+            App.Current.Resources["MahApps.Brushes.Accent4"] = accent4;
+            App.Current.Resources["MahApps.Brushes.Highlight"] = highlight;
+
+            App.Current.Resources["MahApps.Brushes.WindowTitle"] = accent;
+            App.Current.Resources["MahApps.Brushes.TextBlock.FloatingMessage"] = accentBase;
+            App.Current.Resources["MahApps.Brushes.Badged.Background"] = accentBase;
+            App.Current.Resources["MahApps.Brushes.Dialog.Background.Accent"] = highlight;
+            App.Current.Resources["MahApps.Brushes.Dialog.Glow"] = accent;
+            App.Current.Resources["MahApps.Brushes.CheckmarkFill"] = accent;
+            App.Current.Resources["MahApps.Brushes.RightArrowFill"] = accent;
+
+            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.Background"] = accent;
+            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.Background.Inactive"] = accent3;
+            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.Background.MouseOver"] = accent2;
+            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.BorderBrush"] = accent;
+            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.BorderBrush.Focus"] = accent;
+            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.BorderBrush.Inactive"] = accent3;
+            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.BorderBrush.MouseOver"] = accent2;
+
+            App.Current.Resources["MahApps.Brushes.SystemControlBackgroundAccent"] = accentBase;
+            App.Current.Resources["MahApps.Brushes.SystemControlDisabledAccent"] = accentBase;
+            App.Current.Resources["MahApps.Brushes.SystemControlForegroundAccent"] = accentBase;
+            App.Current.Resources["MahApps.Brushes.SystemControlHighlightAccent"] = accentBase;
+            App.Current.Resources["MahApps.Brushes.SystemControlHighlightAltAccent"] = accentBase;
+        }
+        private static void UpdateColorResourceDictionary(Color accentBase, Color accent, Color accent2, Color accent3, Color accent4, Color highlight)
+        {
+            App.Current.Resources["MahApps.Colors.AccentBase"] = accentBase;
+            App.Current.Resources["MahApps.Colors.Accent"] = accent;
+            App.Current.Resources["MahApps.Colors.Accent2"] = accent2;
+            App.Current.Resources["MahApps.Colors.Accent3"] = accent3;
+            App.Current.Resources["MahApps.Colors.Accent4"] = accent4;
+            App.Current.Resources["MahApps.Colors.Highlight"] = highlight;
+
+            App.Current.Resources["MahApps.Colors.SystemAccent"] = accentBase;
         }
     }
 }

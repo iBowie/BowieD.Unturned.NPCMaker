@@ -203,6 +203,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 mainWindowBackgroundImageBlurRadius = MainWindowBackgroundBlurRadius_Slider.Value,
                 alternateBoolValue = AlternateBoolValue_Box.IsChecked.Value,
                 forceSoftwareRendering = ForceSoftwareRendering_Box.IsChecked.Value,
+                themeType = _currentThemeType,
             };
             set
             {
@@ -254,11 +255,13 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 MainWindowBackgroundBlurRadius_Slider.Value = value.mainWindowBackgroundImageBlurRadius;
                 AlternateBoolValue_Box.IsChecked = value.alternateBoolValue;
                 ForceSoftwareRendering_Box.IsChecked = value.forceSoftwareRendering;
+                _currentThemeType = value.themeType;
             }
         }
 
         private string curUntDir;
         private string curMainWindowBackgroundPath;
+        private EThemeType _currentThemeType;
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {

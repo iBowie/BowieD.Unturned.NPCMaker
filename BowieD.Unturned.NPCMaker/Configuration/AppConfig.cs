@@ -45,6 +45,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public bool forceSoftwareRendering;
         public bool useDarkMode = true;
         public Coloring.Color accentColor = new Coloring.Color("#60A917");
+        public EThemeType themeType = EThemeType.Normal;
 
         public void Apply(AppConfig from, out bool hasToRestart)
         {
@@ -68,10 +69,11 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             hasToRestart |= (forceSoftwareRendering != from.forceSoftwareRendering);
 
             // it has to do some work before it can be applied
-            if (useDarkMode != from.useDarkMode || accentColor != from.accentColor)
+            if (useDarkMode != from.useDarkMode || accentColor != from.accentColor || themeType != from.themeType)
             {
                 useDarkMode = from.useDarkMode;
                 accentColor = from.accentColor;
+                themeType = from.themeType;
 
                 ThemeManager.Apply(accentColor, useDarkMode);
             }
