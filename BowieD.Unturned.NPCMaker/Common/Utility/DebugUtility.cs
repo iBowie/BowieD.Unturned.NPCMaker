@@ -41,7 +41,6 @@ namespace BowieD.Unturned.NPCMaker.Common.Utility
                 sb.AppendLine($".animateControls: {cfg.animateControls}");
                 sb.AppendLine($".autosaveOption: {cfg.autosaveOption}");
                 sb.AppendLine($".autoUpdate: {cfg.autoUpdate}");
-                sb.AppendLine($".currentTheme: {cfg.currentTheme}");
                 sb.AppendLine($".enableDiscord: {cfg.enableDiscord}");
                 sb.AppendLine($".experimentalFeatures: {cfg.experimentalFeatures}");
                 sb.AppendLine($".generateGuids: {cfg.generateGuids}");

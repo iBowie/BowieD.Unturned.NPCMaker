@@ -20,7 +20,6 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public ELanguage language;
         public EExportSchema exportSchema;
         public bool enableDiscord;
-        public string currentTheme;
         public bool generateGuids;
         public byte autosaveOption;
         public bool animateControls;
@@ -44,6 +43,8 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public double mainWindowBackgroundImageBlurRadius;
         public bool alternateBoolValue;
         public bool forceSoftwareRendering;
+        public bool useDarkMode = true;
+        public Coloring.Color accentColor = new Coloring.Color("#60A917");
 
         public void Apply(AppConfig from, out bool hasToRestart)
         {
@@ -67,12 +68,12 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             hasToRestart |= (forceSoftwareRendering != from.forceSoftwareRendering);
 
             // it has to do some work before it can be applied
-            if (currentTheme != from.currentTheme)
+            if (useDarkMode != from.useDarkMode || accentColor != from.accentColor)
             {
-                currentTheme = from.currentTheme;
+                useDarkMode = from.useDarkMode;
+                accentColor = from.accentColor;
 
-                Theme theme = ThemeManager.Themes.ContainsKey(currentTheme ?? "") ? ThemeManager.Themes[currentTheme] : ThemeManager.Themes["Metro/LightGreen"];
-                ThemeManager.Apply(theme);
+                ThemeManager.Apply(accentColor, useDarkMode);
             }
 
             if (automaticallyCheckForErrors != from.automaticallyCheckForErrors)
@@ -96,7 +97,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 mainWindowBackgroundImage = from.mainWindowBackgroundImage;
                 mainWindowBackgroundImageBlurRadius = from.mainWindowBackgroundImageBlurRadius;
 
-                MainWindow.Instance.SetBackground(mainWindowBackgroundImage, currentTheme.Substring("Metro/".Length).StartsWith("Dark"));
+                MainWindow.Instance.SetBackground(mainWindowBackgroundImage, useDarkMode);
             }
 
             // it's enough to just change value to apply it
@@ -158,7 +159,8 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             App.Logger.Log($"[CFG] - Loading default configuration...");
             scale = 1;
             enableDiscord = true;
-            currentTheme = "Metro/LightGreen";
+            accentColor = new Coloring.Color("#60A917");
+            useDarkMode = true;
             generateGuids = true;
             autosaveOption = 1;
             experimentalFeatures = false;

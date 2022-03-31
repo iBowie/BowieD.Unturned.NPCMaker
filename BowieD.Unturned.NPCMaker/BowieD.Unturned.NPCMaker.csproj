@@ -602,8 +602,6 @@
     <Compile Include="Templating\Template.cs" />
     <Compile Include="Templating\TemplateManager.cs" />
     <Compile Include="TextUtil.cs" />
-    <Compile Include="Themes\MetroTheme.cs" />
-    <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
     <Compile Include="Updating\GitHubUpdateManager.cs" />
     <Compile Include="Updating\IUpdateManager.cs" />

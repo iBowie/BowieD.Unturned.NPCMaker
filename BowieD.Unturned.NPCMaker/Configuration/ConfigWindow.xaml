@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Configuration"
         xmlns:npcmaker="clr-namespace:BowieD.Unturned.NPCMaker"
-        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" WindowStartupLocation="CenterOwner"
+        xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" WindowStartupLocation="CenterOwner"
         mc:Ignorable="d"
         Title="{xaml:Localize Key=GENERAL_Configuration_Title}" Icon="{DynamicResource app_Icon}" Height="360" Width="600">
     <Grid>
@@ -50,10 +50,16 @@
             <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Interface}">
                 <ScrollViewer Margin="5">
                     <StackPanel>
-                        <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_currentTheme_Tooltip}">
-                            <Label Content="{xaml:Localize Key=OPTIONS_currentTheme}"/>
-                            <ComboBox SelectedIndex="0" HorizontalAlignment="Right" Name="Selected_Theme_Box"/>
-                        </Grid>
+                        <GroupBox Header="{xaml:Localize Key=OPTIONS_currentTheme}">
+                            <UniformGrid Rows="2" Columns="2">
+                                <Label Content="{xaml:Localize Key=OPTIONS_useDarkMode}" ToolTip="{xaml:Localize Key=OPTIONS_useDarkMode_Tooltip}"
+                                       HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <CheckBox Margin="5" x:Name="UseDarkMode_CheckBox" VerticalAlignment="Center"/>
+                                <Label Content="{xaml:Localize Key=OPTIONS_accentColor}" ToolTip="{xaml:Localize Key=OPTIONS_accentColor_Tooltip}"
+                                       HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <xctk:ColorPicker Margin="5" UsingAlphaChannel="False" x:Name="AccentColor_Picker" ShowAvailableColors="False" ShowRecentColors="False" ShowStandardColors="True"/>
+                            </UniformGrid>
+                        </GroupBox>
                         <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_scale_Tooltip}">
                             <Label Content="{xaml:Localize Key=OPTIONS_scale}"/>
                             <ComboBox SelectedIndex="1" Name="Scale_Box" HorizontalAlignment="Right">

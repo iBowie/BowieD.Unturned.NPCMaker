@@ -39,10 +39,8 @@ namespace BowieD.Unturned.NPCMaker
         public new void Show()
         {
             #region THEME SETUP
-            Themes.Theme theme = ThemeManager.Themes.ContainsKey(AppConfig.Instance.currentTheme ?? "") ? ThemeManager.Themes[AppConfig.Instance.currentTheme] : ThemeManager.Themes["Metro/LightGreen"];
-            ThemeManager.Apply(theme);
-
-            SetBackground(AppConfig.Instance.mainWindowBackgroundImage, theme.Name.Substring("Metro/".Length).StartsWith("Dark"));
+            ThemeManager.Init(AppConfig.Instance.accentColor, AppConfig.Instance.useDarkMode);
+            SetBackground(AppConfig.Instance.mainWindowBackgroundImage, AppConfig.Instance.useDarkMode);
             #endregion
 
             ImportAssetsForm iaf = new ImportAssetsForm();

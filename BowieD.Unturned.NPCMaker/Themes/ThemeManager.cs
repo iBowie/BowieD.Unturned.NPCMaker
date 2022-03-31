@@ -1,386 +1,116 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Media;
 
 namespace BowieD.Unturned.NPCMaker.Themes
 {
     public static class ThemeManager
     {
-        public static Theme CurrentTheme { get; set; }
-        public static void Apply(Theme t)
+        static readonly BrushConverter _converter = new BrushConverter();
+
+        public static void Init(Coloring.Color newColor, bool isDarkMode)
         {
-            CurrentTheme?.Remove();
-            t.Apply();
-            CurrentTheme = t;
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml") });
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml") });
+
+            Apply(newColor, isDarkMode);
         }
-        public static readonly Dictionary<string, Theme> Themes = new Dictionary<string, Theme>()
+
+        public static void Apply(Coloring.Color newColor, bool isDarkMode)
         {
+            List<ResourceDictionary> metroThemes = (from d in Application.Current.Resources.MergedDictionaries
+                                                    where d.Source != null && d.Source.OriginalString.StartsWith("pack://application:,,,/MahApps.Metro;component/Styles/Themes/")
+                                                    select d).ToList();
+
+            if (metroThemes?.Count() > 0)
             {
-                "Metro/LightAmber", new MetroTheme()
+                foreach (ResourceDictionary dic in metroThemes)
                 {
-                    Name = "Metro/LightAmber",
-                    DictionaryName = "Light.Amber",
-                    AccentColor = "#F0A30A"
-                }
-            },
-            {
-                "Metro/LightBlue", new MetroTheme()
-                {
-                    Name = "Metro/LightBlue",
-                    DictionaryName = "Light.Blue",
-                    AccentColor = "#119EDA"
-                }
-            },
-            {
-                "Metro/LightBrown", new MetroTheme()
-                {
-                    Name = "Metro/LightBrown",
-                    DictionaryName = "Light.Brown",
-                    AccentColor = "#825A2C"
-                }
-            },
-            {
-                "Metro/LightCobalt", new MetroTheme()
-                {
-                    Name = "Metro/LightCobalt",
-                    DictionaryName = "Light.Cobalt",
-                    AccentColor = "#0050EF"
-                }
-            },
-            {
-                "Metro/LightCrimson", new MetroTheme()
-                {
-                    Name = "Metro/LightCrimson",
-                    DictionaryName = "Light.Crimson",
-                    AccentColor = "#A20025"
-                }
-            },
-            {
-                "Metro/LightCyan", new MetroTheme()
-                {
-                    Name = "Metro/LightCyan",
-                    DictionaryName = "Light.Cyan",
-                    AccentColor = "#1BA1E2"
-                }
-            },
-            {
-                "Metro/LightEmerald", new MetroTheme()
-                {
-                    Name = "Metro/LightEmerald",
-                    DictionaryName = "Light.Emerald",
-                    AccentColor = "#008A00"
-                }
-            },
-            {
-                "Metro/LightGreen", new MetroTheme()
-                {
-                    Name = "Metro/LightGreen",
-                    DictionaryName = "Light.Green",
-                    AccentColor = "#60A917"
-                }
-            },
-            {
-                "Metro/LightIndigo", new MetroTheme()
-                {
-                    Name = "Metro/LightIndigo",
-                    DictionaryName = "Light.Indigo",
-                    AccentColor = "#6A00FF"
-                }
-            },
-            {
-                "Metro/LightLime", new MetroTheme()
-                {
-                    Name = "Metro/LightLime",
-                    DictionaryName = "Light.Lime",
-                    AccentColor = "#A4C400"
-                }
-            },
-            {
-                "Metro/LightMagenta", new MetroTheme()
-                {
-                    Name = "Metro/LightMagenta",
-                    DictionaryName = "Light.Magenta",
-                    AccentColor = "#D80073"
-                }
-            },
-            {
-                "Metro/LightMauve", new MetroTheme()
-                {
-                    Name = "Metro/LightMauve",
-                    DictionaryName = "Light.Mauve",
-                    AccentColor = "#76608A"
-                }
-            },
-            {
-                "Metro/LightOlive", new MetroTheme()
-                {
-                    Name = "Metro/LightOlive",
-                    DictionaryName = "Light.Olive",
-                    AccentColor = "#6D8764"
-                }
-            },
-            {
-                "Metro/LightOrange", new MetroTheme()
-                {
-                    Name = "Metro/LightOrange",
-                    DictionaryName = "Light.Orange",
-                    AccentColor = "#FA6800"
-                }
-            },
-            {
-                "Metro/LightPink", new MetroTheme()
-                {
-                    Name = "Metro/LightPink",
-                    DictionaryName = "Light.Pink",
-                    AccentColor = "#F472D0"
-                }
-            },
-            {
-                "Metro/LightPurple", new MetroTheme()
-                {
-                    Name = "Metro/LightPurple",
-                    DictionaryName = "Light.Purple",
-                    AccentColor = "#6459DF"
-                }
-            },
-            {
-                "Metro/LightRed", new MetroTheme()
-                {
-                    Name = "Metro/LightRed",
-                    DictionaryName = "Light.Red",
-                    AccentColor = "#E51400"
-                }
-            },
-            {
-                "Metro/LightSienna", new MetroTheme()
-                {
-                    Name = "Metro/LightSienna",
-                    DictionaryName = "Light.Sienna",
-                    AccentColor = "#A0522D"
-                }
-            },
-            {
-                "Metro/LightSteel", new MetroTheme()
-                {
-                    Name = "Metro/LightSteel",
-                    DictionaryName = "Light.Steel",
-                    AccentColor = "#647687"
-                }
-            },
-            {
-                "Metro/LightTaupe", new MetroTheme()
-                {
-                    Name = "Metro/LightTaupe",
-                    DictionaryName = "Light.Taupe",
-                    AccentColor = "#87794E"
-                }
-            },
-            {
-                "Metro/LightTeal", new MetroTheme()
-                {
-                    Name = "Metro/LightTeal",
-                    DictionaryName = "Light.Teal",
-                    AccentColor = "#00ABA9"
-                }
-            },
-            {
-                "Metro/LightViolet", new MetroTheme()
-                {
-                    Name = "Metro/LightViolet",
-                    DictionaryName = "Light.Violet",
-                    AccentColor = "#AA00FF"
-                }
-            },
-            {
-                "Metro/LightYellow", new MetroTheme()
-                {
-                    Name = "Metro/LightYellow",
-                    DictionaryName = "Light.Yellow",
-                    AccentColor = "#FEDE06"
-                }
-            },
-            {
-                "Metro/DarkAmber", new MetroTheme()
-                {
-                    Name = "Metro/DarkAmber",
-                    DictionaryName = "Dark.Amber",
-                    AccentColor = "#F0A30A"
-                }
-            },
-            {
-                "Metro/DarkBlue", new MetroTheme()
-                {
-                    Name = "Metro/DarkBlue",
-                    DictionaryName = "Dark.Blue",
-                    AccentColor = "#119EDA"
-                }
-            },
-            {
-                "Metro/DarkBrown", new MetroTheme()
-                {
-                    Name = "Metro/DarkBrown",
-                    DictionaryName = "Dark.Brown",
-                    AccentColor = "#825A2C"
-                }
-            },
-            {
-                "Metro/DarkCobalt", new MetroTheme()
-                {
-                    Name = "Metro/DarkCobalt",
-                    DictionaryName = "Dark.Cobalt",
-                    AccentColor = "#0050EF"
-                }
-            },
-            {
-                "Metro/DarkCrimson", new MetroTheme()
-                {
-                    Name = "Metro/DarkCrimson",
-                    DictionaryName = "Dark.Crimson",
-                    AccentColor = "#A20025"
-                }
-            },
-            {
-                "Metro/DarkCyan", new MetroTheme()
-                {
-                    Name = "Metro/DarkCyan",
-                    DictionaryName = "Dark.Cyan",
-                    AccentColor = "#1BA1E2"
-                }
-            },
-            {
-                "Metro/DarkEmerald", new MetroTheme()
-                {
-                    Name = "Metro/DarkEmerald",
-                    DictionaryName = "Dark.Emerald",
-                    AccentColor = "#008A00"
-                }
-            },
-            {
-                "Metro/DarkGreen", new MetroTheme()
-                {
-                    Name = "Metro/DarkGreen",
-                    DictionaryName = "Dark.Green",
-                    AccentColor = "#60A917"
-                }
-            },
-            {
-                "Metro/DarkIndigo", new MetroTheme()
-                {
-                    Name = "Metro/DarkIndigo",
-                    DictionaryName = "Dark.Indigo",
-                    AccentColor = "#6A00FF"
-                }
-            },
-            {
-                "Metro/DarkLime", new MetroTheme()
-                {
-                    Name = "Metro/DarkLime",
-                    DictionaryName = "Dark.Lime",
-                    AccentColor = "#A4C400"
-                }
-            },
-            {
-                "Metro/DarkMagenta", new MetroTheme()
-                {
-                    Name = "Metro/DarkMagenta",
-                    DictionaryName = "Dark.Magenta",
-                    AccentColor = "#D80073"
-                }
-            },
-            {
-                "Metro/DarkMauve", new MetroTheme()
-                {
-                    Name = "Metro/DarkMauve",
-                    DictionaryName = "Dark.Mauve",
-                    AccentColor = "#76608A"
-                }
-            },
-            {
-                "Metro/DarkOlive", new MetroTheme()
-                {
-                    Name = "Metro/DarkOlive",
-                    DictionaryName = "Dark.Olive",
-                    AccentColor = "#6D8764"
-                }
-            },
-            {
-                "Metro/DarkOrange", new MetroTheme()
-                {
-                    Name = "Metro/DarkOrange",
-                    DictionaryName = "Dark.Orange",
-                    AccentColor = "#FA6800"
-                }
-            },
-            {
-                "Metro/DarkPink", new MetroTheme()
-                {
-                    Name = "Metro/DarkPink",
-                    DictionaryName = "Dark.Pink",
-                    AccentColor = "#F472D0"
-                }
-            },
-            {
-                "Metro/DarkPurple", new MetroTheme()
-                {
-                    Name = "Metro/DarkPurple",
-                    DictionaryName = "Dark.Purple",
-                    AccentColor = "#6459DF"
-                }
-            },
-            {
-                "Metro/DarkRed", new MetroTheme()
-                {
-                    Name = "Metro/DarkRed",
-                    DictionaryName = "Dark.Red",
-                    AccentColor = "#E51400"
-                }
-            },
-            {
-                "Metro/DarkSienna", new MetroTheme()
-                {
-                    Name = "Metro/DarkSienna",
-                    DictionaryName = "Dark.Sienna",
-                    AccentColor = "#A0522D"
-                }
-            },
-            {
-                "Metro/DarkSteel", new MetroTheme()
-                {
-                    Name = "Metro/DarkSteel",
-                    DictionaryName = "Dark.Steel",
-                    AccentColor = "#647687"
-                }
-            },
-            {
-                "Metro/DarkTaupe", new MetroTheme()
-                {
-                    Name = "Metro/DarkTaupe",
-                    DictionaryName = "Dark.Taupe",
-                    AccentColor = "#87794E"
-                }
-            },
-            {
-                "Metro/DarkTeal", new MetroTheme()
-                {
-                    Name = "Metro/DarkTeal",
-                    DictionaryName = "Dark.Teal",
-                    AccentColor = "#00ABA9"
-                }
-            },
-            {
-                "Metro/DarkViolet", new MetroTheme()
-                {
-                    Name = "Metro/DarkViolet",
-                    DictionaryName = "Dark.Violet",
-                    AccentColor = "#AA00FF"
-                }
-            },
-            {
-                "Metro/DarkYellow", new MetroTheme()
-                {
-                    Name = "Metro/DarkYellow",
-                    DictionaryName = "Dark.Yellow",
-                    AccentColor = "#FEDE06"
+                    Application.Current.Resources.MergedDictionaries.Remove(dic);
                 }
             }
-        };
+
+            ResourceDictionary resourceDictionary = new ResourceDictionary() { Source = new Uri($"pack://application:,,,/MahApps.Metro;component/Styles/Themes/{(isDarkMode ? "Dark" : "Light")}.Green.xaml") };
+
+            Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+
+            ApplyAccentColorToUI(newColor, isDarkMode);
+        }
+
+        private static void ApplyAccentColorToUI(Coloring.Color color, bool isDarkMode)
+        {
+            CreateVariant(byte.MaxValue, color, out var accentBaseBrush, out var accentBaseColor);
+            CreateVariant(0xCC, color, out var accentBrush, out var accentColor);
+            CreateVariant(0x99, color, out var accent2Brush, out var accent2Color);
+            CreateVariant(0x66, color, out var accent3Brush, out var accent3Color);
+            CreateVariant(0x33, color, out var accent4Brush, out var accent4Color);
+            CreateVariant(byte.MaxValue, Color.Multiply(color, 0.75f), out var highlightBrush, out var highlightColor);
+
+            App.Current.Resources["AccentColor"] = accentBaseBrush;
+
+            if (isDarkMode)
+            {
+                App.Current.Resources["ForegroundColor"] = _converter.ConvertFromString("#FFFFFF");
+                App.Current.Resources["BackgroundColor"] = _converter.ConvertFromString("#252525");
+            }
+            else
+            {
+                App.Current.Resources["ForegroundColor"] = _converter.ConvertFromString("#000000");
+                App.Current.Resources["BackgroundColor"] = _converter.ConvertFromString("#FFFFFF");
+            }
+
+            App.Current.Resources["MahApps.Colors.AccentBase"] = accentBaseColor;
+            App.Current.Resources["MahApps.Colors.Accent"] = accentColor;
+            App.Current.Resources["MahApps.Colors.Accent2"] = accent2Color;
+            App.Current.Resources["MahApps.Colors.Accent3"] = accent3Color;
+            App.Current.Resources["MahApps.Colors.Accent4"] = accent4Color;
+            App.Current.Resources["MahApps.Colors.Highlight"] = highlightColor;
+
+            App.Current.Resources["MahApps.Brushes.AccentBase"] = accentBaseBrush;
+            App.Current.Resources["MahApps.Brushes.Accent"] = accentBrush;
+            App.Current.Resources["MahApps.Brushes.Accent2"] = accent2Brush;
+            App.Current.Resources["MahApps.Brushes.Accent3"] = accent3Brush;
+            App.Current.Resources["MahApps.Brushes.Accent4"] = accent4Brush;
+            App.Current.Resources["MahApps.Brushes.Highlight"] = highlightBrush;
+
+            App.Current.Resources["MahApps.Brushes.WindowTitle"] = accentBrush;
+            App.Current.Resources["MahApps.Brushes.TextBlock.FloatingMessage"] = accentBaseBrush;
+            App.Current.Resources["MahApps.Brushes.Badged.Background"] = accentBaseBrush;
+            App.Current.Resources["MahApps.Brushes.Dialog.Background.Accent"] = highlightBrush;
+            App.Current.Resources["MahApps.Brushes.Dialog.Glow"] = accentBrush;
+            App.Current.Resources["MahApps.Brushes.CheckmarkFill"] = accentBrush;
+            App.Current.Resources["MahApps.Brushes.RightArrowFill"] = accentBrush;
+
+            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.Background"] = accentBrush;
+            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.Background.Inactive"] = accent3Brush;
+            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.Background.MouseOver"] = accent2Brush;
+            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.BorderBrush"] = accentBrush;
+            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.BorderBrush.Focus"] = accentBrush;
+            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.BorderBrush.Inactive"] = accent3Brush;
+            App.Current.Resources["MahApps.Brushes.DataGrid.Selection.BorderBrush.MouseOver"] = accent2Brush;
+
+            LinearGradientBrush progr = new LinearGradientBrush()
+            {
+                StartPoint = new Point(1.002, 0.5),
+                EndPoint = new Point(0.001, 0.5),
+            };
+
+            progr.GradientStops.Add(new GradientStop(highlightColor, 0));
+            progr.GradientStops.Add(new GradientStop(accent3Color, 1));
+
+            progr.Freeze();
+
+            App.Current.Resources["MahApps.Brushes.Progress"] = progr;
+        }
+
+        private static void CreateVariant(byte opacity, Coloring.Color color, out SolidColorBrush scb, out Color resultColor)
+        {
+            resultColor = Color.FromArgb(opacity, color.R, color.G, color.B);
+            scb = new SolidColorBrush(resultColor);
+
+            scb.Freeze();
+        }
     }
 }
