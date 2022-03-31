@@ -265,16 +265,10 @@ namespace BowieD.Unturned.NPCMaker.Parsing
         {
             Condition[] c = new Condition[asset.ReadByte(prefix + "Conditions")];
 
-            int num = 0;
-            string text;
-            while (true)
+            for (int num = 0; num < c.Length; num++)
             {
-                if (num >= c.Length)
-                {
-                    return c;
-                }
-
-                text = $"{prefix}{postfix}{num}_Type";
+                string text = $"{prefix}{postfix}{num}_Type";
+                
                 if (!asset.Has(text))
                 {
                     throw new InvalidDataException("Parsed condition is invalid");
@@ -285,6 +279,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 bool needToReset = asset.Has($"{prefix}{postfix}{num}_Reset");
                 Logic_Type logic = asset.ReadEnum($"{prefix}{postfix}{num}_Logic", Logic_Type.Equal);
                 string tp = $"{prefix}{postfix}{num}_";
+
                 switch (type)
                 {
                     case Condition_Type.Kills_Tree:
@@ -471,25 +466,21 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                     default:
                         throw new InvalidDataException("Parsed condition is invalid");
                 }
+                
                 c[num].Localization = desc ?? "";
                 c[num].Reset = needToReset;
-                num++;
             }
+
             return c;
         }
         private Reward[] ParseRewards(string prefix, string postfix = "Reward_")
         {
             Reward[] r = new Reward[asset.ReadByte($"{prefix}Rewards")];
-            int num = 0;
-            string text;
-            while (true)
-            {
-                if (num >= r.Length)
-                {
-                    return r;
-                }
 
-                text = $"{prefix}{postfix}{num}_Type";
+            for (int num = 0; num < r.Length; num++)
+            {
+                string text = $"{prefix}{postfix}{num}_Type";
+
                 if (!asset.Has(text))
                 {
                     throw new InvalidDataException("Parsed reward is invalid");
@@ -498,6 +489,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                 RewardType type = asset.ReadEnum<RewardType>(text);
                 string desc = local?.ReadString($"{prefix}{postfix}{num}");
                 string tp = $"{prefix}{postfix}{num}_";
+
                 switch (type)
                 {
                     case RewardType.Achievement:
@@ -610,11 +602,12 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                         };
                         break;
                     default:
-                        throw new InvalidDataException("Parsed condition is invalid");
+                        throw new InvalidDataException("Parsed reward is invalid");
                 }
+
                 r[num].Localization = desc ?? "";
-                num++;
             }
+
             return r;
         }
         public ParseType GetParseType()
