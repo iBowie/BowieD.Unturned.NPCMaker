@@ -179,7 +179,7 @@ namespace BowieD.Unturned.NPCMaker.Themes
 
             caukf.AutoReverse = true;
             caukf.RepeatBehavior = RepeatBehavior.Forever;
-            caukf.Duration = new Duration(TimeSpan.FromSeconds(7));
+            caukf.Duration = new Duration(TimeSpan.FromSeconds(21));
 
             return caukf;
         }
