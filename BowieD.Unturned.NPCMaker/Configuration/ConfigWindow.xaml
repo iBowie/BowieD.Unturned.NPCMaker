@@ -50,15 +50,22 @@
             <TabItem Header="{xaml:Localize Key=INTERFACE_Configuration_Tab_Interface}">
                 <ScrollViewer Margin="5">
                     <StackPanel>
-                        <GroupBox Header="{xaml:Localize Key=OPTIONS_currentTheme}">
-                            <UniformGrid Rows="2" Columns="2">
-                                <Label Content="{xaml:Localize Key=OPTIONS_useDarkMode}" ToolTip="{xaml:Localize Key=OPTIONS_useDarkMode_Tooltip}"
+                        <GroupBox Margin="2.5" Header="{xaml:Localize Key=OPTIONS_currentTheme}">
+                            <StackPanel Orientation="Vertical">
+                                <UniformGrid Rows="2" Columns="2">
+                                    <Label Content="{xaml:Localize Key=OPTIONS_useDarkMode}" ToolTip="{xaml:Localize Key=OPTIONS_useDarkMode_Tooltip}"
                                        HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <CheckBox Margin="5" x:Name="UseDarkMode_CheckBox" VerticalAlignment="Center"/>
-                                <Label Content="{xaml:Localize Key=OPTIONS_accentColor}" ToolTip="{xaml:Localize Key=OPTIONS_accentColor_Tooltip}"
+                                    <CheckBox Margin="5" x:Name="UseDarkMode_CheckBox" VerticalAlignment="Center"/>
+                                    <Label Content="{xaml:Localize Key=OPTIONS_accentColor}" ToolTip="{xaml:Localize Key=OPTIONS_accentColor_Tooltip}"
                                        HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <xctk:ColorPicker Margin="5" UsingAlphaChannel="False" x:Name="AccentColor_Picker" ShowAvailableColors="False" ShowRecentColors="False" ShowStandardColors="True"/>
-                            </UniformGrid>
+                                    <xctk:ColorPicker Margin="5" UsingAlphaChannel="False" x:Name="AccentColor_Picker" ShowAvailableColors="False" ShowRecentColors="False" ShowStandardColors="True"/>
+                                </UniformGrid>
+                                <UniformGrid Rows="1" Columns="2" x:Name="SecretThemeGrid">
+                                    <Label Content="{xaml:Localize Key=OPTIONS_themeType}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                    <ComboBox Margin="5" x:Name="ThemeType_ComboBox" ItemsSource="{StaticResource ThemeType_Enums}"
+                                              SelectedItem="{Binding CurrentThemeType, Converter={StaticResource ThemeType_Enums}, UpdateSourceTrigger=PropertyChanged}"/>
+                                </UniformGrid>
+                            </StackPanel>
                         </GroupBox>
                         <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_scale_Tooltip}">
                             <Label Content="{xaml:Localize Key=OPTIONS_scale}"/>

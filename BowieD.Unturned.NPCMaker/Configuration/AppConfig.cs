@@ -46,6 +46,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public bool useDarkMode = true;
         public Coloring.Color accentColor = new Coloring.Color("#60A917");
         public EThemeType themeType = EThemeType.Normal;
+        public bool hasUnlockedSecretThemes = false;
 
         public void Apply(AppConfig from, out bool hasToRestart)
         {
@@ -113,6 +114,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             autoCloseOpenBoomerangs = from.autoCloseOpenBoomerangs;
             alternateLogicTranslation = from.alternateLogicTranslation;
             alternateBoolValue = from.alternateBoolValue;
+            hasUnlockedSecretThemes = from.hasUnlockedSecretThemes;
         }
         public void Save()
         {
@@ -195,6 +197,8 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             autoCloseOpenBoomerangs = true;
             alternateBoolValue = true;
             forceSoftwareRendering = false;
+            hasUnlockedSecretThemes = false;
+            themeType = EThemeType.Normal;
 
             App.Logger.Log($"[CFG] - Default configuration loaded!");
         }

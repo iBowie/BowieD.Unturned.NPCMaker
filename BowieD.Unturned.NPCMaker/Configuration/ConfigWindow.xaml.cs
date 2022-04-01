@@ -98,6 +98,24 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentExportSchema)));
             }
         }
+        private bool _hasUnlockedSecretThemes;
+        public bool HasUnlockedSecretThemes
+        {
+            get => _hasUnlockedSecretThemes;
+            set
+            {
+                _hasUnlockedSecretThemes = value;
+
+                if (value)
+                {
+                    SecretThemeGrid.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    SecretThemeGrid.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
         public string[] CurrentDisabledErrors
         {
             get
@@ -202,7 +220,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 mainWindowBackgroundImageBlurRadius = MainWindowBackgroundBlurRadius_Slider.Value,
                 alternateBoolValue = AlternateBoolValue_Box.IsChecked.Value,
                 forceSoftwareRendering = ForceSoftwareRendering_Box.IsChecked.Value,
-                themeType = _currentThemeType,
+                themeType = CurrentThemeType,
             };
             set
             {
@@ -254,13 +272,23 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 MainWindowBackgroundBlurRadius_Slider.Value = value.mainWindowBackgroundImageBlurRadius;
                 AlternateBoolValue_Box.IsChecked = value.alternateBoolValue;
                 ForceSoftwareRendering_Box.IsChecked = value.forceSoftwareRendering;
-                _currentThemeType = value.themeType;
+                CurrentThemeType = value.themeType;
             }
         }
 
         private string curUntDir;
         private string curMainWindowBackgroundPath;
         private EThemeType _currentThemeType;
+        public EThemeType CurrentThemeType
+        {
+            get => _currentThemeType;
+            set
+            {
+                _currentThemeType = value;
+
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentThemeType)));
+            }
+        }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {

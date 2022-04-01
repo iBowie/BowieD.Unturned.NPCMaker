@@ -36,17 +36,24 @@ namespace BowieD.Unturned.NPCMaker.Themes
 
             Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
 
-            switch (Configuration.AppConfig.Instance.themeType)
+            if (Configuration.AppConfig.Instance.hasUnlockedSecretThemes)
             {
-                case EThemeType.Rainbow:
-                    ApplyRainbow(isDarkMode);
-                    break;
-                case EThemeType.ExtraDark:
-                    ApplyExtraDarkMode(newColor);
-                    break;
-                default:
-                    ApplyNormalAccentColorToUI(newColor, isDarkMode);
-                    break;
+                switch (Configuration.AppConfig.Instance.themeType)
+                {
+                    case EThemeType.Rainbow:
+                        ApplyRainbow(isDarkMode);
+                        break;
+                    case EThemeType.ExtraDark:
+                        ApplyExtraDarkMode(newColor);
+                        break;
+                    default:
+                        ApplyNormalAccentColorToUI(newColor, isDarkMode);
+                        break;
+                }
+            }
+            else
+            {
+                ApplyNormalAccentColorToUI(newColor, isDarkMode);
             }
         }
 
@@ -191,11 +198,13 @@ namespace BowieD.Unturned.NPCMaker.Themes
             if (isDarkMode)
             {
                 App.Current.Resources["ForegroundColor"] = _converter.ConvertFromString("#FFFFFF");
+                App.Current.Resources["MahApps.Brushes.Text"] = _converter.ConvertFromString("#FFFFFF");
                 App.Current.Resources["BackgroundColor"] = _converter.ConvertFromString("#252525");
             }
             else
             {
                 App.Current.Resources["ForegroundColor"] = _converter.ConvertFromString("#000000");
+                App.Current.Resources["MahApps.Brushes.Text"] = _converter.ConvertFromString("#000000");
                 App.Current.Resources["BackgroundColor"] = _converter.ConvertFromString("#FFFFFF");
             }
 
