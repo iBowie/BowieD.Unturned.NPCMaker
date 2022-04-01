@@ -221,6 +221,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 alternateBoolValue = AlternateBoolValue_Box.IsChecked.Value,
                 forceSoftwareRendering = ForceSoftwareRendering_Box.IsChecked.Value,
                 themeType = CurrentThemeType,
+                hasUnlockedSecretThemes = HasUnlockedSecretThemes,
             };
             set
             {
@@ -273,6 +274,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 AlternateBoolValue_Box.IsChecked = value.alternateBoolValue;
                 ForceSoftwareRendering_Box.IsChecked = value.forceSoftwareRendering;
                 CurrentThemeType = value.themeType;
+                HasUnlockedSecretThemes = value.hasUnlockedSecretThemes;
             }
         }
 
