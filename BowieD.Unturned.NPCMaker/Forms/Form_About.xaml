@@ -12,6 +12,9 @@
         <Grid.LayoutTransform>
             <ScaleTransform x:Name="gridScale"/>
         </Grid.LayoutTransform>
+        <Grid.RenderTransform>
+            <ScaleTransform x:Name="secretScale" ScaleX="1" ScaleY="1"/>
+        </Grid.RenderTransform>
         <Grid.RowDefinitions>
             <!-- Author label -->
             <RowDefinition Height="Auto"/>

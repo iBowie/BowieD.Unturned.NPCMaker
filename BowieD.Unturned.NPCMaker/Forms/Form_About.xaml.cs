@@ -2,11 +2,13 @@
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Themes;
 using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace BowieD.Unturned.NPCMaker.Forms
@@ -99,6 +101,12 @@ namespace BowieD.Unturned.NPCMaker.Forms
                         case System.Windows.Input.Key.Right:
                             BeginShake(new Point(10, 0));
                             break;
+                        case System.Windows.Input.Key.A:
+                            BeginScale(1.25);
+                            break;
+                        case System.Windows.Input.Key.B:
+                            BeginScale(0.75);
+                            break;
                     }
 
                     if (_currentTrickKeys.Count == _trickKeys.Length)
@@ -132,7 +140,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 await Shake(shakeAmount, _cts.Token);
             });
         }
-
         private async Task Shake(Point shakeAmount, CancellationToken token)
         {
             await Dispatcher.Invoke(async () =>
@@ -173,6 +180,24 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 this.Left = left;
                 this.Top = top;
             });
+        }
+
+        private void BeginScale(double amount)
+        {
+            DoubleAnimation da = new DoubleAnimation()
+            {
+                From = 1.0,
+                To = amount,
+                AutoReverse = true,
+                Duration = new Duration(TimeSpan.FromSeconds(0.1)),
+                FillBehavior = FillBehavior.Stop,
+            };
+
+            secretScale.CenterX = ActualWidth / 2.0;
+            secretScale.CenterY = ActualHeight / 2.0;
+
+            secretScale.BeginAnimation(ScaleTransform.ScaleXProperty, da);
+            secretScale.BeginAnimation(ScaleTransform.ScaleYProperty, da);
         }
     }
 }
