@@ -15,7 +15,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
         public IMPORTANCE Importance = IMPORTANCE.ADVICE;
         public virtual IEnumerable<Mistake> CheckMistake()
         {
-            return new List<Mistake>();
+            return Array.Empty<Mistake>();
         }
     }
 
