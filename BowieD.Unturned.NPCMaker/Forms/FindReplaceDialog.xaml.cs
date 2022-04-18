@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.FindReplace;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.FindReplace;
 using BowieD.Unturned.NPCMaker.ViewModels;
 using MahApps.Metro.Controls;
 using System.Collections.Generic;
@@ -17,6 +18,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
         public FindReplaceDialog(FindReplaceFormat? initialFormat = null)
         {
             InitializeComponent();
+
+            Width *= AppConfig.Instance.scale;
+            Height *= AppConfig.Instance.scale;
 
             MainWindow.Instance.MainWindowViewModel.SaveAll();
 
