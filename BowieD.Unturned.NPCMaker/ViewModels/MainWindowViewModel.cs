@@ -465,7 +465,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     {
                         OpenFileDialog ofd = new OpenFileDialog()
                         {
-                            Filter = $"Unturned Asset |Asset.dat",
+                            Filter = $"Unturned Asset|*.dat;*.asset",
                             Multiselect = true
                         };
                         if (ofd.ShowDialog() == true)

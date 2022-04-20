@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.NPC.Currency;
 using BowieD.Unturned.NPCMaker.Parsing;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Media;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration
@@ -92,6 +93,25 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                     yield return $"{e.ItemGUID} - {string.Format(format, e.Value)}";
                 }
             }
+        }
+
+        public CurrencyAsset ConvertToProject()
+        {
+            CurrencyAsset currencyAsset = new CurrencyAsset()
+            {
+                Entries = entries.Select(d =>
+                {
+                    return new CurrencyEntry()
+                    {
+                        ItemGUID = d.ItemGUID,
+                        Value = d.Value,
+                    };
+                }).ToList(), // clone entries
+                GUID = guid.ToString("N"),
+                ValueFormat = valueFormat,
+            };
+
+            return currencyAsset;
         }
     }
 }

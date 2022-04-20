@@ -355,7 +355,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             }
         }
 
-        private static Tuple<bool, GameAsset> TryReadAssetFile(string fileName, EGameAssetOrigin origin)
+        internal static Tuple<bool, GameAsset> TryReadAssetFile(string fileName, EGameAssetOrigin origin)
         {
             using (StreamReader sr = new StreamReader(fileName))
             {
