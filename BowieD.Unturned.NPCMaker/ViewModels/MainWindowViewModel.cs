@@ -103,6 +103,23 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                     }
                 })));
 
+            RoutedCommand toggleLogsCommand = new RoutedCommand();
+            toggleLogsCommand.InputGestures.Add(new KeyGesture(Key.F1, ModifierKeys.Control));
+            MainWindow.CommandBindings.Add(new CommandBinding(toggleLogsCommand,
+                (sender, e) =>
+                {
+                    if (LogTabViewModel.TabVisibility == Visibility.Collapsed)
+                    {
+                        LogTabViewModel.TabVisibility = Visibility.Visible;
+                        MainWindow.mainTabControl.SelectedItem = MainWindow.logListTab;
+                    }
+                    else
+                    {
+                        LogTabViewModel.TabVisibility = Visibility.Collapsed;
+                        MainWindow.mainTabControl.SelectedItem = null;
+                    }
+                }));
+
             MainWindow.txtID.BindFindReplace(FindReplaceFormats.CHARACTER_ID);
             MainWindow.txtStartDialogueID.BindFindReplace(FindReplaceFormats.DIALOGUE_ID);
             MainWindow.dialogueInputIdControl.BindFindReplace(FindReplaceFormats.DIALOGUE_ID);
@@ -115,6 +132,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             DialogueVendorTabViewModel = new VirtualDialogueVendorTabViewModel();
             QuestTabViewModel = new QuestTabViewModel();
             CurrencyTabViewModel = new CurrencyTabViewModel();
+            LogTabViewModel = new LogTabViewModel();
             MainWindow.mainTabControl.SelectionChanged += TabControl_SelectionChanged;
 
             MainWindow.CurrentProject.OnDataLoaded += async () =>
@@ -197,6 +215,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         public QuestTabViewModel QuestTabViewModel { get; set; }
         public CurrencyTabViewModel CurrencyTabViewModel { get; set; }
         public MistakeTabViewModel MistakeTabViewModel { get; set; }
+        public LogTabViewModel LogTabViewModel { get; }
         public void ResetAll()
         {
             CharacterTabViewModel.Reset();
@@ -381,6 +400,24 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                     },
                                     Details = $"Critical errors: {Mistakes.MistakesManager.Criticals_Count}".Shortify(125),
                                     State = $"Warnings: {Mistakes.MistakesManager.Warnings_Count}".Shortify(125)
+                                });
+                                break;
+                            }
+                        case 7:
+                            {
+                                MainWindow.DiscordManager.SendPresence(new RichPresence
+                                {
+                                    Timestamps = new Timestamps
+                                    {
+                                        StartUnixMilliseconds = (ulong)(MainWindow.Started.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                                    },
+                                    Assets = new Assets()
+                                    {
+                                        SmallImageKey = "icon_if_outlined",
+                                        SmallImageText = "i love logs",
+                                    },
+                                    Details = "Viewing logs",
+                                    State = "Literally just viewing logs"
                                 });
                                 break;
                             }

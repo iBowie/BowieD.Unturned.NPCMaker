@@ -232,6 +232,7 @@ namespace BowieD.Unturned.NPCMaker
         {
             Logger = new LoggingManager();
             Logger.ConnectLogger(new FileLogger());
+            Logger.ConnectLogger(new DelegateLogger());
         }
         public static void InitManagers()
         {

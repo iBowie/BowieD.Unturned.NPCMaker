@@ -866,6 +866,8 @@
         "Main_Tab_Errors_Error_Solution": "Solution",
         "Main_Tab_Errors_Error_Importance": "Importance",
         "Main_Tab_Errors_Error_None": "No mistakes! You're doing great!",
+        "Main_Tab_Log": "Logs",
+        "Main_Tab_Log_Enter": "Enter",
         "Editor_Condition_Fail": "All fields must have correct data.",
         "Editor_Condition_Save": "Save Condition",
         "Editor_Condition_Title": "Condition Editor",

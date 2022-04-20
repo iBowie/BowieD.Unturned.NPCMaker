@@ -1991,6 +1991,27 @@
 
                     </Grid>
                 </TabItem>
+                <TabItem DataContext="{Binding LogTabViewModel}" Name="logListTab" Header="{xaml:Localize INTERFACE_Main_Tab_Log}" Visibility="{Binding TabVisibility}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ListBox Margin="5" Name="logListBox" ItemsSource="{Binding LogLines}"/>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Margin="5" Text="{Binding UserInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBox.InputBindings>
+                                    <KeyBinding Key="Return" Command="{Binding EnterCommand}"/>
+                                </TextBox.InputBindings>
+                            </TextBox>
+                            <Button Grid.Column="1" Content="{xaml:Localize INTERFACE_Main_Tab_Log_Enter}" Margin="5" Command="{Binding EnterCommand}"/>
+                        </Grid>
+                    </Grid>
+                </TabItem>
                 <TabControl.ItemTemplate>
                     <DataTemplate>
                         <TabItem Content="{Binding Content}" Background="Transparent"/>

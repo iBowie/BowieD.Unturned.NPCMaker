@@ -207,6 +207,7 @@
     <Compile Include="Common\Utility\PathUtility.cs" />
     <Compile Include="Common\XmlNodeExtension.cs" />
     <Compile Include="Configuration\EExportSchema.cs" />
+    <Compile Include="Logging\DelegateLogger.cs" />
     <Compile Include="Themes\EThemeType.cs" />
     <Compile Include="Configuration\ExportSchemaStrings.cs" />
     <Compile Include="Controls\ClockControl.xaml.cs">
@@ -621,6 +622,7 @@
     <Compile Include="ViewModels\CharacterTabViewModel.cs" />
     <Compile Include="ViewModels\CurrencyTabViewModel.cs" />
     <Compile Include="ViewModels\DialogueTabViewModel.cs" />
+    <Compile Include="ViewModels\LogTabViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MistakeTabViewModel.cs" />
     <Compile Include="ViewModels\QuestTabViewModel.cs" />

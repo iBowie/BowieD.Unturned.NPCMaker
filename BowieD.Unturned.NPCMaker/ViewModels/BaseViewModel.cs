@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace BowieD.Unturned.NPCMaker.ViewModels
@@ -14,6 +15,18 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         internal void RelayChange(string propertyName)
         {
             OnPropertyChange(propertyName);
+        }
+
+        protected bool Set<T>(ref T backField, T newValue, string name)
+        {
+            if (EqualityComparer<T>.Default.Equals(backField, newValue))
+                return false;
+
+            backField = newValue;
+
+            OnPropertyChange(name);
+
+            return true;
         }
     }
     public interface INPCTab

@@ -860,6 +860,8 @@
         "Main_Tab_Errors_Error_Solution": "Возможное решение",
         "Main_Tab_Errors_Error_Importance": "Важность ошибки",
         "Main_Tab_Errors_Error_None": "Ошибок нет! Вы отлично справляетесь!",
+        "Main_Tab_Log": "Логи",
+        "Main_Tab_Log_Enter": "Ввод",
         "Editor_Condition_Fail": "Все поля должны иметь правильные данные.",
         "Editor_Condition_Save": "Сохранить условие",
         "Editor_Condition_Title": "Редактор условия",
