@@ -16,7 +16,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Логика взаимодействия для ImportAssetsForm.xaml
     /// </summary>
-    public partial class ImportAssetsForm : MetroWindow
+    public partial class ImportAssetsForm : Window
     {
         public ImportAssetsForm()
         {
@@ -66,7 +66,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                                         }
                                     }
                                     break;
-                                case CommonFileDialogResult.Cancel:
+                                default:
                                     {
                                         Close();
                                     }
