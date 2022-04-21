@@ -1,18 +1,28 @@
 ﻿using DiscordRPC;
+using System;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace BowieD.Unturned.NPCMaker.DiscordRPC
 {
     public class DiscordManager
     {
         private DiscordRpcClient client;
-        public int ticksDelay;
+        private DispatcherTimer _timer;
+        public readonly int ticksDelay;
         public bool descriptive { get; set; }
 
         public DiscordManager(int delay)
         {
             ticksDelay = delay;
+
+            _timer = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromMilliseconds(delay),
+            };
+            _timer.Tick += Update;
         }
 
         public void Initialize() // Run when app starts
@@ -24,7 +34,7 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
             client.OnReady += Client_OnReady;
             client.OnPresenceUpdate += Client_OnPresenceUpdate;
             client.Initialize();
-            Update();
+            _timer.Start();
         }
 
         public void SendPresence(RichPresence rich)
@@ -61,18 +71,14 @@ namespace BowieD.Unturned.NPCMaker.DiscordRPC
             }
         }
 
-        public async void Update()
+        private void Update(object sender, EventArgs e)
         {
             client.Invoke();
-            await Task.Delay(ticksDelay);
-            if (!client.Disposed)
-            {
-                Update();
-            }
         }
 
         public void Deinitialize()
         {
+            _timer.Stop();
             client.Dispose();
             App.Logger.Log("[DISCORD] - Rich Presence client deinitialized!");
         }
