@@ -410,6 +410,7 @@
         "Type_Flag_Math": "Изменить значение флага через флаг (Число)",
         "Type_Currency": "Выдать валюту",
         "Type_Hint": "Подсказка",
+        "Type_Player_Spawnpoint": "Точка возрождения",
         "Currency_Value": "Кол-во валюты",
         "Currency_GUID": "GUID валюты",
         "Hint_Duration": "Длительность подсказки",
@@ -459,6 +460,7 @@
         "Flag_Math_Operation_Subtraction": "Вычесть значение B из флага A",
         "Flag_Math_Operation_Multiplication": "Умножить значение флага A на B",
         "Flag_Math_Operation_Division": "Разделить значение флага A на B",
+        "Player_Spawnpoint_ID": "ID точки возрождения",
         "Shared_Localization": "Локализация"
     },
     "VendorItem":

@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
     {
         // REALLY IMPORTANT
         // ADAPT THIS CODE TO .NET REWRITE VERSION
-        public const int CURRENT_SAVEDATA_VERSION = 11;
+        public const int CURRENT_SAVEDATA_VERSION = 12;
         /*
          * SAVEDATA_VERSION information
          * 
@@ -29,6 +29,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
          *  9  - split buying and selling items in to separate collections, added MinRadius to ZombieKills
          *  10 - added rewards to vendor items
          *  11 - added GUID/ID bridge
+         *  12 - added spawnpoint reward
          */
 
         public NPCProject()
