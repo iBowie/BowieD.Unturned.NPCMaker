@@ -114,7 +114,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
         {
             GameIntegration.GameAssetManager.Purge();
 
-            if (AppConfig.Instance.importVanilla)
+            if (AppConfig.Instance.importVanilla && !string.IsNullOrWhiteSpace(mainPath))
             {
                 stepText.Text = LocalizationManager.Current.Interface.Translate("StartUp_ImportGameAssets_Window_Step_Unturned");
 
@@ -136,7 +136,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 GameAssetManager.HasImportedVanilla = true;
             }
 
-            if (AppConfig.Instance.importWorkshop)
+            if (AppConfig.Instance.importWorkshop && !string.IsNullOrWhiteSpace(mainPath))
             {
                 string workshopPath = PathUtility.GetUnturnedWorkshopPathFromUnturnedPath(mainPath);
 
