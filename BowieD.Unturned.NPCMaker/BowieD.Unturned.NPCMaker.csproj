@@ -209,6 +209,7 @@
     <Compile Include="Configuration\EExportSchema.cs" />
     <Compile Include="Logging\DelegateLogger.cs" />
     <Compile Include="Themes\EThemeType.cs" />
+    <Compile Include="NPC\Rewards\RewardPlayerSpawnpoint.cs" />
     <Compile Include="Configuration\ExportSchemaStrings.cs" />
     <Compile Include="Controls\ClockControl.xaml.cs">
       <DependentUpon>ClockControl.xaml</DependentUpon>

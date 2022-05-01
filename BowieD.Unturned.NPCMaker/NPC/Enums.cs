@@ -89,7 +89,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
         Achievement,
         Event,
         Currency,
-        Hint
+        Hint,
+        Player_Spawnpoint,
     }
     public enum Quest_Status
     {

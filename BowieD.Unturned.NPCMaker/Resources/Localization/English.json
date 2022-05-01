@@ -418,6 +418,7 @@
         "Type_Flag_Math": "Calculate flag value",
         "Type_Currency": "Currency",
         "Type_Hint": "Hint",
+        "Type_Player_Spawnpoint": "Player Spawnpoint",
         "Currency_Value": "Amount of Currency",
         "Currency_GUID": "Currency GUID",
         "Hint_Duration": "Hint Duration",
@@ -467,6 +468,7 @@
         "Flag_Math_Operation_Subtraction": "Subtract B from A",
         "Flag_Math_Operation_Multiplication": "Multiply A by B",
         "Flag_Math_Operation_Division": "Divide A by B",
+        "Player_Spawnpoint_ID": "Spawnpoint ID",
         "Shared_Localization": "Localization"
     },
     "VendorItem":

@@ -94,6 +94,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                         return new RewardTeleport();
                     case "RewardVehicle":
                         return new RewardVehicle();
+                    case "RewardPlayerSpawnpoint" when version >= 12:
+                        return new RewardPlayerSpawnpoint();
                     default:
                         throw new Exception("Unknown type");
                 }
