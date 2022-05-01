@@ -601,6 +601,12 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                             Duration = asset.ReadSingle(tp + "Duration", 2f)
                         };
                         break;
+                    case RewardType.Player_Spawnpoint:
+                        r[num] = new RewardPlayerSpawnpoint()
+                        {
+                            ID = asset.ReadString(tp + "ID"),
+                        };
+                        break;
                     default:
                         throw new InvalidDataException("Parsed reward is invalid");
                 }
