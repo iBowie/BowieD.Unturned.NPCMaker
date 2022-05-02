@@ -33,15 +33,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
             Width *= scale;
             MinWidth *= scale;
 
-            ContextMenu cmenu = new ContextMenu();
-
-            cmenu.Items.Add(ContextHelper.CreateAddFromTemplateButton(ClipboardManager.GetTypeFromFormat(ClipboardManager.GetFormat(ReturnType)), (result) =>
-            {
-                Add(new Universal_ItemList(result));
-            }));
-
-            addButton.ContextMenu = cmenu;
-
             addButton.Command = new AdvancedCommand(() =>
             {
                 switch (ReturnType)

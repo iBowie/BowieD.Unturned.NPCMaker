@@ -24,18 +24,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             CurrencyAsset empty = new CurrencyAsset();
             Currency = empty;
             UpdateTabs();
-
-            ContextMenu cmenu2 = new ContextMenu();
-
-            cmenu2.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(CurrencyEntry), (result) =>
-            {
-                if (result is CurrencyEntry item)
-                {
-                    AddEntry(item);
-                }
-            }));
-
-            MainWindow.Instance.currencyAddItemButton.ContextMenu = cmenu2;
         }
 
         public CurrencyAsset Currency

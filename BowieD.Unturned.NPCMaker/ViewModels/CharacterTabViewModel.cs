@@ -36,21 +36,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             UpdateColorPicker();
             UpdateTabs();
 
-            ContextMenu cmenu3 = new ContextMenu();
-
-            cmenu3.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(NPCCharacter), (result) =>
-            {
-                if (result is NPCCharacter npcc)
-                {
-                    MainWindow.CurrentProject.data.characters.Add(npcc);
-                    MetroTabItem tabItem = CreateTab(npcc);
-                    MainWindow.Instance.characterTabSelect.Items.Add(tabItem);
-                    MainWindow.Instance.characterTabSelect.SelectedIndex = MainWindow.Instance.characterTabSelect.Items.Count - 1;
-                }
-            }));
-
-            MainWindow.Instance.characterTabButtonAdd.ContextMenu = cmenu3;
-
             MainWindow.Instance.txtDisplayName.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich | ContextHelper.EContextOption.Group_TextEdit);
 
             #region Clothing Init
