@@ -78,6 +78,11 @@
                                 <iconPacks:PackIconMaterial Kind="FolderDownloadOutline" Foreground="{DynamicResource AccentColor}"/>
                             </MenuItem.Icon>
                         </MenuItem>
+                        <MenuItem Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_Import_Project}" Command="{Binding ImportProjectCommand}">
+                            <MenuItem.Icon>
+                                <iconPacks:PackIconMaterial Kind="ArchivePlusOutline" Foreground="{DynamicResource AccentColor}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Import" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>

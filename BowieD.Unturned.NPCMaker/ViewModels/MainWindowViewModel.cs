@@ -460,7 +460,120 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             projectSettingsCommand,
             aboutCommand,
             importFileCommand,
-            importDirectoryCommand;
+            importDirectoryCommand,
+            importProjectCommand;
+        public ICommand ImportProjectCommand
+        {
+            get
+            {
+                if (importProjectCommand is null)
+                {
+                    importProjectCommand = new BaseCommand(() =>
+                    {
+                        OpenFileDialog ofd = new OpenFileDialog()
+                        {
+                            Filter =
+                            $"{LocalizationManager.Current.General["Project_SaveFilter"]}|*.npcproj" + "|" +
+                            $"{LocalizationManager.Current.General["Project_SaveFilter_Legacy"]}|*.npc",
+                            Multiselect = true,
+                        };
+
+                        if (ofd.ShowDialog() == true)
+                        {
+                            bool hasLoadedAnything = false;
+
+                            int charCount = 0,
+                                dialogueCount = 0,
+                                vendorCount = 0,
+                                questCount = 0,
+                                dialogueVendorCount = 0,
+                                currencyCount = 0,
+                                flagCount = 0;
+
+                            foreach (var sPath in ofd.FileNames)
+                            {
+                                if (string.IsNullOrWhiteSpace(sPath))
+                                    continue;
+
+                                if (!File.Exists(sPath))
+                                    continue;
+
+                                ProjectData pData = new ProjectData
+                                {
+                                    file = sPath,
+                                };
+
+                                if (!pData.Load(null))
+                                    continue;
+
+                                hasLoadedAnything = true;
+
+                                var project = MainWindow.CurrentProject.data;
+
+                                foreach (var character in pData.data.characters)
+                                {
+                                    project.characters.Add(character);
+                                    charCount++;
+                                }
+
+                                foreach (var dialogue in pData.data.dialogues)
+                                {
+                                    project.dialogues.Add(dialogue);
+                                    dialogueCount++;
+                                }
+
+                                foreach (var vendor in pData.data.vendors)
+                                {
+                                    project.vendors.Add(vendor);
+                                    vendorCount++;
+                                }
+
+                                foreach (var dVendor in pData.data.dialogueVendors)
+                                {
+                                    project.dialogueVendors.Add(dVendor);
+                                    dialogueVendorCount++;
+                                }
+
+                                foreach (var quest in pData.data.quests)
+                                {
+                                    project.quests.Add(quest);
+                                    questCount++;
+                                }
+
+                                foreach (var currency in pData.data.currencies)
+                                {
+                                    project.currencies.Add(currency);
+                                    currencyCount++;
+                                }
+
+                                foreach (var flag in pData.data.flags)
+                                {
+                                    project.flags.Add(flag);
+                                    flagCount++;
+                                }
+                            }
+
+                            if (hasLoadedAnything)
+                            {
+                                UpdateAllTabs();
+
+                                App.NotificationManager.Notify(
+                                    LocalizationManager.Current.Notification.Translate(
+                                        "Import_Project_Done",
+                                            charCount, dialogueCount, vendorCount, questCount, 
+                                            dialogueVendorCount, currencyCount, flagCount));
+                            }
+                            else
+                            {
+                                App.NotificationManager.Notify(LocalizationManager.Current.Notification["Import_Project_None"]);
+                            }
+                        }
+                    });
+                }
+
+                return importProjectCommand;
+            }
+        }
         public ICommand ImportDirectoryCommand
         {
             get
