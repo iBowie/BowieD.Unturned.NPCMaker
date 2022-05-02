@@ -272,7 +272,6 @@
     <Compile Include="FindReplace\FindReplacerDialogueResponseTargeter.cs" />
     <Compile Include="FindReplace\FindReplacerDialogueTargeter.cs" />
     <Compile Include="FindReplace\FindReplaceFormats.cs" />
-    <Compile Include="FindReplace\FindReplacerDialogueVendorTargeter.cs" />
     <Compile Include="FindReplace\FindReplacerQuestTargeter.cs" />
     <Compile Include="FindReplace\FindReplacerRewardTargeter.cs" />
     <Compile Include="FindReplace\FindReplacerVendorItemTargeter.cs" />
@@ -608,7 +607,6 @@
     <Compile Include="ViewModels\MistakeTabViewModel.cs" />
     <Compile Include="ViewModels\QuestTabViewModel.cs" />
     <Compile Include="ViewModels\VendorTabViewModel.cs" />
-    <Compile Include="ViewModels\VirtualDialogueVendorTabViewModel.cs" />
     <Compile Include="Workshop\SteamManager.cs" />
     <Compile Include="XAML\BoolItemsSource.cs" />
     <Compile Include="XAML\EnumItemsSource.cs" />

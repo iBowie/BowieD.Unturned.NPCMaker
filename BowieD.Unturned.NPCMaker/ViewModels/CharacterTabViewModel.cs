@@ -873,17 +873,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                             }
                             MainWindow.Instance.MainWindowViewModel.VendorTabViewModel.RelayChange(nameof(VendorTabViewModel.GUID));
                         }
-                        if (MainWindow.CurrentProject.data.dialogueVendors != null)
-                        {
-                            foreach (VirtualDialogueVendor v in MainWindow.CurrentProject.data.dialogueVendors)
-                            {
-                                if (v != null)
-                                {
-                                    v.GUID = Guid.NewGuid().ToString("N");
-                                }
-                            }
-                            MainWindow.Instance.MainWindowViewModel.DialogueVendorTabViewModel.RelayChange(nameof(VirtualDialogueVendorTabViewModel.GUID));
-                        }
                         if (MainWindow.CurrentProject.data.quests != null)
                         {
                             foreach (NPCQuest q in MainWindow.CurrentProject.data.quests)

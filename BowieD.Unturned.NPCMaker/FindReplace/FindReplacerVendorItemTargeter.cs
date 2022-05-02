@@ -10,8 +10,7 @@ namespace BowieD.Unturned.NPCMaker.FindReplace
         {
             var data = MainWindow.CurrentProject.data;
 
-            return data.dialogueVendors.SelectMany(d => d.Items)
-                .Concat(data.vendors.SelectMany(d => d.items));
+            return data.vendors.SelectMany(d => d.items);
         }
 
         protected override IEnumerable<ReplaceableProperty> CreateReplaceableProperties()

@@ -13,7 +13,6 @@ namespace BowieD.Unturned.NPCMaker.FindReplace
             return data.characters.SelectMany(d => d.visibilityConditions)
                 .Concat(data.dialogues.SelectMany(d => d.Messages.SelectMany(k => k.conditions)))
                 .Concat(data.dialogues.SelectMany(d => d.Responses.SelectMany(k => k.conditions)))
-                .Concat(data.dialogueVendors.SelectMany(d => d.Items.SelectMany(k => k.conditions)))
                 .Concat(data.vendors.SelectMany(d => d.items.SelectMany(k => k.conditions)))
                 .Concat(data.quests.SelectMany(d => d.conditions));
         }

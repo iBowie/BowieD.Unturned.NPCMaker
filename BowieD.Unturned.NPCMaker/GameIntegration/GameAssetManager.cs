@@ -99,11 +99,6 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 {
                     yield return new GameDialogueAsset(ch, EGameAssetOrigin.Project) as T;
                 }
-
-                foreach (var ch in MainWindow.CurrentProject.data.dialogueVendors)
-                {
-                    yield return new GameDialogueAsset(ch.CreateDialogue(), EGameAssetOrigin.Project) as T;
-                }
             }
 
             if (typeof(T).IsAssignableFrom(typeof(GameVendorAsset)))

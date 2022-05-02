@@ -11,9 +11,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
 {
     public class NPCProject : IAXData
     {
-        // REALLY IMPORTANT
-        // ADAPT THIS CODE TO .NET REWRITE VERSION
-        public const int CURRENT_SAVEDATA_VERSION = 12;
+        public const int CURRENT_SAVEDATA_VERSION = 13;
         /*
          * SAVEDATA_VERSION information
          * 
@@ -30,6 +28,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
          *  10 - added rewards to vendor items
          *  11 - added GUID/ID bridge
          *  12 - added spawnpoint reward
+         *  13 - removed dialogue vendors
          */
 
         public NPCProject()
@@ -39,14 +38,12 @@ namespace BowieD.Unturned.NPCMaker.NPC
             characters = new List<NPCCharacter>();
             dialogues = new List<NPCDialogue>();
             vendors = new List<NPCVendor>();
-            dialogueVendors = new List<VirtualDialogueVendor>();
             quests = new List<NPCQuest>();
             currencies = new List<CurrencyAsset>();
             flags = new List<FlagDescriptionProjectAsset>();
             lastCharacter = -1;
             lastDialogue = -1;
             lastVendor = -1;
-            lastDialogueVendor = -1;
             lastQuest = -1;
             lastCurrency = -1;
             settings = new NPCProjectSettings();
@@ -58,7 +55,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
         public List<NPCCharacter> characters;
         public List<NPCDialogue> dialogues;
         public List<NPCVendor> vendors;
-        public List<VirtualDialogueVendor> dialogueVendors;
         public List<NPCQuest> quests;
         public List<CurrencyAsset> currencies;
         public List<FlagDescriptionProjectAsset> flags;
@@ -66,7 +62,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
             lastCharacter = -1,
             lastDialogue = -1,
             lastVendor = -1,
-            lastDialogueVendor = -1,
             lastQuest = -1,
             lastCurrency = -1;
         public NPCProjectSettings settings;
@@ -136,13 +131,13 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 flags = new List<FlagDescriptionProjectAsset>();
             }
 
-            if (version >= 7)
+            if (version >= 7 && version < 13)
             {
-                dialogueVendors = node["dialogueVendors"].ParseAXDataCollection<VirtualDialogueVendor>(version).ToList();
-            }
-            else
-            {
-                dialogueVendors = new List<VirtualDialogueVendor>();
+                var legacyDialogueVendors = node["dialogueVendors"].ParseAXDataCollection<VirtualDialogueVendor>(version).ToList();
+
+                var convertedToDialogues = legacyDialogueVendors.Select(d => d.CreateDialogue());
+
+                dialogues.AddRange(convertedToDialogues);
             }
 
             if (version >= 3)
@@ -161,13 +156,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     lastCurrency = -1;
                 }
 
-                if (version >= 7)
+                if (version >= 7 && version < 13)
                 {
-                    lastDialogueVendor = node["lastDialogueVendor"].ToInt32();
-                }
-                else
-                {
-                    lastDialogueVendor = -1;
+                    var legacyLastDialogueVendor = node["lastDialogueVendor"].ToInt32();
                 }
             }
             else
@@ -175,7 +166,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 lastCharacter = -1;
                 lastDialogue = -1;
                 lastVendor = -1;
-                lastDialogueVendor = -1;
                 lastQuest = -1;
                 lastCurrency = -1;
             }
@@ -193,7 +183,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
             document.CreateNodeC("characters", node).WriteAXDataCollection(document, "NPCCharacter", characters);
             document.CreateNodeC("dialogues", node).WriteAXDataCollection(document, "NPCDialogue", dialogues);
             document.CreateNodeC("vendors", node).WriteAXDataCollection(document, "NPCVendor", vendors);
-            document.CreateNodeC("dialogueVendors", node).WriteAXDataCollection(document, "VirtualDialogueVendor", dialogueVendors);
             document.CreateNodeC("quests", node).WriteAXDataCollection(document, "NPCQuest", quests);
             document.CreateNodeC("currencies", node).WriteAXDataCollection(document, "CurrencyAsset", currencies);
             document.CreateNodeC("flags", node).WriteAXDataCollection(document, "FlagDescriptionProjectAsset", flags);
@@ -201,7 +190,6 @@ namespace BowieD.Unturned.NPCMaker.NPC
             document.CreateNodeC("lastCharacter", node).WriteInt32(lastCharacter);
             document.CreateNodeC("lastDialogue", node).WriteInt32(lastDialogue);
             document.CreateNodeC("lastVendor", node).WriteInt32(lastVendor);
-            document.CreateNodeC("lastDialogueVendor", node).WriteInt32(lastDialogueVendor);
             document.CreateNodeC("lastQuest", node).WriteInt32(lastQuest);
             document.CreateNodeC("lastCurrency", node).WriteInt32(lastCurrency);
 

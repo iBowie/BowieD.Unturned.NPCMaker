@@ -580,7 +580,7 @@
         "Import_File_Done": "Imported {0}",
         "Import_File_Fail": "Can't import {0}.",
         "Import_Directory_Done": "Imported {0} files. Skipped {1}.",
-        "Import_Project_Done": "Imported {0} characters, {1} dialogues, {2} vendors, {3} quests, {4} dialogue vendors, {5} currencies and {6} flag descriptions.",
+        "Import_Project_Done": "Imported {0} characters, {1} dialogues, {2} vendors, {3} quests, {4} currencies and {5} flag descriptions.",
         "Import_Project_None": "Ничего не было импортировано.",
         "Export_Done": "Export done!",
         "Export_Done_Goto": "Open result folder",
