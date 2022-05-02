@@ -6,37 +6,22 @@
         xmlns:local="clr-namespace:BowieD.Unturned.NPCMaker.Forms"
         xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner"
-        Title="{xaml:Localize Key=INTERFACE_App_About_Title}" MinHeight="200" Height="Auto" MinWidth="200" Width="300.25" Icon="{DynamicResource app_Icon}">
-
-    <Grid>
-        <Grid.LayoutTransform>
-            <ScaleTransform x:Name="gridScale"/>
-        </Grid.LayoutTransform>
-        <Grid.RenderTransform>
+        Title="{xaml:Localize Key=INTERFACE_App_About_Title}" MinHeight="200" Height="Auto" MinWidth="200" Width="300.25" Icon="{DynamicResource app_Icon}"
+        SizeToContent="Height">
+    <StackPanel>
+        <StackPanel.LayoutTransform>
+            <ScaleTransform x:Name="gridScale" ScaleX="{DynamicResource Scale}" ScaleY="{DynamicResource Scale}"/>
+        </StackPanel.LayoutTransform>
+        <StackPanel.RenderTransform>
             <ScaleTransform x:Name="secretScale" ScaleX="1" ScaleY="1"/>
-        </Grid.RenderTransform>
-        <Grid.RowDefinitions>
-            <!-- Author label -->
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <!-- About section -->
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <!-- Patrons section -->
-            <RowDefinition />
-            <RowDefinition Height="Auto"/>
-            <!-- Credits section -->
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Label Width="32" Visibility="Collapsed" Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+        </StackPanel.RenderTransform>
+        <Label Width="32" Visibility="Collapsed" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
             <TextBlock Name="authorText" Text="BowieD" TextAlignment="Center"/>
         </Label>
-        <GridSplitter Grid.Row="1"/>
-        <Label Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Top">
+        <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Top">
             <TextBlock Name="mainText" TextWrapping="Wrap" TextAlignment="Center" />
         </Label>
-        <GridSplitter Grid.Row="3"/>
-        <Grid Grid.Row="4" Margin="5">
+        <Grid Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
@@ -52,8 +37,7 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <GridSplitter Grid.Row="5"/>
-        <Grid Grid.Row="6" Margin="5">
+        <Grid Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
@@ -70,5 +54,15 @@
                 </ListView.View>
             </ListView>
         </Grid>
-    </Grid>
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Margin="5" x:Name="makerLicenseButton"
+                    Content="{xaml:Localize Key=INTERFACE_App_About_Licenses_NPCMaker}"/>
+            <Button Margin="5" Grid.Column="1" x:Name="thirdPartyLicenseButton"
+                    Content="{xaml:Localize Key=INTERFACE_App_About_Licenses_ThirdParty}"/>
+        </Grid>
+    </StackPanel>
 </mah:MetroWindow>

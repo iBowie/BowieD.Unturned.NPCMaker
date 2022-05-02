@@ -1,10 +1,12 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Themes;
+using BowieD.Unturned.NPCMaker.ViewModels;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,14 +33,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
             double scale = AppConfig.Instance.scale;
             Height *= scale;
             Width *= scale;
-            gridScale.ScaleX = scale;
-            gridScale.ScaleY = scale;
-
-            if (AppConfig.Instance.animateControls)
-            {
-                DoubleAnimation da = new DoubleAnimation(0, 1, new Duration(new System.TimeSpan(0, 0, 1)));
-                authorText.BeginAnimation(OpacityProperty, da);
-            }
 
             foreach (string patron in App.Package.Patrons)
             {
@@ -51,6 +45,36 @@ namespace BowieD.Unturned.NPCMaker.Forms
             }
 
             PreviewKeyDown += Form_About_PreviewKeyDown;
+
+            makerLicenseButton.Command = new BaseCommand(() =>
+            {
+                string licText;
+
+                var sinfo = App.GetResourceStream(new Uri("pack://application:,,,/Resources/LICENSE.txt"));
+                using (var stream = sinfo.Stream)
+                using (var sr = new StreamReader(stream))
+                {
+                    licText = sr.ReadToEnd();
+                }
+
+                PlainTextWindow ptw = new PlainTextWindow(LocalizationManager.Current.Interface["App_About_Licenses_NPCMaker_Title"], licText);
+                ptw.ShowDialog();
+            });
+
+            thirdPartyLicenseButton.Command = new BaseCommand(() =>
+            {
+                string licText;
+
+                var sinfo = App.GetResourceStream(new Uri("pack://application:,,,/Resources/THIRD_PARTY_LICENSES.txt"));
+                using (var stream = sinfo.Stream)
+                using (var sr = new StreamReader(stream))
+                {
+                    licText = sr.ReadToEnd();
+                }
+
+                PlainTextWindow ptw = new PlainTextWindow(LocalizationManager.Current.Interface["App_About_Licenses_ThirdParty_Title"], licText);
+                ptw.ShowDialog();
+            });
         }
 
         private List<int> _currentTrickKeys = new List<int>();

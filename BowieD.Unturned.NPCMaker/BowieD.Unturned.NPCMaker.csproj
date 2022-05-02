@@ -207,6 +207,9 @@
     <Compile Include="Common\Utility\PathUtility.cs" />
     <Compile Include="Common\XmlNodeExtension.cs" />
     <Compile Include="Configuration\EExportSchema.cs" />
+    <Compile Include="Forms\PlainTextWindow.xaml.cs">
+      <DependentUpon>PlainTextWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Logging\DelegateLogger.cs" />
     <Compile Include="Themes\EThemeType.cs" />
     <Compile Include="NPC\Rewards\RewardPlayerSpawnpoint.cs" />
@@ -727,6 +730,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\PlainTextWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\ProjectSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -946,6 +953,12 @@
   <ItemGroup>
     <Resource Include="Libs\Microsoft.WindowsAPICodePack.dll" />
     <Resource Include="Libs\Microsoft.WindowsAPICodePack.Shell.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\THIRD_PARTY_LICENSES.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
