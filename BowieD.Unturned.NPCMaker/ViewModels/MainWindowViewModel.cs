@@ -267,7 +267,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 DoubleAnimation anim = new DoubleAnimation(0, 1, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
                 g.BeginAnimation(MainWindow.OpacityProperty, anim);
             }
-            if (selectedIndex == (sender as TabControl).Items.Count - 1)
+            if (selectedIndex == (sender as TabControl).Items.Count - 2)
             {
                 Mistakes.MistakesManager.FindMistakes();
             }
