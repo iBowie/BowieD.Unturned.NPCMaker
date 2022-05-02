@@ -299,7 +299,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     addMessageCommand = new AdvancedCommand(() =>
                     {
-                        AddMessage(new Dialogue_Message(new NPCMessage(), this));
+                        var msg = new NPCMessage();
+
+                        msg.pages.Add(string.Empty);
+                        
+                        AddMessage(new Dialogue_Message(msg, this));
                     }, (p) =>
                     {
                         return _dialogue.Messages.CanAdd;
