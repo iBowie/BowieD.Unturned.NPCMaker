@@ -1,4 +1,4 @@
-# BowieD.Unturned.NPCMaker
+# NPC Maker for Unturned 3.0 by BowieD
 
 ## Key Features
 
