@@ -581,6 +581,9 @@ namespace BowieD.Unturned.NPCMaker
             }
 
             App.Logger.Log("Closing app");
+            AppUpdateTimer?.Stop();
+            AutosaveTimer?.Stop();
+            ErrorCheckTimer?.Stop();
             DiscordManager?.Deinitialize();
             Environment.Exit(0);
         }
