@@ -1,6 +1,7 @@
 ﻿using BowieD.Unturned.NPCMaker.Coloring;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.NPC.Conditions;
+using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -245,6 +246,7 @@ namespace BowieD.Unturned.NPCMaker.Common
                                 {
                                     spawnPointID = string.Empty,
                                     conditions = cNode["Conditions"].ParseAXDataCollection<Condition>(version).ToList(),
+                                    rewards = cNode["Rewards"].ParseAXDataCollection<Reward>(version).ToList(),
                                     cost = cNode["Cost"].ToUInt32(),
                                     id = cNode["ID"].ToUInt16(),
                                     isBuy = true,
@@ -271,6 +273,7 @@ namespace BowieD.Unturned.NPCMaker.Common
                                 {
                                     spawnPointID = string.Empty,
                                     conditions = cNode["Conditions"].ParseAXDataCollection<Condition>(version).ToList(),
+                                    rewards = cNode["Rewards"].ParseAXDataCollection<Reward>(version).ToList(),
                                     cost = cNode["Cost"].ToUInt32(),
                                     id = cNode["ID"].ToUInt16(),
                                     isBuy = false,
@@ -284,6 +287,7 @@ namespace BowieD.Unturned.NPCMaker.Common
                                 {
                                     spawnPointID = cNode["spawnpoint"].ToText(),
                                     conditions = cNode["Conditions"].ParseAXDataCollection<Condition>(version).ToList(),
+                                    rewards = cNode["Rewards"].ParseAXDataCollection<Reward>(version).ToList(),
                                     cost = cNode["Cost"].ToUInt32(),
                                     id = cNode["ID"].ToUInt16(),
                                     isBuy = false,
@@ -350,6 +354,7 @@ namespace BowieD.Unturned.NPCMaker.Common
                 doc.CreateNodeC("ID", cNode).WriteUInt16(elem.id);
                 doc.CreateNodeC("Cost", cNode).WriteUInt32(elem.cost);
                 doc.CreateNodeC("Conditions", cNode).WriteAXDataCollection(doc, "Condition", elem.conditions);
+                doc.CreateNodeC("Rewards", cNode).WriteAXDataCollection(doc, "Reward", elem.rewards);
 
                 switch (elem.type)
                 {
