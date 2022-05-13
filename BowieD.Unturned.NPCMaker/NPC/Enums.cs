@@ -160,7 +160,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
         Addition,
         Subtraction,
         Multiplication,
-        Division
+        Division,
+        Modulo,
     }
     public enum ENPCHoliday
     {

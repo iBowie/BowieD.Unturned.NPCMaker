@@ -13,7 +13,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
     {
         // REALLY IMPORTANT
         // ADAPT THIS CODE TO .NET REWRITE VERSION
-        public const int CURRENT_SAVEDATA_VERSION = 12;
+        public const int CURRENT_SAVEDATA_VERSION = 13;
         /*
          * SAVEDATA_VERSION information
          * 
@@ -30,6 +30,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
          *  10 - added rewards to vendor items
          *  11 - added GUID/ID bridge
          *  12 - added spawnpoint reward
+         *  13 - added 'B_Value' for flag math reward, added modulo operation type
          */
 
         public NPCProject()

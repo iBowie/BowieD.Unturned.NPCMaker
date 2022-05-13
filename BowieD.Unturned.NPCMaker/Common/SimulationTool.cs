@@ -38,6 +38,8 @@ namespace BowieD.Unturned.NPCMaker.Common
                     return (short)(a * b);
                 case Operation_Type.Subtraction:
                     return (short)(a - b);
+                case Operation_Type.Modulo:
+                    return (short)(a % b);
                 default: throw new Exception("Invalid operation");
             }
         }

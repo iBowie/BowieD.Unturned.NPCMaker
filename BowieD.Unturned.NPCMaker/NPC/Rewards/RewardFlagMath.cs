@@ -23,8 +23,9 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
                     case Operation_Type.Division: sb.Append("/"); break;
                     case Operation_Type.Multiplication: sb.Append("*"); break;
                     case Operation_Type.Subtraction: sb.Append("-"); break;
+                    case Operation_Type.Modulo: sb.Append('%'); break;
                 }
-                sb.Append($" [{B_ID}]");
+                sb.Append($" [{B_ID} | {B_Value}]");
                 return sb.ToString();
             }
         }
@@ -32,13 +33,17 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         public ushort A_ID { get; set; }
         [AssetPicker(typeof(FlagDescriptionProjectAsset), "Control_SelectAsset_Project_Flag", MahApps.Metro.IconPacks.PackIconMaterialKind.Flag)]
         public ushort B_ID { get; set; }
+        public short B_Value { get; set; }
         public Operation_Type Operation { get; set; }
 
         public override void Give(Simulation simulation)
         {
-            short
-                a = simulation.Flags[A_ID],
-                b = simulation.Flags[B_ID];
+            simulation.Flags.TryGetValue(A_ID, out var a);
+
+            if (B_ID == 0 || !simulation.Flags.TryGetValue(B_ID, out short b))
+            {
+                b = B_Value;
+            }
 
             simulation.Flags[A_ID] = SimulationTool.Operate(a, b, Operation);
         }
@@ -50,6 +55,15 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             A_ID = node["A_ID"].ToUInt16();
             B_ID = node["B_ID"].ToUInt16();
             Operation = node["Operation"].ToEnum<Operation_Type>();
+
+            if (version >= 13)
+            {
+                B_Value = node["B_Value"].ToInt16();
+            }
+            else
+            {
+                B_Value = 0;
+            }
         }
 
         public override void Save(XmlDocument document, XmlNode node)
@@ -59,6 +73,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             document.CreateNodeC("A_ID", node).WriteUInt16(A_ID);
             document.CreateNodeC("B_ID", node).WriteUInt16(B_ID);
             document.CreateNodeC("Operation", node).WriteEnum(Operation);
+            document.CreateNodeC("B_Value", node).WriteInt16(B_Value);
         }
     }
 }
