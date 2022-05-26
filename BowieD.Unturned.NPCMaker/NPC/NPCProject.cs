@@ -11,7 +11,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
 {
     public class NPCProject : IAXData
     {
-        public const int CURRENT_SAVEDATA_VERSION = 13;
+        public const int CURRENT_SAVEDATA_VERSION = 14;
         /*
          * SAVEDATA_VERSION information
          * 
@@ -28,7 +28,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
          *  10 - added rewards to vendor items
          *  11 - added GUID/ID bridge
          *  12 - added spawnpoint reward
-         *  13 - removed dialogue vendors
+         *  13 - added 'B_Value' for flag math reward, added modulo operation type
+         *  14 - removed dialogue vendors
          */
 
         public NPCProject()
@@ -131,7 +132,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                 flags = new List<FlagDescriptionProjectAsset>();
             }
 
-            if (version >= 7 && version < 13)
+            if (version >= 7 && version < 14)
             {
                 var legacyDialogueVendors = node["dialogueVendors"].ParseAXDataCollection<VirtualDialogueVendor>(version).ToList();
 
@@ -156,7 +157,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
                     lastCurrency = -1;
                 }
 
-                if (version >= 7 && version < 13)
+                if (version >= 7 && version < 14)
                 {
                     var legacyLastDialogueVendor = node["lastDialogueVendor"].ToInt32();
                 }
