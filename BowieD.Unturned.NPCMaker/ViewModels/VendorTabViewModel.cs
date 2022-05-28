@@ -56,6 +56,10 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             }, GameIntegration.EGameAssetCategory.NPC));
 
             MainWindow.Instance.vendorIdTxtBox.ContextMenu = vendorIdTxtBoxContext;
+
+            var skLevel = Configuration.AppConfig.Instance.skillLevel;
+
+            MainWindow.Instance.vendorCurrencyGrid.IsEnabled = skLevel >= Configuration.ESkillLevel.Intermediate;
         }
         private void VendorTabButtonAdd_Click(object sender, RoutedEventArgs e)
         {

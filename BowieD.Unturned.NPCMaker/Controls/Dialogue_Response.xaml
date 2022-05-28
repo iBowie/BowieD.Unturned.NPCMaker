@@ -98,7 +98,7 @@
                         <Border Grid.Row="1" Grid.Column="2" Margin="5">
                             <TextBlock Text="{xaml:Localize Key=DIALOGUE_Reply_Redirects_Vendor}" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="11" TextAlignment="Left"/>
                         </Border>
-                        <Border Grid.Row="2" Grid.Column="2" Margin="5">
+                        <Border x:Name="previewQuestLabel" Grid.Row="2" Grid.Column="2" Margin="5">
                             <TextBlock Text="{xaml:Localize Key=DIALOGUE_Reply_Redirects_Quest}" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="11" TextAlignment="Left"/>
                         </Border>
                         <Button Grid.Row="0" Grid.Column="1" Click="DialogueSelect_Click" Margin="5">
@@ -111,7 +111,7 @@
                                 <iconPacks:PackIconMaterial Kind="CurrencyUsd" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
                         </Button>
-                        <Button Grid.Row="2" Grid.Column="1" Click="QuestSelect_Click" Margin="5">
+                        <Button x:Name="selectQuestButton" Grid.Row="2" Grid.Column="1" Click="QuestSelect_Click" Margin="5">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="Exclamation" Foreground="{DynamicResource AccentColor}"/>
                             </Button.Content>
@@ -125,7 +125,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="42"/>
                         </Grid.ColumnDefinitions>
-                        <Button Click="ChangeVisibilityButton_Click" Content="{xaml:Localize Key=DIALOGUE_Reply_Visibility}" Margin="5" Height="32" VerticalAlignment="Top"/>
+                        <Button x:Name="editVisibilityButton" Click="ChangeVisibilityButton_Click" Content="{xaml:Localize Key=DIALOGUE_Reply_Visibility}" Margin="5" Height="32" VerticalAlignment="Top"/>
                         <Button Grid.Column="1" ToolTip="{xaml:Localize Key=DIALOGUE_Reply_Move_Down}" Name="orderButtonDown" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Top" Height="31" Width="31">
                             <Button.Content>
                                 <iconPacks:PackIconMaterial Kind="ArrowDown" Foreground="{DynamicResource AccentColor}"/>

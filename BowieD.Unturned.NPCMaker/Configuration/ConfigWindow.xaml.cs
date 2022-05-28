@@ -1,3 +1,4 @@
+using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Themes;
@@ -62,8 +63,19 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             addStandardColor("Teal", "#00ABA9");
             addStandardColor("Violet", "#AA00FF");
             addStandardColor("Yellow", "#FEDE06");
+
+            SelectSkillLevel_Button.Command = new BaseCommand(() =>
+            {
+                AskSkillsView askSkillsView = new AskSkillsView();
+
+                if (askSkillsView.ShowDialog() == true)
+                {
+                    _currentSkillLevel = askSkillsView.SelectedSkillLevel;
+                }
+            });
         }
 
+        private ESkillLevel _currentSkillLevel;
         private EExportSchema _currentExportSchema;
         public EExportSchema CurrentExportSchema
         {
@@ -222,6 +234,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 forceSoftwareRendering = ForceSoftwareRendering_Box.IsChecked.Value,
                 themeType = CurrentThemeType,
                 hasUnlockedSecretThemes = HasUnlockedSecretThemes,
+                skillLevel = _currentSkillLevel,
             };
             set
             {
@@ -275,6 +288,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 ForceSoftwareRendering_Box.IsChecked = value.forceSoftwareRendering;
                 CurrentThemeType = value.themeType;
                 HasUnlockedSecretThemes = value.hasUnlockedSecretThemes;
+                _currentSkillLevel = value.skillLevel;
             }
         }
 

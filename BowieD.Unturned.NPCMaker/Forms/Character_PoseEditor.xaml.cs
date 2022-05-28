@@ -1,4 +1,5 @@
-﻿using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.NPC;
 using MahApps.Metro.Controls;
 using System.Windows;
 
@@ -16,6 +17,12 @@ namespace BowieD.Unturned.NPCMaker.Forms
             DataContext = this;
 
             Character = character;
+
+            var skLevel = AppConfig.Instance.skillLevel;
+
+            pitchGrid.IsEnabled = skLevel >= ESkillLevel.Intermediate;
+            leanGrid.IsEnabled = skLevel >= ESkillLevel.Intermediate;
+            headOffsetGrid.IsEnabled = skLevel >= ESkillLevel.Intermediate;
         }
 
         public NPCCharacter Character { get; }

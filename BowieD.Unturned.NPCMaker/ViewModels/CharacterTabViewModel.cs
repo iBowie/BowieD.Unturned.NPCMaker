@@ -284,6 +284,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             dialogueIDContext.Items.Add(ContextHelper.CreateFindReplaceButton(FindReplaceFormats.DIALOGUE_ID));
 
             MainWindow.Instance.txtStartDialogueID.ContextMenu = dialogueIDContext;
+
+            var skLevel = AppConfig.Instance.skillLevel;
         }
 
         private void CharacterTabButtonAdd_Click(object sender, RoutedEventArgs e)
@@ -683,7 +685,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 if (editVisibilityConditionsCommand == null)
                 {
-                    editVisibilityConditionsCommand = new BaseCommand(() =>
+                    editVisibilityConditionsCommand = new AdvancedCommand(() =>
                     {
                         Universal_ListView ulv = new Universal_ListView(Character.visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, true)).ToLimitedList(byte.MaxValue), Universal_ItemList.ReturnType.Condition)
                         {
@@ -692,6 +694,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         ulv.ShowDialog();
                         Character.visibilityConditions = new LimitedList<Condition>(ulv.Values.Cast<Condition>(), byte.MaxValue);
                         MainWindow.CurrentProject.isSaved = false;
+                    }, (p) =>
+                    {
+                        return AppConfig.Instance.skillLevel >= ESkillLevel.Intermediate;
                     });
                 }
                 return editVisibilityConditionsCommand;

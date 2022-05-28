@@ -1453,7 +1453,7 @@
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="2">
                                     <CheckBox IsChecked="{Binding DisableSorting, UpdateSourceTrigger=PropertyChanged}" Name="vendorDisableSortingBox" Content="{xaml:Localize Key=VENDOR_DisableSorting}" Margin="5" />
-                                    <Grid>
+                                    <Grid x:Name="vendorCurrencyGrid">
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
                                             <RowDefinition/>

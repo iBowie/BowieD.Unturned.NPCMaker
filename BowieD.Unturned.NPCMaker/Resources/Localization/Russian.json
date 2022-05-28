@@ -81,6 +81,8 @@
         "alternateBoolValue_Tooltip": "Использовать выпадающий список с двумя опциями 'Ложь' и 'Истина' вместо галочки в некоторых местах.",
         "forceSoftwareRendering_Tooltip": "Может исправить некоторые проблемы, связанные с отрисовкой за счёт игнорирования установленной видеокарты и использования процессора для отрисовки программы.\nБудьте аккуратны при включении этой опции - это может как починить что-то, так и сломать.\nОбратите внимание: программа станет работать гораздо медленнее.",
 
+        "selectSkillLevel_Button": "Выбрать уровень навыка",
+
         "exportSchema_Warning": "Внимание! Эта настройка предназначена для продвинутых пользователей!",
 
         "exportSchema_Structure": "Структура",
@@ -645,6 +647,27 @@
         "AssetPicker_ToolTip_GameItemClothingAsset_Beard_Invisible": "Скрывает бороду",
         "AssetPicker_ToolTip_GameItemBagAsset_Width": "Ширина хранилища: {0}",
         "AssetPicker_ToolTip_GameItemBagAsset_Height": "Высота хранилища: {0}",
+
+        "AskSkillsView_Title": "Выберите свой уровень навыка",
+        "AskSkillsView_Header": "Давай я помогу тебе не заблудиться.",
+
+        "AskSkillsView_Content_Beginner_Description": "Ты знаешь что... ну... НПС существуют, с ними можно говорить и торговать. Условия и награды - абсолютно новые понятия для тебя. Если это про тебя - этот вариант тебе подойдёт.",
+        "AskSkillsView_Content_Intermediate_Description": "Ты знаешь пару продвинутых штуковин, но не всё. Тебя не пугают многие условия и награды, но некоторые всё равно слишком сложные для понимания.",
+        "AskSkillsView_Content_Advanced_Description": "Ты знаешь практически всё об НПС, и готов(а) к изучению более сложных штук. Этот вариант для тебя, если тебе хочется использовать эту программу по максимуму.",
+
+        "AskSkillsView_Header_Available": "Что доступно",
+        "AskSkillsView_Content_Beginner_Available": "* Базовый редактор персонажей\n* Базовый редактор диалогов\n* Базовый редактор магазинов",
+        "AskSkillsView_Content_Intermediate_Available": "* Продвинутый редактор персонажей\n* Обычный редактор диалогов\n* Обычный редактор магазинов\n* Редактор заданий\n* Редактор валюты",
+        "AskSkillsView_Content_Advanced_Available": "* Всё включено",
+
+        "AskSkillsView_Header_Locked": "Что заблокировано",
+        "AskSkillsView_Content_Beginner_Locked": "* Условия\n* Награды\n* Задания\n* Продвинутые опции диалогов\n* Своя валюта",
+        "AskSkillsView_Content_Intermediate_Locked": "* Продвинутые условия\n* Продвинутые награды\n* Продвинутые опции диалогов",
+        "AskSkillsView_Content_Advanced_Locked": "* Ничего",
+
+        "AskSkillsView_Buttons_Beginner": "Новичок",
+        "AskSkillsView_Buttons_Intermediate": "Средний",
+        "AskSkillsView_Buttons_Advanced": "Продвинутый",
 
         "FindReplace_Title": "Найти и заменить",
         "FindReplace_Format": "Искать",

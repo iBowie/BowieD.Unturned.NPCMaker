@@ -8,6 +8,7 @@ using System.Xml;
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
     [System.Serializable]
+    [Configuration.SkillLock(Configuration.ESkillLevel.Advanced)]
     public sealed class ConditionWeatherStatus : Condition
     {
         [AssetPicker(typeof(GameWeatherAsset), "Control_SelectAsset_Weather", MahApps.Metro.IconPacks.PackIconMaterialKind.WeatherCloudy)]

@@ -29,7 +29,7 @@
                     </Label>
                     <ComboBox Grid.Column="1" ItemsSource="{StaticResource Character_Pose_Enums}" SelectedValue="{Binding Pose, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Character_Pose_Enums}}" Name="apparelPoseBox" SelectedIndex="0" Margin="5"/>
                 </Grid>
-                <Grid Margin="5">
+                <Grid Margin="5" x:Name="leanGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="Auto"/>
@@ -43,7 +43,7 @@
                     </Label>
                     <Slider ValueChanged="Lean_Slider_ValueChanged" Grid.Column="2" Margin="5" Minimum="-1" Maximum="1" Value="{Binding Lean, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
                 </Grid>
-                <Grid Margin="5">
+                <Grid Margin="5" x:Name="pitchGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="Auto"/>
@@ -57,7 +57,7 @@
                     </Label>
                     <Slider ValueChanged="Pitch_Slider_ValueChanged" Grid.Column="2" Margin="5" Minimum="1" Maximum="179" Value="{Binding Pitch, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
                 </Grid>
-                <Grid Margin="5">
+                <Grid Margin="5" x:Name="headOffsetGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>

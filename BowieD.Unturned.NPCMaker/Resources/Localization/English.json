@@ -81,6 +81,8 @@
         "alternateBoolValue_Tooltip": "Use dropdown with two options 'False' and 'True' instead of checkbox in some places.",
         "forceSoftwareRendering_Tooltip": "May fix some issues related to rendering of the app by forcing it to ignore your installed graphics card and render itself with CPU only.\nBe careful enabling this option as this option can either fix or break something.\nNote: app will work much slower.",
 
+        "selectSkillLevel_Button": "Select Skill Level",
+
         "exportSchema_Warning": "Warning! This setting is only for advanced users!",
 
         "exportSchema_Structure": "Structure",
@@ -645,6 +647,27 @@
         "AssetPicker_ToolTip_GameItemClothingAsset_Beard_Invisible": "Hides beard",
         "AssetPicker_ToolTip_GameItemBagAsset_Width": "Capacity Width: {0}",
         "AssetPicker_ToolTip_GameItemBagAsset_Height": "Capacity Height: {0}",
+
+        "AskSkillsView_Title": "Choose Your Skill",
+        "AskSkillsView_Header": "Let me help you not get lost here.",
+
+        "AskSkillsView_Content_Beginner_Description": "You know that... well... NPC exist, they are used to talk to and trade with them. Conditions and rewards are absolutely new terms for you. If it feels about right - this option is the best to choose.",
+        "AskSkillsView_Content_Intermediate_Description": "You know some advanced stuff, but not much. You are able to comprehend conditions and rewards, but still get stumbled when you see some of them.",
+        "AskSkillsView_Content_Advanced_Description": "You know just about everything about NPCs, and ready for complex stuff. This option is for you if you want to make really advanced stuff with this app.",
+
+        "AskSkillsView_Header_Available": "What is available",
+        "AskSkillsView_Content_Beginner_Available": "* Basic character editor\n* Basic dialogue editor\n* Basic vendor editor",
+        "AskSkillsView_Content_Intermediate_Available": "* Advanced character editor\n* Intermediate dialogue editor\n* Intermediate vendor editor\n* Quest editor\n* Currency editor",
+        "AskSkillsView_Content_Advanced_Available": "* Full app experience",
+
+        "AskSkillsView_Header_Locked": "What exactly is locked out",
+        "AskSkillsView_Content_Beginner_Locked": "* Conditions\n* Rewards\n* Quests\n* Advanced dialogue options\n* Custom currency",
+        "AskSkillsView_Content_Intermediate_Locked": "* Advanced conditions\n* Advanced rewards\n* Advanced dialogue options",
+        "AskSkillsView_Content_Advanced_Locked": "* Nothing",
+
+        "AskSkillsView_Buttons_Beginner": "Beginner",
+        "AskSkillsView_Buttons_Intermediate": "Intermediate",
+        "AskSkillsView_Buttons_Advanced": "Advanced",
 
         "FindReplace_Title": "Find & Replace",
         "FindReplace_Format": "Search for",

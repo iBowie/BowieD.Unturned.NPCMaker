@@ -6,6 +6,7 @@ using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
     [System.Serializable]
+    [Configuration.SkillLock(Configuration.ESkillLevel.Advanced)]
     public sealed class ConditionKillsAnimal : Condition
     {
         public override Condition_Type Type => Condition_Type.Kills_Animal;

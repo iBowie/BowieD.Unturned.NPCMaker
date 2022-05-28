@@ -554,7 +554,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
             {
                 if (t != null && t.IsSealed && t.IsSubclassOf(typeof(Condition)))
                 {
-                    yield return t;
+                    var skillLock = t.GetCustomAttribute<Configuration.SkillLockAttribute>();
+
+                    if (skillLock is null || AppConfig.Instance.skillLevel >= skillLock.Level)
+                        yield return t;
                 }
             }
         }

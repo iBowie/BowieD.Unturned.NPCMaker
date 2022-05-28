@@ -8,6 +8,7 @@ using System.Xml;
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
     [System.Serializable]
+    [Configuration.SkillLock(Configuration.ESkillLevel.Advanced)]
     public sealed class ConditionFlagShort : Condition
     {
         [AssetPicker(typeof(FlagDescriptionProjectAsset), "Control_SelectAsset_Project_Flag", MahApps.Metro.IconPacks.PackIconMaterialKind.Flag)]
