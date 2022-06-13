@@ -11,7 +11,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
     {
         public override RewardType Type => RewardType.Achievement;
         public override string UIText => $"{LocalizationManager.Current.Reward["Type_Achievement"]} [{ID}]";
-        [TextBoxOptions("Soulcrystal", "Mk2", "Boss_Magma", "Zweihander", "Kuwait_Squeek", "Kuwait_FelineFriends", "Kuwait_DinosaurJuice", "Kuwait_HomeDecor", "Kuwait_AlwaysWatching", "Kuwait_FamiliarFaces", "Elver_FinalBoss", "Festive2021_Power", "Festive2021_Snowman", "Festive2021_Delivery", "Festive2021_Cook", "Arid_Finale", "Arid_RPG")]
+        [TextBoxOptions("Soulcrystal", "Mk2", "Boss_Magma", "Zweihander", "Kuwait_Squeek", "Kuwait_FelineFriends", "Kuwait_DinosaurJuice", "Kuwait_HomeDecor", "Kuwait_AlwaysWatching", "Kuwait_FamiliarFaces", "Elver_FinalBoss", "Festive2021_Power", "Festive2021_Snowman", "Festive2021_Delivery", "Festive2021_Cook", "Arid_Finale", "Arid_RPG", "Kuwait_EscapingOutlands", "Kuwait_DunemansPromise")]
         public string ID { get; set; }
 
         public override void Give(Simulation simulation) { }
