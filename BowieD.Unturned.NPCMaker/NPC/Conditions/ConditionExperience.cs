@@ -7,6 +7,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [System.Serializable]
     public sealed class ConditionExperience : Condition
     {
+        public ConditionExperience()
+        {
+            Logic = Logic_Type.Equal;
+        }
+
         public override Condition_Type Type => Condition_Type.Experience;
         public override string UIText
         {

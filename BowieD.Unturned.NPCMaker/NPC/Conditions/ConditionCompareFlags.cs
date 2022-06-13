@@ -11,6 +11,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [Configuration.SkillLock(Configuration.ESkillLevel.Advanced)]
     public sealed class ConditionCompareFlags : Condition
     {
+        public ConditionCompareFlags()
+        {
+            Logic = Logic_Type.Equal;
+        }
+
         public override Condition_Type Type => Condition_Type.Compare_Flags;
         [AssetPicker(typeof(FlagDescriptionProjectAsset), "Control_SelectAsset_Project_Flag", MahApps.Metro.IconPacks.PackIconMaterialKind.Flag)]
         public ushort A_ID { get; set; }

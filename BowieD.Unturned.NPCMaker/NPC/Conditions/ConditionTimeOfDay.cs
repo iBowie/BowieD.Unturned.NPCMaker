@@ -11,6 +11,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [System.Serializable]
     public sealed class ConditionTimeOfDay : Condition, INotifyPropertyChanged
     {
+        public ConditionTimeOfDay()
+        {
+            Logic = Logic_Type.Equal;
+        }
+
         private int _second;
 
         [SkipField]

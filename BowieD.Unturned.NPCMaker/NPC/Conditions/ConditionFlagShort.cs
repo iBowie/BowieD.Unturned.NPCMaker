@@ -11,6 +11,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [Configuration.SkillLock(Configuration.ESkillLevel.Advanced)]
     public sealed class ConditionFlagShort : Condition
     {
+        public ConditionFlagShort()
+        {
+            Logic = Logic_Type.Equal;
+        }
+
         [AssetPicker(typeof(FlagDescriptionProjectAsset), "Control_SelectAsset_Project_Flag", MahApps.Metro.IconPacks.PackIconMaterialKind.Flag)]
         public ushort ID { get; set; }
         public short Value { get; set; }

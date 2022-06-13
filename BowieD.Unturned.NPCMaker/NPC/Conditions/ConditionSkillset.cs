@@ -8,6 +8,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [System.Serializable]
     public sealed class ConditionSkillset : Condition
     {
+        public ConditionSkillset()
+        {
+            Logic = Logic_Type.Equal;
+        }
+
         public override Condition_Type Type => Condition_Type.Skillset;
         public ESkillset Value { get; set; }
         public Logic_Type Logic { get; set; }
