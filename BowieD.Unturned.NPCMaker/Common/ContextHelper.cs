@@ -4,7 +4,6 @@ using BowieD.Unturned.NPCMaker.GameIntegration.Filtering;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.ViewModels;
 using MahApps.Metro.IconPacks;
-using Microsoft.Win32;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -112,7 +111,15 @@ namespace BowieD.Unturned.NPCMaker.Common
                 TextBox target = context.PlacementTarget as TextBox;
                 int pos = target.SelectionStart;
                 int l = target.SelectionLength;
-                target.Text = target.Text.Remove(pos, l).Insert(pos, "<br>");
+                try
+                {
+                    target.BeginChange();
+                    target.Text = target.Text.Remove(pos, l).Insert(pos, "<br>");
+                }
+                finally
+                {
+                    target.EndChange();
+                }
             });
             b.Icon = new PackIconMaterial()
             {
@@ -133,7 +140,15 @@ namespace BowieD.Unturned.NPCMaker.Common
                 TextBox target = context.PlacementTarget as TextBox;
                 int pos = target.SelectionStart;
                 int l = target.SelectionLength;
-                target.Text = target.Text.Remove(pos, l).Insert(pos, "<pause>");
+                try
+                {
+                    target.BeginChange();
+                    target.Text = target.Text.Remove(pos, l).Insert(pos, "<pause>");
+                }
+                finally
+                {
+                    target.EndChange();
+                }
             });
             b.Icon = new PackIconMaterial()
             {
@@ -154,7 +169,15 @@ namespace BowieD.Unturned.NPCMaker.Common
                 TextBox target = context.PlacementTarget as TextBox;
                 int pos = target.SelectionStart;
                 int l = target.SelectionLength;
-                target.Text = target.Text.Remove(pos, l).Insert(pos, "<name_char>");
+                try
+                {
+                    target.BeginChange();
+                    target.Text = target.Text.Remove(pos, l).Insert(pos, "<name_char>");
+                }
+                finally
+                {
+                    target.EndChange();
+                }
             });
             b.Icon = new PackIconMaterial()
             {
@@ -175,7 +198,15 @@ namespace BowieD.Unturned.NPCMaker.Common
                 TextBox target = context.PlacementTarget as TextBox;
                 int pos = target.SelectionStart;
                 int l = target.SelectionLength;
-                target.Text = target.Text.Remove(pos, l).Insert(pos, "<name_npc>");
+                try
+                {
+                    target.BeginChange();
+                    target.Text = target.Text.Remove(pos, l).Insert(pos, "<name_npc>");
+                }
+                finally
+                {
+                    target.EndChange();
+                }
             });
             b.Icon = new PackIconMaterial()
             {
@@ -261,7 +292,15 @@ namespace BowieD.Unturned.NPCMaker.Common
                 TextBox target = context.PlacementTarget as TextBox;
                 int pos = target.SelectionStart;
                 int l = target.SelectionLength;
-                target.Text = target.Text.Insert(pos + l, "</color>").Insert(pos, $"<color={Coloring.ColorConverter.BrushToHEX(clr)}>");
+                try
+                {
+                    target.BeginChange();
+                    target.Text = target.Text.Insert(pos + l, "</color>").Insert(pos, $"<color={Coloring.ColorConverter.BrushToHEX(clr)}>");
+                }
+                finally
+                {
+                    target.EndChange();
+                }
             });
             return b;
         }
@@ -277,7 +316,15 @@ namespace BowieD.Unturned.NPCMaker.Common
                 TextBox target = context.PlacementTarget as TextBox;
                 int pos = target.SelectionStart;
                 int l = target.SelectionLength;
-                target.Text = target.Text.Insert(pos + l, "</i>").Insert(pos, "<i>");
+                try
+                {
+                    target.BeginChange();
+                    target.Text = target.Text.Insert(pos + l, "</i>").Insert(pos, "<i>");
+                }
+                finally
+                {
+                    target.EndChange();
+                }
             });
             b.Icon = new PackIconMaterial()
             {
@@ -298,7 +345,15 @@ namespace BowieD.Unturned.NPCMaker.Common
                 TextBox target = context.PlacementTarget as TextBox;
                 int pos = target.SelectionStart;
                 int l = target.SelectionLength;
-                target.Text = target.Text.Insert(pos + l, "</b>").Insert(pos, "<b>");
+                try
+                {
+                    target.BeginChange();
+                    target.Text = target.Text.Insert(pos + l, "</b>").Insert(pos, "<b>");
+                }
+                finally
+                {
+                    target.EndChange();
+                }
             });
             b.Icon = new PackIconMaterial()
             {
