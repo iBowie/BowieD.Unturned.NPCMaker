@@ -220,10 +220,6 @@ namespace BowieD.Unturned.NPCMaker
 
             MainWindow mw = new MainWindow();
             InitManagers();
-#if DEBUG
-#else
-            ConsoleLogger.HideConsoleWindow();
-#endif
             Application.Current.MainWindow = mw;
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
             mw.Show();
