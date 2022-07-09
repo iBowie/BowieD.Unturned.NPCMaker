@@ -34,6 +34,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 register<NE_0002>();
                 register<NE_0003>();
                 register<NE_0004>();
+                register<NE_0005>();
                 // dialogues
                 register<NE_1000>();
                 register<NE_1001>();
@@ -45,16 +46,19 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
                 register<NE_1007>();
                 register<NE_1008>();
                 register<NE_1009>();
+                register<NE_1010>();
                 // vendors
                 register<NE_2000>();
                 register<NE_2001>();
                 register<NE_2002>();
                 register<NE_2003>();
+                register<NE_2004>();
                 // quests
                 register<NE_3000>();
                 register<NE_3001>();
                 register<NE_3002>();
                 register<NE_3003>();
+                register<NE_3004>();
                 // currencies
                 register<NE_4000>();
                 register<NE_4001>();
