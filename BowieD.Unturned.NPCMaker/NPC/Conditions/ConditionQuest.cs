@@ -19,6 +19,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
         public ushort ID { get; set; }
         public Quest_Status Status { get; set; }
         public Logic_Type Logic { get; set; }
+        [Priority(-1)]
         public bool Ignore_NPC { get; set; }
         public override string UIText
         {

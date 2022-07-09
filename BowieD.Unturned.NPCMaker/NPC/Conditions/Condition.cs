@@ -7,6 +7,7 @@ using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using BowieD.Unturned.NPCMaker.XAML;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows;
@@ -138,14 +139,20 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 
         public IEnumerable<FrameworkElement> GetControls()
         {
-            PropertyInfo[] props = GetType().GetProperties();
+            IEnumerable<PropertyInfo> props = GetType().GetProperties()
+                .Where(pInfo => pInfo.CanRead && pInfo.CanWrite)
+                .OrderByDescending(pInfo =>
+                {
+                    var orderAttrib = pInfo.GetCustomAttribute<PriorityAttribute>();
+
+                    int priority = orderAttrib?.Priority ?? 0;
+
+                    return priority;
+                }
+            );
+
             foreach (PropertyInfo prop in props)
             {
-                if (!prop.CanWrite || !prop.CanRead)
-                {
-                    continue;
-                }
-
                 string propName = prop.Name;
                 Type propType = prop.PropertyType;
                 // string localizedName = LocalizationManager.Current.Condition[$"{Type}_{propName}"];
