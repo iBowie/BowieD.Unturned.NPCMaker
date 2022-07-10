@@ -7,6 +7,7 @@ using System.Xml;
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
     [System.Serializable]
+    [Configuration.SkillLock(Configuration.ESkillLevel.Advanced)]
     public sealed class RewardFlagBool : Reward
     {
         public override RewardType Type => RewardType.Flag_Bool;

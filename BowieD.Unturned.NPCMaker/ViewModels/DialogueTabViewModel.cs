@@ -26,41 +26,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             Dialogue = empty;
             UpdateTabs();
 
-            ContextMenu cmenu = new ContextMenu();
-
-            cmenu.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(NPCResponse), (result) =>
-            {
-                if (result is NPCResponse npcr)
-                    AddResponse(new Dialogue_Response(npcr, this));
-            }));
-
-            MainWindow.Instance.dialogueAddReplyButton.ContextMenu = cmenu;
-
-            ContextMenu cmenu2 = new ContextMenu();
-
-            cmenu2.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(NPCMessage), (result) =>
-            {
-                if (result is NPCMessage npcm)
-                    AddMessage(new Dialogue_Message(npcm, this));
-            }));
-
-            MainWindow.Instance.dialogueAddMessageButton.ContextMenu = cmenu2;
-
-            ContextMenu cmenu3 = new ContextMenu();
-
-            cmenu3.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(NPCDialogue), (result) =>
-            {
-                if (result is NPCDialogue npcd)
-                {
-                    MainWindow.CurrentProject.data.dialogues.Add(npcd);
-                    MetroTabItem tabItem = CreateTab(npcd);
-                    MainWindow.Instance.dialogueTabSelect.Items.Add(tabItem);
-                    MainWindow.Instance.dialogueTabSelect.SelectedIndex = MainWindow.Instance.dialogueTabSelect.Items.Count - 1;
-                }
-            }));
-
-            MainWindow.Instance.dialogueTabButtonAdd.ContextMenu = cmenu3;
-
             var dialogueInputIdControlContext = new ContextMenu();
 
             dialogueInputIdControlContext.Items.Add(ContextHelper.CreateFindUnusedIDButton((id) =>
@@ -334,7 +299,11 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                 {
                     addMessageCommand = new AdvancedCommand(() =>
                     {
-                        AddMessage(new Dialogue_Message(new NPCMessage(), this));
+                        var msg = new NPCMessage();
+
+                        msg.pages.Add(string.Empty);
+                        
+                        AddMessage(new Dialogue_Message(msg, this));
                     }, (p) =>
                     {
                         return _dialogue.Messages.CanAdd;

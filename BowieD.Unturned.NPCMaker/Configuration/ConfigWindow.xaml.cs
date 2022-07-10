@@ -1,10 +1,11 @@
+using BowieD.Unturned.NPCMaker.Forms;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.Themes;
 using BowieD.Unturned.NPCMaker.ViewModels;
+using MahApps.Metro.Controls;
 using Microsoft.Win32;
-using System;
-using System.IO;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -12,26 +13,69 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace BowieD.Unturned.NPCMaker.Configuration
 {
     /// <summary>
     /// Логика взаимодействия для ConfigWindow.xaml
     /// </summary>
-    public partial class ConfigWindow : Window, INotifyPropertyChanged
+    public partial class ConfigWindow : MetroWindow, INotifyPropertyChanged
     {
         public ConfigWindow()
         {
             InitializeComponent();
             Width *= AppConfig.Instance.scale;
             Height *= AppConfig.Instance.scale;
-            
+
             DataContext = this;
 
             CurrentConfig = AppConfig.Instance;
+
+            void addStandardColor(string name, string hex)
+            {
+                Coloring.Color color = new Coloring.Color(hex);
+
+                AccentColor_Picker.StandardColors.Add(new Xceed.Wpf.Toolkit.ColorItem(color, name));
+            }
+
+            AccentColor_Picker.StandardColors = new System.Collections.ObjectModel.ObservableCollection<Xceed.Wpf.Toolkit.ColorItem>();
+
+            addStandardColor("Amber", "#F0A30A");
+            addStandardColor("Blue", "#119EDA");
+            addStandardColor("Brown", "#825A2C");
+            addStandardColor("Cobalt", "#0050EF");
+            addStandardColor("Crimson", "#A20025");
+            addStandardColor("Cyan", "#1BA1E2");
+            addStandardColor("Emerald", "#008A00");
+            addStandardColor("Green", "#60A917");
+            addStandardColor("Indigo", "#6A00FF");
+            addStandardColor("Lime", "#A4C400");
+            addStandardColor("Magenta", "#D80073");
+            addStandardColor("Mauve", "#76608A");
+            addStandardColor("Olive", "#6D8764");
+            addStandardColor("Orange", "#FA6800");
+            addStandardColor("Pink", "#F472D0");
+            addStandardColor("Purple", "#6459DF");
+            addStandardColor("Red", "#E51400");
+            addStandardColor("Sienna", "#A0522D");
+            addStandardColor("Steel", "#647687");
+            addStandardColor("Taupe", "#87794E");
+            addStandardColor("Teal", "#00ABA9");
+            addStandardColor("Violet", "#AA00FF");
+            addStandardColor("Yellow", "#FEDE06");
+
+            SelectSkillLevel_Button.Command = new BaseCommand(() =>
+            {
+                AskSkillsView askSkillsView = new AskSkillsView();
+
+                if (askSkillsView.ShowDialog() == true)
+                {
+                    _currentSkillLevel = askSkillsView.SelectedSkillLevel;
+                }
+            });
         }
 
+        private ESkillLevel _currentSkillLevel;
         private EExportSchema _currentExportSchema;
         public EExportSchema CurrentExportSchema
         {
@@ -64,6 +108,24 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 ExportSchema_Structure_Preview_TextBlock.Text = disp;
 
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentExportSchema)));
+            }
+        }
+        private bool _hasUnlockedSecretThemes;
+        public bool HasUnlockedSecretThemes
+        {
+            get => _hasUnlockedSecretThemes;
+            set
+            {
+                _hasUnlockedSecretThemes = value;
+
+                if (value)
+                {
+                    SecretThemeGrid.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    SecretThemeGrid.Visibility = Visibility.Collapsed;
+                }
             }
         }
         public string[] CurrentDisabledErrors
@@ -141,7 +203,8 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         {
             get => new AppConfig
             {
-                currentTheme = ((Selected_Theme_Box.SelectedItem as ComboBoxItem).Tag as Theme).Name,
+                accentColor = AccentColor_Picker.SelectedColor ?? new Coloring.Color("#FFFFFF"),
+                useDarkMode = UseDarkMode_CheckBox.IsChecked.Value,
                 autosaveOption = (byte)Autosave_Box.SelectedIndex,
                 language = (ELanguage)(Languages_Box.SelectedItem as ComboBoxItem).Tag,
                 exportSchema = CurrentExportSchema,
@@ -169,22 +232,14 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 mainWindowBackgroundImageBlurRadius = MainWindowBackgroundBlurRadius_Slider.Value,
                 alternateBoolValue = AlternateBoolValue_Box.IsChecked.Value,
                 forceSoftwareRendering = ForceSoftwareRendering_Box.IsChecked.Value,
+                themeType = CurrentThemeType,
+                hasUnlockedSecretThemes = HasUnlockedSecretThemes,
+                skillLevel = _currentSkillLevel,
             };
             set
             {
-                foreach (System.Collections.Generic.KeyValuePair<string, Theme> theme in ThemeManager.Themes)
-                {
-                    ComboBoxItem cbi = new ComboBoxItem()
-                    {
-                        Content = theme.Key,
-                        Tag = theme.Value
-                    };
-                    Selected_Theme_Box.Items.Add(cbi);
-                    if (theme.Key == value.currentTheme)
-                    {
-                        Selected_Theme_Box.SelectedItem = cbi;
-                    }
-                }
+                UseDarkMode_CheckBox.IsChecked = value.useDarkMode;
+                AccentColor_Picker.SelectedColor = value.accentColor;
                 Autosave_Box.SelectedIndex = value.autosaveOption;
                 foreach (ELanguage lang in LocalizationManager.SupportedLanguages())
                 {
@@ -231,11 +286,25 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 MainWindowBackgroundBlurRadius_Slider.Value = value.mainWindowBackgroundImageBlurRadius;
                 AlternateBoolValue_Box.IsChecked = value.alternateBoolValue;
                 ForceSoftwareRendering_Box.IsChecked = value.forceSoftwareRendering;
+                CurrentThemeType = value.themeType;
+                HasUnlockedSecretThemes = value.hasUnlockedSecretThemes;
+                _currentSkillLevel = value.skillLevel;
             }
         }
 
         private string curUntDir;
         private string curMainWindowBackgroundPath;
+        private EThemeType _currentThemeType;
+        public EThemeType CurrentThemeType
+        {
+            get => _currentThemeType;
+            set
+            {
+                _currentThemeType = value;
+
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentThemeType)));
+            }
+        }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {

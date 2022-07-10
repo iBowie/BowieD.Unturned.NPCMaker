@@ -17,7 +17,6 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
@@ -39,14 +38,26 @@ namespace BowieD.Unturned.NPCMaker
         public new void Show()
         {
             #region THEME SETUP
-            Themes.Theme theme = ThemeManager.Themes.ContainsKey(AppConfig.Instance.currentTheme ?? "") ? ThemeManager.Themes[AppConfig.Instance.currentTheme] : ThemeManager.Themes["Metro/LightGreen"];
-            ThemeManager.Apply(theme);
-
-            SetBackground(AppConfig.Instance.mainWindowBackgroundImage, theme.Name.Substring("Metro/".Length).StartsWith("Dark"));
+            ThemeManager.Init(AppConfig.Instance.accentColor, AppConfig.Instance.useDarkMode);
+            SetBackground(AppConfig.Instance.mainWindowBackgroundImage, AppConfig.Instance.useDarkMode);
             #endregion
 
             ImportAssetsForm iaf = new ImportAssetsForm();
             iaf.ShowDialog();
+
+            var level = AppConfig.Instance.skillLevel;
+            while (level == ESkillLevel.None)
+            {
+                AskSkillsView askSkillsView = new AskSkillsView();
+
+                if (askSkillsView.ShowDialog() == true)
+                {
+                    level = askSkillsView.SelectedSkillLevel;
+
+                    AppConfig.Instance.skillLevel = level;
+                    AppConfig.Instance.Save();
+                }
+            }
 
             Width *= AppConfig.Instance.scale;
             Height *= AppConfig.Instance.scale;
@@ -286,8 +297,6 @@ namespace BowieD.Unturned.NPCMaker
                 App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("StartUp_Patreon_Patrons", pjoined));
             }
 
-            ConsoleLogger.StartWaitForInput();
-
             Loaded += (sender, e) =>
             {
                 var scr = ScreenHelper.GetCurrentScreen(this);
@@ -326,7 +335,7 @@ namespace BowieD.Unturned.NPCMaker
 
                 if (!CurrentProject.hasLoadedAtLeastOnce)
                 {
-                    string crashSavePath = Path.Combine(AppConfig.ExeDirectory, Program.CRASH_SAVE_FILENAME);
+                    string crashSavePath = Path.Combine(AppConfig.ExeDirectory, App.CRASH_SAVE_FILENAME);
 
                     if (File.Exists(crashSavePath))
                     {
@@ -358,6 +367,14 @@ namespace BowieD.Unturned.NPCMaker
                     }
                 }
             };
+
+            #region Skill Level Setup
+            if (level < ESkillLevel.Intermediate)
+                questTab.Visibility = Visibility.Collapsed;
+
+            if (level < ESkillLevel.Intermediate)
+                currencyTab.Visibility = Visibility.Collapsed;
+            #endregion
 
             base.Show();
         }
@@ -586,6 +603,9 @@ namespace BowieD.Unturned.NPCMaker
             }
 
             App.Logger.Log("Closing app");
+            AppUpdateTimer?.Stop();
+            AutosaveTimer?.Stop();
+            ErrorCheckTimer?.Stop();
             DiscordManager?.Deinitialize();
             Environment.Exit(0);
         }

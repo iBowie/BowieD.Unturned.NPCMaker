@@ -1,7 +1,8 @@
-﻿using BowieD.Unturned.NPCMaker.FindReplace;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.FindReplace;
 using BowieD.Unturned.NPCMaker.ViewModels;
+using MahApps.Metro.Controls;
 using System.Collections.Generic;
-using System.Windows;
 using System.Windows.Input;
 
 namespace BowieD.Unturned.NPCMaker.Forms
@@ -9,7 +10,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Логика взаимодействия для FindReplaceDialog.xaml
     /// </summary>
-    public partial class FindReplaceDialog : Window
+    public partial class FindReplaceDialog : MetroWindow
     {
         private readonly List<FindReplaceTarget> searchResult = new List<FindReplaceTarget>();
         private bool allowReplace = false;
@@ -17,6 +18,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
         public FindReplaceDialog(FindReplaceFormat? initialFormat = null)
         {
             InitializeComponent();
+
+            Width *= AppConfig.Instance.scale;
+            Height *= AppConfig.Instance.scale;
 
             MainWindow.Instance.MainWindowViewModel.SaveAll();
 

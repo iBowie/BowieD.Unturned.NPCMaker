@@ -38,7 +38,6 @@ namespace BowieD.Unturned.NPCMaker.Export
 
                 Export_Characters(save.characters);
                 Export_Dialogues(save.dialogues);
-                Export_Dialogues(save.dialogueVendors.Select(d => d.CreateDialogue()));
                 Export_Quests(save.quests);
                 Export_Vendors(save.vendors);
                 Export_Currencies(save.currencies);
@@ -84,10 +83,10 @@ namespace BowieD.Unturned.NPCMaker.Export
                 try
                 {
                     string aPath = Path.Combine(dir, "Characters", GetCharacterFolderName(character));
-                    
+
                     if (!Directory.Exists(aPath))
                         Directory.CreateDirectory(aPath);
-                    
+
                     using (StreamWriter asset = new StreamWriter(Path.Combine(aPath, "Asset.dat"), false, Encoding.UTF8))
                     using (StreamWriter local = new StreamWriter(Path.Combine(aPath, "English.dat"), false, Encoding.UTF8))
                     {
@@ -292,7 +291,7 @@ namespace BowieD.Unturned.NPCMaker.Export
 
                     if (!Directory.Exists(aPath))
                         Directory.CreateDirectory(aPath);
-                    
+
                     using (StreamWriter asset = new StreamWriter(Path.Combine(aPath, "Asset.dat"), false, Encoding.UTF8))
                     using (StreamWriter local = new StreamWriter(Path.Combine(aPath, "English.dat"), false, Encoding.UTF8))
                     {
@@ -622,7 +621,7 @@ namespace BowieD.Unturned.NPCMaker.Export
 
                     if (!Directory.Exists(aPath))
                         Directory.CreateDirectory(aPath);
-                    
+
                     using (StreamWriter asset = new StreamWriter(Path.Combine(aPath, GetCurrencyFileName(cur)), false, Encoding.UTF8))
                     {
                         char q = '\"';
@@ -784,10 +783,10 @@ namespace BowieD.Unturned.NPCMaker.Export
             {
                 case EExportSchema.GUID_All_The_Way:
                     return $"{ps(character.GUID)}_{character.ID}";
-                
+
                 case EExportSchema.Verbose_Comment:
                     return $"{ps(character.Comment, character.EditorName, character.GUID)}_{character.ID}";
-                
+
                 case EExportSchema.Verbose_No_Comment:
                     return $"{ps(character.EditorName, character.GUID)}_{character.ID}";
 

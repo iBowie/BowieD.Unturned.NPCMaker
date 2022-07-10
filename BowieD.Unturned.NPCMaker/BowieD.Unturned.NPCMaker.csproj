@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{76722CC9-A215-414E-8DFF-938AD2834D74}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>BowieD.Unturned.NPCMaker</RootNamespace>
     <AssemblyName>BowieD.Unturned.NPCMaker</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -53,7 +53,7 @@
     <ApplicationIcon>Resources\Icons\app.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>BowieD.Unturned.NPCMaker.Program</StartupObject>
+    <StartupObject>BowieD.Unturned.NPCMaker.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugFast|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -195,7 +195,6 @@
     <Compile Include="Commands\CheckSyncCommand.cs" />
     <Compile Include="Commands\ColorCommand.cs" />
     <Compile Include="Commands\ConfigCommand.cs" />
-    <Compile Include="Commands\HideCommand.cs" />
     <Compile Include="Commands\LicenseCommand.cs" />
     <Compile Include="Commands\ParseCommand.cs" />
     <Compile Include="Commands\ShutdownCommand.cs" />
@@ -208,6 +207,21 @@
     <Compile Include="Common\Utility\PathUtility.cs" />
     <Compile Include="Common\XmlNodeExtension.cs" />
     <Compile Include="Configuration\EExportSchema.cs" />
+    <Compile Include="Configuration\ESkillLevel.cs" />
+    <Compile Include="Forms\AskSkillsView.xaml.cs">
+      <DependentUpon>AskSkillsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PlainTextWindow.xaml.cs">
+      <DependentUpon>PlainTextWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Logging\DelegateLogger.cs" />
+    <Compile Include="Mistakes\Character\NE_0005.cs" />
+    <Compile Include="Mistakes\ConditionChecker.cs" />
+    <Compile Include="Mistakes\Dialogue\NE_1010.cs" />
+    <Compile Include="Mistakes\Quest\NE_3004.cs" />
+    <Compile Include="Mistakes\Vendor\NE_2004.cs" />
+    <Compile Include="NPC\Shared\Attributes\PriorityAttribute.cs" />
+    <Compile Include="Themes\EThemeType.cs" />
     <Compile Include="NPC\Rewards\RewardPlayerSpawnpoint.cs" />
     <Compile Include="Configuration\ExportSchemaStrings.cs" />
     <Compile Include="Controls\ClockControl.xaml.cs">
@@ -268,7 +282,6 @@
     <Compile Include="FindReplace\FindReplacerDialogueResponseTargeter.cs" />
     <Compile Include="FindReplace\FindReplacerDialogueTargeter.cs" />
     <Compile Include="FindReplace\FindReplaceFormats.cs" />
-    <Compile Include="FindReplace\FindReplacerDialogueVendorTargeter.cs" />
     <Compile Include="FindReplace\FindReplacerQuestTargeter.cs" />
     <Compile Include="FindReplace\FindReplacerRewardTargeter.cs" />
     <Compile Include="FindReplace\FindReplacerVendorItemTargeter.cs" />
@@ -437,7 +450,6 @@
     <Compile Include="Localization\TranslationDictionary.cs" />
     <Compile Include="Logging\FileLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
-    <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\ILoggingManager.cs" />
     <Compile Include="Logging\LogLevel.cs" />
     <Compile Include="Managers\DataManager.cs" />
@@ -570,7 +582,6 @@
     <Compile Include="Parsing\KVTable\TReaders\SystemTypes\KVTableTypeReader.cs" />
     <Compile Include="Parsing\KVTable\TReaders\UnityTypes\KVTableVector3Reader.cs" />
     <Compile Include="Parsing\ParseTool.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -579,32 +590,7 @@
     <Compile Include="Random.cs" />
     <Compile Include="Markup\IMarkup.cs" />
     <Compile Include="ScreenHelper.cs" />
-    <Compile Include="Templating\Conditions\Attributes\TemplateConditionAttribute.cs" />
-    <Compile Include="Templating\Conditions\Converters\TemplateConditionConverter.cs" />
-    <Compile Include="Templating\Conditions\ITemplateCondition.cs" />
-    <Compile Include="Templating\Conditions\TemplateCondition_AlwaysFalse.cs" />
-    <Compile Include="Templating\Conditions\TemplateCondition_AlwaysTrue.cs" />
-    <Compile Include="Templating\Conditions\TemplateCondition_Input.cs" />
-    <Compile Include="Templating\InputField.cs" />
-    <Compile Include="Templating\LogicTool.cs" />
-    <Compile Include="Templating\Modify\Attributes\ModifyValueAttribute.cs" />
-    <Compile Include="Templating\Modify\Converters\ModifyValueConverter.cs" />
-    <Compile Include="Templating\Modify\EModifyEntryOperation.cs" />
-    <Compile Include="Templating\Modify\IModifyValue.cs" />
-    <Compile Include="Templating\Modify\ModifyEntry.cs" />
-    <Compile Include="Templating\Modify\ModifyTool.cs" />
-    <Compile Include="Templating\Modify\ModifyValue_Condition.cs" />
-    <Compile Include="Templating\Modify\ModifyValue_Input.cs" />
-    <Compile Include="Templating\Modify\ModifyValue_Parameterless.cs" />
-    <Compile Include="Templating\Modify\ModifyValue_Reward.cs" />
-    <Compile Include="Templating\Modify\ModifyValue_String.cs" />
-    <Compile Include="Templating\Reflection\FPInfo.cs" />
-    <Compile Include="Templating\Reflection\TypeResolver.cs" />
-    <Compile Include="Templating\Template.cs" />
-    <Compile Include="Templating\TemplateManager.cs" />
     <Compile Include="TextUtil.cs" />
-    <Compile Include="Themes\MetroTheme.cs" />
-    <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
     <Compile Include="Updating\GitHubUpdateManager.cs" />
     <Compile Include="Updating\IUpdateManager.cs" />
@@ -626,11 +612,11 @@
     <Compile Include="ViewModels\CharacterTabViewModel.cs" />
     <Compile Include="ViewModels\CurrencyTabViewModel.cs" />
     <Compile Include="ViewModels\DialogueTabViewModel.cs" />
+    <Compile Include="ViewModels\LogTabViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MistakeTabViewModel.cs" />
     <Compile Include="ViewModels\QuestTabViewModel.cs" />
     <Compile Include="ViewModels\VendorTabViewModel.cs" />
-    <Compile Include="ViewModels\VirtualDialogueVendorTabViewModel.cs" />
     <Compile Include="Workshop\SteamManager.cs" />
     <Compile Include="XAML\BoolItemsSource.cs" />
     <Compile Include="XAML\EnumItemsSource.cs" />
@@ -681,6 +667,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\AskSkillsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\AssetPicker_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -726,6 +716,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\OneFieldInputView_Dialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\PlainTextWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -948,6 +942,12 @@
   <ItemGroup>
     <Resource Include="Libs\Microsoft.WindowsAPICodePack.dll" />
     <Resource Include="Libs\Microsoft.WindowsAPICodePack.Shell.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\THIRD_PARTY_LICENSES.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

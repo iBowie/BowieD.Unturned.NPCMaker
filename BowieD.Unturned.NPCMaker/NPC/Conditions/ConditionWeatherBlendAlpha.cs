@@ -8,8 +8,14 @@ using System.Xml;
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
     [System.Serializable]
+    [Configuration.SkillLock(Configuration.ESkillLevel.Advanced)]
     public sealed class ConditionWeatherBlendAlpha : Condition
     {
+        public ConditionWeatherBlendAlpha()
+        {
+            Logic = Logic_Type.Equal;
+        }
+
         [AssetPicker(typeof(GameWeatherAsset), "Control_SelectAsset_Weather", MahApps.Metro.IconPacks.PackIconMaterialKind.WeatherCloudy)]
         public string GUID { get; set; }
         [Range(0f, 1f)]

@@ -18,7 +18,7 @@ namespace BowieD.Unturned.NPCMaker.FindReplace
             if (target is NPCDialogue dialogue)
             {
                 MainWindow.Instance.mainTabControl.SelectedValue = MainWindow.Instance.dialogueTab;
-                
+
                 var tabber = MainWindow.Instance.dialogueTabSelect;
 
                 for (int i = 0; i < tabber.Items.Count; i++)

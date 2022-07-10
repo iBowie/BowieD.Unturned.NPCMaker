@@ -49,6 +49,18 @@ namespace BowieD.Unturned.NPCMaker.XAML
             {
                 valueToNameMap = type
                   .GetFields(BindingFlags.Static | BindingFlags.Public)
+                  .Where(fi =>
+                  {
+                      var skillLock = fi.GetCustomAttribute<Configuration.SkillLockAttribute>();
+
+                      if (skillLock is null)
+                          return true;
+
+                      if (Configuration.AppConfig.Instance.skillLevel >= skillLock.Level)
+                          return true;
+
+                      return false;
+                  })
                   .ToDictionary(fi => fi.GetValue(null), GetDescription);
                 nameToValueMap = valueToNameMap
                   .ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
@@ -57,6 +69,18 @@ namespace BowieD.Unturned.NPCMaker.XAML
             {
                 valueToNameMap = type
                     .GetFields(BindingFlags.Static | BindingFlags.Public)
+                    .Where(fi =>
+                    {
+                        var skillLock = fi.GetCustomAttribute<Configuration.SkillLockAttribute>();
+
+                        if (skillLock is null)
+                            return true;
+
+                        if (Configuration.AppConfig.Instance.skillLevel >= skillLock.Level)
+                            return true;
+
+                        return false;
+                    })
                     .ToDictionary(fi => fi.GetValue(null), k => (object)Dictionary.Translate(LocalizationPrefix + k.Name));
                 nameToValueMap = valueToNameMap
                     .ToDictionary(kvp => kvp.Value, kvp => kvp.Key);

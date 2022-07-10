@@ -10,6 +10,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [System.Serializable]
     public sealed class ConditionCurrency : Condition
     {
+        public ConditionCurrency()
+        {
+            Logic = Logic_Type.Equal;
+        }
+
         public override Condition_Type Type => Condition_Type.Currency;
         public override string UIText
         {

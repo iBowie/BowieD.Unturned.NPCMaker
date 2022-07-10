@@ -7,6 +7,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [System.Serializable]
     public sealed class ConditionReputation : Condition
     {
+        public ConditionReputation()
+        {
+            Logic = Logic_Type.Equal;
+        }
+
         public override Condition_Type Type => Condition_Type.Reputation;
         public int Value { get; set; }
         public Logic_Type Logic { get; set; }

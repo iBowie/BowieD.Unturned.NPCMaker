@@ -37,7 +37,7 @@
                             <TextBlock Name="indexTextBlock" TextAlignment="Left" Text=""/>
                         </Label.Content>
                     </Label>
-                    <Label Margin="5" MaxWidth="100" Grid.Column="1">
+                    <Label x:Name="prevLabel" Margin="5" MaxWidth="100" Grid.Column="1">
                         <Label.Content>
                             <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{xaml:Localize Key=DIALOGUE_Message_Prev}" ToolTip="{xaml:Localize Key=DIALOGUE_Message_Prev_Tooltip}"/>
                         </Label.Content>
@@ -49,7 +49,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Button VerticalAlignment="Center" Click="Button_Click" Content="{xaml:Localize Key=DIALOGUE_Message_Conditions}" Margin="5">
+                    <Button x:Name="conditionsButton" VerticalAlignment="Center" Click="Button_Click" Content="{xaml:Localize Key=DIALOGUE_Message_Conditions}" Margin="5">
                         <Button.ToolTip>
                             <StackPanel>
                                 <Label Content="{xaml:Localize Key=DIALOGUE_Message_Conditions_Tooltip}"/>
@@ -70,7 +70,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Button VerticalAlignment="Center" Click="EditRewardsButton_Click" Content="{xaml:Localize Key=DIALOGUE_Message_Rewards}" Margin="5">
+                    <Button x:Name="rewardsButton" VerticalAlignment="Center" Click="EditRewardsButton_Click" Content="{xaml:Localize Key=DIALOGUE_Message_Rewards}" Margin="5">
                         <Button.ToolTip>
                             <StackPanel>
                                 <Label Content="{xaml:Localize Key=DIALOGUE_Message_Rewards_Tooltip}"/>

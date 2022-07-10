@@ -36,8 +36,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
         }
 
         [AssetPicker(typeof(GameItemAsset), "Control_SelectAsset_Item", MahApps.Metro.IconPacks.PackIconMaterialKind.Archive)]
+        [Priority(2)]
         public GUIDIDBridge ID { get; set; }
         [Range(byte.MinValue, byte.MaxValue)]
+        [Priority(1)]
         public byte Amount { get; set; } = 1;
         [Optional(null)]
         [AssetPicker(typeof(GameItemSightAsset), "Control_SelectAsset_Sight", MahApps.Metro.IconPacks.PackIconMaterialKind.Crosshairs)]

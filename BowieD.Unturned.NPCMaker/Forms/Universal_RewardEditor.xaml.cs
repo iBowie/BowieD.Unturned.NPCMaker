@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Логика взаимодействия для Universal_RewardEditor.xaml
     /// </summary>
-    public partial class Universal_RewardEditor : Window
+    public partial class Universal_RewardEditor : MetroWindow
     {
         public Universal_RewardEditor(Reward reward = null)
         {

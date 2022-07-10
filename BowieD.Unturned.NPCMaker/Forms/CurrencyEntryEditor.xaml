@@ -1,4 +1,4 @@
-﻿<Window x:Class="BowieD.Unturned.NPCMaker.Forms.CurrencyEntryEditor"
+﻿<mah:MetroWindow  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="BowieD.Unturned.NPCMaker.Forms.CurrencyEntryEditor"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -31,4 +31,4 @@
         </Grid>
         <Button Margin="10" Content="{xaml:Localize CURRENCY_Entry_Editor_Save}" Click="Button_Click"/>
     </StackPanel>
-</Window>
+</mah:MetroWindow>

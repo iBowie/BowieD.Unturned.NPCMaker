@@ -1,18 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BowieD.Unturned.NPCMaker.Controls
 {
@@ -172,8 +160,8 @@ namespace BowieD.Unturned.NPCMaker.Controls
         private static void IsPMOverAMChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             if (sender is ClockControl cc &&
-                !cc._isDraggingHour       &&
-                !cc._isDraggingMinute     &&
+                !cc._isDraggingHour &&
+                !cc._isDraggingMinute &&
                 e.NewValue is bool newB)
             {
                 if (newB)
@@ -192,9 +180,9 @@ namespace BowieD.Unturned.NPCMaker.Controls
         }
         private static void DisplayTimeChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            if (sender is ClockControl cc && 
-                !cc._isDraggingMinute     && 
-                !cc._isDraggingHour       && 
+            if (sender is ClockControl cc &&
+                !cc._isDraggingMinute &&
+                !cc._isDraggingHour &&
                 e.NewValue is TimeSpan newSpan)
             {
                 // cc.rotHour.Angle = newSpan.Hours % 12.0 / 12.0 * 360.0;

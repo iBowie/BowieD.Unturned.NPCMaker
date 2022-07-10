@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker.GameIntegration;
-using BowieD.Unturned.NPCMaker.ViewModels;
 using System;
 using System.Globalization;
 

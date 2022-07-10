@@ -4,6 +4,7 @@ using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Markup;
 using BowieD.Unturned.NPCMaker.NPC;
+using MahApps.Metro.Controls;
 using System;
 using System.Linq;
 using System.Windows;
@@ -15,7 +16,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Interaction logic for VendorView_Window.xaml
     /// </summary>
-    public partial class VendorView_Window : Window
+    public partial class VendorView_Window : MetroWindow
     {
         static IMarkup formatter = new RichText();
 

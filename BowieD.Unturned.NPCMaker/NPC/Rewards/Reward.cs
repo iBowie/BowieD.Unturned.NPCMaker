@@ -7,6 +7,7 @@ using BowieD.Unturned.NPCMaker.NPC.Shared.Attributes;
 using BowieD.Unturned.NPCMaker.XAML;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows;
@@ -108,14 +109,19 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
         public IEnumerable<FrameworkElement> GetControls()
         {
-            PropertyInfo[] props = GetType().GetProperties();
+            IEnumerable<PropertyInfo> props = GetType().GetProperties()
+                .Where(pInfo => pInfo.CanRead && pInfo.CanWrite)
+                .OrderByDescending(pInfo =>
+                {
+                    var orderAttrib = pInfo.GetCustomAttribute<PriorityAttribute>();
+
+                    int priority = orderAttrib?.Priority ?? 0;
+
+                    return priority;
+                });
+            
             foreach (PropertyInfo prop in props)
             {
-                if (!prop.CanWrite || !prop.CanRead)
-                {
-                    continue;
-                }
-
                 string propName = prop.Name;
                 Type propType = prop.PropertyType;
 
@@ -451,7 +457,10 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             {
                 if (t != null && t.IsSealed && t.IsSubclassOf(typeof(Reward)))
                 {
-                    yield return t;
+                    var skillLock = t.GetCustomAttribute<Configuration.SkillLockAttribute>();
+
+                    if (skillLock is null || AppConfig.Instance.skillLevel >= skillLock.Level)
+                        yield return t;
                 }
             }
         }

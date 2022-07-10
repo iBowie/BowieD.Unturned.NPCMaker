@@ -9,11 +9,17 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [System.Serializable]
     public sealed class ConditionQuest : Condition
     {
+        public ConditionQuest()
+        {
+            Logic = Logic_Type.Equal;
+        }
+
         public override Condition_Type Type => Condition_Type.Quest;
         [AssetPicker(typeof(GameQuestAsset), "Control_SelectAsset_Quest", MahApps.Metro.IconPacks.PackIconMaterialKind.Exclamation)]
         public ushort ID { get; set; }
         public Quest_Status Status { get; set; }
         public Logic_Type Logic { get; set; }
+        [Priority(-1)]
         public bool Ignore_NPC { get; set; }
         public override string UIText
         {

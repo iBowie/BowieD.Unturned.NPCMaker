@@ -78,6 +78,11 @@
                                 <iconPacks:PackIconMaterial Kind="FolderDownloadOutline" Foreground="{DynamicResource AccentColor}"/>
                             </MenuItem.Icon>
                         </MenuItem>
+                        <MenuItem Header="{xaml:Localize Key=INTERFACE_Main_Menu_File_Import_Project}" Command="{Binding ImportProjectCommand}">
+                            <MenuItem.Icon>
+                                <iconPacks:PackIconMaterial Kind="ArchivePlusOutline" Foreground="{DynamicResource AccentColor}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Import" Foreground="{DynamicResource AccentColor}"/>
                         </MenuItem.Icon>
@@ -1448,7 +1453,7 @@
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="2">
                                     <CheckBox IsChecked="{Binding DisableSorting, UpdateSourceTrigger=PropertyChanged}" Name="vendorDisableSortingBox" Content="{xaml:Localize Key=VENDOR_DisableSorting}" Margin="5" />
-                                    <Grid>
+                                    <Grid x:Name="vendorCurrencyGrid">
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
                                             <RowDefinition/>
@@ -1480,239 +1485,6 @@
                                         </GroupBox>
                                     </Grid>
                                     <Button Grid.Row="1" Command="{Binding AddItemCommand}" Name="vendorAddItemButton" Content="{xaml:Localize Key=VENDOR_Item_Add}" Margin="5" Height="25"/>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </TabItem>
-                <TabItem DataContext="{Binding DialogueVendorTabViewModel}" Name="dialogueVendorTab" Header="{xaml:Localize Key=INTERFACE_Main_Tab_DialogueVendor}">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
-                                <TabControl ItemContainerStyle="{DynamicResource FancyTabItem}" Name="dialogueVendorTabSelect"
-                                            Background="Transparent"/>
-                            </ScrollViewer>
-                            <Button Style="{DynamicResource FlatButtonStyle}" Name="dialogueVendorTabButtonAdd" Grid.Column="1" Margin="10">
-                                <Button.Content>
-                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Plus" Foreground="{DynamicResource AccentColor}"/>
-                                </Button.Content>
-                            </Button>
-                            <xctk:DropDownButton Style="{DynamicResource FlatDropDownButtonStyle}" Name="dialogueVendorTabButtonSort" Grid.Column="2" Margin="10">
-                                <xctk:DropDownButton.Content>
-                                    <iconPacks:PackIconMaterial Background="Transparent" Kind="Sort" Foreground="{DynamicResource AccentColor}"/>
-                                </xctk:DropDownButton.Content>
-                                <xctk:DropDownButton.DropDownContent>
-                                    <StackPanel>
-                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_Title_Ascending}" Command="{Binding SortTitleAscending}"/>
-                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_Title_Descending}" Command="{Binding SortTitleDescending}"/>
-                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Ascending}" Command="{Binding SortIDAscending}"/>
-                                        <Button Content="{xaml:Localize Key=INTERFACE_Sort_ID_Descending}" Command="{Binding SortIDDescending}"/>
-                                    </StackPanel>
-                                </xctk:DropDownButton.DropDownContent>
-                            </xctk:DropDownButton>
-                        </Grid>
-                        <Grid Grid.Row="1" Name="dialogueVendorTabGridNoSelection" Visibility="Collapsed">
-                            <Label Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <TextBlock TextAlignment="Center" FontSize="36" Text="{xaml:Localize Key=INTERFACE_Main_Tab_DialogueVendor_NoSelection}" TextWrapping="Wrap"/>
-                            </Label>
-                            <Label Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right">
-                                <TextBlock TextAlignment="Center" Text="{xaml:Localize Key=INTERFACE_Main_Tab_DialogueVendor_NoSelection_Hint}" TextWrapping="Wrap" MaxWidth="100"/>
-                            </Label>
-                        </Grid>
-                        <Grid Grid.Row="1" Name="dialogueVendorTabGrid">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="dialogueVendor_commentbox" Grid.Column="2" VerticalAlignment="Top" Margin="5" Height="26"/>
-                                <StackPanel>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock MinWidth="195" VerticalAlignment="Center" IsEnabled="False" Margin="5" TextWrapping="NoWrap" Text="{Binding GUID}"/>
-                                        <Grid Grid.Column="1">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition/>
-                                                <ColumnDefinition/>
-                                                <ColumnDefinition/>
-                                            </Grid.ColumnDefinitions>
-                                            <Button Command="{Binding SetGuidCommand}"
-                                                Margin="5"
-                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_DialogueVendor_Guid_Set}"
-                                                Style="{DynamicResource FlatOutlineButtonStyle}">
-                                                <Button.Content>
-                                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="Pencil"/>
-                                                </Button.Content>
-                                            </Button>
-                                            <Button 
-                                        Command="{Binding RandomGuidCommand}" 
-                                        Grid.Column="1" 
-                                        Margin="5" 
-                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_DialogueVendor_Guid_Random}"
-                                        Style="{DynamicResource FlatOutlineButtonStyle}">
-                                                <Button.Content>
-                                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="DiceMultiple"/>
-                                                </Button.Content>
-                                            </Button>
-                                            <Button 
-                                        Command="{Binding CopyGuidCommand}" 
-                                        Grid.Column="2" 
-                                        Margin="5" 
-                                        ToolTip="{xaml:Localize Key=INTERFACE_Main_Tab_DialogueVendor_Guid_Copy}"
-                                        Style="{DynamicResource FlatOutlineButtonStyle}">
-                                                <Button.Content>
-                                                    <iconPacks:PackIconMaterial Foreground="{DynamicResource AccentColor}" Kind="ContentCopy"/>
-                                                </Button.Content>
-                                            </Button>
-                                        </Grid>
-                                        <TextBlock VerticalAlignment="Center" Grid.Column="2" Margin="5" TextWrapping="Wrap" Text="{xaml:Localize Key=DIALOGUEVENDOR_Guid}"/>
-                                    </Grid>
-                                </StackPanel>
-                                <StackPanel Grid.Column="1">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <xctk:UShortUpDown Foreground="{DynamicResource ForegroundColor}" Value="{Binding ID, UpdateSourceTrigger=PropertyChanged}" x:Name="dialogueVendorIdTxtBox" HorizontalAlignment="Left" Height="26" Margin="5" VerticalAlignment="Top" Width="62" ParsingNumberStyle="Integer" HorizontalContentAlignment="Left" ShowButtonSpinner="False" Maximum="65535" Minimum="0"   />
-                                        <Border HorizontalAlignment="Left" Grid.Column="1" Margin="5" VerticalAlignment="Center">
-                                            <TextBlock TextWrapping="Wrap" Text="{xaml:Localize Key=DIALOGUEVENDOR_ID}"/>
-                                        </Border>
-                                    </Grid>
-                                </StackPanel>
-                            </Grid>
-                            <Grid Grid.Row="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <ScrollViewer Grid.Column="2">
-                                    <StackPanel>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
-                                            <TextBox Name="dialogueVendorCurrencyBox" Grid.Row="1" VerticalAlignment="Center" Text="{Binding Currency, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
-                                            <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=DIALOGUEVENDOR_Currency}" Margin="5"/>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
-                                            <TextBox Name="dialogueVendorSellingFormatBox" Grid.Row="1" VerticalAlignment="Center" Text="{Binding SellingFormatText, UpdateSourceTrigger=PropertyChanged}" Margin="5">
-                                                <xaml:Extensions.OCBoomerangsAttach>
-                                                    <xaml:OCBoomerangsAttach/>
-                                                </xaml:Extensions.OCBoomerangsAttach>
-                                            </TextBox>
-                                            <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=DIALOGUEVENDOR_SellingFormat}" Margin="5"/>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
-                                            <TextBox Name="dialogueVendorBuyingFormatBox" Grid.Row="1" VerticalAlignment="Center" Text="{Binding BuyingFormatText, UpdateSourceTrigger=PropertyChanged}" Margin="5">
-                                                <xaml:Extensions.OCBoomerangsAttach>
-                                                    <xaml:OCBoomerangsAttach/>
-                                                </xaml:Extensions.OCBoomerangsAttach>
-                                            </TextBox>
-                                            <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=DIALOGUEVENDOR_BuyingFormat}" Margin="5"/>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
-                                            <TextBox Name="dialogueVendorGoodbyeTextBox" Grid.Row="1" VerticalAlignment="Center" Text="{Binding GoodbyeText, UpdateSourceTrigger=PropertyChanged}" Margin="5">
-                                                <xaml:Extensions.OCBoomerangsAttach>
-                                                    <xaml:OCBoomerangsAttach/>
-                                                </xaml:Extensions.OCBoomerangsAttach>
-                                            </TextBox>
-                                            <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=DIALOGUEVENDOR_GoodbyeText}" Margin="5"/>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
-                                            <xctk:UShortUpDown Name="dialogueVendorSellingDialogueBox" Grid.Row="1" VerticalAlignment="Center" Value="{Binding SoldDialogueID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ShowButtonSpinner="False" Foreground="{DynamicResource ForegroundColor}" Margin="5" />
-                                            <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=DIALOGUEVENDOR_SoldDialogueID}" Margin="5"/>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
-                                            <xctk:UShortUpDown Name="dialogueVendorBuyingDialogueBox" Grid.Row="1" VerticalAlignment="Center" Value="{Binding BoughtDialogueID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ShowButtonSpinner="False" Foreground="{DynamicResource ForegroundColor}" Margin="5" />
-                                            <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=DIALOGUEVENDOR_BoughtDialogueID}" Margin="5"/>
-                                        </Grid>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
-                                            <xctk:UShortUpDown Name="dialogueVendorGoodbyeDialogueBox" Grid.Row="1" VerticalAlignment="Center" Value="{Binding GoodbyeDialogueID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ShowButtonSpinner="False" Foreground="{DynamicResource ForegroundColor}" Margin="5" />
-                                            <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{xaml:Localize Key=DIALOGUEVENDOR_GoodbyeDialogueID}" Margin="5"/>
-                                        </Grid>
-                                        <Button Command="{Binding ConvertToDialogueCommand}" Name="convertToDialogueDialogueVendorButton" Margin="5" VerticalContentAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_DialogueVendor_ConvertToDialogue}"/>
-                                    </StackPanel>
-                                </ScrollViewer>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <GroupBox Grid.Column="0" Margin="5" Header="{xaml:Localize Key=DIALOGUEVENDOR_Pages}">
-                                            <ScrollViewer>
-                                                <StackPanel Name="dialogueVendorPagesGrid" />
-                                            </ScrollViewer>
-                                        </GroupBox>
-                                        <GroupBox Grid.Column="1" Margin="5" Header="{xaml:Localize Key=DIALOGUEVENDOR_Items_Buy}">
-                                            <ScrollViewer>
-                                                <StackPanel Name="dialogueVendorListBuyItems"/>
-                                            </ScrollViewer>
-                                        </GroupBox>
-                                        <GroupBox Grid.Column="2" Margin="5" Header="{xaml:Localize Key=DIALOGUEVENDOR_Items_Sell}">
-                                            <ScrollViewer>
-                                                <StackPanel Name="dialogueVendorListSellItems"/>
-                                            </ScrollViewer>
-                                        </GroupBox>
-                                    </Grid>
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="33*"/>
-                                            <ColumnDefinition Width="66*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Button Grid.Column="0" Command="{Binding AddPageCommand}" Name="dialogueVendorAddPageButton" Content="{xaml:Localize Key=DIALOGUEVENDOR_Page_Add}" Margin="5" Height="25"/>
-                                        <Button Grid.Column="1" Command="{Binding AddItemCommand}" Name="dialogueVendorAddItemButton" Content="{xaml:Localize Key=DIALOGUEVENDOR_Item_Add}" Margin="5" Height="25"/>
-                                    </Grid>
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -1989,6 +1761,27 @@
                         </ListView>
                         <Label Name="noErrorsLabel" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{xaml:Localize Key=INTERFACE_Main_Tab_Errors_Error_None}" FontSize="24" Visibility="Collapsed" Margin="0,0,0,100"/>
 
+                    </Grid>
+                </TabItem>
+                <TabItem DataContext="{Binding LogTabViewModel}" Name="logListTab" Header="{xaml:Localize INTERFACE_Main_Tab_Log}" Visibility="{Binding TabVisibility}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ListBox Margin="5" Name="logListBox" ItemsSource="{Binding LogLines}"/>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Margin="5" Text="{Binding UserInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBox.InputBindings>
+                                    <KeyBinding Key="Return" Command="{Binding EnterCommand}"/>
+                                </TextBox.InputBindings>
+                            </TextBox>
+                            <Button Grid.Column="1" Content="{xaml:Localize INTERFACE_Main_Tab_Log_Enter}" Margin="5" Command="{Binding EnterCommand}"/>
+                        </Grid>
                     </Grid>
                 </TabItem>
                 <TabControl.ItemTemplate>

@@ -30,6 +30,9 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails
 
             bmp.EndInit();
 
+            if (bmp.CanFreeze)
+                bmp.Freeze();
+
             _results[uri.AbsoluteUri] = bmp;
             GeneratedThumbnailCount++;
 

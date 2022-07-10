@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BowieD.Unturned.NPCMaker.Logging
@@ -98,6 +99,11 @@ namespace BowieD.Unturned.NPCMaker.Logging
                 await Log(ex.Message, level);
                 await Log(ex.StackTrace, level);
             }
+        }
+
+        public T GetLogger<T>() where T : ILogger
+        {
+            return (T)loggers.FirstOrDefault(d => d is T);
         }
     }
 }

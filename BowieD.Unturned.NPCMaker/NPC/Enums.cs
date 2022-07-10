@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
+using System.ComponentModel;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {
@@ -16,26 +17,38 @@ namespace BowieD.Unturned.NPCMaker.NPC
         None,
         Experience,
         Reputation,
+        [SkillLock(ESkillLevel.Advanced)]
         Quest,
         Item,
+        [SkillLock(ESkillLevel.Advanced)]
         Kills_Zombie,
+        [SkillLock(ESkillLevel.Advanced)]
         Kills_Horde,
+        [SkillLock(ESkillLevel.Advanced)]
         Kills_Animal,
+        [SkillLock(ESkillLevel.Advanced)]
         Kills_Player,
         Time_Of_Day,
         Player_Life_Health,
         Player_Life_Food,
         Player_Life_Water,
         Player_Life_Virus,
+        [SkillLock(ESkillLevel.Advanced)]
         Flag_Bool,
+        [SkillLock(ESkillLevel.Advanced)]
         Flag_Short,
         Skillset,
+        [SkillLock(ESkillLevel.Advanced)]
         Kills_Object,
         Holiday,
+        [SkillLock(ESkillLevel.Advanced)]
         Compare_Flags,
         Currency,
+        [SkillLock(ESkillLevel.Advanced)]
         Kills_Tree,
+        [SkillLock(ESkillLevel.Advanced)]
         Weather_Status,
+        [SkillLock(ESkillLevel.Advanced)]
         Weather_Blend_Alpha
     }
     public enum Logic_Type
@@ -49,7 +62,9 @@ namespace BowieD.Unturned.NPCMaker.NPC
     }
     public enum ItemType
     {
-        ITEM, VEHICLE
+        ITEM,
+        [SkillLock(ESkillLevel.Advanced)]
+        VEHICLE
     }
     public enum NPC_Pose
     {
@@ -77,19 +92,30 @@ namespace BowieD.Unturned.NPCMaker.NPC
         None,
         Experience,
         Reputation,
+        [SkillLock(ESkillLevel.Advanced)]
         Quest,
         Item,
         Item_Random,
+        [SkillLock(ESkillLevel.Advanced)]
         Vehicle,
+        [SkillLock(ESkillLevel.Advanced)]
         Teleport,
+        [SkillLock(ESkillLevel.Advanced)]
         Flag_Bool,
+        [SkillLock(ESkillLevel.Advanced)]
         Flag_Short,
+        [SkillLock(ESkillLevel.Advanced)]
         Flag_Short_Random,
+        [SkillLock(ESkillLevel.Advanced)]
         Flag_Math,
+        [SkillLock(ESkillLevel.Advanced)]
         Achievement,
+        [SkillLock(ESkillLevel.Advanced)]
         Event,
         Currency,
+        [SkillLock(ESkillLevel.Advanced)]
         Hint,
+        [SkillLock(ESkillLevel.Advanced)]
         Player_Spawnpoint,
     }
     public enum Quest_Status

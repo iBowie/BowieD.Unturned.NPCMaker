@@ -5,6 +5,7 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:xaml="clr-namespace:BowieD.Unturned.NPCMaker.XAML"
              xmlns:npc="clr-namespace:BowieD.Unturned.NPCMaker.NPC"
+             xmlns:themes="clr-namespace:BowieD.Unturned.NPCMaker.Themes"
              xmlns:cfg="clr-namespace:BowieD.Unturned.NPCMaker.Configuration">
     <Application.Resources>
         <ResourceDictionary>
@@ -19,6 +20,7 @@
             <xaml:EnumItemsSource x:Key="Simulation_Holidays_Enums" Type="{x:Type npc:ENPCHoliday}"/>
             <xaml:EnumItemsSource x:Key="Simulation_Skillsets_Enums" Type="{x:Type npc:ESkillset}"/>
             <xaml:EnumItemsSource x:Key="ExportSchema_Enums" Type="{x:Type cfg:EExportSchema}"/>
+            <xaml:EnumItemsSource x:Key="ThemeType_Enums" Type="{x:Type themes:EThemeType}"/>
             <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Green.xaml"/>

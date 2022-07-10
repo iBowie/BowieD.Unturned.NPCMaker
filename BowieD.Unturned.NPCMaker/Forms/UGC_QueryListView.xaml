@@ -1,4 +1,4 @@
-﻿<Window x:Class="BowieD.Unturned.NPCMaker.Forms.UGC_QueryListView"
+﻿<mah:MetroWindow  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="BowieD.Unturned.NPCMaker.Forms.UGC_QueryListView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -21,4 +21,4 @@
         </ScrollViewer>
         <Button Grid.Row="1" Margin="10" Name="cancelButton" Content="{xamle:Localize INTERFACE_UGC_QueryList_Cancel}"/>
     </Grid>
-</Window>
+</mah:MetroWindow>

@@ -5,6 +5,7 @@ using BowieD.Unturned.NPCMaker.GameIntegration.Devkit;
 using BowieD.Unturned.NPCMaker.NPC;
 using BowieD.Unturned.NPCMaker.NPC.Rewards;
 using BowieD.Unturned.NPCMaker.ViewModels;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Логика взаимодействия для Universal_VendorItemEditor.xaml
     /// </summary>
-    public partial class Universal_VendorItemEditor : Window
+    public partial class Universal_VendorItemEditor : MetroWindow
     {
         private bool ignoreAnimation = true;
 
@@ -145,6 +146,12 @@ namespace BowieD.Unturned.NPCMaker.Forms
             }, "Control_SelectAsset_DKSpawnpoint", MahApps.Metro.IconPacks.PackIconMaterialKind.MapMarker));
 
             txtBoxSpawnpoint.ContextMenu = cmenuSpawnpoint;
+
+            var skLevel = AppConfig.Instance.skillLevel;
+
+            editConditionsButton.IsEnabled = skLevel >= ESkillLevel.Intermediate;
+            editRewardsButton.IsEnabled = skLevel >= ESkillLevel.Intermediate;
+            vehicleTypeItem.IsEnabled = skLevel >= ESkillLevel.Advanced;
         }
         public Universal_VendorItemEditor(NPCVendor vendor, VendorItem startItem = null) : this(vendor.BuyItems.Count < byte.MaxValue, vendor.SellItems.Count < byte.MaxValue, startItem) { }
         public Universal_VendorItemEditor(VirtualDialogueVendor vendor, VendorItem startItem = null) : this(true, true, startItem) { }

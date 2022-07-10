@@ -99,11 +99,6 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 {
                     yield return new GameDialogueAsset(ch, EGameAssetOrigin.Project) as T;
                 }
-
-                foreach (var ch in MainWindow.CurrentProject.data.dialogueVendors)
-                {
-                    yield return new GameDialogueAsset(ch.CreateDialogue(), EGameAssetOrigin.Project) as T;
-                }
             }
 
             if (typeof(T).IsAssignableFrom(typeof(GameVendorAsset)))
@@ -355,7 +350,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
             }
         }
 
-        private static Tuple<bool, GameAsset> TryReadAssetFile(string fileName, EGameAssetOrigin origin)
+        internal static Tuple<bool, GameAsset> TryReadAssetFile(string fileName, EGameAssetOrigin origin)
         {
             using (StreamReader sr = new StreamReader(fileName))
             {

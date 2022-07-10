@@ -36,21 +36,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             UpdateColorPicker();
             UpdateTabs();
 
-            ContextMenu cmenu3 = new ContextMenu();
-
-            cmenu3.Items.Add(ContextHelper.CreateAddFromTemplateButton(typeof(NPCCharacter), (result) =>
-            {
-                if (result is NPCCharacter npcc)
-                {
-                    MainWindow.CurrentProject.data.characters.Add(npcc);
-                    MetroTabItem tabItem = CreateTab(npcc);
-                    MainWindow.Instance.characterTabSelect.Items.Add(tabItem);
-                    MainWindow.Instance.characterTabSelect.SelectedIndex = MainWindow.Instance.characterTabSelect.Items.Count - 1;
-                }
-            }));
-
-            MainWindow.Instance.characterTabButtonAdd.ContextMenu = cmenu3;
-
             MainWindow.Instance.txtDisplayName.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Rich | ContextHelper.EContextOption.Group_TextEdit);
 
             #region Clothing Init
@@ -299,6 +284,8 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             dialogueIDContext.Items.Add(ContextHelper.CreateFindReplaceButton(FindReplaceFormats.DIALOGUE_ID));
 
             MainWindow.Instance.txtStartDialogueID.ContextMenu = dialogueIDContext;
+
+            var skLevel = AppConfig.Instance.skillLevel;
         }
 
         private void CharacterTabButtonAdd_Click(object sender, RoutedEventArgs e)
@@ -698,7 +685,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             {
                 if (editVisibilityConditionsCommand == null)
                 {
-                    editVisibilityConditionsCommand = new BaseCommand(() =>
+                    editVisibilityConditionsCommand = new AdvancedCommand(() =>
                     {
                         Universal_ListView ulv = new Universal_ListView(Character.visibilityConditions.Select(d => new Universal_ItemList(d, Universal_ItemList.ReturnType.Condition, true)).ToLimitedList(byte.MaxValue), Universal_ItemList.ReturnType.Condition)
                         {
@@ -707,6 +694,9 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         ulv.ShowDialog();
                         Character.visibilityConditions = new LimitedList<Condition>(ulv.Values.Cast<Condition>(), byte.MaxValue);
                         MainWindow.CurrentProject.isSaved = false;
+                    }, (p) =>
+                    {
+                        return AppConfig.Instance.skillLevel >= ESkillLevel.Intermediate;
                     });
                 }
                 return editVisibilityConditionsCommand;
@@ -887,17 +877,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 }
                             }
                             MainWindow.Instance.MainWindowViewModel.VendorTabViewModel.RelayChange(nameof(VendorTabViewModel.GUID));
-                        }
-                        if (MainWindow.CurrentProject.data.dialogueVendors != null)
-                        {
-                            foreach (VirtualDialogueVendor v in MainWindow.CurrentProject.data.dialogueVendors)
-                            {
-                                if (v != null)
-                                {
-                                    v.GUID = Guid.NewGuid().ToString("N");
-                                }
-                            }
-                            MainWindow.Instance.MainWindowViewModel.DialogueVendorTabViewModel.RelayChange(nameof(VirtualDialogueVendorTabViewModel.GUID));
                         }
                         if (MainWindow.CurrentProject.data.quests != null)
                         {

@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.ViewModels;
 using BowieD.Unturned.NPCMaker.Workshop;
+using MahApps.Metro.Controls;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +10,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Логика взаимодействия для UGC_QueryListView.xaml
     /// </summary>
-    public partial class UGC_QueryListView : Window
+    public partial class UGC_QueryListView : MetroWindow
     {
         public UGC_QueryListView(IEnumerable<UGC> ugcs)
         {

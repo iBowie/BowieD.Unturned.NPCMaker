@@ -1,6 +1,11 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
+using BowieD.Unturned.NPCMaker.Mistakes.Character;
+using BowieD.Unturned.NPCMaker.Mistakes.Currencies;
+using BowieD.Unturned.NPCMaker.Mistakes.Dialogue;
+using BowieD.Unturned.NPCMaker.Mistakes.Quest;
+using BowieD.Unturned.NPCMaker.Mistakes.Vendor;
 using BowieD.Unturned.NPCMaker.NPC;
 using System;
 using System.Collections.Generic;
@@ -17,26 +22,49 @@ namespace BowieD.Unturned.NPCMaker.Mistakes
             if (CheckMistakes == null)
             {
                 CheckMistakes = new HashSet<Mistake>();
-                string[] nspaces = {
-                    "BowieD.Unturned.NPCMaker.Mistakes.Character",
-                    "BowieD.Unturned.NPCMaker.Mistakes.Dialogue",
-                    "BowieD.Unturned.NPCMaker.Mistakes.Vendor",
-                    "BowieD.Unturned.NPCMaker.Mistakes.Quest",
-                    "BowieD.Unturned.NPCMaker.Mistakes.Currencies"
-                };
-                IEnumerable<Type> q = from t in Assembly.GetExecutingAssembly().GetTypes() where t.IsClass && !t.IsAbstract && nspaces.Contains(t.Namespace) select t;
-                foreach (Type t in q)
+
+                void register<T>() where T : Mistake, new()
                 {
-                    try
-                    {
-                        object mistake = Activator.CreateInstance(t);
-                        if (mistake is Mistake mist)
-                        {
-                            CheckMistakes.Add(mist);
-                        }
-                    }
-                    catch { }
+                    CheckMistakes.Add(new T());
                 }
+
+                // characters
+                register<NE_0000>();
+                register<NE_0001>();
+                register<NE_0002>();
+                register<NE_0003>();
+                register<NE_0004>();
+                register<NE_0005>();
+                // dialogues
+                register<NE_1000>();
+                register<NE_1001>();
+                register<NE_1002>();
+                register<NE_1003>();
+                register<NE_1004>();
+                register<NE_1005>();
+                register<NE_1006>();
+                register<NE_1007>();
+                register<NE_1008>();
+                register<NE_1009>();
+                register<NE_1010>();
+                // vendors
+                register<NE_2000>();
+                register<NE_2001>();
+                register<NE_2002>();
+                register<NE_2003>();
+                register<NE_2004>();
+                // quests
+                register<NE_3000>();
+                register<NE_3001>();
+                register<NE_3002>();
+                register<NE_3003>();
+                register<NE_3004>();
+                // currencies
+                register<NE_4000>();
+                register<NE_4001>();
+                register<NE_4002>();
+                register<NE_4003>();
+                register<NE_4004>();
             }
             MainWindow.Instance.MainWindowViewModel.SaveAll();
             MainWindow.Instance.lstMistakes.Items.Clear();

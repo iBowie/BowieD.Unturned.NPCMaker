@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Localization;
+using MahApps.Metro.Controls;
 using System.Windows;
 using System.Windows.Controls;
 using static BowieD.Unturned.NPCMaker.Controls.Universal_ItemList;
@@ -9,7 +10,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Логика взаимодействия для Universal_Select.xaml
     /// </summary>
-    public partial class Universal_Select : Window
+    public partial class Universal_Select : MetroWindow
     {
         public Universal_Select(ReturnType returnType)
         {

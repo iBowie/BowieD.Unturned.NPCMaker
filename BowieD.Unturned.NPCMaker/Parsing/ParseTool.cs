@@ -268,7 +268,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
             for (int num = 0; num < c.Length; num++)
             {
                 string text = $"{prefix}{postfix}{num}_Type";
-                
+
                 if (!asset.Has(text))
                 {
                     throw new InvalidDataException("Parsed condition is invalid");
@@ -466,7 +466,7 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                     default:
                         throw new InvalidDataException("Parsed condition is invalid");
                 }
-                
+
                 c[num].Localization = desc ?? "";
                 c[num].Reset = needToReset;
             }

@@ -3,6 +3,7 @@ using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Markup;
 using BowieD.Unturned.NPCMaker.NPC;
+using MahApps.Metro.Controls;
 using MahApps.Metro.IconPacks;
 using System.Linq;
 using System.Windows;
@@ -15,7 +16,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Interaction logic for DialogueView_Window.xaml
     /// </summary>
-    public partial class DialogueView_Window : Window
+    public partial class DialogueView_Window : MetroWindow
     {
         static IMarkup formatter = new RichText();
 

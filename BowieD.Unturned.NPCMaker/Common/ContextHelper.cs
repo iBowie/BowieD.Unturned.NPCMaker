@@ -2,10 +2,8 @@
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.GameIntegration.Filtering;
 using BowieD.Unturned.NPCMaker.Localization;
-using BowieD.Unturned.NPCMaker.Templating;
 using BowieD.Unturned.NPCMaker.ViewModels;
 using MahApps.Metro.IconPacks;
-using Microsoft.Win32;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -64,9 +62,6 @@ namespace BowieD.Unturned.NPCMaker.Common
             if (option.HasFlag(EContextOption.PasteObject))
                 throw new ArgumentException("PasteObject is not supported here");
 
-            if (option.HasFlag(EContextOption.AddFromTemplate))
-                throw new ArgumentException("AddFromTemplate is not supported here");
-
             return cmenu;
         }
 
@@ -90,6 +85,7 @@ namespace BowieD.Unturned.NPCMaker.Common
 
             Group_CopyPasteObject = CopyObject | DuplicateObject | PasteObject,
 
+            [Obsolete("Not used by anything", true)]
             AddFromTemplate = 1 << 10,
 
             Color_Unturned = 1 << 11,
@@ -115,7 +111,15 @@ namespace BowieD.Unturned.NPCMaker.Common
                 TextBox target = context.PlacementTarget as TextBox;
                 int pos = target.SelectionStart;
                 int l = target.SelectionLength;
-                target.Text = target.Text.Remove(pos, l).Insert(pos, "<br>");
+                try
+                {
+                    target.BeginChange();
+                    target.Text = target.Text.Remove(pos, l).Insert(pos, "<br>");
+                }
+                finally
+                {
+                    target.EndChange();
+                }
             });
             b.Icon = new PackIconMaterial()
             {
@@ -136,7 +140,15 @@ namespace BowieD.Unturned.NPCMaker.Common
                 TextBox target = context.PlacementTarget as TextBox;
                 int pos = target.SelectionStart;
                 int l = target.SelectionLength;
-                target.Text = target.Text.Remove(pos, l).Insert(pos, "<pause>");
+                try
+                {
+                    target.BeginChange();
+                    target.Text = target.Text.Remove(pos, l).Insert(pos, "<pause>");
+                }
+                finally
+                {
+                    target.EndChange();
+                }
             });
             b.Icon = new PackIconMaterial()
             {
@@ -157,7 +169,15 @@ namespace BowieD.Unturned.NPCMaker.Common
                 TextBox target = context.PlacementTarget as TextBox;
                 int pos = target.SelectionStart;
                 int l = target.SelectionLength;
-                target.Text = target.Text.Remove(pos, l).Insert(pos, "<name_char>");
+                try
+                {
+                    target.BeginChange();
+                    target.Text = target.Text.Remove(pos, l).Insert(pos, "<name_char>");
+                }
+                finally
+                {
+                    target.EndChange();
+                }
             });
             b.Icon = new PackIconMaterial()
             {
@@ -178,7 +198,15 @@ namespace BowieD.Unturned.NPCMaker.Common
                 TextBox target = context.PlacementTarget as TextBox;
                 int pos = target.SelectionStart;
                 int l = target.SelectionLength;
-                target.Text = target.Text.Remove(pos, l).Insert(pos, "<name_npc>");
+                try
+                {
+                    target.BeginChange();
+                    target.Text = target.Text.Remove(pos, l).Insert(pos, "<name_npc>");
+                }
+                finally
+                {
+                    target.EndChange();
+                }
             });
             b.Icon = new PackIconMaterial()
             {
@@ -264,7 +292,15 @@ namespace BowieD.Unturned.NPCMaker.Common
                 TextBox target = context.PlacementTarget as TextBox;
                 int pos = target.SelectionStart;
                 int l = target.SelectionLength;
-                target.Text = target.Text.Insert(pos + l, "</color>").Insert(pos, $"<color={Coloring.ColorConverter.BrushToHEX(clr)}>");
+                try
+                {
+                    target.BeginChange();
+                    target.Text = target.Text.Insert(pos + l, "</color>").Insert(pos, $"<color={Coloring.ColorConverter.BrushToHEX(clr)}>");
+                }
+                finally
+                {
+                    target.EndChange();
+                }
             });
             return b;
         }
@@ -280,7 +316,15 @@ namespace BowieD.Unturned.NPCMaker.Common
                 TextBox target = context.PlacementTarget as TextBox;
                 int pos = target.SelectionStart;
                 int l = target.SelectionLength;
-                target.Text = target.Text.Insert(pos + l, "</i>").Insert(pos, "<i>");
+                try
+                {
+                    target.BeginChange();
+                    target.Text = target.Text.Insert(pos + l, "</i>").Insert(pos, "<i>");
+                }
+                finally
+                {
+                    target.EndChange();
+                }
             });
             b.Icon = new PackIconMaterial()
             {
@@ -301,7 +345,15 @@ namespace BowieD.Unturned.NPCMaker.Common
                 TextBox target = context.PlacementTarget as TextBox;
                 int pos = target.SelectionStart;
                 int l = target.SelectionLength;
-                target.Text = target.Text.Insert(pos + l, "</b>").Insert(pos, "<b>");
+                try
+                {
+                    target.BeginChange();
+                    target.Text = target.Text.Insert(pos + l, "</b>").Insert(pos, "<b>");
+                }
+                finally
+                {
+                    target.EndChange();
+                }
             });
             b.Icon = new PackIconMaterial()
             {
@@ -349,63 +401,6 @@ namespace BowieD.Unturned.NPCMaker.Common
             b.Icon = new PackIconMaterial()
             {
                 Kind = PackIconMaterialKind.ContentPaste
-            };
-            (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
-            return b;
-        }
-
-        internal static MenuItem CreateAddFromTemplateButton(Type context, Action<object> add)
-        {
-            MenuItem b = new MenuItem()
-            {
-                Header = LocalizationManager.Current.Interface["Control_AddFromTemplate"]
-            };
-            b.Click += new RoutedEventHandler((sender, e) =>
-            {
-                OpenFileDialog ofd = new OpenFileDialog()
-                {
-                    Filter = $"{LocalizationManager.Current.General["Project_TemplateFilter"]}|*.npctemplate",
-                    Multiselect = false
-                };
-                if (ofd.ShowDialog() == true)
-                {
-                    try
-                    {
-                        var template = TemplateManager.LoadTemplate(ofd.FileName);
-
-                        if (template != null)
-                        {
-                            if (TemplateManager.IsCorrectContext(template, context))
-                            {
-                                TemplateManager.PrepareTemplate(template);
-
-                                if (template.Inputs.Count > 0)
-                                    TemplateManager.AskForInput(template);
-
-                                var result = TemplateManager.ApplyTemplate(template);
-
-                                add.Invoke(result);
-                            }
-                            else
-                            {
-                                App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Template_InvalidContext"));
-                            }
-                        }
-                        else
-                        {
-                            App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Template_InvalidFile"));
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        App.NotificationManager.Notify(LocalizationManager.Current.Notification.Translate("Template_Error"));
-                        App.Logger.LogException("Could not add item from template", ex: ex);
-                    }
-                }
-            });
-            b.Icon = new PackIconMaterial()
-            {
-                Kind = PackIconMaterialKind.FolderPlusOutline
             };
             (b.Icon as PackIconMaterial).SetResourceReference(PackIconMaterial.ForegroundProperty, "AccentColor");
             return b;

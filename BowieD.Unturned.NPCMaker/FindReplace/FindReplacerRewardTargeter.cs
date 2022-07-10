@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC.Rewards;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,7 +12,6 @@ namespace BowieD.Unturned.NPCMaker.FindReplace
 
             return data.dialogues.SelectMany(d => d.Messages.SelectMany(k => k.rewards))
                 .Concat(data.dialogues.SelectMany(d => d.Responses.SelectMany(k => k.rewards)))
-                .Concat(data.dialogueVendors.SelectMany(d => d.Items.SelectMany(k => k.rewards)))
                 .Concat(data.vendors.SelectMany(d => d.items.SelectMany(k => k.rewards)))
                 .Concat(data.quests.SelectMany(d => d.rewards));
         }

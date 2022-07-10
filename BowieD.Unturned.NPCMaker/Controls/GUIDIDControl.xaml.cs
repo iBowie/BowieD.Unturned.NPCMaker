@@ -34,7 +34,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
             if (sender is GUIDIDControl control && e.NewValue is GUIDIDBridge bridge)
             {
                 control.txt.TextChanged -= control.txt_TextChanged;
-                
+
                 if (bridge.Guid.HasValue)
                 {
                     control.txt.Text = bridge.Guid.Value.ToString("N");
@@ -50,7 +50,7 @@ namespace BowieD.Unturned.NPCMaker.Controls
                     control.txt.Text = string.Empty;
                     control.mainGrid.BorderBrush = Brushes.Red;
                 }
-                
+
                 control.txt.TextChanged += control.txt_TextChanged;
 
                 control.ValueChanged?.Invoke(control, bridge);

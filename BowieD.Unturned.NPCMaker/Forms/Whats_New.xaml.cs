@@ -1,5 +1,6 @@
 ﻿using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Markup;
+using MahApps.Metro.Controls;
 using System;
 using System.Windows;
 
@@ -8,7 +9,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Логика взаимодействия для Whats_New.xaml
     /// </summary>
-    public partial class Whats_New : Window
+    public partial class Whats_New : MetroWindow
     {
         public static string UpdateTitle = "";
         public static string UpdateContent = "";

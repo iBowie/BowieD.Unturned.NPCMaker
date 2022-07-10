@@ -51,15 +51,12 @@
 	"credits":
 	{
 		"Unturned": "Nelson Sexton",
-		"Newtonsoft.Json": "https://www.newtonsoft.com/json",
-		"DiscordRPC": "https://github.com/Lachee",
-		"MahApps.Metro": "https://mahapps.com/",
-		"ControlzEx": "https://github.com/ControlzEx/ControlzEx",
-		"Xceed.Wpf.Toolkit": "https://github.com/xceedsoftware/wpftoolkit",
-		"Steamworks.NET": "https://github.com/rlabrecque/Steamworks.NET"
+		"Loco": "Almost infinite idea supply",
+		"kulkaGM": "New folder selectors"
 	},
 	"guides":
 	{
+		"[EN] Official Wiki": "https://github.com/iBowie/BowieD.Unturned.NPCMaker/wiki",
 		"[RU/EN] Official Guide on Steam": "https://steamcommunity.com/sharedfiles/filedetails/?id=1664300090",
 		"[RU] Гайд от Second Cog": "https://youtu.be/A3I8c3l6ZAs",
 		"[EN SUBTITLES] Second Cog's Guide": "https://youtu.be/A3I8c3l6ZAs",
@@ -69,7 +66,7 @@
 		"[TR] kürek mahkumu's Tutorial" : "https://youtu.be/0QPqktKTOXM"
 	},
 	"templatesURL": "https://discord.gg/hwFGB67",
-	"patrons":["Loco","Blackwood","rufu"],
+	"patrons":["Loco","Blackwood","rufu","trooves"],
 	"holidays":
 	[
 		{
@@ -141,51 +138,6 @@
 			{
 				"from": "2020-05-26T00:00:01Z",
 				"to": "2020-05-26T23:59:59Z",
-				"annual": true
-			}
-		},
-		{
-			"notification": "May the force be with you...",
-			"range":
-			{
-				"from": "2020-05-04T00:00:01Z",
-				"to": "2020-05-04T23:59:59Z",
-				"annual": true
-			}
-		},
-		{
-			"notification": "Happy Birthday, Minecraft!",
-			"range":
-			{
-				"from": "2009-05-17T00:00:01Z",
-				"to": "2009-05-17T23:59:59Z",
-				"annual": true
-			}
-		},
-		{
-			"notification": "Life is Strange...",
-			"range":
-			{
-				"from": "2015-01-30T00:00:01Z",
-				"to": "2015-01-30T23:59:59Z",
-				"annual": true
-			}
-		},
-		{
-			"notification": "Happy Birthday, Sonic The Hedgehog!",
-			"range":
-			{
-				"from": "1991-06-23T00:00:01Z",
-				"to": "1991-06-23T23:59:59Z",
-				"annual": true
-			}
-		},
-		{
-			"notification": "Happy Birthday, Terraria!",
-			"range":
-			{
-				"from": "2011-05-16T00:00:01Z",
-				"to": "2011-05-16T23:59:59Z",
 				"annual": true
 			}
 		},

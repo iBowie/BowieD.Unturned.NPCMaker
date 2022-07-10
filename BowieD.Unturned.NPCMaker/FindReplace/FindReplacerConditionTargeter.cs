@@ -1,5 +1,4 @@
 ﻿using BowieD.Unturned.NPCMaker.NPC.Conditions;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,7 +13,6 @@ namespace BowieD.Unturned.NPCMaker.FindReplace
             return data.characters.SelectMany(d => d.visibilityConditions)
                 .Concat(data.dialogues.SelectMany(d => d.Messages.SelectMany(k => k.conditions)))
                 .Concat(data.dialogues.SelectMany(d => d.Responses.SelectMany(k => k.conditions)))
-                .Concat(data.dialogueVendors.SelectMany(d => d.Items.SelectMany(k => k.conditions)))
                 .Concat(data.vendors.SelectMany(d => d.items.SelectMany(k => k.conditions)))
                 .Concat(data.quests.SelectMany(d => d.conditions));
         }
@@ -33,7 +31,7 @@ namespace BowieD.Unturned.NPCMaker.FindReplace
             yield return new ReplaceableProperty(nameof(ConditionKillsPlayer.ID), typeof(ConditionKillsPlayer), FindReplaceFormats.FLAG_ID);
             yield return new ReplaceableProperty(nameof(ConditionKillsTree.ID), typeof(ConditionKillsTree), FindReplaceFormats.FLAG_ID);
             yield return new ReplaceableProperty(nameof(ConditionKillsZombie.ID), typeof(ConditionKillsZombie), FindReplaceFormats.FLAG_ID);
-            
+
             yield return new ReplaceableProperty(nameof(ConditionCurrency.GUID), typeof(ConditionCurrency), FindReplaceFormats.CURRENCY_GUID);
         }
     }

@@ -7,6 +7,11 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
     [System.Serializable]
     public sealed class ConditionPlayerLifeVirus : Condition
     {
+        public ConditionPlayerLifeVirus()
+        {
+            Logic = Logic_Type.Equal;
+        }
+
         public override Condition_Type Type => Condition_Type.Player_Life_Virus;
         public int Value { get; set; }
         public Logic_Type Logic { get; set; }

@@ -20,7 +20,6 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public ELanguage language;
         public EExportSchema exportSchema;
         public bool enableDiscord;
-        public string currentTheme;
         public bool generateGuids;
         public byte autosaveOption;
         public bool animateControls;
@@ -44,6 +43,11 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public double mainWindowBackgroundImageBlurRadius;
         public bool alternateBoolValue;
         public bool forceSoftwareRendering;
+        public bool useDarkMode = true;
+        public Coloring.Color accentColor = new Coloring.Color("#60A917");
+        public EThemeType themeType = EThemeType.Normal;
+        public bool hasUnlockedSecretThemes = false;
+        public ESkillLevel skillLevel = ESkillLevel.None;
 
         public void Apply(AppConfig from, out bool hasToRestart)
         {
@@ -65,14 +69,16 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             hasToRestart |= (useOldStyleMoveUpDown != from.useOldStyleMoveUpDown);
             hasToRestart |= (replaceMissingKeysWithEnglish != from.replaceMissingKeysWithEnglish);
             hasToRestart |= (forceSoftwareRendering != from.forceSoftwareRendering);
+            hasToRestart |= (skillLevel != from.skillLevel);
 
             // it has to do some work before it can be applied
-            if (currentTheme != from.currentTheme)
+            if (useDarkMode != from.useDarkMode || accentColor != from.accentColor || themeType != from.themeType)
             {
-                currentTheme = from.currentTheme;
+                useDarkMode = from.useDarkMode;
+                accentColor = from.accentColor;
+                themeType = from.themeType;
 
-                Theme theme = ThemeManager.Themes.ContainsKey(currentTheme ?? "") ? ThemeManager.Themes[currentTheme] : ThemeManager.Themes["Metro/LightGreen"];
-                ThemeManager.Apply(theme);
+                ThemeManager.Apply(accentColor, useDarkMode);
             }
 
             if (automaticallyCheckForErrors != from.automaticallyCheckForErrors)
@@ -96,7 +102,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 mainWindowBackgroundImage = from.mainWindowBackgroundImage;
                 mainWindowBackgroundImageBlurRadius = from.mainWindowBackgroundImageBlurRadius;
 
-                MainWindow.Instance.SetBackground(mainWindowBackgroundImage, currentTheme.Substring("Metro/".Length).StartsWith("Dark"));
+                MainWindow.Instance.SetBackground(mainWindowBackgroundImage, useDarkMode);
             }
 
             // it's enough to just change value to apply it
@@ -110,6 +116,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             autoCloseOpenBoomerangs = from.autoCloseOpenBoomerangs;
             alternateLogicTranslation = from.alternateLogicTranslation;
             alternateBoolValue = from.alternateBoolValue;
+            hasUnlockedSecretThemes = from.hasUnlockedSecretThemes;
         }
         public void Save()
         {
@@ -125,9 +132,9 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             {
                 App.Logger.Log($"[CFG] - File not found. Creating one...");
                 LoadDefaults();
-                
+
                 PostLoad();
-                
+
                 Save();
             }
             else
@@ -137,16 +144,16 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                     App.Logger.Log($"[CFG] - File found. Loading configuration...");
                     string content = File.ReadAllText(path);
                     JsonConvert.PopulateObject(content, this);
-                    
+
                     PostLoad();
-                    
+
                     App.Logger.Log($"[CFG] - Configuration loaded from {path}");
                 }
                 catch
                 {
                     App.Logger.Log($"[CFG] - Could not load configuration from file. Reverting to default...", ELogLevel.WARNING);
                     LoadDefaults();
-                    
+
                     PostLoad();
 
                     Save();
@@ -158,7 +165,8 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             App.Logger.Log($"[CFG] - Loading default configuration...");
             scale = 1;
             enableDiscord = true;
-            currentTheme = "Metro/LightGreen";
+            accentColor = new Coloring.Color("#60A917");
+            useDarkMode = true;
             generateGuids = true;
             autosaveOption = 1;
             experimentalFeatures = false;
@@ -191,6 +199,9 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             autoCloseOpenBoomerangs = true;
             alternateBoolValue = true;
             forceSoftwareRendering = false;
+            hasUnlockedSecretThemes = false;
+            themeType = EThemeType.Normal;
+            skillLevel = ESkillLevel.None;
 
             App.Logger.Log($"[CFG] - Default configuration loaded!");
         }

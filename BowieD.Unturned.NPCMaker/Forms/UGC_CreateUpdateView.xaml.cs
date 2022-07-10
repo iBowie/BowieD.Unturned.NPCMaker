@@ -1,12 +1,12 @@
 ﻿using BowieD.Unturned.NPCMaker.ViewModels;
-using System.Windows;
+using MahApps.Metro.Controls;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
     /// <summary>
     /// Логика взаимодействия для UGC_CreateUpdateView.xaml
     /// </summary>
-    public partial class UGC_CreateUpdateView : Window
+    public partial class UGC_CreateUpdateView : MetroWindow
     {
         public UGC_CreateUpdateView()
         {

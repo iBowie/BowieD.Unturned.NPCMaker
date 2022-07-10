@@ -5,6 +5,7 @@ using System.Xml;
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
     [System.Serializable]
+    [Configuration.SkillLock(Configuration.ESkillLevel.Advanced)]
     public sealed class RewardPlayerSpawnpoint : Reward
     {
         public override RewardType Type => RewardType.Player_Spawnpoint;

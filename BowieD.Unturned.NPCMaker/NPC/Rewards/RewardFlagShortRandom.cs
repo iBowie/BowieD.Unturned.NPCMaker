@@ -8,6 +8,7 @@ using System.Xml;
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
     [System.Serializable]
+    [Configuration.SkillLock(Configuration.ESkillLevel.Advanced)]
     public sealed class RewardFlagShortRandom : Reward
     {
         public override RewardType Type => RewardType.Flag_Short_Random;

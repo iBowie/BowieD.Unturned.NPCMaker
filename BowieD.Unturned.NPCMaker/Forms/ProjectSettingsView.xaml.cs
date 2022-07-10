@@ -14,7 +14,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Логика взаимодействия для ProjectSettingsView.xaml
     /// </summary>
-    public partial class ProjectSettingsView : Window
+    public partial class ProjectSettingsView : MetroWindow
     {
         public readonly NPCProject project;
 

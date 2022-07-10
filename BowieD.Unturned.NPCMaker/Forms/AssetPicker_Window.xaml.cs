@@ -5,6 +5,7 @@ using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.Markup;
 using BowieD.Unturned.NPCMaker.ViewModels;
+using MahApps.Metro.Controls;
 using MahApps.Metro.IconPacks;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
     /// <summary>
     /// Логика взаимодействия для AssetPicker_Window.xaml
     /// </summary>
-    public partial class AssetPicker_Window : Window
+    public partial class AssetPicker_Window : MetroWindow
     {
         public AssetPicker_Window(Type assetType, params AssetFilter[] filters)
         {

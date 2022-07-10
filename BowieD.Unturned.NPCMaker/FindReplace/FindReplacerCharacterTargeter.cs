@@ -18,7 +18,7 @@ namespace BowieD.Unturned.NPCMaker.FindReplace
             if (target is NPCCharacter character)
             {
                 MainWindow.Instance.mainTabControl.SelectedValue = MainWindow.Instance.characterTab;
-                
+
                 var tabber = MainWindow.Instance.characterTabSelect;
 
                 for (int i = 0; i < tabber.Items.Count; i++)

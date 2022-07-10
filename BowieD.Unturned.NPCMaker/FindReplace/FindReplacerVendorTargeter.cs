@@ -18,7 +18,7 @@ namespace BowieD.Unturned.NPCMaker.FindReplace
             if (target is NPCVendor vendor)
             {
                 MainWindow.Instance.mainTabControl.SelectedValue = MainWindow.Instance.vendorTab;
-                
+
                 var tabber = MainWindow.Instance.vendorTabSelect;
 
                 for (int i = 0; i < tabber.Items.Count; i++)
