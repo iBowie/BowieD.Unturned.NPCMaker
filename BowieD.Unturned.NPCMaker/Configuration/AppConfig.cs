@@ -47,7 +47,6 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public Coloring.Color accentColor = new Coloring.Color("#60A917");
         public EThemeType themeType = EThemeType.Normal;
         public bool hasUnlockedSecretThemes = false;
-        public ESkillLevel skillLevel = ESkillLevel.None;
 
         public void Apply(AppConfig from, out bool hasToRestart)
         {
@@ -69,7 +68,6 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             hasToRestart |= (useOldStyleMoveUpDown != from.useOldStyleMoveUpDown);
             hasToRestart |= (replaceMissingKeysWithEnglish != from.replaceMissingKeysWithEnglish);
             hasToRestart |= (forceSoftwareRendering != from.forceSoftwareRendering);
-            hasToRestart |= (skillLevel != from.skillLevel);
 
             // it has to do some work before it can be applied
             if (useDarkMode != from.useDarkMode || accentColor != from.accentColor || themeType != from.themeType)
@@ -201,7 +199,6 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             forceSoftwareRendering = false;
             hasUnlockedSecretThemes = false;
             themeType = EThemeType.Normal;
-            skillLevel = ESkillLevel.None;
 
             App.Logger.Log($"[CFG] - Default configuration loaded!");
         }

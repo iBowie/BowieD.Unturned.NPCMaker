@@ -74,17 +74,6 @@ namespace BowieD.Unturned.NPCMaker.Controls
             }
 
             mainText.ContextMenu = ContextHelper.CreateContextMenu(ContextHelper.EContextOption.Group_Dialogue | ContextHelper.EContextOption.Group_TextEdit);
-
-            var skLevel = Configuration.AppConfig.Instance.skillLevel;
-
-            txtBoxQuestID.IsEnabled = skLevel >= Configuration.ESkillLevel.Intermediate;
-            previewQuestLabel.IsEnabled = txtBoxQuestID.IsEnabled;
-            selectQuestButton.IsEnabled = txtBoxQuestID.IsEnabled;
-
-            editVisibilityButton.IsEnabled = skLevel >= Configuration.ESkillLevel.Advanced;
-
-            editConditionsButton.IsEnabled = skLevel >= Configuration.ESkillLevel.Intermediate;
-            editRewardsButton.IsEnabled = skLevel >= Configuration.ESkillLevel.Intermediate;
         }
 
         public NPC.NPCResponse Response { get; private set; }

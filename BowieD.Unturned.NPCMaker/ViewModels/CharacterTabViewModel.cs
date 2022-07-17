@@ -284,8 +284,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
             dialogueIDContext.Items.Add(ContextHelper.CreateFindReplaceButton(FindReplaceFormats.DIALOGUE_ID));
 
             MainWindow.Instance.txtStartDialogueID.ContextMenu = dialogueIDContext;
-
-            var skLevel = AppConfig.Instance.skillLevel;
         }
 
         private void CharacterTabButtonAdd_Click(object sender, RoutedEventArgs e)
@@ -694,9 +692,6 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         ulv.ShowDialog();
                         Character.visibilityConditions = new LimitedList<Condition>(ulv.Values.Cast<Condition>(), byte.MaxValue);
                         MainWindow.CurrentProject.isSaved = false;
-                    }, (p) =>
-                    {
-                        return AppConfig.Instance.skillLevel >= ESkillLevel.Intermediate;
                     });
                 }
                 return editVisibilityConditionsCommand;

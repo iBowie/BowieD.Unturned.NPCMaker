@@ -81,14 +81,6 @@ namespace BowieD.Unturned.NPCMaker.Controls
             resizeRect.MouseLeftButtonDown += ResizeRect_MouseLeftButtonDown;
             resizeRect.MouseLeftButtonUp += ResizeRect_MouseLeftButtonUp;
             resizeRect.MouseMove += ResizeRect_MouseMove;
-
-            var skLevel = Configuration.AppConfig.Instance.skillLevel;
-
-            prevBox.IsEnabled = skLevel >= Configuration.ESkillLevel.Advanced;
-            prevLabel.IsEnabled = prevBox.IsEnabled;
-
-            conditionsButton.IsEnabled = skLevel >= Configuration.ESkillLevel.Intermediate;
-            rewardsButton.IsEnabled = skLevel >= Configuration.ESkillLevel.Intermediate;
         }
 
         private Point resizeStart;

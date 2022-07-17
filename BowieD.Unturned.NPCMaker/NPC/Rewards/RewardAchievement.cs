@@ -6,7 +6,6 @@ using System.Xml;
 namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 {
     [System.Serializable]
-    [Configuration.SkillLock(Configuration.ESkillLevel.Advanced)]
     public sealed class RewardAchievement : Reward
     {
         public override RewardType Type => RewardType.Achievement;

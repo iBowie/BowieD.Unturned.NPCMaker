@@ -457,10 +457,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
             {
                 if (t != null && t.IsSealed && t.IsSubclassOf(typeof(Reward)))
                 {
-                    var skillLock = t.GetCustomAttribute<Configuration.SkillLockAttribute>();
-
-                    if (skillLock is null || AppConfig.Instance.skillLevel >= skillLock.Level)
-                        yield return t;
+                    yield return t;
                 }
             }
         }

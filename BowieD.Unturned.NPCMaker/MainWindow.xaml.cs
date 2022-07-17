@@ -45,20 +45,6 @@ namespace BowieD.Unturned.NPCMaker
             ImportAssetsForm iaf = new ImportAssetsForm();
             iaf.ShowDialog();
 
-            var level = AppConfig.Instance.skillLevel;
-            while (level == ESkillLevel.None)
-            {
-                AskSkillsView askSkillsView = new AskSkillsView();
-
-                if (askSkillsView.ShowDialog() == true)
-                {
-                    level = askSkillsView.SelectedSkillLevel;
-
-                    AppConfig.Instance.skillLevel = level;
-                    AppConfig.Instance.Save();
-                }
-            }
-
             Width *= AppConfig.Instance.scale;
             Height *= AppConfig.Instance.scale;
             MinWidth *= AppConfig.Instance.scale;
@@ -367,14 +353,6 @@ namespace BowieD.Unturned.NPCMaker
                     }
                 }
             };
-
-            #region Skill Level Setup
-            if (level < ESkillLevel.Intermediate)
-                questTab.Visibility = Visibility.Collapsed;
-
-            if (level < ESkillLevel.Intermediate)
-                currencyTab.Visibility = Visibility.Collapsed;
-            #endregion
 
             base.Show();
         }

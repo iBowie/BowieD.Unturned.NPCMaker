@@ -146,12 +146,6 @@ namespace BowieD.Unturned.NPCMaker.Forms
             }, "Control_SelectAsset_DKSpawnpoint", MahApps.Metro.IconPacks.PackIconMaterialKind.MapMarker));
 
             txtBoxSpawnpoint.ContextMenu = cmenuSpawnpoint;
-
-            var skLevel = AppConfig.Instance.skillLevel;
-
-            editConditionsButton.IsEnabled = skLevel >= ESkillLevel.Intermediate;
-            editRewardsButton.IsEnabled = skLevel >= ESkillLevel.Intermediate;
-            vehicleTypeItem.IsEnabled = skLevel >= ESkillLevel.Advanced;
         }
         public Universal_VendorItemEditor(NPCVendor vendor, VendorItem startItem = null) : this(vendor.BuyItems.Count < byte.MaxValue, vendor.SellItems.Count < byte.MaxValue, startItem) { }
         public Universal_VendorItemEditor(VirtualDialogueVendor vendor, VendorItem startItem = null) : this(true, true, startItem) { }

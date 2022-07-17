@@ -8,7 +8,6 @@ using System.Xml;
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
     [System.Serializable]
-    [Configuration.SkillLock(Configuration.ESkillLevel.Advanced)]
     public sealed class ConditionFlagShort : Condition
     {
         public ConditionFlagShort()

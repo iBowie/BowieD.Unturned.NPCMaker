@@ -8,7 +8,6 @@ using System.Text;
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
     [System.Serializable]
-    [Configuration.SkillLock(Configuration.ESkillLevel.Advanced)]
     public sealed class ConditionKillsTree : Condition
     {
         public ushort ID { get; set; }

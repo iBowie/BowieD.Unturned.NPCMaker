@@ -4,7 +4,6 @@ using BowieD.Unturned.NPCMaker.Localization;
 namespace BowieD.Unturned.NPCMaker.NPC.Conditions
 {
     [System.Serializable]
-    [Configuration.SkillLock(Configuration.ESkillLevel.Advanced)]
     public sealed class ConditionKillsHorde : Condition
     {
         public override Condition_Type Type => Condition_Type.Kills_Horde;
