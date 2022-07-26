@@ -51,6 +51,7 @@
         "mainWindowBackgroundBlurRadius": "Background Blur Radius",
         "alternateBoolValue": "Use alternative boolean selector",
         "forceSoftwareRendering": "Force CPU rendering",
+        "unlockedItemRewardEditor": "Unlocked Item Reward Editor",
 
         "experimentalFeatures_Tooltip": "Something experimental, maybe unstable",
         "scale_Tooltip": "Adjust scale of the app on your screen",
@@ -80,6 +81,7 @@
         "mainWindowBackgroundBlurRadius_Tooltip": "How much blurred background image should be. 0 completely disables this.",
         "alternateBoolValue_Tooltip": "Use dropdown with two options 'False' and 'True' instead of checkbox in some places.",
         "forceSoftwareRendering_Tooltip": "May fix some issues related to rendering of the app by forcing it to ignore your installed graphics card and render itself with CPU only.\nBe careful enabling this option as this option can either fix or break something.\nNote: app will work much slower.",
+        "unlockedItemRewardEditor_Tooltip": "Allows you to put attachments on weapons that do not support them",
 
         "exportSchema_Warning": "Warning! This setting is only for advanced users!",
 

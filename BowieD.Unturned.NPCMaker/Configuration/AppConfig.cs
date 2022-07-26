@@ -47,6 +47,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public Coloring.Color accentColor = new Coloring.Color("#60A917");
         public EThemeType themeType = EThemeType.Normal;
         public bool hasUnlockedSecretThemes = false;
+        public bool unlockedItemRewardEditor = false;
 
         public void Apply(AppConfig from, out bool hasToRestart)
         {
@@ -115,6 +116,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             alternateLogicTranslation = from.alternateLogicTranslation;
             alternateBoolValue = from.alternateBoolValue;
             hasUnlockedSecretThemes = from.hasUnlockedSecretThemes;
+            unlockedItemRewardEditor = from.unlockedItemRewardEditor;
         }
         public void Save()
         {

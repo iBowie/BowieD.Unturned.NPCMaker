@@ -72,7 +72,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
             void check(GUIDIDBridge bridge)
             {
-                if (!bridge.IsEmpty)
+                if (!Configuration.AppConfig.Instance.unlockedItemRewardEditor && !bridge.IsEmpty)
                 {
                     if (GameAssetManager.TryGetAsset<GameItemGunAsset>(bridge, out var gunAsset))
                     {

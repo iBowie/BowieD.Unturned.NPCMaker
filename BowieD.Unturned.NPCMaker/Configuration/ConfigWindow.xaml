@@ -167,6 +167,7 @@
                     <StackPanel>
                         <CheckBox Name="Experimental_Box" VerticalAlignment="Top" Margin="5" Content="{xaml:Localize Key=OPTIONS_experimentalFeatures}" ToolTip="{xaml:Localize Key=OPTIONS_experimentalFeatures_Tooltip}"/>
                         <CheckBox Name="PreferLegacyIDsOverGUIDs_Box" VerticalAlignment="Top" Margin="5" Content="{xaml:Localize Key=OPTIONS_preferLegacyIDsOverGUIDs}" ToolTip="{xaml:Localize Key=OPTIONS_preferLegacyIDsOverGUIDs_Tooltip}"/>
+                        <CheckBox Name="UnlockedItemRewardEditor_Box" VerticalAlignment="Top" Margin="5" Content="{xaml:Localize Key=OPTIONS_unlockedItemRewardEditor}" ToolTip="{xaml:Localize Key=OPTIONS_unlockedItemRewardEditor_Tooltip}"/>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>

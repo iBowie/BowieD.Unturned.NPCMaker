@@ -223,6 +223,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 forceSoftwareRendering = ForceSoftwareRendering_Box.IsChecked.Value,
                 themeType = CurrentThemeType,
                 hasUnlockedSecretThemes = HasUnlockedSecretThemes,
+                unlockedItemRewardEditor = UnlockedItemRewardEditor_Box.IsChecked.Value,
             };
             set
             {
@@ -276,6 +277,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 ForceSoftwareRendering_Box.IsChecked = value.forceSoftwareRendering;
                 CurrentThemeType = value.themeType;
                 HasUnlockedSecretThemes = value.hasUnlockedSecretThemes;
+                UnlockedItemRewardEditor_Box.IsChecked = value.unlockedItemRewardEditor;
             }
         }
 
