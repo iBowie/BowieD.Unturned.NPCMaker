@@ -44,7 +44,6 @@
                         <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_automaticallyCheckForErrors_Tooltip}">
                             <CheckBox Name="AutomaticallyCheckForErrors_Box" Content="{xaml:Localize Key=OPTIONS_automaticallyCheckForErrors}"/>
                         </Grid>
-                        <Button Margin="5" Content="{xaml:Localize Key=OPTIONS_selectSkillLevel_Button}" x:Name="SelectSkillLevel_Button"/>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
