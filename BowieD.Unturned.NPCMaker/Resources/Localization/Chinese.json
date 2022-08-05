@@ -568,7 +568,7 @@
         "Importance_WARNING": "警告",
         "Importance_CRITICAL": "关键"
     },
-    "通知":
+    "Notification":
     {
         "RecoverOnStart": "看起来应用上次崩溃了。\n别担心 - 您的工作已保存。\n崩溃保存是在“{0}”创建的\n\n您要加载此项目吗？",
         "RecoverOnStart_Title": "项目恢复",
