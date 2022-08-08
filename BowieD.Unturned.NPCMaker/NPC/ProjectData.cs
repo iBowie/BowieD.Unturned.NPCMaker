@@ -137,55 +137,63 @@ namespace BowieD.Unturned.NPCMaker.NPC
             {
                 App.Logger.Log($"[AXDATA] - Parsing XML...");
 
-                XmlDocument doc = new XmlDocument();
-                doc.Load(FileName);
-
                 try
                 {
-                    NPCProject project = new NPCProject();
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(FileName);
 
-                    var oldRoot = doc["NPCSave"];
-
-                    if (oldRoot != null)
+                    try
                     {
-                        var root = oldRoot;
+                        NPCProject project = new NPCProject();
 
-                        int ver = -1;
+                        var oldRoot = doc["NPCSave"];
 
-                        project.Load(root, ver);
-
-                        data = project;
-                        App.Logger.Log($"[AXDATA] - Loaded legacy project");
-                        OnDataLoaded?.Invoke();
-                        hasLoadedAtLeastOnce = true;
-                        return true;
-                    }
-                    else
-                    {
-                        var root = doc["NPCProject"];
-
-                        int ver = root["SAVEDATA_VERSION"].ToInt32();
-
-                        if (ver <= NPCProject.CURRENT_SAVEDATA_VERSION)
+                        if (oldRoot != null)
                         {
+                            var root = oldRoot;
+
+                            int ver = -1;
+
                             project.Load(root, ver);
 
                             data = project;
-                            App.Logger.Log($"[AXDATA] - Loaded");
+                            App.Logger.Log($"[AXDATA] - Loaded legacy project");
                             OnDataLoaded?.Invoke();
                             hasLoadedAtLeastOnce = true;
                             return true;
                         }
                         else
                         {
-                            App.Logger.Log($"[AXDATA] - Tried to load newer project file");
-                            return false;
+                            var root = doc["NPCProject"];
+
+                            int ver = root["SAVEDATA_VERSION"].ToInt32();
+
+                            if (ver <= NPCProject.CURRENT_SAVEDATA_VERSION)
+                            {
+                                project.Load(root, ver);
+
+                                data = project;
+                                App.Logger.Log($"[AXDATA] - Loaded");
+                                OnDataLoaded?.Invoke();
+                                hasLoadedAtLeastOnce = true;
+                                return true;
+                            }
+                            else
+                            {
+                                App.Logger.Log($"[AXDATA] - Tried to load newer project file");
+                                return false;
+                            }
                         }
+                    }
+                    catch (Exception ex)
+                    {
+                        App.Logger.LogException($"[AXDATA] - Could not load project from {FileName}", ex: ex);
+                        return false;
                     }
                 }
                 catch (Exception ex)
                 {
-                    App.Logger.LogException($"[AXDATA] - Could not load project from {FileName}", ex: ex);
+                    App.Logger.LogException($"[AXDATA] - Project file must be corrupted: {FileName}", ex: ex);
                     return false;
                 }
             }
