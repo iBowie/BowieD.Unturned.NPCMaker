@@ -85,6 +85,18 @@ namespace BowieD.Unturned.NPCMaker.NPC
         {
             try
             {
+                if (File.Exists(FileName))
+                {
+                    var bakFileName = $"{FileName}.old";
+
+                    if (File.Exists(bakFileName))
+                    {
+                        File.Delete(bakFileName);
+                    }
+
+                    File.Move(FileName, bakFileName);
+                }
+
                 XmlDocument doc = new XmlDocument();
 
                 doc.AppendChild(doc.CreateXmlDeclaration("1.0", "utf-8", string.Empty));
