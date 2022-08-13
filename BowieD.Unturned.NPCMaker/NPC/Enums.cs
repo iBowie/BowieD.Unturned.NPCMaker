@@ -37,7 +37,8 @@ namespace BowieD.Unturned.NPCMaker.NPC
         Currency,
         Kills_Tree,
         Weather_Status,
-        Weather_Blend_Alpha
+        Weather_Blend_Alpha,
+        Is_Full_Moon,
     }
     public enum Logic_Type
     {

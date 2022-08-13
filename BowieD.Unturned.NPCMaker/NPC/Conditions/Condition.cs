@@ -128,6 +128,8 @@ namespace BowieD.Unturned.NPCMaker.NPC.Conditions
                         return new ConditionWeatherBlendAlpha();
                     case "ConditionWeatherStatus":
                         return new ConditionWeatherStatus();
+                    case "ConditionIsFullMoon":
+                        return new ConditionIsFullMoon();
                     default:
                         throw new Exception("Unknown type");
                 }

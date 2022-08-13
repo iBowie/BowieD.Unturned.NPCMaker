@@ -216,6 +216,7 @@
     <Compile Include="Mistakes\Dialogue\NE_1010.cs" />
     <Compile Include="Mistakes\Quest\NE_3004.cs" />
     <Compile Include="Mistakes\Vendor\NE_2004.cs" />
+    <Compile Include="NPC\Conditions\ConditionIsFullMoon.cs" />
     <Compile Include="NPC\Shared\Attributes\PriorityAttribute.cs" />
     <Compile Include="Themes\EThemeType.cs" />
     <Compile Include="NPC\Rewards\RewardPlayerSpawnpoint.cs" />

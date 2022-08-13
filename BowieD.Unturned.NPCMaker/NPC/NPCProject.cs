@@ -11,7 +11,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
 {
     public class NPCProject : IAXData
     {
-        public const int CURRENT_SAVEDATA_VERSION = 14;
+        public const int CURRENT_SAVEDATA_VERSION = 15;
         /*
          * SAVEDATA_VERSION information
          * 
@@ -30,6 +30,7 @@ namespace BowieD.Unturned.NPCMaker.NPC
          *  12 - added spawnpoint reward
          *  13 - added 'B_Value' for flag math reward, added modulo operation type
          *  14 - removed dialogue vendors
+         *  15 - added 'Is Full Moon' condition
          */
 
         public NPCProject()

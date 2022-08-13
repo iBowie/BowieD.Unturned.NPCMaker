@@ -463,6 +463,12 @@ namespace BowieD.Unturned.NPCMaker.Parsing
                             Value = asset.ReadEnum(tp + "Value", ENPCWeatherStatus.Active)
                         };
                         break;
+                    case Condition_Type.Is_Full_Moon:
+                        c[num] = new ConditionIsFullMoon()
+                        {
+                            Value = asset.ReadBoolean(tp + "Value", true),
+                        };
+                        break;
                     default:
                         throw new InvalidDataException("Parsed condition is invalid");
                 }
