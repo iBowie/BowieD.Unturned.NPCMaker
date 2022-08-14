@@ -598,9 +598,9 @@
                                                         MinWidth="40"
                                                         Grid.Column="1">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_hat.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="5"/>
@@ -620,9 +620,9 @@
                                                         MinWidth="40"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_mask.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="5"/>
@@ -642,9 +642,9 @@
                                                         MinWidth="40"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="5"/>
@@ -664,9 +664,9 @@
                                                         MinWidth="40"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="5"/>
@@ -686,9 +686,9 @@
                                                         Margin="5"
                                                         MinWidth="40">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="5"/>
@@ -708,9 +708,9 @@
                                                         MinWidth="40"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_vest.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="5"/>
@@ -730,9 +730,9 @@
                                                         MinWidth="40"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}" Margin="5"/>
@@ -758,9 +758,9 @@
                                                         MinWidth="40"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_hat.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="5"/>
@@ -780,9 +780,9 @@
                                                         MinWidth="40"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_mask.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="5"/>
@@ -802,9 +802,9 @@
                                                         MinWidth="40"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="5"/>
@@ -824,9 +824,9 @@
                                                         MinWidth="40"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="5"/>
@@ -846,9 +846,9 @@
                                                         MinWidth="40"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="5"/>
@@ -868,9 +868,9 @@
                                                         Value="{Binding Vest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_vest.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="5"/>
@@ -890,9 +890,9 @@
                                                         Value="{Binding Pants, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}" Margin="5"/>
@@ -918,9 +918,9 @@
                                                         MinWidth="40"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_hat.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Hat}" Margin="5"/>
@@ -940,9 +940,9 @@
                                                         MinWidth="40"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_mask.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Mask}" Margin="5"/>
@@ -962,9 +962,9 @@
                                                         MinWidth="40"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_glasses.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Glasses}" Margin="5"/>
@@ -984,9 +984,9 @@
                                                         MinWidth="40"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_shirt.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Shirt}" Margin="5"/>
@@ -1006,9 +1006,9 @@
                                                         MinWidth="40"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_backpack.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Back}" Margin="5"/>
@@ -1028,9 +1028,9 @@
                                                         MinWidth="40"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_vest.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Vest}" Margin="5"/>
@@ -1050,9 +1050,9 @@
                                                         MinWidth="40"
                                                         Margin="5">
                                                         <bettercontrols:GUIDIDControl.ToolTip>
-                                                            <StackPanel>
+                                                            <Viewbox Width="384" Height="384">
                                                                 <Image Source="Resources/Help/img_help_apparel_bottom.png"/>
-                                                            </StackPanel>
+                                                            </Viewbox>
                                                         </bettercontrols:GUIDIDControl.ToolTip>
                                                     </bettercontrols:GUIDIDControl>
                                                     <Label Grid.Column="2" Content="{xaml:Localize Key=CHARACTER_Clothing_Pants}" Margin="5"/>
