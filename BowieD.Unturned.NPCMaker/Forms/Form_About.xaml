@@ -48,8 +48,8 @@
             <ListView Name="creditsList" Grid.Row="1">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="{xaml:Localize Key=INTERFACE_App_About_Credits_List_Key}"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="{xaml:Localize Key=INTERFACE_App_About_Credits_List_Value}"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="{xaml:Localize Key=INTERFACE_App_About_Credits_List_Value}"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="{xaml:Localize Key=INTERFACE_App_About_Credits_List_Key}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
