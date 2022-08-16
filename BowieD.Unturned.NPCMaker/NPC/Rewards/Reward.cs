@@ -119,7 +119,7 @@ namespace BowieD.Unturned.NPCMaker.NPC.Rewards
 
                     return priority;
                 });
-            
+
             foreach (PropertyInfo prop in props)
             {
                 string propName = prop.Name;

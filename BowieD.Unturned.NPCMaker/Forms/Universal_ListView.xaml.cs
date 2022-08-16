@@ -1,5 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Common;
-using BowieD.Unturned.NPCMaker.Configuration;
+﻿using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Controls;
 using BowieD.Unturned.NPCMaker.Localization;
 using BowieD.Unturned.NPCMaker.ViewModels;

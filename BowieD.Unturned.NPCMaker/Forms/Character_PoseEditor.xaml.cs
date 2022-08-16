@@ -1,5 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Configuration;
-using BowieD.Unturned.NPCMaker.NPC;
+﻿using BowieD.Unturned.NPCMaker.NPC;
 using MahApps.Metro.Controls;
 using System.Windows;
 

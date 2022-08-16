@@ -14,7 +14,7 @@ namespace BowieD.Unturned.NPCMaker.Mistakes.Vendor
         {
             var localizedTypeName = LocalizationManager.Current.Condition[$"Type_{conditionType}"];
 
-            MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_2004_Desc" + (isBuy ? "_Buy": "_Sell"), itemIndex + 1, title, id, localizedTypeName);
+            MistakeDesc = LocalizationManager.Current.Mistakes.Translate("NE_2004_Desc" + (isBuy ? "_Buy" : "_Sell"), itemIndex + 1, title, id, localizedTypeName);
         }
 
         public override IEnumerable<Mistake> CheckMistake()

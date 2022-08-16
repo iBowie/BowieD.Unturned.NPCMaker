@@ -3,7 +3,6 @@ using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.GameIntegration;
 using BowieD.Unturned.NPCMaker.GameIntegration.Thumbnails;
 using BowieD.Unturned.NPCMaker.Localization;
-using MahApps.Metro.Controls;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.IO;
 using System.Linq;

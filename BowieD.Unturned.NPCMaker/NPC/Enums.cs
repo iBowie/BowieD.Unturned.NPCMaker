@@ -1,5 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Configuration;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace BowieD.Unturned.NPCMaker.NPC
 {

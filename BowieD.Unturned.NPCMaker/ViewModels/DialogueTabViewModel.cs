@@ -302,7 +302,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         var msg = new NPCMessage();
 
                         msg.pages.Add(string.Empty);
-                        
+
                         AddMessage(new Dialogue_Message(msg, this));
                     }, (p) =>
                     {

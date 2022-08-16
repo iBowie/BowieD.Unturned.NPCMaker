@@ -524,7 +524,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                                 App.NotificationManager.Notify(
                                     LocalizationManager.Current.Notification.Translate(
                                         "Import_Project_Done",
-                                            charCount, dialogueCount, vendorCount, questCount, 
+                                            charCount, dialogueCount, vendorCount, questCount,
                                             currencyCount, flagCount));
                             }
                             else
