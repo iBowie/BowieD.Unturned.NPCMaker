@@ -766,7 +766,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         if (Mistakes.MistakesManager.Criticals_Count > 0)
                         {
                             SystemSounds.Hand.Play();
-                            MainWindow.mainTabControl.SelectedIndex = MainWindow.mainTabControl.Items.Count - 1;
+                            MainWindow.mainTabControl.SelectedIndex = MainWindow.mainTabControl.Items.Count - 2;
                             return;
                         }
                         if (Mistakes.MistakesManager.Warnings_Count > 0)
@@ -812,7 +812,7 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
                         if (Mistakes.MistakesManager.Criticals_Count > 0)
                         {
                             SystemSounds.Hand.Play();
-                            MainWindow.mainTabControl.SelectedIndex = MainWindow.mainTabControl.Items.Count - 1;
+                            MainWindow.mainTabControl.SelectedIndex = MainWindow.mainTabControl.Items.Count - 2;
                             return;
                         }
                         if (Mistakes.MistakesManager.Warnings_Count > 0)
