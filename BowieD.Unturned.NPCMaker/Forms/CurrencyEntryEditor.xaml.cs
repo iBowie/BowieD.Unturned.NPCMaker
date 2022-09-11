@@ -52,6 +52,16 @@ namespace BowieD.Unturned.NPCMaker.Forms
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Value)));
             }
         }
+        public bool IsVisibleInVendorMenu
+        {
+            get => Entry.IsVisibleInVendorMenu;
+            set
+            {
+                Entry.IsVisibleInVendorMenu = value;
+
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsVisibleInVendorMenu)));
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

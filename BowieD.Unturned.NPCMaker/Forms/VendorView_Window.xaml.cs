@@ -263,6 +263,9 @@ namespace BowieD.Unturned.NPCMaker.Forms
 
                     foreach (var entry in asset.entries.OrderBy(d => d.Value))
                     {
+                        if (!entry.IsVisibleInVendorMenu)
+                            continue;
+
                         Grid eG = new Grid();
 
                         Image eIcon = new Image()

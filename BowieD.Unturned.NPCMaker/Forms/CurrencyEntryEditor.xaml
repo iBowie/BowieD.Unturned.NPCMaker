@@ -29,6 +29,7 @@
             <Label Content="{xaml:Localize CURRENCY_Entry_Value}"/>
             <xctk:UIntegerUpDown Grid.Column="1" HorizontalAlignment="Stretch" Foreground="{DynamicResource ForegroundColor}" ShowButtonSpinner="False" Value="{Binding Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
         </Grid>
+        <CheckBox Margin="10" Content="{xaml:Localize CURRENCY_Entry_IsVisibleInVendorMenu}" IsChecked="{Binding IsVisibleInVendorMenu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Button Margin="10" Content="{xaml:Localize CURRENCY_Entry_Editor_Save}" Click="Button_Click"/>
     </StackPanel>
 </mah:MetroWindow>

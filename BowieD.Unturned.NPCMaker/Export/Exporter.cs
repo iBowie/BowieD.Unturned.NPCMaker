@@ -646,6 +646,7 @@ namespace BowieD.Unturned.NPCMaker.Export
                             asset.WriteLine($"\t\t\t\t{q}GUID{q} {q}{entry.ItemGUID}{q}");
                             asset.WriteLine("\t\t\t}");
                             asset.WriteLine($"\t\t\t{q}Value{q} {q}{entry.Value}{q}");
+                            asset.WriteLine($"\t\t\t{q}Is_Visible_In_Vendor_Menu{q} {q}{entry.IsVisibleInVendorMenu}{q}");
 
                             asset.WriteLine("\t\t}");
                         }

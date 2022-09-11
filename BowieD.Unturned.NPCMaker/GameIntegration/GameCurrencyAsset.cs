@@ -56,6 +56,14 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                 CurrencyEntry entry = new CurrencyEntry();
                 entry.ItemGUID = formattedFileReader.readValue<GameAssetReference<GameItemAsset>>("Item").GUID.ToString("N");
                 entry.Value = formattedFileReader.readValue<uint>("Value");
+                if (formattedFileReader.containsKey("Is_Visible_In_Vendor_Menu"))
+                {
+                    entry.IsVisibleInVendorMenu = formattedFileReader.readValue<bool>("Is_Visible_In_Vendor_Menu");
+                }
+                else
+                {
+                    entry.IsVisibleInVendorMenu = true;
+                }
                 entries[i] = entry;
             }
 
@@ -105,6 +113,7 @@ namespace BowieD.Unturned.NPCMaker.GameIntegration
                     {
                         ItemGUID = d.ItemGUID,
                         Value = d.Value,
+                        IsVisibleInVendorMenu = d.IsVisibleInVendorMenu,
                     };
                 }).ToList(), // clone entries
                 GUID = guid.ToString("N"),

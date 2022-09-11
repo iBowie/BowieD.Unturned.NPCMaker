@@ -242,6 +242,7 @@
         "Item_Add": "Добавить предмет",
         "Entry_GUID": "GUID предмета",
         "Entry_Value": "Ценность",
+        "Entry_IsVisibleInVendorMenu": "Видим в меню торговли",
         "Entry_Editor_Title": "Редактор элемента валюты",
         "Entry_Editor_Save": "Сохранить"
     },

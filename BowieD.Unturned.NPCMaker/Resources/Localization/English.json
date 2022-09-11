@@ -242,6 +242,7 @@
         "Item_Add": "Add Entry",
         "Entry_GUID": "Item GUID",
         "Entry_Value": "Item Value",
+        "Entry_IsVisibleInVendorMenu": "Is visible in vendor menu",
         "Entry_Editor_Title": "Currency Entry Editor",
         "Entry_Editor_Save": "Save Entry"
     },
