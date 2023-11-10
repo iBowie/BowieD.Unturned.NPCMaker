@@ -1,5 +1,9 @@
 # NPC Maker for Unturned 3.0 by BowieD
 
+## Download
+
+Download [latest version](https://github.com/iBowie/BowieD.Unturned.NPCMaker/releases/latest/download/BowieD.Unturned.NPCMaker.exe)
+
 ## Key Features
 
 ### Character editor
