@@ -174,6 +174,9 @@ namespace BowieD.Unturned.NPCMaker
 
                     Package = JsonConvert.DeserializeObject<AppPackage>(data);
 
+                    if (Package is null)
+                        throw new NullReferenceException("Could not properly download package file. Falling back to the local cache.");
+
                     File.WriteAllText(packagePath, data);
                 }
             }
@@ -186,7 +189,28 @@ namespace BowieD.Unturned.NPCMaker
 
                     Package = JsonConvert.DeserializeObject<AppPackage>(data);
 
-                    File.WriteAllText(packagePath, data);
+                    if (Package is null)
+                    {
+                        Logger.Log("Could not properly load locally cached package file. Falling back to the runtime-created one.", ELogLevel.WARNING);
+
+						Package = new AppPackage()
+						{
+							FeedbackLinks = new FeedbackLink[1]
+						    {
+						    	new FeedbackLink()
+						    	{
+						    		Icon = "pack://application:,,,/Resources/Services/GitHub.png",
+						    		Text = "Main_Menu_Communication_GitHub",
+						    		Localize = true,
+						    		URL = "https://github.com/iBowie/BowieD.Unturned.NPCMaker"
+						    	}
+						    }
+						};
+					}
+                    else
+                    {
+                        File.WriteAllText(packagePath, data);
+                    }
                 }
                 else
                 {

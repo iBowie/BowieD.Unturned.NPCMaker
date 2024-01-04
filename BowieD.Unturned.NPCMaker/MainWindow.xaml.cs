@@ -175,7 +175,7 @@ namespace BowieD.Unturned.NPCMaker
 
             #endregion
             HolidayManager.Check();
-            if (App.Package.Guides.Count > 0)
+            if (App.Package?.Guides?.Count > 0)
             {
                 foreach (KeyValuePair<string, string> guide in App.Package.Guides)
                 {
@@ -194,7 +194,7 @@ namespace BowieD.Unturned.NPCMaker
                 guidesMenuItem.IsEnabled = false;
             }
 
-            if (string.IsNullOrEmpty(App.Package.GetTemplatesURL))
+            if (string.IsNullOrEmpty(App.Package?.GetTemplatesURL))
             {
                 getTemplatesMenuItem.IsEnabled = false;
             }
@@ -206,7 +206,7 @@ namespace BowieD.Unturned.NPCMaker
                 };
             }
 
-            if (App.Package.FeedbackLinks.Length > 0)
+            if (App.Package?.FeedbackLinks?.Length > 0)
             {
                 foreach (Data.AppPackage.FeedbackLink link in App.Package.FeedbackLinks)
                 {
@@ -274,7 +274,7 @@ namespace BowieD.Unturned.NPCMaker
                 App.Logger.LogException("Could not display notification(s)", ex: ex);
             }
 
-            if (App.Package.Patrons.Length > 0)
+            if (App.Package?.Patrons?.Length > 0)
             {
                 var pList = App.Package.Patrons.ToList();
                 pList.Shuffle();

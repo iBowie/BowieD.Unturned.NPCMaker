@@ -34,15 +34,24 @@ namespace BowieD.Unturned.NPCMaker.Forms
             Height *= scale;
             Width *= scale;
 
-            foreach (string patron in App.Package.Patrons)
-            {
-                patronsList.Items.Add(patron);
-            }
+            if (!(App.Package is null))
+			{
+				if (!(App.Package.Patrons is null))
+				{
+					foreach (string patron in App.Package.Patrons)
+					{
+						patronsList.Items.Add(patron);
+					}
+				}
 
-            foreach (System.Collections.Generic.KeyValuePair<string, string> credit in App.Package.Credits)
-            {
-                creditsList.Items.Add(credit);
-            }
+                if (!(App.Package.Credits is null))
+				{
+					foreach (var credit in App.Package.Credits)
+					{
+						creditsList.Items.Add(credit);
+					}
+				}
+			}
 
             PreviewKeyDown += Form_About_PreviewKeyDown;
 
