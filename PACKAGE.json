@@ -1,164 +1,179 @@
 ﻿{
-	"notifications":
-	[
-		{
-			"text": "StartUp_Patreon",
-			"loc": true,
-			"buttons":
-			[
-				{
-					"text": "StartUp_Patreon_Open",
-					"loc": true,
-					"actionType": "URL",
-					"actionArgs": "https://boosty.to/bowied"
-				}
-			]
-		}
-	],
-	"feedback":
-	[
-		{
-			"icon": "pack://application:,,,/Resources/Services/GitHub.png",
-			"text": "Main_Menu_Communication_GitHub",
-			"loc": true,
-			"url": "https://github.com/iBowie/BowieD.Unturned.NPCMaker"
-		},
-		{
-			"icon": "pack://application:,,,/Resources/Services/Patreon.png",
-			"text": "Main_Menu_Communication_Patreon",
-			"loc": true,
-			"url": "https://boosty.to/bowied"
-		},
-		{
-			"icon": "pack://application:,,,/Resources/Services/Steam.png",
-			"text": "Main_Menu_Communication_Steam",
-			"loc": true,
-			"url": "https://steamcommunity.com/profiles/76561198085825110"
-		},
-		{
-			"icon": "pack://application:,,,/Resources/Services/Discord.png",
-			"text": "Main_Menu_Communication_Discord",
-			"loc": true,
-			"url": "https://discord.gg/Geqtkx2"
-		},
-		{
-			"icon": "pack://application:,,,/Resources/Services/VK.png",
-			"text": "Main_Menu_Communication_VK",
-			"loc": true,
-			"url": "https://vk.com/id250813640"
-		}
-	],
-	"credits":
-	{
-		"Nelson Sexton": "Unturned",
-		"Loco": "Almost infinite idea supply",
-		"kulkaGM": "New folder selectors",
-		"Zefirka": "New clothing renders"
-	},
-	"guides":
-	{
-		"[EN] Official Wiki": "https://github.com/iBowie/BowieD.Unturned.NPCMaker/wiki",
-		"[RU/EN] Official Guide on Steam": "https://steamcommunity.com/sharedfiles/filedetails/?id=1664300090",
-		"[RU] Гайд от Second Cog": "https://youtu.be/A3I8c3l6ZAs",
-		"[EN SUBTITLES] Second Cog's Guide": "https://youtu.be/A3I8c3l6ZAs",
-		"[FR] RayZoF's Tutorial": "https://www.youtube.com/watch?v=2PjaLFz0Vy8",
-		"[ES] ZoomGYT's Tutorial": "https://www.youtube.com/watch?v=dqVUc_RBzaY",
-		"[ES] ZoomGYT's Spawnpoint Tutorial": "https://www.youtube.com/watch?v=QZnvmNj_Oag",
-		"[TR] kürek mahkumu's Tutorial" : "https://youtu.be/0QPqktKTOXM"
-	},
-	"templatesURL": "https://discord.gg/hwFGB67",
-	"patrons":["Loco","Blackwood","rufu","trooves"],
-	"holidays":
-	[
-		{
-			"notification": "Stay Home!",
-			"range":
-			{
-				"from": "2020-04-01T00:00:01Z",
-				"to": "2020-06-01T23:59:59Z",
-				"annual": false
-			}
-		},
-		{
-			"notification": "Happy Birthday, NPC Maker!",
-			"range":
-			{
-				"from": "2018-12-08T00:00:01Z",
-				"to": "2018-12-08T23:59:59Z",
-				"annual": true
-			}
-		},
-		{
-			"notification": "Happy Birthday, BowieD",
-			"range":
-			{
-				"from": "2002-03-22T00:00:01Z",
-				"to": "2002-03-22T23:59:59Z",
-				"annual": true
-			}
-		},
-		{
-			"notification": "Happy Birthday, DimesAO!",
-			"range":
-			{
-				"from": "2001-11-30T00:00:01Z",
-				"to": "2001-11-30T23:59:59Z",
-				"annual": true
-			}
-		},
-		{
-			"notification": "Happy New Year's Eve!",
-			"range":
-			{
-				"from": "2020-12-31T00:00:01Z",
-				"to": "2020-12-31T23:59:59Z",
-				"annual": true
-			}
-		},
-		{
-			"notification": "Happy New Year!",
-			"range":
-			{
-				"from": "2021-01-01T00:00:01Z",
-				"to": "2021-01-01T23:59:59Z",
-				"annual": true
-			}
-		},
-		{
-			"notification": "April Fools!",
-			"range":
-			{
-				"from": "2021-04-01T00:00:01Z",
-				"to": "2021-04-01T23:59:59Z",
-				"annual": true
-			}
-		},
-		{
-			"notification": "Happy Birthday, Зефирка!",
-			"range":
-			{
-				"from": "2020-05-26T00:00:01Z",
-				"to": "2020-05-26T23:59:59Z",
-				"annual": true
-			}
-		},
-		{
-			"notification": "Spooky!",
-			"range":
-			{
-				"from": "2020-10-20T00:00:01Z",
-				"to": "2020-11-01T00:00:01Z",
-				"annual": true
-			}
-		},
-		{
-			"notification": "Happy Birthday, Unturned!",
-			"range":
-			{
-				"from": "2017-07-07T00:00:01Z",
-				"to": "2017-07-07T23:59:59Z",
-				"annual": true
-			}
-		}
-	]
+    "notifications": [
+    {
+        "text": "StartUp_Patreon",
+        "loc": true,
+        "buttons": [
+        {
+            "text": "StartUp_Patreon_Open",
+            "loc": true,
+            "actionType": "URL",
+            "actionArgs": "https://boosty.to/bowied"
+        }]
+    }],
+    "feedback": [
+    {
+        "icon": "pack://application:,,,/Resources/Services/GitHub.png",
+        "text": "Main_Menu_Communication_GitHub",
+        "loc": true,
+        "url": "https://github.com/iBowie/BowieD.Unturned.NPCMaker"
+    },
+    {
+        "icon": "pack://application:,,,/Resources/Services/Patreon.png",
+        "text": "Main_Menu_Communication_Patreon",
+        "loc": true,
+        "url": "https://boosty.to/bowied"
+    },
+    {
+        "icon": "pack://application:,,,/Resources/Services/Steam.png",
+        "text": "Main_Menu_Communication_Steam",
+        "loc": true,
+        "url": "https://steamcommunity.com/profiles/76561198085825110"
+    },
+    {
+        "icon": "pack://application:,,,/Resources/Services/Discord.png",
+        "text": "Main_Menu_Communication_Discord",
+        "loc": true,
+        "url": "https://discord.gg/Geqtkx2"
+    },
+    {
+        "icon": "pack://application:,,,/Resources/Services/VK.png",
+        "text": "Main_Menu_Communication_VK",
+        "loc": true,
+        "url": "https://vk.com/id250813640"
+    }],
+    "credits":
+    {
+        "Nelson Sexton": "Unturned",
+        "Loco": "Almost infinite idea supply",
+        "kulkaGM": "New folder selectors",
+        "Zefirka": "New clothing renders"
+    },
+    "guides":
+    {
+        "[EN] Official Wiki": "https://github.com/iBowie/BowieD.Unturned.NPCMaker/wiki",
+        "[RU/EN] Official Guide on Steam": "https://steamcommunity.com/sharedfiles/filedetails/?id=1664300090",
+        "[RU] Гайд от Second Cog": "https://youtu.be/A3I8c3l6ZAs",
+        "[EN SUBTITLES] Second Cog's Guide": "https://youtu.be/A3I8c3l6ZAs",
+        "[FR] RayZoF's Tutorial": "https://www.youtube.com/watch?v=2PjaLFz0Vy8",
+        "[ES] ZoomGYT's Tutorial": "https://www.youtube.com/watch?v=dqVUc_RBzaY",
+        "[ES] ZoomGYT's Spawnpoint Tutorial": "https://www.youtube.com/watch?v=QZnvmNj_Oag",
+        "[TR] kürek mahkumu's Tutorial": "https://youtu.be/0QPqktKTOXM"
+    },
+    "templatesURL": "https://discord.gg/hwFGB67",
+    "patrons": [
+        "Loco",
+        "Blackwood",
+        "rufu",
+        "trooves",
+        "Jacob",
+        "Mew",
+        "Zachary Leaman",
+        "Allen Walters",
+        "Jek'a",
+        "Jo Bame",
+        "ZeusSeesAll",
+        "Referalov",
+        "airborngamingyt",
+        "Snippy",
+        "brosswellshooter",
+        "Axodouble",
+        "Jack Holbrook",
+        "Yes Ye",
+        "BUTTER_FINGERS",
+        "MINEmade",
+        "Connor Nelson",
+        "jelle daelman"
+    ],
+    "holidays": [
+    {
+        "notification": "Stay Home!",
+        "range":
+        {
+            "from": "2020-04-01T00:00:01Z",
+            "to": "2020-06-01T23:59:59Z",
+            "annual": false
+        }
+    },
+    {
+        "notification": "Happy Birthday, NPC Maker!",
+        "range":
+        {
+            "from": "2018-12-08T00:00:01Z",
+            "to": "2018-12-08T23:59:59Z",
+            "annual": true
+        }
+    },
+    {
+        "notification": "Happy Birthday, BowieD!",
+        "range":
+        {
+            "from": "2002-03-22T00:00:01Z",
+            "to": "2002-03-22T23:59:59Z",
+            "annual": true
+        }
+    },
+    {
+        "notification": "Happy Birthday, Dumes!",
+        "range":
+        {
+            "from": "2001-11-30T00:00:01Z",
+            "to": "2001-11-30T23:59:59Z",
+            "annual": true
+        }
+    },
+    {
+        "notification": "Happy New Year's Eve!",
+        "range":
+        {
+            "from": "2020-12-31T00:00:01Z",
+            "to": "2020-12-31T23:59:59Z",
+            "annual": true
+        }
+    },
+    {
+        "notification": "Happy New Year!",
+        "range":
+        {
+            "from": "2021-01-01T00:00:01Z",
+            "to": "2021-01-01T23:59:59Z",
+            "annual": true
+        }
+    },
+    {
+        "notification": "April Fools!",
+        "range":
+        {
+            "from": "2021-04-01T00:00:01Z",
+            "to": "2021-04-01T23:59:59Z",
+            "annual": true
+        }
+    },
+    {
+        "notification": "Happy Birthday, Зефирка!",
+        "range":
+        {
+            "from": "2020-05-26T00:00:01Z",
+            "to": "2020-05-26T23:59:59Z",
+            "annual": true
+        }
+    },
+    {
+        "notification": "Spooky!",
+        "range":
+        {
+            "from": "2020-10-20T00:00:01Z",
+            "to": "2020-11-01T00:00:01Z",
+            "annual": true
+        }
+    },
+    {
+        "notification": "Happy Birthday, Unturned!",
+        "range":
+        {
+            "from": "2017-07-07T00:00:01Z",
+            "to": "2017-07-07T23:59:59Z",
+            "annual": true
+        }
+    }]
 }
