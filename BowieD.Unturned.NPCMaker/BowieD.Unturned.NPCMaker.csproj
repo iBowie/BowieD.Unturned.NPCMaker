@@ -207,6 +207,9 @@
     <Compile Include="Common\Utility\PathUtility.cs" />
     <Compile Include="Common\XmlNodeExtension.cs" />
     <Compile Include="Configuration\EExportSchema.cs" />
+    <Compile Include="Forms\FindDialog.xaml.cs">
+      <DependentUpon>FindDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PlainTextWindow.xaml.cs">
       <DependentUpon>PlainTextWindow.xaml</DependentUpon>
     </Compile>
@@ -677,6 +680,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\DialogueView_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\FindDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

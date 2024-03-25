@@ -684,6 +684,13 @@
         "FindReplace_GoToTargetButton": "Перейти к выделению",
         "FindReplace_CloseButton": "Закрыть",
 
+        "Find_Title": "Найти",
+        "Find_FindWith": "Искать с",
+        "Find_SearchResultHeader": "Результат поиска",
+        "Find_FindButton": "Найти",
+        "Find_GoToTargetButton": "Перейти к выделению",
+        "Find_CloseButton": "Закрыть",
+
         "UGC_Title": "Загрузчик мода",
         "UGC_Preview": "Обложка мода",
         "UGC_Preview_Select": "Выбрать обложку",
@@ -812,6 +819,7 @@
         "Main_Menu_File_ExportToWorkshop": "Загрузить NPC в Workshop",
         "Main_Menu_File_Exit": "Выход",
         "Main_Menu_Edit": "Редактировать",
+        "Main_Menu_Edit_Find": "Найти...",
         "Main_Menu_Edit_FindReplace": "Найти/Заменить...",
         "Main_Menu_Options": "Настройки",
         "Main_Menu_ProjectSettings": "Настройки проекта",

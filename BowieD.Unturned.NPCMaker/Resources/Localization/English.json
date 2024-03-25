@@ -684,6 +684,13 @@
         "FindReplace_GoToTargetButton": "Go To Selected",
         "FindReplace_CloseButton": "Close",
 
+        "Find_Title": "Find",
+        "Find_FindWith": "Find with",
+        "Find_SearchResultHeader": "Search Results",
+        "Find_FindButton": "Find",
+        "Find_GoToTargetButton": "Go To Selected",
+        "Find_CloseButton": "Close",
+
         "UGC_Title": "Mod Uploader",
         "UGC_Preview": "Preview Icon",
         "UGC_Preview_Select": "Select Icon",
@@ -812,6 +819,7 @@
         "Main_Menu_File_ExportToWorkshop": "Upload NPCs to Workshop",
         "Main_Menu_File_Exit": "Exit",
         "Main_Menu_Edit": "Edit",
+        "Main_Menu_Edit_Find": "Find...",
         "Main_Menu_Edit_FindReplace": "Find/Replace...",
         "Main_Menu_Options": "Options",
         "Main_Menu_ProjectSettings": "Project Settings",

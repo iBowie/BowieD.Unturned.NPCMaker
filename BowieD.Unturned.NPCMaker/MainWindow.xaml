@@ -110,6 +110,11 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="{xaml:Localize INTERFACE_Main_Menu_Edit}">
+                    <MenuItem Command="{Binding OpenFindCommand}" Header="{xaml:Localize INTERFACE_Main_Menu_Edit_Find}">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="FileFind" Foreground="{DynamicResource AccentColor}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem Command="{Binding OpenFindReplaceCommand}" Header="{xaml:Localize INTERFACE_Main_Menu_Edit_FindReplace}">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="FindReplace" Foreground="{DynamicResource AccentColor}"/>
