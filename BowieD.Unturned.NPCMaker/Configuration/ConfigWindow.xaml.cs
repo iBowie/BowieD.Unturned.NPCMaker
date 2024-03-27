@@ -223,6 +223,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 themeType = CurrentThemeType,
                 hasUnlockedSecretThemes = HasUnlockedSecretThemes,
                 unlockedItemRewardEditor = UnlockedItemRewardEditor_Box.IsChecked.Value,
+                useCuteTheme = useCuteTheme_CheckBox.IsChecked.Value,
             };
             set
             {
@@ -277,6 +278,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
                 CurrentThemeType = value.themeType;
                 HasUnlockedSecretThemes = value.hasUnlockedSecretThemes;
                 UnlockedItemRewardEditor_Box.IsChecked = value.unlockedItemRewardEditor;
+                useCuteTheme_CheckBox.IsChecked = value.useCuteTheme;
             }
         }
 
@@ -314,6 +316,11 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             {
                 App.NotificationManager.Notify(LocalizationManager.Current.Notification["Configuration_OnExit_NoRestart"]);
             }
+
+            if (!currentConfig.useCuteTheme)
+			{
+				App.NotificationManager.Notify(LocalizationManager.Current.Notification["CuteThemeDisabled"]);
+			}
 
             Close();
         }

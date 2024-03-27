@@ -7,7 +7,7 @@
         "Project_SaveFilter_Legacy": "Legacy NPC Project (*.npc)",
         "Project_TemplateFilter": "NPC Template (*.npctemplate)",
         "ImportGameAssets_Directory_Title": "Select Unturned directory",
-        "Title": "Unturned 3.0 NPC Maker by BowieD",
+        "Title": "CUTE Unturned 3.0 NPC Maker by BowieD",
         "Configuration_Title": "App Settings",
         "UGC_ImageFilter": "Supported Images ({0})"
     },
@@ -24,6 +24,7 @@
         "themeType_normal": "Normal",
         "themeType_rainbow": "Rainbow",
         "themeType_extraDark": "Extra Dark",
+        "useCuteTheme": "USE CUTE <3 THEME",
         "generateGuids": "Export GUIDs",
         "autosaveOption": "Autosave",
         "autosaveOption_0": "Never",
@@ -575,6 +576,7 @@
     },
     "Notification":
     {
+        "CuteThemeDisabled": "You're no fun... ~_~",
         "RecoverOnStart": "Looks like app has crashed last time.\nDo not worry - your work has been saved.\nCrash save was created at '{0}'\n\nDo you want to load this project?",
         "RecoverOnStart_Title": "Project Recovery",
         "Simulation_Crashed": "Current simulation has crashed. More details in logs.\nDo not panic, it doesn't mean that you're doing something wrong.\nJust check your project in-game, it will most probably work just fine there!",

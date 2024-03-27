@@ -11,15 +11,20 @@ namespace BowieD.Unturned.NPCMaker.Themes
     {
         static readonly BrushConverter _converter = new BrushConverter();
 
-        public static void Init(Coloring.Color newColor, bool isDarkMode)
+        public static void Init(Coloring.Color newColor, bool isDarkMode, bool isCuteTheme)
         {
             Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml") });
             Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml") });
 
-            Apply(newColor, isDarkMode);
+			Apply(newColor, isDarkMode, isCuteTheme);
         }
-        public static void Apply(Coloring.Color newColor, bool isDarkMode)
+        public static void Apply(Coloring.Color newColor, bool isDarkMode, bool isCuteTheme)
         {
+            if (isCuteTheme)
+            {
+                isDarkMode = false;
+            }
+
             List<ResourceDictionary> metroThemes = (from d in Application.Current.Resources.MergedDictionaries
                                                     where d.Source != null && d.Source.OriginalString.StartsWith("pack://application:,,,/MahApps.Metro;component/Styles/Themes/")
                                                     select d).ToList();
@@ -35,6 +40,12 @@ namespace BowieD.Unturned.NPCMaker.Themes
             ResourceDictionary resourceDictionary = new ResourceDictionary() { Source = new Uri($"pack://application:,,,/MahApps.Metro;component/Styles/Themes/{(isDarkMode ? "Dark" : "Light")}.Green.xaml") };
 
             Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+
+            if (isCuteTheme)
+			{
+				ApplyNormalAccentColorToUI(new Coloring.Color(0xFF, 0xD1, 0xDC), false);
+				return;
+            }
 
             if (Configuration.AppConfig.Instance.hasUnlockedSecretThemes)
             {

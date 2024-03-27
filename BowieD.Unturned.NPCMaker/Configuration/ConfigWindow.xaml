@@ -65,6 +65,7 @@
                                     <ComboBox Margin="5" x:Name="ThemeType_ComboBox" ItemsSource="{StaticResource ThemeType_Enums}"
                                               SelectedItem="{Binding CurrentThemeType, Converter={StaticResource ThemeType_Enums}, UpdateSourceTrigger=PropertyChanged}"/>
                                 </UniformGrid>
+                                <CheckBox Margin="5" Content="{xaml:Localize Key=OPTIONS_useCuteTheme}" x:Name="useCuteTheme_CheckBox"/>
                             </StackPanel>
                         </GroupBox>
                         <Grid Margin="2.5" ToolTip="{xaml:Localize Key=OPTIONS_scale_Tooltip}">

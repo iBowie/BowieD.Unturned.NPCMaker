@@ -48,6 +48,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
         public EThemeType themeType = EThemeType.Normal;
         public bool hasUnlockedSecretThemes = false;
         public bool unlockedItemRewardEditor = false;
+        public bool useCuteTheme = true;
 
         public void Apply(AppConfig from, out bool hasToRestart)
         {
@@ -71,13 +72,14 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             hasToRestart |= (forceSoftwareRendering != from.forceSoftwareRendering);
 
             // it has to do some work before it can be applied
-            if (useDarkMode != from.useDarkMode || accentColor != from.accentColor || themeType != from.themeType)
+            if (useDarkMode != from.useDarkMode || accentColor != from.accentColor || themeType != from.themeType || useCuteTheme != from.useCuteTheme)
             {
                 useDarkMode = from.useDarkMode;
                 accentColor = from.accentColor;
                 themeType = from.themeType;
+                useCuteTheme = from.useCuteTheme;
 
-                ThemeManager.Apply(accentColor, useDarkMode);
+                ThemeManager.Apply(accentColor, useDarkMode, useCuteTheme);
             }
 
             if (automaticallyCheckForErrors != from.automaticallyCheckForErrors)
@@ -201,6 +203,7 @@ namespace BowieD.Unturned.NPCMaker.Configuration
             forceSoftwareRendering = false;
             hasUnlockedSecretThemes = false;
             themeType = EThemeType.Normal;
+            useCuteTheme = true;
 
             App.Logger.Log($"[CFG] - Default configuration loaded!");
         }

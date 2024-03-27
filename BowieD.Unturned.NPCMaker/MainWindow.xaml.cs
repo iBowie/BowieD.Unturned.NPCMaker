@@ -38,7 +38,7 @@ namespace BowieD.Unturned.NPCMaker
         public new void Show()
         {
             #region THEME SETUP
-            ThemeManager.Init(AppConfig.Instance.accentColor, AppConfig.Instance.useDarkMode);
+            ThemeManager.Init(AppConfig.Instance.accentColor, AppConfig.Instance.useDarkMode, AppConfig.Instance.useCuteTheme);
             SetBackground(AppConfig.Instance.mainWindowBackgroundImage, AppConfig.Instance.useDarkMode);
             #endregion
 

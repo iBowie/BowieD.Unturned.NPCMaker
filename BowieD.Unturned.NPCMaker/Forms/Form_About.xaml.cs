@@ -147,7 +147,7 @@ namespace BowieD.Unturned.NPCMaker.Forms
                         AppConfig.Instance.hasUnlockedSecretThemes = true;
                         AppConfig.Instance.themeType = Themes.EThemeType.Rainbow;
                         AppConfig.Instance.Save();
-                        ThemeManager.Apply(AppConfig.Instance.accentColor, AppConfig.Instance.useDarkMode);
+                        ThemeManager.Apply(AppConfig.Instance.accentColor, AppConfig.Instance.useDarkMode, AppConfig.Instance.useCuteTheme);
                     }
                 }
                 else

@@ -7,7 +7,7 @@
         "Project_SaveFilter_Legacy": "Файл старого проекта NPC (*.npc)",
         "Project_TemplateFilter": "Файл шаблона NPC (*.npctemplate)",
         "ImportGameAssets_Directory_Title": "Выберите директорию с Unturned",
-        "Title": "Unturned 3.0 NPC Maker by BowieD",
+        "Title": "МИЛЫЙ Unturned 3.0 NPC Maker by BowieD",
         "Configuration_Title": "Настройки",
         "UGC_ImageFilter": "Поддерживаемые изображения ({0})"
     },
@@ -24,6 +24,7 @@
         "themeType_normal": "Обычная",
         "themeType_rainbow": "Радужная",
         "themeType_extraDark": "Сверхтёмная",
+        "useCuteTheme": "ИСПОЛЬЗОВАТЬ МИЛУЮ <3 ТЕМУ",
         "generateGuids": "Экспортировать GUID",
         "autosaveOption": "Автосохранение",
         "autosaveOption_0": "Никогда",
@@ -575,6 +576,7 @@
     },
     "Notification":
     {
+        "CuteThemeDisabled": "Скукотища... ~_~",
         "RecoverOnStart": "Похоже, что в последний раз программа некорректно завершила свою работу.\nНе беспокойтесь - файл проекта на момент закрытия был сохранён.\nАварийный проект был создан '{0}'\n\nХотите загрузить этот проект?",
         "RecoverOnStart_Title": "Восстановление проекта",
         "Simulation_Crashed": "Текущая симуляция была аварийно закрыта. Подробности в логах программы.\nНе паникуйте! Это не значит, что Вы делаете что-то не так.\nПросто проверьте свой проект в самой игре. Скорее всего, в игре всё будет хорошо!",
