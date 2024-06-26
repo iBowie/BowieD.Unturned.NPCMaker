@@ -8,126 +8,126 @@ using System.Windows.Input;
 
 namespace BowieD.Unturned.NPCMaker.Forms
 {
-	/// <summary>
-	/// Interaction logic for FindDialog.xaml
-	/// </summary>
-	public partial class FindDialog : Window
-	{
-		private readonly List<FindReplaceTarget> searchResult = new List<FindReplaceTarget>();
+    /// <summary>
+    /// Interaction logic for FindDialog.xaml
+    /// </summary>
+    public partial class FindDialog : Window
+    {
+        private readonly List<FindReplaceTarget> searchResult = new List<FindReplaceTarget>();
 
-		public FindDialog()
-		{
-			InitializeComponent();
+        public FindDialog()
+        {
+            InitializeComponent();
 
-			Width *= AppConfig.Instance.scale;
-			Height *= AppConfig.Instance.scale;
+            Width *= AppConfig.Instance.scale;
+            Height *= AppConfig.Instance.scale;
 
-			MainWindow.Instance.MainWindowViewModel.SaveAll();
+            MainWindow.Instance.MainWindowViewModel.SaveAll();
 
-			FindCommand = new AdvancedCommand(() =>
-			{
-				searchResult.Clear();
+            FindCommand = new AdvancedCommand(() =>
+            {
+                searchResult.Clear();
 
-				var query = findValueBox.Text;
+                var query = findValueBox.Text;
 
-				var result = FindWithPartialText(query);
+                var result = FindWithPartialText(query);
 
-				searchResult.AddRange(result);
+                searchResult.AddRange(result);
 
-				searchResultBox.Items.Clear();
+                searchResultBox.Items.Clear();
 
-				foreach (var mt in searchResult)
-				{
-					searchResultBox.Items.Add(mt);
-				}
-			});
+                foreach (var mt in searchResult)
+                {
+                    searchResultBox.Items.Add(mt);
+                }
+            });
 
-			GoToTargetCommand = new AdvancedCommand(() =>
-			{
-				FindReplaceTarget target = (FindReplaceTarget)searchResultBox.SelectedValue;
+            GoToTargetCommand = new AdvancedCommand(() =>
+            {
+                FindReplaceTarget target = (FindReplaceTarget)searchResultBox.SelectedValue;
 
-				var targeter = target.Targeter;
+                var targeter = target.Targeter;
 
-				if (targeter.CanGoToTarget)
-				{
-					if (targeter.ClosesWhenGoesToTarget)
-					{
-						Close();
-					}
+                if (targeter.CanGoToTarget)
+                {
+                    if (targeter.ClosesWhenGoesToTarget)
+                    {
+                        Close();
+                    }
 
-					targeter.GoToTarget(target.Target);
-				}
-			}, (p) =>
-			{
-				if (searchResultBox.SelectedIndex >= 0 && searchResultBox.SelectedValue is FindReplaceTarget selectedTarget)
-				{
-					var targeter = selectedTarget.Targeter;
+                    targeter.GoToTarget(target.Target);
+                }
+            }, (p) =>
+            {
+                if (searchResultBox.SelectedIndex >= 0 && searchResultBox.SelectedValue is FindReplaceTarget selectedTarget)
+                {
+                    var targeter = selectedTarget.Targeter;
 
-					if (targeter.CanGoToTarget)
-					{
-						return true;
-					}
-				}
+                    if (targeter.CanGoToTarget)
+                    {
+                        return true;
+                    }
+                }
 
-				return false;
-			});
+                return false;
+            });
 
-			CloseCommand = new BaseCommand(() =>
-			{
-				Close();
-			});
+            CloseCommand = new BaseCommand(() =>
+            {
+                Close();
+            });
 
-			DataContext = this;
-		}
+            DataContext = this;
+        }
 
-		public ICommand FindCommand { get; }
-		public ICommand GoToTargetCommand { get; }
-		public ICommand CloseCommand { get; }
+        public ICommand FindCommand { get; }
+        public ICommand GoToTargetCommand { get; }
+        public ICommand CloseCommand { get; }
 
-		private static bool CheckString(string query, string text)
-		{
-			text = text.ToLowerInvariant();
+        private static bool CheckString(string query, string text)
+        {
+            text = text.ToLowerInvariant();
 
-			return text.Contains(query);
-		}
-		private static IEnumerable<FindReplaceTarget> FindWithPartialText(string query)
-		{
-			var project = MainWindow.CurrentProject;
-			query = query.ToLowerInvariant();
+            return text.Contains(query);
+        }
+        private static IEnumerable<FindReplaceTarget> FindWithPartialText(string query)
+        {
+            var project = MainWindow.CurrentProject;
+            query = query.ToLowerInvariant();
 
-			FindReplacerDialogueTargeter dialogueTargeter = new FindReplacerDialogueTargeter();
+            FindReplacerDialogueTargeter dialogueTargeter = new FindReplacerDialogueTargeter();
 
-			foreach (var dialogue in project.data.dialogues)
-			{
-				if (dialogue.Responses.Any(d => CheckString(query, d.mainText)))
-				{
-					yield return new FindReplaceTarget(dialogue, default, dialogueTargeter);
-					continue;
-				}
+            foreach (var dialogue in project.data.dialogues)
+            {
+                if (dialogue.Responses.Any(d => CheckString(query, d.mainText)))
+                {
+                    yield return new FindReplaceTarget(dialogue, default, dialogueTargeter);
+                    continue;
+                }
 
-				if (dialogue.Messages.Any(d => d.pages.Any(v => CheckString(query, v))))
-				{
-					yield return new FindReplaceTarget(dialogue, default, dialogueTargeter);
-					continue;
-				}
-			}
+                if (dialogue.Messages.Any(d => d.pages.Any(v => CheckString(query, v))))
+                {
+                    yield return new FindReplaceTarget(dialogue, default, dialogueTargeter);
+                    continue;
+                }
+            }
 
-			FindReplacerQuestTargeter questTargeter = new FindReplacerQuestTargeter();
+            FindReplacerQuestTargeter questTargeter = new FindReplacerQuestTargeter();
 
-			foreach (var quest in project.data.quests)
-			{
-				if (CheckString(query, quest.Title))
-				{
-					yield return new FindReplaceTarget(quest, default, questTargeter);
-					continue;
-				}
+            foreach (var quest in project.data.quests)
+            {
+                if (CheckString(query, quest.Title))
+                {
+                    yield return new FindReplaceTarget(quest, default, questTargeter);
+                    continue;
+                }
 
-				if (CheckString(query, quest.description))
-				{
-					yield return new FindReplaceTarget(quest, default, questTargeter);
-					continue;
-				}
-			}
-		}
-	}
+                if (CheckString(query, quest.description))
+                {
+                    yield return new FindReplaceTarget(quest, default, questTargeter);
+                    continue;
+                }
+            }
+        }
+    }
 }

@@ -193,20 +193,20 @@ namespace BowieD.Unturned.NPCMaker
                     {
                         Logger.Log("Could not properly load locally cached package file. Falling back to the runtime-created one.", ELogLevel.WARNING);
 
-						Package = new AppPackage()
-						{
-							FeedbackLinks = new FeedbackLink[1]
-						    {
-						    	new FeedbackLink()
-						    	{
-						    		Icon = "pack://application:,,,/Resources/Services/GitHub.png",
-						    		Text = "Main_Menu_Communication_GitHub",
-						    		Localize = true,
-						    		URL = "https://github.com/iBowie/BowieD.Unturned.NPCMaker"
-						    	}
-						    }
-						};
-					}
+                        Package = new AppPackage()
+                        {
+                            FeedbackLinks = new FeedbackLink[1]
+                            {
+                                new FeedbackLink()
+                                {
+                                    Icon = "pack://application:,,,/Resources/Services/GitHub.png",
+                                    Text = "Main_Menu_Communication_GitHub",
+                                    Localize = true,
+                                    URL = "https://github.com/iBowie/BowieD.Unturned.NPCMaker"
+                                }
+                            }
+                        };
+                    }
                     else
                     {
                         File.WriteAllText(packagePath, data);

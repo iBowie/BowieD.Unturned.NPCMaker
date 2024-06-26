@@ -1055,24 +1055,24 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
 
                 return _openFindReplaceCommand;
             }
-		}
-		private ICommand _openFindCommand;
-		public ICommand OpenFindCommand
-		{
-			get
-			{
-				if (_openFindCommand is null)
-				{
-					_openFindCommand = new BaseCommand(() =>
-					{
-						FindDialog fd = new FindDialog();
+        }
+        private ICommand _openFindCommand;
+        public ICommand OpenFindCommand
+        {
+            get
+            {
+                if (_openFindCommand is null)
+                {
+                    _openFindCommand = new BaseCommand(() =>
+                    {
+                        FindDialog fd = new FindDialog();
 
-						fd.ShowDialog();
-					});
-				}
+                        fd.ShowDialog();
+                    });
+                }
 
-				return _openFindCommand;
-			}
-		}
-	}
+                return _openFindCommand;
+            }
+        }
+    }
 }

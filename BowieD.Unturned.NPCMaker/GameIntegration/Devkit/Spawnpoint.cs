@@ -10,125 +10,125 @@ using System.Windows.Media.Imaging;
 
 namespace BowieD.Unturned.NPCMaker.GameIntegration.Devkit
 {
-	public class Spawnpoint : DevkitHierarchyWorldItem, IHasThumbnail
-	{
-		public string id;
+    public class Spawnpoint : DevkitHierarchyWorldItem, IHasThumbnail
+    {
+        public string id;
 
-		public Spawnpoint(string fileName, EGameAssetOrigin origin) : base(fileName, origin)
-		{
-		}
+        public Spawnpoint(string fileName, EGameAssetOrigin origin) : base(fileName, origin)
+        {
+        }
 
-		DrawingImage createThumbnail(string fileName)
-		{
-			string dir = Path.GetDirectoryName(fileName);
+        DrawingImage createThumbnail(string fileName)
+        {
+            string dir = Path.GetDirectoryName(fileName);
 
-			var info = LevelDatManager.GetInfo(dir);
+            var info = LevelDatManager.GetInfo(dir);
 
-			ushort border = 1, size = 8;
+            ushort border = 1, size = 8;
 
-			if (info != null)
-			{
-				switch (info.Size)
-				{
-					case ELevelSize.TINY:
-						size = 512;
-						border = 16;
-						break;
-					case ELevelSize.SMALL:
-						size = 1024;
-						border = 64;
-						break;
-					case ELevelSize.MEDIUM:
-						size = 2048;
-						border = 64;
-						break;
-					case ELevelSize.LARGE:
-						size = 4096;
-						border = 64;
-						break;
-					case ELevelSize.INSANE:
-						size = 8192;
-						border = 128;
-						break;
-					default:
-						size = 0;
-						break;
-				}
-			}
+            if (info != null)
+            {
+                switch (info.Size)
+                {
+                    case ELevelSize.TINY:
+                        size = 512;
+                        border = 16;
+                        break;
+                    case ELevelSize.SMALL:
+                        size = 1024;
+                        border = 64;
+                        break;
+                    case ELevelSize.MEDIUM:
+                        size = 2048;
+                        border = 64;
+                        break;
+                    case ELevelSize.LARGE:
+                        size = 4096;
+                        border = 64;
+                        break;
+                    case ELevelSize.INSANE:
+                        size = 8192;
+                        border = 128;
+                        break;
+                    default:
+                        size = 0;
+                        break;
+                }
+            }
 
-			Rect rect = new Rect(new Size(32, 32));
+            Rect rect = new Rect(new Size(32, 32));
 
-			DrawingGroup g = new DrawingGroup();
+            DrawingGroup g = new DrawingGroup();
 
-			Vector2 levelTo2D(Vector3 pos)
-			{
-				float num = size - border * 2f;
-				return new Vector2(pos.X / num + 0.5f, 0.5f - pos.Z / num);
-			}
+            Vector2 levelTo2D(Vector3 pos)
+            {
+                float num = size - border * 2f;
+                return new Vector2(pos.X / num + 0.5f, 0.5f - pos.Z / num);
+            }
 
-			var posOnMap = levelTo2D(Position);
+            var posOnMap = levelTo2D(Position);
 
-			posOnMap.X *= 32;
-			posOnMap.Y *= 32;
+            posOnMap.X *= 32;
+            posOnMap.Y *= 32;
 
-			BitmapImage bi = null;
+            BitmapImage bi = null;
 
-			var mapPng = Path.Combine(dir, "Map.png");
-			var chartPng = Path.Combine(dir, "Chart.png");
+            var mapPng = Path.Combine(dir, "Map.png");
+            var chartPng = Path.Combine(dir, "Chart.png");
 
-			if (File.Exists(mapPng))
-			{
-				bi = new BitmapImage();
+            if (File.Exists(mapPng))
+            {
+                bi = new BitmapImage();
 
-				bi.BeginInit();
+                bi.BeginInit();
 
-				bi.UriSource = new Uri(mapPng);
-				bi.DecodePixelWidth = 32;
-				bi.DecodePixelHeight = 32;
-				bi.CacheOption = BitmapCacheOption.OnLoad;
+                bi.UriSource = new Uri(mapPng);
+                bi.DecodePixelWidth = 32;
+                bi.DecodePixelHeight = 32;
+                bi.CacheOption = BitmapCacheOption.OnLoad;
 
-				bi.EndInit();
+                bi.EndInit();
 
-				if (bi.CanFreeze)
-					bi.Freeze();
-			}
-			else if (File.Exists(chartPng))
-			{
-				bi = new BitmapImage();
+                if (bi.CanFreeze)
+                    bi.Freeze();
+            }
+            else if (File.Exists(chartPng))
+            {
+                bi = new BitmapImage();
 
-				bi.BeginInit();
+                bi.BeginInit();
 
-				bi.UriSource = new Uri(chartPng);
-				bi.DecodePixelWidth = 32;
-				bi.DecodePixelHeight = 32;
-				bi.CacheOption = BitmapCacheOption.OnLoad;
+                bi.UriSource = new Uri(chartPng);
+                bi.DecodePixelWidth = 32;
+                bi.DecodePixelHeight = 32;
+                bi.CacheOption = BitmapCacheOption.OnLoad;
 
-				bi.EndInit();
+                bi.EndInit();
 
-				if (bi.CanFreeze)
-					bi.Freeze();
-			}
+                if (bi.CanFreeze)
+                    bi.Freeze();
+            }
 
-			if (bi != null)
-				g.Children.Add(new ImageDrawing(bi, rect));
+            if (bi != null)
+                g.Children.Add(new ImageDrawing(bi, rect));
 
-			g.Children.Add(new GeometryDrawing(Brushes.Red, null, new EllipseGeometry(posOnMap, 1, 1)));
+            g.Children.Add(new GeometryDrawing(Brushes.Red, null, new EllipseGeometry(posOnMap, 1, 1)));
 
-			return new DrawingImage(g);
-		}
+            return new DrawingImage(g);
+        }
 
-		public override string Name => id;
+        public override string Name => id;
 
-		private ImageSource _thumb;
-		public ImageSource Thumbnail => _thumb;
+        private ImageSource _thumb;
+        public ImageSource Thumbnail => _thumb;
 
-		protected override void readHierarchyItem(IFileReader reader)
-		{
-			base.readHierarchyItem(reader);
+        protected override void readHierarchyItem(IFileReader reader)
+        {
+            base.readHierarchyItem(reader);
 
-			id = reader.readValue<string>("ID");
+            id = reader.readValue<string>("ID");
 
-			_thumb = createThumbnail(OriginFileName);
-		}
-	}
+            _thumb = createThumbnail(OriginFileName);
+        }
+    }
 }
