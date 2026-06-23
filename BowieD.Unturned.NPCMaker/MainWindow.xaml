@@ -278,7 +278,9 @@
                                             </ToolTip>
                                         </xctk:UShortUpDown.ToolTip>
                                     </xctk:UShortUpDown>
-                                    <Button VerticalAlignment="Center" Grid.Column="1" Margin="5" Padding="0" Content="{xaml:Localize Key=CHARACTER_Dialogue}" Command="{Binding SelectStartDialogueCommand}" Background="Transparent" BorderThickness="0" Foreground="{DynamicResource AccentColor}" HorizontalAlignment="Left" Cursor="Hand" />
+                                    <TextBlock Grid.Column="1" Margin="5" VerticalAlignment="Center" TextWrapping="Wrap">
+                                        <Hyperlink Command="{Binding SelectStartDialogueCommand}"><Run Text="{xaml:Localize Key=CHARACTER_Dialogue}"/></Hyperlink>
+                                    </TextBlock>
                                 </Grid>
                                 <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" mah:TextBoxHelper.Watermark="{xaml:Localize Key=INTERFACE_App_Comment}" Name="character_commentbox" Margin="5" Height="26"/>
                                 <Grid>
