@@ -1,4 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker;
+using BowieD.Unturned.NPCMaker;
 using BowieD.Unturned.NPCMaker.Common;
 using BowieD.Unturned.NPCMaker.Configuration;
 using BowieD.Unturned.NPCMaker.Controls;
@@ -570,6 +570,37 @@ namespace BowieD.Unturned.NPCMaker.ViewModels
         private ICommand sortEditorNameA, sortEditorNameD, sortDisplayNameA, sortDisplayNameD, sortIDA, sortIDD;
         private ICommand randomGuidCommand;
         private ICommand setGuidCommand;
+        private ICommand selectStartDialogueCommand;
+
+        public ICommand SelectStartDialogueCommand
+        {
+            get
+            {
+                if (selectStartDialogueCommand == null)
+                {
+                    selectStartDialogueCommand = new BaseCommand(() =>
+                    {
+                        var target = System.Linq.Enumerable.FirstOrDefault(MainWindow.CurrentProject.data.dialogues, x => x.ID == DialogueID);
+                        if (target != null)
+                        {
+                            MainWindow.Instance.mainTabControl.SelectedValue = MainWindow.Instance.dialogueTab;
+                            MainWindow.Instance.MainWindowViewModel.DialogueTabViewModel.Dialogue = target;
+                            
+                            foreach (var item in MainWindow.Instance.dialogueTabSelect.Items)
+                            {
+                                if (item is System.Windows.Controls.TabItem tabItem && tabItem.Tag is Controls.Dialogue_ItemList dllist && dllist.Item == target)
+                                {
+                                    MainWindow.Instance.dialogueTabSelect.SelectedItem = tabItem;
+                                    break;
+                                }
+                            }
+                        }
+                    });
+                }
+                return selectStartDialogueCommand;
+            }
+        }
+
 
         public ICommand SortEditorNameAscending
         {
