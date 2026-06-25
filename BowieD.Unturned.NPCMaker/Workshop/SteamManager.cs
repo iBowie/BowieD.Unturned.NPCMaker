@@ -45,7 +45,7 @@ namespace BowieD.Unturned.NPCMaker.Workshop
             using (StringReader sr = new StringReader(pOut))
             {
                 string line;
-                while ((line = sr.ReadLine()) != null)
+                while ((line = await sr.ReadLineAsync()) != null)
                 {
                     if (ulong.TryParse(line, out fileID))
                         break;
@@ -82,7 +82,7 @@ namespace BowieD.Unturned.NPCMaker.Workshop
                 {
                     while (true)
                     {
-                        string line = tr.ReadLine();
+                        string line = await tr.ReadLineAsync();
                         if (string.IsNullOrEmpty(line))
                             break;
 
@@ -93,7 +93,7 @@ namespace BowieD.Unturned.NPCMaker.Workshop
 
                         res.FileID = fileId;
 
-                        switch (tr.ReadLine())
+                        switch (await tr.ReadLineAsync())
                         {
                             case "public":
                                 res.Visibility = 0;
@@ -109,8 +109,8 @@ namespace BowieD.Unturned.NPCMaker.Workshop
                                 break;
                         }
 
-                        res.Name = tr.ReadLine().Replace("<br>", Environment.NewLine);
-                        res.Preview = tr.ReadLine();
+                        res.Name = (await tr.ReadLineAsync())?.Replace("<br>", Environment.NewLine);
+                        res.Preview = await tr.ReadLineAsync();
 
                         result.Add(res);
                     }
@@ -149,7 +149,7 @@ namespace BowieD.Unturned.NPCMaker.Workshop
             using (StringReader sr = new StringReader(pOut))
             {
                 string line;
-                while ((line = sr.ReadLine()) != null)
+                while ((line = await sr.ReadLineAsync()) != null)
                 {
                     if (ulong.TryParse(line, out fileID))
                         break;
