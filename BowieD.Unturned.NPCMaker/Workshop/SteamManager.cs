@@ -1,4 +1,4 @@
-﻿using BowieD.Unturned.NPCMaker.Configuration;
+using BowieD.Unturned.NPCMaker.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -41,8 +41,16 @@ namespace BowieD.Unturned.NPCMaker.Workshop
 
             string pOut = p.Item2;
 
-            if (!ulong.TryParse(pOut, out ulong fileID))
-                fileID = 0;
+            ulong fileID = 0;
+            using (StringReader sr = new StringReader(pOut))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (ulong.TryParse(line, out fileID))
+                        break;
+                }
+            }
 
             Tuple<int, ulong> tuple = new Tuple<int, ulong>(p.Item1, fileID);
 
@@ -81,7 +89,7 @@ namespace BowieD.Unturned.NPCMaker.Workshop
                         UGC res = new UGC();
 
                         if (!ulong.TryParse(line, out var fileId))
-                            throw new System.Exception("Invalid input");
+                            continue;
 
                         res.FileID = fileId;
 
@@ -137,33 +145,45 @@ namespace BowieD.Unturned.NPCMaker.Workshop
 
             string pOut = p.Item2;
 
-            if (!ulong.TryParse(pOut, out var fileID))
-                fileID = 0;
+            ulong fileID = 0;
+            using (StringReader sr = new StringReader(pOut))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (ulong.TryParse(line, out fileID))
+                        break;
+                }
+            }
 
             Tuple<int, ulong> tuple = new Tuple<int, ulong>(p.Item1, fileID);
 
             return tuple;
         }
 
-        static Task<Tuple<int, string>> RunProcessAsync(ProcessStartInfo psi)
+        static async Task<Tuple<int, string>> RunProcessAsync(ProcessStartInfo psi)
         {
-            var tcs = new TaskCompletionSource<Tuple<int, string>>();
-
             var process = new Process()
             {
                 StartInfo = psi,
                 EnableRaisingEvents = true
             };
 
+            var tcs = new TaskCompletionSource<int>();
+
             process.Exited += (sender, e) =>
             {
-                tcs.SetResult(new Tuple<int, string>(process.ExitCode, process.StandardOutput.ReadToEnd()));
-                process.Dispose();
+                tcs.TrySetResult(process.ExitCode);
             };
 
             process.Start();
 
-            return tcs.Task;
+            string output = await process.StandardOutput.ReadToEndAsync();
+            int exitCode = await tcs.Task;
+            
+            process.Dispose();
+
+            return new Tuple<int, string>(exitCode, output);
         }
     }
 
